@@ -1,0 +1,6375 @@
+{
+  "checkedAt": "2026-11-17T01:53:54.065Z",
+  "mode": "final",
+  "completedThrough": 69,
+  "revision": 247,
+  "baselineRevision": 200,
+  "designPath": "samples/monopoly-go/ui-studio/designs/ux-gjs-0d80d7fe.json",
+  "backupPath": "docs/planning/_backup/20261117_단이/0953_tycoon10_native/samples/monopoly-go/ui-studio/designs/ux-gjs-0d80d7fe.json",
+  "recipePath": "_작업/codex/ux-studio/tycoon10-native-recipe.mjs",
+  "designSHA256": "5b420e160570d71e1d00cfefdc1a46097cd0560a9215bf3b89605307cf7afa0e",
+  "counts": {
+    "screens": 10,
+    "parts": 899,
+    "transitions": 20,
+    "tycoonParts": 98
+  },
+  "intendedRecipeDifferences": [
+    {
+      "key": "scene",
+      "recipeFit": "contain",
+      "savedFitExpected": "cover",
+      "topArchHeightExpected": 64,
+      "reason": "Owner intentional crop proposal. This is a saved configuration check, not visual crop equivalence."
+    },
+    {
+      "key": "Main-Tycoon-native-mouse-forwarding",
+      "savedRevisionsObserved": [
+        246,
+        247
+      ],
+      "fields": [
+        {
+          "id": "element-8f21588e-cf25-42d8-b616-7d770693baee",
+          "name": "Frame_Event_Tycoon_Card",
+          "path": "interaction.mode",
+          "before": "none",
+          "after": "parent"
+        },
+        {
+          "id": "element-f78580e9-170f-4bcb-a9b9-6c54cf487463",
+          "name": "BG_Event_Tycoon_Card",
+          "path": "interaction.mode",
+          "before": "none",
+          "after": "parent"
+        }
+      ],
+      "reason": "Actual mouse hit Frame_Event_Tycoon_Card blocked parent click although AX Enter worked. Only these two exact input-mode fields differ from r200; all remaining old screen fields stay deepEqual."
+    },
+    {
+      "key": "native-fallback-font-fit",
+      "savedRevisionObserved": 245,
+      "reason": "Actual r242 render wrapped the final timer syllable and made Rank01 dice/cash text touch. Native UI reduced timer20→18 and reward quantities19→17, all nowrap; source font unknown. Original recipe/geometry/text/counters remain unchanged.",
+      "fields": [
+        {
+          "name": "Txt_Tycoon_Timer",
+          "fontSize": 18,
+          "wrap": "nowrap",
+          "recipeFontSize": 20
+        },
+        {
+          "name": "Txt_Tycoon_Rank01_DiceQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank01_CashQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank02_DiceQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank02_CashQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank03_DiceQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank03_CashQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank04_DiceQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank04_CashQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_SelfRank_CashQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Read-only local saved-model/asset verification only: no browser/HTTP/nativeAX calls, no writes or actual UI input/visual QA.",
+    "Style fields are saved results expected from native AX editing; this script cannot prove how the edits were performed.",
+    "Default completedThrough45 is the assigned historical checkpoint, not a completion inference. Use --completed-through=N for an intermediate snapshot, --final for strict final checks.",
+    "Assertion counts and recipe/checkpoint counts are not UI completion rates or original-screen equivalence.",
+    "Native font/pixel equality, exact original species/person, game/ranking/reward/countdown APIs and unknown Info body remain unverified.",
+    "Intentional source cover+64px arch crop differs from recipe contain. Saved clipping setting alone does not prove actual rendered clip quality."
+  ],
+  "screenId": "screen-f4fd5be2-98b8-4514-9484-a0cbcb0958d4",
+  "expected": {
+    "recipeOps": 70,
+    "expandedUnits": 96,
+    "cloneChildren": 26,
+    "extraRootAndDim": 2,
+    "tycoonParts": 98,
+    "totalParts": 899,
+    "transitions": 20
+  },
+  "uniqueRegisteredAssetRefsChecked": 23,
+  "snapshotUnchangedAtEnd": true,
+  "summary": {
+    "passed": 360,
+    "expectedPending": 0,
+    "failed": 0,
+    "assertionCount": 360,
+    "savedChecksPass": true
+  },
+  "checks": [
+    {
+      "name": "saved model validateDocument",
+      "status": "pass"
+    },
+    {
+      "name": "baseline is r200 nine screens eighteen transitions",
+      "status": "pass"
+    },
+    {
+      "name": "baseline exact two Main visuals had mode none",
+      "status": "pass"
+    },
+    {
+      "name": "previous nine screens deep equal except exact two Main input modes",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "main",
+          "name": "Page_Board",
+          "unchangedExceptDeclared": true
+        },
+        {
+          "id": "screen-5b226528-5446-48d2-b4b1-f7aaceff7f7b",
+          "name": "Page_Build_City",
+          "unchangedExceptDeclared": true
+        },
+        {
+          "id": "common-5f417889-56a9-4075-9da4-8c918f828fe1",
+          "name": "Modal_Wins_QuickWins",
+          "unchangedExceptDeclared": true
+        },
+        {
+          "id": "screen-1bf4e2ab-55de-4d8c-a28c-9e4d37fc04ca",
+          "name": "Page_Album_Sets",
+          "unchangedExceptDeclared": true
+        },
+        {
+          "id": "common-1ea9535b-40a5-4941-a33b-57bf7b381aea",
+          "name": "Modal_Friends_Timeline",
+          "unchangedExceptDeclared": true
+        },
+        {
+          "id": "common-0e507f99-6097-4037-ac6c-aa0e7229cb07",
+          "name": "Modal_Main_Menu",
+          "unchangedExceptDeclared": true
+        },
+        {
+          "id": "screen-a6493c49-cd67-4081-b900-dbe64315e15e",
+          "name": "Page_Showroom_Shields",
+          "unchangedExceptDeclared": true
+        },
+        {
+          "id": "screen-8bda5052-36bc-4d68-812f-58c535aa4bc7",
+          "name": "Modal_Shop_Store",
+          "unchangedExceptDeclared": true
+        },
+        {
+          "id": "screen-05d68f0a-4c51-4c9a-b764-a6ec3a7245d1",
+          "name": "Modal_Event_RacingStarter",
+          "unchangedExceptDeclared": true
+        }
+      ]
+    },
+    {
+      "name": "previous nine screen order preserved",
+      "status": "pass"
+    },
+    {
+      "name": "previous eighteen transitions exactly preserved",
+      "status": "pass"
+    },
+    {
+      "name": "entry project fixtures unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "one added Tycoon screen only",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "screen-f4fd5be2-98b8-4514-9484-a0cbcb0958d4",
+          "name": "Modal_Event_TycoonExpress"
+        }
+      ]
+    },
+    {
+      "name": "recipe clone contract rank-2",
+      "status": "pass"
+    },
+    {
+      "name": "recipe clone contract rank-3",
+      "status": "pass"
+    },
+    {
+      "name": "recipe seventy ops plus twenty-six clone children",
+      "status": "pass"
+    },
+    {
+      "name": "no duplicated Tycoon names",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "name": "only recipe units plus ROOT and Dim; template/oldClose removed",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "name": "no temporary or foreign copied names",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "name": "fullscreen modal engine dim disabled",
+      "status": "pass",
+      "detail": {
+        "effect": "fade",
+        "durationMs": 240,
+        "autoCloseMs": 0,
+        "dim": false,
+        "blocking": true,
+        "dismissOnEscape": true,
+        "closePolicy": "allow",
+        "type": "modal",
+        "rootMode": "fullscreen"
+      }
+    },
+    {
+      "name": "single full-screen black0.7 native dim",
+      "status": "pass",
+      "detail": {
+        "id": "element-dfc72b77-6567-42c2-977f-8013f7ad86ff",
+        "appearance": {
+          "shape": "rectangle",
+          "fill": "#000000",
+          "strokeWidth": 0,
+          "textColor": "#b6b3aa",
+          "opacity": 0.7,
+          "radius": 0
+        },
+        "rectTransform": {
+          "min": [
+            0,
+            0
+          ],
+          "max": [
+            1,
+            1
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "position": [
+            0,
+            0
+          ],
+          "sizeDelta": [
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "centered551x984 native ROOT outside dim",
+      "status": "pass",
+      "detail": {
+        "min": [
+          0.5,
+          0.5
+        ],
+        "max": [
+          0.5,
+          0.5
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "position": [
+          0,
+          0
+        ],
+        "sizeDelta": [
+          551,
+          984
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect panel",
+      "status": "pass",
+      "detail": {
+        "id": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "name": "Group_Tycoon_Panel",
+        "parentId": "element-fe92c76a-5f9b-40dd-929f-4c3e6720d587",
+        "expectedParent": "element-fe92c76a-5f9b-40dd-929f-4c3e6720d587",
+        "actualRect": [
+          15.36,
+          84,
+          520.29,
+          828.31
+        ],
+        "expectedRect": [
+          15.36,
+          84,
+          520.29,
+          828.31
+        ]
+      }
+    },
+    {
+      "name": "native group kind panel",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native parent and px rect panel-fill",
+      "status": "pass",
+      "detail": {
+        "id": "element-36e8a4cc-30cd-426a-9ecb-de9dd573f85e",
+        "name": "BG_Tycoon_Arch",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          0,
+          0,
+          520.29,
+          828.31
+        ],
+        "expectedRect": [
+          0,
+          0,
+          520.29,
+          828.31
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize panel-fill",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-db8f3125a30ff9ed9db35414615d560837f7215a5e2c75ca8461135bb15f7a7c.webp",
+        "actualSourceSize": [
+          192,
+          224
+        ],
+        "expectedRef": "sha256-db8f3125a30ff9ed9db35414615d560837f7215a5e2c75ca8461135bb15f7a7c.webp",
+        "expectedSourceSize": [
+          192,
+          224
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad panel-fill",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          96,
+          36,
+          24,
+          36
+        ],
+        "edges": [
+          96,
+          96,
+          12,
+          96
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect scene",
+      "status": "pass",
+      "detail": {
+        "id": "element-2bca3fbe-b351-434c-86cc-385b83425e4b",
+        "name": "Img_Tycoon_StationScene",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          9.939999999999998,
+          30.710000000000008,
+          500.42,
+          284.5299999999999
+        ],
+        "expectedRect": [
+          9.94,
+          30.71,
+          500.42,
+          284.53
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize scene",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-ded4cf62daf9e396fb2af1b704ce4cb2fd94dc4894f497d281bc3330d4b68fa7.webp",
+        "actualSourceSize": [
+          700,
+          467
+        ],
+        "expectedRef": "sha256-ded4cf62daf9e396fb2af1b704ce4cb2fd94dc4894f497d281bc3330d4b68fa7.webp",
+        "expectedSourceSize": [
+          700,
+          467
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership scene",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          700,
+          467
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          700,
+          467
+        ],
+        "actualFit": "cover",
+        "expectedFit": "cover"
+      }
+    },
+    {
+      "name": "intentional scene cover top arch64",
+      "status": "pass",
+      "detail": {
+        "recipeFit": "contain",
+        "actualFit": "cover",
+        "topArchHeight": 64
+      }
+    },
+    {
+      "name": "native parent and px rect progress-ground",
+      "status": "pass",
+      "detail": {
+        "id": "element-c54b3d93-5dff-48a3-9461-2f450bb929f6",
+        "name": "BG_Tycoon_ProgressGround",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          9.939999999999998,
+          315.24,
+          500.42,
+          95.75
+        ],
+        "expectedRect": [
+          9.94,
+          315.24,
+          500.42,
+          95.75
+        ]
+      }
+    },
+    {
+      "name": "native solid style progress-ground",
+      "status": "pass",
+      "detail": {
+        "actual": {
+          "shape": "rectangle",
+          "fill": "#a9dd59",
+          "strokeWidth": 0,
+          "textColor": "#b6b3aa",
+          "opacity": 1,
+          "radius": 0,
+          "stroke": "#ffffff"
+        },
+        "expected": {
+          "fill": "#a9dd59",
+          "opacity": 1,
+          "strokeWidth": 0,
+          "strokeColor": "#ffffff"
+        },
+        "geometry": "rectangle"
+      }
+    },
+    {
+      "name": "native parent and px rect panel-frame",
+      "status": "pass",
+      "detail": {
+        "id": "element-742bd91a-36b7-4cef-b52e-ec08ce401a78",
+        "name": "Frame_Tycoon_Arch",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          0,
+          0,
+          520.29,
+          828.31
+        ],
+        "expectedRect": [
+          0,
+          0,
+          520.29,
+          828.31
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize panel-frame",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-d5b7bcaa82cb9bc9948f278a0d4c2f4d76ad7babaffc2ffe2e8501372d921ae4.webp",
+        "actualSourceSize": [
+          192,
+          224
+        ],
+        "expectedRef": "sha256-d5b7bcaa82cb9bc9948f278a0d4c2f4d76ad7babaffc2ffe2e8501372d921ae4.webp",
+        "expectedSourceSize": [
+          192,
+          224
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad panel-frame",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          96,
+          36,
+          24,
+          36
+        ],
+        "edges": [
+          96,
+          96,
+          12,
+          96
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect title-1",
+      "status": "pass",
+      "detail": {
+        "id": "element-c7b9d269-4816-41a5-ba91-05e8d61e822f",
+        "name": "Txt_Tycoon_Title01",
+        "parentId": "element-fe92c76a-5f9b-40dd-929f-4c3e6720d587",
+        "expectedParent": "element-fe92c76a-5f9b-40dd-929f-4c3e6720d587",
+        "actualRect": [
+          167.11,
+          37.02999999999997,
+          214.98,
+          70
+        ],
+        "expectedRect": [
+          167.11,
+          37.03,
+          214.98,
+          70
+        ]
+      }
+    },
+    {
+      "name": "native text title-1",
+      "status": "pass",
+      "detail": {
+        "text": "발자국",
+        "expected": "발자국"
+      }
+    },
+    {
+      "name": "saved nativeAX typography title-1",
+      "status": "pass",
+      "detail": {
+        "fontSize": 64,
+        "typography": {
+          "weight": 900,
+          "lineHeight": 70,
+          "strokeWidth": 4,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#005a55"
+        },
+        "textColor": "#ffcf54",
+        "expected": {
+          "size": 64,
+          "weight": 900,
+          "line": 70,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffcf54",
+          "stroke": 4,
+          "strokeColor": "#005a55"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect title-2",
+      "status": "pass",
+      "detail": {
+        "id": "element-d7fe600b-5854-44ac-8a58-ed2c2b2df3f9",
+        "name": "Txt_Tycoon_Title02",
+        "parentId": "element-fe92c76a-5f9b-40dd-929f-4c3e6720d587",
+        "expectedParent": "element-fe92c76a-5f9b-40dd-929f-4c3e6720d587",
+        "actualRect": [
+          182.46,
+          100.25999999999999,
+          189.69,
+          44.26
+        ],
+        "expectedRect": [
+          182.46,
+          100.26,
+          189.69,
+          44.26
+        ]
+      }
+    },
+    {
+      "name": "native text title-2",
+      "status": "pass",
+      "detail": {
+        "text": "익스프레스",
+        "expected": "익스프레스"
+      }
+    },
+    {
+      "name": "saved nativeAX typography title-2",
+      "status": "pass",
+      "detail": {
+        "fontSize": 36,
+        "typography": {
+          "weight": 900,
+          "lineHeight": 42,
+          "strokeWidth": 3,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#005a55"
+        },
+        "textColor": "#ffe06b",
+        "expected": {
+          "size": 36,
+          "weight": 900,
+          "line": 42,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffe06b",
+          "stroke": 3,
+          "strokeColor": "#005a55"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect departure",
+      "status": "pass",
+      "detail": {
+        "id": "element-0ad90410-dbd3-41e1-9bed-042a73683e1c",
+        "name": "Group_Tycoon_Departure",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          29.810000000000002,
+          102.97,
+          242.98,
+          39.74
+        ],
+        "expectedRect": [
+          29.81,
+          102.97,
+          242.98,
+          39.74
+        ]
+      }
+    },
+    {
+      "name": "native group kind departure",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native parent and px rect departure-bg",
+      "status": "pass",
+      "detail": {
+        "id": "element-c68a528b-a785-4560-ac7f-1a7f5eec93a8",
+        "name": "BG_Tycoon_Departure",
+        "parentId": "element-0ad90410-dbd3-41e1-9bed-042a73683e1c",
+        "expectedParent": "element-0ad90410-dbd3-41e1-9bed-042a73683e1c",
+        "actualRect": [
+          0,
+          0,
+          242.98,
+          39.74
+        ],
+        "expectedRect": [
+          0,
+          0,
+          242.98,
+          39.74
+        ]
+      }
+    },
+    {
+      "name": "native solid style departure-bg",
+      "status": "pass",
+      "detail": {
+        "actual": {
+          "shape": "capsule",
+          "fill": "#ffffff",
+          "strokeWidth": 0,
+          "textColor": "#b6b3aa",
+          "opacity": 1,
+          "radius": 0,
+          "stroke": "#ffffff"
+        },
+        "expected": {
+          "fill": "#ffffff",
+          "opacity": 1,
+          "strokeWidth": 0,
+          "strokeColor": "#ffffff"
+        },
+        "geometry": "capsule"
+      }
+    },
+    {
+      "name": "native parent and px rect departure-prefix",
+      "status": "pass",
+      "detail": {
+        "id": "element-2b2e1cc4-6e18-477f-9a87-3e78c6b5da0c",
+        "name": "Txt_Tycoon_DeparturePrefix",
+        "parentId": "element-0ad90410-dbd3-41e1-9bed-042a73683e1c",
+        "expectedParent": "element-0ad90410-dbd3-41e1-9bed-042a73683e1c",
+        "actualRect": [
+          9.939999999999998,
+          8.129999999999995,
+          47.87,
+          22.58
+        ],
+        "expectedRect": [
+          9.94,
+          8.13,
+          47.87,
+          22.58
+        ]
+      }
+    },
+    {
+      "name": "native text departure-prefix",
+      "status": "pass",
+      "detail": {
+        "text": "열차가",
+        "expected": "열차가"
+      }
+    },
+    {
+      "name": "saved nativeAX typography departure-prefix",
+      "status": "pass",
+      "detail": {
+        "fontSize": 16,
+        "typography": {
+          "weight": 700,
+          "lineHeight": 20,
+          "strokeWidth": 0,
+          "align": "left",
+          "vertical": "middle"
+        },
+        "textColor": "#414139",
+        "expected": {
+          "size": 16,
+          "weight": 700,
+          "line": 20,
+          "align": "왼쪽",
+          "vertical": "가운데",
+          "color": "#414139",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect departure-rating",
+      "status": "pass",
+      "detail": {
+        "id": "element-95cbebad-9707-4c2e-9a0b-3cd7375601e9",
+        "name": "Img_Tycoon_DepartureRating",
+        "parentId": "element-0ad90410-dbd3-41e1-9bed-042a73683e1c",
+        "expectedParent": "element-0ad90410-dbd3-41e1-9bed-042a73683e1c",
+        "actualRect": [
+          59.61999999999999,
+          5.4199999999999875,
+          23.49,
+          26.2
+        ],
+        "expectedRect": [
+          59.62,
+          5.42,
+          23.49,
+          26.2
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize departure-rating",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-3c0961fc3082224d471599cc0113243f9c8f7a3c0eb3f90244d9abb161be4a4c.webp",
+        "actualSourceSize": [
+          477,
+          471
+        ],
+        "expectedRef": "sha256-3c0961fc3082224d471599cc0113243f9c8f7a3c0eb3f90244d9abb161be4a4c.webp",
+        "expectedSourceSize": [
+          477,
+          471
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership departure-rating",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          477,
+          471
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          477,
+          471
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect departure-suffix",
+      "status": "pass",
+      "detail": {
+        "id": "element-345dd4ea-7f43-4acf-b756-c4079ddf7aa9",
+        "name": "Txt_Tycoon_Departure575",
+        "parentId": "element-0ad90410-dbd3-41e1-9bed-042a73683e1c",
+        "expectedParent": "element-0ad90410-dbd3-41e1-9bed-042a73683e1c",
+        "actualRect": [
+          86.71,
+          8.129999999999995,
+          148.14,
+          22.58
+        ],
+        "expectedRect": [
+          86.71,
+          8.13,
+          148.14,
+          22.58
+        ]
+      }
+    },
+    {
+      "name": "native text departure-suffix",
+      "status": "pass",
+      "detail": {
+        "text": "575에서 출발합니다.",
+        "expected": "575에서 출발합니다."
+      }
+    },
+    {
+      "name": "saved nativeAX typography departure-suffix",
+      "status": "pass",
+      "detail": {
+        "fontSize": 16,
+        "typography": {
+          "weight": 700,
+          "lineHeight": 20,
+          "strokeWidth": 0,
+          "align": "left",
+          "vertical": "middle"
+        },
+        "textColor": "#414139",
+        "expected": {
+          "size": 16,
+          "weight": 700,
+          "line": 20,
+          "align": "왼쪽",
+          "vertical": "가운데",
+          "color": "#414139",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect progress",
+      "status": "pass",
+      "detail": {
+        "id": "element-87a91caa-9152-4993-b306-9dbabafdeffc",
+        "name": "Group_Tycoon_Progress",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          121.04,
+          339.63,
+          276.4,
+          29.81
+        ],
+        "expectedRect": [
+          121.04,
+          339.63,
+          276.4,
+          29.81
+        ]
+      }
+    },
+    {
+      "name": "native group kind progress",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native parent and px rect progress-bg",
+      "status": "pass",
+      "detail": {
+        "id": "element-abdd1e35-6935-4742-9395-345b6eaa26e1",
+        "name": "BG_Tycoon_Progress",
+        "parentId": "element-87a91caa-9152-4993-b306-9dbabafdeffc",
+        "expectedParent": "element-87a91caa-9152-4993-b306-9dbabafdeffc",
+        "actualRect": [
+          0,
+          0,
+          276.4,
+          29.81
+        ],
+        "expectedRect": [
+          0,
+          0,
+          276.4,
+          29.81
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize progress-bg",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-0311a3e14be0a77e2378f703b8bab604a1e8036d03e2c402c02278334d50883f.webp",
+        "actualSourceSize": [
+          128,
+          32
+        ],
+        "expectedRef": "sha256-0311a3e14be0a77e2378f703b8bab604a1e8036d03e2c402c02278334d50883f.webp",
+        "expectedSourceSize": [
+          128,
+          32
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad progress-bg",
+      "status": "pass",
+      "detail": {
+        "mode": "3",
+        "slices": [
+          0,
+          16,
+          0,
+          16
+        ],
+        "edges": [
+          0,
+          14,
+          0,
+          14
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect progress-fill",
+      "status": "pass",
+      "detail": {
+        "id": "element-a6d0dcf5-1d89-433e-8859-38c3d452b040",
+        "name": "Fill_Tycoon_Progress",
+        "parentId": "element-87a91caa-9152-4993-b306-9dbabafdeffc",
+        "expectedParent": "element-87a91caa-9152-4993-b306-9dbabafdeffc",
+        "actualRect": [
+          12.650000000000006,
+          1.8100000000000023,
+          175.24,
+          25.29
+        ],
+        "expectedRect": [
+          12.65,
+          1.81,
+          175.24,
+          25.29
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize progress-fill",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-fb8756d02de875984265aef4dd103a01cc05264e65593fc6ea99fe71366d7d59.webp",
+        "actualSourceSize": [
+          128,
+          32
+        ],
+        "expectedRef": "sha256-fb8756d02de875984265aef4dd103a01cc05264e65593fc6ea99fe71366d7d59.webp",
+        "expectedSourceSize": [
+          128,
+          32
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad progress-fill",
+      "status": "pass",
+      "detail": {
+        "mode": "3",
+        "slices": [
+          0,
+          16,
+          0,
+          16
+        ],
+        "edges": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect pet-disc",
+      "status": "pass",
+      "detail": {
+        "id": "element-68e8da7b-8404-4adf-8843-6b5eb84b18c2",
+        "name": "Group_Tycoon_ProgressPet",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          82.2,
+          321.57000000000005,
+          65.04,
+          65.04
+        ],
+        "expectedRect": [
+          82.2,
+          321.57,
+          65.04,
+          65.04
+        ]
+      }
+    },
+    {
+      "name": "native group kind pet-disc",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native parent and px rect pet-disc-bg",
+      "status": "pass",
+      "detail": {
+        "id": "element-f144800f-82c3-4794-9389-b1c088533f21",
+        "name": "BG_Tycoon_ProgressPet",
+        "parentId": "element-68e8da7b-8404-4adf-8843-6b5eb84b18c2",
+        "expectedParent": "element-68e8da7b-8404-4adf-8843-6b5eb84b18c2",
+        "actualRect": [
+          0,
+          0,
+          65.04,
+          65.04
+        ],
+        "expectedRect": [
+          0,
+          0,
+          65.04,
+          65.04
+        ]
+      }
+    },
+    {
+      "name": "native solid style pet-disc-bg",
+      "status": "pass",
+      "detail": {
+        "actual": {
+          "shape": "circle",
+          "fill": "#00624e",
+          "strokeWidth": 4,
+          "textColor": "#b6b3aa",
+          "opacity": 1,
+          "radius": 0,
+          "stroke": "#ffffff"
+        },
+        "expected": {
+          "fill": "#00624e",
+          "opacity": 1,
+          "strokeWidth": 4,
+          "strokeColor": "#ffffff"
+        },
+        "geometry": "circle"
+      }
+    },
+    {
+      "name": "native parent and px rect pet-disc-art",
+      "status": "pass",
+      "detail": {
+        "id": "element-8467eb72-f85a-4109-9314-83da835d1f1f",
+        "name": "Img_Tycoon_ProgressPet",
+        "parentId": "element-68e8da7b-8404-4adf-8843-6b5eb84b18c2",
+        "expectedParent": "element-68e8da7b-8404-4adf-8843-6b5eb84b18c2",
+        "actualRect": [
+          10.840000000000003,
+          8.129999999999995,
+          44.26,
+          45.16
+        ],
+        "expectedRect": [
+          10.84,
+          8.13,
+          44.26,
+          45.16
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize pet-disc-art",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+        "actualSourceSize": [
+          120,
+          120
+        ],
+        "expectedRef": "sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+        "expectedSourceSize": [
+          120,
+          120
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership pet-disc-art",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect reward-disc",
+      "status": "pass",
+      "detail": {
+        "id": "element-73f63b80-a329-4618-b976-45e32d3b55e3",
+        "name": "Img_Tycoon_ProgressRewardDisc",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          373.96,
+          317.05,
+          75.88,
+          75.88
+        ],
+        "expectedRect": [
+          373.96,
+          317.05,
+          75.88,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize reward-disc",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-00231d8709fdf0d4591fd55f1384a8d1866d8ff6ee7428b1cd8a6f9d72827ef5.webp",
+        "actualSourceSize": [
+          500,
+          512
+        ],
+        "expectedRef": "sha256-00231d8709fdf0d4591fd55f1384a8d1866d8ff6ee7428b1cd8a6f9d72827ef5.webp",
+        "expectedSourceSize": [
+          500,
+          512
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership reward-disc",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          500,
+          512
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          500,
+          512
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect reward-green-pack",
+      "status": "pass",
+      "detail": {
+        "id": "element-0e9e6fdc-f2a0-4f74-9f28-1f0d288b036c",
+        "name": "Img_Tycoon_ProgressGreenPack",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          390.22,
+          325.18,
+          39.74,
+          56
+        ],
+        "expectedRect": [
+          390.22,
+          325.18,
+          39.74,
+          56
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize reward-green-pack",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-dd956d1c68c5245f8d34603ed2e044f827cc63e7fa5701ccc87b2c3d99b7eafc.webp",
+        "actualSourceSize": [
+          316,
+          388
+        ],
+        "expectedRef": "sha256-dd956d1c68c5245f8d34603ed2e044f827cc63e7fa5701ccc87b2c3d99b7eafc.webp",
+        "expectedSourceSize": [
+          316,
+          388
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership reward-green-pack",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          316,
+          388
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          316,
+          388
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect timer",
+      "status": "pass",
+      "detail": {
+        "id": "element-bfc16ff2-ec07-439d-a9e4-23ba7f68a634",
+        "name": "Group_Tycoon_Timer",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          191.5,
+          376.67,
+          136.4,
+          32.52
+        ],
+        "expectedRect": [
+          191.5,
+          376.67,
+          136.4,
+          32.52
+        ]
+      }
+    },
+    {
+      "name": "native group kind timer",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native parent and px rect timer-bg",
+      "status": "pass",
+      "detail": {
+        "id": "element-2a49d96e-1fc3-441c-ba57-ef084d3b6e01",
+        "name": "BG_Tycoon_Timer",
+        "parentId": "element-bfc16ff2-ec07-439d-a9e4-23ba7f68a634",
+        "expectedParent": "element-bfc16ff2-ec07-439d-a9e4-23ba7f68a634",
+        "actualRect": [
+          0,
+          0,
+          136.4,
+          32.52
+        ],
+        "expectedRect": [
+          0,
+          0,
+          136.4,
+          32.52
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize timer-bg",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-0311a3e14be0a77e2378f703b8bab604a1e8036d03e2c402c02278334d50883f.webp",
+        "actualSourceSize": [
+          128,
+          32
+        ],
+        "expectedRef": "sha256-0311a3e14be0a77e2378f703b8bab604a1e8036d03e2c402c02278334d50883f.webp",
+        "expectedSourceSize": [
+          128,
+          32
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad timer-bg",
+      "status": "pass",
+      "detail": {
+        "mode": "3",
+        "slices": [
+          0,
+          16,
+          0,
+          16
+        ],
+        "edges": [
+          0,
+          14,
+          0,
+          14
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect timer-clock",
+      "status": "pass",
+      "detail": {
+        "id": "element-8e1fd559-4479-4a04-ae34-fb69d6e1ef1a",
+        "name": "Img_Tycoon_TimerClock",
+        "parentId": "element-bfc16ff2-ec07-439d-a9e4-23ba7f68a634",
+        "expectedParent": "element-bfc16ff2-ec07-439d-a9e4-23ba7f68a634",
+        "actualRect": [
+          13.550000000000011,
+          6.319999999999993,
+          15.36,
+          18.07
+        ],
+        "expectedRect": [
+          13.55,
+          6.32,
+          15.36,
+          18.07
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize timer-clock",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-20155982bef39f01e01c6319a5004ec40169abb2d7d0ab843d4ec81952c43051.webp",
+        "actualSourceSize": [
+          64,
+          64
+        ],
+        "expectedRef": "sha256-20155982bef39f01e01c6319a5004ec40169abb2d7d0ab843d4ec81952c43051.webp",
+        "expectedSourceSize": [
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership timer-clock",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect timer-text",
+      "status": "pass",
+      "detail": {
+        "id": "element-954f5a6f-0dbf-4783-b1be-6bb38bbaae69",
+        "name": "Txt_Tycoon_Timer",
+        "parentId": "element-bfc16ff2-ec07-439d-a9e4-23ba7f68a634",
+        "expectedParent": "element-bfc16ff2-ec07-439d-a9e4-23ba7f68a634",
+        "actualRect": [
+          32.52000000000001,
+          4.519999999999982,
+          92.13,
+          24
+        ],
+        "expectedRect": [
+          32.52,
+          4.52,
+          92.13,
+          24
+        ]
+      }
+    },
+    {
+      "name": "native visual fit nowrap timer-text",
+      "status": "pass",
+      "detail": {
+        "wrap": "nowrap",
+        "expected": "nowrap",
+        "recipeFontSize": 20,
+        "expectedNativeFontSize": 18
+      }
+    },
+    {
+      "name": "native text timer-text",
+      "status": "pass",
+      "detail": {
+        "text": "7시간 48분",
+        "expected": "7시간 48분"
+      }
+    },
+    {
+      "name": "saved nativeAX typography timer-text",
+      "status": "pass",
+      "detail": {
+        "fontSize": 18,
+        "typography": {
+          "weight": 700,
+          "lineHeight": 24,
+          "strokeWidth": 0,
+          "align": "center",
+          "vertical": "middle",
+          "wrap": "nowrap"
+        },
+        "textColor": "#ffffff",
+        "expected": {
+          "size": 18,
+          "weight": 700,
+          "line": 24,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffffff",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-viewport",
+      "status": "pass",
+      "detail": {
+        "id": "element-4dc4c798-db09-4cdf-8269-486c08c8f965",
+        "name": "Viewport_Tycoon_Ranks",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          14.45,
+          423.64,
+          489.58,
+          345.05
+        ],
+        "expectedRect": [
+          14.45,
+          423.64,
+          489.58,
+          345.05
+        ]
+      }
+    },
+    {
+      "name": "native group kind rank-viewport",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native overflow rank-viewport",
+      "status": "pass",
+      "detail": {
+        "actual": "scroll-y",
+        "expected": "scroll-y"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-content",
+      "status": "pass",
+      "detail": {
+        "id": "element-00f98833-c311-4796-b4ab-2d4fedbbd445",
+        "name": "Content_Tycoon_Ranks",
+        "parentId": "element-4dc4c798-db09-4cdf-8269-486c08c8f965",
+        "expectedParent": "element-4dc4c798-db09-4cdf-8269-486c08c8f965",
+        "actualRect": [
+          0,
+          0,
+          489.58,
+          390.22
+        ],
+        "expectedRect": [
+          0,
+          0,
+          489.58,
+          390.22
+        ]
+      }
+    },
+    {
+      "name": "native group kind rank-content",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native overflow rank-content",
+      "status": "pass",
+      "detail": {
+        "actual": "visible",
+        "expected": "visible"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-1",
+      "status": "pass",
+      "detail": {
+        "id": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "name": "Group_Tycoon_Rank01",
+        "parentId": "element-00f98833-c311-4796-b4ab-2d4fedbbd445",
+        "expectedParent": "element-00f98833-c311-4796-b4ab-2d4fedbbd445",
+        "actualRect": [
+          1.8099999999999987,
+          0,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          1.81,
+          0,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "native group kind rank-1",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native parent and px rect r1-fill",
+      "status": "pass",
+      "detail": {
+        "id": "element-cfa21940-db32-4957-a704-a9327ee77694",
+        "name": "BG_Tycoon_Rank01",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r1-fill",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-c51ffa094a97473ba2e28dbef2dfe1ea45f4ce434609b2d898451adfbeee297f.webp",
+        "actualSourceSize": [
+          128,
+          96
+        ],
+        "expectedRef": "sha256-c51ffa094a97473ba2e28dbef2dfe1ea45f4ce434609b2d898451adfbeee297f.webp",
+        "expectedSourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad r1-fill",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect r1-frame",
+      "status": "pass",
+      "detail": {
+        "id": "element-3fcf1967-08cd-466f-a897-b503ad73cfec",
+        "name": "Frame_Tycoon_Rank01",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r1-frame",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "actualSourceSize": [
+          128,
+          96
+        ],
+        "expectedRef": "sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "expectedSourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad r1-frame",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect r1-rank",
+      "status": "pass",
+      "detail": {
+        "id": "element-e05e7187-0136-45ad-af8a-1eba66645a00",
+        "name": "Txt_Tycoon_Rank01_Position",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          4.520000000000003,
+          4.519999999999982,
+          28,
+          29.809999999999995
+        ],
+        "expectedRect": [
+          4.52,
+          4.52,
+          28,
+          29.81
+        ]
+      }
+    },
+    {
+      "name": "native text r1-rank",
+      "status": "pass",
+      "detail": {
+        "text": "1",
+        "expected": "1"
+      }
+    },
+    {
+      "name": "saved nativeAX typography r1-rank",
+      "status": "pass",
+      "detail": {
+        "fontSize": 20,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 24,
+          "strokeWidth": 0,
+          "align": "center",
+          "vertical": "middle"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 20,
+          "weight": 800,
+          "line": 24,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect r1-avatar",
+      "status": "pass",
+      "detail": {
+        "id": "element-16708f32-211d-4d5c-9b02-dc08b746d1ee",
+        "name": "Img_Tycoon_Rank01_Avatar",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          36.13,
+          9.940000000000055,
+          57.81,
+          57.81
+        ],
+        "expectedRect": [
+          36.13,
+          9.94,
+          57.81,
+          57.81
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r1-avatar",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-0f64562a55eb2608e981874371cda11dc04010f6781a52eb07cd6d64f14ccc8c.webp",
+        "actualSourceSize": [
+          160,
+          160
+        ],
+        "expectedRef": "sha256-0f64562a55eb2608e981874371cda11dc04010f6781a52eb07cd6d64f14ccc8c.webp",
+        "expectedSourceSize": [
+          160,
+          160
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership r1-avatar",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          160,
+          160
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          160,
+          160
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect r1-name",
+      "status": "pass",
+      "detail": {
+        "id": "element-dc00e7bf-a0b4-487a-b9ff-93bb76e4b6d4",
+        "name": "Txt_Tycoon_Rank01_Name",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          106.59,
+          5.419999999999959,
+          221.3,
+          25.29
+        ],
+        "expectedRect": [
+          106.59,
+          5.42,
+          221.3,
+          25.29
+        ]
+      }
+    },
+    {
+      "name": "native text r1-name",
+      "status": "pass",
+      "detail": {
+        "text": "NotableCamel38",
+        "expected": "NotableCamel38"
+      }
+    },
+    {
+      "name": "saved nativeAX typography r1-name",
+      "status": "pass",
+      "detail": {
+        "fontSize": 20,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 24,
+          "strokeWidth": 0,
+          "align": "left",
+          "vertical": "middle"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 20,
+          "weight": 800,
+          "line": 24,
+          "align": "왼쪽",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect r1-score-bg",
+      "status": "pass",
+      "detail": {
+        "id": "element-753c1f62-7fb3-44b5-938f-760bcdbe5c0a",
+        "name": "BG_Tycoon_Rank01_Score",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          105.68,
+          33.41999999999996,
+          153.56,
+          30.709999999999994
+        ],
+        "expectedRect": [
+          105.68,
+          33.42,
+          153.56,
+          30.71
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r1-score-bg",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-2f67dcff5ef1c106e62c435d7cfbce9e07ab429ec057d5b15af5152495ecc31d.webp",
+        "actualSourceSize": [
+          128,
+          40
+        ],
+        "expectedRef": "sha256-2f67dcff5ef1c106e62c435d7cfbce9e07ab429ec057d5b15af5152495ecc31d.webp",
+        "expectedSourceSize": [
+          128,
+          40
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad r1-score-bg",
+      "status": "pass",
+      "detail": {
+        "mode": "3",
+        "slices": [
+          0,
+          20,
+          0,
+          20
+        ],
+        "edges": [
+          0,
+          14,
+          0,
+          14
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect r1-score-pet",
+      "status": "pass",
+      "detail": {
+        "id": "element-013589c8-b7d6-4e3d-991c-749aa4d04187",
+        "name": "Img_Tycoon_Rank01_ScorePet",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          110.19999999999999,
+          36.129999999999995,
+          27.1,
+          25.29
+        ],
+        "expectedRect": [
+          110.2,
+          36.13,
+          27.1,
+          25.29
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r1-score-pet",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+        "actualSourceSize": [
+          120,
+          120
+        ],
+        "expectedRef": "sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+        "expectedSourceSize": [
+          120,
+          120
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership r1-score-pet",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect r1-score",
+      "status": "pass",
+      "detail": {
+        "id": "element-cf420455-cd3b-4a94-afef-c218f671d989",
+        "name": "Txt_Tycoon_Rank01_Score",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          142.72,
+          34.32000000000005,
+          109.3,
+          28.9
+        ],
+        "expectedRect": [
+          142.72,
+          34.32,
+          109.3,
+          28.9
+        ]
+      }
+    },
+    {
+      "name": "native text r1-score",
+      "status": "pass",
+      "detail": {
+        "text": "920",
+        "expected": "920"
+      }
+    },
+    {
+      "name": "saved nativeAX typography r1-score",
+      "status": "pass",
+      "detail": {
+        "fontSize": 25,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 28.9,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#ffffff"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 25,
+          "weight": 800,
+          "line": 28.9,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 1,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect r1-pack",
+      "status": "pass",
+      "detail": {
+        "id": "element-3a153e4c-1e1d-4a35-9fb3-17c82cc259c1",
+        "name": "Img_Tycoon_Rank01_Pack",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          344.15,
+          17.159999999999968,
+          34.32,
+          41.55
+        ],
+        "expectedRect": [
+          344.15,
+          17.16,
+          34.32,
+          41.55
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r1-pack",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-e34c0b5999bdad93895272d889dd2af9e75e5050b2e7a3a3d6d94cf97fa99824.webp",
+        "actualSourceSize": [
+          376,
+          417
+        ],
+        "expectedRef": "sha256-e34c0b5999bdad93895272d889dd2af9e75e5050b2e7a3a3d6d94cf97fa99824.webp",
+        "expectedSourceSize": [
+          376,
+          417
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership r1-pack",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          376,
+          417
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          376,
+          417
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect r1-dice",
+      "status": "pass",
+      "detail": {
+        "id": "element-63d9bc24-e7fa-45c2-94bd-333fb8daa98d",
+        "name": "Img_Tycoon_Rank01_Dice",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          395.64,
+          18.07000000000005,
+          28,
+          31.609999999999996
+        ],
+        "expectedRect": [
+          395.64,
+          18.07,
+          28,
+          31.61
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r1-dice",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+        "actualSourceSize": [
+          266,
+          264
+        ],
+        "expectedRef": "sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+        "expectedSourceSize": [
+          266,
+          264
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership r1-dice",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          266,
+          264
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          266,
+          264
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect r1-dice-qty",
+      "status": "pass",
+      "detail": {
+        "id": "element-b7322f72-bea2-4260-b500-e09cee76f267",
+        "name": "Txt_Tycoon_Rank01_DiceQty",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          386.6,
+          44.25999999999999,
+          49.68,
+          22
+        ],
+        "expectedRect": [
+          386.6,
+          44.26,
+          49.68,
+          22
+        ]
+      }
+    },
+    {
+      "name": "native visual fit nowrap r1-dice-qty",
+      "status": "pass",
+      "detail": {
+        "wrap": "nowrap",
+        "expected": "nowrap",
+        "recipeFontSize": 19,
+        "expectedNativeFontSize": 17
+      }
+    },
+    {
+      "name": "native text r1-dice-qty",
+      "status": "pass",
+      "detail": {
+        "text": "1,500",
+        "expected": "1,500"
+      }
+    },
+    {
+      "name": "saved nativeAX typography r1-dice-qty",
+      "status": "pass",
+      "detail": {
+        "fontSize": 17,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 22,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#414139",
+          "wrap": "nowrap"
+        },
+        "textColor": "#ffffff",
+        "expected": {
+          "size": 17,
+          "weight": 800,
+          "line": 22,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffffff",
+          "stroke": 1,
+          "strokeColor": "#414139"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect r1-cash",
+      "status": "pass",
+      "detail": {
+        "id": "element-3dc74531-6769-4010-bf2c-7bba4bf4f5bf",
+        "name": "Img_Tycoon_Rank01_Cash",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          440.8,
+          19.870000000000005,
+          36.13,
+          27.1
+        ],
+        "expectedRect": [
+          440.8,
+          19.87,
+          36.13,
+          27.1
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r1-cash",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "actualSourceSize": [
+          1254,
+          1254
+        ],
+        "expectedRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "expectedSourceSize": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership r1-cash",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          148,
+          308,
+          959,
+          680
+        ],
+        "expectedRegion": [
+          148,
+          308,
+          959,
+          680
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect r1-cash-qty",
+      "status": "pass",
+      "detail": {
+        "id": "element-a27a309b-43a4-4dbe-89ca-438f586d3582",
+        "name": "Txt_Tycoon_Rank01_CashQty",
+        "parentId": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "expectedParent": "element-a269573c-da96-40d7-a878-c4f6f5a7a90f",
+        "actualRect": [
+          436.28,
+          44.25999999999999,
+          49.68,
+          22
+        ],
+        "expectedRect": [
+          436.28,
+          44.26,
+          49.68,
+          22
+        ]
+      }
+    },
+    {
+      "name": "native visual fit nowrap r1-cash-qty",
+      "status": "pass",
+      "detail": {
+        "wrap": "nowrap",
+        "expected": "nowrap",
+        "recipeFontSize": 19,
+        "expectedNativeFontSize": 17
+      }
+    },
+    {
+      "name": "native text r1-cash-qty",
+      "status": "pass",
+      "detail": {
+        "text": "1.6M",
+        "expected": "1.6M"
+      }
+    },
+    {
+      "name": "saved nativeAX typography r1-cash-qty",
+      "status": "pass",
+      "detail": {
+        "fontSize": 17,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 22,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#414139",
+          "wrap": "nowrap"
+        },
+        "textColor": "#ffdc20",
+        "expected": {
+          "size": 17,
+          "weight": 800,
+          "line": 22,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffdc20",
+          "stroke": 1,
+          "strokeColor": "#414139"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2",
+      "status": "pass",
+      "detail": {
+        "id": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "name": "Group_Tycoon_Rank02",
+        "parentId": "element-00f98833-c311-4796-b4ab-2d4fedbbd445",
+        "expectedParent": "element-00f98833-c311-4796-b4ab-2d4fedbbd445",
+        "actualRect": [
+          1.8099999999999987,
+          79.49000000000001,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          1.81,
+          79.49,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "native group kind rank-2",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::row-fill",
+      "status": "pass",
+      "detail": {
+        "id": "element-2a360944-d2e4-4cca-8606-5a3352c529f2",
+        "name": "BG_Tycoon_Rank02",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-2::row-fill",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-c51ffa094a97473ba2e28dbef2dfe1ea45f4ce434609b2d898451adfbeee297f.webp",
+        "actualSourceSize": [
+          128,
+          96
+        ],
+        "expectedRef": "sha256-c51ffa094a97473ba2e28dbef2dfe1ea45f4ce434609b2d898451adfbeee297f.webp",
+        "expectedSourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad rank-2::row-fill",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::row-frame",
+      "status": "pass",
+      "detail": {
+        "id": "element-2cf67527-16ae-434d-8189-5df1aba432c8",
+        "name": "Frame_Tycoon_Rank02",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-2::row-frame",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "actualSourceSize": [
+          128,
+          96
+        ],
+        "expectedRef": "sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "expectedSourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad rank-2::row-frame",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::rank-position",
+      "status": "pass",
+      "detail": {
+        "id": "element-a10b447e-8dff-4d57-bb07-d5c5c2a77bea",
+        "name": "Txt_Tycoon_Rank02_Position",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          4.520000000000003,
+          4.519999999999982,
+          28,
+          29.809999999999995
+        ],
+        "expectedRect": [
+          4.52,
+          4.52,
+          28,
+          29.81
+        ]
+      }
+    },
+    {
+      "name": "native text rank-2::rank-position",
+      "status": "pass",
+      "detail": {
+        "text": "2",
+        "expected": "2"
+      }
+    },
+    {
+      "name": "saved nativeAX typography rank-2::rank-position",
+      "status": "pass",
+      "detail": {
+        "fontSize": 20,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 24,
+          "strokeWidth": 0,
+          "align": "center",
+          "vertical": "middle"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 20,
+          "weight": 800,
+          "line": 24,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::avatar",
+      "status": "pass",
+      "detail": {
+        "id": "element-8ca06dc0-2c12-451a-af13-7fc29ce2be1d",
+        "name": "Img_Tycoon_Rank02_Avatar",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          36.13,
+          9.940000000000055,
+          57.81,
+          57.81
+        ],
+        "expectedRect": [
+          36.13,
+          9.94,
+          57.81,
+          57.81
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-2::avatar",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-cce46f2afe222d8dcd9ca51a045abce77a9673a6fb0fb8ebb73aaf27353804ad.webp",
+        "actualSourceSize": [
+          160,
+          160
+        ],
+        "expectedRef": "sha256-cce46f2afe222d8dcd9ca51a045abce77a9673a6fb0fb8ebb73aaf27353804ad.webp",
+        "expectedSourceSize": [
+          160,
+          160
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership rank-2::avatar",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          160,
+          160
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          160,
+          160
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::nickname",
+      "status": "pass",
+      "detail": {
+        "id": "element-23699907-1bda-4ee6-89b0-9138aad68da6",
+        "name": "Txt_Tycoon_Rank02_Name",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          106.59,
+          5.419999999999959,
+          221.3,
+          25.29
+        ],
+        "expectedRect": [
+          106.59,
+          5.42,
+          221.3,
+          25.29
+        ]
+      }
+    },
+    {
+      "name": "native text rank-2::nickname",
+      "status": "pass",
+      "detail": {
+        "text": "ابراهيم",
+        "expected": "ابراهيم"
+      }
+    },
+    {
+      "name": "saved nativeAX typography rank-2::nickname",
+      "status": "pass",
+      "detail": {
+        "fontSize": 20,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 24,
+          "strokeWidth": 0,
+          "align": "left",
+          "vertical": "middle"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 20,
+          "weight": 800,
+          "line": 24,
+          "align": "왼쪽",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::score-backing",
+      "status": "pass",
+      "detail": {
+        "id": "element-0ae668a6-1f07-4461-9d55-5a35f46bc5a9",
+        "name": "BG_Tycoon_Rank02_Score",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          105.68,
+          33.41999999999996,
+          153.56,
+          30.709999999999994
+        ],
+        "expectedRect": [
+          105.68,
+          33.42,
+          153.56,
+          30.71
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-2::score-backing",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-2f67dcff5ef1c106e62c435d7cfbce9e07ab429ec057d5b15af5152495ecc31d.webp",
+        "actualSourceSize": [
+          128,
+          40
+        ],
+        "expectedRef": "sha256-2f67dcff5ef1c106e62c435d7cfbce9e07ab429ec057d5b15af5152495ecc31d.webp",
+        "expectedSourceSize": [
+          128,
+          40
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad rank-2::score-backing",
+      "status": "pass",
+      "detail": {
+        "mode": "3",
+        "slices": [
+          0,
+          20,
+          0,
+          20
+        ],
+        "edges": [
+          0,
+          14,
+          0,
+          14
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::score-pet",
+      "status": "pass",
+      "detail": {
+        "id": "element-a443f9c3-fe0f-4c45-87d6-44e8cf586c8c",
+        "name": "Img_Tycoon_Rank02_ScorePet",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          110.19999999999999,
+          36.129999999999995,
+          27.1,
+          25.29
+        ],
+        "expectedRect": [
+          110.2,
+          36.13,
+          27.1,
+          25.29
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-2::score-pet",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+        "actualSourceSize": [
+          120,
+          120
+        ],
+        "expectedRef": "sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+        "expectedSourceSize": [
+          120,
+          120
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership rank-2::score-pet",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::score",
+      "status": "pass",
+      "detail": {
+        "id": "element-c2616200-ec12-420c-9b2a-383f81bea9cb",
+        "name": "Txt_Tycoon_Rank02_Score",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          142.72,
+          34.32000000000005,
+          109.3,
+          28.9
+        ],
+        "expectedRect": [
+          142.72,
+          34.32,
+          109.3,
+          28.9
+        ]
+      }
+    },
+    {
+      "name": "native text rank-2::score",
+      "status": "pass",
+      "detail": {
+        "text": "502",
+        "expected": "502"
+      }
+    },
+    {
+      "name": "saved nativeAX typography rank-2::score",
+      "status": "pass",
+      "detail": {
+        "fontSize": 25,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 28.9,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#ffffff"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 25,
+          "weight": 800,
+          "line": 28.9,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 1,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::pack",
+      "status": "pass",
+      "detail": {
+        "id": "element-1db69457-a4fe-4fa4-a4d7-e190bd92957f",
+        "name": "Img_Tycoon_Rank02_Pack",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          344.15,
+          17.159999999999968,
+          34.32,
+          41.55
+        ],
+        "expectedRect": [
+          344.15,
+          17.16,
+          34.32,
+          41.55
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-2::pack",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-04b82b6fcc7d7ab2854211d25f388f36b788216e43be8fb5fc37bd7bd1fae8c6.webp",
+        "actualSourceSize": [
+          82,
+          120
+        ],
+        "expectedRef": "sha256-04b82b6fcc7d7ab2854211d25f388f36b788216e43be8fb5fc37bd7bd1fae8c6.webp",
+        "expectedSourceSize": [
+          82,
+          120
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership rank-2::pack",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          82,
+          120
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          82,
+          120
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::dice",
+      "status": "pass",
+      "detail": {
+        "id": "element-f5b9459d-d836-4255-9c73-c119f9ffaf50",
+        "name": "Img_Tycoon_Rank02_Dice",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          395.64,
+          18.07000000000005,
+          28,
+          31.609999999999996
+        ],
+        "expectedRect": [
+          395.64,
+          18.07,
+          28,
+          31.61
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-2::dice",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+        "actualSourceSize": [
+          266,
+          264
+        ],
+        "expectedRef": "sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+        "expectedSourceSize": [
+          266,
+          264
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership rank-2::dice",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          266,
+          264
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          266,
+          264
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::dice-quantity",
+      "status": "pass",
+      "detail": {
+        "id": "element-08ef7184-4d98-43f1-afa4-d1c27bdd0497",
+        "name": "Txt_Tycoon_Rank02_DiceQty",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          386.6,
+          44.25999999999999,
+          49.68,
+          22
+        ],
+        "expectedRect": [
+          386.6,
+          44.26,
+          49.68,
+          22
+        ]
+      }
+    },
+    {
+      "name": "native visual fit nowrap rank-2::dice-quantity",
+      "status": "pass",
+      "detail": {
+        "wrap": "nowrap",
+        "expected": "nowrap",
+        "recipeFontSize": 19,
+        "expectedNativeFontSize": 17
+      }
+    },
+    {
+      "name": "native text rank-2::dice-quantity",
+      "status": "pass",
+      "detail": {
+        "text": "800",
+        "expected": "800"
+      }
+    },
+    {
+      "name": "saved nativeAX typography rank-2::dice-quantity",
+      "status": "pass",
+      "detail": {
+        "fontSize": 17,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 22,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#414139",
+          "wrap": "nowrap"
+        },
+        "textColor": "#ffffff",
+        "expected": {
+          "size": 17,
+          "weight": 800,
+          "line": 22,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffffff",
+          "stroke": 1,
+          "strokeColor": "#414139"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::cash",
+      "status": "pass",
+      "detail": {
+        "id": "element-ca645de0-17c0-4d49-aaf5-4a977256d793",
+        "name": "Img_Tycoon_Rank02_Cash",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          440.8,
+          19.870000000000005,
+          36.13,
+          27.1
+        ],
+        "expectedRect": [
+          440.8,
+          19.87,
+          36.13,
+          27.1
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-2::cash",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "actualSourceSize": [
+          1254,
+          1254
+        ],
+        "expectedRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "expectedSourceSize": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership rank-2::cash",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          148,
+          308,
+          959,
+          680
+        ],
+        "expectedRegion": [
+          148,
+          308,
+          959,
+          680
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-2::cash-quantity",
+      "status": "pass",
+      "detail": {
+        "id": "element-0734c770-fd21-4f7d-bc44-6d10d48f1d83",
+        "name": "Txt_Tycoon_Rank02_CashQty",
+        "parentId": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "expectedParent": "element-bc7eb903-2350-4a82-bb38-d3591de41899",
+        "actualRect": [
+          436.28,
+          44.25999999999999,
+          49.68,
+          22
+        ],
+        "expectedRect": [
+          436.28,
+          44.26,
+          49.68,
+          22
+        ]
+      }
+    },
+    {
+      "name": "native visual fit nowrap rank-2::cash-quantity",
+      "status": "pass",
+      "detail": {
+        "wrap": "nowrap",
+        "expected": "nowrap",
+        "recipeFontSize": 19,
+        "expectedNativeFontSize": 17
+      }
+    },
+    {
+      "name": "native text rank-2::cash-quantity",
+      "status": "pass",
+      "detail": {
+        "text": "800K",
+        "expected": "800K"
+      }
+    },
+    {
+      "name": "saved nativeAX typography rank-2::cash-quantity",
+      "status": "pass",
+      "detail": {
+        "fontSize": 17,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 22,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#414139",
+          "wrap": "nowrap"
+        },
+        "textColor": "#ffdc20",
+        "expected": {
+          "size": 17,
+          "weight": 800,
+          "line": 22,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffdc20",
+          "stroke": 1,
+          "strokeColor": "#414139"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3",
+      "status": "pass",
+      "detail": {
+        "id": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "name": "Group_Tycoon_Rank03",
+        "parentId": "element-00f98833-c311-4796-b4ab-2d4fedbbd445",
+        "expectedParent": "element-00f98833-c311-4796-b4ab-2d4fedbbd445",
+        "actualRect": [
+          1.8099999999999987,
+          158.98000000000002,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          1.81,
+          158.98,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "native group kind rank-3",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::row-fill",
+      "status": "pass",
+      "detail": {
+        "id": "element-58085eb8-b23b-40d1-9e8b-bc97c22e4389",
+        "name": "BG_Tycoon_Rank03",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-3::row-fill",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-c51ffa094a97473ba2e28dbef2dfe1ea45f4ce434609b2d898451adfbeee297f.webp",
+        "actualSourceSize": [
+          128,
+          96
+        ],
+        "expectedRef": "sha256-c51ffa094a97473ba2e28dbef2dfe1ea45f4ce434609b2d898451adfbeee297f.webp",
+        "expectedSourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad rank-3::row-fill",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::row-frame",
+      "status": "pass",
+      "detail": {
+        "id": "element-13a11d31-9eb5-4ca4-9d8f-f69bcfc278d0",
+        "name": "Frame_Tycoon_Rank03",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-3::row-frame",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "actualSourceSize": [
+          128,
+          96
+        ],
+        "expectedRef": "sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "expectedSourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad rank-3::row-frame",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::rank-position",
+      "status": "pass",
+      "detail": {
+        "id": "element-b50f6060-8b71-4cad-b26a-a3accf52be13",
+        "name": "Txt_Tycoon_Rank03_Position",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          4.520000000000003,
+          4.519999999999982,
+          28,
+          29.809999999999995
+        ],
+        "expectedRect": [
+          4.52,
+          4.52,
+          28,
+          29.81
+        ]
+      }
+    },
+    {
+      "name": "native text rank-3::rank-position",
+      "status": "pass",
+      "detail": {
+        "text": "3",
+        "expected": "3"
+      }
+    },
+    {
+      "name": "saved nativeAX typography rank-3::rank-position",
+      "status": "pass",
+      "detail": {
+        "fontSize": 20,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 24,
+          "strokeWidth": 0,
+          "align": "center",
+          "vertical": "middle"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 20,
+          "weight": 800,
+          "line": 24,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::avatar",
+      "status": "pass",
+      "detail": {
+        "id": "element-b4a6ef74-7206-4e6c-8dea-320e73572b36",
+        "name": "Img_Tycoon_Rank03_Avatar",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          36.13,
+          9.940000000000055,
+          57.81,
+          57.81
+        ],
+        "expectedRect": [
+          36.13,
+          9.94,
+          57.81,
+          57.81
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-3::avatar",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-45974b5abeaaca7d108041619e50b55f7c45186a3fb116e1765d10dcff23326f.webp",
+        "actualSourceSize": [
+          160,
+          160
+        ],
+        "expectedRef": "sha256-45974b5abeaaca7d108041619e50b55f7c45186a3fb116e1765d10dcff23326f.webp",
+        "expectedSourceSize": [
+          160,
+          160
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership rank-3::avatar",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          160,
+          160
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          160,
+          160
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::nickname",
+      "status": "pass",
+      "detail": {
+        "id": "element-17c9ddbb-eccc-4833-bf78-786e2edf2c1d",
+        "name": "Txt_Tycoon_Rank03_Name",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          106.59,
+          5.419999999999959,
+          221.3,
+          25.29
+        ],
+        "expectedRect": [
+          106.59,
+          5.42,
+          221.3,
+          25.29
+        ]
+      }
+    },
+    {
+      "name": "native text rank-3::nickname",
+      "status": "pass",
+      "detail": {
+        "text": "ElegantDove05",
+        "expected": "ElegantDove05"
+      }
+    },
+    {
+      "name": "saved nativeAX typography rank-3::nickname",
+      "status": "pass",
+      "detail": {
+        "fontSize": 20,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 24,
+          "strokeWidth": 0,
+          "align": "left",
+          "vertical": "middle"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 20,
+          "weight": 800,
+          "line": 24,
+          "align": "왼쪽",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::score-backing",
+      "status": "pass",
+      "detail": {
+        "id": "element-914cd7f2-e1c4-4a25-8f12-ca40848f029b",
+        "name": "BG_Tycoon_Rank03_Score",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          105.68,
+          33.41999999999996,
+          153.56,
+          30.709999999999994
+        ],
+        "expectedRect": [
+          105.68,
+          33.42,
+          153.56,
+          30.71
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-3::score-backing",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-2f67dcff5ef1c106e62c435d7cfbce9e07ab429ec057d5b15af5152495ecc31d.webp",
+        "actualSourceSize": [
+          128,
+          40
+        ],
+        "expectedRef": "sha256-2f67dcff5ef1c106e62c435d7cfbce9e07ab429ec057d5b15af5152495ecc31d.webp",
+        "expectedSourceSize": [
+          128,
+          40
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad rank-3::score-backing",
+      "status": "pass",
+      "detail": {
+        "mode": "3",
+        "slices": [
+          0,
+          20,
+          0,
+          20
+        ],
+        "edges": [
+          0,
+          14,
+          0,
+          14
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::score-pet",
+      "status": "pass",
+      "detail": {
+        "id": "element-f4b15750-9afb-4355-a967-d99c2304f425",
+        "name": "Img_Tycoon_Rank03_ScorePet",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          110.19999999999999,
+          36.129999999999995,
+          27.1,
+          25.29
+        ],
+        "expectedRect": [
+          110.2,
+          36.13,
+          27.1,
+          25.29
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-3::score-pet",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+        "actualSourceSize": [
+          120,
+          120
+        ],
+        "expectedRef": "sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+        "expectedSourceSize": [
+          120,
+          120
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership rank-3::score-pet",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::score",
+      "status": "pass",
+      "detail": {
+        "id": "element-26c6652f-bc00-40f7-a5f2-95ee621c7e09",
+        "name": "Txt_Tycoon_Rank03_Score",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          142.72,
+          34.32000000000005,
+          109.3,
+          28.9
+        ],
+        "expectedRect": [
+          142.72,
+          34.32,
+          109.3,
+          28.9
+        ]
+      }
+    },
+    {
+      "name": "native text rank-3::score",
+      "status": "pass",
+      "detail": {
+        "text": "290",
+        "expected": "290"
+      }
+    },
+    {
+      "name": "saved nativeAX typography rank-3::score",
+      "status": "pass",
+      "detail": {
+        "fontSize": 25,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 28.9,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#ffffff"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 25,
+          "weight": 800,
+          "line": 28.9,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 1,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::pack",
+      "status": "pass",
+      "detail": {
+        "id": "element-94ec8377-eff2-4453-8ac1-e1a96face77b",
+        "name": "Img_Tycoon_Rank03_Pack",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          344.15,
+          17.159999999999968,
+          34.32,
+          41.55
+        ],
+        "expectedRect": [
+          344.15,
+          17.16,
+          34.32,
+          41.55
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-3::pack",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-04b82b6fcc7d7ab2854211d25f388f36b788216e43be8fb5fc37bd7bd1fae8c6.webp",
+        "actualSourceSize": [
+          82,
+          120
+        ],
+        "expectedRef": "sha256-04b82b6fcc7d7ab2854211d25f388f36b788216e43be8fb5fc37bd7bd1fae8c6.webp",
+        "expectedSourceSize": [
+          82,
+          120
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership rank-3::pack",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          82,
+          120
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          82,
+          120
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::dice",
+      "status": "pass",
+      "detail": {
+        "id": "element-2aa7aec9-f046-49fd-8bac-e34a7adfd7f7",
+        "name": "Img_Tycoon_Rank03_Dice",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          395.64,
+          18.07000000000005,
+          28,
+          31.609999999999996
+        ],
+        "expectedRect": [
+          395.64,
+          18.07,
+          28,
+          31.61
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-3::dice",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+        "actualSourceSize": [
+          266,
+          264
+        ],
+        "expectedRef": "sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+        "expectedSourceSize": [
+          266,
+          264
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership rank-3::dice",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          266,
+          264
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          266,
+          264
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::dice-quantity",
+      "status": "pass",
+      "detail": {
+        "id": "element-378fb4ab-3aea-42fa-bc54-ceb81e63488b",
+        "name": "Txt_Tycoon_Rank03_DiceQty",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          386.6,
+          44.25999999999999,
+          49.68,
+          22
+        ],
+        "expectedRect": [
+          386.6,
+          44.26,
+          49.68,
+          22
+        ]
+      }
+    },
+    {
+      "name": "native visual fit nowrap rank-3::dice-quantity",
+      "status": "pass",
+      "detail": {
+        "wrap": "nowrap",
+        "expected": "nowrap",
+        "recipeFontSize": 19,
+        "expectedNativeFontSize": 17
+      }
+    },
+    {
+      "name": "native text rank-3::dice-quantity",
+      "status": "pass",
+      "detail": {
+        "text": "600",
+        "expected": "600"
+      }
+    },
+    {
+      "name": "saved nativeAX typography rank-3::dice-quantity",
+      "status": "pass",
+      "detail": {
+        "fontSize": 17,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 22,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#414139",
+          "wrap": "nowrap"
+        },
+        "textColor": "#ffffff",
+        "expected": {
+          "size": 17,
+          "weight": 800,
+          "line": 22,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffffff",
+          "stroke": 1,
+          "strokeColor": "#414139"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::cash",
+      "status": "pass",
+      "detail": {
+        "id": "element-80fc8f7d-a7be-4ae7-bdcc-12ed11da62a1",
+        "name": "Img_Tycoon_Rank03_Cash",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          440.8,
+          19.870000000000005,
+          36.13,
+          27.1
+        ],
+        "expectedRect": [
+          440.8,
+          19.87,
+          36.13,
+          27.1
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize rank-3::cash",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "actualSourceSize": [
+          1254,
+          1254
+        ],
+        "expectedRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "expectedSourceSize": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership rank-3::cash",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          148,
+          308,
+          959,
+          680
+        ],
+        "expectedRegion": [
+          148,
+          308,
+          959,
+          680
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect rank-3::cash-quantity",
+      "status": "pass",
+      "detail": {
+        "id": "element-0f548aa0-fc05-434c-8806-537398a52659",
+        "name": "Txt_Tycoon_Rank03_CashQty",
+        "parentId": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "expectedParent": "element-9ab73494-3d39-43ff-b60b-057ab50f7dac",
+        "actualRect": [
+          436.28,
+          44.25999999999999,
+          49.68,
+          22
+        ],
+        "expectedRect": [
+          436.28,
+          44.26,
+          49.68,
+          22
+        ]
+      }
+    },
+    {
+      "name": "native visual fit nowrap rank-3::cash-quantity",
+      "status": "pass",
+      "detail": {
+        "wrap": "nowrap",
+        "expected": "nowrap",
+        "recipeFontSize": 19,
+        "expectedNativeFontSize": 17
+      }
+    },
+    {
+      "name": "native text rank-3::cash-quantity",
+      "status": "pass",
+      "detail": {
+        "text": "600K",
+        "expected": "600K"
+      }
+    },
+    {
+      "name": "saved nativeAX typography rank-3::cash-quantity",
+      "status": "pass",
+      "detail": {
+        "fontSize": 17,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 22,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#414139",
+          "wrap": "nowrap"
+        },
+        "textColor": "#ffdc20",
+        "expected": {
+          "size": 17,
+          "weight": 800,
+          "line": 22,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffdc20",
+          "stroke": 1,
+          "strokeColor": "#414139"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect rank-4",
+      "status": "pass",
+      "detail": {
+        "id": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "name": "Group_Tycoon_Rank04",
+        "parentId": "element-00f98833-c311-4796-b4ab-2d4fedbbd445",
+        "expectedParent": "element-00f98833-c311-4796-b4ab-2d4fedbbd445",
+        "actualRect": [
+          1.8099999999999987,
+          238.47000000000003,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          1.81,
+          238.47,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "native group kind rank-4",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native parent and px rect r4-fill",
+      "status": "pass",
+      "detail": {
+        "id": "element-888ed142-d50b-4783-a7ad-4b4ec5db235a",
+        "name": "BG_Tycoon_Rank04",
+        "parentId": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "expectedParent": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "actualRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r4-fill",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-c51ffa094a97473ba2e28dbef2dfe1ea45f4ce434609b2d898451adfbeee297f.webp",
+        "actualSourceSize": [
+          128,
+          96
+        ],
+        "expectedRef": "sha256-c51ffa094a97473ba2e28dbef2dfe1ea45f4ce434609b2d898451adfbeee297f.webp",
+        "expectedSourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad r4-fill",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect r4-frame",
+      "status": "pass",
+      "detail": {
+        "id": "element-0fa63079-07a5-439e-bdf7-67f1dfc9c9ba",
+        "name": "Frame_Tycoon_Rank04",
+        "parentId": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "expectedParent": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "actualRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r4-frame",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "actualSourceSize": [
+          128,
+          96
+        ],
+        "expectedRef": "sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "expectedSourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad r4-frame",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect r4-rank",
+      "status": "pass",
+      "detail": {
+        "id": "element-22754617-9b43-441b-b5f1-22654348f652",
+        "name": "Txt_Tycoon_Rank04_Position",
+        "parentId": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "expectedParent": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "actualRect": [
+          4.520000000000003,
+          4.519999999999982,
+          28,
+          29.809999999999995
+        ],
+        "expectedRect": [
+          4.52,
+          4.52,
+          28,
+          29.81
+        ]
+      }
+    },
+    {
+      "name": "native text r4-rank",
+      "status": "pass",
+      "detail": {
+        "text": "4",
+        "expected": "4"
+      }
+    },
+    {
+      "name": "saved nativeAX typography r4-rank",
+      "status": "pass",
+      "detail": {
+        "fontSize": 20,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 24,
+          "strokeWidth": 0,
+          "align": "center",
+          "vertical": "middle"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 20,
+          "weight": 800,
+          "line": 24,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect r4-name",
+      "status": "pass",
+      "detail": {
+        "id": "element-cdd0e8e4-4390-42fe-a6f2-a0bbae393ee1",
+        "name": "Txt_Tycoon_Rank04_Name",
+        "parentId": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "expectedParent": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "actualRect": [
+          106.59,
+          5.419999999999959,
+          221.3,
+          25.29
+        ],
+        "expectedRect": [
+          106.59,
+          5.42,
+          221.3,
+          25.29
+        ]
+      }
+    },
+    {
+      "name": "native text r4-name",
+      "status": "pass",
+      "detail": {
+        "text": "PeerlessPelican...",
+        "expected": "PeerlessPelican..."
+      }
+    },
+    {
+      "name": "saved nativeAX typography r4-name",
+      "status": "pass",
+      "detail": {
+        "fontSize": 20,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 24,
+          "strokeWidth": 0,
+          "align": "left",
+          "vertical": "middle"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 20,
+          "weight": 800,
+          "line": 24,
+          "align": "왼쪽",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect r4-score-bg",
+      "status": "pass",
+      "detail": {
+        "id": "element-5159d057-e678-4de4-8bc1-b40e3db6aa52",
+        "name": "BG_Tycoon_Rank04_Score",
+        "parentId": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "expectedParent": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "actualRect": [
+          105.68,
+          33.41999999999996,
+          153.56,
+          30.709999999999994
+        ],
+        "expectedRect": [
+          105.68,
+          33.42,
+          153.56,
+          30.71
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r4-score-bg",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-2f67dcff5ef1c106e62c435d7cfbce9e07ab429ec057d5b15af5152495ecc31d.webp",
+        "actualSourceSize": [
+          128,
+          40
+        ],
+        "expectedRef": "sha256-2f67dcff5ef1c106e62c435d7cfbce9e07ab429ec057d5b15af5152495ecc31d.webp",
+        "expectedSourceSize": [
+          128,
+          40
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad r4-score-bg",
+      "status": "pass",
+      "detail": {
+        "mode": "3",
+        "slices": [
+          0,
+          20,
+          0,
+          20
+        ],
+        "edges": [
+          0,
+          14,
+          0,
+          14
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect r4-score",
+      "status": "pass",
+      "detail": {
+        "id": "element-a83db52b-c1a3-4851-aa92-edae1c4c380e",
+        "name": "Txt_Tycoon_Rank04_Score",
+        "parentId": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "expectedParent": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "actualRect": [
+          142.72,
+          34.32000000000005,
+          109.3,
+          28.9
+        ],
+        "expectedRect": [
+          142.72,
+          34.32,
+          109.3,
+          28.9
+        ]
+      }
+    },
+    {
+      "name": "native text r4-score",
+      "status": "pass",
+      "detail": {
+        "text": "",
+        "expected": ""
+      }
+    },
+    {
+      "name": "saved nativeAX typography r4-score",
+      "status": "pass",
+      "detail": {
+        "fontSize": 25,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 28.9,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#ffffff"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 25,
+          "weight": 800,
+          "line": 28.9,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 1,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect r4-pack",
+      "status": "pass",
+      "detail": {
+        "id": "element-2965ecc2-a1d0-499a-abcb-09c45ea66970",
+        "name": "Img_Tycoon_Rank04_Pack",
+        "parentId": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "expectedParent": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "actualRect": [
+          344.15,
+          17.159999999999968,
+          34.32,
+          41.55
+        ],
+        "expectedRect": [
+          344.15,
+          17.16,
+          34.32,
+          41.55
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r4-pack",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-04b82b6fcc7d7ab2854211d25f388f36b788216e43be8fb5fc37bd7bd1fae8c6.webp",
+        "actualSourceSize": [
+          82,
+          120
+        ],
+        "expectedRef": "sha256-04b82b6fcc7d7ab2854211d25f388f36b788216e43be8fb5fc37bd7bd1fae8c6.webp",
+        "expectedSourceSize": [
+          82,
+          120
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership r4-pack",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          82,
+          120
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          82,
+          120
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect r4-dice",
+      "status": "pass",
+      "detail": {
+        "id": "element-8462c0e6-37ab-4891-aeb6-99b2f59f2373",
+        "name": "Img_Tycoon_Rank04_Dice",
+        "parentId": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "expectedParent": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "actualRect": [
+          395.64,
+          18.07000000000005,
+          28,
+          31.609999999999996
+        ],
+        "expectedRect": [
+          395.64,
+          18.07,
+          28,
+          31.61
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r4-dice",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+        "actualSourceSize": [
+          266,
+          264
+        ],
+        "expectedRef": "sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+        "expectedSourceSize": [
+          266,
+          264
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership r4-dice",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          266,
+          264
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          266,
+          264
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect r4-dice-qty",
+      "status": "pass",
+      "detail": {
+        "id": "element-fa5fdae0-82e2-483e-bb30-32c2e39c6331",
+        "name": "Txt_Tycoon_Rank04_DiceQty",
+        "parentId": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "expectedParent": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "actualRect": [
+          386.6,
+          44.25999999999999,
+          49.68,
+          22
+        ],
+        "expectedRect": [
+          386.6,
+          44.26,
+          49.68,
+          22
+        ]
+      }
+    },
+    {
+      "name": "native visual fit nowrap r4-dice-qty",
+      "status": "pass",
+      "detail": {
+        "wrap": "nowrap",
+        "expected": "nowrap",
+        "recipeFontSize": 19,
+        "expectedNativeFontSize": 17
+      }
+    },
+    {
+      "name": "native text r4-dice-qty",
+      "status": "pass",
+      "detail": {
+        "text": "",
+        "expected": ""
+      }
+    },
+    {
+      "name": "saved nativeAX typography r4-dice-qty",
+      "status": "pass",
+      "detail": {
+        "fontSize": 17,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 22,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#414139",
+          "wrap": "nowrap"
+        },
+        "textColor": "#ffffff",
+        "expected": {
+          "size": 17,
+          "weight": 800,
+          "line": 22,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffffff",
+          "stroke": 1,
+          "strokeColor": "#414139"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect r4-cash",
+      "status": "pass",
+      "detail": {
+        "id": "element-68daf5f6-3db3-4250-b4a8-2889b67de4fa",
+        "name": "Img_Tycoon_Rank04_Cash",
+        "parentId": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "expectedParent": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "actualRect": [
+          440.8,
+          19.870000000000005,
+          36.13,
+          27.1
+        ],
+        "expectedRect": [
+          440.8,
+          19.87,
+          36.13,
+          27.1
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize r4-cash",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "actualSourceSize": [
+          1254,
+          1254
+        ],
+        "expectedRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "expectedSourceSize": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership r4-cash",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          148,
+          308,
+          959,
+          680
+        ],
+        "expectedRegion": [
+          148,
+          308,
+          959,
+          680
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect r4-cash-qty",
+      "status": "pass",
+      "detail": {
+        "id": "element-105cc57b-9fd3-4739-85aa-38bd06b143f3",
+        "name": "Txt_Tycoon_Rank04_CashQty",
+        "parentId": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "expectedParent": "element-81bd66d0-5774-444c-b577-8477bc7aebbd",
+        "actualRect": [
+          436.28,
+          44.25999999999999,
+          49.68,
+          22
+        ],
+        "expectedRect": [
+          436.28,
+          44.26,
+          49.68,
+          22
+        ]
+      }
+    },
+    {
+      "name": "native visual fit nowrap r4-cash-qty",
+      "status": "pass",
+      "detail": {
+        "wrap": "nowrap",
+        "expected": "nowrap",
+        "recipeFontSize": 19,
+        "expectedNativeFontSize": 17
+      }
+    },
+    {
+      "name": "native text r4-cash-qty",
+      "status": "pass",
+      "detail": {
+        "text": "",
+        "expected": ""
+      }
+    },
+    {
+      "name": "saved nativeAX typography r4-cash-qty",
+      "status": "pass",
+      "detail": {
+        "fontSize": 17,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 22,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#414139",
+          "wrap": "nowrap"
+        },
+        "textColor": "#ffdc20",
+        "expected": {
+          "size": 17,
+          "weight": 800,
+          "line": 22,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffdc20",
+          "stroke": 1,
+          "strokeColor": "#414139"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect self-row",
+      "status": "pass",
+      "detail": {
+        "id": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "name": "Group_Tycoon_SelfRank",
+        "parentId": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "expectedParent": "element-0e7ce1de-5a88-4148-9635-4d8cb0b82cca",
+        "actualRect": [
+          16.26,
+          696.43,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          16.26,
+          696.43,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "native group kind self-row",
+      "status": "pass",
+      "detail": {
+        "kind": "panel",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native parent and px rect self-fill",
+      "status": "pass",
+      "detail": {
+        "id": "element-5265ee43-f65d-4354-8020-385f4ab075b2",
+        "name": "BG_Tycoon_SelfRank",
+        "parentId": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "expectedParent": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "actualRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize self-fill",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-0e4060ab1a0f87046be244aaa7c999afbb553d3ed8bc632c0f08b514df61a95f.webp",
+        "actualSourceSize": [
+          128,
+          96
+        ],
+        "expectedRef": "sha256-0e4060ab1a0f87046be244aaa7c999afbb553d3ed8bc632c0f08b514df61a95f.webp",
+        "expectedSourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad self-fill",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect self-frame",
+      "status": "pass",
+      "detail": {
+        "id": "element-7fbdd8d4-10cc-44e4-bc47-5ade02471ef4",
+        "name": "Frame_Tycoon_SelfRank",
+        "parentId": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "expectedParent": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "actualRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ],
+        "expectedRect": [
+          0,
+          0,
+          486.87,
+          75.88
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize self-frame",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "actualSourceSize": [
+          128,
+          96
+        ],
+        "expectedRef": "sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "expectedSourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "native9/3 slices edges pad self-frame",
+      "status": "pass",
+      "detail": {
+        "mode": "9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "native parent and px rect self-rank",
+      "status": "pass",
+      "detail": {
+        "id": "element-20228b8e-1a70-43a1-84fb-1af761ffdb1e",
+        "name": "Txt_Tycoon_SelfRank_Position",
+        "parentId": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "expectedParent": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "actualRect": [
+          4.52,
+          4.519999999999982,
+          28,
+          29.809999999999995
+        ],
+        "expectedRect": [
+          4.52,
+          4.52,
+          28,
+          29.81
+        ]
+      }
+    },
+    {
+      "name": "native text self-rank",
+      "status": "pass",
+      "detail": {
+        "text": "22",
+        "expected": "22"
+      }
+    },
+    {
+      "name": "saved nativeAX typography self-rank",
+      "status": "pass",
+      "detail": {
+        "fontSize": 20,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 24,
+          "strokeWidth": 0,
+          "align": "center",
+          "vertical": "middle"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 20,
+          "weight": 800,
+          "line": 24,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect self-avatar",
+      "status": "pass",
+      "detail": {
+        "id": "element-5b859da7-9f1e-4a79-8fe6-32cc2233e014",
+        "name": "Img_Tycoon_SelfRank_SNSAvatar",
+        "parentId": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "expectedParent": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "actualRect": [
+          36.129999999999995,
+          9.940000000000055,
+          57.81,
+          57.81
+        ],
+        "expectedRect": [
+          36.13,
+          9.94,
+          57.81,
+          57.81
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize self-avatar",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-5c24391da35e6ea0fa50e68d9db00c1da08086a2fc52ae9eb73d01b1e5225124.webp",
+        "actualSourceSize": [
+          1254,
+          1254
+        ],
+        "expectedRef": "sha256-5c24391da35e6ea0fa50e68d9db00c1da08086a2fc52ae9eb73d01b1e5225124.webp",
+        "expectedSourceSize": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership self-avatar",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          60,
+          75,
+          1111,
+          1111
+        ],
+        "expectedRegion": [
+          60,
+          75,
+          1111,
+          1111
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect self-name",
+      "status": "pass",
+      "detail": {
+        "id": "element-f5696fc6-9d1a-4527-a916-7edcf2145618",
+        "name": "Txt_Tycoon_SelfRank_Name",
+        "parentId": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "expectedParent": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "actualRect": [
+          106.59,
+          5.419999999999959,
+          221.3,
+          25.29
+        ],
+        "expectedRect": [
+          106.59,
+          5.42,
+          221.3,
+          25.29
+        ]
+      }
+    },
+    {
+      "name": "native text self-name",
+      "status": "pass",
+      "detail": {
+        "text": "현중",
+        "expected": "현중"
+      }
+    },
+    {
+      "name": "saved nativeAX typography self-name",
+      "status": "pass",
+      "detail": {
+        "fontSize": 20,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 24,
+          "strokeWidth": 0,
+          "align": "left",
+          "vertical": "middle"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 20,
+          "weight": 800,
+          "line": 24,
+          "align": "왼쪽",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect self-score-bg",
+      "status": "pass",
+      "detail": {
+        "id": "element-b9de5af0-63bc-46f7-b7a4-2af553bd48cd",
+        "name": "BG_Tycoon_SelfRank_Score",
+        "parentId": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "expectedParent": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "actualRect": [
+          105.68,
+          33.41999999999996,
+          153.56,
+          30.709999999999994
+        ],
+        "expectedRect": [
+          105.68,
+          33.42,
+          153.56,
+          30.71
+        ]
+      }
+    },
+    {
+      "name": "native solid style self-score-bg",
+      "status": "pass",
+      "detail": {
+        "actual": {
+          "shape": "capsule",
+          "fill": "#9da7d8",
+          "strokeWidth": 0,
+          "textColor": "#b6b3aa",
+          "opacity": 1,
+          "radius": 0,
+          "stroke": "#ffffff"
+        },
+        "expected": {
+          "fill": "#9da7d8",
+          "opacity": 1,
+          "strokeWidth": 0,
+          "strokeColor": "#ffffff"
+        },
+        "geometry": "capsule"
+      }
+    },
+    {
+      "name": "native parent and px rect self-score-pet",
+      "status": "pass",
+      "detail": {
+        "id": "element-00d34c8f-0d20-40e6-9d7a-19b965f9b68c",
+        "name": "Img_Tycoon_SelfRank_ScorePet",
+        "parentId": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "expectedParent": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "actualRect": [
+          110.19999999999999,
+          36.129999999999995,
+          27.1,
+          25.29
+        ],
+        "expectedRect": [
+          110.2,
+          36.13,
+          27.1,
+          25.29
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize self-score-pet",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+        "actualSourceSize": [
+          120,
+          120
+        ],
+        "expectedRef": "sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+        "expectedSourceSize": [
+          120,
+          120
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership self-score-pet",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          120,
+          120
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect self-score",
+      "status": "pass",
+      "detail": {
+        "id": "element-0eb975e5-27de-4433-86c1-c29387786dcc",
+        "name": "Txt_Tycoon_SelfRank_Score",
+        "parentId": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "expectedParent": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "actualRect": [
+          142.72,
+          34.32000000000005,
+          109.3,
+          28.9
+        ],
+        "expectedRect": [
+          142.72,
+          34.32,
+          109.3,
+          28.9
+        ]
+      }
+    },
+    {
+      "name": "native text self-score",
+      "status": "pass",
+      "detail": {
+        "text": "104",
+        "expected": "104"
+      }
+    },
+    {
+      "name": "saved nativeAX typography self-score",
+      "status": "pass",
+      "detail": {
+        "fontSize": 25,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 28.9,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#ffffff"
+        },
+        "textColor": "#36362e",
+        "expected": {
+          "size": 25,
+          "weight": 800,
+          "line": 28.9,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#36362e",
+          "stroke": 1,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect self-cash",
+      "status": "pass",
+      "detail": {
+        "id": "element-3626cd54-eb39-4b43-a44f-c31cf57fc148",
+        "name": "Img_Tycoon_SelfRank_Cash",
+        "parentId": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "expectedParent": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "actualRect": [
+          440.8,
+          19.870000000000005,
+          36.13,
+          27.1
+        ],
+        "expectedRect": [
+          440.8,
+          19.87,
+          36.13,
+          27.1
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize self-cash",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "actualSourceSize": [
+          1254,
+          1254
+        ],
+        "expectedRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "expectedSourceSize": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership self-cash",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          148,
+          308,
+          959,
+          680
+        ],
+        "expectedRegion": [
+          148,
+          308,
+          959,
+          680
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect self-cash-qty",
+      "status": "pass",
+      "detail": {
+        "id": "element-25990959-e04d-40b3-a139-f6e10c51c808",
+        "name": "Txt_Tycoon_SelfRank_CashQty",
+        "parentId": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "expectedParent": "element-9dc0a643-a98d-4319-98ae-73fcbbcc77be",
+        "actualRect": [
+          436.28,
+          44.25999999999999,
+          49.68,
+          22
+        ],
+        "expectedRect": [
+          436.28,
+          44.26,
+          49.68,
+          22
+        ]
+      }
+    },
+    {
+      "name": "native visual fit nowrap self-cash-qty",
+      "status": "pass",
+      "detail": {
+        "wrap": "nowrap",
+        "expected": "nowrap",
+        "recipeFontSize": 19,
+        "expectedNativeFontSize": 17
+      }
+    },
+    {
+      "name": "native text self-cash-qty",
+      "status": "pass",
+      "detail": {
+        "text": "40K",
+        "expected": "40K"
+      }
+    },
+    {
+      "name": "saved nativeAX typography self-cash-qty",
+      "status": "pass",
+      "detail": {
+        "fontSize": 17,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 22,
+          "strokeWidth": 1,
+          "align": "center",
+          "vertical": "middle",
+          "strokeColor": "#414139",
+          "wrap": "nowrap"
+        },
+        "textColor": "#ffdc20",
+        "expected": {
+          "size": 17,
+          "weight": 800,
+          "line": 22,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffdc20",
+          "stroke": 1,
+          "strokeColor": "#414139"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect close",
+      "status": "pass",
+      "detail": {
+        "id": "element-389bb5e2-3bf4-4c3e-817a-9078e2b664de",
+        "name": "Btn_Tycoon_Close",
+        "parentId": "element-fe92c76a-5f9b-40dd-929f-4c3e6720d587",
+        "expectedParent": "element-fe92c76a-5f9b-40dd-929f-4c3e6720d587",
+        "actualRect": [
+          253.5,
+          932,
+          44,
+          44
+        ],
+        "expectedRect": [
+          253.5,
+          932,
+          44,
+          44
+        ]
+      }
+    },
+    {
+      "name": "native group kind close",
+      "status": "pass",
+      "detail": {
+        "kind": "button",
+        "reusedNativeButton": true,
+        "children": [
+          {
+            "name": "Txt_Tycoon_CloseGlyph",
+            "parentId": "element-389bb5e2-3bf4-4c3e-817a-9078e2b664de"
+          }
+        ],
+        "interaction": {
+          "mode": "action",
+          "enabled": true,
+          "shape": "rectangle",
+          "reason": ""
+        },
+        "buttonState": {
+          "enabled": true,
+          "mode": "tint",
+          "targetGraphic": "self",
+          "selectable": false,
+          "selected": false,
+          "tints": {
+            "normal": "#ffffff",
+            "hover": "#f2f2f2",
+            "pressed": "#bdbdbd",
+            "selected": "#d8e8ff",
+            "disabled": "#999999"
+          }
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect close-glyph",
+      "status": "pass",
+      "detail": {
+        "id": "element-0d8f4a1b-0231-4795-8c84-45babae8ee20",
+        "name": "Txt_Tycoon_CloseGlyph",
+        "parentId": "element-389bb5e2-3bf4-4c3e-817a-9078e2b664de",
+        "expectedParent": "element-389bb5e2-3bf4-4c3e-817a-9078e2b664de",
+        "actualRect": [
+          0,
+          0,
+          44,
+          44
+        ],
+        "expectedRect": [
+          0,
+          0,
+          44,
+          44
+        ]
+      }
+    },
+    {
+      "name": "native text close-glyph",
+      "status": "pass",
+      "detail": {
+        "text": "×",
+        "expected": "×"
+      }
+    },
+    {
+      "name": "saved nativeAX typography close-glyph",
+      "status": "pass",
+      "detail": {
+        "fontSize": 36,
+        "typography": {
+          "weight": 700,
+          "lineHeight": 44,
+          "strokeWidth": 0,
+          "align": "center",
+          "vertical": "middle"
+        },
+        "textColor": "#ffffff",
+        "expected": {
+          "size": 36,
+          "weight": 700,
+          "line": 44,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffffff",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "native parent and px rect info",
+      "status": "pass",
+      "detail": {
+        "id": "element-d1ba401b-bed3-4273-9932-0258c94ede64",
+        "name": "Btn_Tycoon_Info",
+        "parentId": "element-fe92c76a-5f9b-40dd-929f-4c3e6720d587",
+        "expectedParent": "element-fe92c76a-5f9b-40dd-929f-4c3e6720d587",
+        "actualRect": [
+          9.16,
+          28.129999999999995,
+          44,
+          44
+        ],
+        "expectedRect": [
+          9.16,
+          28.13,
+          44,
+          44
+        ]
+      }
+    },
+    {
+      "name": "native group kind info",
+      "status": "pass",
+      "detail": {
+        "kind": "button",
+        "isGroup": true
+      }
+    },
+    {
+      "name": "native parent and px rect info-bg",
+      "status": "pass",
+      "detail": {
+        "id": "element-0be1fbef-fe1f-4cca-9dfc-0eab6b504785",
+        "name": "Img_Tycoon_InfoDisc",
+        "parentId": "element-d1ba401b-bed3-4273-9932-0258c94ede64",
+        "expectedParent": "element-d1ba401b-bed3-4273-9932-0258c94ede64",
+        "actualRect": [
+          5,
+          5,
+          33.99999999999999,
+          33.99999999999999
+        ],
+        "expectedRect": [
+          5,
+          5,
+          34,
+          34
+        ]
+      }
+    },
+    {
+      "name": "assetRef and sourceSize info-bg",
+      "status": "pass",
+      "detail": {
+        "actualRef": "sha256-f0d955d9d96c6e527de6fff57ffa330a6afaf414bfef8de8d45e09252db3320c.webp",
+        "actualSourceSize": [
+          64,
+          64
+        ],
+        "expectedRef": "sha256-f0d955d9d96c6e527de6fff57ffa330a6afaf414bfef8de8d45e09252db3320c.webp",
+        "expectedSourceSize": [
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "name": "image region fit ownership info-bg",
+      "status": "pass",
+      "detail": {
+        "actualRegion": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "expectedRegion": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "actualFit": "contain",
+        "expectedFit": "contain"
+      }
+    },
+    {
+      "name": "native parent and px rect info-glyph",
+      "status": "pass",
+      "detail": {
+        "id": "element-7e054957-a32d-43a4-ad2b-9c8b3ef8309a",
+        "name": "Txt_Tycoon_InfoGlyph",
+        "parentId": "element-d1ba401b-bed3-4273-9932-0258c94ede64",
+        "expectedParent": "element-d1ba401b-bed3-4273-9932-0258c94ede64",
+        "actualRect": [
+          5,
+          5,
+          33.99999999999999,
+          33.99999999999999
+        ],
+        "expectedRect": [
+          5,
+          5,
+          34,
+          34
+        ]
+      }
+    },
+    {
+      "name": "native text info-glyph",
+      "status": "pass",
+      "detail": {
+        "text": "i",
+        "expected": "i"
+      }
+    },
+    {
+      "name": "saved nativeAX typography info-glyph",
+      "status": "pass",
+      "detail": {
+        "fontSize": 26,
+        "typography": {
+          "weight": 800,
+          "lineHeight": 30,
+          "strokeWidth": 0,
+          "align": "center",
+          "vertical": "middle"
+        },
+        "textColor": "#ffffff",
+        "expected": {
+          "size": 26,
+          "weight": 800,
+          "line": 30,
+          "align": "가운데",
+          "vertical": "가운데",
+          "color": "#ffffff",
+          "stroke": 0,
+          "strokeColor": "#ffffff"
+        }
+      }
+    },
+    {
+      "name": "thirteen clone children preserved rank-2",
+      "status": "pass",
+      "detail": {
+        "actualChildren": [
+          "BG_Tycoon_Rank02",
+          "Frame_Tycoon_Rank02",
+          "Txt_Tycoon_Rank02_Position",
+          "Img_Tycoon_Rank02_Avatar",
+          "Txt_Tycoon_Rank02_Name",
+          "BG_Tycoon_Rank02_Score",
+          "Img_Tycoon_Rank02_ScorePet",
+          "Txt_Tycoon_Rank02_Score",
+          "Img_Tycoon_Rank02_Pack",
+          "Img_Tycoon_Rank02_Dice",
+          "Txt_Tycoon_Rank02_DiceQty",
+          "Img_Tycoon_Rank02_Cash",
+          "Txt_Tycoon_Rank02_CashQty"
+        ],
+        "expectedChildren": [
+          "BG_Tycoon_Rank02",
+          "Frame_Tycoon_Rank02",
+          "Txt_Tycoon_Rank02_Position",
+          "Img_Tycoon_Rank02_Avatar",
+          "Txt_Tycoon_Rank02_Name",
+          "BG_Tycoon_Rank02_Score",
+          "Img_Tycoon_Rank02_ScorePet",
+          "Txt_Tycoon_Rank02_Score",
+          "Img_Tycoon_Rank02_Pack",
+          "Img_Tycoon_Rank02_Dice",
+          "Txt_Tycoon_Rank02_DiceQty",
+          "Img_Tycoon_Rank02_Cash",
+          "Txt_Tycoon_Rank02_CashQty"
+        ]
+      }
+    },
+    {
+      "name": "thirteen clone children preserved rank-3",
+      "status": "pass",
+      "detail": {
+        "actualChildren": [
+          "BG_Tycoon_Rank03",
+          "Frame_Tycoon_Rank03",
+          "Txt_Tycoon_Rank03_Position",
+          "Img_Tycoon_Rank03_Avatar",
+          "Txt_Tycoon_Rank03_Name",
+          "BG_Tycoon_Rank03_Score",
+          "Img_Tycoon_Rank03_ScorePet",
+          "Txt_Tycoon_Rank03_Score",
+          "Img_Tycoon_Rank03_Pack",
+          "Img_Tycoon_Rank03_Dice",
+          "Txt_Tycoon_Rank03_DiceQty",
+          "Img_Tycoon_Rank03_Cash",
+          "Txt_Tycoon_Rank03_CashQty"
+        ],
+        "expectedChildren": [
+          "BG_Tycoon_Rank03",
+          "Frame_Tycoon_Rank03",
+          "Txt_Tycoon_Rank03_Position",
+          "Img_Tycoon_Rank03_Avatar",
+          "Txt_Tycoon_Rank03_Name",
+          "BG_Tycoon_Rank03_Score",
+          "Img_Tycoon_Rank03_ScorePet",
+          "Txt_Tycoon_Rank03_Score",
+          "Img_Tycoon_Rank03_Pack",
+          "Img_Tycoon_Rank03_Dice",
+          "Txt_Tycoon_Rank03_DiceQty",
+          "Img_Tycoon_Rank03_Cash",
+          "Txt_Tycoon_Rank03_CashQty"
+        ]
+      }
+    },
+    {
+      "name": "all five rows share normalized486.87x75.88 geometry",
+      "status": "pass"
+    },
+    {
+      "name": "same ranking columns rank-2",
+      "status": "pass"
+    },
+    {
+      "name": "same ranking columns rank-3",
+      "status": "pass"
+    },
+    {
+      "name": "fixed self sibling outside scroll viewport",
+      "status": "pass"
+    },
+    {
+      "name": "rank4 unknown values blank and avatar absent",
+      "status": "pass"
+    },
+    {
+      "name": "575 departure and own22/현중/104/40K exact",
+      "status": "pass"
+    },
+    {
+      "name": "44 square native close",
+      "status": "pass",
+      "detail": {
+        "name": "Btn_Tycoon_Close",
+        "kind": "button",
+        "rect": {
+          "x": 253.5,
+          "y": 932,
+          "w": 44,
+          "h": 44
+        },
+        "hasLegacySkin": false
+      }
+    },
+    {
+      "name": "44 square native info",
+      "status": "pass",
+      "detail": {
+        "name": "Btn_Tycoon_Info",
+        "kind": "button",
+        "rect": {
+          "x": 9.16,
+          "y": 28.129999999999995,
+          "w": 44,
+          "h": 44
+        },
+        "hasLegacySkin": false
+      }
+    },
+    {
+      "name": "only Main entry and native Close always edges",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "element-ad666721-f5ff-442f-aafa-a52e8d46d683",
+          "fromScreen": "screen-f4fd5be2-98b8-4514-9484-a0cbcb0958d4",
+          "fromElement": "element-389bb5e2-3bf4-4c3e-817a-9078e2b664de",
+          "event": "click",
+          "action": "close",
+          "condition": "always",
+          "label": "타이쿤에서 이전 화면으로",
+          "returnPolicy": "선택/스크롤 유지"
+        },
+        {
+          "id": "edge-f94fc57f-9b8c-41d7-b05c-968470742fd1",
+          "fromScreen": "main",
+          "fromElement": "element-1e5ecbb6-4016-4021-bac2-bff0a3800671",
+          "event": "click",
+          "action": "open",
+          "condition": "always",
+          "targetScreen": "screen-f4fd5be2-98b8-4514-9484-a0cbcb0958d4",
+          "label": "시연: TYCOON → 발자국 익스프레스 · 버전/진입조건 미확인",
+          "returnPolicy": "원래 화면 선택/스크롤 유지"
+        }
+      ]
+    },
+    {
+      "name": "native Close edge label identifies Tycoon",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "element-ad666721-f5ff-442f-aafa-a52e8d46d683",
+          "label": "타이쿤에서 이전 화면으로"
+        }
+      ]
+    },
+    {
+      "name": "Info has no unseen target or invented body",
+      "status": "pass"
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-db8f3125a30ff9ed9db35414615d560837f7215a5e2c75ca8461135bb15f7a7c.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-db8f3125a30ff9ed9db35414615d560837f7215a5e2c75ca8461135bb15f7a7c.webp",
+        "sourceSize": [
+          192,
+          224
+        ],
+        "bytes": 1716
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-ded4cf62daf9e396fb2af1b704ce4cb2fd94dc4894f497d281bc3330d4b68fa7.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-ded4cf62daf9e396fb2af1b704ce4cb2fd94dc4894f497d281bc3330d4b68fa7.webp",
+        "sourceSize": [
+          700,
+          467
+        ],
+        "bytes": 119930
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-d5b7bcaa82cb9bc9948f278a0d4c2f4d76ad7babaffc2ffe2e8501372d921ae4.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-d5b7bcaa82cb9bc9948f278a0d4c2f4d76ad7babaffc2ffe2e8501372d921ae4.webp",
+        "sourceSize": [
+          192,
+          224
+        ],
+        "bytes": 4026
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-3c0961fc3082224d471599cc0113243f9c8f7a3c0eb3f90244d9abb161be4a4c.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-3c0961fc3082224d471599cc0113243f9c8f7a3c0eb3f90244d9abb161be4a4c.webp",
+        "sourceSize": [
+          477,
+          471
+        ],
+        "bytes": 51464
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-0311a3e14be0a77e2378f703b8bab604a1e8036d03e2c402c02278334d50883f.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-0311a3e14be0a77e2378f703b8bab604a1e8036d03e2c402c02278334d50883f.webp",
+        "sourceSize": [
+          128,
+          32
+        ],
+        "bytes": 406
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-fb8756d02de875984265aef4dd103a01cc05264e65593fc6ea99fe71366d7d59.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-fb8756d02de875984265aef4dd103a01cc05264e65593fc6ea99fe71366d7d59.webp",
+        "sourceSize": [
+          128,
+          32
+        ],
+        "bytes": 434
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-c2cf68d85f2cf6c3bd128ba639f2168daa1d99b0012da1ca59fbf14c1537efe7.webp",
+        "sourceSize": [
+          120,
+          120
+        ],
+        "bytes": 16146
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-00231d8709fdf0d4591fd55f1384a8d1866d8ff6ee7428b1cd8a6f9d72827ef5.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-00231d8709fdf0d4591fd55f1384a8d1866d8ff6ee7428b1cd8a6f9d72827ef5.webp",
+        "sourceSize": [
+          500,
+          512
+        ],
+        "bytes": 191918
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-dd956d1c68c5245f8d34603ed2e044f827cc63e7fa5701ccc87b2c3d99b7eafc.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-dd956d1c68c5245f8d34603ed2e044f827cc63e7fa5701ccc87b2c3d99b7eafc.webp",
+        "sourceSize": [
+          316,
+          388
+        ],
+        "bytes": 98260
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-20155982bef39f01e01c6319a5004ec40169abb2d7d0ab843d4ec81952c43051.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-20155982bef39f01e01c6319a5004ec40169abb2d7d0ab843d4ec81952c43051.webp",
+        "sourceSize": [
+          64,
+          64
+        ],
+        "bytes": 1918
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-c51ffa094a97473ba2e28dbef2dfe1ea45f4ce434609b2d898451adfbeee297f.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-c51ffa094a97473ba2e28dbef2dfe1ea45f4ce434609b2d898451adfbeee297f.webp",
+        "sourceSize": [
+          128,
+          96
+        ],
+        "bytes": 490
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "sourceSize": [
+          128,
+          96
+        ],
+        "bytes": 606
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-0f64562a55eb2608e981874371cda11dc04010f6781a52eb07cd6d64f14ccc8c.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-0f64562a55eb2608e981874371cda11dc04010f6781a52eb07cd6d64f14ccc8c.webp",
+        "sourceSize": [
+          160,
+          160
+        ],
+        "bytes": 33268
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-2f67dcff5ef1c106e62c435d7cfbce9e07ab429ec057d5b15af5152495ecc31d.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-2f67dcff5ef1c106e62c435d7cfbce9e07ab429ec057d5b15af5152495ecc31d.webp",
+        "sourceSize": [
+          128,
+          40
+        ],
+        "bytes": 506
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-e34c0b5999bdad93895272d889dd2af9e75e5050b2e7a3a3d6d94cf97fa99824.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-e34c0b5999bdad93895272d889dd2af9e75e5050b2e7a3a3d6d94cf97fa99824.webp",
+        "sourceSize": [
+          376,
+          417
+        ],
+        "bytes": 121622
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+        "sourceSize": [
+          266,
+          264
+        ],
+        "bytes": 28482
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "bytes": 79024
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-cce46f2afe222d8dcd9ca51a045abce77a9673a6fb0fb8ebb73aaf27353804ad.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-cce46f2afe222d8dcd9ca51a045abce77a9673a6fb0fb8ebb73aaf27353804ad.webp",
+        "sourceSize": [
+          160,
+          160
+        ],
+        "bytes": 30552
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-04b82b6fcc7d7ab2854211d25f388f36b788216e43be8fb5fc37bd7bd1fae8c6.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-04b82b6fcc7d7ab2854211d25f388f36b788216e43be8fb5fc37bd7bd1fae8c6.webp",
+        "sourceSize": [
+          82,
+          120
+        ],
+        "bytes": 15360
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-45974b5abeaaca7d108041619e50b55f7c45186a3fb116e1765d10dcff23326f.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-45974b5abeaaca7d108041619e50b55f7c45186a3fb116e1765d10dcff23326f.webp",
+        "sourceSize": [
+          160,
+          160
+        ],
+        "bytes": 33714
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-0e4060ab1a0f87046be244aaa7c999afbb553d3ed8bc632c0f08b514df61a95f.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-0e4060ab1a0f87046be244aaa7c999afbb553d3ed8bc632c0f08b514df61a95f.webp",
+        "sourceSize": [
+          128,
+          96
+        ],
+        "bytes": 532
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-5c24391da35e6ea0fa50e68d9db00c1da08086a2fc52ae9eb73d01b1e5225124.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-5c24391da35e6ea0fa50e68d9db00c1da08086a2fc52ae9eb73d01b1e5225124.webp",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "bytes": 193182
+      }
+    },
+    {
+      "name": "actual registered asset SHA and dimensions sha256-f0d955d9d96c6e527de6fff57ffa330a6afaf414bfef8de8d45e09252db3320c.webp",
+      "status": "pass",
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-f0d955d9d96c6e527de6fff57ffa330a6afaf414bfef8de8d45e09252db3320c.webp",
+        "sourceSize": [
+          64,
+          64
+        ],
+        "bytes": 2118
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize panel-brown-arched-fill9",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-ui/common_tycoon_panel-brown-arched-fill9_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-ui/common_tycoon_panel-brown-arched-fill9_normal_v001.webp",
+        "sourceSize": [
+          192,
+          224
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize panel-brown-arched-frame9",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-ui/common_tycoon_panel-brown-arched-frame9_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-ui/common_tycoon_panel-brown-arched-frame9_normal_v001.webp",
+        "sourceSize": [
+          192,
+          224
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize rank-row-light-fill9",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-ui/common_tycoon_rank-row-light-fill9_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-ui/common_tycoon_rank-row-light-fill9_normal_v001.webp",
+        "sourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize self-row-purple-fill9",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-ui/common_tycoon_self-row-purple-fill9_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-ui/common_tycoon_self-row-purple-fill9_normal_v001.webp",
+        "sourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize score-lightblue-pill3",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-ui/common_tycoon_score-lightblue-pill3_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-ui/common_tycoon_score-lightblue-pill3_normal_v001.webp",
+        "sourceSize": [
+          128,
+          40
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize info-blue-disc-fixed",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-ui/common_tycoon_info-blue-disc-fixed_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-ui/common_tycoon_info-blue-disc-fixed_normal_v001.webp",
+        "sourceSize": [
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize drawer-white-frame9",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/menu-ui/common_menu_drawer-white-frame9_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/menu-ui/common_menu_drawer-white-frame9_normal_v001.webp",
+        "sourceSize": [
+          128,
+          96
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize weekly-progress-dark-olive-background-3slice",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/wins-ui/common_wins_weekly-progress-bg3_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/wins-ui/common_wins_weekly-progress-bg3_normal_v001.webp",
+        "sourceSize": [
+          128,
+          32
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize weekly-progress-cyan-blue-fill-3slice",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/wins-ui/common_wins_weekly-progress-fill3_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/wins-ui/common_wins_weekly-progress-fill3_normal_v001.webp",
+        "sourceSize": [
+          128,
+          32
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize stopwatch-fixed",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/racing-ui/common_racing_stopwatch-fixed_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/racing-ui/common_racing_stopwatch-fixed_normal_v001.webp",
+        "sourceSize": [
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize tycoon-station-scene",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-event/common_event-tycoon-station_scene_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-event/common_event-tycoon-station_scene_normal_v001.webp",
+        "sourceSize": [
+          700,
+          467
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize tycoon-avatar-musician",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-icons/common_tycoon-avatar-musician_icon_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-icons/common_tycoon-avatar-musician_icon_normal_v001.webp",
+        "sourceSize": [
+          160,
+          160
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize tycoon-avatar-generic-family",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-icons/common_tycoon-avatar-generic-family_icon_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-icons/common_tycoon-avatar-generic-family_icon_normal_v001.webp",
+        "sourceSize": [
+          160,
+          160
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize tycoon-avatar-sailor",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-icons/common_tycoon-avatar-sailor_icon_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-icons/common_tycoon-avatar-sailor_icon_normal_v001.webp",
+        "sourceSize": [
+          160,
+          160
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize shared-tycoon-pet-progress-and-score",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-icons/common_tycoon-pet-score_icon_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-icons/common_tycoon-pet-score_icon_normal_v001.webp",
+        "sourceSize": [
+          120,
+          120
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize tycoon-blue-reward-pack",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/tycoon-icons/common_tycoon-pack-blue_icon_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/tycoon-icons/common_tycoon-pack-blue_icon_normal_v001.webp",
+        "sourceSize": [
+          82,
+          120
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize purple-pack",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/wins-icons/common_wins-pack-purple_icon_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/wins-icons/common_wins-pack-purple_icon_normal_v001.webp",
+        "sourceSize": [
+          376,
+          417
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize green-pack",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/wins-icons/common_wins-pack-green_icon_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/wins-icons/common_wins-pack-green_icon_normal_v001.webp",
+        "sourceSize": [
+          316,
+          388
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize build-star",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/build-hud/common_build-level-star_icon_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/build-hud/common_build-level-star_icon_normal_v001.webp",
+        "sourceSize": [
+          477,
+          471
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize gold-disc",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/warehouse-products/common_warehouse-gold-medallion_icon_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/warehouse-products/common_warehouse-gold-medallion_icon_normal_v001.webp",
+        "sourceSize": [
+          500,
+          512
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize dice",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/album-icons/common_album-reward-dice-stack_icon_normal_v001.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/album-icons/common_album-reward-dice-stack_icon_normal_v001.webp",
+        "sourceSize": [
+          266,
+          264
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize cash",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/hud-top/common_hud-top_cash-icon_normal_v003.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/hud-top/common_hud-top_cash-icon_normal_v003.webp",
+        "sourceSize": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "name": "local production staging SHA sourceSize sns",
+      "status": "pass",
+      "detail": {
+        "productionPath": "samples/monopoly-go/ui-studio/assets/production/hud-top/common_hud-top_player-avatar_normal_v003.webp",
+        "stagingPath": "src/tools/uxStudio/assets/import-staging/hud-top/common_hud-top_player-avatar_normal_v003.webp",
+        "sourceSize": [
+          1254,
+          1254
+        ]
+      }
+    },
+    {
+      "name": "final ten screens899parts20edges",
+      "status": "pass",
+      "detail": {
+        "actual": {
+          "screens": 10,
+          "parts": 899,
+          "transitions": 20,
+          "tycoonParts": 98
+        },
+        "expected": {
+          "recipeOps": 70,
+          "expandedUnits": 96,
+          "cloneChildren": 26,
+          "extraRootAndDim": 2,
+          "tycoonParts": 98,
+          "totalParts": 899,
+          "transitions": 20
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "format": "ui-studio-video-observation",
+  "version": 1,
+  "videoId": "MGV08",
+  "status": "proposal awaiting review",
+  "source": {
+    "videoId": "MGV08",
+    "source": "/Users/max/projest_max/영상작업 모음/모노폴리 영상/Timeline 1 전체 1.mov",
+    "name": "Timeline 1 전체 1.mov",
+    "sha256": "0dd4c400bf33fc67bf40222c59f9c20412daa8f373d966c0565040f21557c26f",
+    "bytes": 664823,
+    "durationSeconds": 0.83,
+    "width": 1920,
+    "height": 1080,
+    "fps": 24.0,
+    "metadataExitCode": 1,
+    "metadataNote": "No output specified exit1 is expected; metadata parsed from actual Video/Duration lines",
+    "decoder": "/Applications/BlueStacks.app/Contents/MacOS/ffmpeg",
+    "sampleStep": 0.5,
+    "status": "extraction only; visual inventory pending"
+  },
+  "method": {
+    "decoder": "/Applications/BlueStacks.app/Contents/MacOS/ffmpeg",
+    "originalReadOnly": true,
+    "samplingReviewStep": 0.5,
+    "representatives": "direct PNG with ffmpeg selected input PTS",
+    "jpegReviewLabels": "nominal fps=2 schedule only; never substitute for input PTS"
+  },
+  "existingDesignComparison": {
+    "projectId": "ux-gjs-0d80d7fe",
+    "revision": 277,
+    "match": "family candidate, not visual equivalence"
+  },
+  "counts": {
+    "screenRecords": 1,
+    "stateRecords": 2,
+    "transitionRecords": 1
+  },
+  "screens": [
+    {
+      "id": "MGV08-S01",
+      "canonicalFamily": "main-board",
+      "observedTitle": "메인 주사위 굴림",
+      "scope": "game",
+      "presentationObserved": "page/state",
+      "states": [
+        {
+          "id": "MGV08-S01-A",
+          "label": "굴림 전 221/60",
+          "kindObserved": "stable",
+          "representative": {
+            "requested": 0.0,
+            "actual": 0.0,
+            "file": "captures/validated/frame_001.png",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "requested": 0.0,
+            "actual": 0.0,
+            "file": "captures/validated/frame_001.png",
+            "width": 1920,
+            "height": 1080,
+            "format": "PNG direct source decode; selected input PTS recorded by ffmpeg showinfo"
+          },
+          "gameCrop": {
+            "file": "captures/validated/frame_001-game.png",
+            "sourcePNG": "captures/validated/frame_001.png",
+            "rect": [
+              655,
+              0,
+              610,
+              1080
+            ],
+            "width": 610,
+            "height": 1080,
+            "method": "unscaled original PNG reference crop; not production art"
+          },
+          "stableSampleRangesSeconds": [
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "basis": "Direct original PNG at recorded input PTS; isolated samples do not prove a click, duration, easing or complete timeline.",
+          "notes": []
+        },
+        {
+          "id": "MGV08-S01-B",
+          "label": "주사위 표시·201/60",
+          "kindObserved": "transition",
+          "representative": {
+            "requested": 0.5,
+            "actual": 0.5,
+            "file": "captures/validated/frame_002.png",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "requested": 0.5,
+            "actual": 0.5,
+            "file": "captures/validated/frame_002.png",
+            "width": 1920,
+            "height": 1080,
+            "format": "PNG direct source decode; selected input PTS recorded by ffmpeg showinfo"
+          },
+          "gameCrop": {
+            "file": "captures/validated/frame_002-game.png",
+            "sourcePNG": "captures/validated/frame_002.png",
+            "rect": [
+              655,
+              0,
+              610,
+              1080
+            ],
+            "width": 610,
+            "height": 1080,
+            "method": "unscaled original PNG reference crop; not production art"
+          },
+          "stableSampleRangesSeconds": [
+            [
+              0.5,
+              0.5
+            ]
+          ],
+          "basis": "Direct original PNG at recorded input PTS; isolated samples do not prove a click, duration, easing or complete timeline.",
+          "notes": []
+        }
+      ],
+      "visibleStructure": [
+        "공통 HUD/좌우 이벤트",
+        "보드 위 주사위2개",
+        "GO/×20 배수",
+        "주사위 수량 221/60 → 201/60",
+        "하단 4메뉴·알림"
+      ],
+      "visibleControls": [
+        {
+          "label": "GO",
+          "activationProven": false
+        },
+        {
+          "label": "배수",
+          "activationProven": false
+        }
+      ],
+      "existingDesignScreenId": "main",
+      "existingDesignMatchStatus": "family candidate only; does not prove matching states or transitions",
+      "implementationStatus": "video observed only; source/design unchanged",
+      "entryBeforeClip": null,
+      "exitOutsideObservedWindow": null,
+      "notes": [
+        "파일명 전체와 달리 0.83초 녹화이다. 최종 주사위 눈·이동·보상·굴림 종료는 미관찰. 수량 감소를 일반 게임 로직으로 확정하지 않음."
+      ]
+    }
+  ],
+  "excludedTransitionAnimations": [],
+  "unknowns": [
+    "Input events and exact trigger times are not proven by these screenshots.",
+    "Unobserved destinations and external URI remain null.",
+    "No game code, app install, consent, chat send or payment performed."
+  ]
+}

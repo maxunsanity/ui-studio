@@ -1,0 +1,340 @@
+{
+  "revision": 53,
+  "screens": [
+    {
+      "id": "main",
+      "name": "Page_Board",
+      "parts": 63
+    },
+    {
+      "id": "screen-5b226528-5446-48d2-b4b1-f7aaceff7f7b",
+      "name": "Page_Build_City",
+      "parts": 78
+    },
+    {
+      "id": "common-5f417889-56a9-4075-9da4-8c918f828fe1",
+      "name": "Modal_Wins_QuickWins",
+      "parts": 46
+    }
+  ],
+  "transitions": [
+    {
+      "id": "edge-d53e22c1-2281-4e50-bd09-fd32870c1162",
+      "fromScreen": "screen-5b226528-5446-48d2-b4b1-f7aaceff7f7b",
+      "fromElement": "element-5e26bedc-dfc1-4f1e-bf20-9937a0fec415",
+      "event": "click",
+      "action": "back",
+      "condition": "always",
+      "label": "짓기 닫기 · 이전 화면",
+      "payload": {
+        "message": "시험 안내"
+      },
+      "returnPolicy": "호출한 이전 화면으로 복귀"
+    },
+    {
+      "id": "edge-27fbc9ae-70e3-4dea-b336-79609ade567b",
+      "fromScreen": "main",
+      "fromElement": "element-b86bde93-56a3-41e0-8e4e-662ec28cf6ba",
+      "event": "click",
+      "action": "navigate",
+      "condition": "always",
+      "label": "짓기 · 도시 랜드마크 보기",
+      "payload": {
+        "message": "시험 안내"
+      },
+      "returnPolicy": "짓기 닫기의 이전 화면 행동으로 복귀",
+      "targetScreen": "screen-5b226528-5446-48d2-b4b1-f7aaceff7f7b"
+    },
+    {
+      "id": "edge-7f3dac33-a01d-422d-84f9-a3a2e89e0d95",
+      "fromScreen": "common-5f417889-56a9-4075-9da4-8c918f828fe1",
+      "fromElement": "common-5f417889-56a9-4075-9da4-8c918f828fe1-close",
+      "event": "click",
+      "action": "close",
+      "condition": "always",
+      "label": "닫고 원래 화면 유지",
+      "returnPolicy": "선택/스크롤 유지"
+    },
+    {
+      "id": "edge-acbf6c93-07ba-4d7f-ab83-8e9aadb6d9cf",
+      "fromScreen": "main",
+      "fromElement": "element-4c0bf9af-479b-4c30-bcef-70f8385e3963",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "targetScreen": "common-5f417889-56a9-4075-9da4-8c918f828fe1",
+      "label": "Btn_BottomNav_Wins → 공통 모달",
+      "returnPolicy": "원래 화면 선택/스크롤 유지"
+    }
+  ],
+  "mainUnchangedFromR43": true,
+  "buildUnchangedFromR43": true,
+  "missionSizes": [
+    {
+      "name": "Card_Wins_Mission01",
+      "x": 8.091495556528193,
+      "y": 27.09355397720339,
+      "w": 83.73137452663228,
+      "h": 12.203753874691856
+    },
+    {
+      "name": "Card_Wins_Mission02",
+      "x": 8.091495556528193,
+      "y": 40.27360816187059,
+      "w": 83.73137452663228,
+      "h": 12.203753874691856
+    },
+    {
+      "name": "Card_Wins_Mission03",
+      "x": 8.091495556528193,
+      "y": 53.4536623465378,
+      "w": 83.73137452663228,
+      "h": 12.203753874691856
+    }
+  ],
+  "nativeText": [
+    {
+      "name": "Txt_Wins_Header_Title",
+      "text": "퀵 승리",
+      "fontSize": 46,
+      "typography": {
+        "weight": 900,
+        "lineHeight": 56,
+        "family": "system",
+        "align": "center",
+        "vertical": "middle",
+        "wrap": "nowrap",
+        "strokeWidth": 4.5,
+        "strokeColor": "#168fd4"
+      }
+    },
+    {
+      "name": "Txt_Wins_Mission01_Description",
+      "text": "출발(을)를 1회 지나세요",
+      "fontSize": 22,
+      "typography": {
+        "weight": 700,
+        "lineHeight": 28,
+        "family": "system",
+        "align": "left",
+        "vertical": "middle",
+        "wrap": "wrap"
+      }
+    },
+    {
+      "name": "Txt_Wins_Mission02_Description",
+      "text": "은행 강탈을 1회 완료하세요",
+      "fontSize": 22,
+      "typography": {
+        "weight": 700,
+        "lineHeight": 28,
+        "family": "system",
+        "align": "left",
+        "vertical": "middle",
+        "wrap": "wrap"
+      }
+    },
+    {
+      "name": "Txt_Wins_Header_Eyebrow",
+      "text": "오늘의",
+      "fontSize": 22,
+      "typography": {
+        "weight": 700,
+        "lineHeight": 26,
+        "family": "system",
+        "align": "center",
+        "vertical": "middle",
+        "wrap": "nowrap"
+      }
+    },
+    {
+      "name": "Txt_Wins_Mission03_Description",
+      "text": "랜드마크를 2개\n업그레이드하세요",
+      "fontSize": 22,
+      "typography": {
+        "weight": 700,
+        "lineHeight": 28,
+        "family": "system",
+        "align": "left",
+        "vertical": "middle",
+        "wrap": "wrap"
+      }
+    },
+    {
+      "name": "Txt_Wins_Mission01_GO",
+      "text": "GO",
+      "fontSize": 14,
+      "typography": {
+        "weight": 900,
+        "lineHeight": 18,
+        "family": "system",
+        "align": "center",
+        "vertical": "middle",
+        "wrap": "nowrap"
+      }
+    },
+    {
+      "name": "Txt_Wins_Reset_Time",
+      "text": "남은 시간 : 4시간 16분",
+      "fontSize": 18,
+      "typography": {
+        "weight": 700,
+        "lineHeight": 24,
+        "family": "system",
+        "align": "center",
+        "vertical": "middle",
+        "wrap": "nowrap"
+      }
+    },
+    {
+      "name": "Txt_Wins_Weekly_Help",
+      "text": "(을)를 획득하여 바를 채우고 주간\n보상을 획득하세요!",
+      "fontSize": 20,
+      "typography": {
+        "weight": 700,
+        "lineHeight": 26,
+        "family": "system",
+        "align": "center",
+        "vertical": "middle",
+        "wrap": "wrap"
+      }
+    },
+    {
+      "name": "Txt_Wins_Weekly_DayCount",
+      "text": "- 7일 중 1일 차 -",
+      "fontSize": 24,
+      "typography": {
+        "weight": 700,
+        "lineHeight": 28,
+        "family": "system",
+        "align": "center",
+        "vertical": "middle",
+        "wrap": "nowrap"
+      }
+    }
+  ],
+  "presentation": {
+    "type": "modal",
+    "effect": "fade",
+    "durationMs": 240,
+    "autoCloseMs": 0,
+    "dim": true,
+    "blocking": true,
+    "dismissOnEscape": true,
+    "closePolicy": "allow",
+    "rootMode": "fullscreen"
+  },
+  "assetRefs": [
+    "sha256-0311a3e14be0a77e2378f703b8bab604a1e8036d03e2c402c02278334d50883f.webp",
+    "sha256-0ab9bbc9d7fee502a7f7a4d15c37dbd7ea4d6e44e67349cb28fea0893800412d.webp",
+    "sha256-2f08244eae2d911fb2ffc303d8d823a37ddc1a29ce0ecaabbcfe366c152ce446.webp",
+    "sha256-45d191030987148c1924aa2975160dafa19d29639ce682b674d5fccd0fffb887.webp",
+    "sha256-48579a9e413e10742d3c884c3e3dd3926a3e937a0aa95147d40acd9d6fd293c4.webp",
+    "sha256-55e5d6c1b61a834ac7821939812c66f37d456caf8f3c8dd2072fa7787f79dee8.webp",
+    "sha256-65d9500c593a1180395b76f4175a656af4f76f6c98a4a8119b606649521f1517.webp",
+    "sha256-89a77b7d3705b7944e9cafa9a3bd7ec39f72eaefdb6c99830889fb247299f451.webp",
+    "sha256-926dcc38282407e9cbe0e6411fdcfd43107c59bcece0320582f34feff92a4e46.webp",
+    "sha256-98cbb3b3f20180d95c4d6dd7f3a6b5776ad002466fd6a0dc9553ce28688deeee.webp",
+    "sha256-a07400ab919be996b1fa45b98b66b9326ba2a5ed69f0acb985fe9a7443c0813d.webp",
+    "sha256-a9bb9cec28223c7b2bbe945655ed9a38dc43393cf177c4ea2f7918c925c96a2c.webp",
+    "sha256-c835d9a10b9d11c476a2d01128e2114a6428fcc02fee95e77bb65c78a81261f0.webp",
+    "sha256-dd956d1c68c5245f8d34603ed2e044f827cc63e7fa5701ccc87b2c3d99b7eafc.webp",
+    "sha256-e34c0b5999bdad93895272d889dd2af9e75e5050b2e7a3a3d6d94cf97fa99824.webp",
+    "sha256-e79c16bfd2c8f9707eed2995da78bbc1940567da74f7969dbff2eb5c0554ea72.webp",
+    "sha256-f62fa456a08fdd617cbd39e5e5a1256638c228815712d5b3d6a5d52d0d2876d5.webp",
+    "sha256-fb8756d02de875984265aef4dd103a01cc05264e65593fc6ea99fe71366d7d59.webp"
+  ],
+  "designHash": "8f4a64ae897374559da331973b27f731f70f9f4356f86a68baa0dbac3bb08149",
+  "assetChecks": [
+    {
+      "ref": "sha256-0311a3e14be0a77e2378f703b8bab604a1e8036d03e2c402c02278334d50883f.webp",
+      "bytes": 406,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-0ab9bbc9d7fee502a7f7a4d15c37dbd7ea4d6e44e67349cb28fea0893800412d.webp",
+      "bytes": 92692,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-2f08244eae2d911fb2ffc303d8d823a37ddc1a29ce0ecaabbcfe366c152ce446.webp",
+      "bytes": 177802,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-45d191030987148c1924aa2975160dafa19d29639ce682b674d5fccd0fffb887.webp",
+      "bytes": 50,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-48579a9e413e10742d3c884c3e3dd3926a3e937a0aa95147d40acd9d6fd293c4.webp",
+      "bytes": 85926,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-55e5d6c1b61a834ac7821939812c66f37d456caf8f3c8dd2072fa7787f79dee8.webp",
+      "bytes": 20036,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-65d9500c593a1180395b76f4175a656af4f76f6c98a4a8119b606649521f1517.webp",
+      "bytes": 1578,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-89a77b7d3705b7944e9cafa9a3bd7ec39f72eaefdb6c99830889fb247299f451.webp",
+      "bytes": 102600,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-926dcc38282407e9cbe0e6411fdcfd43107c59bcece0320582f34feff92a4e46.webp",
+      "bytes": 700,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-98cbb3b3f20180d95c4d6dd7f3a6b5776ad002466fd6a0dc9553ce28688deeee.webp",
+      "bytes": 706,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-a07400ab919be996b1fa45b98b66b9326ba2a5ed69f0acb985fe9a7443c0813d.webp",
+      "bytes": 6736,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-a9bb9cec28223c7b2bbe945655ed9a38dc43393cf177c4ea2f7918c925c96a2c.webp",
+      "bytes": 4088,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-c835d9a10b9d11c476a2d01128e2114a6428fcc02fee95e77bb65c78a81261f0.webp",
+      "bytes": 89822,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-dd956d1c68c5245f8d34603ed2e044f827cc63e7fa5701ccc87b2c3d99b7eafc.webp",
+      "bytes": 98260,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-e34c0b5999bdad93895272d889dd2af9e75e5050b2e7a3a3d6d94cf97fa99824.webp",
+      "bytes": 121622,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-e79c16bfd2c8f9707eed2995da78bbc1940567da74f7969dbff2eb5c0554ea72.webp",
+      "bytes": 32,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-f62fa456a08fdd617cbd39e5e5a1256638c228815712d5b3d6a5d52d0d2876d5.webp",
+      "bytes": 75726,
+      "sha256Matches": true
+    },
+    {
+      "ref": "sha256-fb8756d02de875984265aef4dd103a01cc05264e65593fc6ea99fe71366d7d59.webp",
+      "bytes": 434,
+      "sha256Matches": true
+    }
+  ]
+}

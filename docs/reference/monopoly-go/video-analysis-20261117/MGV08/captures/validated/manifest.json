@@ -1,0 +1,68 @@
+{
+  "videoId": "MGV08",
+  "command": [
+    "/Applications/BlueStacks.app/Contents/MacOS/ffmpeg",
+    "-hide_banner",
+    "-i",
+    "/Users/max/projest_max/영상작업 모음/모노폴리 영상/Timeline 1 전체 1.mov",
+    "-vf",
+    "select=eq(n\\,0)+eq(n\\,12),showinfo",
+    "-fps_mode",
+    "passthrough",
+    "-frames:v",
+    "2",
+    "-c:v",
+    "png",
+    "/Users/max/projest_max/ui-studio/docs/reference/monopoly-go/video-analysis-20261117/MGV08/captures/validated/frame_%03d.png"
+  ],
+  "decoder": "/Applications/BlueStacks.app/Contents/MacOS/ffmpeg",
+  "timeBasis": "requested sampling time vs actual decoded source PTS; old fps=2 review labels are schedule only",
+  "frames": [
+    {
+      "label": "main-roll-before",
+      "requested": 0.0,
+      "legacyFull": "captures/main-roll-before-00.000s-full.png",
+      "actual": 0.0,
+      "file": "captures/validated/frame_001.png",
+      "width": 1920,
+      "height": 1080,
+      "format": "PNG direct source decode; selected input PTS recorded by ffmpeg showinfo",
+      "gameCrop": {
+        "file": "captures/validated/frame_001-game.png",
+        "sourcePNG": "captures/validated/frame_001.png",
+        "rect": [
+          655,
+          0,
+          610,
+          1080
+        ],
+        "width": 610,
+        "height": 1080,
+        "method": "unscaled original PNG reference crop; not production art"
+      }
+    },
+    {
+      "label": "main-roll-during",
+      "requested": 0.5,
+      "legacyFull": "captures/main-roll-during-00.500s-full.png",
+      "actual": 0.5,
+      "file": "captures/validated/frame_002.png",
+      "width": 1920,
+      "height": 1080,
+      "format": "PNG direct source decode; selected input PTS recorded by ffmpeg showinfo",
+      "gameCrop": {
+        "file": "captures/validated/frame_002-game.png",
+        "sourcePNG": "captures/validated/frame_002.png",
+        "rect": [
+          655,
+          0,
+          610,
+          1080
+        ],
+        "width": 610,
+        "height": 1080,
+        "method": "unscaled original PNG reference crop; not production art"
+      }
+    }
+  ]
+}

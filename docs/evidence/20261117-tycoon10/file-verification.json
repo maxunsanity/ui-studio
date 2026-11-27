@@ -1,0 +1,146 @@
+{
+  "checkedAt": "2026-11-17T02:10:28.069Z",
+  "mode": "final",
+  "completedThrough": 69,
+  "revision": 248,
+  "baselineRevision": 200,
+  "designPath": "samples/monopoly-go/ui-studio/designs/ux-gjs-0d80d7fe.json",
+  "backupPath": "docs/planning/_backup/20261117_단이/0953_tycoon10_native/samples/monopoly-go/ui-studio/designs/ux-gjs-0d80d7fe.json",
+  "recipePath": "_작업/codex/ux-studio/tycoon10-native-recipe.mjs",
+  "designSHA256": "fa61ae7b283cef60429536e4d381a48ed8a1fa4ba341f0e14dc74a9beb384799",
+  "counts": {
+    "screens": 10,
+    "parts": 899,
+    "transitions": 20,
+    "tycoonParts": 98
+  },
+  "intendedRecipeDifferences": [
+    {
+      "key": "scene",
+      "recipeFit": "contain",
+      "savedFitExpected": "cover",
+      "topArchHeightExpected": 64,
+      "reason": "Owner intentional crop proposal. This is a saved configuration check, not visual crop equivalence."
+    },
+    {
+      "key": "Main-Tycoon-native-mouse-forwarding",
+      "savedRevisionsObserved": [
+        246,
+        247
+      ],
+      "fields": [
+        {
+          "id": "element-8f21588e-cf25-42d8-b616-7d770693baee",
+          "name": "Frame_Event_Tycoon_Card",
+          "path": "interaction.mode",
+          "before": "none",
+          "after": "parent"
+        },
+        {
+          "id": "element-f78580e9-170f-4bcb-a9b9-6c54cf487463",
+          "name": "BG_Event_Tycoon_Card",
+          "path": "interaction.mode",
+          "before": "none",
+          "after": "parent"
+        }
+      ],
+      "reason": "Actual mouse hit Frame_Event_Tycoon_Card blocked parent click although AX Enter worked. Only these two exact input-mode fields differ from r200; all remaining old screen fields stay deepEqual."
+    },
+    {
+      "key": "native-fallback-font-fit",
+      "savedRevisionObserved": 245,
+      "reason": "Actual r242 render wrapped the final timer syllable and made Rank01 dice/cash text touch. Native UI reduced timer20→18 and reward quantities19→17, all nowrap; source font unknown. Original recipe/geometry/text/counters remain unchanged.",
+      "fields": [
+        {
+          "name": "Txt_Tycoon_Timer",
+          "fontSize": 18,
+          "wrap": "nowrap",
+          "recipeFontSize": 20
+        },
+        {
+          "name": "Txt_Tycoon_Rank01_DiceQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank01_CashQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank02_DiceQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank02_CashQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank03_DiceQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank03_CashQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank04_DiceQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_Rank04_CashQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        },
+        {
+          "name": "Txt_Tycoon_SelfRank_CashQty",
+          "fontSize": 17,
+          "wrap": "nowrap",
+          "recipeFontSize": 19
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Read-only local saved-model/asset verification only: no browser/HTTP/nativeAX calls, no writes or actual UI input/visual QA.",
+    "Style fields are saved results expected from native AX editing; this script cannot prove how the edits were performed.",
+    "Default completedThrough45 is the assigned historical checkpoint, not a completion inference. Use --completed-through=N for an intermediate snapshot, --final for strict final checks.",
+    "Assertion counts and recipe/checkpoint counts are not UI completion rates or original-screen equivalence.",
+    "Native font/pixel equality, exact original species/person, game/ranking/reward/countdown APIs and unknown Info body remain unverified.",
+    "Intentional source cover+64px arch crop differs from recipe contain. Saved clipping setting alone does not prove actual rendered clip quality."
+  ],
+  "screenId": "screen-f4fd5be2-98b8-4514-9484-a0cbcb0958d4",
+  "expected": {
+    "recipeOps": 70,
+    "expandedUnits": 96,
+    "cloneChildren": 26,
+    "extraRootAndDim": 2,
+    "tycoonParts": 98,
+    "totalParts": 899,
+    "transitions": 20
+  },
+  "uniqueRegisteredAssetRefsChecked": 23,
+  "snapshotUnchangedAtEnd": true,
+  "summary": {
+    "passed": 360,
+    "expectedPending": 0,
+    "failed": 0,
+    "assertionCount": 360,
+    "savedChecksPass": true
+  },
+  "failed": [],
+  "expectedPending": []
+}
