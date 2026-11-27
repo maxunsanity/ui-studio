@@ -1,0 +1,5 @@
+export function enhance(u){const {t,o,assets}=u;
+ u.tabs=async(id,options,value,icons=false)=>{await o.props(id);await t.playwright.getByRole('combobox',{name:'UI 종류',exact:true}).selectOption({label:'버튼'});await u.input(id,'자체 동작');await o.detail('.control-inspector');await t.playwright.getByRole('combobox',{name:'입력 종류',exact:true}).selectOption({label:'선택 탭'});await o.field('선택 항목 · 한 줄에 값 | 표시 이름',options,'.control-inspector');await o.field('기본값',value,'.control-inspector');if(icons){await o.detail('.control-inspector');await t.playwright.getByRole('combobox',{name:'탭 글자 표시',exact:true}).selectOption({label:'아이콘만'});}await u.observe();};
+ u.tabSkin=async(id,normal,selected)=>{await o.props(id);await o.detail('.control-inspector');await u.setCheck(t.playwright.getByRole('checkbox',{name:'탭 프레임 · 3슬라이스',exact:true}),true);for(const [st,role] of [['normal',normal],['selected',selected]]){await o.detail('.control-inspector');const pending=t.playwright.waitForEvent('filechooser');await t.playwright.locator('[data-tab-image="'+st+'"]').click();await(await pending).setFiles([assets.find(a=>a.role===role).path]);await t.getAXState({emit:false});}};
+ return u;
+}

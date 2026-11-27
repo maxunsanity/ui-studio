@@ -1,0 +1,3 @@
+# Wild Castle sample scope
+
+Read the root AGENTS.md, ui-studio/AGENTS.md and docs/ui/PRODUCTION_GUIDE.md before work. This folder is independent UI sample data on port7018. Never author or mutate the native saved design JSON outside the Studio UI; read-only audits are allowed. Captured source pixels are analysis only; game field is fresh static art and UI uses native editable elements. Preserve originals and W/P/U. Work only in this sample and its own _작업/codex folder; do not edit another sample, common source, server or7007. The high-level screenshot is a state reference; do not invent unlock or economy rules. All output is proposal/review pending.

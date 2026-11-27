@@ -1,0 +1,7 @@
+import {create} from './native_setup_v6.mjs';
+export async function setup(t,assets){const u=create(t,assets),o=u.o;const d=o.detail;o.detail=async css=>{if(css==='.press-depth-inspector')await d('.button-state-inspector');await d(css);};
+ await u.reseed();
+ u.section=async(key,title,y,role='red-header')=>{await u.image(role,'BG_WC_Shop_'+key+'_Heading',[0,y,390,38],'Group_WC_Shop_Catalog',390,674);await u.text('Txt_WC_Shop_'+key+'_Heading',title,[24,y+4,342,28],20,'#fff2c2','Group_WC_Shop_Catalog',390,674);};
+ u.card=async(key,qty,price,role,x,y,w=108,h=130)=>{const base=await o.id('Btn_WC_Shop_Product_BundlePopular'),id=await o.duplicate(base),p=await o.parts(id);await o.rename(id,'Btn_WC_Shop_Product_'+key);await o.parent(id,'Group_WC_Shop_Catalog');await o.box(id,[x,y,w,h],390,674,'왼쪽 위 고정');const im=p.find(x=>/Art/.test(x.name)),q=p.find(x=>/Label/.test(x.name)),g=p.find(x=>/Glyph/.test(x.name)),pb=p.find(x=>/BG_.*Price/.test(x.name)),pt=p.find(x=>/Txt_.*Price/.test(x.name));for(const [a,n]of [[im,'BG_'+key],[q,'Txt_'+key+'_Qty'],[g,'Img_'+key+'_Glyph'],[pb,'BG_'+key+'_Price'],[pt,'Txt_'+key+'_Price']])await o.rename(a.id,n);await o.box(im.id,[0,0,w,h],w,h);await o.props(q.id);await o.field('화면에 표시할 글',qty);await o.box(q.id,[4,5,w-8,23],w,h);await u.asset(g.id,role,'전체 맞춤');await o.box(g.id,[(w-76)/2,29,76,64],w,h);await o.box(pb.id,[8,h-27,w-16,21],w,h);await o.props(pt.id);await o.field('화면에 표시할 글',price);await o.box(pt.id,[8,h-27,w-16,21],w,h);return id;};
+ return u;
+}
