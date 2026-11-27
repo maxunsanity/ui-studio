@@ -1,0 +1,2399 @@
+{
+  "title": "Shop08 assembly quick sheet",
+  "createdAtKST": "2026-11-17T02:03:08.567369+09:00",
+  "status": "제안(검수 대기)·측정 준비만",
+  "usageGuard": {
+    "checkedBeforeWork": 89,
+    "stopAt": 90,
+    "sharedAcrossAccount": true
+  },
+  "reference": {
+    "path": "docs/reference/monopoly-go/20261116-ten-screens/08_shop.png",
+    "size": [
+      818,
+      1449
+    ],
+    "sha256": "7ccad26227bb86eca298f0b3f35890dcc82a104c896d6cb5b14b77efa522eec2",
+    "actuallyViewed": true,
+    "pixelsCopied": false
+  },
+  "planRead": "docs/plans/20261116-ten-screen-assembly.md:118-121",
+  "coordinateContract": {
+    "logicalSize": [
+      551,
+      984
+    ],
+    "uniformWidthScale": 0.6735941320293398,
+    "widthScaledSourceHeight": 976.0378973105134,
+    "heightDeltaTo984": 7.962102689486642,
+    "rule": "Use s for BOTH axes and sizes; do not stretchY984/1449. Source fits551×976.0379, leaving7.9621 logicalpx.",
+    "footerSourceMapped": [
+      0,
+      918.78,
+      551,
+      57.26
+    ],
+    "footerBottomAnchorProposal": [
+      0,
+      926.74,
+      551,
+      57.26
+    ],
+    "extraHeightProposal": "Keep source width geometry and extend background/vertical viewport by7.9621; bottom-anchor footer. This is a production proposal, not source policy.",
+    "precision": "Visual source bounds ±4px; decimals are calculation precision. Card subregions are normalized uniform proposals based on source layout.",
+    "art": "contain preserves ratio; text/amount/price/percent/availability/frame/shadow/input separate from art."
+  },
+  "rectangles": [
+    {
+      "key": "HUD_Shop",
+      "parent": "root",
+      "sourceRect": [
+        15,
+        0,
+        793,
+        136
+      ],
+      "globalRect551": [
+        10.1,
+        0.0,
+        534.16,
+        91.61
+      ],
+      "parentRelativeRect551": [
+        10.1,
+        0.0,
+        534.16,
+        91.61
+      ],
+      "role": "group"
+    },
+    {
+      "key": "Frame_HUD",
+      "parent": "HUD_Shop",
+      "sourceRect": [
+        128,
+        26,
+        674,
+        78
+      ],
+      "globalRect551": [
+        86.22,
+        17.51,
+        454.0,
+        52.54
+      ],
+      "parentRelativeRect551": [
+        76.12,
+        17.51,
+        454.0,
+        52.54
+      ],
+      "role": "background-frame"
+    },
+    {
+      "key": "Avatar",
+      "parent": "HUD_Shop",
+      "sourceRect": [
+        17,
+        0,
+        138,
+        138
+      ],
+      "globalRect551": [
+        11.45,
+        0.0,
+        92.96,
+        92.96
+      ],
+      "parentRelativeRect551": [
+        1.35,
+        0.0,
+        92.96,
+        92.96
+      ],
+      "role": "portrait-frame"
+    },
+    {
+      "key": "CashArt",
+      "parent": "HUD_Shop",
+      "sourceRect": [
+        205,
+        44,
+        61,
+        44
+      ],
+      "globalRect551": [
+        138.09,
+        29.64,
+        41.09,
+        29.64
+      ],
+      "parentRelativeRect551": [
+        127.98,
+        29.64,
+        41.09,
+        29.64
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "CashText",
+      "parent": "HUD_Shop",
+      "sourceRect": [
+        289,
+        47,
+        187,
+        39
+      ],
+      "globalRect551": [
+        194.67,
+        31.66,
+        125.96,
+        26.27
+      ],
+      "parentRelativeRect551": [
+        184.56,
+        31.66,
+        125.96,
+        26.27
+      ],
+      "role": "native-text",
+      "observedText": "36,750,000"
+    },
+    {
+      "key": "DiceArt",
+      "parent": "HUD_Shop",
+      "sourceRect": [
+        603,
+        37,
+        50,
+        57
+      ],
+      "globalRect551": [
+        406.18,
+        24.92,
+        33.68,
+        38.39
+      ],
+      "parentRelativeRect551": [
+        396.07,
+        24.92,
+        33.68,
+        38.39
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "DiceText",
+      "parent": "HUD_Shop",
+      "sourceRect": [
+        663,
+        48,
+        91,
+        38
+      ],
+      "globalRect551": [
+        446.59,
+        32.33,
+        61.3,
+        25.6
+      ],
+      "parentRelativeRect551": [
+        436.49,
+        32.33,
+        61.3,
+        25.6
+      ],
+      "role": "native-text",
+      "observedText": "2,627"
+    },
+    {
+      "key": "Offer_Viewport",
+      "parent": "root",
+      "sourceRect": [
+        45,
+        127,
+        725,
+        289
+      ],
+      "globalRect551": [
+        30.31,
+        85.55,
+        488.36,
+        194.67
+      ],
+      "parentRelativeRect551": [
+        30.31,
+        85.55,
+        488.36,
+        194.67
+      ],
+      "role": "horizontal-offer-viewport",
+      "notes": "Only one offer visible; carousel swipe/dot synchronization not demonstrated."
+    },
+    {
+      "key": "Offer_Frame",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        45,
+        127,
+        725,
+        289
+      ],
+      "globalRect551": [
+        30.31,
+        85.55,
+        488.36,
+        194.67
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        488.36,
+        194.67
+      ],
+      "role": "separate-background-frame"
+    },
+    {
+      "key": "Offer_InnerBand",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        149,
+        158,
+        515,
+        134
+      ],
+      "globalRect551": [
+        100.37,
+        106.43,
+        346.9,
+        90.26
+      ],
+      "parentRelativeRect551": [
+        70.05,
+        20.88,
+        346.9,
+        90.26
+      ],
+      "role": "background"
+    },
+    {
+      "key": "Offer_Vampire",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        61,
+        184,
+        139,
+        187
+      ],
+      "globalRect551": [
+        41.09,
+        123.94,
+        93.63,
+        125.96
+      ],
+      "parentRelativeRect551": [
+        10.78,
+        38.39,
+        93.63,
+        125.96
+      ],
+      "role": "new-character-art"
+    },
+    {
+      "key": "Offer_Mummy",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        630,
+        201,
+        120,
+        184
+      ],
+      "globalRect551": [
+        424.36,
+        135.39,
+        80.83,
+        123.94
+      ],
+      "parentRelativeRect551": [
+        394.05,
+        49.85,
+        80.83,
+        123.94
+      ],
+      "role": "new-character-art"
+    },
+    {
+      "key": "Offer_DiceArt",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        211,
+        181,
+        84,
+        84
+      ],
+      "globalRect551": [
+        142.13,
+        121.92,
+        56.58,
+        56.58
+      ],
+      "parentRelativeRect551": [
+        111.82,
+        36.37,
+        56.58,
+        56.58
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "Offer_DiceCount",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        208,
+        246,
+        84,
+        39
+      ],
+      "globalRect551": [
+        140.11,
+        165.7,
+        56.58,
+        26.27
+      ],
+      "parentRelativeRect551": [
+        109.8,
+        80.16,
+        56.58,
+        26.27
+      ],
+      "role": "native-text",
+      "observedText": "475"
+    },
+    {
+      "key": "Offer_CashArt",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        364,
+        198,
+        88,
+        54
+      ],
+      "globalRect551": [
+        245.19,
+        133.37,
+        59.28,
+        36.37
+      ],
+      "parentRelativeRect551": [
+        214.88,
+        47.83,
+        59.28,
+        36.37
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "Offer_CashAmount",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        344,
+        243,
+        123,
+        43
+      ],
+      "globalRect551": [
+        231.72,
+        163.68,
+        82.85,
+        28.96
+      ],
+      "parentRelativeRect551": [
+        201.4,
+        78.14,
+        82.85,
+        28.96
+      ],
+      "role": "native-text",
+      "observedText": "1.55M"
+    },
+    {
+      "key": "Offer_PackArt",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        530,
+        180,
+        60,
+        69
+      ],
+      "globalRect551": [
+        357.0,
+        121.25,
+        40.42,
+        46.48
+      ],
+      "parentRelativeRect551": [
+        326.69,
+        35.7,
+        40.42,
+        46.48
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "Offer_PackCount",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        572,
+        220,
+        27,
+        31
+      ],
+      "globalRect551": [
+        385.3,
+        148.19,
+        18.19,
+        20.88
+      ],
+      "parentRelativeRect551": [
+        354.98,
+        62.64,
+        18.19,
+        20.88
+      ],
+      "role": "native-text",
+      "observedText": "2"
+    },
+    {
+      "key": "Offer_Info",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        493,
+        170,
+        22,
+        22
+      ],
+      "globalRect551": [
+        332.08,
+        114.51,
+        14.82,
+        14.82
+      ],
+      "parentRelativeRect551": [
+        301.77,
+        28.96,
+        14.82,
+        14.82
+      ],
+      "role": "native-input-icon",
+      "observedText": "i"
+    },
+    {
+      "key": "Offer_Minimum",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        523,
+        250,
+        80,
+        18
+      ],
+      "globalRect551": [
+        352.29,
+        168.4,
+        53.89,
+        12.12
+      ],
+      "parentRelativeRect551": [
+        321.98,
+        82.85,
+        53.89,
+        12.12
+      ],
+      "role": "native-text",
+      "observedText": "Min 1 of"
+    },
+    {
+      "key": "Offer_Stars",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        541,
+        270,
+        39,
+        18
+      ],
+      "globalRect551": [
+        364.41,
+        181.87,
+        26.27,
+        12.12
+      ],
+      "parentRelativeRect551": [
+        334.1,
+        96.32,
+        26.27,
+        12.12
+      ],
+      "role": "two-separate-stars"
+    },
+    {
+      "key": "Offer_Availability",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        96,
+        365,
+        188,
+        31
+      ],
+      "globalRect551": [
+        64.67,
+        245.86,
+        126.64,
+        20.88
+      ],
+      "parentRelativeRect551": [
+        34.35,
+        160.32,
+        126.64,
+        20.88
+      ],
+      "role": "native-text",
+      "observedText": "2/2 Available"
+    },
+    {
+      "key": "Offer_Buy",
+      "parent": "Offer_Viewport",
+      "sourceRect": [
+        304,
+        327,
+        202,
+        73
+      ],
+      "globalRect551": [
+        204.77,
+        220.27,
+        136.07,
+        49.17
+      ],
+      "parentRelativeRect551": [
+        174.46,
+        134.72,
+        136.07,
+        49.17
+      ],
+      "role": "native-input-wrapper"
+    },
+    {
+      "key": "Offer_Price",
+      "parent": "Offer_Buy",
+      "sourceRect": [
+        327,
+        343,
+        163,
+        43
+      ],
+      "globalRect551": [
+        220.27,
+        231.04,
+        109.8,
+        28.96
+      ],
+      "parentRelativeRect551": [
+        15.49,
+        10.78,
+        109.8,
+        28.96
+      ],
+      "role": "native-text",
+      "observedText": "₩7,500"
+    },
+    {
+      "key": "Carousel_Dots",
+      "parent": "root",
+      "sourceRect": [
+        348,
+        418,
+        117,
+        18
+      ],
+      "globalRect551": [
+        234.41,
+        281.56,
+        78.81,
+        12.12
+      ],
+      "parentRelativeRect551": [
+        234.41,
+        281.56,
+        78.81,
+        12.12
+      ],
+      "role": "five-page-dots"
+    },
+    {
+      "key": "Carousel_Dot1",
+      "parent": "Carousel_Dots",
+      "sourceRect": [
+        348,
+        418,
+        18,
+        18
+      ],
+      "globalRect551": [
+        234.41,
+        281.56,
+        12.12,
+        12.12
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        12.12,
+        12.12
+      ],
+      "role": "fixed-circle",
+      "notes": "grey"
+    },
+    {
+      "key": "Carousel_Dot2",
+      "parent": "Carousel_Dots",
+      "sourceRect": [
+        373,
+        418,
+        18,
+        18
+      ],
+      "globalRect551": [
+        251.25,
+        281.56,
+        12.12,
+        12.12
+      ],
+      "parentRelativeRect551": [
+        16.84,
+        0.0,
+        12.12,
+        12.12
+      ],
+      "role": "fixed-circle",
+      "notes": "white selected"
+    },
+    {
+      "key": "Carousel_Dot3",
+      "parent": "Carousel_Dots",
+      "sourceRect": [
+        397,
+        418,
+        18,
+        18
+      ],
+      "globalRect551": [
+        267.42,
+        281.56,
+        12.12,
+        12.12
+      ],
+      "parentRelativeRect551": [
+        33.01,
+        0.0,
+        12.12,
+        12.12
+      ],
+      "role": "fixed-circle",
+      "notes": "grey"
+    },
+    {
+      "key": "Carousel_Dot4",
+      "parent": "Carousel_Dots",
+      "sourceRect": [
+        422,
+        418,
+        18,
+        18
+      ],
+      "globalRect551": [
+        284.26,
+        281.56,
+        12.12,
+        12.12
+      ],
+      "parentRelativeRect551": [
+        49.85,
+        0.0,
+        12.12,
+        12.12
+      ],
+      "role": "fixed-circle",
+      "notes": "grey"
+    },
+    {
+      "key": "Carousel_Dot5",
+      "parent": "Carousel_Dots",
+      "sourceRect": [
+        447,
+        418,
+        18,
+        18
+      ],
+      "globalRect551": [
+        301.1,
+        281.56,
+        12.12,
+        12.12
+      ],
+      "parentRelativeRect551": [
+        66.69,
+        0.0,
+        12.12,
+        12.12
+      ],
+      "role": "fixed-circle",
+      "notes": "orange/red; semantic state unknown"
+    },
+    {
+      "key": "Shop_ProductViewport",
+      "parent": "root",
+      "sourceRect": [
+        0,
+        464,
+        818,
+        900
+      ],
+      "globalRect551": [
+        0.0,
+        312.55,
+        551.0,
+        606.23
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        312.55,
+        551.0,
+        606.23
+      ],
+      "role": "vertical-scroll-viewport",
+      "notes": "Proposed vertical scroll owner separate from horizontal offer. Exact source scrolling is not performed by this task."
+    },
+    {
+      "key": "Shop_Separator",
+      "parent": "Shop_ProductViewport",
+      "sourceRect": [
+        0,
+        464,
+        818,
+        55
+      ],
+      "globalRect551": [
+        0.0,
+        312.55,
+        551.0,
+        37.05
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        551.0,
+        37.05
+      ],
+      "role": "separate-gold-cream-lines"
+    },
+    {
+      "key": "Shop_CandleBatBanner",
+      "parent": "root",
+      "sourceRect": [
+        64,
+        445,
+        690,
+        95
+      ],
+      "globalRect551": [
+        43.11,
+        299.75,
+        464.78,
+        63.99
+      ],
+      "parentRelativeRect551": [
+        43.11,
+        299.75,
+        464.78,
+        63.99
+      ],
+      "role": "decorative-art",
+      "notes": "Observed candles/bats/cloud ornament. It protrudes above product viewport; keep separate, no text baked."
+    },
+    {
+      "key": "Shop_ProductPanel",
+      "parent": "Shop_ProductViewport",
+      "sourceRect": [
+        24,
+        540,
+        765,
+        819
+      ],
+      "globalRect551": [
+        16.17,
+        363.74,
+        515.3,
+        551.67
+      ],
+      "parentRelativeRect551": [
+        16.17,
+        51.19,
+        515.3,
+        551.67
+      ],
+      "role": "native-frame-background"
+    },
+    {
+      "key": "Shop_RollsHeading",
+      "parent": "Shop_ProductViewport",
+      "sourceRect": [
+        313,
+        558,
+        192,
+        34
+      ],
+      "globalRect551": [
+        210.83,
+        375.87,
+        129.33,
+        22.9
+      ],
+      "parentRelativeRect551": [
+        210.83,
+        63.32,
+        129.33,
+        22.9
+      ],
+      "role": "heading-group"
+    },
+    {
+      "key": "Shop_RollsText",
+      "parent": "Shop_RollsHeading",
+      "sourceRect": [
+        350,
+        558,
+        115,
+        34
+      ],
+      "globalRect551": [
+        235.76,
+        375.87,
+        77.46,
+        22.9
+      ],
+      "parentRelativeRect551": [
+        24.92,
+        0.0,
+        77.46,
+        22.9
+      ],
+      "role": "native-text",
+      "observedText": "ROLLS"
+    },
+    {
+      "key": "Shop_RollsDiceLeft",
+      "parent": "Shop_RollsHeading",
+      "sourceRect": [
+        313,
+        560,
+        31,
+        31
+      ],
+      "globalRect551": [
+        210.83,
+        377.21,
+        20.88,
+        20.88
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        1.35,
+        20.88,
+        20.88
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "Shop_RollsDiceRight",
+      "parent": "Shop_RollsHeading",
+      "sourceRect": [
+        468,
+        560,
+        31,
+        31
+      ],
+      "globalRect551": [
+        315.24,
+        377.21,
+        20.88,
+        20.88
+      ],
+      "parentRelativeRect551": [
+        104.41,
+        1.35,
+        20.88,
+        20.88
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "Product01",
+      "parent": "Shop_ProductViewport",
+      "sourceRect": [
+        49,
+        613,
+        232,
+        334
+      ],
+      "globalRect551": [
+        33.01,
+        412.91,
+        156.27,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        33.01,
+        100.37,
+        156.27,
+        224.98
+      ],
+      "role": "equal-product-item",
+      "notes": "Normalized same item232×334; observed white card220×334. Extra12px contains dice/ribbon source protrusion; not original card width."
+    },
+    {
+      "key": "Product01_Card",
+      "parent": "Product01",
+      "sourceRect": [
+        49,
+        613,
+        220,
+        334
+      ],
+      "globalRect551": [
+        33.01,
+        412.91,
+        148.19,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        148.19,
+        224.98
+      ],
+      "role": "separate-background-frame"
+    },
+    {
+      "key": "Product01_Quantity",
+      "parent": "Product01",
+      "sourceRect": [
+        61,
+        643,
+        196,
+        70
+      ],
+      "globalRect551": [
+        41.09,
+        433.12,
+        132.02,
+        47.15
+      ],
+      "parentRelativeRect551": [
+        8.08,
+        20.21,
+        132.02,
+        47.15
+      ],
+      "role": "native-text",
+      "observedText": "140"
+    },
+    {
+      "key": "Product01_Dice",
+      "parent": "Product01",
+      "sourceRect": [
+        180,
+        741,
+        98,
+        88
+      ],
+      "globalRect551": [
+        121.25,
+        499.13,
+        66.01,
+        59.28
+      ],
+      "parentRelativeRect551": [
+        88.24,
+        86.22,
+        66.01,
+        59.28
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "Product01_Ribbon",
+      "parent": "Product01",
+      "sourceRect": [
+        75,
+        788,
+        204,
+        69
+      ],
+      "globalRect551": [
+        50.52,
+        530.79,
+        137.41,
+        46.48
+      ],
+      "parentRelativeRect551": [
+        17.51,
+        117.88,
+        137.41,
+        46.48
+      ],
+      "role": "separate-ribbon-frame"
+    },
+    {
+      "key": "Product01_Bonus",
+      "parent": "Product01",
+      "sourceRect": [
+        97,
+        798,
+        161,
+        48
+      ],
+      "globalRect551": [
+        65.34,
+        537.53,
+        108.45,
+        32.33
+      ],
+      "parentRelativeRect551": [
+        32.33,
+        124.61,
+        108.45,
+        32.33
+      ],
+      "role": "native-text",
+      "observedText": "+200"
+    },
+    {
+      "key": "Product01_Buy",
+      "parent": "Product01",
+      "sourceRect": [
+        63,
+        862,
+        192,
+        66
+      ],
+      "globalRect551": [
+        42.44,
+        580.64,
+        129.33,
+        44.46
+      ],
+      "parentRelativeRect551": [
+        9.43,
+        167.72,
+        129.33,
+        44.46
+      ],
+      "role": "native-input-wrapper"
+    },
+    {
+      "key": "Product01_Price",
+      "parent": "Product01_Buy",
+      "sourceRect": [
+        66,
+        866,
+        186,
+        54
+      ],
+      "globalRect551": [
+        44.46,
+        583.33,
+        125.29,
+        36.37
+      ],
+      "parentRelativeRect551": [
+        2.02,
+        2.69,
+        125.29,
+        36.37
+      ],
+      "role": "native-text",
+      "observedText": "₩3,000"
+    },
+    {
+      "key": "Product02",
+      "parent": "Shop_ProductViewport",
+      "sourceRect": [
+        297,
+        613,
+        232,
+        334
+      ],
+      "globalRect551": [
+        200.06,
+        412.91,
+        156.27,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        200.06,
+        100.37,
+        156.27,
+        224.98
+      ],
+      "role": "equal-product-item",
+      "notes": "Normalized same item232×334; observed white card220×334. Extra12px contains dice/ribbon source protrusion; not original card width."
+    },
+    {
+      "key": "Product02_Card",
+      "parent": "Product02",
+      "sourceRect": [
+        297,
+        613,
+        220,
+        334
+      ],
+      "globalRect551": [
+        200.06,
+        412.91,
+        148.19,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        148.19,
+        224.98
+      ],
+      "role": "separate-background-frame"
+    },
+    {
+      "key": "Product02_Quantity",
+      "parent": "Product02",
+      "sourceRect": [
+        309,
+        643,
+        196,
+        70
+      ],
+      "globalRect551": [
+        208.14,
+        433.12,
+        132.02,
+        47.15
+      ],
+      "parentRelativeRect551": [
+        8.08,
+        20.21,
+        132.02,
+        47.15
+      ],
+      "role": "native-text",
+      "observedText": "425"
+    },
+    {
+      "key": "Product02_More",
+      "parent": "Product02",
+      "sourceRect": [
+        327,
+        716,
+        160,
+        28
+      ],
+      "globalRect551": [
+        220.27,
+        482.29,
+        107.78,
+        18.86
+      ],
+      "parentRelativeRect551": [
+        20.21,
+        69.38,
+        107.78,
+        18.86
+      ],
+      "role": "native-text",
+      "observedText": "20% More"
+    },
+    {
+      "key": "Product02_Dice",
+      "parent": "Product02",
+      "sourceRect": [
+        428,
+        741,
+        98,
+        88
+      ],
+      "globalRect551": [
+        288.3,
+        499.13,
+        66.01,
+        59.28
+      ],
+      "parentRelativeRect551": [
+        88.24,
+        86.22,
+        66.01,
+        59.28
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "Product02_Ribbon",
+      "parent": "Product02",
+      "sourceRect": [
+        323,
+        788,
+        204,
+        69
+      ],
+      "globalRect551": [
+        217.57,
+        530.79,
+        137.41,
+        46.48
+      ],
+      "parentRelativeRect551": [
+        17.51,
+        117.88,
+        137.41,
+        46.48
+      ],
+      "role": "separate-ribbon-frame"
+    },
+    {
+      "key": "Product02_Bonus",
+      "parent": "Product02",
+      "sourceRect": [
+        345,
+        798,
+        161,
+        48
+      ],
+      "globalRect551": [
+        232.39,
+        537.53,
+        108.45,
+        32.33
+      ],
+      "parentRelativeRect551": [
+        32.33,
+        124.61,
+        108.45,
+        32.33
+      ],
+      "role": "native-text",
+      "observedText": "+550"
+    },
+    {
+      "key": "Product02_Buy",
+      "parent": "Product02",
+      "sourceRect": [
+        311,
+        862,
+        192,
+        66
+      ],
+      "globalRect551": [
+        209.49,
+        580.64,
+        129.33,
+        44.46
+      ],
+      "parentRelativeRect551": [
+        9.43,
+        167.72,
+        129.33,
+        44.46
+      ],
+      "role": "native-input-wrapper"
+    },
+    {
+      "key": "Product02_Price",
+      "parent": "Product02_Buy",
+      "sourceRect": [
+        314,
+        866,
+        186,
+        54
+      ],
+      "globalRect551": [
+        211.51,
+        583.33,
+        125.29,
+        36.37
+      ],
+      "parentRelativeRect551": [
+        2.02,
+        2.69,
+        125.29,
+        36.37
+      ],
+      "role": "native-text",
+      "observedText": "₩7,500"
+    },
+    {
+      "key": "Product03",
+      "parent": "Shop_ProductViewport",
+      "sourceRect": [
+        545,
+        613,
+        232,
+        334
+      ],
+      "globalRect551": [
+        367.11,
+        412.91,
+        156.27,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        367.11,
+        100.37,
+        156.27,
+        224.98
+      ],
+      "role": "equal-product-item",
+      "notes": "Normalized same item232×334; observed white card220×334. Extra12px contains dice/ribbon source protrusion; not original card width."
+    },
+    {
+      "key": "Product03_Card",
+      "parent": "Product03",
+      "sourceRect": [
+        545,
+        613,
+        220,
+        334
+      ],
+      "globalRect551": [
+        367.11,
+        412.91,
+        148.19,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        148.19,
+        224.98
+      ],
+      "role": "separate-background-frame"
+    },
+    {
+      "key": "Product03_Quantity",
+      "parent": "Product03",
+      "sourceRect": [
+        557,
+        643,
+        196,
+        70
+      ],
+      "globalRect551": [
+        375.19,
+        433.12,
+        132.02,
+        47.15
+      ],
+      "parentRelativeRect551": [
+        8.08,
+        20.21,
+        132.02,
+        47.15
+      ],
+      "role": "native-text",
+      "observedText": "900"
+    },
+    {
+      "key": "Product03_More",
+      "parent": "Product03",
+      "sourceRect": [
+        575,
+        716,
+        160,
+        28
+      ],
+      "globalRect551": [
+        387.32,
+        482.29,
+        107.78,
+        18.86
+      ],
+      "parentRelativeRect551": [
+        20.21,
+        69.38,
+        107.78,
+        18.86
+      ],
+      "role": "native-text",
+      "observedText": "30% More"
+    },
+    {
+      "key": "Product03_Dice",
+      "parent": "Product03",
+      "sourceRect": [
+        676,
+        741,
+        98,
+        88
+      ],
+      "globalRect551": [
+        455.35,
+        499.13,
+        66.01,
+        59.28
+      ],
+      "parentRelativeRect551": [
+        88.24,
+        86.22,
+        66.01,
+        59.28
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "Product03_Ribbon",
+      "parent": "Product03",
+      "sourceRect": [
+        571,
+        788,
+        204,
+        69
+      ],
+      "globalRect551": [
+        384.62,
+        530.79,
+        137.41,
+        46.48
+      ],
+      "parentRelativeRect551": [
+        17.51,
+        117.88,
+        137.41,
+        46.48
+      ],
+      "role": "separate-ribbon-frame"
+    },
+    {
+      "key": "Product03_Bonus",
+      "parent": "Product03",
+      "sourceRect": [
+        593,
+        798,
+        161,
+        48
+      ],
+      "globalRect551": [
+        399.44,
+        537.53,
+        108.45,
+        32.33
+      ],
+      "parentRelativeRect551": [
+        32.33,
+        124.61,
+        108.45,
+        32.33
+      ],
+      "role": "native-text",
+      "observedText": "+1,200"
+    },
+    {
+      "key": "Product03_Buy",
+      "parent": "Product03",
+      "sourceRect": [
+        559,
+        862,
+        192,
+        66
+      ],
+      "globalRect551": [
+        376.54,
+        580.64,
+        129.33,
+        44.46
+      ],
+      "parentRelativeRect551": [
+        9.43,
+        167.72,
+        129.33,
+        44.46
+      ],
+      "role": "native-input-wrapper"
+    },
+    {
+      "key": "Product03_Price",
+      "parent": "Product03_Buy",
+      "sourceRect": [
+        562,
+        866,
+        186,
+        54
+      ],
+      "globalRect551": [
+        378.56,
+        583.33,
+        125.29,
+        36.37
+      ],
+      "parentRelativeRect551": [
+        2.02,
+        2.69,
+        125.29,
+        36.37
+      ],
+      "role": "native-text",
+      "observedText": "₩15,000"
+    },
+    {
+      "key": "Product04",
+      "parent": "Shop_ProductViewport",
+      "sourceRect": [
+        49,
+        1012,
+        232,
+        334
+      ],
+      "globalRect551": [
+        33.01,
+        681.68,
+        156.27,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        33.01,
+        369.13,
+        156.27,
+        224.98
+      ],
+      "role": "equal-product-item",
+      "notes": "Normalized same item232×334; observed white card220×334. Extra12px contains dice/ribbon source protrusion; not original card width."
+    },
+    {
+      "key": "Product04_Card",
+      "parent": "Product04",
+      "sourceRect": [
+        49,
+        1012,
+        220,
+        334
+      ],
+      "globalRect551": [
+        33.01,
+        681.68,
+        148.19,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        148.19,
+        224.98
+      ],
+      "role": "separate-background-frame"
+    },
+    {
+      "key": "Product04_Quantity",
+      "parent": "Product04",
+      "sourceRect": [
+        61,
+        1042,
+        196,
+        70
+      ],
+      "globalRect551": [
+        41.09,
+        701.89,
+        132.02,
+        47.15
+      ],
+      "parentRelativeRect551": [
+        8.08,
+        20.21,
+        132.02,
+        47.15
+      ],
+      "role": "native-text",
+      "observedText": "2,100"
+    },
+    {
+      "key": "Product04_More",
+      "parent": "Product04",
+      "sourceRect": [
+        79,
+        1115,
+        160,
+        28
+      ],
+      "globalRect551": [
+        53.21,
+        751.06,
+        107.78,
+        18.86
+      ],
+      "parentRelativeRect551": [
+        20.21,
+        69.38,
+        107.78,
+        18.86
+      ],
+      "role": "native-text",
+      "observedText": "50% More"
+    },
+    {
+      "key": "Product04_Dice",
+      "parent": "Product04",
+      "sourceRect": [
+        180,
+        1140,
+        98,
+        88
+      ],
+      "globalRect551": [
+        121.25,
+        767.9,
+        66.01,
+        59.28
+      ],
+      "parentRelativeRect551": [
+        88.24,
+        86.22,
+        66.01,
+        59.28
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "Product04_Ribbon",
+      "parent": "Product04",
+      "sourceRect": [
+        75,
+        1187,
+        204,
+        69
+      ],
+      "globalRect551": [
+        50.52,
+        799.56,
+        137.41,
+        46.48
+      ],
+      "parentRelativeRect551": [
+        17.51,
+        117.88,
+        137.41,
+        46.48
+      ],
+      "role": "separate-ribbon-frame"
+    },
+    {
+      "key": "Product04_Bonus",
+      "parent": "Product04",
+      "sourceRect": [
+        97,
+        1197,
+        161,
+        48
+      ],
+      "globalRect551": [
+        65.34,
+        806.29,
+        108.45,
+        32.33
+      ],
+      "parentRelativeRect551": [
+        32.33,
+        124.61,
+        108.45,
+        32.33
+      ],
+      "role": "native-text",
+      "observedText": "+2,700"
+    },
+    {
+      "key": "Product04_Buy",
+      "parent": "Product04",
+      "sourceRect": [
+        63,
+        1261,
+        192,
+        66
+      ],
+      "globalRect551": [
+        42.44,
+        849.4,
+        129.33,
+        44.46
+      ],
+      "parentRelativeRect551": [
+        9.43,
+        167.72,
+        129.33,
+        44.46
+      ],
+      "role": "native-input-wrapper"
+    },
+    {
+      "key": "Product04_Price",
+      "parent": "Product04_Buy",
+      "sourceRect": [
+        66,
+        1265,
+        186,
+        54
+      ],
+      "globalRect551": [
+        44.46,
+        852.1,
+        125.29,
+        36.37
+      ],
+      "parentRelativeRect551": [
+        2.02,
+        2.69,
+        125.29,
+        36.37
+      ],
+      "role": "native-text",
+      "observedText": "₩29,000"
+    },
+    {
+      "key": "Product05",
+      "parent": "Shop_ProductViewport",
+      "sourceRect": [
+        297,
+        1012,
+        232,
+        334
+      ],
+      "globalRect551": [
+        200.06,
+        681.68,
+        156.27,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        200.06,
+        369.13,
+        156.27,
+        224.98
+      ],
+      "role": "equal-product-item",
+      "notes": "Normalized same item232×334; observed white card220×334. Extra12px contains dice/ribbon source protrusion; not original card width."
+    },
+    {
+      "key": "Product05_Card",
+      "parent": "Product05",
+      "sourceRect": [
+        297,
+        1012,
+        220,
+        334
+      ],
+      "globalRect551": [
+        200.06,
+        681.68,
+        148.19,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        148.19,
+        224.98
+      ],
+      "role": "separate-background-frame"
+    },
+    {
+      "key": "Product05_Quantity",
+      "parent": "Product05",
+      "sourceRect": [
+        309,
+        1042,
+        196,
+        70
+      ],
+      "globalRect551": [
+        208.14,
+        701.89,
+        132.02,
+        47.15
+      ],
+      "parentRelativeRect551": [
+        8.08,
+        20.21,
+        132.02,
+        47.15
+      ],
+      "role": "native-text",
+      "observedText": "5,300"
+    },
+    {
+      "key": "Product05_More",
+      "parent": "Product05",
+      "sourceRect": [
+        327,
+        1115,
+        160,
+        28
+      ],
+      "globalRect551": [
+        220.27,
+        751.06,
+        107.78,
+        18.86
+      ],
+      "parentRelativeRect551": [
+        20.21,
+        69.38,
+        107.78,
+        18.86
+      ],
+      "role": "native-text",
+      "observedText": "50% More"
+    },
+    {
+      "key": "Product05_Dice",
+      "parent": "Product05",
+      "sourceRect": [
+        428,
+        1140,
+        98,
+        88
+      ],
+      "globalRect551": [
+        288.3,
+        767.9,
+        66.01,
+        59.28
+      ],
+      "parentRelativeRect551": [
+        88.24,
+        86.22,
+        66.01,
+        59.28
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "Product05_Ribbon",
+      "parent": "Product05",
+      "sourceRect": [
+        323,
+        1187,
+        204,
+        69
+      ],
+      "globalRect551": [
+        217.57,
+        799.56,
+        137.41,
+        46.48
+      ],
+      "parentRelativeRect551": [
+        17.51,
+        117.88,
+        137.41,
+        46.48
+      ],
+      "role": "separate-ribbon-frame"
+    },
+    {
+      "key": "Product05_Bonus",
+      "parent": "Product05",
+      "sourceRect": [
+        345,
+        1197,
+        161,
+        48
+      ],
+      "globalRect551": [
+        232.39,
+        806.29,
+        108.45,
+        32.33
+      ],
+      "parentRelativeRect551": [
+        32.33,
+        124.61,
+        108.45,
+        32.33
+      ],
+      "role": "native-text",
+      "observedText": "+7,500"
+    },
+    {
+      "key": "Product05_Buy",
+      "parent": "Product05",
+      "sourceRect": [
+        311,
+        1261,
+        192,
+        66
+      ],
+      "globalRect551": [
+        209.49,
+        849.4,
+        129.33,
+        44.46
+      ],
+      "parentRelativeRect551": [
+        9.43,
+        167.72,
+        129.33,
+        44.46
+      ],
+      "role": "native-input-wrapper"
+    },
+    {
+      "key": "Product05_Price",
+      "parent": "Product05_Buy",
+      "sourceRect": [
+        314,
+        1265,
+        186,
+        54
+      ],
+      "globalRect551": [
+        211.51,
+        852.1,
+        125.29,
+        36.37
+      ],
+      "parentRelativeRect551": [
+        2.02,
+        2.69,
+        125.29,
+        36.37
+      ],
+      "role": "native-text",
+      "observedText": "₩79,000"
+    },
+    {
+      "key": "Product06",
+      "parent": "Shop_ProductViewport",
+      "sourceRect": [
+        545,
+        1012,
+        232,
+        334
+      ],
+      "globalRect551": [
+        367.11,
+        681.68,
+        156.27,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        367.11,
+        369.13,
+        156.27,
+        224.98
+      ],
+      "role": "equal-product-item",
+      "notes": "Normalized same item232×334; observed white card220×334. Extra12px contains dice/ribbon source protrusion; not original card width."
+    },
+    {
+      "key": "Product06_Card",
+      "parent": "Product06",
+      "sourceRect": [
+        545,
+        1012,
+        220,
+        334
+      ],
+      "globalRect551": [
+        367.11,
+        681.68,
+        148.19,
+        224.98
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        148.19,
+        224.98
+      ],
+      "role": "separate-background-frame"
+    },
+    {
+      "key": "Product06_Quantity",
+      "parent": "Product06",
+      "sourceRect": [
+        557,
+        1042,
+        196,
+        70
+      ],
+      "globalRect551": [
+        375.19,
+        701.89,
+        132.02,
+        47.15
+      ],
+      "parentRelativeRect551": [
+        8.08,
+        20.21,
+        132.02,
+        47.15
+      ],
+      "role": "native-text",
+      "observedText": "11K"
+    },
+    {
+      "key": "Product06_More",
+      "parent": "Product06",
+      "sourceRect": [
+        575,
+        1115,
+        160,
+        28
+      ],
+      "globalRect551": [
+        387.32,
+        751.06,
+        107.78,
+        18.86
+      ],
+      "parentRelativeRect551": [
+        20.21,
+        69.38,
+        107.78,
+        18.86
+      ],
+      "role": "native-text",
+      "observedText": "55% More"
+    },
+    {
+      "key": "Product06_Dice",
+      "parent": "Product06",
+      "sourceRect": [
+        676,
+        1140,
+        98,
+        88
+      ],
+      "globalRect551": [
+        455.35,
+        767.9,
+        66.01,
+        59.28
+      ],
+      "parentRelativeRect551": [
+        88.24,
+        86.22,
+        66.01,
+        59.28
+      ],
+      "role": "reuse-art"
+    },
+    {
+      "key": "Product06_Ribbon",
+      "parent": "Product06",
+      "sourceRect": [
+        571,
+        1187,
+        204,
+        69
+      ],
+      "globalRect551": [
+        384.62,
+        799.56,
+        137.41,
+        46.48
+      ],
+      "parentRelativeRect551": [
+        17.51,
+        117.88,
+        137.41,
+        46.48
+      ],
+      "role": "separate-ribbon-frame"
+    },
+    {
+      "key": "Product06_Bonus",
+      "parent": "Product06",
+      "sourceRect": [
+        593,
+        1197,
+        161,
+        48
+      ],
+      "globalRect551": [
+        399.44,
+        806.29,
+        108.45,
+        32.33
+      ],
+      "parentRelativeRect551": [
+        32.33,
+        124.61,
+        108.45,
+        32.33
+      ],
+      "role": "native-text",
+      "observedText": "+18,000"
+    },
+    {
+      "key": "Product06_Buy",
+      "parent": "Product06",
+      "sourceRect": [
+        559,
+        1261,
+        192,
+        66
+      ],
+      "globalRect551": [
+        376.54,
+        849.4,
+        129.33,
+        44.46
+      ],
+      "parentRelativeRect551": [
+        9.43,
+        167.72,
+        129.33,
+        44.46
+      ],
+      "role": "native-input-wrapper"
+    },
+    {
+      "key": "Product06_Price",
+      "parent": "Product06_Buy",
+      "sourceRect": [
+        562,
+        1265,
+        186,
+        54
+      ],
+      "globalRect551": [
+        378.56,
+        852.1,
+        125.29,
+        36.37
+      ],
+      "parentRelativeRect551": [
+        2.02,
+        2.69,
+        125.29,
+        36.37
+      ],
+      "role": "native-text",
+      "observedText": "₩149,000"
+    },
+    {
+      "key": "Shop_Footer",
+      "parent": "root",
+      "sourceRect": [
+        0,
+        1364,
+        818,
+        85
+      ],
+      "globalRect551": [
+        0.0,
+        918.78,
+        551.0,
+        57.26
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        918.78,
+        551.0,
+        57.26
+      ],
+      "role": "bottom-fixed-footer"
+    },
+    {
+      "key": "Shop_CloseGlyph",
+      "parent": "Shop_Footer",
+      "sourceRect": [
+        388,
+        1393,
+        34,
+        39
+      ],
+      "globalRect551": [
+        261.35,
+        938.32,
+        22.9,
+        26.27
+      ],
+      "parentRelativeRect551": [
+        261.35,
+        19.53,
+        22.9,
+        26.27
+      ],
+      "role": "native-close-glyph",
+      "observedText": "×"
+    }
+  ],
+  "observations": {
+    "cash": "36,750,000",
+    "hudDice": "2,627",
+    "offer": {
+      "dice": "475",
+      "cash": "1.55M",
+      "packCount": "2",
+      "minimum": "Min 1 of",
+      "stars": 2,
+      "price": "₩7,500",
+      "availability": "2/2 Available"
+    },
+    "carousel": {
+      "count": 5,
+      "selected": 2,
+      "dotColors": [
+        "grey",
+        "white",
+        "grey",
+        "grey",
+        "orange/red"
+      ],
+      "lastDotMeaning": "unconfirmed"
+    },
+    "heading": "ROLLS",
+    "products": [
+      {
+        "quantity": "140",
+        "percentLabel": null,
+        "bonus": "+200",
+        "price": "₩3,000"
+      },
+      {
+        "quantity": "425",
+        "percentLabel": "20% More",
+        "bonus": "+550",
+        "price": "₩7,500"
+      },
+      {
+        "quantity": "900",
+        "percentLabel": "30% More",
+        "bonus": "+1,200",
+        "price": "₩15,000"
+      },
+      {
+        "quantity": "2,100",
+        "percentLabel": "50% More",
+        "bonus": "+2,700",
+        "price": "₩29,000"
+      },
+      {
+        "quantity": "5,300",
+        "percentLabel": "50% More",
+        "bonus": "+7,500",
+        "price": "₩79,000"
+      },
+      {
+        "quantity": "11K",
+        "percentLabel": "55% More",
+        "bonus": "+18,000",
+        "price": "₩149,000"
+      }
+    ]
+  },
+  "resourceReview": {
+    "newCharacterManifest": "_작업/codex/ux-studio/shop-art-assets.json",
+    "newPreparedCharacters": [
+      {
+        "role": "dracula-showman",
+        "path": "samples/monopoly-go/ui-studio/assets/production/shop-art/common_shop-dracula-showman_illustration_normal_v001.webp",
+        "size": [
+          367,
+          511
+        ],
+        "uiAppliedAtManifestCreation": false
+      },
+      {
+        "role": "mummy",
+        "path": "samples/monopoly-go/ui-studio/assets/production/shop-art/common_shop-mummy_illustration_normal_v001.webp",
+        "size": [
+          377,
+          511
+        ],
+        "uiAppliedAtManifestCreation": false
+      }
+    ],
+    "reusePlanned": [
+      "existing dice",
+      "existing cash",
+      "existing orange pack"
+    ],
+    "manifestReuseReferences": [
+      {
+        "role": "dice-stack",
+        "relativePath": "samples/monopoly-go/ui-studio/assets/production/album-icons/common_album-reward-dice-stack_icon_normal_v001.webp"
+      },
+      {
+        "role": "cash",
+        "relativePath": "samples/monopoly-go/ui-studio/assets/production/hud-top/common_hud-top_cash-icon_normal_v003.webp"
+      },
+      {
+        "role": "orange-pack",
+        "relativePath": "samples/monopoly-go/ui-studio/assets/production/wins-icons/common_wins-pack-orange_icon_normal_v001.webp"
+      }
+    ],
+    "newBannerAndFrameRegistration": "not performed; candle/bat decoration is observed, not created by measurement",
+    "doNotBake": [
+      "475",
+      "1.55M",
+      "pack2",
+      "Min 1 of",
+      "stars/count",
+      "2/2 Available",
+      "all prices",
+      "ROLLS",
+      "quantities",
+      "percent labels",
+      "bonuses"
+    ]
+  },
+  "proposedNativeStyles": {
+    "quantity": {
+      "fontSize": 42,
+      "weight": 900,
+      "lineHeight": 48,
+      "strokeWidth": 1.5,
+      "strokeColor": "#30283c",
+      "color": "#ffffff"
+    },
+    "percent": {
+      "fontSize": 16,
+      "weight": 700,
+      "lineHeight": 20,
+      "color": "#171717"
+    },
+    "bonus": {
+      "fontSize": 27,
+      "weight": 900,
+      "lineHeight": 31,
+      "strokeWidth": 1.5,
+      "strokeColor": "#30283c",
+      "color": "#ffffff"
+    },
+    "price": {
+      "fontSize": 26,
+      "weight": 900,
+      "lineHeight": 30,
+      "color": "#ffffff"
+    },
+    "note": "Font substitutes proposed; original font/actual fit unverified."
+  },
+  "assemblyOrder": [
+    "Preserve existing Main cash/Menu SHOP IDs; create actual page target first. No target ID invented here.",
+    "HUD native values→horizontal offer own viewport/art/native amounts/Buy→five dots→separate decorative banner.",
+    "Vertical product viewport→native paper frame/ROLLS→3col×2row equal item232×334/source-card220×334; each nativequantity/percent/bonus/price/Buy separate.",
+    "Apply width-scale-only geometry, extra7.9621px background/viewport correction and bottom-fixed footer/44²nativeClose.",
+    "Connect actual Main cash/Menu SHOP→navigate and X→back after page creation; carousel sync/payment/receipts/game changes remain unimplemented."
+  ],
+  "limitations": [
+    "All amounts/prices/percent labels are observed static fixtures, not real payment or approved product/balance policy.",
+    "Do not add quantity+bonus to invent reward totals.",
+    "No actual scrolling/swipe/purchase/nativekeyboard/mobile/HTTP/UI registration tests were performed.",
+    "No guide/source/product design/report/STATUS edits; only two worksheet files."
+  ]
+}

@@ -1,0 +1,1187 @@
+--- before/src/tools/uxStudio/asset-reference.mjs
++++ after/src/tools/uxStudio/asset-reference.mjs
+@@ -0,0 +1,39 @@
++// Keep the existing per-image import contract when moving bytes out of design JSON.
++export const MAX_ASSET_BYTES = 300000;
++export const MAX_ASSET_DIMENSION = 4096;
++const REF = /^sha256-[a-f0-9]{64}\.(png|jpg|webp)$/;
++const WORKSPACE = /^[a-z][a-z0-9-]{0,47}$/;
++export function validateAssetRef(ref) {
++    if (typeof ref !== 'string' || !REF.test(ref)) throw Error('이미지 자원 참조 형식이 올바르지 않습니다.');
++    return ref;
++}
++export function validateAssetWorkspace(workspace) {
++    if (workspace !== null && (typeof workspace !== 'string' || !WORKSPACE.test(workspace))) throw Error('이미지의 프로젝트 폴더 ID 오류');
++    return workspace;
++}
++export function currentAssetWorkspace(location = globalThis.location) {
++    if (!location || !/^\/ui-studio(?:\/|$)/.test(location.pathname)) throw Error('이미지의 프로젝트 폴더 범위를 명시해 주세요.');
++    const params = new URLSearchParams(location.search);
++    if (params.getAll('workspace').length > 1) throw Error('이미지의 프로젝트 폴더 ID가 중복되었습니다.');
++    return validateAssetWorkspace(params.has('workspace') ? params.get('workspace') : null);
++}
++export function assetUrl(ref, workspace = currentAssetWorkspace()) {
++    validateAssetRef(ref); validateAssetWorkspace(workspace);
++    const params = new URLSearchParams({ref});
++    if (workspace !== null) params.set('workspace',workspace);
++    return '/api/ux-studio/asset?' + params;
++}
++export function assetSource(image, workspace) {
++    return image?.assetRef ? assetUrl(image.assetRef,workspace) : image?.src || '';
++}
++export function documentAssetImages(document) {
++    const images=[];
++    for (const screen of document.screens || []) {
++        images.push(...Object.values(screen.skin?.textures || {}));
++        for (const element of screen.elements || []) {
++            if (element.image) images.push(element.image);
++            images.push(...Object.values(element.skin?.textures || {}));
++        }
++    }
++    return images.filter(image=>image.assetRef !== undefined);
++}
+--- before/src/tools/uxStudio/asset-store.mjs
++++ after/src/tools/uxStudio/asset-store.mjs
+@@ -0,0 +1,129 @@
++import {mkdir,lstat,realpath,readdir,open,link,unlink} from 'node:fs/promises';
++import {constants} from 'node:fs';
++import {resolve,join,relative,isAbsolute,sep} from 'node:path';
++import {createHash,randomUUID} from 'node:crypto';
++import {MAX_ASSET_BYTES,MAX_ASSET_DIMENSION,validateAssetRef,documentAssetImages} from './asset-reference.mjs';
++function fail(message,status=400) { const error=Error(message);error.status=status;throw error; }
++function dimensions(buffer,mime) {
++    let width,height;
++    const b=buffer;
++    if(mime==='image/png') {
++        if(b.length<45 || !b.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])) || b.readUInt32BE(8)!==13 || b.toString('ascii',12,16)!=='IHDR') fail('PNG 이미지 내용 오류');
++        width=b.readUInt32BE(16);height=b.readUInt32BE(20);
++        let offset=8,idat=false,end=false;
++        while(offset+12<=b.length) {
++            const length=b.readUInt32BE(offset),type=b.toString('ascii',offset+4,offset+8);
++            if(offset+12+length>b.length) fail('PNG 이미지가 잘렸습니다.');
++            if(type==='IDAT' && length>0) idat=true;
++            offset+=12+length;
++            if(type==='IEND') {if(length!==0 || offset!==b.length)fail('PNG 끝 형식 오류');end=true;break;}
++        }
++        if(!idat || !end)fail('PNG 이미지 데이터가 없습니다.');
++    } else if(mime==='image/jpeg') {
++        if(b.length<4 || b[0]!==255 || b[1]!==216 || b[b.length-2]!==255 || b[b.length-1]!==217)fail('JPEG 이미지 내용 오류');
++        let offset=2,scan=false;
++        while(offset+3<b.length) {
++            if(b[offset++]!==255)fail('JPEG 마커 오류');
++            while(b[offset]===255)offset++;
++            const marker=b[offset++];
++            if(marker===0xda) {scan=true;break;}
++            if(marker===0xd9)break;
++            if(marker===0x01 || marker>=0xd0 && marker<=0xd7)continue;
++            if(offset+2>b.length)fail('JPEG 이미지가 잘렸습니다.');
++            const length=b.readUInt16BE(offset);
++            if(length<2 || offset+length>b.length)fail('JPEG 이미지가 잘렸습니다.');
++            if([0xc0,0xc1,0xc2].includes(marker)) {if(length<8)fail('JPEG 크기 오류');height=b.readUInt16BE(offset+3);width=b.readUInt16BE(offset+5);}
++            offset+=length;
++        }
++        if(!scan)fail('JPEG 이미지 데이터가 없습니다.');
++    } else if(mime==='image/webp') {
++        if(b.length<30 || b.toString('ascii',0,4)!=='RIFF' || b.toString('ascii',8,12)!=='WEBP' || b.readUInt32LE(4)+8!==b.length)fail('WebP 이미지 내용 오류');
++        let offset=12,hasImage=false;
++        while(offset+8<=b.length) {
++            const type=b.toString('ascii',offset,offset+4),length=b.readUInt32LE(offset+4),start=offset+8;
++            if(start+length>b.length)fail('WebP 이미지가 잘렸습니다.');
++            if(type==='VP8X' && length>=10) {width=b.readUIntLE(start+4,3)+1;height=b.readUIntLE(start+7,3)+1;}
++            if(type==='VP8 ' && length>=10) {
++                if(!b.subarray(start+3,start+6).equals(Buffer.from([0x9d,1,0x2a])))fail('WebP 프레임 오류');
++                width??=b.readUInt16LE(start+6)&0x3fff;height??=b.readUInt16LE(start+8)&0x3fff;hasImage=true;
++            }
++            if(type==='VP8L' && length>=5) {if(b[start]!==0x2f)fail('WebP 프레임 오류');const bits=b.readUInt32LE(start+1);width??=(bits&0x3fff)+1;height??=((bits>>>14)&0x3fff)+1;hasImage=true;}
++            offset=start+length+(length%2);
++        }
++        if(!hasImage || offset!==b.length)fail('지원하는 정적 WebP 이미지 데이터가 없습니다.');
++    } else fail('PNG/JPEG/WebP 이미지만 저장할 수 있습니다.');
++    if(!Number.isInteger(width)||!Number.isInteger(height)||width<1||height<1||width>MAX_ASSET_DIMENSION||height>MAX_ASSET_DIMENSION)fail('이미지 원본 크기는1~4096px입니다.');
++    return {width,height};
++}
++export function inspectAsset(buffer,mime) {
++    if(!Buffer.isBuffer(buffer)||!buffer.length||buffer.length>MAX_ASSET_BYTES)fail('이미지는300KB 이하입니다.',413);
++    const size=dimensions(buffer,mime),extension={'image/png':'png','image/jpeg':'jpg','image/webp':'webp'}[mime];
++    return {assetRef:'sha256-'+createHash('sha256').update(buffer).digest('hex')+'.'+extension,mime,bytes:buffer.length,...size};
++}
++export function createAssetStore(root,directory) {
++    async function safeDirectory(create=false) {
++        const base=await realpath(root),rel=relative(base,resolve(directory));
++        if(!rel||rel.startsWith('..')||isAbsolute(rel))fail('이미지 자원 저장 경로를 벗어났습니다.');
++        let path=base;
++        for(const part of rel.split(sep)) {
++            path=join(path,part);
++            if(create)try{await mkdir(path);}catch(error){if(error.code!=='EEXIST')throw error;}
++            const info=await lstat(path);
++            if(info.isSymbolicLink()||!info.isDirectory())fail('심볼릭 링크 자원 폴더는 허용하지 않습니다.');
++        }
++        return path;
++    }
++    async function read(assetRef) {
++        validateAssetRef(assetRef);
++        let handle;
++        try {
++            const safe=await safeDirectory();
++            handle=await open(join(safe,assetRef),constants.O_RDONLY|constants.O_NOFOLLOW);
++            const stat=await handle.stat();
++            if(!stat.isFile()||stat.size<1||stat.size>MAX_ASSET_BYTES)fail('이미지 자원 파일 형식·크기 오류');
++            const bytes=Buffer.alloc(MAX_ASSET_BYTES+1);let size=0;
++            while(size<bytes.length) {
++                const chunk=await handle.read(bytes,size,bytes.length-size,size);
++                if(!chunk.bytesRead)break;
++                size+=chunk.bytesRead;
++            }
++            if(size>MAX_ASSET_BYTES)fail('이미지 자원 파일 크기 오류',413);
++            const buffer=bytes.subarray(0,size);
++            const mime={'png':'image/png','jpg':'image/jpeg','webp':'image/webp'}[assetRef.split('.').pop()];
++            const asset=inspectAsset(buffer,mime);
++            if(asset.assetRef!==assetRef)fail('이미지 자원 해시가 파일 내용과 다릅니다.');
++            return {asset,buffer};
++        } catch(error) {if(error.code==='ENOENT')fail('이미지 자원 파일이 없습니다: '+assetRef,404);throw error;}
++        finally {await handle?.close();}
++    }
++    return {
++        read,
++        async list() {
++            let safe;try{safe=await safeDirectory();}catch(error){if(error.code==='ENOENT')return [];throw error;}
++            const assets=[];
++            for(const name of (await readdir(safe)).sort()) {
++                try{validateAssetRef(name);}catch{continue;}
++                assets.push((await read(name)).asset);
++            }
++            return assets;
++        },
++        async put(buffer,mime) {
++            const asset=inspectAsset(buffer,mime),safe=await safeDirectory(true),temp=join(safe,'.asset-'+randomUUID()+'.tmp');
++            const handle=await open(temp,'wx',0o600);
++            try {
++                try{await handle.writeFile(buffer);await handle.sync();}finally{await handle.close();}
++                try{await link(temp,join(safe,asset.assetRef));}catch(error){if(error.code!=='EEXIST')throw error;}
++                return (await read(asset.assetRef)).asset;
++            } finally {await unlink(temp).catch(()=>{});}
++        },
++        async validateDocument(document) {
++            const cache=new Map();
++            for(const image of documentAssetImages(document)) {
++                let asset=cache.get(image.assetRef);
++                if(!asset) {asset=(await read(image.assetRef)).asset;cache.set(image.assetRef,asset);}
++                const size=image.sourceSize || [image.w,image.h];
++                if(!Array.isArray(size)||size[0]!==asset.width||size[1]!==asset.height)fail('이미지 자원과 설계의 원본 크기가 다릅니다.');
++            }
++        }
++    };
++}
+--- before/src/tools/uxStudio/asset-client.mjs
++++ after/src/tools/uxStudio/asset-client.mjs
+@@ -0,0 +1,28 @@
++import {MAX_ASSET_BYTES,MAX_ASSET_DIMENSION,validateAssetRef,validateAssetWorkspace,assetUrl,documentAssetImages} from './asset-reference.mjs';
++function endpoint(workspace) {
++    validateAssetWorkspace(workspace);
++    return '/api/ux-studio/asset' + (workspace===null?'':'?workspace='+encodeURIComponent(workspace));
++}
++async function responseError(response) {
++    let error;try{error=(await response.json()).error;}catch{}
++    throw Error(error || '이미지 자원 요청을 처리하지 못했습니다.');
++}
++export async function uploadImageAsset(file,workspace,fetcher=globalThis.fetch) {
++    if(!file || !Number.isSafeInteger(file.size) || file.size<1 || file.size>MAX_ASSET_BYTES || !['image/png','image/jpeg','image/webp'].includes(file.type))throw Error('PNG/JPEG/WebP300KB 이하 파일을 선택하세요.');
++    const response=await fetcher(endpoint(workspace),{method:'POST',headers:{'Content-Type':file.type},body:file,redirect:'error'});
++    if(!response.ok)return responseError(response);
++    const {asset}=await response.json();
++    validateAssetRef(asset?.assetRef);
++    if(asset.mime!==file.type || asset.bytes!==file.size || ![asset.width,asset.height].every(n=>Number.isInteger(n)&&n>0&&n<=MAX_ASSET_DIMENSION))throw Error('이미지 자원 저장 응답의 종류·크기가 다릅니다.');
++    return asset;
++}
++export async function copyDocumentAssets(document,sourceWorkspace,targetWorkspace,fetcher=globalThis.fetch) {
++    validateAssetWorkspace(sourceWorkspace);validateAssetWorkspace(targetWorkspace);
++    const refs=[...new Set(documentAssetImages(document).map(image=>validateAssetRef(image.assetRef)))];
++    for(const ref of refs) {
++        const response=await fetcher(assetUrl(ref,sourceWorkspace),{cache:'no-store',redirect:'error'});
++        if(!response.ok)return responseError(response);
++        const file=await response.blob(),asset=await uploadImageAsset(file,targetWorkspace,fetcher);
++        if(asset.assetRef!==ref)throw Error('사본 이미지 자원 참조의 해시가 원본과 다릅니다. 설계 사본은 저장하지 않았습니다.');
++    }
++}
+--- before/src/tools/uxStudio/save-plugin.mjs
++++ after/src/tools/uxStudio/save-plugin.mjs
+@@ -0,0 +1,327 @@
++import {createAssetStore} from './asset-store.mjs';
++import {MAX_ASSET_BYTES} from './asset-reference.mjs';
++import { createWorkspaceStore } from './workspace-store.mjs';
++import { readFeatureCatalog } from './catalog.mjs';
++import { mkdir, lstat, readFile, readdir, open, rename, unlink, copyFile, realpath, link } from 'node:fs/promises';
++import { resolve, join, relative, sep, dirname } from 'node:path';
++import { randomUUID } from 'node:crypto';
++import { validateDocument } from './model.mjs';
++const ID = /^[a-z][a-z0-9-]{0,47}$/;
++export async function ensureSafeRoot(root, dir) {
++    root = await realpath(root);
++    const rel = relative(root, resolve(dir));
++    if (!rel || rel.startsWith('..') || rel.split(sep).includes('..'))
++        throw Error('허용된 저장 폴더가 아닙니다.');
++    let current = root;
++    for (const part of rel.split(sep)) {
++        current = join(current, part);
++        try {
++            await mkdir(current);
++        }
++        catch (e) {
++            if (e.code !== 'EEXIST')
++                throw e;
++        }
++        const st = await lstat(current);
++        if (!st.isDirectory() || st.isSymbolicLink())
++            throw Error('심볼릭 링크 저장은 허용하지 않습니다.');
++    }
++    return current;
++}
++async function readDocument(file) {
++    try {
++        const st = await lstat(file);
++        if (st.isSymbolicLink() || !st.isFile())
++            throw Error('저장 파일 형식 오류');
++        return validateDocument(JSON.parse(await readFile(file, 'utf8')));
++    }
++    catch (e) {
++        if (e.code === 'ENOENT')
++            return null;
++        throw e;
++    }
++}
++export async function saveDocument(root, dir, document, expectedRevision) {
++    validateDocument(document);
++    if (Buffer.byteLength(JSON.stringify(document)) > 2000000) throw Error('전체 설계는2MB 이하입니다.');
++    if (expectedRevision !== null && (!Number.isSafeInteger(expectedRevision) || expectedRevision < 0))
++        throw Error('저장 기준 버전 오류');
++    if (document.revision !== (expectedRevision ?? 0))
++        throw Error('문서와 기준 버전이 다릅니다.');
++    dir = await ensureSafeRoot(root, dir);
++    const lock = join(dir, '.save.lock');
++    let handle;
++    try {
++        handle = await open(lock, 'wx', 0o600);
++    }
++    catch (e) {
++        if (e.code === 'EEXIST') {
++            const error = Error('다른 저장이 진행 중입니다. 잠시 후 다시 시도해 주세요.');
++            error.status = 409;
++            throw error;
++        }
++        throw e;
++    }
++    let temp;
++    try {
++        await handle.writeFile(String(process.pid));
++        const file = join(dir, document.projectId + '.json');
++        const before = await readDocument(file);
++        if ((before?.revision ?? null) !== expectedRevision) {
++            const error = Error('다른 탭 또는 AI가 먼저 저장했습니다. 새 버전과 비교한 뒤 다시 저장해 주세요.');
++            error.status = 409;
++            throw error;
++        }
++        await createAssetStore(root, join(dirname(dir), 'assets')).validateDocument(document);
++        const next = {
++            ...document, revision: (before?.revision ?? 0) + 1, savedAt: new Date().toISOString()
++        };
++        validateDocument(next);
++        if (Buffer.byteLength(JSON.stringify(next, null, 2) + '\n') > 2000000) throw Error('전체 설계는2MB 이하입니다.');
++        const backups = await ensureSafeRoot(root, join(dir, 'backups'));
++        if (before)
++            await copyFile(file, join(backups, document.projectId + '-r' + before.revision + '-' + randomUUID() + '.json'));
++        temp = join(dir, '.' + document.projectId + '-' + randomUUID() + '.tmp');
++        const out = await open(temp, 'wx', 0o600);
++        try {
++            await out.writeFile(JSON.stringify(next, null, 2) + '\n');
++            await out.sync();
++        }
++        finally {
++            await out.close();
++        }
++        await rename(temp, file);
++        temp = null;
++        const reread = await readDocument(file);
++        if (JSON.stringify(reread) !== JSON.stringify(next))
++            throw Error('저장 후 재읽기 확인에 실패했습니다.');
++        return reread;
++    }
++    finally {
++        if (temp)
++            await unlink(temp).catch(() => {
++            });
++        await handle.close();
++        await unlink(lock).catch(() => {
++        });
++    }
++}
++// Baselines pin an already saved revision; they never replace the working design.
++function baselineName(projectId, stage, revision) {
++    if (!ID.test(projectId || '') || !['W', 'P', 'U'].includes(stage) || !Number.isSafeInteger(revision) || revision < 1)
++        throw Error('기준판의 프로젝트·단계·저장 버전을 확인해 주세요.');
++    return projectId + '-' + stage + '-r' + revision + '.json';
++}
++export async function readBaseline(root, dir, projectId, stage, revision) {
++    const name = baselineName(projectId, stage, revision);
++    const safe = await ensureSafeRoot(root, join(dir, 'baselines'));
++    const document = await readDocument(join(safe, name));
++    if (document && (document.projectId !== projectId || document.revision !== revision))
++        throw Error('기준판 내용과 식별자가 다릅니다.');
++    return document;
++}
++export async function listBaselines(root, dir, projectId) {
++    if (!ID.test(projectId || '')) throw Error('프로젝트 ID 오류');
++    const safe = await ensureSafeRoot(root, join(dir, 'baselines'));
++    const items = [];
++    for (const name of await readdir(safe)) {
++        const match = /^(.*)-([WPU])-r([1-9][0-9]*)\.json$/.exec(name);
++        if (!match || match[1] !== projectId) continue;
++        const revision = Number(match[3]);
++        const document = await readBaseline(root, dir, projectId, match[2], revision);
++        if (document) items.push({stage: match[2], revision, name: document.name});
++    }
++    return items.sort((a, b) => b.revision - a.revision || 'WPU'.indexOf(a.stage) - 'WPU'.indexOf(b.stage));
++}
++export async function saveBaseline(root, dir, projectId, stage, expectedRevision) {
++    const name = baselineName(projectId, stage, expectedRevision);
++    dir = await ensureSafeRoot(root, dir);
++    const document = await readDocument(join(dir, projectId + '.json'));
++    if (!document || document.revision !== expectedRevision) {
++        const error = Error('먼저 현재 설계를 저장하고 저장 버전을 확인해 주세요.');
++        error.status = 409;
++        throw error;
++    }
++    const safe = await ensureSafeRoot(root, join(dir, 'baselines'));
++    const temp = join(safe, '.' + randomUUID() + '.tmp');
++    const out = await open(temp, 'wx', 0o600);
++    try {
++        try {
++            await out.writeFile(JSON.stringify(document, null, 2) + '\n');
++            await out.sync();
++        } finally {
++            await out.close();
++        }
++        // Publish the complete file atomically without overwriting an existing baseline.
++        try {
++            await link(temp, join(safe, name));
++        } catch (error) {
++            if (error.code !== 'EEXIST') throw error;
++            const before = await readBaseline(root, dir, projectId, stage, expectedRevision);
++            if (JSON.stringify(before) !== JSON.stringify(document)) {
++                const conflict = Error('이미 있는 기준판을 덮어쓸 수 없습니다.');
++                conflict.status = 409;
++                throw conflict;
++            }
++        }
++        return await readBaseline(root, dir, projectId, stage, expectedRevision);
++    } finally {
++        await unlink(temp).catch(() => {});
++    }
++}
++export default function uxSavePlugin(root, dir, options = {}) {
++    const workspaces = createWorkspaceStore(root, dir, options);
++    return {
++        name: 'ux-studio-save', configureServer(server) {
++            server.middlewares.use(async (req, res, next) => {
++                const u = new URL(req.url || '/', 'http://127.0.0.1');
++                if (!u.pathname.startsWith('/api/ux-studio/'))
++                    return next();
++                const send = (status, value) => {
++                    res.statusCode = status;
++                    res.setHeader('Content-Type', 'application/json; charset=utf-8');
++                    res.setHeader('Cache-Control', 'no-store');
++                    res.end(JSON.stringify(value));
++                };
++                try {
++                    if (!/^127\.0\.0\.1:\d+$/.test(req.headers.host || ''))
++                        return send(403, {
++                            error: '허용되지 않은 호스트입니다.'
++                        });
++                    const origin = 'http://' + req.headers.host;
++                    if (req.headers.origin && req.headers.origin !== origin)
++                        return send(403, {
++                            error: '같은 도구에서만 접근할 수 있습니다.'
++                        });
++                    const storage = writing => u.searchParams.has('workspace')
++                        ? workspaces.storage(u.searchParams.get('workspace'), writing)
++                        : Promise.resolve({root, dir});
++                    const assets = async writing => {
++                        const target = u.searchParams.has('workspace')
++                            ? await workspaces.assetStorage(u.searchParams.get('workspace'), writing)
++                            : {root, dir:join(dirname(dir),'assets')};
++                        return createAssetStore(target.root, target.dir);
++                    };
++                    if (u.searchParams.getAll('workspace').length > 1) throw Error('프로젝트 폴더 ID가 중복되었습니다.');
++                    if (req.method === 'GET' && u.pathname === '/api/ux-studio/assets')
++                        return send(200, {assets:await (await assets(false)).list()});
++                    if (req.method === 'GET' && u.pathname === '/api/ux-studio/asset') {
++                        const {asset,buffer} = await (await assets(false)).read(u.searchParams.get('ref'));
++                        res.statusCode = 200;
++                        res.setHeader('Content-Type',asset.mime);
++                        res.setHeader('Content-Length',buffer.length);
++                        res.setHeader('Cache-Control','no-store');
++                        res.setHeader('X-Content-Type-Options','nosniff');
++                        return res.end(buffer);
++                    }
++                    if (req.method === 'POST' && u.pathname === '/api/ux-studio/asset') {
++                        if (req.headers.origin !== origin) return send(403,{error:'같은 도구에서만 이미지를 저장할 수 있습니다.'});
++                        const mime=req.headers['content-type'];
++                        if (!['image/png','image/jpeg','image/webp'].includes(mime)) throw Error('PNG/JPEG/WebP 이미지만 저장할 수 있습니다.');
++                        const target=await assets(true),chunks=[];let size=0;
++                        for await (const chunk of req) {
++                            size+=chunk.length;
++                            if (size>MAX_ASSET_BYTES) return send(413,{error:'이미지는300KB 이하입니다.'});
++                            chunks.push(chunk);
++                        }
++                        return send(200,{asset:await target.put(Buffer.concat(chunks),mime)});
++                    }
++                    if (req.method === 'GET' && u.pathname === '/api/ux-studio/workspaces')
++                        return send(200, {workspaces: await workspaces.list()});
++                    if (req.method === 'GET' && u.pathname === '/api/ux-studio/workspace')
++                        return send(200, {workspace: await workspaces.get(u.searchParams.get('workspace'))});
++                    if (req.method === 'GET' && u.pathname === '/api/ux-studio/workspace-guide')
++                        return send(200, {text: await workspaces.guide(u.searchParams.get('workspace'), u.searchParams.get('file') || 'USER_GUIDE.md')});
++                    const postRoutes = ['/api/ux-studio/project', '/api/ux-studio/baseline', '/api/ux-studio/workspace-select', '/api/ux-studio/workspace-decision'];
++                    let body;
++                    if (req.method === 'POST' && postRoutes.includes(u.pathname)) {
++                        if (req.headers.origin !== origin || !req.headers['content-type']?.startsWith('application/json'))
++                            return send(403, {error: '같은 도구의 JSON 저장만 허용합니다.'});
++                        const chunks = [];
++                        let size = 0;
++                        for await (const c of req) {
++                            size += c.length;
++                            if (size > 2000000) return send(413, {error: '설계 파일이 너무 큽니다.'});
++                            chunks.push(c);
++                        }
++                        body = JSON.parse(Buffer.concat(chunks).toString('utf8'));
++                        if (!body || typeof body !== 'object' || Array.isArray(body)) throw Error('요청 형식 오류');
++                        if (u.pathname === '/api/ux-studio/workspace-select') {
++                            if (Object.keys(body).length) throw Error('폴더는 네이티브 선택 창으로만 지정할 수 있습니다.');
++                            return send(200, await workspaces.select());
++                        }
++                        if (u.pathname === '/api/ux-studio/workspace-decision') {
++                            if (Object.keys(body).some(key => key !== 'decision')) throw Error('변환 선택 요청 형식 오류');
++                            return send(200, {workspace: await workspaces.decision(u.searchParams.get('workspace'), body.decision)});
++                        }
++                    }
++                    if (req.method === 'GET' && u.pathname === '/api/ux-studio/catalog')
++                        return send(200, {
++                            catalog: await readFeatureCatalog(root)
++                        });
++                    if (req.method === 'GET' && u.pathname === '/api/ux-studio/projects') {
++                        const target = await storage(false);
++                        const safe = await ensureSafeRoot(target.root, target.dir);
++                        const projects = [];
++                        for (const name of await readdir(safe))
++                            if (name.endsWith('.json') && ID.test(name.slice(0, -5))) {
++                                const d = await readDocument(join(safe, name));
++                                projects.push({
++                                    id: d.projectId, name: d.name, revision: d.revision
++                                });
++                            }
++                        return send(200, {
++                            projects
++                        });
++                    }
++                    if (req.method === 'GET' && u.pathname === '/api/ux-studio/project') {
++                        const id = u.searchParams.get('id');
++                        if (!ID.test(id || ''))
++                            return send(400, {
++                                error: '프로젝트 ID 오류'
++                            });
++                        const target = await storage(false);
++                        const safe = await ensureSafeRoot(target.root, target.dir);
++                        const d = await readDocument(join(safe, id + '.json'));
++                        return d ? send(200, {
++                            document: d
++                        }) : send(404, {
++                            error: '아직 저장된 설계가 없습니다.'
++                        });
++                    }
++                    if (req.method === 'GET' && u.pathname === '/api/ux-studio/baselines') {
++                        const target = await storage(false);
++                        return send(200, { baselines: await listBaselines(target.root, target.dir, u.searchParams.get('id')) });
++                    }
++                    if (req.method === 'GET' && u.pathname === '/api/ux-studio/baseline') {
++                        const target = await storage(false);
++                        const document = await readBaseline(target.root, target.dir, u.searchParams.get('id'), u.searchParams.get('stage'), Number(u.searchParams.get('revision')));
++                        return document ? send(200, { document }) : send(404, { error: '기준판이 없습니다.' });
++                    }
++                    if (req.method === 'POST' && ['/api/ux-studio/project', '/api/ux-studio/baseline'].includes(u.pathname)) {
++                        const target = await storage(true);
++                        if (u.pathname === '/api/ux-studio/baseline') {
++                            const document = await saveBaseline(target.root, target.dir, body.projectId, body.stage, body.expectedRevision);
++                            return send(200, { document });
++                        }
++                        const { document, expectedRevision } = body;
++                        if (expectedRevision === undefined)
++                            throw Error('기준 버전이 없습니다.');
++                        const d = await saveDocument(target.root, target.dir, document, expectedRevision);
++                        return send(200, {
++                            document: d
++                        });
++                    }
++                    return send(405, {
++                        error: '지원하지 않는 요청입니다.'
++                    });
++                }
++                catch (e) {
++                    return send(e.status || 400, {
++                        error: e.message || '저장 요청 오류'
++                    });
++                }
++            });
++        }
++    };
++}
+--- before/src/tools/uxStudio/workspace-store.mjs
++++ after/src/tools/uxStudio/workspace-store.mjs
+@@ -0,0 +1,248 @@
++import { mkdir, lstat, realpath, readFile, open, rename, unlink } from 'node:fs/promises';
++import { resolve, join, relative, sep, dirname, basename, isAbsolute, parse } from 'node:path';
++import { randomUUID, createHash } from 'node:crypto';
++import { execFile } from 'node:child_process';
++import { promisify } from 'node:util';
++const runFile = promisify(execFile);
++const ID = /^[a-z][a-z0-9-]{0,47}$/;
++const GUIDE_FILES = ['README.md', 'USER_GUIDE.md', 'AI_GUIDE.md', 'TOOL_SPEC.md', 'ARCHITECTURE.md', 'EXISTING_GAME.md', 'PROGRESS.md', 'index.json'];
++const DECISIONS = ['pending', 'convert', 'independent'];
++let chooserOpen = false;
++function fail(message, status = 400) { const error = Error(message); error.status = status; throw error; }
++async function stat(path) {
++    try { return await lstat(path); } catch (error) { if (error.code === 'ENOENT') return null; throw error; }
++}
++function checkType(info, directory) {
++    if (!info || info.isSymbolicLink() || !(directory ? info.isDirectory() : info.isFile()))
++        fail('심볼릭 링크 또는 잘못된 프로젝트 파일·폴더 형식입니다.');
++}
++async function safeGameRoot(directory) {
++    if (typeof directory !== 'string' || !isAbsolute(directory) || directory.includes('\0')) fail('올바른 프로젝트 폴더를 선택해 주세요.');
++    const absolute = resolve(directory);
++    let current = parse(absolute).root;
++    for (const part of relative(current, absolute).split(sep).filter(Boolean)) {
++        current = join(current, part); checkType(await stat(current), true);
++    }
++    if (absolute === parse(absolute).root) fail('최상위 시스템 폴더는 프로젝트로 열 수 없습니다.');
++    return realpath(absolute);
++}
++async function safeChild(root, name, create = false) {
++    const rel = relative(root, resolve(root, name));
++    if (!rel || rel.startsWith('..') || isAbsolute(rel)) fail('프로젝트 저장 경로를 벗어났습니다.');
++    let current = root;
++    for (const part of rel.split(sep)) {
++        current = join(current, part);
++        if (create) { try { await mkdir(current); } catch (error) { if (error.code !== 'EEXIST') throw error; } }
++        checkType(await stat(current), true);
++    }
++    return current;
++}
++async function textFile(file) { checkType(await stat(file), false); return readFile(file, 'utf8'); }
++async function writeAtomic(directory, name, value) {
++    const target = join(directory, name); const before = await stat(target);
++    if (before) checkType(before, false);
++    const temp = join(directory, '.' + name + '-' + randomUUID() + '.tmp');
++    const output = await open(temp, 'wx', 0o600);
++    try {
++        try { await output.writeFile(JSON.stringify(value, null, 2) + '\n'); await output.sync(); }
++        finally { await output.close(); }
++        await rename(temp, target);
++    } finally { await unlink(temp).catch(() => {}); }
++}
++function validateMeta(meta) {
++    const allowed = ['schemaVersion','id','name','guideVersion','mode','conversionDecision','conversionDecidedAt','conversionStatus','createdAt'];
++    if (!meta || typeof meta !== 'object' || Array.isArray(meta) || Object.keys(meta).some(key => !allowed.includes(key)) || meta.schemaVersion !== 1 || !ID.test(meta.id || '') || typeof meta.name !== 'string' || !meta.name.trim() || meta.name.length > 200 || /[\x00-\x1f]/.test(meta.name) || typeof meta.guideVersion !== 'string' || !meta.guideVersion || !DECISIONS.includes(meta.conversionDecision) || meta.mode !== meta.conversionDecision || !Number.isFinite(Date.parse(meta.createdAt)))
++        fail('기존 ui-studio/project.json 형식이 맞지 않습니다. 원본을 보존한 채 확인해 주세요.');
++    const status = meta.conversionDecision === 'convert' ? 'requested' : meta.conversionDecision === 'independent' ? 'independent' : 'not-requested';
++    if (meta.conversionStatus !== status || (meta.conversionDecision === 'pending' ? meta.conversionDecidedAt !== null : !Number.isFinite(Date.parse(meta.conversionDecidedAt))))
++        fail('기존 프로젝트의 변환 선택 기록이 올바르지 않습니다.');
++    return meta;
++}
++async function workspaceAt(gameRoot) {
++    const root = await safeGameRoot(gameRoot);
++    const directory = await safeChild(root, 'ui-studio');
++    const meta = validateMeta(JSON.parse(await textFile(join(directory, 'project.json'))));
++    return {root, directory, meta};
++}
++function publicMeta(workspace) { return {...workspace.meta, directory: workspace.root}; }
++async function writeMissing(directory, name, text) {
++    const file = join(directory, name); const before = await stat(file);
++    if (before) { checkType(before, false); return; }
++    let output;
++    try { output = await open(file, 'wx', 0o600); }
++    catch (error) { if (error.code === 'EEXIST') {checkType(await stat(file), false); return;} throw error; }
++    try { await output.writeFile(text); await output.sync(); } finally { await output.close(); }
++}
++export async function prepareFolderPicker(root, cache) {
++    if (process.platform !== 'darwin') fail('네이티브 폴더 선택은 macOS에서 지원합니다.');
++    const source = join(root, 'tools/ux-studio/folder-picker.swift');
++    const sourceText = await textFile(source);
++    const pickerCache = await safeChild(cache, 'folder-picker-cache', true);
++    const bundleIdentifier = 'local.max.ux-studio-folder-picker';
++    const info = `<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0"><dict>
++<key>CFBundleIdentifier</key><string>${bundleIdentifier}</string>
++<key>CFBundleName</key><string>UI Studio Folder Picker</string>
++<key>CFBundleDisplayName</key><string>UI 스튜디오 폴더 선택</string>
++<key>CFBundleExecutable</key><string>UIStudioFolderPicker</string>
++<key>CFBundlePackageType</key><string>APPL</string>
++<key>CFBundleVersion</key><string>1</string>
++<key>CFBundleShortVersionString</key><string>1.0</string>
++<key>NSPrincipalClass</key><string>NSApplication</string>
++<key>NSHighResolutionCapable</key><true/>
++</dict></plist>
++`;
++    const hash = createHash('sha256').update(sourceText).update(info).digest('hex').slice(0,16);
++    const bundle = await safeChild(pickerCache, 'UI Studio Folder Picker-' + hash + '.app', true);
++    const contents = await safeChild(bundle, 'Contents', true);
++    const executables = await safeChild(contents, 'MacOS', true);
++    await writeMissing(contents, 'Info.plist', info);
++    if (await textFile(join(contents, 'Info.plist')) !== info) fail('폴더 선택기 앱 정보가 변경되었습니다. 캐시 원본을 확인해 주세요.');
++    const executable = join(executables, 'UIStudioFolderPicker');
++    if (!await stat(executable)) {
++        const modules = await safeChild(pickerCache, 'modules', true);
++        const temporary = executable + '-' + randomUUID() + '.tmp';
++        try {
++            await runFile('/usr/bin/xcrun', ['swiftc', source, '-module-cache-path', modules, '-o', temporary], {timeout:120000, maxBuffer:1024*1024});
++            checkType(await stat(temporary), false);
++            await rename(temporary, executable);
++        } finally { await unlink(temporary).catch(() => {}); }
++    }
++    checkType(await stat(executable), false);
++    return {bundle, executable, bundleIdentifier};
++}
++async function nativeDirectory(root, cache) {
++    const {executable} = await prepareFolderPicker(root, cache);
++    const {stdout} = await runFile(executable, [], {maxBuffer:16384});
++    const result = JSON.parse(stdout);
++    if (result.cancelled === true) return null;
++    if (typeof result.directory !== 'string') fail('폴더 선택 결과를 확인할 수 없습니다.');
++    return result.directory;
++}
++export function createWorkspaceStore(projectRoot, legacyDirectory, options = {}) {
++    const cache = dirname(resolve(legacyDirectory));
++    const registryFile = join(cache, 'workspaces.json');
++    const commonGuide = join(projectRoot, 'src/tools/uxStudio/guide');
++    async function safeCache() {
++        const root = await realpath(projectRoot);
++        return safeChild(root, relative(root, cache), true);
++    }
++    async function registry() {
++        const parent = await stat(cache);
++        if (!parent) return {schemaVersion:1, workspaces:[]};
++        await safeCache();
++        if (!await stat(registryFile)) return {schemaVersion:1, workspaces:[]};
++        const data = JSON.parse(await textFile(registryFile));
++        if (!data || data.schemaVersion !== 1 || !Array.isArray(data.workspaces)) fail('프로젝트 폴더 목록 형식이 올바르지 않습니다.');
++        const ids = new Set(); const roots = new Set();
++        for (const item of data.workspaces) {
++            if (!item || !ID.test(item.id || '') || typeof item.root !== 'string' || !isAbsolute(item.root) || ids.has(item.id) || roots.has(item.root)) fail('프로젝트 폴더 목록 항목이 올바르지 않습니다.');
++            ids.add(item.id); roots.add(item.root);
++        }
++        return data;
++    }
++    async function locked(action) {
++        await safeCache();
++        let lock;
++        try { lock = await open(join(cache, '.workspaces.lock'), 'wx', 0o600); }
++        catch (error) { if (error.code === 'EEXIST') fail('다른 프로젝트 폴더 요청이 진행 중입니다. 잠시 후 다시 시도해 주세요.',409); throw error; }
++        try { await lock.writeFile(String(process.pid)); return await action(); }
++        finally { await lock.close(); await unlink(join(cache, '.workspaces.lock')).catch(() => {}); }
++    }
++    async function load(id) {
++        if (!ID.test(id || '')) fail('프로젝트 폴더 ID 오류');
++        const entry = (await registry()).workspaces.find(item => item.id === id);
++        if (!entry) fail('등록되지 않은 프로젝트 폴더입니다. 폴더 찾기로 다시 열어 주세요.',404);
++        const workspace = await workspaceAt(entry.root);
++        if (workspace.root !== entry.root || workspace.meta.id !== id) fail('등록된 프로젝트 폴더와 식별자가 다릅니다.');
++        return workspace;
++    }
++    async function copyGuides(workspace) {
++        // Existing project guides are user-owned and are never overwritten.
++        const guide = await safeChild(workspace.directory, 'guide', true);
++        checkType(await stat(commonGuide), true);
++        for (const file of GUIDE_FILES) await writeMissing(guide, file, await textFile(join(commonGuide,file)));
++        await writeMissing(workspace.directory, 'README.md', '# UI 스튜디오 프로젝트\n\n상위 프로젝트의 AGENTS.md와 지침이 우선합니다. 공통 사용법은 [guide/USER_GUIDE.md](guide/USER_GUIDE.md), AI 작업 규칙은 [guide/AI_GUIDE.md](guide/AI_GUIDE.md), 이 프로젝트의 연결·변환 기록은 [integration.md](integration.md)를 읽어 주세요.\n\n설계는 designs/, 독립 자원은 assets/, 출력은 exports/에 저장합니다. 게임의 기존 UI는 폴더를 열었다는 이유로 변환되지 않습니다.\n');
++        await writeMissing(workspace.directory, 'AGENTS.md', '# AI 진입점\n\n1. 상위 게임 프로젝트의 AGENTS.md와 최신 직접 지시를 먼저 따릅니다. 이 문서는 상위 지침을 변경하지 않습니다.\n2. README.md → guide/AI_GUIDE.md → guide/EXISTING_GAME.md → integration.md → project.json 순으로 읽습니다.\n3. conversionDecision=pending이면 설계 저장 전 사용자 선택이 필요합니다. independent이면 기존 게임 파일을 변경하지 않고 ui-studio 안에서만 독립 UI를 만듭니다.\n4. convert는 변환·연결 요청 기록이며 완료가 아닙니다. 별도 실제 게임 조사·백업·구현·회귀 검수 없이 전체 변환 완료를 주장하지 않습니다.\n5. 가이드 사본과 원본·설계·자원을 임의로 덮어쓰거나 삭제하지 않습니다. 현재 미완료 범위는 guide/PROGRESS.md를 확인합니다.\n');
++        await writeMissing(workspace.directory, 'integration.md', '# 기존 게임 연결·변환 기록\n\n현재 선택은 project.json의 conversionDecision·conversionDecidedAt·conversionStatus가 정본입니다. 폴더 열기는 게임 루트 AGENTS.md·소스·저장파일을 읽거나 변경하지 않습니다.\n\n- pending: 사용자 선택 대기. 설계 읽기만 허용합니다.\n- independent: 기존 게임 UI를 변경하지 않고 ui-studio 내부에 독립 UI 소스를 저장합니다.\n- convert / requested: 사용자 변환·연결 요청만 기록했습니다. 자동 변환은 미구현이며 기존 게임 UI 조사·백업·연결 변경·회귀 검수를 거친 후 별도 결과를 남겨야 합니다.\n\n전체 변환 완료: 미실행·미검수. 기존 UI 목록·게임 연결·누락·미지원 화면: 아직 조사하지 않았습니다.\n');
++    }
++    return {
++        async list() {
++            const data = await registry(); const workspaces=[];
++            for (const entry of data.workspaces) {
++                try { workspaces.push(publicMeta(await load(entry.id))); }
++                catch (error) { workspaces.push({id:entry.id,directory:entry.root,name:basename(entry.root),unavailable:true,error:error.message}); }
++            }
++            return workspaces;
++        },
++        async get(id) { return publicMeta(await load(id)); },
++        async select() {
++            if (chooserOpen) fail('폴더 선택 창이 이미 열려 있습니다.',409);
++            chooserOpen = true;
++            try {
++                const directory = options.chooseDirectory ? await options.chooseDirectory() : await nativeDirectory(projectRoot, await safeCache());
++                if (directory === null || directory === undefined) return {cancelled:true};
++                return await locked(async () => {
++                    const root = await safeGameRoot(directory);
++                    if (root === await realpath(projectRoot)) fail('선택한 곳은 UI 스튜디오 툴 소스 폴더입니다. 제작할 게임 폴더나 samples/monopoly-go를 선택해 주세요.');
++                    const studio = join(root,'ui-studio'); const existing = await stat(studio);
++                    let workspace;
++                    if (existing) { checkType(existing,true); workspace = await workspaceAt(root); }
++                    else {
++                        const index = JSON.parse(await textFile(join(commonGuide,'index.json')));
++                        if (typeof index.version !== 'string' || !index.version) fail('공통 가이드 판 정보가 없습니다.');
++                        const meta={schemaVersion:1,id:'workspace-'+randomUUID(),name:basename(root),guideVersion:index.version,mode:'pending',conversionDecision:'pending',conversionDecidedAt:null,conversionStatus:'not-requested',createdAt:new Date().toISOString()};
++                        validateMeta(meta);
++                        await mkdir(studio);
++                        await writeAtomic(studio,'project.json',meta);
++                        workspace={root,directory:studio,meta};
++                    }
++                    const data=await registry();
++                    const duplicate = data.workspaces.find(item => item.id === workspace.meta.id && item.root !== root);
++                    // Explicit folder reselection can repair a move only when the old location is absent.
++                    if (duplicate && await stat(duplicate.root)) fail('다른 폴더에 같은 프로젝트 폴더 ID가 등록되어 있습니다. 복사본을 확인해 주세요.',409);
++                    const sameRoot = data.workspaces.find(item => item.root === root);
++                    if (sameRoot && sameRoot.id !== workspace.meta.id) fail('등록된 폴더와 프로젝트 ID가 다릅니다.');
++                    for (const name of ['designs','assets','exports']) await safeChild(studio,name,true);
++                    await copyGuides(workspace);
++                    if (!sameRoot) {
++                        if (duplicate) duplicate.root=root;
++                        else data.workspaces.push({id:workspace.meta.id,root});
++                        await writeAtomic(cache,'workspaces.json',data);
++                    }
++                    return {workspace:publicMeta(workspace)};
++                });
++            } finally { chooserOpen = false; }
++        },
++        async decision(id, decision) {
++            if (!['convert','independent'].includes(decision)) fail('변환 요청 또는 독립 UI 작업을 선택해 주세요.');
++            return locked(async () => {
++                const workspace=await load(id);
++                workspace.meta={...workspace.meta,mode:decision,conversionDecision:decision,conversionDecidedAt:new Date().toISOString(),conversionStatus:decision==='convert'?'requested':'independent'};
++                validateMeta(workspace.meta); await writeAtomic(workspace.directory,'project.json',workspace.meta);
++                return publicMeta(workspace);
++            });
++        },
++        async storage(id, writing=false) {
++            const workspace=await load(id);
++            if (writing && workspace.meta.conversionDecision==='pending') fail('먼저 기존 UI 변환 요청 또는 독립 UI 작업을 선택해 주세요.',409);
++            return {root:workspace.root,dir:await safeChild(workspace.directory,'designs')};
++        },
++        async assetStorage(id, writing=false) {
++            const workspace=await load(id);
++            if (writing && workspace.meta.conversionDecision==='pending') fail('먼저 기존 UI 변환 요청 또는 독립 UI 작업을 선택해 주세요.',409);
++            return {root:workspace.root,dir:await safeChild(workspace.directory,'assets')};
++        },
++        async guide(id, file) {
++            const isProject = id !== null;
++            const commonFile=file?.startsWith('guide/') ? file.slice(6) : file;
++            const wrapper=isProject && ['README.md','AGENTS.md','integration.md'].includes(file);
++            if (!wrapper && !GUIDE_FILES.includes(commonFile)) fail('허용된 가이드 파일이 아닙니다.');
++            if (!isProject) return textFile(join(commonGuide,commonFile));
++            const workspace=await load(id);
++            const directory=wrapper ? workspace.directory : await safeChild(workspace.directory,'guide');
++            return textFile(join(directory,wrapper?file:commonFile));
++        }
++    };
++}
+--- before/src/tools/uxStudio/parts.mjs
++++ after/src/tools/uxStudio/parts.mjs
+@@ -0,0 +1,204 @@
++import {MAX_ASSET_BYTES, validateAssetRef} from './asset-reference.mjs';
++export const PART_ROLES = {
++    container: '구성 전체', background: '바탕', frame: '프레임', image: '이미지', label: '텍스트', badge: '배지'
++};
++export const INPUT_MODES = {
++    action: '자체 동작', parent: '부모에 전달', none: '표시 전용', block: '입력 차단'
++};
++export const IMAGE_BYTES = MAX_ASSET_BYTES;
++export function inputMode(e, transitions = []) {
++    return e?.interaction?.mode || (e?.menu || (e?.kind === 'button' && !e.intentionalNoAction) || transitions.some(t => t.fromElement === e?.id) ? 'action' : 'none');
++}
++export function inputOwner(screen, id, transitions = []) {
++    const seen = new Set();
++    let e = screen?.elements.find(e => e.id === id);
++    while (e && !seen.has(e.id)) {
++        seen.add(e.id);
++        if (inputMode(e, transitions) !== 'parent')
++            return inputMode(e, transitions) === 'action' ? e : null;
++        e = screen.elements.find(n => n.id === e.parentId);
++    }
++    return null;
++}
++export function componentRoot(screen, id) {
++    let e = screen?.elements.find(e => e.id === id);
++    const seen = new Set();
++    while (e && !seen.has(e.id)) {
++        if (['image-frame', 'game-ui'].includes(e.component))
++            return e;
++        seen.add(e.id);
++        e = screen.elements.find(n => n.id === e.parentId);
++    }
++    return null;
++}
++export function editTarget(screen, id, inside = null) {
++    const root = componentRoot(screen, id);
++    return root && root.id !== inside ? root.id : id;
++}
++export function validateImageRegion(image) {
++    if (image.sourceSize !== undefined && (!Array.isArray(image.sourceSize) || image.sourceSize.length !== 2 || image.sourceSize.some(v => !Number.isInteger(v) || v < 1 || v > 4096)))
++        throw Error('이미지 원본 크기는1~4096px 정수입니다.');
++    if (image.region === undefined) return;
++    const r = image.region, size = image.sourceSize;
++    if ((!image.src && !image.assetRef) || image.asset || !size || !Array.isArray(r) || r.length !== 4 || r.some(v => !Number.isInteger(v)) || r[0] < 0 || r[1] < 0 || r[2] < 1 || r[3] < 1 || r[0] + r[2] > size[0] || r[1] + r[3] > size[1])
++        throw Error('이미지 영역은 원본 안의 X/Y/W/H 정수로 지정하세요.');
++}
++export const FONT_FAMILIES = {
++    system: '-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif',
++    arial: 'Arial, sans-serif', georgia: 'Georgia, serif', mono: 'ui-monospace, monospace'
++};
++export function validateTypography(e) {
++    if (e.fontSize !== undefined && (!Number.isFinite(e.fontSize) || e.fontSize < 1 || e.fontSize > 256))
++        throw Error('글자 크기는1~256px입니다.');
++    const t = e.typography;
++    if (t === undefined) return;
++    if (!t || typeof t !== 'object' || Array.isArray(t) || Object.keys(t).some(k => !['family','weight','lineHeight','letterSpacing','align','vertical','wrap','overflow'].includes(k)))
++        throw Error('텍스트 속성 형식 오류');
++    const enums = {family:Object.keys(FONT_FAMILIES), align:['left','center','right'], vertical:['top','middle','bottom'], wrap:['wrap','nowrap'], overflow:['visible','clip','ellipsis']};
++    for (const [k,values] of Object.entries(enums))
++        if (t[k] !== undefined && !values.includes(t[k])) throw Error('지원하지 않는 텍스트 '+k);
++    for (const [k,min,max] of [['weight',1,1000],['lineHeight',1,512],['letterSpacing',-10,64]])
++        if (t[k] !== undefined && (!Number.isFinite(t[k]) || t[k] < min || t[k] > max)) throw Error('텍스트 '+k+' 범위를 확인하세요.');
++    if (t.overflow === 'ellipsis' && t.wrap !== 'nowrap') throw Error('말줄임표는 한 줄 모드에서 사용하세요.');
++}
++export function typographyStyles(e) {
++    const t = e.typography || {};
++    return {
++        fontFamily: t.family ? FONT_FAMILIES[t.family] : '', fontWeight:t.weight === undefined ? '' : String(t.weight),
++        lineHeight:t.lineHeight === undefined ? '' : t.lineHeight+'px', letterSpacing:t.letterSpacing === undefined ? '' : t.letterSpacing+'px',
++        textAlign:t.align || '', whiteSpace:t.wrap === 'nowrap' ? 'nowrap' : t.wrap === 'wrap' ? 'pre-wrap' : '',
++        overflowWrap:t.wrap === 'wrap' ? 'anywhere' : '', overflow:t.overflow && t.overflow !== 'visible' ? 'hidden' : '',
++        textOverflow:t.overflow === 'ellipsis' ? 'ellipsis' : '', width:e.typography ? '100%' : '', maxHeight:e.typography ? '100%' : ''
++    };
++}
++export function validateParts(e) {
++    validateTypography(e);
++    if (e.component !== undefined && !['image-frame', 'game-ui'].includes(e.component))
++        throw Error('지원하지 않는 복합 유닛');
++    if (e.partRole !== undefined && !Object.hasOwn(PART_ROLES, e.partRole))
++        throw Error('부품 역할 오류');
++    if (e.component && ['image', 'text'].includes(e.kind))
++        throw Error('복합 전체는 이미지/텍스트 부품과 분리해야 합니다.');
++    if (e.partRole === 'image' && e.kind !== 'image' || e.partRole === 'label' && e.kind !== 'text' || ['background', 'frame'].includes(e.partRole) && e.kind !== 'panel')
++        throw Error('부품 역할과 UI 종류가 다릅니다. 이미지/텍스트/영역 종류를 먼저 확인하세요.');
++    const i = e.interaction;
++    if (i !== undefined && (!i || !Object.hasOwn(INPUT_MODES, i.mode) || typeof i.enabled !== 'boolean' || !['rectangle', 'ellipse'].includes(i.shape) || typeof i.reason !== 'string' || i.reason.length > 1000))
++        throw Error('입력 역할·도형·상태를 확인하세요.');
++    const a = e.image;
++    if (a !== undefined && (!a || !['image', 'panel', 'button', 'card'].includes(e.kind) || typeof a.alt !== 'string' || a.alt.length > 1000 || !['contain', 'cover', 'fill'].includes(a.fit) || a.asset !== undefined && a.asset !== 'icon' || a.compact !== undefined && typeof a.compact !== 'boolean' || typeof a.src !== 'string' || (a.src !== '' && (!/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(a.src) || a.src.length > 400100))))
++        throw Error('이미지는 PNG/JPEG/WebP 300KB 이하로 넣어 주세요.');
++    if (a?.assetRef !== undefined) {
++        validateAssetRef(a.assetRef);
++        if (a.src !== '' || a.asset !== undefined || !a.sourceSize) throw Error('이미지 자원 참조는 원본 크기와 함께 단독으로 지정하세요.');
++    }
++    if (a) validateImageRegion(a);
++}
++export function decomposeImageFrame(screen, root, transitions = []) {
++    if (!root || root.component || root.menu || root.isGroup || root.binding?.type === 'content-slot' || screen.elements.some(e => e.parentId === root.id))
++        throw Error('하위 요소가 없는 일반 이미지·버튼·판을 선택하세요.');
++    if (screen.elements.length + 4 > 400)
++        throw Error('화면 요소는400개까지 추가할 수 있습니다.');
++    const originalMode = inputMode(root, transitions), action = ['action', 'parent'].includes(originalMode), text = root.text || root.name, appearance = root.appearance || {}, originalImage = root.image;
++    const ids = new Set(screen.elements.map(e => e.id));
++    const makeId = suffix => {
++        let id = root.id.slice(0, 85) + '-' + suffix;
++        while (ids.has(id))
++            id = root.id.slice(0, 70) + '-' + suffix + '-' + crypto.randomUUID().slice(0, 8);
++        ids.add(id);
++        return id;
++    };
++    if (['image', 'text'].includes(root.kind))
++        root.kind = 'panel';
++    root.component = 'image-frame';
++    root.partRole = 'container';
++    root.interaction = {
++        mode: originalMode, enabled: root.interaction?.enabled !== false, shape: root.interaction?.shape || 'rectangle', reason: root.interaction?.reason || ''
++    };
++    root.text = '';
++    delete root.image;
++    const part = (role, kind, x, y, w, h, extra = {}) => ({
++        id: makeId(role), parentId: root.id, partRole: role, kind, name: root.name + ' · ' + PART_ROLES[role], x, y, w, h, text: '', purpose: PART_ROLES[role] + ' 부품', info: action ? '게임 입력은 부모 전체에 전달합니다.' : '표시 전용입니다. 게임 기능을 실행하지 않습니다.', interaction: {
++            mode: originalMode === 'none' ? 'none' : 'parent', enabled: true, shape: 'rectangle', reason: ''
++        }, ...extra
++    });
++    const bg = part('background', 'panel', 0, 0, 100, 100, {
++        appearance: {
++            ...appearance, shape: 'rectangle', fill: appearance.fill || '#eef1f4', strokeWidth: 0
++        }
++    });
++    const image = part('image', 'image', 8, 7, 84, 65, {
++        image: originalImage || {
++            src: '', alt: root.name + ' 이미지', fit: 'contain'
++        }, appearance: {
++            shape: 'rectangle', fill: '#f4f5f7', stroke: '#a2acb5', strokeWidth: 1, radius: 0
++        }
++    });
++    const label = part('label', 'text', 8, 76, 84, 18, {
++        text, fontSize: 14, appearance: {
++            shape: 'rectangle', fill: '#ffffff', strokeWidth: 0
++        }
++    });
++    const frame = part('frame', 'panel', 0, 0, 100, 100, {
++        appearance: {
++            ...appearance, shape: 'rectangle', stroke: appearance.stroke || '#71839a', strokeWidth: appearance.strokeWidth || 2, radius: 0
++        }
++    });
++    screen.elements.push(bg, image, label, frame);
++    return root;
++}
++export function insideHit(e, x, y) {
++    return x >= 0 && x <= 1 && y >= 0 && y <= 1 && (e.interaction?.shape !== 'ellipse' || ((x - .5) / .5) ** 2 + ((y - .5) / .5) ** 2 <= 1);
++}
++export function acceptsEvent(screen, transitions, node, event, container) {
++    const owner = inputOwner(screen, node?.dataset.element, transitions);
++    if (!owner)
++        return true;
++    const target = [...container.querySelectorAll('.ui-element')].find(n => n.dataset.screen === screen.id && n.dataset.element === owner.id);
++    if (!target)
++        return false;
++    if (event.detail === 0)
++        return true;
++    const r = target.getBoundingClientRect();
++    return insideHit(owner, (event.clientX - r.left) / r.width, (event.clientY - r.top) / r.height);
++}
++export async function readImageFile(file) {
++    if (!file || file.size > IMAGE_BYTES || !['image/png', 'image/jpeg', 'image/webp'].includes(file.type))
++        throw Error('PNG/JPEG/WebP 300KB 이하 파일을 선택하세요.');
++    const b = new Uint8Array(await file.arrayBuffer());
++    const valid = file.type === 'image/png' ? b.slice(0, 8).join(',') === '137,80,78,71,13,10,26,10' : file.type === 'image/jpeg' ? b[0] === 255 && b[1] === 216 && b[2] === 255 : b.length >= 12 && String.fromCharCode(...b.slice(0, 4)) === 'RIFF' && String.fromCharCode(...b.slice(8, 12)) === 'WEBP';
++    if (!valid)
++        throw Error('파일 내용과 이미지 종류가 일치하지 않습니다.');
++    return 'data:' + file.type + ';base64,' + btoa(Array.from(b, v => String.fromCharCode(v)).join(''));
++}
++export function createPartsDemo(id) {
++    const screen = {
++        id: 'parts-lobby', name: '이미지와 프레임', kind: 'page', purpose: '부품 선택과 입력 구분 시험', elements: [
++            {
++                id: 'intro', kind: 'text', name: '안내', x: 6, y: 3, w: 88, h: 9, text: '이미지 + 프레임\n전체 선택 → 부품 안으로', purpose: '선택 방법', info: '', interaction: {
++                    mode: 'none', enabled: true, shape: 'rectangle', reason: ''
++                }
++            },
++            {
++                id: 'display-card', kind: 'panel', name: '표시 전용 이미지판', x: 10, y: 15, w: 80, h: 28, text: '이미지판 · 게임 입력 없음', purpose: '표시 전용 예제', info: ''
++            },
++            {
++                id: 'action-card', kind: 'button', name: '상점 이미지 버튼', x: 20, y: 51, w: 60, h: 25, text: '상점 열기', purpose: '부품을 눌러도 전체 버튼 동작', info: ''
++            },
++            {
++                id: 'hint', kind: 'text', name: '시험 안내', x: 8, y: 82, w: 84, h: 13, text: '부품은 편집에서 각각 선택\n동작 시험: 위는 표시, 아래는 버튼', purpose: '동작 구분', info: ''
++            }
++        ]
++    };
++    const transitions = [{
++            id: 'open-example', fromScreen: screen.id, fromElement: 'action-card', event: 'click', action: 'feedback', condition: 'always', label: '상점 열기 시험', payload: {
++                message: '상점 버튼의 입력을 받았습니다 · 실제 게임 실행 없음'
++            }
++        }];
++    decomposeImageFrame(screen, screen.elements[1], transitions);
++    decomposeImageFrame(screen, screen.elements[2], transitions);
++    return {
++        schemaVersion: 2, projectId: id, revision: 0, name: '세부 와이어프레임 · 이미지와 프레임', entryScreen: screen.id, screens: [screen], transitions, fixtures: {
++            balance: 0, items: []
++        }
++    };
++}
+--- before/src/tools/uxStudio/skins.mjs
++++ after/src/tools/uxStudio/skins.mjs
+@@ -0,0 +1,191 @@
++import {validateAssetRef, assetSource} from './asset-reference.mjs';
++const asset = name => new URL('./assets/ui-skins/' + name, import.meta.url).href;
++export const SKIN_ASSETS = Object.freeze({
++    frame: {
++        src: asset('frame.svg'), w: 128, h: 96
++    }, button: {
++        src: asset('button.svg'), w: 96, h: 48
++    }, icon: {
++        src: asset('icon.svg'), w: 24, h: 24
++    }
++});
++export const SKIN_STATES = {
++    normal: '기본', pressed: '눌림', selected: '선택', disabled: '비활성'
++};
++export const SKINS = Object.freeze({
++    button: {
++        name: '버튼', mode: '3', asset: 'button', tone: '#dcefe8', slices: [0, 16, 0, 16], edges: [0, 12, 0, 12], padding: [5, 12, 5, 12]
++    },
++    backplate: {
++        name: '정보 백판', mode: '9', asset: 'frame', tone: '#dbe2e9', slices: [12, 12, 12, 12], edges: [6, 6, 6, 6], padding: [6, 8, 6, 8]
++    },
++    modal: {
++        name: '모달창', mode: '9', asset: 'frame', tone: '#e8e1f3', slices: [12, 12, 12, 12], edges: [10, 10, 10, 10], padding: [16, 16, 16, 16]
++    },
++    sheet: {
++        name: '바텀창', mode: '9', asset: 'frame', tone: '#f5e5d6', slices: [12, 12, 12, 12], edges: [8, 8, 8, 8], padding: [14, 14, 14, 14]
++    },
++    top: {
++        name: '탑창', mode: '9', asset: 'frame', tone: '#dceaf5', slices: [12, 12, 12, 12], edges: [8, 8, 8, 8], padding: [12, 12, 12, 12]
++    },
++    topMenu: {
++        name: '탑 메뉴', mode: '9', asset: 'frame', tone: '#f4edcc', slices: [12, 12, 12, 12], edges: [6, 6, 6, 6], padding: [6, 8, 6, 8]
++    },
++    background: {
++        name: '비조작 배경', mode: '9', asset: 'frame', tone: '#56616f', slices: [12, 12, 12, 12], edges: [4, 4, 4, 4], padding: [8, 8, 8, 8]
++    }
++});
++export const createSkin = preset => {
++    if (!Object.hasOwn(SKINS, preset))
++        throw Error('UI 종류 오류');
++    return {
++        preset, version: 1, ...structuredClone(SKINS[preset]), defaultState: 'normal', repeat: 'stretch'
++    };
++};
++export function validateSkin(s) {
++    if (s === undefined)
++        return;
++    if (!s || s.version !== 1 || !Object.hasOwn(SKINS, s.preset) || !['3', '9'].includes(s.mode) || !['frame', 'button'].includes(s.asset) || !/^#[a-f0-9]{6}$/i.test(s.tone) || !Object.hasOwn(SKIN_STATES, s.defaultState) || !['stretch', 'repeat', 'round'].includes(s.repeat))
++        throw Error('UI 이미지 조립 설정 오류');
++    for (const key of ['slices', 'edges', 'padding'])
++        if (!Array.isArray(s[key]) || s[key].length !== 4 || s[key].some(n => !Number.isFinite(n) || n < 0 || n > 96))
++            throw Error('분할/고정폭/여백은 상·우·하·좌의 유효한 숫자여야 합니다.');
++    for (const [state, t] of Object.entries(s.textures || {})) {
++        if (!Object.hasOwn(SKIN_STATES, state) || !t || (t.assetRef === undefined ? !/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(t.src) || t.src.length > 400100 : t.src !== '') || !Number.isInteger(t.w) || !Number.isInteger(t.h) || t.w < 1 || t.h < 1 || t.w > 4096 || t.h > 4096 || s.slices[0] + s.slices[2] >= t.h || s.slices[1] + s.slices[3] >= t.w)
++            throw Error('프레임 이미지/크기 오류');
++        if (t.assetRef !== undefined) validateAssetRef(t.assetRef);
++    }
++    const a = skinSource(s, s.defaultState);
++    if (s.slices[0] + s.slices[2] >= a.h || s.slices[1] + s.slices[3] >= a.w || (s.mode === '3' && (s.slices[0] !== 0 || s.slices[2] !== 0 || s.edges[0] !== 0 || s.edges[2] !== 0)))
++        throw Error('이미지 중앙 영역과3슬라이스 상하값을 확인하세요.');
++}
++export function applySkin(node, skin, { view = 'art', state, live = false, workspaceId } = {}) {
++    node.classList.toggle('game-skin', !!skin);
++    node.classList.toggle('skin-live', !!skin && live);
++    if (!skin) {
++        node._skinAssetSource = null;
++        node.querySelector?.(':scope > .skin-image-error')?.remove();
++        return;
++    }
++    const current = state || skin.defaultState, p = skinSource(skin, current);
++    node.classList.toggle('custom-skin-image', !!(skin.textures?.[current] || skin.textures?.normal));
++    node.dataset.skinPreset = skin.preset;
++    node.dataset.skinState = current;
++    node.dataset.skinView = view;
++    for (const stateName of Object.keys(SKIN_STATES))
++        node.style.setProperty('--skin-' + stateName + '-source', `url("${assetSource(skinSource(skin, stateName), workspaceId)}")`);
++    node.classList.toggle('structure-unit', view === 'wire' && state !== undefined);
++    node.style.setProperty('--skin-source', `url("${assetSource(p, workspaceId)}")`);
++    const source = assetSource(p, workspaceId);
++    if ((p.assetRef || node._skinAssetSource) && node._skinAssetSource !== source) {
++        node._skinAssetSource = source;
++        node.querySelector(':scope > .skin-image-error')?.remove();
++        node.classList.toggle('skin-image-missing', false);
++        if (p.assetRef && typeof Image !== 'undefined') {
++            const probe = new Image();
++            probe.onerror = () => {
++                if (node._skinAssetSource !== source) return;
++                node.classList.add('skin-image-missing');
++                const error = document.createElement('small');
++                error.className = 'skin-image-error';
++                error.textContent = '프레임 이미지 오류 · 자원 파일을 확인하세요.';
++                node.append(error);
++            };
++            probe.src = source;
++        }
++    }
++    node.style.setProperty('--skin-tone', skin.tone);
++    node.style.setProperty('--skin-slices', skin.slices.join(' ') + ' fill');
++    node.style.setProperty('--skin-edges', skin.edges.map(n => n + 'px').join(' '));
++    node.style.setProperty('--skin-repeat', skin.repeat);
++    node.style.setProperty('--skin-padding', skin.padding.map(n => n + 'px').join(' '));
++    node.style.setProperty('--skin-text', skin.preset === 'background' ? '#f7f8fa' : '#34424f');
++}
++export function constructGameUI(d, screenId, onlyId) {
++    const screen = d.screens.find(s => s.id === screenId);
++    if (!screen)
++        throw Error('로비 화면을 선택하세요.');
++    const roots = screen.elements.filter(e => (!onlyId || e.id === onlyId) && !e.parentId && !e.component && e.kind !== 'text' && (!e.skin || e.id === onlyId));
++    if (screen.elements.length + roots.filter(e => e.binding?.type !== 'content-slot').length * 2 > 400)
++        throw Error('부품 추가 뒤400개를 넘습니다.');
++    const ids = new Set(d.screens.flatMap(s => s.elements.map(e => e.id)));
++    const childId = (id, suffix) => {
++        let n = id.slice(0, 90) + '-ui-' + suffix;
++        while (ids.has(n))
++            n = id.slice(0, 75) + '-' + crypto.randomUUID().slice(0, 8) + '-' + suffix;
++        ids.add(n);
++        return n;
++    };
++    for (const e of roots) {
++        if (screen.elements.some(n => n.parentId === e.id))
++            continue;
++        if (e.binding?.type === 'content-slot') {
++            e.skin = createSkin('background');
++            e.interaction = {
++                mode: 'none', enabled: true, shape: 'rectangle', reason: ''
++            };
++            continue;
++        }
++        const original = e.text, button = e.kind === 'button', linked = d.transitions.some(t => t.fromElement === e.id), nav = e.id.startsWith('menu-'), inline = e.id.startsWith('currency-') || e.id.startsWith('info-') || ['record', 'news', 'roll'].includes(e.id);
++        e.skin ||= createSkin(button ? 'button' : 'backplate');
++        e.component = 'game-ui';
++        e.partRole = 'container';
++        e.text = '';
++        e.appearance = {
++            ...e.appearance, shape: 'rectangle', strokeWidth: 0
++        };
++        e.interaction = {
++            mode: button ? 'action' : 'none', enabled: !button || linked, shape: 'rectangle', reason: button && !linked ? '기능 연결 정의가 아직 없습니다.' : ''
++        };
++        const part = (role, kind, rect, extra) => ({
++            id: childId(e.id, role), parentId: e.id, partRole: role, kind, name: e.name + ' · ' + (role === 'image' ? '아이콘' : '텍스트'), x: rect[0], y: rect[1], w: rect[2], h: rect[3], text: '', purpose: e.name + '의 ' + role, info: role === 'image' ? '실제 아이콘을 교체하는 이미지 부품' : '표시 문구·수치. 입력은 전체 버튼에 전달합니다.', interaction: {
++                mode: button ? 'parent' : 'none', enabled: true, shape: 'rectangle', reason: ''
++            }, ...extra
++        });
++        screen.elements.push(part('image', 'image', nav ? [30, 7, 40, 46] : inline ? [5, 17, 14, 66] : [7, 12, 18, 35], {
++            image: {
++                src: '', asset: 'icon', alt: e.name + ' 아이콘', fit: 'contain', compact: true
++            }
++        }), part('label', 'text', nav ? [2, 57, 96, 34] : inline ? [23, 4, 72, 92] : [8, 50, 84, 43], {
++            text: original, fontSize: nav ? 11 : e.id === 'roll' ? 16 : 12
++        }));
++    }
++    for (const s of d.screens)
++        if (s.kind !== 'page' && !s.skin)
++            s.skin = createSkin(s.presentation?.type === 'sheet' ? 'sheet' : s.presentation?.type === 'top' ? 'top' : 'modal');
++    nestBackgrounds(d, screen);
++    d.schemaVersion = 3;
++    return d;
++}
++export function skinSource(s, state = 'normal') {
++    return s.textures?.[state] || s.textures?.normal || SKIN_ASSETS[s.asset];
++}
++function nestBackgrounds(d, screen) {
++    const ids = new Set(d.screens.flatMap(s => s.elements.map(e => e.id)));
++    for (const root of screen.elements.filter(e => e.component === 'game-ui' && e.skin)) {
++        root.appearance = {
++            ...root.appearance, shape: 'rectangle', strokeWidth: 0
++        };
++        if (screen.elements.some(e => e.parentId === root.id && e.partRole === 'background'))
++            continue;
++        if (screen.elements.length >= 400)
++            throw Error('바탕 추가 뒤400개를 넘습니다.');
++        let id = root.id.slice(0, 85) + '-ui-background';
++        while (ids.has(id))
++            id = root.id.slice(0, 70) + '-bg-' + crypto.randomUUID().slice(0, 8);
++        ids.add(id);
++        const inset = root.skin.mode === '3' ? [2, root.skin.edges[1], 3, root.skin.edges[3]] : [root.skin.edges[0], root.skin.edges[1], root.skin.edges[2], root.skin.edges[3]];
++        const face = {
++            id, parentId: root.id, partRole: 'background', kind: 'panel', name: root.name + ' · 바탕 이미지', x: 0, y: 0, w: 100, h: 100, inset, text: '', purpose: '프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.', info: '입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.', interaction: {
++                mode: root.interaction.mode === 'action' ? 'parent' : 'none', enabled: true, shape: 'rectangle', reason: ''
++            }, image: {
++                src: '', alt: root.name + ' 바탕', fit: 'fill'
++            }, appearance: {
++                shape: 'rectangle', fill: root.skin.tone, strokeWidth: 0, opacity: 1
++            }
++        };
++        for (const child of screen.elements.filter(e => e.parentId === root.id))
++            child.parentId = id;
++        screen.elements.push(face);
++    }
++}

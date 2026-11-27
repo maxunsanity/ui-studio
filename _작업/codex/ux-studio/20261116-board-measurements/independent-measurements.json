@@ -1,0 +1,2245 @@
+{
+  "status": "제안(검수 대기)",
+  "author": "codex independent visual measurement subagent",
+  "created_at_kst": "2026-11-16T13:26:19+09:00",
+  "source": {
+    "path": "/var/folders/dn/m763zzn15514kpgp2jhdyft40000gn/T/codex-clipboard-28a63c8f-7423-4b4b-909a-a2c5dcd51f85.png",
+    "size_px": [
+      551,
+      984
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      255,
+      255
+    ],
+    "modified": false
+  },
+  "coordinates": {
+    "origin": "source image top-left",
+    "rect": "[x,y,width,height]; integer samples use right/bottom-exclusive convention",
+    "percent": "[x/W*100,y/H*100,width/W*100,height/H*100]",
+    "center": "[x+width/2,y+height/2]",
+    "source_pixel_is_not_css_pixel": true
+  },
+  "method": {
+    "visual": "view_image original plus in-memory enlarged read-only crops",
+    "pixel": "Pillow ROI RGB masks and4-connected components; no source image writes",
+    "uncertainty": "High-contrast ink/solid cores usually±1px; manual/antialias/occluded artwork generally±2px. Numerical four-decimal percentages do not imply subpixel measurement accuracy.",
+    "font": "Only visible ink dimensions observed. Family, weight name, point size, line-height, source font asset and device scale are unverified.",
+    "scope": "Visual overlays only. No product data, engine logic, hit areas, runtime behavior, source, browser, server, package or design JSON changes."
+  },
+  "top_level_measurement_count": 25,
+  "measurements": [
+    {
+      "id": "scene_full_canvas",
+      "label": "3D scene behind all UI",
+      "bbox_px_xywh": [
+        0,
+        0,
+        551,
+        984
+      ],
+      "center_px": [
+        275.5,
+        492.0
+      ],
+      "bbox_percent_xywh": [
+        0.0,
+        0.0,
+        100.0,
+        100.0
+      ],
+      "center_percent": [
+        50.0,
+        50.0
+      ],
+      "bbox_kind": "full_canvas",
+      "edge_uncertainty_px": 0,
+      "confidence": "high",
+      "notes": [
+        "The visible 3D city/board extends behind all 2D overlays. A center rectangle is not the 3D scene boundary.",
+        "No engine, game rule, camera, or scene asset contract is inferred."
+      ]
+    },
+    {
+      "id": "hud_top_union",
+      "label": "Top HUD visible union",
+      "bbox_px_xywh": [
+        9,
+        0,
+        536,
+        94
+      ],
+      "center_px": [
+        277.0,
+        47.0
+      ],
+      "bbox_percent_xywh": [
+        1.6334,
+        0.0,
+        97.2777,
+        9.5528
+      ],
+      "center_percent": [
+        50.2722,
+        4.7764
+      ],
+      "bbox_kind": "visible_union",
+      "edge_uncertainty_px": 2,
+      "confidence": "high",
+      "notes": [
+        "Avatar shadow and antialias edges have approximately ±2 px uncertainty."
+      ]
+    },
+    {
+      "id": "avatar_player",
+      "label": "SNS photographic avatar and white rim",
+      "bbox_px_xywh": [
+        9,
+        0,
+        96,
+        94
+      ],
+      "center_px": [
+        57.0,
+        47.0
+      ],
+      "bbox_percent_xywh": [
+        1.6334,
+        0.0,
+        17.4229,
+        9.5528
+      ],
+      "center_percent": [
+        10.3448,
+        4.7764
+      ],
+      "bbox_kind": "visible_art",
+      "edge_uncertainty_px": 2,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "avatar_photo",
+          "label": "Visible grayscale photographic circle",
+          "bbox_px_xywh": [
+            16,
+            5,
+            82,
+            81
+          ],
+          "center_px": [
+            57.0,
+            45.5
+          ],
+          "bbox_percent_xywh": [
+            2.9038,
+            0.5081,
+            14.882,
+            8.2317
+          ],
+          "center_percent": [
+            10.3448,
+            4.624
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 2,
+          "confidence": "medium"
+        },
+        {
+          "id": "avatar_white_core",
+          "label": "Bright white rim core, edge-clipped",
+          "bbox_px_xywh": [
+            10,
+            0,
+            93,
+            91
+          ],
+          "center_px": [
+            56.5,
+            45.5
+          ],
+          "bbox_percent_xywh": [
+            1.8149,
+            0.0,
+            16.8784,
+            9.248
+          ],
+          "center_percent": [
+            10.2541,
+            4.624
+          ],
+          "bbox_kind": "threshold_visible",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        }
+      ],
+      "notes": [
+        "This is a grayscale photographic portrait, not a cartoon portrait.",
+        "The upper circle is clipped by source y=0; a full circle outside the source cannot be measured.",
+        "White rim core rows: y0 x41..72; y45 x10..14 and98..102; y90 x51..61. Soft outer edge/shadow extends further."
+      ]
+    },
+    {
+      "id": "topbar_backplate",
+      "label": "Top bar visible backplate",
+      "bbox_px_xywh": [
+        96,
+        16,
+        449,
+        54
+      ],
+      "center_px": [
+        320.5,
+        43.0
+      ],
+      "bbox_percent_xywh": [
+        17.4229,
+        1.626,
+        81.4882,
+        5.4878
+      ],
+      "center_percent": [
+        58.167,
+        4.3699
+      ],
+      "bbox_kind": "visible_occluded_plate",
+      "edge_uncertainty_px": 2,
+      "confidence": "high",
+      "notes": [
+        "Right round end reaches approximately x544.",
+        "Avatar obscures the true left edge. This bbox begins at the visible left segment and does not assert a hidden full panel width.",
+        "Main straight bright rim is y17..19 and y66..68; plate fill is approximately y21..64."
+      ]
+    },
+    {
+      "id": "cash_icon",
+      "label": "Cash bundle icon",
+      "bbox_px_xywh": [
+        136,
+        26,
+        45,
+        34
+      ],
+      "center_px": [
+        158.5,
+        43.0
+      ],
+      "bbox_percent_xywh": [
+        24.6824,
+        2.6423,
+        8.167,
+        3.4553
+      ],
+      "center_percent": [
+        28.7659,
+        4.3699
+      ],
+      "bbox_kind": "visible_art",
+      "edge_uncertainty_px": 1,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "cash_icon_color_core",
+          "label": "Cash high contrast color core",
+          "bbox_px_xywh": [
+            137,
+            27,
+            43,
+            32
+          ],
+          "center_px": [
+            158.5,
+            43.0
+          ],
+          "bbox_percent_xywh": [
+            24.8639,
+            2.7439,
+            7.804,
+            3.252
+          ],
+          "center_percent": [
+            28.7659,
+            4.3699
+          ],
+          "bbox_kind": "threshold_visible",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "id": "cash_amount",
+      "label": "13,075",
+      "bbox_px_xywh": [
+        196,
+        33,
+        68,
+        22
+      ],
+      "center_px": [
+        230.0,
+        44.0
+      ],
+      "bbox_percent_xywh": [
+        35.5717,
+        3.3537,
+        12.3412,
+        2.2358
+      ],
+      "center_percent": [
+        41.7423,
+        4.4715
+      ],
+      "bbox_kind": "ink_bbox",
+      "edge_uncertainty_px": 1,
+      "confidence": "high",
+      "text": "13,075",
+      "font": {
+        "family": "unverified",
+        "point_size": "unverified",
+        "observed_ink_height_source_px": 22,
+        "method": "RGB maximum <130 within ROI; comma descender included"
+      }
+    },
+    {
+      "id": "shield_group",
+      "label": "Three shield outlines",
+      "bbox_px_xywh": [
+        376,
+        25,
+        88,
+        36
+      ],
+      "center_px": [
+        420.0,
+        43.0
+      ],
+      "bbox_percent_xywh": [
+        68.2396,
+        2.5407,
+        15.971,
+        3.6585
+      ],
+      "center_percent": [
+        76.225,
+        4.3699
+      ],
+      "bbox_kind": "visible_art",
+      "edge_uncertainty_px": 1,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "shield_1",
+          "label": "Shield 1 outline",
+          "bbox_px_xywh": [
+            376,
+            25,
+            34,
+            36
+          ],
+          "center_px": [
+            393.0,
+            43.0
+          ],
+          "bbox_percent_xywh": [
+            68.2396,
+            2.5407,
+            6.1706,
+            3.6585
+          ],
+          "center_percent": [
+            71.3249,
+            4.3699
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "children": [
+            {
+              "id": "shield_1_fill",
+              "label": "Shield 1 orange core",
+              "bbox_px_xywh": [
+                381,
+                30,
+                23,
+                25
+              ],
+              "center_px": [
+                392.5,
+                42.5
+              ],
+              "bbox_percent_xywh": [
+                69.147,
+                3.0488,
+                4.1742,
+                2.5407
+              ],
+              "center_percent": [
+                71.2341,
+                4.3191
+              ],
+              "bbox_kind": "threshold_visible",
+              "edge_uncertainty_px": 1,
+              "confidence": "high"
+            }
+          ]
+        },
+        {
+          "id": "shield_2",
+          "label": "Shield 2 outline",
+          "bbox_px_xywh": [
+            403,
+            25,
+            34,
+            36
+          ],
+          "center_px": [
+            420.0,
+            43.0
+          ],
+          "bbox_percent_xywh": [
+            73.1397,
+            2.5407,
+            6.1706,
+            3.6585
+          ],
+          "center_percent": [
+            76.225,
+            4.3699
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "children": [
+            {
+              "id": "shield_2_fill",
+              "label": "Shield 2 orange core",
+              "bbox_px_xywh": [
+                409,
+                30,
+                22,
+                25
+              ],
+              "center_px": [
+                420.0,
+                42.5
+              ],
+              "bbox_percent_xywh": [
+                74.2287,
+                3.0488,
+                3.9927,
+                2.5407
+              ],
+              "center_percent": [
+                76.225,
+                4.3191
+              ],
+              "bbox_kind": "threshold_visible",
+              "edge_uncertainty_px": 1,
+              "confidence": "high"
+            }
+          ]
+        },
+        {
+          "id": "shield_3",
+          "label": "Shield 3 outline",
+          "bbox_px_xywh": [
+            430,
+            25,
+            34,
+            36
+          ],
+          "center_px": [
+            447.0,
+            43.0
+          ],
+          "bbox_percent_xywh": [
+            78.0399,
+            2.5407,
+            6.1706,
+            3.6585
+          ],
+          "center_percent": [
+            81.1252,
+            4.3699
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "children": [
+            {
+              "id": "shield_3_fill",
+              "label": "Shield 3 orange core",
+              "bbox_px_xywh": [
+                436,
+                30,
+                23,
+                25
+              ],
+              "center_px": [
+                447.5,
+                42.5
+              ],
+              "bbox_percent_xywh": [
+                79.1289,
+                3.0488,
+                4.1742,
+                2.5407
+              ],
+              "center_percent": [
+                81.216,
+                4.3191
+              ],
+              "bbox_kind": "threshold_visible",
+              "edge_uncertainty_px": 1,
+              "confidence": "high"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "White/dark frames have neighboring overlapping bounding rectangles. Fill centers are x392.5,420.0,447.5; center spacing approximately27.5 px."
+      ]
+    },
+    {
+      "id": "menu_icon",
+      "label": "Top three-line menu icon",
+      "bbox_px_xywh": [
+        492,
+        28,
+        33,
+        28
+      ],
+      "center_px": [
+        508.5,
+        42.0
+      ],
+      "bbox_percent_xywh": [
+        89.2922,
+        2.8455,
+        5.9891,
+        2.8455
+      ],
+      "center_percent": [
+        92.2868,
+        4.2683
+      ],
+      "bbox_kind": "visible_art",
+      "edge_uncertainty_px": 1,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "menu_gold_ink",
+          "label": "Gold line interiors",
+          "bbox_px_xywh": [
+            496,
+            31,
+            25,
+            21
+          ],
+          "center_px": [
+            508.5,
+            41.5
+          ],
+          "bbox_percent_xywh": [
+            90.0181,
+            3.1504,
+            4.5372,
+            2.1341
+          ],
+          "center_percent": [
+            92.2868,
+            4.2175
+          ],
+          "bbox_kind": "threshold_visible",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "id": "topbar_dividers",
+      "label": "Top bar vertical divider union",
+      "bbox_px_xywh": [
+        119,
+        23,
+        361,
+        40
+      ],
+      "center_px": [
+        299.5,
+        43.0
+      ],
+      "bbox_percent_xywh": [
+        21.5971,
+        2.3374,
+        65.5172,
+        4.065
+      ],
+      "center_percent": [
+        54.3557,
+        4.3699
+      ],
+      "bbox_kind": "visible_union",
+      "edge_uncertainty_px": 1,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "top_divider_1",
+          "label": "Divider near avatar/cash",
+          "bbox_px_xywh": [
+            119,
+            23,
+            3,
+            40
+          ],
+          "center_px": [
+            120.5,
+            43.0
+          ],
+          "bbox_percent_xywh": [
+            21.5971,
+            2.3374,
+            0.5445,
+            4.065
+          ],
+          "center_percent": [
+            21.8693,
+            4.3699
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "solid_color_core_bbox_px": [
+            120,
+            25,
+            1,
+            36
+          ]
+        },
+        {
+          "id": "top_divider_2",
+          "label": "Divider before shields",
+          "bbox_px_xywh": [
+            360,
+            23,
+            3,
+            40
+          ],
+          "center_px": [
+            361.5,
+            43.0
+          ],
+          "bbox_percent_xywh": [
+            65.3358,
+            2.3374,
+            0.5445,
+            4.065
+          ],
+          "center_percent": [
+            65.608,
+            4.3699
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "solid_color_core_bbox_px": [
+            361,
+            25,
+            1,
+            36
+          ]
+        },
+        {
+          "id": "top_divider_3",
+          "label": "Divider before menu",
+          "bbox_px_xywh": [
+            477,
+            23,
+            3,
+            40
+          ],
+          "center_px": [
+            478.5,
+            43.0
+          ],
+          "bbox_percent_xywh": [
+            86.5699,
+            2.3374,
+            0.5445,
+            4.065
+          ],
+          "center_percent": [
+            86.8421,
+            4.3699
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "solid_color_core_bbox_px": [
+            478,
+            25,
+            1,
+            36
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_group",
+      "label": "Upper right event visual group",
+      "bbox_px_xywh": [
+        452,
+        91,
+        84,
+        108
+      ],
+      "center_px": [
+        494.0,
+        145.0
+      ],
+      "bbox_percent_xywh": [
+        82.0327,
+        9.248,
+        15.245,
+        10.9756
+      ],
+      "center_percent": [
+        89.6552,
+        14.7358
+      ],
+      "bbox_kind": "visible_union",
+      "edge_uncertainty_px": 2,
+      "confidence": "medium",
+      "notes": [
+        "The front gold object appears hardhat/helmet shaped in the enlarged source. It is not identified as coins.",
+        "No event function or state beyond visible shapes/text is inferred."
+      ]
+    },
+    {
+      "id": "event_art",
+      "label": "Event cards, circle and gold foreground art",
+      "bbox_px_xywh": [
+        452,
+        91,
+        84,
+        88
+      ],
+      "center_px": [
+        494.0,
+        135.0
+      ],
+      "bbox_percent_xywh": [
+        82.0327,
+        9.248,
+        15.245,
+        8.9431
+      ],
+      "center_percent": [
+        89.6552,
+        13.7195
+      ],
+      "bbox_kind": "visible_art",
+      "edge_uncertainty_px": 2,
+      "confidence": "medium",
+      "children": [
+        {
+          "id": "event_cards",
+          "label": "Visible stacked cards/papers",
+          "bbox_px_xywh": [
+            453,
+            93,
+            59,
+            60
+          ],
+          "center_px": [
+            482.5,
+            123.0
+          ],
+          "bbox_percent_xywh": [
+            82.2142,
+            9.4512,
+            10.7078,
+            6.0976
+          ],
+          "center_percent": [
+            87.5681,
+            12.5
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 2,
+          "confidence": "medium"
+        },
+        {
+          "id": "event_round_back",
+          "label": "Round blue/white backplate",
+          "bbox_px_xywh": [
+            453,
+            105,
+            83,
+            74
+          ],
+          "center_px": [
+            494.5,
+            142.0
+          ],
+          "bbox_percent_xywh": [
+            82.2142,
+            10.6707,
+            15.0635,
+            7.5203
+          ],
+          "center_percent": [
+            89.7459,
+            14.4309
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 2,
+          "confidence": "medium"
+        },
+        {
+          "id": "event_gold_front",
+          "label": "Gold helmet-shaped foreground",
+          "bbox_px_xywh": [
+            461,
+            112,
+            70,
+            64
+          ],
+          "center_px": [
+            496.0,
+            144.0
+          ],
+          "bbox_percent_xywh": [
+            83.6661,
+            11.3821,
+            12.7042,
+            6.5041
+          ],
+          "center_percent": [
+            90.0181,
+            14.6341
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 2,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "id": "event_badge",
+      "label": "Event red notification circle including rim",
+      "bbox_px_xywh": [
+        515,
+        94,
+        19,
+        20
+      ],
+      "center_px": [
+        524.5,
+        104.0
+      ],
+      "bbox_percent_xywh": [
+        93.4664,
+        9.5528,
+        3.4483,
+        2.0325
+      ],
+      "center_percent": [
+        95.1906,
+        10.5691
+      ],
+      "bbox_kind": "visible_art",
+      "edge_uncertainty_px": 2,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "event_badge_red_core",
+          "label": "Event red solid core",
+          "bbox_px_xywh": [
+            518,
+            97,
+            13,
+            14
+          ],
+          "center_px": [
+            524.5,
+            104.0
+          ],
+          "bbox_percent_xywh": [
+            94.0109,
+            9.8577,
+            2.3593,
+            1.4228
+          ],
+          "center_percent": [
+            95.1906,
+            10.5691
+          ],
+          "bbox_kind": "threshold_visible",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "id": "event_timer_plate",
+      "label": "White rounded timer plate",
+      "bbox_px_xywh": [
+        453,
+        165,
+        82,
+        34
+      ],
+      "center_px": [
+        494.0,
+        182.0
+      ],
+      "bbox_percent_xywh": [
+        82.2142,
+        16.7683,
+        14.882,
+        3.4553
+      ],
+      "center_percent": [
+        89.6552,
+        18.4959
+      ],
+      "bbox_kind": "visible_occluded_plate",
+      "edge_uncertainty_px": 2,
+      "confidence": "medium",
+      "notes": [
+        "Art overlaps and hides part of its upper boundary; exact full hidden shape is unverified.",
+        "Visible lower shadow ends around y198."
+      ]
+    },
+    {
+      "id": "event_timer_text",
+      "label": "23시간 19분",
+      "bbox_px_xywh": [
+        461,
+        174,
+        64,
+        13
+      ],
+      "center_px": [
+        493.0,
+        180.5
+      ],
+      "bbox_percent_xywh": [
+        83.6661,
+        17.6829,
+        11.6152,
+        1.3211
+      ],
+      "center_percent": [
+        89.4737,
+        18.3435
+      ],
+      "bbox_kind": "ink_bbox",
+      "edge_uncertainty_px": 1,
+      "confidence": "high",
+      "text": "23시간 19분",
+      "font": {
+        "family": "unverified",
+        "point_size": "unverified",
+        "observed_ink_height_source_px": 13,
+        "method": "RGB maximum<160; <130 gives the same width and12px height"
+      }
+    },
+    {
+      "id": "go_art",
+      "label": "Orange rounded diamond GO button art",
+      "bbox_px_xywh": [
+        169,
+        715,
+        211,
+        204
+      ],
+      "center_px": [
+        274.5,
+        817.0
+      ],
+      "bbox_percent_xywh": [
+        30.6715,
+        72.6626,
+        38.294,
+        20.7317
+      ],
+      "center_percent": [
+        49.8185,
+        83.0285
+      ],
+      "bbox_kind": "visible_art",
+      "edge_uncertainty_px": 2,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "go_solid_silhouette",
+          "label": "Connected colored silhouette core",
+          "bbox_px_xywh": [
+            170,
+            716,
+            209,
+            201
+          ],
+          "center_px": [
+            274.5,
+            816.5
+          ],
+          "bbox_percent_xywh": [
+            30.853,
+            72.7642,
+            37.931,
+            20.4268
+          ],
+          "center_percent": [
+            49.8185,
+            82.9776
+          ],
+          "bbox_kind": "threshold_visible",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        }
+      ],
+      "notes": [
+        "Includes raised orange face plus dark orange lower extrusion.",
+        "White/cream surround belongs to the shared BottomNav backplate rather than a rectangular scene frame.",
+        "Approximate visible silhouette vertices: top(274.5,716),right(378.5,815),bottom(274.5,916.5),left(169.5,815). These are artwork observations, not hit-test or transform values."
+      ]
+    },
+    {
+      "id": "go_text",
+      "label": "GO white letter ink",
+      "bbox_px_xywh": [
+        223,
+        763,
+        105,
+        61
+      ],
+      "center_px": [
+        275.5,
+        793.5
+      ],
+      "bbox_percent_xywh": [
+        40.4719,
+        77.5407,
+        19.0563,
+        6.1992
+      ],
+      "center_percent": [
+        50.0,
+        80.6402
+      ],
+      "bbox_kind": "ink_bbox",
+      "edge_uncertainty_px": 1,
+      "confidence": "high",
+      "text": "GO",
+      "font": {
+        "family": "unverified",
+        "point_size": "unverified",
+        "observed_ink_height_source_px": 61,
+        "method": "RGB minimum>245; >230 gives62px height; dark shadow excluded"
+      }
+    },
+    {
+      "id": "go_arrows",
+      "label": "White horizontal arrow motif below GO",
+      "bbox_px_xywh": [
+        239,
+        831,
+        72,
+        9
+      ],
+      "center_px": [
+        275.0,
+        835.5
+      ],
+      "bbox_percent_xywh": [
+        43.3757,
+        84.4512,
+        13.0672,
+        0.9146
+      ],
+      "center_percent": [
+        49.9093,
+        84.9085
+      ],
+      "bbox_kind": "ink_bbox",
+      "edge_uncertainty_px": 1,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "go_arrow_left",
+          "label": "Left arrowhead",
+          "bbox_px_xywh": [
+            239,
+            831,
+            11,
+            9
+          ],
+          "center_px": [
+            244.5,
+            835.5
+          ],
+          "bbox_percent_xywh": [
+            43.3757,
+            84.4512,
+            1.9964,
+            0.9146
+          ],
+          "center_percent": [
+            44.3739,
+            84.9085
+          ],
+          "bbox_kind": "ink_bbox",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        },
+        {
+          "id": "go_arrow_shaft",
+          "label": "Horizontal shaft",
+          "bbox_px_xywh": [
+            248,
+            834,
+            53,
+            3
+          ],
+          "center_px": [
+            274.5,
+            835.5
+          ],
+          "bbox_percent_xywh": [
+            45.0091,
+            84.7561,
+            9.6189,
+            0.3049
+          ],
+          "center_percent": [
+            49.8185,
+            84.9085
+          ],
+          "bbox_kind": "ink_bbox",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        },
+        {
+          "id": "go_arrow_right",
+          "label": "Right terminal/fletching motif",
+          "bbox_px_xywh": [
+            298,
+            831,
+            13,
+            9
+          ],
+          "center_px": [
+            304.5,
+            835.5
+          ],
+          "bbox_percent_xywh": [
+            54.0835,
+            84.4512,
+            2.3593,
+            0.9146
+          ],
+          "center_percent": [
+            55.2632,
+            84.9085
+          ],
+          "bbox_kind": "ink_bbox",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        }
+      ],
+      "notes": [
+        "One continuous horizontal white motif is visible. Bounding parts do not establish separate buttons or functionality."
+      ]
+    },
+    {
+      "id": "go_description",
+      "label": "Two line Korean instruction ink",
+      "bbox_px_xywh": [
+        249,
+        841,
+        51,
+        26
+      ],
+      "center_px": [
+        274.5,
+        854.0
+      ],
+      "bbox_percent_xywh": [
+        45.1906,
+        85.4675,
+        9.2559,
+        2.6423
+      ],
+      "center_percent": [
+        49.8185,
+        86.7886
+      ],
+      "bbox_kind": "ink_bbox",
+      "edge_uncertainty_px": 2,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "go_description_line_1",
+          "label": "길게 눌러",
+          "bbox_px_xywh": [
+            250,
+            841,
+            49,
+            12
+          ],
+          "center_px": [
+            274.5,
+            847.0
+          ],
+          "bbox_percent_xywh": [
+            45.3721,
+            85.4675,
+            8.8929,
+            1.2195
+          ],
+          "center_percent": [
+            49.8185,
+            86.0772
+          ],
+          "bbox_kind": "ink_bbox",
+          "edge_uncertainty_px": 2,
+          "confidence": "high",
+          "text": "길게 눌러"
+        },
+        {
+          "id": "go_description_line_2",
+          "label": "자동 모드",
+          "bbox_px_xywh": [
+            250,
+            855,
+            49,
+            12
+          ],
+          "center_px": [
+            274.5,
+            861.0
+          ],
+          "bbox_percent_xywh": [
+            45.3721,
+            86.8902,
+            8.8929,
+            1.2195
+          ],
+          "center_percent": [
+            49.8185,
+            87.5
+          ],
+          "bbox_kind": "ink_bbox",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "text": "자동 모드"
+        }
+      ],
+      "font": {
+        "family": "unverified",
+        "point_size": "unverified",
+        "observed_line_ink_height_source_px": [
+          12,
+          12
+        ],
+        "observed_line_top_spacing_source_px": 14
+      },
+      "notes": [
+        "Upper line lies very close to the arrow shadow, adding about±2px segmentation uncertainty."
+      ]
+    },
+    {
+      "id": "bottomnav_backplate",
+      "label": "Bottom nav shared white/cream raised backplate",
+      "bbox_px_xywh": [
+        0,
+        704,
+        551,
+        280
+      ],
+      "center_px": [
+        275.5,
+        844.0
+      ],
+      "bbox_percent_xywh": [
+        0.0,
+        71.5447,
+        100.0,
+        28.4553
+      ],
+      "center_percent": [
+        50.0,
+        85.7724
+      ],
+      "bbox_kind": "visible_plate_extent",
+      "edge_uncertainty_px": 1,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "bottomnav_central_rise",
+          "label": "Raised central outline above flat edge",
+          "bbox_px_xywh": [
+            147,
+            704,
+            257,
+            161
+          ],
+          "center_px": [
+            275.5,
+            784.5
+          ],
+          "bbox_percent_xywh": [
+            26.6788,
+            71.5447,
+            46.6425,
+            16.3618
+          ],
+          "center_percent": [
+            50.0,
+            79.7256
+          ],
+          "bbox_kind": "visible_outline_envelope",
+          "edge_uncertainty_px": 2,
+          "confidence": "high"
+        }
+      ],
+      "flat_top_boundary_y_px": 864,
+      "flat_top_boundary_y_percent": 87.8049,
+      "flat_cream_fill_from_y_px": 879,
+      "flat_strip_bbox_px": [
+        0,
+        864,
+        551,
+        120
+      ],
+      "upper_white_rim_samples_px": [
+        [
+          0,
+          864
+        ],
+        [
+          50,
+          864
+        ],
+        [
+          100,
+          864
+        ],
+        [
+          130,
+          865
+        ],
+        [
+          140,
+          865
+        ],
+        [
+          145,
+          864
+        ],
+        [
+          150,
+          811
+        ],
+        [
+          155,
+          802
+        ],
+        [
+          160,
+          796
+        ],
+        [
+          170,
+          784
+        ],
+        [
+          180,
+          773
+        ],
+        [
+          190,
+          763
+        ],
+        [
+          200,
+          753
+        ],
+        [
+          210,
+          743
+        ],
+        [
+          220,
+          734
+        ],
+        [
+          230,
+          726
+        ],
+        [
+          240,
+          719
+        ],
+        [
+          250,
+          712
+        ],
+        [
+          260,
+          707
+        ],
+        [
+          270,
+          705
+        ],
+        [
+          275,
+          705
+        ],
+        [
+          280,
+          705
+        ],
+        [
+          290,
+          708
+        ],
+        [
+          300,
+          713
+        ],
+        [
+          310,
+          720
+        ],
+        [
+          320,
+          728
+        ],
+        [
+          330,
+          736
+        ],
+        [
+          340,
+          745
+        ],
+        [
+          350,
+          754
+        ],
+        [
+          360,
+          764
+        ],
+        [
+          370,
+          774
+        ],
+        [
+          380,
+          786
+        ],
+        [
+          390,
+          798
+        ],
+        [
+          395,
+          804
+        ],
+        [
+          400,
+          815
+        ],
+        [
+          405,
+          864
+        ],
+        [
+          410,
+          864
+        ],
+        [
+          420,
+          864
+        ],
+        [
+          450,
+          864
+        ],
+        [
+          500,
+          864
+        ],
+        [
+          550,
+          865
+        ]
+      ],
+      "notes": [
+        "White rim measured as connected component from(0,865) with RGB minimum>245;4884pixels in ROI y695..884.",
+        "Antialiased peak begins approximately y704; bright white core y705.",
+        "The top contour has side return curves: per-x upper envelope samples alone omit the lower return branch around x147..160 and x390..404.",
+        "Backplate is clipped by x0,x551 and y984 source edges. Outside-source extension is unknown."
+      ]
+    },
+    {
+      "id": "bottomnav_dividers",
+      "label": "Bottom four gold divider cores",
+      "bbox_px_xywh": [
+        80,
+        892,
+        389,
+        86
+      ],
+      "center_px": [
+        274.5,
+        935.0
+      ],
+      "bbox_percent_xywh": [
+        14.5191,
+        90.6504,
+        70.5989,
+        8.7398
+      ],
+      "center_percent": [
+        49.8185,
+        95.0203
+      ],
+      "bbox_kind": "visible_union",
+      "edge_uncertainty_px": 1,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "bottom_divider_1",
+          "label": "Victory/build divider core",
+          "bbox_px_xywh": [
+            80,
+            892,
+            2,
+            86
+          ],
+          "center_px": [
+            81.0,
+            935.0
+          ],
+          "bbox_percent_xywh": [
+            14.5191,
+            90.6504,
+            0.363,
+            8.7398
+          ],
+          "center_percent": [
+            14.7005,
+            95.0203
+          ],
+          "bbox_kind": "threshold_visible",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        },
+        {
+          "id": "bottom_divider_2",
+          "label": "Build/center divider visible core",
+          "bbox_px_xywh": [
+            168,
+            901,
+            2,
+            77
+          ],
+          "center_px": [
+            169.0,
+            939.5
+          ],
+          "bbox_percent_xywh": [
+            30.49,
+            91.565,
+            0.363,
+            7.8252
+          ],
+          "center_percent": [
+            30.6715,
+            95.4776
+          ],
+          "bbox_kind": "threshold_visible",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "notes": [
+            "Top section is occluded by notification badge."
+          ]
+        },
+        {
+          "id": "bottom_divider_3",
+          "label": "Center/album divider core",
+          "bbox_px_xywh": [
+            379,
+            892,
+            2,
+            86
+          ],
+          "center_px": [
+            380.0,
+            935.0
+          ],
+          "bbox_percent_xywh": [
+            68.784,
+            90.6504,
+            0.363,
+            8.7398
+          ],
+          "center_percent": [
+            68.9655,
+            95.0203
+          ],
+          "bbox_kind": "threshold_visible",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        },
+        {
+          "id": "bottom_divider_4",
+          "label": "Album/friends divider core",
+          "bbox_px_xywh": [
+            467,
+            893,
+            2,
+            85
+          ],
+          "center_px": [
+            468.0,
+            935.5
+          ],
+          "bbox_percent_xywh": [
+            84.755,
+            90.752,
+            0.363,
+            8.6382
+          ],
+          "center_percent": [
+            84.9365,
+            95.0711
+          ],
+          "bbox_kind": "threshold_visible",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        }
+      ],
+      "notes": [
+        "Soft outer line fringes span about4–5px; these core bboxes deliberately exclude the fringe."
+      ]
+    },
+    {
+      "id": "nav_victory",
+      "label": "Victory icon and label visible union",
+      "bbox_px_xywh": [
+        17,
+        898,
+        44,
+        76
+      ],
+      "center_px": [
+        39.0,
+        936.0
+      ],
+      "bbox_percent_xywh": [
+        3.0853,
+        91.2602,
+        7.9855,
+        7.7236
+      ],
+      "center_percent": [
+        7.078,
+        95.122
+      ],
+      "bbox_kind": "visible_union",
+      "edge_uncertainty_px": 2,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "nav_victory_icon",
+          "label": "Clipboard/check icon including rim",
+          "bbox_px_xywh": [
+            17,
+            898,
+            44,
+            59
+          ],
+          "center_px": [
+            39.0,
+            927.5
+          ],
+          "bbox_percent_xywh": [
+            3.0853,
+            91.2602,
+            7.9855,
+            5.9959
+          ],
+          "center_percent": [
+            7.078,
+            94.2581
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 2,
+          "confidence": "high"
+        },
+        {
+          "id": "nav_victory_label",
+          "label": "승리 ink",
+          "bbox_px_xywh": [
+            27,
+            961,
+            23,
+            12
+          ],
+          "center_px": [
+            38.5,
+            967.0
+          ],
+          "bbox_percent_xywh": [
+            4.9002,
+            97.6626,
+            4.1742,
+            1.2195
+          ],
+          "center_percent": [
+            6.9873,
+            98.2724
+          ],
+          "bbox_kind": "ink_bbox",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "text": "승리",
+          "font": {
+            "family": "unverified",
+            "point_size": "unverified",
+            "observed_ink_height_source_px": 12
+          }
+        }
+      ],
+      "notes": [
+        "Icon centerx39.0; label centerx38.5, approximately0.5px left."
+      ]
+    },
+    {
+      "id": "nav_build",
+      "label": "Build icon, badge and label visible union",
+      "bbox_px_xywh": [
+        92,
+        879,
+        80,
+        95
+      ],
+      "center_px": [
+        132.0,
+        926.5
+      ],
+      "bbox_percent_xywh": [
+        16.6969,
+        89.3293,
+        14.5191,
+        9.6545
+      ],
+      "center_percent": [
+        23.9564,
+        94.1565
+      ],
+      "bbox_kind": "visible_union",
+      "edge_uncertainty_px": 2,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "nav_build_icon",
+          "label": "Hammer/spark icon excluding badge",
+          "bbox_px_xywh": [
+            92,
+            898,
+            65,
+            61
+          ],
+          "center_px": [
+            124.5,
+            928.5
+          ],
+          "bbox_percent_xywh": [
+            16.6969,
+            91.2602,
+            11.7967,
+            6.1992
+          ],
+          "center_percent": [
+            22.5953,
+            94.3598
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 2,
+          "confidence": "high",
+          "notes": [
+            "Upper-right contour is partly occluded by badge."
+          ]
+        },
+        {
+          "id": "nav_build_label",
+          "label": "짓기 ink",
+          "bbox_px_xywh": [
+            114,
+            960,
+            23,
+            13
+          ],
+          "center_px": [
+            125.5,
+            966.5
+          ],
+          "bbox_percent_xywh": [
+            20.6897,
+            97.561,
+            4.1742,
+            1.3211
+          ],
+          "center_percent": [
+            22.7768,
+            98.2215
+          ],
+          "bbox_kind": "ink_bbox",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "text": "짓기",
+          "font": {
+            "family": "unverified",
+            "point_size": "unverified",
+            "observed_ink_height_source_px": 13
+          }
+        },
+        {
+          "id": "nav_badge_5",
+          "label": "Red5 notification circle including white rim",
+          "bbox_px_xywh": [
+            139,
+            879,
+            33,
+            33
+          ],
+          "center_px": [
+            155.5,
+            895.5
+          ],
+          "bbox_percent_xywh": [
+            25.2269,
+            89.3293,
+            5.9891,
+            3.3537
+          ],
+          "center_percent": [
+            28.2214,
+            91.0061
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 2,
+          "confidence": "high",
+          "children": [
+            {
+              "id": "nav_badge_5_red_core",
+              "label": "Red disc solid core",
+              "bbox_px_xywh": [
+                143,
+                883,
+                24,
+                25
+              ],
+              "center_px": [
+                155.0,
+                895.5
+              ],
+              "bbox_percent_xywh": [
+                25.9528,
+                89.7358,
+                4.3557,
+                2.5407
+              ],
+              "center_percent": [
+                28.1307,
+                91.0061
+              ],
+              "bbox_kind": "threshold_visible",
+              "edge_uncertainty_px": 1,
+              "confidence": "high"
+            },
+            {
+              "id": "nav_badge_5_ink",
+              "label": "5 white ink",
+              "bbox_px_xywh": [
+                150,
+                888,
+                9,
+                16
+              ],
+              "center_px": [
+                154.5,
+                896.0
+              ],
+              "bbox_percent_xywh": [
+                27.2232,
+                90.2439,
+                1.6334,
+                1.626
+              ],
+              "center_percent": [
+                28.0399,
+                91.0569
+              ],
+              "bbox_kind": "ink_bbox",
+              "edge_uncertainty_px": 1,
+              "confidence": "high",
+              "text": "5",
+              "font": {
+                "family": "unverified",
+                "point_size": "unverified",
+                "observed_ink_height_source_px": 16
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nav_album",
+      "label": "Album icon and label visible union",
+      "bbox_px_xywh": [
+        391,
+        898,
+        69,
+        76
+      ],
+      "center_px": [
+        425.5,
+        936.0
+      ],
+      "bbox_percent_xywh": [
+        70.9619,
+        91.2602,
+        12.5227,
+        7.7236
+      ],
+      "center_percent": [
+        77.2232,
+        95.122
+      ],
+      "bbox_kind": "visible_union",
+      "edge_uncertainty_px": 2,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "nav_album_icon",
+          "label": "Album/cards icon including rim",
+          "bbox_px_xywh": [
+            391,
+            898,
+            69,
+            62
+          ],
+          "center_px": [
+            425.5,
+            929.0
+          ],
+          "bbox_percent_xywh": [
+            70.9619,
+            91.2602,
+            12.5227,
+            6.3008
+          ],
+          "center_percent": [
+            77.2232,
+            94.4106
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 2,
+          "confidence": "high"
+        },
+        {
+          "id": "nav_album_label",
+          "label": "앨범 ink",
+          "bbox_px_xywh": [
+            412,
+            960,
+            22,
+            13
+          ],
+          "center_px": [
+            423.0,
+            966.5
+          ],
+          "bbox_percent_xywh": [
+            74.7731,
+            97.561,
+            3.9927,
+            1.3211
+          ],
+          "center_percent": [
+            76.7695,
+            98.2215
+          ],
+          "bbox_kind": "ink_bbox",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "text": "앨범",
+          "font": {
+            "family": "unverified",
+            "point_size": "unverified",
+            "observed_ink_height_source_px": 13
+          }
+        }
+      ],
+      "notes": [
+        "Icon centerx425.5; label centerx423.0, approximately2.5px left."
+      ]
+    },
+    {
+      "id": "nav_friends",
+      "label": "Friends icon and label visible union",
+      "bbox_px_xywh": [
+        477,
+        901,
+        67,
+        73
+      ],
+      "center_px": [
+        510.5,
+        937.5
+      ],
+      "bbox_percent_xywh": [
+        86.5699,
+        91.565,
+        12.1597,
+        7.4187
+      ],
+      "center_percent": [
+        92.6497,
+        95.2744
+      ],
+      "bbox_kind": "visible_union",
+      "edge_uncertainty_px": 2,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "nav_friends_icon",
+          "label": "Handshake/sparks icon including rim",
+          "bbox_px_xywh": [
+            477,
+            901,
+            67,
+            55
+          ],
+          "center_px": [
+            510.5,
+            928.5
+          ],
+          "bbox_percent_xywh": [
+            86.5699,
+            91.565,
+            12.1597,
+            5.5894
+          ],
+          "center_percent": [
+            92.6497,
+            94.3598
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 2,
+          "confidence": "high"
+        },
+        {
+          "id": "nav_friends_label",
+          "label": "친구 ink",
+          "bbox_px_xywh": [
+            499,
+            960,
+            23,
+            13
+          ],
+          "center_px": [
+            510.5,
+            966.5
+          ],
+          "bbox_percent_xywh": [
+            90.5626,
+            97.561,
+            4.1742,
+            1.3211
+          ],
+          "center_percent": [
+            92.6497,
+            98.2215
+          ],
+          "bbox_kind": "ink_bbox",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "text": "친구",
+          "font": {
+            "family": "unverified",
+            "point_size": "unverified",
+            "observed_ink_height_source_px": 13
+          }
+        }
+      ],
+      "notes": [
+        "Icon centerx510.5; label centerx510.5."
+      ]
+    },
+    {
+      "id": "center_gauge",
+      "label": "Center89/30 gauge including outer rim",
+      "bbox_px_xywh": [
+        184,
+        928,
+        181,
+        37
+      ],
+      "center_px": [
+        274.5,
+        946.5
+      ],
+      "bbox_percent_xywh": [
+        33.3938,
+        94.3089,
+        32.8494,
+        3.7602
+      ],
+      "center_percent": [
+        49.8185,
+        96.189
+      ],
+      "bbox_kind": "visible_art",
+      "edge_uncertainty_px": 1,
+      "confidence": "high",
+      "children": [
+        {
+          "id": "center_gauge_dark_frame",
+          "label": "Dark gauge border",
+          "bbox_px_xywh": [
+            187,
+            931,
+            176,
+            32
+          ],
+          "center_px": [
+            275.0,
+            947.0
+          ],
+          "bbox_percent_xywh": [
+            33.9383,
+            94.6138,
+            31.9419,
+            3.252
+          ],
+          "center_percent": [
+            49.9093,
+            96.2398
+          ],
+          "bbox_kind": "visible_art",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        },
+        {
+          "id": "center_gauge_blue_fill",
+          "label": "Blue solid interior",
+          "bbox_px_xywh": [
+            190,
+            934,
+            169,
+            25
+          ],
+          "center_px": [
+            274.5,
+            946.5
+          ],
+          "bbox_percent_xywh": [
+            34.4828,
+            94.9187,
+            30.6715,
+            2.5407
+          ],
+          "center_percent": [
+            49.8185,
+            96.189
+          ],
+          "bbox_kind": "threshold_visible",
+          "edge_uncertainty_px": 1,
+          "confidence": "high"
+        },
+        {
+          "id": "center_gauge_text",
+          "label": "89/30 white ink",
+          "bbox_px_xywh": [
+            241,
+            937,
+            68,
+            21
+          ],
+          "center_px": [
+            275.0,
+            947.5
+          ],
+          "bbox_percent_xywh": [
+            43.7387,
+            95.2236,
+            12.3412,
+            2.1341
+          ],
+          "center_percent": [
+            49.9093,
+            96.2907
+          ],
+          "bbox_kind": "ink_bbox",
+          "edge_uncertainty_px": 1,
+          "confidence": "high",
+          "text": "89/30",
+          "font": {
+            "family": "unverified",
+            "point_size": "unverified",
+            "observed_ink_height_source_px": 21,
+            "method": "RGB minimum>240 within textROI; slash sets tallest ink extent"
+          }
+        }
+      ],
+      "notes": [
+        "Gauge center(274.5,946.5),1px left of canvas centerx275.5.",
+        "Text center(275,947.5),0.5px right of gauge center.",
+        "Displayed89/30 is transcribed only; no maximum, capacity, rule or engine state is inferred."
+      ]
+    }
+  ],
+  "alignment_observations": {
+    "canvas_center_x_px": 275.5,
+    "go_art_center_x_px": 274.5,
+    "go_white_text_center_x_px": 275.5,
+    "gauge_outer_center_x_px": 274.5,
+    "gauge_text_center_x_px": 275,
+    "topbar_amount_center_y_px": 44,
+    "topbar_cash_color_core_center_y_px": 43,
+    "shield_orange_core_center_y_px": 42.5,
+    "menu_gold_ink_center_y_px": 41.5,
+    "bottom_label_visible_ink_bottom_y_exclusive_px": 973,
+    "nominal_nav_column_boundaries_from_divider_centers_px": [
+      0,
+      81,
+      169,
+      380,
+      468,
+      551
+    ]
+  },
+  "known_limits": [
+    "Reference is a single opaque551×984 raster. Hidden geometry behind avatar, event art and badges cannot be recovered exactly.",
+    "Original canvas edge clips top avatar and bottom/side nav. Full off-canvas artwork is unknown.",
+    "No logical phone size, CSS size, DPI, safe area, hit rectangle or responsive constraints are established by this image.",
+    "A white/colored art contour is not a rectangular button hit area.",
+    "Exact font family/point size cannot be determined from ink bbox alone.",
+    "Event front art is described by visible helmet-like shape; event mechanics and object identity are not asserted.",
+    "No copied image crop is registered as a production resource."
+  ]
+}

@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {writeFileSync} from 'node:fs';
+import {readDesign} from '../20261124-defense-simple/shared.mjs';
+const d=readDesign('kpop-defense-ui');
+const boards=d.screens.filter(s=>['defense-enemy-models','defense-enemy-boss-fx'].includes(s.id));
+assert.equal(boards.length,2);
+const images=boards.flatMap(s=>s.elements.filter(e=>e.image));
+assert.equal(images.length,19);
+for(const e of images)e.image.preserveColor=true;
+writeFileSync(new URL('defense.json',import.meta.url),JSON.stringify(d));
+writeFileSync(new URL('defense-assets.json',import.meta.url),'{}');

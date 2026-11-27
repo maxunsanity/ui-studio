@@ -1,0 +1,3852 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Clash Royale · 원본 UI 판틀 카탈로그</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f3f4f0;color:#233344;font:16px/1.6 -apple-system,BlinkMacSystemFont,sans-serif}main{max-width:1440px;margin:auto;padding:28px 22px}h1{font-size:clamp(26px,4vw,38px);line-height:1.3}h2{font-size:23px;line-height:1.35}h3{font-size:17px}.note{padding:16px;background:#fff3ce;border-left:4px solid #b48525}.counts{display:flex;gap:10px;flex-wrap:wrap}.counts span{padding:8px 12px;background:white;border:1px solid #ccd6db;border-radius:8px}.tools{position:sticky;top:0;z-index:2;display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#f3f4f0f5;padding:12px 0;border-bottom:1px solid #ccd6db}.tools label{display:flex;align-items:center;gap:8px}.tools input,.tools select{font:inherit;padding:9px;border:1px solid #8a9aa4;border-radius:6px;max-width:100%}.tools input{width:min(420px,100%)}.tools output{margin-left:auto}a{color:#176580;overflow-wrap:anywhere}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:24px 0}article{min-width:0;background:white;border:1px solid #d7dce0;border-radius:12px;padding:16px;content-visibility:auto;contain-intrinsic-size:auto 900px}article[hidden]{display:none}.card-head{display:flex;align-items:center;gap:10px;font-size:13px;color:#546b79}.pill{background:#dcecf2;color:#224c64;border-radius:4px;padding:4px 8px;font-weight:700}article img{display:block;max-width:100%;width:auto;height:450px;object-fit:contain;margin:auto;background:#e4e9ed}.source{font-size:12px;color:#596c7b;overflow-wrap:anywhere}.actual{padding:9px;background:#f9eac7;color:#6c4c0e;font-weight:600}.muted,small{color:#596c7b}details{border-top:1px solid #d7dce0;padding:10px 0}summary{cursor:pointer;font-weight:600}pre{font-size:12px;line-height:1.5;background:#f3f6f8;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere}li{margin:5px 0}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;border-bottom:1px solid #d6dce0;padding:10px;vertical-align:top;overflow-wrap:anywhere}.table{max-width:100%;overflow:auto}footer{margin-top:30px;color:#536778;font-size:14px}@media(max-width:1000px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.cards{grid-template-columns:minmax(0,1fr)}article img{height:auto;max-height:660px}.tools{position:static}.tools label{width:100%}.tools input{width:100%}.tools output{margin-left:0}main{padding:20px 14px}table{min-width:650px}}
+</style></head><body><main><p>UI STUDIO / CLASH ROYALE / REFERENCE CATALOG</p><h1>클래시 로얄 · 원본 UI 판틀 찾기</h1><p class="note">사용자 표현 ‘클래시오브 클랜’의 제공 영상은 실제 로고와 상품명 기준 <strong>Clash Royale / 클래시 로얄</strong>입니다. 이 페이지는 원본 영상 관찰자료입니다. <strong>프로젝트 등록됨 · 4 partial / 12 spec-only · 미검수</strong>이며 스크린샷은 production UI가 아닙니다. r43 이후 Social 조립중이며 실제 부품수/최종revision·제품사용승인은 미확인입니다. 전체 게임 UI 조사·3D 장면 제작·미관찰 게임동작은 포함하지 않습니다.</p><div class="counts"><span>고유 판틀 후보 <b>16</b></span><span>공통 튜토리얼군 <b>1</b></span><span>보조 토스트 <b>1</b></span><span>외부 UI 제외 <b>2</b></span><span>partial <b>4 / 16</b></span><span>spec-only <b>12 / 16</b></span><span>실검수 <b>미확인</b></span></div><p>A12와 B7을 단순 합산하지 않고 홈·덱페이지·컬렉션3쌍을 통합했습니다. 보상/카드의 반복상태·상점 스크롤·튜토리얼 문구는 별도 전체판틀로 늘리지 않습니다.</p><p><a href="native-target-status.json">본체 전달 native 등록/진행 상태</a> · <a href="PRODUCTION_GUIDE.draft.md">제작 가이드 초안</a> · <a href="catalog.json">구조화 데이터</a> · <a href="catalog.md">관찰·분모 설명</a> · <a href="source-snapshots/video-a-analysis.md">영상 A 정본 스냅샷</a> · <a href="source-snapshots/video-b-inventory.md">영상 B 정본 스냅샷</a> · <a href="verification.json">파일 검증</a></p><section class="tools" aria-label="판틀 검색"><label>찾기 <input id="q" type="search" placeholder="예: 덱, 보상, 4열, CR09, 소셜"></label><label>구분 <select id="kind"><option value="all">전체</option><option value="game">고유 판틀16</option><option value="overlay">공통 튜토리얼</option><option value="state">보조 토스트</option><option value="external">제작 제외 · 외부2</option></select></label><output id="found" aria-live="polite">전체20항목</output></section><section class="cards"><article class="family" id="CR01" data-kind="game" data-search="cr01 로고·캐릭터 로딩 loading 전체 캐릭터 배경+상단 로고+하단 진행바. 77/99/100%는 같은 판틀의 상태. a-f01 clash royale 클래시 로얄 99% 100%"><div class="card-head"><span class="pill">CR01</span><span>loading</span></div><h2>로고·캐릭터 로딩</h2><p>전체 캐릭터 배경+상단 로고+하단 진행바. 77/99/100%는 같은 판틀의 상태.</p><a class="reference" href="refs/A-014994989us-0a84d6f2.jpg"><img loading="lazy" src="refs/A-014994989us-0a84d6f2.jpg" alt="참고 원본 · 로고·캐릭터 로딩"></a><p class="source">CLASH-A · 요청 15s → 실제 14.994989s<br>원본 1080×2340 · 비교 전용<br>SHA256 0a84d6f2419ca903c30b495022068dd24f6a0c48e6b62892596f84c125a93cfc</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>CLASH ROYALE</li><li>클래시 로얄</li><li>99%</li><li>100%</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-000000000us-4bbbcb76.jpg">초기 로딩+동의창 배후</a> <small>CLASH-A · 요청 0s → 실제 0.000000s</small></li><li><a href="refs/A-014994989us-0a84d6f2.jpg">99% 단독</a> <small>CLASH-A · 요청 15s → 실제 14.994989s</small></li><li><a href="refs/A-072994378us-b9e872d7.jpg">전투결과 뒤 77% 재로딩</a> <small>CLASH-A · 요청 73s → 실제 72.994378s</small></li><li><a href="refs/A-073986144us-ec6726ac.jpg">100%</a> <small>CLASH-A · 요청 74s → 실제 73.986144s</small></li></ul><h3>실제 관찰</h3><ul><li>영상이 로딩+OS 알림창에서 시작한다.</li><li>15.995초 전투; 72.994초 재로딩 뒤 75.996초 보상 화면.</li><li>이번 영상에서 스크롤 미관찰</li></ul><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p>조사한기존두샘플에서직접적합한전체판틀미선정. 없는계층/동작/수치를만들지않음.</p></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F01&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;screen&quot;,
+        &quot;description&quot;: &quot;원본 전체 1080×2340&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          0,
+          0,
+          1080,
+          2340
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Img_Splash&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;캐릭터 전면 원화&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Img_Logo&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;image+text&quot;,
+        &quot;description&quot;: &quot;게임 로고&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          257,
+          149,
+          668,
+          367
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Progress_Loading&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;progress&quot;,
+        &quot;description&quot;: &quot;하단 진행바와 별도 백분율&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          0,
+          2224,
+          1080,
+          116
+        ]
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>로딩완료 조건/진행바 easing/실제 자원은 미확인</li></ul></details></article><article class="family" id="CR02" data-kind="game" data-search="cr02 나이 선택 modal 회색 외틀 안 캐릭터상단/밝은 슬라이더영역/확인버튼의 분할. 값변경·활성/비활성은 상태. a-f02 나이가 어떻게 되세요? 슬라이더를 움직여 나이를 설정하세요. 35 50 59 53 게임 플레이에는 영향을 주지 않습니다. 확인"><div class="card-head"><span class="pill">CR02</span><span>modal</span></div><h2>나이 선택</h2><p>회색 외틀 안 캐릭터상단/밝은 슬라이더영역/확인버튼의 분할. 값변경·활성/비활성은 상태.</p><a class="reference" href="refs/A-004983456us-4fd203b7.jpg"><img loading="lazy" src="refs/A-004983456us-4fd203b7.jpg" alt="참고 원본 · 나이 선택"></a><p class="source">CLASH-A · 요청 5s → 실제 4.983456s<br>원본 1080×2340 · 비교 전용<br>SHA256 4fd203b7a7c3be4cb6cde01acc1f964cd3ef044b20278ed815cc66be75be916c</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>나이가 어떻게 되세요?</li><li>슬라이더를 움직여 나이를 설정하세요.</li><li>35</li><li>50</li><li>59</li><li>53</li><li>게임 플레이에는 영향을 주지 않습니다.</li><li>확인</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-000995089us-654a9891.jpg">미선택·확인 비활성</a> <small>CLASH-A · 요청 1s → 실제 0.995089s</small></li><li><a href="refs/A-004983456us-4fd203b7.jpg">35·확인 활성</a> <small>CLASH-A · 요청 5s → 실제 4.983456s</small></li><li><a href="refs/A-005985156us-785a02b5.jpg">50</a> <small>CLASH-A · 요청 6s → 실제 5.985156s</small></li><li><a href="refs/A-006985611us-84b9df13.jpg">59</a> <small>CLASH-A · 요청 7s → 실제 6.985611s</small></li><li><a href="refs/A-008988244us-3779af29.jpg">53</a> <small>CLASH-A · 요청 9s → 실제 8.988244s</small></li></ul><h3>실제 관찰</h3><ul><li>0.995초 OS 권한판 대신 연령판 등장.</li><li>9.488초 연령판이 사라진 로딩, 9.741초 중요공지 등장. 확인 버튼 입력은 추정.</li><li>이번 영상에서 스크롤 미관찰</li></ul><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p>조사한기존두샘플에서직접적합한전체판틀미선정. 없는계층/동작/수치를만들지않음.</p></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F02&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;overlay&quot;,
+        &quot;description&quot;: &quot;로딩 배후&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Panel_Age&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;panel&quot;,
+        &quot;description&quot;: &quot;중앙 회색 외틀&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          51,
+          519,
+          977,
+          1389
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Txt_Title&quot;,
+        &quot;parent&quot;: &quot;Panel_Age&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;나이가 어떻게 되세요?&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Img_King&quot;,
+        &quot;parent&quot;: &quot;Panel_Age&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;상단 파랑 킹 초상&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Group_Slider&quot;,
+        &quot;parent&quot;: &quot;Panel_Age&quot;,
+        &quot;role&quot;: &quot;input-group&quot;,
+        &quot;description&quot;: &quot;설명/숫자 말풍선/초록 트랙/파랑 손잡이/좌우 삼각&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Txt_Age&quot;,
+        &quot;parent&quot;: &quot;Group_Slider&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;슬라이더 표시값&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Slider_Age&quot;,
+        &quot;parent&quot;: &quot;Group_Slider&quot;,
+        &quot;role&quot;: &quot;slider&quot;,
+        &quot;description&quot;: &quot;연령 입력&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Btn_ConfirmAge&quot;,
+        &quot;parent&quot;: &quot;Panel_Age&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;확인&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          406,
+          1552,
+          269,
+          120
+        ]
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>나이 입력범위/Unity slider 값/저장 값/정책 효과 미확인</li></ul></details></article><article class="family" id="CR03" data-kind="game" data-search="cr03 중요 공지 bottomnotice 로딩 배후딤 위 하단 제목/안내문/가로3선택 판. 나이입력·동의공급자 판과 다름. a-f03 중요 공지 ‘확인’을 탭해 이용 약관에 동의하고, 개인정보 처리방침에서 저희가 회원 개인정보를 어떻게 처리하는지 확인하세요. 확인 개인정보 처리방침 이용 약관"><div class="card-head"><span class="pill">CR03</span><span>bottomNotice</span></div><h2>중요 공지</h2><p>로딩 배후딤 위 하단 제목/안내문/가로3선택 판. 나이입력·동의공급자 판과 다름.</p><a class="reference" href="refs/A-009991333us-7c9f644a.jpg"><img loading="lazy" src="refs/A-009991333us-7c9f644a.jpg" alt="참고 원본 · 중요 공지"></a><p class="source">CLASH-A · 요청 10s → 실제 9.991333s<br>원본 1080×2340 · 비교 전용<br>SHA256 7c9f644a4c5b7ca1ff391864bfac33c20c08ceb1594903e3d3ff629ae371ed93</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>중요 공지</li><li>‘확인’을 탭해 이용 약관에 동의하고, 개인정보 처리방침에서 저희가 회원 개인정보를 어떻게 처리하는지 확인하세요.</li><li>확인</li><li>개인정보 처리방침</li><li>이용 약관</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-009991333us-7c9f644a.jpg">공지 표시</a> <small>CLASH-A · 요청 10s → 실제 9.991333s</small></li></ul><h3>실제 관찰</h3><ul><li>9.741초부터 중요공지 관찰.</li><li>11.996초 로딩 단독 뒤 12.242초 별도 개인정보 동의판.</li><li>이번 영상에서 스크롤 미관찰</li></ul><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p>조사한기존두샘플에서직접적합한전체판틀미선정. 없는계층/동작/수치를만들지않음.</p></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F03&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;overlay&quot;,
+        &quot;description&quot;: &quot;로딩 배후+딤&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Panel_Notice&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;panel&quot;,
+        &quot;description&quot;: &quot;하단 안내판&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          29,
+          1761,
+          1022,
+          558
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Txt_NoticeTitle&quot;,
+        &quot;parent&quot;: &quot;Panel_Notice&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;중요 공지&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Txt_NoticeBody&quot;,
+        &quot;parent&quot;: &quot;Panel_Notice&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;이용약관·개인정보 안내&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Group_Actions&quot;,
+        &quot;parent&quot;: &quot;Panel_Notice&quot;,
+        &quot;role&quot;: &quot;row&quot;,
+        &quot;description&quot;: &quot;확인/개인정보 처리방침/이용 약관&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Confirm&quot;,
+        &quot;parent&quot;: &quot;Group_Actions&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;확인&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Privacy&quot;,
+        &quot;parent&quot;: &quot;Group_Actions&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;개인정보 처리방침&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Terms&quot;,
+        &quot;parent&quot;: &quot;Group_Actions&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;이용 약관&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>세 선택의 실제 클릭과 링크 목적지 미관찰</li></ul></details></article><article class="family" id="CR04" data-kind="game" data-search="cr04 훈련 전투 ui scenehud 전장 위 적표시/타워hp/하단4카드/엘릭서·다음카드 hud. 전투1/2·유닛·카드바 숨김은 상태. 장면3d 제작 제외. a-f04 로얄 훈련관 얼 교관 피코바 교관 클래시 로얄에 오신 것을 환영합니다! 먼저 훈련 매치부터 해보죠! 적군이 쳐들어오고 있습니다! 카드를 전장에 배치해 타워를 방어하세요! 선택한 카드가 없습니다. 다음: 레벨 1 레벨 3"><div class="card-head"><span class="pill">CR04</span><span>sceneHUD</span></div><h2>훈련 전투 UI</h2><p>전장 위 적표시/타워HP/하단4카드/엘릭서·다음카드 HUD. 전투1/2·유닛·카드바 숨김은 상태. 장면3D 제작 제외.</p><a class="reference" href="refs/A-105997300us-e9eb5244.jpg"><img loading="lazy" src="refs/A-105997300us-e9eb5244.jpg" alt="참고 원본 · 훈련 전투 UI"></a><p class="source">CLASH-A · 요청 106s → 실제 105.997300s<br>원본 1080×2340 · 비교 전용<br>SHA256 e9eb524435ad2654a059904617b14e0cf2653e6404f36a5bf44bf0ea1d02ac75</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>로얄 훈련관</li><li>얼 교관</li><li>피코바 교관</li><li>클래시 로얄에 오신 것을 환영합니다!</li><li>먼저 훈련 매치부터 해보죠!</li><li>적군이 쳐들어오고 있습니다!</li><li>카드를 전장에 배치해 타워를 방어하세요!</li><li>선택한 카드가 없습니다.</li><li>다음:</li><li>레벨 1</li><li>레벨 3</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-016988844us-5b3903df.jpg">카드바 없는 초기 전장</a> <small>CLASH-A · 요청 17s → 실제 16.988844s</small></li><li><a href="refs/A-019987067us-3b05242e.jpg">킹 대사</a> <small>CLASH-A · 요청 20s → 실제 19.987067s</small></li><li><a href="refs/A-029986756us-5b6b6fda.jpg">카드 선택·적영역 배치금지</a> <small>CLASH-A · 요청 30s → 실제 29.986756s</small></li><li><a href="refs/A-044986689us-00ff827d.jpg">전투1 카드바 표시</a> <small>CLASH-A · 요청 45s → 실제 44.986689s</small></li><li><a href="refs/A-119996500us-1ef1d543.jpg">전투2 카드바 없는 순간</a> <small>CLASH-A · 요청 120s → 실제 119.996500s</small></li><li><a href="refs/A-105997300us-e9eb5244.jpg">전투2 카드바 표시</a> <small>CLASH-A · 요청 106s → 실제 105.997300s</small></li><li><a href="refs/A-216198133us-c41484f3.jpg">영상 종료도 전투중</a> <small>CLASH-A · 요청 216.2s → 실제 216.198133s</small></li></ul><h3>실제 관찰</h3><ul><li>15.995초 첫 훈련 전장; 102.994초 두 번째 훈련 전장.</li><li>첫 전투 69.498초 결과판으로 진행. 두 번째 전투는216.198초까지 진행중이며 종료결과 미관찰.</li><li>아레나는 전면장면. 화면 수직 스크롤은 미관찰.</li></ul><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p>조사한기존두샘플에서직접적합한전체판틀미선정. 없는계층/동작/수치를만들지않음.</p></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F04&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;screen&quot;,
+        &quot;description&quot;: &quot;아레나 전면&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          0,
+          0,
+          1080,
+          2340
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Scene_Arena&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;scene-reference&quot;,
+        &quot;description&quot;: &quot;타워/잔디/울타리/강/다리; 원본 Unity 계층 미확인&quot;
+      },
+      {
+        &quot;id&quot;: &quot;HUD_Opponent&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;hud&quot;,
+        &quot;description&quot;: &quot;좌상 방패·교관 이름·로얄 훈련관&quot;
+      },
+      {
+        &quot;id&quot;: &quot;HUD_Towers&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;hud&quot;,
+        &quot;description&quot;: &quot;양측 타워 HP/왕관 레벨&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Group_Tutorial&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;overlay&quot;,
+        &quot;description&quot;: &quot;킹/대사/손가락/선택안내&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Img_KingGuide&quot;,
+        &quot;parent&quot;: &quot;Group_Tutorial&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;하단 킹 인물&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Txt_Bubble&quot;,
+        &quot;parent&quot;: &quot;Group_Tutorial&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;흰 말풍선 대사&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Img_HandGuide&quot;,
+        &quot;parent&quot;: &quot;Group_Tutorial&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;드래그·클릭 유도 손&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Group_Deploy&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;overlay&quot;,
+        &quot;description&quot;: &quot;금지영역/카드 이름/유닛 미리보기&quot;
+      },
+      {
+        &quot;id&quot;: &quot;HUD_Hand&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;hud&quot;,
+        &quot;description&quot;: &quot;하단 파란 카드·엘릭서 판(표시 상태에만)&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          0,
+          1970,
+          1080,
+          370
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;NextCard&quot;,
+        &quot;parent&quot;: &quot;HUD_Hand&quot;,
+        &quot;role&quot;: &quot;card&quot;,
+        &quot;description&quot;: &quot;다음 카드/라벨&quot;
+      },
+      {
+        &quot;id&quot;: &quot;HandCards&quot;,
+        &quot;parent&quot;: &quot;HUD_Hand&quot;,
+        &quot;role&quot;: &quot;row&quot;,
+        &quot;description&quot;: &quot;4카드 슬롯/엘릭서 비용/회색 비활성&quot;
+      },
+      {
+        &quot;id&quot;: &quot;ElixirBar&quot;,
+        &quot;parent&quot;: &quot;HUD_Hand&quot;,
+        &quot;role&quot;: &quot;progress&quot;,
+        &quot;description&quot;: &quot;수치와 분홍 게이지&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><ul><li>아레나잔디/울타리/강/다리·실시간유닛/타워·전투판정. UI HUD만 카탈로그 범위.</li></ul><h3>미확인</h3><ul><li>입력 좌표/드래그 궤적/카드바 표시정책/게임엔진 계층/전투2 종료 미확인</li></ul></details></article><article class="family" id="CR05" data-kind="game" data-search="cr05 훈련 승리 결과 resultoverlay 전장딤 위 적/아군 리본+vs/왕관+상자보상+확인. 왕관등장연출은 상태. a-f05 얼 교관 로얄 훈련관 vs 나 클랜 없음 승리! 보상 확인"><div class="card-head"><span class="pill">CR05</span><span>resultOverlay</span></div><h2>훈련 승리 결과</h2><p>전장딤 위 적/아군 리본+VS/왕관+상자보상+확인. 왕관등장연출은 상태.</p><a class="reference" href="refs/A-071983978us-ceb22ec9.jpg"><img loading="lazy" src="refs/A-071983978us-ceb22ec9.jpg" alt="참고 원본 · 훈련 승리 결과"></a><p class="source">CLASH-A · 요청 72s → 실제 71.983978s<br>원본 1080×2340 · 비교 전용<br>SHA256 ceb22ec9d7b7d990c25c7f3e4fe6a4aed69aadf866281af665848dd1ee4b7b10</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>얼 교관</li><li>로얄 훈련관</li><li>VS</li><li>나</li><li>클랜 없음</li><li>승리!</li><li>보상</li><li>확인</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-068997678us-7f8c1560.jpg">결과 리본 등장·왕관 애니메이션</a> <small>CLASH-A · 요청 69s → 실제 68.997678s</small></li><li><a href="refs/A-071983978us-ceb22ec9.jpg">3왕관+보상+확인</a> <small>CLASH-A · 요청 72s → 실제 71.983978s</small></li></ul><h3>실제 관찰</h3><ul><li>68.998초 전장 뒤69.498초 리본 등장.</li><li>72.485초 승리 문구·확인 남아있음;72.994초 로딩. 확인 입력은 추정.</li><li>이번 영상에서 스크롤 미관찰</li></ul><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p>조사한기존두샘플에서직접적합한전체판틀미선정. 없는계층/동작/수치를만들지않음.</p></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F05&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;overlay&quot;,
+        &quot;description&quot;: &quot;전장 배후+딤&quot;
+      },
+      {
+        &quot;id&quot;: &quot;OpponentResult&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;ribbon&quot;,
+        &quot;description&quot;: &quot;적 이름/문장/빈 왕관쿠션&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          60,
+          605,
+          950,
+          319
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Txt_VS&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;VS&quot;
+      },
+      {
+        &quot;id&quot;: &quot;PlayerResult&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;ribbon&quot;,
+        &quot;description&quot;: &quot;아군 이름/클랜없음/왕관3&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          61,
+          1094,
+          949,
+          374
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Reward_Chest&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;card&quot;,
+        &quot;description&quot;: &quot;보상/상자&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          398,
+          1497,
+          286,
+          351
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Btn_ConfirmResult&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;확인&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          430,
+          1950,
+          220,
+          107
+        ]
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>보상상자 별도 탭효과/패배판/다른 왕관수 결과 미관찰</li></ul></details></article><article class="family" id="CR06" data-kind="game" data-search="cr06 상자 보상 발표 rewardflow 파란배경 위 보상카드/보유·수량/열린상자·남은수. 상자단독/개별보상/4개요약은 같은 흐름의 상태. a-f06 골드 자원 카드 +18 내 골드: 118 기사 일반 카드 x1 2/2 미니 p.e.k.k.a 희귀 카드 머스킷병 잠금 해제! 획득:"><div class="card-head"><span class="pill">CR06</span><span>rewardFlow</span></div><h2>상자 보상 발표</h2><p>파란배경 위 보상카드/보유·수량/열린상자·남은수. 상자단독/개별보상/4개요약은 같은 흐름의 상태.</p><a class="reference" href="refs/A-078991800us-757d7971.jpg"><img loading="lazy" src="refs/A-078991800us-757d7971.jpg" alt="참고 원본 · 상자 보상 발표"></a><p class="source">CLASH-A · 요청 79s → 실제 78.991800s<br>원본 1080×2340 · 비교 전용<br>SHA256 757d79713837d033714c60e43c140d7f92fbbce32cc852ccbf993b738dd5c400</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>골드</li><li>자원 카드</li><li>+18</li><li>내 골드:</li><li>118</li><li>기사</li><li>일반 카드</li><li>x1</li><li>2/2</li><li>미니 P.E.K.K.A</li><li>희귀 카드</li><li>머스킷병</li><li>잠금 해제!</li><li>획득:</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-075996167us-69a57a52.jpg">상자단독</a> <small>CLASH-A · 요청 76s → 실제 75.996167s</small></li><li><a href="refs/A-078991800us-757d7971.jpg">골드+18</a> <small>CLASH-A · 요청 79s → 실제 78.991800s</small></li><li><a href="refs/A-079993867us-bb86353c.jpg">기사x1</a> <small>CLASH-A · 요청 80s → 실제 79.993867s</small></li><li><a href="refs/A-080793667us-4d4dd44a.jpg">미니P.E.K.K.A x1</a> <small>CLASH-A · 요청 80.8s → 실제 80.793667s</small></li><li><a href="refs/A-081594322us-a479457e.jpg">머스킷병x1</a> <small>CLASH-A · 요청 81.6s → 실제 81.594322s</small></li><li><a href="refs/A-081794556us-15315ce2.jpg">4개 획득요약</a> <small>CLASH-A · 요청 81.8s → 실제 81.794556s</small></li></ul><h3>실제 관찰</h3><ul><li>75.996초 파란 보상장면; 앞은 전투결과·로딩.</li><li>81.795초 4개요약 뒤81.995초 홈전환. 상자/다음보상 터치입구는 추정.</li><li>이번 영상에서 스크롤 미관찰</li></ul><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p>조사한기존두샘플에서직접적합한전체판틀미선정. 없는계층/동작/수치를만들지않음.</p></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F06&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;screen&quot;,
+        &quot;description&quot;: &quot;파란 다이아 무늬&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Group_RewardReveal&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;panel&quot;,
+        &quot;description&quot;: &quot;카드/제목/보유량&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          180,
+          426,
+          762,
+          460
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Img_RewardCard&quot;,
+        &quot;parent&quot;: &quot;Group_RewardReveal&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;좌측 카드&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Txt_RewardTitle&quot;,
+        &quot;parent&quot;: &quot;Group_RewardReveal&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;이름/등급&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Txt_Quantity&quot;,
+        &quot;parent&quot;: &quot;Group_RewardReveal&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;+18 또는x1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Progress_Ownership&quot;,
+        &quot;parent&quot;: &quot;Group_RewardReveal&quot;,
+        &quot;role&quot;: &quot;progress&quot;,
+        &quot;description&quot;: &quot;보유수/업그레이드가능&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Chest&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;열린상자/발광&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          362,
+          1134,
+          379,
+          347
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Badge_Remaining&quot;,
+        &quot;parent&quot;: &quot;Chest&quot;,
+        &quot;role&quot;: &quot;badge&quot;,
+        &quot;description&quot;: &quot;4→3→2→1→0&quot;
+      },
+      {
+        &quot;id&quot;: &quot;RewardSummary&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;row&quot;,
+        &quot;description&quot;: &quot;요약상태에서 하단4카드&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>실제 탭 좌표/총 배출확률/미관찰보상/실제 자원분리 미확인</li></ul></details></article><article class="family" id="CR07" data-kind="game" data-search="cr07 전투 홈 home hud/상단프로필/중앙아레나모형/이벤트상자/노랑전투/하단5탭의 공통구조. 훈련진행과왕관·패스는 상단내용 variant. a-f07 b-f01 나 클랜 없음 훈련 진행도 멀티플레이 해제까지 1/3 이벤트 전투 전투에서 승리하여 더 많은 보상을 획득하세요! 113 100 18 나나나와 0 로얄 패스 3일 1시간"><div class="card-head"><span class="pill">CR07</span><span>home</span></div><h2>전투 홈</h2><p>HUD/상단프로필/중앙아레나모형/이벤트상자/노랑전투/하단5탭의 공통구조. 훈련진행과왕관·패스는 상단내용 variant.</p><a class="reference" href="refs/B-000000000us-af79b41a.jpg"><img loading="lazy" src="refs/B-000000000us-af79b41a.jpg" alt="참고 원본 · 전투 홈"></a><p class="source">CLASH-B · 요청 0s → 실제 0.000000s<br>원본 1080×2340 · 비교 전용<br>SHA256 af79b41ac644bc047ef3e7553535e996ddea5df4734c3c96208e7b94ddf6ec8e</p><p class="actual">partial · 실제 조립중 · 미검수 · 제품사용승인 미확인</p><p><a href="http://127.0.0.1:7018/ui-studio/?workspace=workspace-2a3dc8e9-dcd3-4c88-a98a-231991656500&amp;project=ux-ea29177e&amp;editor=detail&amp;screen=main">이 판틀 native 편집 열기 · partial</a></p><details><summary>관찰 문구·상태·전환</summary><ul><li>나</li><li>클랜 없음</li><li>훈련 진행도</li><li>멀티플레이 해제까지</li><li>1/3</li><li>이벤트</li><li>전투</li><li>전투에서 승리하여 더 많은 보상을 획득하세요!</li><li>113</li><li>100</li><li>18</li><li>나나나와</li><li>0</li><li>로얄 패스</li><li>3일 1시간</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-082395322us-d6816090.jpg">보상 수령 직후 파랑 배경 홈</a> <small>CLASH-A · 요청 82.4s → 실제 82.395322s</small></li><li><a href="refs/A-101993267us-937e4f65.jpg">전투버튼 유도·조명배경 홈</a> <small>CLASH-A · 요청 102s → 실제 101.993267s</small></li><li><a href="refs/B-000000000us-af79b41a.jpg">영상B 대표 상태</a> <small>CLASH-B · 요청 0s → 실제 0.000000s</small></li></ul><h3>실제 관찰</h3><ul><li>81.995초부터 상자발표 후 홈;100.241초 컬렉션 다음 홈.</li><li>82.996~83.997초 덱;102.994초 전투. 메뉴/전투 버튼 안내와 전후 흐름만 관찰.</li><li>이번 영상에서 스크롤 미관찰</li><li>영상 시작에 이미 홈이 표시됨</li><li>덱시트와 게임모드시트가 열린 뒤 다시 이 화면으로 복귀함</li><li>소셜 후 홈을 거쳐 카드 페이지로 가로 이동함</li></ul><h3>입력 후보 · 추정</h3><ul><li>하단 전투 버튼 왼쪽 카드 버튼이 덱시트 입구로 보임</li><li>전투 버튼 오른쪽 트로피 영역이 게임모드 입구로 보임</li><li>소셜 진입은 하단 사람 방패 탭이 유력하나 터치 좌표/탭과 스와이프 차이는 미관찰</li></ul></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p><a href="#sample-home_toolbar">home_toolbar · 부분 적합</a><br>ux-25ecc98a r63 / Page_TSV_Territory<br>상단 고정 HUD·하단 고정 nav를 중앙 장면과 형제로 두는 계층을 참고합니다. 샘플 nav는 6슬롯이고 중앙은 영지 그림입니다. 클래시 5탭·중앙 아레나·자원 종류/아이콘/라벨은 새 원본에 맞춥니다.</p><ul><li>6슬롯 중 Heroes만 유효 진입 연결입니다. 5탭의 각 목적지를 제공하지 않습니다.</li><li>기존 64px/84px 규격을 390폭에 그대로 강제하지 않습니다.</li></ul></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F07&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;screen&quot;,
+        &quot;description&quot;: &quot;홈 전면&quot;
+      },
+      {
+        &quot;id&quot;: &quot;HUD_Currency&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;row&quot;,
+        &quot;description&quot;: &quot;경험(왕관카드)/골드/보석&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          0,
+          108,
+          1080,
+          80
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;ProfileRow&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;row&quot;,
+        &quot;description&quot;: &quot;이름/클랜없음/친구/소식/메뉴&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          12,
+          239,
+          1035,
+          117
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;TrainingProgress&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;progress&quot;,
+        &quot;description&quot;: &quot;훈련진행도/멀티플레이해제/1/3&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          187,
+          385,
+          725,
+          146
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Img_ArenaDiorama&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;scene-reference&quot;,
+        &quot;description&quot;: &quot;중앙 훈련장 모형&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          271,
+          904,
+          542,
+          589
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;EventRewards&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;panel&quot;,
+        &quot;description&quot;: &quot;이벤트 제목/체크와 상자들&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          367,
+          1588,
+          353,
+          216
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Battle&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;노란 전투&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          365,
+          1817,
+          361,
+          211
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Tutorial&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;overlay&quot;,
+        &quot;description&quot;: &quot;손가락/전투안내&quot;
+      },
+      {
+        &quot;id&quot;: &quot;BottomNav&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;tabbar&quot;,
+        &quot;description&quot;: &quot;5개메뉴; 선택 전투&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          0,
+          2157,
+          1080,
+          183
+        ]
+      }
+    ]
+  },
+  {
+    &quot;sourceFamilyId&quot;: &quot;B-F01&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;name&quot;: &quot;Group_ResourceHUD&quot;,
+        &quot;kind&quot;: &quot;fixedOverlay&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          102,
+          1080,
+          86
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Group_ProgressXP&quot;,
+            &quot;kind&quot;: &quot;display&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              0,
+              102,
+              407,
+              86
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_XPCards&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Img_ProgressBar&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_XP&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;18&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_GoldPlus&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              427,
+              110,
+              340,
+              74
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_Gold&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_Gold&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;113&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Glyph_Plus&quot;,
+                &quot;kind&quot;: &quot;text&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_GemPlus&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              785,
+              110,
+              274,
+              74
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_Gem&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_Gem&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;100&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Glyph_Plus&quot;,
+                &quot;kind&quot;: &quot;text&quot;
+              }
+            ]
+          }
+        ],
+        &quot;note&quot;: &quot;소셜에서는 이 HUD가 보이지 않음. shop/collection 스크롤 중에는 같은 화면 위치 유지. 원본 Unity 계층 아님.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Group_Profile&quot;,
+        &quot;kind&quot;: &quot;display&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          185,
+          620,
+          390
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Img_ThreeCrowns&quot;,
+            &quot;kind&quot;: &quot;image&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Txt_PlayerName&quot;,
+            &quot;kind&quot;: &quot;text&quot;,
+            &quot;observedText&quot;: &quot;나나나와&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Txt_Clan&quot;,
+            &quot;kind&quot;: &quot;text&quot;,
+            &quot;observedText&quot;: &quot;클랜 없음&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Group_Trophies&quot;,
+            &quot;kind&quot;: &quot;display&quot;,
+            &quot;observedText&quot;: &quot;0&quot;
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Group_UtilityButtons&quot;,
+        &quot;kind&quot;: &quot;buttonRow&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          638,
+          235,
+          405,
+          122
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Btn_People&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_News&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Menu&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Btn_RoyalPass&quot;,
+        &quot;kind&quot;: &quot;buttonCandidate&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          650,
+          375,
+          410,
+          196
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Txt_RoyalPass&quot;,
+            &quot;kind&quot;: &quot;text&quot;,
+            &quot;observedText&quot;: &quot;로얄 패스&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Img_Lock&quot;,
+            &quot;kind&quot;: &quot;image&quot;
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Btn_MiniPass&quot;,
+        &quot;kind&quot;: &quot;buttonCandidate&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          890,
+          636,
+          177,
+          220
+        ],
+        &quot;observedText&quot;: &quot;3일 1시간&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Group_ArenaDiorama&quot;,
+        &quot;kind&quot;: &quot;display&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          260,
+          975,
+          560,
+          530
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Img_Arena&quot;,
+            &quot;kind&quot;: &quot;image&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Group_TrophyProgress&quot;,
+            &quot;kind&quot;: &quot;display&quot;
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Btn_EventsChests&quot;,
+        &quot;kind&quot;: &quot;buttonCandidate&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          315,
+          1585,
+          460,
+          210
+        ],
+        &quot;observedText&quot;: &quot;이벤트 / 1&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Group_BattleActions&quot;,
+        &quot;kind&quot;: &quot;buttonRow&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          122,
+          1812,
+          868,
+          242
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Btn_DeckQuickview&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Battle&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;observedText&quot;: &quot;전투&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_ModeTrophy&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Group_BottomNavigation&quot;,
+        &quot;kind&quot;: &quot;navigation&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          2155,
+          1080,
+          185
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Btn_Shop&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_CardsCollection&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Badge_Notifications&quot;,
+                &quot;kind&quot;: &quot;display&quot;,
+                &quot;observedText&quot;: &quot;6&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Battle&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Social&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_SwordWreath&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;,
+            &quot;note&quot;: &quot;라벨/목적지 미관찰&quot;
+          }
+        ],
+        &quot;note&quot;: &quot;선택 탭은 넓어지고 라벨·좌우 작은 화살표가 나타남. 각 탭 폭은 상태에 따라 달라짐.&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><ul><li>중앙훈련장·아레나디오라마와조명장면. 3D모델/카메라/애니메이션 제작 제외.</li></ul><h3>미확인</h3><ul><li>친구/소식/메뉴/이벤트상자/다른 바텀메뉴 목적지 미관찰</li><li>전투 실행/매칭/전투 화면</li><li>상단 유틸리티·패스·이벤트 목적지</li><li>현금/보석 추가 버튼 동작</li></ul></details></article><article class="family" id="CR08" data-kind="game" data-search="cr08 덱 페이지 tabpage 같은3자원/상단덱·컬렉션/4열×2카드/평균엘릭서/타워/하단5탭. 수량·레벨·튜토리얼손은 상태로 병합. a-f08 b-f05 덱 컬렉션 전투 덱 레벨 1 레벨 3 new 3.6 1/2 2/2 8/9 6 레벨 2 0/4 6/2"><div class="card-head"><span class="pill">CR08</span><span>tabPage</span></div><h2>덱 페이지</h2><p>같은3자원/상단덱·컬렉션/4열×2카드/평균엘릭서/타워/하단5탭. 수량·레벨·튜토리얼손은 상태로 병합.</p><a class="reference" href="refs/B-016986656us-077e1104.jpg"><img loading="lazy" src="refs/B-016986656us-077e1104.jpg" alt="참고 원본 · 덱 페이지"></a><p class="source">CLASH-B · 요청 17s → 실제 16.986656s<br>원본 1080×2340 · 비교 전용<br>SHA256 077e110404a3dee968ffacd6148a6e7e6099163120fac19ae9aa29e0a49abd2e</p><p class="actual">partial · 실제 조립중 · 미검수 · 제품사용승인 미확인</p><p><a href="http://127.0.0.1:7018/ui-studio/?workspace=workspace-2a3dc8e9-dcd3-4c88-a98a-231991656500&amp;project=ux-ea29177e&amp;editor=detail&amp;screen=screen-afcec0a1-501b-43b4-9203-10f9a4cf94f6">이 판틀 native 편집 열기 · partial</a></p><details><summary>관찰 문구·상태·전환</summary><ul><li>덱</li><li>컬렉션</li><li>전투 덱</li><li>레벨 1</li><li>레벨 3</li><li>NEW</li><li>3.6</li><li>1/2</li><li>2/2</li><li>8/9</li><li>6</li><li>레벨 2</li><li>0/4</li><li>6/2</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-083997256us-48bc5799.jpg">보상정산 중 수치15/109</a> <small>CLASH-A · 요청 84s → 실제 83.997256s</small></li><li><a href="refs/A-084999056us-8e69f35b.jpg">정산후17/118/100</a> <small>CLASH-A · 요청 85s → 실제 84.999056s</small></li><li><a href="refs/B-016986656us-077e1104.jpg">영상B 대표 상태</a> <small>CLASH-B · 요청 17s → 실제 16.986656s</small></li></ul><h3>실제 관찰</h3><ul><li>82.996~83.997초 홈다음 덱 등장; 하단 카드입구로 추정.</li><li>86.400초 덱;86.600초 컬렉션목록 하단으로 전환. 실제 탭입력은 미확인.</li><li>이번 영상에서 스크롤 미관찰</li><li>16초 홈과 카드 페이지의 가로 이동 중,16.2초 덱 페이지 표시</li><li>19.6초까지 덱 탭 유지</li><li>19.8초 컬렉션 탭으로 변경</li></ul><h3>입력 후보 · 추정</h3><ul><li>하단 카드/컬렉션탭 또는 좌우 스와이프 진입</li><li>상단 컬렉션 라벨이 다음 목록 입구</li></ul></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p><a href="#sample-collection_four_columns">collection_four_columns · 컬렉션 구조 적합·덱은 부분</a><br>ux-25ecc98a r63 / Page_TSV_Heroes<br>4열·분리 초상/native 레벨·스크롤 본문/고정 상하단의 구조를 참고합니다. 덱은 이 유닛을 새 4×2 컨테이너에 조립할 후보이며 Tower 영역·덱 선택·교체 동작은 없습니다.</p><ul><li>실제 layout.type=grid가 아닌 개별 카드의 fixed rectTransform 배치입니다.</li><li>필터는 panel이며 control tabs/연결이 없습니다. 모집/영웅 상세는 미연결입니다.</li><li>보유카드 4×2+Tower·바텀시트 전용 계층은 없습니다.</li><li>scroll-y 저장은 있으나 authored 크기에서 11카드 본문560이 viewport694보다 짧습니다. 실제 스크롤 발생을 뜻하지 않습니다.</li></ul><p><a href="#sample-album_card_family">album_card_family · 유닛만 부분 적합</a><br>ux-gjs-0d80d7fe r354 / Page_Album_Sets<br>카드 그림·제목·진행수량과 입력 wrapper 분리, scroll viewport→content→카드 계층을 참고합니다. 샘플은 앨범 세트 3열 9장이고 클래시 컬렉션/덱은 4열 개별 카드입니다.</p><ul><li>3열 164×248을 클래시 카드 비율·4열에 직접 적용하지 않습니다.</li><li>카드 클릭→상세 연결은 없고 Back만 있습니다.</li><li>카드 level/희귀도/엘릭서/업그레이드 상태는 없습니다.</li></ul></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F08&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;screen&quot;,
+        &quot;description&quot;: &quot;카드관리 공통셸&quot;
+      },
+      {
+        &quot;id&quot;: &quot;HUD_Currency&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;row&quot;,
+        &quot;description&quot;: &quot;경험/골드/보석&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Tabs_Mode&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;tabbar&quot;,
+        &quot;description&quot;: &quot;덱·컬렉션&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          105,
+          236,
+          868,
+          119
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;DeckBanner&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;ribbon&quot;,
+        &quot;description&quot;: &quot;전투 덱&quot;
+      },
+      {
+        &quot;id&quot;: &quot;DeckGrid&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;grid&quot;,
+        &quot;description&quot;: &quot;2행×4카드&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          18,
+          583,
+          1040,
+          761
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;DeckCard&quot;,
+        &quot;parent&quot;: &quot;DeckGrid&quot;,
+        &quot;role&quot;: &quot;repeat-card&quot;,
+        &quot;description&quot;: &quot;비용/초상/레벨/NEW/수량게이지는별도역할&quot;
+      },
+      {
+        &quot;id&quot;: &quot;AverageElixir&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;stat&quot;,
+        &quot;description&quot;: &quot;보라 엘릭서3.6&quot;
+      },
+      {
+        &quot;id&quot;: &quot;TowerUnits&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;panel&quot;,
+        &quot;description&quot;: &quot;킹/타워캐릭터/레벨/진행/연필/타워유닛카드&quot;
+      },
+      {
+        &quot;id&quot;: &quot;BottomNav&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;tabbar&quot;,
+        &quot;description&quot;: &quot;공통5메뉴&quot;
+      }
+    ]
+  },
+  {
+    &quot;sourceFamilyId&quot;: &quot;B-F05&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;name&quot;: &quot;Group_ResourceHUD&quot;,
+        &quot;kind&quot;: &quot;fixedOverlay&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          102,
+          1080,
+          86
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Group_ProgressXP&quot;,
+            &quot;kind&quot;: &quot;display&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              0,
+              102,
+              407,
+              86
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_XPCards&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Img_ProgressBar&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_XP&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;18&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_GoldPlus&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              427,
+              110,
+              340,
+              74
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_Gold&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_Gold&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;113&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Glyph_Plus&quot;,
+                &quot;kind&quot;: &quot;text&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_GemPlus&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              785,
+              110,
+              274,
+              74
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_Gem&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_Gem&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;100&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Glyph_Plus&quot;,
+                &quot;kind&quot;: &quot;text&quot;
+              }
+            ]
+          }
+        ],
+        &quot;note&quot;: &quot;소셜에서는 이 HUD가 보이지 않음. shop/collection 스크롤 중에는 같은 화면 위치 유지. 원본 Unity 계층 아님.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Tabs_DeckCollection&quot;,
+        &quot;kind&quot;: &quot;tabs&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          100,
+          235,
+          880,
+          118
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Tab_Deck&quot;,
+            &quot;kind&quot;: &quot;tab&quot;,
+            &quot;observedText&quot;: &quot;덱&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Tab_Collection&quot;,
+            &quot;kind&quot;: &quot;tab&quot;,
+            &quot;observedText&quot;: &quot;컬렉션 / 6&quot;
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Header_Deck&quot;,
+        &quot;kind&quot;: &quot;display&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          350,
+          1080,
+          175
+        ],
+        &quot;observedText&quot;: &quot;전투 덱&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Group_BattleDeckBody&quot;,
+        &quot;kind&quot;: &quot;sharedContent&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          700,
+          1080,
+          1470
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Grid_DeckCards&quot;,
+            &quot;kind&quot;: &quot;grid&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Card_Unit&quot;,
+                &quot;kind&quot;: &quot;repeatableComponent&quot;,
+                &quot;children&quot;: [
+                  {
+                    &quot;name&quot;: &quot;Img_Frame&quot;,
+                    &quot;kind&quot;: &quot;image&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Img_Artwork&quot;,
+                    &quot;kind&quot;: &quot;image&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Badge_Elixir&quot;,
+                    &quot;kind&quot;: &quot;display&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Txt_Level&quot;,
+                    &quot;kind&quot;: &quot;text&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Group_UpgradeProgress&quot;,
+                    &quot;kind&quot;: &quot;display&quot;,
+                    &quot;children&quot;: [
+                      {
+                        &quot;name&quot;: &quot;Img_Arrow&quot;,
+                        &quot;kind&quot;: &quot;image&quot;
+                      },
+                      {
+                        &quot;name&quot;: &quot;Img_Fill&quot;,
+                        &quot;kind&quot;: &quot;image&quot;
+                      },
+                      {
+                        &quot;name&quot;: &quot;Txt_OwnedRequired&quot;,
+                        &quot;kind&quot;: &quot;text&quot;
+                      }
+                    ]
+                  },
+                  {
+                    &quot;name&quot;: &quot;Badge_New&quot;,
+                    &quot;kind&quot;: &quot;display&quot;,
+                    &quot;note&quot;: &quot;선택 항목만&quot;
+                  }
+                ],
+                &quot;note&quot;: &quot;이 계층은 픽셀 관찰을 재조립하기 위한 제안. 실제 엔진 부품/HitArea/폰트값 미확인.&quot;,
+                &quot;repeat&quot;: [
+                  4,
+                  2
+                ]
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Group_AverageElixir&quot;,
+            &quot;kind&quot;: &quot;display&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_Elixir&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_Average&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;3.6&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Img_Divider&quot;,
+            &quot;kind&quot;: &quot;image&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Group_Towers&quot;,
+            &quot;kind&quot;: &quot;display&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_KingPrincessTowers&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Group_KingProgress&quot;,
+                &quot;kind&quot;: &quot;display&quot;,
+                &quot;observedText&quot;: &quot;1 / 8/9&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Btn_TowerAppearance&quot;,
+                &quot;kind&quot;: &quot;buttonCandidate&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Card_TowerTroop&quot;,
+                &quot;kind&quot;: &quot;card&quot;,
+                &quot;observedText&quot;: &quot;레벨 1 / 1/2&quot;
+              }
+            ]
+          }
+        ],
+        &quot;note&quot;: &quot;시트에서는 grid y≈700, 정식 페이지에서는 y≈575. 본문 재사용 가능하나 전체 화면 shell 동일 아님.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Group_BottomNavigation&quot;,
+        &quot;kind&quot;: &quot;navigation&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          2155,
+          1080,
+          185
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Btn_Shop&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_CardsCollection&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Badge_Notifications&quot;,
+                &quot;kind&quot;: &quot;display&quot;,
+                &quot;observedText&quot;: &quot;6&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Battle&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Social&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_SwordWreath&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;,
+            &quot;note&quot;: &quot;라벨/목적지 미관찰&quot;
+          }
+        ],
+        &quot;note&quot;: &quot;선택 탭은 넓어지고 라벨·좌우 작은 화살표가 나타남. 각 탭 폭은 상태에 따라 달라짐.&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><ul><li>하단왕/프린세스타워3D모형. 2D그림·별도native진행/수치로분리할후보이며3D제작제외.</li></ul><h3>미확인</h3><ul><li>덱 교체/카드드래그/연필/타워상세/선택외탭 동작 미관찰</li><li>카드 선택 결과</li><li>편집 버튼 결과</li><li>상단 덱탭으로 역복귀</li><li>덱 본문 실제 스크롤</li></ul></details></article><article class="family" id="CR09" data-kind="game" data-search="cr09 컬렉션 목록 scrollpage 상단2탭+5분류/발견·미발견4열목록/필터·정렬/하단5탭. 선택카드팝오버·업그레이드전후·스크롤 위치는 상태. a-f09 b-f06 덱 컬렉션 카드 컬렉션 찾음: 8/123 레벨 기준 발견함 미발견 잠금 해제: 아레나 1 타워 유닛 찾음: 1/4 업그레이드 정보 사용"><div class="card-head"><span class="pill">CR09</span><span>scrollPage</span></div><h2>컬렉션 목록</h2><p>상단2탭+5분류/발견·미발견4열목록/필터·정렬/하단5탭. 선택카드팝오버·업그레이드전후·스크롤 위치는 상태.</p><a class="reference" href="refs/B-019991200us-fb41a8f1.jpg"><img loading="lazy" src="refs/B-019991200us-fb41a8f1.jpg" alt="참고 원본 · 컬렉션 목록"></a><p class="source">CLASH-B · 요청 20s → 실제 19.991200s<br>원본 1080×2340 · 비교 전용<br>SHA256 fb41a8f1e245de7a09f1e4a69b7b960bbdda9f765870538a11430b89e272e678</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>덱</li><li>컬렉션</li><li>카드 컬렉션</li><li>찾음: 8/123</li><li>레벨 기준</li><li>발견함</li><li>미발견</li><li>잠금 해제:</li><li>아레나 1</li><li>타워 유닛</li><li>찾음: 1/4</li><li>업그레이드</li><li>정보</li><li>사용</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-086984000us-aebd9434.jpg">세로목록하단·타워유닛</a> <small>CLASH-A · 요청 87s → 실제 86.984000s</small></li><li><a href="refs/A-087784456us-82165122.jpg">스크롤중</a> <small>CLASH-A · 요청 87.8s → 실제 87.784456s</small></li><li><a href="refs/A-088986522us-cc455e5b.jpg">목록상단</a> <small>CLASH-A · 요청 89s → 실제 88.986522s</small></li><li><a href="refs/A-090496400us-ae9b4398.jpg">기사선택·업그레이드/사용</a> <small>CLASH-A · 요청 90.5s → 실제 90.496400s</small></li><li><a href="refs/A-099489689us-8e90d3a0.jpg">업그레이드후 정보/사용</a> <small>CLASH-A · 요청 99.5s → 실제 99.489689s</small></li><li><a href="refs/B-019991200us-fb41a8f1.jpg">영상B 대표 상태</a> <small>CLASH-B · 요청 20s → 실제 19.991200s</small></li></ul><h3>실제 관찰</h3><ul><li>86.600초 덱 다음 컬렉션 아래쪽;88.987초 목록상단;90.496초 기사선택확장.</li><li>91.489초 기사상세로 진행;업그레이드완료후98.989초 동일목록복귀;100.241초 홈.</li><li>86.600~88.987초 하단목록에서상단으로보이는영역이변한다. 상단3자원/하단메뉴는같은위치. 스크롤오프셋과gesture는미확인.</li><li>20초 8개 발견 카드와 미발견 시작 표시</li><li>20.8~22.8초 상단 덱/컬렉션·아이콘분류·정렬행도 위로 사라지고 4열 미발견 목록이 계속 이동,HUD와 하단 nav 위치는 유지</li><li>후반 행은 아레나/잠금 문구가 다르지만 같은 4열 그리드 반복</li><li>B20.8~22.8초에는 상단2탭·5분류·정렬행도 스크롤과 함께 사라짐. source A의 상위탭고정정책 미확인은 B 관찰로 보완. HUD/하단nav만 고정 관찰.</li></ul><h3>입력 후보 · 추정</h3><ul><li>목록의 상향 이동은 위로 스와이프한 세로 스크롤로 추정,손가락 경로/scrollTop 값은 없음</li></ul></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p><a href="#sample-collection_four_columns">collection_four_columns · 컬렉션 구조 적합·덱은 부분</a><br>ux-25ecc98a r63 / Page_TSV_Heroes<br>4열·분리 초상/native 레벨·스크롤 본문/고정 상하단의 구조를 참고합니다. 덱은 이 유닛을 새 4×2 컨테이너에 조립할 후보이며 Tower 영역·덱 선택·교체 동작은 없습니다.</p><ul><li>실제 layout.type=grid가 아닌 개별 카드의 fixed rectTransform 배치입니다.</li><li>필터는 panel이며 control tabs/연결이 없습니다. 모집/영웅 상세는 미연결입니다.</li><li>보유카드 4×2+Tower·바텀시트 전용 계층은 없습니다.</li><li>scroll-y 저장은 있으나 authored 크기에서 11카드 본문560이 viewport694보다 짧습니다. 실제 스크롤 발생을 뜻하지 않습니다.</li></ul><p><a href="#sample-album_card_family">album_card_family · 유닛만 부분 적합</a><br>ux-gjs-0d80d7fe r354 / Page_Album_Sets<br>카드 그림·제목·진행수량과 입력 wrapper 분리, scroll viewport→content→카드 계층을 참고합니다. 샘플은 앨범 세트 3열 9장이고 클래시 컬렉션/덱은 4열 개별 카드입니다.</p><ul><li>3열 164×248을 클래시 카드 비율·4열에 직접 적용하지 않습니다.</li><li>카드 클릭→상세 연결은 없고 Back만 있습니다.</li><li>카드 level/희귀도/엘릭서/업그레이드 상태는 없습니다.</li></ul><p><a href="#sample-home_toolbar">home_toolbar · 부분 적합</a><br>ux-25ecc98a r63 / Page_TSV_Territory<br>상단 고정 HUD·하단 고정 nav를 중앙 장면과 형제로 두는 계층을 참고합니다. 샘플 nav는 6슬롯이고 중앙은 영지 그림입니다. 클래시 5탭·중앙 아레나·자원 종류/아이콘/라벨은 새 원본에 맞춥니다.</p><ul><li>6슬롯 중 Heroes만 유효 진입 연결입니다. 5탭의 각 목적지를 제공하지 않습니다.</li><li>기존 64px/84px 규격을 390폭에 그대로 강제하지 않습니다.</li></ul></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F09&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;screen&quot;,
+        &quot;description&quot;: &quot;카드관리공통셸&quot;
+      },
+      {
+        &quot;id&quot;: &quot;HUD_Currency&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;row&quot;,
+        &quot;description&quot;: &quot;경험/골드/보석(스크롤중에도 화면상단유지)&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Tabs_Mode&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;tabbar&quot;,
+        &quot;description&quot;: &quot;덱·컬렉션&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Tabs_Category&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;tabbar&quot;,
+        &quot;description&quot;: &quot;5개아이콘; 카드/다른4종&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Scroll_Collection&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;scroll&quot;,
+        &quot;description&quot;: &quot;세로 카드본문&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Toolbar&quot;,
+        &quot;parent&quot;: &quot;Scroll_Collection&quot;,
+        &quot;role&quot;: &quot;row&quot;,
+        &quot;description&quot;: &quot;찾음·필터슬라이더아이콘·정렬삼각·레벨기준&quot;
+      },
+      {
+        &quot;id&quot;: &quot;DiscoveredGrid&quot;,
+        &quot;parent&quot;: &quot;Scroll_Collection&quot;,
+        &quot;role&quot;: &quot;grid&quot;,
+        &quot;description&quot;: &quot;발견함 4열 카드&quot;
+      },
+      {
+        &quot;id&quot;: &quot;UndiscoveredGrid&quot;,
+        &quot;parent&quot;: &quot;Scroll_Collection&quot;,
+        &quot;role&quot;: &quot;grid&quot;,
+        &quot;description&quot;: &quot;미발견 회색 4열 아레나해제카드&quot;
+      },
+      {
+        &quot;id&quot;: &quot;TowerUnitSection&quot;,
+        &quot;parent&quot;: &quot;Scroll_Collection&quot;,
+        &quot;role&quot;: &quot;grid&quot;,
+        &quot;description&quot;: &quot;하단 타워유닛4카드&quot;
+      },
+      {
+        &quot;id&quot;: &quot;SelectedCardPopover&quot;,
+        &quot;parent&quot;: &quot;Scroll_Collection&quot;,
+        &quot;role&quot;: &quot;popover&quot;,
+        &quot;description&quot;: &quot;선택 카드 확장과 업그레이드/정보+사용&quot;
+      },
+      {
+        &quot;id&quot;: &quot;BottomNav&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;tabbar&quot;,
+        &quot;description&quot;: &quot;5메뉴;컬렉션선택&quot;
+      }
+    ]
+  },
+  {
+    &quot;sourceFamilyId&quot;: &quot;B-F06&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;name&quot;: &quot;Group_ResourceHUD&quot;,
+        &quot;kind&quot;: &quot;fixedOverlay&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          102,
+          1080,
+          86
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Group_ProgressXP&quot;,
+            &quot;kind&quot;: &quot;display&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              0,
+              102,
+              407,
+              86
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_XPCards&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Img_ProgressBar&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_XP&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;18&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_GoldPlus&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              427,
+              110,
+              340,
+              74
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_Gold&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_Gold&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;113&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Glyph_Plus&quot;,
+                &quot;kind&quot;: &quot;text&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_GemPlus&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              785,
+              110,
+              274,
+              74
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_Gem&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_Gem&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;100&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Glyph_Plus&quot;,
+                &quot;kind&quot;: &quot;text&quot;
+              }
+            ]
+          }
+        ],
+        &quot;note&quot;: &quot;소셜에서는 이 HUD가 보이지 않음. shop/collection 스크롤 중에는 같은 화면 위치 유지. 원본 Unity 계층 아님.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Viewport_CollectionScroll&quot;,
+        &quot;kind&quot;: &quot;verticalScroll&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          0,
+          1080,
+          2155
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Tabs_DeckCollection&quot;,
+            &quot;kind&quot;: &quot;tabs&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              100,
+              235,
+              880,
+              118
+            ],
+            &quot;observedText&quot;: &quot;덱 / 컬렉션&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Group_CollectionCategories&quot;,
+            &quot;kind&quot;: &quot;iconTabRow&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              0,
+              350,
+              1080,
+              200
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Tab_Cards&quot;,
+                &quot;kind&quot;: &quot;tabCandidate&quot;,
+                &quot;observedText&quot;: &quot;2&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Tab_Tokens&quot;,
+                &quot;kind&quot;: &quot;tabCandidate&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Tab_Emotes&quot;,
+                &quot;kind&quot;: &quot;tabCandidate&quot;,
+                &quot;observedText&quot;: &quot;4&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Tab_Towers&quot;,
+                &quot;kind&quot;: &quot;tabCandidate&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Tab_Badge&quot;,
+                &quot;kind&quot;: &quot;tabCandidate&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Group_CollectionControls&quot;,
+            &quot;kind&quot;: &quot;row&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              26,
+              632,
+              1028,
+              132
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Txt_CollectionTitle&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;카드 컬렉션&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_Found&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;찾음: 8/123&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Btn_Filter&quot;,
+                &quot;kind&quot;: &quot;buttonCandidate&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Btn_Ascending&quot;,
+                &quot;kind&quot;: &quot;buttonCandidate&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Btn_SortCriterion&quot;,
+                &quot;kind&quot;: &quot;buttonCandidate&quot;,
+                &quot;observedText&quot;: &quot;레벨 기준&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Txt_Discovered&quot;,
+            &quot;kind&quot;: &quot;text&quot;,
+            &quot;observedText&quot;: &quot;발견함&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Grid_Discovered&quot;,
+            &quot;kind&quot;: &quot;grid&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Card_Unit&quot;,
+                &quot;kind&quot;: &quot;repeatableComponent&quot;,
+                &quot;children&quot;: [
+                  {
+                    &quot;name&quot;: &quot;Img_Frame&quot;,
+                    &quot;kind&quot;: &quot;image&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Img_Artwork&quot;,
+                    &quot;kind&quot;: &quot;image&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Badge_Elixir&quot;,
+                    &quot;kind&quot;: &quot;display&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Txt_Level&quot;,
+                    &quot;kind&quot;: &quot;text&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Group_UpgradeProgress&quot;,
+                    &quot;kind&quot;: &quot;display&quot;,
+                    &quot;children&quot;: [
+                      {
+                        &quot;name&quot;: &quot;Img_Arrow&quot;,
+                        &quot;kind&quot;: &quot;image&quot;
+                      },
+                      {
+                        &quot;name&quot;: &quot;Img_Fill&quot;,
+                        &quot;kind&quot;: &quot;image&quot;
+                      },
+                      {
+                        &quot;name&quot;: &quot;Txt_OwnedRequired&quot;,
+                        &quot;kind&quot;: &quot;text&quot;
+                      }
+                    ]
+                  },
+                  {
+                    &quot;name&quot;: &quot;Badge_New&quot;,
+                    &quot;kind&quot;: &quot;display&quot;,
+                    &quot;note&quot;: &quot;선택 항목만&quot;
+                  }
+                ],
+                &quot;note&quot;: &quot;이 계층은 픽셀 관찰을 재조립하기 위한 제안. 실제 엔진 부품/HitArea/폰트값 미확인.&quot;,
+                &quot;repeat&quot;: [
+                  4,
+                  2
+                ]
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Txt_Undiscovered&quot;,
+            &quot;kind&quot;: &quot;text&quot;,
+            &quot;observedText&quot;: &quot;미발견&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Grid_Undiscovered&quot;,
+            &quot;kind&quot;: &quot;grid&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Card_LockedUnit&quot;,
+                &quot;kind&quot;: &quot;repeatableComponent&quot;,
+                &quot;children&quot;: [
+                  {
+                    &quot;name&quot;: &quot;Img_GrayscaleArtwork&quot;,
+                    &quot;kind&quot;: &quot;image&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Txt_ArenaUnlock&quot;,
+                    &quot;kind&quot;: &quot;text&quot;
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Group_BottomNavigation&quot;,
+        &quot;kind&quot;: &quot;navigation&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          2155,
+          1080,
+          185
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Btn_Shop&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_CardsCollection&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Badge_Notifications&quot;,
+                &quot;kind&quot;: &quot;display&quot;,
+                &quot;observedText&quot;: &quot;6&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Battle&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Social&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_SwordWreath&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;,
+            &quot;note&quot;: &quot;라벨/목적지 미관찰&quot;
+          }
+        ],
+        &quot;note&quot;: &quot;선택 탭은 넓어지고 라벨·좌우 작은 화살표가 나타남. 각 탭 폭은 상태에 따라 달라짐.&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>스크롤 입력방식/총픽셀거리/상위탭 고정정책/5하위탭 목적지/정렬·필터효과 미확인</li><li>필터/정렬/다른 카테고리 본문</li><li>미발견 카드 상세</li><li>전체 카드 목록 수동 전수 확인</li><li>원본 scroll metric/Unity mask/anchor</li></ul></details></article><article class="family" id="CR10" data-kind="game" data-search="cr10 카드 상세 detailmodal 돌출기사/파란큰판/카드·이름/희귀도·유형표/시연영역/업그레이드·사용/닫기. 시연3d 제작 제외. a-f10 기사 레벨 1 2/2 희귀도 일반 유형 유닛 업그레이드 5 사용"><div class="card-head"><span class="pill">CR10</span><span>detailModal</span></div><h2>카드 상세</h2><p>돌출기사/파란큰판/카드·이름/희귀도·유형표/시연영역/업그레이드·사용/닫기. 시연3D 제작 제외.</p><a class="reference" href="refs/A-091990178us-1e9609cd.jpg"><img loading="lazy" src="refs/A-091990178us-1e9609cd.jpg" alt="참고 원본 · 카드 상세"></a><p class="source">CLASH-A · 요청 92s → 실제 91.990178s<br>원본 1080×2340 · 비교 전용<br>SHA256 1e9609cdd1b9851c4fe81d9d0e7d8579123367c12bf644b4a6a07c0d1e008d7a</p><p class="actual">partial · 실제 조립중 · 미검수 · 제품사용승인 미확인</p><p><a href="http://127.0.0.1:7018/ui-studio/?workspace=workspace-2a3dc8e9-dcd3-4c88-a98a-231991656500&amp;project=ux-ea29177e&amp;editor=detail&amp;screen=screen-d17e97c9-578e-4fb4-bdca-d4541ba56ad5">이 판틀 native 편집 열기 · partial</a></p><details><summary>관찰 문구·상태·전환</summary><ul><li>기사</li><li>레벨 1</li><li>2/2</li><li>희귀도</li><li>일반</li><li>유형</li><li>유닛</li><li>업그레이드</li><li>5</li><li>사용</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-091990178us-1e9609cd.jpg">카드상세·시연</a> <small>CLASH-A · 요청 92s → 실제 91.990178s</small></li></ul><h3>실제 관찰</h3><ul><li>90.997초 선택메뉴 다음91.489초 상세. 선택카드의업그레이드또는초상탭중정확입력은미확인.</li><li>92.490초 업그레이드보상 확인판이 중첩;X닫기/사용 동작은미관찰.</li><li>이번 영상에서 스크롤 미관찰</li></ul><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p><a href="#sample-card_detail_surrogate">card_detail_surrogate · 근접 예제·직접 적합 없음</a><br>ux-gjs-0d80d7fe r354 / Modal_Showroom_TokenDetail<br>확대 전시 그룹·이름표·그림/native 글자 분리와 하단 CTA/Close만 참고합니다. 원본 카드 상세의 능력치/레벨/업그레이드 비용/확인 상태와 sheet 바닥 위치는 새로 정의해야 합니다.</p><ul><li>토큰 상세이며 카드 능력치/업그레이드 구조가 없습니다.</li><li>equip/info/previous/next는 입력 wrapper이나 유효 transition이 없습니다.</li><li>modal rootMode=fullscreen입니다. 바텀시트 동등 구조/동작으로 쓰지 않습니다.</li><li>명시 진입 transition은 없고 Close만 있습니다.</li></ul></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F10&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;overlay&quot;,
+        &quot;description&quot;: &quot;컬렉션 배후+딤&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Img_KnightFigure&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;판 위 돌출 기사모형&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          301,
+          163,
+          556,
+          593
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Panel_Detail&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;panel&quot;,
+        &quot;description&quot;: &quot;파란 상세판&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          46,
+          758,
+          994,
+          1258
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Close&quot;,
+        &quot;parent&quot;: &quot;Panel_Detail&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;우상 빨강X&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          935,
+          779,
+          72,
+          75
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Card_Preview&quot;,
+        &quot;parent&quot;: &quot;Panel_Detail&quot;,
+        &quot;role&quot;: &quot;card&quot;,
+        &quot;description&quot;: &quot;좌측비용3/기사/레벨/2/2&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Txt_NameLevel&quot;,
+        &quot;parent&quot;: &quot;Panel_Detail&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;기사/레벨1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Stat_Rarity&quot;,
+        &quot;parent&quot;: &quot;Panel_Detail&quot;,
+        &quot;role&quot;: &quot;stat&quot;,
+        &quot;description&quot;: &quot;희귀도/일반&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Stat_Type&quot;,
+        &quot;parent&quot;: &quot;Panel_Detail&quot;,
+        &quot;role&quot;: &quot;stat&quot;,
+        &quot;description&quot;: &quot;유형/유닛&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Scene_Demo&quot;,
+        &quot;parent&quot;: &quot;Panel_Detail&quot;,
+        &quot;role&quot;: &quot;scene-reference&quot;,
+        &quot;description&quot;: &quot;아레나 시연장면&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Pager_Demo&quot;,
+        &quot;parent&quot;: &quot;Panel_Detail&quot;,
+        &quot;role&quot;: &quot;indicator&quot;,
+        &quot;description&quot;: &quot;시연아래 점들&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Upgrade&quot;,
+        &quot;parent&quot;: &quot;Panel_Detail&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;업그레이드5골드&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Use&quot;,
+        &quot;parent&quot;: &quot;Panel_Detail&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;사용&quot;
+      },
+      {
+        &quot;id&quot;: &quot;TutorialHand&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;업그레이드유도손&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><ul><li>상단기사모형/본문아레나시연. 실제3D·전투시뮬레이션제작제외.</li></ul><h3>미확인</h3><ul><li>시연화면 실제플레이입력/점선택/닫기복귀/다른카드상세/패널스크롤 미확인</li></ul></details></article><article class="family" id="CR11" data-kind="game" data-search="cr11 업그레이드 보상 확인 confirmationpopover 상세 위 작은 꼬리판+보상2행+녹색확인비용. 왕 튜토리얼 문구판과 구조·입력역할 다름. a-f11 업그레이드 보상 1 4 확인 5"><div class="card-head"><span class="pill">CR11</span><span>confirmationPopover</span></div><h2>업그레이드 보상 확인</h2><p>상세 위 작은 꼬리판+보상2행+녹색확인비용. 왕 튜토리얼 문구판과 구조·입력역할 다름.</p><a class="reference" href="refs/A-092690322us-713c5900.jpg"><img loading="lazy" src="refs/A-092690322us-713c5900.jpg" alt="참고 원본 · 업그레이드 보상 확인"></a><p class="source">CLASH-A · 요청 92.7s → 실제 92.690322s<br>원본 1080×2340 · 비교 전용<br>SHA256 713c5900820482fbd278736a1e9803463bb33174337a8e10a863a14249070963</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>업그레이드 보상</li><li>1</li><li>4</li><li>확인</li><li>5</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-092690322us-713c5900.jpg">확인판</a> <small>CLASH-A · 요청 92.7s → 실제 92.690322s</small></li></ul><h3>실제 관찰</h3><ul><li>92.490초부터상세위확인판.</li><li>92.9초무렵다이아배경업그레이드발표. 확인입력은안내/전후흐름으로추정.</li><li>이번 영상에서 스크롤 미관찰</li></ul><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p>조사한기존두샘플에서직접적합한전체판틀미선정. 없는계층/동작/수치를만들지않음.</p></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F11&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;overlay&quot;,
+        &quot;description&quot;: &quot;상세 배후+추가딤&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Panel_UpgradeConfirm&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;popover&quot;,
+        &quot;description&quot;: &quot;말풍선테두리/아래꼬리&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          297,
+          1373,
+          489,
+          453
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Txt_Title&quot;,
+        &quot;parent&quot;: &quot;Panel_UpgradeConfirm&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;업그레이드 보상(일부가림)&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Reward_CrownCards&quot;,
+        &quot;parent&quot;: &quot;Panel_UpgradeConfirm&quot;,
+        &quot;role&quot;: &quot;row&quot;,
+        &quot;description&quot;: &quot;왕관카드아이콘1&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Reward_Star&quot;,
+        &quot;parent&quot;: &quot;Panel_UpgradeConfirm&quot;,
+        &quot;role&quot;: &quot;row&quot;,
+        &quot;description&quot;: &quot;금색별아이콘4&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Confirm&quot;,
+        &quot;parent&quot;: &quot;Panel_UpgradeConfirm&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;확인5골드&quot;
+      },
+      {
+        &quot;id&quot;: &quot;TutorialHand&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;확인유도손&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>취소/외부클릭/보상아이콘공식명칭/확인전체문구 일부가림</li></ul></details></article><article class="family" id="CR12" data-kind="game" data-search="cr12 카드 업그레이드 발표 upgraderesult 이름/진행/중앙카드/증가스탯3행 세로배치. 상자보상과 배경만 같아 별도 판틀. a-f12 기사 0/4 레벨 2 피해량 86 +7 초당 피해량 71 +6 hp 759 +69"><div class="card-head"><span class="pill">CR12</span><span>upgradeResult</span></div><h2>카드 업그레이드 발표</h2><p>이름/진행/중앙카드/증가스탯3행 세로배치. 상자보상과 배경만 같아 별도 판틀.</p><a class="reference" href="refs/A-097997133us-ef8b88d0.jpg"><img loading="lazy" src="refs/A-097997133us-ef8b88d0.jpg" alt="참고 원본 · 카드 업그레이드 발표"></a><p class="source">CLASH-A · 요청 98s → 실제 97.997133s<br>원본 1080×2340 · 비교 전용<br>SHA256 ef8b88d06dc29d1af0668a859c787925a274c7296c313c8b857696c74a817217</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>기사</li><li>0/4</li><li>레벨 2</li><li>피해량</li><li>86</li><li>+7</li><li>초당 피해량</li><li>71</li><li>+6</li><li>HP</li><li>759</li><li>+69</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-093992089us-efaddcce.jpg">카드레벨변경·발광</a> <small>CLASH-A · 요청 94s → 실제 93.992089s</small></li><li><a href="refs/A-094993667us-bb66b5b7.jpg">0/4·레벨2</a> <small>CLASH-A · 요청 95s → 실제 94.993667s</small></li><li><a href="refs/A-097997133us-ef8b88d0.jpg">스탯3행</a> <small>CLASH-A · 요청 98s → 실제 97.997133s</small></li></ul><h3>실제 관찰</h3><ul><li>확인판후92.991초부터발표장면.</li><li>98.989초컬렉션복귀;닫기버튼은보이지않고실제복귀입력은미확인.</li><li>이번 영상에서 스크롤 미관찰</li></ul><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p>조사한기존두샘플에서직접적합한전체판틀미선정. 없는계층/동작/수치를만들지않음.</p></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-F12&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;screen&quot;,
+        &quot;description&quot;: &quot;파란 다이아 배경&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Txt_CardName&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;기사&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          443,
+          351,
+          190,
+          105
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Progress_Card&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;progress&quot;,
+        &quot;description&quot;: &quot;화살표/0/4&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          328,
+          463,
+          452,
+          111
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Img_Card&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;card&quot;,
+        &quot;description&quot;: &quot;발광카드/레벨2&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          366,
+          671,
+          341,
+          420
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Stat_UpgradeRows&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;column&quot;,
+        &quot;description&quot;: &quot;피해량86+7/초당피해량71+6/HP759+69&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          392,
+          1134,
+          405,
+          414
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Stat_Icon&quot;,
+        &quot;parent&quot;: &quot;Stat_UpgradeRows&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;각행아이콘&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Stat_Name&quot;,
+        &quot;parent&quot;: &quot;Stat_UpgradeRows&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;항목명&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Stat_Base&quot;,
+        &quot;parent&quot;: &quot;Stat_UpgradeRows&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;현재표시수치&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Stat_Delta&quot;,
+        &quot;parent&quot;: &quot;Stat_UpgradeRows&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;녹색증가량&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>표시수치의밸런스정본/재생시간정책/다른카드/터치복귀조건 미확인</li></ul></details></article><article class="family" id="CR13" data-kind="game" data-search="cr13 전투 덱 바텀시트 bottomsheet cr08과 덱 본문공유. 배후홈딤/상단collapse/바텀시트가 하단내비게이션을 덮는 컨테이너 variant로 별도 유지. b-f02 전투 덱 레벨 2 레벨 1 레벨 3 0/4 6/2 1/2 2/2 new 3.6 8/9"><div class="card-head"><span class="pill">CR13</span><span>bottomSheet</span></div><h2>전투 덱 바텀시트</h2><p>CR08과 덱 본문공유. 배후홈딤/상단collapse/바텀시트가 하단내비게이션을 덮는 컨테이너 variant로 별도 유지.</p><a class="reference" href="refs/B-003088211us-d65488d2.jpg"><img loading="lazy" src="refs/B-003088211us-d65488d2.jpg" alt="참고 원본 · 전투 덱 바텀시트"></a><p class="source">CLASH-B · 요청 3.1s → 실제 3.088211s<br>원본 1080×2340 · 비교 전용<br>SHA256 d65488d239b94022158eae94a4e4d16b1ac7645f87e5e2ac4b2e6ff036d27ed0</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>전투 덱</li><li>레벨 2</li><li>레벨 1</li><li>레벨 3</li><li>0/4</li><li>6/2</li><li>1/2</li><li>2/2</li><li>NEW</li><li>3.6</li><li>8/9</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/B-003088211us-d65488d2.jpg">영상B 대표 상태</a> <small>CLASH-B · 요청 3.1s → 실제 3.088211s</small></li></ul><h3>실제 관찰</h3><ul><li>2.3~2.7초에 아래에서 올라옴</li><li>배후 홈은 어두워진 채 유지되고 하단 탭은 시트에 덮임</li><li>5.3초에는 시트가 사라지고 배후딤이 잠시 남음,5.5초 홈 표시</li></ul><h3>입력 후보 · 추정</h3><ul><li>닫기는 상단 아래방향 chevron이 유력, 실제 touchup 좌표·배경터치 여부는 미관찰</li></ul></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p><a href="#sample-collection_four_columns">collection_four_columns · 컬렉션 구조 적합·덱은 부분</a><br>ux-25ecc98a r63 / Page_TSV_Heroes<br>4열·분리 초상/native 레벨·스크롤 본문/고정 상하단의 구조를 참고합니다. 덱은 이 유닛을 새 4×2 컨테이너에 조립할 후보이며 Tower 영역·덱 선택·교체 동작은 없습니다.</p><ul><li>실제 layout.type=grid가 아닌 개별 카드의 fixed rectTransform 배치입니다.</li><li>필터는 panel이며 control tabs/연결이 없습니다. 모집/영웅 상세는 미연결입니다.</li><li>보유카드 4×2+Tower·바텀시트 전용 계층은 없습니다.</li><li>scroll-y 저장은 있으나 authored 크기에서 11카드 본문560이 viewport694보다 짧습니다. 실제 스크롤 발생을 뜻하지 않습니다.</li></ul><p><a href="#sample-album_card_family">album_card_family · 유닛만 부분 적합</a><br>ux-gjs-0d80d7fe r354 / Page_Album_Sets<br>카드 그림·제목·진행수량과 입력 wrapper 분리, scroll viewport→content→카드 계층을 참고합니다. 샘플은 앨범 세트 3열 9장이고 클래시 컬렉션/덱은 4열 개별 카드입니다.</p><ul><li>3열 164×248을 클래시 카드 비율·4열에 직접 적용하지 않습니다.</li><li>카드 클릭→상세 연결은 없고 Back만 있습니다.</li><li>카드 level/희귀도/엘릭서/업그레이드 상태는 없습니다.</li></ul></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;B-F02&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;name&quot;: &quot;Img_BackdropDim&quot;,
+        &quot;kind&quot;: &quot;overlay&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          0,
+          1080,
+          2340
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Panel_DeckBottomSheet&quot;,
+        &quot;kind&quot;: &quot;bottomSheet&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          340,
+          1080,
+          2000
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Btn_CollapseChevron&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              430,
+              365,
+              218,
+              87
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Header_Deck&quot;,
+            &quot;kind&quot;: &quot;display&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              0,
+              475,
+              1080,
+              150
+            ],
+            &quot;observedText&quot;: &quot;전투 덱&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Group_BattleDeckBody&quot;,
+            &quot;kind&quot;: &quot;sharedContent&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              0,
+              700,
+              1080,
+              1470
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Grid_DeckCards&quot;,
+                &quot;kind&quot;: &quot;grid&quot;,
+                &quot;children&quot;: [
+                  {
+                    &quot;name&quot;: &quot;Card_Unit&quot;,
+                    &quot;kind&quot;: &quot;repeatableComponent&quot;,
+                    &quot;children&quot;: [
+                      {
+                        &quot;name&quot;: &quot;Img_Frame&quot;,
+                        &quot;kind&quot;: &quot;image&quot;
+                      },
+                      {
+                        &quot;name&quot;: &quot;Img_Artwork&quot;,
+                        &quot;kind&quot;: &quot;image&quot;
+                      },
+                      {
+                        &quot;name&quot;: &quot;Badge_Elixir&quot;,
+                        &quot;kind&quot;: &quot;display&quot;
+                      },
+                      {
+                        &quot;name&quot;: &quot;Txt_Level&quot;,
+                        &quot;kind&quot;: &quot;text&quot;
+                      },
+                      {
+                        &quot;name&quot;: &quot;Group_UpgradeProgress&quot;,
+                        &quot;kind&quot;: &quot;display&quot;,
+                        &quot;children&quot;: [
+                          {
+                            &quot;name&quot;: &quot;Img_Arrow&quot;,
+                            &quot;kind&quot;: &quot;image&quot;
+                          },
+                          {
+                            &quot;name&quot;: &quot;Img_Fill&quot;,
+                            &quot;kind&quot;: &quot;image&quot;
+                          },
+                          {
+                            &quot;name&quot;: &quot;Txt_OwnedRequired&quot;,
+                            &quot;kind&quot;: &quot;text&quot;
+                          }
+                        ]
+                      },
+                      {
+                        &quot;name&quot;: &quot;Badge_New&quot;,
+                        &quot;kind&quot;: &quot;display&quot;,
+                        &quot;note&quot;: &quot;선택 항목만&quot;
+                      }
+                    ],
+                    &quot;note&quot;: &quot;이 계층은 픽셀 관찰을 재조립하기 위한 제안. 실제 엔진 부품/HitArea/폰트값 미확인.&quot;,
+                    &quot;repeat&quot;: [
+                      4,
+                      2
+                    ]
+                  }
+                ]
+              },
+              {
+                &quot;name&quot;: &quot;Group_AverageElixir&quot;,
+                &quot;kind&quot;: &quot;display&quot;,
+                &quot;children&quot;: [
+                  {
+                    &quot;name&quot;: &quot;Img_Elixir&quot;,
+                    &quot;kind&quot;: &quot;image&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Txt_Average&quot;,
+                    &quot;kind&quot;: &quot;text&quot;,
+                    &quot;observedText&quot;: &quot;3.6&quot;
+                  }
+                ]
+              },
+              {
+                &quot;name&quot;: &quot;Img_Divider&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Group_Towers&quot;,
+                &quot;kind&quot;: &quot;display&quot;,
+                &quot;children&quot;: [
+                  {
+                    &quot;name&quot;: &quot;Img_KingPrincessTowers&quot;,
+                    &quot;kind&quot;: &quot;image&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Group_KingProgress&quot;,
+                    &quot;kind&quot;: &quot;display&quot;,
+                    &quot;observedText&quot;: &quot;1 / 8/9&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Btn_TowerAppearance&quot;,
+                    &quot;kind&quot;: &quot;buttonCandidate&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Card_TowerTroop&quot;,
+                    &quot;kind&quot;: &quot;card&quot;,
+                    &quot;observedText&quot;: &quot;레벨 1 / 1/2&quot;
+                  }
+                ]
+              }
+            ],
+            &quot;note&quot;: &quot;시트에서는 grid y≈700, 정식 페이지에서는 y≈575. 본문 재사용 가능하나 전체 화면 shell 동일 아님.&quot;
+          }
+        ]
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><ul><li>하단왕/프린세스타워3D모형. 2D그림·별도native진행/수치로분리할후보이며3D제작제외.</li></ul><h3>미확인</h3><ul><li>카드 상세/교체/업그레이드</li><li>타워 꾸미기 버튼 목적지</li><li>시트 내부 수동 스크롤</li></ul></details></article><article class="family" id="CR14" data-kind="game" data-search="cr14 게임 모드 바텀시트 bottomsheet cr13과시트shell공유. 트로피/합체전술/잠긴경쟁전/클래식 분할카드 세로목록이라본문판틀은다름. b-f03 게임 모드 트로피 진척도 합체 전술 남은 시간: 12일 2시간 경쟁 모드 경쟁전 13000 트로피에서 잠금 해제 클래식 모드 클래식 1v1"><div class="card-head"><span class="pill">CR14</span><span>bottomSheet</span></div><h2>게임 모드 바텀시트</h2><p>CR13과시트shell공유. 트로피/합체전술/잠긴경쟁전/클래식 분할카드 세로목록이라본문판틀은다름.</p><a class="reference" href="refs/B-006992644us-1d3cf9fb.jpg"><img loading="lazy" src="refs/B-006992644us-1d3cf9fb.jpg" alt="참고 원본 · 게임 모드 바텀시트"></a><p class="source">CLASH-B · 요청 7s → 실제 6.992644s<br>원본 1080×2340 · 비교 전용<br>SHA256 1d3cf9fbe255deab8253260dd21a94a4af3ddf24c92697f929e518db72321863</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>게임 모드</li><li>트로피 진척도</li><li>합체 전술</li><li>남은 시간: 12일 2시간</li><li>경쟁 모드</li><li>경쟁전</li><li>13000 트로피에서 잠금 해제</li><li>클래식 모드</li><li>클래식 1v1</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/B-006992644us-1d3cf9fb.jpg">영상B 대표 상태</a> <small>CLASH-B · 요청 7s → 실제 6.992644s</small></li></ul><h3>실제 관찰</h3><ul><li>6.5초 진입 이동 중,6.7~7.5초 목록 관찰</li><li>7.7초 아래로 내려가고8초 딤만 남은 뒤8.2초 홈 복귀</li></ul><h3>입력 후보 · 추정</h3><ul><li>홈 오른쪽 트로피 버튼이 입구,상단 chevron이 닫기 후보</li></ul></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p>조사한기존두샘플에서직접적합한전체판틀미선정. 없는계층/동작/수치를만들지않음.</p></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;B-F03&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;name&quot;: &quot;Img_BackdropDim&quot;,
+        &quot;kind&quot;: &quot;overlay&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          0,
+          1080,
+          2340
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Panel_ModeBottomSheet&quot;,
+        &quot;kind&quot;: &quot;bottomSheet&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          320,
+          1080,
+          2020
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Btn_CollapseChevron&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              430,
+              348,
+              218,
+              88
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Header_Mode&quot;,
+            &quot;kind&quot;: &quot;display&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              0,
+              460,
+              1080,
+              152
+            ],
+            &quot;observedText&quot;: &quot;게임 모드&quot;
+          },
+          {
+            &quot;name&quot;: &quot;List_ModeCards&quot;,
+            &quot;kind&quot;: &quot;list&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              22,
+              681,
+              1034,
+              1640
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Btn_TrophyRoad&quot;,
+                &quot;kind&quot;: &quot;splitCard&quot;,
+                &quot;observedText&quot;: &quot;트로피 진척도 / 0&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Btn_MergeTactics&quot;,
+                &quot;kind&quot;: &quot;splitCard&quot;,
+                &quot;observedText&quot;: &quot;합체 전술 / 0 / 남은 시간: 12일 2시간&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_CompetitiveHeading&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;경쟁 모드&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Btn_CompetitiveLocked&quot;,
+                &quot;kind&quot;: &quot;splitCard&quot;,
+                &quot;observedText&quot;: &quot;경쟁전 / 13000 트로피에서 잠금 해제&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_ClassicHeading&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;클래식 모드&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Btn_Classic1v1&quot;,
+                &quot;kind&quot;: &quot;splitCard&quot;,
+                &quot;observedText&quot;: &quot;클래식 1v1&quot;
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>모드 선택 결과</li><li>잠김 버튼의 실제 입력반응</li><li>세로 스크롤/아래 추가 모드</li></ul></details></article><article class="family" id="CR15" data-kind="game" data-search="cr15 소셜·클랜 없음 socialpage 상단클랜유도판+온라인/순위표 큰목록+하단퀵플레이/친구추가/카메라. 왕안내는cr17 공통overlay. b-f04 클랜을 생성하거나 가입하세요! 클랜을 검색하거나 생성하세요! 보기 소셜 온라인 순위표 나나나와 0 퀵플레이 친구 추가!"><div class="card-head"><span class="pill">CR15</span><span>socialPage</span></div><h2>소셜·클랜 없음</h2><p>상단클랜유도판+온라인/순위표 큰목록+하단퀵플레이/친구추가/카메라. 왕안내는CR17 공통overlay.</p><a class="reference" href="refs/B-011998133us-dacfc321.jpg"><img loading="lazy" src="refs/B-011998133us-dacfc321.jpg" alt="참고 원본 · 소셜·클랜 없음"></a><p class="source">CLASH-B · 요청 12s → 실제 11.998133s<br>원본 1080×2340 · 비교 전용<br>SHA256 dacfc321e6e2ccd9ec5711618b9062bf236366b403cae6e7b5982412a599d0a8</p><p class="actual">partial · 실제 조립중 · 미검수 · 제품사용승인 미확인</p><p><a href="http://127.0.0.1:7018/ui-studio/?workspace=workspace-2a3dc8e9-dcd3-4c88-a98a-231991656500&amp;project=ux-ea29177e&amp;editor=detail&amp;screen=screen-004379d1-026b-4a8f-ba4c-6e5da113e6b8">이 판틀 native 편집 열기 · partial</a></p><details><summary>관찰 문구·상태·전환</summary><ul><li>클랜을 생성하거나 가입하세요!</li><li>클랜을 검색하거나 생성하세요!</li><li>보기</li><li>소셜</li><li>온라인</li><li>순위표</li><li>나나나와</li><li>0</li><li>퀵플레이</li><li>친구 추가!</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/B-011998133us-dacfc321.jpg">영상B 대표 상태</a> <small>CLASH-B · 요청 12s → 실제 11.998133s</small></li></ul><h3>실제 관찰</h3><ul><li>9.5초 소셜 바탕으로 변경,곧 튜토리얼 캐릭터/딤 표시</li><li>11.7~12초 튜토리얼 제거 후 본문 표시</li><li>14.2초 안내문이 목록 위에 나타나고15초 가로전환 때도 잠시 유지됨</li></ul><h3>입력 후보 · 추정</h3><ul><li>하단 소셜탭 또는 가로스와이프로 진입</li><li>오른쪽 검/월계관 탭 입력 뒤 공사중 안내가 나왔을 가능성 있으나 실제 입력 위치 미관찰</li></ul></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p><a href="#sample-social_tabs_rows">social_tabs_rows · 목록/탭 구조만 부분 적합</a><br>ux-gjs-0d80d7fe r354 / Modal_Friends_Timeline<br>헤더·선택 탭·scroll viewport·반복행·고정 닫기를 참고합니다. 샘플은 modal이고 클랜 목록은 전체 페이지 컨테이너와 하단 5탭을 별도로 검토해야 합니다.</p><ul><li>add/leaderboard는 미관찰 빈 본문입니다. timeline만 실제 내용이 있습니다.</li><li>친구 요청 Send/Reject 입력이 있어도 게임/API 연결은 없습니다.</li><li>클랜 참가·검색·채팅·정렬·클랜정보 연결을 제공하지 않습니다.</li></ul><p><a href="#sample-home_toolbar">home_toolbar · 부분 적합</a><br>ux-25ecc98a r63 / Page_TSV_Territory<br>상단 고정 HUD·하단 고정 nav를 중앙 장면과 형제로 두는 계층을 참고합니다. 샘플 nav는 6슬롯이고 중앙은 영지 그림입니다. 클래시 5탭·중앙 아레나·자원 종류/아이콘/라벨은 새 원본에 맞춥니다.</p><ul><li>6슬롯 중 Heroes만 유효 진입 연결입니다. 5탭의 각 목적지를 제공하지 않습니다.</li><li>기존 64px/84px 규격을 390폭에 그대로 강제하지 않습니다.</li></ul></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;B-F04&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;name&quot;: &quot;Img_BlurredArenaBackdrop&quot;,
+        &quot;kind&quot;: &quot;image&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          0,
+          1080,
+          2155
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Panel_ClanPrompt&quot;,
+        &quot;kind&quot;: &quot;panel&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          58,
+          285,
+          978,
+          334
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Img_ClanSymbol&quot;,
+            &quot;kind&quot;: &quot;image&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Txt_ClanPrompt&quot;,
+            &quot;kind&quot;: &quot;text&quot;,
+            &quot;observedText&quot;: &quot;클랜을 생성하거나 가입하세요!&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Txt_ClanHint&quot;,
+            &quot;kind&quot;: &quot;text&quot;,
+            &quot;observedText&quot;: &quot;클랜을 검색하거나 생성하세요!&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_ViewClan&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;observedText&quot;: &quot;보기&quot;
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Panel_Social&quot;,
+        &quot;kind&quot;: &quot;panel&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          58,
+          666,
+          978,
+          1435
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Header_Social&quot;,
+            &quot;kind&quot;: &quot;display&quot;,
+            &quot;observedText&quot;: &quot;소셜&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Sort&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Filter&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Viewport_SocialList&quot;,
+            &quot;kind&quot;: &quot;list&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              70,
+              785,
+              955,
+              1140
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Txt_Online&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;온라인&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_Ranking&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;순위표&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Row_Self&quot;,
+                &quot;kind&quot;: &quot;row&quot;,
+                &quot;approxRectSourcePx&quot;: [
+                  100,
+                  983,
+                  888,
+                  150
+                ],
+                &quot;children&quot;: [
+                  {
+                    &quot;name&quot;: &quot;Img_Avatar&quot;,
+                    &quot;kind&quot;: &quot;image&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Img_OnlineDot&quot;,
+                    &quot;kind&quot;: &quot;image&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Txt_PlayerName&quot;,
+                    &quot;kind&quot;: &quot;text&quot;,
+                    &quot;observedText&quot;: &quot;나나나와&quot;
+                  },
+                  {
+                    &quot;name&quot;: &quot;Txt_Trophies&quot;,
+                    &quot;kind&quot;: &quot;text&quot;,
+                    &quot;observedText&quot;: &quot;0&quot;
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Group_SocialActions&quot;,
+            &quot;kind&quot;: &quot;buttonRow&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              80,
+              1960,
+              930,
+              112
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Btn_QuickPlay&quot;,
+                &quot;kind&quot;: &quot;buttonCandidate&quot;,
+                &quot;observedText&quot;: &quot;퀵플레이&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Btn_AddFriend&quot;,
+                &quot;kind&quot;: &quot;buttonCandidate&quot;,
+                &quot;observedText&quot;: &quot;친구 추가!&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Btn_Camera&quot;,
+                &quot;kind&quot;: &quot;buttonCandidate&quot;
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Group_BottomNavigation&quot;,
+        &quot;kind&quot;: &quot;navigation&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          2155,
+          1080,
+          185
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Btn_Shop&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_CardsCollection&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Badge_Notifications&quot;,
+                &quot;kind&quot;: &quot;display&quot;,
+                &quot;observedText&quot;: &quot;6&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Battle&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Social&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_SwordWreath&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;,
+            &quot;note&quot;: &quot;라벨/목적지 미관찰&quot;
+          }
+        ],
+        &quot;note&quot;: &quot;선택 탭은 넓어지고 라벨·좌우 작은 화살표가 나타남. 각 탭 폭은 상태에 따라 달라짐.&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>보기/퀵플레이/친구추가/카메라/정렬/필터 결과</li><li>친구목록 실제 스크롤</li><li>클랜 가입/생성/초대</li></ul></details></article><article class="family" id="CR16" data-kind="game" data-search="cr16 상점·세로 섹션 shopscrollpage 고정hud/하단내비 사이 넓은오퍼·3열상품·제목리본의긴세로본문. 일일/이모티콘/보석/골드와역스크롤은상태/반복부품. b-f07 특별 상품 클래시 로얄 초보자 팩 업그레이드 스페셜 미니 패스 이모티콘 마켓 마켓 일일 상품 새 카드 등장까지 남은 시간: 8시간 15분 골드 상자 아레나1 무료! 기사 일반 머스킷병 희귀 꾸미기 아이템 이모티콘 특별한 이모티콘으로 자신을 표현하세요! 자원 보석 골드 크리에이터 부스트"><div class="card-head"><span class="pill">CR16</span><span>shopScrollPage</span></div><h2>상점·세로 섹션</h2><p>고정HUD/하단내비 사이 넓은오퍼·3열상품·제목리본의긴세로본문. 일일/이모티콘/보석/골드와역스크롤은상태/반복부품.</p><a class="reference" href="refs/B-023794289us-dee7bde0.jpg"><img loading="lazy" src="refs/B-023794289us-dee7bde0.jpg" alt="참고 원본 · 상점·세로 섹션"></a><p class="source">CLASH-B · 요청 23.8s → 실제 23.794289s<br>원본 1080×2340 · 비교 전용<br>SHA256 dee7bde00fefb544b41dde8a4850099f7a35a8c000831174c4a342ee80d2cba9</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>특별 상품</li><li>클래시 로얄 초보자 팩</li><li>업그레이드 스페셜</li><li>미니 패스</li><li>이모티콘 마켓</li><li>마켓</li><li>일일 상품</li><li>새 카드 등장까지 남은 시간: 8시간 15분</li><li>골드 상자</li><li>아레나1</li><li>무료!</li><li>기사</li><li>일반</li><li>머스킷병</li><li>희귀</li><li>꾸미기 아이템</li><li>이모티콘</li><li>특별한 이모티콘으로 자신을 표현하세요!</li><li>자원</li><li>보석</li><li>골드</li><li>크리에이터 부스트</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/B-023794289us-dee7bde0.jpg">영상B 대표 상태</a> <small>CLASH-B · 요청 23.8s → 실제 23.794289s</small></li><li><a href="refs/B-028983856us-7d0ab23c.jpg">B-F07-shop-daily.jpg</a> <small>CLASH-B · 요청 29s → 실제 28.983856s</small></li><li><a href="refs/B-027998567us-739dcc1b.jpg">B-F07-shop-emotes.jpg</a> <small>CLASH-B · 요청 28s → 실제 27.998567s</small></li><li><a href="refs/B-026997878us-6c72fe50.jpg">B-F07-shop-gems.jpg</a> <small>CLASH-B · 요청 27s → 실제 26.997878s</small></li><li><a href="refs/B-025996567us-efcce882.jpg">B-F07-shop-gold.jpg</a> <small>CLASH-B · 요청 26s → 실제 25.996567s</small></li><li><a href="refs/B-029984622us-200eae82.jpg">B-F07-shop-mini-pass.jpg</a> <small>CLASH-B · 요청 30s → 실제 29.984622s</small></li></ul><h3>실제 관찰</h3><ul><li>23초 상점 진입 직후 StarterPack 카드가 흰 flash/로딩 연출로 보이고23.4초 정상 그림</li><li>23.8~24초 특별상품 정상 표시</li><li>25초 일일상품,26~27초 자원과 하단 크리에이터 구간,28초 위쪽 이모티콘,29초 일일상품,30초 미니패스,31~32.6초 초보자 팩으로 역스크롤</li><li>스크롤 중 HUD/하단 nav는 고정이며 본문·섹션 배경이 함께 이동</li></ul><h3>입력 후보 · 추정</h3><ul><li>하단 상점탭 또는 좌우 스와이프로 전환</li><li>본문 이동 방향으로 세로 스크롤 추정</li></ul></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p><a href="#sample-shop_products">shop_products · 부분 적합</a><br>ux-gjs-0d80d7fe r354 / Modal_Shop_Store<br>고정 HUD/프로모션·scroll 상품영역·고정 footer와 상품별 그림/수량/가격/버튼 분리를 참고합니다. 클래시 상점은 세로 섹션·서로 다른 offer 크기를 원본대로 재구성해야 합니다.</p><ul><li>샘플은 modal/fullscreen이며 main/menu에서 open, footer close입니다. 하단 5탭 페이지와 같지 않습니다.</li><li>샘플 3열×2행 상품과 실제 클래시 세로 offer 구성은 다릅니다.</li><li>구매 버튼 tint 입력은 있으나 결제/재화 차감 transition은 없습니다.</li><li>scroll-y 저장은 있으나 authored 두 상품행은 viewport 안에 들어갑니다. 긴 세로 상점 스크롤 동등 검수는 아닙니다.</li></ul><p><a href="#sample-home_toolbar">home_toolbar · 부분 적합</a><br>ux-25ecc98a r63 / Page_TSV_Territory<br>상단 고정 HUD·하단 고정 nav를 중앙 장면과 형제로 두는 계층을 참고합니다. 샘플 nav는 6슬롯이고 중앙은 영지 그림입니다. 클래시 5탭·중앙 아레나·자원 종류/아이콘/라벨은 새 원본에 맞춥니다.</p><ul><li>6슬롯 중 Heroes만 유효 진입 연결입니다. 5탭의 각 목적지를 제공하지 않습니다.</li><li>기존 64px/84px 규격을 390폭에 그대로 강제하지 않습니다.</li></ul></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;B-F07&quot;,
+    &quot;status&quot;: &quot;관찰 픽셀에서 재조립하기 위한 제안. 실제 Unity hierarchy 미관찰.&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;name&quot;: &quot;Group_ResourceHUD&quot;,
+        &quot;kind&quot;: &quot;fixedOverlay&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          102,
+          1080,
+          86
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Group_ProgressXP&quot;,
+            &quot;kind&quot;: &quot;display&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              0,
+              102,
+              407,
+              86
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_XPCards&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Img_ProgressBar&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_XP&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;18&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_GoldPlus&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              427,
+              110,
+              340,
+              74
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_Gold&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_Gold&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;113&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Glyph_Plus&quot;,
+                &quot;kind&quot;: &quot;text&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_GemPlus&quot;,
+            &quot;kind&quot;: &quot;buttonCandidate&quot;,
+            &quot;approxRectSourcePx&quot;: [
+              785,
+              110,
+              274,
+              74
+            ],
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Img_Gem&quot;,
+                &quot;kind&quot;: &quot;image&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Txt_Gem&quot;,
+                &quot;kind&quot;: &quot;text&quot;,
+                &quot;observedText&quot;: &quot;100&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Glyph_Plus&quot;,
+                &quot;kind&quot;: &quot;text&quot;
+              }
+            ]
+          }
+        ],
+        &quot;note&quot;: &quot;소셜에서는 이 HUD가 보이지 않음. shop/collection 스크롤 중에는 같은 화면 위치 유지. 원본 Unity 계층 아님.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Viewport_Shop&quot;,
+        &quot;kind&quot;: &quot;verticalScroll&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          0,
+          1080,
+          2155
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Section_SpecialOffers&quot;,
+            &quot;kind&quot;: &quot;section&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Header_SpecialOffers&quot;,
+                &quot;kind&quot;: &quot;ribbon&quot;,
+                &quot;observedText&quot;: &quot;특별 상품&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Offer_StarterPack&quot;,
+                &quot;kind&quot;: &quot;wideOffer&quot;,
+                &quot;observedText&quot;: &quot;클래시 로얄 초보자 팩 / 2일 23시간 / 10000 / 500 / x20 / ₩1,500&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Offer_UpgradeSpecial&quot;,
+                &quot;kind&quot;: &quot;wideOffer&quot;,
+                &quot;observedText&quot;: &quot;업그레이드 스페셜 / 19일 2시간 / 250000 / 20/20 이용 가능 / ₩7,500&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Offer_MiniPass&quot;,
+                &quot;kind&quot;: &quot;wideOffer&quot;,
+                &quot;observedText&quot;: &quot;미니 패스 / 3일 1시간 / ₩4,400&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Offer_EmoteMarket&quot;,
+                &quot;kind&quot;: &quot;wideOffer&quot;,
+                &quot;note&quot;: &quot;제목/상부만 보여 본문 완전판 미확인&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Section_Market&quot;,
+            &quot;kind&quot;: &quot;section&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Header_Market&quot;,
+                &quot;kind&quot;: &quot;woodSign&quot;,
+                &quot;observedText&quot;: &quot;마켓&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Group_DailyOffers&quot;,
+                &quot;kind&quot;: &quot;threeColumnGrid&quot;,
+                &quot;observedText&quot;: &quot;일일 상품 / 8시간 15분&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Product_FreeChest&quot;,
+                &quot;kind&quot;: &quot;productCard&quot;,
+                &quot;observedText&quot;: &quot;골드 상자 / 아레나1 / 무료!&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Product_Knight&quot;,
+                &quot;kind&quot;: &quot;productCard&quot;,
+                &quot;observedText&quot;: &quot;기사 / 일반 / x2 / 0/4 / 20&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Product_Musketeer&quot;,
+                &quot;kind&quot;: &quot;productCard&quot;,
+                &quot;observedText&quot;: &quot;머스킷병 / 희귀 / x1 / 1/2 / 50&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Section_Cosmetics&quot;,
+            &quot;kind&quot;: &quot;section&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Header_Cosmetics&quot;,
+                &quot;kind&quot;: &quot;scrollSign&quot;,
+                &quot;observedText&quot;: &quot;꾸미기 아이템&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Group_EmoteProducts&quot;,
+                &quot;kind&quot;: &quot;threeColumnGrid&quot;,
+                &quot;observedText&quot;: &quot;이모티콘 / 특별한 이모티콘으로 자신을 표현하세요! / 각250보석&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Section_Resources&quot;,
+            &quot;kind&quot;: &quot;section&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Header_Resources&quot;,
+                &quot;kind&quot;: &quot;ribbon&quot;,
+                &quot;observedText&quot;: &quot;자원&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Grid_Gems&quot;,
+                &quot;kind&quot;: &quot;threeColumnGrid&quot;,
+                &quot;observedText&quot;: &quot;보석&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Grid_Gold&quot;,
+                &quot;kind&quot;: &quot;threeColumnGrid&quot;,
+                &quot;observedText&quot;: &quot;골드&quot;
+              },
+              {
+                &quot;name&quot;: &quot;Panel_CreatorBoost&quot;,
+                &quot;kind&quot;: &quot;panel&quot;,
+                &quot;observedText&quot;: &quot;크리에이터 부스트 / 크리에이터 코드를 입력해 슈퍼셀 크리에이터를 후원하세요!&quot;
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Group_BottomNavigation&quot;,
+        &quot;kind&quot;: &quot;navigation&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          2155,
+          1080,
+          185
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Btn_Shop&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_CardsCollection&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;name&quot;: &quot;Badge_Notifications&quot;,
+                &quot;kind&quot;: &quot;display&quot;,
+                &quot;observedText&quot;: &quot;6&quot;
+              }
+            ]
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Battle&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_Social&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Btn_SwordWreath&quot;,
+            &quot;kind&quot;: &quot;tabCandidate&quot;,
+            &quot;note&quot;: &quot;라벨/목적지 미관찰&quot;
+          }
+        ],
+        &quot;note&quot;: &quot;선택 탭은 넓어지고 라벨·좌우 작은 화살표가 나타남. 각 탭 폭은 상태에 따라 달라짐.&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>상품/무료상자/정보 버튼 클릭</li><li>결제/보상/차감</li><li>미니패스 상세/이모티콘마켓 전체/크리에이터 입력·확인</li><li>정확한 scrollTop/총본문높이/scrollbar 계약</li></ul></details></article><article class="family" id="CR17" data-kind="overlay" data-search="cr17 튜토리얼 왕·손가락·말풍선 공통군 commontutorialoverlay 왕+흰말풍선과손가락유도는본문전투/홈/덱/소셜위공통overlay역할로분리. 문구·위치·손의방향·타깃변화는variant. 실제같은엔진prefab이라고주장하지않음. a-f04/group_tutorial a-f07/tutorial a-f08/hand a-f10/tutorialhand a-f11/tutorialhand b-o01 이제 친구와 클랜을 소셜 탭에서 확인할 수 있습니다! 퀵플레이는 새롭게 승리를 거둘 수 있는 방법입니다! 친구들과 한번 플레이해 보세요!"><div class="card-head"><span class="pill">CR17</span><span>commonTutorialOverlay</span></div><h2>튜토리얼 왕·손가락·말풍선 공통군</h2><p>왕+흰말풍선과손가락유도는본문전투/홈/덱/소셜위공통overlay역할로분리. 문구·위치·손의방향·타깃변화는variant. 실제같은엔진prefab이라고주장하지않음.</p><a class="reference" href="refs/B-009996333us-a664ce6a.jpg"><img loading="lazy" src="refs/B-009996333us-a664ce6a.jpg" alt="참고 원본 · 튜토리얼 왕·손가락·말풍선 공통군"></a><p class="source">CLASH-B · 요청 10s → 실제 9.996333s<br>원본 1080×2340 · 비교 전용<br>SHA256 a664ce6add038fdf224d5ea12cb6c28f236b494c54eb7d0d0494b8e5b23b40c0</p><p class="actual">spec-only · 판틀 명세/원본 관찰만 · native screen ID 없음</p><details><summary>관찰 문구·상태·전환</summary><ul><li>이제 친구와 클랜을 소셜 탭에서 확인할 수 있습니다!</li><li>퀵플레이는 새롭게 승리를 거둘 수 있는 방법입니다! 친구들과 한번 플레이해 보세요!</li></ul><h3>같은 판틀의 상태</h3><ul><li><a href="refs/A-019987067us-3b05242e.jpg">훈련전장왕대사</a> <small>CLASH-A · 요청 20s → 실제 19.987067s</small></li><li><a href="refs/A-101993267us-937e4f65.jpg">홈 전투버튼 손+말풍선</a> <small>CLASH-A · 요청 102s → 실제 101.993267s</small></li><li><a href="refs/A-084999056us-8e69f35b.jpg">덱 컬렉션탭 손</a> <small>CLASH-A · 요청 85s → 실제 84.999056s</small></li><li><a href="refs/B-009996333us-a664ce6a.jpg">B-O01-S01</a> <small>CLASH-B · 요청 10s → 실제 9.996333s</small></li><li><a href="refs/B-011197111us-aa5b8c84.jpg">B-O01-S02</a> <small>CLASH-B · 요청 11.2s → 실제 11.197111s</small></li></ul><h3>실제 관찰</h3><ul><li>9.7초 왕이 하단에서 진입</li><li>10초 첫 문구</li><li>11.2초 둘째 문구</li><li>11.7초 아래로 퇴장,12초 본문만 남음</li></ul><h3>입력 후보 · 추정</h3><ul><li>화면 탭으로 다음 문구/닫기 진행 가능성, 실제 탭/자동 타이머 구분 미확인</li></ul></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary><p>조사한기존두샘플에서직접적합한전체판틀미선정. 없는계층/동작/수치를만들지않음.</p></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;B-O01&quot;,
+    &quot;status&quot;: &quot;관찰기반재조립제안&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;name&quot;: &quot;Img_FullScreenDim&quot;,
+        &quot;kind&quot;: &quot;overlay&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          0,
+          1080,
+          2340
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Img_KingCharacter&quot;,
+        &quot;kind&quot;: &quot;image&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          0,
+          1550,
+          932,
+          790
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Group_SpeechBubble&quot;,
+        &quot;kind&quot;: &quot;panel&quot;,
+        &quot;approxRectSourcePx&quot;: [
+          470,
+          1372,
+          488,
+          414
+        ],
+        &quot;children&quot;: [
+          {
+            &quot;name&quot;: &quot;Img_Bubble&quot;,
+            &quot;kind&quot;: &quot;image&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Txt_Tutorial&quot;,
+            &quot;kind&quot;: &quot;text&quot;
+          }
+        ]
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>닫기 버튼/선택형 입력</li><li>다음/이전/재열기</li><li>입력차단 범위/접근성/타이머</li></ul></details></article><article class="family" id="CRS01" data-kind="state" data-search="crs01 공사중 토스트 transienttoast 14.2초 소셜 목록 위에 표시되고 홈/덱 가로전환에도 잠시 남음. 화면/별도 고유판틀로 세지 않음. 발생 버튼/자동이벤트는 미확인. b-o02 이 아레나는 현재 공사 중입니다! 이벤트 모드는 전투 화면으로 이동하였습니다."><div class="card-head"><span class="pill">CRS01</span><span>transientToast</span></div><h2>공사중 토스트</h2><p>14.2초 소셜 목록 위에 표시되고 홈/덱 가로전환에도 잠시 남음. 화면/별도 고유판틀로 세지 않음. 발생 버튼/자동이벤트는 미확인.</p><a class="reference" href="refs/B-014183556us-ad002bf6.jpg"><img loading="lazy" src="refs/B-014183556us-ad002bf6.jpg" alt="참고 원본 · 공사중 토스트"></a><p class="source">CLASH-B · 요청 14.2s → 실제 14.183556s<br>원본 1080×2340 · 비교 전용<br>SHA256 ad002bf6be85dfa843284ca3700a6ec225c9db73bac3fadc3878a1750b241a7c</p><p class="actual">보조 상태 · 등록 전 · 조립 전</p><details><summary>관찰 문구·상태·전환</summary><ul><li>이 아레나는 현재 공사 중입니다! 이벤트 모드는 전투 화면으로 이동하였습니다.</li></ul><h3>같은 판틀의 상태</h3><ul></ul><h3>실제 관찰</h3><p class="muted">미관찰 / 해당 없음</p><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>실제발생입력/타이머/입력차단</li></ul></details></article><article class="family" id="CRX01" data-kind="external" data-search="crx01 android 알림 허용창 permission-sheet os/외부동의공급자 원본참고만. 게임ui제작 분모에서 제외. a-x01 클래시 로얄에서 알림을 보내도록 허용하시겠습니까? 허용 허용 안함"><div class="card-head"><span class="pill">CRX01</span><span>permission-sheet</span></div><h2>Android 알림 허용창</h2><p>OS/외부동의공급자 원본참고만. 게임UI제작 분모에서 제외.</p><a class="reference" href="refs/A-000000000us-4bbbcb76.jpg"><img loading="lazy" src="refs/A-000000000us-4bbbcb76.jpg" alt="참고 원본 · Android 알림 허용창"></a><p class="source">CLASH-A · 요청 0s → 실제 0.000000s<br>원본 1080×2340 · 비교 전용<br>SHA256 4bbbcb767169fa3f44e5945e3283195e1c9e38a044ae3563f2c699db843bda0d</p><p class="actual">외부 UI · 제작대상 제외</p><details><summary>관찰 문구·상태·전환</summary><ul><li>클래시 로얄에서 알림을 보내도록 허용하시겠습니까?</li><li>허용</li><li>허용 안함</li></ul><h3>같은 판틀의 상태</h3><ul></ul><h3>실제 관찰</h3><p class="muted">미관찰 / 해당 없음</p><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-X01&quot;,
+    &quot;status&quot;: &quot;외부판관찰만&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;overlay&quot;,
+        &quot;description&quot;: &quot;로딩 배후&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Sheet_OSPermission&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;system-sheet&quot;,
+        &quot;description&quot;: &quot;벨/질문/세로 두 선택&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          29,
+          1680,
+          1022,
+          638
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Img_Bell&quot;,
+        &quot;parent&quot;: &quot;Sheet_OSPermission&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;알림 벨&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Txt_Prompt&quot;,
+        &quot;parent&quot;: &quot;Sheet_OSPermission&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;알림 허용 질문&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Allow&quot;,
+        &quot;parent&quot;: &quot;Sheet_OSPermission&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;허용&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Deny&quot;,
+        &quot;parent&quot;: &quot;Sheet_OSPermission&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;허용 안함&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>실제 운영체제 버전/선택 결과/재진입 동작 미확인</li></ul></details></article><article class="family" id="CRX02" data-kind="external" data-search="crx02 usercentrics 개인정보 동의판 consent-sheet os/외부동의공급자 원본참고만. 게임ui제작 분모에서 제외. a-x02 개인 정보 개인정보 보호정책 서비스 약관 자세한 정보 모두 수락 전체 거부 powered by usercentrics consent management"><div class="card-head"><span class="pill">CRX02</span><span>consent-sheet</span></div><h2>Usercentrics 개인정보 동의판</h2><p>OS/외부동의공급자 원본참고만. 게임UI제작 분모에서 제외.</p><a class="reference" href="refs/A-012983789us-c787a7cf.jpg"><img loading="lazy" src="refs/A-012983789us-c787a7cf.jpg" alt="참고 원본 · Usercentrics 개인정보 동의판"></a><p class="source">CLASH-A · 요청 13s → 실제 12.983789s<br>원본 1080×2340 · 비교 전용<br>SHA256 c787a7cf0742bfc208396ebec65403eaa20a922122ee6098760e2e21a3ca81dd</p><p class="actual">외부 UI · 제작대상 제외</p><details><summary>관찰 문구·상태·전환</summary><ul><li>개인 정보</li><li>개인정보 보호정책</li><li>서비스 약관</li><li>자세한 정보</li><li>모두 수락</li><li>전체 거부</li><li>Powered by Usercentrics Consent Management</li></ul><h3>같은 판틀의 상태</h3><ul></ul><h3>실제 관찰</h3><p class="muted">미관찰 / 해당 없음</p><h3>입력 후보 · 추정</h3><p class="muted">미관찰 / 해당 없음</p></details><details><summary>기존 샘플 실제 데이터 · 적용 차이</summary></details><details><summary>계층 제안 · 미확인 · 장면 제외</summary><p>픽셀 관찰을 재조립하는 제안이며 원본 Unity 실제 계층·논리 크기·폰트는 미확인입니다.</p><pre>[
+  {
+    &quot;sourceFamilyId&quot;: &quot;A-X02&quot;,
+    &quot;status&quot;: &quot;외부판관찰만&quot;,
+    &quot;nodes&quot;: [
+      {
+        &quot;id&quot;: &quot;ROOT&quot;,
+        &quot;parent&quot;: null,
+        &quot;role&quot;: &quot;overlay&quot;,
+        &quot;description&quot;: &quot;로딩 배후+딤&quot;
+      },
+      {
+        &quot;id&quot;: &quot;OS_Status&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;description&quot;: &quot;시간/기록/배터리 상태바; 샘플 콘텐츠에서 제외&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Panel_Consent&quot;,
+        &quot;parent&quot;: &quot;ROOT&quot;,
+        &quot;role&quot;: &quot;panel&quot;,
+        &quot;description&quot;: &quot;파란 개인정보 동의판&quot;,
+        &quot;approxSourceRectXYWH&quot;: [
+          35,
+          887,
+          1010,
+          1377
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;Img_Logo&quot;,
+        &quot;parent&quot;: &quot;Panel_Consent&quot;,
+        &quot;role&quot;: &quot;image&quot;,
+        &quot;description&quot;: &quot;작은 CLASH ROYALE 로고&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Txt_Title&quot;,
+        &quot;parent&quot;: &quot;Panel_Consent&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;개인 정보&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Txt_ConsentBody&quot;,
+        &quot;parent&quot;: &quot;Panel_Consent&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;cookies·tracking·광고·분석 파트너 안내&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Group_Links&quot;,
+        &quot;parent&quot;: &quot;Panel_Consent&quot;,
+        &quot;role&quot;: &quot;row&quot;,
+        &quot;description&quot;: &quot;보호정책/약관/자세한 정보&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Accept&quot;,
+        &quot;parent&quot;: &quot;Panel_Consent&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;모두 수락&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Btn_Reject&quot;,
+        &quot;parent&quot;: &quot;Panel_Consent&quot;,
+        &quot;role&quot;: &quot;button&quot;,
+        &quot;description&quot;: &quot;전체 거부&quot;
+      },
+      {
+        &quot;id&quot;: &quot;Txt_Vendor&quot;,
+        &quot;parent&quot;: &quot;Panel_Consent&quot;,
+        &quot;role&quot;: &quot;text&quot;,
+        &quot;description&quot;: &quot;Usercentrics 공급자 표기&quot;
+      }
+    ]
+  }
+]</pre><h3>3D 장면 제작 제외</h3><p class="muted">미관찰 / 해당 없음</p><h3>미확인</h3><ul><li>실제 선택/외부 페이지/스크롤/OS 환경 미확인</li></ul></details></article></section><h2>기존 샘플의 실제 저장 데이터</h2><p id="match-status">연결용결과스냅샷읽음</p><p>기존 샘플 실제 계층·크기·폰트·상태·연결·자원은 별도 조사 담당 결과를 읽어 연결합니다. 원본 영상 픽셀을 기존 샘플 저장값으로 바꾸어 적지 않습니다.</p><p>기존 저장샘플 2개: tile-survival ux-25ecc98a r63(504×894), monopoly-go ux-gjs-0d80d7fe r354(551×984). 아래 값은 <strong>실제 저장 설계에서 계산한 논리값</strong>이며 브라우저 실측·Clash 원본 Unity 값이 아닙니다. 대상 native 프로젝트는 4 partial / 12 spec-only·미검수입니다. r43 이후 Social 조립중이며 실제 부품수/최종revision·제품사용승인은 미확인입니다.</p><p><a href="source-snapshots/sample-match-sample-match.json">전체 계층·논리rect·부모좌표·폰트·상태·input·연결·자원 JSON</a></p><details class="saved-match" id="sample-home_toolbar"><summary>home_toolbar · 부분 적합 · Page_TSV_Territory</summary><p>상단 고정 HUD·하단 고정 nav를 중앙 장면과 형제로 두는 계층을 참고합니다. 샘플 nav는 6슬롯이고 중앙은 영지 그림입니다. 클래시 5탭·중앙 아레나·자원 종류/아이콘/라벨은 새 원본에 맞춥니다.</p><p><a href="http://127.0.0.1:7018/ui-studio/?editor=detail&amp;workspace=workspace-76e57701-a74e-4e37-a4f6-9e83c12cd6fc&amp;project=ux-25ecc98a&amp;screen=main">기존 샘플 실제 툴에서 보기</a> · workspace-76e57701-a74e-4e37-a4f6-9e83c12cd6fc / ux-25ecc98a r63</p><ul><li>nav 슬롯 가로 pitch: 84 logical px</li><li>nav 슬롯 사이 여백: 0 logical px</li><li>nav 아이콘→라벨 겹침: 4 logical px</li><li>상단 HUD 고정 높이: 64 logical px</li><li>하단 nav 고정 높이: 64 logical px</li></ul><div class="table"><table><thead><tr><th>부품명 / ID</th><th>부모 ID</th><th>x / y / W / H<br>샘플 논리px</th><th>폰트·입력·상태·자원</th></tr></thead><tbody><tr><td>HUD_TSV_Top<br><small>group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8</small></td><td>main</td><td>0 / 0 / 504 / 64</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>BG_TSV_HUD_PowerCell<br><small>element-8508e0d9-c1ac-45fc-8c53-c5e7e7c9ab59</small></td><td>group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8</td><td>82 / 3 / 116 / 24</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;skin&quot;: {
+    &quot;preset&quot;: &quot;backplate&quot;,
+    &quot;version&quot;: 1,
+    &quot;name&quot;: &quot;정보 백판&quot;,
+    &quot;mode&quot;: &quot;9&quot;,
+    &quot;asset&quot;: &quot;frame&quot;,
+    &quot;tone&quot;: &quot;#dbe2e9&quot;,
+    &quot;slices&quot;: [
+      5,
+      5,
+      5,
+      5
+    ],
+    &quot;edges&quot;: [
+      2,
+      2,
+      2,
+      2
+    ],
+    &quot;padding&quot;: [
+      0,
+      0,
+      0,
+      0
+    ],
+    &quot;defaultState&quot;: &quot;normal&quot;,
+    &quot;repeat&quot;: &quot;stretch&quot;,
+    &quot;textures&quot;: {
+      &quot;normal&quot;: {
+        &quot;src&quot;: &quot;&quot;,
+        &quot;assetRef&quot;: &quot;sha256-4d90275894d87fbda61d5bee6ac43cb91c2913a69393308ec1a36da0836b7cfb.webp&quot;,
+        &quot;w&quot;: 96,
+        &quot;h&quot;: 24
+      }
+    }
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Txt_TSV_HUD_Power<br><small>element-bbf566b8-d06b-4f58-94be-fcdaab065500</small></td><td>group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8</td><td>86 / 3 / 112 / 24</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 17,
+    &quot;weight&quot;: 700,
+    &quot;lineHeight&quot;: 21,
+    &quot;align&quot;: &quot;left&quot;
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Img_TSV_HUD_Power<br><small>element-64d5ed75-779d-439d-b2e7-f0d148242a11</small></td><td>group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8</td><td>66 / 3 / 22 / 25</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;image&quot;: {
+    &quot;src&quot;: &quot;&quot;,
+    &quot;assetRef&quot;: &quot;sha256-1b58af09c668409876699d72160aac06c378461d9dcffcf4cd14781183756711.webp&quot;,
+    &quot;sourceSize&quot;: [
+      36,
+      36
+    ],
+    &quot;alt&quot;: &quot;Img_TSV_HUD_Power&quot;,
+    &quot;fit&quot;: &quot;contain&quot;
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>HUD_TSV_Nav<br><small>group-43921518-07ac-44a3-a720-05a0e2ab4626</small></td><td>main</td><td>0 / 830 / 504 / 64</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Btn_TSV_Nav_Heroes<br><small>element-0829ac2b-fe35-4a88-9124-073e0f75dbc0</small></td><td>group-43921518-07ac-44a3-a720-05a0e2ab4626</td><td>84 / 830 / 84 / 64</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;action&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;action&quot;,
+    &quot;ownerId&quot;: &quot;element-0829ac2b-fe35-4a88-9124-073e0f75dbc0&quot;
+  },
+  &quot;state&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;mode&quot;: &quot;tint&quot;,
+    &quot;targetGraphic&quot;: &quot;element-0829ac2b-fe35-4a88-9124-073e0f75dbc0-image&quot;,
+    &quot;selectable&quot;: false,
+    &quot;selected&quot;: false,
+    &quot;tints&quot;: {
+      &quot;normal&quot;: &quot;#ffffff&quot;,
+      &quot;hover&quot;: &quot;#f2f2f2&quot;,
+      &quot;pressed&quot;: &quot;#bdbdbd&quot;,
+      &quot;selected&quot;: &quot;#d8e8ff&quot;,
+      &quot;disabled&quot;: &quot;#999999&quot;
+    }
+  },
+  &quot;transitionIds&quot;: [
+    &quot;edge-74af7c00-31f4-4af7-876a-69939170f3b5&quot;
+  ]
+}</pre></td></tr><tr><td>Img_TSV_Nav_Heroes<br><small>element-0829ac2b-fe35-4a88-9124-073e0f75dbc0-image</small></td><td>element-0829ac2b-fe35-4a88-9124-073e0f75dbc0</td><td>102 / 830 / 48 / 48</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;parent&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;parent&quot;,
+    &quot;ownerId&quot;: &quot;element-0829ac2b-fe35-4a88-9124-073e0f75dbc0&quot;
+  },
+  &quot;image&quot;: {
+    &quot;src&quot;: &quot;&quot;,
+    &quot;assetRef&quot;: &quot;sha256-b74e83ebe50a5afb1103738e4d3470e509cb8793251bfc33eff2216fd049f1e2.webp&quot;,
+    &quot;sourceSize&quot;: [
+      128,
+      128
+    ],
+    &quot;alt&quot;: &quot;이미지 + 프레임 버튼 이미지&quot;,
+    &quot;fit&quot;: &quot;contain&quot;
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Txt_TSV_Nav_Heroes<br><small>element-0829ac2b-fe35-4a88-9124-073e0f75dbc0-label</small></td><td>element-0829ac2b-fe35-4a88-9124-073e0f75dbc0</td><td>84 / 874 / 84 / 20</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 14
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;parent&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;parent&quot;,
+    &quot;ownerId&quot;: &quot;element-0829ac2b-fe35-4a88-9124-073e0f75dbc0&quot;
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr></tbody></table></div><h3>적용 차이 · 미확인</h3><ul><li>6슬롯 중 Heroes만 유효 진입 연결입니다. 5탭의 각 목적지를 제공하지 않습니다.</li><li>기존 64px/84px 규격을 390폭에 그대로 강제하지 않습니다.</li></ul></details><details class="saved-match" id="sample-collection_four_columns"><summary>collection_four_columns · 컬렉션 구조 적합·덱은 부분 · Page_TSV_Heroes</summary><p>4열·분리 초상/native 레벨·스크롤 본문/고정 상하단의 구조를 참고합니다. 덱은 이 유닛을 새 4×2 컨테이너에 조립할 후보이며 Tower 영역·덱 선택·교체 동작은 없습니다.</p><p><a href="http://127.0.0.1:7018/ui-studio/?editor=detail&amp;workspace=workspace-76e57701-a74e-4e37-a4f6-9e83c12cd6fc&amp;project=ux-25ecc98a&amp;screen=screen-f6d00d61-09cc-45f5-bf29-fc0f2f6b5417">기존 샘플 실제 툴에서 보기</a> · workspace-76e57701-a74e-4e37-a4f6-9e83c12cd6fc / ux-25ecc98a r63</p><ul><li>가로 카드 크기: 111 logical px</li><li>세로 카드 크기: 180 logical px</li><li>가로 gap: 8 logical px</li><li>세로 gap: 10 logical px</li><li>왼쪽/오른쪽 여백: 18 logical px</li><li>header→list: 8 logical px</li><li>list→footer: 8 logical px</li></ul><div class="table"><table><thead><tr><th>부품명 / ID</th><th>부모 ID</th><th>x / y / W / H<br>샘플 논리px</th><th>폰트·입력·상태·자원</th></tr></thead><tbody><tr><td>HUD_TSV_Heroes_Header<br><small>group-232cfc77-e31f-47ff-a2b0-f88c06239a9d</small></td><td>screen-f6d00d61-09cc-45f5-bf29-fc0f2f6b5417</td><td>0 / 0 / 504 / 108</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>List_TSV_Heroes<br><small>group-e0be6b71-3ec5-42ba-b372-9aaff32baee3</small></td><td>screen-f6d00d61-09cc-45f5-bf29-fc0f2f6b5417</td><td>18 / 116 / 468 / 694</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;overflow&quot;: &quot;scroll-y&quot;,
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>HUD_TSV_Heroes_Footer<br><small>group-dde3f332-3979-46a5-934b-d57f8e2a8686</small></td><td>screen-f6d00d61-09cc-45f5-bf29-fc0f2f6b5417</td><td>0 / 818 / 504 / 76</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Card_TSV_Hero01<br><small>group-3a3f4494-0292-4bde-8fc6-bed0dee78c98</small></td><td>group-e0be6b71-3ec5-42ba-b372-9aaff32baee3</td><td>18 / 116 / 111 / 180</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Card_TSV_Hero02<br><small>group-6b1224b0-e311-4258-830b-cce77ed90ec5</small></td><td>group-e0be6b71-3ec5-42ba-b372-9aaff32baee3</td><td>137 / 116 / 111 / 180</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Card_TSV_Hero05<br><small>group-c9d72508-b73c-41af-81c5-f1aaf702fd78</small></td><td>group-e0be6b71-3ec5-42ba-b372-9aaff32baee3</td><td>18 / 306 / 111 / 180</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>BG_TSV_Hero01<br><small>element-5f4fb9fe-344f-4005-a942-df81f711f715</small></td><td>group-3a3f4494-0292-4bde-8fc6-bed0dee78c98</td><td>18 / 116 / 111 / 180</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;skin&quot;: {
+    &quot;preset&quot;: &quot;backplate&quot;,
+    &quot;version&quot;: 1,
+    &quot;name&quot;: &quot;정보 백판&quot;,
+    &quot;mode&quot;: &quot;9&quot;,
+    &quot;asset&quot;: &quot;frame&quot;,
+    &quot;tone&quot;: &quot;#dbe2e9&quot;,
+    &quot;slices&quot;: [
+      9,
+      9,
+      9,
+      9
+    ],
+    &quot;edges&quot;: [
+      8,
+      8,
+      8,
+      8
+    ],
+    &quot;padding&quot;: [
+      0,
+      0,
+      0,
+      0
+    ],
+    &quot;defaultState&quot;: &quot;normal&quot;,
+    &quot;repeat&quot;: &quot;stretch&quot;,
+    &quot;textures&quot;: {
+      &quot;normal&quot;: {
+        &quot;src&quot;: &quot;&quot;,
+        &quot;assetRef&quot;: &quot;sha256-372a1d6a635bb292173bb4d5de4b3e02eb957d7f10941258263a3a1aa25bcff6.webp&quot;,
+        &quot;w&quot;: 111,
+        &quot;h&quot;: 180
+      }
+    }
+  },
+  &quot;shadow&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;color&quot;: &quot;#000000&quot;,
+    &quot;opacity&quot;: 0.18,
+    &quot;x&quot;: 0,
+    &quot;y&quot;: 2,
+    &quot;blur&quot;: 2
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Img_TSV_Hero01<br><small>element-a3557112-07d4-4b25-91bb-03576b6cc8a7</small></td><td>group-3a3f4494-0292-4bde-8fc6-bed0dee78c98</td><td>22 / 120 / 103 / 154</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;image&quot;: {
+    &quot;src&quot;: &quot;&quot;,
+    &quot;alt&quot;: &quot;Img_TSV_Hero01&quot;,
+    &quot;fit&quot;: &quot;contain&quot;,
+    &quot;assetRef&quot;: &quot;sha256-5d000f8169206bc20365cef7277c7b2feb4c799542fa4a87d22ccf7eda85d1fb.webp&quot;,
+    &quot;sourceSize&quot;: [
+      512,
+      683
+    ]
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Txt_TSV_Hero01_Status<br><small>element-705a5f67-88c2-46f4-b425-ba75c513577b</small></td><td>group-3a3f4494-0292-4bde-8fc6-bed0dee78c98</td><td>26 / 248 / 96 / 25</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 18,
+    &quot;weight&quot;: 700,
+    &quot;lineHeight&quot;: 22,
+    &quot;align&quot;: &quot;left&quot;
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Btn_TSV_Heroes_Back<br><small>element-5eed0a24-a228-4dce-81ac-eff668fea902</small></td><td>group-dde3f332-3979-46a5-934b-d57f8e2a8686</td><td>0 / 824 / 74 / 64</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;action&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;action&quot;,
+    &quot;ownerId&quot;: &quot;element-5eed0a24-a228-4dce-81ac-eff668fea902&quot;
+  },
+  &quot;state&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;mode&quot;: &quot;tint&quot;,
+    &quot;targetGraphic&quot;: &quot;self&quot;,
+    &quot;selectable&quot;: false,
+    &quot;selected&quot;: false,
+    &quot;tints&quot;: {
+      &quot;normal&quot;: &quot;#ffffff&quot;,
+      &quot;hover&quot;: &quot;#f2f2f2&quot;,
+      &quot;pressed&quot;: &quot;#bdbdbd&quot;,
+      &quot;selected&quot;: &quot;#d8e8ff&quot;,
+      &quot;disabled&quot;: &quot;#999999&quot;
+    }
+  },
+  &quot;transitionIds&quot;: [
+    &quot;edge-56e3ae03-9680-4c28-9ace-ce5599c62783&quot;
+  ]
+}</pre></td></tr></tbody></table></div><h3>적용 차이 · 미확인</h3><ul><li>실제 layout.type=grid가 아닌 개별 카드의 fixed rectTransform 배치입니다.</li><li>필터는 panel이며 control tabs/연결이 없습니다. 모집/영웅 상세는 미연결입니다.</li><li>보유카드 4×2+Tower·바텀시트 전용 계층은 없습니다.</li><li>scroll-y 저장은 있으나 authored 크기에서 11카드 본문560이 viewport694보다 짧습니다. 실제 스크롤 발생을 뜻하지 않습니다.</li></ul></details><details class="saved-match" id="sample-album_card_family"><summary>album_card_family · 유닛만 부분 적합 · Page_Album_Sets</summary><p>카드 그림·제목·진행수량과 입력 wrapper 분리, scroll viewport→content→카드 계층을 참고합니다. 샘플은 앨범 세트 3열 9장이고 클래시 컬렉션/덱은 4열 개별 카드입니다.</p><p><a href="http://127.0.0.1:7018/ui-studio/?editor=detail&amp;workspace=workspace-8e0f09e7-4699-4ac6-81b3-d545c7046ef6&amp;project=ux-gjs-0d80d7fe&amp;screen=screen-1bf4e2ab-55de-4d8c-a28c-9e4d37fc04ca">기존 샘플 실제 툴에서 보기</a> · workspace-8e0f09e7-4699-4ac6-81b3-d545c7046ef6 / ux-gjs-0d80d7fe r354</p><ul><li>가로/세로 gap: 6 logical px</li><li>card W: 164 logical px</li><li>card H: 248 logical px</li><li>content padding top: 25.59 logical px</li><li>content padding right: 24 logical px</li><li>content padding bottom: 24 logical px</li><li>content padding left: 23 logical px</li></ul><div class="table"><table><thead><tr><th>부품명 / ID</th><th>부모 ID</th><th>x / y / W / H<br>샘플 논리px</th><th>폰트·입력·상태·자원</th></tr></thead><tbody><tr><td>Viewport_Album_Sets<br><small>group-87429c2f-99c9-459d-9adb-ae2705532856</small></td><td>screen-1bf4e2ab-55de-4d8c-a28c-9e4d37fc04ca</td><td>0 / 359.41 / 551 / 624.59</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;overflow&quot;: &quot;scroll-y&quot;,
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Content_Album_Sets<br><small>element-e30e66f5-5e57-407d-bf14-fb9f75ba243c</small></td><td>group-87429c2f-99c9-459d-9adb-ae2705532856</td><td>0 / 359.41 / 551 / 806</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;layout&quot;: {
+    &quot;gap&quot;: 6,
+    &quot;padding&quot;: [
+      25.59,
+      24,
+      24,
+      23
+    ],
+    &quot;itemSize&quot;: [
+      164,
+      248
+    ],
+    &quot;type&quot;: &quot;grid&quot;,
+    &quot;columns&quot;: 3
+  },
+  &quot;overflow&quot;: &quot;visible&quot;,
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Card_Album_Set01<br><small>element-aca889c0-962d-44b8-b2ac-e86b0790d30b</small></td><td>element-e30e66f5-5e57-407d-bf14-fb9f75ba243c</td><td>23 / 385 / 164 / 248</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Card_Album_Set02<br><small>element-8622b40e-de5e-461d-b57a-29984b78d4d9</small></td><td>element-e30e66f5-5e57-407d-bf14-fb9f75ba243c</td><td>193 / 385 / 164 / 248</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Card_Album_Set04<br><small>element-ec35afd1-e1f6-4371-8766-7b5f62ac1d36</small></td><td>element-e30e66f5-5e57-407d-bf14-fb9f75ba243c</td><td>23 / 639 / 164 / 248</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Img_Album_Set01_Art<br><small>element-aca889c0-962d-44b8-b2ac-e86b0790d30b-image</small></td><td>element-aca889c0-962d-44b8-b2ac-e86b0790d30b</td><td>28 / 395 / 154 / 154</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;image&quot;: {
+    &quot;src&quot;: &quot;&quot;,
+    &quot;alt&quot;: &quot;새로 그린 커뮤니티 갤러리 강아지&quot;,
+    &quot;fit&quot;: &quot;contain&quot;,
+    &quot;assetRef&quot;: &quot;sha256-8eccb069ebb27fd7ae72ba1e9688f7c8fa917f3fc7f959a8c13a7585994aa1e9.webp&quot;,
+    &quot;sourceSize&quot;: [
+      290,
+      290
+    ]
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Txt_Album_Set01_Title<br><small>element-aca889c0-962d-44b8-b2ac-e86b0790d30b-label</small></td><td>element-aca889c0-962d-44b8-b2ac-e86b0790d30b</td><td>23 / 505 / 164 / 64</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 26,
+    &quot;weight&quot;: 900,
+    &quot;lineHeight&quot;: 28,
+    &quot;family&quot;: &quot;system&quot;,
+    &quot;align&quot;: &quot;center&quot;,
+    &quot;vertical&quot;: &quot;middle&quot;,
+    &quot;wrap&quot;: &quot;wrap&quot;,
+    &quot;strokeWidth&quot;: 3,
+    &quot;strokeColor&quot;: &quot;#207aaa&quot;
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Txt_Album_Set01_Count<br><small>element-91ca6081-7afe-494a-8756-cfe2f9b8c59d</small></td><td>element-aca889c0-962d-44b8-b2ac-e86b0790d30b</td><td>47 / 583 / 116 / 30</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 24,
+    &quot;weight&quot;: 700,
+    &quot;lineHeight&quot;: 28,
+    &quot;family&quot;: &quot;system&quot;,
+    &quot;align&quot;: &quot;center&quot;,
+    &quot;vertical&quot;: &quot;middle&quot;,
+    &quot;wrap&quot;: &quot;nowrap&quot;
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr></tbody></table></div><h3>적용 차이 · 미확인</h3><ul><li>3열 164×248을 클래시 카드 비율·4열에 직접 적용하지 않습니다.</li><li>카드 클릭→상세 연결은 없고 Back만 있습니다.</li><li>카드 level/희귀도/엘릭서/업그레이드 상태는 없습니다.</li></ul></details><details class="saved-match" id="sample-social_tabs_rows"><summary>social_tabs_rows · 목록/탭 구조만 부분 적합 · Modal_Friends_Timeline</summary><p>헤더·선택 탭·scroll viewport·반복행·고정 닫기를 참고합니다. 샘플은 modal이고 클랜 목록은 전체 페이지 컨테이너와 하단 5탭을 별도로 검토해야 합니다.</p><p><a href="http://127.0.0.1:7018/ui-studio/?editor=detail&amp;workspace=workspace-8e0f09e7-4699-4ac6-81b3-d545c7046ef6&amp;project=ux-gjs-0d80d7fe&amp;screen=common-1ea9535b-40a5-4941-a33b-57bf7b381aea">기존 샘플 실제 툴에서 보기</a> · workspace-8e0f09e7-4699-4ac6-81b3-d545c7046ef6 / ux-gjs-0d80d7fe r354</p><ul><li>반복 활동행 W: 485.35 logical px</li><li>반복 활동행 H: 80 logical px</li><li>반복 활동행 gap: 4 logical px</li><li>행 내부 이름 x offset: 97 logical px</li><li>행 내부 이름 y offset: 8 logical px</li></ul><div class="table"><table><thead><tr><th>부품명 / ID</th><th>부모 ID</th><th>x / y / W / H<br>샘플 논리px</th><th>폰트·입력·상태·자원</th></tr></thead><tbody><tr><td>Group_Friends_Panel<br><small>element-7173ad88-7bec-42c6-940c-01ead9054ea2</small></td><td>common-1ea9535b-40a5-4941-a33b-57bf7b381aea</td><td>10.76 / 119.53 / 531.63 / 797.23</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;shadow&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;color&quot;: &quot;#000000&quot;,
+    &quot;opacity&quot;: 0.25,
+    &quot;x&quot;: 0,
+    &quot;y&quot;: 3,
+    &quot;blur&quot;: 6
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Frame_Friends_Panel<br><small>element-7173ad88-7bec-42c6-940c-01ead9054ea2-frame</small></td><td>element-7173ad88-7bec-42c6-940c-01ead9054ea2</td><td>10.76 / 119.53 / 531.63 / 797.23</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;skin&quot;: {
+    &quot;preset&quot;: &quot;backplate&quot;,
+    &quot;version&quot;: 1,
+    &quot;name&quot;: &quot;정보 백판&quot;,
+    &quot;mode&quot;: &quot;9&quot;,
+    &quot;asset&quot;: &quot;frame&quot;,
+    &quot;tone&quot;: &quot;#dbe2e9&quot;,
+    &quot;slices&quot;: [
+      27,
+      27,
+      27,
+      27
+    ],
+    &quot;edges&quot;: [
+      24,
+      24,
+      24,
+      24
+    ],
+    &quot;padding&quot;: [
+      0,
+      0,
+      0,
+      0
+    ],
+    &quot;defaultState&quot;: &quot;normal&quot;,
+    &quot;repeat&quot;: &quot;stretch&quot;,
+    &quot;textures&quot;: {
+      &quot;normal&quot;: {
+        &quot;src&quot;: &quot;&quot;,
+        &quot;assetRef&quot;: &quot;sha256-1ea09a227cb855bc85a54f159c3ec8b40d945897f85f1e1f1082db0c44de653c.webp&quot;,
+        &quot;w&quot;: 128,
+        &quot;h&quot;: 96
+      }
+    }
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Tabs_Friends_Sections<br><small>common-1ea9535b-40a5-4941-a33b-57bf7b381aea-body</small></td><td>element-7173ad88-7bec-42c6-940c-01ead9054ea2</td><td>24.75 / 227.32 / 506.88 / 94.98</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 24,
+    &quot;weight&quot;: 800,
+    &quot;lineHeight&quot;: 30
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;action&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;action&quot;,
+    &quot;ownerId&quot;: &quot;common-1ea9535b-40a5-4941-a33b-57bf7b381aea-body&quot;
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Viewport_Friends_Timeline<br><small>element-c62d41db-9fa4-49e2-9ad1-f0ffbe27c701</small></td><td>element-7173ad88-7bec-42c6-940c-01ead9054ea2</td><td>24.75 / 328.71 / 505.8 / 583.29</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;overflow&quot;: &quot;scroll-y&quot;,
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Content_Friends_Timeline<br><small>element-2ad1bafc-6f50-42d0-ad27-952698286dbf</small></td><td>element-c62d41db-9fa4-49e2-9ad1-f0ffbe27c701</td><td>24.75 / 328.71 / 505.8 / 634.304</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;overflow&quot;: &quot;visible&quot;,
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Card_Friends_Activity02<br><small>element-3e3d4c4d-10a6-4b24-9159-e15d91b25fa2</small></td><td>element-a53d05fc-7b40-4ab2-a9c5-3e11f89853dd</td><td>33.36 / 543.715 / 485.35 / 84</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Txt_Friends_Activity02_Name<br><small>element-3f8c3fc8-3f7f-4b08-ada0-0dca0e6c0f64</small></td><td>element-3e3d4c4d-10a6-4b24-9159-e15d91b25fa2</td><td>130.36 / 551.715 / 310 / 28</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 23,
+    &quot;weight&quot;: 900,
+    &quot;lineHeight&quot;: 28,
+    &quot;align&quot;: &quot;left&quot;,
+    &quot;vertical&quot;: &quot;top&quot;,
+    &quot;wrap&quot;: &quot;wrap&quot;
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Txt_Friends_Activity02_Message<br><small>element-7a0985db-14e9-473a-818d-4494b5905f13</small></td><td>element-3e3d4c4d-10a6-4b24-9159-e15d91b25fa2</td><td>130.36 / 579.715 / 329 / 42</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 16,
+    &quot;weight&quot;: 700,
+    &quot;lineHeight&quot;: 20,
+    &quot;align&quot;: &quot;left&quot;,
+    &quot;vertical&quot;: &quot;top&quot;,
+    &quot;wrap&quot;: &quot;wrap&quot;
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Btn_Friends_Close<br><small>common-1ea9535b-40a5-4941-a33b-57bf7b381aea-close</small></td><td>element-001653c9-34c1-44ea-893c-a7ec0914477c</td><td>253.5 / 940 / 44 / 44</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;action&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;action&quot;,
+    &quot;ownerId&quot;: &quot;common-1ea9535b-40a5-4941-a33b-57bf7b381aea-close&quot;
+  },
+  &quot;state&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;mode&quot;: &quot;tint&quot;,
+    &quot;targetGraphic&quot;: &quot;self&quot;,
+    &quot;selectable&quot;: false,
+    &quot;selected&quot;: false,
+    &quot;tints&quot;: {
+      &quot;normal&quot;: &quot;#ffffff&quot;,
+      &quot;hover&quot;: &quot;#f2f2f2&quot;,
+      &quot;pressed&quot;: &quot;#bdbdbd&quot;,
+      &quot;selected&quot;: &quot;#d8e8ff&quot;,
+      &quot;disabled&quot;: &quot;#999999&quot;
+    }
+  },
+  &quot;transitionIds&quot;: [
+    &quot;edge-4b9f52e5-6fa1-4da3-9a34-dcc8e7d9b63e&quot;
+  ]
+}</pre></td></tr></tbody></table></div><h3>적용 차이 · 미확인</h3><ul><li>add/leaderboard는 미관찰 빈 본문입니다. timeline만 실제 내용이 있습니다.</li><li>친구 요청 Send/Reject 입력이 있어도 게임/API 연결은 없습니다.</li><li>클랜 참가·검색·채팅·정렬·클랜정보 연결을 제공하지 않습니다.</li></ul></details><details class="saved-match" id="sample-shop_products"><summary>shop_products · 부분 적합 · Modal_Shop_Store</summary><p>고정 HUD/프로모션·scroll 상품영역·고정 footer와 상품별 그림/수량/가격/버튼 분리를 참고합니다. 클래시 상점은 세로 섹션·서로 다른 offer 크기를 원본대로 재구성해야 합니다.</p><p><a href="http://127.0.0.1:7018/ui-studio/?editor=detail&amp;workspace=workspace-8e0f09e7-4699-4ac6-81b3-d545c7046ef6&amp;project=ux-gjs-0d80d7fe&amp;screen=screen-8bda5052-36bc-4d68-812f-58c535aa4bc7">기존 샘플 실제 툴에서 보기</a> · workspace-8e0f09e7-4699-4ac6-81b3-d545c7046ef6 / ux-gjs-0d80d7fe r354</p><ul><li>상품 W: 156.27 logical px</li><li>상품 H: 224.98 logical px</li><li>상품 가로 pitch: 167.05 logical px</li><li>상품 가로 gap: 10.78 logical px</li><li>상품 세로 pitch: 268.76 logical px</li><li>상품 세로 gap: 43.78 logical px</li></ul><div class="table"><table><thead><tr><th>부품명 / ID</th><th>부모 ID</th><th>x / y / W / H<br>샘플 논리px</th><th>폰트·입력·상태·자원</th></tr></thead><tbody><tr><td>HUD_Shop<br><small>element-e5cee089-2d91-4d7a-92c4-3cd944c37248</small></td><td>screen-8bda5052-36bc-4d68-812f-58c535aa4bc7</td><td>8 / 12 / 535 / 96</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Group_Shop_HalloweenOffer<br><small>element-41312b24-130b-4001-be4d-3a89a79a7b60</small></td><td>screen-8bda5052-36bc-4d68-812f-58c535aa4bc7</td><td>30.31 / 85.55 / 488.36 / 194.67</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;shadow&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;color&quot;: &quot;#000000&quot;,
+    &quot;opacity&quot;: 0.3,
+    &quot;x&quot;: 0,
+    &quot;y&quot;: 2,
+    &quot;blur&quot;: 4
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Viewport_Shop_Products<br><small>element-ca5280d4-3ce6-4926-a149-2923d32dc95d</small></td><td>screen-8bda5052-36bc-4d68-812f-58c535aa4bc7</td><td>0 / 312.55 / 551 / 599.45</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;overflow&quot;: &quot;scroll-y&quot;,
+  &quot;shadow&quot;: {
+    &quot;enabled&quot;: false,
+    &quot;color&quot;: &quot;#000000&quot;,
+    &quot;opacity&quot;: 0.3,
+    &quot;x&quot;: -2,
+    &quot;y&quot;: 2,
+    &quot;blur&quot;: 5
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Group_Shop_Product01<br><small>element-7d63fba0-2ea8-4307-b2d3-7305816d081d</small></td><td>element-ca5280d4-3ce6-4926-a149-2923d32dc95d</td><td>33.01 / 412.92 / 156.27 / 224.98</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;shadow&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;color&quot;: &quot;#000000&quot;,
+    &quot;opacity&quot;: 0.25,
+    &quot;x&quot;: 0,
+    &quot;y&quot;: 3,
+    &quot;blur&quot;: 4
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Group_Shop_Product02<br><small>element-7301ed62-3c4b-4050-b23d-30038f05bafa</small></td><td>element-ca5280d4-3ce6-4926-a149-2923d32dc95d</td><td>200.06 / 412.92 / 156.27 / 224.98</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;shadow&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;color&quot;: &quot;#000000&quot;,
+    &quot;opacity&quot;: 0.25,
+    &quot;x&quot;: 0,
+    &quot;y&quot;: 3,
+    &quot;blur&quot;: 4
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Group_Shop_Product04<br><small>element-7f8158a3-e12d-40f0-9bd3-e503d4bdd810</small></td><td>element-ca5280d4-3ce6-4926-a149-2923d32dc95d</td><td>33.01 / 681.68 / 156.27 / 224.98</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;shadow&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;color&quot;: &quot;#000000&quot;,
+    &quot;opacity&quot;: 0.25,
+    &quot;x&quot;: 0,
+    &quot;y&quot;: 3,
+    &quot;blur&quot;: 4
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Frame_Shop_Product01<br><small>element-f0927c74-e104-4c70-a230-12bcc160be8f</small></td><td>element-7d63fba0-2ea8-4307-b2d3-7305816d081d</td><td>33.01 / 412.92 / 148.19 / 224.98</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;skin&quot;: {
+    &quot;preset&quot;: &quot;backplate&quot;,
+    &quot;version&quot;: 1,
+    &quot;name&quot;: &quot;정보 백판&quot;,
+    &quot;mode&quot;: &quot;9&quot;,
+    &quot;asset&quot;: &quot;frame&quot;,
+    &quot;tone&quot;: &quot;#dbe2e9&quot;,
+    &quot;slices&quot;: [
+      27,
+      27,
+      27,
+      27
+    ],
+    &quot;edges&quot;: [
+      24,
+      24,
+      24,
+      24
+    ],
+    &quot;padding&quot;: [
+      0,
+      0,
+      0,
+      0
+    ],
+    &quot;defaultState&quot;: &quot;normal&quot;,
+    &quot;repeat&quot;: &quot;stretch&quot;,
+    &quot;textures&quot;: {
+      &quot;normal&quot;: {
+        &quot;src&quot;: &quot;&quot;,
+        &quot;assetRef&quot;: &quot;sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp&quot;,
+        &quot;w&quot;: 128,
+        &quot;h&quot;: 96
+      }
+    }
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Txt_Shop_Product01_Quantity<br><small>element-b3b204d5-4ed8-486e-8729-1df683e3d4b0</small></td><td>element-7d63fba0-2ea8-4307-b2d3-7305816d081d</td><td>41.09 / 433.13 / 132.02 / 47.15</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 42,
+    &quot;weight&quot;: 900,
+    &quot;lineHeight&quot;: 48,
+    &quot;strokeWidth&quot;: 1.5,
+    &quot;align&quot;: &quot;center&quot;,
+    &quot;vertical&quot;: &quot;middle&quot;,
+    &quot;strokeColor&quot;: &quot;#30283c&quot;
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Btn_Shop_Product01_Buy<br><small>element-f84a68f4-4dd6-49bf-8db2-f7f021c52b4f</small></td><td>element-7d63fba0-2ea8-4307-b2d3-7305816d081d</td><td>42.44 / 580.64 / 129.33 / 44.46</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;action&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;action&quot;,
+    &quot;ownerId&quot;: &quot;element-f84a68f4-4dd6-49bf-8db2-f7f021c52b4f&quot;
+  },
+  &quot;state&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;mode&quot;: &quot;tint&quot;,
+    &quot;targetGraphic&quot;: &quot;self&quot;,
+    &quot;selectable&quot;: false,
+    &quot;selected&quot;: false,
+    &quot;tints&quot;: {
+      &quot;normal&quot;: &quot;#ffffff&quot;,
+      &quot;hover&quot;: &quot;#f2f2f2&quot;,
+      &quot;pressed&quot;: &quot;#bdbdbd&quot;,
+      &quot;selected&quot;: &quot;#d8e8ff&quot;,
+      &quot;disabled&quot;: &quot;#999999&quot;
+    }
+  },
+  &quot;shadow&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;color&quot;: &quot;#000000&quot;,
+    &quot;opacity&quot;: 0.25,
+    &quot;x&quot;: 0,
+    &quot;y&quot;: 3,
+    &quot;blur&quot;: 3
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>BG_Shop_Product01_Buy<br><small>element-aeb8dea2-ddd1-4e48-9f5b-84f434819694</small></td><td>element-f84a68f4-4dd6-49bf-8db2-f7f021c52b4f</td><td>42.44 / 580.64 / 129.33 / 44.46</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;none&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;skin&quot;: {
+    &quot;preset&quot;: &quot;button&quot;,
+    &quot;version&quot;: 1,
+    &quot;name&quot;: &quot;버튼&quot;,
+    &quot;mode&quot;: &quot;3&quot;,
+    &quot;asset&quot;: &quot;button&quot;,
+    &quot;tone&quot;: &quot;#dcefe8&quot;,
+    &quot;slices&quot;: [
+      0,
+      24,
+      0,
+      24
+    ],
+    &quot;edges&quot;: [
+      0,
+      16,
+      0,
+      16
+    ],
+    &quot;padding&quot;: [
+      0,
+      0,
+      0,
+      0
+    ],
+    &quot;defaultState&quot;: &quot;normal&quot;,
+    &quot;repeat&quot;: &quot;stretch&quot;,
+    &quot;textures&quot;: {
+      &quot;normal&quot;: {
+        &quot;src&quot;: &quot;&quot;,
+        &quot;assetRef&quot;: &quot;sha256-ea2db7909fff4b4fad71e16dc1126186df552404e0b116bac30caa1d3cb7fa66.webp&quot;,
+        &quot;w&quot;: 128,
+        &quot;h&quot;: 48
+      }
+    }
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Txt_Shop_Product01_Price<br><small>element-c8dd5e75-cee1-4fe7-864d-26c6cb3b8a7a</small></td><td>element-f84a68f4-4dd6-49bf-8db2-f7f021c52b4f</td><td>44.46 / 583.33 / 125.29 / 36.37</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 26,
+    &quot;weight&quot;: 900,
+    &quot;lineHeight&quot;: 30,
+    &quot;strokeWidth&quot;: 0,
+    &quot;align&quot;: &quot;center&quot;,
+    &quot;vertical&quot;: &quot;middle&quot;
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;parent&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;parent&quot;,
+    &quot;ownerId&quot;: &quot;element-f84a68f4-4dd6-49bf-8db2-f7f021c52b4f&quot;
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Group_Shop_Footer<br><small>element-9bbbcb6f-baae-466b-bb74-8d81e6688f0e</small></td><td>screen-8bda5052-36bc-4d68-812f-58c535aa4bc7</td><td>0 / 912 / 551 / 72</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;shadow&quot;: {
+    &quot;enabled&quot;: false,
+    &quot;color&quot;: &quot;#000000&quot;,
+    &quot;opacity&quot;: 0.3,
+    &quot;x&quot;: -2,
+    &quot;y&quot;: 2,
+    &quot;blur&quot;: 5
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Btn_Shop_Close<br><small>element-2150dcd4-a557-4c1c-a738-c4b656154a50</small></td><td>element-9bbbcb6f-baae-466b-bb74-8d81e6688f0e</td><td>253.5 / 940 / 44 / 44</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;action&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;action&quot;,
+    &quot;ownerId&quot;: &quot;element-2150dcd4-a557-4c1c-a738-c4b656154a50&quot;
+  },
+  &quot;state&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;mode&quot;: &quot;tint&quot;,
+    &quot;targetGraphic&quot;: &quot;self&quot;,
+    &quot;selectable&quot;: false,
+    &quot;selected&quot;: false,
+    &quot;tints&quot;: {
+      &quot;normal&quot;: &quot;#ffffff&quot;,
+      &quot;hover&quot;: &quot;#f2f2f2&quot;,
+      &quot;pressed&quot;: &quot;#bdbdbd&quot;,
+      &quot;selected&quot;: &quot;#d8e8ff&quot;,
+      &quot;disabled&quot;: &quot;#999999&quot;
+    }
+  },
+  &quot;transitionIds&quot;: [
+    &quot;element-457d901d-7097-40a4-805a-60d8139881f2&quot;
+  ]
+}</pre></td></tr></tbody></table></div><h3>적용 차이 · 미확인</h3><ul><li>샘플은 modal/fullscreen이며 main/menu에서 open, footer close입니다. 하단 5탭 페이지와 같지 않습니다.</li><li>샘플 3열×2행 상품과 실제 클래시 세로 offer 구성은 다릅니다.</li><li>구매 버튼 tint 입력은 있으나 결제/재화 차감 transition은 없습니다.</li><li>scroll-y 저장은 있으나 authored 두 상품행은 viewport 안에 들어갑니다. 긴 세로 상점 스크롤 동등 검수는 아닙니다.</li></ul></details><details class="saved-match" id="sample-card_detail_surrogate"><summary>card_detail_surrogate · 근접 예제·직접 적합 없음 · Modal_Showroom_TokenDetail</summary><p>확대 전시 그룹·이름표·그림/native 글자 분리와 하단 CTA/Close만 참고합니다. 원본 카드 상세의 능력치/레벨/업그레이드 비용/확인 상태와 sheet 바닥 위치는 새로 정의해야 합니다.</p><p><a href="http://127.0.0.1:7018/ui-studio/?editor=detail&amp;workspace=workspace-8e0f09e7-4699-4ac6-81b3-d545c7046ef6&amp;project=ux-gjs-0d80d7fe&amp;screen=screen-fb2afd7d-f997-4bc8-90f5-40439ae2af76">기존 샘플 실제 툴에서 보기</a> · workspace-8e0f09e7-4699-4ac6-81b3-d545c7046ef6 / ux-gjs-0d80d7fe r354</p><ul><li>nameplate→category gap: 5 logical px</li><li>footer 고정 H: 72 logical px</li><li>Close hit W/H: 44 logical px</li><li>CTA 버튼 W: 244 logical px</li><li>CTA 버튼 H: 72 logical px</li></ul><div class="table"><table><thead><tr><th>부품명 / ID</th><th>부모 ID</th><th>x / y / W / H<br>샘플 논리px</th><th>폰트·입력·상태·자원</th></tr></thead><tbody><tr><td>Group_TokenDetail_Nameplate<br><small>group-7491c1cf-787c-48ff-95e6-9c85ba291964</small></td><td>screen-fb2afd7d-f997-4bc8-90f5-40439ae2af76</td><td>103 / 35 / 345 / 73</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Frame_TokenDetail_Nameplate<br><small>element-8a0c2ae7-82e6-48ec-a723-a8c61a9f9ce8</small></td><td>group-7491c1cf-787c-48ff-95e6-9c85ba291964</td><td>103 / 35 / 345 / 73</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;skin&quot;: {
+    &quot;preset&quot;: &quot;backplate&quot;,
+    &quot;version&quot;: 1,
+    &quot;name&quot;: &quot;정보 백판&quot;,
+    &quot;mode&quot;: &quot;9&quot;,
+    &quot;asset&quot;: &quot;frame&quot;,
+    &quot;tone&quot;: &quot;#dbe2e9&quot;,
+    &quot;slices&quot;: [
+      24,
+      26,
+      24,
+      26
+    ],
+    &quot;edges&quot;: [
+      24,
+      26,
+      24,
+      26
+    ],
+    &quot;padding&quot;: [
+      0,
+      0,
+      0,
+      0
+    ],
+    &quot;defaultState&quot;: &quot;normal&quot;,
+    &quot;repeat&quot;: &quot;stretch&quot;,
+    &quot;textures&quot;: {
+      &quot;normal&quot;: {
+        &quot;src&quot;: &quot;&quot;,
+        &quot;assetRef&quot;: &quot;sha256-44bc79d189208ab98c101988d1ce903eecbabdd89cb48ec1ac3310ba9383d62a.webp&quot;,
+        &quot;w&quot;: 128,
+        &quot;h&quot;: 80
+      }
+    }
+  },
+  &quot;shadow&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;color&quot;: &quot;#000000&quot;,
+    &quot;opacity&quot;: 0.25,
+    &quot;x&quot;: 0,
+    &quot;y&quot;: 3,
+    &quot;blur&quot;: 3
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Txt_TokenDetail_Name<br><small>element-3a6ed7f0-1da4-4147-a565-2ae064cae861</small></td><td>group-7491c1cf-787c-48ff-95e6-9c85ba291964</td><td>117 / 44 / 318 / 52</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 34,
+    &quot;weight&quot;: 800,
+    &quot;lineHeight&quot;: 40,
+    &quot;strokeWidth&quot;: 0,
+    &quot;align&quot;: &quot;center&quot;,
+    &quot;vertical&quot;: &quot;middle&quot;,
+    &quot;strokeColor&quot;: &quot;#194c67&quot;
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Group_TokenDetail_Display<br><small>group-c416f5ac-971f-4191-8cff-7a4177a6c127</small></td><td>screen-fb2afd7d-f997-4bc8-90f5-40439ae2af76</td><td>85 / 210 / 386 / 531</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Img_TokenDetail_Buttons<br><small>element-8c0206c1-233a-4db2-8873-e05e4588ba79</small></td><td>group-c416f5ac-971f-4191-8cff-7a4177a6c127</td><td>218 / 280 / 128 / 219</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;image&quot;: {
+    &quot;src&quot;: &quot;&quot;,
+    &quot;assetRef&quot;: &quot;sha256-cc9a3c273b06e3c7269b428d40c213cc6706678ab80696d23e73d095eb74b375.webp&quot;,
+    &quot;sourceSize&quot;: [
+      779,
+      1316
+    ],
+    &quot;alt&quot;: &quot;새로 그린 버튼 스타일 토큰&quot;,
+    &quot;fit&quot;: &quot;contain&quot;
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Group_TokenDetail_EquipDock<br><small>group-a633e3a8-b611-4838-ab14-db5b2bc317ac</small></td><td>screen-fb2afd7d-f997-4bc8-90f5-40439ae2af76</td><td>0 / 810 / 551 / 102</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Btn_TokenDetail_Equip<br><small>element-295e8f60-a574-43a7-bf35-df897fabd91c</small></td><td>group-a633e3a8-b611-4838-ab14-db5b2bc317ac</td><td>153.5 / 810 / 244 / 72</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;action&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;action&quot;,
+    &quot;ownerId&quot;: &quot;element-295e8f60-a574-43a7-bf35-df897fabd91c&quot;
+  },
+  &quot;state&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;mode&quot;: &quot;image&quot;,
+    &quot;targetGraphic&quot;: &quot;self&quot;,
+    &quot;selectable&quot;: false,
+    &quot;selected&quot;: false,
+    &quot;tints&quot;: {
+      &quot;normal&quot;: &quot;#ffffff&quot;,
+      &quot;hover&quot;: &quot;#f2f2f2&quot;,
+      &quot;pressed&quot;: &quot;#bdbdbd&quot;,
+      &quot;selected&quot;: &quot;#d8e8ff&quot;,
+      &quot;disabled&quot;: &quot;#999999&quot;
+    },
+    &quot;images&quot;: {
+      &quot;normal&quot;: {
+        &quot;src&quot;: &quot;&quot;,
+        &quot;assetRef&quot;: &quot;sha256-e2bab5af103141d6643b4468589c16161fc220b59fc9da6a9bba4b40e536ae6b.webp&quot;,
+        &quot;sourceSize&quot;: [
+          244,
+          72
+        ],
+        &quot;fit&quot;: &quot;contain&quot;,
+        &quot;alt&quot;: &quot;프로젝트 이미지&quot;
+      },
+      &quot;pressed&quot;: {
+        &quot;src&quot;: &quot;&quot;,
+        &quot;assetRef&quot;: &quot;sha256-bd864c5b55ff5bd8ff317195877aa3227c5804f94f999a72cd0c7ceb9818ed34.webp&quot;,
+        &quot;sourceSize&quot;: [
+          244,
+          72
+        ],
+        &quot;fit&quot;: &quot;contain&quot;,
+        &quot;alt&quot;: &quot;프로젝트 이미지&quot;
+      },
+      &quot;disabled&quot;: {
+        &quot;src&quot;: &quot;&quot;,
+        &quot;assetRef&quot;: &quot;sha256-f77ecd3e214eb8ac4a3768be181c95b98537e78d8da8a7068357fccfd31dcce1.webp&quot;,
+        &quot;sourceSize&quot;: [
+          244,
+          72
+        ],
+        &quot;fit&quot;: &quot;contain&quot;,
+        &quot;alt&quot;: &quot;프로젝트 이미지&quot;
+      }
+    },
+    &quot;pressFeedback&quot;: {
+      &quot;enabled&quot;: true,
+      &quot;target&quot;: &quot;element-dbf6e59d-81c2-449b-960d-b52c8b2cf8a1&quot;,
+      &quot;distance&quot;: 1.5,
+      &quot;shadow&quot;: {
+        &quot;enabled&quot;: true,
+        &quot;color&quot;: &quot;#000000&quot;,
+        &quot;opacity&quot;: 0.12,
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 1,
+        &quot;blur&quot;: 1
+      }
+    }
+  },
+  &quot;skin&quot;: {
+    &quot;preset&quot;: &quot;button&quot;,
+    &quot;version&quot;: 1,
+    &quot;name&quot;: &quot;버튼&quot;,
+    &quot;mode&quot;: &quot;3&quot;,
+    &quot;asset&quot;: &quot;button&quot;,
+    &quot;tone&quot;: &quot;#dcefe8&quot;,
+    &quot;slices&quot;: [
+      0,
+      40,
+      0,
+      40
+    ],
+    &quot;edges&quot;: [
+      0,
+      40,
+      0,
+      40
+    ],
+    &quot;padding&quot;: [
+      5,
+      12,
+      5,
+      12
+    ],
+    &quot;defaultState&quot;: &quot;normal&quot;,
+    &quot;repeat&quot;: &quot;stretch&quot;,
+    &quot;textures&quot;: {
+      &quot;normal&quot;: {
+        &quot;src&quot;: &quot;&quot;,
+        &quot;assetRef&quot;: &quot;sha256-e2bab5af103141d6643b4468589c16161fc220b59fc9da6a9bba4b40e536ae6b.webp&quot;,
+        &quot;w&quot;: 244,
+        &quot;h&quot;: 72
+      }
+    }
+  },
+  &quot;shadow&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;color&quot;: &quot;#000000&quot;,
+    &quot;opacity&quot;: 0.24,
+    &quot;x&quot;: 0,
+    &quot;y&quot;: 2,
+    &quot;blur&quot;: 3
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Txt_TokenDetail_Equip<br><small>element-dbf6e59d-81c2-449b-960d-b52c8b2cf8a1</small></td><td>element-295e8f60-a574-43a7-bf35-df897fabd91c</td><td>167.5 / 819 / 216 / 48</td><td><pre>{
+  &quot;font&quot;: {
+    &quot;size&quot;: 42,
+    &quot;weight&quot;: 800,
+    &quot;lineHeight&quot;: 46,
+    &quot;strokeWidth&quot;: 0,
+    &quot;align&quot;: &quot;center&quot;,
+    &quot;vertical&quot;: &quot;middle&quot;
+  },
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;parent&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;parent&quot;,
+    &quot;ownerId&quot;: &quot;element-295e8f60-a574-43a7-bf35-df897fabd91c&quot;
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Footer_TokenDetail<br><small>element-ae932b51-e274-4903-b949-47489e3bbfae</small></td><td>screen-fb2afd7d-f997-4bc8-90f5-40439ae2af76</td><td>0 / 912 / 551 / 72</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: null,
+    &quot;effectiveMode&quot;: &quot;none&quot;,
+    &quot;ownerId&quot;: null
+  },
+  &quot;transitionIds&quot;: []
+}</pre></td></tr><tr><td>Btn_TokenDetail_Close<br><small>element-d80d00ba-8baf-46fb-875f-b60f69128491</small></td><td>element-ae932b51-e274-4903-b949-47489e3bbfae</td><td>253.5 / 940 / 44 / 44</td><td><pre>{
+  &quot;input&quot;: {
+    &quot;stored&quot;: {
+      &quot;mode&quot;: &quot;action&quot;,
+      &quot;enabled&quot;: true,
+      &quot;shape&quot;: &quot;rectangle&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    &quot;effectiveMode&quot;: &quot;action&quot;,
+    &quot;ownerId&quot;: &quot;element-d80d00ba-8baf-46fb-875f-b60f69128491&quot;
+  },
+  &quot;state&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;mode&quot;: &quot;tint&quot;,
+    &quot;targetGraphic&quot;: &quot;self&quot;,
+    &quot;selectable&quot;: false,
+    &quot;selected&quot;: false,
+    &quot;tints&quot;: {
+      &quot;normal&quot;: &quot;#ffffff&quot;,
+      &quot;hover&quot;: &quot;#f2f2f2&quot;,
+      &quot;pressed&quot;: &quot;#bdbdbd&quot;,
+      &quot;selected&quot;: &quot;#d8e8ff&quot;,
+      &quot;disabled&quot;: &quot;#999999&quot;
+    }
+  },
+  &quot;transitionIds&quot;: [
+    &quot;element-614bc0fe-f9f0-4341-a3ff-dce9b2fdb53b&quot;
+  ]
+}</pre></td></tr></tbody></table></div><h3>적용 차이 · 미확인</h3><ul><li>토큰 상세이며 카드 능력치/업그레이드 구조가 없습니다.</li><li>equip/info/previous/next는 입력 wrapper이나 유효 transition이 없습니다.</li><li>modal rootMode=fullscreen입니다. 바텀시트 동등 구조/동작으로 쓰지 않습니다.</li><li>명시 진입 transition은 없고 Close만 있습니다.</li></ul></details><h3>조사한 샘플에서 직접 적합한 예제 없음</h3><ul><li>덱 4×2 + Tower: 직접 적합 샘플 없음 / 4열유닛만 참고. 두 줄 고정/별도 Tower영역/덱탭/교체 상태와 연결은 새 영상 근거로 제작.</li><li>실제 바텀시트와 전체 페이지 전환: 선정 샘플은 page 또는 fullscreen modal. 실제 sheet 동등 샘플 없음. / kind/presentation/root 및 고정/스크롤 범위를 섞지 않음. 부모영상 원본에서 시트 외곽과 배후·닫기 경로를 먼저 확인.</li><li>카드 능력치·업그레이드: 직접 적합 샘플 없음 / 확대그림/제목/CTA 분리만 참고. 비용·레벨·진행바·상태·성공화면·게임수치는 새 원본 필요.</li></ul><h2>관찰된 전환 · 실제 클릭은 미확인</h2><p>31건은 두 영상의 화면 전후·상태·스크롤 관찰입니다. 실제 runtime 연결31개 또는 확인된 클릭31개가 아닙니다. 아래 입력은 모두 후보/추정입니다.</p><div class="table"><table><thead><tr><th>ID</th><th>영상</th><th>판틀</th><th>실제 관찰</th><th>입력 후보 · 추정</th></tr></thead><tbody><tr><td>A-T01</td><td>CLASH-A</td><td>CRX01 → CR02</td><td>OS허용판→나이선택</td><td>선택 버튼 미확인</td></tr><tr><td>A-T02</td><td>CLASH-A</td><td>CR02 → CR03</td><td>연령판 닫힘 뒤 중요공지</td><td>확인 버튼 추정</td></tr><tr><td>A-T03</td><td>CLASH-A</td><td>CR03 → CRX02</td><td>중요공지 닫힘·개인정보동의판</td><td>확인/정책링크 중 실제입력 미확인</td></tr><tr><td>A-T04</td><td>CLASH-A</td><td>CRX02 → CR04</td><td>동의판닫힘→로딩→첫전장</td><td>수락/거부 선택 미확인</td></tr><tr><td>A-T05</td><td>CLASH-A</td><td>CR04 → CR05</td><td>첫전투타워파괴 뒤 승리결과</td><td>전투종료 연출 관찰</td></tr><tr><td>A-T06</td><td>CLASH-A</td><td>CR05 → CR06</td><td>확인→로딩→상자</td><td>확인 클릭 추정</td></tr><tr><td>A-T07</td><td>CLASH-A</td><td>CR06 → CR07</td><td>4개요약→홈</td><td>탭/자동전환 구분 미확인</td></tr><tr><td>A-T08</td><td>CLASH-A</td><td>CR07 → CR08</td><td>홈→덱</td><td>하단카드메뉴 안내손과 전후화면; 입력 추정</td></tr><tr><td>A-T09</td><td>CLASH-A</td><td>CR08 → CR09</td><td>덱→컬렉션하단</td><td>컬렉션탭 전환 추정</td></tr><tr><td>A-T10</td><td>CLASH-A</td><td>CR09 → CR10</td><td>기사선택확장→상세</td><td>초상/업그레이드 중 정확입력 미확인</td></tr><tr><td>A-T11</td><td>CLASH-A</td><td>CR10 → CR11</td><td>상세→업그레이드보상확인</td><td>녹색업그레이드 버튼 추정</td></tr><tr><td>A-T12</td><td>CLASH-A</td><td>CR11 → CR12</td><td>확인→업그레이드발표</td><td>확인5골드 버튼 추정</td></tr><tr><td>A-T13</td><td>CLASH-A</td><td>CR12 → CR09</td><td>업그레이드발표→컬렉션복귀</td><td>복귀입력 미확인</td></tr><tr><td>A-T14</td><td>CLASH-A</td><td>CR09 → CR07</td><td>컬렉션→전투홈</td><td>하단전투탭 안내손; 입력추정</td></tr><tr><td>A-T15</td><td>CLASH-A</td><td>CR07 → CR04</td><td>전투홈→두번째훈련전투</td><td>노란전투버튼 안내손; 입력추정</td></tr><tr><td>B-T01</td><td>CLASH-B</td><td>CR07 → CR13</td><td>홈에서 덱 시트가 아래에서 올라옴</td><td>Btn_DeckQuickview</td></tr><tr><td>B-T02</td><td>CLASH-B</td><td>CR13 → CR07</td><td>덱시트가 내려가고 홈 복귀</td><td>Btn_CollapseChevron</td></tr><tr><td>B-T03</td><td>CLASH-B</td><td>CR07 → CR14</td><td>게임모드 시트 진입</td><td>Btn_ModeTrophy</td></tr><tr><td>B-T04</td><td>CLASH-B</td><td>CR14 → CR07</td><td>게임모드 시트 퇴장,홈 복귀</td><td>Btn_CollapseChevron</td></tr><tr><td>B-T05</td><td>CLASH-B</td><td>CR07 → CR15</td><td>소셜 바탕으로 변경 후 왕 오버레이 진입</td><td>Btn_Social 또는 가로스와이프</td></tr><tr><td>B-T06</td><td>CLASH-B</td><td>CR17 → CR17</td><td>같은 말풍선의 문구 변경</td><td>화면탭 또는 자동 타이머</td></tr><tr><td>B-T07</td><td>CLASH-B</td><td>CR17 → CR15</td><td>왕과 딤 퇴장,소셜만 표시</td><td>화면탭 또는 자동 타이머</td></tr><tr><td>B-T08</td><td>CLASH-B</td><td>CR15 → CR15,CRS01</td><td>공사중 안내문 표시</td><td>오른쪽 검/월계관탭 가능성</td></tr><tr><td>B-T09</td><td>CLASH-B</td><td>CR15 → CR07</td><td>소셜이 오른쪽으로 밀리고 홈 복귀</td><td>Btn_Battle 또는 가로스와이프</td></tr><tr><td>B-T10</td><td>CLASH-B</td><td>CR07 → CR08</td><td>홈이 오른쪽으로 밀리고 덱 페이지 진입</td><td>Btn_CardsCollection 또는 가로스와이프</td></tr><tr><td>B-T11</td><td>CLASH-B</td><td>CR08 → CR09</td><td>상단 선택이 덱에서 컬렉션으로 변경</td><td>Tab_Collection</td></tr><tr><td>B-T12</td><td>CLASH-B</td><td>CR09 → CR09</td><td>카드 목록이 위로 이동,미발견 후반 행 표시</td><td>위로 스와이프 추정</td></tr><tr><td>B-T13</td><td>CLASH-B</td><td>CR09 → CR16</td><td>상점으로 변경,오퍼 흰flash 뒤 실제그림</td><td>Btn_Shop 또는 가로스와이프</td></tr><tr><td>B-T14</td><td>CLASH-B</td><td>CR16 → CR16</td><td>특별상품→일일상품→자원/크리에이터 구간으로 스크롤</td><td>위로 스와이프 추정</td></tr><tr><td>B-T15</td><td>CLASH-B</td><td>CR16 → CR16</td><td>자원→이모티콘→일일상품으로 역스크롤</td><td>아래로 스와이프 추정</td></tr><tr><td>B-T16</td><td>CLASH-B</td><td>CR16 → CR16</td><td>일일상품→미니패스→초보자 팩 상단으로 역스크롤</td><td>아래로 스와이프 추정</td></tr></tbody></table></div><footer>codex(단이) · 2026-11-18T17:22:28+09:00 · 제안(검수 대기)<br>원본과 제품·설계·서버·공용 보고 무수정. 저장값·툴 실제 조립·실화면 검수·게임동작·최종시각승인은 별개입니다.</footer></main><script>
+'use strict';
+const input=document.getElementById('q'),kind=document.getElementById('kind'),out=document.getElementById('found'),cards=[...document.querySelectorAll('.family')];
+function filterCatalog(){const q=input.value.trim().toLocaleLowerCase('ko'),k=kind.value;let count=0;for(const card of cards){const show=(k==='all'||card.dataset.kind===k)&&(!q||card.dataset.search.includes(q));card.hidden=!show;if(show)count++;}out.textContent=count+' / '+cards.length+'항목';}
+input.addEventListener('input',filterCatalog);kind.addEventListener('change',filterCatalog);filterCatalog();
+</script></body></html>

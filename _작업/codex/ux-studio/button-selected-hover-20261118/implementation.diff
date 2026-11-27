@@ -1,0 +1,62 @@
+--- backup/button-state.mjs
++++ src/tools/uxStudio/button-state.mjs
+@@ -84,7 +84,7 @@
+   if(c.mode==='image'){
+    if(svg){svg.remove();svg=matrix=null;}
+    target.style.filter=visualShadow;
+-   ctx.renderGraphic?.(target,ctx.graphic,c.images?.[state]||c.images?.normal||ctx.graphic.image);imageApplied=true;
++   ctx.renderGraphic?.(target,ctx.graphic,c.images?.[state]||(state==='hover'&&buttonSelected(ctx.screen,ctx.owner,ctx.runtime)&&c.images?.selected)||c.images?.normal||ctx.graphic.image);imageApplied=true;
+   }else{
+    if(imageApplied){ctx.renderGraphic?.(target,ctx.graphic,ctx.graphic.image);imageApplied=false;}
+    if(!matrix){
+--- backup/control-visual.test.mjs
++++ tests/ux-studio/control-visual.test.mjs
+@@ -447,3 +447,48 @@
+  fire(button,'pointerdown',{button:0,pointerId:2,pointerType:'touch',clientX:50,clientY:50});fire(button,'pointermove',{pointerId:2,clientX:150,clientY:50});assert.equal(front.style.translate,'');fire(button,'pointercancel',{pointerId:2});assert.equal(front.style.translate,'');
+  assert.deepEqual(design,before);consumer.dispose();assert.equal(front.style.translate,'');
+ });
++
++
++const selectionImages={
++ normal:{src:'data:image/png;base64,b2Zm',alt:'Off',fit:'contain',sourceSize:[180,80]},
++ selected:{src:'data:image/png;base64,b24=',alt:'On',fit:'contain',sourceSize:[180,80]},
++ hover:{src:'data:image/png;base64,aG92ZXI=',alt:'Hover',fit:'contain',sourceSize:[180,80]}
++};
++function selectedImageConsumer(t,{selected=true,slice,hover=false}={}){
++ const root=fixture(t),create=document.createElement;
++ document.createElement=tag=>{const node=create(tag);node.style.setProperty=(key,value)=>{node.style[key]=value;};node.style.removeProperty=key=>{delete node.style[key];};return node;};
++ const design=stateDesign(),buttonData=design.screens[0].elements[0],config=buttonData.buttonState;
++ Object.assign(config,{mode:'image',selected,images:{normal:selectionImages.normal,pressed:selectionImages.normal,selected:selectionImages.selected}});
++ if(hover)config.images.hover=selectionImages.hover;
++ if(slice){config.targetGraphic='self';buttonData.skin=createSkin(slice==='3'?'button':'backplate');design.screens[0].elements=[buttonData];}
++ const before=structuredClone(design),consumer=mountDesignConsumer(root,design),button=renderedPart(root,'state-button'),graphic=slice?button:renderedPart(root,'state-icon');
++ t.after(()=>{assert.deepEqual(design,before);consumer.dispose();});
++ return {root,consumer,button,graphic,src:()=>slice?graphic.style['--skin-source']:graphic.querySelector('img').src};
++}
++for(const trigger of ['pointerenter','focus'])test('selected button image keeps selected fallback during '+trigger,t=>{
++ const {button,src}=selectedImageConsumer(t);assert.equal(button.getAttribute('aria-pressed'),'true');assert.equal(src(),selectionImages.selected.src);
++ fire(button,trigger,{pointerType:'mouse'});assert.equal(button.dataset.buttonState,'hover');assert.equal(button.getAttribute('aria-pressed'),'true');
++ assert.equal(src(),selectionImages.selected.src,'missing hover image must retain the selected base image');
++});
++test('selected button image follows runtime on/off while hovered',t=>{
++ const {root,consumer,button,graphic,src}=selectedImageConsumer(t,{selected:false});fire(button,'pointerenter',{pointerType:'mouse'});
++ fire(button,'pointerdown',{button:0,pointerId:1});assert.equal(src(),selectionImages.normal.src);fire(button,'pointerup',{pointerId:1});fire(root,'click',{target:graphic,detail:0});
++ assert.equal(consumer.getState().buttonSelections.main['state-button'],true);assert.equal(button.getAttribute('aria-pressed'),'true');assert.equal(button.dataset.buttonState,'hover');
++ assert.equal(src(),selectionImages.selected.src,'runtime selection must reach the visible image while hovered');
++ fire(root,'click',{target:graphic,detail:0});assert.equal(button.getAttribute('aria-pressed'),'false');assert.equal(src(),selectionImages.normal.src);
++});
++for(const slice of ['3','9'])test('selected button image preserves '+slice+'-slice fallback while hovered',t=>{
++ const {button,graphic,src}=selectedImageConsumer(t,{slice}),selected='url("'+selectionImages.selected.src+'")',slices=graphic.style['--skin-slices'],edges=graphic.style['--skin-edges'];
++ assert.equal(src(),selected);fire(button,'pointerenter',{pointerType:'mouse'});assert.equal(src(),selected,'sliced frame must receive the selected fallback');
++ for(const state of ['normal','highlighted','pressed','selected','disabled'])assert.equal(graphic.style['--skin-'+state+'-source'],selected);
++ assert.equal(graphic.style['--skin-slices'],slices);assert.equal(graphic.style['--skin-edges'],edges);
++});
++test('selected button image keeps an explicit hover image ahead of selected',t=>{
++ const {button,src}=selectedImageConsumer(t,{hover:true});fire(button,'pointerenter',{pointerType:'mouse'});assert.equal(src(),selectionImages.hover.src);
++});
++test('selected button image keeps an explicit pressed image ahead of selected',t=>{
++ const {button,src}=selectedImageConsumer(t);fire(button,'pointerenter',{pointerType:'mouse'});fire(button,'pointerdown',{button:0,pointerId:1});assert.equal(button.dataset.buttonState,'pressed');assert.equal(src(),selectionImages.normal.src);
++});
++test('selected button image keeps normal fallback when unselected',t=>{
++ const {button,src}=selectedImageConsumer(t,{selected:false});fire(button,'pointerenter',{pointerType:'mouse'});assert.equal(button.getAttribute('aria-pressed'),'false');assert.equal(src(),selectionImages.normal.src);
++});

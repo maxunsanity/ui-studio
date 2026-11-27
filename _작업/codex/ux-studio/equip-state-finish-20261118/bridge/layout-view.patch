@@ -1,0 +1,24 @@
+--- a/src/tools/uxStudio/layout-view.mjs
++++ b/src/tools/uxStudio/layout-view.mjs
+@@ -278,7 +278,20 @@
+     }
+     if (parentId === null) {
+         attachControls(container, screen, runtime, {mode:'edit',workspaceId,assetView});
+-        attachButtonStates(container,screen,runtime,{mode,assetView,transitions,shell,preview:buttonPreview,previewElement:buttonElement,renderGraphic:(node,element,image)=>renderImagePart(node,{...element,image},assetView,false,workspaceId)});
++        attachButtonStates(container,screen,runtime,{mode,assetView,transitions,shell,preview:buttonPreview,previewElement:buttonElement,renderGraphic:(node,element,image)=>{
++            let skin=element.skin;
++            if(skin&&!element.image&&!image?.region){
++                renderImagePart(node,element,assetView,false,workspaceId);
++                if(image){
++                    const original=skin.textures?.normal||SKIN_ASSETS[skin.asset];
++                    const [w,h]=image.sourceSize||[original.w,original.h];
++                    const texture={...image,w,h,src:image.asset?SKIN_ASSETS[image.asset].src:image.src};
++                    // Keep live CSS pseudo-states on the image already chosen by the button controller.
++                    skin={...skin,textures:Object.fromEntries(['normal','highlighted','pressed','selected','disabled'].map(state=>[state,texture]))};
++                }
++            }else renderImagePart(node,{...element,image},assetView,false,workspaceId);
++            if(element.skin&&!element.image)applySkin(node,skin,{workspaceId,view:assetView,state:element.interaction?.enabled===false?'disabled':element.id===skinElement?skinState:undefined,live:mode!=='edit'});
++        }});
+         attachScrollPins(container,screen);
+     }
+ }

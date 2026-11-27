@@ -1,0 +1,4878 @@
+{
+  "kind": "normal-ui-action-recipes-not-design",
+  "game": "ACECRAFT",
+  "scope": "7 representative list/shop/reveal boards; instructions only for parent normal UI execution",
+  "coordinateSpace": {
+    "width": 420,
+    "height": 924,
+    "unit": "px",
+    "rects": "absolute even when parent is set"
+  },
+  "executionRules": [
+    "Use only normal UI actions; this file is not a saved model, tool schema, design import, or source edit.",
+    "Actions are ordered; every parent key refers to an earlier action.",
+    "Text remains native op:text, separate from image pixels and button skins. Numeric weights are used.",
+    "Buying, claiming and Go actions are sample navigation only; wire to prepared local sample confirmation/reward pages, never a live purchase.",
+    "Do not display screenshot frames/crops as production. All path/region images are prepared assets.",
+    "Repeated cards share identical dimensions by role. Resource/glyph substitutes and omitted repeated rows are explicitly listed in each family notes."
+  ],
+  "resourceManifest": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/art-ui/resource-manifest.json",
+  "portraitManifest": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/art-recruit/acecraft-pilot-portraits-atlas-v1-manifest.json",
+  "families": [
+    {
+      "id": "ACE02",
+      "name": "Page_ACE_PilotList",
+      "nativeKind": "page",
+      "purpose": "Pilot collection: nine equal cards, observed first six level labels, filter and amplification affordance.",
+      "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00005.jpg",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_ACE02_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "fill": "#594b3c"
+        },
+        {
+          "op": "panel",
+          "key": "Header",
+          "name": "Panel_ACE02_Header",
+          "rect": {
+            "x": 73,
+            "y": 50,
+            "w": 277,
+            "h": 67
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Title",
+          "name": "Txt_ACE02_Title",
+          "rect": {
+            "x": 85,
+            "y": 65,
+            "w": 255,
+            "h": 40
+          },
+          "parent": "root",
+          "text": "PILOT LIST",
+          "size": 29,
+          "weight": 800,
+          "color": "#fff0bd",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Filter",
+          "name": "Btn_ACE02_Filter",
+          "rect": {
+            "x": 17,
+            "y": 167,
+            "w": 122,
+            "h": 35
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "FilterLabel",
+          "name": "Txt_ACE02_FilterLabel",
+          "rect": {
+            "x": 24,
+            "y": 175,
+            "w": 108,
+            "h": 23
+          },
+          "parent": "Filter",
+          "text": "All",
+          "size": 17,
+          "weight": 700,
+          "color": "#493329",
+          "align": "left"
+        },
+        {
+          "op": "text",
+          "key": "Collection",
+          "name": "Txt_ACE02_Collection",
+          "rect": {
+            "x": 254,
+            "y": 171,
+            "w": 145,
+            "h": 25
+          },
+          "parent": "root",
+          "text": "Pilots 28/29",
+          "size": 16,
+          "weight": 700,
+          "color": "#fff0ad",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "Amplification",
+          "name": "Txt_ACE02_Amplification",
+          "rect": {
+            "x": 62,
+            "y": 230,
+            "w": 240,
+            "h": 43
+          },
+          "parent": "root",
+          "text": "900/81\nMax Pilot Lv. +0 after Amplification.",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Advance",
+          "name": "Btn_ACE02_Advance",
+          "rect": {
+            "x": 322,
+            "y": 240,
+            "w": 74,
+            "h": 32
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "AdvanceLabel",
+          "name": "Txt_ACE02_AdvanceLabel",
+          "rect": {
+            "x": 325,
+            "y": 248,
+            "w": 68,
+            "h": 21
+          },
+          "parent": "Advance",
+          "text": "Advance",
+          "size": 13,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "plain",
+          "key": "ListViewport",
+          "name": "Frame_ACE02_ListViewport",
+          "rect": {
+            "x": 0,
+            "y": 280,
+            "w": 420,
+            "h": 520
+          },
+          "parent": "root",
+          "fill": "#00000000",
+          "partRole": "frame",
+          "overflow": "scroll-y"
+        },
+        {
+          "op": "button",
+          "key": "Pilot1",
+          "name": "Btn_ACE02_Pilot1",
+          "rect": {
+            "x": 18,
+            "y": 286,
+            "w": 113,
+            "h": 176
+          },
+          "parent": "ListViewport",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Pilot1Portrait",
+          "name": "Img_ACE02_Pilot1Portrait",
+          "rect": {
+            "x": 22,
+            "y": 298,
+            "w": 105,
+            "h": 118
+          },
+          "parent": "Pilot1",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+          "fit": "contain",
+          "region": [
+            0,
+            0,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Pilot2",
+          "name": "Btn_ACE02_Pilot2",
+          "rect": {
+            "x": 153,
+            "y": 286,
+            "w": 113,
+            "h": 176
+          },
+          "parent": "ListViewport",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Pilot2Portrait",
+          "name": "Img_ACE02_Pilot2Portrait",
+          "rect": {
+            "x": 157,
+            "y": 298,
+            "w": 105,
+            "h": 118
+          },
+          "parent": "Pilot2",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+          "fit": "contain",
+          "region": [
+            200,
+            0,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Pilot3",
+          "name": "Btn_ACE02_Pilot3",
+          "rect": {
+            "x": 288,
+            "y": 286,
+            "w": 113,
+            "h": 176
+          },
+          "parent": "ListViewport",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Pilot3Portrait",
+          "name": "Img_ACE02_Pilot3Portrait",
+          "rect": {
+            "x": 292,
+            "y": 298,
+            "w": 105,
+            "h": 118
+          },
+          "parent": "Pilot3",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+          "fit": "contain",
+          "region": [
+            400,
+            0,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Pilot4",
+          "name": "Btn_ACE02_Pilot4",
+          "rect": {
+            "x": 18,
+            "y": 484,
+            "w": 113,
+            "h": 176
+          },
+          "parent": "ListViewport",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Pilot4Portrait",
+          "name": "Img_ACE02_Pilot4Portrait",
+          "rect": {
+            "x": 22,
+            "y": 496,
+            "w": 105,
+            "h": 118
+          },
+          "parent": "Pilot4",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+          "fit": "contain",
+          "region": [
+            0,
+            200,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Pilot5",
+          "name": "Btn_ACE02_Pilot5",
+          "rect": {
+            "x": 153,
+            "y": 484,
+            "w": 113,
+            "h": 176
+          },
+          "parent": "ListViewport",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Pilot5Portrait",
+          "name": "Img_ACE02_Pilot5Portrait",
+          "rect": {
+            "x": 157,
+            "y": 496,
+            "w": 105,
+            "h": 118
+          },
+          "parent": "Pilot5",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+          "fit": "contain",
+          "region": [
+            200,
+            200,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Pilot6",
+          "name": "Btn_ACE02_Pilot6",
+          "rect": {
+            "x": 288,
+            "y": 484,
+            "w": 113,
+            "h": 176
+          },
+          "parent": "ListViewport",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Pilot6Portrait",
+          "name": "Img_ACE02_Pilot6Portrait",
+          "rect": {
+            "x": 292,
+            "y": 496,
+            "w": 105,
+            "h": 118
+          },
+          "parent": "Pilot6",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+          "fit": "contain",
+          "region": [
+            400,
+            200,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Pilot7",
+          "name": "Btn_ACE02_Pilot7",
+          "rect": {
+            "x": 18,
+            "y": 682,
+            "w": 113,
+            "h": 176
+          },
+          "parent": "ListViewport",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Pilot7Portrait",
+          "name": "Img_ACE02_Pilot7Portrait",
+          "rect": {
+            "x": 22,
+            "y": 694,
+            "w": 105,
+            "h": 118
+          },
+          "parent": "Pilot7",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+          "fit": "contain",
+          "region": [
+            0,
+            400,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Pilot8",
+          "name": "Btn_ACE02_Pilot8",
+          "rect": {
+            "x": 153,
+            "y": 682,
+            "w": 113,
+            "h": 176
+          },
+          "parent": "ListViewport",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Pilot8Portrait",
+          "name": "Img_ACE02_Pilot8Portrait",
+          "rect": {
+            "x": 157,
+            "y": 694,
+            "w": 105,
+            "h": 118
+          },
+          "parent": "Pilot8",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+          "fit": "contain",
+          "region": [
+            200,
+            400,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Pilot9",
+          "name": "Btn_ACE02_Pilot9",
+          "rect": {
+            "x": 288,
+            "y": 682,
+            "w": 113,
+            "h": 176
+          },
+          "parent": "ListViewport",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Pilot9Portrait",
+          "name": "Img_ACE02_Pilot9Portrait",
+          "rect": {
+            "x": 292,
+            "y": 694,
+            "w": 105,
+            "h": 118
+          },
+          "parent": "Pilot9",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+          "fit": "contain",
+          "region": [
+            400,
+            400,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Level1",
+          "name": "Txt_ACE02_Level1",
+          "rect": {
+            "x": 36,
+            "y": 293,
+            "w": 88,
+            "h": 25
+          },
+          "parent": "Pilot1",
+          "text": "Lv.60",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff9dc",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "Level2",
+          "name": "Txt_ACE02_Level2",
+          "rect": {
+            "x": 171,
+            "y": 293,
+            "w": 88,
+            "h": 25
+          },
+          "parent": "Pilot2",
+          "text": "Lv.35",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff9dc",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "Level3",
+          "name": "Txt_ACE02_Level3",
+          "rect": {
+            "x": 306,
+            "y": 293,
+            "w": 88,
+            "h": 25
+          },
+          "parent": "Pilot3",
+          "text": "Lv.60",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff9dc",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "Level4",
+          "name": "Txt_ACE02_Level4",
+          "rect": {
+            "x": 36,
+            "y": 491,
+            "w": 88,
+            "h": 25
+          },
+          "parent": "Pilot4",
+          "text": "Lv.40",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff9dc",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "Level5",
+          "name": "Txt_ACE02_Level5",
+          "rect": {
+            "x": 171,
+            "y": 491,
+            "w": 88,
+            "h": 25
+          },
+          "parent": "Pilot5",
+          "text": "Lv.60",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff9dc",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "Level6",
+          "name": "Txt_ACE02_Level6",
+          "rect": {
+            "x": 306,
+            "y": 491,
+            "w": 88,
+            "h": 25
+          },
+          "parent": "Pilot6",
+          "text": "Lv.60",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff9dc",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "CollectionTabs",
+          "name": "Panel_ACE02_CollectionTabs",
+          "rect": {
+            "x": 12,
+            "y": 798,
+            "w": 396,
+            "h": 40
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "CollectionPilotCaption",
+          "name": "Txt_ACE02_CollectionPilotCaption",
+          "rect": {
+            "x": 14,
+            "y": 806,
+            "w": 190,
+            "h": 25
+          },
+          "parent": "CollectionTabs",
+          "text": "Pilot",
+          "size": 17,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "CollectionPappoCaption",
+          "name": "Txt_ACE02_CollectionPappoCaption",
+          "rect": {
+            "x": 212,
+            "y": 806,
+            "w": 190,
+            "h": 25
+          },
+          "parent": "CollectionTabs",
+          "text": "Pappo",
+          "size": 17,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        }
+      ],
+      "notes": [
+        "Nine freshly generated portrait cells are reference-inspired approximations, not confirmed character identities.",
+        "Source steampunk wall is approximated by a flat brown root because a matching clean backdrop is unavailable.",
+        "Original rarity badges, ability sub-icons and global icon navigation are omitted; first six level labels are retained. Third-row labels are behind the source bottom tabs and omitted.",
+        "Pilot and Pappo are two separate native text captions. Pappo destination content is unobserved; no Pappo input route is added.",
+        "v007 native tab/filter/advance captions are children of their corresponding button, preserving two-part copy/reuse and the correct button input/state ownership.",
+        "v007 Pilot list uses a transparent role-frame ListViewport ABS(0,280,420,520), overflow=scroll-y. Pilot1..9 are its children with original ABS rectangles unchanged; portrait/level descendants remain under their cards. The viewport clips at y800 so third-row content does not cross CollectionTabs/footer, and normal native scrolling can expose it. Actual scrolling is not verified by this recipe review."
+      ]
+    },
+    {
+      "id": "ACE10L",
+      "name": "Page_ACE_SpecialPack_Limited",
+      "nativeKind": "page",
+      "purpose": "Two-column Special Pack offer grid; four representative complete source offers and native purchase-entry targets.",
+      "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00041.jpg",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_ACE10L_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "fill": "#503b32"
+        },
+        {
+          "op": "image",
+          "key": "BrickBackground",
+          "name": "Img_ACE10L_BrickBackground",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-store-brick-bg-v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "Title",
+          "name": "Txt_ACE10L_Title",
+          "rect": {
+            "x": 45,
+            "y": 75,
+            "w": 330,
+            "h": 36
+          },
+          "parent": "root",
+          "text": "Special Pack",
+          "size": 25,
+          "weight": 800,
+          "color": "#fff1b2",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Mode1",
+          "name": "Btn_ACE10L_Mode1",
+          "rect": {
+            "x": 96,
+            "y": 166,
+            "w": 116,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "ModeLabel1",
+          "name": "Txt_ACE10L_ModeLabel1",
+          "rect": {
+            "x": 99,
+            "y": 175,
+            "w": 110,
+            "h": 22
+          },
+          "parent": "Mode1",
+          "text": "Limited-Time",
+          "size": 15,
+          "weight": 700,
+          "color": "#62472e",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Mode2",
+          "name": "Btn_ACE10L_Mode2",
+          "rect": {
+            "x": 212,
+            "y": 166,
+            "w": 116,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "ModeLabel2",
+          "name": "Txt_ACE10L_ModeLabel2",
+          "rect": {
+            "x": 215,
+            "y": 175,
+            "w": 110,
+            "h": 22
+          },
+          "parent": "Mode2",
+          "text": "Chapter Pack",
+          "size": 15,
+          "weight": 700,
+          "color": "#62472e",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "ShopFooter",
+          "name": "Panel_ACE10L_ShopFooter",
+          "rect": {
+            "x": 0,
+            "y": 842,
+            "w": 420,
+            "h": 82
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Back",
+          "name": "Btn_ACE10L_Back",
+          "rect": {
+            "x": 0,
+            "y": 842,
+            "w": 40,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavSpecialPack",
+          "name": "Btn_ACE10L_NavSpecialPack",
+          "rect": {
+            "x": 40,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavTopPick",
+          "name": "Btn_ACE10L_NavTopPick",
+          "rect": {
+            "x": 135,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavCumulative",
+          "name": "Btn_ACE10L_NavCumulative",
+          "rect": {
+            "x": 230,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavItemShop",
+          "name": "Btn_ACE10L_NavItemShop",
+          "rect": {
+            "x": 325,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "Offer1",
+          "name": "Btn_ACE10L_Offer1",
+          "rect": {
+            "x": 39,
+            "y": 227,
+            "w": 162,
+            "h": 210
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Offer1Art",
+          "name": "Img_ACE10L_Offer1Art",
+          "rect": {
+            "x": 77,
+            "y": 252,
+            "w": 86,
+            "h": 72
+          },
+          "parent": "Offer1",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "fit": "contain",
+          "region": [
+            0,
+            0,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Offer1Meta",
+          "name": "Txt_ACE10L_Offer1Meta",
+          "rect": {
+            "x": 46,
+            "y": 328,
+            "w": 148,
+            "h": 43
+          },
+          "parent": "Offer1",
+          "text": "Daily Limit 1/1\n×20 · 2H×5 · 2H×5",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Offer1Price",
+          "name": "Btn_ACE10L_Offer1Price",
+          "rect": {
+            "x": 55,
+            "y": 392,
+            "w": 130,
+            "h": 34
+          },
+          "parent": "Offer1",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Offer1PriceLabel",
+          "name": "Txt_ACE10L_Offer1PriceLabel",
+          "rect": {
+            "x": 59,
+            "y": 399,
+            "w": 122,
+            "h": 23
+          },
+          "parent": "Offer1Price",
+          "text": "FREE",
+          "size": 16,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Offer2",
+          "name": "Btn_ACE10L_Offer2",
+          "rect": {
+            "x": 229,
+            "y": 227,
+            "w": 162,
+            "h": 210
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Offer2Art",
+          "name": "Img_ACE10L_Offer2Art",
+          "rect": {
+            "x": 267,
+            "y": 252,
+            "w": 86,
+            "h": 72
+          },
+          "parent": "Offer2",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            128,
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Offer2Meta",
+          "name": "Txt_ACE10L_Offer2Meta",
+          "rect": {
+            "x": 236,
+            "y": 328,
+            "w": 148,
+            "h": 43
+          },
+          "parent": "Offer2",
+          "text": "Daily Limit 1/1\n×80",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Offer2Price",
+          "name": "Btn_ACE10L_Offer2Price",
+          "rect": {
+            "x": 245,
+            "y": 392,
+            "w": 130,
+            "h": 34
+          },
+          "parent": "Offer2",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Offer2PriceLabel",
+          "name": "Txt_ACE10L_Offer2PriceLabel",
+          "rect": {
+            "x": 249,
+            "y": 399,
+            "w": 122,
+            "h": 23
+          },
+          "parent": "Offer2Price",
+          "text": "3.80",
+          "size": 16,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Offer3",
+          "name": "Btn_ACE10L_Offer3",
+          "rect": {
+            "x": 39,
+            "y": 449,
+            "w": 162,
+            "h": 210
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Offer3Art",
+          "name": "Img_ACE10L_Offer3Art",
+          "rect": {
+            "x": 77,
+            "y": 474,
+            "w": 86,
+            "h": 72
+          },
+          "parent": "Offer3",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "fit": "contain",
+          "region": [
+            400,
+            0,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Offer3Meta",
+          "name": "Txt_ACE10L_Offer3Meta",
+          "rect": {
+            "x": 46,
+            "y": 550,
+            "w": 148,
+            "h": 43
+          },
+          "parent": "Offer3",
+          "text": "25d · Total Limit 2/2\n×10",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Offer3Price",
+          "name": "Btn_ACE10L_Offer3Price",
+          "rect": {
+            "x": 55,
+            "y": 614,
+            "w": 130,
+            "h": 34
+          },
+          "parent": "Offer3",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Offer3PriceLabel",
+          "name": "Txt_ACE10L_Offer3PriceLabel",
+          "rect": {
+            "x": 59,
+            "y": 621,
+            "w": 122,
+            "h": 23
+          },
+          "parent": "Offer3Price",
+          "text": "×10",
+          "size": 16,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Offer4",
+          "name": "Btn_ACE10L_Offer4",
+          "rect": {
+            "x": 229,
+            "y": 449,
+            "w": 162,
+            "h": 210
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Offer4Art",
+          "name": "Img_ACE10L_Offer4Art",
+          "rect": {
+            "x": 267,
+            "y": 474,
+            "w": 86,
+            "h": 72
+          },
+          "parent": "Offer4",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "fit": "contain",
+          "region": [
+            400,
+            0,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Offer4Meta",
+          "name": "Txt_ACE10L_Offer4Meta",
+          "rect": {
+            "x": 236,
+            "y": 550,
+            "w": 148,
+            "h": 43
+          },
+          "parent": "Offer4",
+          "text": "25d · Total Limit 2/2\n×10",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Offer4Price",
+          "name": "Btn_ACE10L_Offer4Price",
+          "rect": {
+            "x": 245,
+            "y": 614,
+            "w": 130,
+            "h": 34
+          },
+          "parent": "Offer4",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Offer4PriceLabel",
+          "name": "Txt_ACE10L_Offer4PriceLabel",
+          "rect": {
+            "x": 249,
+            "y": 621,
+            "w": 122,
+            "h": 23
+          },
+          "parent": "Offer4Price",
+          "text": "×3000",
+          "size": 16,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavSpecialPackCaption",
+          "name": "Txt_ACE10L_NavSpecialPackCaption",
+          "rect": {
+            "x": 42,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavSpecialPack",
+          "text": "Special\nPack",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavTopPickCaption",
+          "name": "Txt_ACE10L_NavTopPickCaption",
+          "rect": {
+            "x": 137,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavTopPick",
+          "text": "Top Pick\nPacks",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavCumulativeCaption",
+          "name": "Txt_ACE10L_NavCumulativeCaption",
+          "rect": {
+            "x": 232,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavCumulative",
+          "text": "Cumulative\nPurchase",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavItemShopCaption",
+          "name": "Txt_ACE10L_NavItemShopCaption",
+          "rect": {
+            "x": 327,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavItemShop",
+          "text": "Item Shop",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "BackCaption",
+          "name": "Txt_ACE10L_BackCaption",
+          "rect": {
+            "x": 0,
+            "y": 858,
+            "w": 40,
+            "h": 42
+          },
+          "parent": "Back",
+          "text": "‹",
+          "size": 34,
+          "weight": 800,
+          "color": "#fff1c8",
+          "align": "center"
+        }
+      ],
+      "notes": [
+        "Only the first two complete rows (four offers) are included; original lower partial rows and long-scroll products repeat the same card structure and are excluded from this representative board.",
+        "Prepared glyphs replace the source bundle paintings. The red bottle and exact gear art are not available; no unrelated character portrait substitutes are used.",
+        "Product-card and price buttons are separate native targets. Their eventual destination is the sample confirmation flow, never a live payment.",
+        "Shop footer keeps independent native text captions inside each of the four destination buttons at 14px. The back chevron is also a separate native caption because deleting the old combined string would otherwise remove it. Original nav pictograms remain omitted.",
+        "텍스트 분리를 우선한 v003은 앞선 35행 가이드를 넘을 수 있습니다. 개별 글자가 해당 버튼 부모 안에 있으므로 단일 공백 문자열로 배치하지 않습니다.",
+        "v004 artwork-only patch: Offer1Art → free, Offer3Art → blue, Offer4Art → blue. Uses the newly drawn six-cell shop atlas; source item identity and exact original shape are not claimed. Text, quantities, duration, positions, parents, inputs and button behavior are unchanged.",
+        "v007 shop-family footer: group420×82 at(0,842), observed Back input40×82 at x0, four destination tabs95×82 at x40/135/230/325. Separate native captions91×38,14px remain within their own tabs. This is not the global five84px-cell navigation specification; no fifth shop destination or relocated Back was invented.",
+        "v007 native tab/filter/advance captions are children of their corresponding button, preserving two-part copy/reuse and the correct button input/state ownership.",
+        "v008 omits the old whitespace CurrencyValues instruction. No replacement header group is embedded here. Root builds ACE_ShopCurrencyPatch in Limited and then uses normal UI copy/rebind for the other shop families; target-specific visible currencies and values must be rechecked."
+      ],
+      "navigationIntent": {
+        "Back": "parent-defined local return",
+        "NavSpecialPack": "ACE10L",
+        "NavTopPick": null,
+        "NavCumulative": "ACE15P",
+        "NavItemShop": "ACE14T",
+        "Mode2": "ACE10C",
+        "Offer1Price": "sample purchase confirmation, no real purchase",
+        "Offer2Price": "sample purchase confirmation, no real purchase",
+        "Offer3Price": "sample purchase confirmation, no real purchase",
+        "Offer4Price": "sample purchase confirmation, no real purchase"
+      }
+    },
+    {
+      "id": "ACE10C",
+      "name": "Page_ACE_SpecialPack_Chapter",
+      "nativeKind": "page",
+      "purpose": "Chapter Pack mode with Normal/Elite selector and wide horizontal chapter banners.",
+      "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00038.jpg",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_ACE10C_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "fill": "#503b32"
+        },
+        {
+          "op": "image",
+          "key": "BrickBackground",
+          "name": "Img_ACE10C_BrickBackground",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-store-brick-bg-v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "Title",
+          "name": "Txt_ACE10C_Title",
+          "rect": {
+            "x": 45,
+            "y": 75,
+            "w": 330,
+            "h": 36
+          },
+          "parent": "root",
+          "text": "Special Pack",
+          "size": 25,
+          "weight": 800,
+          "color": "#fff1b2",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Mode1",
+          "name": "Btn_ACE10C_Mode1",
+          "rect": {
+            "x": 96,
+            "y": 166,
+            "w": 116,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "ModeLabel1",
+          "name": "Txt_ACE10C_ModeLabel1",
+          "rect": {
+            "x": 99,
+            "y": 175,
+            "w": 110,
+            "h": 22
+          },
+          "parent": "Mode1",
+          "text": "Limited-Time",
+          "size": 15,
+          "weight": 700,
+          "color": "#62472e",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Mode2",
+          "name": "Btn_ACE10C_Mode2",
+          "rect": {
+            "x": 212,
+            "y": 166,
+            "w": 116,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "ModeLabel2",
+          "name": "Txt_ACE10C_ModeLabel2",
+          "rect": {
+            "x": 215,
+            "y": 175,
+            "w": 110,
+            "h": 22
+          },
+          "parent": "Mode2",
+          "text": "Chapter Pack",
+          "size": 15,
+          "weight": 700,
+          "color": "#62472e",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "ShopFooter",
+          "name": "Panel_ACE10C_ShopFooter",
+          "rect": {
+            "x": 0,
+            "y": 842,
+            "w": 420,
+            "h": 82
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Back",
+          "name": "Btn_ACE10C_Back",
+          "rect": {
+            "x": 0,
+            "y": 842,
+            "w": 40,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavSpecialPack",
+          "name": "Btn_ACE10C_NavSpecialPack",
+          "rect": {
+            "x": 40,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavTopPick",
+          "name": "Btn_ACE10C_NavTopPick",
+          "rect": {
+            "x": 135,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavCumulative",
+          "name": "Btn_ACE10C_NavCumulative",
+          "rect": {
+            "x": 230,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavItemShop",
+          "name": "Btn_ACE10C_NavItemShop",
+          "rect": {
+            "x": 325,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "Difficulty0",
+          "name": "Btn_ACE10C_Difficulty0",
+          "rect": {
+            "x": 149,
+            "y": 223,
+            "w": 64,
+            "h": 58
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "DifficultyLabel0",
+          "name": "Txt_ACE10C_DifficultyLabel0",
+          "rect": {
+            "x": 150,
+            "y": 258,
+            "w": 62,
+            "h": 21
+          },
+          "parent": "Difficulty0",
+          "text": "Normal",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1d0",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Difficulty1",
+          "name": "Btn_ACE10C_Difficulty1",
+          "rect": {
+            "x": 214,
+            "y": 223,
+            "w": 64,
+            "h": 58
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "DifficultyLabel1",
+          "name": "Txt_ACE10C_DifficultyLabel1",
+          "rect": {
+            "x": 215,
+            "y": 258,
+            "w": 62,
+            "h": 21
+          },
+          "parent": "Difficulty1",
+          "text": "Elite",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1d0",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "Chapter1",
+          "name": "Panel_ACE10C_Chapter1",
+          "rect": {
+            "x": 32,
+            "y": 309,
+            "w": 358,
+            "h": 166
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Chapter1Title",
+          "name": "Txt_ACE10C_Chapter1Title",
+          "rect": {
+            "x": 190,
+            "y": 329,
+            "w": 183,
+            "h": 27
+          },
+          "parent": "Chapter1",
+          "text": "Chapter 1 Pack",
+          "size": 18,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "image",
+          "key": "Chapter1Art",
+          "name": "Img_ACE10C_Chapter1Art",
+          "rect": {
+            "x": 42,
+            "y": 333,
+            "w": 138,
+            "h": 129
+          },
+          "parent": "Chapter1",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "fit": "contain",
+          "region": [
+            0,
+            200,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Chapter1Rewards",
+          "name": "Txt_ACE10C_Chapter1Rewards",
+          "rect": {
+            "x": 189,
+            "y": 373,
+            "w": 183,
+            "h": 41
+          },
+          "parent": "Chapter1",
+          "text": "×300  ·  ×3  ·  ×3000  ·  ×100",
+          "size": 13,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Chapter1Price",
+          "name": "Btn_ACE10C_Chapter1Price",
+          "rect": {
+            "x": 232,
+            "y": 428,
+            "w": 132,
+            "h": 34
+          },
+          "parent": "Chapter1",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Chapter1PriceLabel",
+          "name": "Txt_ACE10C_Chapter1PriceLabel",
+          "rect": {
+            "x": 235,
+            "y": 434,
+            "w": 126,
+            "h": 25
+          },
+          "parent": "Chapter1Price",
+          "text": "11.90",
+          "size": 17,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "Chapter2",
+          "name": "Panel_ACE10C_Chapter2",
+          "rect": {
+            "x": 32,
+            "y": 513,
+            "w": 358,
+            "h": 166
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Chapter2Title",
+          "name": "Txt_ACE10C_Chapter2Title",
+          "rect": {
+            "x": 190,
+            "y": 533,
+            "w": 183,
+            "h": 27
+          },
+          "parent": "Chapter2",
+          "text": "Chapter 2 Pack",
+          "size": 18,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "image",
+          "key": "Chapter2Art",
+          "name": "Img_ACE10C_Chapter2Art",
+          "rect": {
+            "x": 42,
+            "y": 537,
+            "w": 138,
+            "h": 129
+          },
+          "parent": "Chapter2",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "fit": "contain",
+          "region": [
+            0,
+            200,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Chapter2Rewards",
+          "name": "Txt_ACE10C_Chapter2Rewards",
+          "rect": {
+            "x": 189,
+            "y": 577,
+            "w": 183,
+            "h": 41
+          },
+          "parent": "Chapter2",
+          "text": "×300  ·  ×3  ·  ×3000  ·  ×100",
+          "size": 13,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Chapter2Price",
+          "name": "Btn_ACE10C_Chapter2Price",
+          "rect": {
+            "x": 232,
+            "y": 632,
+            "w": 132,
+            "h": 34
+          },
+          "parent": "Chapter2",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Chapter2PriceLabel",
+          "name": "Txt_ACE10C_Chapter2PriceLabel",
+          "rect": {
+            "x": 235,
+            "y": 638,
+            "w": 126,
+            "h": 25
+          },
+          "parent": "Chapter2Price",
+          "text": "10.90",
+          "size": 17,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "Chapter3",
+          "name": "Panel_ACE10C_Chapter3",
+          "rect": {
+            "x": 32,
+            "y": 717,
+            "w": 358,
+            "h": 133
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Chapter3Title",
+          "name": "Txt_ACE10C_Chapter3Title",
+          "rect": {
+            "x": 189,
+            "y": 739,
+            "w": 184,
+            "h": 27
+          },
+          "parent": "Chapter3",
+          "text": "Chapter 3 Pack",
+          "size": 18,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "image",
+          "key": "Chapter3Art",
+          "name": "Img_ACE10C_Chapter3Art",
+          "rect": {
+            "x": 41,
+            "y": 743,
+            "w": 139,
+            "h": 104
+          },
+          "parent": "Chapter3",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "fit": "contain",
+          "region": [
+            0,
+            200,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "text",
+          "key": "NavSpecialPackCaption",
+          "name": "Txt_ACE10C_NavSpecialPackCaption",
+          "rect": {
+            "x": 42,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavSpecialPack",
+          "text": "Special\nPack",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavTopPickCaption",
+          "name": "Txt_ACE10C_NavTopPickCaption",
+          "rect": {
+            "x": 137,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavTopPick",
+          "text": "Top Pick\nPacks",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavCumulativeCaption",
+          "name": "Txt_ACE10C_NavCumulativeCaption",
+          "rect": {
+            "x": 232,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavCumulative",
+          "text": "Cumulative\nPurchase",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavItemShopCaption",
+          "name": "Txt_ACE10C_NavItemShopCaption",
+          "rect": {
+            "x": 327,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavItemShop",
+          "text": "Item Shop",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "BackCaption",
+          "name": "Txt_ACE10C_BackCaption",
+          "rect": {
+            "x": 0,
+            "y": 858,
+            "w": 40,
+            "h": 42
+          },
+          "parent": "Back",
+          "text": "‹",
+          "size": 34,
+          "weight": 800,
+          "color": "#fff1c8",
+          "align": "center"
+        }
+      ],
+      "notes": [
+        "Chapter-specific castle, cake and dark-fortress paintings are unavailable; each left art slot uses the new gold-chest illustration as an explicit generic pack proxy.",
+        "First two full chapter rows and the partially visible third row are represented. Third-row price is offscreen and is not invented.",
+        "Chapter rewards are native quantity strings in the observed order: gem / gold ticket / gold coin / question-card. Exact original tiny reward icon drawings are omitted.",
+        "Shop footer keeps independent native text captions inside each of the four destination buttons at 14px. The back chevron is also a separate native caption because deleting the old combined string would otherwise remove it. Original nav pictograms remain omitted.",
+        "텍스트 분리를 우선한 v003은 앞선 35행 가이드를 넘을 수 있습니다. 개별 글자가 해당 버튼 부모 안에 있으므로 단일 공백 문자열로 배치하지 않습니다.",
+        "v004 artwork-only patch: Chapter1Art → chest, Chapter2Art → chest, Chapter3Art → chest. Uses the newly drawn six-cell shop atlas; source item identity and exact original shape are not claimed. Text, quantities, duration, positions, parents, inputs and button behavior are unchanged.",
+        "v007 shop-family footer: group420×82 at(0,842), observed Back input40×82 at x0, four destination tabs95×82 at x40/135/230/325. Separate native captions91×38,14px remain within their own tabs. This is not the global five84px-cell navigation specification; no fifth shop destination or relocated Back was invented.",
+        "v007 Difficulty Normal/Elite use equal64×58 input rectangles so native labels at y258..279 remain inside their corresponding button. The source label-under-icon structure is preserved; no unobserved Elite destination is added.",
+        "v007 native tab/filter/advance captions are children of their corresponding button, preserving two-part copy/reuse and the correct button input/state ownership.",
+        "v008 omits the old whitespace CurrencyValues instruction. No replacement header group is embedded here. Root builds ACE_ShopCurrencyPatch in Limited and then uses normal UI copy/rebind for the other shop families; target-specific visible currencies and values must be rechecked."
+      ],
+      "navigationIntent": {
+        "Back": "parent-defined local return",
+        "NavSpecialPack": "ACE10L",
+        "NavTopPick": null,
+        "NavCumulative": "ACE15P",
+        "NavItemShop": "ACE14T",
+        "Mode1": "ACE10L"
+      }
+    },
+    {
+      "id": "ACE14T",
+      "name": "Page_ACE_ItemShop_Tempus",
+      "nativeKind": "page",
+      "purpose": "Three-column item-grid shop with two mode tabs and reset timer.",
+      "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00086.jpg",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_ACE14T_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "fill": "#503b32"
+        },
+        {
+          "op": "image",
+          "key": "BrickBackground",
+          "name": "Img_ACE14T_BrickBackground",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-store-brick-bg-v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "Title",
+          "name": "Txt_ACE14T_Title",
+          "rect": {
+            "x": 45,
+            "y": 75,
+            "w": 330,
+            "h": 36
+          },
+          "parent": "root",
+          "text": "Item Shop",
+          "size": 25,
+          "weight": 800,
+          "color": "#fff1b2",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Mode1",
+          "name": "Btn_ACE14T_Mode1",
+          "rect": {
+            "x": 96,
+            "y": 166,
+            "w": 116,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "ModeLabel1",
+          "name": "Txt_ACE14T_ModeLabel1",
+          "rect": {
+            "x": 99,
+            "y": 175,
+            "w": 110,
+            "h": 22
+          },
+          "parent": "Mode1",
+          "text": "Medal Shop",
+          "size": 15,
+          "weight": 700,
+          "color": "#62472e",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Mode2",
+          "name": "Btn_ACE14T_Mode2",
+          "rect": {
+            "x": 212,
+            "y": 166,
+            "w": 116,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "ModeLabel2",
+          "name": "Txt_ACE14T_ModeLabel2",
+          "rect": {
+            "x": 215,
+            "y": 175,
+            "w": 110,
+            "h": 22
+          },
+          "parent": "Mode2",
+          "text": "Tempus Shop",
+          "size": 15,
+          "weight": 700,
+          "color": "#62472e",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "ShopFooter",
+          "name": "Panel_ACE14T_ShopFooter",
+          "rect": {
+            "x": 0,
+            "y": 842,
+            "w": 420,
+            "h": 82
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Back",
+          "name": "Btn_ACE14T_Back",
+          "rect": {
+            "x": 0,
+            "y": 842,
+            "w": 40,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavSpecialPack",
+          "name": "Btn_ACE14T_NavSpecialPack",
+          "rect": {
+            "x": 40,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavTopPick",
+          "name": "Btn_ACE14T_NavTopPick",
+          "rect": {
+            "x": 135,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavCumulative",
+          "name": "Btn_ACE14T_NavCumulative",
+          "rect": {
+            "x": 230,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavItemShop",
+          "name": "Btn_ACE14T_NavItemShop",
+          "rect": {
+            "x": 325,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "text",
+          "key": "ResetTimer",
+          "name": "Txt_ACE14T_ResetTimer",
+          "rect": {
+            "x": 147,
+            "y": 213,
+            "w": 128,
+            "h": 25
+          },
+          "parent": "root",
+          "text": "215:57:42",
+          "size": 17,
+          "weight": 700,
+          "color": "#fff2d2",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Item1",
+          "name": "Btn_ACE14T_Item1",
+          "rect": {
+            "x": 55,
+            "y": 255,
+            "w": 90,
+            "h": 115
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Item1Icon",
+          "name": "Img_ACE14T_Item1Icon",
+          "rect": {
+            "x": 68,
+            "y": 267,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "Item1",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "fit": "contain",
+          "region": [
+            400,
+            0,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Item1Meta",
+          "name": "Txt_ACE14T_Item1Meta",
+          "rect": {
+            "x": 53,
+            "y": 342,
+            "w": 94,
+            "h": 45
+          },
+          "parent": "root",
+          "text": "×1500\n5/5",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Item2",
+          "name": "Btn_ACE14T_Item2",
+          "rect": {
+            "x": 166,
+            "y": 255,
+            "w": 90,
+            "h": 115
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Item2Icon",
+          "name": "Img_ACE14T_Item2Icon",
+          "rect": {
+            "x": 179,
+            "y": 267,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "Item2",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            128,
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Item2Meta",
+          "name": "Txt_ACE14T_Item2Meta",
+          "rect": {
+            "x": 164,
+            "y": 342,
+            "w": 94,
+            "h": 45
+          },
+          "parent": "root",
+          "text": "×1500\n5/5",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Item3",
+          "name": "Btn_ACE14T_Item3",
+          "rect": {
+            "x": 277,
+            "y": 255,
+            "w": 90,
+            "h": 115
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Item3Icon",
+          "name": "Img_ACE14T_Item3Icon",
+          "rect": {
+            "x": 290,
+            "y": 267,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "Item3",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "fit": "contain",
+          "region": [
+            200,
+            200,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Item3Meta",
+          "name": "Txt_ACE14T_Item3Meta",
+          "rect": {
+            "x": 275,
+            "y": 342,
+            "w": 94,
+            "h": 45
+          },
+          "parent": "root",
+          "text": "×1400\n5/5",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Item4",
+          "name": "Btn_ACE14T_Item4",
+          "rect": {
+            "x": 55,
+            "y": 408,
+            "w": 90,
+            "h": 115
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Item4Icon",
+          "name": "Img_ACE14T_Item4Icon",
+          "rect": {
+            "x": 68,
+            "y": 420,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "Item4",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            128,
+            128,
+            64,
+            64
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Item4Meta",
+          "name": "Txt_ACE14T_Item4Meta",
+          "rect": {
+            "x": 53,
+            "y": 495,
+            "w": 94,
+            "h": 45
+          },
+          "parent": "root",
+          "text": "×5 · ×1500\n6/6",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Item5",
+          "name": "Btn_ACE14T_Item5",
+          "rect": {
+            "x": 166,
+            "y": 408,
+            "w": 90,
+            "h": 115
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Item5Icon",
+          "name": "Img_ACE14T_Item5Icon",
+          "rect": {
+            "x": 179,
+            "y": 420,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "Item5",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            0,
+            0,
+            64,
+            64
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Item5Meta",
+          "name": "Txt_ACE14T_Item5Meta",
+          "rect": {
+            "x": 164,
+            "y": 495,
+            "w": 94,
+            "h": 45
+          },
+          "parent": "root",
+          "text": "×45.5K · ×600\n10/10",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Item6",
+          "name": "Btn_ACE14T_Item6",
+          "rect": {
+            "x": 277,
+            "y": 408,
+            "w": 90,
+            "h": 115
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+          "skinMetrics": [
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Item6Icon",
+          "name": "Img_ACE14T_Item6Icon",
+          "rect": {
+            "x": 290,
+            "y": 420,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "Item6",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "fit": "contain",
+          "region": [
+            200,
+            0,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Item6Meta",
+          "name": "Txt_ACE14T_Item6Meta",
+          "rect": {
+            "x": 275,
+            "y": 495,
+            "w": 94,
+            "h": 45
+          },
+          "parent": "root",
+          "text": "×13.4K · ×200\n10/10",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavSpecialPackCaption",
+          "name": "Txt_ACE14T_NavSpecialPackCaption",
+          "rect": {
+            "x": 42,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavSpecialPack",
+          "text": "Special\nPack",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavTopPickCaption",
+          "name": "Txt_ACE14T_NavTopPickCaption",
+          "rect": {
+            "x": 137,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavTopPick",
+          "text": "Top Pick\nPacks",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavCumulativeCaption",
+          "name": "Txt_ACE14T_NavCumulativeCaption",
+          "rect": {
+            "x": 232,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavCumulative",
+          "text": "Cumulative\nPurchase",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavItemShopCaption",
+          "name": "Txt_ACE14T_NavItemShopCaption",
+          "rect": {
+            "x": 327,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavItemShop",
+          "text": "Item Shop",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "BackCaption",
+          "name": "Txt_ACE14T_BackCaption",
+          "rect": {
+            "x": 0,
+            "y": 858,
+            "w": 40,
+            "h": 42
+          },
+          "parent": "Back",
+          "text": "‹",
+          "size": 34,
+          "weight": 800,
+          "color": "#fff1c8",
+          "align": "center"
+        }
+      ],
+      "notes": [
+        "Tempus is the representative item-shop board. Medal at source 90s shares the three-column structure and is documented as a variant rather than a second same-geometry board.",
+        "Only the first six source slots are included. Four character-face offers and two further gear offers in lower source rows are omitted, not moved into invented products.",
+        "The red-bottle and purple charm drawings are unavailable; redticket and gear glyphs are explicit generic proxies. Exact identity is not claimed.",
+        "For source Medal variant: timer partially obscured by the recorded reward animation; observed first-row price/status and limits are 04:59 countdown with 2/3, gem×30 with 1/1, gem×120 with 5/5. Its exact native source text should be re-read if that separate board is later built.",
+        "Shop footer keeps independent native text captions inside each of the four destination buttons at 14px. The back chevron is also a separate native caption because deleting the old combined string would otherwise remove it. Original nav pictograms remain omitted.",
+        "텍스트 분리를 우선한 v003은 앞선 35행 가이드를 넘을 수 있습니다. 개별 글자가 해당 버튼 부모 안에 있으므로 단일 공백 문자열로 배치하지 않습니다.",
+        "v004 artwork-only patch: Item1Icon → blue, Item3Icon → red, Item6Icon → bottle. Uses the newly drawn six-cell shop atlas; source item identity and exact original shape are not claimed. Text, quantities, duration, positions, parents, inputs and button behavior are unchanged.",
+        "v005: source A frame 86 confirms Item6 is a red consumable bottle. Item6Icon alone now uses red-bottle atlas region [200,0,200,200]. All other actions, text, amounts, parents and input behavior remain unchanged.",
+        "v007 shop-family footer: group420×82 at(0,842), observed Back input40×82 at x0, four destination tabs95×82 at x40/135/230/325. Separate native captions91×38,14px remain within their own tabs. This is not the global five84px-cell navigation specification; no fifth shop destination or relocated Back was invented.",
+        "v007 native tab/filter/advance captions are children of their corresponding button, preserving two-part copy/reuse and the correct button input/state ownership.",
+        "v008 omits the old whitespace CurrencyValues instruction. No replacement header group is embedded here. Root builds ACE_ShopCurrencyPatch in Limited and then uses normal UI copy/rebind for the other shop families; target-specific visible currencies and values must be rechecked."
+      ],
+      "navigationIntent": {
+        "Back": "parent-defined local return",
+        "NavSpecialPack": "ACE10L",
+        "NavTopPick": null,
+        "NavCumulative": "ACE15P",
+        "NavItemShop": "ACE14T"
+      },
+      "modeVariant": {
+        "name": "Medal Shop",
+        "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00090.jpg",
+        "excludedReason": "same native 3-column frame, different inventory/currency state; kept as documented variant",
+        "notBuilt": true
+      }
+    },
+    {
+      "id": "ACE15P",
+      "name": "Page_ACE_Cumulative_Period",
+      "nativeKind": "page",
+      "purpose": "Period Rewards purchase event: display case, three amount medallions and claim footer.",
+      "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00092.jpg",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_ACE15P_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "fill": "#503b32"
+        },
+        {
+          "op": "image",
+          "key": "BrickBackground",
+          "name": "Img_ACE15P_BrickBackground",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-store-brick-bg-v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "Title",
+          "name": "Txt_ACE15P_Title",
+          "rect": {
+            "x": 45,
+            "y": 75,
+            "w": 330,
+            "h": 36
+          },
+          "parent": "root",
+          "text": "Cumulative Purchase",
+          "size": 25,
+          "weight": 800,
+          "color": "#fff1b2",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "ShopFooter",
+          "name": "Panel_ACE15P_ShopFooter",
+          "rect": {
+            "x": 0,
+            "y": 842,
+            "w": 420,
+            "h": 82
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Back",
+          "name": "Btn_ACE15P_Back",
+          "rect": {
+            "x": 0,
+            "y": 842,
+            "w": 40,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavSpecialPack",
+          "name": "Btn_ACE15P_NavSpecialPack",
+          "rect": {
+            "x": 40,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavTopPick",
+          "name": "Btn_ACE15P_NavTopPick",
+          "rect": {
+            "x": 135,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavCumulative",
+          "name": "Btn_ACE15P_NavCumulative",
+          "rect": {
+            "x": 230,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavItemShop",
+          "name": "Btn_ACE15P_NavItemShop",
+          "rect": {
+            "x": 325,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "LocalTab0",
+          "name": "Btn_ACE15P_LocalTab0",
+          "rect": {
+            "x": 14,
+            "y": 778,
+            "w": 196,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "LocalTabLabel0",
+          "name": "Txt_ACE15P_LocalTabLabel0",
+          "rect": {
+            "x": 17,
+            "y": 787,
+            "w": 190,
+            "h": 21
+          },
+          "parent": "LocalTab0",
+          "text": "Period Rewards",
+          "size": 15,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "LocalTab1",
+          "name": "Btn_ACE15P_LocalTab1",
+          "rect": {
+            "x": 210,
+            "y": 778,
+            "w": 196,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "LocalTabLabel1",
+          "name": "Txt_ACE15P_LocalTabLabel1",
+          "rect": {
+            "x": 213,
+            "y": 787,
+            "w": 190,
+            "h": 21
+          },
+          "parent": "LocalTab1",
+          "text": "Cumulative Purchase",
+          "size": 15,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "plain",
+          "key": "EventBody",
+          "name": "Panel_ACE15P_EventBody",
+          "rect": {
+            "x": 0,
+            "y": 146,
+            "w": 420,
+            "h": 496
+          },
+          "parent": "root",
+          "fill": "#537b87"
+        },
+        {
+          "op": "text",
+          "key": "EventTimer",
+          "name": "Txt_ACE15P_EventTimer",
+          "rect": {
+            "x": 144,
+            "y": 149,
+            "w": 135,
+            "h": 24
+          },
+          "parent": "root",
+          "text": "25d 23h",
+          "size": 15,
+          "weight": 700,
+          "color": "#fff0ce",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "EventHeadline",
+          "name": "Txt_ACE15P_EventHeadline",
+          "rect": {
+            "x": 19,
+            "y": 174,
+            "w": 384,
+            "h": 25
+          },
+          "parent": "root",
+          "text": "Limited-Time Offer: Epic Wingman Selection",
+          "size": 17,
+          "weight": 700,
+          "color": "#ffe99f",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "EventDescription",
+          "name": "Txt_ACE15P_EventDescription",
+          "rect": {
+            "x": 30,
+            "y": 201,
+            "w": 360,
+            "h": 48
+          },
+          "parent": "root",
+          "text": "Make purchases to get the corresponding\nnumber of Flight Medals. Reach the milestone\nto select an Epic Wingman.",
+          "size": 13,
+          "weight": 700,
+          "color": "#173f56",
+          "align": "center"
+        },
+        {
+          "op": "image",
+          "key": "DisplayCaseProxy",
+          "name": "Img_ACE15P_DisplayCaseProxy",
+          "rect": {
+            "x": 76,
+            "y": 372,
+            "w": 268,
+            "h": 240
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "fit": "contain",
+          "region": [
+            0,
+            200,
+            200,
+            200
+          ]
+        },
+        {
+          "op": "image",
+          "key": "Medallion0",
+          "name": "Img_ACE15P_Medallion0",
+          "rect": {
+            "x": 78,
+            "y": 305,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            0,
+            0,
+            64,
+            64
+          ]
+        },
+        {
+          "op": "image",
+          "key": "MedallionItem0",
+          "name": "Img_ACE15P_MedallionItem0",
+          "rect": {
+            "x": 93,
+            "y": 314,
+            "w": 35,
+            "h": 35
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            128,
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "op": "text",
+          "key": "MedallionAmount0",
+          "name": "Txt_ACE15P_MedallionAmount0",
+          "rect": {
+            "x": 86,
+            "y": 350,
+            "w": 48,
+            "h": 21
+          },
+          "parent": "root",
+          "text": "50",
+          "size": 17,
+          "weight": 700,
+          "color": "#fff9d8",
+          "align": "center"
+        },
+        {
+          "op": "image",
+          "key": "Medallion1",
+          "name": "Img_ACE15P_Medallion1",
+          "rect": {
+            "x": 178,
+            "y": 273,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            0,
+            0,
+            64,
+            64
+          ]
+        },
+        {
+          "op": "image",
+          "key": "MedallionItem1",
+          "name": "Img_ACE15P_MedallionItem1",
+          "rect": {
+            "x": 193,
+            "y": 282,
+            "w": 35,
+            "h": 35
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            192,
+            0,
+            64,
+            64
+          ]
+        },
+        {
+          "op": "text",
+          "key": "MedallionAmount1",
+          "name": "Txt_ACE15P_MedallionAmount1",
+          "rect": {
+            "x": 186,
+            "y": 318,
+            "w": 48,
+            "h": 21
+          },
+          "parent": "root",
+          "text": "28",
+          "size": 17,
+          "weight": 700,
+          "color": "#fff9d8",
+          "align": "center"
+        },
+        {
+          "op": "image",
+          "key": "Medallion2",
+          "name": "Img_ACE15P_Medallion2",
+          "rect": {
+            "x": 281,
+            "y": 305,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            0,
+            0,
+            64,
+            64
+          ]
+        },
+        {
+          "op": "image",
+          "key": "MedallionItem2",
+          "name": "Img_ACE15P_MedallionItem2",
+          "rect": {
+            "x": 296,
+            "y": 314,
+            "w": 35,
+            "h": 35
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            0,
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "op": "text",
+          "key": "MedallionAmount2",
+          "name": "Txt_ACE15P_MedallionAmount2",
+          "rect": {
+            "x": 289,
+            "y": 350,
+            "w": 48,
+            "h": 21
+          },
+          "parent": "root",
+          "text": "28",
+          "size": 17,
+          "weight": 700,
+          "color": "#fff9d8",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "ClaimFooter",
+          "name": "Panel_ACE15P_ClaimFooter",
+          "rect": {
+            "x": 14,
+            "y": 648,
+            "w": 394,
+            "h": 101
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "ClaimCongrats",
+          "name": "Txt_ACE15P_ClaimCongrats",
+          "rect": {
+            "x": 24,
+            "y": 660,
+            "w": 374,
+            "h": 24
+          },
+          "parent": "ClaimFooter",
+          "text": "Congratulations! You have obtained the following rewards:",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "Claim",
+          "name": "Btn_ACE15P_Claim",
+          "rect": {
+            "x": 304,
+            "y": 695,
+            "w": 94,
+            "h": 37
+          },
+          "parent": "ClaimFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "ClaimLabel",
+          "name": "Txt_ACE15P_ClaimLabel",
+          "rect": {
+            "x": 307,
+            "y": 702,
+            "w": 88,
+            "h": 24
+          },
+          "parent": "Claim",
+          "text": "Claim",
+          "size": 18,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavSpecialPackCaption",
+          "name": "Txt_ACE15P_NavSpecialPackCaption",
+          "rect": {
+            "x": 42,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavSpecialPack",
+          "text": "Special\nPack",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavTopPickCaption",
+          "name": "Txt_ACE15P_NavTopPickCaption",
+          "rect": {
+            "x": 137,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavTopPick",
+          "text": "Top Pick\nPacks",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavCumulativeCaption",
+          "name": "Txt_ACE15P_NavCumulativeCaption",
+          "rect": {
+            "x": 232,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavCumulative",
+          "text": "Cumulative\nPurchase",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavItemShopCaption",
+          "name": "Txt_ACE15P_NavItemShopCaption",
+          "rect": {
+            "x": 327,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavItemShop",
+          "text": "Item Shop",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "BackCaption",
+          "name": "Txt_ACE15P_BackCaption",
+          "rect": {
+            "x": 0,
+            "y": 858,
+            "w": 40,
+            "h": 42
+          },
+          "parent": "Back",
+          "text": "‹",
+          "size": 34,
+          "weight": 800,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "image",
+          "key": "ClaimRewardTicket",
+          "name": "Img_ACE15P_ClaimRewardTicket",
+          "rect": {
+            "x": 27,
+            "y": 690,
+            "w": 48,
+            "h": 46
+          },
+          "parent": "ClaimFooter",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "region": [
+            200,
+            200,
+            200,
+            200
+          ],
+          "fit": "contain"
+        },
+        {
+          "op": "image",
+          "key": "ClaimRewardGem",
+          "name": "Img_ACE15P_ClaimRewardGem",
+          "rect": {
+            "x": 87,
+            "y": 690,
+            "w": 48,
+            "h": 46
+          },
+          "parent": "ClaimFooter",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "region": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "fit": "contain"
+        },
+        {
+          "op": "image",
+          "key": "ClaimRewardBottle",
+          "name": "Img_ACE15P_ClaimRewardBottle",
+          "rect": {
+            "x": 147,
+            "y": 690,
+            "w": 48,
+            "h": 46
+          },
+          "parent": "ClaimFooter",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+          "region": [
+            200,
+            0,
+            200,
+            200
+          ],
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "ClaimRewardGemQuantity",
+          "name": "Txt_ACE15P_ClaimRewardGemQuantity",
+          "rect": {
+            "x": 90,
+            "y": 723,
+            "w": 44,
+            "h": 18
+          },
+          "parent": "ClaimFooter",
+          "text": "×100",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "right"
+        },
+        {
+          "op": "text",
+          "key": "ClaimRewardBottleDuration",
+          "name": "Txt_ACE15P_ClaimRewardBottleDuration",
+          "rect": {
+            "x": 157,
+            "y": 690,
+            "w": 36,
+            "h": 16
+          },
+          "parent": "ClaimFooter",
+          "text": "24H",
+          "size": 11,
+          "weight": 700,
+          "color": "#493329",
+          "align": "right"
+        },
+        {
+          "op": "text",
+          "key": "ClaimRewardBottleQuantity",
+          "name": "Txt_ACE15P_ClaimRewardBottleQuantity",
+          "rect": {
+            "x": 157,
+            "y": 723,
+            "w": 36,
+            "h": 18
+          },
+          "parent": "ClaimFooter",
+          "text": "×2",
+          "size": 12,
+          "weight": 700,
+          "color": "#493329",
+          "align": "right"
+        }
+      ],
+      "notes": [
+        "Source ornate open display suitcase, purple flask and white flower paintings are not available. The new gold chest is an explicit display-case proxy; this is not claimed as a matching item drawing.",
+        "Three amount medallions use prepared gold-coin and resource glyphs. Their circular ornament detail differs from the source.",
+        "Reward footer quantities are observed gem×100 and 24H red bottle×2. The first gold ticket has no reliably readable quantity in this frame; no quantity is invented.",
+        "Shop footer keeps independent native text captions inside each of the four destination buttons at 14px. The back chevron is also a separate native caption because deleting the old combined string would otherwise remove it. Original nav pictograms remain omitted.",
+        "텍스트 분리를 우선한 v003은 앞선 35행 가이드를 넘을 수 있습니다. 개별 글자가 해당 버튼 부모 안에 있으므로 단일 공백 문자열로 배치하지 않습니다.",
+        "v004 artwork-only patch: DisplayCaseProxy → chest. Uses the newly drawn six-cell shop atlas; source item identity and exact original shape are not claimed. Text, quantities, duration, positions, parents, inputs and button behavior are unchanged.",
+        "v007 shop-family footer: group420×82 at(0,842), observed Back input40×82 at x0, four destination tabs95×82 at x40/135/230/325. Separate native captions91×38,14px remain within their own tabs. This is not the global five84px-cell navigation specification; no fifth shop destination or relocated Back was invented.",
+        "v007 source A92 confirms exactly three claim rewards: gold ticket/card, blue gem×100, red bottle×2 with24H. They are now three separate native image nodes, with gem quantity / bottle duration / bottle quantity as separate native text. The prepared red pilot-ticket is a declared color/illustration proxy for the gold source ticket/card; no quantity is invented for that first reward.",
+        "v007 native tab/filter/advance captions are children of their corresponding button, preserving two-part copy/reuse and the correct button input/state ownership.",
+        "v008 omits the old whitespace CurrencyValues instruction. No replacement header group is embedded here. Root builds ACE_ShopCurrencyPatch in Limited and then uses normal UI copy/rebind for the other shop families; target-specific visible currencies and values must be rechecked."
+      ],
+      "navigationIntent": {
+        "Back": "parent-defined local return",
+        "NavSpecialPack": "ACE10L",
+        "NavTopPick": null,
+        "NavCumulative": "ACE15P",
+        "NavItemShop": "ACE14T",
+        "LocalTab1": "ACE15M"
+      }
+    },
+    {
+      "id": "ACE15M",
+      "name": "Page_ACE_Cumulative_Milestones",
+      "nativeKind": "page",
+      "purpose": "Cumulative milestone tiers with completed green progress, partial yellow progress, Claim and Go states.",
+      "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00096.jpg",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_ACE15M_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "fill": "#503b32"
+        },
+        {
+          "op": "image",
+          "key": "BrickBackground",
+          "name": "Img_ACE15M_BrickBackground",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-store-brick-bg-v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "Title",
+          "name": "Txt_ACE15M_Title",
+          "rect": {
+            "x": 45,
+            "y": 75,
+            "w": 330,
+            "h": 36
+          },
+          "parent": "root",
+          "text": "Cumulative Purchase",
+          "size": 25,
+          "weight": 800,
+          "color": "#fff1b2",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "ShopFooter",
+          "name": "Panel_ACE15M_ShopFooter",
+          "rect": {
+            "x": 0,
+            "y": 842,
+            "w": 420,
+            "h": 82
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Back",
+          "name": "Btn_ACE15M_Back",
+          "rect": {
+            "x": 0,
+            "y": 842,
+            "w": 40,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavSpecialPack",
+          "name": "Btn_ACE15M_NavSpecialPack",
+          "rect": {
+            "x": 40,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavTopPick",
+          "name": "Btn_ACE15M_NavTopPick",
+          "rect": {
+            "x": 135,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavCumulative",
+          "name": "Btn_ACE15M_NavCumulative",
+          "rect": {
+            "x": 230,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "NavItemShop",
+          "name": "Btn_ACE15M_NavItemShop",
+          "rect": {
+            "x": 325,
+            "y": 842,
+            "w": 95,
+            "h": 82
+          },
+          "parent": "ShopFooter",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "button",
+          "key": "LocalTab0",
+          "name": "Btn_ACE15M_LocalTab0",
+          "rect": {
+            "x": 14,
+            "y": 778,
+            "w": 196,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "LocalTabLabel0",
+          "name": "Txt_ACE15M_LocalTabLabel0",
+          "rect": {
+            "x": 17,
+            "y": 787,
+            "w": 190,
+            "h": 21
+          },
+          "parent": "LocalTab0",
+          "text": "Period Rewards",
+          "size": 15,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "LocalTab1",
+          "name": "Btn_ACE15M_LocalTab1",
+          "rect": {
+            "x": 210,
+            "y": 778,
+            "w": 196,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "LocalTabLabel1",
+          "name": "Txt_ACE15M_LocalTabLabel1",
+          "rect": {
+            "x": 213,
+            "y": 787,
+            "w": 190,
+            "h": 21
+          },
+          "parent": "LocalTab1",
+          "text": "Cumulative Purchase",
+          "size": 15,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "EventTimer",
+          "name": "Txt_ACE15M_EventTimer",
+          "rect": {
+            "x": 145,
+            "y": 149,
+            "w": 130,
+            "h": 24
+          },
+          "parent": "root",
+          "text": "25d 23h",
+          "size": 15,
+          "weight": 700,
+          "color": "#fff1cc",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "TotalCollected",
+          "name": "Txt_ACE15M_TotalCollected",
+          "rect": {
+            "x": 102,
+            "y": 175,
+            "w": 218,
+            "h": 27
+          },
+          "parent": "root",
+          "text": "Total Collected   15",
+          "size": 18,
+          "weight": 700,
+          "color": "#fff0a8",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "Tier1",
+          "name": "Panel_ACE15M_Tier1",
+          "rect": {
+            "x": 14,
+            "y": 209,
+            "w": 394,
+            "h": 123
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Tier1Requirement",
+          "name": "Txt_ACE15M_Tier1Requirement",
+          "rect": {
+            "x": 29,
+            "y": 217,
+            "w": 269,
+            "h": 39
+          },
+          "parent": "Tier1",
+          "text": "Earn Flight Medals ×5\n15/5",
+          "size": 16,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "plain",
+          "key": "Tier1Progress",
+          "name": "Panel_ACE15M_Tier1Progress",
+          "rect": {
+            "x": 30,
+            "y": 251,
+            "w": 365,
+            "h": 10
+          },
+          "parent": "Tier1",
+          "fill": "#a8df4e"
+        },
+        {
+          "op": "image",
+          "key": "Tier1Rewards",
+          "name": "Img_ACE15M_Tier1Rewards",
+          "rect": {
+            "x": 27,
+            "y": 273,
+            "w": 222,
+            "h": 50
+          },
+          "parent": "Tier1",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            0,
+            0,
+            256,
+            64
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Tier1Action",
+          "name": "Btn_ACE15M_Tier1Action",
+          "rect": {
+            "x": 302,
+            "y": 278,
+            "w": 93,
+            "h": 38
+          },
+          "parent": "Tier1",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Tier1ActionLabel",
+          "name": "Txt_ACE15M_Tier1ActionLabel",
+          "rect": {
+            "x": 305,
+            "y": 286,
+            "w": 87,
+            "h": 24
+          },
+          "parent": "Tier1Action",
+          "text": "Claim",
+          "size": 18,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "Tier2",
+          "name": "Panel_ACE15M_Tier2",
+          "rect": {
+            "x": 14,
+            "y": 343,
+            "w": 394,
+            "h": 123
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Tier2Requirement",
+          "name": "Txt_ACE15M_Tier2Requirement",
+          "rect": {
+            "x": 29,
+            "y": 351,
+            "w": 269,
+            "h": 39
+          },
+          "parent": "Tier2",
+          "text": "Earn Flight Medals ×10\n15/10",
+          "size": 16,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "plain",
+          "key": "Tier2Progress",
+          "name": "Panel_ACE15M_Tier2Progress",
+          "rect": {
+            "x": 30,
+            "y": 385,
+            "w": 365,
+            "h": 10
+          },
+          "parent": "Tier2",
+          "fill": "#a8df4e"
+        },
+        {
+          "op": "image",
+          "key": "Tier2Rewards",
+          "name": "Img_ACE15M_Tier2Rewards",
+          "rect": {
+            "x": 27,
+            "y": 407,
+            "w": 222,
+            "h": 50
+          },
+          "parent": "Tier2",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            0,
+            0,
+            256,
+            64
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Tier2Action",
+          "name": "Btn_ACE15M_Tier2Action",
+          "rect": {
+            "x": 302,
+            "y": 412,
+            "w": 93,
+            "h": 38
+          },
+          "parent": "Tier2",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Tier2ActionLabel",
+          "name": "Txt_ACE15M_Tier2ActionLabel",
+          "rect": {
+            "x": 305,
+            "y": 420,
+            "w": 87,
+            "h": 24
+          },
+          "parent": "Tier2Action",
+          "text": "Claim",
+          "size": 18,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "panel",
+          "key": "Tier3",
+          "name": "Panel_ACE15M_Tier3",
+          "rect": {
+            "x": 14,
+            "y": 477,
+            "w": 394,
+            "h": 123
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+          "skinMetrics": [
+            20,
+            20,
+            20,
+            20
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Tier3Requirement",
+          "name": "Txt_ACE15M_Tier3Requirement",
+          "rect": {
+            "x": 29,
+            "y": 485,
+            "w": 269,
+            "h": 39
+          },
+          "parent": "Tier3",
+          "text": "Earn Flight Medals ×20\n15/20",
+          "size": 16,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "plain",
+          "key": "Tier3Progress",
+          "name": "Panel_ACE15M_Tier3Progress",
+          "rect": {
+            "x": 30,
+            "y": 519,
+            "w": 273,
+            "h": 10
+          },
+          "parent": "Tier3",
+          "fill": "#efd04d"
+        },
+        {
+          "op": "image",
+          "key": "Tier3Rewards",
+          "name": "Img_ACE15M_Tier3Rewards",
+          "rect": {
+            "x": 27,
+            "y": 541,
+            "w": 222,
+            "h": 50
+          },
+          "parent": "Tier3",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+          "fit": "contain",
+          "region": [
+            0,
+            0,
+            256,
+            64
+          ]
+        },
+        {
+          "op": "button",
+          "key": "Tier3Action",
+          "name": "Btn_ACE15M_Tier3Action",
+          "rect": {
+            "x": 302,
+            "y": 546,
+            "w": 93,
+            "h": 38
+          },
+          "parent": "Tier3",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+          "skinMetrics": [
+            0,
+            18,
+            0,
+            18
+          ]
+        },
+        {
+          "op": "text",
+          "key": "Tier3ActionLabel",
+          "name": "Txt_ACE15M_Tier3ActionLabel",
+          "rect": {
+            "x": 305,
+            "y": 554,
+            "w": 87,
+            "h": 24
+          },
+          "parent": "Tier3Action",
+          "text": "Go",
+          "size": 18,
+          "weight": 700,
+          "color": "#493329",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavSpecialPackCaption",
+          "name": "Txt_ACE15M_NavSpecialPackCaption",
+          "rect": {
+            "x": 42,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavSpecialPack",
+          "text": "Special\nPack",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavTopPickCaption",
+          "name": "Txt_ACE15M_NavTopPickCaption",
+          "rect": {
+            "x": 137,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavTopPick",
+          "text": "Top Pick\nPacks",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavCumulativeCaption",
+          "name": "Txt_ACE15M_NavCumulativeCaption",
+          "rect": {
+            "x": 232,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavCumulative",
+          "text": "Cumulative\nPurchase",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "NavItemShopCaption",
+          "name": "Txt_ACE15M_NavItemShopCaption",
+          "rect": {
+            "x": 327,
+            "y": 878,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "NavItemShop",
+          "text": "Item Shop",
+          "size": 14,
+          "weight": 700,
+          "color": "#fff1c8",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "BackCaption",
+          "name": "Txt_ACE15M_BackCaption",
+          "rect": {
+            "x": 0,
+            "y": 858,
+            "w": 40,
+            "h": 42
+          },
+          "parent": "Back",
+          "text": "‹",
+          "size": 34,
+          "weight": 800,
+          "color": "#fff1c8",
+          "align": "center"
+        }
+      ],
+      "notes": [
+        "Three representative native milestone rows are included: ×5 complete, ×10 complete, ×20 partial. Lower ×50 and ×100 rows repeat the same structure and are omitted.",
+        "Source four-item reward strips are represented by the prepared generic resource glyph strip; exact item art and all individual reward quantities are intentionally not fabricated.",
+        "Requirement and progress are kept in one native two-line text object per row to fit the action budget. Original progress value is centered over the bar; here it is centered with the row title.",
+        "Shop footer keeps independent native text captions inside each of the four destination buttons at 14px. The back chevron is also a separate native caption because deleting the old combined string would otherwise remove it. Original nav pictograms remain omitted.",
+        "텍스트 분리를 우선한 v003은 앞선 35행 가이드를 넘을 수 있습니다. 개별 글자가 해당 버튼 부모 안에 있으므로 단일 공백 문자열로 배치하지 않습니다.",
+        "v007 shop-family footer: group420×82 at(0,842), observed Back input40×82 at x0, four destination tabs95×82 at x40/135/230/325. Separate native captions91×38,14px remain within their own tabs. This is not the global five84px-cell navigation specification; no fifth shop destination or relocated Back was invented.",
+        "v007 native tab/filter/advance captions are children of their corresponding button, preserving two-part copy/reuse and the correct button input/state ownership.",
+        "v008 omits the old whitespace CurrencyValues instruction. No replacement header group is embedded here. Root builds ACE_ShopCurrencyPatch in Limited and then uses normal UI copy/rebind for the other shop families; target-specific visible currencies and values must be rechecked."
+      ],
+      "navigationIntent": {
+        "Back": "parent-defined local return",
+        "NavSpecialPack": "ACE10L",
+        "NavTopPick": null,
+        "NavCumulative": "ACE15P",
+        "NavItemShop": "ACE14T",
+        "LocalTab0": "ACE15P"
+      }
+    },
+    {
+      "id": "ACE_B03",
+      "name": "Page_ACE_CharacterReveal_Scott",
+      "nativeKind": "page",
+      "purpose": "Independent character reveal page: new stage background, native A Scott, cream bear + plane, and transparent dismiss input only.",
+      "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-b/frames/frame_00013.jpg",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_ACE_B03_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "fill": "#243b43"
+        },
+        {
+          "op": "image",
+          "key": "StageBackground",
+          "name": "Img_ACE_B03_StageBackground",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-rewards-stage-bg-v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "image",
+          "key": "RankGlyph",
+          "name": "Img_ACE_B03_GradeEmblem",
+          "rect": {
+            "x": 45,
+            "y": 235,
+            "w": 26,
+            "h": 29
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-lobby-icons-atlas-v001.webp",
+          "fit": "contain",
+          "region": [
+            450,
+            300,
+            150,
+            150
+          ]
+        },
+        {
+          "op": "text",
+          "key": "GradeCode",
+          "name": "Txt_ACE_B03_GradeCode",
+          "rect": {
+            "x": 79,
+            "y": 238,
+            "w": 20,
+            "h": 24
+          },
+          "parent": "root",
+          "text": "A",
+          "size": 20,
+          "weight": 800,
+          "color": "#e9b4f4",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "CharacterName",
+          "name": "Txt_ACE_B03_CharacterName",
+          "rect": {
+            "x": 102,
+            "y": 237,
+            "w": 66,
+            "h": 25
+          },
+          "parent": "root",
+          "text": "Scott",
+          "size": 22,
+          "weight": 800,
+          "color": "#fff7e7",
+          "align": "left"
+        },
+        {
+          "op": "image",
+          "key": "ScottAndPlane",
+          "name": "Img_ACE_B03_ScottAndPlane",
+          "rect": {
+            "x": 6,
+            "y": 295,
+            "w": 408,
+            "h": 292
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_character_reveal_bear_plane_v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "button",
+          "key": "Dismiss",
+          "name": "Btn_ACE_B03_Dismiss",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 420,
+            "h": 924
+          },
+          "parent": "root",
+          "text": "",
+          "size": 14,
+          "weight": 700,
+          "color": "#493329",
+          "skin": null,
+          "skinMetrics": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "fill": "#00000000",
+          "hitAreaOnly": true
+        },
+        {
+          "op": "text",
+          "key": "DismissLabel",
+          "name": "Txt_ACE_B03_DismissLabel",
+          "rect": {
+            "x": 83,
+            "y": 775,
+            "w": 254,
+            "h": 28
+          },
+          "parent": "Dismiss",
+          "text": "Tap Anywhere",
+          "size": 16,
+          "weight": 700,
+          "color": "#fff8d7",
+          "align": "center"
+        }
+      ],
+      "notes": [
+        "Scott is the cream bear pilot with propeller plane. Earlier penguin-like speculation was corrected using the actual full-body source frame.",
+        "Prepared acecraft_character_reveal_bear_plane_v001.webp is a new reference-inspired illustration, not a cropped original or an exact identity reproduction.",
+        "This board requires the bear-plane asset to exist and decode. If it fails, mark the board incomplete; do not silently substitute another portrait.",
+        "사용자 단독 페이지 원칙에 따라 원본에서 보이는 모집 배후 UI는 제외했습니다. 새 무대 배경만 사용하며 Joey/Canyon/모집 헤더/History/Preview/Draw/pity/dimmer는 없습니다. 원본 연기·돌 받침도 생략했습니다.",
+        "원본B 등급A/Scott를별도native폼으로분리(근사A79,238,20,24 /Scott102,237,66,25). 금빛문양은코인이라고확정하지않고새항공badge를대체표현으로사용.",
+        "Tap Anywhere 클릭영역은전체420×924이며글자는해당버튼의자식으로분리. 실제엔진게임과정은구현하지않음."
+      ],
+      "requiredAssets": [
+        "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-rewards-stage-bg-v001.webp",
+        "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_character_reveal_bear_plane_v001.webp"
+      ],
+      "navigationIntent": {
+        "Dismiss": "parent-defined Rewards Obtained sample or local recruiter return"
+      }
+    }
+  ],
+  "verification": {
+    "type": "recipe-structure-only",
+    "familyCount": 7,
+    "actionCount": 237,
+    "actionsPerFamily": {
+      "ACE02": 37,
+      "ACE10L": 38,
+      "ACE10C": 37,
+      "ACE14T": 37,
+      "ACE15P": 42,
+      "ACE15M": 38,
+      "ACE_B03": 8
+    },
+    "allParentsEarlier": true,
+    "allPreparedAssetPathsExist": true,
+    "allTextWeightsNumeric": true,
+    "captionRectsWithinParentButtons": true,
+    "scottRecruitBackgroundRemoved": true,
+    "normalUiExecuted": false,
+    "actualUiRendered": false,
+    "designModelWritten": false,
+    "shopFooterSpec": "420x82 at0,842; Back40+four95; source function count preserved",
+    "pilotViewport": {
+      "rect": [
+        0,
+        280,
+        420,
+        520
+      ],
+      "overflow": "scroll-y",
+      "cardCount": 9,
+      "originalAbsAnd113x176Preserved": true
+    },
+    "claimRewardImageCount": 3,
+    "oldWhitespaceCurrencyValuesRemoved": [
+      "ACE10L",
+      "ACE10C",
+      "ACE14T",
+      "ACE15P",
+      "ACE15M"
+    ],
+    "headerPatchEmbedded": false
+  },
+  "review": {
+    "version": "v003",
+    "reviewedAtKst": "2026-11-20T18:12:23+09:00",
+    "source": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/recipes-lists-shops.json",
+    "originalSha256": "27dac799e723bc0dcb96ec74ce0f2909709f940f00501df7e156eea1104ab97b",
+    "changes": [
+      "Scott 독립 무대7행: 모든 모집 배후 제거",
+      "상점4메뉴 각각14px native caption·부모버튼 지정",
+      "Back 화살표 별도native로 보존",
+      "Pilot/Pappo native caption2개로 분리·Pappo 연결 없음"
+    ],
+    "normalUiExecuted": false
+  },
+  "notes": [
+    "v004 changes path/region and explanatory notes only. Earlier review/verification metadata is retained as base history; this file does not claim native tool execution.",
+    "v005 source-first correction: ACE14T/Item6Icon red bottle only; based on v004 without changing any other action.",
+    "v007 approved recipe corrections only: shop Back40+4tabs95 within420×82, native caption ownership/hitbounds, and Period claim exact3-item structure. No normal UI, model, saved project or paid action was executed by this review."
+  ],
+  "reviewV007": {
+    "source": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/recipes-lists-shops.reviewed-v006.json",
+    "sourceSHA256": "141fef8296d2a22cc828eee0546f2d25b6f78006cef76eb8cdde5c5303b2d57b",
+    "preparedAtKst": "2026-11-20T20:09:09+09:00",
+    "changes": [
+      "ACE02/FilterLabel: parent→Filter",
+      "ACE02/AdvanceLabel: parent→Advance",
+      "ACE10L: footer40+4×95,82high",
+      "ACE10L/ModeLabel1: parent→Mode1",
+      "ACE10L/ModeLabel2: parent→Mode2",
+      "ACE10C: footer40+4×95,82high",
+      "ACE10C/ModeLabel1: parent→Mode1",
+      "ACE10C/ModeLabel2: parent→Mode2",
+      "ACE14T: footer40+4×95,82high",
+      "ACE14T/ModeLabel1: parent→Mode1",
+      "ACE14T/ModeLabel2: parent→Mode2",
+      "ACE15P: footer40+4×95,82high",
+      "ACE15P/LocalTabLabel0: parent→LocalTab0",
+      "ACE15P/LocalTabLabel1: parent→LocalTab1",
+      "ACE15P: claim3separateimages + native×100/24H/×2",
+      "ACE15M: footer40+4×95,82high",
+      "ACE15M/LocalTabLabel0: parent→LocalTab0",
+      "ACE15M/LocalTabLabel1: parent→LocalTab1",
+      "ACE02: transparent ListViewport420×520,scroll-y;9cards reparented without changing ABS/card size"
+    ],
+    "checks": [
+      "ACE10L: footer no gaps/overlaps",
+      "ACE10C: footer no gaps/overlaps",
+      "ACE14T: footer no gaps/overlaps",
+      "ACE15P: footer no gaps/overlaps",
+      "ACE15M: footer no gaps/overlaps",
+      "overflow enum scroll-y confirmed in responsive-layout.mjs:6 and responsive-inspector.mjs:82; UI label 세로 스크롤"
+    ],
+    "actionCount": 242,
+    "actualUiApplied": false
+  },
+  "reviewV008": {
+    "source": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/recipes-lists-shops.reviewed-v007.json",
+    "sourceSHA256": "931c32eb23c615751526708f1109400020df0e761dc87738d324afdd15bed9aa",
+    "preparedAtKst": "2026-11-20T20:24:54+09:00",
+    "actionChanges": "remove exactly five CurrencyValues; all other actions identical",
+    "separatePatch": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/recipe-shop-currency-patch.json",
+    "actualUiApplied": false
+  }
+}

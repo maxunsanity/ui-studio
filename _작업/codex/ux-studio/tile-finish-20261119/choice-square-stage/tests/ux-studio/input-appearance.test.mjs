@@ -1,0 +1,46 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import * as controls from '../../src/tools/uxStudio/controls.mjs';
+const options=[{value:'a',label:'Alpha'},{value:'b',label:'Beta'},{value:'c',label:'Blocked',disabled:true}];
+const element=(id,control)=>({id,name:id,kind:'panel',x:0,y:0,w:50,h:10,text:'Label',control});
+const design=elements=>({schemaVersion:3,projectId:'choice-style-test',revision:0,name:'Choice style',entryScreen:'page',screens:[{id:'page',name:'Page',kind:'page',elements}],transitions:[],fixtures:{balance:0,items:[]}});
+class TestNode extends EventTarget {
+    constructor(tag, doc) { super(); this.tagName = tag.toUpperCase(); this.ownerDocument = doc; this.children = []; this.dataset = {}; this.style = {}; this.attributes = {}; this.className = ''; this.value = ''; this.hidden = false; this.disabled = false; this.tabIndex = 0; }
+    append(...nodes) { for (const node of nodes) { node.parentNode = this; this.children.push(node); } }
+    remove() { if (this.parentNode) this.parentNode.children.splice(this.parentNode.children.indexOf(this), 1); this.parentNode = null; }
+    setAttribute(key, value) { this.attributes[key] = String(value); }
+    removeAttribute(key) { delete this.attributes[key]; }
+    getAttribute(key) { return this.attributes[key] ?? null; }
+    contains(node) { return node === this || this.children.some(n => n.contains(node)); }
+    closest(selector) { if (selector === 'button' && this.tagName === 'BUTTON' || selector === '[inert]' && this.inert) return this; return this.parentNode?.closest(selector) || null; }
+    querySelectorAll(selector) {
+        const match = n => selector === '.ui-element' ? n.className.split(' ').includes('ui-element') : selector.startsWith(':scope > .') ? n.className.split(' ').includes(selector.slice(10)) : n.tagName.toLowerCase() === selector;
+        const direct = this.children.filter(match);
+        return selector.startsWith(':scope') ? direct : this.children.flatMap(n => [...(match(n) ? [n] : []), ...n.querySelectorAll(selector)]);
+    }
+    querySelector(selector) { return this.querySelectorAll(selector)[0] || null; }
+    focus() { this.ownerDocument.activeElement = this; }
+    setCustomValidity(message) { this.validationMessage = message; }
+}
+function dom(screen) {
+    const doc = { createElement: tag => new TestNode(tag, doc), activeElement: null }, root = doc.createElement('section');
+    for (const e of screen.elements) {
+        const node = doc.createElement('div'); node.className = 'ui-element'; node.dataset = { screen: screen.id, element: e.id };
+        const text = doc.createElement('span'); text.className = 'element-text'; node.append(text); root.append(node);
+    }
+    return root;
+}
+
+
+test('native text input uses existing appearance and inherited font without changing identity or caret',()=>{
+ const e=element('name',{type:'input',value:'Player',maxLength:16});e.appearance={fill:'#334455',stroke:'#667788',textColor:'#ddeeff',strokeWidth:2,radius:6};
+ const d=design([e]),before=structuredClone(d),screen=d.screens[0],root=dom(screen);controls.attachControls(root,screen);
+ const field=root.querySelector('input');field.selectionStart=2;field.selectionEnd=4;
+ assert.equal(field.style.backgroundColor,'#334455');assert.equal(field.style.borderColor,'#667788');assert.equal(field.style.color,'#ddeeff');assert.equal(field.style.borderWidth,'2px');assert.equal(field.style.borderStyle,'solid');assert.equal(field.style.borderRadius,'6px');assert.equal(field.style.font,'inherit');assert.equal(field.maxLength,16);
+ e.appearance.fill='#445566';e.appearance.strokeWidth=0;e.appearance.radius=0;controls.attachControls(root,screen);assert.equal(root.querySelector('input'),field);assert.equal(field.style.backgroundColor,'#445566');assert.equal(field.style.borderWidth,'0px');assert.equal(field.style.borderRadius,'0px');assert.equal(field.selectionStart,2);assert.equal(field.selectionEnd,4);assert.deepEqual(d.screens[0].elements[0].control,before.screens[0].elements[0].control);
+ delete e.appearance;controls.attachControls(root,screen);for(const key of ['backgroundColor','borderColor','color','borderWidth','borderStyle','borderRadius','font'])assert.equal(field.style[key],'',key+' is restored');
+});
+test('native inputs without appearance and other control types retain their default field styling',()=>{
+ const plain=element('plain',{type:'input'}),dropdown=element('choice',{type:'dropdown',options,value:'a'});dropdown.appearance={fill:'#334455',stroke:'#667788',textColor:'#ddeeff',strokeWidth:2,radius:6};
+ const screen=design([plain,dropdown]).screens[0],root=dom(screen);controls.attachControls(root,screen);for(const field of [root.querySelector('input'),root.querySelector('select')])for(const key of ['backgroundColor','borderColor','color','borderWidth','borderStyle','borderRadius','font'])assert.equal(field.style[key],undefined);
+});

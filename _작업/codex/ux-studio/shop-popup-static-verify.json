@@ -1,0 +1,842 @@
+{
+  "checkedAt": "2026-11-17T00:08:50.644Z",
+  "revision": 184,
+  "baselineRevision": 170,
+  "designPath": "samples/monopoly-go/ui-studio/designs/ux-gjs-0d80d7fe.json",
+  "backup": "docs/planning/_backup/20261117_단이/0835_shop_popup_resume/samples/monopoly-go/ui-studio/designs/ux-gjs-0d80d7fe.json",
+  "designSHA256": "50f0bb6dfc710f29fe398b2087508b11458f7567a764faae6d04e86ef2ad2216",
+  "authority": "AGENTS.md latest 2026-11-17 08:35 manual approval; no new cap or automation changes",
+  "checks": [
+    {
+      "name": "actual validateDocument",
+      "pass": true
+    },
+    {
+      "name": "original seven screens exactly preserved",
+      "pass": true
+    },
+    {
+      "name": "only duplicate Shop board group and image removed",
+      "pass": true,
+      "detail": [
+        "Group_Shop_BoardBackdrop",
+        "Img_Shop_BoardBackdrop"
+      ]
+    },
+    {
+      "name": "Main elements preserved including original background",
+      "pass": true
+    },
+    {
+      "name": "same Shop ID fullscreen blocking modal",
+      "pass": true,
+      "detail": {
+        "effect": "fade",
+        "durationMs": 240,
+        "autoCloseMs": 0,
+        "dim": false,
+        "blocking": true,
+        "dismissOnEscape": true,
+        "closePolicy": "allow",
+        "type": "modal",
+        "rootMode": "fullscreen"
+      }
+    },
+    {
+      "name": "separate full Shop dim retained",
+      "pass": true,
+      "detail": {
+        "id": "element-017fd84b-489b-4254-8aa4-5e0e0ec16532",
+        "appearance": {
+          "shape": "rectangle",
+          "fill": "#000000",
+          "strokeWidth": 0,
+          "textColor": "#b6b3aa",
+          "opacity": 0.72,
+          "radius": 0
+        }
+      }
+    },
+    {
+      "name": "Group_Shop_Cash display-only interaction",
+      "pass": true,
+      "detail": {
+        "id": "element-b14b186c-a1e1-49b0-92ec-b36a2c464ace",
+        "interaction": {
+          "mode": "none",
+          "enabled": true,
+          "shape": "rectangle",
+          "reason": ""
+        }
+      }
+    },
+    {
+      "name": "Group_Shop_Dice display-only interaction",
+      "pass": true,
+      "detail": {
+        "id": "element-9adedfc8-e501-4554-8e78-a31a41640aa7",
+        "interaction": {
+          "mode": "none",
+          "enabled": true,
+          "shape": "rectangle",
+          "reason": ""
+        }
+      }
+    },
+    {
+      "name": "old thirteen edges preserved",
+      "pass": true
+    },
+    {
+      "name": "sixteen edges and Shop Close",
+      "pass": true,
+      "detail": {
+        "total": 16,
+        "close": {
+          "id": "element-457d901d-7097-40a4-805a-60d8139881f2",
+          "fromScreen": "screen-8bda5052-36bc-4d68-812f-58c535aa4bc7",
+          "fromElement": "element-2150dcd4-a557-4c1c-a738-c4b656154a50",
+          "event": "click",
+          "action": "close",
+          "condition": "always",
+          "label": "상점에서 이전 화면으로",
+          "returnPolicy": "선택/스크롤 유지"
+        }
+      }
+    },
+    {
+      "name": "MainCash and MenuShop always open",
+      "pass": true,
+      "detail": {
+        "cash": {
+          "id": "edge-506502d9-4bdf-4f27-a3e2-0bd60a633ee1",
+          "fromScreen": "main",
+          "fromElement": "group-60125bc9-5219-4616-a184-e63867609f40",
+          "event": "click",
+          "action": "open",
+          "condition": "always",
+          "targetScreen": "screen-8bda5052-36bc-4d68-812f-58c535aa4bc7",
+          "label": "Btn_HUD_Cash → Modal_Shop_Store",
+          "returnPolicy": "원래 화면 선택/스크롤 유지"
+        },
+        "menuShop": {
+          "id": "edge-e02e9639-d038-4cb4-9a17-5b86f75a5fbb",
+          "fromScreen": "common-0e507f99-6097-4037-ac6c-aa0e7229cb07",
+          "fromElement": "element-f4306411-a796-4c73-bf8a-3173f48433d9",
+          "event": "click",
+          "action": "open",
+          "condition": "always",
+          "label": "메뉴 SHOP → 상점 팝업",
+          "payload": {
+            "message": "시험 안내"
+          },
+          "returnPolicy": "메뉴 선택 유지",
+          "targetScreen": "screen-8bda5052-36bc-4d68-812f-58c535aa4bc7"
+        }
+      }
+    },
+    {
+      "name": "model MainCash open and close return Main",
+      "pass": true,
+      "detail": {
+        "opened": {
+          "page": "main",
+          "overlays": [
+            "screen-8bda5052-36bc-4d68-812f-58c535aa4bc7"
+          ],
+          "focusReturn": "group-60125bc9-5219-4616-a184-e63867609f40"
+        },
+        "closed": {
+          "page": "main",
+          "overlays": [],
+          "focusReturn": "group-60125bc9-5219-4616-a184-e63867609f40"
+        }
+      }
+    },
+    {
+      "name": "model nested Shop close returns Menu",
+      "pass": true,
+      "detail": {
+        "opened": {
+          "page": "main",
+          "overlays": [
+            "common-0e507f99-6097-4037-ac6c-aa0e7229cb07",
+            "screen-8bda5052-36bc-4d68-812f-58c535aa4bc7"
+          ],
+          "focusReturn": "element-f4306411-a796-4c73-bf8a-3173f48433d9"
+        },
+        "returned": {
+          "page": "main",
+          "overlays": [
+            "common-0e507f99-6097-4037-ac6c-aa0e7229cb07"
+          ],
+          "focusReturn": "element-f4306411-a796-4c73-bf8a-3173f48433d9"
+        }
+      }
+    },
+    {
+      "name": "Product01 fixed156.27x224.98",
+      "pass": true,
+      "detail": {
+        "id": "element-7d63fba0-2ea8-4307-b2d3-7305816d081d",
+        "rect": {
+          "x": 33.01,
+          "y": 412.91999999999996,
+          "w": 156.27,
+          "h": 224.98000000000005
+        },
+        "rectTransform": {
+          "min": [
+            0,
+            1
+          ],
+          "max": [
+            0,
+            1
+          ],
+          "pivot": [
+            0,
+            1
+          ],
+          "position": [
+            33.01,
+            -100.37
+          ],
+          "sizeDelta": [
+            156.27,
+            224.98000000000005
+          ]
+        }
+      }
+    },
+    {
+      "name": "Product01 native Quantity",
+      "pass": true,
+      "detail": {
+        "id": "element-b3b204d5-4ed8-486e-8729-1df683e3d4b0",
+        "value": "140"
+      }
+    },
+    {
+      "name": "Product01 native More",
+      "pass": true,
+      "detail": {
+        "id": "element-65660acd-2d5d-424c-9182-6e8c92acd88c",
+        "value": ""
+      }
+    },
+    {
+      "name": "Product01 native Bonus",
+      "pass": true,
+      "detail": {
+        "id": "element-cbbcf7a4-11d2-445a-b612-cb57c2e7dee2",
+        "value": "+200"
+      }
+    },
+    {
+      "name": "Product01 native Price",
+      "pass": true,
+      "detail": {
+        "id": "element-c8dd5e75-cee1-4fe7-864d-26c6cb3b8a7a",
+        "value": "₩3,000"
+      }
+    },
+    {
+      "name": "Product02 fixed156.27x224.98",
+      "pass": true,
+      "detail": {
+        "id": "element-7301ed62-3c4b-4050-b23d-30038f05bafa",
+        "rect": {
+          "x": 200.06,
+          "y": 412.91999999999996,
+          "w": 156.27,
+          "h": 224.98000000000005
+        },
+        "rectTransform": {
+          "min": [
+            0,
+            1
+          ],
+          "max": [
+            0,
+            1
+          ],
+          "pivot": [
+            0,
+            1
+          ],
+          "position": [
+            200.06,
+            -100.37
+          ],
+          "sizeDelta": [
+            156.27,
+            224.98000000000005
+          ]
+        }
+      }
+    },
+    {
+      "name": "Product02 native Quantity",
+      "pass": true,
+      "detail": {
+        "id": "element-412ce1fe-b068-4e4c-90d7-d76babbdcbe9",
+        "value": "425"
+      }
+    },
+    {
+      "name": "Product02 native More",
+      "pass": true,
+      "detail": {
+        "id": "element-433ffa87-645e-4e20-b6d6-312babd27c23",
+        "value": "20% More"
+      }
+    },
+    {
+      "name": "Product02 native Bonus",
+      "pass": true,
+      "detail": {
+        "id": "element-12654368-5a99-4c44-a914-2f74d0c312f1",
+        "value": "+550"
+      }
+    },
+    {
+      "name": "Product02 native Price",
+      "pass": true,
+      "detail": {
+        "id": "element-b95bc086-e96a-4ee4-8646-c190f3487793",
+        "value": "₩7,500"
+      }
+    },
+    {
+      "name": "Product03 fixed156.27x224.98",
+      "pass": true,
+      "detail": {
+        "id": "element-d264f11f-4a3d-48d7-8bbd-e695a9f7abb1",
+        "rect": {
+          "x": 367.11,
+          "y": 412.91999999999996,
+          "w": 156.27,
+          "h": 224.98000000000005
+        },
+        "rectTransform": {
+          "min": [
+            0,
+            1
+          ],
+          "max": [
+            0,
+            1
+          ],
+          "pivot": [
+            0,
+            1
+          ],
+          "position": [
+            367.11,
+            -100.37
+          ],
+          "sizeDelta": [
+            156.27,
+            224.98000000000005
+          ]
+        }
+      }
+    },
+    {
+      "name": "Product03 native Quantity",
+      "pass": true,
+      "detail": {
+        "id": "element-21c2599e-3263-4e2f-b8fd-ee0f0aef03e6",
+        "value": "900"
+      }
+    },
+    {
+      "name": "Product03 native More",
+      "pass": true,
+      "detail": {
+        "id": "element-aeba140e-5333-4a83-9565-6c19d50add5b",
+        "value": "30% More"
+      }
+    },
+    {
+      "name": "Product03 native Bonus",
+      "pass": true,
+      "detail": {
+        "id": "element-32cea5cd-2426-44c4-87ad-946efa74df01",
+        "value": "+1,200"
+      }
+    },
+    {
+      "name": "Product03 native Price",
+      "pass": true,
+      "detail": {
+        "id": "element-06a77427-027d-4281-a585-07f5b4b99725",
+        "value": "₩15,000"
+      }
+    },
+    {
+      "name": "Product04 fixed156.27x224.98",
+      "pass": true,
+      "detail": {
+        "id": "element-7f8158a3-e12d-40f0-9bd3-e503d4bdd810",
+        "rect": {
+          "x": 33.01,
+          "y": 681.68,
+          "w": 156.27,
+          "h": 224.98000000000005
+        },
+        "rectTransform": {
+          "min": [
+            0,
+            1
+          ],
+          "max": [
+            0,
+            1
+          ],
+          "pivot": [
+            0,
+            1
+          ],
+          "position": [
+            33.01,
+            -369.13
+          ],
+          "sizeDelta": [
+            156.27,
+            224.98000000000005
+          ]
+        }
+      }
+    },
+    {
+      "name": "Product04 native Quantity",
+      "pass": true,
+      "detail": {
+        "id": "element-ffd3f3a8-cffb-45ed-8523-7a8b2d2983d0",
+        "value": "2,100"
+      }
+    },
+    {
+      "name": "Product04 native More",
+      "pass": true,
+      "detail": {
+        "id": "element-198ef16b-e5a6-4ddf-90ad-a57075e3ef23",
+        "value": "50% More"
+      }
+    },
+    {
+      "name": "Product04 native Bonus",
+      "pass": true,
+      "detail": {
+        "id": "element-69cc7ee7-e1e9-4afd-8a95-c1cf89f67ab5",
+        "value": "+2,700"
+      }
+    },
+    {
+      "name": "Product04 native Price",
+      "pass": true,
+      "detail": {
+        "id": "element-f8f0a1d0-944b-4156-91d6-ff46b550d9da",
+        "value": "₩29,000"
+      }
+    },
+    {
+      "name": "Product05 fixed156.27x224.98",
+      "pass": true,
+      "detail": {
+        "id": "element-7dd39139-f251-40fe-b83a-945a6b93e7e8",
+        "rect": {
+          "x": 200.06,
+          "y": 681.68,
+          "w": 156.27,
+          "h": 224.98000000000005
+        },
+        "rectTransform": {
+          "min": [
+            0,
+            1
+          ],
+          "max": [
+            0,
+            1
+          ],
+          "pivot": [
+            0,
+            1
+          ],
+          "position": [
+            200.06,
+            -369.13
+          ],
+          "sizeDelta": [
+            156.27,
+            224.98000000000005
+          ]
+        }
+      }
+    },
+    {
+      "name": "Product05 native Quantity",
+      "pass": true,
+      "detail": {
+        "id": "element-0370d67a-7563-4c1a-ab2c-49a600237ee2",
+        "value": "5,300"
+      }
+    },
+    {
+      "name": "Product05 native More",
+      "pass": true,
+      "detail": {
+        "id": "element-7a4610b4-43b6-4bb4-921e-4805ad2ba06a",
+        "value": "50% More"
+      }
+    },
+    {
+      "name": "Product05 native Bonus",
+      "pass": true,
+      "detail": {
+        "id": "element-f39129f3-89f7-4826-98d2-4cdbb75341ab",
+        "value": "+7,500"
+      }
+    },
+    {
+      "name": "Product05 native Price",
+      "pass": true,
+      "detail": {
+        "id": "element-e1ef5be7-d4b5-44ea-91c0-fccf63104401",
+        "value": "₩79,000"
+      }
+    },
+    {
+      "name": "Product06 fixed156.27x224.98",
+      "pass": true,
+      "detail": {
+        "id": "element-92147f6b-dcc2-43ab-ba8a-85a12668dc0f",
+        "rect": {
+          "x": 367.11,
+          "y": 681.68,
+          "w": 156.27,
+          "h": 224.98000000000005
+        },
+        "rectTransform": {
+          "min": [
+            0,
+            1
+          ],
+          "max": [
+            0,
+            1
+          ],
+          "pivot": [
+            0,
+            1
+          ],
+          "position": [
+            367.11,
+            -369.13
+          ],
+          "sizeDelta": [
+            156.27,
+            224.98000000000005
+          ]
+        }
+      }
+    },
+    {
+      "name": "Product06 native Quantity",
+      "pass": true,
+      "detail": {
+        "id": "element-ebe3c0f8-d940-4dc0-b388-f12248b3ccf2",
+        "value": "11K"
+      }
+    },
+    {
+      "name": "Product06 native More",
+      "pass": true,
+      "detail": {
+        "id": "element-d9b7d061-4e39-4d75-865c-546c13e613ea",
+        "value": "55% More"
+      }
+    },
+    {
+      "name": "Product06 native Bonus",
+      "pass": true,
+      "detail": {
+        "id": "element-01c929fc-a0fc-4c11-93a9-972ae2c716fc",
+        "value": "+18,000"
+      }
+    },
+    {
+      "name": "Product06 native Price",
+      "pass": true,
+      "detail": {
+        "id": "element-1fb8af9a-4aff-49a0-b1cc-7faf85d554fd",
+        "value": "₩149,000"
+      }
+    },
+    {
+      "name": "local registered asset sha256-01ff4cb0e22cd9f0623400729df16d592f3903e1f677b018e3c108f751d8d218.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-01ff4cb0e22cd9f0623400729df16d592f3903e1f677b018e3c108f751d8d218.webp",
+        "bytes": 662,
+        "width": 128,
+        "height": 64,
+        "sha256": "01ff4cb0e22cd9f0623400729df16d592f3903e1f677b018e3c108f751d8d218"
+      }
+    },
+    {
+      "name": "local registered asset sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "bytes": 79024,
+        "width": 1254,
+        "height": 1254,
+        "sha256": "5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2"
+      }
+    },
+    {
+      "name": "local registered asset sha256-33871ab0e0f89239cb9b1b033315b3275834c05f7df382a672427cab2b5016e0.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-33871ab0e0f89239cb9b1b033315b3275834c05f7df382a672427cab2b5016e0.webp",
+        "bytes": 690,
+        "width": 128,
+        "height": 64,
+        "sha256": "33871ab0e0f89239cb9b1b033315b3275834c05f7df382a672427cab2b5016e0"
+      }
+    },
+    {
+      "name": "local registered asset sha256-5c24391da35e6ea0fa50e68d9db00c1da08086a2fc52ae9eb73d01b1e5225124.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-5c24391da35e6ea0fa50e68d9db00c1da08086a2fc52ae9eb73d01b1e5225124.webp",
+        "bytes": 193182,
+        "width": 1254,
+        "height": 1254,
+        "sha256": "5c24391da35e6ea0fa50e68d9db00c1da08086a2fc52ae9eb73d01b1e5225124"
+      }
+    },
+    {
+      "name": "local registered asset sha256-9077bed744487f5cb63244093020a3df075df16b1401a85c71896286b510b69a.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-9077bed744487f5cb63244093020a3df075df16b1401a85c71896286b510b69a.webp",
+        "bytes": 38,
+        "width": 32,
+        "height": 32,
+        "sha256": "9077bed744487f5cb63244093020a3df075df16b1401a85c71896286b510b69a"
+      }
+    },
+    {
+      "name": "local registered asset sha256-150bc918192c946962c0c7ac6b8a769fa3ed0c1fe9e52b1d52220039bc143918.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-150bc918192c946962c0c7ac6b8a769fa3ed0c1fe9e52b1d52220039bc143918.webp",
+        "bytes": 38,
+        "width": 32,
+        "height": 32,
+        "sha256": "150bc918192c946962c0c7ac6b8a769fa3ed0c1fe9e52b1d52220039bc143918"
+      }
+    },
+    {
+      "name": "local registered asset sha256-3d568e1e856b60b026ab49e2dab6799d5e8018870ee1c5e470c196cdca32acdd.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-3d568e1e856b60b026ab49e2dab6799d5e8018870ee1c5e470c196cdca32acdd.webp",
+        "bytes": 1066,
+        "width": 128,
+        "height": 96,
+        "sha256": "3d568e1e856b60b026ab49e2dab6799d5e8018870ee1c5e470c196cdca32acdd"
+      }
+    },
+    {
+      "name": "local registered asset sha256-163382c3cf6988eb18fd8cac2129cf6d7d71ecd9f9b19e57c3acc436390ba660.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-163382c3cf6988eb18fd8cac2129cf6d7d71ecd9f9b19e57c3acc436390ba660.webp",
+        "bytes": 145822,
+        "width": 367,
+        "height": 511,
+        "sha256": "163382c3cf6988eb18fd8cac2129cf6d7d71ecd9f9b19e57c3acc436390ba660"
+      }
+    },
+    {
+      "name": "local registered asset sha256-d3872a8c3e0a1c90305d10fd424b3ce940ebc7d05837778ed3704b6e46b736af.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-d3872a8c3e0a1c90305d10fd424b3ce940ebc7d05837778ed3704b6e46b736af.webp",
+        "bytes": 4186,
+        "width": 128,
+        "height": 128,
+        "sha256": "d3872a8c3e0a1c90305d10fd424b3ce940ebc7d05837778ed3704b6e46b736af"
+      }
+    },
+    {
+      "name": "local registered asset sha256-38a2177197357190c71e891b70a2bc53115ae680054a15487dbf142b12a4cce1.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-38a2177197357190c71e891b70a2bc53115ae680054a15487dbf142b12a4cce1.webp",
+        "bytes": 166484,
+        "width": 377,
+        "height": 511,
+        "sha256": "38a2177197357190c71e891b70a2bc53115ae680054a15487dbf142b12a4cce1"
+      }
+    },
+    {
+      "name": "local registered asset sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a.webp",
+        "bytes": 606,
+        "width": 128,
+        "height": 96,
+        "sha256": "6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a"
+      }
+    },
+    {
+      "name": "local registered asset sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c.webp",
+        "bytes": 28482,
+        "width": 266,
+        "height": 264,
+        "sha256": "27aa6548786a412c9259097f7b81afad128d90ae48d271da7e6e5719b78de80c"
+      }
+    },
+    {
+      "name": "local registered asset sha256-0ab9bbc9d7fee502a7f7a4d15c37dbd7ea4d6e44e67349cb28fea0893800412d.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-0ab9bbc9d7fee502a7f7a4d15c37dbd7ea4d6e44e67349cb28fea0893800412d.webp",
+        "bytes": 92692,
+        "width": 311,
+        "height": 377,
+        "sha256": "0ab9bbc9d7fee502a7f7a4d15c37dbd7ea4d6e44e67349cb28fea0893800412d"
+      }
+    },
+    {
+      "name": "local registered asset sha256-ea2db7909fff4b4fad71e16dc1126186df552404e0b116bac30caa1d3cb7fa66.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-ea2db7909fff4b4fad71e16dc1126186df552404e0b116bac30caa1d3cb7fa66.webp",
+        "bytes": 1214,
+        "width": 128,
+        "height": 48,
+        "sha256": "ea2db7909fff4b4fad71e16dc1126186df552404e0b116bac30caa1d3cb7fa66"
+      }
+    },
+    {
+      "name": "local registered asset sha256-926dcc38282407e9cbe0e6411fdcfd43107c59bcece0320582f34feff92a4e46.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-926dcc38282407e9cbe0e6411fdcfd43107c59bcece0320582f34feff92a4e46.webp",
+        "bytes": 700,
+        "width": 128,
+        "height": 96,
+        "sha256": "926dcc38282407e9cbe0e6411fdcfd43107c59bcece0320582f34feff92a4e46"
+      }
+    },
+    {
+      "name": "local registered asset sha256-65d9500c593a1180395b76f4175a656af4f76f6c98a4a8119b606649521f1517.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-65d9500c593a1180395b76f4175a656af4f76f6c98a4a8119b606649521f1517.webp",
+        "bytes": 1578,
+        "width": 128,
+        "height": 96,
+        "sha256": "65d9500c593a1180395b76f4175a656af4f76f6c98a4a8119b606649521f1517"
+      }
+    },
+    {
+      "name": "local registered asset sha256-fba39b66be7c8aaad837813541852d0498145b16e844505706d1b5f2bf93c74c.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-fba39b66be7c8aaad837813541852d0498145b16e844505706d1b5f2bf93c74c.webp",
+        "bytes": 516,
+        "width": 128,
+        "height": 96,
+        "sha256": "fba39b66be7c8aaad837813541852d0498145b16e844505706d1b5f2bf93c74c"
+      }
+    },
+    {
+      "name": "local registered asset sha256-0f53e49a8a17e5d753fa9735c20f8efe7597e1fbe01151e582a283fd57d00d83.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-0f53e49a8a17e5d753fa9735c20f8efe7597e1fbe01151e582a283fd57d00d83.webp",
+        "bytes": 1944,
+        "width": 160,
+        "height": 64,
+        "sha256": "0f53e49a8a17e5d753fa9735c20f8efe7597e1fbe01151e582a283fd57d00d83"
+      }
+    },
+    {
+      "name": "local registered asset sha256-ec0dec127c6e7670434c3ad0af9c568575d916409034d9a6acbaa88bd88178b6.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-ec0dec127c6e7670434c3ad0af9c568575d916409034d9a6acbaa88bd88178b6.webp",
+        "bytes": 116,
+        "width": 32,
+        "height": 16,
+        "sha256": "ec0dec127c6e7670434c3ad0af9c568575d916409034d9a6acbaa88bd88178b6"
+      }
+    },
+    {
+      "name": "local registered asset sha256-26ef2719ef91cb31d7db2f26cedb8038b9eb7fe5fbc4f6f2aaa5f1754c0b014d.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-26ef2719ef91cb31d7db2f26cedb8038b9eb7fe5fbc4f6f2aaa5f1754c0b014d.webp",
+        "bytes": 3758,
+        "width": 512,
+        "height": 40,
+        "sha256": "26ef2719ef91cb31d7db2f26cedb8038b9eb7fe5fbc4f6f2aaa5f1754c0b014d"
+      }
+    },
+    {
+      "name": "local registered asset sha256-0f719508b1d5713237b33706685726d1a8d1ae87191d8c720d47a9d055b898a6.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-0f719508b1d5713237b33706685726d1a8d1ae87191d8c720d47a9d055b898a6.webp",
+        "bytes": 2534,
+        "width": 96,
+        "height": 56,
+        "sha256": "0f719508b1d5713237b33706685726d1a8d1ae87191d8c720d47a9d055b898a6"
+      }
+    },
+    {
+      "name": "local registered asset sha256-2f4c546fa7b18aee4ee88fccb8d05d6ddc80031f009c792aa56da5f4fa26fb08.webp",
+      "pass": true,
+      "detail": {
+        "path": "samples/monopoly-go/ui-studio/assets/sha256-2f4c546fa7b18aee4ee88fccb8d05d6ddc80031f009c792aa56da5f4fa26fb08.webp",
+        "bytes": 2514,
+        "width": 64,
+        "height": 96,
+        "sha256": "2f4c546fa7b18aee4ee88fccb8d05d6ddc80031f009c792aa56da5f4fa26fb08"
+      }
+    }
+  ],
+  "limitations": [
+    "Static model/file checks only. No browser/HTTP/visual equivalence/real focus or scroll verification.",
+    "Current checks are independent of old r170 132 checks and old source suite counts.",
+    "Native cash/dice display-only contract is interpreted as interaction.mode none."
+  ],
+  "originalMainBackgrounds": [
+    {
+      "name": "Img_BoardBackdrop",
+      "id": "element-445ba482-75f7-42e2-aec9-24bce52fa5e4"
+    }
+  ],
+  "screens": 8,
+  "shopParts": 136,
+  "totalParts": 766,
+  "transitions": 16,
+  "uniqueShopAssetRefs": 22,
+  "savedFileUnchanged": true,
+  "pass": true,
+  "passed": 65,
+  "total": 65
+}

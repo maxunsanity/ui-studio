@@ -1,0 +1,174 @@
+{
+  "family": {
+    "id": "ACE_B03",
+    "name": "Page_ACE_CharacterReveal_Scott",
+    "nativeKind": "page",
+    "purpose": "Independent character reveal page: new stage background, native A Scott, cream bear + plane, and transparent dismiss input only.",
+    "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-b/frames/frame_00013.jpg",
+    "actions": [
+      {
+        "op": "plain",
+        "key": "root",
+        "name": "Panel_ACE_B03_root",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "fill": "#243b43"
+      },
+      {
+        "op": "image",
+        "key": "StageBackground",
+        "name": "Img_ACE_B03_StageBackground",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "parent": "root",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-rewards-stage-bg-v001.webp",
+        "fit": "contain"
+      },
+      {
+        "op": "image",
+        "key": "RankGlyph",
+        "name": "Img_ACE_B03_GradeEmblem",
+        "rect": {
+          "x": 45,
+          "y": 235,
+          "w": 26,
+          "h": 29
+        },
+        "parent": "root",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-lobby-icons-atlas-v001.webp",
+        "fit": "contain",
+        "region": [
+          450,
+          300,
+          150,
+          150
+        ]
+      },
+      {
+        "op": "text",
+        "key": "GradeCode",
+        "name": "Txt_ACE_B03_GradeCode",
+        "rect": {
+          "x": 79,
+          "y": 238,
+          "w": 20,
+          "h": 24
+        },
+        "parent": "root",
+        "text": "A",
+        "size": 20,
+        "weight": 800,
+        "color": "#e9b4f4",
+        "align": "center"
+      },
+      {
+        "op": "text",
+        "key": "CharacterName",
+        "name": "Txt_ACE_B03_CharacterName",
+        "rect": {
+          "x": 102,
+          "y": 237,
+          "w": 66,
+          "h": 25
+        },
+        "parent": "root",
+        "text": "Scott",
+        "size": 22,
+        "weight": 800,
+        "color": "#fff7e7",
+        "align": "left"
+      },
+      {
+        "op": "image",
+        "key": "ScottAndPlane",
+        "name": "Img_ACE_B03_ScottAndPlane",
+        "rect": {
+          "x": 6,
+          "y": 295,
+          "w": 408,
+          "h": 292
+        },
+        "parent": "root",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_character_reveal_bear_plane_v001.webp",
+        "fit": "contain"
+      },
+      {
+        "op": "button",
+        "key": "Dismiss",
+        "name": "Btn_ACE_B03_Dismiss",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "parent": "root",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": null,
+        "skinMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fill": "#00000000",
+        "hitAreaOnly": true
+      },
+      {
+        "op": "text",
+        "key": "DismissLabel",
+        "name": "Txt_ACE_B03_DismissLabel",
+        "rect": {
+          "x": 83,
+          "y": 775,
+          "w": 254,
+          "h": 28
+        },
+        "parent": "Dismiss",
+        "text": "Tap Anywhere",
+        "size": 16,
+        "weight": 700,
+        "color": "#fff8d7",
+        "align": "center"
+      }
+    ],
+    "notes": [
+      "Scott is the cream bear pilot with propeller plane. Earlier penguin-like speculation was corrected using the actual full-body source frame.",
+      "Prepared acecraft_character_reveal_bear_plane_v001.webp is a new reference-inspired illustration, not a cropped original or an exact identity reproduction.",
+      "This board requires the bear-plane asset to exist and decode. If it fails, mark the board incomplete; do not silently substitute another portrait.",
+      "사용자 단독 페이지 원칙에 따라 원본에서 보이는 모집 배후 UI는 제외했습니다. 새 무대 배경만 사용하며 Joey/Canyon/모집 헤더/History/Preview/Draw/pity/dimmer는 없습니다. 원본 연기·돌 받침도 생략했습니다.",
+      "원본B 등급A/Scott를별도native폼으로분리(근사A79,238,20,24 /Scott102,237,66,25). 금빛문양은코인이라고확정하지않고새항공badge를대체표현으로사용.",
+      "Tap Anywhere 클릭영역은전체420×924이며글자는해당버튼의자식으로분리. 실제엔진게임과정은구현하지않음."
+    ],
+    "requiredAssets": [
+      "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-rewards-stage-bg-v001.webp",
+      "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_character_reveal_bear_plane_v001.webp"
+    ],
+    "navigationIntent": {
+      "Dismiss": "parent-defined Rewards Obtained sample or local recruiter return"
+    }
+  },
+  "sid": "screen-71d430a2-4579-4730-9236-77b1874b46b3",
+  "i": 8,
+  "map": {
+    "root": "element-b8da5c75-07cb-48fc-8187-c1e1758908ac",
+    "StageBackground": "element-979b2811-1921-40ef-9dde-504b0b416b05",
+    "RankGlyph": "element-e9648f64-20ed-419e-97cc-5168f50677a6",
+    "GradeCode": "element-d0ea6fd4-f59a-4353-99a5-e8b8536104c0",
+    "CharacterName": "element-3b9d7abc-6afc-4d5c-ad03-e96806fdc23a",
+    "ScottAndPlane": "element-4a730024-3c0b-450c-82e2-5cae6494834c",
+    "Dismiss": "element-0f3c7037-9d84-40e6-a3f2-2b5467cb7933",
+    "DismissLabel": "element-faca5703-3cb5-4553-83b2-076bcd3cb260"
+  }
+}

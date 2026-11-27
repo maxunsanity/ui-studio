@@ -1,0 +1,990 @@
+{
+  "schemaVersion": 1,
+  "projectId": "lobby-0eba60ef",
+  "revision": 6,
+  "name": "로비 · 공통 UI 설계",
+  "entryScreen": "lobby-common",
+  "screens": [
+    {
+      "id": "lobby-common",
+      "moduleId": "simulator_module_dice",
+      "name": "로비",
+      "kind": "page",
+      "purpose": "현재 공통 화면 구성을 사용한 UI 배치 초안.3D/게임 상태를 불러오지 않습니다.",
+      "elements": [
+        {
+          "id": "lobby-title",
+          "name": "로비 제목",
+          "kind": "text",
+          "x": 2.564102564102564,
+          "y": 0.35545023696682465,
+          "w": 94.87179487179486,
+          "h": 2.3696682464454977,
+          "text": "로비 · 공통 UI 설계",
+          "purpose": "로비 제목",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#ffffff",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json"
+        },
+        {
+          "id": "currency-dice",
+          "name": "주사위",
+          "kind": "panel",
+          "x": 2.564102564102564,
+          "y": 3.3175355450236967,
+          "w": 31.111111111111107,
+          "h": 2.6066350710900474,
+          "text": "주사위  —",
+          "purpose": "주사위",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json"
+        },
+        {
+          "id": "currency-gems",
+          "name": "보석",
+          "kind": "panel",
+          "x": 34.18803418803418,
+          "y": 3.3175355450236967,
+          "w": 31.111111111111107,
+          "h": 2.6066350710900474,
+          "text": "보석  —",
+          "purpose": "보석",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json"
+        },
+        {
+          "id": "currency-money",
+          "name": "돈",
+          "kind": "panel",
+          "x": 65.8119658119658,
+          "y": 3.3175355450236967,
+          "w": 31.111111111111107,
+          "h": 2.6066350710900474,
+          "text": "돈  —",
+          "purpose": "돈",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json"
+        },
+        {
+          "id": "gauge-badEnergy",
+          "name": "나쁜 기운",
+          "kind": "panel",
+          "x": 2.564102564102564,
+          "y": 6.872037914691944,
+          "w": 31.111111111111107,
+          "h": 6.161137440758293,
+          "text": "나쁜 기운\n값 연결 영역",
+          "purpose": "나쁜 기운",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json"
+        },
+        {
+          "id": "gauge-fans",
+          "name": "팬",
+          "kind": "panel",
+          "x": 34.18803418803418,
+          "y": 6.872037914691944,
+          "w": 31.111111111111107,
+          "h": 6.161137440758293,
+          "text": "팬\n값 연결 영역",
+          "purpose": "팬",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json"
+        },
+        {
+          "id": "gauge-enterPower",
+          "name": "엔터파워",
+          "kind": "panel",
+          "x": 65.8119658119658,
+          "y": 6.872037914691944,
+          "w": 31.111111111111107,
+          "h": 6.161137440758293,
+          "text": "엔터파워\n값 연결 영역",
+          "purpose": "엔터파워",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json"
+        },
+        {
+          "id": "info-team",
+          "name": "팀 정보",
+          "kind": "button",
+          "x": 2.564102564102564,
+          "y": 13.981042654028434,
+          "w": 31.111111111111107,
+          "h": 3.7914691943127963,
+          "text": "팀 정보",
+          "purpose": "팀 정보",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json"
+        },
+        {
+          "id": "info-members",
+          "name": "멤버",
+          "kind": "button",
+          "x": 34.18803418803418,
+          "y": 13.981042654028434,
+          "w": 31.111111111111107,
+          "h": 3.7914691943127963,
+          "text": "멤버",
+          "purpose": "멤버",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json"
+        },
+        {
+          "id": "info-abilities",
+          "name": "능력",
+          "kind": "button",
+          "x": 65.8119658119658,
+          "y": 13.981042654028434,
+          "w": 31.111111111111107,
+          "h": 3.7914691943127963,
+          "text": "능력",
+          "purpose": "능력",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json"
+        },
+        {
+          "id": "slot-world",
+          "name": "3D 도시·보드 영역",
+          "kind": "panel",
+          "x": 0,
+          "y": 18.246445497630333,
+          "w": 100,
+          "h": 29.85781990521327,
+          "text": "3D 도시·보드 자리\n편집기에서는 3D를 읽지 않습니다",
+          "purpose": "3D 도시·보드 영역",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#d8e9ed",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "content-slot",
+            "slot": "world"
+          }
+        },
+        {
+          "id": "slot-filler",
+          "name": "필러·대사 연출 영역",
+          "kind": "panel",
+          "x": 0,
+          "y": 48.1042654028436,
+          "w": 100,
+          "h": 28.436018957345972,
+          "text": "필러 · 대사 · 결과 연출 자리",
+          "purpose": "필러·대사 연출 영역",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "content-slot",
+            "slot": "filler"
+          }
+        },
+        {
+          "id": "record",
+          "name": "기록장",
+          "kind": "button",
+          "x": 2.564102564102564,
+          "y": 77.13270142180097,
+          "w": 20.51282051282051,
+          "h": 2.843601895734597,
+          "text": "기록장",
+          "purpose": "기록장",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "intentionalNoAction": true
+        },
+        {
+          "id": "news",
+          "name": "소식",
+          "kind": "button",
+          "x": 25.64102564102564,
+          "y": 77.13270142180097,
+          "w": 20.51282051282051,
+          "h": 2.843601895734597,
+          "text": "소식",
+          "purpose": "소식",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "intentionalNoAction": true
+        },
+        {
+          "id": "roll",
+          "name": "굴리기",
+          "kind": "button",
+          "x": 5.128205128205128,
+          "y": 80.56872037914692,
+          "w": 89.74358974358975,
+          "h": 6.6350710900473935,
+          "text": "굴리기 · 동작 연결 정의",
+          "purpose": "굴리기",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "intentionalNoAction": true
+        },
+        {
+          "id": "menu-cardbook",
+          "name": "카드북",
+          "kind": "button",
+          "x": 0,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "카드북",
+          "purpose": "카드북",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_cardbook",
+            "action": "open",
+            "label": "카드",
+            "docId": "P168"
+          }
+        },
+        {
+          "id": "menu-mons",
+          "name": "몬스",
+          "kind": "button",
+          "x": 16.666666666666664,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "몬스",
+          "purpose": "몬스",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_mons_inventory",
+            "action": "open",
+            "label": "몬스",
+            "docId": "P96"
+          }
+        },
+        {
+          "id": "menu-shop",
+          "name": "상점",
+          "kind": "button",
+          "x": 33.33333333333333,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "상점",
+          "purpose": "상점",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_shop",
+            "action": "open",
+            "label": "상점",
+            "docId": "P108"
+          }
+        },
+        {
+          "id": "menu-adventure",
+          "name": "모험",
+          "kind": "button",
+          "x": 50,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "모험",
+          "purpose": "모험",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_journey",
+            "action": "open",
+            "label": "모험",
+            "docId": "P152"
+          }
+        },
+        {
+          "id": "menu-build",
+          "name": "건설",
+          "kind": "button",
+          "x": 66.66666666666666,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "건설",
+          "purpose": "건설",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_building",
+            "action": "open",
+            "label": "건설",
+            "docId": "P106"
+          }
+        },
+        {
+          "id": "menu-mission",
+          "name": "미션",
+          "kind": "button",
+          "x": 83.33333333333334,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "미션",
+          "purpose": "미션",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_mission",
+            "action": "open",
+            "label": "미션",
+            "docId": "P108"
+          }
+        },
+        {
+          "id": "menu-crew",
+          "name": "크루",
+          "kind": "button",
+          "x": 0,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "크루",
+          "purpose": "크루",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_music_crew",
+            "action": "open",
+            "label": "응원 크루",
+            "docId": "P221"
+          }
+        },
+        {
+          "id": "menu-festival",
+          "name": "주간",
+          "kind": "button",
+          "x": 16.666666666666664,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "주간",
+          "purpose": "주간",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_music_festival",
+            "action": "open",
+            "label": "주간 페스티벌",
+            "docId": "P207"
+          }
+        },
+        {
+          "id": "menu-worldFestival",
+          "name": "월드",
+          "kind": "button",
+          "x": 33.33333333333333,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "월드",
+          "purpose": "월드",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_music_world_festival",
+            "action": "open",
+            "label": "월드 페스티벌",
+            "docId": "P207"
+          }
+        },
+        {
+          "id": "menu-album",
+          "name": "앨범",
+          "kind": "button",
+          "x": 50,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "앨범",
+          "purpose": "앨범",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_album_release",
+            "action": "open",
+            "label": "앨범 발매",
+            "docId": "P228"
+          }
+        },
+        {
+          "id": "menu-chart",
+          "name": "차트",
+          "kind": "button",
+          "x": 66.66666666666666,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "차트",
+          "purpose": "차트",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_music_chart",
+            "action": "open",
+            "label": "음악 차트",
+            "docId": "P230"
+          }
+        },
+        {
+          "id": "menu-media",
+          "name": "음악 앱",
+          "kind": "button",
+          "x": 83.33333333333334,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "음악 앱",
+          "purpose": "음악 앱",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_music_app",
+            "action": "open",
+            "label": "음악 앱",
+            "docId": "P207"
+          }
+        }
+      ]
+    },
+    {
+      "id": "common-info",
+      "name": "공통 정보",
+      "kind": "modal",
+      "purpose": "현재 화면 위에서 공통 출현·닫힘을 시험합니다.",
+      "presentation": {
+        "type": "modal",
+        "effect": "fade",
+        "durationMs": 240,
+        "autoCloseMs": 0,
+        "dim": true
+      },
+      "elements": [
+        {
+          "id": "common-info-title",
+          "name": "제목",
+          "kind": "text",
+          "x": 8,
+          "y": 8,
+          "w": 75,
+          "h": 15,
+          "text": "공통 모달",
+          "purpose": "공통 UI 시험",
+          "info": ""
+        },
+        {
+          "id": "common-info-body",
+          "name": "안내 내용",
+          "kind": "text",
+          "x": 8,
+          "y": 28,
+          "w": 84,
+          "h": 37,
+          "text": "표시할 내용을 편집하세요",
+          "purpose": "공통 UI 시험",
+          "info": ""
+        },
+        {
+          "id": "common-info-close",
+          "name": "닫기",
+          "kind": "button",
+          "x": 10,
+          "y": 76,
+          "w": 80,
+          "h": 16,
+          "text": "닫기",
+          "purpose": "공통 UI 시험",
+          "info": ""
+        }
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "id": "info-close",
+      "fromScreen": "common-info",
+      "fromElement": "common-info-close",
+      "event": "click",
+      "action": "close",
+      "condition": "always",
+      "label": "닫기",
+      "returnPolicy": "화면 유지"
+    },
+    {
+      "id": "open-info-team",
+      "fromScreen": "lobby-common",
+      "fromElement": "info-team",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "targetScreen": "common-info",
+      "label": "팀 정보 보기",
+      "returnPolicy": "원래 화면 유지"
+    },
+    {
+      "id": "open-info-members",
+      "fromScreen": "lobby-common",
+      "fromElement": "info-members",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "targetScreen": "common-info",
+      "label": "멤버 보기",
+      "returnPolicy": "원래 화면 유지"
+    },
+    {
+      "id": "open-info-abilities",
+      "fromScreen": "lobby-common",
+      "fromElement": "info-abilities",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "targetScreen": "common-info",
+      "label": "능력 보기",
+      "returnPolicy": "원래 화면 유지"
+    },
+    {
+      "id": "module-menu-cardbook",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-cardbook",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_cardbook",
+        "label": "카드"
+      },
+      "label": "카드 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-mons",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-mons",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_mons_inventory",
+        "label": "몬스"
+      },
+      "label": "몬스 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-shop",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-shop",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_shop",
+        "label": "상점"
+      },
+      "label": "상점 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-adventure",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-adventure",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_journey",
+        "label": "모험"
+      },
+      "label": "모험 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-build",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-build",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_building",
+        "label": "건설"
+      },
+      "label": "건설 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-mission",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-mission",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_mission",
+        "label": "미션"
+      },
+      "label": "미션 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-crew",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-crew",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_music_crew",
+        "label": "응원 크루"
+      },
+      "label": "응원 크루 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-festival",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-festival",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_music_festival",
+        "label": "주간 페스티벌"
+      },
+      "label": "주간 페스티벌 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-worldFestival",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-worldFestival",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_music_world_festival",
+        "label": "월드 페스티벌"
+      },
+      "label": "월드 페스티벌 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-album",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-album",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_album_release",
+        "label": "앨범 발매"
+      },
+      "label": "앨범 발매 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-chart",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-chart",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_music_chart",
+        "label": "음악 차트"
+      },
+      "label": "음악 차트 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-media",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-media",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_music_app",
+        "label": "음악 앱"
+      },
+      "label": "음악 앱 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    }
+  ],
+  "fixtures": {
+    "balance": 0,
+    "items": []
+  },
+  "sourceRefs": [
+    "data/simulator/simulator_module.csv",
+    "data/simulator/menu.json",
+    "data/simulator/mobile-frame.json"
+  ],
+  "designBasis": {
+    "type": "common-frame-config",
+    "logicalSize": {
+      "width": 390,
+      "height": 844
+    },
+    "status": "draft-layout-not-measured-lobby",
+    "notes": "필러/진행/하단메뉴 높이는 공통 설정,상단/정보/도시 잔여배치는 편집용 제안. 실제 게임 원본 복사 아님."
+  },
+  "savedAt": "2026-11-13T02:32:20.278Z"
+}

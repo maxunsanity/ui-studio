@@ -1,0 +1,468 @@
+{
+  "documentType": "normal-UI-action-instructions-not-saved-design",
+  "reason": "separate outside dismiss/content blocker/native four story tabs/scrolling profile; fixed content children",
+  "family": {
+    "id": "TS31",
+    "name": "Modal_TSV_SurvivorProfile",
+    "nativeKind": "modal",
+    "purpose": "수잔프로필·합류일·관계·원문한문장·스토리I~IV·보상상자·닫기",
+    "actions": [
+      {
+        "op": "plain",
+        "key": "root",
+        "name": "Modal_TSV_SurvivorProfile",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 504,
+          "h": 894
+        },
+        "parent": null,
+        "text": "",
+        "size": 26,
+        "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+        "weight": 800,
+        "color": "#ffffff",
+        "align": "center",
+        "press": "tint",
+        "anchorPreset": "stretch",
+        "fill": "#142e40",
+        "strokeWidth": 0,
+        "radius": 0,
+        "opacity": 1
+      },
+      {
+        "op": "button",
+        "key": "outsideDismiss",
+        "name": "Btn_TSV_TS31_OutsideDismiss",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 504,
+          "h": 894
+        },
+        "parent": "root",
+        "text": "",
+        "size": 20,
+        "transparent": true,
+        "anchorPreset": "stretch"
+      },
+      {
+        "op": "button",
+        "key": "close",
+        "name": "Btn_Close",
+        "rect": {
+          "x": 442,
+          "y": 29,
+          "w": 62,
+          "h": 56
+        },
+        "parent": "root",
+        "text": "×",
+        "size": 40,
+        "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+        "weight": 800,
+        "color": "#ffffff",
+        "align": "center",
+        "press": "tint",
+        "anchorPreset": "top-right"
+      },
+      {
+        "op": "panel",
+        "key": "outer",
+        "name": "BG_ProfileOuter",
+        "rect": {
+          "x": 15,
+          "y": 82,
+          "w": 476,
+          "h": 686
+        },
+        "parent": "root",
+        "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+        "opacity": 1,
+        "anchorPreset": "stretch-y",
+        "inputMode": "block"
+      },
+      {
+        "op": "panel",
+        "key": "content",
+        "name": "BG_ProfileContent",
+        "rect": {
+          "x": 33,
+          "y": 103,
+          "w": 438,
+          "h": 646
+        },
+        "parent": "outer",
+        "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+        "opacity": 1,
+        "anchorPreset": "stretch",
+        "overflow": "scroll-y"
+      },
+      {
+        "op": "image",
+        "key": "susan",
+        "name": "Img_Susan",
+        "rect": {
+          "x": 58,
+          "y": 133,
+          "w": 119,
+          "h": 151
+        },
+        "parent": "content",
+        "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+        "fit": "contain",
+        "region": [
+          150,
+          150,
+          150,
+          150
+        ],
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "text",
+        "key": "name",
+        "name": "Txt_SurvivorName",
+        "rect": {
+          "x": 184,
+          "y": 134,
+          "w": 243,
+          "h": 33
+        },
+        "parent": "content",
+        "text": "수잔",
+        "size": 26,
+        "weight": 800,
+        "color": "#194d64",
+        "align": "left",
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "text",
+        "key": "age",
+        "name": "Txt_Age",
+        "rect": {
+          "x": 184,
+          "y": 171,
+          "w": 243,
+          "h": 27
+        },
+        "parent": "content",
+        "text": "29세",
+        "size": 18,
+        "weight": 700,
+        "color": "#194d64",
+        "align": "left",
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "text",
+        "key": "occupation",
+        "name": "Txt_Occupation",
+        "rect": {
+          "x": 184,
+          "y": 199,
+          "w": 243,
+          "h": 27
+        },
+        "parent": "content",
+        "text": "전직 간호사",
+        "size": 18,
+        "weight": 700,
+        "color": "#194d64",
+        "align": "left",
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "plain",
+        "key": "joinedBG",
+        "name": "BG_Joined",
+        "rect": {
+          "x": 182,
+          "y": 225,
+          "w": 255,
+          "h": 29
+        },
+        "parent": "content",
+        "fill": "#b6dfe8",
+        "strokeWidth": 0,
+        "radius": 14,
+        "opacity": 1,
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "text",
+        "key": "joined",
+        "name": "Txt_Joined",
+        "rect": {
+          "x": 188,
+          "y": 227,
+          "w": 245,
+          "h": 26
+        },
+        "parent": "content",
+        "text": "2026/11/17 00:22 근거지 합류",
+        "size": 18,
+        "weight": 700,
+        "color": "#37718a",
+        "align": "left",
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "plain",
+        "key": "relationBG",
+        "name": "BG_RelationRow",
+        "rect": {
+          "x": 182,
+          "y": 258,
+          "w": 255,
+          "h": 29
+        },
+        "parent": "content",
+        "fill": "#b6dfe8",
+        "strokeWidth": 0,
+        "radius": 14,
+        "opacity": 1,
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "text",
+        "key": "relationLabel",
+        "name": "Txt_RelationLabel",
+        "rect": {
+          "x": 190,
+          "y": 261,
+          "w": 55,
+          "h": 25
+        },
+        "parent": "content",
+        "text": "관계:",
+        "size": 18,
+        "weight": 700,
+        "color": "#37718a",
+        "align": "left",
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "plain",
+        "key": "relationPill",
+        "name": "BG_RelationPill",
+        "rect": {
+          "x": 247,
+          "y": 261,
+          "w": 104,
+          "h": 25
+        },
+        "parent": "content",
+        "fill": "#a9c9d2",
+        "strokeWidth": 0,
+        "radius": 13,
+        "opacity": 1,
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "text",
+        "key": "relation",
+        "name": "Txt_Relation",
+        "rect": {
+          "x": 250,
+          "y": 261,
+          "w": 98,
+          "h": 25
+        },
+        "parent": "content",
+        "text": "지인",
+        "size": 18,
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "center",
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "button",
+        "key": "relationHelp",
+        "name": "Btn_RelationHelp",
+        "rect": {
+          "x": 357,
+          "y": 260,
+          "w": 27,
+          "h": 27
+        },
+        "parent": "content",
+        "text": "?",
+        "size": 20,
+        "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+        "weight": 800,
+        "color": "#ffffff",
+        "align": "center",
+        "press": "tint",
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "plain",
+        "key": "story",
+        "name": "View_Story",
+        "rect": {
+          "x": 57,
+          "y": 300,
+          "w": 391,
+          "h": 383
+        },
+        "parent": "content",
+        "fill": "#adcddb",
+        "strokeWidth": 0,
+        "radius": 10,
+        "opacity": 1,
+        "overflow": "clip",
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "text",
+        "key": "storyCopy",
+        "name": "Txt_Story",
+        "rect": {
+          "x": 69,
+          "y": 312,
+          "w": 366,
+          "h": 66
+        },
+        "parent": "story",
+        "text": "수잔은 의대생이었으며 섬세한 성격에 쉽게 긴장했습니다.",
+        "size": 20,
+        "weight": 700,
+        "color": "#346c84",
+        "align": "left"
+      },
+      {
+        "op": "button",
+        "key": "storyReward",
+        "name": "Btn_StoryReward",
+        "rect": {
+          "x": 369,
+          "y": 614,
+          "w": 67,
+          "h": 67
+        },
+        "parent": "story",
+        "text": "",
+        "size": 18,
+        "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+        "weight": 800,
+        "color": "#2c6076",
+        "align": "center",
+        "press": "tint"
+      },
+      {
+        "op": "image",
+        "key": "storyChest",
+        "name": "Img_StoryChest",
+        "rect": {
+          "x": 371,
+          "y": 616,
+          "w": 63,
+          "h": 63
+        },
+        "parent": "storyReward",
+        "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/objects-a-atlas-ui-v003.png",
+        "fit": "contain",
+        "region": [
+          0,
+          0,
+          150,
+          150
+        ]
+      },
+      {
+        "op": "plain",
+        "key": "chestDot",
+        "name": "BG_StoryChestDot",
+        "rect": {
+          "x": 414,
+          "y": 617,
+          "w": 12,
+          "h": 12
+        },
+        "parent": "storyReward",
+        "fill": "#f02720",
+        "strokeWidth": 0,
+        "radius": 6,
+        "opacity": 1
+      },
+      {
+        "op": "plain",
+        "key": "storyTabs",
+        "name": "Tabs_TSV_TS31_Story",
+        "rect": {
+          "x": 69,
+          "y": 685,
+          "w": 364,
+          "h": 44
+        },
+        "parent": "content",
+        "fill": "#97c7d4",
+        "strokeWidth": 0,
+        "radius": 0,
+        "opacity": 1,
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "plain",
+        "key": "storyDot",
+        "name": "BG_StoryTabDot",
+        "rect": {
+          "x": 143,
+          "y": 682,
+          "w": 12,
+          "h": 12
+        },
+        "parent": "content",
+        "fill": "#f02720",
+        "strokeWidth": 0,
+        "radius": 6,
+        "opacity": 1,
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "text",
+        "key": "hint",
+        "name": "Txt_DismissHint",
+        "rect": {
+          "x": 154,
+          "y": 853,
+          "w": 205,
+          "h": 31
+        },
+        "parent": "root",
+        "text": "빈 곳을 탭하여 닫기",
+        "size": 18,
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "center",
+        "anchorPreset": "bottom-left"
+      }
+    ],
+    "notes": [
+      "standalone모달,TS30배후복제/스크린샷없음. 기본원문한문장외서사창작금지.",
+      "fullscreen root는outside닫기주체. outer/content/story는입력block,그안버튼은action,표시자식은적절한부모전달로root가설정할것.",
+      "스토리II~IV/상자/관계도움말결과미관측. 실제tabs control은root가구성하되가짜본문복제금지.",
+      "date는게임fixture,실제사용자사건아님. X는native문자×로표현한제작제안.",
+      "본문한문장에는스크롤없음. 닫기후TS30수잔카드초점·스크롤복귀는native접근성검수항목."
+    ],
+    "proposedLinks": [
+      {
+        "from": "close",
+        "action": "닫기 X",
+        "target": "TS30",
+        "evidence": "TSV03 96→97초"
+      },
+      {
+        "from": "root",
+        "action": "빈 곳을 탭하여 닫기",
+        "target": "TS30",
+        "evidence": "화면안내관찰·직접입력미확인",
+        "note": "문구기반제작제안"
+      }
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>표현 CSS 실제 브라우저 회귀</title>
+<link id="base-style" rel="stylesheet" href="../../../../../src/tools/uxStudio/styles.css">
+<link id="candidate-style" rel="stylesheet" href="../../../../../src/tools/uxStudio/presentation.css">
+<style>
+body{margin:20px!important;background:#eef0f3!important;color:#263541!important;font:14px/1.5 system-ui!important;display:block!important}
+h1{font-size:20px}main{display:flex;flex-wrap:wrap;gap:20px}.case{width:220px}.case>p{margin:4px 0}.board{position:relative;width:200px;height:90px;background:white;border:0;margin:8px 0}
+.probe{left:12px;top:9px;width:176px;height:62px;box-sizing:border-box;font-size:21px;line-height:27px;letter-spacing:1px;font-family:Georgia,serif;outline:0}
+.escaped{position:absolute;width:50px;height:20px;left:-20px;top:10px;background:#ce3954;pointer-events:none}.element-text{color:white}
+pre{background:#fff;color:#263541;padding:12px;white-space:pre-wrap}#result[data-pass="true"]{border-left:5px solid #388760}#result[data-pass="false"]{border-left:5px solid #ce3954}
+</style>
+</head>
+<body>
+<h1>표현 CSS 실제 브라우저 회귀</h1>
+<p>실제 CSS 계산으로 root/descendant 상태 source 차단, sample root 기본 paint·clip, 좌표·native typography를 검사합니다. 아래 두 상태 영역에 포인터를 올리거나 누르면 해당 실제 상태도 기록합니다.</p>
+<main>
+<section class="case"><strong>UI sample-screen</strong><div class="board"><div id="ui-screen" class="sample-screen game-skin" data-presentation-mode="ui"><span class="escaped"></span></div></div></section>
+<section class="case"><strong>Detailed root sample-panel</strong><div class="board"><div id="root-probe" class="sample-panel game-skin skin-live probe" data-presentation-mode="detailed-wireframe" tabindex="0" contenteditable="true" role="button" aria-label="root 상태 CSS 검사"><span class="element-text">Root 가나다 42</span></div></div></section>
+<section class="case"><strong>Detailed descendant input root</strong><div class="board" data-presentation-mode="detailed-wireframe"><div id="descendant-probe" class="ui-element game-skin skin-live probe" tabindex="0" contenteditable="true" role="button" aria-label="descendant 상태 CSS 검사"><span class="element-text">Child 日本語 42</span></div></div></section>
+<section class="case" data-presentation-mode="detailed-wireframe"><strong>Native control contrast</strong><div class="ui-control"><input id="native-input" value="Native 42"><select id="native-select"><option>Native 42</option></select><textarea id="native-textarea">Native 42</textarea><button id="native-button">Native 42</button></div></section></main>
+<pre id="result" role="status">브라우저 CSS를 기다립니다.</pre>
+<pre id="states">실제 포인터 hover/active 결과 대기</pre>
+<script>
+(async () => {
+ const candidate = document.querySelector('#candidate-style'), base = document.querySelector('#base-style');
+ const result = document.querySelector('#result'), states = document.querySelector('#states');
+ const root = document.querySelector('#root-probe'), child = document.querySelector('#descendant-probe'), ui = document.querySelector('#ui-screen');
+ const source = color => 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="40"><rect x="2" y="2" rx="10" width="76" height="36" fill="' + color + '"/></svg>');
+ const normal = source('red'), hover = source('green'), active = source('blue');
+ for (const node of [ui, root, child]) {
+  node.style.setProperty('--skin-source', 'url("' + normal + '")');
+  node.style.setProperty('--skin-highlighted-source', 'url("' + hover + '")');
+  node.style.setProperty('--skin-pressed-source', 'url("' + active + '")');
+  node.style.setProperty('--skin-slices', '8 8 8 8 fill');
+  node.style.setProperty('--skin-edges', '6px 6px 6px 6px');
+  node.style.setProperty('--skin-repeat', 'stretch');
+  node.style.setProperty('--skin-tone', '#fff');
+  node.style.setProperty('--skin-text', '#fff');
+ }
+ const loaded = link => link.sheet ? Promise.resolve() : new Promise((resolve, reject) => {link.addEventListener('load', resolve, {once:true});link.addEventListener('error', () => reject(Error('스타일 파일을 읽지 못했습니다: ' + link.href)), {once:true});});
+ const frame = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+ const css = (node, pseudo) => getComputedStyle(node, pseudo);
+ const rect = node => {const r=node.getBoundingClientRect();return [r.left,r.top,r.width,r.height];};
+ const url = value => 'url("' + value + '")';
+ function check(condition, name, failures) {if (!condition) failures.push(name);}
+ async function checks() {
+  const failures=[];
+  check(css(ui).position === 'absolute', 'sample-screen 좌표 기준', failures);
+  check(css(root).position === 'absolute', 'sample-panel 좌표 기준', failures);
+  check(css(ui).overflowX === 'hidden' && css(ui).overflowY === 'hidden', 'sample-screen 경계 클립', failures);
+  check(css(root).overflowX === 'hidden' && css(root).overflowY === 'hidden', 'sample-panel 경계 클립', failures);
+  check(css(ui).borderImageSource === url(normal), 'UI sample-screen 원래 skin source paint', failures);
+  const geometry=[rect(root),rect(child)];
+  for (const node of [root,child]) {
+   node.focus(); await frame();
+   check(node.matches(':focus-visible'), node.id + ' 실제 focus-visible 진입', failures);
+   check(css(node).borderImageSource === 'none', node.id + ' focus parent colored source 차단', failures);
+   check(css(node,'::before').borderImageSource === url(hover), node.id + ' focus pseudo state source 유지', failures);
+   node.blur();
+  }
+  check(JSON.stringify([rect(root),rect(child)]) === JSON.stringify(geometry), '상태 전환 좌표 박스 불변', failures);
+  const text=root.querySelector('.element-text'), type=css(text);
+  check(text.textContent === 'Root 가나다 42' && type.fontSize === '21px' && type.lineHeight === '27px' && type.letterSpacing === '1px' && type.fontFamily.includes('Georgia'), 'native 문구·typography 유지', failures);
+  check(type.color === 'rgb(38, 53, 65)', '흰색 원문 텍스트를 읽을 수 있는 중성 ink', failures);
+  for (const node of document.querySelectorAll('#native-input,#native-select,#native-textarea,#native-button')) {check(css(node).color === 'rgb(38, 53, 65)', node.id + ' text ink', failures);check(css(node).backgroundColor === 'rgb(247, 247, 244)', node.id + ' light paper background', failures);}
+  return failures;
+ }
+ try {
+  await Promise.all([loaded(base),loaded(candidate)]);
+  candidate.disabled=true; await frame(); const before=await checks();
+  candidate.disabled=false; await frame(); const after=await checks();
+  result.dataset.pass=String(before.length>0 && after.length===0);
+  result.textContent='RED: 후보 CSS 없이 ' + before.length + '개 실패\n' + before.join('\n') + '\n\nGREEN: 후보 CSS 적용 ' + after.length + '개 실패\n' + (after.join('\n') || '모든 자동 CSS 계산 통과') + '\n\n포인터 hover/active는 아래 별도 실제 상태 결과를 확인하세요.';
+  for (const node of [root,child]) for (const event of ['pointerenter','pointerdown','focus']) node.addEventListener(event, () => requestAnimationFrame(() => {
+   const state=node.matches(':active')?'active':node.matches(':hover')?'hover':node.matches(':focus-visible')?'focus-visible':'normal';
+   const wanted=state==='active'?active:state==='normal'?normal:hover;
+   const pass=css(node).borderImageSource==='none' && css(node,'::before').borderImageSource===url(wanted);
+   states.textContent += '\n' + node.id + ' ' + state + ': ' + (pass?'PASS':'FAIL');
+  }));
+ } catch (error) {result.dataset.pass='false';result.textContent=error.stack;}
+})();
+</script>
+</body>
+</html>

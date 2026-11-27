@@ -1,0 +1,618 @@
+{
+  "family": {
+    "id": "ACE05",
+    "name": "Modal_ACE_Mail",
+    "nativeKind": "modal",
+    "purpose": "영상 A 10초 대표 MAIL 목록 화면의 정상 UI 조립 지침. 배후 게임 UI는 포함하지 않음.",
+    "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00010.jpg",
+    "actions": [
+      {
+        "key": "root",
+        "op": "plain",
+        "name": "Panel_ACE_Mail_Root",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "fill": "#17232a"
+      },
+      {
+        "key": "Body",
+        "op": "panel",
+        "name": "Panel_ACE_Mail_Body",
+        "rect": {
+          "x": 26,
+          "y": 208,
+          "w": 370,
+          "h": 562
+        },
+        "parent": "root",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+        "skinMetrics": [
+          20,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "key": "TitleBoard",
+        "op": "panel",
+        "name": "Panel_ACE_Mail_TitleBoard",
+        "rect": {
+          "x": 148,
+          "y": 224,
+          "w": 130,
+          "h": 53
+        },
+        "parent": "Body",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+        "skinMetrics": [
+          20,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "key": "Title",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Title",
+        "rect": {
+          "x": 150,
+          "y": 228,
+          "w": 126,
+          "h": 42
+        },
+        "parent": "TitleBoard",
+        "text": "MAIL",
+        "size": 31,
+        "weight": "bold",
+        "color": "#f7d896",
+        "align": "center"
+      },
+      {
+        "key": "Close",
+        "op": "button",
+        "name": "Btn_ACE_Mail_Close",
+        "rect": {
+          "x": 339,
+          "y": 193,
+          "w": 42,
+          "h": 45
+        },
+        "parent": "root",
+        "text": "×",
+        "size": 28,
+        "color": "#fff8e7",
+        "fill": "#b86451",
+        "skin": null,
+        "skinMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "List",
+        "op": "plain",
+        "name": "Panel_ACE_Mail_List",
+        "rect": {
+          "x": 48,
+          "y": 294,
+          "w": 325,
+          "h": 381
+        },
+        "parent": "Body",
+        "fill": "#d2bd92",
+        "overflow": "scroll-y"
+      },
+      {
+        "key": "Row1",
+        "op": "panel",
+        "name": "Panel_ACE_Mail_Row1",
+        "rect": {
+          "x": 58,
+          "y": 299,
+          "w": 307,
+          "h": 60
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Icon1",
+        "op": "image",
+        "name": "Img_ACE_Mail_Icon1",
+        "rect": {
+          "x": 70,
+          "y": 310,
+          "w": 37,
+          "h": 37
+        },
+        "parent": "Row1",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          192,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Subject1",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Subject1",
+        "rect": {
+          "x": 123,
+          "y": 306,
+          "w": 233,
+          "h": 32
+        },
+        "parent": "Row1",
+        "text": "Overdrive Ticket Conversion",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Date1",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Date1",
+        "rect": {
+          "x": 123,
+          "y": 342,
+          "w": 220,
+          "h": 13
+        },
+        "parent": "Row1",
+        "text": "11-01-2026",
+        "size": 9,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Row2",
+        "op": "panel",
+        "name": "Panel_ACE_Mail_Row2",
+        "rect": {
+          "x": 58,
+          "y": 364,
+          "w": 307,
+          "h": 60
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Icon2",
+        "op": "image",
+        "name": "Img_ACE_Mail_Icon2",
+        "rect": {
+          "x": 70,
+          "y": 375,
+          "w": 37,
+          "h": 37
+        },
+        "parent": "Row2",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          192,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Subject2",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Subject2",
+        "rect": {
+          "x": 123,
+          "y": 371,
+          "w": 233,
+          "h": 32
+        },
+        "parent": "Row2",
+        "text": "Fest Sign-in Rewards",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Date2",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Date2",
+        "rect": {
+          "x": 123,
+          "y": 407,
+          "w": 220,
+          "h": 13
+        },
+        "parent": "Row2",
+        "text": "10-30-2026",
+        "size": 9,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Row3",
+        "op": "panel",
+        "name": "Panel_ACE_Mail_Row3",
+        "rect": {
+          "x": 58,
+          "y": 429,
+          "w": 307,
+          "h": 60
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Icon3",
+        "op": "image",
+        "name": "Img_ACE_Mail_Icon3",
+        "rect": {
+          "x": 70,
+          "y": 440,
+          "w": 37,
+          "h": 37
+        },
+        "parent": "Row3",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          0,
+          128,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Subject3",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Subject3",
+        "rect": {
+          "x": 123,
+          "y": 436,
+          "w": 233,
+          "h": 32
+        },
+        "parent": "Row3",
+        "text": "Fest Shop Item Removal",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Date3",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Date3",
+        "rect": {
+          "x": 123,
+          "y": 472,
+          "w": 220,
+          "h": 13
+        },
+        "parent": "Row3",
+        "text": "10-30-2026",
+        "size": 9,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Row4",
+        "op": "panel",
+        "name": "Panel_ACE_Mail_Row4",
+        "rect": {
+          "x": 58,
+          "y": 494,
+          "w": 307,
+          "h": 60
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Icon4",
+        "op": "image",
+        "name": "Img_ACE_Mail_Icon4",
+        "rect": {
+          "x": 70,
+          "y": 505,
+          "w": 37,
+          "h": 37
+        },
+        "parent": "Row4",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          192,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Subject4",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Subject4",
+        "rect": {
+          "x": 123,
+          "y": 501,
+          "w": 233,
+          "h": 32
+        },
+        "parent": "Row4",
+        "text": "Nemeses’ Return Seasonal\nRanking Rewards",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Date4",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Date4",
+        "rect": {
+          "x": 123,
+          "y": 537,
+          "w": 220,
+          "h": 13
+        },
+        "parent": "Row4",
+        "text": "10-30-2026",
+        "size": 9,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Row5",
+        "op": "panel",
+        "name": "Panel_ACE_Mail_Row5",
+        "rect": {
+          "x": 58,
+          "y": 559,
+          "w": 307,
+          "h": 60
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Icon5",
+        "op": "image",
+        "name": "Img_ACE_Mail_Icon5",
+        "rect": {
+          "x": 70,
+          "y": 570,
+          "w": 37,
+          "h": 37
+        },
+        "parent": "Row5",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          192,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Subject5",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Subject5",
+        "rect": {
+          "x": 123,
+          "y": 566,
+          "w": 233,
+          "h": 32
+        },
+        "parent": "Row5",
+        "text": "Nemeses’ Return Periodic Rank\nRewards",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Date5",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Date5",
+        "rect": {
+          "x": 123,
+          "y": 602,
+          "w": 220,
+          "h": 13
+        },
+        "parent": "Row5",
+        "text": "10-30-2026",
+        "size": 9,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Row6",
+        "op": "panel",
+        "name": "Panel_ACE_Mail_Row6",
+        "rect": {
+          "x": 58,
+          "y": 624,
+          "w": 307,
+          "h": 60
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Icon6",
+        "op": "image",
+        "name": "Img_ACE_Mail_Icon6",
+        "rect": {
+          "x": 70,
+          "y": 635,
+          "w": 37,
+          "h": 37
+        },
+        "parent": "Row6",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          192,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Subject6",
+        "op": "text",
+        "name": "Txt_ACE_Mail_Subject6",
+        "rect": {
+          "x": 123,
+          "y": 631,
+          "w": 233,
+          "h": 32
+        },
+        "parent": "Row6",
+        "text": "Cloud Chase Victory Rewards",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "DeleteRead",
+        "op": "button",
+        "name": "Btn_ACE_Mail_DeleteRead",
+        "rect": {
+          "x": 59,
+          "y": 697,
+          "w": 134,
+          "h": 52
+        },
+        "parent": "Body",
+        "text": "Delete Read",
+        "size": 17,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "ClaimAll",
+        "op": "button",
+        "name": "Btn_ACE_Mail_ClaimAll",
+        "rect": {
+          "x": 228,
+          "y": 697,
+          "w": 134,
+          "h": 52
+        },
+        "parent": "Body",
+        "text": "Claim All",
+        "size": 17,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      }
+    ],
+    "notes": [
+      "List is a scroll-y viewport; the sixth row is partially clipped as observed. No individual message detail is invented."
+    ]
+  },
+  "sid": "screen-5338bd69-3769-41b2-9c1e-7c3704a45e29",
+  "i": 31,
+  "map": {
+    "root": "element-263afca5-d9f5-46e6-91b4-1e761cac7d3f",
+    "Body": "element-228f9a43-4470-440e-a2e5-614f2fa96817",
+    "TitleBoard": "element-ff3e83a5-e806-455f-9fad-d18f7c13d30f",
+    "Title": "element-0be502d3-fc6b-40fa-b2c2-1b2d563c823c",
+    "Close": "element-3b46e36e-7d9d-4057-b460-2779db8d986b",
+    "List": "element-93091d87-b15d-45d1-b237-9d9ab9f735a5",
+    "Row1": "element-67ec9a85-f243-4a05-9cef-3544a7c7d90b",
+    "Icon1": "element-ca7480af-9c4d-4fbd-a407-f38dee3dc78f",
+    "Subject1": "element-89a2237d-5c6e-461d-b84d-9691c521ce3f",
+    "Date1": "element-908c4369-9c2e-45ab-8e1b-b728563dddb0",
+    "Row2": "element-4c87035a-361a-4094-a185-af290d4e4f70",
+    "Icon2": "element-e02032f5-996b-41a6-8f11-2a29aa59a696",
+    "Subject2": "element-0bc81c00-4cbf-4d20-8060-c047e6aa390c",
+    "Date2": "element-352d810f-aff7-4392-ac68-c18b378c476a",
+    "Row3": "element-de7c41de-b942-454d-875b-ac6e0d2f364d",
+    "Icon3": "element-23d3e16a-e4b2-43c6-96fb-fe18f69c2f1f",
+    "Subject3": "element-e2dc7094-23c8-4ecc-ab48-cf04789b13e5",
+    "Date3": "element-6f99f9ca-0209-4ef6-b44a-231413945783",
+    "Row4": "element-a3f4dae6-4ac3-4e5b-8776-89697c4ac137",
+    "Icon4": "element-fc223ff2-2bc4-4498-b458-6a939955823c",
+    "Subject4": "element-ea62450f-7750-45f9-a6fa-801396242db3",
+    "Date4": "element-7f8eb7ec-65d6-47b0-a033-24d6e876385e",
+    "Row5": "element-87650d96-b7aa-4f38-a017-6337734a5af0",
+    "Icon5": "element-72f96251-7412-40f7-b3d3-602169828f1c",
+    "Subject5": "element-fe8cce23-59c7-4c25-bdb2-cadbb1ce2ff0",
+    "Date5": "element-e4ce193f-cb75-476f-a61e-637c52f7611c",
+    "Row6": "element-b78dbf3e-d265-466c-9ee0-3dbf9adffba8",
+    "Icon6": "element-9ad67338-eb22-4c72-af80-97aeeb602595",
+    "Subject6": "element-34b735e8-ddf6-481c-9145-48781686ca87",
+    "DeleteRead": "element-d5ead98e-c82e-450e-9417-9974a02849f6",
+    "ClaimAll": "element-14369d00-11da-45ac-970c-a18539419032"
+  }
+}

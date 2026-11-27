@@ -1,0 +1,1730 @@
+{
+  "version": 1,
+  "assetVersion": "v001",
+  "createdAtKST": "2026-11-16T21:28:26+09:00",
+  "author": "codex(단이)",
+  "status": "제안(검수 대기)",
+  "reference": {
+    "path": "docs/reference/monopoly-go/20261116-ten-screens/04_friends.png",
+    "size": [
+      512,
+      922
+    ],
+    "use": "actual view; visual reference only; no screenshot pixels copied"
+  },
+  "reuseReview": [
+    "album-ui-assets.json native9/native3 zero padding and transparent frame contract",
+    "wins-ui-assets.json separate fill/frame, retained masters, lossless encoding and import mirror contract"
+  ],
+  "creation": {
+    "method": "New SVG geometric artwork with matching Pillow 4x supersampling/LANCZOS raster masters",
+    "dependencies": "existing Pillow 11.3.0 only; no package installation; rsvg-convert unavailable on PATH",
+    "sourcePreservation": "SVG + PNG masters retained; no source crop",
+    "sourceRendererEquivalence": "SVG parses; independent browser SVG-vs-PNG pixel equivalence not checked",
+    "textAndNumbers": "none in asset files; contact sheet labels are QA-only",
+    "castShadow": "none baked; runtime effects.shadow defaults off; parent owns runtime shadow decisions"
+  },
+  "checks": {
+    "assetCount": 15,
+    "allSVGParse": true,
+    "eachWebPAtMost300000Bytes": true,
+    "maximumWebPBytes": 5286,
+    "productionMirrorSHAEqual": true,
+    "decodedWebPRGBAEqualsPNG": true,
+    "native9FramesCenterAlpha0": true,
+    "native9FillsAndButtonsCenterAlpha255": true,
+    "externalCastShadowAbsentByConstruction": true,
+    "textElementsInSVG": 0,
+    "contactSheet": {
+      "path": "_작업/codex/ux-studio/friends-ui/friends-ui-v001-contact-sheet.png",
+      "bytes": 71883,
+      "sha256": "f30a02993425ae4d2f5fdd811770e0b26b9aa255bdc6455bd6bfd241f34b2e3f"
+    },
+    "productBrowserQA": false,
+    "registration": null,
+    "UIApplied": false,
+    "supplementContactSheet": {
+      "path": "_작업/codex/ux-studio/friends-ui/friends-ui-v001-footer-star-preview.png",
+      "bytes": 10966,
+      "sha256": "cef184a8e192762d2b76260b195c3b7a846e737a224519a75d71bb7be42c415c"
+    },
+    "original13FilesSHAUnchanged": true
+  },
+  "assets": [
+    {
+      "name": "common_friends_panel-fill9_normal_v001",
+      "role": "panel-fill9",
+      "size": [
+        128,
+        96
+      ],
+      "assembly": {
+        "nineSlice": {
+          "mode": "9",
+          "sourceSize": [
+            128,
+            96
+          ],
+          "slices": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "edges": [
+            24,
+            24,
+            24,
+            24
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            74,
+            42
+          ],
+          "minimumTargetForPositiveCenter": [
+            49,
+            49
+          ],
+          "crop": "none; preserve full source and transparent corners"
+        },
+        "stack": "below matching frame9 and all native text/content",
+        "fill": "#f4f1df"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-fill9_normal_v001.svg",
+          "bytes": 158,
+          "sha256": "5eef50c413fb441368d05dd8364785468b69f33eec99a6444690d556f23759b1"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-fill9_normal_v001.png",
+          "bytes": 1738,
+          "sha256": "7b3bf0dfcce44186cee2cfa0767692d2a280433a3b45d12caa6eea1070ffd62e"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_panel-fill9_normal_v001.webp",
+          "bytes": 516,
+          "sha256": "fba39b66be7c8aaad837813541852d0498145b16e844505706d1b5f2bf93c74c"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_panel-fill9_normal_v001.webp",
+          "bytes": 516,
+          "sha256": "fba39b66be7c8aaad837813541852d0498145b16e844505706d1b5f2bf93c74c"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_panel-fill9_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          96
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          96
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          128,
+          96
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    },
+    {
+      "name": "common_friends_panel-frame9_normal_v001",
+      "role": "panel-frame9",
+      "size": [
+        128,
+        96
+      ],
+      "assembly": {
+        "nineSlice": {
+          "mode": "9",
+          "sourceSize": [
+            128,
+            96
+          ],
+          "slices": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "edges": [
+            24,
+            24,
+            24,
+            24
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            74,
+            42
+          ],
+          "minimumTargetForPositiveCenter": [
+            49,
+            49
+          ],
+          "crop": "none; preserve full source and transparent corners"
+        },
+        "stack": "above matching fill9; use same rect; center alpha 0",
+        "contentInsetRecommendationPx": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "contentInsetPolicy": "recommendation only; native skin padding remains zero"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-frame9_normal_v001.svg",
+          "bytes": 409,
+          "sha256": "5478548c059e174a18835bf2129a7020b3bb6cac913627889dc72542d0e013e2"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-frame9_normal_v001.png",
+          "bytes": 2665,
+          "sha256": "997facc73e275eba6fcb4d8d26b49bed3cd9cb66a2def1ffed1e7e9c20672e22"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_panel-frame9_normal_v001.webp",
+          "bytes": 822,
+          "sha256": "1ea09a227cb855bc85a54f159c3ec8b40d945897f85f1e1f1082db0c44de653c"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_panel-frame9_normal_v001.webp",
+          "bytes": 822,
+          "sha256": "1ea09a227cb855bc85a54f159c3ec8b40d945897f85f1e1f1082db0c44de653c"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_panel-frame9_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 0,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          96
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          96
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          128,
+          96
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    },
+    {
+      "name": "common_friends_panel-leaf-left_normal_v001",
+      "role": "panel-leaf-left",
+      "size": [
+        64,
+        64
+      ],
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          64,
+          64
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "stack": "separate decoration near panel top left corner; never bake into flexible panel"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-leaf-left_normal_v001.svg",
+          "bytes": 679,
+          "sha256": "a2e1c34e2bee9eea3770d54a9405f778baa56339e270de58a13e3f262d5699cc"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-leaf-left_normal_v001.png",
+          "bytes": 2125,
+          "sha256": "6d063fe39559d37d6a022cb2ccf883468f1ba277888e5d1c9d5d8359aaacb2fd"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_panel-leaf-left_normal_v001.webp",
+          "bytes": 1124,
+          "sha256": "2b142a601ce100f4216d3d35557edef4e7b4c28b63b6aeb1fa2ecd47f6f21c59"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_panel-leaf-left_normal_v001.webp",
+          "bytes": 1124,
+          "sha256": "2b142a601ce100f4216d3d35557edef4e7b4c28b63b6aeb1fa2ecd47f6f21c59"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_panel-leaf-left_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          8,
+          9,
+          51,
+          54
+        ],
+        "bboxAlpha128": [
+          8,
+          9,
+          50,
+          54
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          64,
+          64
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    },
+    {
+      "name": "common_friends_panel-leaf-right_normal_v001",
+      "role": "panel-leaf-right",
+      "size": [
+        64,
+        64
+      ],
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          64,
+          64
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "stack": "separate decoration near panel top right corner; never bake into flexible panel"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-leaf-right_normal_v001.svg",
+          "bytes": 680,
+          "sha256": "d544be31bdb61789a4b396c23dbe0faa83aefe26bc97b827fedc1cd567a65771"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-leaf-right_normal_v001.png",
+          "bytes": 2127,
+          "sha256": "f418cac3fa547364fc139e1a8becf23a570832d253d57a07dcffba1186417c73"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_panel-leaf-right_normal_v001.webp",
+          "bytes": 1118,
+          "sha256": "94515640796dd1f9e85f77d7f846b94765a44aff0b1ca3d72212321862f58c2f"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_panel-leaf-right_normal_v001.webp",
+          "bytes": 1118,
+          "sha256": "94515640796dd1f9e85f77d7f846b94765a44aff0b1ca3d72212321862f58c2f"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_panel-leaf-right_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          14,
+          9,
+          57,
+          54
+        ],
+        "bboxAlpha128": [
+          14,
+          9,
+          56,
+          54
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          64,
+          64
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    },
+    {
+      "name": "common_friends_timeline-row-fill9_normal_v001",
+      "role": "timeline-row-fill9",
+      "size": [
+        128,
+        64
+      ],
+      "assembly": {
+        "nineSlice": {
+          "mode": "9",
+          "sourceSize": [
+            128,
+            64
+          ],
+          "slices": [
+            18,
+            18,
+            18,
+            18
+          ],
+          "edges": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            92,
+            28
+          ],
+          "minimumTargetForPositiveCenter": [
+            25,
+            25
+          ],
+          "crop": "none; preserve full source and transparent corners"
+        },
+        "stack": "below matching row frame and row contents",
+        "fill": "#eee9d6"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_timeline-row-fill9_normal_v001.svg",
+          "bytes": 158,
+          "sha256": "8b06aa0556127702177eb4ca8d7150a0b3b4542f92c1246b93a15ef24bd6e0f1"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_timeline-row-fill9_normal_v001.png",
+          "bytes": 923,
+          "sha256": "7aad325341f4d1cc68779831b9aebded1874715f04bfe6a2112b9d0b4d43e136"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_timeline-row-fill9_normal_v001.webp",
+          "bytes": 356,
+          "sha256": "fd6641a84085ac57722e1c015bc43fb3ccc5ebbc8e5092a852b9171919a5f3c4"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_timeline-row-fill9_normal_v001.webp",
+          "bytes": 356,
+          "sha256": "fd6641a84085ac57722e1c015bc43fb3ccc5ebbc8e5092a852b9171919a5f3c4"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_timeline-row-fill9_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          64
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          64
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          128,
+          64
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    },
+    {
+      "name": "common_friends_timeline-row-frame9_normal_v001",
+      "role": "timeline-row-frame9",
+      "size": [
+        128,
+        64
+      ],
+      "assembly": {
+        "nineSlice": {
+          "mode": "9",
+          "sourceSize": [
+            128,
+            64
+          ],
+          "slices": [
+            18,
+            18,
+            18,
+            18
+          ],
+          "edges": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            92,
+            28
+          ],
+          "minimumTargetForPositiveCenter": [
+            25,
+            25
+          ],
+          "crop": "none; preserve full source and transparent corners"
+        },
+        "stack": "above matching row fill9; center alpha 0"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_timeline-row-frame9_normal_v001.svg",
+          "bytes": 336,
+          "sha256": "f8277168c5c76bb65c4a3ae448d4fc71fdd13c7c6d57285a3dc6daf2d7f8befe"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_timeline-row-frame9_normal_v001.png",
+          "bytes": 977,
+          "sha256": "d99dc08beca64ff41cf4be025bcdf950ac59fbe51db7b37b0feaa571bd5bb933"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_timeline-row-frame9_normal_v001.webp",
+          "bytes": 432,
+          "sha256": "1369aa0d81ff395bacc9184ba01cce1fe66efbf714179edfd64f9c56741d4788"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_timeline-row-frame9_normal_v001.webp",
+          "bytes": 432,
+          "sha256": "1369aa0d81ff395bacc9184ba01cce1fe66efbf714179edfd64f9c56741d4788"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_timeline-row-frame9_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 0,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          64
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          64
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          128,
+          64
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    },
+    {
+      "name": "common_friends_tab-selected3_selected_v001",
+      "role": "tab-selected3",
+      "size": [
+        128,
+        64
+      ],
+      "assembly": {
+        "threeSlice": {
+          "mode": "3",
+          "sourceSize": [
+            128,
+            64
+          ],
+          "slices": [
+            0,
+            24,
+            0,
+            24
+          ],
+          "edges": [
+            0,
+            16,
+            0,
+            16
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            80,
+            64
+          ],
+          "sourceCapWidth": 24,
+          "targetCapWidthLogicalPx": 16,
+          "minimumTargetWidthForPositiveCenter": 33,
+          "crop": "none; preserve full source"
+        },
+        "stack": "native tab background only; text and notification badge are separate",
+        "bottom": "flat; source extends rounded rectangle below source bounds"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_tab-selected3_selected_v001.svg",
+          "bytes": 232,
+          "sha256": "89879efec67e5f6844cca13d53802d44b9813e17894e75184a43ea4d069c7127"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_tab-selected3_selected_v001.png",
+          "bytes": 1169,
+          "sha256": "7d889694da080b0b13d5fc1eff086dc8bfdfd7945b465669c88cbbc6004b817d"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_tab-selected3_selected_v001.webp",
+          "bytes": 572,
+          "sha256": "717ac02e4a5f42d696aaf50ab51c27c56f17e44ea2f2aba3619d4bfaa553504e"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_tab-selected3_selected_v001.webp",
+          "bytes": 572,
+          "sha256": "717ac02e4a5f42d696aaf50ab51c27c56f17e44ea2f2aba3619d4bfaa553504e"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_tab-selected3_selected_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          188,
+          188
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          64
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          64
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          128,
+          64
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    },
+    {
+      "name": "common_friends_tab-idle3_normal_v001",
+      "role": "tab-idle3",
+      "size": [
+        128,
+        64
+      ],
+      "assembly": {
+        "threeSlice": {
+          "mode": "3",
+          "sourceSize": [
+            128,
+            64
+          ],
+          "slices": [
+            0,
+            24,
+            0,
+            24
+          ],
+          "edges": [
+            0,
+            16,
+            0,
+            16
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            80,
+            64
+          ],
+          "sourceCapWidth": 24,
+          "targetCapWidthLogicalPx": 16,
+          "minimumTargetWidthForPositiveCenter": 33,
+          "crop": "none; preserve full source"
+        },
+        "stack": "native tab background only; text and notification badge are separate",
+        "bottom": "flat; source extends rounded rectangle below source bounds"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_tab-idle3_normal_v001.svg",
+          "bytes": 232,
+          "sha256": "ac96dcfd2d12c1c8eb4496fd56d3c2120f6d6ff1b7ef4582e50f074e05c6a32c"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_tab-idle3_normal_v001.png",
+          "bytes": 1310,
+          "sha256": "626f816a19e0bece6771ebe6f3de982e4c78a6b5b27f3911c2b8397daf0c480d"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_tab-idle3_normal_v001.webp",
+          "bytes": 656,
+          "sha256": "f86eb565bf6a786b7644ec061c2e0ac77d76e3aba1d170d25eeec5416c79490c"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_tab-idle3_normal_v001.webp",
+          "bytes": 656,
+          "sha256": "f86eb565bf6a786b7644ec061c2e0ac77d76e3aba1d170d25eeec5416c79490c"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_tab-idle3_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          188,
+          188
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          64
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          64
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          128,
+          64
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    },
+    {
+      "name": "common_friends_button-send3_normal_v001",
+      "role": "button-send3",
+      "size": [
+        128,
+        48
+      ],
+      "assembly": {
+        "threeSlice": {
+          "mode": "3",
+          "sourceSize": [
+            128,
+            48
+          ],
+          "slices": [
+            0,
+            24,
+            0,
+            24
+          ],
+          "edges": [
+            0,
+            16,
+            0,
+            16
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            80,
+            48
+          ],
+          "sourceCapWidth": 24,
+          "targetCapWidthLogicalPx": 16,
+          "minimumTargetWidthForPositiveCenter": 33,
+          "crop": "none; preserve full source"
+        },
+        "stack": "button fill only; native label above; runtime shadow off by default",
+        "center": "opaque"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_button-send3_normal_v001.svg",
+          "bytes": 224,
+          "sha256": "78fc05ebecd6a32415dbc15d87bb6baa9331301ae225b09c711984d68798e578"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_button-send3_normal_v001.png",
+          "bytes": 2189,
+          "sha256": "c270dcc109047d0f4893343826b393a1afc4baa9a081aa4b404f46357e09a42f"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_button-send3_normal_v001.webp",
+          "bytes": 1214,
+          "sha256": "ea2db7909fff4b4fad71e16dc1126186df552404e0b116bac30caa1d3cb7fa66"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_button-send3_normal_v001.webp",
+          "bytes": 1214,
+          "sha256": "ea2db7909fff4b4fad71e16dc1126186df552404e0b116bac30caa1d3cb7fa66"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_button-send3_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          48
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          48
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          128,
+          48
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied",
+      "notes": [
+        "Lower dark band is inside the opaque button silhouette, not an external cast shadow."
+      ]
+    },
+    {
+      "name": "common_friends_button-reject3_normal_v001",
+      "role": "button-reject3",
+      "size": [
+        128,
+        48
+      ],
+      "assembly": {
+        "threeSlice": {
+          "mode": "3",
+          "sourceSize": [
+            128,
+            48
+          ],
+          "slices": [
+            0,
+            24,
+            0,
+            24
+          ],
+          "edges": [
+            0,
+            16,
+            0,
+            16
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            80,
+            48
+          ],
+          "sourceCapWidth": 24,
+          "targetCapWidthLogicalPx": 16,
+          "minimumTargetWidthForPositiveCenter": 33,
+          "crop": "none; preserve full source"
+        },
+        "stack": "button fill only; native label above; runtime shadow off by default",
+        "center": "opaque"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_button-reject3_normal_v001.svg",
+          "bytes": 224,
+          "sha256": "591cdf47520eaddd021bfb438a5e4dea9ba7e0b05417803553d394a9533931df"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_button-reject3_normal_v001.png",
+          "bytes": 2244,
+          "sha256": "911a11a8a801ee58469d002ad448f4aa44b13ad234513828168daf20f1626312"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_button-reject3_normal_v001.webp",
+          "bytes": 1252,
+          "sha256": "95543bc313f2a2138f58f00fde5f1598090e8d86f3c42f569cf9bd880afc2525"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_button-reject3_normal_v001.webp",
+          "bytes": 1252,
+          "sha256": "95543bc313f2a2138f58f00fde5f1598090e8d86f3c42f569cf9bd880afc2525"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_button-reject3_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          48
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          48
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          128,
+          48
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied",
+      "notes": [
+        "Lower dark band is inside the opaque button silhouette, not an external cast shadow."
+      ]
+    },
+    {
+      "name": "common_friends_pictogram-ticket-request_normal_v001",
+      "role": "pictogram-ticket-request",
+      "size": [
+        96,
+        80
+      ],
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          96,
+          80
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "stack": "small row-end pictogram; blank overlapping stickers"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_pictogram-ticket-request_normal_v001.svg",
+          "bytes": 806,
+          "sha256": "2eedc086c36a3b5e7b8f80fbcd9986946e9482353926a2736bdd0cc838bea649"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_pictogram-ticket-request_normal_v001.png",
+          "bytes": 6859,
+          "sha256": "87165b4e9acea27c1b3b779529906286ed3c9cfed3872ac0bb5c8f80c7658241"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_pictogram-ticket-request_normal_v001.webp",
+          "bytes": 4650,
+          "sha256": "3212294bf7cac7c402eea5862e51fba03e05b14f9368fbf3f41c1def6996d169"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_pictogram-ticket-request_normal_v001.webp",
+          "bytes": 4650,
+          "sha256": "3212294bf7cac7c402eea5862e51fba03e05b14f9368fbf3f41c1def6996d169"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_pictogram-ticket-request_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          11,
+          9,
+          86,
+          71
+        ],
+        "bboxAlpha128": [
+          11,
+          9,
+          85,
+          70
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          96,
+          80
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    },
+    {
+      "name": "common_friends_pictogram-greycat-head_normal_v001",
+      "role": "pictogram-greycat-head",
+      "size": [
+        96,
+        104
+      ],
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          96,
+          104
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "stack": "small row-end cat head"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_pictogram-greycat-head_normal_v001.svg",
+          "bytes": 1818,
+          "sha256": "8cf2fe958506159eabf3477b03ae92687c6a120541662cb800e21a18c0d85953"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_pictogram-greycat-head_normal_v001.png",
+          "bytes": 8490,
+          "sha256": "8b250111b17f4b0c6a26b9dfe9bc46763d6f37cb142e7a3662a56c13a876fb5a"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_pictogram-greycat-head_normal_v001.webp",
+          "bytes": 5286,
+          "sha256": "d682189a39e69f966a351acb8f149909a5c88e16de6f316be325e894340ea4c4"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_pictogram-greycat-head_normal_v001.webp",
+          "bytes": 5286,
+          "sha256": "d682189a39e69f966a351acb8f149909a5c88e16de6f316be325e894340ea4c4"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_pictogram-greycat-head_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          9,
+          8,
+          87,
+          91
+        ],
+        "bboxAlpha128": [
+          9,
+          8,
+          87,
+          91
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          96,
+          104
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied",
+      "notes": [
+        "Grey cat with two visible pale eyes and tongue; no eye mask. Simple newly drawn geometric interpretation."
+      ]
+    },
+    {
+      "name": "common_friends_pictogram-calendar-red_normal_v001",
+      "role": "pictogram-calendar-red",
+      "size": [
+        80,
+        96
+      ],
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          80,
+          96
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "stack": "small row-end blank calendar pictogram"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_pictogram-calendar-red_normal_v001.svg",
+          "bytes": 654,
+          "sha256": "3e1c4f1113826ef837aef3580efc9f1356ad8d4f2e4e8d64f9b7414a636ae515"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_pictogram-calendar-red_normal_v001.png",
+          "bytes": 2035,
+          "sha256": "532b029acedb743cf70290aba117bfce124f91312f9ec2d05bab9bbeaa1a08bb"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_pictogram-calendar-red_normal_v001.webp",
+          "bytes": 1260,
+          "sha256": "0c732602c7741ededf31d287d829c77a4f06269988248d45f755526d7e853b2b"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_pictogram-calendar-red_normal_v001.webp",
+          "bytes": 1260,
+          "sha256": "0c732602c7741ededf31d287d829c77a4f06269988248d45f755526d7e853b2b"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_pictogram-calendar-red_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          8,
+          6,
+          72,
+          90
+        ],
+        "bboxAlpha128": [
+          9,
+          6,
+          71,
+          89
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          80,
+          96
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    },
+    {
+      "name": "common_friends_pictogram-sticker-star_normal_v001",
+      "role": "pictogram-sticker-star",
+      "size": [
+        64,
+        64
+      ],
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          64,
+          64
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "stack": "separate small gold ornament above request sticker; no text replacement",
+        "targetLogicalExample": [
+          21,
+          21
+        ]
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_pictogram-sticker-star_normal_v001.svg",
+          "bytes": 580,
+          "sha256": "5d509e76c3cebbe59f2e80a14dc4c89d9614217b663ef0375734295152eaccb3"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_pictogram-sticker-star_normal_v001.png",
+          "bytes": 4114,
+          "sha256": "2b7de80501df0441f9c06ab8cefea4cc4055a3314747605359d7c21d49dd3fb5"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_pictogram-sticker-star_normal_v001.webp",
+          "bytes": 2942,
+          "sha256": "e6f3eeaa5aa38a7df1299cea34108ef8b0bb263cfe3977b4ce7481dfc6971fca"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_pictogram-sticker-star_normal_v001.webp",
+          "bytes": 2942,
+          "sha256": "e6f3eeaa5aa38a7df1299cea34108ef8b0bb263cfe3977b4ce7481dfc6971fca"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_pictogram-sticker-star_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          4,
+          3,
+          60,
+          56
+        ],
+        "bboxAlpha128": [
+          5,
+          4,
+          59,
+          55
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          64,
+          64
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    },
+    {
+      "name": "common_friends_footer-fill3_normal_v001",
+      "role": "footer-fill3",
+      "size": [
+        128,
+        48
+      ],
+      "assembly": {
+        "threeSlice": {
+          "mode": "3",
+          "sourceSize": [
+            128,
+            48
+          ],
+          "slices": [
+            0,
+            16,
+            0,
+            16
+          ],
+          "edges": [
+            0,
+            16,
+            0,
+            16
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            96,
+            48
+          ],
+          "sourceCapWidth": 16,
+          "targetCapWidthLogicalPx": 16,
+          "minimumTargetWidthForPositiveCenter": 33,
+          "crop": "none; preserve full source"
+        },
+        "targetLogicalExample": [
+          551,
+          67
+        ],
+        "stack": "opaque ivory footer backplate plus top gold rule; native Close icon above",
+        "sourceTopRulePx": {
+          "gold": 3,
+          "highlight": 1
+        },
+        "targetRulePolicy": "native3 stretches source height 48 to target height; rule thickness scales with target height",
+        "center": "opaque"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_footer-fill3_normal_v001.svg",
+          "bytes": 352,
+          "sha256": "dd5b4e7be75cbe18439ee084297238a7a95d4ee1b1af07725ff938927d98f424"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_footer-fill3_normal_v001.png",
+          "bytes": 252,
+          "sha256": "6da6a1c7b1dceb009aaae90bbc08321f69bd2fe10d0a442bb04f6688da72bfbe"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_footer-fill3_normal_v001.webp",
+          "bytes": 106,
+          "sha256": "b3a042777dabc1324f1d8046f665bdaba6d3761c596c862d73688c1013ffd480"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_footer-fill3_normal_v001.webp",
+          "bytes": 106,
+          "sha256": "b3a042777dabc1324f1d8046f665bdaba6d3761c596c862d73688c1013ffd480"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_footer-fill3_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          255,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          48
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          48
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          128,
+          48
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or UI-applied"
+    }
+  ],
+  "backup": {
+    "path": "docs/planning/_backup/20261116_단이/2128_friends_ui_assets",
+    "preexistingFilesBackedUp": [],
+    "newAssetPathsWereAbsent": true
+  },
+  "registration": null,
+  "UIApplied": false,
+  "visualApproval": false,
+  "limitations": [
+    "New geometric interpretation of low-resolution reference, not original font/pixel equality.",
+    "No product source, design JSON, common guide, STATUS or report changed.",
+    "No editor registration, product browser QA, build, server or 7007 action in this asset subtask.",
+    "Fixed corner leaves and pictograms must stay separate from flexible native9/native3 backgrounds."
+  ],
+  "supplements": [
+    {
+      "atKST": "2026-11-16T21:44:15+09:00",
+      "purpose": "two requested geometric assets only: gold sticker star + footer native3",
+      "assetNames": [
+        "common_friends_pictogram-sticker-star_normal_v001",
+        "common_friends_footer-fill3_normal_v001"
+      ],
+      "backupBeforeAppend": "docs/planning/_backup/20261116_단이/214415_friends_footer_star",
+      "original13AssetRecordsAnd52FilesUnchanged": true,
+      "preview": {
+        "path": "_작업/codex/ux-studio/friends-ui/friends-ui-v001-footer-star-preview.png",
+        "bytes": 10966,
+        "sha256": "cef184a8e192762d2b76260b195c3b7a846e737a224519a75d71bb7be42c415c"
+      },
+      "registration": null,
+      "UIApplied": false
+    }
+  ]
+}

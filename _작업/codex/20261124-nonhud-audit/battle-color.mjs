@@ -1,0 +1,11 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {readDesign,get} from '../20261124-defense-simple/shared.mjs';
+const d=readDesign('kpop-defense-ui');
+const battle=d.screens.find(s=>s.id==='defense-battle');
+const url=new URL('battlefield-color.png',import.meta.url);
+const bytes=readFileSync(url);
+const ref='sha256-'+createHash('sha256').update(bytes).digest('hex')+'.png';
+Object.assign(get(battle,'world').image,{assetRef:ref,src:'',preserveColor:true,sourceSize:[bytes.readUInt32BE(16),bytes.readUInt32BE(20)],alt:'시뮬레이터 원본 컬러 댄스 연습실 3D 전장'});
+writeFileSync(new URL('defense.json',import.meta.url),JSON.stringify(d));
+writeFileSync(new URL('defense-assets.json',import.meta.url),JSON.stringify({[ref]:decodeURIComponent(url.pathname)}));

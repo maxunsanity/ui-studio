@@ -1,0 +1,407 @@
+{
+  "kind": "source-transition-candidates-not-design-not-executable",
+  "status": "제안(검수 대기); root normal UI only",
+  "atKst": "2026-11-20T20:08:15+09:00",
+  "auditSnapshot": {
+    "revision": 25,
+    "screens": 12,
+    "transitions": 0,
+    "unexpectedStructuralMismatches": 0,
+    "unexpectedImageMismatches": 0,
+    "sha256": "9dd787e035be09b6767de4631ce93a8fbaffa09473b03ec5b74a7dbd66d2632f",
+    "outputs": [
+      "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/audit-acecraft-partial-r25.json",
+      "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/audit-images-partial-r25.json"
+    ],
+    "note": "Audits were taken at r25. Root continued normal UI work later; this is not an audit of later revisions."
+  },
+  "sourceLimits": [
+    "A inventory1-second sampling records visible screen sequences and does not prove exact gesture targets. Candidates use matching visible input labels plus that sequence.",
+    "B early playback discontinuity prevents deriving resource/reward rules.",
+    "This plan creates no links and does not modify source/model/design/alias logs.",
+    "Only named X/back candidates and observed screen navigation are proposed; unknown purchase and game logic stay unlinked."
+  ],
+  "candidates": [
+    {
+      "label": "로비 메뉴 열기",
+      "sourceName": "Page_ACE_Lobby",
+      "sourceKey": "Menu",
+      "sourceElementName": "Btn_ACE_Lobby_Menu",
+      "sourceScreenId": "main",
+      "sourceElementId": "element-249b32d6-6777-401d-bd16-6d4bce7a208b",
+      "action": "open",
+      "targetName": "Modal_ACE_Menu",
+      "targetScreenId": "screen-31240fe2-8a12-44bc-8390-6b1d6cfb0534",
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "A03→A04,7~9초; 동명 Menu 입구와 우측 메뉴판 관찰",
+      "notes": []
+    },
+    {
+      "label": "메뉴 친구 열기",
+      "sourceName": "Modal_ACE_Menu",
+      "sourceKey": "Row1",
+      "sourceElementName": "Btn_ACE_Menu_Row1",
+      "sourceScreenId": "screen-31240fe2-8a12-44bc-8390-6b1d6cfb0534",
+      "sourceElementId": "element-9d99110b-77c5-4811-9fc3-fd531667f359",
+      "action": "open",
+      "targetName": "Modal_ACE_Friends",
+      "targetScreenId": "screen-42c82cb7-49d5-46af-b2c9-05b4fd78c05e",
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "A04→A06,13~14초; Friends 행/타이틀 일치",
+      "notes": [
+        "open은 overlay stack에 추가되므로 Friends close 시 Menu가 남는다."
+      ]
+    },
+    {
+      "label": "메뉴 우편 열기",
+      "sourceName": "Modal_ACE_Menu",
+      "sourceKey": "Row2",
+      "sourceElementName": "Btn_ACE_Menu_Row2",
+      "sourceScreenId": "screen-31240fe2-8a12-44bc-8390-6b1d6cfb0534",
+      "sourceElementId": "element-1aa9fcd8-9c97-430f-a4c8-a1fc5e9c3e66",
+      "action": "open",
+      "targetName": "Modal_ACE_Mail",
+      "targetScreenId": "screen-5338bd69-3769-41b2-9c1e-7c3704a45e29",
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "A04→A05,9~10초; Mail 행/타이틀 일치",
+      "notes": [
+        "open은 overlay stack에 추가되므로 Mail close 시 Menu가 남는다."
+      ]
+    },
+    {
+      "label": "로비 Radiant 진입",
+      "sourceName": "Page_ACE_Lobby",
+      "sourceKey": "RadiantPact",
+      "sourceElementName": "Btn_ACE_Lobby_RadiantPact",
+      "sourceScreenId": "main",
+      "sourceElementId": "element-fab0ecfc-58ff-42a8-a04d-034f4b3fe12f",
+      "action": "navigate",
+      "targetName": "Page_ACE_RadiantPact",
+      "targetScreenId": "screen-558543af-0ff9-4e1c-bda6-0d4f75fb1568",
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "A03→A07,19~20초; 동명 이벤트 입구와 제목",
+      "notes": []
+    },
+    {
+      "label": "Radiant 미션 열기",
+      "sourceName": "Page_ACE_RadiantPact",
+      "sourceKey": "Missions",
+      "sourceElementName": "Btn_RadiantPact_Missions",
+      "sourceScreenId": "screen-558543af-0ff9-4e1c-bda6-0d4f75fb1568",
+      "sourceElementId": "element-ad789565-b616-47b9-8bfe-bdcfcce1e565",
+      "action": "open",
+      "targetName": "Modal_ACE_Missions",
+      "targetScreenId": "screen-9629a9ae-cae2-4daa-8ad1-406c387a6859",
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "A07→A08,22~23초; Missions 입구/제목",
+      "notes": []
+    },
+    {
+      "label": "로비 Special Recruit 진입",
+      "sourceName": "Page_ACE_Lobby",
+      "sourceKey": "SpecialRecruit",
+      "sourceElementName": "Btn_ACE_Lobby_SpecialRecruit",
+      "sourceScreenId": "main",
+      "sourceElementId": "element-38e69188-5660-40d3-b7e5-ba0191821de4",
+      "action": "navigate",
+      "targetName": "Page_ACE_OverdriveRecruit",
+      "targetScreenId": "screen-a1264c79-4692-4b79-868e-3fc2fa358808",
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "A03→A09,26~27초; Special Recruit 입구/제목",
+      "notes": []
+    },
+    {
+      "label": "Radiant Back",
+      "sourceName": "Page_ACE_RadiantPact",
+      "sourceKey": "Back",
+      "sourceElementName": "Btn_RadiantPact_Back",
+      "sourceScreenId": "screen-558543af-0ff9-4e1c-bda6-0d4f75fb1568",
+      "sourceElementId": "element-1780120e-36f6-4d89-b18a-ef4fd04090d0",
+      "action": "back",
+      "targetName": null,
+      "targetScreenId": null,
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "A07 원본 좌하단 Back 표시 및 이후 로비 복귀 흐름",
+      "notes": [
+        "navigate로 진입한 뒤 back을 시험한다. 단독 동작 시험에서 history가 비면 돌아갈 화면 없음 안내가 맞다."
+      ]
+    },
+    {
+      "label": "Overdrive Back",
+      "sourceName": "Page_ACE_OverdriveRecruit",
+      "sourceKey": "Back",
+      "sourceElementName": "Btn_OverdriveRecruit_Back",
+      "sourceScreenId": "screen-a1264c79-4692-4b79-868e-3fc2fa358808",
+      "sourceElementId": "element-b717455d-7dd6-42d0-a549-8782e5ef0bae",
+      "action": "back",
+      "targetName": null,
+      "targetScreenId": null,
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "A09/B01 원본 좌하단 Back 표시",
+      "notes": [
+        "고정 Lobby target을 만들기보다 runtime history를 사용한다."
+      ]
+    },
+    {
+      "label": "Modal_ACE_Mail X 닫기",
+      "sourceName": "Modal_ACE_Mail",
+      "sourceKey": "Close",
+      "sourceElementName": "Btn_ACE_Mail_Close",
+      "sourceScreenId": "screen-5338bd69-3769-41b2-9c1e-7c3704a45e29",
+      "sourceElementId": "element-3b46e36e-7d9d-4057-b460-2779db8d986b",
+      "action": "close",
+      "targetName": null,
+      "targetScreenId": null,
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "원본 A10/A14/A23/A62/A63의 가시 X, 각 관련 화면 복귀 흐름",
+      "notes": [
+        "target 없음. 실제 close는 overlay stack과 trigger focus를 복원하며 returnPolicy 문구가 engine rule은 아니다."
+      ]
+    },
+    {
+      "label": "Modal_ACE_Friends X 닫기",
+      "sourceName": "Modal_ACE_Friends",
+      "sourceKey": "Close",
+      "sourceElementName": "Btn_ACE_Friends_Close",
+      "sourceScreenId": "screen-42c82cb7-49d5-46af-b2c9-05b4fd78c05e",
+      "sourceElementId": "element-5e1a9260-72d3-44f6-9198-2b443b657daa",
+      "action": "close",
+      "targetName": null,
+      "targetScreenId": null,
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "원본 A10/A14/A23/A62/A63의 가시 X, 각 관련 화면 복귀 흐름",
+      "notes": [
+        "target 없음. 실제 close는 overlay stack과 trigger focus를 복원하며 returnPolicy 문구가 engine rule은 아니다."
+      ]
+    },
+    {
+      "label": "Modal_ACE_Missions X 닫기",
+      "sourceName": "Modal_ACE_Missions",
+      "sourceKey": "Close",
+      "sourceElementName": "Btn_ACE_Missions_Close",
+      "sourceScreenId": "screen-9629a9ae-cae2-4daa-8ad1-406c387a6859",
+      "sourceElementId": "element-ac0cd040-30e2-40f5-93a2-640634b4492c",
+      "action": "close",
+      "targetName": null,
+      "targetScreenId": null,
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "원본 A10/A14/A23/A62/A63의 가시 X, 각 관련 화면 복귀 흐름",
+      "notes": [
+        "target 없음. 실제 close는 overlay stack과 trigger focus를 복원하며 returnPolicy 문구가 engine rule은 아니다."
+      ]
+    },
+    {
+      "label": "Modal_ACE_PackDetail X 닫기",
+      "sourceName": "Modal_ACE_PackDetail",
+      "sourceKey": "Close",
+      "sourceElementName": "Btn_ACE_PackDetail_Close",
+      "sourceScreenId": "screen-b19c300d-b9b7-42d8-9c8e-6b35fd5a73bb",
+      "sourceElementId": "element-20484eb3-4b4f-4fe4-8989-6fd03393c2fc",
+      "action": "close",
+      "targetName": null,
+      "targetScreenId": null,
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "원본 A10/A14/A23/A62/A63의 가시 X, 각 관련 화면 복귀 흐름",
+      "notes": [
+        "target 없음. 실제 close는 overlay stack과 trigger focus를 복원하며 returnPolicy 문구가 engine rule은 아니다."
+      ]
+    },
+    {
+      "label": "Modal_ACE_PurchaseConfirm X 닫기",
+      "sourceName": "Modal_ACE_PurchaseConfirm",
+      "sourceKey": "Close",
+      "sourceElementName": "Btn_ACE_PurchaseConfirm_Close",
+      "sourceScreenId": "screen-7ddb297b-99b3-446b-8464-1d2fdcf6d79b",
+      "sourceElementId": "element-7a275253-7d29-4782-ba37-036fb6d8bb46",
+      "action": "close",
+      "targetName": null,
+      "targetScreenId": null,
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "원본 A10/A14/A23/A62/A63의 가시 X, 각 관련 화면 복귀 흐름",
+      "notes": [
+        "target 없음. 실제 close는 overlay stack과 trigger focus를 복원하며 returnPolicy 문구가 engine rule은 아니다."
+      ]
+    },
+    {
+      "label": "묶음 38.00 확인창 보기",
+      "sourceName": "Modal_ACE_PackDetail",
+      "sourceKey": "Buy",
+      "sourceElementName": "Btn_ACE_PackDetail_Buy",
+      "sourceScreenId": "screen-b19c300d-b9b7-42d8-9c8e-6b35fd5a73bb",
+      "sourceElementId": "element-5003429e-ba88-4dcd-9b83-5beae0b2c6cb",
+      "action": "open",
+      "targetName": "Modal_ACE_PurchaseConfirm",
+      "targetScreenId": "screen-7ddb297b-99b3-446b-8464-1d2fdcf6d79b",
+      "conditionProposal": "always",
+      "event": "click",
+      "status": "both ends built at audited r25",
+      "evidence": "A11→A12,62~63초; 상세38.00과 확인문구38.00/M-Cash999 일치",
+      "notes": [
+        "UI 확인창 열기만 제안. action=purchase 금지. UseCash/UseMCash는 연결하지 않는다."
+      ]
+    }
+  ],
+  "deferredUntilBuilt": [
+    {
+      "route": "OverdriveRecruit.Packs → SpecialPack_Limited",
+      "evidence": "B01→B06,30.48~30.98초; B 영상은 Limited-Time 선택 상태",
+      "hold": "현재 r25 미조립. A38은 Chapter 선택이므로 공통 게임의 고정 기본 탭으로 자칭하지 않는다."
+    },
+    {
+      "route": "SpecialPack Limited Mode2 ↔ Chapter Mode1",
+      "evidence": "A38~41초의 같은 상점 2개 탭",
+      "hold": "두 board 조립 후 같은 shop family의 보기 이동으로만 연결; 수치/재화는 변경하지 않는다."
+    },
+    {
+      "route": "Shop NavItemShop → ItemShop_Tempus; NavCumulative → Cumulative_Period",
+      "evidence": "A85→86, A91→92의 하단 동명 탭",
+      "hold": "대상 board 조립 후 입력 root와 실제 탭·복귀를 확인한다."
+    },
+    {
+      "route": "Cumulative Period LocalTab1 ↔ Milestones LocalTab0",
+      "evidence": "A92/96/104 이후 동일 화면 하단 2개 탭",
+      "hold": "각 구조가 준비된 뒤 보기만 이동; 결제 집계/보상 차감은 만들지 않는다."
+    }
+  ],
+  "holdUnlinked": [
+    {
+      "controls": [
+        "Modal_ACE_PurchaseConfirm.UseCash",
+        "Modal_ACE_PurchaseConfirm.UseMCash"
+      ],
+      "reason": "실제 구매·재화 차감·부족 조건/완료 목적지가 미확인. 현재 미연결 유지."
+    },
+    {
+      "controls": [
+        "SpecialPack offer/card/price buttons"
+      ],
+      "reason": "현재 대표 첫4개 offer는 FREE/3.80/티켓10/보석3000이며 별도 상세창은38.00 묶음이다. 서로 다른 상품을 같은38.00 상세/확인창으로 연결하지 않는다."
+    },
+    {
+      "controls": [
+        "RecruitOnce",
+        "RecruitTen",
+        "FreeRecruit",
+        "Claim",
+        "ClaimAll",
+        "DeleteRead",
+        "SendClaim",
+        "EnergySend",
+        "EnergyClaim"
+      ],
+      "reason": "영상에 결과 overlay는 있지만 조건·정확한 보상 variant·상태 변경을 새로 확정할 수 없다. fixed A99 4개 보상을 모든 청구/추첨 결과로 재사용하지 않는다."
+    },
+    {
+      "controls": [
+        "History",
+        "Preview",
+        "Switch",
+        "PathGrowth",
+        "RadiantPass",
+        "ExchangeShop",
+        "미션 Go",
+        "HowToObtain Go",
+        "Menu Backpack/Settings/Account/Notice/Support"
+      ],
+      "reason": "가시 입구는 있으나 목적 UI나 처리 결과가 관찰되지 않아 미연결 유지."
+    },
+    {
+      "controls": [
+        "Modal_ACE_Menu.Close backdrop",
+        "Modal_ACE_ItemInfo.Close backdrop",
+        "Modal_ACE_Rewards.Close backdrop"
+      ],
+      "reason": "닫힘/다음 화면 흐름은 보이나 정확한 backdrop dismiss 입력은 source inventory의 미확인이다. source 확정 링크와 구분한 sample-only 정책이 필요하다. 현재 Escape는 기존 presentation 설정으로 동작 가능."
+    },
+    {
+      "controls": [
+        "ItemInfo 진입용 ticket/cube 그림"
+      ],
+      "reason": "어느 현재 그림/아이템 root가 같은 Owned20/Overdrive Ticket 정보를 여는지 정확한 부품 대응이 미확인이다. 관련 없는 glyph나 금액을 새 입력으로 만들지 않는다."
+    },
+    {
+      "controls": [
+        "Honk PilotRecruit/CloudHub/잘린Sky탭",
+        "Lobby RecruitNav/Pilots/Shop 등 global menu"
+      ],
+      "reason": "부분 관찰 순서만으로 각 현재 아이콘의 고정 초기 목적지를 확정하지 않는다. 실제 입력 추적/대응 확인 후 별도 연결."
+    }
+  ],
+  "nativeConnectionUi": {
+    "selectScreen": "[data-tree=\"screens\"] then .screen-list button[data-screen=\"<sid>\"]",
+    "selectInputRoot": "[data-tree=\"layers\"] then button.layer-select[data-element=\"<sourceElementId>\"]",
+    "tab": "[data-tab=\"connections\"]",
+    "add": "[data-action=\"add-edge\"]",
+    "identifyNewEdge": "Read existing fieldset[data-edge-form] IDs before adding; new edge is the ID difference, exactly one.",
+    "formScope": "fieldset[data-edge-form=\"<newEdgeId>\"]",
+    "fields": {
+      "target": "[data-edge-field=\"targetScreen\"]",
+      "action": "[data-edge-field=\"action\"]",
+      "label": "[data-edge-field=\"label\"]",
+      "itemId": "[data-edge-field=\"itemId\"]",
+      "returnDescription": "[data-edge-field=\"returnPolicy\"]",
+      "condition": "[data-edge-field=\"condition\"]"
+    },
+    "delete": "[data-remove-edge=\"<edgeId>\"]",
+    "order": [
+      "Select targetScreen first for open/navigate; target none for close/back",
+      "Set action",
+      "Set concise label and return description; leave trial itemId empty",
+      "Set condition=always LAST only for accepted candidates",
+      "After each change/Tab, reacquire current fieldset/field because UI rerenders",
+      "Save, reopen, and test actual source page→input→target→close/back→focus return"
+    ],
+    "defaults": "New edge click/feedback/unknown, label 새 행동, payload.message 시험 안내, returnPolicy 미정. No arbitrary payload JSON editor.",
+    "semantics": [
+      "Setting navigate/open without a target normalizes condition to unknown.",
+      "unknown stops execution; first true outgoing edge wins.",
+      "navigate pushes history and clears overlays; back pops history.",
+      "open pushes another overlay; close removes that overlay and restores its trigger focus, so Menu→Mail/Friends can return to Menu.",
+      "returnPolicy is stored descriptive metadata here; runtime return is implemented by history/overlay stack, not parsing its text.",
+      "Selecting a caption creates a caption source edge. Use the mapped input root IDs."
+    ],
+    "sourceEvidence": [
+      "src/tools/uxStudio/main.mjs:501",
+      "src/tools/uxStudio/main.mjs:1613",
+      "src/tools/uxStudio/main.mjs:2241",
+      "src/tools/uxStudio/model.mjs:309",
+      "src/tools/uxStudio/overlay-runtime.mjs:32"
+    ]
+  },
+  "readOriginals": [
+    "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/family-inventory.json",
+    "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-b/inventory.json",
+    "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/catalog-draft.json"
+  ],
+  "knownP2DeferredToRoot": [
+    "Missions bar overlap",
+    "Pack quantity white contrast",
+    "Lobby8012 icon gold→greenbanknote"
+  ]
+}

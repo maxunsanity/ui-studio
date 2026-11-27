@@ -1,0 +1,56 @@
+# 작업 ledger — plan: /Users/max/projest_max/ui-studio/docs/plans/20261119-tile-survival-finish.md
+
+2026-11-19T08:32:59.345633+09:00 시작: r63/4부분화면/219부품/5연결,기존목록31/미제작27.
+원본sha 3411e858552f46daac63ceb2a23de6da680cd3e294234435f619c0ea8fea3df4
+백업 /Users/max/projest_max/ui-studio/docs/planning/_backup/20261119_단이/0832_tile_finish_r63
+명세/그림은병행, 실제UI조립은본체단일.
+
+## 2026-11-19 09:29 KST · TS09 native 조립 r68
+- 실제 툴에서 ChapterMissions 3개 미션행/개별 보상/세로스크롤/하단 보상스크롤/닫기·수령버튼을 구성했습니다. 수치가 잘린 셋째행 수량은 창작하지 않았습니다.
+- raw 본문 도구의 배경표면은 부품역할 label을 명시해 제거. 단순 표시값과 입력 전달을 구분했습니다. 모든 버튼 interaction.enabled와 buttonState.enabled를 별도로 확인했습니다.
+- skins.mjs의 schemaVersion=3 강제하향을 Math.max로 수정. 하위 RED 재현 후 관련43/43, 본체 npm test686/686 fail0/exit0. 실제 v4 원본에서 유닛추가→이름/배치 수정 정상.
+- 미완료: 새 파란 닫기프레임 교체, TS17 대상/영지 입구 연결 및 실제 동작시험. r68을 TS09 완료로 세지 않습니다. 남은26가족 조립레시피와 원화는 병행 준비.
+
+## 2026-11-19 10:00 KST · 모집/영웅상세 native 저장 r72
+- 저장 실수량: 7화면/389부품/6연결. 기존4 + 미션/모집/영웅상세3입니다. 구성 수량이며 최종검수 완료 수가 아닙니다.
+- 모집 r69: 재화·새3인 삽화·튜토리얼·무료버튼·고급/일반 입구. 영웅상세 r72: 빈3D영역·전투력/등급/성장값·원형정보2입구·책/문서/소총 분리. 원본 출처별 관측수치 사용.
+- 모집 실제 전체캡처 recruit-r69-fit.jpg 보존. 영상일반/고급 탭 상태, 속성/스킬 실제control, 상세버튼 연결·원본동등은 후속 미완료. 빈 factory Txt 중복가시0(actual확인), 최종미사용부품 정리는 예정.
+- 정상네이티브키입력만 확정 반영됨. fill·type·paste 경로는 입력창값만 바뀌는 차이가 있어 사용 중단/정상입력 재확정. 제품 결함으로 단정하지 않음. helper/recipe는 정상 UI 조작용이며 저장모델 주입/외부JSON편집을 하지 않았습니다.
+- 다음 TS19 출전편성 새 화면은 현재 editor에만 미저장 상태입니다.
+
+## 2026-11-19 10:55 KST · native r93 / 입력·선택 actual
+- 저장 11화면/503부품/6연결. 기존4+신규7 조립본이며 나머지20가족은 미조립입니다. 31가족 최종검수 완료를 뜻하지 않습니다.
+- TS19편성/TS20전투HUD/TS21결과/TS12지휘관정보를 native조립했습니다. 전투 자동·배속은 원본잠금 상태, 전장3D는 비움. 전투/구매/실계정 기능은 구현하지 않았습니다.
+- 실제preview: 닉네임 TileTest42 입력, 남→여 전환 시 여성만선택, 다시열면 Survivor.43a3e·없음만선택 복원. maxlength16 실제활성, edit mode에서 disabled는 의도된 편집상태입니다. 원본minimum3/문자정책 검증은 미지원/미확인으로 구분합니다.
+- 원본네모checkbox양식 대비 현재native radio원형·input의darkCSS상속 시각차이가 발견돼 공통옵션보강을 stage에서만 병행 준비합니다. 제품source변경은 아직없고HMR안전시점에통합할예정입니다.
+- 정리실수: 이름재사용된 factory -ui-label ID를 suffix만보고삭제해 실제문구3곳 누락(TS22고급/일반,TS26성장조건). r87/88 실제독립Txt로복구. 이후 factory이름_Caption 분리/empty caption선삭제/explicit action-owned ID보존/저장후coverage재검증 적용. 생성이벤트버그 근거는 없습니다.
+- TS09 Close파랑/행·viewport앵커, TS22글자/하단앵커, TS26레벨복구·구름/소총·성급/화살표·하단앵커를 native보완했습니다. TS19/20/21 anchors 및전체actualprofiles검수는 후속입니다.
+- 이번source시험686/686은08시대schema보완의실행결과(재합산/새UI통과수아님). commonchoice stage통합뒤fresh회귀예정.
+
+
+### 2026-11-19 11:50 KST · r136 중간 저장
+- TS14 수용29action/TS16 교환24/TS13 파견63 조립, TS15 편지함 진행. 실제 화면 수 15; 최종검수 완료 수 아님.
+- r102 읽기 감사: TS14 29/29 일치, Jimmy 부모입력 정상. TS19 factorycaption2개/짧은높이 TS12·14 CTA겹침은 보완대기.
+- 생존자수용/파견 실제 캡처 docs/evidence/20261119-tile-finish/ 보존.
+- 공통 choice optional/nativeinput 소스 통합696/696, 서버47381 재시작 승인 질문 미응답; 새 choice 필드는 아직 적용/저장하지 않음.
+- native clone은 독립 UUID/부모·앵커 초기화를 읽어 실제 UI로 이름/부모/rect 재확정. 알파8자리 부모는 투명 frame+별도배경 leaf로 분리.
+- 전체31/W/P/U/S0/4/원본동등 미완료, 계속제작.
+
+
+### 2026-11-19 12:42 KST · r237 중간
+- 26화면, TS24 모집결과 조립중; A14 전체 action조립 저장. 신규TS04/06/01/02/08/10/11/17/18 151/151 source/model 대조r233, prior3화면140/140 r165. 실제GUI검수/게임동등 아님.
+- native r162 파견scene stretch-x 높이214, r163 편성두caption 부모/좌표, r164~166 편성/전투/결과앵커, r171 TS06 richclone 잔여2개 제거, r231 TS06 title/select center 보완. 현재원본recipe와의 차이는 의도보완으로 기록.
+- 남은 UI조립 TS24진행/TS27·28·29·30·31, 이후 기존4·실제controls·연결/반응형/재열기·가이드/카탈로그 검수.
+- source newchoice/native input696/696은 앞선이번시험, 서버validator재읽기 승인질문 미응답. 설치·서버재시작0.
+
+
+### 2026-11-19 13:17 KST · r288 / 재시작 승인 해결
+- 현중 직접답변 “현재7018재시작허용” 후 정확 oldPID47381·command·port를 확인, r241/관리기록 백업→그PID만SIGTERM→ownPID21943/exec4352 기동. 7007/다른서버/빌드0. 소스맵3개없음 경고는 기존vendor .map이며 기능오류아님, 새패키지추가0. 관리기록 server-ownership-20261119.json.
+- 새choice shape/size/color 실제UI저장r242, 입력외형/회색3slice14pxr243, body scroll/재열기r244. nativeMale→Female 단일·SpaceOther·미리보기재열기None기본 복원 확인.32pxsquare/#36ca5c, 입력bg215231235/text63119138 computed확인. tablet 논리504×672에서 body H330과 CTA분리/선택스크롤확인.
+- TS29 r281 native2탭 선택으로 feed display none↔flex, 실제입력 TileTest42/value·maxLength1000·enabled확인. 실제전송/개인본문미관찰은구현안함. 채널prefix/입력분리, 기존placeholder는opacity0보존, 기존장식탭2개는native컨트롤로교체.
+- TS27 r248 rootframe/딤leaf별도·모든표시자식parent. r247은저장비동기완료시간차이며실패아님. t.save는파일저장재읽기완료status까지대기.
+- 현재 30화면 TS30진행, TS31미착수, 기존4/기타nativecontrols/연결/전체GUI검수·가이드/카탈로그 후속. 전체31종최종완료·W/P/U/S통과·원본동등 주장아님.
+
+
+### 2026-11-19 14:08 KST · 사용자 중지 / 마지막r345
+현중 “이번을 마지막 작업으로하고 그만해”에 따라 TS05 8/8정상UI조립 저장, r345·31화면·1207부품·6연결 schema읽기검증통과, wholecanvas재읽기확인 후 중지했습니다. 390/430비율 HUD28.98logicalpx확인, CSSviewport1378×1531/미리보기JPEG1723×1914. 전체QA/남은nativecontrols/연결/카탈로그·노하우본문 발행미완료. 보고 `docs/collaboration/reports/20261119_1408_단이_타일서바이벌_사용자중지.md`. root-task는stopped_by_user/명시재개필요, 새제작단위/예약재개0. 공통PROGRESS에는중지현황만기록.

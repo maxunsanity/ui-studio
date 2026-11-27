@@ -1,0 +1,4756 @@
+{
+  "documentType": "deterministic-native-ui-action-recipe-not-design-json",
+  "createdAtKST": "2026-11-19T09:22:42.734645+09:00",
+  "reviewStatus": "제안(검수 대기)",
+  "logicalSize": {
+    "w": 504,
+    "h": 894
+  },
+  "executionRules": {
+    "allowedOps": [
+      "panel",
+      "text",
+      "image",
+      "button",
+      "plain"
+    ],
+    "allRects": "ABSOLUTE logicalpx504×894; parent-local conversion happens only when root executes native UI.",
+    "parentOrder": "Each parent key already exists. Roots have parent null. Native screen is family.name, plain/button root is a distinct element.",
+    "panel": "skin is existing source mirror path, native9frame. Screen/action array is recipe, never write it into design model.",
+    "button": "text is native child label, skin contains no words, default native press tint=true. Explicit text/image descendants forward input to button.",
+    "modal": "standalone. No behindpage or fake game entry buttons. 3D source area uses plain+3D only.",
+    "input": "No unsupported input op. inputControlsRequired tells root where native editable control must be configured; preview text cannot remain fake input at completion.",
+    "unknown": "No unseen numbers/copied full source screenshot/invented action result. Notes distinguish source observation from native visual replacements."
+  },
+  "assetsRead": [
+    "spec-b/existing-image-map.json",
+    "art/native-regions.json",
+    "art/art-manifest.json"
+  ],
+  "families": [
+    {
+      "id": "TS12",
+      "name": "Modal_TSV_CommanderEdit",
+      "nativeKind": "modal",
+      "purpose": "지휘관 정보 편집 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_TSV_TS12_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#143C50",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "commander",
+          "name": "BG_TSV_TS12_commander",
+          "rect": {
+            "x": 26,
+            "y": 58,
+            "w": 454,
+            "h": 722
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "body",
+          "name": "BG_TSV_TS12_body",
+          "rect": {
+            "x": 42,
+            "y": 126,
+            "w": 420,
+            "h": 552
+          },
+          "parent": "commander",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "header",
+          "name": "BG_TSV_TS12_header",
+          "rect": {
+            "x": 26,
+            "y": 58,
+            "w": 454,
+            "h": 56
+          },
+          "parent": "commander",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch-x"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_TSV_TS12_title",
+          "rect": {
+            "x": 42,
+            "y": 72,
+            "w": 350,
+            "h": 38
+          },
+          "parent": "header",
+          "text": "지휘관 정보",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "close",
+          "name": "Btn_TSV_TS12_close",
+          "rect": {
+            "x": 432,
+            "y": 66,
+            "w": 40,
+            "h": 40
+          },
+          "parent": "header",
+          "text": "×",
+          "size": 32,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "plain",
+          "key": "nameSection",
+          "name": "Panel_TSV_TS12_nameSection",
+          "rect": {
+            "x": 50,
+            "y": 132,
+            "w": 404,
+            "h": 192
+          },
+          "parent": "body",
+          "fill": "#ACCDDA",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "nameHeader",
+          "name": "Panel_TSV_TS12_nameHeader",
+          "rect": {
+            "x": 50,
+            "y": 132,
+            "w": 404,
+            "h": 44
+          },
+          "parent": "nameSection",
+          "fill": "#74B3CD",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "nameTitle",
+          "name": "Txt_TSV_TS12_nameTitle",
+          "rect": {
+            "x": 60,
+            "y": 142,
+            "w": 360,
+            "h": 32
+          },
+          "parent": "nameSection",
+          "text": "지휘관 닉네임",
+          "size": 24,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "nameRule",
+          "name": "Txt_TSV_TS12_nameRule",
+          "rect": {
+            "x": 60,
+            "y": 190,
+            "w": 360,
+            "h": 28
+          },
+          "parent": "nameSection",
+          "text": "이름은 3~16자 이내여야 합니다.",
+          "size": 20,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "plain",
+          "key": "nicknameInput",
+          "name": "Panel_TSV_TS12_nicknameInput",
+          "rect": {
+            "x": 60,
+            "y": 222,
+            "w": 384,
+            "h": 40
+          },
+          "parent": "nameSection",
+          "fill": "#93B5C5",
+          "strokeWidth": 1,
+          "radius": 4,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "nicknameInitialPreview",
+          "name": "Txt_TSV_TS12_nicknameInitialPreview",
+          "rect": {
+            "x": 68,
+            "y": 226,
+            "w": 368,
+            "h": 32
+          },
+          "parent": "nicknameInput",
+          "text": "Survivor.43a3e",
+          "size": 22,
+          "weight": 700,
+          "color": "#437E91",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "charRule",
+          "name": "Txt_TSV_TS12_charRule",
+          "rect": {
+            "x": 60,
+            "y": 274,
+            "w": 360,
+            "h": 28
+          },
+          "parent": "nameSection",
+          "text": "문자와 숫자만 사용하세요.",
+          "size": 20,
+          "weight": 700,
+          "color": "#7A929A",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "plain",
+          "key": "genderSection",
+          "name": "Panel_TSV_TS12_genderSection",
+          "rect": {
+            "x": 50,
+            "y": 332,
+            "w": 404,
+            "h": 188
+          },
+          "parent": "body",
+          "fill": "#ACCDDA",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "genderHeader",
+          "name": "Panel_TSV_TS12_genderHeader",
+          "rect": {
+            "x": 50,
+            "y": 332,
+            "w": 404,
+            "h": 42
+          },
+          "parent": "genderSection",
+          "fill": "#74B3CD",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "genderTitle",
+          "name": "Txt_TSV_TS12_genderTitle",
+          "rect": {
+            "x": 60,
+            "y": 342,
+            "w": 350,
+            "h": 32
+          },
+          "parent": "genderSection",
+          "text": "지휘관 성별",
+          "size": 24,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "male",
+          "name": "Btn_TSV_TS12_male",
+          "rect": {
+            "x": 72,
+            "y": 402,
+            "w": 132,
+            "h": 40
+          },
+          "parent": "genderSection",
+          "text": "",
+          "size": 22,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "maleCheckbox",
+          "name": "Panel_TSV_TS12_maleCheckbox",
+          "rect": {
+            "x": 72,
+            "y": 402,
+            "w": 30,
+            "h": 30
+          },
+          "parent": "male",
+          "fill": "#90B4C5",
+          "strokeWidth": 1,
+          "radius": 5,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "maleLabel",
+          "name": "Txt_TSV_TS12_maleLabel",
+          "rect": {
+            "x": 112,
+            "y": 402,
+            "w": 78,
+            "h": 32
+          },
+          "parent": "male",
+          "text": "남",
+          "size": 22,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "female",
+          "name": "Btn_TSV_TS12_female",
+          "rect": {
+            "x": 266,
+            "y": 402,
+            "w": 132,
+            "h": 40
+          },
+          "parent": "genderSection",
+          "text": "",
+          "size": 22,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "femaleCheckbox",
+          "name": "Panel_TSV_TS12_femaleCheckbox",
+          "rect": {
+            "x": 266,
+            "y": 402,
+            "w": 30,
+            "h": 30
+          },
+          "parent": "female",
+          "fill": "#90B4C5",
+          "strokeWidth": 1,
+          "radius": 5,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "femaleLabel",
+          "name": "Txt_TSV_TS12_femaleLabel",
+          "rect": {
+            "x": 306,
+            "y": 402,
+            "w": 78,
+            "h": 32
+          },
+          "parent": "female",
+          "text": "여",
+          "size": 22,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "other",
+          "name": "Btn_TSV_TS12_other",
+          "rect": {
+            "x": 72,
+            "y": 460,
+            "w": 132,
+            "h": 40
+          },
+          "parent": "genderSection",
+          "text": "",
+          "size": 22,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "otherCheckbox",
+          "name": "Panel_TSV_TS12_otherCheckbox",
+          "rect": {
+            "x": 72,
+            "y": 460,
+            "w": 30,
+            "h": 30
+          },
+          "parent": "other",
+          "fill": "#90B4C5",
+          "strokeWidth": 1,
+          "radius": 5,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "otherLabel",
+          "name": "Txt_TSV_TS12_otherLabel",
+          "rect": {
+            "x": 112,
+            "y": 460,
+            "w": 78,
+            "h": 32
+          },
+          "parent": "other",
+          "text": "기타",
+          "size": 22,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "none",
+          "name": "Btn_TSV_TS12_none",
+          "rect": {
+            "x": 266,
+            "y": 460,
+            "w": 132,
+            "h": 40
+          },
+          "parent": "genderSection",
+          "text": "",
+          "size": 22,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "noneCheckbox",
+          "name": "Panel_TSV_TS12_noneCheckbox",
+          "rect": {
+            "x": 266,
+            "y": 460,
+            "w": 30,
+            "h": 30
+          },
+          "parent": "none",
+          "fill": "#90B4C5",
+          "strokeWidth": 1,
+          "radius": 5,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "noneLabel",
+          "name": "Txt_TSV_TS12_noneLabel",
+          "rect": {
+            "x": 306,
+            "y": 460,
+            "w": 78,
+            "h": 32
+          },
+          "parent": "none",
+          "text": "없음",
+          "size": 22,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "noneCheck",
+          "name": "Img_TSV_TS12_noneCheck",
+          "rect": {
+            "x": 264,
+            "y": 458,
+            "w": 38,
+            "h": 38
+          },
+          "parent": "none",
+          "fit": "contain",
+          "ref": "sha256-e5b792fd54ff92994f9bf072dca0260cb0e0fea80c61dd9263faee766ed95bd9.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "maleSymbol",
+          "name": "Txt_TSV_TS12_maleSymbol",
+          "rect": {
+            "x": 132,
+            "y": 400,
+            "w": 30,
+            "h": 34
+          },
+          "parent": "genderSection",
+          "text": "♂",
+          "size": 28,
+          "weight": 700,
+          "color": "#03B4D8",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "femaleSymbol",
+          "name": "Txt_TSV_TS12_femaleSymbol",
+          "rect": {
+            "x": 326,
+            "y": 400,
+            "w": 30,
+            "h": 34
+          },
+          "parent": "genderSection",
+          "text": "♀",
+          "size": 28,
+          "weight": 700,
+          "color": "#EC63A2",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "otherSymbol",
+          "name": "Txt_TSV_TS12_otherSymbol",
+          "rect": {
+            "x": 138,
+            "y": 458,
+            "w": 30,
+            "h": 34
+          },
+          "parent": "genderSection",
+          "text": "?",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFF3B8",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "free",
+          "name": "Btn_TSV_TS12_free",
+          "rect": {
+            "x": 84,
+            "y": 690,
+            "w": 336,
+            "h": 64
+          },
+          "parent": "commander",
+          "text": "무료",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "text",
+          "key": "dismissHint",
+          "name": "Txt_TSV_TS12_dismissHint",
+          "rect": {
+            "x": 120,
+            "y": 856,
+            "w": 264,
+            "h": 30
+          },
+          "parent": "root",
+          "text": "빈 곳을 탭하여 닫기",
+          "size": 18,
+          "weight": 700,
+          "color": "#E0EDEA",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        }
+      ],
+      "notes": [
+        "길이/문자규칙안내문은보이나실제validation코드/마침표허용예외미확인.",
+        "없음초기selected,다른성별선택은localfixture제안.",
+        "키보드열림/입력가능/가림검수필요.이는명세로실제입력검수아님.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "무료는회색관측상태;조건/제출성공미확인.선택버튼4개는local radio fixture제안."
+      ],
+      "proposedLinks": [
+        {
+          "action": "입력/성별",
+          "target": "local state",
+          "basis": "controls visible only",
+          "proposal": "native입력과선택fixture.실계정/오류문구창작금지",
+          "payload": {}
+        },
+        {
+          "action": "무료",
+          "target": null,
+          "basis": "gray state only",
+          "proposal": "제출결과/실제저장미확인",
+          "payload": {}
+        },
+        {
+          "action": "X/바깥",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "호출부dismiss제안",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [
+        {
+          "key": "nicknameInput",
+          "previewTextKey": "nicknameInitialPreview",
+          "rect": {
+            "x": 60,
+            "y": 222,
+            "w": 384,
+            "h": 40
+          },
+          "initialValue": "Survivor.43a3e",
+          "nativeEditableRequired": true,
+          "configureBeforeCompletion": "native 입력으로변환한후별도preview text중복제거.키보드focus/편집/가림검수필수",
+          "validationPolicyUnverified": true,
+          "observedInstruction": "이름은 3~16자 이내여야 합니다. / 문자와 숫자만 사용하세요."
+        }
+      ],
+      "missingArtwork": [],
+      "observedStates": {
+        "nickname": "Survivor.43a3e",
+        "selectedGender": "none"
+      },
+      "sourceReferences": [
+        "TS12-R01"
+      ],
+      "stateControlsRequired": [
+        {
+          "keys": [
+            "male",
+            "female",
+            "other",
+            "none"
+          ],
+          "mode": "single-selection-fixture",
+          "initialSelected": [
+            "none"
+          ],
+          "selectedIndicatorKey": "noneCheck",
+          "sourceResult": "other gender selection unobserved",
+          "requiredNativeConfiguration": "기본버튼selected상태와단일선택그룹을본체UI에서설정.새오류문구/저장결과없음"
+        }
+      ]
+    },
+    {
+      "id": "TS14",
+      "name": "Modal_TSV_SurvivorAccept",
+      "nativeKind": "modal",
+      "purpose": "생존자 수용 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_TSV_TS14_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#143C50",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "clipboard",
+          "name": "BG_TSV_TS14_clipboard",
+          "rect": {
+            "x": 6,
+            "y": 64,
+            "w": 494,
+            "h": 768
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "paper",
+          "name": "BG_TSV_TS14_paper",
+          "rect": {
+            "x": 20,
+            "y": 118,
+            "w": 466,
+            "h": 606
+          },
+          "parent": "clipboard",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "plain",
+          "key": "clipPlate",
+          "name": "Panel_TSV_TS14_clipPlate",
+          "rect": {
+            "x": 150,
+            "y": 52,
+            "w": 208,
+            "h": 94
+          },
+          "parent": "clipboard",
+          "fill": "#7D939D",
+          "strokeWidth": 2,
+          "radius": 26,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "clipHandle",
+          "name": "Panel_TSV_TS14_clipHandle",
+          "rect": {
+            "x": 180,
+            "y": 70,
+            "w": 148,
+            "h": 20
+          },
+          "parent": "clipPlate",
+          "fill": "#4E5F66",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "close",
+          "name": "Btn_TSV_TS14_close",
+          "rect": {
+            "x": 452,
+            "y": 76,
+            "w": 40,
+            "h": 40
+          },
+          "parent": "clipboard",
+          "text": "×",
+          "size": 32,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_TSV_TS14_title",
+          "rect": {
+            "x": 158,
+            "y": 154,
+            "w": 170,
+            "h": 42
+          },
+          "parent": "paper",
+          "text": "생존자 수용",
+          "size": 28,
+          "weight": 700,
+          "color": "#327C91",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "help",
+          "name": "Btn_TSV_TS14_help",
+          "rect": {
+            "x": 310,
+            "y": 154,
+            "w": 40,
+            "h": 40
+          },
+          "parent": "paper",
+          "text": "?",
+          "size": 26,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "panel",
+          "key": "capacity",
+          "name": "BG_TSV_TS14_capacity",
+          "rect": {
+            "x": 16,
+            "y": 200,
+            "w": 474,
+            "h": 100
+          },
+          "parent": "clipboard",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch-x"
+        },
+        {
+          "op": "text",
+          "key": "populationLabel",
+          "name": "Txt_TSV_TS14_populationLabel",
+          "rect": {
+            "x": 44,
+            "y": 260,
+            "w": 74,
+            "h": 24
+          },
+          "parent": "capacity",
+          "text": "총 인구",
+          "size": 18,
+          "weight": 700,
+          "color": "#C7ECF5",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "population",
+          "name": "Txt_TSV_TS14_population",
+          "rect": {
+            "x": 136,
+            "y": 230,
+            "w": 100,
+            "h": 48
+          },
+          "parent": "capacity",
+          "text": "4",
+          "size": 40,
+          "weight": 700,
+          "color": "#D8F2F5",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "populationPlus",
+          "name": "Txt_TSV_TS14_populationPlus",
+          "rect": {
+            "x": 170,
+            "y": 230,
+            "w": 70,
+            "h": 48
+          },
+          "parent": "capacity",
+          "text": "+2",
+          "size": 40,
+          "weight": 700,
+          "color": "#59CD16",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "populationIcon",
+          "name": "Img_TSV_TS14_populationIcon",
+          "rect": {
+            "x": 56,
+            "y": 220,
+            "w": 48,
+            "h": 38
+          },
+          "parent": "capacity",
+          "fit": "contain",
+          "ref": "sha256-4d30ace4433ecf5a33802d00477cfc2830e1e6c4897686cf6228f5e55a24680d.webp",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "bedsLabel",
+          "name": "Txt_TSV_TS14_bedsLabel",
+          "rect": {
+            "x": 320,
+            "y": 260,
+            "w": 82,
+            "h": 24
+          },
+          "parent": "capacity",
+          "text": "침대 자리",
+          "size": 18,
+          "weight": 700,
+          "color": "#C7ECF5",
+          "align": "left",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "text",
+          "key": "beds",
+          "name": "Txt_TSV_TS14_beds",
+          "rect": {
+            "x": 402,
+            "y": 230,
+            "w": 54,
+            "h": 48
+          },
+          "parent": "capacity",
+          "text": "6",
+          "size": 40,
+          "weight": 700,
+          "color": "#D8F2F5",
+          "align": "left",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "text",
+          "key": "bedSymbol",
+          "name": "Txt_TSV_TS14_bedSymbol",
+          "rect": {
+            "x": 320,
+            "y": 220,
+            "w": 46,
+            "h": 36
+          },
+          "parent": "capacity",
+          "text": "▰",
+          "size": 32,
+          "weight": 700,
+          "color": "#73BCD5",
+          "align": "left",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "text",
+          "key": "waiting",
+          "name": "Txt_TSV_TS14_waiting",
+          "rect": {
+            "x": 148,
+            "y": 310,
+            "w": 224,
+            "h": 34
+          },
+          "parent": "paper",
+          "text": "수용 대기 생존자: 2",
+          "size": 22,
+          "weight": 700,
+          "color": "#437E91",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "susan",
+          "name": "Btn_TSV_TS14_susan",
+          "rect": {
+            "x": 40,
+            "y": 348,
+            "w": 132,
+            "h": 146
+          },
+          "parent": "paper",
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "susanPortrait",
+          "name": "Img_TSV_TS14_susanPortrait",
+          "rect": {
+            "x": 40,
+            "y": 348,
+            "w": 132,
+            "h": 146
+          },
+          "parent": "susan",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+          "region": [
+            150,
+            150,
+            150,
+            150
+          ],
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "plain",
+          "key": "susanSelectedShade",
+          "name": "Panel_TSV_TS14_susanSelectedShade",
+          "rect": {
+            "x": 40,
+            "y": 348,
+            "w": 132,
+            "h": 146
+          },
+          "parent": "susan",
+          "fill": "#24374080",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "susanCheck",
+          "name": "Img_TSV_TS14_susanCheck",
+          "rect": {
+            "x": 72,
+            "y": 400,
+            "w": 68,
+            "h": 56
+          },
+          "parent": "susan",
+          "fit": "contain",
+          "ref": "sha256-e5b792fd54ff92994f9bf072dca0260cb0e0fea80c61dd9263faee766ed95bd9.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "susanName",
+          "name": "Txt_TSV_TS14_susanName",
+          "rect": {
+            "x": 40,
+            "y": 498,
+            "w": 132,
+            "h": 30
+          },
+          "parent": "paper",
+          "text": "수잔",
+          "size": 22,
+          "weight": 700,
+          "color": "#437E91",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "jimmy",
+          "name": "Btn_TSV_TS14_jimmy",
+          "rect": {
+            "x": 188,
+            "y": 348,
+            "w": 132,
+            "h": 146
+          },
+          "parent": "paper",
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "jimmyPortrait",
+          "name": "Img_TSV_TS14_jimmyPortrait",
+          "rect": {
+            "x": 188,
+            "y": 348,
+            "w": 132,
+            "h": 146
+          },
+          "parent": "jimmy",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+          "region": [
+            300,
+            150,
+            150,
+            150
+          ],
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "plain",
+          "key": "jimmySelectedShade",
+          "name": "Panel_TSV_TS14_jimmySelectedShade",
+          "rect": {
+            "x": 188,
+            "y": 348,
+            "w": 132,
+            "h": 146
+          },
+          "parent": "jimmy",
+          "fill": "#24374080",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "jimmyCheck",
+          "name": "Img_TSV_TS14_jimmyCheck",
+          "rect": {
+            "x": 220,
+            "y": 400,
+            "w": 68,
+            "h": 56
+          },
+          "parent": "jimmy",
+          "fit": "contain",
+          "ref": "sha256-e5b792fd54ff92994f9bf072dca0260cb0e0fea80c61dd9263faee766ed95bd9.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "jimmyName",
+          "name": "Txt_TSV_TS14_jimmyName",
+          "rect": {
+            "x": 188,
+            "y": 498,
+            "w": 132,
+            "h": 30
+          },
+          "parent": "paper",
+          "text": "지미",
+          "size": 22,
+          "weight": 700,
+          "color": "#437E91",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "accept",
+          "name": "Btn_TSV_TS14_accept",
+          "rect": {
+            "x": 84,
+            "y": 738,
+            "w": 336,
+            "h": 64
+          },
+          "parent": "clipboard",
+          "text": "생존자 수용",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/button-green3.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "3",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "text",
+          "key": "dismissHint",
+          "name": "Txt_TSV_TS14_dismissHint",
+          "rect": {
+            "x": 120,
+            "y": 856,
+            "w": 264,
+            "h": 30
+          },
+          "parent": "root",
+          "text": "빈 곳을 탭하여 닫기",
+          "size": 18,
+          "weight": 700,
+          "color": "#E0EDEA",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        }
+      ],
+      "notes": [
+        "권장상태=R02수용가능(4+2/침대6/2초상체크).R01정원부족variant.",
+        "R01하단빨강 침대를 확장해 더 많은 생존자를 수용하세요.+우측이동화살표;R02녹색CTA.동시표시금지.",
+        "튜토리얼흰손은공통overlay로분리.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "대표ready(R02). full(R01) 상태는동시표시하지않음:총인구4/침대4/체크없음,하단빨강 침대를 확장해 더 많은 생존자를 수용하세요.와우측이동화살표."
+      ],
+      "proposedLinks": [
+        {
+          "action": "생존자수용",
+          "target": "TS03",
+          "basis": "sequence-observed125→126s",
+          "proposal": "selectedSurvivorIds/returnTo전달후dismiss;실인구계산은fixture한정",
+          "payload": {
+            "selectedSurvivorIds": [
+              "susan",
+              "jimmy"
+            ]
+          }
+        },
+        {
+          "action": "침대확장이동",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "목적건물미확인연결보류",
+          "payload": {}
+        },
+        {
+          "action": "X/바깥",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "호출부dismiss",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [],
+      "observedStates": {
+        "selectedVariant": "ready",
+        "variants": {
+          "full": {
+            "population": "4",
+            "beds": "4",
+            "selected": [],
+            "footer": "침대를 확장해 더 많은 생존자를 수용하세요."
+          },
+          "ready": {
+            "population": "4+2",
+            "beds": "6",
+            "selected": [
+              "susan",
+              "jimmy"
+            ],
+            "footer": "생존자 수용"
+          }
+        }
+      },
+      "sourceReferences": [
+        "TS14-R01",
+        "TS14-R02"
+      ],
+      "stateControlsRequired": [
+        {
+          "keys": [
+            "susan",
+            "jimmy"
+          ],
+          "mode": "multiple-selection-fixture",
+          "initialSelected": [
+            "susan",
+            "jimmy"
+          ],
+          "selectedIndicatorKeys": [
+            "susanCheck",
+            "jimmyCheck"
+          ],
+          "sourceResult": "ready frame has both checked; individual click policy unverified",
+          "requiredNativeConfiguration": "관측ready선택상태를native로보존.임의인구계산추가금지"
+        }
+      ]
+    },
+    {
+      "id": "TS16",
+      "name": "Modal_TSV_ResidentExchange",
+      "nativeKind": "modal",
+      "purpose": "주민 자원 교환 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_TSV_TS16_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#143C50",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "trade",
+          "name": "BG_TSV_TS16_trade",
+          "rect": {
+            "x": 50,
+            "y": 374,
+            "w": 414,
+            "h": 356
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "plain",
+          "key": "orangePortraitBack",
+          "name": "Panel_TSV_TS16_orangePortraitBack",
+          "rect": {
+            "x": 60,
+            "y": 214,
+            "w": 392,
+            "h": 176
+          },
+          "parent": "root",
+          "fill": "#EF9C25",
+          "strokeWidth": 0,
+          "radius": 28,
+          "opacity": 1,
+          "anchorPreset": "center"
+        },
+        {
+          "op": "image",
+          "key": "jasonPortrait",
+          "name": "Img_TSV_TS16_jasonPortrait",
+          "rect": {
+            "x": 112,
+            "y": 144,
+            "w": 280,
+            "h": 246
+          },
+          "parent": "orangePortraitBack",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+          "region": [
+            150,
+            0,
+            150,
+            150
+          ],
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "name",
+          "name": "Txt_TSV_TS16_name",
+          "rect": {
+            "x": 174,
+            "y": 334,
+            "w": 160,
+            "h": 40
+          },
+          "parent": "orangePortraitBack",
+          "text": "제이슨",
+          "size": 30,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "close",
+          "name": "Btn_TSV_TS16_close",
+          "rect": {
+            "x": 428,
+            "y": 196,
+            "w": 40,
+            "h": 40
+          },
+          "parent": "orangePortraitBack",
+          "text": "×",
+          "size": 32,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "panel",
+          "key": "paper",
+          "name": "BG_TSV_TS16_paper",
+          "rect": {
+            "x": 60,
+            "y": 374,
+            "w": 392,
+            "h": 262
+          },
+          "parent": "trade",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "text",
+          "key": "request",
+          "name": "Txt_TSV_TS16_request",
+          "rect": {
+            "x": 90,
+            "y": 410,
+            "w": 334,
+            "h": 80
+          },
+          "parent": "paper",
+          "text": "저기, 사장님! 공구를 수리할 나무가 부족한데 모아둔 토마토와 바꿀 수 있을까?",
+          "size": 22,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "rewards",
+          "name": "Panel_TSV_TS16_rewards",
+          "rect": {
+            "x": 74,
+            "y": 500,
+            "w": 358,
+            "h": 118
+          },
+          "parent": "paper",
+          "fill": "#F5D894",
+          "strokeWidth": 0,
+          "radius": 12,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "rewardHeader",
+          "name": "Panel_TSV_TS16_rewardHeader",
+          "rect": {
+            "x": 74,
+            "y": 500,
+            "w": 358,
+            "h": 34
+          },
+          "parent": "rewards",
+          "fill": "#FAC052",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "rewardTitle",
+          "name": "Txt_TSV_TS16_rewardTitle",
+          "rect": {
+            "x": 92,
+            "y": 504,
+            "w": 220,
+            "h": 32
+          },
+          "parent": "rewards",
+          "text": "획득",
+          "size": 24,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "speedup",
+          "name": "BG_TSV_TS16_speedup",
+          "rect": {
+            "x": 196,
+            "y": 546,
+            "w": 60,
+            "h": 60
+          },
+          "parent": "rewards",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "speedupIcon",
+          "name": "Img_TSV_TS16_speedupIcon",
+          "rect": {
+            "x": 201,
+            "y": 551,
+            "w": 50,
+            "h": 47
+          },
+          "parent": "speedup",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/objects-a-atlas-ui-v003.png",
+          "region": [
+            450,
+            0,
+            150,
+            150
+          ],
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "speedupUnit",
+          "name": "Txt_TSV_TS16_speedupUnit",
+          "rect": {
+            "x": 198,
+            "y": 547,
+            "w": 56,
+            "h": 22
+          },
+          "parent": "speedup",
+          "text": "5분",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "speedupCount",
+          "name": "Txt_TSV_TS16_speedupCount",
+          "rect": {
+            "x": 199,
+            "y": 582,
+            "w": 54,
+            "h": 22
+          },
+          "parent": "speedup",
+          "text": "x1",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "supplies",
+          "name": "BG_TSV_TS16_supplies",
+          "rect": {
+            "x": 264,
+            "y": 546,
+            "w": 60,
+            "h": 60
+          },
+          "parent": "rewards",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "suppliesIcon",
+          "name": "Img_TSV_TS16_suppliesIcon",
+          "rect": {
+            "x": 269,
+            "y": 551,
+            "w": 50,
+            "h": 47
+          },
+          "parent": "supplies",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/objects-a-atlas-ui-v003.png",
+          "region": [
+            150,
+            0,
+            150,
+            150
+          ],
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "suppliesCount",
+          "name": "Txt_TSV_TS16_suppliesCount",
+          "rect": {
+            "x": 267,
+            "y": 582,
+            "w": 54,
+            "h": 22
+          },
+          "parent": "supplies",
+          "text": "x10",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "later",
+          "name": "Btn_TSV_TS16_later",
+          "rect": {
+            "x": 84,
+            "y": 648,
+            "w": 164,
+            "h": 64
+          },
+          "parent": "trade",
+          "text": "다음에",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-orange9-v003.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "button",
+          "key": "exchange",
+          "name": "Btn_TSV_TS16_exchange",
+          "rect": {
+            "x": 264,
+            "y": 648,
+            "w": 164,
+            "h": 64
+          },
+          "parent": "trade",
+          "text": "",
+          "size": 24,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/button-green3.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "3",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "image",
+          "key": "woodCost",
+          "name": "Img_TSV_TS16_woodCost",
+          "rect": {
+            "x": 308,
+            "y": 652,
+            "w": 28,
+            "h": 26
+          },
+          "parent": "exchange",
+          "fit": "contain",
+          "ref": "sha256-46dbd170bfe8e6e45b0704bdd4f760a7230ef6bb9d1002dcdcbb0215c8a78201.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "cost",
+          "name": "Txt_TSV_TS16_cost",
+          "rect": {
+            "x": 336,
+            "y": 652,
+            "w": 70,
+            "h": 24
+          },
+          "parent": "exchange",
+          "text": "1000",
+          "size": 20,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "dismissHint",
+          "name": "Txt_TSV_TS16_dismissHint",
+          "rect": {
+            "x": 120,
+            "y": 856,
+            "w": 264,
+            "h": 30
+          },
+          "parent": "root",
+          "text": "빈 곳을 탭하여 닫기",
+          "size": 18,
+          "weight": 700,
+          "color": "#E0EDEA",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "text",
+          "key": "exchangeLabel",
+          "name": "Txt_TSV_TS16_exchangeLabel",
+          "rect": {
+            "x": 272,
+            "y": 678,
+            "w": 148,
+            "h": 28
+          },
+          "parent": "exchange",
+          "text": "교환",
+          "size": 24,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        }
+      ],
+      "notes": [
+        "R01/R02본문/보상/비용동일.목재1000/5분가속1/물자상자10.",
+        "catalog앞부분의교환미관측옛문장과뒤TSV03연결이충돌. sequence-observed만연결근거.",
+        "실재화차감/관계계산없음,fixture로한정.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음."
+      ],
+      "proposedLinks": [
+        {
+          "action": "교환",
+          "target": "TS28",
+          "basis": "sequence-observed88→90s",
+          "proposal": "survivorId/tradeFixture/returnToScreenId전달;실재화계산없음",
+          "payload": {
+            "survivorId": "jason",
+            "costWood": 1000,
+            "rewardSpeedup5m": 1,
+            "rewardSupplyBox": 10
+          }
+        },
+        {
+          "action": "다음에/X/빈곳",
+          "target": null,
+          "basis": "visible; later-near cursor world return",
+          "proposal": "호출부dismiss;3수단개별실행검수필요",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [],
+      "observedStates": {},
+      "sourceReferences": [
+        "TS16-R01",
+        "TS16-R02"
+      ]
+    },
+    {
+      "id": "TS13",
+      "name": "Modal_TSV_SurvivorDispatch",
+      "nativeKind": "modal",
+      "purpose": "생존자 파견 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_TSV_TS13_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#143C50",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "plain",
+          "key": "scene",
+          "name": "Panel_TSV_TS13_scene",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 214
+          },
+          "parent": "root",
+          "fill": "#416851",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "text",
+          "key": "sceneLabel",
+          "name": "Txt_TSV_TS13_sceneLabel",
+          "rect": {
+            "x": 0,
+            "y": 30,
+            "w": 504,
+            "h": 36
+          },
+          "parent": "scene",
+          "text": "3D",
+          "size": 28,
+          "weight": 700,
+          "color": "#D5E5D8",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "unlockToast",
+          "name": "Panel_TSV_TS13_unlockToast",
+          "rect": {
+            "x": 0,
+            "y": 96,
+            "w": 504,
+            "h": 44
+          },
+          "parent": "scene",
+          "fill": "#14232E9C",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch-x"
+        },
+        {
+          "op": "text",
+          "key": "unlockText",
+          "name": "Txt_TSV_TS13_unlockText",
+          "rect": {
+            "x": 28,
+            "y": 104,
+            "w": 448,
+            "h": 30
+          },
+          "parent": "unlockToast",
+          "text": "영웅 지구 1레벨 잠금 해제",
+          "size": 22,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "arrivalToast",
+          "name": "Panel_TSV_TS13_arrivalToast",
+          "rect": {
+            "x": 68,
+            "y": 148,
+            "w": 364,
+            "h": 40
+          },
+          "parent": "scene",
+          "fill": "#263E41A8",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "arrivalText",
+          "name": "Txt_TSV_TS13_arrivalText",
+          "rect": {
+            "x": 130,
+            "y": 156,
+            "w": 244,
+            "h": 28
+          },
+          "parent": "arrivalToast",
+          "text": "새로운 생존자가 도착했습니다!",
+          "size": 17,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "arrivalGo",
+          "name": "Btn_TSV_TS13_arrivalGo",
+          "rect": {
+            "x": 376,
+            "y": 152,
+            "w": 52,
+            "h": 32
+          },
+          "parent": "arrivalToast",
+          "text": "»",
+          "size": 26,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "panel",
+          "key": "sheet",
+          "name": "BG_TSV_TS13_sheet",
+          "rect": {
+            "x": 0,
+            "y": 214,
+            "w": 504,
+            "h": 680
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "header",
+          "name": "BG_TSV_TS13_header",
+          "rect": {
+            "x": 0,
+            "y": 214,
+            "w": 504,
+            "h": 58
+          },
+          "parent": "sheet",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch-x"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_TSV_TS13_title",
+          "rect": {
+            "x": 12,
+            "y": 230,
+            "w": 80,
+            "h": 30
+          },
+          "parent": "header",
+          "text": "생존자",
+          "size": 24,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "help",
+          "name": "Btn_TSV_TS13_help",
+          "rect": {
+            "x": 80,
+            "y": 222,
+            "w": 40,
+            "h": 40
+          },
+          "parent": "header",
+          "text": "?",
+          "size": 26,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "mailbox",
+          "name": "Btn_TSV_TS13_mailbox",
+          "rect": {
+            "x": 432,
+            "y": 204,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "header",
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "text",
+          "key": "mailboxIconText",
+          "name": "Txt_TSV_TS13_mailboxIconText",
+          "rect": {
+            "x": 438,
+            "y": 210,
+            "w": 52,
+            "h": 42
+          },
+          "parent": "mailbox",
+          "text": "✉",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "mailboxLabel",
+          "name": "Txt_TSV_TS13_mailboxLabel",
+          "rect": {
+            "x": 412,
+            "y": 248,
+            "w": 92,
+            "h": 24
+          },
+          "parent": "header",
+          "text": "근거지 편지함",
+          "size": 14,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "plain",
+          "key": "summary",
+          "name": "Panel_TSV_TS13_summary",
+          "rect": {
+            "x": 14,
+            "y": 282,
+            "w": 476,
+            "h": 132
+          },
+          "parent": "sheet",
+          "fill": "#ACCDDA",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "stretch-x"
+        },
+        {
+          "op": "plain",
+          "key": "summaryTitle",
+          "name": "Panel_TSV_TS13_summaryTitle",
+          "rect": {
+            "x": 14,
+            "y": 282,
+            "w": 476,
+            "h": 38
+          },
+          "parent": "summary",
+          "fill": "#74B3CD",
+          "strokeWidth": 0,
+          "radius": 6,
+          "opacity": 1,
+          "anchorPreset": "stretch-x"
+        },
+        {
+          "op": "text",
+          "key": "summaryLabel",
+          "name": "Txt_TSV_TS13_summaryLabel",
+          "rect": {
+            "x": 24,
+            "y": 288,
+            "w": 240,
+            "h": 28
+          },
+          "parent": "summary",
+          "text": "생존자",
+          "size": 22,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "summaryCount",
+          "name": "Txt_TSV_TS13_summaryCount",
+          "rect": {
+            "x": 402,
+            "y": 288,
+            "w": 76,
+            "h": 28
+          },
+          "parent": "summary",
+          "text": "4/4",
+          "size": 20,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "plain",
+          "key": "status0",
+          "name": "Panel_TSV_TS13_status0",
+          "rect": {
+            "x": 38,
+            "y": 338,
+            "w": 92,
+            "h": 42
+          },
+          "parent": "summary",
+          "fill": "#C7DFE6",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statusCount0",
+          "name": "Txt_TSV_TS13_statusCount0",
+          "rect": {
+            "x": 84,
+            "y": 344,
+            "w": 34,
+            "h": 30
+          },
+          "parent": "status0",
+          "text": "3",
+          "size": 24,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "statusLabel0",
+          "name": "Txt_TSV_TS13_statusLabel0",
+          "rect": {
+            "x": 34,
+            "y": 384,
+            "w": 102,
+            "h": 24
+          },
+          "parent": "summary",
+          "text": "작업 중",
+          "size": 16,
+          "weight": 700,
+          "color": "#789DAD",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "status1",
+          "name": "Panel_TSV_TS13_status1",
+          "rect": {
+            "x": 150,
+            "y": 338,
+            "w": 92,
+            "h": 42
+          },
+          "parent": "summary",
+          "fill": "#C7DFE6",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statusCount1",
+          "name": "Txt_TSV_TS13_statusCount1",
+          "rect": {
+            "x": 196,
+            "y": 344,
+            "w": 34,
+            "h": 30
+          },
+          "parent": "status1",
+          "text": "1",
+          "size": 24,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "statusLabel1",
+          "name": "Txt_TSV_TS13_statusLabel1",
+          "rect": {
+            "x": 146,
+            "y": 384,
+            "w": 102,
+            "h": 24
+          },
+          "parent": "summary",
+          "text": "휴식 중",
+          "size": 16,
+          "weight": 700,
+          "color": "#789DAD",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "status2",
+          "name": "Panel_TSV_TS13_status2",
+          "rect": {
+            "x": 262,
+            "y": 338,
+            "w": 92,
+            "h": 42
+          },
+          "parent": "summary",
+          "fill": "#C7DFE6",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statusCount2",
+          "name": "Txt_TSV_TS13_statusCount2",
+          "rect": {
+            "x": 308,
+            "y": 344,
+            "w": 34,
+            "h": 30
+          },
+          "parent": "status2",
+          "text": "0",
+          "size": 24,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "statusLabel2",
+          "name": "Txt_TSV_TS13_statusLabel2",
+          "rect": {
+            "x": 258,
+            "y": 384,
+            "w": 102,
+            "h": 24
+          },
+          "parent": "summary",
+          "text": "아픔",
+          "size": 16,
+          "weight": 700,
+          "color": "#789DAD",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "status3",
+          "name": "Panel_TSV_TS13_status3",
+          "rect": {
+            "x": 374,
+            "y": 338,
+            "w": 92,
+            "h": 42
+          },
+          "parent": "summary",
+          "fill": "#C7DFE6",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statusCount3",
+          "name": "Txt_TSV_TS13_statusCount3",
+          "rect": {
+            "x": 420,
+            "y": 344,
+            "w": 34,
+            "h": 30
+          },
+          "parent": "status3",
+          "text": "0",
+          "size": 24,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "statusLabel3",
+          "name": "Txt_TSV_TS13_statusLabel3",
+          "rect": {
+            "x": 370,
+            "y": 384,
+            "w": 102,
+            "h": 24
+          },
+          "parent": "summary",
+          "text": "파업 중",
+          "size": 16,
+          "weight": 700,
+          "color": "#789DAD",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "list",
+          "name": "Panel_TSV_TS13_list",
+          "rect": {
+            "x": 14,
+            "y": 420,
+            "w": 476,
+            "h": 306
+          },
+          "parent": "sheet",
+          "fill": "#ACCDDA",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "overflow": "scroll-y",
+          "anchorPreset": "stretch-y"
+        },
+        {
+          "op": "plain",
+          "key": "building0",
+          "name": "Panel_TSV_TS13_building0",
+          "rect": {
+            "x": 20,
+            "y": 420,
+            "w": 464,
+            "h": 82
+          },
+          "parent": "list",
+          "fill": "#DAE9EA",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "building03d",
+          "name": "Panel_TSV_TS13_building03d",
+          "rect": {
+            "x": 26,
+            "y": 428,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "building0",
+          "fill": "#8DAEA0",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "building03dLabel",
+          "name": "Txt_TSV_TS13_building03dLabel",
+          "rect": {
+            "x": 26,
+            "y": 442,
+            "w": 64,
+            "h": 32
+          },
+          "parent": "building03d",
+          "text": "3D",
+          "size": 18,
+          "weight": 700,
+          "color": "#E7F1E9",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "building0Name",
+          "name": "Txt_TSV_TS13_building0Name",
+          "rect": {
+            "x": 104,
+            "y": 430,
+            "w": 220,
+            "h": 28
+          },
+          "parent": "building0",
+          "text": "목재 공방",
+          "size": 22,
+          "weight": 700,
+          "color": "#7496A3",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "building0Minus",
+          "name": "Btn_TSV_TS13_building0Minus",
+          "rect": {
+            "x": 336,
+            "y": 444,
+            "w": 36,
+            "h": 36
+          },
+          "parent": "building0",
+          "text": "−",
+          "size": 25,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "building0Count",
+          "name": "Txt_TSV_TS13_building0Count",
+          "rect": {
+            "x": 376,
+            "y": 450,
+            "w": 58,
+            "h": 28
+          },
+          "parent": "building0",
+          "text": "1/2",
+          "size": 18,
+          "weight": 700,
+          "color": "#244657",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "building0Plus",
+          "name": "Btn_TSV_TS13_building0Plus",
+          "rect": {
+            "x": 438,
+            "y": 444,
+            "w": 36,
+            "h": 36
+          },
+          "parent": "building0",
+          "text": "+",
+          "size": 25,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "building1",
+          "name": "Panel_TSV_TS13_building1",
+          "rect": {
+            "x": 20,
+            "y": 510,
+            "w": 464,
+            "h": 82
+          },
+          "parent": "list",
+          "fill": "#DAE9EA",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "building13d",
+          "name": "Panel_TSV_TS13_building13d",
+          "rect": {
+            "x": 26,
+            "y": 518,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "building1",
+          "fill": "#8DAEA0",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "building13dLabel",
+          "name": "Txt_TSV_TS13_building13dLabel",
+          "rect": {
+            "x": 26,
+            "y": 532,
+            "w": 64,
+            "h": 32
+          },
+          "parent": "building13d",
+          "text": "3D",
+          "size": 18,
+          "weight": 700,
+          "color": "#E7F1E9",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "building1Name",
+          "name": "Txt_TSV_TS13_building1Name",
+          "rect": {
+            "x": 104,
+            "y": 520,
+            "w": 220,
+            "h": 28
+          },
+          "parent": "building1",
+          "text": "제련 공방",
+          "size": 22,
+          "weight": 700,
+          "color": "#7496A3",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "building1Minus",
+          "name": "Btn_TSV_TS13_building1Minus",
+          "rect": {
+            "x": 336,
+            "y": 534,
+            "w": 36,
+            "h": 36
+          },
+          "parent": "building1",
+          "text": "−",
+          "size": 25,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "building1Count",
+          "name": "Txt_TSV_TS13_building1Count",
+          "rect": {
+            "x": 376,
+            "y": 540,
+            "w": 58,
+            "h": 28
+          },
+          "parent": "building1",
+          "text": "0/1",
+          "size": 18,
+          "weight": 700,
+          "color": "#244657",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "building1Plus",
+          "name": "Btn_TSV_TS13_building1Plus",
+          "rect": {
+            "x": 438,
+            "y": 534,
+            "w": 36,
+            "h": 36
+          },
+          "parent": "building1",
+          "text": "+",
+          "size": 25,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "building2",
+          "name": "Panel_TSV_TS13_building2",
+          "rect": {
+            "x": 20,
+            "y": 600,
+            "w": 464,
+            "h": 82
+          },
+          "parent": "list",
+          "fill": "#DAE9EA",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "building23d",
+          "name": "Panel_TSV_TS13_building23d",
+          "rect": {
+            "x": 26,
+            "y": 608,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "building2",
+          "fill": "#8DAEA0",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "building23dLabel",
+          "name": "Txt_TSV_TS13_building23dLabel",
+          "rect": {
+            "x": 26,
+            "y": 622,
+            "w": 64,
+            "h": 32
+          },
+          "parent": "building23d",
+          "text": "3D",
+          "size": 18,
+          "weight": 700,
+          "color": "#E7F1E9",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "building2Name",
+          "name": "Txt_TSV_TS13_building2Name",
+          "rect": {
+            "x": 104,
+            "y": 610,
+            "w": 220,
+            "h": 28
+          },
+          "parent": "building2",
+          "text": "주방",
+          "size": 22,
+          "weight": 700,
+          "color": "#7496A3",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "building2Minus",
+          "name": "Btn_TSV_TS13_building2Minus",
+          "rect": {
+            "x": 336,
+            "y": 624,
+            "w": 36,
+            "h": 36
+          },
+          "parent": "building2",
+          "text": "−",
+          "size": 25,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "building2Count",
+          "name": "Txt_TSV_TS13_building2Count",
+          "rect": {
+            "x": 376,
+            "y": 630,
+            "w": 58,
+            "h": 28
+          },
+          "parent": "building2",
+          "text": "1/1",
+          "size": 18,
+          "weight": 700,
+          "color": "#244657",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "building2Plus",
+          "name": "Btn_TSV_TS13_building2Plus",
+          "rect": {
+            "x": 438,
+            "y": 624,
+            "w": 36,
+            "h": 36
+          },
+          "parent": "building2",
+          "text": "+",
+          "size": 25,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "building3",
+          "name": "Panel_TSV_TS13_building3",
+          "rect": {
+            "x": 20,
+            "y": 690,
+            "w": 464,
+            "h": 82
+          },
+          "parent": "list",
+          "fill": "#DAE9EA",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "building33d",
+          "name": "Panel_TSV_TS13_building33d",
+          "rect": {
+            "x": 26,
+            "y": 698,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "building3",
+          "fill": "#8DAEA0",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "building33dLabel",
+          "name": "Txt_TSV_TS13_building33dLabel",
+          "rect": {
+            "x": 26,
+            "y": 712,
+            "w": 64,
+            "h": 32
+          },
+          "parent": "building33d",
+          "text": "3D",
+          "size": 18,
+          "weight": 700,
+          "color": "#E7F1E9",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "building3Name",
+          "name": "Txt_TSV_TS13_building3Name",
+          "rect": {
+            "x": 104,
+            "y": 700,
+            "w": 220,
+            "h": 28
+          },
+          "parent": "building3",
+          "text": "온실",
+          "size": 22,
+          "weight": 700,
+          "color": "#7496A3",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "auto",
+          "name": "Btn_TSV_TS13_auto",
+          "rect": {
+            "x": 84,
+            "y": 734,
+            "w": 336,
+            "h": 64
+          },
+          "parent": "sheet",
+          "text": "자동 파견",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/button-green3.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "3",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "plain",
+          "key": "footer",
+          "name": "Panel_TSV_TS13_footer",
+          "rect": {
+            "x": 0,
+            "y": 810,
+            "w": 504,
+            "h": 84
+          },
+          "parent": "sheet",
+          "fill": "#006D8A",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "button",
+          "key": "back",
+          "name": "Btn_TSV_TS13_back",
+          "rect": {
+            "x": 0,
+            "y": 818,
+            "w": 74,
+            "h": 64
+          },
+          "parent": "footer",
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "backIcon",
+          "name": "Img_TSV_TS13_backIcon",
+          "rect": {
+            "x": 18,
+            "y": 834,
+            "w": 40,
+            "h": 32
+          },
+          "parent": "back",
+          "fit": "contain",
+          "ref": "sha256-bfb17132c14dd0ee750de58681c9c5fef9ebaf4d7d80111abec3de1fbf91bc6b.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "dispatchTab",
+          "name": "Btn_TSV_TS13_dispatchTab",
+          "rect": {
+            "x": 88,
+            "y": 810,
+            "w": 202,
+            "h": 70
+          },
+          "parent": "footer",
+          "text": "파견",
+          "size": 26,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "detailTab",
+          "name": "Btn_TSV_TS13_detailTab",
+          "rect": {
+            "x": 298,
+            "y": 810,
+            "w": 200,
+            "h": 70
+          },
+          "parent": "footer",
+          "text": "속성 상세정보",
+          "size": 24,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        }
+      ],
+      "notes": [
+        "source sheet를native modal로분류제안.상단영지0~214유지,전체풀딤없음.",
+        "상단 영웅 지구 1레벨 잠금 해제/새로운 생존자가 도착했습니다!는일시토스트/공통배너.",
+        "온실잘린수치추정금지.목록행같은크기.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "건물썸네일은원본3D건물구역이므로plain+3D;건물명/파견수/±는native.온실수치잘림으로생성안함.",
+        "상단toast2개는관측된일시overlay;전역고정메뉴아님."
+      ],
+      "proposedLinks": [
+        {
+          "action": "근거지편지함",
+          "target": "TS15",
+          "basis": "visible entry; exact source click unverified",
+          "proposal": "보이는진입아이콘만이용가능;returnToTS13보존",
+          "payload": {
+            "baseId": "fixture"
+          }
+        },
+        {
+          "action": "뒤로",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "호출부dismiss",
+          "payload": {}
+        },
+        {
+          "action": "속성상세정보",
+          "target": null,
+          "basis": "destination unseen",
+          "proposal": "가짜상세페이지추가금지",
+          "payload": {}
+        },
+        {
+          "action": "−/+ / 자동파견",
+          "target": "local fixture",
+          "basis": "results unseen",
+          "proposal": "파견결과/계산규칙/수치창작금지",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [],
+      "observedStates": {
+        "population": "4/4",
+        "working": 3,
+        "resting": 1,
+        "ill": 0,
+        "striking": 0,
+        "buildings": [
+          {
+            "name": "목재 공방",
+            "count": "1/2"
+          },
+          {
+            "name": "제련 공방",
+            "count": "0/1"
+          },
+          {
+            "name": "주방",
+            "count": "1/1"
+          },
+          {
+            "name": "온실",
+            "count": null
+          }
+        ]
+      },
+      "sourceReferences": [
+        "TS13-R01"
+      ]
+    },
+    {
+      "id": "TS15",
+      "name": "Page_TSV_Mailbox",
+      "nativeKind": "page",
+      "purpose": "근거지 편지함 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_TSV_TS15_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#143C50",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "page",
+          "name": "BG_TSV_TS15_page",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "header",
+          "name": "BG_TSV_TS15_header",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 78
+          },
+          "parent": "page",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch-x"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_TSV_TS15_title",
+          "rect": {
+            "x": 130,
+            "y": 16,
+            "w": 210,
+            "h": 42
+          },
+          "parent": "header",
+          "text": "근거지 편지함",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "help",
+          "name": "Btn_TSV_TS15_help",
+          "rect": {
+            "x": 316,
+            "y": 14,
+            "w": 40,
+            "h": 40
+          },
+          "parent": "header",
+          "text": "?",
+          "size": 26,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "mailSlot",
+          "name": "Panel_TSV_TS15_mailSlot",
+          "rect": {
+            "x": 82,
+            "y": 90,
+            "w": 342,
+            "h": 20
+          },
+          "parent": "page",
+          "fill": "#00465D",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "panel",
+          "key": "morale",
+          "name": "BG_TSV_TS15_morale",
+          "rect": {
+            "x": 18,
+            "y": 122,
+            "w": 468,
+            "h": 228
+          },
+          "parent": "page",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch-x"
+        },
+        {
+          "op": "text",
+          "key": "status",
+          "name": "Txt_TSV_TS15_status",
+          "rect": {
+            "x": 46,
+            "y": 138,
+            "w": 360,
+            "h": 50
+          },
+          "parent": "morale",
+          "text": "생존자들에게 약간의 불만이 있지만, 그래도 여전히 당신을 믿고 있습니다!",
+          "size": 18,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "gift",
+          "name": "Btn_TSV_TS15_gift",
+          "rect": {
+            "x": 424,
+            "y": 136,
+            "w": 40,
+            "h": 40
+          },
+          "parent": "morale",
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "skinMode": "9",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "image",
+          "key": "giftIcon",
+          "name": "Img_TSV_TS15_giftIcon",
+          "rect": {
+            "x": 424,
+            "y": 136,
+            "w": 40,
+            "h": 40
+          },
+          "parent": "gift",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/objects-b-atlas-ui-v003.png",
+          "region": [
+            300,
+            150,
+            150,
+            150
+          ],
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "statLabel0",
+          "name": "Txt_TSV_TS15_statLabel0",
+          "rect": {
+            "x": 40,
+            "y": 194,
+            "w": 54,
+            "h": 26
+          },
+          "parent": "morale",
+          "text": "식사",
+          "size": 16,
+          "weight": 700,
+          "color": "#397D93",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "statTrack0",
+          "name": "Panel_TSV_TS15_statTrack0",
+          "rect": {
+            "x": 70,
+            "y": 198,
+            "w": 352,
+            "h": 20
+          },
+          "parent": "morale",
+          "fill": "#00516A",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "statFill0",
+          "name": "Panel_TSV_TS15_statFill0",
+          "rect": {
+            "x": 70,
+            "y": 198,
+            "w": 180,
+            "h": 20
+          },
+          "parent": "morale",
+          "fill": "#F75C59",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statVal0",
+          "name": "Txt_TSV_TS15_statVal0",
+          "rect": {
+            "x": 154,
+            "y": 197,
+            "w": 186,
+            "h": 24
+          },
+          "parent": "morale",
+          "text": "51.00",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statFace0",
+          "name": "Txt_TSV_TS15_statFace0",
+          "rect": {
+            "x": 430,
+            "y": 192,
+            "w": 30,
+            "h": 32
+          },
+          "parent": "morale",
+          "text": "☻",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFCA30",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statLabel1",
+          "name": "Txt_TSV_TS15_statLabel1",
+          "rect": {
+            "x": 40,
+            "y": 238,
+            "w": 54,
+            "h": 26
+          },
+          "parent": "morale",
+          "text": "수면",
+          "size": 16,
+          "weight": 700,
+          "color": "#397D93",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "statTrack1",
+          "name": "Panel_TSV_TS15_statTrack1",
+          "rect": {
+            "x": 70,
+            "y": 242,
+            "w": 352,
+            "h": 20
+          },
+          "parent": "morale",
+          "fill": "#00516A",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "statFill1",
+          "name": "Panel_TSV_TS15_statFill1",
+          "rect": {
+            "x": 70,
+            "y": 242,
+            "w": 176,
+            "h": 20
+          },
+          "parent": "morale",
+          "fill": "#35B5EB",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statVal1",
+          "name": "Txt_TSV_TS15_statVal1",
+          "rect": {
+            "x": 154,
+            "y": 241,
+            "w": 186,
+            "h": 24
+          },
+          "parent": "morale",
+          "text": "50.00",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statFace1",
+          "name": "Txt_TSV_TS15_statFace1",
+          "rect": {
+            "x": 430,
+            "y": 236,
+            "w": 30,
+            "h": 32
+          },
+          "parent": "morale",
+          "text": "☻",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFCA30",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statLabel2",
+          "name": "Txt_TSV_TS15_statLabel2",
+          "rect": {
+            "x": 40,
+            "y": 282,
+            "w": 54,
+            "h": 26
+          },
+          "parent": "morale",
+          "text": "기분",
+          "size": 16,
+          "weight": 700,
+          "color": "#397D93",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "statTrack2",
+          "name": "Panel_TSV_TS15_statTrack2",
+          "rect": {
+            "x": 70,
+            "y": 286,
+            "w": 352,
+            "h": 20
+          },
+          "parent": "morale",
+          "fill": "#00516A",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "statFill2",
+          "name": "Panel_TSV_TS15_statFill2",
+          "rect": {
+            "x": 70,
+            "y": 286,
+            "w": 180,
+            "h": 20
+          },
+          "parent": "morale",
+          "fill": "#F3AF27",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statVal2",
+          "name": "Txt_TSV_TS15_statVal2",
+          "rect": {
+            "x": 154,
+            "y": 285,
+            "w": 186,
+            "h": 24
+          },
+          "parent": "morale",
+          "text": "51.00",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "statFace2",
+          "name": "Txt_TSV_TS15_statFace2",
+          "rect": {
+            "x": 430,
+            "y": 280,
+            "w": 30,
+            "h": 32
+          },
+          "parent": "morale",
+          "text": "☻",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFCA30",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "messages",
+          "name": "Panel_TSV_TS15_messages",
+          "rect": {
+            "x": 18,
+            "y": 354,
+            "w": 468,
+            "h": 444
+          },
+          "parent": "page",
+          "fill": "#00546B",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "overflow": "scroll-y",
+          "anchorPreset": "stretch-y"
+        },
+        {
+          "op": "text",
+          "key": "eventTitle",
+          "name": "Txt_TSV_TS15_eventTitle",
+          "rect": {
+            "x": 28,
+            "y": 358,
+            "w": 300,
+            "h": 28
+          },
+          "parent": "messages",
+          "text": "생존자 사건",
+          "size": 18,
+          "weight": 700,
+          "color": "#E1EFF2",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "eventPortrait",
+          "name": "Img_TSV_TS15_eventPortrait",
+          "rect": {
+            "x": 26,
+            "y": 386,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "messages",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+          "region": [
+            0,
+            0,
+            150,
+            150
+          ],
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "eventName",
+          "name": "Txt_TSV_TS15_eventName",
+          "rect": {
+            "x": 26,
+            "y": 452,
+            "w": 64,
+            "h": 24
+          },
+          "parent": "messages",
+          "text": "미아",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "panel",
+          "key": "eventBubble",
+          "name": "BG_TSV_TS15_eventBubble",
+          "rect": {
+            "x": 98,
+            "y": 386,
+            "w": 380,
+            "h": 92
+          },
+          "parent": "messages",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "eventText",
+          "name": "Txt_TSV_TS15_eventText",
+          "rect": {
+            "x": 114,
+            "y": 396,
+            "w": 302,
+            "h": 66
+          },
+          "parent": "eventBubble",
+          "text": "도저히 민가-1의 변기을(를) 참을 수가 없어!",
+          "size": 21,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "eventAction",
+          "name": "Btn_TSV_TS15_eventAction",
+          "rect": {
+            "x": 348,
+            "y": 446,
+            "w": 122,
+            "h": 28
+          },
+          "parent": "eventBubble",
+          "text": "건설하기 »",
+          "size": 17,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "reviewTitle",
+          "name": "Txt_TSV_TS15_reviewTitle",
+          "rect": {
+            "x": 28,
+            "y": 494,
+            "w": 300,
+            "h": 28
+          },
+          "parent": "messages",
+          "text": "생존자 평가",
+          "size": 18,
+          "weight": 700,
+          "color": "#E1EFF2",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "review1Portrait",
+          "name": "Img_TSV_TS15_review1Portrait",
+          "rect": {
+            "x": 26,
+            "y": 522,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "messages",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+          "region": [
+            0,
+            0,
+            150,
+            150
+          ],
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "review1Name",
+          "name": "Txt_TSV_TS15_review1Name",
+          "rect": {
+            "x": 26,
+            "y": 588,
+            "w": 64,
+            "h": 24
+          },
+          "parent": "messages",
+          "text": "미아",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "panel",
+          "key": "review1Bubble",
+          "name": "BG_TSV_TS15_review1Bubble",
+          "rect": {
+            "x": 98,
+            "y": 522,
+            "w": 380,
+            "h": 92
+          },
+          "parent": "messages",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "review1Text",
+          "name": "Txt_TSV_TS15_review1Text",
+          "rect": {
+            "x": 114,
+            "y": 532,
+            "w": 302,
+            "h": 66
+          },
+          "parent": "review1Bubble",
+          "text": "이곳 사람들은 모두 친절해서 여기가 마음에 들어.",
+          "size": 21,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "review1Like",
+          "name": "Btn_TSV_TS15_review1Like",
+          "rect": {
+            "x": 436,
+            "y": 534,
+            "w": 36,
+            "h": 60
+          },
+          "parent": "review1Bubble",
+          "text": "👍",
+          "size": 24,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "review2Portrait",
+          "name": "Img_TSV_TS15_review2Portrait",
+          "rect": {
+            "x": 26,
+            "y": 624,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "messages",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+          "region": [
+            0,
+            0,
+            150,
+            150
+          ],
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "review2Name",
+          "name": "Txt_TSV_TS15_review2Name",
+          "rect": {
+            "x": 26,
+            "y": 690,
+            "w": 64,
+            "h": 24
+          },
+          "parent": "messages",
+          "text": "미아",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "panel",
+          "key": "review2Bubble",
+          "name": "BG_TSV_TS15_review2Bubble",
+          "rect": {
+            "x": 98,
+            "y": 624,
+            "w": 380,
+            "h": 92
+          },
+          "parent": "messages",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "review2Text",
+          "name": "Txt_TSV_TS15_review2Text",
+          "rect": {
+            "x": 114,
+            "y": 634,
+            "w": 302,
+            "h": 66
+          },
+          "parent": "review2Bubble",
+          "text": "그때 여기로 오게 되어서 정말 다행이야.",
+          "size": 21,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "review2Like",
+          "name": "Btn_TSV_TS15_review2Like",
+          "rect": {
+            "x": 436,
+            "y": 636,
+            "w": 36,
+            "h": 60
+          },
+          "parent": "review2Bubble",
+          "text": "👍",
+          "size": 24,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "review3Portrait",
+          "name": "Img_TSV_TS15_review3Portrait",
+          "rect": {
+            "x": 26,
+            "y": 726,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "messages",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+          "region": [
+            0,
+            0,
+            150,
+            150
+          ],
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "review3Name",
+          "name": "Txt_TSV_TS15_review3Name",
+          "rect": {
+            "x": 26,
+            "y": 792,
+            "w": 64,
+            "h": 24
+          },
+          "parent": "messages",
+          "text": "미아",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "panel",
+          "key": "review3Bubble",
+          "name": "BG_TSV_TS15_review3Bubble",
+          "rect": {
+            "x": 98,
+            "y": 726,
+            "w": 380,
+            "h": 92
+          },
+          "parent": "messages",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "review3Text",
+          "name": "Txt_TSV_TS15_review3Text",
+          "rect": {
+            "x": 114,
+            "y": 736,
+            "w": 302,
+            "h": 66
+          },
+          "parent": "review3Bubble",
+          "text": "그때 여기로 오게 되어서 정말 다행이야.",
+          "size": 21,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "review3Like",
+          "name": "Btn_TSV_TS15_review3Like",
+          "rect": {
+            "x": 436,
+            "y": 738,
+            "w": 36,
+            "h": 60
+          },
+          "parent": "review3Bubble",
+          "text": "👍",
+          "size": 24,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "footer",
+          "name": "Panel_TSV_TS15_footer",
+          "rect": {
+            "x": 0,
+            "y": 814,
+            "w": 504,
+            "h": 80
+          },
+          "parent": "page",
+          "fill": "#00546B",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "button",
+          "key": "back",
+          "name": "Btn_TSV_TS15_back",
+          "rect": {
+            "x": 0,
+            "y": 818,
+            "w": 74,
+            "h": 64
+          },
+          "parent": "footer",
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "backIcon",
+          "name": "Img_TSV_TS15_backIcon",
+          "rect": {
+            "x": 18,
+            "y": 834,
+            "w": 40,
+            "h": 32
+          },
+          "parent": "back",
+          "fit": "contain",
+          "ref": "sha256-bfb17132c14dd0ee750de58681c9c5fef9ebaf4d7d80111abec3de1fbf91bc6b.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "mailboxTab",
+          "name": "Btn_TSV_TS15_mailboxTab",
+          "rect": {
+            "x": 84,
+            "y": 818,
+            "w": 170,
+            "h": 64
+          },
+          "parent": "footer",
+          "text": "근거지 편지함",
+          "size": 25,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "albumTab",
+          "name": "Btn_TSV_TS15_albumTab",
+          "rect": {
+            "x": 260,
+            "y": 818,
+            "w": 238,
+            "h": 64
+          },
+          "parent": "footer",
+          "text": "생존자 도감",
+          "size": 27,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        }
+      ],
+      "notes": [
+        "대표는미아변기건설요청/미아평가3행.제이슨교환사건/사건없음은다른state.",
+        "원문 변기을(를) 조사화면그대로보존. 관계진행1/3막대는일시연출로분리.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "원본식사/수면/기분은아이콘.기존정확아이콘미확인으로작은native라벨을동일뜻제안대체;원본무문자아이콘과시각동등아님.",
+        "미아평가row2/3같은문구는원본에실재.행3하단clip."
+      ],
+      "proposedLinks": [
+        {
+          "action": "생존자도감",
+          "target": "TS30",
+          "basis": "sequence-observed93→94s",
+          "proposal": "실제탭으로전환,fromScreenId=TS15",
+          "payload": {}
+        },
+        {
+          "action": "제이슨 교환하기 »",
+          "target": "TS16",
+          "basis": "catalog state; exact entry unverified",
+          "proposal": "제이슨사건state일때만보이는action으로연결.미아건설하기오연결금지",
+          "payload": {}
+        },
+        {
+          "action": "미아 건설하기 »",
+          "target": null,
+          "basis": "destination unspecified",
+          "proposal": "대상변기/민가정확연결근거없음",
+          "payload": {}
+        },
+        {
+          "action": "뒤로",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "실제호출부TS13등보존",
+          "payload": {}
+        },
+        {
+          "action": "선물/도움말/좋아요",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "미관측보상/도움말생성금지",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [],
+      "observedStates": {
+        "food": "51.00",
+        "sleep": "50.00",
+        "mood": "51.00",
+        "eventVariant": "mia-toilet-request"
+      },
+      "sourceReferences": [
+        "TS15-R01"
+      ]
+    },
+    {
+      "id": "TS04",
+      "name": "Modal_TSV_StoryDialogue",
+      "nativeKind": "modal",
+      "purpose": "스토리 / 주민 대화 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_TSV_TS04_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#143C50",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "plain",
+          "key": "scene",
+          "name": "Panel_TSV_TS04_scene",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 698
+          },
+          "parent": "root",
+          "fill": "#416851",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "text",
+          "key": "sceneLabel",
+          "name": "Txt_TSV_TS04_sceneLabel",
+          "rect": {
+            "x": 0,
+            "y": 331.0,
+            "w": 504,
+            "h": 36
+          },
+          "parent": "scene",
+          "text": "3D",
+          "size": 28,
+          "weight": 700,
+          "color": "#D5E5D8",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "panel",
+          "key": "worldBubble",
+          "name": "BG_TSV_TS04_worldBubble",
+          "rect": {
+            "x": 278,
+            "y": 230,
+            "w": 160,
+            "h": 114
+          },
+          "parent": "scene",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "worldBubbleText",
+          "name": "Txt_TSV_TS04_worldBubbleText",
+          "rect": {
+            "x": 294,
+            "y": 244,
+            "w": 128,
+            "h": 88
+          },
+          "parent": "worldBubble",
+          "text": "씨앗이 싹을 틔우려고 애쓰는 것처럼 열심히 일할 게!",
+          "size": 22,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "damonPortrait",
+          "name": "Img_TSV_TS04_damonPortrait",
+          "rect": {
+            "x": 0,
+            "y": 454,
+            "w": 256,
+            "h": 250
+          },
+          "parent": "root",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+          "region": [
+            300,
+            0,
+            150,
+            150
+          ],
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "panel",
+          "key": "dialog",
+          "name": "BG_TSV_TS04_dialog",
+          "rect": {
+            "x": 16,
+            "y": 698,
+            "w": 476,
+            "h": 192
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "panel",
+          "key": "nameTab",
+          "name": "BG_TSV_TS04_nameTab",
+          "rect": {
+            "x": 8,
+            "y": 692,
+            "w": 172,
+            "h": 42
+          },
+          "parent": "dialog",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "name",
+          "name": "Txt_TSV_TS04_name",
+          "rect": {
+            "x": 20,
+            "y": 696,
+            "w": 146,
+            "h": 36
+          },
+          "parent": "nameTab",
+          "text": "데이몬",
+          "size": 27,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "body",
+          "name": "Txt_TSV_TS04_body",
+          "rect": {
+            "x": 36,
+            "y": 756,
+            "w": 424,
+            "h": 82
+          },
+          "parent": "dialog",
+          "text": "정말 고마워. 드디어 살 곳이 생겼어!",
+          "size": 22,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "next",
+          "name": "Btn_TSV_TS04_next",
+          "rect": {
+            "x": 228,
+            "y": 850,
+            "w": 48,
+            "h": 40
+          },
+          "parent": "dialog",
+          "text": "▾",
+          "size": 24,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "skip",
+          "name": "Btn_TSV_TS04_skip",
+          "rect": {
+            "x": 404,
+            "y": 854,
+            "w": 80,
+            "h": 32
+          },
+          "parent": "dialog",
+          "text": "스킵 »",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        }
+      ],
+      "notes": [
+        "대표데이몬. 월드말풍선은고정대화판과별도부품.",
+        "화자/좌우초상변경은state;다른대사를임의순서로이어붙이지않음. X는원본에없음.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "반신새그림resident-dayun은데이몬계열제안.원본정확초상동등성미검수.",
+        "다음대사없는상태에서임의대사순서/게임분기를생성하지않음."
+      ],
+      "proposedLinks": [
+        {
+          "action": "다음/스킵",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "다음대사순서/원문미확인. 스킵호출부dismiss는제작제안만",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [],
+      "observedStates": {
+        "speaker": "데이몬",
+        "body": "정말 고마워. 드디어 살 곳이 생겼어!"
+      },
+      "sourceReferences": [
+        "TS04-R01"
+      ]
+    },
+    {
+      "id": "TS06",
+      "name": "Modal_TSV_TutorialChoice",
+      "nativeKind": "modal",
+      "purpose": "튜토리얼 대응 방식 2택 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_TSV_TS06_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#143C50",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "titlePill",
+          "name": "BG_TSV_TS06_titlePill",
+          "rect": {
+            "x": 176,
+            "y": 156,
+            "w": 154,
+            "h": 50
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_TSV_TS06_title",
+          "rect": {
+            "x": 178,
+            "y": 164,
+            "w": 150,
+            "h": 32
+          },
+          "parent": "titlePill",
+          "text": "대응 방식 선택",
+          "size": 20,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "open",
+          "name": "Btn_TSV_TS06_open",
+          "rect": {
+            "x": 64,
+            "y": 256,
+            "w": 164,
+            "h": 230
+          },
+          "parent": "root",
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "image",
+          "key": "openArt",
+          "name": "Img_TSV_TS06_openArt",
+          "rect": {
+            "x": 74,
+            "y": 266,
+            "w": 144,
+            "h": 172
+          },
+          "parent": "open",
+          "fit": "cover",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/banners-b-atlas-ui-v003.png",
+          "region": [
+            4,
+            382,
+            312,
+            190
+          ],
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "openText",
+          "name": "Txt_TSV_TS06_openText",
+          "rect": {
+            "x": 68,
+            "y": 444,
+            "w": 156,
+            "h": 34
+          },
+          "parent": "open",
+          "text": "문을 열어 수용하기",
+          "size": 18,
+          "weight": 700,
+          "color": "#244657",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "electric",
+          "name": "Btn_TSV_TS06_electric",
+          "rect": {
+            "x": 276,
+            "y": 256,
+            "w": 164,
+            "h": 230
+          },
+          "parent": "root",
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "9",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "image",
+          "key": "electricArt",
+          "name": "Img_TSV_TS06_electricArt",
+          "rect": {
+            "x": 286,
+            "y": 266,
+            "w": 144,
+            "h": 172
+          },
+          "parent": "electric",
+          "fit": "cover",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/banners-c-atlas-ui-v003.png",
+          "region": [
+            4,
+            382,
+            312,
+            190
+          ],
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "electricText",
+          "name": "Txt_TSV_TS06_electricText",
+          "rect": {
+            "x": 280,
+            "y": 444,
+            "w": 156,
+            "h": 34
+          },
+          "parent": "electric",
+          "text": "바로 방전하기",
+          "size": 18,
+          "weight": 700,
+          "color": "#244657",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "plain",
+          "key": "selectionTop",
+          "name": "Panel_TSV_TS06_selectionTop",
+          "rect": {
+            "x": 52,
+            "y": 244,
+            "w": 190,
+            "h": 6
+          },
+          "parent": "root",
+          "fill": "#2BC7D2",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "center"
+        },
+        {
+          "op": "plain",
+          "key": "selectionBottom",
+          "name": "Panel_TSV_TS06_selectionBottom",
+          "rect": {
+            "x": 52,
+            "y": 494,
+            "w": 190,
+            "h": 6
+          },
+          "parent": "root",
+          "fill": "#2BC7D2",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "center"
+        },
+        {
+          "op": "plain",
+          "key": "descriptionPanel",
+          "name": "Panel_TSV_TS06_descriptionPanel",
+          "rect": {
+            "x": 66,
+            "y": 518,
+            "w": 374,
+            "h": 86
+          },
+          "parent": "root",
+          "fill": "#112C16C9",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "center"
+        },
+        {
+          "op": "text",
+          "key": "description",
+          "name": "Txt_TSV_TS06_description",
+          "rect": {
+            "x": 88,
+            "y": 534,
+            "w": 332,
+            "h": 58
+          },
+          "parent": "descriptionPanel",
+          "text": "생존자를 구할 수 있지만 문을 열면 감염자들이 몰려올 수 있습니다.",
+          "size": 22,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "select",
+          "name": "Btn_TSV_TS06_select",
+          "rect": {
+            "x": 170,
+            "y": 662,
+            "w": 164,
+            "h": 64
+          },
+          "parent": "root",
+          "text": "선택",
+          "size": 27,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/button-green3.webp",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "skinMode": "3",
+          "anchorPreset": "bottom-left"
+        }
+      ],
+      "notes": [
+        "좌측선택관측;우측은커서만.우측설명/분기결과미확인.",
+        "원본X/바깥닫기힌트없음.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "선택표시native상하강조선은기본패널제안이며원본ㄱ자브래킷과정확동등미확인.",
+        "장면새그림이원본보다가로형이라card내cover;원화원본파일은유지.우측설명미관측."
+      ],
+      "proposedLinks": [
+        {
+          "action": "카드선택",
+          "target": "local state",
+          "basis": "left selected observed",
+          "proposal": "카드부모처리;우측미관측설명창작금지",
+          "payload": {}
+        },
+        {
+          "action": "선택",
+          "target": null,
+          "basis": "result unverified",
+          "proposal": "게임분기임의연결금지;단독보기진입미검수",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [],
+      "observedStates": {},
+      "sourceReferences": [
+        "TS06-R01"
+      ],
+      "stateControlsRequired": [
+        {
+          "keys": [
+            "open",
+            "electric"
+          ],
+          "mode": "single-selection-fixture",
+          "initialSelected": [
+            "open"
+          ],
+          "sourceResult": "right-card selection result/description unobserved",
+          "requiredNativeConfiguration": "선택강조는부모카드selected.우측미관측본문추가금지"
+        }
+      ]
+    }
+  ],
+  "remainingFamilyIds": [],
+  "completedRecipeOnly": true,
+  "scope": {
+    "families": 7,
+    "actions": 229
+  },
+  "validation": {
+    "acceptedOps": true,
+    "uniqueKeys": true,
+    "allParentsCreatedEarlier": true,
+    "allPositiveRects": true,
+    "imageAndSkinPathsExist": true,
+    "assetRefsInReadMap": true,
+    "nativeGUIExecuted": false,
+    "allParentChainsAcyclic": true,
+    "atlasRegionsWithinSourcePixels": true,
+    "finalFourArtPathsConfirmed": true
+  },
+  "updatedAtKST": "2026-11-19T09:37:28.464517+09:00",
+  "artFinalization": {
+    "title": "/ui-studio/source/assets/import-staging/tile-finish-20261119/title-illustration-ui-v005.png",
+    "anvil": {
+      "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/celebration-a-atlas-ui-v002.png",
+      "region": [
+        25,
+        56,
+        272,
+        232
+      ]
+    },
+    "plant": {
+      "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/powerplant-emblem-ui-v003.png",
+      "region": [
+        0,
+        105,
+        316,
+        150
+      ]
+    },
+    "rainbow": {
+      "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/celebration-b-atlas-ui-v002.png",
+      "region": [
+        21,
+        47,
+        280,
+        190
+      ]
+    },
+    "confetti": {
+      "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/celebration-b-atlas-ui-v002.png",
+      "region": [
+        339,
+        19,
+        278,
+        268
+      ]
+    },
+    "directlyViewedAllFinalProductionFiles": true
+  }
+}

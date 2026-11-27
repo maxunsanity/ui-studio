@@ -1,0 +1,976 @@
+{
+  "title": "Racing09 assembly quick sheet",
+  "createdAtKST": "2026-11-17T02:27:59.954514+09:00",
+  "status": "제안(검수 대기)·측정만",
+  "authorization": {
+    "AGENTSSection": "2026-11-17 02:19 KST latest direct resume after90%",
+    "usedPercentObserved": 90,
+    "ordinaryUsageAllowedObserved": true,
+    "noNewStopPercent": true,
+    "hardStopKST": "2026-11-17 08:00",
+    "resetOrPurchase": false
+  },
+  "reference": {
+    "path": "docs/reference/monopoly-go/20261116-ten-screens/09_event-offer.png",
+    "size": [
+      418,
+      747
+    ],
+    "sha256": "6885f0217168b5360927fdd30bafa2c6ffc4d37d488530dd39428b7a468c6295",
+    "actuallyViewed": true,
+    "pixelsCopied": false
+  },
+  "planRead": "docs/plans/20261116-ten-screen-assembly.md:126-130",
+  "initialReadOnlyDesign": {
+    "revision": 153,
+    "sha256": "f8100edccb47d6a6f012a427a1182f80817a490174cb0716bd662111092e78ac",
+    "screens": 8,
+    "parts": 656,
+    "edges": 14
+  },
+  "followupReadRevision": 158,
+  "coordinateContract": {
+    "logicalSize": [
+      551,
+      984
+    ],
+    "uniformWidthScale": 1.3181818181818181,
+    "widthScaledSourceHeight": 984.6818181818181,
+    "nativeMinusWidthScaledHeight": -0.6818181818181301,
+    "rule": "Use s for x/y/w/h, never independent984/747 Y stretch. Source551×984.6818 exceeds nativeheight984 by.6818; crop background bottom only as a production proposal. Main modal controls/title lie inside984.",
+    "rectFormat": "[x,y,w,h]px; local is parent-origin-subtracted source mapped with same s.",
+    "precision": "Approved plan rects quoted. Other visible bounds manually measured ±3 sourcepx; decimals are calculation precision."
+  },
+  "rectangles": [
+    {
+      "key": "Dim_Racing_Backdrop",
+      "parent": "root",
+      "sourceRect": [
+        0,
+        0,
+        418,
+        747
+      ],
+      "globalRect551": [
+        0.0,
+        0.0,
+        551.0,
+        984.68
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        551.0,
+        984.68
+      ],
+      "role": "single-modal-dim",
+      "notes": "Keep actual caller Main behind dim; do not copy the screenshot Main or its old HUD values."
+    },
+    {
+      "key": "Panel_Racing_Offer",
+      "parent": "root",
+      "sourceRect": [
+        33,
+        96,
+        360,
+        615
+      ],
+      "globalRect551": [
+        43.5,
+        126.55,
+        474.55,
+        810.68
+      ],
+      "parentRelativeRect551": [
+        43.5,
+        126.55,
+        474.55,
+        810.68
+      ],
+      "role": "modal-panel",
+      "notes": "Approved plan bounds; visual outer border/rounding ±2 sourcepx. Root fullscreen transparent overlay is proposed, actual target not created by this task."
+    },
+    {
+      "key": "BG_Racing_Offer",
+      "parent": "Panel_Racing_Offer",
+      "sourceRect": [
+        33,
+        96,
+        360,
+        615
+      ],
+      "globalRect551": [
+        43.5,
+        126.55,
+        474.55,
+        810.68
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        474.55,
+        810.68
+      ],
+      "role": "background"
+    },
+    {
+      "key": "Frame_Racing_Offer",
+      "parent": "Panel_Racing_Offer",
+      "sourceRect": [
+        33,
+        96,
+        360,
+        615
+      ],
+      "globalRect551": [
+        43.5,
+        126.55,
+        474.55,
+        810.68
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        474.55,
+        810.68
+      ],
+      "role": "separate-frame"
+    },
+    {
+      "key": "Group_Racing_Title",
+      "parent": "root",
+      "sourceRect": [
+        117,
+        39,
+        188,
+        120
+      ],
+      "globalRect551": [
+        154.23,
+        51.41,
+        247.82,
+        158.18
+      ],
+      "parentRelativeRect551": [
+        154.23,
+        51.41,
+        247.82,
+        158.18
+      ],
+      "role": "outside-panel-title",
+      "notes": "Separate sibling of Panel so Panel clipping cannot cut off title/flags/ribbon."
+    },
+    {
+      "key": "Txt_Racing_TitleLine1",
+      "parent": "Group_Racing_Title",
+      "sourceRect": [
+        144,
+        43,
+        136,
+        44
+      ],
+      "globalRect551": [
+        189.82,
+        56.68,
+        179.27,
+        58.0
+      ],
+      "parentRelativeRect551": [
+        35.59,
+        5.27,
+        179.27,
+        58.0
+      ],
+      "role": "native-text",
+      "observedText": "레이싱"
+    },
+    {
+      "key": "Txt_Racing_TitleLine2",
+      "parent": "Group_Racing_Title",
+      "sourceRect": [
+        154,
+        82,
+        112,
+        42
+      ],
+      "globalRect551": [
+        203.0,
+        108.09,
+        147.64,
+        55.36
+      ],
+      "parentRelativeRect551": [
+        48.77,
+        56.68,
+        147.64,
+        55.36
+      ],
+      "role": "native-text",
+      "observedText": "챔피언"
+    },
+    {
+      "key": "Img_Racing_FlagLeft",
+      "parent": "Group_Racing_Title",
+      "sourceRect": [
+        119,
+        78,
+        39,
+        37
+      ],
+      "globalRect551": [
+        156.86,
+        102.82,
+        51.41,
+        48.77
+      ],
+      "parentRelativeRect551": [
+        2.64,
+        51.41,
+        51.41,
+        48.77
+      ],
+      "role": "flag-art"
+    },
+    {
+      "key": "Img_Racing_FlagRight",
+      "parent": "Group_Racing_Title",
+      "sourceRect": [
+        268,
+        80,
+        37,
+        34
+      ],
+      "globalRect551": [
+        353.27,
+        105.45,
+        48.77,
+        44.82
+      ],
+      "parentRelativeRect551": [
+        199.05,
+        54.05,
+        48.77,
+        44.82
+      ],
+      "role": "flag-art"
+    },
+    {
+      "key": "BG_Racing_StarterRibbon",
+      "parent": "Group_Racing_Title",
+      "sourceRect": [
+        135,
+        124,
+        153,
+        33
+      ],
+      "globalRect551": [
+        177.95,
+        163.45,
+        201.68,
+        43.5
+      ],
+      "parentRelativeRect551": [
+        23.73,
+        112.05,
+        201.68,
+        43.5
+      ],
+      "role": "separate-ribbon-frame"
+    },
+    {
+      "key": "Txt_Racing_StarterPack",
+      "parent": "Group_Racing_Title",
+      "sourceRect": [
+        174,
+        128,
+        74,
+        21
+      ],
+      "globalRect551": [
+        229.36,
+        168.73,
+        97.55,
+        27.68
+      ],
+      "parentRelativeRect551": [
+        75.14,
+        117.32,
+        97.55,
+        27.68
+      ],
+      "role": "native-text",
+      "observedText": "스타터 팩"
+    },
+    {
+      "key": "Viewport_Racing_Hero",
+      "parent": "Panel_Racing_Offer",
+      "sourceRect": [
+        36,
+        165,
+        355,
+        224
+      ],
+      "globalRect551": [
+        47.45,
+        217.5,
+        467.95,
+        295.27
+      ],
+      "parentRelativeRect551": [
+        3.95,
+        90.95,
+        467.95,
+        295.27
+      ],
+      "role": "new-scene-art-viewport",
+      "notes": "Observed scene band approximate. Prepared new700×467 has different aspect; contain preserves driver/wheels. Cover/crop needs actual QA, no anisotropic stretch."
+    },
+    {
+      "key": "Img_Racing_Scene",
+      "parent": "Viewport_Racing_Hero",
+      "sourceRect": [
+        36,
+        165,
+        355,
+        224
+      ],
+      "globalRect551": [
+        47.45,
+        217.5,
+        467.95,
+        295.27
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        467.95,
+        295.27
+      ],
+      "role": "new-racing-art"
+    },
+    {
+      "key": "BG_Racing_LowerRoad",
+      "parent": "Panel_Racing_Offer",
+      "sourceRect": [
+        36,
+        389,
+        354,
+        318
+      ],
+      "globalRect551": [
+        47.45,
+        512.77,
+        466.64,
+        419.18
+      ],
+      "parentRelativeRect551": [
+        3.95,
+        386.23,
+        466.64,
+        419.18
+      ],
+      "role": "separate-road-decoration-background",
+      "notes": "Underlying grey/green road field; do not bake reward/CTA/time/count into art."
+    },
+    {
+      "key": "Group_Racing_Boost",
+      "parent": "root",
+      "sourceRect": [
+        327,
+        271,
+        88,
+        88
+      ],
+      "globalRect551": [
+        431.05,
+        357.23,
+        116.0,
+        116.0
+      ],
+      "parentRelativeRect551": [
+        431.05,
+        357.23,
+        116.0,
+        116.0
+      ],
+      "role": "intentional-right-overhang",
+      "notes": "Panel right393; bubble right415, overhang22sourcepx. Circle remains inside418-wide root. This does not grant all children unlimited overflow."
+    },
+    {
+      "key": "BG_Racing_Boost",
+      "parent": "Group_Racing_Boost",
+      "sourceRect": [
+        327,
+        271,
+        88,
+        88
+      ],
+      "globalRect551": [
+        431.05,
+        357.23,
+        116.0,
+        116.0
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        116.0,
+        116.0
+      ],
+      "role": "fixed-circle-frame"
+    },
+    {
+      "key": "Txt_Racing_BoostPercent",
+      "parent": "Group_Racing_Boost",
+      "sourceRect": [
+        339,
+        288,
+        64,
+        26
+      ],
+      "globalRect551": [
+        446.86,
+        379.64,
+        84.36,
+        34.27
+      ],
+      "parentRelativeRect551": [
+        15.82,
+        22.41,
+        84.36,
+        34.27
+      ],
+      "role": "native-text",
+      "observedText": "235%"
+    },
+    {
+      "key": "Txt_Racing_BoostLabel",
+      "parent": "Group_Racing_Boost",
+      "sourceRect": [
+        345,
+        315,
+        50,
+        26
+      ],
+      "globalRect551": [
+        454.77,
+        415.23,
+        65.91,
+        34.27
+      ],
+      "parentRelativeRect551": [
+        23.73,
+        58.0,
+        65.91,
+        34.27
+      ],
+      "role": "native-text",
+      "observedText": "증가!"
+    },
+    {
+      "key": "Group_Racing_Rewards",
+      "parent": "Panel_Racing_Offer",
+      "sourceRect": [
+        91,
+        390,
+        252,
+        115
+      ],
+      "globalRect551": [
+        119.95,
+        514.09,
+        332.18,
+        151.59
+      ],
+      "parentRelativeRect551": [
+        76.45,
+        387.55,
+        332.18,
+        151.59
+      ],
+      "role": "separate-reward-group"
+    },
+    {
+      "key": "Img_Racing_RewardDice",
+      "parent": "Group_Racing_Rewards",
+      "sourceRect": [
+        103,
+        395,
+        83,
+        72
+      ],
+      "globalRect551": [
+        135.77,
+        520.68,
+        109.41,
+        94.91
+      ],
+      "parentRelativeRect551": [
+        15.82,
+        6.59,
+        109.41,
+        94.91
+      ],
+      "role": "reuse-dice-art"
+    },
+    {
+      "key": "Txt_Racing_RewardDice",
+      "parent": "Group_Racing_Rewards",
+      "sourceRect": [
+        110,
+        461,
+        70,
+        36
+      ],
+      "globalRect551": [
+        145.0,
+        607.68,
+        92.27,
+        47.45
+      ],
+      "parentRelativeRect551": [
+        25.05,
+        93.59,
+        92.27,
+        47.45
+      ],
+      "role": "native-text",
+      "observedText": "525"
+    },
+    {
+      "key": "Img_Racing_RewardCash",
+      "parent": "Group_Racing_Rewards",
+      "sourceRect": [
+        241,
+        417,
+        81,
+        47
+      ],
+      "globalRect551": [
+        317.68,
+        549.68,
+        106.77,
+        61.95
+      ],
+      "parentRelativeRect551": [
+        197.73,
+        35.59,
+        106.77,
+        61.95
+      ],
+      "role": "reuse-cash-art"
+    },
+    {
+      "key": "Txt_Racing_RewardCash",
+      "parent": "Group_Racing_Rewards",
+      "sourceRect": [
+        250,
+        463,
+        64,
+        33
+      ],
+      "globalRect551": [
+        329.55,
+        610.32,
+        84.36,
+        43.5
+      ],
+      "parentRelativeRect551": [
+        209.59,
+        96.23,
+        84.36,
+        43.5
+      ],
+      "role": "native-text",
+      "observedText": "54K"
+    },
+    {
+      "key": "Btn_Racing_Buy",
+      "parent": "Panel_Racing_Offer",
+      "sourceRect": [
+        107,
+        571,
+        210,
+        59
+      ],
+      "globalRect551": [
+        141.05,
+        752.68,
+        276.82,
+        77.77
+      ],
+      "parentRelativeRect551": [
+        97.55,
+        626.14,
+        276.82,
+        77.77
+      ],
+      "role": "native-input-wrapper",
+      "notes": "Display/demo purchase entry only; no real payment API or reward grant inferred."
+    },
+    {
+      "key": "BG_Racing_Buy",
+      "parent": "Btn_Racing_Buy",
+      "sourceRect": [
+        107,
+        571,
+        210,
+        59
+      ],
+      "globalRect551": [
+        141.05,
+        752.68,
+        276.82,
+        77.77
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        276.82,
+        77.77
+      ],
+      "role": "separate-button-background"
+    },
+    {
+      "key": "Txt_Racing_Price",
+      "parent": "Btn_Racing_Buy",
+      "sourceRect": [
+        150,
+        585,
+        126,
+        31
+      ],
+      "globalRect551": [
+        197.73,
+        771.14,
+        166.09,
+        40.86
+      ],
+      "parentRelativeRect551": [
+        56.68,
+        18.45,
+        166.09,
+        40.86
+      ],
+      "role": "native-text",
+      "observedText": "₩4,400"
+    },
+    {
+      "key": "Group_Racing_Time",
+      "parent": "Panel_Racing_Offer",
+      "sourceRect": [
+        146,
+        641,
+        134,
+        26
+      ],
+      "globalRect551": [
+        192.45,
+        844.95,
+        176.64,
+        34.27
+      ],
+      "parentRelativeRect551": [
+        148.95,
+        718.41,
+        176.64,
+        34.27
+      ],
+      "role": "separate-clock-and-native-time"
+    },
+    {
+      "key": "Img_Racing_Clock",
+      "parent": "Group_Racing_Time",
+      "sourceRect": [
+        146,
+        641,
+        22,
+        25
+      ],
+      "globalRect551": [
+        192.45,
+        844.95,
+        29.0,
+        32.95
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        29.0,
+        32.95
+      ],
+      "role": "clock-art"
+    },
+    {
+      "key": "Txt_Racing_Time",
+      "parent": "Group_Racing_Time",
+      "sourceRect": [
+        172,
+        642,
+        108,
+        25
+      ],
+      "globalRect551": [
+        226.73,
+        846.27,
+        142.36,
+        32.95
+      ],
+      "parentRelativeRect551": [
+        34.27,
+        1.32,
+        142.36,
+        32.95
+      ],
+      "role": "native-text",
+      "observedText": "22시간 56분"
+    },
+    {
+      "key": "Txt_Racing_Availability",
+      "parent": "Panel_Racing_Offer",
+      "sourceRect": [
+        183,
+        676,
+        61,
+        15
+      ],
+      "globalRect551": [
+        241.23,
+        891.09,
+        80.41,
+        19.77
+      ],
+      "parentRelativeRect551": [
+        197.73,
+        764.55,
+        80.41,
+        19.77
+      ],
+      "role": "native-text",
+      "observedText": "2/2 가능"
+    },
+    {
+      "key": "Btn_Racing_Close",
+      "parent": "root",
+      "sourceRect": [
+        369.8103448275862,
+        88.8103448275862,
+        33.37931034482759,
+        33.37931034482759
+      ],
+      "globalRect551": [
+        487.48,
+        117.07,
+        44.0,
+        44.0
+      ],
+      "parentRelativeRect551": [
+        487.48,
+        117.07,
+        44.0,
+        44.0
+      ],
+      "role": "proposed-native44-square-hit",
+      "notes": "Production44² logical hit centered on observed orange close art. Separate sibling and stable callback to close/refocus caller."
+    },
+    {
+      "key": "BG_Racing_Close",
+      "parent": "Btn_Racing_Close",
+      "sourceRect": [
+        372,
+        90,
+        29,
+        31
+      ],
+      "globalRect551": [
+        490.36,
+        118.64,
+        38.23,
+        40.86
+      ],
+      "parentRelativeRect551": [
+        2.89,
+        1.57,
+        38.23,
+        40.86
+      ],
+      "role": "close-circle-art",
+      "notes": "Observed visual bounds; native circle normalization1:1 is a production proposal."
+    },
+    {
+      "key": "Txt_Racing_Close",
+      "parent": "Btn_Racing_Close",
+      "sourceRect": [
+        379,
+        96,
+        15,
+        20
+      ],
+      "globalRect551": [
+        499.59,
+        126.55,
+        19.77,
+        26.36
+      ],
+      "parentRelativeRect551": [
+        12.11,
+        9.48,
+        19.77,
+        26.36
+      ],
+      "role": "native-close-glyph",
+      "notes": "Source shows a whiteX silhouette. Native multiplication× is a production substitute, original codepoint/font not established."
+    }
+  ],
+  "observations": {
+    "titleLines": [
+      "레이싱",
+      "챔피언"
+    ],
+    "subtitle": "스타터 팩",
+    "boostLines": [
+      "235%",
+      "증가!"
+    ],
+    "rewardDice": "525",
+    "rewardCash": "54K",
+    "price": "₩4,400",
+    "time": "22시간 56분",
+    "availability": "2/2 가능",
+    "backgroundMain": "Screenshot caller HUD/version differs from actual Main; do not overwrite current caller values."
+  },
+  "nativeStylesProposal": {
+    "titleLine1": {
+      "fontSize": 52,
+      "weight": 900,
+      "lineHeight": 56,
+      "strokeWidth": 3,
+      "strokeColor": "#33376e",
+      "color": "#ffd43b"
+    },
+    "titleLine2": {
+      "fontSize": 46,
+      "weight": 900,
+      "lineHeight": 52,
+      "strokeWidth": 3,
+      "strokeColor": "#33376e",
+      "color": "#8ed8ff"
+    },
+    "starterPack": {
+      "fontSize": 22,
+      "weight": 800,
+      "lineHeight": 26,
+      "color": "#ffffff"
+    },
+    "boost": {
+      "fontSize": 29,
+      "weight": 800,
+      "lineHeight": 32,
+      "color": "#ffffff"
+    },
+    "reward": {
+      "fontSize": 40,
+      "weight": 900,
+      "lineHeight": 44,
+      "strokeWidth": 2,
+      "strokeColor": "#34343a",
+      "diceColor": "#ffffff",
+      "cashColor": "#ffe329"
+    },
+    "price": {
+      "fontSize": 40,
+      "weight": 900,
+      "lineHeight": 44,
+      "color": "#ffffff"
+    },
+    "time": {
+      "fontSize": 24,
+      "weight": 700,
+      "lineHeight": 28,
+      "color": "#ffffff"
+    },
+    "availability": {
+      "fontSize": 16,
+      "weight": 600,
+      "lineHeight": 20,
+      "color": "#ffffff"
+    },
+    "close": {
+      "glyphProposal": "×",
+      "fontSize": 28,
+      "weight": 800,
+      "lineHeight": 34,
+      "inputLogicalSize": [
+        44,
+        44
+      ]
+    },
+    "note": "Native font/color substitutes proposed from reference; original font/exact gradients unverified."
+  },
+  "resourceReview": {
+    "manifest": "_작업/codex/ux-studio/racing-event-assets.json",
+    "preparedScene": {
+      "role": "racing-adventure-scene",
+      "path": "samples/monopoly-go/ui-studio/assets/production/racing-event/common_event-racing_scene_normal_v001.webp",
+      "size": [
+        700,
+        467
+      ],
+      "sha256": "e0ca769640ba9fbaeebae6a2cb16e12c865446a121dcd38a47162bdafacc2241",
+      "uiAppliedAtCreation": false
+    },
+    "observedSceneBandAspect": 1.5848214285714286,
+    "preparedSceneAspect": 1.4989293361884368,
+    "aspectMismatch": "Contain in observed band preserves scene. Cover/crop only after verifying driver/wheel survival; never stretch independently.",
+    "sourceVsNewArt": "Source includes a small yellow third car; prepared two-car dark/purple variant deliberately omits it. Production interpretation, not source pixel equality.",
+    "reusePlanned": [
+      "existing separate dice art",
+      "existing separate cash art"
+    ],
+    "keepSeparate": [
+      "title",
+      "flags/ribbon",
+      "boost circle and235%/증가!",
+      "525/54K rewards",
+      "price CTA",
+      "clock/time",
+      "availability",
+      "Close input"
+    ],
+    "registrationAndRuntime": "Not performed in this measurement task; creation manifest state is historical."
+  },
+  "nativeModalProposal": {
+    "kind": "modal",
+    "rootMode": "fullscreen",
+    "logicalSize": [
+      551,
+      984
+    ],
+    "singleDim": "engine dim=true once,blocking=true,dismissOnEscape=true; if custom dimtexture is used,engine.dim=false. Exact sourcealpha unknown.",
+    "layering": "PanelBG/Frame, outsideTitle, Boost, Close are siblings under one uniformly scaled offer group. Hero can clip within Panel; title/boost/Close must not be cut by Panel clipping.",
+    "intentionalBoostOverhangSource": 22,
+    "boostEndLogicalX": 547.05,
+    "responsive": "Use one uniform scaled/anchored offer group, keep relative geometry and44²Close logical hit; preserve circle1:1. Check390/430/1440 actual availability, no percentageYstretch.",
+    "scroll": "No source scroll observed. Full source modal controls fit authored native984 except.6818background; no scroll by default. If a smaller actual viewport needs scrolling, validate body-only ownership and keepClose/title fixed; no runtime claim.",
+    "return": "MainSALE demo mapping open→Modal; Close/Escape close, Maininert only whileopen, originaltriggerfocus return. Sourceevent/MainSALEversions differ; no actual targetID invented.",
+    "existingTrigger": {
+      "screenId": "main",
+      "id": "element-d163884a-f8b5-43f6-80f4-b6ee8279d229",
+      "name": "Btn_Event_Sale",
+      "preserveId": true,
+      "mappingStatus": "different-event-version demo proposal"
+    },
+    "actualTargetId": null
+  },
+  "assemblyOrder": [
+    "Create actual modal target; keep existing Main Sale ID and version/demo label.",
+    "PanelBG/frame→hero artviewport→native outside title/ribbon/flags→intentional boost circle→separate reward art/counts.",
+    "NativeBuyBG/price+clock/time+availability; native44²Close sibling; single dim/blocked Main/close/refocus contracts.",
+    "Save/reopen;390/430/1440 uniform geometry, circleaspect/overhang/Close/pointer+keyboard/dim/inert/focus/optionalscroll checks remain pending."
+  ],
+  "limitations": [
+    "All price/reward/time/availability values are observed fixtures, not approved economy, real payment or countdown policy.",
+    "No purchase/reward grant/event Info API/Unity behavior inferred.",
+    "Only two worksheet files written; no product/source/design/guide/report/STATUS/server/schedule modifications."
+  ]
+}

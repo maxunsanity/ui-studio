@@ -1,0 +1,8 @@
+export async function adapt(t,th,write){
+ t.nativeName=a=>a.name;
+ const set=t.set;t.set=async(sel,v)=>{let l=t.p.locator(sel);if(await l.count()&&(await l.evaluate(e=>e.type))==='color'){await t.openFor(l);if(await l.evaluate(e=>e.value)!==String(v))await l.fill(String(v));return;}return set(sel,v);};
+ t.panel=async(name,r,src,parent)=>{let id=await t.unit('네모 백판 도구',name,r);await t.tab('general');await t.set('[data-skin-mode]',/(?:cta3|ribbon3|pill3)/i.test(src||'')?'button':'backplate');if(src)await t.skin(src);if(parent)await t.parent(parent);return id;};
+ const action=t.action;t.action=async a=>{let id=await action(a);if(a.op==='plain'&&a.role){await t.pick(id);await t.tab('general');await t.set('[data-part-field="partRole"]',a.role);}if(a.op==='panel'||a.op==='button'&&!a.transparent){await t.pick(id);await t.tab('general');if(await t.p.locator('[data-skin-field="padding.0"]').count())for(let i=0;i<4;i++)await t.set('[data-skin-field="padding.'+i+'"]',0);if(a.skinMetrics)for(let k of ['slices','edges'])for(let i=0;i<4;i++)await t.set('[data-skin-field="'+k+'.'+i+'"]',a.skinMetrics[i]);}if(a.op==='button'&&a.text&&!a.transparent){await t.pick(id+'-ui-label');await t.tab('general');await t.set('[data-field="typography.strokeWidth"]',0);}if(a.inputMode){await t.pick(id);await t.tab('general');await t.set('[data-part-field="mode"]',a.inputMode);}return id;};
+ t.run=async(max=3)=>{let started=Date.now(),n=0;while(t.job.i<t.job.family.actions.length&&n<max){if(n&&Date.now()-started>35000)break;let a=t.job.family.actions[t.job.i];await t.action(a);t.job.i++;n++;}write({family:t.job.family.id,index:t.job.i,total:t.job.family.actions.length});};
+ return t;
+}

@@ -1,0 +1,91 @@
+{
+  "author": "codex clash_art subagent",
+  "createdAtKST": "2026-11-18T17:15:45.052972+09:00",
+  "status": "proposal-awaiting-review",
+  "tool": "built-in image_gen",
+  "generationCalls": 1,
+  "prompt": "Use case: precise-object-edit.\nAsset type: ONE separate transparent game character illustration for a card-detail popup, intended display 170 by 200 logical pixels. Create a NEW pose and extended body, not an enlarged head sprite.\nInput roles:\nImage 1 (eight-icon atlas) is an IDENTITY AND ART STYLE reference. Use ONLY its TOP-LEFT blond knight. Preserve that knight's friendly broad rounded nose, blue eyes, bold blond eyebrows, long curled blond moustache, short pointed blond beard, cheerful face, polished colorful chunky toy-like 3D illustration style and silver/blue/gold palette. The other seven atlas subjects must not appear.\nImage 2 (game screenshot) is a POSE/OUTFIT observation reference only: the sword held overhead in one hand, other arm reaching forward, chainmail, blue belt and cape. Do not reuse screenshot pixels or include any screenshot UI.\nSubject: the same TOP-LEFT blond knight from Image 1, shown from raised sword tip down to upper thighs. Open silver helmet with short blue plume; visible chainmail coif around neck and side cheeks, chainmail short sleeves, simple steel torso armor over a tan tunic, broad royal-blue cross-body strap and belt with a plain gold buckle, a short royal-blue cape behind the shoulder. Sturdy friendly cartoon proportions.\nPose: lively three-quarter heroic greeting, smiling open mouth, sword hand lifted beside/above his head at viewer LEFT, holding a broad silver sword that sweeps diagonally across the upper part of the image toward viewer RIGHT. His other hand reaches outward in a welcoming gesture near shoulder height. All visible fingers plausible. Keep face clearly visible below the sword. No shield, no extra weapon.\nComposition: one complete waist-to-upper-thigh figure with full raised sword inside the canvas. Centered on a portrait canvas about 0.85 width-to-height ratio, designed to fit 170x200 display. Leave a narrow but genuine transparent safety margin around every silhouette edge; do not clip sword tip, plume, hands or cape.\nLighting: clean soft upper-left highlight, internal material shading only.\nBackground: actual transparent alpha, completely empty.\nStrict constraints: ONE knight only. No HUD, no deck, no cards, no text, no numerals, no title, no UI frames, no panels, no button, no tutorial hand, no environment, no floor, no external cast/drop shadow, no glow/aura, no cloudy or colored background, no checkerboard, no logo, no watermark. All surroundings remain truly transparent.",
+  "generatedSource": "/Users/max/.codex/generated_images/01a1ed81-1432-75a1-9ee9-145ae50569b1/exec-946bdca7-b33b-4d40-95b5-fcb1a77a7a93.png",
+  "inputRoles": [
+    {
+      "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/clash-sample-20261118/art/clash-deck-atlas-v003-original.png",
+      "role": "top-left knight identity/style reference only"
+    },
+    {
+      "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/clash-sample-20261118/video-a/representatives/A-F10_091990ms.jpg",
+      "role": "raised sword/chainmail/blue belt and cape pose observation only"
+    }
+  ],
+  "referenceUse": "New generative pose and upper-thigh body; no screenshot pixels reused, no face sprite enlarged.",
+  "original": {
+    "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/clash-sample-20261118/art/clash-knight-detail-v001-original.png",
+    "width": 1159,
+    "height": 1358,
+    "mode": "RGBA",
+    "bytes": 1556459,
+    "sha256": "efd5e48b9b426ace46488768d806f0cabfd22ac348201e46e5ea07335be29671",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaBBox": [
+      0,
+      8,
+      1141,
+      1358
+    ],
+    "alpha0Pixels": 774690,
+    "alpha1to8Pixels": 26725,
+    "alpha9to32Pixels": 2212
+  },
+  "delivery": {
+    "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/clash-sample-20261118/art/clash-knight-detail-v001-delivery-340x400.png",
+    "width": 340,
+    "height": 400,
+    "mode": "RGBA",
+    "bytes": 174447,
+    "sha256": "65e974347027196b7bdf0d4795c2786d9ff03f4bb73f3dbd34e46bd93ed0a0f8",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaBBox": [
+      0,
+      6,
+      334,
+      400
+    ],
+    "alpha0Pixels": 67776,
+    "alpha1to8Pixels": 919,
+    "alpha9to32Pixels": 504
+  },
+  "deliveryStaging": "/Users/max/projest_max/ui-studio/src/tools/uxStudio/assets/import-staging/clash-royale/clash-knight-detail-v001-delivery-340x400.png",
+  "deliveryAuthoring": "/Users/max/projest_max/ui-studio/samples/clash-royale/ui-studio/assets/authoring/clash-knight-detail-v001-delivery-340x400.png",
+  "suggestedElementName": "Img_CardDetail_KnightHero",
+  "intendedDisplayLogicalSize": {
+    "width": 170,
+    "height": 200
+  },
+  "contentBBoxAlphaGT8": {
+    "x": 10,
+    "y": 8,
+    "width": 324,
+    "height": 389
+  },
+  "processing": "Built-in image_gen extended the knight into a separate new raised-sword pose. Original PNG unchanged. Official macOS sips -z 400 340 resample only. Python used only copies/hash/alpha metadata, no raster save/edit.",
+  "verification": {
+    "exact340x400": true,
+    "under300000Bytes": true,
+    "selectedMirrorHashesEqual": true,
+    "oneKnightSwordChainmailBlueBeltCape": true,
+    "bakedTextHUDDeckFrame": false,
+    "externalShadows": false,
+    "rootSourceSavedDesignCommonMetadataChanges": 0,
+    "browserChecks": 0
+  },
+  "unconfirmed": [
+    "Native registration, popup fit and original-reference appearance remain for parent actual-screen verification.",
+    "Tiny low-alpha edge fringe may remain from image_gen; no manual alpha edits.",
+    "This is a new matching illustration, not original character mesh or exact original pixels."
+  ]
+}

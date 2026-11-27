@@ -1,0 +1,897 @@
+{
+  "version": 1,
+  "assetVersion": "v001",
+  "createdAtKST": "2026-11-16T19:23:30+09:00",
+  "author": "codex(단이)",
+  "status": "제안(검수 대기)",
+  "reference": {
+    "path": "docs/reference/monopoly-go/20261116-ten-screens/02_wins.png",
+    "size": [
+      324,
+      568
+    ],
+    "use": "visual reference only; no screenshot pixels copied",
+    "sha256": "1cd071023d08cb79764ddd9ea13a7c98427e0633764921a0af13d14cfbb1201a",
+    "assemblyReference": "_작업/codex/ux-studio/wins-assembly-quick-sheet.md"
+  },
+  "creation": {
+    "method": "new native SVG vector artwork, no ImageGen needed for geometric UI shapes",
+    "rasterization": "Pillow 4x supersampling, LANCZOS reduction; SVG and raster share the same declared shape geometry and colors",
+    "dependencies": "existing Pillow only; no package installed",
+    "sourcePreservation": "SVG and RGBA PNG masters retained; PNG/WebP source sizes unchanged; no source crop",
+    "prompt": "Create separate parchment cream fill9 and thick gold/white rim frame9, blue clipboard metal clip, gold weekly rays panel from the reference concept. Exclude text, numbers, logos, rewards, checks, UI controls and external drop shadows."
+  },
+  "checks": {
+    "assetCount": 7,
+    "eachWebPAtMost300000Bytes": true,
+    "maximumDimensionAtMost4096": true,
+    "productionMirrorSHAEqual": true,
+    "decodedWebPRGBAEqualsPNG": true,
+    "allSourcesHaveTransparentPixels": true,
+    "native9FrameCenterTransparent": true,
+    "native9FillCenterOpaque": true,
+    "native9TopLeftCornerPreservedAt525x819": true,
+    "native9SourcePositiveCenter": [
+      74,
+      42
+    ],
+    "missionRowAt440x100HasOpaqueBeigeCenterAndTransparentCorners": true,
+    "missionRowSourceSlices27RenderedEdges16": true,
+    "progressCapsules": {
+      "count": 2,
+      "sourceSize": [
+        128,
+        32
+      ],
+      "slices": [
+        0,
+        16,
+        0,
+        16
+      ],
+      "edges": [
+        0,
+        18,
+        0,
+        18
+      ],
+      "padding": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "targetsLogicalPx": [
+        [
+          375.84,
+          36.38
+        ],
+        [
+          64,
+          36.38
+        ]
+      ],
+      "sourceCentersOpaque": true,
+      "transparentCorners": true,
+      "RGBAWebPExact": true,
+      "targetCentersPositive": true,
+      "previewQuantization": "diagnostic raster at 8 samples per logical px, fractional destination edges rounded only for the preview; actual CSS variables retain 18px edges",
+      "actualSkinModuleValidationAndCSSVariables": "2/2 passed: actual validateSkin/applySkin; SVG/WebP registration and browser CSS painting not performed",
+      "verificationCommand": "node _작업/codex/ux-studio/wins-ui/verify-progress-native.mjs",
+      "allSevenArtifactHashesAndOldFiveRecordsPreserved": true
+    }
+  },
+  "preview": "_작업/codex/ux-studio/wins-ui/wins-ui-v001-preview.png",
+  "assets": [
+    {
+      "name": "common_wins_clipboard-fill9_normal_v001",
+      "role": "parchment-cream-fill9",
+      "size": [
+        128,
+        96
+      ],
+      "assembly": {
+        "nineSlice": {
+          "mode": "9",
+          "sourceSize": [
+            128,
+            96
+          ],
+          "slices": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "edges": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            74,
+            42
+          ],
+          "minimumTargetForPositiveCenter": [
+            55,
+            55
+          ],
+          "crop": "none; preserve complete source including transparent corners"
+        },
+        "targetLogicalExample": [
+          525.49,
+          819.42
+        ],
+        "stack": "bottom; below frame9 and all clipboard content"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_clipboard-fill9_normal_v001.svg",
+          "bytes": 146,
+          "sha256": "9be742e99f3f457062c3bd11ef441efb86cd3f7aa6ff6b5d292698c37c4f72b8"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_clipboard-fill9_normal_v001.png",
+          "bytes": 2252,
+          "sha256": "df19b4330c5bbe1abeb533c0829b74cd62dfd33abdd0ec359c1ca58bb0ebab66"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/wins-ui/common_wins_clipboard-fill9_normal_v001.webp",
+          "bytes": 700,
+          "sha256": "926dcc38282407e9cbe0e6411fdcfd43107c59bcece0320582f34feff92a4e46"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/wins-ui/common_wins_clipboard-fill9_normal_v001.webp",
+          "bytes": 700,
+          "sha256": "926dcc38282407e9cbe0e6411fdcfd43107c59bcece0320582f34feff92a4e46"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/wins-ui/common_wins_clipboard-fill9_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          96
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          96
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or applied"
+    },
+    {
+      "name": "common_wins_clipboard-rim-frame9_normal_v001",
+      "role": "gold-white-rim-frame9",
+      "size": [
+        128,
+        96
+      ],
+      "assembly": {
+        "nineSlice": {
+          "mode": "9",
+          "sourceSize": [
+            128,
+            96
+          ],
+          "slices": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "edges": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            74,
+            42
+          ],
+          "minimumTargetForPositiveCenter": [
+            55,
+            55
+          ],
+          "crop": "none; preserve complete source including transparent corners"
+        },
+        "targetLogicalExample": [
+          525.49,
+          819.42
+        ],
+        "stack": "above matching fill9, same x/y/w/h; preserve transparent center",
+        "rimBandsPx": {
+          "outerGold": 8,
+          "innerWhite": 4,
+          "total": 12
+        },
+        "contentInsetRecommendationPx": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "contentInsetPolicy": "recommendation only; asset skin padding remains zero; parent owns approved layout"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_clipboard-rim-frame9_normal_v001.svg",
+          "bytes": 447,
+          "sha256": "6b3f8ed9ff2f50af30e9cc505e478961ed008854e09151bd1ad15be942759310"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_clipboard-rim-frame9_normal_v001.png",
+          "bytes": 5151,
+          "sha256": "d5e11d7742189dfb4d482d54184e521eaa0f2d34349555c52c2bc78cfed28d43"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/wins-ui/common_wins_clipboard-rim-frame9_normal_v001.webp",
+          "bytes": 1578,
+          "sha256": "65d9500c593a1180395b76f4175a656af4f76f6c98a4a8119b606649521f1517"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/wins-ui/common_wins_clipboard-rim-frame9_normal_v001.webp",
+          "bytes": 1578,
+          "sha256": "65d9500c593a1180395b76f4175a656af4f76f6c98a4a8119b606649521f1517"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/wins-ui/common_wins_clipboard-rim-frame9_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 0,
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          96
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          96
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or applied"
+    },
+    {
+      "name": "common_wins_clipboard-clip_normal_v001",
+      "role": "fixed-blue-metal-clip",
+      "size": [
+        253,
+        69
+      ],
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          253,
+          69
+        ],
+        "targetLogicalExample": [
+          253.39,
+          69.3
+        ],
+        "objectFit": "contain",
+        "sourceRect": [
+          0,
+          0,
+          253,
+          69
+        ],
+        "stack": "above clipboard top, centered; reference global x144.55/y86.62",
+        "noSlice": true
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_clipboard-clip_normal_v001.svg",
+          "bytes": 2191,
+          "sha256": "74596cae86604463e8eaf39efca015dd0346c823881a7eb2e88eb400d5a66165"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_clipboard-clip_normal_v001.png",
+          "bytes": 5492,
+          "sha256": "8fe184ccd7637dbea3f734623e9eb76801bf3d44f4336e74c1f57f72337e50c0"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/wins-ui/common_wins_clipboard-clip_normal_v001.webp",
+          "bytes": 4088,
+          "sha256": "a9bb9cec28223c7b2bbe945655ed9a38dc43393cf177c4ea2f7918c925c96a2c"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/wins-ui/common_wins_clipboard-clip_normal_v001.webp",
+          "bytes": 4088,
+          "sha256": "a9bb9cec28223c7b2bbe945655ed9a38dc43393cf177c4ea2f7918c925c96a2c"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/wins-ui/common_wins_clipboard-clip_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 0,
+        "bboxAlpha16": [
+          0,
+          0,
+          253,
+          66
+        ],
+        "bboxAlpha128": [
+          1,
+          1,
+          252,
+          65
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or applied"
+    },
+    {
+      "name": "common_wins_weekly-gold-rays_normal_v001",
+      "role": "fixed-weekly-gold-panel-rays",
+      "size": [
+        470,
+        255
+      ],
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          470,
+          255
+        ],
+        "targetLogicalExample": [
+          469.37,
+          254.66
+        ],
+        "objectFit": "contain",
+        "sourceRect": [
+          0,
+          0,
+          470,
+          255
+        ],
+        "stack": "behind weekly text/progress/rewards and separate frame",
+        "noSlice": true,
+        "excludes": [
+          "frame",
+          "text",
+          "numbers",
+          "reward pack",
+          "progress bar",
+          "check icon",
+          "external shadow"
+        ]
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_weekly-gold-rays_normal_v001.svg",
+          "bytes": 2155,
+          "sha256": "fa922680d23b0c0169f4efe11260ed32b249263404870a2813dd4cee41b267c0"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_weekly-gold-rays_normal_v001.png",
+          "bytes": 30013,
+          "sha256": "22c7fee60fc09a9672e95c78a55263e1ff00ee2a6732fc62a58bd3f366b55842"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/wins-ui/common_wins_weekly-gold-rays_normal_v001.webp",
+          "bytes": 20036,
+          "sha256": "55e5d6c1b61a834ac7821939812c66f37d456caf8f3c8dd2072fa7787f79dee8"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/wins-ui/common_wins_weekly-gold-rays_normal_v001.webp",
+          "bytes": 20036,
+          "sha256": "55e5d6c1b61a834ac7821939812c66f37d456caf8f3c8dd2072fa7787f79dee8"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/wins-ui/common_wins_weekly-gold-rays_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          61,
+          255
+        ],
+        "center": 255,
+        "bboxAlpha16": [
+          0,
+          0,
+          470,
+          255
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          470,
+          255
+        ],
+        "corners": [
+          61,
+          61,
+          61,
+          61
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or applied"
+    },
+    {
+      "name": "common_wins_mission-row-fill9_normal_v001",
+      "role": "beige-mission-row-fill9",
+      "size": [
+        128,
+        96
+      ],
+      "assembly": {
+        "nineSlice": {
+          "mode": "9",
+          "sourceSize": [
+            128,
+            96
+          ],
+          "slices": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "edges": [
+            16,
+            16,
+            16,
+            16
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            74,
+            42
+          ],
+          "minimumTargetForPositiveCenter": [
+            33,
+            33
+          ],
+          "crop": "none; preserve complete source including transparent corners"
+        },
+        "targetLogicalExample": [
+          440,
+          100
+        ],
+        "stack": "single row background; reuse for three rows",
+        "fill": "#e3ddc9",
+        "excludes": [
+          "text",
+          "icons",
+          "border",
+          "external shadow"
+        ]
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_mission-row-fill9_normal_v001.svg",
+          "bytes": 146,
+          "sha256": "87b615f5dc60a5bd774a86d2dcf7b99e4552d3592066bb60385413309e6407c4"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_mission-row-fill9_normal_v001.png",
+          "bytes": 2306,
+          "sha256": "66a198a0613ebeea87cc1296fd58449a8dcf2a444d10859c182df887ec62feb0"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/wins-ui/common_wins_mission-row-fill9_normal_v001.webp",
+          "bytes": 706,
+          "sha256": "98cbb3b3f20180d95c4d6dd7f3a6b5776ad002466fd6a0dc9553ce28688deeee"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/wins-ui/common_wins_mission-row-fill9_normal_v001.webp",
+          "bytes": 706,
+          "sha256": "98cbb3b3f20180d95c4d6dd7f3a6b5776ad002466fd6a0dc9553ce28688deeee"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/wins-ui/common_wins_mission-row-fill9_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          96
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          96
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "status": "제안(검수 대기); generated only, not registered or applied"
+    },
+    {
+      "name": "common_wins_weekly-progress-bg3_normal_v001",
+      "role": "weekly-progress-dark-olive-background-3slice",
+      "size": [
+        128,
+        32
+      ],
+      "fill": "#5f614c",
+      "assembly": {
+        "threeSlice": {
+          "mode": "3",
+          "sourceSize": [
+            128,
+            32
+          ],
+          "slices": [
+            0,
+            16,
+            0,
+            16
+          ],
+          "edges": [
+            0,
+            18,
+            0,
+            18
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            96,
+            32
+          ],
+          "minimumTargetWidthForPositiveCenter": 37,
+          "sourceRect": [
+            0,
+            0,
+            128,
+            32
+          ],
+          "sourceCapWidth": 16,
+          "targetCapWidthLogicalPx": 18,
+          "crop": "none; preserve the complete 128x32 source",
+          "targetLogicalExamples": [
+            [
+              375.84,
+              36.38
+            ],
+            [
+              64,
+              36.38
+            ]
+          ],
+          "targetCenterWidthsLogicalPx": [
+            339.84,
+            28
+          ],
+          "assembly": "native CSS border-image, mode 3; use registered normal texture at w128/h32, slices 0 16 0 16 fill, edges 0px 18px 0px 18px, repeat stretch, zero padding. No text/image child needed."
+        },
+        "stack": "background"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_weekly-progress-bg3_normal_v001.svg",
+          "bytes": 146,
+          "sha256": "fca3dd1248c7650f08f8af975cf861ad2d4491d8f2e92a4d34c4e7a716f280a7"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_weekly-progress-bg3_normal_v001.png",
+          "bytes": 960,
+          "sha256": "83896e465b8dc74c4ab03780420b35eced1776c539335a8faf1c7b6a24e0eb91"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/wins-ui/common_wins_weekly-progress-bg3_normal_v001.webp",
+          "bytes": 406,
+          "sha256": "0311a3e14be0a77e2378f703b8bab604a1e8036d03e2c402c02278334d50883f"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/wins-ui/common_wins_weekly-progress-bg3_normal_v001.webp",
+          "bytes": 406,
+          "sha256": "0311a3e14be0a77e2378f703b8bab604a1e8036d03e2c402c02278334d50883f"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/wins-ui/common_wins_weekly-progress-bg3_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          32
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          32
+        ]
+      },
+      "excludes": [
+        "text",
+        "numbers",
+        "border",
+        "external shadow"
+      ],
+      "status": "제안(검수 대기); generated only, not registered or applied"
+    },
+    {
+      "name": "common_wins_weekly-progress-fill3_normal_v001",
+      "role": "weekly-progress-cyan-blue-fill-3slice",
+      "size": [
+        128,
+        32
+      ],
+      "fill": "#23bedf",
+      "assembly": {
+        "threeSlice": {
+          "mode": "3",
+          "sourceSize": [
+            128,
+            32
+          ],
+          "slices": [
+            0,
+            16,
+            0,
+            16
+          ],
+          "edges": [
+            0,
+            18,
+            0,
+            18
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            96,
+            32
+          ],
+          "minimumTargetWidthForPositiveCenter": 37,
+          "sourceRect": [
+            0,
+            0,
+            128,
+            32
+          ],
+          "sourceCapWidth": 16,
+          "targetCapWidthLogicalPx": 18,
+          "crop": "none; preserve the complete 128x32 source",
+          "targetLogicalExamples": [
+            [
+              375.84,
+              36.38
+            ],
+            [
+              64,
+              36.38
+            ]
+          ],
+          "targetCenterWidthsLogicalPx": [
+            339.84,
+            28
+          ],
+          "assembly": "native CSS border-image, mode 3; use registered normal texture at w128/h32, slices 0 16 0 16 fill, edges 0px 18px 0px 18px, repeat stretch, zero padding. No text/image child needed."
+        },
+        "stack": "above matching dark olive track; size by progress value"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_weekly-progress-fill3_normal_v001.svg",
+          "bytes": 146,
+          "sha256": "7d4eb54b67b8349dcf014a0014ef8706f0c78331f24a4603d06a6cd4ffe0d9fc"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/wins-ui/v001/common_wins_weekly-progress-fill3_normal_v001.png",
+          "bytes": 1093,
+          "sha256": "c4ff530e8f1b1a48e00035a6c5c74f9f7d80f67fe0983dc97ee134328a9d500f"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/wins-ui/common_wins_weekly-progress-fill3_normal_v001.webp",
+          "bytes": 434,
+          "sha256": "fb8756d02de875984265aef4dd103a01cc05264e65593fc6ea99fe71366d7d59"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/wins-ui/common_wins_weekly-progress-fill3_normal_v001.webp",
+          "bytes": 434,
+          "sha256": "fb8756d02de875984265aef4dd103a01cc05264e65593fc6ea99fe71366d7d59"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/wins-ui/common_wins_weekly-progress-fill3_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true,
+        "sameSourceSize": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          32
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          32
+        ]
+      },
+      "excludes": [
+        "text",
+        "numbers",
+        "border",
+        "external shadow"
+      ],
+      "status": "제안(검수 대기); generated only, not registered or applied"
+    }
+  ],
+  "registration": null,
+  "UIApplied": false,
+  "visualApproval": false,
+  "limitations": [
+    "Source rasterization uses the same geometry primitives as SVG; browser SVG rendering was not separately compared.",
+    "Clip and rays are fixed decorations, not scalable frames.",
+    "Reference is low resolution; this is a newly drawn geometric interpretation, not an assertion of exact reproduction.",
+    "No actual editor/browser registration or desktop/mobile product QA performed in this subtask.",
+    "Parent owns final layout, native text, frame composition and source-content hash registration."
+  ],
+  "supplements": [
+    {
+      "atKST": "2026-11-16T19:35:34+09:00",
+      "purpose": "Two textless native 3-slice progress capsules only",
+      "assets": [
+        "common_wins_weekly-progress-bg3_normal_v001",
+        "common_wins_weekly-progress-fill3_normal_v001"
+      ],
+      "preview": "_작업/codex/ux-studio/wins-ui/wins-progress-3slice-v001-preview.png",
+      "backupBeforeAppend": "docs/planning/_backup/20261116_단이/1934_wins_progress_capsules/wins-ui-assets.json",
+      "rasterization": "New native SVG rect/capsule geometry; Pillow 4x supersampling/LANCZOS raster derivative. No reference pixels used.",
+      "oldAssetRecordsUnchanged": true,
+      "registration": null,
+      "UIApplied": false
+    }
+  ]
+}

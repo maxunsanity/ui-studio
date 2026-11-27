@@ -1,0 +1,819 @@
+{
+  "version": "v001",
+  "status": "제안(검수 대기)",
+  "tool": "builtin image_gen",
+  "skill": "/Users/max/.codex/skills/.system/imagegen/SKILL.md",
+  "prompt": "Use case: stylized-concept\nAsset type: ONE transparent production spritesheet containing exactly FIVE separate mobile board-game landmark illustrations. Wide horizontal canvas, target 2048 x 1024 pixels. Real alpha background. This is NEW artwork, never a collage of screenshot cards.\nLayout: exactly five independent objects, left-to-right in one horizontal row, one object per equal-width fifth of the sheet. Leave generous completely transparent gutters between every object. Keep all five objects fully inside their own fifth, no touching, overlapping, shared ground or bridges between objects. Align their footpoints to one baseline near the lower part of the canvas. Consistent camera, lighting and miniature world scale; their actual heights vary naturally. No extra objects or duplicate buildings.\nStyle shared across all five: polished toy-isometric 2D game illustrations with a friendly 3D-diorama impression, warm peach/red-brown/cream architecture, clean chunky forms, soft restrained surface shading, sea-green/gold landmark accents. Elevated three-quarter isometric camera looking down about 30 degrees. Same warm pastel seaside-city style across the entire sheet. Every sprite has opaque solid object surfaces and clean antialiased alpha edges.\nObjects in EXACT left-to-right order:\n1. A SMALL RED-AND-CREAM NEIGHBORHOOD SHOP: low compact single-story/two-level shop building, flat red-brown roof, cream trim, dark blue shop windows, a small red-and-cream awning and tiny entrance step. No signage or words.\n2. A BROWN THREE-STORY TOWNHOUSE: warm brick-brown/terracotta compact three-storey town building, cream projecting floor cornices, orderly dark teal windows, flat roof with small chimney. Clearly taller than the small shop, not a tower.\n3. A CLOCK-TOWER BUILDING: slender warm cream/ochre stepped tower building, small teal-blue clock face with simple hands and tick marks but NO numerals/letters, blocky gold/cream roof cap and small roof finial. Friendly miniature urban landmark.\n4. A CUTE GREEN STATUE OF LIBERTY ON ITS PEDESTAL: mint/sea-green robe, friendly simple face, crown with warm gold tips, raised torch and tablet, chunky reddish-brown/cream square pedestal. A complete small landmark object, not a floating icon. No moustache, top hat or branded mascot.\n5. A PROMENADE ENTRANCE WITH TWO LAMPPOSTS: a small pale stone/cream walkway entrance platform with two slender dark teal lampposts with warm pale-yellow lamp heads, low simple side rails, no building behind it. Slight isometric angle, compact and visibly distinct from the other four buildings.\nStrict exclusions: no card frame, card panel, white/cream background, tile background, three-dot indicators, stars, prices, currency, numbers, labels, letters, completion tick/checkmark, buttons, borders around sprites, UI, watermark. NO cast/drop/contact shadow outside the object's own silhouette; the rendering engine will add external shadows later. Internal form shading is allowed. No ground plane, scenery, street scene or sky. Outside each isolated object must be true empty alpha, not a checkerboard picture.",
+  "reference": {
+    "manifest": "docs/reference/monopoly-go/20261116-ten-screens/manifest.json",
+    "preserved": "docs/reference/monopoly-go/20261116-ten-screens/01_build.png",
+    "sha256": "8bfa0d5cf8c7c6152d04fb3b539165985a3934b93c77547ed23d667455260ca7",
+    "use": "visual reference only, no screenshot crop pasted into an asset"
+  },
+  "generatedSource": "/Users/max/.codex/generated_images/01a1e298-9fbe-7a21-9915-7f1af018c699/exec-909bbb07-de03-410b-9a94-046a6c3830d5.png",
+  "generationConditions": {
+    "calls": 1,
+    "corrections": 0,
+    "requestedCanvas": [
+      2048,
+      1024
+    ],
+    "transparentBackground": true,
+    "count": 5,
+    "order": [
+      "small red/cream shop",
+      "brown three-story townhouse",
+      "clock-tower building",
+      "cute green Statue of Liberty on pedestal",
+      "promenade entrance with two lampposts"
+    ]
+  },
+  "processingAuthorization": "User explicitly authorized cropping the newly generated spritesheet into alpha-boundary individual assets; the full PNG source is preserved.",
+  "exclusions": [
+    "card frame",
+    "three-dot indicators",
+    "price",
+    "text",
+    "numerals",
+    "completion check",
+    "background",
+    "cast shadow",
+    "UI shadow"
+  ],
+  "fit": "contain",
+  "scope": "New PNG master, alpha-boundary cropped PNG/WebP sprites, import mirrors and own JSON only. No source, sample design, actual UI, guide, STATUS or automation changes.",
+  "createdKST": "2026-11-16T17:38:27+09:00",
+  "master": {
+    "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/assets/authoring/build-landmarks/v001/common_build-landmarks_master_normal_v001.png",
+    "size": [
+      1774,
+      887
+    ],
+    "bytes": 1019986,
+    "sha256": "ed018b9fbc4ca062c5171d0fce1e0cc5c5e9cd7080b836c9e555d938e3793278",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaBounds": {
+      "1": [
+        29,
+        7,
+        1745,
+        842
+      ],
+      "16": [
+        35,
+        105,
+        1677,
+        671
+      ],
+      "128": [
+        35,
+        106,
+        1676,
+        669
+      ]
+    }
+  },
+  "verticalObjectRangesAlpha16": [
+    [
+      35,
+      338
+    ],
+    [
+      399,
+      693
+    ],
+    [
+      754,
+      1010
+    ],
+    [
+      1075,
+      1347
+    ],
+    [
+      1401,
+      1712
+    ]
+  ],
+  "tileCuts": [
+    0,
+    368,
+    723,
+    1042,
+    1374,
+    1774
+  ],
+  "assets": [
+    {
+      "order": 1,
+      "key": "shop",
+      "tileRectInMaster": [
+        0,
+        0,
+        368,
+        887
+      ],
+      "alpha16CropInTile": [
+        35,
+        466,
+        303,
+        301
+      ],
+      "cropRectInMaster": [
+        35,
+        466,
+        303,
+        301
+      ],
+      "cropThreshold": 16,
+      "resized": false,
+      "syntheticPadding": false,
+      "sourceSize": [
+        303,
+        301
+      ],
+      "recommendedFit": "contain",
+      "png": {
+        "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/assets/authoring/build-landmarks/v001/common_build-shop_landmark_normal_v001.png",
+        "size": [
+          303,
+          301
+        ],
+        "bytes": 141626,
+        "sha256": "2866245cd9ddadba39334aeb93c2a9d6efd85cbedf59728d4493dc26f6a0a558",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            303,
+            301
+          ],
+          "16": [
+            0,
+            0,
+            303,
+            301
+          ],
+          "128": [
+            0,
+            1,
+            303,
+            300
+          ]
+        }
+      },
+      "production": {
+        "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/assets/production/build-landmarks/common_build-shop_landmark_normal_v001.webp",
+        "size": [
+          303,
+          301
+        ],
+        "bytes": 33984,
+        "sha256": "b5d5c28c5a7231d598957b24b4b2eaca01b24bab2378d40121ee21dba76a0a44",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            303,
+            301
+          ],
+          "16": [
+            0,
+            0,
+            303,
+            301
+          ],
+          "128": [
+            0,
+            1,
+            303,
+            300
+          ]
+        }
+      },
+      "importMirror": {
+        "path": "/Users/max/projest_max/ui-studio/src/tools/uxStudio/assets/import-staging/build-landmarks/common_build-shop_landmark_normal_v001.webp",
+        "size": [
+          303,
+          301
+        ],
+        "bytes": 33984,
+        "sha256": "b5d5c28c5a7231d598957b24b4b2eaca01b24bab2378d40121ee21dba76a0a44",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            303,
+            301
+          ],
+          "16": [
+            0,
+            0,
+            303,
+            301
+          ],
+          "128": [
+            0,
+            1,
+            303,
+            300
+          ]
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/build-landmarks/common_build-shop_landmark_normal_v001.webp",
+      "webpQuality": 95,
+      "alphaExactlyPreservedInWebP": true,
+      "compressionAttempts": [
+        {
+          "quality": 95,
+          "bytes": 33984
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "key": "townhouse",
+      "tileRectInMaster": [
+        368,
+        0,
+        355,
+        887
+      ],
+      "alpha16CropInTile": [
+        31,
+        217,
+        294,
+        544
+      ],
+      "cropRectInMaster": [
+        399,
+        217,
+        294,
+        544
+      ],
+      "cropThreshold": 16,
+      "resized": false,
+      "syntheticPadding": false,
+      "sourceSize": [
+        294,
+        544
+      ],
+      "recommendedFit": "contain",
+      "png": {
+        "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/assets/authoring/build-landmarks/v001/common_build-townhouse_landmark_normal_v001.png",
+        "size": [
+          294,
+          544
+        ],
+        "bytes": 256247,
+        "sha256": "8000b94ab8366702e169295efb492a516a1b8fb3baceb2fa4e864d4766ef9800",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            294,
+            544
+          ],
+          "16": [
+            0,
+            0,
+            294,
+            544
+          ],
+          "128": [
+            1,
+            1,
+            292,
+            543
+          ]
+        }
+      },
+      "production": {
+        "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/assets/production/build-landmarks/common_build-townhouse_landmark_normal_v001.webp",
+        "size": [
+          294,
+          544
+        ],
+        "bytes": 59120,
+        "sha256": "e5bbdc4815c23ce6be73565367c832f919a7bf450775629d58ef96f57e1c6707",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            294,
+            544
+          ],
+          "16": [
+            0,
+            0,
+            294,
+            544
+          ],
+          "128": [
+            1,
+            1,
+            292,
+            543
+          ]
+        }
+      },
+      "importMirror": {
+        "path": "/Users/max/projest_max/ui-studio/src/tools/uxStudio/assets/import-staging/build-landmarks/common_build-townhouse_landmark_normal_v001.webp",
+        "size": [
+          294,
+          544
+        ],
+        "bytes": 59120,
+        "sha256": "e5bbdc4815c23ce6be73565367c832f919a7bf450775629d58ef96f57e1c6707",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            294,
+            544
+          ],
+          "16": [
+            0,
+            0,
+            294,
+            544
+          ],
+          "128": [
+            1,
+            1,
+            292,
+            543
+          ]
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/build-landmarks/common_build-townhouse_landmark_normal_v001.webp",
+      "webpQuality": 95,
+      "alphaExactlyPreservedInWebP": true,
+      "compressionAttempts": [
+        {
+          "quality": 95,
+          "bytes": 59120
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "key": "clocktower",
+      "tileRectInMaster": [
+        723,
+        0,
+        319,
+        887
+      ],
+      "alpha16CropInTile": [
+        31,
+        105,
+        256,
+        662
+      ],
+      "cropRectInMaster": [
+        754,
+        105,
+        256,
+        662
+      ],
+      "cropThreshold": 16,
+      "resized": false,
+      "syntheticPadding": false,
+      "sourceSize": [
+        256,
+        662
+      ],
+      "recommendedFit": "contain",
+      "png": {
+        "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/assets/authoring/build-landmarks/v001/common_build-clocktower_landmark_normal_v001.png",
+        "size": [
+          256,
+          662
+        ],
+        "bytes": 227236,
+        "sha256": "cbc220ab6701b2a3c63bac796f2918e916539792d44e6f64e512354fd89b5b4f",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            256,
+            662
+          ],
+          "16": [
+            0,
+            0,
+            256,
+            662
+          ],
+          "128": [
+            1,
+            1,
+            254,
+            660
+          ]
+        }
+      },
+      "production": {
+        "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/assets/production/build-landmarks/common_build-clocktower_landmark_normal_v001.webp",
+        "size": [
+          256,
+          662
+        ],
+        "bytes": 57646,
+        "sha256": "24014d1fcfb6f249c37c1ae7a5d5fa4665f4790b2aaad83c3ca0ea5f311d550d",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            256,
+            662
+          ],
+          "16": [
+            0,
+            0,
+            256,
+            662
+          ],
+          "128": [
+            1,
+            1,
+            254,
+            660
+          ]
+        }
+      },
+      "importMirror": {
+        "path": "/Users/max/projest_max/ui-studio/src/tools/uxStudio/assets/import-staging/build-landmarks/common_build-clocktower_landmark_normal_v001.webp",
+        "size": [
+          256,
+          662
+        ],
+        "bytes": 57646,
+        "sha256": "24014d1fcfb6f249c37c1ae7a5d5fa4665f4790b2aaad83c3ca0ea5f311d550d",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            256,
+            662
+          ],
+          "16": [
+            0,
+            0,
+            256,
+            662
+          ],
+          "128": [
+            1,
+            1,
+            254,
+            660
+          ]
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/build-landmarks/common_build-clocktower_landmark_normal_v001.webp",
+      "webpQuality": 95,
+      "alphaExactlyPreservedInWebP": true,
+      "compressionAttempts": [
+        {
+          "quality": 95,
+          "bytes": 57646
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "key": "liberty",
+      "tileRectInMaster": [
+        1042,
+        0,
+        332,
+        887
+      ],
+      "alpha16CropInTile": [
+        33,
+        137,
+        272,
+        639
+      ],
+      "cropRectInMaster": [
+        1075,
+        137,
+        272,
+        639
+      ],
+      "cropThreshold": 16,
+      "resized": false,
+      "syntheticPadding": false,
+      "sourceSize": [
+        272,
+        639
+      ],
+      "recommendedFit": "contain",
+      "png": {
+        "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/assets/authoring/build-landmarks/v001/common_build-liberty_landmark_normal_v001.png",
+        "size": [
+          272,
+          639
+        ],
+        "bytes": 216402,
+        "sha256": "d549f48f8bcae68a68a786b5d1e550cb3c6f51b9b8eaef3507f679cfb27aed88",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            272,
+            639
+          ],
+          "16": [
+            0,
+            0,
+            272,
+            639
+          ],
+          "128": [
+            1,
+            1,
+            270,
+            637
+          ]
+        }
+      },
+      "production": {
+        "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/assets/production/build-landmarks/common_build-liberty_landmark_normal_v001.webp",
+        "size": [
+          272,
+          639
+        ],
+        "bytes": 64198,
+        "sha256": "4bcaf6de548ff2dd4b3390623b53256aedab762557289dd62d457afab7d1ef92",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            272,
+            639
+          ],
+          "16": [
+            0,
+            0,
+            272,
+            639
+          ],
+          "128": [
+            1,
+            1,
+            270,
+            637
+          ]
+        }
+      },
+      "importMirror": {
+        "path": "/Users/max/projest_max/ui-studio/src/tools/uxStudio/assets/import-staging/build-landmarks/common_build-liberty_landmark_normal_v001.webp",
+        "size": [
+          272,
+          639
+        ],
+        "bytes": 64198,
+        "sha256": "4bcaf6de548ff2dd4b3390623b53256aedab762557289dd62d457afab7d1ef92",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            272,
+            639
+          ],
+          "16": [
+            0,
+            0,
+            272,
+            639
+          ],
+          "128": [
+            1,
+            1,
+            270,
+            637
+          ]
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/build-landmarks/common_build-liberty_landmark_normal_v001.webp",
+      "webpQuality": 95,
+      "alphaExactlyPreservedInWebP": true,
+      "compressionAttempts": [
+        {
+          "quality": 95,
+          "bytes": 64198
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "key": "promenade",
+      "tileRectInMaster": [
+        1374,
+        0,
+        400,
+        887
+      ],
+      "alpha16CropInTile": [
+        27,
+        425,
+        311,
+        351
+      ],
+      "cropRectInMaster": [
+        1401,
+        425,
+        311,
+        351
+      ],
+      "cropThreshold": 16,
+      "resized": false,
+      "syntheticPadding": false,
+      "sourceSize": [
+        311,
+        351
+      ],
+      "recommendedFit": "contain",
+      "png": {
+        "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/assets/authoring/build-landmarks/v001/common_build-promenade_landmark_normal_v001.png",
+        "size": [
+          311,
+          351
+        ],
+        "bytes": 117279,
+        "sha256": "4a039e52183ebcb7d76490d078f0759f91c817853071dd49863c0ca0e8247ad9",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            311,
+            351
+          ],
+          "16": [
+            0,
+            0,
+            311,
+            351
+          ],
+          "128": [
+            0,
+            1,
+            310,
+            349
+          ]
+        }
+      },
+      "production": {
+        "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/assets/production/build-landmarks/common_build-promenade_landmark_normal_v001.webp",
+        "size": [
+          311,
+          351
+        ],
+        "bytes": 38142,
+        "sha256": "ad8d11de174399cd4c90e50d33a569d859042898470dcdd6e637a684b581dc45",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            311,
+            351
+          ],
+          "16": [
+            0,
+            0,
+            311,
+            351
+          ],
+          "128": [
+            0,
+            1,
+            310,
+            349
+          ]
+        }
+      },
+      "importMirror": {
+        "path": "/Users/max/projest_max/ui-studio/src/tools/uxStudio/assets/import-staging/build-landmarks/common_build-promenade_landmark_normal_v001.webp",
+        "size": [
+          311,
+          351
+        ],
+        "bytes": 38142,
+        "sha256": "ad8d11de174399cd4c90e50d33a569d859042898470dcdd6e637a684b581dc45",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBounds": {
+          "1": [
+            0,
+            0,
+            311,
+            351
+          ],
+          "16": [
+            0,
+            0,
+            311,
+            351
+          ],
+          "128": [
+            0,
+            1,
+            310,
+            349
+          ]
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/build-landmarks/common_build-promenade_landmark_normal_v001.webp",
+      "webpQuality": 95,
+      "alphaExactlyPreservedInWebP": true,
+      "compressionAttempts": [
+        {
+          "quality": 95,
+          "bytes": 38142
+        }
+      ]
+    }
+  ],
+  "processingNotes": [
+    "Tile cuts use actual transparent gutters between the five alpha16 object ranges, not fixed equal fifths; the fifth object crossed its requested nominal fifth.",
+    "Each crop is the tight rectangular alpha16 bound of its generated object. Low-alpha fringe outside that rectangle is excluded by cropping; source pixels inside the crop are unchanged.",
+    "The full master including low-alpha fringes remains preserved byte-for-byte. Individual aspect ratios were not resized or padded.",
+    "WebP q95 derivatives preserve every cropped alpha value exactly; external shadows are not synthesized."
+  ],
+  "differencesAndUnverified": [
+    "New illustrated interpretations in one coherent toy-isometric style, not pixel-identical reproductions of the reference cards.",
+    "Objects have naturally different heights; equal card-frame dimensions and contain placement are parent UI tasks.",
+    "No card frames, three-dot indicators, prices, native text or completion controls were composed.",
+    "Actual import, placement, interaction and final user approval remain parent tasks."
+  ],
+  "visualInspection": {
+    "allFiveProductionFilesOpened": true,
+    "objectsCompleteAndSeparate": true,
+    "textOrCardUIComposed": false,
+    "note": "Some generated colored low-alpha fringe remains close to object edges; no manual color/alpha repaint was performed. The full source and unchanged cropped pixels are preserved."
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "status": "제안(검수 대기)",
+  "scope": "Read-only manifest/SVG/PNG/new-art review; live native assembly was not inspected. Asset absence is not proof of absence from current native UI.",
+  "guideDraft": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unique-frames32/measure/guide-fragment32.md",
+  "reviewed": [
+    "geometry19 manifest/contact sheet/validation",
+    "SVG token-pedestal,equip-button3,class-token,bean-chest",
+    "Showroom gray preview and verification",
+    "Class new master PNG",
+    "Beanstalk cyan-alpha-check and new master/production alpha histograms",
+    "Prior source measurements, four source images visually inspected in initial pass"
+  ],
+  "issues": [
+    {
+      "priority": "P1",
+      "item": "showroom GodRays and pedestal paw",
+      "observed": "Source token display has broad warm rays and front plinth paw; geometry19 contains neither rays nor paw within token-pedestal SVG (token-paw is available separately).",
+      "action": "Add independent rays behind token/pedestal and a separate small token-paw instance on cream front. Preserve source hierarchy/layer order.",
+      "basis": [
+        "showroom-token-detail.json: GodRays,PedestalPaw",
+        "geometry/manifest.json:19 names",
+        "geometry/token-pedestal.svg"
+      ]
+    },
+    {
+      "priority": "P1",
+      "item": "class 3 benefit roles",
+      "observed": "Geometry19 supplies class-book and class-token, but no first mint portrait/card icon. Source has exactly3 equal-role pads.",
+      "action": "Ensure three peer benefit groups with own cream pad and distinct portrait-card/book/token icon; source header profile photo is not the same role as first benefit card.",
+      "basis": [
+        "tournament-class-preview.json: PortraitBenefit,BookBenefit,TokenBenefit",
+        "geometry/manifest.json"
+      ]
+    },
+    {
+      "priority": "P1",
+      "item": "beanstalk equal3column structure",
+      "observed": "Geometry assets supply scalable body/card and tile icons, but 3equalcolumns/dividers/quantities are native assembly duties.",
+      "action": "Use3 peer columns with common role dimensions, 2vertical dividers, separate header/card/item/+amount/bean; multiplier explanation remains a fourth independent lower region.",
+      "basis": [
+        "beanstalk-bonanza-details.json: TileGrid,Chance,Community,Railroad,Multiplier"
+      ]
+    },
+    {
+      "priority": "P1-if-claiming-complete-3D-button",
+      "item": "equipment pressed art missing",
+      "observed": "equip-button3 is one stacked-roundrect normal asset;19asset manifest has no pressed/disabled peer.",
+      "action": "If new equipment button is declared3D/complete, supply separate same-camera/coordinate normal+pressed full illustration consistent with r300. Otherwise explicitly leave pressed artwork pending; do not claim tint fulfills it.",
+      "basis": [
+        "geometry/equip-button3.svg",
+        "geometry/manifest.json"
+      ]
+    },
+    {
+      "priority": "P2",
+      "item": "closed community chest differs from source open chest",
+      "observed": "bean-chest.svg/PNG depicts closed blue geometric box; source tile icon is open chest with visible contents.",
+      "action": "Revise icon toward open blue chest, preserving independent tile card/icon nodes; no need to alter3column frame.",
+      "basis": [
+        "geometry/bean-chest.svg",
+        "MGV09 stable-extra-frame_00000.png"
+      ]
+    },
+    {
+      "priority": "P2",
+      "item": "blue class token silhouette differs",
+      "observed": "class-token.svg/PNG has a hat/bowtie-like center; source center is stylized hat/face/mustache medallion.",
+      "action": "Refine internal token silhouette if aiming toward observed motif; keep round blue medallion dimensions/benefit role.",
+      "basis": [
+        "geometry/class-token.svg",
+        "MGV09 stable-frame_00015.png"
+      ]
+    },
+    {
+      "priority": "P2-visual-limit",
+      "item": "new character/scene style differs materially",
+      "observed": "New showroom fullbody/bow/heart motif is present, but eye/bow proportions differ; class scene is more ornate/realistic; beanstalk treasure uses coins instead of source gold eggs and different explorer.",
+      "action": "Label independent reinterpretation/proposal; avoid source-equivalence approval. If tighter likeness is required, iterate art only without multiplying frames.",
+      "basis": [
+        "showroom-preview-on-gray.jpg",
+        "class-luxury-train-interior-v1.png",
+        "beanstalk-cyan-alpha-check-v1.jpg"
+      ]
+    }
+  ],
+  "alphaFollowup": {
+    "beanstalk": "Most nontransparent pixels are near-opaque rather than255: median252,p90=253,p99=253;747794pixels>=240. Tiny alpha255 count alone is not an opacity failure.42196pixels alpha1..15, inspect actual-background preview before assuming tight alpha bbox proves no fringe.",
+    "showroom": "Original master contains low-alpha remote pixels but production crop/threshold removed them per manifest. Production character visible in reviewed gray preview."
+  },
+  "verificationBoundary": "No live canvas/browser/server, no design JSON/common source/guide/report/STATUS changes. Only this scratch guide/review files written."
+}

@@ -1,0 +1,2356 @@
+{
+  "title": "Tycoon10 assembly quick sheet",
+  "createdAtKST": "2026-11-17T02:39:49.089291+09:00",
+  "status": "제안(검수 대기)·측정만",
+  "authorization": {
+    "usageCheckedBeforeWork": 90,
+    "ordinaryUsageAllowed": true,
+    "resume": "Latest direct approval after90%; no90-only stop",
+    "hardStopKST": "2026-11-17 08:00",
+    "resetOrPurchase": false
+  },
+  "reference": {
+    "path": "docs/reference/monopoly-go/20261116-ten-screens/10_tycoon.png",
+    "size": [
+      610,
+      1095
+    ],
+    "sha256": "07a2ebd10d414935ead85e38ac9a8453cab6725a9d3d36498233aa689a3f1f38",
+    "actuallyViewed": true,
+    "pixelsCopied": false
+  },
+  "planRead": "docs/plans/20261116-ten-screen-assembly.md:132-137",
+  "coordinateContract": {
+    "logicalSize": [
+      551,
+      984
+    ],
+    "uniformWidthScale": 0.9032786885245901,
+    "widthScaledHeight": 989.0901639344262,
+    "nativeMinusWidthScaledHeight": -5.090163934426187,
+    "rule": "Use width scale for both axes and sizes; no984/1095 Y stretching. Source is5.0902px taller. Keep source scene/panel geometry; normalizeClose separately inside984.",
+    "precision": "Approved plan rects quoted; other source boxes manual ±3px. Row subregions are same-template normalization proposals, not exact per-pixel segmentation.",
+    "rectFormat": "[x,y,w,h]px; local subtracts parent origin before same uniform scale."
+  },
+  "rectangles": [
+    {
+      "key": "Dim_Tycoon_Main",
+      "parent": "root",
+      "sourceRect": [
+        0,
+        0,
+        610,
+        1095
+      ],
+      "globalRect551": [
+        0.0,
+        0.0,
+        551.0,
+        989.09
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        551.0,
+        989.09
+      ],
+      "role": "single-grey-darkened-main-dim",
+      "notes": "Observed dark/grey caller Main; exactRGBA cannot be recovered from one composite. Keep actual caller state, do not use source screenshot as Main."
+    },
+    {
+      "key": "Panel_Tycoon",
+      "parent": "root",
+      "sourceRect": [
+        17,
+        93,
+        576,
+        917
+      ],
+      "globalRect551": [
+        15.36,
+        84.0,
+        520.29,
+        828.31
+      ],
+      "parentRelativeRect551": [
+        15.36,
+        84.0,
+        520.29,
+        828.31
+      ],
+      "role": "full-modal-panel",
+      "notes": "Plan outer bbox; upper edge is an arch, not an ordinary rounded rectangle. New scene/frame/mask integration needs actual QA."
+    },
+    {
+      "key": "Frame_Tycoon_UpperArch",
+      "parent": "Panel_Tycoon",
+      "sourceRect": [
+        17,
+        93,
+        576,
+        165
+      ],
+      "globalRect551": [
+        15.36,
+        84.0,
+        520.29,
+        149.04
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        520.29,
+        149.04
+      ],
+      "role": "separate-fixed-aspect-arch-frame"
+    },
+    {
+      "key": "Frame_Tycoon_LowerBody",
+      "parent": "Panel_Tycoon",
+      "sourceRect": [
+        17,
+        258,
+        576,
+        752
+      ],
+      "globalRect551": [
+        15.36,
+        233.05,
+        520.29,
+        679.27
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        149.04,
+        520.29,
+        679.27
+      ],
+      "role": "separate-lower-panel-frame"
+    },
+    {
+      "key": "Group_Tycoon_Title",
+      "parent": "root",
+      "sourceRect": [
+        176,
+        35,
+        258,
+        139
+      ],
+      "globalRect551": [
+        158.98,
+        31.61,
+        233.05,
+        125.56
+      ],
+      "parentRelativeRect551": [
+        158.98,
+        31.61,
+        233.05,
+        125.56
+      ],
+      "role": "outside-panel-title"
+    },
+    {
+      "key": "Txt_Tycoon_Title01",
+      "parent": "Group_Tycoon_Title",
+      "sourceRect": [
+        185,
+        41,
+        238,
+        76
+      ],
+      "globalRect551": [
+        167.11,
+        37.03,
+        214.98,
+        68.65
+      ],
+      "parentRelativeRect551": [
+        8.13,
+        5.42,
+        214.98,
+        68.65
+      ],
+      "role": "native-text",
+      "observedText": "발자국"
+    },
+    {
+      "key": "Txt_Tycoon_Title02",
+      "parent": "Group_Tycoon_Title",
+      "sourceRect": [
+        202,
+        111,
+        210,
+        49
+      ],
+      "globalRect551": [
+        182.46,
+        100.26,
+        189.69,
+        44.26
+      ],
+      "parentRelativeRect551": [
+        23.49,
+        68.65,
+        189.69,
+        44.26
+      ],
+      "role": "native-text",
+      "observedText": "익스프레스"
+    },
+    {
+      "key": "Viewport_Tycoon_Hero",
+      "parent": "Panel_Tycoon",
+      "sourceRect": [
+        28,
+        127,
+        554,
+        315
+      ],
+      "globalRect551": [
+        25.29,
+        114.72,
+        500.42,
+        284.53
+      ],
+      "parentRelativeRect551": [
+        9.94,
+        30.71,
+        500.42,
+        284.53
+      ],
+      "role": "prepared-scene-viewport",
+      "notes": "Approved plan bbox. The arched outer edge needs matching frame/mask; rectangular scene must not spill outside arch."
+    },
+    {
+      "key": "Img_Tycoon_NewScene",
+      "parent": "Viewport_Tycoon_Hero",
+      "sourceRect": [
+        28,
+        127,
+        554,
+        315
+      ],
+      "globalRect551": [
+        25.29,
+        114.72,
+        500.42,
+        284.53
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        500.42,
+        284.53
+      ],
+      "role": "new-scene-art",
+      "notes": "New700×467 scene has different ratio from554×315. Contain preserves train/topiary; cover/crop requires actual QA, no independentXYstretch."
+    },
+    {
+      "key": "Group_Tycoon_Departure",
+      "parent": "Panel_Tycoon",
+      "sourceRect": [
+        50,
+        207,
+        269,
+        44
+      ],
+      "globalRect551": [
+        45.16,
+        186.98,
+        242.98,
+        39.74
+      ],
+      "parentRelativeRect551": [
+        29.81,
+        102.97,
+        242.98,
+        39.74
+      ],
+      "role": "speech-bubble"
+    },
+    {
+      "key": "BG_Tycoon_Departure",
+      "parent": "Group_Tycoon_Departure",
+      "sourceRect": [
+        50,
+        207,
+        269,
+        44
+      ],
+      "globalRect551": [
+        45.16,
+        186.98,
+        242.98,
+        39.74
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        242.98,
+        39.74
+      ],
+      "role": "separate-bubble-frame"
+    },
+    {
+      "key": "Txt_Tycoon_DeparturePrefix",
+      "parent": "Group_Tycoon_Departure",
+      "sourceRect": [
+        61,
+        216,
+        53,
+        25
+      ],
+      "globalRect551": [
+        55.1,
+        195.11,
+        47.87,
+        22.58
+      ],
+      "parentRelativeRect551": [
+        9.94,
+        8.13,
+        47.87,
+        22.58
+      ],
+      "role": "native-text",
+      "observedText": "열차가"
+    },
+    {
+      "key": "Img_Tycoon_DepartureGear",
+      "parent": "Group_Tycoon_Departure",
+      "sourceRect": [
+        116,
+        213,
+        26,
+        29
+      ],
+      "globalRect551": [
+        104.78,
+        192.4,
+        23.49,
+        26.2
+      ],
+      "parentRelativeRect551": [
+        59.62,
+        5.42,
+        23.49,
+        26.2
+      ],
+      "role": "separate-star-gear-art"
+    },
+    {
+      "key": "Txt_Tycoon_DepartureValue",
+      "parent": "Group_Tycoon_Departure",
+      "sourceRect": [
+        146,
+        216,
+        164,
+        25
+      ],
+      "globalRect551": [
+        131.88,
+        195.11,
+        148.14,
+        22.58
+      ],
+      "parentRelativeRect551": [
+        86.71,
+        8.13,
+        148.14,
+        22.58
+      ],
+      "role": "native-text",
+      "observedText": "575에서 출발합니다.",
+      "notes": "Actual source enlarged in-memory4×. Parent brief5750 corrected to575; source icon is separate."
+    },
+    {
+      "key": "Group_Tycoon_Progress",
+      "parent": "Panel_Tycoon",
+      "sourceRect": [
+        101,
+        448,
+        409,
+        74
+      ],
+      "globalRect551": [
+        91.23,
+        404.67,
+        369.44,
+        66.84
+      ],
+      "parentRelativeRect551": [
+        75.88,
+        320.66,
+        369.44,
+        66.84
+      ],
+      "role": "progress-group"
+    },
+    {
+      "key": "BG_Tycoon_ProgressTrack",
+      "parent": "Group_Tycoon_Progress",
+      "sourceRect": [
+        151,
+        469,
+        306,
+        33
+      ],
+      "globalRect551": [
+        136.4,
+        423.64,
+        276.4,
+        29.81
+      ],
+      "parentRelativeRect551": [
+        45.16,
+        18.97,
+        276.4,
+        29.81
+      ],
+      "role": "separate-track"
+    },
+    {
+      "key": "Fill_Tycoon_ProgressObserved",
+      "parent": "Group_Tycoon_Progress",
+      "sourceRect": [
+        165,
+        471,
+        194,
+        28
+      ],
+      "globalRect551": [
+        149.04,
+        425.44,
+        175.24,
+        25.29
+      ],
+      "parentRelativeRect551": [
+        57.81,
+        20.78,
+        175.24,
+        25.29
+      ],
+      "role": "visible-fill-bounds-only",
+      "notes": "No current/goal/percentage inferred from this visible width.575/104 are not used to reverse-calculate it."
+    },
+    {
+      "key": "Badge_Tycoon_ProgressLeft",
+      "parent": "Group_Tycoon_Progress",
+      "sourceRect": [
+        108,
+        449,
+        72,
+        71
+      ],
+      "globalRect551": [
+        97.55,
+        405.57,
+        65.04,
+        64.13
+      ],
+      "parentRelativeRect551": [
+        6.32,
+        0.9,
+        65.04,
+        64.13
+      ],
+      "role": "fixed-circle-with-monkey-art"
+    },
+    {
+      "key": "Reward_Tycoon_ProgressRight",
+      "parent": "Group_Tycoon_Progress",
+      "sourceRect": [
+        431,
+        444,
+        84,
+        80
+      ],
+      "globalRect551": [
+        389.31,
+        401.06,
+        75.88,
+        72.26
+      ],
+      "parentRelativeRect551": [
+        298.08,
+        -3.61,
+        75.88,
+        72.26
+      ],
+      "role": "fixed-circle-with-green-pack-art",
+      "notes": "No separate numeric quantity or pack tier confirmed."
+    },
+    {
+      "key": "Group_Tycoon_Timer",
+      "parent": "Panel_Tycoon",
+      "sourceRect": [
+        229,
+        510,
+        151,
+        36
+      ],
+      "globalRect551": [
+        206.85,
+        460.67,
+        136.4,
+        32.52
+      ],
+      "parentRelativeRect551": [
+        191.5,
+        376.67,
+        136.4,
+        32.52
+      ],
+      "role": "fixed-timer-pill"
+    },
+    {
+      "key": "Img_Tycoon_TimerClock",
+      "parent": "Group_Tycoon_Timer",
+      "sourceRect": [
+        244,
+        517,
+        17,
+        20
+      ],
+      "globalRect551": [
+        220.4,
+        467.0,
+        15.36,
+        18.07
+      ],
+      "parentRelativeRect551": [
+        13.55,
+        6.32,
+        15.36,
+        18.07
+      ],
+      "role": "clock-art"
+    },
+    {
+      "key": "Txt_Tycoon_Timer",
+      "parent": "Group_Tycoon_Timer",
+      "sourceRect": [
+        265,
+        515,
+        102,
+        23
+      ],
+      "globalRect551": [
+        239.37,
+        465.19,
+        92.13,
+        20.78
+      ],
+      "parentRelativeRect551": [
+        32.52,
+        4.52,
+        92.13,
+        20.78
+      ],
+      "role": "native-text",
+      "observedText": "7시간 48분"
+    },
+    {
+      "key": "Viewport_Tycoon_Ranks",
+      "parent": "Panel_Tycoon",
+      "sourceRect": [
+        33,
+        562,
+        542,
+        382
+      ],
+      "globalRect551": [
+        29.81,
+        507.64,
+        489.58,
+        345.05
+      ],
+      "parentRelativeRect551": [
+        14.45,
+        423.64,
+        489.58,
+        345.05
+      ],
+      "role": "vertical-rank-scroll-viewport",
+      "notes": "Source static view; scroll behavior is a production acceptance check, not performed here."
+    },
+    {
+      "key": "Row_Tycoon_Rank01",
+      "parent": "Viewport_Tycoon_Ranks",
+      "sourceRect": [
+        35,
+        562,
+        539,
+        84
+      ],
+      "globalRect551": [
+        31.61,
+        507.64,
+        486.87,
+        75.88
+      ],
+      "parentRelativeRect551": [
+        1.81,
+        0.0,
+        486.87,
+        75.88
+      ],
+      "role": "normalized-common-row-proposal",
+      "notes": "Observed rows approx82–85px; normalized same539×84/gap4. Row04 lower body unobserved/covered."
+    },
+    {
+      "key": "Row_Tycoon_Rank01_BG",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        35,
+        562,
+        539,
+        84
+      ],
+      "globalRect551": [
+        31.61,
+        507.64,
+        486.87,
+        75.88
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        486.87,
+        75.88
+      ],
+      "role": "separate-card-background-frame"
+    },
+    {
+      "key": "Row_Tycoon_Rank01_Rank",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        40,
+        567,
+        31,
+        33
+      ],
+      "globalRect551": [
+        36.13,
+        512.16,
+        28.0,
+        29.81
+      ],
+      "parentRelativeRect551": [
+        4.52,
+        4.52,
+        28.0,
+        29.81
+      ],
+      "role": "native-text",
+      "observedText": "1"
+    },
+    {
+      "key": "Row_Tycoon_Rank01_Avatar",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        75,
+        573,
+        64,
+        64
+      ],
+      "globalRect551": [
+        67.75,
+        517.58,
+        57.81,
+        57.81
+      ],
+      "parentRelativeRect551": [
+        36.13,
+        9.94,
+        57.81,
+        57.81
+      ],
+      "role": "avatar-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank01_Nickname",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        153,
+        568,
+        245,
+        28
+      ],
+      "globalRect551": [
+        138.2,
+        513.06,
+        221.3,
+        25.29
+      ],
+      "parentRelativeRect551": [
+        106.59,
+        5.42,
+        221.3,
+        25.29
+      ],
+      "role": "native-text",
+      "observedText": "NotableCamel38"
+    },
+    {
+      "key": "Row_Tycoon_Rank01_ScoreBG",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        152,
+        599,
+        170,
+        34
+      ],
+      "globalRect551": [
+        137.3,
+        541.06,
+        153.56,
+        30.71
+      ],
+      "parentRelativeRect551": [
+        105.68,
+        33.42,
+        153.56,
+        30.71
+      ],
+      "role": "separate-score-pill"
+    },
+    {
+      "key": "Row_Tycoon_Rank01_ScoreIcon",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        157,
+        602,
+        30,
+        28
+      ],
+      "globalRect551": [
+        141.81,
+        543.77,
+        27.1,
+        25.29
+      ],
+      "parentRelativeRect551": [
+        110.2,
+        36.13,
+        27.1,
+        25.29
+      ],
+      "role": "monkey-score-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank01_Score",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        193,
+        600,
+        121,
+        32
+      ],
+      "globalRect551": [
+        174.33,
+        541.97,
+        109.3,
+        28.9
+      ],
+      "parentRelativeRect551": [
+        142.72,
+        34.32,
+        109.3,
+        28.9
+      ],
+      "role": "native-text",
+      "observedText": "920"
+    },
+    {
+      "key": "Row_Tycoon_Rank01_Pack",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        416,
+        581,
+        38,
+        46
+      ],
+      "globalRect551": [
+        375.76,
+        524.8,
+        34.32,
+        41.55
+      ],
+      "parentRelativeRect551": [
+        344.15,
+        17.16,
+        34.32,
+        41.55
+      ],
+      "role": "separate-pack-art",
+      "notes": "No native quantity observed; do not assign1 or a star tier."
+    },
+    {
+      "key": "Row_Tycoon_Rank01_Dice",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        473,
+        582,
+        31,
+        35
+      ],
+      "globalRect551": [
+        427.25,
+        525.71,
+        28.0,
+        31.61
+      ],
+      "parentRelativeRect551": [
+        395.64,
+        18.07,
+        28.0,
+        31.61
+      ],
+      "role": "separate-dice-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank01_DiceCount",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        463,
+        611,
+        55,
+        24
+      ],
+      "globalRect551": [
+        418.22,
+        551.9,
+        49.68,
+        21.68
+      ],
+      "parentRelativeRect551": [
+        386.6,
+        44.26,
+        49.68,
+        21.68
+      ],
+      "role": "native-text",
+      "observedText": "1,500"
+    },
+    {
+      "key": "Row_Tycoon_Rank01_Cash",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        523,
+        584,
+        40,
+        30
+      ],
+      "globalRect551": [
+        472.41,
+        527.51,
+        36.13,
+        27.1
+      ],
+      "parentRelativeRect551": [
+        440.8,
+        19.87,
+        36.13,
+        27.1
+      ],
+      "role": "separate-cash-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank01_CashCount",
+      "parent": "Row_Tycoon_Rank01",
+      "sourceRect": [
+        518,
+        611,
+        55,
+        24
+      ],
+      "globalRect551": [
+        467.9,
+        551.9,
+        49.68,
+        21.68
+      ],
+      "parentRelativeRect551": [
+        436.28,
+        44.26,
+        49.68,
+        21.68
+      ],
+      "role": "native-text",
+      "observedText": "1.6M"
+    },
+    {
+      "key": "Row_Tycoon_Rank02",
+      "parent": "Viewport_Tycoon_Ranks",
+      "sourceRect": [
+        35,
+        650,
+        539,
+        84
+      ],
+      "globalRect551": [
+        31.61,
+        587.13,
+        486.87,
+        75.88
+      ],
+      "parentRelativeRect551": [
+        1.81,
+        79.49,
+        486.87,
+        75.88
+      ],
+      "role": "normalized-common-row-proposal",
+      "notes": "Observed rows approx82–85px; normalized same539×84/gap4. Row04 lower body unobserved/covered."
+    },
+    {
+      "key": "Row_Tycoon_Rank02_BG",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        35,
+        650,
+        539,
+        84
+      ],
+      "globalRect551": [
+        31.61,
+        587.13,
+        486.87,
+        75.88
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        486.87,
+        75.88
+      ],
+      "role": "separate-card-background-frame"
+    },
+    {
+      "key": "Row_Tycoon_Rank02_Rank",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        40,
+        655,
+        31,
+        33
+      ],
+      "globalRect551": [
+        36.13,
+        591.65,
+        28.0,
+        29.81
+      ],
+      "parentRelativeRect551": [
+        4.52,
+        4.52,
+        28.0,
+        29.81
+      ],
+      "role": "native-text",
+      "observedText": "2"
+    },
+    {
+      "key": "Row_Tycoon_Rank02_Avatar",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        75,
+        661,
+        64,
+        64
+      ],
+      "globalRect551": [
+        67.75,
+        597.07,
+        57.81,
+        57.81
+      ],
+      "parentRelativeRect551": [
+        36.13,
+        9.94,
+        57.81,
+        57.81
+      ],
+      "role": "avatar-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank02_Nickname",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        153,
+        656,
+        245,
+        28
+      ],
+      "globalRect551": [
+        138.2,
+        592.55,
+        221.3,
+        25.29
+      ],
+      "parentRelativeRect551": [
+        106.59,
+        5.42,
+        221.3,
+        25.29
+      ],
+      "role": "native-text",
+      "observedText": "ابراهيم",
+      "notes": "Visible Arabic transcription only; initial alef hamza/diacritics/precise Unicode not fully confirmed. Possible spellingإبراهيم remains unconfirmed. See zoom crop."
+    },
+    {
+      "key": "Row_Tycoon_Rank02_ScoreBG",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        152,
+        687,
+        170,
+        34
+      ],
+      "globalRect551": [
+        137.3,
+        620.55,
+        153.56,
+        30.71
+      ],
+      "parentRelativeRect551": [
+        105.68,
+        33.42,
+        153.56,
+        30.71
+      ],
+      "role": "separate-score-pill"
+    },
+    {
+      "key": "Row_Tycoon_Rank02_ScoreIcon",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        157,
+        690,
+        30,
+        28
+      ],
+      "globalRect551": [
+        141.81,
+        623.26,
+        27.1,
+        25.29
+      ],
+      "parentRelativeRect551": [
+        110.2,
+        36.13,
+        27.1,
+        25.29
+      ],
+      "role": "monkey-score-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank02_Score",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        193,
+        688,
+        121,
+        32
+      ],
+      "globalRect551": [
+        174.33,
+        621.46,
+        109.3,
+        28.9
+      ],
+      "parentRelativeRect551": [
+        142.72,
+        34.32,
+        109.3,
+        28.9
+      ],
+      "role": "native-text",
+      "observedText": "502"
+    },
+    {
+      "key": "Row_Tycoon_Rank02_Pack",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        416,
+        669,
+        38,
+        46
+      ],
+      "globalRect551": [
+        375.76,
+        604.29,
+        34.32,
+        41.55
+      ],
+      "parentRelativeRect551": [
+        344.15,
+        17.16,
+        34.32,
+        41.55
+      ],
+      "role": "separate-pack-art",
+      "notes": "No native quantity observed; do not assign1 or a star tier."
+    },
+    {
+      "key": "Row_Tycoon_Rank02_Dice",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        473,
+        670,
+        31,
+        35
+      ],
+      "globalRect551": [
+        427.25,
+        605.2,
+        28.0,
+        31.61
+      ],
+      "parentRelativeRect551": [
+        395.64,
+        18.07,
+        28.0,
+        31.61
+      ],
+      "role": "separate-dice-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank02_DiceCount",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        463,
+        699,
+        55,
+        24
+      ],
+      "globalRect551": [
+        418.22,
+        631.39,
+        49.68,
+        21.68
+      ],
+      "parentRelativeRect551": [
+        386.6,
+        44.26,
+        49.68,
+        21.68
+      ],
+      "role": "native-text",
+      "observedText": "800"
+    },
+    {
+      "key": "Row_Tycoon_Rank02_Cash",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        523,
+        672,
+        40,
+        30
+      ],
+      "globalRect551": [
+        472.41,
+        607.0,
+        36.13,
+        27.1
+      ],
+      "parentRelativeRect551": [
+        440.8,
+        19.87,
+        36.13,
+        27.1
+      ],
+      "role": "separate-cash-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank02_CashCount",
+      "parent": "Row_Tycoon_Rank02",
+      "sourceRect": [
+        518,
+        699,
+        55,
+        24
+      ],
+      "globalRect551": [
+        467.9,
+        631.39,
+        49.68,
+        21.68
+      ],
+      "parentRelativeRect551": [
+        436.28,
+        44.26,
+        49.68,
+        21.68
+      ],
+      "role": "native-text",
+      "observedText": "800K"
+    },
+    {
+      "key": "Row_Tycoon_Rank03",
+      "parent": "Viewport_Tycoon_Ranks",
+      "sourceRect": [
+        35,
+        738,
+        539,
+        84
+      ],
+      "globalRect551": [
+        31.61,
+        666.62,
+        486.87,
+        75.88
+      ],
+      "parentRelativeRect551": [
+        1.81,
+        158.98,
+        486.87,
+        75.88
+      ],
+      "role": "normalized-common-row-proposal",
+      "notes": "Observed rows approx82–85px; normalized same539×84/gap4. Row04 lower body unobserved/covered."
+    },
+    {
+      "key": "Row_Tycoon_Rank03_BG",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        35,
+        738,
+        539,
+        84
+      ],
+      "globalRect551": [
+        31.61,
+        666.62,
+        486.87,
+        75.88
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        486.87,
+        75.88
+      ],
+      "role": "separate-card-background-frame"
+    },
+    {
+      "key": "Row_Tycoon_Rank03_Rank",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        40,
+        743,
+        31,
+        33
+      ],
+      "globalRect551": [
+        36.13,
+        671.14,
+        28.0,
+        29.81
+      ],
+      "parentRelativeRect551": [
+        4.52,
+        4.52,
+        28.0,
+        29.81
+      ],
+      "role": "native-text",
+      "observedText": "3"
+    },
+    {
+      "key": "Row_Tycoon_Rank03_Avatar",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        75,
+        749,
+        64,
+        64
+      ],
+      "globalRect551": [
+        67.75,
+        676.56,
+        57.81,
+        57.81
+      ],
+      "parentRelativeRect551": [
+        36.13,
+        9.94,
+        57.81,
+        57.81
+      ],
+      "role": "avatar-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank03_Nickname",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        153,
+        744,
+        245,
+        28
+      ],
+      "globalRect551": [
+        138.2,
+        672.04,
+        221.3,
+        25.29
+      ],
+      "parentRelativeRect551": [
+        106.59,
+        5.42,
+        221.3,
+        25.29
+      ],
+      "role": "native-text",
+      "observedText": "ElegantDove05"
+    },
+    {
+      "key": "Row_Tycoon_Rank03_ScoreBG",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        152,
+        775,
+        170,
+        34
+      ],
+      "globalRect551": [
+        137.3,
+        700.04,
+        153.56,
+        30.71
+      ],
+      "parentRelativeRect551": [
+        105.68,
+        33.42,
+        153.56,
+        30.71
+      ],
+      "role": "separate-score-pill"
+    },
+    {
+      "key": "Row_Tycoon_Rank03_ScoreIcon",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        157,
+        778,
+        30,
+        28
+      ],
+      "globalRect551": [
+        141.81,
+        702.75,
+        27.1,
+        25.29
+      ],
+      "parentRelativeRect551": [
+        110.2,
+        36.13,
+        27.1,
+        25.29
+      ],
+      "role": "monkey-score-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank03_Score",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        193,
+        776,
+        121,
+        32
+      ],
+      "globalRect551": [
+        174.33,
+        700.94,
+        109.3,
+        28.9
+      ],
+      "parentRelativeRect551": [
+        142.72,
+        34.32,
+        109.3,
+        28.9
+      ],
+      "role": "native-text",
+      "observedText": "290"
+    },
+    {
+      "key": "Row_Tycoon_Rank03_Pack",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        416,
+        757,
+        38,
+        46
+      ],
+      "globalRect551": [
+        375.76,
+        683.78,
+        34.32,
+        41.55
+      ],
+      "parentRelativeRect551": [
+        344.15,
+        17.16,
+        34.32,
+        41.55
+      ],
+      "role": "separate-pack-art",
+      "notes": "No native quantity observed; do not assign1 or a star tier."
+    },
+    {
+      "key": "Row_Tycoon_Rank03_Dice",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        473,
+        758,
+        31,
+        35
+      ],
+      "globalRect551": [
+        427.25,
+        684.69,
+        28.0,
+        31.61
+      ],
+      "parentRelativeRect551": [
+        395.64,
+        18.07,
+        28.0,
+        31.61
+      ],
+      "role": "separate-dice-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank03_DiceCount",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        463,
+        787,
+        55,
+        24
+      ],
+      "globalRect551": [
+        418.22,
+        710.88,
+        49.68,
+        21.68
+      ],
+      "parentRelativeRect551": [
+        386.6,
+        44.26,
+        49.68,
+        21.68
+      ],
+      "role": "native-text",
+      "observedText": "600"
+    },
+    {
+      "key": "Row_Tycoon_Rank03_Cash",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        523,
+        760,
+        40,
+        30
+      ],
+      "globalRect551": [
+        472.41,
+        686.49,
+        36.13,
+        27.1
+      ],
+      "parentRelativeRect551": [
+        440.8,
+        19.87,
+        36.13,
+        27.1
+      ],
+      "role": "separate-cash-art"
+    },
+    {
+      "key": "Row_Tycoon_Rank03_CashCount",
+      "parent": "Row_Tycoon_Rank03",
+      "sourceRect": [
+        518,
+        787,
+        55,
+        24
+      ],
+      "globalRect551": [
+        467.9,
+        710.88,
+        49.68,
+        21.68
+      ],
+      "parentRelativeRect551": [
+        436.28,
+        44.26,
+        49.68,
+        21.68
+      ],
+      "role": "native-text",
+      "observedText": "600K"
+    },
+    {
+      "key": "Row_Tycoon_Rank04",
+      "parent": "Viewport_Tycoon_Ranks",
+      "sourceRect": [
+        35,
+        826,
+        539,
+        84
+      ],
+      "globalRect551": [
+        31.61,
+        746.11,
+        486.87,
+        75.88
+      ],
+      "parentRelativeRect551": [
+        1.81,
+        238.47,
+        486.87,
+        75.88
+      ],
+      "role": "normalized-common-row-proposal",
+      "notes": "Observed rows approx82–85px; normalized same539×84/gap4. Row04 lower body unobserved/covered."
+    },
+    {
+      "key": "Row_Tycoon_Rank04_BG",
+      "parent": "Row_Tycoon_Rank04",
+      "sourceRect": [
+        35,
+        826,
+        539,
+        84
+      ],
+      "globalRect551": [
+        31.61,
+        746.11,
+        486.87,
+        75.88
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        486.87,
+        75.88
+      ],
+      "role": "separate-card-background-frame"
+    },
+    {
+      "key": "Row_Tycoon_Rank04_Rank",
+      "parent": "Row_Tycoon_Rank04",
+      "sourceRect": [
+        40,
+        831,
+        31,
+        33
+      ],
+      "globalRect551": [
+        36.13,
+        750.62,
+        28.0,
+        29.81
+      ],
+      "parentRelativeRect551": [
+        4.52,
+        4.52,
+        28.0,
+        29.81
+      ],
+      "role": "native-text",
+      "observedText": "4"
+    },
+    {
+      "key": "Row_Tycoon_Rank04_Avatar",
+      "parent": "Row_Tycoon_Rank04",
+      "sourceRect": [
+        75,
+        837,
+        64,
+        64
+      ],
+      "globalRect551": [
+        67.75,
+        756.04,
+        57.81,
+        57.81
+      ],
+      "parentRelativeRect551": [
+        36.13,
+        9.94,
+        57.81,
+        57.81
+      ],
+      "role": "partial-avatar-unobserved-lower"
+    },
+    {
+      "key": "Row_Tycoon_Rank04_Nickname",
+      "parent": "Row_Tycoon_Rank04",
+      "sourceRect": [
+        153,
+        832,
+        245,
+        28
+      ],
+      "globalRect551": [
+        138.2,
+        751.53,
+        221.3,
+        25.29
+      ],
+      "parentRelativeRect551": [
+        106.59,
+        5.42,
+        221.3,
+        25.29
+      ],
+      "role": "native-text",
+      "observedText": "PeerlessPelican...",
+      "notes": "Lower row body hidden by fixed MyRank. No score/reward quantity/fullname invented."
+    },
+    {
+      "key": "Row_Tycoon_Rank04_VisiblePart",
+      "parent": "Row_Tycoon_Rank04",
+      "sourceRect": [
+        35,
+        826,
+        539,
+        38
+      ],
+      "globalRect551": [
+        31.61,
+        746.11,
+        486.87,
+        34.32
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        486.87,
+        34.32
+      ],
+      "role": "source-visible-upper-only",
+      "notes": "Full normalized row is a production template, visible source part stops atMyRankY864."
+    },
+    {
+      "key": "Row_Tycoon_Rank04_PackPartial",
+      "parent": "Row_Tycoon_Rank04",
+      "sourceRect": [
+        418,
+        845,
+        36,
+        19
+      ],
+      "globalRect551": [
+        377.57,
+        763.27,
+        32.52,
+        17.16
+      ],
+      "parentRelativeRect551": [
+        345.96,
+        17.16,
+        32.52,
+        17.16
+      ],
+      "role": "partial-art-no-quantity"
+    },
+    {
+      "key": "Row_Tycoon_Rank04_DicePartial",
+      "parent": "Row_Tycoon_Rank04",
+      "sourceRect": [
+        472,
+        844,
+        31,
+        20
+      ],
+      "globalRect551": [
+        426.35,
+        762.37,
+        28.0,
+        18.07
+      ],
+      "parentRelativeRect551": [
+        394.73,
+        16.26,
+        28.0,
+        18.07
+      ],
+      "role": "partial-art-no-quantity"
+    },
+    {
+      "key": "Row_Tycoon_Rank04_CashPartial",
+      "parent": "Row_Tycoon_Rank04",
+      "sourceRect": [
+        524,
+        850,
+        37,
+        14
+      ],
+      "globalRect551": [
+        473.32,
+        767.79,
+        33.42,
+        12.65
+      ],
+      "parentRelativeRect551": [
+        441.7,
+        21.68,
+        33.42,
+        12.65
+      ],
+      "role": "partial-art-no-quantity"
+    },
+    {
+      "key": "Row_Tycoon_MyRank_Observed",
+      "parent": "Panel_Tycoon",
+      "sourceRect": [
+        35,
+        864,
+        539,
+        81
+      ],
+      "globalRect551": [
+        31.61,
+        780.43,
+        486.87,
+        73.17
+      ],
+      "parentRelativeRect551": [
+        16.26,
+        696.43,
+        486.87,
+        73.17
+      ],
+      "role": "fixed-sibling-above-scroll",
+      "notes": "Must be outside scroll content and drawn in front. Common84px normalization is a proposal; observed own row81px."
+    },
+    {
+      "key": "MyRank_BG",
+      "parent": "Row_Tycoon_MyRank_Observed",
+      "sourceRect": [
+        35,
+        864,
+        539,
+        81
+      ],
+      "globalRect551": [
+        31.61,
+        780.43,
+        486.87,
+        73.17
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        486.87,
+        73.17
+      ],
+      "role": "selected-card-background-frame"
+    },
+    {
+      "key": "MyRank_Position",
+      "parent": "Row_Tycoon_MyRank_Observed",
+      "sourceRect": [
+        40,
+        869,
+        31,
+        33
+      ],
+      "globalRect551": [
+        36.13,
+        784.95,
+        28.0,
+        29.81
+      ],
+      "parentRelativeRect551": [
+        4.52,
+        4.52,
+        28.0,
+        29.81
+      ],
+      "role": "native-text",
+      "observedText": "22"
+    },
+    {
+      "key": "MyRank_Avatar",
+      "parent": "Row_Tycoon_MyRank_Observed",
+      "sourceRect": [
+        75,
+        876,
+        64,
+        64
+      ],
+      "globalRect551": [
+        67.75,
+        791.27,
+        57.81,
+        57.81
+      ],
+      "parentRelativeRect551": [
+        36.13,
+        10.84,
+        57.81,
+        57.81
+      ],
+      "role": "portrait-art"
+    },
+    {
+      "key": "MyRank_Name",
+      "parent": "Row_Tycoon_MyRank_Observed",
+      "sourceRect": [
+        153,
+        870,
+        245,
+        28
+      ],
+      "globalRect551": [
+        138.2,
+        785.85,
+        221.3,
+        25.29
+      ],
+      "parentRelativeRect551": [
+        106.59,
+        5.42,
+        221.3,
+        25.29
+      ],
+      "role": "native-text",
+      "observedText": "현중"
+    },
+    {
+      "key": "MyRank_ScoreBG",
+      "parent": "Row_Tycoon_MyRank_Observed",
+      "sourceRect": [
+        152,
+        898,
+        170,
+        36
+      ],
+      "globalRect551": [
+        137.3,
+        811.14,
+        153.56,
+        32.52
+      ],
+      "parentRelativeRect551": [
+        105.68,
+        30.71,
+        153.56,
+        32.52
+      ],
+      "role": "separate-score-pill"
+    },
+    {
+      "key": "MyRank_ScoreIcon",
+      "parent": "Row_Tycoon_MyRank_Observed",
+      "sourceRect": [
+        157,
+        902,
+        30,
+        28
+      ],
+      "globalRect551": [
+        141.81,
+        814.76,
+        27.1,
+        25.29
+      ],
+      "parentRelativeRect551": [
+        110.2,
+        34.32,
+        27.1,
+        25.29
+      ],
+      "role": "monkey-score-art"
+    },
+    {
+      "key": "MyRank_Score",
+      "parent": "Row_Tycoon_MyRank_Observed",
+      "sourceRect": [
+        193,
+        901,
+        121,
+        32
+      ],
+      "globalRect551": [
+        174.33,
+        813.85,
+        109.3,
+        28.9
+      ],
+      "parentRelativeRect551": [
+        142.72,
+        33.42,
+        109.3,
+        28.9
+      ],
+      "role": "native-text",
+      "observedText": "104"
+    },
+    {
+      "key": "MyRank_CashArt",
+      "parent": "Row_Tycoon_MyRank_Observed",
+      "sourceRect": [
+        524,
+        889,
+        38,
+        28
+      ],
+      "globalRect551": [
+        473.32,
+        803.01,
+        34.32,
+        25.29
+      ],
+      "parentRelativeRect551": [
+        441.7,
+        22.58,
+        34.32,
+        25.29
+      ],
+      "role": "separate-cash-art"
+    },
+    {
+      "key": "MyRank_CashCount",
+      "parent": "Row_Tycoon_MyRank_Observed",
+      "sourceRect": [
+        520,
+        911,
+        46,
+        23
+      ],
+      "globalRect551": [
+        469.7,
+        822.89,
+        41.55,
+        20.78
+      ],
+      "parentRelativeRect551": [
+        438.09,
+        42.45,
+        41.55,
+        20.78
+      ],
+      "role": "native-text",
+      "observedText": "40K"
+    },
+    {
+      "key": "Info_Observed",
+      "parent": "root",
+      "sourceRect": [
+        17,
+        36,
+        35,
+        39
+      ],
+      "globalRect551": [
+        15.36,
+        32.52,
+        31.61,
+        35.23
+      ],
+      "parentRelativeRect551": [
+        15.36,
+        32.52,
+        31.61,
+        35.23
+      ],
+      "role": "observed-info-art"
+    },
+    {
+      "key": "Btn_Tycoon_Info44",
+      "parent": "root",
+      "sourceRect": [
+        10.144283121597095,
+        31.144283121597095,
+        48.71143375680581,
+        48.71143375680581
+      ],
+      "globalRect551": [
+        9.16,
+        28.13,
+        44.0,
+        44.0
+      ],
+      "parentRelativeRect551": [
+        9.16,
+        28.13,
+        44.0,
+        44.0
+      ],
+      "role": "proposed-native44-square-hit",
+      "notes": "No Info destination/API invented."
+    },
+    {
+      "key": "Close_Observed",
+      "parent": "root",
+      "sourceRect": [
+        274,
+        1041,
+        56,
+        54
+      ],
+      "globalRect551": [
+        247.5,
+        940.31,
+        50.58,
+        48.78
+      ],
+      "parentRelativeRect551": [
+        247.5,
+        940.31,
+        50.58,
+        48.78
+      ],
+      "role": "observed-close-cross-circle",
+      "notes": "Width-scaled bottom989.09 exceedsnative984. Do not preserve clipping of the active Close input."
+    },
+    {
+      "key": "Btn_Tycoon_Close44_SourceCentered",
+      "parent": "root",
+      "sourceRect": [
+        277.6442831215971,
+        1043.644283121597,
+        48.71143375680581,
+        48.71143375680581
+      ],
+      "globalRect551": [
+        250.79,
+        942.7,
+        44.0,
+        44.0
+      ],
+      "parentRelativeRect551": [
+        250.79,
+        942.7,
+        44.0,
+        44.0
+      ],
+      "role": "source-centered44-comparison",
+      "notes": "This source-centered44 hit extends below native984; use separate bottom-anchor proposal [253.5,932,44,44] instead."
+    }
+  ],
+  "observations": {
+    "title": "발자국 익스프레스",
+    "departure": "열차가 [별 기어 아이콘] 575에서 출발합니다.",
+    "departureCount": "575",
+    "timer": "7시간 48분",
+    "ranks": [
+      {
+        "rank": "1",
+        "nickname": "NotableCamel38",
+        "score": "920",
+        "packColorObserved": "purple",
+        "packQuantity": null,
+        "dice": "1,500",
+        "cash": "1.6M",
+        "complete": true
+      },
+      {
+        "rank": "2",
+        "nickname": "ابراهيم",
+        "nicknameStatus": "Visible Arabic transcription only; initial alef hamza/diacritics/precise Unicode not fully confirmed. Possible spellingإبراهيم remains unconfirmed. See zoom crop.",
+        "score": "502",
+        "packColorObserved": "blue",
+        "packQuantity": null,
+        "dice": "800",
+        "cash": "800K",
+        "complete": true
+      },
+      {
+        "rank": "3",
+        "nickname": "ElegantDove05",
+        "score": "290",
+        "packColorObserved": "blue",
+        "packQuantity": null,
+        "dice": "600",
+        "cash": "600K",
+        "complete": true
+      },
+      {
+        "rank": "4",
+        "nickname": "PeerlessPelican...",
+        "fullNickname": null,
+        "score": null,
+        "packColorObserved": "blue partial",
+        "packQuantity": null,
+        "dice": null,
+        "cash": null,
+        "complete": false,
+        "unobserved": "Lower row body hidden by fixed MyRank. No score/reward quantity/fullname invented."
+      }
+    ],
+    "myRank": {
+      "rank": "22",
+      "nickname": "현중",
+      "score": "104",
+      "cash": "40K",
+      "packQuantity": null,
+      "dice": null
+    },
+    "progress": "Visible fill only; no current/goal/total inferred."
+  },
+  "correctionsAndZoomEvidence": {
+    "departure": {
+      "discardedBriefValue": "5750",
+      "observedValue": "575",
+      "reason": "4×nearest source crop clearly shows575 immediately followed by에서; parent explicitly accepted actual575 and discarded5750 guess.",
+      "sourceCropXYXY": [
+        49,
+        206,
+        326,
+        253
+      ],
+      "zoom": "4×NEAREST in-memory analysis image only; no extra output file."
+    },
+    "arabicNickname": {
+      "visibleNativeTranscription": "ابراهيم",
+      "possibleDiacriticVariant": "إبراهيم",
+      "exactUnicode": "unconfirmed at this resolution; do not present hamza/diacritics as verified.",
+      "sourceCropXYXY": [
+        147,
+        654,
+        317,
+        691
+      ],
+      "zoom": "4×NEAREST in-memory; preserve native visible string, no Romanized nickname used."
+    }
+  },
+  "normalizationProposal": {
+    "fourRankRowsSource": [
+      539,
+      84
+    ],
+    "fourRankRowsLogical": [
+      486.87,
+      75.88
+    ],
+    "sourceGap": 4,
+    "logicalGap": 3.61,
+    "myRowObservedSource": [
+      539,
+      81
+    ],
+    "myRowOptionalCommonSource": [
+      539,
+      84
+    ],
+    "avatarSource": [
+      64,
+      64
+    ],
+    "nicknameLocalSource": [
+      118,
+      6,
+      245,
+      28
+    ],
+    "scorePillLocalSource": [
+      117,
+      37,
+      170,
+      34
+    ],
+    "scoreIconLocalSource": [
+      122,
+      40,
+      30,
+      28
+    ],
+    "scoreTextLocalSource": [
+      158,
+      38,
+      121,
+      32
+    ],
+    "threeRewardSlotsLocalSource": [
+      [
+        375,
+        10,
+        53,
+        68
+      ],
+      [
+        428,
+        10,
+        55,
+        68
+      ],
+      [
+        483,
+        10,
+        55,
+        68
+      ]
+    ],
+    "rank4UnknownFields": "Keep score/dice/cash/pack quantity/fullnickname blank; do not invent uncovered data.",
+    "myRowSlots": "Only last cash slot40K observed; pack/dice slots remain absent, not zero rewards.",
+    "scrollProposal": {
+      "viewportSource": [
+        33,
+        562,
+        542,
+        382
+      ],
+      "contentRowsOnlySourceHeight": 348,
+      "bottomSpacerSource": 84,
+      "contentWithSpacerSourceHeight": 432,
+      "potentialScrollRangeSource": 50,
+      "reason": "Four known rows plus bottom spacer allows last row to move above fixedMyRank. No invented rank5–21 records. Source scrolling not performed.",
+      "myRank": "Outside viewport/content as fixed sibling, higher paint order."
+    }
+  },
+  "resourceReview": {
+    "manifest": "_작업/codex/ux-studio/tycoon-event-assets.json",
+    "preparedScene": {
+      "path": "samples/monopoly-go/ui-studio/assets/production/tycoon-event/common_event-tycoon-station_scene_normal_v001.webp",
+      "size": [
+        700,
+        467
+      ],
+      "sha256": "ded4cf62daf9e396fb2af1b704ce4cb2fd94dc4894f497d281bc3330d4b68fa7",
+      "uiAppliedAtCreation": false,
+      "actuallyViewedThisTask": true
+    },
+    "sceneFit": "Prepared700×467 versus observed554×315; contain preserves station/train/topiary. Cover/crop needs actual QA; no XYstretch.",
+    "newSceneInterpretation": "New dog/rabbit foliage shapes, station geometry/train/clouds/flowers are production interpretation, not exact original animals or scene. SourceM emblems/moustache roof ornament excluded from prepared scene.",
+    "separateAssets": [
+      "monkey score/progress glyph",
+      "green/purple/blue pack graphics",
+      "dice",
+      "cash",
+      "avatars",
+      "star gear",
+      "clock",
+      "title/frame/progress/timer/rank/button UI"
+    ],
+    "packQuantity": "No separate native quantity observed on the rank pack icons; tier/stars/count unknown."
+  },
+  "modalProposal": {
+    "kind": "modal",
+    "rootMode": "fullscreen",
+    "singleDim": "Observed grey/darkened caller; exactRGBAunknown. Use one existing native dim layer, no stacked dim inference.",
+    "blockingAndReturn": "MainTycoon→open; Close/Escape→close/refocus original trigger; Info target unset. Actual behavior not tested here.",
+    "geometry": "Outside title/Info/Close are siblings toPanel. Keep scene inside matched arched frame/mask; arch/frame capability is not claimed by measurement.",
+    "close44LogicalProposal": [
+      253.5,
+      932,
+      44,
+      44
+    ],
+    "closeProposalReason": "Native bottom8px margin keeps hit inside984 despite source bottom989.09; geometry proposal, not original UI policy.",
+    "info44Logical": [
+      9.16,
+      28.13,
+      44.0,
+      44.0
+    ],
+    "responsive": "Keep uniform source layout and same-row roles; header/progress/timer fixed, rank viewport owns vertical scroll,MyRank fixed outside. Inspect390/430/1440 actual clipping/overlap/44hit bounds.",
+    "versionBoundary": {
+      "Main05ObservedIconTitle": "TYCOON CLASS",
+      "source10NativeTitle": "발자국 익스프레스",
+      "status": "Different reference versions; only demo mapping proposed, no shared scoring/reward rules inferred."
+    },
+    "actualTargetId": null,
+    "existingTriggerName": "Btn_Event_Tycoon"
+  },
+  "nativeStyleProposal": {
+    "title01": {
+      "fontSize": 64,
+      "weight": 900,
+      "lineHeight": 70,
+      "strokeWidth": 4,
+      "strokeColor": "#005a55",
+      "color": "#ffcf54"
+    },
+    "title02": {
+      "fontSize": 36,
+      "weight": 900,
+      "lineHeight": 42,
+      "strokeWidth": 3,
+      "strokeColor": "#005a55",
+      "color": "#ffe06b"
+    },
+    "departure": {
+      "fontSize": 16,
+      "weight": 700,
+      "lineHeight": 20,
+      "color": "#414139"
+    },
+    "timer": {
+      "fontSize": 20,
+      "weight": 700,
+      "lineHeight": 24,
+      "color": "#ffffff"
+    },
+    "rank": {
+      "fontSize": 20,
+      "weight": 800,
+      "lineHeight": 24
+    },
+    "nickname": {
+      "fontSize": 20,
+      "weight": 800,
+      "lineHeight": 24,
+      "align": "left",
+      "note": "Preserve Arabic visible native string; no transliteration substituted."
+    },
+    "score": {
+      "fontSize": 25,
+      "weight": 800,
+      "lineHeight": 29,
+      "strokeWidth": 1,
+      "strokeColor": "#ffffff",
+      "color": "#36362e"
+    },
+    "rewardQuantity": {
+      "fontSize": 19,
+      "weight": 800,
+      "lineHeight": 22,
+      "diceColor": "#ffffff",
+      "cashColor": "#ffdc20",
+      "strokeWidth": 1
+    },
+    "close": {
+      "nativeGlyphProposal": "×",
+      "fontSize": 36,
+      "weight": 700,
+      "lineHeight": 44,
+      "hitLogical": [
+        44,
+        44
+      ]
+    },
+    "info": {
+      "nativeGlyph": "i",
+      "fontSize": 26,
+      "weight": 800,
+      "lineHeight": 30,
+      "hitLogical": [
+        44,
+        44
+      ]
+    },
+    "originalFont": "unverified; these are production substitutes"
+  },
+  "assemblyOrder": [
+    "Create real modal target and preserve MainTycoon existing ID; label mapping as different-reference demo.",
+    "Separate archedPanel/frame/title/info/newscene/departurebubble575→progress/greenpack/timer.",
+    "One common rank row→4known rows with blank unknown rank4 data→three separate reward slots/native quantities→fixedMyRank22/현중/104/40K.",
+    "Add bottom spacer for scroll access; keepMyRank out of scroll content/higher paint order;native44Close bottom-safe andInfo44 without invented API.",
+    "Save/reopen then390/430/1440 geometry/scroll/row access/nativekeyboard/dim/inert/close/refocus checks; no runtime completion claimed."
+  ],
+  "limitations": [
+    "No current goal/total derived from progress width, no real-time ranking/reward/purchase/tie-sort/API/Unity policy inferred.",
+    "Only three complete ranking rows and top of fourth are observed; own22 is a separate fixed source row.",
+    "Prepared artwork/file measurement is not registration/UI verification/source equivalence or user approval.",
+    "Only two worksheet files written; no product/source/UI/design/guide/report/STATUS/server/automation modifications."
+  ]
+}

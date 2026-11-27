@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "default_group_id": "primary",
+  "module_aliases": {
+    "simulator_module_casting_battle": "simulator_module_stage_battle"
+  },
+  "groups": [
+    {
+      "id": "primary",
+      "label_key": "primary_menu",
+      "collapsed": false,
+      "module_ids": [
+        "simulator_module_audition",
+        "simulator_module_dice",
+        "simulator_module_stage_battle",
+        "simulator_module_bad_energy",
+        "simulator_module_events",
+        "simulator_module_cardbook",
+        "simulator_module_mons_inventory",
+        "simulator_module_journey",
+        "simulator_module_mission",
+        "simulator_module_shop",
+        "simulator_module_building",
+        "simulator_module_album_release",
+        "simulator_module_music_festival",
+        "simulator_module_music_world_festival",
+        "simulator_module_music_crew",
+        "simulator_module_chance_event",
+        "simulator_module_music_app"
+      ],
+      "submenus": [
+        {
+          "parent_module_id": "simulator_module_album_release",
+          "label": "앨범 활동",
+          "module_ids": [
+            "simulator_module_music_production",
+            "simulator_module_music_activity",
+            "simulator_module_music_chart",
+            "simulator_module_music_city"
+          ]
+        },
+        {
+          "parent_module_id": "simulator_module_music_app",
+          "label": "음악 앱",
+          "module_ids": [
+            "simulator_module_music_ui_preview",
+            "simulator_module_stage_ui_preview",
+            "simulator_module_shorts_ui_preview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "growth_tools",
+      "label_key": "growth_tools",
+      "collapsed": false,
+      "module_ids": [
+        "simulator_module_idol_growth",
+        "simulator_module_fan_growth",
+        "simulator_module_click_growth",
+        "simulator_module_growth_ability",
+        "simulator_module_growth_rapport",
+        "simulator_module_neuron_info"
+      ]
+    },
+    {
+      "id": "auxiliary",
+      "label_key": "auxiliary_menu",
+      "collapsed": true,
+      "module_ids": [
+        "simulator_module_board",
+        "simulator_module_filler",
+        "simulator_module_mons_viewer",
+        "simulator_module_resources",
+        "simulator_module_music_season",
+        "simulator_module_festival_score_lab",
+        "simulator_module_festival_vote_lab",
+        "simulator_module_world_popularity_trial"
+      ]
+    }
+  ],
+  "module_labels": {
+    "simulator_module_album_release": "앨범 발매",
+    "simulator_module_music_festival": "주간 페스티벌",
+    "simulator_module_music_crew": "응원 크루",
+    "simulator_module_music_production": "음원 제작",
+    "simulator_module_music_activity": "방송·공연",
+    "simulator_module_music_chart": "음악 차트",
+    "simulator_module_music_city": "시티 투어",
+    "simulator_module_music_app": "음악 앱",
+    "simulator_module_festival_score_lab": "페스티벌 점수 설정",
+    "simulator_module_festival_vote_lab": "페스티벌 투표 시험",
+    "simulator_module_stage_ui_preview": "공연",
+    "simulator_module_shorts_ui_preview": "숏츠",
+    "simulator_module_music_ui_preview": "음원",
+    "simulator_module_world_popularity_trial": "월드 인기·우승",
+    "simulator_module_music_world_festival": "월드 페스티벌"
+  },
+  "related_apps": {
+    "label": "관련 앱",
+    "parent_module_id": "simulator_module_music_festival",
+    "instance_key": "simulator_instance_music_career",
+    "module_ids": [
+      "simulator_module_music_app",
+      "simulator_module_festival_score_lab",
+      "simulator_module_festival_vote_lab",
+      "simulator_module_music_festival"
+    ],
+    "module_labels": {
+      "simulator_module_music_festival": "게임 시뮬레이터 · 페스티벌"
+    },
+    "enabled": false
+  },
+  "entry_defaults": {
+    "simulator_module_album_release": "simulator_module_music_production",
+    "simulator_module_stage_ui_preview": "simulator_module_music_app",
+    "simulator_module_shorts_ui_preview": "simulator_module_music_app",
+    "simulator_module_music_ui_preview": "simulator_module_music_app",
+    "simulator_module_music_world_festival": "simulator_module_music_festival"
+  },
+  "media_entries": {
+    "simulator_module_stage_ui_preview": "stage",
+    "simulator_module_shorts_ui_preview": "shorts",
+    "simulator_module_music_ui_preview": "music"
+  },
+  "festival_entries": {
+    "simulator_module_music_festival": "weekly",
+    "simulator_module_music_world_festival": "world"
+  }
+}

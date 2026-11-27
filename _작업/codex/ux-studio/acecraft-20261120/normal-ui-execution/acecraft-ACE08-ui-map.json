@@ -1,0 +1,691 @@
+{
+  "family": {
+    "id": "ACE08",
+    "name": "Modal_ACE_Missions",
+    "nativeKind": "modal",
+    "purpose": "영상 A 23초 대표 Radiant Pact Missions 화면의 정상 UI 조립 지침. 배후 게임 UI는 포함하지 않음.",
+    "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00023.jpg",
+    "actions": [
+      {
+        "key": "root",
+        "op": "plain",
+        "name": "Panel_ACE_Missions_Root",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "fill": "#17232a"
+      },
+      {
+        "key": "Body",
+        "op": "panel",
+        "name": "Panel_ACE_Missions_Body",
+        "rect": {
+          "x": 22,
+          "y": 190,
+          "w": 385,
+          "h": 590
+        },
+        "parent": "root",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+        "skinMetrics": [
+          20,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "key": "Header",
+        "op": "panel",
+        "name": "Panel_ACE_Missions_Header",
+        "rect": {
+          "x": 30,
+          "y": 190,
+          "w": 366,
+          "h": 62
+        },
+        "parent": "Body",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Title",
+        "op": "text",
+        "name": "Txt_ACE_Missions_Title",
+        "rect": {
+          "x": 112,
+          "y": 207,
+          "w": 211,
+          "h": 38
+        },
+        "parent": "Header",
+        "text": "Missions",
+        "size": 26,
+        "weight": "bold",
+        "color": "#f5d97a",
+        "align": "center"
+      },
+      {
+        "key": "Close",
+        "op": "button",
+        "name": "Btn_ACE_Missions_Close",
+        "rect": {
+          "x": 366,
+          "y": 181,
+          "w": 42,
+          "h": 47
+        },
+        "parent": "root",
+        "text": "×",
+        "size": 28,
+        "color": "#fff8e7",
+        "fill": "#b86451",
+        "skin": null,
+        "skinMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "List",
+        "op": "plain",
+        "name": "Panel_ACE_Missions_List",
+        "rect": {
+          "x": 43,
+          "y": 259,
+          "w": 334,
+          "h": 415
+        },
+        "parent": "Body",
+        "fill": "#e9ddc0",
+        "overflow": "scroll-y"
+      },
+      {
+        "key": "Mission1",
+        "op": "panel",
+        "name": "Panel_ACE_Missions_Mission1",
+        "rect": {
+          "x": 45,
+          "y": 259,
+          "w": 331,
+          "h": 73
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Reward1",
+        "op": "image",
+        "name": "Img_ACE_Missions_Reward1",
+        "rect": {
+          "x": 60,
+          "y": 272,
+          "w": 45,
+          "h": 45
+        },
+        "parent": "Mission1",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          128,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Progress1",
+        "op": "plain",
+        "name": "Panel_ACE_Missions_Progress1",
+        "rect": {
+          "x": 120,
+          "y": 308,
+          "w": 165,
+          "h": 12
+        },
+        "parent": "Mission1",
+        "fill": "#edbf3e"
+      },
+      {
+        "key": "Description1",
+        "op": "text",
+        "name": "Txt_ACE_Missions_Description1",
+        "rect": {
+          "x": 120,
+          "y": 267,
+          "w": 165,
+          "h": 55
+        },
+        "parent": "Mission1",
+        "text": "Own Permanent Privilege\nduring the event.\n1/1",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Action1",
+        "op": "button",
+        "name": "Btn_ACE_Missions_Action1",
+        "rect": {
+          "x": 296,
+          "y": 283,
+          "w": 72,
+          "h": 31
+        },
+        "parent": "Mission1",
+        "text": "Claim",
+        "size": 13,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Mission2",
+        "op": "panel",
+        "name": "Panel_ACE_Missions_Mission2",
+        "rect": {
+          "x": 45,
+          "y": 339,
+          "w": 331,
+          "h": 73
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Reward2",
+        "op": "image",
+        "name": "Img_ACE_Missions_Reward2",
+        "rect": {
+          "x": 60,
+          "y": 352,
+          "w": 45,
+          "h": 45
+        },
+        "parent": "Mission2",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          128,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Progress2",
+        "op": "plain",
+        "name": "Panel_ACE_Missions_Progress2",
+        "rect": {
+          "x": 120,
+          "y": 388,
+          "w": 165,
+          "h": 12
+        },
+        "parent": "Mission2",
+        "fill": "#294458"
+      },
+      {
+        "key": "Description2",
+        "op": "text",
+        "name": "Txt_ACE_Missions_Description2",
+        "rect": {
+          "x": 120,
+          "y": 347,
+          "w": 165,
+          "h": 55
+        },
+        "parent": "Mission2",
+        "text": "Own Monthly Pass\nduring the event.\n0/1",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Action2",
+        "op": "button",
+        "name": "Btn_ACE_Missions_Action2",
+        "rect": {
+          "x": 296,
+          "y": 363,
+          "w": 72,
+          "h": 31
+        },
+        "parent": "Mission2",
+        "text": "Go",
+        "size": 13,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Mission3",
+        "op": "panel",
+        "name": "Panel_ACE_Missions_Mission3",
+        "rect": {
+          "x": 45,
+          "y": 419,
+          "w": 331,
+          "h": 73
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Reward3",
+        "op": "image",
+        "name": "Img_ACE_Missions_Reward3",
+        "rect": {
+          "x": 60,
+          "y": 432,
+          "w": 45,
+          "h": 45
+        },
+        "parent": "Mission3",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          128,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Progress3",
+        "op": "plain",
+        "name": "Panel_ACE_Missions_Progress3",
+        "rect": {
+          "x": 120,
+          "y": 468,
+          "w": 165,
+          "h": 12
+        },
+        "parent": "Mission3",
+        "fill": "#294458"
+      },
+      {
+        "key": "Description3",
+        "op": "text",
+        "name": "Txt_ACE_Missions_Description3",
+        "rect": {
+          "x": 120,
+          "y": 427,
+          "w": 165,
+          "h": 55
+        },
+        "parent": "Mission3",
+        "text": "Claim Ad rewards 10\ntime(s) in total.\n0/10",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Action3",
+        "op": "button",
+        "name": "Btn_ACE_Missions_Action3",
+        "rect": {
+          "x": 296,
+          "y": 443,
+          "w": 72,
+          "h": 31
+        },
+        "parent": "Mission3",
+        "text": "Go",
+        "size": 13,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Mission4",
+        "op": "panel",
+        "name": "Panel_ACE_Missions_Mission4",
+        "rect": {
+          "x": 45,
+          "y": 499,
+          "w": 331,
+          "h": 73
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Reward4",
+        "op": "image",
+        "name": "Img_ACE_Missions_Reward4",
+        "rect": {
+          "x": 60,
+          "y": 512,
+          "w": 45,
+          "h": 45
+        },
+        "parent": "Mission4",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          128,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Progress4",
+        "op": "plain",
+        "name": "Panel_ACE_Missions_Progress4",
+        "rect": {
+          "x": 120,
+          "y": 548,
+          "w": 165,
+          "h": 12
+        },
+        "parent": "Mission4",
+        "fill": "#294458"
+      },
+      {
+        "key": "Description4",
+        "op": "text",
+        "name": "Txt_ACE_Missions_Description4",
+        "rect": {
+          "x": 120,
+          "y": 507,
+          "w": 165,
+          "h": 55
+        },
+        "parent": "Mission4",
+        "text": "Participate in Golden\nApple Rush 10 time(s)\nduring the event. 0/10",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Action4",
+        "op": "button",
+        "name": "Btn_ACE_Missions_Action4",
+        "rect": {
+          "x": 296,
+          "y": 523,
+          "w": 72,
+          "h": 31
+        },
+        "parent": "Mission4",
+        "text": "Go",
+        "size": 13,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Mission5",
+        "op": "panel",
+        "name": "Panel_ACE_Missions_Mission5",
+        "rect": {
+          "x": 45,
+          "y": 579,
+          "w": 331,
+          "h": 73
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Reward5",
+        "op": "image",
+        "name": "Img_ACE_Missions_Reward5",
+        "rect": {
+          "x": 60,
+          "y": 592,
+          "w": 45,
+          "h": 45
+        },
+        "parent": "Mission5",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          128,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Progress5",
+        "op": "plain",
+        "name": "Panel_ACE_Missions_Progress5",
+        "rect": {
+          "x": 120,
+          "y": 628,
+          "w": 165,
+          "h": 12
+        },
+        "parent": "Mission5",
+        "fill": "#294458"
+      },
+      {
+        "key": "Description5",
+        "op": "text",
+        "name": "Txt_ACE_Missions_Description5",
+        "rect": {
+          "x": 120,
+          "y": 587,
+          "w": 165,
+          "h": 55
+        },
+        "parent": "Mission5",
+        "text": "Participate in Golden\nApple Rush 20 time(s)\nduring the event. 0/20",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "Action5",
+        "op": "button",
+        "name": "Btn_ACE_Missions_Action5",
+        "rect": {
+          "x": 296,
+          "y": 603,
+          "w": 72,
+          "h": 31
+        },
+        "parent": "Mission5",
+        "text": "Go",
+        "size": 13,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Mission6",
+        "op": "panel",
+        "name": "Panel_ACE_Missions_Mission6",
+        "rect": {
+          "x": 45,
+          "y": 659,
+          "w": 331,
+          "h": 73
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Reward6",
+        "op": "image",
+        "name": "Img_ACE_Missions_Reward6",
+        "rect": {
+          "x": 60,
+          "y": 672,
+          "w": 45,
+          "h": 45
+        },
+        "parent": "Mission6",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          128,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Description6",
+        "op": "text",
+        "name": "Txt_ACE_Missions_Description6",
+        "rect": {
+          "x": 120,
+          "y": 667,
+          "w": 165,
+          "h": 44
+        },
+        "parent": "Mission6",
+        "text": "Participate in Golden\nApple Rush 30 time(s)",
+        "size": 11,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "ClaimAll",
+        "op": "button",
+        "name": "Btn_ACE_Missions_ClaimAll",
+        "rect": {
+          "x": 142,
+          "y": 691,
+          "w": 137,
+          "h": 57
+        },
+        "parent": "Body",
+        "text": "Claim All",
+        "size": 19,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      }
+    ],
+    "notes": [
+      "Sixth row is deliberately clipped by List, matching the observed viewport; no unseen action or progress amount is added.",
+      "Prepared cube is a generic reward icon proxy, not the original event-token illustration."
+    ]
+  },
+  "sid": "screen-9629a9ae-cae2-4daa-8ad1-406c387a6859",
+  "i": 35,
+  "map": {
+    "root": "element-afcdcda8-3e0a-4eaa-a9fe-f2697363b135",
+    "Body": "element-370111ab-6504-44f4-8123-23acdd07f864",
+    "Header": "element-a7937ccd-5c8e-465c-8374-803511633c69",
+    "Title": "element-9e7866fd-fe1d-4eba-9159-ed86a653f1c4",
+    "Close": "element-ac0cd040-30e2-40f5-93a2-640634b4492c",
+    "List": "element-84c76014-e60d-4dac-a3ab-4d89b0a93c5a",
+    "Mission1": "element-64b5f032-c1c4-43ce-af22-5525c4f23b32",
+    "Reward1": "element-08a5362a-6fa5-4a26-a57a-c9acde371835",
+    "Progress1": "element-dfaddbe8-5c95-465c-b1ea-d6afc76d9e98",
+    "Description1": "element-7f0208f8-4873-4c0f-8665-a46ab891003d",
+    "Action1": "element-39557acd-1acf-4637-bfc7-9790bb4cab9a",
+    "Mission2": "element-bf91336c-c63d-4a0f-a197-9ddf2f392d0d",
+    "Reward2": "element-9e9a2b87-7fbc-49c3-b846-7e1f9e9d3804",
+    "Progress2": "element-b98b8da3-67c3-481a-a513-eab6f71a9f72",
+    "Description2": "element-4bb692a2-5fc9-4380-8a9a-358944f2b4ad",
+    "Action2": "element-ad348b94-b59b-4896-a8ae-b29555805778",
+    "Mission3": "element-35369196-8253-441d-82af-f9710605dca2",
+    "Reward3": "element-be4bb09e-e27d-4952-93dc-943fd364f1ab",
+    "Progress3": "element-607d20a4-6978-42bb-9579-6e64658b321b",
+    "Description3": "element-d02c8a95-ab60-4899-80df-3bb34cd6238e",
+    "Action3": "element-90dac2fb-80b7-4fef-bb3f-0c08c821fef3",
+    "Mission4": "element-51080f93-f901-4f31-993c-14226b9b82e4",
+    "Reward4": "element-ff4a18a0-ba24-4cb0-8f24-3f51dcde7466",
+    "Progress4": "element-b616e6cc-edca-48b9-8381-f7eabaa6d5d7",
+    "Description4": "element-67f6adce-c297-4220-b68a-20993fe13997",
+    "Action4": "element-38d35cb0-06f2-43d4-ab13-219e11f7a88d",
+    "Mission5": "element-99ccd073-66b6-4462-876b-a02c04788edc",
+    "Reward5": "element-f818c3f3-90da-4fbd-9ea0-071b3d45252e",
+    "Progress5": "element-d7a0da25-f6c1-49db-9142-82217331de63",
+    "Description5": "element-b54bd87f-64e9-4a50-a72f-b3491ea5ba73",
+    "Action5": "element-ba45953f-594d-4e13-839b-3e025998b95a",
+    "Mission6": "element-7efb58c9-8ded-4435-a74c-28f820af309b",
+    "Reward6": "element-80601a3f-915e-4865-ab2a-1a3d8597131c",
+    "Description6": "element-e445637e-91bb-4ede-b01a-5a707b618277",
+    "ClaimAll": "element-b2d456f9-0391-408a-b120-e61b2acffffb"
+  }
+}

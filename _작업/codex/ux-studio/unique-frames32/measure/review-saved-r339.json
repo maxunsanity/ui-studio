@@ -1,0 +1,128 @@
+{
+  "status": "제안(검수 대기)",
+  "snapshot": {
+    "path": "samples/monopoly-go/ui-studio/designs/ux-gjs-0d80d7fe.json",
+    "revision": 339,
+    "savedAt": "2026-11-17T11:46:48.342Z",
+    "savedAtKST": "2026-11-17 20:46:48 KST",
+    "bytes": 1544550,
+    "inodeAndSizeStableDuringRead": true,
+    "readScope": "One accepted r339 snapshot parsed once for comparison. Source may advance afterward; findings are r339 only."
+  },
+  "baseline": {
+    "path": "docs/evidence/20261117-networth-stage-map/confirmed-native-r335-design.json",
+    "revision": 335
+  },
+  "preservation": {
+    "originalScreensDeepEqual": 14,
+    "originalScreensTotal": 14,
+    "original22TransitionsAllDeepEqual": true,
+    "original22TransitionsSameOrderPrefix": true,
+    "existingIdsUnchanged": true,
+    "newScreens": 2,
+    "newTransitions": 1,
+    "classConstructionNotReviewedForOmissions": true
+  },
+  "showroom": {
+    "screenId": "screen-fb2afd7d-f997-4bc8-90f5-40439ae2af76",
+    "parts": 27,
+    "hierarchyPresent": [
+      "Nameplate group/frame/native name",
+      "Category group/paw/native style text/info hit+disc+native glyph",
+      "Display group/separate rays/fullbody/pedestal/separate front paw",
+      "separate Equip hit/frame/native label",
+      "Footer/line/Close+glyph/Previous+glyph/Next+glyph",
+      "standalone extension and dim"
+    ],
+    "logicalRectsConfirmed": {
+      "Footer": [
+        0,
+        912,
+        551,
+        72
+      ],
+      "FooterLine": [
+        0,
+        912,
+        551,
+        6
+      ],
+      "CloseHit": [
+        253.5,
+        940,
+        44,
+        44
+      ],
+      "CloseGlyph": [
+        261.5,
+        948,
+        28,
+        28
+      ],
+      "EquipExtension": [
+        0,
+        852,
+        551,
+        60
+      ],
+      "Dim": [
+        0,
+        0,
+        551,
+        912
+      ],
+      "Category": [
+        151,
+        113,
+        290,
+        60
+      ],
+      "CategoryTextBox": [
+        223,
+        130,
+        218,
+        42
+      ]
+    },
+    "rectVerificationMethod": "Native percentage/rectTransform values transcribed from accepted snapshot and resolved with actual model.resolveRect; no browser execution. Footer legacy x/y values are overridden by rectTransform, so x2% is not an actual offset defect.",
+    "inputs": {
+      "close": "one click/close/always edge; no game API",
+      "equipPreviousNextInfo": "explicit action hits but no transition edges/targets; unknown game behavior remains unset",
+      "equipFrameAndLabel": "parent input forwarding explicitly set",
+      "closeGlyph": "parent input forwarding explicitly set"
+    },
+    "sourceEquivalence": "Not established; new art and approved common layout policy adaptations remain proposals."
+  },
+  "findings": [
+    {
+      "priority": "P1",
+      "title": "Equip extension saved below dim in sibling paint order",
+      "elementIds": [
+        "element-88614f39-ad85-45f8-b2c5-410065eaf4c4",
+        "element-c76f236a-c618-4401-95c8-b6163f4cfa02"
+      ],
+      "confirmed": "Root order is EquipExtension first, Dim second. Extension(0,852,551,60) is fully inside Dim(0,0,551,912). Dim texture has alpha194/255. renderLayout preserves source sibling order on fresh mount (layout-view.mjs63–68,75–85), so later Dim paints over extension.",
+      "impact": "Intended cream extension darkens under black dim; standard Footer starts912 and remains unaffected.",
+      "rootAction": "Move Dim before extension in saved native sibling order; reopen/fresh render and visually confirm extension is cream. Do not change72 Footer/44 hit/28 glyph sizes.",
+      "boundary": "Actual current DOM not inspected; this is a confirmed saved-order/geometry mismatch and fresh-mount consequence."
+    },
+    {
+      "priority": "P2",
+      "title": "Showroom Close edge retains Gallery label",
+      "transitionId": "element-614bc0fe-f9f0-4341-a3ff-dce9b2fdb53b",
+      "confirmed": "label is 재산 갤러리 닫기 · 보드 복귀 while fromScreen is Modal_Showroom_TokenDetail. action close/always and returnPolicy are otherwise consistent.",
+      "rootAction": "Rename metadata label to 쇼룸 토큰 상세 닫기 · 보드 복귀 without changing stable edge ID/action/condition."
+    }
+  ],
+  "nonBlockingObservations": [
+    "Category native label box center is332 logical versus visually estimated source label center~306. It is a source-relative alignment observation, not a confirmed runtime clipping/failure; check after screenshot before deciding a correction.",
+    "Equip buttonState currently tint/self and frame has normal texture only; separate pressed-state art remains unimplemented. Do not describe this as full r300 normal/pressed-art completion.",
+    "Class18 parts are under construction and deliberately excluded from omission/quality findings."
+  ],
+  "unchecked": [
+    "Actual desktop/mobile render, pointer/keyboard/focus, Close runtime return and unknown-button no-op behavior",
+    "Image404/overflow/alpha on live device backgrounds",
+    "New-source full visual equivalence/user approval"
+  ],
+  "mutations": "Only review-saved-r339.json/.md scratch outputs written; no design/source/common docs/browser/server/Capy access."
+}

@@ -1,0 +1,86 @@
+--- before/src/tools/uxStudio/commands.mjs
++++ after/src/tools/uxStudio/commands.mjs
+@@ -2,9 +2,16 @@
+ import { clone, resolveRect, adjustRect } from './model.mjs';
+ import {isAutoLayoutChild} from './responsive-layout.mjs';
+ export const selectionIds = descendants;
++function clearRemovedTabPanels(screen, removed) {
++    for (const e of screen.elements)
++        if (e.control?.type === 'tabs')
++            for (const option of e.control.options)
++                if (removed.has(option.panelId)) delete option.panelId;
++}
+ export function removeSelection(document, screenId, ids) {
+     const screen = document.screens.find(s => s.id === screenId), found = selectionIds(screen, ids);
+     screen.elements = screen.elements.filter(e => !found.has(e.id));
++    clearRemovedTabPanels(screen, found);
+     document.transitions = document.transitions.filter(t => !found.has(t.fromElement));
+     return found.size;
+ }
+@@ -39,6 +46,12 @@
+     for (const original of clipboard.elements) {
+         const e = clone(original);
+         e.id = map.get(e.id);
++        if (e.control?.type === 'tabs')
++            for (const option of e.control.options) {
++                if (option.panelId === undefined) continue;
++                if (map.has(option.panelId)) option.panelId = map.get(option.panelId);
++                else delete option.panelId;
++            }
+         if(e.buttonState&&e.buttonState.targetGraphic!=='self')e.buttonState.targetGraphic=map.get(e.buttonState.targetGraphic);
+         if (e.parentId)
+             e.parentId = map.get(e.parentId);
+@@ -93,6 +106,7 @@
+         const children = screen.elements.filter(e => e.parentId === id).map(e => e.id);
+         result.push(...moveInto(screen, children, group.parentId || '', width, height));
+         screen.elements = screen.elements.filter(e => e.id !== id);
++        clearRemovedTabPanels(screen, new Set([id]));
+         document.transitions = document.transitions.filter(t => t.fromElement !== id);
+     }
+     return result;
+--- before/tests/ux-studio/commands.test.mjs
++++ after/tests/ux-studio/commands.test.mjs
+@@ -123,3 +123,43 @@
+     nudgeSelection(d,s.id,['parent','face','label'],-1,0,390,844);
+     equalRect(resolveRect(s,'label',390,844),before);
+ });
++
++function tabFixture(){
++ const d=make(),s=d.screens[0];d.transitions=[];
++ const part=(id,parentId,extra={})=>({id,name:id,kind:'panel',x:0,y:0,w:40,h:40,...(parentId?{parentId}:{}),...extra});
++ s.elements=[part('root',null,{isGroup:true}),part('tabs','root',{control:{type:'tabs',value:'a',options:[{value:'a',label:'A',panelId:'body-a'},{value:'b',label:'B',panelId:'body-b'}]}}),part('body-a','root',{isGroup:true}),part('body-b','root',{isGroup:true}),part('label-a','body-a',{kind:'text',text:'Keep A'}),part('label-b','body-b',{kind:'text',text:'Keep B'})];
++ validateDocument(d);return d;
++}
++test('duplicating a tab container remaps only copied panel IDs and preserves source and clipboard',()=>{
++ const d=tabFixture(),s=d.screens[0],original=structuredClone(s.elements),clip=copySelection(d,s.id,['root']),before=structuredClone(clip);let n=0;
++ pasteSelection(d,s.id,clip,()=>`tab-copy-${++n}`);validateDocument(d);
++ const tabs=s.elements.find(e=>e.id==='tab-copy-2');
++ assert.deepEqual(tabs.control.options,[{value:'a',label:'A',panelId:'tab-copy-3'},{value:'b',label:'B',panelId:'tab-copy-4'}]);
++ assert.deepEqual(s.elements.slice(0,original.length),original);assert.deepEqual(clip,before);
++});
++for(const destination of ['same','other'])test('copying tabs without content clears unbundled panel references on '+destination+' screen',()=>{
++ const d=tabFixture(),s=d.screens[0],clip=copySelection(d,s.id,['tabs']),before=structuredClone(clip);let n=0;
++ if(destination==='other')d.screens.push({id:'other',name:'Other',kind:'page',elements:[]});
++ const target=destination==='same'?s:d.screens.at(-1),[id]=pasteSelection(d,target.id,clip,()=>`tabs-only-${++n}`);validateDocument(d);
++ assert.deepEqual(target.elements.find(e=>e.id===id).control.options,[{value:'a',label:'A'},{value:'b',label:'B'}]);
++ assert.deepEqual(s.elements.find(e=>e.id==='tabs').control.options,before.elements[0].control.options);assert.deepEqual(clip,before);
++});
++test('partial tab content copy remaps the included panel and clears only the absent target',()=>{
++ const d=tabFixture(),s=d.screens[0],clip=copySelection(d,s.id,['tabs','body-a']);let n=0;
++ pasteSelection(d,s.id,clip,()=>`partial-${++n}`);validateDocument(d);
++ assert.deepEqual(s.elements.find(e=>e.id==='partial-1').control.options,[{value:'a',label:'A',panelId:'partial-2'},{value:'b',label:'B'}]);
++});
++test('deleting a selected ancestor clears only references to its deleted tab panel descendants',()=>{
++ const d=tabFixture(),s=d.screens[0],tabs=s.elements.find(e=>e.id==='tabs'),otherBefore=structuredClone(s.elements.filter(e=>['body-b','label-b'].includes(e.id)));
++ s.elements.push({id:'holder',name:'Holder',kind:'panel',isGroup:true,parentId:'root',x:0,y:0,w:100,h:100});s.elements.find(e=>e.id==='body-a').parentId='holder';
++ assert.equal(removeSelection(d,s.id,['holder']),3);validateDocument(d);
++ assert.deepEqual(tabs.control.options,[{value:'a',label:'A'},{value:'b',label:'B',panelId:'body-b'}]);
++ assert.equal(tabs.control.value,'a');assert.deepEqual(s.elements.filter(e=>['body-b','label-b'].includes(e.id)),otherBefore);
++});
++
++test('ungrouping a referenced tab panel clears its link while preserving children and the other panel',()=>{
++ const d=tabFixture(),s=d.screens[0],tabs=s.elements.find(e=>e.id==='tabs'),before=resolveRect(s,'label-a',390,844),other=structuredClone(s.elements.find(e=>e.id==='body-b'));
++ assert.deepEqual(ungroupSelection(d,s.id,['body-a'],390,844),['label-a']);validateDocument(d);
++ assert.deepEqual(tabs.control.options,[{value:'a',label:'A'},{value:'b',label:'B',panelId:'body-b'}]);
++ assert.equal(s.elements.find(e=>e.id==='label-a').parentId,'root');equalRect(resolveRect(s,'label-a',390,844),before);assert.deepEqual(s.elements.find(e=>e.id==='body-b'),other);
++});

@@ -1,0 +1,4421 @@
+{
+  "specType": "assembly-instructions-only-not-design-json",
+  "reviewStatus": "제안(검수 대기)",
+  "createdAtKST": "2026-11-19T08:40:15.064296+09:00",
+  "sourceCatalog": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/catalog.json",
+  "readonlyActual": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/designs/ux-25ecc98a.json",
+  "actualRevision": 63,
+  "logicalSize": [
+    504,
+    894
+  ],
+  "families": {
+    "TS01": {
+      "id": "TS01",
+      "label": "타이틀 / 로딩",
+      "catalogKind": "screen",
+      "nativeKind": "page",
+      "referencesViewed": [
+        {
+          "id": "TS01-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS01_01_TSV01_0000.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [],
+      "catalogTexts": [
+        "버전 정보 획득",
+        "게임 리소스 업데이트",
+        "근거지 진입 중"
+      ],
+      "catalogUnverified": [
+        "좌상단 고객센터·설정·계정 아이콘은 보이나 목적지 미관찰. Google Play 로고는 로딩 화면의 표시만 관찰.",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Page_TSV_TS01",
+      "roleTable": [
+        {
+          "name": "Img_TSV_TS01_Settlement",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Page_TSV_TS01",
+          "note": "글자/로고/버튼없는새타이틀정착지삽화"
+        },
+        {
+          "name": "Img_TSV_TS01_Logo",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            80,
+            100,
+            350,
+            134
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Page_TSV_TS01",
+          "note": "장식 TILES SURVIVE! 로고새그림"
+        },
+        {
+          "name": "Btn_TSV_TS01_Support",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            8,
+            8,
+            48,
+            48
+          ],
+          "text": "고객센터",
+          "fontPx": 12,
+          "parent": "Page_TSV_TS01",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS01_Settings",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            68,
+            8,
+            44,
+            44
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Page_TSV_TS01",
+          "note": "톱니아이콘별도child"
+        },
+        {
+          "name": "Img_TSV_TS01_Service",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            224,
+            16,
+            58,
+            58
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Page_TSV_TS01",
+          "note": "대표Google Play표시,상호작용미관측"
+        },
+        {
+          "name": "Txt_TSV_TS01_Version",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            300,
+            12,
+            198,
+            28
+          ],
+          "text": "v 2.6.400.1546",
+          "fontPx": 16,
+          "parent": "Page_TSV_TS01",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS01_Tip",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            16,
+            766,
+            472,
+            44
+          ],
+          "text": "자원지를 업그레이드하면 자원 생산 속도가 증가하여 더 많은 자원을 획득합니다.",
+          "fontPx": 18,
+          "parent": "Page_TSV_TS01",
+          "note": null
+        },
+        {
+          "name": "Panel_TSV_TS01_Loading",
+          "kind": "frame3",
+          "boundsAbsLogicalPx": [
+            14,
+            820,
+            478,
+            20
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Page_TSV_TS01",
+          "note": "진행fill별도;대표약1%육안근사,진행정책미확인"
+        },
+        {
+          "name": "Txt_TSV_TS01_Status",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            70,
+            842,
+            364,
+            30
+          ],
+          "text": "버전 정보 획득",
+          "fontPx": 21,
+          "parent": "Page_TSV_TS01",
+          "note": null
+        }
+      ],
+      "observations": [
+        "대표영문로고/버전정보획득. TS02상태에는계정아이콘추가와버전suffix(1582,1582).",
+        "로딩상태3종은catalog관측문구;임의자동진입/타이머정책추가금지."
+      ],
+      "newArtwork": [
+        "정착지전체배경(글자없음)",
+        "장식로고",
+        "고객센터/톱니/계정/서비스아이콘"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "목록선택",
+          "target": null,
+          "basis": "source entry unverified",
+          "proposal": "목록에서단독보기;가짜게임시작버튼/자동시간전환추가금지",
+          "payload": {}
+        }
+      ],
+      "fixture": {
+        "statusStates": [
+          "버전 정보 획득",
+          "게임 리소스 업데이트",
+          "근거지 진입 중"
+        ]
+      },
+      "scrollProposal": "fixed; no whole-screen scroll"
+    },
+    "TS02": {
+      "id": "TS02",
+      "label": "게임 이용약관",
+      "catalogKind": "modal",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS02-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS02_01_TSV01_0005.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [],
+      "catalogTexts": [
+        "게임 이용약관",
+        "서비스 이용약관",
+        "개인정보 처리방침",
+        "시작하기",
+        "모두 동의하고 시작하기"
+      ],
+      "catalogUnverified": [
+        "정책 링크 본문과 X/시작/동의시작의 개별 결과 미확인.",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS02",
+      "roleTable": [
+        {
+          "name": "Panel_TSV_TS02_Terms",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            38,
+            282,
+            430,
+            350
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS02",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS02_Terms",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            38,
+            282,
+            430,
+            350
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS02_Terms",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS02_Header",
+          "kind": "frame3",
+          "boundsAbsLogicalPx": [
+            38,
+            282,
+            430,
+            50
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS02_Terms",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS02_Title",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            50,
+            294,
+            360,
+            32
+          ],
+          "text": "게임 이용약관",
+          "fontPx": 28,
+          "parent": "Panel_TSV_TS02_Terms",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS02_Close",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            422,
+            286,
+            40,
+            40
+          ],
+          "text": "×",
+          "fontPx": 32,
+          "parent": "Panel_TSV_TS02_Terms",
+          "note": null
+        },
+        {
+          "name": "Scroll_TSV_TS02_Body",
+          "kind": "scroll",
+          "boundsAbsLogicalPx": [
+            54,
+            340,
+            396,
+            208
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS02_Terms",
+          "note": "마지막줄원본잘림;뒤문장창작금지"
+        },
+        {
+          "name": "Txt_TSV_TS02_Body",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            70,
+            352,
+            364,
+            184
+          ],
+          "text": "저희 서비스 이용 전 <서비스 이용약관>, <개인정보 처리방침> 각 조항을 자세히 읽고 동의하셔야 합니다. 또한 해당 면책 조항 또는 본사의 책임 제한 조항 및 귀하의 권리 제한 조항을 자세히 살펴 보시기 바랍니다.",
+          "fontPx": 20,
+          "parent": "Scroll_TSV_TS02_Body",
+          "note": "서비스약관/개인정보는주황밑줄native링크별도;URL미확인"
+        },
+        {
+          "name": "Txt_TSV_TS02_BodyPartial",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            70,
+            512,
+            364,
+            26
+          ],
+          "text": "약관 및 처리방침을 읽고 동의하신다면 다음 선",
+          "fontPx": 20,
+          "parent": "Scroll_TSV_TS02_Body",
+          "note": "화면에여기까지보임.뒷문구미확인"
+        },
+        {
+          "name": "Btn_TSV_TS02_Start",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            56,
+            556,
+            188,
+            58
+          ],
+          "text": "시작하기",
+          "fontPx": 30,
+          "parent": "Panel_TSV_TS02_Terms",
+          "note": "원본회색.실제disabled여부미확인"
+        },
+        {
+          "name": "Btn_TSV_TS02_AgreeStart",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            264,
+            556,
+            184,
+            58
+          ],
+          "text": "모두 동의하고 시작하기",
+          "fontPx": 21,
+          "parent": "Panel_TSV_TS02_Terms",
+          "note": null
+        }
+      ],
+      "observations": [
+        "TS01위중앙모달.배경별도원화+nativeUI;전체화면JPG붙이기금지.",
+        "원본약관전체/정책URL/각버튼결과미확인.배경상태는 게임 리소스 업데이트 3.97M/3.97M."
+      ],
+      "newArtwork": [
+        "청록판/헤더기본9/3프레임",
+        "닫기X아이콘"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "X",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "실제호출부dismiss제안. TS01위에서호출되었을때TS01복귀",
+          "payload": {}
+        },
+        {
+          "action": "시작하기/모두동의/정책링크",
+          "target": null,
+          "basis": "destinations unverified",
+          "proposal": "임의게임진입/URL/전체약관창작금지",
+          "payload": {}
+        }
+      ],
+      "fixture": {
+        "sourceBodyComplete": false,
+        "backdropStatus": "게임 리소스 업데이트 3.97M/3.97M"
+      },
+      "scrollProposal": "본문viewport만세로스크롤제안;모달/헤더/버튼고정"
+    },
+    "TS04": {
+      "id": "TS04",
+      "label": "스토리 / 주민 대화",
+      "catalogKind": "sheet",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS04-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS04_01_TSV01_0170.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [],
+      "catalogTexts": [
+        "데이몬",
+        "정말 고마워. 드디어 살 곳이 생겼어!",
+        "스킵",
+        "럭키",
+        "세이지",
+        "미아",
+        "이 근처에도 감염자가 나타났어. 어서 모두에게 알려야겠어.",
+        "하지만 이 큰 녀석을 먼저 처리해야 해.",
+        "하하, 엄청 많아, 정말 대수확이네!",
+        "너무 고마워! 변기를 고치니 공기가 훨씬 상쾌해졌어!"
+      ],
+      "catalogUnverified": [
+        "인물별 대사로 가족을 늘리지 않음. 월드 말풍선은 공통 WorldAnchor 부품.",
+        "다음 삼각/스킵 입구 표시. 실제 스킵 사용 여부는 미확인.",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS04",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS04",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Img_TSV_TS04_Damon",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            454,
+            256,
+            250
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS04",
+          "note": "새데이몬반신투명그림"
+        },
+        {
+          "name": "Panel_TSV_TS04_Dialog",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            16,
+            698,
+            476,
+            192
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS04",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS04_Dialog",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            16,
+            698,
+            476,
+            192
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS04_Dialog",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS04_Name",
+          "kind": "frame3",
+          "boundsAbsLogicalPx": [
+            8,
+            692,
+            172,
+            42
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS04_Dialog",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS04_Name",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            20,
+            696,
+            146,
+            36
+          ],
+          "text": "데이몬",
+          "fontPx": 27,
+          "parent": "Panel_TSV_TS04_Dialog",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS04_Body",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            36,
+            756,
+            424,
+            82
+          ],
+          "text": "정말 고마워. 드디어 살 곳이 생겼어!",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS04_Dialog",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS04_Next",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            228,
+            850,
+            48,
+            40
+          ],
+          "text": "▾",
+          "fontPx": 24,
+          "parent": "Panel_TSV_TS04_Dialog",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS04_Skip",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            404,
+            854,
+            80,
+            32
+          ],
+          "text": "스킵 »",
+          "fontPx": 18,
+          "parent": "Panel_TSV_TS04_Dialog",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS04_WorldBubble",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            278,
+            230,
+            160,
+            114
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS04",
+          "note": "별도WorldAnchor말풍선"
+        },
+        {
+          "name": "Txt_TSV_TS04_WorldBubble",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            294,
+            244,
+            128,
+            88
+          ],
+          "text": "씨앗이 싹을 틔우려고 애쓰는 것처럼 열심히 일할 게!",
+          "fontPx": 22,
+          "parent": "Group_TSV_TS04_WorldBubble",
+          "note": null
+        }
+      ],
+      "observations": [
+        "대표데이몬. 월드말풍선은고정대화판과별도부품.",
+        "화자/좌우초상변경은state;다른대사를임의순서로이어붙이지않음. X는원본에없음."
+      ],
+      "newArtwork": [
+        "데이몬반신",
+        "대화/이름프레임",
+        "월드말풍선"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "다음/스킵",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "다음대사순서/원문미확인. 스킵호출부dismiss는제작제안만",
+          "payload": {}
+        }
+      ],
+      "fixture": {
+        "speaker": "데이몬",
+        "body": "정말 고마워. 드디어 살 곳이 생겼어!"
+      },
+      "scrollProposal": "fixed; no whole-screen scroll"
+    },
+    "TS06": {
+      "id": "TS06",
+      "label": "튜토리얼 대응 방식 2택",
+      "catalogKind": "modal",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS06-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS06_01_TSV01_0105.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [],
+      "catalogTexts": [
+        "대응 방식 선택",
+        "문을 열어 수용하기",
+        "바로 방전하기",
+        "선택"
+      ],
+      "catalogUnverified": [
+        "105초의 두카드+설명+선택은 대화판과 다른 판틀. 선택 분기 결과는 미확인.",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS06",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS06",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Scrim_TSV",
+          "kind": "panel",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS06",
+          "note": "native dim/blur;그림과분리"
+        },
+        {
+          "name": "BG_TSV_TS06_Title",
+          "kind": "frame3",
+          "boundsAbsLogicalPx": [
+            176,
+            156,
+            154,
+            50
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS06",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS06_Title",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            178,
+            164,
+            150,
+            32
+          ],
+          "text": "대응 방식 선택",
+          "fontPx": 20,
+          "parent": "Modal_TSV_TS06",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS06_Accept",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            64,
+            256,
+            164,
+            230
+          ],
+          "text": "문을 열어 수용하기",
+          "fontPx": 20,
+          "parent": "Modal_TSV_TS06",
+          "note": "그림상단/라벨하단44px;좌측선택브래킷별도"
+        },
+        {
+          "name": "Img_TSV_TS06_Accept",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            74,
+            266,
+            144,
+            172
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS06_Accept",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS06_Discharge",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            276,
+            256,
+            164,
+            230
+          ],
+          "text": "바로 방전하기",
+          "fontPx": 20,
+          "parent": "Modal_TSV_TS06",
+          "note": "동일역할164×230"
+        },
+        {
+          "name": "Img_TSV_TS06_Discharge",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            286,
+            266,
+            144,
+            172
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS06_Discharge",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS06_Description",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            66,
+            518,
+            374,
+            86
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS06",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS06_Description",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            88,
+            534,
+            332,
+            58
+          ],
+          "text": "생존자를 구할 수 있지만 문을 열면 감염자들이 몰려올 수 있습니다.",
+          "fontPx": 22,
+          "parent": "Modal_TSV_TS06",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS06_Select",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            170,
+            662,
+            164,
+            64
+          ],
+          "text": "선택",
+          "fontPx": 27,
+          "parent": "Modal_TSV_TS06",
+          "note": null
+        }
+      ],
+      "observations": [
+        "좌측선택관측;우측은커서만.우측설명/분기결과미확인.",
+        "원본X/바깥닫기힌트없음."
+      ],
+      "newArtwork": [
+        "두선택장면144×172각1",
+        "선택브래킷",
+        "기본3/9프레임"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "카드선택",
+          "target": "local state",
+          "basis": "left selected observed",
+          "proposal": "카드부모처리;우측미관측설명창작금지",
+          "payload": {}
+        },
+        {
+          "action": "선택",
+          "target": null,
+          "basis": "result unverified",
+          "proposal": "게임분기임의연결금지;단독보기진입미검수",
+          "payload": {}
+        }
+      ],
+      "fixture": {},
+      "scrollProposal": "fixed; no whole-screen scroll"
+    },
+    "TS08": {
+      "id": "TS08",
+      "label": "습격 예고 / 이동 안내",
+      "catalogKind": "modal",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS08-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS08_01_TSV01_0225.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [],
+      "catalogTexts": [
+        "곧 습격이 시작됩니다.",
+        "00:58:41",
+        "발전소 5레벨 달성(2/5)",
+        "이동하기",
+        "빈 곳을 탭하여 닫기"
+      ],
+      "catalogUnverified": [
+        "이동하기·X·배경닫기 표시. 다음 샘플에서 영지 복귀만 확인되며 어떤 입력으로 닫았는지 미확인.",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS08",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS08",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Scrim_TSV",
+          "kind": "panel",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS08",
+          "note": "native dim/blur;그림과분리"
+        },
+        {
+          "name": "Panel_TSV_TS08_Warning",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            36,
+            154,
+            432,
+            626
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS08",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS08_Warning",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            36,
+            432,
+            432,
+            348
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS08_Warning",
+          "note": null
+        },
+        {
+          "name": "Img_TSV_TS08_Boss",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            52,
+            126,
+            402,
+            276
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS08_Warning",
+          "note": "푸른거대감염자/붉은장면;문구없는새그림"
+        },
+        {
+          "name": "Btn_TSV_TS08_Close",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            410,
+            160,
+            40,
+            40
+          ],
+          "text": "×",
+          "fontPx": 32,
+          "parent": "Panel_TSV_TS08_Warning",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS08_Ribbon",
+          "kind": "frame3",
+          "boundsAbsLogicalPx": [
+            38,
+            386,
+            430,
+            66
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS08_Warning",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS08_Title",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            92,
+            396,
+            350,
+            44
+          ],
+          "text": "곧 습격이 시작됩니다.",
+          "fontPx": 32,
+          "parent": "Panel_TSV_TS08_Warning",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS08_Timer",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            174,
+            456,
+            156,
+            30
+          ],
+          "text": "00:58:41",
+          "fontPx": 24,
+          "parent": "Panel_TSV_TS08_Warning",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS08_Requirement",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            80,
+            496,
+            344,
+            30
+          ],
+          "text": "발전소 5레벨 달성(2/5)",
+          "fontPx": 21,
+          "parent": "Panel_TSV_TS08_Warning",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS08_Rewards",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            148,
+            534,
+            214,
+            68
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS08_Warning",
+          "note": "보석×100/보라별카드×1/갈색별카드×3,각64×64"
+        },
+        {
+          "name": "Txt_TSV_TS08_Guide",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            104,
+            628,
+            300,
+            58
+          ],
+          "text": "챕터 미션 가이드에 따라 발전소를 업그레이드하세요.",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS08_Warning",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS08_Go",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            84,
+            686,
+            336,
+            64
+          ],
+          "text": "이동하기",
+          "fontPx": 28,
+          "parent": "Panel_TSV_TS08_Warning",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_DismissHint",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            120,
+            856,
+            264,
+            30
+          ],
+          "text": "빈 곳을 탭하여 닫기",
+          "fontPx": 18,
+          "parent": "Modal_TSV_TS08",
+          "note": null
+        }
+      ],
+      "observations": [
+        "거대적돌출그림/경고리본/native문구수치/보상모두분리.",
+        "타이머고정관측값. countdown/습격로직미확인."
+      ],
+      "newArtwork": [
+        "적장면",
+        "붉은경고리본/아이콘",
+        "별카드2종/보석"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "X/빈곳",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "호출부dismiss제안",
+          "payload": {}
+        },
+        {
+          "action": "이동하기",
+          "target": null,
+          "basis": "destination unverified",
+          "proposal": "목적건물/좌표근거없이TS03/05오연결금지",
+          "payload": {}
+        }
+      ],
+      "fixture": {
+        "timer": "00:58:41",
+        "rewards": [
+          {
+            "gem": 100
+          },
+          {
+            "purpleStarCard": 1
+          },
+          {
+            "brownStarCard": 3
+          }
+        ]
+      },
+      "scrollProposal": "fixed; no whole-screen scroll"
+    },
+    "TS09": {
+      "id": "TS09",
+      "label": "챕터 미션 노트",
+      "catalogKind": "modal",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS09-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS09_01_TSV02_0169.00s.jpg"
+        },
+        {
+          "id": "TS09-R02",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS09_02_TSV01_0240.00s.jpg"
+        },
+        {
+          "id": "TS09-R03",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS09_03_TSV04_0000.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [
+        {
+          "action": "모두 수령",
+          "targetId": "TS17",
+          "sourceId": "TSV04",
+          "evidence": "01.5초 모두 수령 커서 →02초 보상 비행 →02.5~04.4초 챕터 보상",
+          "confidence": "sequence_observed",
+          "eventLogVerified": false
+        },
+        {
+          "action": "모두 수령",
+          "targetId": "TS17",
+          "sourceId": "TSV02",
+          "timeRangeSeconds": [
+            171,
+            174
+          ],
+          "evidence": "수령 뒤 챕터 보상 연출",
+          "confidence": "sequence_observed",
+          "eventLogVerified": false
+        }
+      ],
+      "catalogTexts": [
+        "챕터 2",
+        "위기 예보",
+        "2-10 민가1 2레벨 달성 (2/2)",
+        "2-12 생존자 수용 (1/1)",
+        "2-2 목재 공방 건설 (1/1)",
+        "2-8 제련 공방 건설 (1/1)",
+        "수령",
+        "이번 챕터 미션 보상",
+        "모두 수령",
+        "챕터3",
+        "용사집결",
+        "3-8 발전소 4레벨 달성 (4/4)",
+        "3-3 영웅 지구 건설 (1/1)",
+        "3-1 생존자 구조 (1/1)",
+        "빈 곳을 탭하여 닫기"
+      ],
+      "catalogUnverified": [
+        "우상단 X와 빈곳닫기 안내. 모두수령 뒤 F13 챕터완료 연출.",
+        "부모 영지 연결은 제작 제안이며 해당 4초 영상에서 기반 화면으로 복귀하지 않음",
+        "미션 행의 수령 가능/기수령은 동일 리스트 내 상태",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS09",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS09",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Scrim_TSV",
+          "kind": "panel",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS09",
+          "note": "native dim/blur;그림과분리"
+        },
+        {
+          "name": "Panel_TSV_TS09_Notebook",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            0,
+            60,
+            504,
+            740
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS09",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS09_Notebook",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            0,
+            60,
+            504,
+            740
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS09_Notebook",
+          "note": "루프/찢긴상단장식별도"
+        },
+        {
+          "name": "Btn_TSV_TS09_Close",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            446,
+            24,
+            40,
+            40
+          ],
+          "text": "×",
+          "fontPx": 32,
+          "parent": "Modal_TSV_TS09",
+          "note": " 공통Close40×40적용;원본외곽근사44와약간차이."
+        },
+        {
+          "name": "Group_TSV_TS09_Banner",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            22,
+            96,
+            454,
+            178
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS09_Notebook",
+          "note": null
+        },
+        {
+          "name": "Img_TSV_TS09_Banner",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            22,
+            96,
+            454,
+            178
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Group_TSV_TS09_Banner",
+          "note": "챕터3새배너;TS18공유가능"
+        },
+        {
+          "name": "Txt_TSV_TS09_Chapter",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            30,
+            196,
+            150,
+            32
+          ],
+          "text": "챕터 3",
+          "fontPx": 30,
+          "parent": "Group_TSV_TS09_Banner",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS09_Title",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            30,
+            232,
+            200,
+            28
+          ],
+          "text": "용사 집결",
+          "fontPx": 22,
+          "parent": "Group_TSV_TS09_Banner",
+          "note": null
+        },
+        {
+          "name": "Scroll_TSV_TS09_Missions",
+          "kind": "scroll",
+          "boundsAbsLogicalPx": [
+            22,
+            276,
+            454,
+            344
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS09_Notebook",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS09_Mission01",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            22,
+            276,
+            454,
+            114
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Scroll_TSV_TS09_Missions",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS09_Mission01",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            34,
+            284,
+            420,
+            30
+          ],
+          "text": "3-8 발전소 4레벨 달성 (4/4)",
+          "fontPx": 22,
+          "parent": "Group_TSV_TS09_Mission01",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS09_Mission01Rewards",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            34,
+            318,
+            202,
+            64
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Group_TSV_TS09_Mission01",
+          "note": "보석×10/목재×100/식량×60;각64×64"
+        },
+        {
+          "name": "Btn_TSV_TS09_Claim01",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            368,
+            320,
+            96,
+            48
+          ],
+          "text": "수령",
+          "fontPx": 22,
+          "parent": "Group_TSV_TS09_Mission01",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS09_Mission02",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            22,
+            398,
+            454,
+            116
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Scroll_TSV_TS09_Missions",
+          "note": "제목3-3 영웅 지구 건설 (1/1);동일보상;우측녹색체크"
+        },
+        {
+          "name": "Group_TSV_TS09_Mission03",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            22,
+            522,
+            454,
+            116
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Scroll_TSV_TS09_Missions",
+          "note": "제목3-1 생존자 구조 (1/1);보석/목재/식량아이콘과우측녹색체크.수량하단clip로미확인;창작금지."
+        },
+        {
+          "name": "Txt_TSV_TS09_RewardTitle",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            126,
+            638,
+            260,
+            30
+          ],
+          "text": "이번 챕터 미션 보상",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS09_Notebook",
+          "note": null
+        },
+        {
+          "name": "Scroll_TSV_TS09_ChapterRewards",
+          "kind": "scroll-x",
+          "boundsAbsLogicalPx": [
+            22,
+            678,
+            326,
+            78
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS09_Notebook",
+          "note": "1K EXP×5/1분×5/보석×200/목재×720.식량이프레임잘림;TS17-R01에서×400"
+        },
+        {
+          "name": "Btn_TSV_TS09_ClaimAll",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            368,
+            690,
+            96,
+            48
+          ],
+          "text": "모두 수령",
+          "fontPx": 20,
+          "parent": "Panel_TSV_TS09_Notebook",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_DismissHint",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            120,
+            856,
+            264,
+            30
+          ],
+          "text": "빈 곳을 탭하여 닫기",
+          "fontPx": 18,
+          "parent": "Modal_TSV_TS09",
+          "note": null
+        }
+      ],
+      "observations": [
+        "권장대표=TS09-R03(TSV04),챕터3.카탈로그primary TS09-R01은챕터2로다른state.",
+        "챕터1/2/3미션/수치혼합금지.보석비행은일시연출."
+      ],
+      "newArtwork": [
+        "챕터3배너(TS18공유)",
+        "챕터1/2배너는상태지원시추가",
+        "노트루프",
+        "보석/목재/식량/가속/EXP아이콘"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "모두 수령",
+          "target": "TS17",
+          "basis": "sequence-observed",
+          "proposal": "chapterId+returnToScreenId전달,재수령/지갑계산없음",
+          "payload": {
+            "chapterId": 3
+          }
+        },
+        {
+          "action": "X/바깥",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "실제호출부dismiss.원본진입없으면목록단독보기",
+          "payload": {}
+        },
+        {
+          "action": "개별수령",
+          "target": "local claimed state",
+          "basis": "source action partial",
+          "proposal": "checked예시만;실경제변경없음",
+          "payload": {}
+        }
+      ],
+      "fixture": {
+        "selectedChapterId": 3,
+        "chapters": {
+          "1": {
+            "title": "발전소 가동",
+            "missions": [
+              "1-2 민가 건설 (1/1)",
+              "1-6 온실 건설 (1/1)",
+              "1-1 발전소 연결 (1/1)"
+            ],
+            "chapterRewards": {
+              "minute1": 5,
+              "gem": 200,
+              "food": 300,
+              "wood": 400
+            }
+          },
+          "2": {
+            "title": "위기 예보",
+            "missions": [
+              "2-10 민가1 2레벨 달성 (2/2)",
+              "2-12 생존자 수용 (1/1)",
+              "2-2 목재 공방 건설 (1/1)"
+            ],
+            "rowRewards": [
+              {
+                "gem": 10
+              },
+              {
+                "gem": 10,
+                "food": 600,
+                "wood": 1240
+              },
+              {
+                "gem": 10
+              }
+            ],
+            "chapterRewards": {
+              "minute1": 5,
+              "gem": 200,
+              "wood": 600,
+              "food": 400
+            }
+          },
+          "3": {
+            "title": "용사 집결",
+            "missions": [
+              "3-8 발전소 4레벨 달성 (4/4)",
+              "3-3 영웅 지구 건설 (1/1)",
+              "3-1 생존자 구조 (1/1)"
+            ],
+            "rowRewards": [
+              {
+                "gem": 10,
+                "wood": 100,
+                "food": 60
+              },
+              {
+                "gem": 10,
+                "wood": 100,
+                "food": 60
+              },
+              {
+                "gem": null,
+                "wood": null,
+                "food": null,
+                "note": "원본세번째행하단clip;아이콘종류는보이나수량완전판독미확인"
+              }
+            ],
+            "chapterRewards": {
+              "exp1k": 5,
+              "minute1": 5,
+              "gem": 200,
+              "wood": 720,
+              "food": 400
+            }
+          }
+        }
+      },
+      "scrollProposal": "미션viewport세로/보상레일가로. 배너/하단보상/닫기/수령CTA고정"
+    },
+    "TS10": {
+      "id": "TS10",
+      "label": "일반 건물 업그레이드 성공",
+      "catalogKind": "overlay",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS10-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS10_01_TSV02_0075.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [],
+      "catalogTexts": [
+        "제련 공방 업그레이드 성공",
+        "민가-1 업그레이드 성공",
+        "민가-2 업그레이드 성공",
+        "Lv.2",
+        "금속 생산 속도: 50 » 100",
+        "아무 곳이나 터치해 닫으세요."
+      ],
+      "catalogUnverified": [
+        "하단 문구로 아무곳 터치 닫기 확인. 실제 입력 코드/정확 클릭 시점은 미확인.",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS10",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Scrim_TSV",
+          "kind": "panel",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": "native dim/blur;그림과분리"
+        },
+        {
+          "name": "Txt_TSV_TS10_Title",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            76,
+            92,
+            352,
+            34
+          ],
+          "text": "제련 공방 업그레이드 성공",
+          "fontPx": 25,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": null
+        },
+        {
+          "name": "Img_TSV_TS10_RaysConfetti",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            24,
+            150,
+            456,
+            500
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": "글자없는광선/색종이"
+        },
+        {
+          "name": "Img_TSV_TS10_Ribbon",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            32,
+            258,
+            440,
+            108
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": "글자없는붉은리본"
+        },
+        {
+          "name": "Txt_TSV_TS10_Level",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            132,
+            268,
+            240,
+            64
+          ],
+          "text": "Lv.2",
+          "fontPx": 54,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS10_Stat",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            28,
+            402,
+            294,
+            34
+          ],
+          "text": "금속 생산 속도:",
+          "fontPx": 22,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS10_Before",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            374,
+            402,
+            40,
+            34
+          ],
+          "text": "50",
+          "fontPx": 22,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": null
+        },
+        {
+          "name": "Img_TSV_TS10_Arrow",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            410,
+            404,
+            30,
+            28
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS10_After",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            440,
+            402,
+            50,
+            34
+          ],
+          "text": "100",
+          "fontPx": 22,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS10_Rewards",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            154,
+            516,
+            200,
+            94
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": "보석×10/모루가구;각92×92.가구수량표시없음"
+        },
+        {
+          "name": "Txt_TSV_TS10_Hint",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            152,
+            808,
+            200,
+            52
+          ],
+          "text": "아무 곳이나 터치해 닫으세요.",
+          "fontPx": 18,
+          "parent": "Btn_TSV_TS10_Continue",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS10_Continue",
+          "kind": "transparent-button",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS10",
+          "note": "전면투명button부모. 배경/딤/판/문구/보상은이부모의자식으로입력전달. 자기전체직사각형이닫기hit영역."
+        }
+      ],
+      "observations": [
+        "대표제련공방Lv.2/50→100/보석10/모루.민가침대상태와혼합금지.",
+        "닫기후목적지미관측.호출부backstack복귀제안."
+      ],
+      "newArtwork": [
+        "붉은리본",
+        "광선/색종이",
+        "모루가구/보석/화살표"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "아무곳터치",
+          "target": null,
+          "basis": "source hint visible",
+          "proposal": "실제호출부dismiss;정확입력시점미관측",
+          "payload": {}
+        }
+      ],
+      "fixture": {},
+      "scrollProposal": "fixed; no whole-screen scroll"
+    },
+    "TS11": {
+      "id": "TS11",
+      "label": "발전소 레벨 증가 기록판",
+      "catalogKind": "overlay",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS11-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS11_01_TSV03_0000.80s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [
+        {
+          "action": "화면 터치",
+          "targetId": "TS03",
+          "sourceId": "TSV03",
+          "evidence": "02초 오버레이 → 03초 영지",
+          "confidence": "sequence_observed",
+          "eventLogVerified": false
+        }
+      ],
+      "catalogTexts": [
+        "Lv.3",
+        "전투력 증가: 10.07K → 16.37K",
+        "전기 공급 구역: 6 → 8",
+        "화면을 터치하여 계속하세요.",
+        "발전소 업그레이드 성공",
+        "LV.4",
+        "전투력 증가",
+        "영웅 레벨 상한",
+        "전기 공급 구역",
+        "계속하세요."
+      ],
+      "catalogUnverified": [
+        "상단이 Google Play 서비스 업데이트 OS 알림으로 가려져 있음. 알림 배너는 게임 UI 아님.",
+        "화면터치 계속 문구.",
+        "00초 OS 알림 배너가 있으므로 가림이 없는 00.8초를 대표로 선택",
+        "증가 수치·보상 수량은 영상 관측값이며 게임 데이터 확정값 아님",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS11",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS11_Continue",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Scrim_TSV",
+          "kind": "panel",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS11_Continue",
+          "note": "native dim/blur;그림과분리"
+        },
+        {
+          "name": "Txt_TSV_TS11_Title",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            112,
+            92,
+            284,
+            34
+          ],
+          "text": "발전소 업그레이드 성공",
+          "fontPx": 25,
+          "parent": "Btn_TSV_TS11_Continue",
+          "note": null
+        },
+        {
+          "name": "Panel_TSV_TS11_Record",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            40,
+            182,
+            424,
+            574
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS11_Continue",
+          "note": null
+        },
+        {
+          "name": "Img_TSV_TS11_PowerPlant",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            140,
+            184,
+            226,
+            142
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": "글자없는금빛발전소/월계수"
+        },
+        {
+          "name": "BG_TSV_TS11_Record",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            54,
+            374,
+            396,
+            380
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": "하단방패꼴장식별도"
+        },
+        {
+          "name": "Img_TSV_TS11_Ribbon",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            36,
+            316,
+            432,
+            104
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS11_Level",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            136,
+            320,
+            232,
+            66
+          ],
+          "text": "Lv.4",
+          "fontPx": 52,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS11_Stat01",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            80,
+            458,
+            194,
+            32
+          ],
+          "text": "전투력 증가:",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS11_Stat01Before",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            230,
+            458,
+            78,
+            32
+          ],
+          "text": "16.37K",
+          "fontPx": 21,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS11_Stat01After",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            350,
+            458,
+            78,
+            32
+          ],
+          "text": "24.39K",
+          "fontPx": 21,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS11_Stat02",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            80,
+            494,
+            214,
+            32
+          ],
+          "text": "영웅 레벨 상한:",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS11_Stat02Before",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            342,
+            494,
+            20,
+            32
+          ],
+          "text": "5",
+          "fontPx": 21,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS11_Stat02After",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            398,
+            494,
+            34,
+            32
+          ],
+          "text": "10",
+          "fontPx": 21,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS11_Stat03",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            80,
+            532,
+            214,
+            32
+          ],
+          "text": "전기 공급 구역:",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS11_Stat03Before",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            342,
+            532,
+            20,
+            32
+          ],
+          "text": "8",
+          "fontPx": 21,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS11_Stat03After",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            398,
+            532,
+            34,
+            32
+          ],
+          "text": "9",
+          "fontPx": 21,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS11_Rewards",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            176,
+            600,
+            154,
+            74
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS11_Record",
+          "note": "EXP×40,000/보석×10;각72×72"
+        },
+        {
+          "name": "Txt_TSV_TS11_Hint",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            154,
+            810,
+            202,
+            52
+          ],
+          "text": "화면을 터치하여 계속하세요.",
+          "fontPx": 18,
+          "parent": "Btn_TSV_TS11_Continue",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS11_Continue",
+          "kind": "transparent-button",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS11",
+          "note": "전면투명button부모. 배경/딤/판/문구/보상은이부모의자식으로입력전달. 자기전체직사각형이닫기hit영역."
+        }
+      ],
+      "observations": [
+        "직접본대표TS11-R01은Lv.4. catalog에섞인Lv.3/10.07K→16.37K/6→8은다른state.",
+        "대표HUD43,992/04:56/6/8/9.75K/보석790을현행TS03지갑과혼합하지않음.",
+        "우하단설정tooltip/Steam채팅은게임UI제외."
+      ],
+      "newArtwork": [
+        "금빛발전소/월계수",
+        "붉은리본",
+        "방패하단장식",
+        "EXP/보석/녹색화살표3개"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "화면터치",
+          "target": "TS03",
+          "basis": "sequence-observed02→03s",
+          "proposal": "기존TS03위dismiss,returnToScreenId보존;독립선택은복귀대상별도기록",
+          "payload": {}
+        }
+      ],
+      "fixture": {
+        "level": 4,
+        "powerBefore": "16.37K",
+        "powerAfter": "24.39K",
+        "heroCapBefore": 5,
+        "heroCapAfter": 10,
+        "gridBefore": 8,
+        "gridAfter": 9,
+        "exp": 40000,
+        "gem": 10
+      },
+      "scrollProposal": "fixed; no whole-screen scroll"
+    },
+    "TS12": {
+      "id": "TS12",
+      "label": "지휘관 정보 편집",
+      "catalogKind": "modal",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS12-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS12_01_TSV02_0060.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [],
+      "catalogTexts": [
+        "지휘관 정보",
+        "지휘관 닉네임",
+        "이름은 3~16자 이내여야 합니다.",
+        "Survivor.43a3e",
+        "문자와 숫자만 사용하세요.",
+        "지휘관 성별",
+        "남",
+        "여",
+        "기타",
+        "없음",
+        "무료",
+        "빈 곳을 탭하여 닫기"
+      ],
+      "catalogUnverified": [
+        "우상단 X와 하단 빈 곳 탭 닫기 문구가 보임.",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS12",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS12",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Scrim_TSV",
+          "kind": "panel",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS12",
+          "note": "native dim/blur;그림과분리"
+        },
+        {
+          "name": "Panel_TSV_TS12_Commander",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            26,
+            58,
+            454,
+            722
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS12",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS12_Commander",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            26,
+            58,
+            454,
+            722
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS12_Commander",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS12_Header",
+          "kind": "frame3",
+          "boundsAbsLogicalPx": [
+            26,
+            58,
+            454,
+            56
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS12_Commander",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS12_Title",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            42,
+            72,
+            350,
+            38
+          ],
+          "text": "지휘관 정보",
+          "fontPx": 28,
+          "parent": "Panel_TSV_TS12_Commander",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS12_Close",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            432,
+            66,
+            40,
+            40
+          ],
+          "text": "×",
+          "fontPx": 32,
+          "parent": "Panel_TSV_TS12_Commander",
+          "note": null
+        },
+        {
+          "name": "Panel_TSV_TS12_Name",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            50,
+            132,
+            404,
+            192
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS12_Commander",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS12_NameTitle",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            60,
+            144,
+            360,
+            32
+          ],
+          "text": "지휘관 닉네임",
+          "fontPx": 24,
+          "parent": "Panel_TSV_TS12_Name",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS12_NameRule",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            60,
+            190,
+            360,
+            28
+          ],
+          "text": "이름은 3~16자 이내여야 합니다.",
+          "fontPx": 20,
+          "parent": "Panel_TSV_TS12_Name",
+          "note": null
+        },
+        {
+          "name": "Input_TSV_TS12_Nickname",
+          "kind": "input",
+          "boundsAbsLogicalPx": [
+            60,
+            222,
+            384,
+            40
+          ],
+          "text": "Survivor.43a3e",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS12_Name",
+          "note": "진짜native편집입력.가짜text금지/실계정저장없음"
+        },
+        {
+          "name": "Txt_TSV_TS12_CharRule",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            60,
+            274,
+            360,
+            28
+          ],
+          "text": "문자와 숫자만 사용하세요.",
+          "fontPx": 20,
+          "parent": "Panel_TSV_TS12_Name",
+          "note": null
+        },
+        {
+          "name": "Panel_TSV_TS12_Gender",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            50,
+            332,
+            404,
+            188
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS12_Commander",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS12_GenderTitle",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            60,
+            342,
+            350,
+            32
+          ],
+          "text": "지휘관 성별",
+          "fontPx": 24,
+          "parent": "Panel_TSV_TS12_Gender",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS12_Male",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            72,
+            396,
+            132,
+            44
+          ],
+          "text": "남 ♂",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS12_Gender",
+          "note": "checkbox/icon/text분리;동일132×44"
+        },
+        {
+          "name": "Btn_TSV_TS12_Female",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            266,
+            396,
+            132,
+            44
+          ],
+          "text": "여 ♀",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS12_Gender",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS12_Other",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            72,
+            454,
+            132,
+            44
+          ],
+          "text": "기타 ?",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS12_Gender",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS12_None",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            266,
+            454,
+            132,
+            44
+          ],
+          "text": "없음",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS12_Gender",
+          "note": "관측selected"
+        },
+        {
+          "name": "Btn_TSV_TS12_Free",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            84,
+            690,
+            336,
+            64
+          ],
+          "text": "무료",
+          "fontPx": 28,
+          "parent": "Panel_TSV_TS12_Commander",
+          "note": "회색관측;enabled조건미확인.임의성공저장금지"
+        },
+        {
+          "name": "Txt_TSV_DismissHint",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            120,
+            856,
+            264,
+            30
+          ],
+          "text": "빈 곳을 탭하여 닫기",
+          "fontPx": 18,
+          "parent": "Modal_TSV_TS12",
+          "note": null
+        }
+      ],
+      "observations": [
+        "길이/문자규칙안내문은보이나실제validation코드/마침표허용예외미확인.",
+        "없음초기selected,다른성별선택은localfixture제안.",
+        "키보드열림/입력가능/가림검수필요.이는명세로실제입력검수아님."
+      ],
+      "newArtwork": [
+        "기본3/9프레임",
+        "성별/선택체크아이콘"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "입력/성별",
+          "target": "local state",
+          "basis": "controls visible only",
+          "proposal": "native입력과선택fixture.실계정/오류문구창작금지",
+          "payload": {}
+        },
+        {
+          "action": "무료",
+          "target": null,
+          "basis": "gray state only",
+          "proposal": "제출결과/실제저장미확인",
+          "payload": {}
+        },
+        {
+          "action": "X/바깥",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "호출부dismiss제안",
+          "payload": {}
+        }
+      ],
+      "fixture": {
+        "nickname": "Survivor.43a3e",
+        "selectedGender": "none"
+      },
+      "scrollProposal": "fixed; no whole-screen scroll"
+    },
+    "TS13": {
+      "id": "TS13",
+      "label": "생존자 파견",
+      "catalogKind": "sheet",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS13-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS13_01_TSV02_0080.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [],
+      "catalogTexts": [
+        "생존자",
+        "4/4",
+        "작업 중 3",
+        "휴식 중 1",
+        "아픔 0",
+        "파업 중 0",
+        "목재 공방",
+        "제련 공방",
+        "주방",
+        "온실",
+        "자동 파견",
+        "파견",
+        "속성 상세정보",
+        "근거지 편지함"
+      ],
+      "catalogUnverified": [
+        "좌하단 뒤로 화살표. 속성 상세정보 탭 내용은 영상에 없음.",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS13",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS13",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Panel_TSV_TS13_Sheet",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            0,
+            214,
+            504,
+            680
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS13",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS13_Sheet",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            0,
+            214,
+            504,
+            680
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS13_Sheet",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS13_Header",
+          "kind": "frame3",
+          "boundsAbsLogicalPx": [
+            0,
+            214,
+            504,
+            58
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS13_Sheet",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS13_Title",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            12,
+            232,
+            80,
+            30
+          ],
+          "text": "생존자",
+          "fontPx": 24,
+          "parent": "Panel_TSV_TS13_Sheet",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS13_Help",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            80,
+            222,
+            40,
+            40
+          ],
+          "text": "?",
+          "fontPx": 26,
+          "parent": "Panel_TSV_TS13_Sheet",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS13_Mailbox",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            416,
+            204,
+            88,
+            68
+          ],
+          "text": "근거지 편지함",
+          "fontPx": 16,
+          "parent": "Panel_TSV_TS13_Sheet",
+          "note": "아이콘/문구/알림점분리"
+        },
+        {
+          "name": "Panel_TSV_TS13_Summary",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            14,
+            282,
+            476,
+            132
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS13_Sheet",
+          "note": "4/4;작업중3/휴식중1/아픔0/파업중0,동일108×64셀4개"
+        },
+        {
+          "name": "Txt_TSV_TS13_Count",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            402,
+            286,
+            76,
+            28
+          ],
+          "text": "4/4",
+          "fontPx": 20,
+          "parent": "Panel_TSV_TS13_Summary",
+          "note": null
+        },
+        {
+          "name": "Scroll_TSV_TS13_Buildings",
+          "kind": "scroll",
+          "boundsAbsLogicalPx": [
+            14,
+            420,
+            476,
+            306
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS13_Sheet",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS13_Building01",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            20,
+            420,
+            464,
+            82
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Scroll_TSV_TS13_Buildings",
+          "note": "목재 공방;아이콘64×64/라벨/작업자/−/1/2/+별도;+알림점"
+        },
+        {
+          "name": "Group_TSV_TS13_Building02",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            20,
+            510,
+            464,
+            82
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Scroll_TSV_TS13_Buildings",
+          "note": "제련 공방;0/1;−회색;+알림점"
+        },
+        {
+          "name": "Group_TSV_TS13_Building03",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            20,
+            600,
+            464,
+            82
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Scroll_TSV_TS13_Buildings",
+          "note": "주방;1/1;+회색"
+        },
+        {
+          "name": "Group_TSV_TS13_Building04",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            20,
+            690,
+            464,
+            82
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Scroll_TSV_TS13_Buildings",
+          "note": "온실일부만보임;수치미확인빈값"
+        },
+        {
+          "name": "Btn_TSV_TS13_Auto",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            84,
+            734,
+            336,
+            64
+          ],
+          "text": "자동 파견",
+          "fontPx": 28,
+          "parent": "Panel_TSV_TS13_Sheet",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS13_Footer",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            0,
+            810,
+            504,
+            84
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS13_Sheet",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS13_Back",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            0,
+            818,
+            74,
+            64
+          ],
+          "text": "←",
+          "fontPx": 36,
+          "parent": "Group_TSV_TS13_Footer",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS13_DispatchTab",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            88,
+            810,
+            202,
+            70
+          ],
+          "text": "파견",
+          "fontPx": 26,
+          "parent": "Group_TSV_TS13_Footer",
+          "note": "selected"
+        },
+        {
+          "name": "Btn_TSV_TS13_DetailTab",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            298,
+            810,
+            200,
+            70
+          ],
+          "text": "속성 상세정보",
+          "fontPx": 24,
+          "parent": "Group_TSV_TS13_Footer",
+          "note": null
+        }
+      ],
+      "observations": [
+        "source sheet를native modal로분류제안.상단영지0~214유지,전체풀딤없음.",
+        "상단 영웅 지구 1레벨 잠금 해제/새로운 생존자가 도착했습니다!는일시토스트/공통배너.",
+        "온실잘린수치추정금지.목록행같은크기."
+      ],
+      "newArtwork": [
+        "건물4종아이콘",
+        "작업/휴식/침대/파업아이콘",
+        "편지함/뒤로/알림점",
+        "기본3/9프레임"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "근거지편지함",
+          "target": "TS15",
+          "basis": "visible entry; exact source click unverified",
+          "proposal": "보이는진입아이콘만이용가능;returnToTS13보존",
+          "payload": {
+            "baseId": "fixture"
+          }
+        },
+        {
+          "action": "뒤로",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "호출부dismiss",
+          "payload": {}
+        },
+        {
+          "action": "속성상세정보",
+          "target": null,
+          "basis": "destination unseen",
+          "proposal": "가짜상세페이지추가금지",
+          "payload": {}
+        },
+        {
+          "action": "−/+ / 자동파견",
+          "target": "local fixture",
+          "basis": "results unseen",
+          "proposal": "파견결과/계산규칙/수치창작금지",
+          "payload": {}
+        }
+      ],
+      "fixture": {
+        "population": "4/4",
+        "working": 3,
+        "resting": 1,
+        "ill": 0,
+        "striking": 0,
+        "buildings": [
+          {
+            "name": "목재 공방",
+            "count": "1/2"
+          },
+          {
+            "name": "제련 공방",
+            "count": "0/1"
+          },
+          {
+            "name": "주방",
+            "count": "1/1"
+          },
+          {
+            "name": "온실",
+            "count": null
+          }
+        ]
+      },
+      "scrollProposal": "건물목록만세로스크롤;헤더/요약/자동파견/하단탭고정"
+    },
+    "TS14": {
+      "id": "TS14",
+      "label": "생존자 수용",
+      "catalogKind": "modal",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS14-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS14_01_TSV02_0105.00s.jpg"
+        },
+        {
+          "id": "TS14-R02",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS14_02_TSV02_0125.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [
+        {
+          "action": "생존자 수용",
+          "targetId": "TS03",
+          "sourceId": "TSV02",
+          "timeRangeSeconds": [
+            125,
+            126
+          ],
+          "evidence": "수용가능 모달 다음 월드의 생존자+2 피드백",
+          "confidence": "sequence_observed",
+          "eventLogVerified": false
+        }
+      ],
+      "catalogTexts": [
+        "생존자 수용",
+        "총 인구 4",
+        "침대 자리 4",
+        "수용 대기 생존자: 2",
+        "수잔",
+        "지미",
+        "침대를 확장해 더 많은 생존자를 수용하세요.",
+        "4+2",
+        "침대 자리 6"
+      ],
+      "catalogUnverified": [
+        "우상단 X, 빈곳 닫기 안내. 수용 후 월드에 생존자+2 피드백(126초).",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS14",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS14",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Scrim_TSV",
+          "kind": "panel",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS14",
+          "note": "native dim/blur;그림과분리"
+        },
+        {
+          "name": "Panel_TSV_TS14_Clipboard",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            6,
+            64,
+            494,
+            768
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS14",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS14_Clipboard",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            6,
+            64,
+            494,
+            768
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": null
+        },
+        {
+          "name": "Img_TSV_TS14_Clip",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            148,
+            52,
+            210,
+            94
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS14_Close",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            452,
+            76,
+            40,
+            40
+          ],
+          "text": "×",
+          "fontPx": 32,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS14_Title",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            158,
+            154,
+            170,
+            42
+          ],
+          "text": "생존자 수용",
+          "fontPx": 30,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS14_Help",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            310,
+            154,
+            40,
+            40
+          ],
+          "text": "?",
+          "fontPx": 26,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS14_Capacity",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            16,
+            200,
+            474,
+            100
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": "총인구/침대자리아이콘/라벨/수치별도"
+        },
+        {
+          "name": "Txt_TSV_TS14_Population",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            136,
+            230,
+            100,
+            48
+          ],
+          "text": "4+2",
+          "fontPx": 40,
+          "parent": "Group_TSV_TS14_Capacity",
+          "note": "4청록/+2녹색필요시2텍스트"
+        },
+        {
+          "name": "Txt_TSV_TS14_Beds",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            402,
+            230,
+            54,
+            48
+          ],
+          "text": "6",
+          "fontPx": 40,
+          "parent": "Group_TSV_TS14_Capacity",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS14_Waiting",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            148,
+            310,
+            224,
+            34
+          ],
+          "text": "수용 대기 생존자: 2",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS14_Susan",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            40,
+            348,
+            132,
+            146
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": "새초상+선택딤+녹색체크각child"
+        },
+        {
+          "name": "Txt_TSV_TS14_Susan",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            40,
+            498,
+            132,
+            30
+          ],
+          "text": "수잔",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS14_Jimmy",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            188,
+            348,
+            132,
+            146
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": "동일크기새초상+체크"
+        },
+        {
+          "name": "Txt_TSV_TS14_Jimmy",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            188,
+            498,
+            132,
+            30
+          ],
+          "text": "지미",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS14_Accept",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            84,
+            738,
+            336,
+            64
+          ],
+          "text": "생존자 수용",
+          "fontPx": 28,
+          "parent": "Panel_TSV_TS14_Clipboard",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_DismissHint",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            120,
+            856,
+            264,
+            30
+          ],
+          "text": "빈 곳을 탭하여 닫기",
+          "fontPx": 18,
+          "parent": "Modal_TSV_TS14",
+          "note": null
+        }
+      ],
+      "observations": [
+        "권장상태=R02수용가능(4+2/침대6/2초상체크).R01정원부족variant.",
+        "R01하단빨강 침대를 확장해 더 많은 생존자를 수용하세요.+우측이동화살표;R02녹색CTA.동시표시금지.",
+        "튜토리얼흰손은공통overlay로분리."
+      ],
+      "newArtwork": [
+        "수잔/지미초상",
+        "클립",
+        "인구/침대/체크/이동아이콘"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "생존자수용",
+          "target": "TS03",
+          "basis": "sequence-observed125→126s",
+          "proposal": "selectedSurvivorIds/returnTo전달후dismiss;실인구계산은fixture한정",
+          "payload": {
+            "selectedSurvivorIds": [
+              "susan",
+              "jimmy"
+            ]
+          }
+        },
+        {
+          "action": "침대확장이동",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "목적건물미확인연결보류",
+          "payload": {}
+        },
+        {
+          "action": "X/바깥",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "호출부dismiss",
+          "payload": {}
+        }
+      ],
+      "fixture": {
+        "selectedVariant": "ready",
+        "variants": {
+          "full": {
+            "population": "4",
+            "beds": "4",
+            "selected": [],
+            "footer": "침대를 확장해 더 많은 생존자를 수용하세요."
+          },
+          "ready": {
+            "population": "4+2",
+            "beds": "6",
+            "selected": [
+              "susan",
+              "jimmy"
+            ],
+            "footer": "생존자 수용"
+          }
+        }
+      },
+      "scrollProposal": "fixed; no whole-screen scroll"
+    },
+    "TS15": {
+      "id": "TS15",
+      "label": "근거지 편지함",
+      "catalogKind": "screen",
+      "nativeKind": "page",
+      "referencesViewed": [
+        {
+          "id": "TS15-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS15_01_TSV02_0115.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [
+        {
+          "action": "생존자 도감 탭",
+          "targetId": "TS30",
+          "sourceId": "TSV03",
+          "evidence": "93초 우하단 탭 커서 →94초 도감",
+          "confidence": "sequence_observed",
+          "eventLogVerified": false
+        }
+      ],
+      "catalogTexts": [
+        "근거지 편지함",
+        "생존자들에게 약간의 불만이 있지만, 그래도 여전히 당신을 믿고 있습니다!",
+        "생존자 사건",
+        "생존자 평가",
+        "미아",
+        "제이슨",
+        "도저히 민가-1의 변기을(를) 참을 수가 없어!",
+        "건설하기 »",
+        "당신과 물건을 교환하고 싶어요!",
+        "교환하기 »",
+        "생존자 도감",
+        "현재 근거지에 특수 사건이 없습니다."
+      ],
+      "catalogUnverified": [
+        "좌하단 뒤로. 생존자도감 탭 버튼은 보이나 탭 내용은 미확인.",
+        "선물·도움말·평가 좋아요 동작은 미확인",
+        "화면 전환 중 친밀도 막대가 일시 중첩되므로 고정 UI와 분리",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Page_TSV_TS15",
+      "roleTable": [
+        {
+          "name": "BG_TSV_TS15_Page",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Page_TSV_TS15",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS15_Header",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            112
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Page_TSV_TS15",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS15_Header",
+          "kind": "frame3",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            78
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Group_TSV_TS15_Header",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS15_Title",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            130,
+            16,
+            210,
+            42
+          ],
+          "text": "근거지 편지함",
+          "fontPx": 30,
+          "parent": "Group_TSV_TS15_Header",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS15_Help",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            316,
+            14,
+            40,
+            40
+          ],
+          "text": "?",
+          "fontPx": 26,
+          "parent": "Group_TSV_TS15_Header",
+          "note": null
+        },
+        {
+          "name": "Img_TSV_TS15_MailSlot",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            82,
+            90,
+            342,
+            24
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Group_TSV_TS15_Header",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS15_Morale",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            18,
+            122,
+            468,
+            228
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Page_TSV_TS15",
+          "note": "설명/선물/식사51.00수면50.00기분51.00;막대352×20동일크기"
+        },
+        {
+          "name": "Txt_TSV_TS15_Status",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            46,
+            138,
+            360,
+            50
+          ],
+          "text": "생존자들에게 약간의 불만이 있지만, 그래도 여전히 당신을 믿고 있습니다!",
+          "fontPx": 18,
+          "parent": "Group_TSV_TS15_Morale",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS15_Gift",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            424,
+            136,
+            40,
+            40
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Group_TSV_TS15_Morale",
+          "note": "선물아이콘;결과미관측"
+        },
+        {
+          "name": "Scroll_TSV_TS15_Messages",
+          "kind": "scroll",
+          "boundsAbsLogicalPx": [
+            18,
+            354,
+            468,
+            444
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Page_TSV_TS15",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS15_EventTitle",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            28,
+            358,
+            300,
+            28
+          ],
+          "text": "생존자 사건",
+          "fontPx": 18,
+          "parent": "Scroll_TSV_TS15_Messages",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS15_Event01",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            26,
+            386,
+            452,
+            96
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Scroll_TSV_TS15_Messages",
+          "note": "미아초상64×64/이름;본문 도저히 민가-1의 변기을(를) 참을 수가 없어!;화난얼굴2개아이콘; 건설하기 »와망치버튼별도"
+        },
+        {
+          "name": "Txt_TSV_TS15_ReviewTitle",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            28,
+            494,
+            300,
+            28
+          ],
+          "text": "생존자 평가",
+          "fontPx": 18,
+          "parent": "Scroll_TSV_TS15_Messages",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS15_Review01",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            26,
+            522,
+            452,
+            92
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Scroll_TSV_TS15_Messages",
+          "note": "미아;웃는아이콘+이곳 사람들은 모두 친절해서 여기가 마음에 들어.;우측좋아요40×64"
+        },
+        {
+          "name": "Group_TSV_TS15_Review02",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            26,
+            624,
+            452,
+            92
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Scroll_TSV_TS15_Messages",
+          "note": "미아;그때 여기로 오게 되어서 정말 다행이야.+웃는아이콘;좋아요"
+        },
+        {
+          "name": "Group_TSV_TS15_Review03",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            26,
+            726,
+            452,
+            92
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Scroll_TSV_TS15_Messages",
+          "note": "같은평가본문반복원본에실재;하단clip"
+        },
+        {
+          "name": "Group_TSV_TS15_Footer",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            0,
+            814,
+            504,
+            80
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Page_TSV_TS15",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS15_Back",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            0,
+            818,
+            74,
+            64
+          ],
+          "text": "←",
+          "fontPx": 36,
+          "parent": "Group_TSV_TS15_Footer",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS15_MailboxTab",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            84,
+            818,
+            170,
+            64
+          ],
+          "text": "근거지 편지함",
+          "fontPx": 25,
+          "parent": "Group_TSV_TS15_Footer",
+          "note": "selected"
+        },
+        {
+          "name": "Btn_TSV_TS15_AlbumTab",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            260,
+            818,
+            238,
+            64
+          ],
+          "text": "생존자 도감",
+          "fontPx": 27,
+          "parent": "Group_TSV_TS15_Footer",
+          "note": null
+        }
+      ],
+      "observations": [
+        "대표는미아변기건설요청/미아평가3행.제이슨교환사건/사건없음은다른state.",
+        "원문 변기을(를) 조사화면그대로보존. 관계진행1/3막대는일시연출로분리."
+      ],
+      "newArtwork": [
+        "미아초상",
+        "선물/식사/수면/기분/감정/망치/좋아요",
+        "우편투입구",
+        "기본3/9프레임"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "생존자도감",
+          "target": "TS30",
+          "basis": "sequence-observed93→94s",
+          "proposal": "실제탭으로전환,fromScreenId=TS15",
+          "payload": {}
+        },
+        {
+          "action": "제이슨 교환하기 »",
+          "target": "TS16",
+          "basis": "catalog state; exact entry unverified",
+          "proposal": "제이슨사건state일때만보이는action으로연결.미아건설하기오연결금지",
+          "payload": {}
+        },
+        {
+          "action": "미아 건설하기 »",
+          "target": null,
+          "basis": "destination unspecified",
+          "proposal": "대상변기/민가정확연결근거없음",
+          "payload": {}
+        },
+        {
+          "action": "뒤로",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "실제호출부TS13등보존",
+          "payload": {}
+        },
+        {
+          "action": "선물/도움말/좋아요",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "미관측보상/도움말생성금지",
+          "payload": {}
+        }
+      ],
+      "fixture": {
+        "food": "51.00",
+        "sleep": "50.00",
+        "mood": "51.00",
+        "eventVariant": "mia-toilet-request"
+      },
+      "scrollProposal": "헤더/모랄요약/하단탭고정,사건+평가목록세로"
+    },
+    "TS16": {
+      "id": "TS16",
+      "label": "주민 자원 교환",
+      "catalogKind": "modal",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS16-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS16_01_TSV02_0450.00s.jpg"
+        },
+        {
+          "id": "TS16-R02",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS16_02_TSV03_0087.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [
+        {
+          "action": "교환",
+          "targetId": "TS28",
+          "sourceId": "TSV03",
+          "evidence": "88초 교환 부근 커서 →89초 영지 자원 차감 →90초 친밀도 보상",
+          "confidence": "sequence_observed",
+          "eventLogVerified": false
+        }
+      ],
+      "catalogTexts": [
+        "제이슨",
+        "저기, 사장님! 공구를 수리할 나무가 부족한데 모아둔 토마토와 바꿀 수 있을까?",
+        "획득",
+        "5분 x1",
+        "x10",
+        "다음에",
+        "1000 교환",
+        "빈 곳을 탭하여 닫기"
+      ],
+      "catalogUnverified": [
+        "X/다음에/빈곳닫기 표시. 451초 월드 복귀, 다음에 버튼 근처 커서.",
+        "교환 비용·보상 수량은 예시 영상 관측값이며 설정 승인이 아님",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS16",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS16",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Scrim_TSV",
+          "kind": "panel",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS16",
+          "note": "native dim/blur;그림과분리"
+        },
+        {
+          "name": "Panel_TSV_TS16_Trade",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            50,
+            214,
+            414,
+            516
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS16",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS16_Trade",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            50,
+            374,
+            414,
+            356
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS16_Trade",
+          "note": null
+        },
+        {
+          "name": "Img_TSV_TS16_Jason",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            60,
+            144,
+            392,
+            246
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS16_Trade",
+          "note": "새반신/주황상단배너;이름별도"
+        },
+        {
+          "name": "Txt_TSV_TS16_Name",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            174,
+            334,
+            160,
+            40
+          ],
+          "text": "제이슨",
+          "fontPx": 30,
+          "parent": "Panel_TSV_TS16_Trade",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS16_Close",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            428,
+            196,
+            40,
+            40
+          ],
+          "text": "×",
+          "fontPx": 32,
+          "parent": "Panel_TSV_TS16_Trade",
+          "note": " 공통Close40×40적용;원본외곽근사44와약간차이."
+        },
+        {
+          "name": "Txt_TSV_TS16_Request",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            90,
+            410,
+            334,
+            80
+          ],
+          "text": "저기, 사장님! 공구를 수리할 나무가 부족한데 모아둔 토마토와 바꿀 수 있을까?",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS16_Trade",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS16_Rewards",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            74,
+            500,
+            358,
+            118
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS16_Trade",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS16_Rewards",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            74,
+            500,
+            358,
+            118
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Group_TSV_TS16_Rewards",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS16_RewardsTitle",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            92,
+            504,
+            220,
+            32
+          ],
+          "text": "획득",
+          "fontPx": 24,
+          "parent": "Group_TSV_TS16_Rewards",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS16_Items",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            196,
+            546,
+            126,
+            62
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Group_TSV_TS16_Rewards",
+          "note": "5분가속×1/물자상자×10;각60×60,토마토단독아이콘아님"
+        },
+        {
+          "name": "Btn_TSV_TS16_Later",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            84,
+            648,
+            164,
+            64
+          ],
+          "text": "다음에",
+          "fontPx": 28,
+          "parent": "Panel_TSV_TS16_Trade",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS16_Exchange",
+          "kind": "button",
+          "boundsAbsLogicalPx": [
+            264,
+            648,
+            164,
+            64
+          ],
+          "text": "1000\n교환",
+          "fontPx": 22,
+          "parent": "Panel_TSV_TS16_Trade",
+          "note": "목재아이콘child별도"
+        },
+        {
+          "name": "Txt_TSV_DismissHint",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            120,
+            856,
+            264,
+            30
+          ],
+          "text": "빈 곳을 탭하여 닫기",
+          "fontPx": 18,
+          "parent": "Modal_TSV_TS16",
+          "note": null
+        }
+      ],
+      "observations": [
+        "R01/R02본문/보상/비용동일.목재1000/5분가속1/물자상자10.",
+        "catalog앞부분의교환미관측옛문장과뒤TSV03연결이충돌. sequence-observed만연결근거.",
+        "실재화차감/관계계산없음,fixture로한정."
+      ],
+      "newArtwork": [
+        "제이슨반신",
+        "주황배너/링고리",
+        "5분가속/물자상자/목재아이콘"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "교환",
+          "target": "TS28",
+          "basis": "sequence-observed88→90s",
+          "proposal": "survivorId/tradeFixture/returnToScreenId전달;실재화계산없음",
+          "payload": {
+            "survivorId": "jason",
+            "costWood": 1000,
+            "rewardSpeedup5m": 1,
+            "rewardSupplyBox": 10
+          }
+        },
+        {
+          "action": "다음에/X/빈곳",
+          "target": null,
+          "basis": "visible; later-near cursor world return",
+          "proposal": "호출부dismiss;3수단개별실행검수필요",
+          "payload": {}
+        }
+      ],
+      "fixture": {},
+      "scrollProposal": "fixed; no whole-screen scroll"
+    },
+    "TS17": {
+      "id": "TS17",
+      "label": "챕터 완료 보상",
+      "catalogKind": "overlay",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS17-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS17_01_TSV04_0004.40s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [
+        {
+          "action": "다음 챕터 연출",
+          "targetId": "TS18",
+          "sourceId": "TSV02",
+          "timeRangeSeconds": [
+            174,
+            176
+          ],
+          "evidence": "보상 뒤 소개 카드. 입력 여부 미확인",
+          "confidence": "sequence_observed",
+          "eventLogVerified": false
+        }
+      ],
+      "catalogTexts": [
+        "축하합니다!",
+        "챕터 미션 완료를 축하드립니다! 획득 보상:",
+        "미션 완료",
+        "1K EXP x5",
+        "1분 x5",
+        "보석 x200",
+        "목재 x720",
+        "식량 x400",
+        "화면을 터치하여 계속하세요."
+      ],
+      "catalogUnverified": [
+        "연출 뒤 176초 새 챕터 배너로 전환. 정확 닫기 동작 미확인.",
+        "보상 수량은 대표 프레임에서 읽은 관측값",
+        "TSV03 친밀도 보상과 축하 헤더/계속 안내 재사용 가능; 몸체는 관계변경 없는 보상그리드",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS17",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS17_Continue",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Scrim_TSV",
+          "kind": "panel",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS17_Continue",
+          "note": "native dim/blur;그림과분리"
+        },
+        {
+          "name": "Img_TSV_TS17_Rainbow",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            36,
+            84,
+            432,
+            170
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS17_Continue",
+          "note": "글자없는무지개/별/색종이새그림"
+        },
+        {
+          "name": "Txt_TSV_TS17_Congratulations",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            58,
+            124,
+            392,
+            90
+          ],
+          "text": "축하합니다!",
+          "fontPx": 60,
+          "parent": "Btn_TSV_TS17_Continue",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS17_Subtitle",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            74,
+            226,
+            364,
+            32
+          ],
+          "text": "챕터 미션 완료를 축하드립니다! 획득 보상:",
+          "fontPx": 20,
+          "parent": "Btn_TSV_TS17_Continue",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS17_Complete",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            174,
+            260,
+            168,
+            30
+          ],
+          "text": "미션 완료",
+          "fontPx": 24,
+          "parent": "Btn_TSV_TS17_Continue",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS17_Rewards",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            40,
+            306,
+            428,
+            204
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Btn_TSV_TS17_Continue",
+          "note": "4열첫행+1둘째행;각92×92간20"
+        },
+        {
+          "name": "Group_TSV_TS17_Exp",
+          "kind": "reward",
+          "boundsAbsLogicalPx": [
+            40,
+            306,
+            92,
+            92
+          ],
+          "text": "1K EXP\nx5",
+          "fontPx": 18,
+          "parent": "Group_TSV_TS17_Rewards",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS17_Speedup",
+          "kind": "reward",
+          "boundsAbsLogicalPx": [
+            152,
+            306,
+            92,
+            92
+          ],
+          "text": "1분\nx5",
+          "fontPx": 18,
+          "parent": "Group_TSV_TS17_Rewards",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS17_Gem",
+          "kind": "reward",
+          "boundsAbsLogicalPx": [
+            264,
+            306,
+            92,
+            92
+          ],
+          "text": "x200",
+          "fontPx": 20,
+          "parent": "Group_TSV_TS17_Rewards",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS17_Wood",
+          "kind": "reward",
+          "boundsAbsLogicalPx": [
+            376,
+            306,
+            92,
+            92
+          ],
+          "text": "x720",
+          "fontPx": 20,
+          "parent": "Group_TSV_TS17_Rewards",
+          "note": null
+        },
+        {
+          "name": "Group_TSV_TS17_Food",
+          "kind": "reward",
+          "boundsAbsLogicalPx": [
+            40,
+            418,
+            92,
+            92
+          ],
+          "text": "x400",
+          "fontPx": 20,
+          "parent": "Group_TSV_TS17_Rewards",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS17_Hint",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            130,
+            826,
+            272,
+            44
+          ],
+          "text": "화면을 터치하여 계속하세요.",
+          "fontPx": 20,
+          "parent": "Btn_TSV_TS17_Continue",
+          "note": null
+        },
+        {
+          "name": "Btn_TSV_TS17_Continue",
+          "kind": "transparent-button",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS17",
+          "note": "전면투명button부모. 배경/딤/판/문구/보상은이부모의자식으로입력전달. 자기전체직사각형이닫기hit영역."
+        }
+      ],
+      "observations": [
+        "TSV04챕터3보상:1K EXP×5/1분×5/보석×200/목재×720/식량×400직접확인.",
+        "TS09-R01챕터2목재600과혼합금지.",
+        "배경은TS09미션창강한블러.실제모달배경유지+nativeblur제안;전체JPG금지."
+      ],
+      "newArtwork": [
+        "무지개/별/색종이(글자없음)",
+        "EXP/가속/보석/목재/식량",
+        "기본9보상카드"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "화면터치",
+          "target": "TS18",
+          "basis": "TSV02reward→intro sequence; input unverified",
+          "proposal": "보이는계속입력으로소개를여는제작예시.자동타이머추가금지/returnToTS03보존",
+          "payload": {
+            "chapterId": 3
+          }
+        }
+      ],
+      "fixture": {
+        "chapterId": 3,
+        "rewards": {
+          "exp1k": 5,
+          "minute1": 5,
+          "gem": 200,
+          "wood": 720,
+          "food": 400
+        }
+      },
+      "scrollProposal": "fixed; no whole-screen scroll"
+    },
+    "TS18": {
+      "id": "TS18",
+      "label": "신규 챕터 소개 카드",
+      "catalogKind": "overlay",
+      "nativeKind": "modal",
+      "referencesViewed": [
+        {
+          "id": "TS18-R01",
+          "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/references/TS18_01_TSV02_0176.00s.jpg"
+        }
+      ],
+      "sourceObservedLinks": [],
+      "catalogTexts": [
+        "3 챕터",
+        "용사 집결"
+      ],
+      "catalogUnverified": [
+        "자동으로 월드 구조지점 카메라로 전환되는 순서. 입력 필요 여부 미확인.",
+        "원본 서체명·정확한 폰트 크기·9slice 경계·입력 hitbox·원본 엔진 계층 미확인.",
+        "전체 원화/전체 부품 조립/상태·연결 적용/반응형·키보드 실검수는 미완료. r63 부분조립은 actualAssembly와 targetActual로 구분."
+      ],
+      "rootName": "Modal_TSV_TS18",
+      "roleTable": [
+        {
+          "name": "Img_TSV_World",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS18",
+          "note": "기존native새월드원화재사용가능;참조JPG금지"
+        },
+        {
+          "name": "Scrim_TSV",
+          "kind": "panel",
+          "boundsAbsLogicalPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS18",
+          "note": "native dim/blur;그림과분리"
+        },
+        {
+          "name": "Panel_TSV_TS18_Intro",
+          "kind": "group",
+          "boundsAbsLogicalPx": [
+            16,
+            268,
+            472,
+            216
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Modal_TSV_TS18",
+          "note": null
+        },
+        {
+          "name": "BG_TSV_TS18_Intro",
+          "kind": "frame9",
+          "boundsAbsLogicalPx": [
+            16,
+            268,
+            472,
+            216
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS18_Intro",
+          "note": null
+        },
+        {
+          "name": "Img_TSV_TS18_Banner",
+          "kind": "image",
+          "boundsAbsLogicalPx": [
+            22,
+            276,
+            460,
+            172
+          ],
+          "text": null,
+          "fontPx": null,
+          "parent": "Panel_TSV_TS18_Intro",
+          "note": "TS09챕터3새배너공유"
+        },
+        {
+          "name": "Txt_TSV_TS18_Number",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            30,
+            424,
+            48,
+            44
+          ],
+          "text": "3",
+          "fontPx": 36,
+          "parent": "Panel_TSV_TS18_Intro",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS18_Chapter",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            24,
+            456,
+            54,
+            24
+          ],
+          "text": "챕터",
+          "fontPx": 20,
+          "parent": "Panel_TSV_TS18_Intro",
+          "note": null
+        },
+        {
+          "name": "Txt_TSV_TS18_Title",
+          "kind": "text",
+          "boundsAbsLogicalPx": [
+            170,
+            450,
+            240,
+            32
+          ],
+          "text": "용사 집결",
+          "fontPx": 25,
+          "parent": "Panel_TSV_TS18_Intro",
+          "note": null
+        }
+      ],
+      "observations": [
+        "버튼/닫기X/터치안내없음.임시가짜닫기추가금지.",
+        "175→176초아트뒤숫자/제목등장.자동복귀처럼보이나시간/입력정책미확인.",
+        "목록단독보기권장;닫기없는연결로실행흐름에가두지않음."
+      ],
+      "newArtwork": [
+        "TS09챕터3배너공유",
+        "기본9흰카드"
+      ],
+      "connectionCandidates": [
+        {
+          "action": "목록단독보기",
+          "target": null,
+          "basis": "source controls absent",
+          "proposal": "전환없는시각샘플.실행도구수준복귀만,가짜게임닫기금지",
+          "payload": {}
+        },
+        {
+          "action": "월드복귀",
+          "target": "TS03",
+          "basis": "automatic-looking sequence; exact input unverified",
+          "proposal": "근거없는자동복귀연결미검수로기록",
+          "payload": {}
+        }
+      ],
+      "fixture": {
+        "chapter": 3,
+        "title": "용사 집결"
+      },
+      "scrollProposal": "fixed; no whole-screen scroll"
+    }
+  },
+  "commonContract": {
+    "coordinateRule": "Every x,y,w,h is approximate absolute logical px on504×894. Native editor local coords: childAbsXY minus parentAbsXY; if native percent required divide local by parentWH×100. Not actual source RectTransform/hitbox.",
+    "names": "Page/Modal_TSV_TSxx root; Panel/Group/Scroll/Btn/BG/Img/Txt/Input_TSV_TSxx_Role.",
+    "commonSizes": {
+      "Back": [
+        74,
+        64
+      ],
+      "PrimaryCTA": [
+        336,
+        64
+      ],
+      "PairedAction": [
+        164,
+        64
+      ],
+      "SmallClaim": [
+        96,
+        48
+      ],
+      "Close": [
+        40,
+        40
+      ],
+      "Reward": [
+        72,
+        72
+      ],
+      "LargeReward": [
+        92,
+        92
+      ],
+      "SurvivorPortrait": [
+        132,
+        146
+      ]
+    },
+    "sizeEvidence": "r63 actual Back74×64/Recruit336×64/Header504×108. Proposed common CTA336×64 follows that; compact modal/source-specific exceptions noted in roles.",
+    "fontProposal": {
+      "family": "existing native Korean sans; source exact family unknown",
+      "header": 28,
+      "body": 22,
+      "denseBody": 20,
+      "small": 18,
+      "CTA": 28,
+      "hint": 18,
+      "largeLevel": 52
+    },
+    "buttonHierarchy": "Btn container > BG basic3/9frame + Img icon(optional) + Txt label. Parts independently editable; child image/text receives no own action and forwards input to parent. Buttons may tint pressed; never bake labels into image.",
+    "rewardHierarchy": "Group > BG basic9frame + Img icon + Txt unit(optional top) + Txt count(bottom-right). Same size tokens within same role; large celebratory cards92×92 versus compact72×72.",
+    "frameRule": "Use default basic 3/9frame. 3 for horizontal header/pill with preserved endcaps; 9 for panels/cards. No invented exact slice bounds. New art remains separate.",
+    "artRule": "references JPG are analysis-only. No full screenshot as UI art or crop-derived product assets. New character/world/banner/icon art; native text separately.",
+    "inputRule": "TS12 nickname native editable input. No fake text pretending to input.",
+    "entryRule": "Use existing visible entrances. Missing sample entrance => UI Studio list standalone and entry unverified. No temporary fake game buttons. Dismiss returns actual caller/backstack.",
+    "stateRule": "Use observed selected/gray variants; gray alone does not prove disabled. Video values are fixtures, not approved game balance. No account/save/real time/economy logic inferred.",
+    "excludedNonGame": "OS GooglePlay notification / Steam chat / cursor / pink pointer / editor tooltip/outline excluded.",
+    "verification": "This worker viewed assigned references and read JSON only; no browser, native assembly/save, generated art, real input, responsive or screenshot verification."
+  },
+  "scope": {
+    "familyCount": 15,
+    "referenceImageCount": 19,
+    "roleCount": 222,
+    "excluded": [
+      "TS03",
+      "TS05",
+      "TS07"
+    ]
+  },
+  "recommendedAssemblyOrder": [
+    "TS12",
+    "TS14",
+    "TS16",
+    "TS09",
+    "TS17",
+    "TS18",
+    "TS13",
+    "TS15",
+    "TS11",
+    "TS10",
+    "TS04",
+    "TS06",
+    "TS08",
+    "TS01",
+    "TS02"
+  ],
+  "verificationRequired": [
+    "Native화면존재/저장/reopen과분리텍스트/이미지/입력검수는본체담당.",
+    "TS12키보드입력/성별상태/버튼가림. TS09/13/15스크롤/고정footer/clip.",
+    "실제보이는입구와backstack/TS09→17chapterId/TS16→28payload/TS15→30검수.",
+    "TS18닫기없는상태를강제흐름에끼워막히게하지않음.",
+    "없는수치/대사/링크결과/실경제/자동타이머창작금지.",
+    "원본JPG자산금지/같은역할크기/기본3·9frame/입력부모전달."
+  ],
+  "specValidation": {
+    "jsonParse": true,
+    "familyCount": 15,
+    "referenceImagesExist": 19,
+    "uniqueRoleNamesWithinFamily": true,
+    "allParentsResolveWithinFamily": true,
+    "positiveBounds": true,
+    "noBrowserOrNativeUIValidation": true,
+    "fullScreenTouchParentsResolved": true
+  }
+}

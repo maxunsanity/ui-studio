@@ -1,0 +1,11 @@
+import {writeFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+import {readDesign,get} from '../20261124-defense-simple/shared.mjs';
+const design=readDesign('kpop-defense-ui');
+const failure=design.screens.find(s=>s.id==='defense-failed');
+const caption=get(failure,'caption.main');
+assert.equal(caption.text,'몬스들이 끝까지 방어했어요');
+caption.name=caption.text='방어에 실패해 연습실이 파손됐어요';
+caption.fontSize=16;
+caption.typography.lineHeight=19;
+for(const [file,value] of [['defense.json',design],['defense-assets.json',{}]])writeFileSync(new URL(file,import.meta.url),JSON.stringify(value));

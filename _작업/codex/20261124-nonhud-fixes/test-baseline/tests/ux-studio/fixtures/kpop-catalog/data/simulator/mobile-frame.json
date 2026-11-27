@@ -1,0 +1,272 @@
+{
+  "version": 1,
+  "presentationOnly": true,
+  "valueStatus": "시안 예시 · 재화와 게임 기능을 지급하거나 실행하지 않습니다.",
+  "layout": {
+    "width": 390,
+    "height": 844,
+    "maxWidth": 420,
+    "viewportGap": 8,
+    "review": {
+      "compact": true,
+      "fillerHeight": 240,
+      "actionsHeight": 96,
+      "hideInactivePlaceholders": true,
+      "hideEmptyInformation": true
+    },
+    "eventViewports": {
+      "prize": {
+        "width": 366,
+        "height": 518,
+        "source": "src/port/kings/event/minigames/prizeDropHost.ts:PRIZE_BOARD_W/PRIZE_BOARD_H"
+      }
+    },
+    "bottomMenu": {
+      "columns": 30,
+      "rowHeight": 46,
+      "rowGap": 3,
+      "paddingTop": 4,
+      "paddingBottom": 2,
+      "borderWidth": 1
+    }
+  },
+  "copy": {
+    "frame": "게임 화면",
+    "profile": "프로필",
+    "accountName": "테스트 계정",
+    "moduleLabel": "와이어프레임 · 제안(검수 대기)",
+    "walletSample": "시안 재화",
+    "walletCurrent": "현재 재화",
+    "walletPending": "재화 연결 대기",
+    "sampleValue": "시안 예시",
+    "pendingValue": "연결 대기",
+    "unavailable": "—",
+    "preparing": "준비 중",
+    "menu": "전체 메뉴",
+    "events": "이벤트",
+    "bottomMenu": "게임 메뉴",
+    "currentCity": "지금 도시",
+    "location": "도시 정보 대기",
+    "locationDetail": "현재 콘텐츠를 확인합니다.",
+    "emptyContent": "콘텐츠를 준비하고 있어요.",
+    "controlsHint": "오른쪽 설정에서 실행",
+    "resourcePreview": "리소스를 선택해 주세요.",
+    "record": "기록장",
+    "news": "소식",
+    "entry": "입장",
+    "scenes": {
+      "map": "맵",
+      "filler": "도착 필러",
+      "content": "콘텐츠",
+      "reward": "보상"
+    },
+    "expand": "크게 보기",
+    "collapse": "원래 크기",
+    "popup": "팝업 보기",
+    "collapsePopup": "팝업 닫기",
+    "resizePresentation": "연출 영역 너비",
+    "gauges": "공통 게이지",
+    "information": "팀·성장 정보",
+    "closeInformation": "닫기",
+    "informationPending": "연결된 팀 정보를 확인하는 공간입니다.",
+    "fillerTitle": "도착 · 필러",
+    "fillerEmpty": "도착 안내와 대사, 결과가 이곳에 표시됩니다.",
+    "enterPowerLevel": "Lv {value}",
+    "enterPowerProgress": "{value}/{max}"
+  },
+  "currencies": [
+    {
+      "key": "dice",
+      "label": "주사위",
+      "icon": "dice",
+      "fallback": 45
+    },
+    {
+      "key": "gems",
+      "label": "보석",
+      "icon": "gem",
+      "fallback": 1000
+    },
+    {
+      "key": "money",
+      "label": "돈",
+      "icon": "coin",
+      "fallback": 3754
+    }
+  ],
+  "events": [
+    {
+      "id": "event",
+      "label": "특가",
+      "icon": "spark",
+      "available": false
+    },
+    {
+      "id": "festival",
+      "label": "3일 마일스톤",
+      "icon": "flag",
+      "available": false
+    },
+    {
+      "id": "season",
+      "label": "시즌 자리",
+      "icon": "trophy",
+      "available": false
+    }
+  ],
+  "menus": [
+    {
+      "id": "cardbook",
+      "label": "카드북",
+      "icon": "cards",
+      "available": true,
+      "moduleId": "simulator_module_cardbook",
+      "row": 1,
+      "columnSpan": 5
+    },
+    {
+      "id": "mons",
+      "label": "몬스",
+      "icon": "spark",
+      "available": true,
+      "moduleId": "simulator_module_mons_inventory",
+      "row": 1,
+      "columnSpan": 5
+    },
+    {
+      "id": "shop",
+      "label": "상점",
+      "icon": "shop",
+      "available": true,
+      "row": 1,
+      "columnSpan": 5,
+      "moduleId": "simulator_module_shop"
+    },
+    {
+      "id": "adventure",
+      "label": "모험",
+      "icon": "compass",
+      "available": true,
+      "moduleId": "simulator_module_journey",
+      "row": 1,
+      "columnSpan": 5
+    },
+    {
+      "id": "build",
+      "label": "건설",
+      "icon": "building",
+      "available": true,
+      "moduleId": "simulator_module_building",
+      "row": 1,
+      "columnSpan": 5
+    },
+    {
+      "id": "mission",
+      "label": "미션",
+      "icon": "check",
+      "available": true,
+      "moduleId": "simulator_module_mission",
+      "row": 1,
+      "columnSpan": 5
+    },
+    {
+      "id": "crew",
+      "label": "크루",
+      "icon": "spark",
+      "available": true,
+      "moduleId": "simulator_module_music_crew",
+      "row": 2,
+      "columnSpan": 5
+    },
+    {
+      "id": "festival",
+      "label": "주간",
+      "icon": "trophy",
+      "available": true,
+      "moduleId": "simulator_module_music_festival",
+      "moduleIds": [
+        "simulator_module_music_season",
+        "simulator_module_music_activity",
+        "simulator_module_music_app",
+        "simulator_module_festival_score_lab",
+        "simulator_module_festival_vote_lab"
+      ],
+      "row": 2,
+      "columnSpan": 5
+    },
+    {
+      "id": "worldFestival",
+      "label": "월드",
+      "icon": "trophy",
+      "available": true,
+      "moduleId": "simulator_module_music_world_festival",
+      "row": 2,
+      "columnSpan": 5
+    },
+    {
+      "id": "album",
+      "label": "앨범",
+      "icon": "cards",
+      "available": true,
+      "moduleId": "simulator_module_album_release",
+      "moduleIds": [
+        "simulator_module_music_production",
+        "simulator_module_music_city"
+      ],
+      "row": 2,
+      "columnSpan": 5
+    },
+    {
+      "id": "chart",
+      "label": "차트",
+      "icon": "flag",
+      "available": true,
+      "moduleId": "simulator_module_music_chart",
+      "row": 2,
+      "columnSpan": 5
+    },
+    {
+      "id": "media",
+      "label": "음악 앱",
+      "icon": "menu",
+      "available": true,
+      "moduleId": "simulator_module_music_app",
+      "moduleIds": [
+        "simulator_module_stage_ui_preview",
+        "simulator_module_shorts_ui_preview",
+        "simulator_module_music_ui_preview"
+      ],
+      "row": 2,
+      "columnSpan": 5
+    }
+  ],
+  "activeMenu": "adventure",
+  "gauges": [
+    {
+      "key": "badEnergy",
+      "label": "나쁜 기운"
+    },
+    {
+      "key": "fans",
+      "label": "팬"
+    },
+    {
+      "key": "enterPower",
+      "label": "엔터파워"
+    }
+  ],
+  "information": [
+    {
+      "key": "team",
+      "label": "팀 정보"
+    },
+    {
+      "key": "members",
+      "label": "멤버"
+    },
+    {
+      "key": "abilities",
+      "label": "능력"
+    }
+  ]
+}

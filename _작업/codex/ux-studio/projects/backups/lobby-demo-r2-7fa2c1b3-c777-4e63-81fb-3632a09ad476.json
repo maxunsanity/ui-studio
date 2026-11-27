@@ -1,0 +1,707 @@
+{
+  "schemaVersion": 1,
+  "projectId": "lobby-demo",
+  "revision": 2,
+  "name": "로비·상점 UX 검토",
+  "entryScreen": "lobby",
+  "feedbackScreen": "notice",
+  "screens": [
+    {
+      "id": "lobby",
+      "name": "로비",
+      "kind": "page",
+      "purpose": "정보·보드·필러·주요 진입 UI의 배치를 검토합니다. 확정 게임 화면이 아닌 시험용 구성입니다.",
+      "elements": [
+        {
+          "id": "lobby-title",
+          "name": "로비 이름",
+          "kind": "text",
+          "x": 5,
+          "y": 3,
+          "w": 90,
+          "h": 5,
+          "text": "로비 · UX 검토 샘플",
+          "purpose": "",
+          "info": ""
+        },
+        {
+          "id": "lobby-hud",
+          "name": "공통 정보",
+          "kind": "panel",
+          "x": 5,
+          "y": 10,
+          "w": 90,
+          "h": 9,
+          "text": "재화 · 팀 · 진행 정보",
+          "purpose": "표시할 정보와 우선순위를 정의합니다.",
+          "info": ""
+        },
+        {
+          "id": "lobby-board",
+          "name": "보드 영역",
+          "kind": "panel",
+          "x": 5,
+          "y": 22,
+          "w": 90,
+          "h": 35,
+          "text": "보드 / 게임 진행 영역",
+          "purpose": "확정 비율이 아닌 편집용 샘플 영역입니다.",
+          "info": ""
+        },
+        {
+          "id": "lobby-filler",
+          "name": "필러 연출 공간",
+          "kind": "panel",
+          "x": 5,
+          "y": 60,
+          "w": 90,
+          "h": 20,
+          "text": "필러 · 대사 / 인물 / 상황 안내",
+          "purpose": "짧은 연출과 설명이 들어가는 영역입니다.",
+          "info": ""
+        },
+        {
+          "id": "lobby-shop",
+          "name": "상점 진입",
+          "kind": "button",
+          "x": 6,
+          "y": 84,
+          "w": 59,
+          "h": 8,
+          "text": "상점 열기",
+          "purpose": "로비에서 상점 목록을 엽니다. 로비 복귀는 상점의 이전 버튼으로 시험합니다.",
+          "info": ""
+        },
+        {
+          "id": "lobby-help",
+          "name": "도움말",
+          "kind": "button",
+          "x": 68,
+          "y": 84,
+          "w": 27,
+          "h": 8,
+          "text": "도움말",
+          "purpose": "",
+          "info": ""
+        }
+      ]
+    },
+    {
+      "id": "shop",
+      "name": "상점 목록",
+      "kind": "page",
+      "purpose": "목록 선택·필터·상품 상세·시험 결과와 복귀를 검토합니다.",
+      "elements": [
+        {
+          "id": "shop-title",
+          "name": "상점 제목",
+          "kind": "text",
+          "x": 5,
+          "y": 3,
+          "w": 90,
+          "h": 5,
+          "text": "상점 · 시험 데이터",
+          "purpose": "",
+          "info": ""
+        },
+        {
+          "id": "shop-back",
+          "name": "로비로",
+          "kind": "button",
+          "x": 5,
+          "y": 10,
+          "w": 26,
+          "h": 6,
+          "text": "← 로비",
+          "purpose": "",
+          "info": ""
+        },
+        {
+          "id": "shop-filter-all",
+          "name": "전체 필터",
+          "kind": "button",
+          "x": 35,
+          "y": 10,
+          "w": 28,
+          "h": 6,
+          "text": "전체",
+          "purpose": "",
+          "info": ""
+        },
+        {
+          "id": "shop-filter-material",
+          "name": "재료 필터",
+          "kind": "button",
+          "x": 67,
+          "y": 10,
+          "w": 28,
+          "h": 6,
+          "text": "재료",
+          "purpose": "",
+          "info": ""
+        },
+        {
+          "id": "shop-list",
+          "name": "상품 목록",
+          "kind": "list",
+          "x": 5,
+          "y": 20,
+          "w": 90,
+          "h": 65,
+          "text": "",
+          "purpose": "스크롤 위치를 닫기 후 유지합니다.",
+          "info": ""
+        },
+        {
+          "id": "product-1",
+          "name": "상품 1",
+          "kind": "button",
+          "x": 2,
+          "y": 2,
+          "w": 96,
+          "h": 14,
+          "text": "샘플 카드 1 · 100 (시험값)",
+          "purpose": "",
+          "info": "",
+          "itemId": "item-1",
+          "parentId": "shop-list"
+        },
+        {
+          "id": "product-2",
+          "name": "상품 2",
+          "kind": "button",
+          "x": 2,
+          "y": 19,
+          "w": 96,
+          "h": 14,
+          "text": "샘플 재료 2 · 200 (시험값)",
+          "purpose": "",
+          "info": "",
+          "itemId": "item-2",
+          "parentId": "shop-list"
+        },
+        {
+          "id": "product-3",
+          "name": "상품 3",
+          "kind": "button",
+          "x": 2,
+          "y": 36,
+          "w": 96,
+          "h": 14,
+          "text": "샘플 카드 3 · 300 (시험값)",
+          "purpose": "",
+          "info": "",
+          "itemId": "item-3",
+          "parentId": "shop-list"
+        },
+        {
+          "id": "product-4",
+          "name": "상품 4",
+          "kind": "button",
+          "x": 2,
+          "y": 53,
+          "w": 96,
+          "h": 14,
+          "text": "샘플 재료 4 · 400 (시험값)",
+          "purpose": "",
+          "info": "",
+          "itemId": "item-4",
+          "parentId": "shop-list"
+        },
+        {
+          "id": "product-5",
+          "name": "상품 5",
+          "kind": "button",
+          "x": 2,
+          "y": 70,
+          "w": 96,
+          "h": 14,
+          "text": "샘플 카드 5 · 500 (시험값)",
+          "purpose": "",
+          "info": "",
+          "itemId": "item-5",
+          "parentId": "shop-list"
+        },
+        {
+          "id": "product-6",
+          "name": "상품 6",
+          "kind": "button",
+          "x": 2,
+          "y": 87,
+          "w": 96,
+          "h": 14,
+          "text": "샘플 재료 6 · 600 (시험값)",
+          "purpose": "",
+          "info": "",
+          "itemId": "item-6",
+          "parentId": "shop-list"
+        },
+        {
+          "id": "product-7",
+          "name": "상품 7",
+          "kind": "button",
+          "x": 2,
+          "y": 104,
+          "w": 96,
+          "h": 14,
+          "text": "샘플 카드 7 · 700 (시험값)",
+          "purpose": "",
+          "info": "",
+          "itemId": "item-7",
+          "parentId": "shop-list"
+        },
+        {
+          "id": "product-8",
+          "name": "상품 8",
+          "kind": "button",
+          "x": 2,
+          "y": 121,
+          "w": 96,
+          "h": 14,
+          "text": "샘플 재료 8 · 800 (시험값)",
+          "purpose": "",
+          "info": "",
+          "itemId": "item-8",
+          "parentId": "shop-list"
+        },
+        {
+          "id": "shop-selected",
+          "name": "선택 상품",
+          "kind": "text",
+          "x": 5,
+          "y": 87,
+          "w": 90,
+          "h": 4,
+          "text": "{{selected}}",
+          "purpose": "",
+          "info": ""
+        },
+        {
+          "id": "shop-help",
+          "name": "상점 도움말",
+          "kind": "button",
+          "x": 5,
+          "y": 93,
+          "w": 90,
+          "h": 5,
+          "text": "목록/복귀 동작 도움말",
+          "purpose": "",
+          "info": ""
+        }
+      ]
+    },
+    {
+      "id": "product",
+      "name": "상품 상세 모달",
+      "kind": "modal",
+      "purpose": "선택한 상품 ID를 받아 정보를 표시하고 성공·실패·취소를 시험합니다.",
+      "elements": [
+        {
+          "id": "product-title",
+          "name": "선택 상품 이름",
+          "kind": "text",
+          "x": 8,
+          "y": 6,
+          "w": 84,
+          "h": 13,
+          "text": "{{selected}}",
+          "purpose": "",
+          "info": ""
+        },
+        {
+          "id": "product-info",
+          "name": "상품 정보",
+          "kind": "panel",
+          "x": 8,
+          "y": 25,
+          "w": 84,
+          "h": 37,
+          "text": "시험용 상품 정보\n{{price}}\n실제 결제·게임 장부를 사용하지 않습니다.",
+          "purpose": "",
+          "info": ""
+        },
+        {
+          "id": "product-buy",
+          "name": "시험 실행",
+          "kind": "button",
+          "x": 8,
+          "y": 70,
+          "w": 84,
+          "h": 10,
+          "text": "시험 실행",
+          "purpose": "",
+          "info": ""
+        },
+        {
+          "id": "product-close",
+          "name": "상품 창 닫기",
+          "kind": "button",
+          "x": 8,
+          "y": 84,
+          "w": 84,
+          "h": 9,
+          "text": "취소 · 닫기",
+          "purpose": "",
+          "info": ""
+        }
+      ]
+    },
+    {
+      "id": "help",
+      "name": "공통 도움말",
+      "kind": "modal",
+      "purpose": "현재 조작의 의미와 동작을 안내합니다.",
+      "elements": [
+        {
+          "id": "help-title",
+          "name": "도움말 제목",
+          "kind": "text",
+          "x": 8,
+          "y": 7,
+          "w": 84,
+          "h": 13,
+          "text": "UX 동작 시험 안내",
+          "purpose": "",
+          "info": ""
+        },
+        {
+          "id": "help-body",
+          "name": "도움말 본문",
+          "kind": "panel",
+          "x": 8,
+          "y": 24,
+          "w": 84,
+          "h": 48,
+          "text": "편집 모드: 요소를 선택하고 배치·설명을 수정합니다.\n시험 모드: 버튼을 눌러 연결·조건·복귀를 확인합니다.\n도구의 미리보기 안에서만 동작합니다.",
+          "purpose": "",
+          "info": ""
+        },
+        {
+          "id": "help-close",
+          "name": "도움말 닫기",
+          "kind": "button",
+          "x": 8,
+          "y": 82,
+          "w": 84,
+          "h": 10,
+          "text": "닫기",
+          "purpose": "",
+          "info": ""
+        }
+      ]
+    },
+    {
+      "id": "notice",
+      "name": "결과 안내",
+      "kind": "toast",
+      "purpose": "시험 성공·실패·잔액 부족 결과를 표시합니다.",
+      "elements": [
+        {
+          "id": "notice-message",
+          "name": "안내 내용",
+          "kind": "text",
+          "x": 5,
+          "y": 5,
+          "w": 90,
+          "h": 90,
+          "text": "{{message}}",
+          "purpose": "",
+          "info": "",
+          "intentionalNoAction": true
+        }
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "id": "edge-1",
+      "fromScreen": "lobby",
+      "fromElement": "lobby-shop",
+      "event": "click",
+      "action": "navigate",
+      "condition": "always",
+      "label": "상점 열기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "shop"
+    },
+    {
+      "id": "edge-2",
+      "fromScreen": "lobby",
+      "fromElement": "lobby-help",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "label": "공통 도움말 열기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "help"
+    },
+    {
+      "id": "edge-3",
+      "fromScreen": "shop",
+      "fromElement": "shop-back",
+      "event": "click",
+      "action": "back",
+      "condition": "always",
+      "label": "이전 화면 복귀",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안"
+    },
+    {
+      "id": "edge-4",
+      "fromScreen": "shop",
+      "fromElement": "shop-filter-all",
+      "event": "click",
+      "action": "filter",
+      "condition": "always",
+      "label": "전체 보기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "payload": {
+        "value": "all"
+      }
+    },
+    {
+      "id": "edge-5",
+      "fromScreen": "shop",
+      "fromElement": "shop-filter-material",
+      "event": "click",
+      "action": "filter",
+      "condition": "always",
+      "label": "재료만 보기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "payload": {
+        "value": "material"
+      }
+    },
+    {
+      "id": "edge-6",
+      "fromScreen": "shop",
+      "fromElement": "product-1",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "label": "상품 상세 열기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "product",
+      "payload": {
+        "itemId": "item-1"
+      }
+    },
+    {
+      "id": "edge-7",
+      "fromScreen": "shop",
+      "fromElement": "product-2",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "label": "상품 상세 열기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "product",
+      "payload": {
+        "itemId": "item-2"
+      }
+    },
+    {
+      "id": "edge-8",
+      "fromScreen": "shop",
+      "fromElement": "product-3",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "label": "상품 상세 열기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "product",
+      "payload": {
+        "itemId": "item-3"
+      }
+    },
+    {
+      "id": "edge-9",
+      "fromScreen": "shop",
+      "fromElement": "product-4",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "label": "상품 상세 열기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "product",
+      "payload": {
+        "itemId": "item-4"
+      }
+    },
+    {
+      "id": "edge-10",
+      "fromScreen": "shop",
+      "fromElement": "product-5",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "label": "상품 상세 열기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "product",
+      "payload": {
+        "itemId": "item-5"
+      }
+    },
+    {
+      "id": "edge-11",
+      "fromScreen": "shop",
+      "fromElement": "product-6",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "label": "상품 상세 열기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "product",
+      "payload": {
+        "itemId": "item-6"
+      }
+    },
+    {
+      "id": "edge-12",
+      "fromScreen": "shop",
+      "fromElement": "product-7",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "label": "상품 상세 열기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "product",
+      "payload": {
+        "itemId": "item-7"
+      }
+    },
+    {
+      "id": "edge-13",
+      "fromScreen": "shop",
+      "fromElement": "product-8",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "label": "상품 상세 열기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "product",
+      "payload": {
+        "itemId": "item-8"
+      }
+    },
+    {
+      "id": "edge-14",
+      "fromScreen": "shop",
+      "fromElement": "shop-help",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "label": "도움말 열기",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "help"
+    },
+    {
+      "id": "edge-15",
+      "fromScreen": "product",
+      "fromElement": "product-buy",
+      "event": "click",
+      "action": "purchase",
+      "condition": "always",
+      "label": "시험 요청 → 성공/실패/시간초과",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안",
+      "targetScreen": "notice"
+    },
+    {
+      "id": "edge-16",
+      "fromScreen": "product",
+      "fromElement": "product-close",
+      "event": "click",
+      "action": "close",
+      "condition": "always",
+      "label": "닫고 목록 유지",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안"
+    },
+    {
+      "id": "edge-17",
+      "fromScreen": "help",
+      "fromElement": "help-close",
+      "event": "click",
+      "action": "close",
+      "condition": "always",
+      "label": "원래 UI 복귀",
+      "returnPolicy": "선택·필터·스크롤 유지",
+      "sourceRef": "T04 §3 · 첫 판 시험용 제안"
+    }
+  ],
+  "fixtures": {
+    "balance": 500,
+    "items": [
+      {
+        "id": "item-1",
+        "name": "샘플 카드 1",
+        "price": 100,
+        "category": "card"
+      },
+      {
+        "id": "item-2",
+        "name": "샘플 재료 2",
+        "price": 200,
+        "category": "material"
+      },
+      {
+        "id": "item-3",
+        "name": "샘플 카드 3",
+        "price": 300,
+        "category": "card"
+      },
+      {
+        "id": "item-4",
+        "name": "샘플 재료 4",
+        "price": 400,
+        "category": "material"
+      },
+      {
+        "id": "item-5",
+        "name": "샘플 카드 5",
+        "price": 500,
+        "category": "card"
+      },
+      {
+        "id": "item-6",
+        "name": "샘플 재료 6",
+        "price": 600,
+        "category": "material"
+      },
+      {
+        "id": "item-7",
+        "name": "샘플 카드 7",
+        "price": 700,
+        "category": "card"
+      },
+      {
+        "id": "item-8",
+        "name": "샘플 재료 8",
+        "price": 800,
+        "category": "material"
+      }
+    ]
+  },
+  "sourceRefs": [
+    {
+      "document": "T04",
+      "section": "3. 첫 판의 구체적인 샘플 제안",
+      "status": "시험용 제안·게임 규격 미확정"
+    }
+  ],
+  "savedAt": "2026-11-13T00:54:51.677Z"
+}

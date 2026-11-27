@@ -1,0 +1,416 @@
+{
+  "kind": "independent-visual-review-not-design",
+  "reviewedAtKst": "2026-11-20T19:58:28+09:00",
+  "scope": "지정 최신 캡처5장과 source A7/23/62/63/75 모두 view_image로 실제 확인",
+  "comparisonPolicy": "SourceReference 픽셀 동등/동일 캐릭터/원본 engine 설정을 주장하지 않음. 신규 원화/대체 glyph 차이는 별도 notes.",
+  "captureVersionPolicy": "원래 basename의 최신 r20/r14/r15/r23/r24만 검토. 옛 ACE01_Patch-r16-before 실패판 제외. 파일 hash는 후속판과 과거판을 섞지 않기 위한 현재 증거.",
+  "hashComputedAtKst": "2026-11-20T19:58:28+09:00",
+  "rootReportedContext": [
+    "r17 정상 UI16cell0mismatch 확인",
+    "r17 Scene 전체 복원 확인",
+    "현재 ACE01_Patch는 r20 footer 표준화 후 캡처"
+  ],
+  "prioritySummary": {
+    "P2": 3,
+    "P3": 2
+  },
+  "P1Count": 0,
+  "issues": [
+    {
+      "id": "MIS-01",
+      "familyIds": [
+        "ACE08"
+      ],
+      "priority": "P2",
+      "type": "progress-bar-text-overlap-clipping",
+      "areaApproxPx": [
+        118,
+        348,
+        169,
+        291
+      ],
+      "observation": "두번째–다섯번째 미션의 진행 수치와 마지막 설명줄이 짙은 progress bar와 같은 영역에 겹칩니다. 0/1·0/10 등 숫자 아래쪽이 가려지고, 4/5행의 during the event 문구도 잘려 읽기 어렵습니다.",
+      "sourceComparison": "A23은 설명이 위에 있고 진행 값은 아래 bar 안에 별도 밝은 글자로 가운데 정렬됩니다.",
+      "recommendation": "native 설명과 진행 값 영역을 분리하고 bar와 글자 높이/그리기 순서를 정리합니다. 각 행의 설명·진행 값 모두 읽히는지 다시 캡처합니다.",
+      "status": "open-at-reviewed-capture",
+      "actualFixPerformed": false,
+      "captureEvidence": [
+        {
+          "path": "/Users/max/Documents/Codex/2026-11-11/new-chat/outputs/acecraft/ACE08.jpg",
+          "size": [
+            420,
+            924
+          ],
+          "sha256": "cfac8161cbc3f77906fba9642b010b660f1c3500d8c65eacbff0d9f2db4f919f",
+          "bytes": 44659,
+          "filesystemModifiedAtKst": "2026-11-20T18:44:51+09:00",
+          "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+        }
+      ]
+    },
+    {
+      "id": "PACK-01",
+      "familyIds": [
+        "ACE11"
+      ],
+      "priority": "P2",
+      "type": "item-quantity-duration-contrast",
+      "areaApproxPx": [
+        87,
+        452,
+        246,
+        78
+      ],
+      "observation": "item tile의 ×8/×10/×10과 24H가 흰색 native 글자라 밝은 크림 tile 위에서 매우 희미합니다. 그림은 보이지만 핵심 수량/기간을 쉽게 읽기 어렵습니다.",
+      "sourceComparison": "A62 원본은 밝은 숫자/24H에 진한 경계가 있어 수량이 배경에서 분리됩니다.",
+      "recommendation": "tile 위 수량/24H native 글자를 어두운 잉크색 등 충분한 대비로 변경하거나, 최소한의 어두운 경계를 주어 확인합니다. 그림/프레임에 글자를 굽지 않습니다.",
+      "status": "open-at-reviewed-capture",
+      "actualFixPerformed": false,
+      "captureEvidence": [
+        {
+          "path": "/Users/max/Documents/Codex/2026-11-11/new-chat/outputs/acecraft/ACE11.jpg",
+          "size": [
+            420,
+            924
+          ],
+          "sha256": "c43f93fb41d9e0d650338125d082c93c9b3da7196c19968fadeef28fa9dd3ae0",
+          "bytes": 18634,
+          "filesystemModifiedAtKst": "2026-11-20T18:50:38+09:00",
+          "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+        }
+      ]
+    },
+    {
+      "id": "LOB-01",
+      "familyIds": [
+        "ACE01_Patch"
+      ],
+      "priority": "P2",
+      "type": "currency-symbol-semantic-mismatch",
+      "areaApproxPx": [
+        337,
+        46,
+        64,
+        51
+      ],
+      "observation": "HUD의 8,012 위 그림은 현재 금화/금메달 계열 원형 금색 아이콘입니다. source A7의 8012 앞 그림은 초록 지폐여서 통화 의미가 달라집니다.",
+      "sourceComparison": "A7 상단 두번째 줄의 8012 앞에 기울어진 green banknote가 보입니다. 이는 로비16셀 region mismatch와 별개의 HUD 자원 glyph 선택 문제입니다.",
+      "recommendation": "확인된 같은 자원을 나타내도록 공통 resource atlas의 greenbanknote 역할 glyph를 사용합니다. 통화의 공식 이름은 추정하지 않습니다.",
+      "status": "open-at-reviewed-capture",
+      "actualFixPerformed": false,
+      "captureEvidence": [
+        {
+          "path": "/Users/max/Documents/Codex/2026-11-11/new-chat/outputs/acecraft/ACE01_Patch.jpg",
+          "size": [
+            420,
+            924
+          ],
+          "sha256": "3663a394c846020f1db5dd3a46031ed5e418051ea4ac83c16ade55eecc3323b5",
+          "bytes": 92149,
+          "filesystemModifiedAtKst": "2026-11-20T19:22:20+09:00",
+          "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+        }
+      ]
+    },
+    {
+      "id": "CTA-02",
+      "familyIds": [
+        "ACE11",
+        "ACE12"
+      ],
+      "priority": "P3",
+      "type": "yellow-cta-caption-contrast-polish",
+      "areaApproxPx": null,
+      "observation": "노란 CTA의 38.00과 Use M-Cash는 읽히지만 흰 글자/노란 판의 대비가 낮은 편입니다. 원본의 진한 글자 경계와 비교하면 작은 표시에서 더 흐려질 수 있습니다.",
+      "recommendation": "기본 클릭/배치를 유지하면서 native caption 대비를 선택적으로 보강하고 작은 크기에서 확인합니다.",
+      "status": "optional-polish",
+      "actualFixPerformed": false,
+      "captureEvidence": [
+        {
+          "path": "/Users/max/Documents/Codex/2026-11-11/new-chat/outputs/acecraft/ACE11.jpg",
+          "size": [
+            420,
+            924
+          ],
+          "sha256": "c43f93fb41d9e0d650338125d082c93c9b3da7196c19968fadeef28fa9dd3ae0",
+          "bytes": 18634,
+          "filesystemModifiedAtKst": "2026-11-20T18:50:38+09:00",
+          "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+        },
+        {
+          "path": "/Users/max/Documents/Codex/2026-11-11/new-chat/outputs/acecraft/ACE12.jpg",
+          "size": [
+            420,
+            924
+          ],
+          "sha256": "524dc8f5fd29d264726e56ed0fd633f075dcec701688fb0fa89f237b2d544fed",
+          "bytes": 20427,
+          "filesystemModifiedAtKst": "2026-11-20T19:47:26+09:00",
+          "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+        }
+      ]
+    },
+    {
+      "id": "MIS-02",
+      "familyIds": [
+        "ACE08"
+      ],
+      "priority": "P3",
+      "type": "header-caption-contrast-polish",
+      "areaApproxPx": [
+        158,
+        210,
+        117,
+        29
+      ],
+      "observation": "Missions 노란 제목은 큰 글자여서 읽히지만 옅은 파랑 판과의 명도 대비가 낮습니다.",
+      "recommendation": "작은 화면에서도 제목 경계가 명확한지 확인해 native 글자 대비를 보강할 수 있습니다.",
+      "status": "optional-polish",
+      "actualFixPerformed": false,
+      "captureEvidence": [
+        {
+          "path": "/Users/max/Documents/Codex/2026-11-11/new-chat/outputs/acecraft/ACE08.jpg",
+          "size": [
+            420,
+            924
+          ],
+          "sha256": "cfac8161cbc3f77906fba9642b010b660f1c3500d8c65eacbff0d9f2db4f919f",
+          "bytes": 44659,
+          "filesystemModifiedAtKst": "2026-11-20T18:44:51+09:00",
+          "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+        }
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "familyId": "ACE01_Patch",
+      "rootReportedCaptureVersion": "r20",
+      "capture": {
+        "path": "/Users/max/Documents/Codex/2026-11-11/new-chat/outputs/acecraft/ACE01_Patch.jpg",
+        "size": [
+          420,
+          924
+        ],
+        "sha256": "3663a394c846020f1db5dd3a46031ed5e418051ea4ac83c16ade55eecc3323b5",
+        "bytes": 92149,
+        "filesystemModifiedAtKst": "2026-11-20T19:22:20+09:00",
+        "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+      },
+      "source": {
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00007.jpg",
+        "size": [
+          420,
+          924
+        ],
+        "sha256": "fdd757e2a932785f2fe529d7c4d94d924084aee34065efdf1d4378111f9eb036",
+        "bytes": 172012,
+        "filesystemModifiedAtKst": "2026-11-20T17:06:45+09:00",
+        "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+      },
+      "captureViewImageActuallyRead": true,
+      "sourceViewImageActuallyRead": true,
+      "issueIds": [
+        "LOB-01"
+      ],
+      "noIssueObserved": [
+        "최신 basename r20만 실제 읽었고 ACE01_Patch-r16-before 실패판은 열거나 판정에 사용하지 않았습니다.",
+        "로비16개 그림은 요청 역할별 Store/gift/watch/card/cosmicface/cabinet/notebook/helmet/party/orb/crate/wingbadge/redplane/greencase/bluecase/goldcase로 보이며 잘못된 셀을 명백히 가져온 모습은 보이지 않습니다. 이는 source 동일성이나 모델 region 수치 검증은 아닙니다.",
+        "비행선 Scene이 전체 화면 배경으로 보이고 한 모퉁이만 잘못 확대한 crop 현상은 보이지 않습니다.",
+        "하단5개 표준 footer 아이콘은 칸 안에 있고 Start·토끼·좌우 입구에 명백한 clipping/충돌은 보이지 않습니다."
+      ],
+      "knownNewInterpretationDifferences": [
+        "신규 비행선 배경과 크림 비행복/신발 토끼는 원본과 다릅니다. 동일 캐릭터/픽셀 동등을 주장하지 않습니다.",
+        "HUD와 Navigator Pass를 크림 공통판/native 글자로 재구성한 것은 알려진 새 해석입니다.",
+        "로비16개의 새 glyph는 세부 형태가 원본과 다르며 원형/글로우/배지를 그대로 복제하지 않습니다.",
+        "Realm Trial 등16종 외 일부 보조 입구는 준비된 그림 proxy이며 원본 film reel와 동일 아트라고 주장하지 않습니다.",
+        "하단 Recruit/Pilot/Adventure/미확인4/Shop 추정은 본체 계획상의 해석입니다."
+      ],
+      "status": "정지 캡처 대조만. 실제 native 속성/입력/저장/연결 검수는 본체확인대기"
+    },
+    {
+      "familyId": "ACE08",
+      "rootReportedCaptureVersion": "r14",
+      "capture": {
+        "path": "/Users/max/Documents/Codex/2026-11-11/new-chat/outputs/acecraft/ACE08.jpg",
+        "size": [
+          420,
+          924
+        ],
+        "sha256": "cfac8161cbc3f77906fba9642b010b660f1c3500d8c65eacbff0d9f2db4f919f",
+        "bytes": 44659,
+        "filesystemModifiedAtKst": "2026-11-20T18:44:51+09:00",
+        "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+      },
+      "source": {
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00023.jpg",
+        "size": [
+          420,
+          924
+        ],
+        "sha256": "e611495df485e895e755618d51ae6a965e53474b6f3af6794c5e48a625ee0e3e",
+        "bytes": 146969,
+        "filesystemModifiedAtKst": "2026-11-20T17:06:45+09:00",
+        "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+      },
+      "captureViewImageActuallyRead": true,
+      "sourceViewImageActuallyRead": true,
+      "issueIds": [
+        "MIS-01",
+        "MIS-02"
+      ],
+      "noIssueObserved": [
+        "큰 흰 기본 Close 백판은 보이지 않습니다.",
+        "다섯 완전 행/부분 여섯번째 행과 고정 Claim All footer의 큰 구성은 화면 안에 들어옵니다.",
+        "어두운 배후에는 원본 게임 UI가 복제되지 않고 단색 root만 보입니다.",
+        "공통 slice 프레임의 뚜렷한 가로/세로 파손은 보이지 않습니다."
+      ],
+      "knownNewInterpretationDifferences": [
+        "원본 event-token 대신 generic cube glyph 사용은 알려진 대체입니다.",
+        "원본의 종이/클립보드와 굽은 장식은 평평한 공통 paper/blue header로 대체됐습니다.",
+        "6번째 미션의 일부만 보이는 scroll viewport 자체는 원본의 부분 행과 같은 대표 범위입니다. 다만 2–5행 텍스트/bar 겹침은 의도된 clipping과 별개입니다."
+      ],
+      "status": "정지 캡처 대조만. 실제 native 속성/입력/저장/연결 검수는 본체확인대기"
+    },
+    {
+      "familyId": "ACE11",
+      "rootReportedCaptureVersion": "r15",
+      "capture": {
+        "path": "/Users/max/Documents/Codex/2026-11-11/new-chat/outputs/acecraft/ACE11.jpg",
+        "size": [
+          420,
+          924
+        ],
+        "sha256": "c43f93fb41d9e0d650338125d082c93c9b3da7196c19968fadeef28fa9dd3ae0",
+        "bytes": 18634,
+        "filesystemModifiedAtKst": "2026-11-20T18:50:38+09:00",
+        "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+      },
+      "source": {
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00062.jpg",
+        "size": [
+          420,
+          924
+        ],
+        "sha256": "a137ae36d776d5b86956af52a786da04da301401bed1acd5bdabf9c4246c8146",
+        "bytes": 95850,
+        "filesystemModifiedAtKst": "2026-11-20T17:06:46+09:00",
+        "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+      },
+      "captureViewImageActuallyRead": true,
+      "sourceViewImageActuallyRead": true,
+      "issueIds": [
+        "PACK-01",
+        "CTA-02"
+      ],
+      "noIssueObserved": [
+        "큰 흰 기본 Close 백판이 없고 ×는 주로 paper 바깥 어두운 root 위에 보입니다.",
+        "상품명·세 tile·가격 버튼이 화면 안에 있고 명백한 frame clipping은 보이지 않습니다.",
+        "배후 게임 UI 복제는 보이지 않습니다."
+      ],
+      "knownNewInterpretationDifferences": [
+        "빨간 에너지병·청록 white-gem 티켓·금빛 star token은 신규 그림/역할 proxy이며 원본 plane-shaped ticket와 동일 아트가 아닙니다.",
+        "보이는 source A62 묶음 의미는 red bottle×8 / Overdrive ticket×10 / gold token×10입니다. 현재 그림 순서에서 뒤바뀐 atlas cell은 보이지 않습니다.",
+        "청색 곡면 trim 대신 평평한 paper/rounded tile을 사용한 것은 공통 프레임 해석입니다."
+      ],
+      "status": "정지 캡처 대조만. 실제 native 속성/입력/저장/연결 검수는 본체확인대기"
+    },
+    {
+      "familyId": "ACE12",
+      "rootReportedCaptureVersion": "r23",
+      "capture": {
+        "path": "/Users/max/Documents/Codex/2026-11-11/new-chat/outputs/acecraft/ACE12.jpg",
+        "size": [
+          420,
+          924
+        ],
+        "sha256": "524dc8f5fd29d264726e56ed0fd633f075dcec701688fb0fa89f237b2d544fed",
+        "bytes": 20427,
+        "filesystemModifiedAtKst": "2026-11-20T19:47:26+09:00",
+        "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+      },
+      "source": {
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00063.jpg",
+        "size": [
+          420,
+          924
+        ],
+        "sha256": "0b73085416546a690b28645ed0cb9c6e43b5854a293488f89340f7e3152e0cdf",
+        "bytes": 122986,
+        "filesystemModifiedAtKst": "2026-11-20T17:06:46+09:00",
+        "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+      },
+      "captureViewImageActuallyRead": true,
+      "sourceViewImageActuallyRead": true,
+      "issueIds": [
+        "CTA-02"
+      ],
+      "noIssueObserved": [
+        "제목/본문/두 가격/두 버튼이 잘리지 않고 읽힙니다.",
+        "큰 흰 기본 Close 백판이 없고 ×가 어두운 영역에서 보입니다.",
+        "배후 게임 UI 복제나 별도 pasted screenshot은 외형상 보이지 않습니다.",
+        "버튼/공통 paper의 slice 외형이 명백히 파손된 모습은 없습니다."
+      ],
+      "knownNewInterpretationDifferences": [
+        "원본 blue curved dialog 대신 공통 paper 틀을 사용했습니다.",
+        "38.00의 원본 통화 기호 이름을 확정하지 않아 금액 native 글자와 generic currency 그림으로 표현한 것은 알려진 제한입니다."
+      ],
+      "status": "정지 캡처 대조만. 실제 native 속성/입력/저장/연결 검수는 본체확인대기"
+    },
+    {
+      "familyId": "ACE13",
+      "rootReportedCaptureVersion": "r24",
+      "capture": {
+        "path": "/Users/max/Documents/Codex/2026-11-11/new-chat/outputs/acecraft/ACE13.jpg",
+        "size": [
+          420,
+          924
+        ],
+        "sha256": "7b58651b605f100ef1863f4fa8bd491580dbc2c5e2a4b30e3dec4ed12b27c46c",
+        "bytes": 20374,
+        "filesystemModifiedAtKst": "2026-11-20T19:51:26+09:00",
+        "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+      },
+      "source": {
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00075.jpg",
+        "size": [
+          420,
+          924
+        ],
+        "sha256": "c6270301c91253613e39b5559019c104b5b9265230448a14ddca6e95f60485f8",
+        "bytes": 124719,
+        "filesystemModifiedAtKst": "2026-11-20T17:06:46+09:00",
+        "mtimeMeaning": "파일 수정시각, 실제 캡처/저장시각의 독립 증명은 아님"
+      },
+      "captureViewImageActuallyRead": true,
+      "sourceViewImageActuallyRead": true,
+      "issueIds": [],
+      "noIssueObserved": [
+        "Owned20·아이템 이름·설명 모두 paper 안에서 읽히고 명백한 text clipping/겹침은 없습니다.",
+        "큰 기본 white backing control이나 배후 게임 UI는 보이지 않습니다.",
+        "Close X가 없는 것은 source의 backdrop dismiss 정보 카드와 일치하는 구성입니다.",
+        "이번 정지 시각 대조에서 수정이 필요한 P1/P2 문제는 발견하지 못했습니다."
+      ],
+      "knownNewInterpretationDifferences": [
+        "Overdrive Ticket은 새 청록 white-gem 그림으로 대체돼 원본 소형 plane 형태와 다릅니다.",
+        "원본의 희미한 paper stamp/가장자리 질감은 공통 paper로 대체됐습니다."
+      ],
+      "status": "정지 캡처 대조만. 실제 native 속성/입력/저장/연결 검수는 본체확인대기"
+    }
+  ],
+  "flatCaptureLimits": {
+    "atlas": "그림의 역할·외형은 보았지만 saved model의 정확한 region 수치를 직접 검사한 것은 아님.",
+    "nativeText": "한 장 JPG만으로 모든 문구의 native layer/bitmap 여부를 증명할 수 없음. 알려진 새 원화와 분리된 문구 배치로 보이나 실제 layer 검수는 본체 담당.",
+    "screenshotPasting": "원본 게임 screenshot/문구를 한 장 붙인 흔적은 외형상 발견하지 못함. 이는 모델 구조 검증 통과 주장이 아님."
+  },
+  "notPerformed": [
+    "UI/model/source/recipe 수정",
+    "실제 입력·scroll·Close·route 검수",
+    "저장/재열기",
+    "native layer/assetRef 전체 검사",
+    "정량 contrast ratio",
+    "404 네트워크 검사",
+    "사용자 승인"
+  ],
+  "finalCompletionClaim": false
+}

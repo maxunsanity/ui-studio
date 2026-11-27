@@ -1,0 +1,2663 @@
+{
+  "documentType": "deterministic-native-ui-action-recipe-not-design-json",
+  "createdAtKST": "2026-11-19T09:22:42.734645+09:00",
+  "reviewStatus": "제안(검수 대기)",
+  "logicalSize": {
+    "w": 504,
+    "h": 894
+  },
+  "executionRules": {
+    "allowedOps": [
+      "panel",
+      "text",
+      "image",
+      "button",
+      "plain"
+    ],
+    "allRects": "ABSOLUTE logicalpx504×894; parent-local conversion happens only when root executes native UI.",
+    "parentOrder": "Each parent key already exists. Roots have parent null. Native screen is family.name, plain/button root is a distinct element.",
+    "panel": "skin is existing source mirror path, native9frame. Screen/action array is recipe, never write it into design model.",
+    "button": "text is native child label, skin contains no words, default native press tint=true. Explicit text/image descendants forward input to button.",
+    "modal": "standalone. No behindpage or fake game entry buttons. 3D source area uses plain+3D only.",
+    "input": "No unsupported input op. inputControlsRequired tells root where native editable control must be configured; preview text cannot remain fake input at completion.",
+    "unknown": "No unseen numbers/copied full source screenshot/invented action result. Notes distinguish source observation from native visual replacements."
+  },
+  "assetsRead": [
+    "spec-b/existing-image-map.json",
+    "art/native-regions.json",
+    "art/art-manifest.json"
+  ],
+  "families": [
+    {
+      "id": "TS01",
+      "name": "Page_TSV_TitleLoading",
+      "nativeKind": "page",
+      "purpose": "타이틀 / 로딩 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_TSV_TS01_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#398FB5",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "image",
+          "key": "titleIllustration",
+          "name": "Img_TSV_TS01_titleIllustration",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": "root",
+          "fit": "cover",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/title-illustration-ui-v005.png",
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "plain",
+          "key": "titleShade",
+          "name": "Panel_TSV_TS01_titleShade",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": "root",
+          "fill": "#002E5630",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "text",
+          "key": "logoTiles",
+          "name": "Txt_TSV_TS01_logoTiles",
+          "rect": {
+            "x": 76,
+            "y": 102,
+            "w": 352,
+            "h": 68
+          },
+          "parent": "root",
+          "text": "TILES",
+          "size": 62,
+          "weight": 900,
+          "color": "#EFFEDB",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "logoSurvive",
+          "name": "Txt_TSV_TS01_logoSurvive",
+          "rect": {
+            "x": 66,
+            "y": 168,
+            "w": 376,
+            "h": 70
+          },
+          "parent": "root",
+          "text": "SURVIVE!",
+          "size": 60,
+          "weight": 900,
+          "color": "#FFB32D",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "support",
+          "name": "Btn_TSV_TS01_support",
+          "rect": {
+            "x": 8,
+            "y": 8,
+            "w": 48,
+            "h": 48
+          },
+          "parent": "root",
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "supportSymbol",
+          "name": "Txt_TSV_TS01_supportSymbol",
+          "rect": {
+            "x": 12,
+            "y": 8,
+            "w": 40,
+            "h": 30
+          },
+          "parent": "support",
+          "text": "☏",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "supportText",
+          "name": "Txt_TSV_TS01_supportText",
+          "rect": {
+            "x": 4,
+            "y": 40,
+            "w": 56,
+            "h": 20
+          },
+          "parent": "support",
+          "text": "고객센터",
+          "size": 12,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "settings",
+          "name": "Btn_TSV_TS01_settings",
+          "rect": {
+            "x": 68,
+            "y": 8,
+            "w": 44,
+            "h": 44
+          },
+          "parent": "root",
+          "text": "⚙",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "serviceMark",
+          "name": "Txt_TSV_TS01_serviceMark",
+          "rect": {
+            "x": 224,
+            "y": 16,
+            "w": 58,
+            "h": 58
+          },
+          "parent": "root",
+          "text": "▶",
+          "size": 34,
+          "weight": 700,
+          "color": "#30AE57",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "version",
+          "name": "Txt_TSV_TS01_version",
+          "rect": {
+            "x": 300,
+            "y": 12,
+            "w": 198,
+            "h": 28
+          },
+          "parent": "root",
+          "text": "v 2.6.400.1546",
+          "size": 16,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "text",
+          "key": "tip",
+          "name": "Txt_TSV_TS01_tip",
+          "rect": {
+            "x": 16,
+            "y": 766,
+            "w": 472,
+            "h": 44
+          },
+          "parent": "root",
+          "text": "자원지를 업그레이드하면 자원 생산 속도가 증가하여 더 많은 자원을 획득합니다.",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "plain",
+          "key": "loadingTrack",
+          "name": "Panel_TSV_TS01_loadingTrack",
+          "rect": {
+            "x": 14,
+            "y": 820,
+            "w": 478,
+            "h": 20
+          },
+          "parent": "root",
+          "fill": "#1D4263",
+          "strokeWidth": 1,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "plain",
+          "key": "loadingFill",
+          "name": "Panel_TSV_TS01_loadingFill",
+          "rect": {
+            "x": 18,
+            "y": 824,
+            "w": 5,
+            "h": 12
+          },
+          "parent": "loadingTrack",
+          "fill": "#58D82F",
+          "strokeWidth": 0,
+          "radius": 6,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "status",
+          "name": "Txt_TSV_TS01_status",
+          "rect": {
+            "x": 70,
+            "y": 842,
+            "w": 364,
+            "h": 30
+          },
+          "parent": "root",
+          "text": "버전 정보 획득",
+          "size": 21,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        }
+      ],
+      "notes": [
+        "대표영문로고/버전정보획득. TS02상태에는계정아이콘추가와버전suffix(1582,1582).",
+        "로딩상태3종은catalog관측문구;임의자동진입/타이머정책추가금지.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "계정아이콘은TS02시점추가상태이며대표TS01-R01에는미표시.▶서비스마크native대체는정확GooglePlay로고아님.",
+        "새title-illustration-ui-v005를직접시각확인:중앙발전소/정착지/전기울타리/트럭/두사람.태양광판없음.투명상단은native파란배경위에제목문자배치.원본과동등판정은본체최종GUI검수."
+      ],
+      "proposedLinks": [
+        {
+          "action": "목록선택",
+          "target": null,
+          "basis": "source entry unverified",
+          "proposal": "목록에서단독보기;가짜게임시작버튼/자동시간전환추가금지",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [
+        {
+          "slot": "logoTiles/logoSurvive",
+          "needed": "도끼포함장식로고외곽그림",
+          "currentProposal": "원본영문을native문자로분리조립",
+          "sourceVisualEquivalence": false
+        }
+      ],
+      "observedStates": {
+        "statusStates": [
+          "버전 정보 획득",
+          "게임 리소스 업데이트",
+          "근거지 진입 중"
+        ]
+      },
+      "sourceReferences": [
+        "TS01-R01"
+      ]
+    },
+    {
+      "id": "TS02",
+      "name": "Modal_TSV_Terms",
+      "nativeKind": "modal",
+      "purpose": "게임 이용약관 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_TSV_TS02_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#143C50",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "terms",
+          "name": "BG_TSV_TS02_terms",
+          "rect": {
+            "x": 38,
+            "y": 282,
+            "w": 430,
+            "h": 350
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "panel",
+          "key": "header",
+          "name": "BG_TSV_TS02_header",
+          "rect": {
+            "x": 38,
+            "y": 282,
+            "w": 430,
+            "h": 50
+          },
+          "parent": "terms",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "stretch-x"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_TSV_TS02_title",
+          "rect": {
+            "x": 50,
+            "y": 294,
+            "w": 360,
+            "h": 32
+          },
+          "parent": "header",
+          "text": "게임 이용약관",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "close",
+          "name": "Btn_TSV_TS02_close",
+          "rect": {
+            "x": 422,
+            "y": 286,
+            "w": 40,
+            "h": 40
+          },
+          "parent": "header",
+          "text": "×",
+          "size": 32,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "panel",
+          "key": "bodyViewport",
+          "name": "BG_TSV_TS02_bodyViewport",
+          "rect": {
+            "x": 54,
+            "y": 340,
+            "w": 396,
+            "h": 208
+          },
+          "parent": "terms",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "bodyClip",
+          "name": "Panel_TSV_TS02_bodyClip",
+          "rect": {
+            "x": 54,
+            "y": 340,
+            "w": 396,
+            "h": 208
+          },
+          "parent": "bodyViewport",
+          "fill": "#00000000",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "overflow": "clip",
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "text",
+          "key": "body",
+          "name": "Txt_TSV_TS02_body",
+          "rect": {
+            "x": 70,
+            "y": 352,
+            "w": 364,
+            "h": 184
+          },
+          "parent": "bodyClip",
+          "text": "저희 서비스 이용 전 <서비스 이용약관>, <개인정보 처리방침> 각 조항을 자세히 읽고 동의하셔야 합니다. 또한 해당 면책 조항 또는 본사의 책임 제한 조항 및 귀하의 권리 제한 조항을 자세히 살펴 보시기 바랍니다.",
+          "size": 20,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "bodyPartial",
+          "name": "Txt_TSV_TS02_bodyPartial",
+          "rect": {
+            "x": 70,
+            "y": 512,
+            "w": 364,
+            "h": 26
+          },
+          "parent": "bodyClip",
+          "text": "약관 및 처리방침을 읽고 동의하신다면 다음 선",
+          "size": 20,
+          "weight": 700,
+          "color": "#244657",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "termsLink",
+          "name": "Btn_TSV_TS02_termsLink",
+          "rect": {
+            "x": 226,
+            "y": 352,
+            "w": 182,
+            "h": 30
+          },
+          "parent": "bodyClip",
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "skinMode": "9",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "privacyLink",
+          "name": "Btn_TSV_TS02_privacyLink",
+          "rect": {
+            "x": 70,
+            "y": 384,
+            "w": 152,
+            "h": 30
+          },
+          "parent": "bodyClip",
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "skinMode": "9",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "start",
+          "name": "Btn_TSV_TS02_start",
+          "rect": {
+            "x": 56,
+            "y": 556,
+            "w": 188,
+            "h": 58
+          },
+          "parent": "terms",
+          "text": "시작하기",
+          "size": 30,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "skinMode": "9",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "button",
+          "key": "agreeStart",
+          "name": "Btn_TSV_TS02_agreeStart",
+          "rect": {
+            "x": 264,
+            "y": 556,
+            "w": 184,
+            "h": 58
+          },
+          "parent": "terms",
+          "text": "모두 동의하고 시작하기",
+          "size": 21,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/button-green3.webp",
+          "skinMode": "3",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "anchorPreset": "bottom-right"
+        }
+      ],
+      "notes": [
+        "TS01위중앙모달.배경별도원화+nativeUI;전체화면JPG붙이기금지.",
+        "원본약관전체/정책URL/각버튼결과미확인.배경상태는 게임 리소스 업데이트 3.97M/3.97M.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "모달단독표시이므로원본TS01배경을뒤페이지로생성하지않음.",
+        "정책링크는원문글자내포된부분의투명hit영역제안이며URL/방문결과미확인.본문마지막잘린문장보완금지.",
+        "원본링크주황밑줄은native부분서식가능하면추가;지원없으면본문내용만보존하고서식미검수기록."
+      ],
+      "proposedLinks": [
+        {
+          "action": "X",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "실제호출부dismiss제안. TS01위에서호출되었을때TS01복귀",
+          "payload": {}
+        },
+        {
+          "action": "시작하기/모두동의/정책링크",
+          "target": null,
+          "basis": "destinations unverified",
+          "proposal": "임의게임진입/URL/전체약관창작금지",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [],
+      "observedStates": {
+        "sourceBodyComplete": false,
+        "backdropStatus": "게임 리소스 업데이트 3.97M/3.97M"
+      },
+      "sourceReferences": [
+        "TS02-R01"
+      ]
+    },
+    {
+      "id": "TS08",
+      "name": "Modal_TSV_RaidAlert",
+      "nativeKind": "modal",
+      "purpose": "습격 예고 / 이동 안내 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_TSV_TS08_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#143C50",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "warning",
+          "name": "BG_TSV_TS08_warning",
+          "rect": {
+            "x": 36,
+            "y": 432,
+            "w": 432,
+            "h": 348
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-orange9-v003.webp",
+          "skinMode": "9",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "plain",
+          "key": "bossBackdrop",
+          "name": "Panel_TSV_TS08_bossBackdrop",
+          "rect": {
+            "x": 52,
+            "y": 156,
+            "w": 402,
+            "h": 252
+          },
+          "parent": "root",
+          "fill": "#7F1E26",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "center"
+        },
+        {
+          "op": "image",
+          "key": "boss",
+          "name": "Img_TSV_TS08_boss",
+          "rect": {
+            "x": 58,
+            "y": 126,
+            "w": 390,
+            "h": 280
+          },
+          "parent": "bossBackdrop",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/objects-b-atlas-ui-v003.png",
+          "region": [
+            150,
+            0,
+            150,
+            150
+          ],
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "close",
+          "name": "Btn_TSV_TS08_close",
+          "rect": {
+            "x": 410,
+            "y": 160,
+            "w": 40,
+            "h": 40
+          },
+          "parent": "bossBackdrop",
+          "text": "×",
+          "size": 32,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "plain",
+          "key": "ribbon",
+          "name": "Panel_TSV_TS08_ribbon",
+          "rect": {
+            "x": 38,
+            "y": 386,
+            "w": 430,
+            "h": 66
+          },
+          "parent": "root",
+          "fill": "#E64D28",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "center"
+        },
+        {
+          "op": "text",
+          "key": "exclamation",
+          "name": "Txt_TSV_TS08_exclamation",
+          "rect": {
+            "x": 40,
+            "y": 374,
+            "w": 76,
+            "h": 68
+          },
+          "parent": "ribbon",
+          "text": "!",
+          "size": 60,
+          "weight": 700,
+          "color": "#FFF7CE",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_TSV_TS08_title",
+          "rect": {
+            "x": 92,
+            "y": 396,
+            "w": 350,
+            "h": 44
+          },
+          "parent": "ribbon",
+          "text": "곧 습격이 시작됩니다.",
+          "size": 32,
+          "weight": 700,
+          "color": "#FFF8DD",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "timer",
+          "name": "Txt_TSV_TS08_timer",
+          "rect": {
+            "x": 174,
+            "y": 456,
+            "w": 156,
+            "h": 30
+          },
+          "parent": "warning",
+          "text": "00:58:41",
+          "size": 24,
+          "weight": 700,
+          "color": "#A85A20",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "plain",
+          "key": "condition",
+          "name": "Panel_TSV_TS08_condition",
+          "rect": {
+            "x": 62,
+            "y": 482,
+            "w": 384,
+            "h": 138
+          },
+          "parent": "warning",
+          "fill": "#F6D99F",
+          "strokeWidth": 0,
+          "radius": 10,
+          "opacity": 1,
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "requirement",
+          "name": "Txt_TSV_TS08_requirement",
+          "rect": {
+            "x": 80,
+            "y": 496,
+            "w": 344,
+            "h": 30
+          },
+          "parent": "condition",
+          "text": "발전소 5레벨 달성(2/5)",
+          "size": 21,
+          "weight": 700,
+          "color": "#244657",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "gem",
+          "name": "BG_TSV_TS08_gem",
+          "rect": {
+            "x": 148,
+            "y": 534,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "condition",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-purple9-v003.webp",
+          "skinMode": "9",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "gemIcon",
+          "name": "Img_TSV_TS08_gemIcon",
+          "rect": {
+            "x": 153,
+            "y": 539,
+            "w": 54,
+            "h": 51
+          },
+          "parent": "gem",
+          "fit": "contain",
+          "ref": "sha256-796431a7cd9958dd1c1d89eb01c1ac872fe0e44f471763fdea738feee0c95b0e.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "gemCount",
+          "name": "Txt_TSV_TS08_gemCount",
+          "rect": {
+            "x": 151,
+            "y": 574,
+            "w": 58,
+            "h": 22
+          },
+          "parent": "gem",
+          "text": "x100",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "purpleCard",
+          "name": "BG_TSV_TS08_purpleCard",
+          "rect": {
+            "x": 224,
+            "y": 534,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "condition",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-orange9-v003.webp",
+          "skinMode": "9",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "purpleCardIcon",
+          "name": "Img_TSV_TS08_purpleCardIcon",
+          "rect": {
+            "x": 229,
+            "y": 539,
+            "w": 54,
+            "h": 51
+          },
+          "parent": "purpleCard",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/objects-a-atlas-ui-v003.png",
+          "region": [
+            150,
+            150,
+            150,
+            150
+          ],
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "purpleCardCount",
+          "name": "Txt_TSV_TS08_purpleCardCount",
+          "rect": {
+            "x": 227,
+            "y": 574,
+            "w": 58,
+            "h": 22
+          },
+          "parent": "purpleCard",
+          "text": "x1",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "brownCard",
+          "name": "BG_TSV_TS08_brownCard",
+          "rect": {
+            "x": 300,
+            "y": 534,
+            "w": 64,
+            "h": 64
+          },
+          "parent": "condition",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-orange9-v003.webp",
+          "skinMode": "9",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "brownStar",
+          "name": "Txt_TSV_TS08_brownStar",
+          "rect": {
+            "x": 308,
+            "y": 542,
+            "w": 48,
+            "h": 36
+          },
+          "parent": "brownCard",
+          "text": "☆",
+          "size": 32,
+          "weight": 700,
+          "color": "#6C3E29",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "brownCount",
+          "name": "Txt_TSV_TS08_brownCount",
+          "rect": {
+            "x": 304,
+            "y": 574,
+            "w": 56,
+            "h": 22
+          },
+          "parent": "brownCard",
+          "text": "x3",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "guide",
+          "name": "Txt_TSV_TS08_guide",
+          "rect": {
+            "x": 104,
+            "y": 628,
+            "w": 300,
+            "h": 58
+          },
+          "parent": "warning",
+          "text": "챕터 미션 가이드에 따라 발전소를 업그레이드하세요.",
+          "size": 22,
+          "weight": 700,
+          "color": "#4F8997",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "button",
+          "key": "go",
+          "name": "Btn_TSV_TS08_go",
+          "rect": {
+            "x": 84,
+            "y": 686,
+            "w": 336,
+            "h": 64
+          },
+          "parent": "warning",
+          "text": "이동하기",
+          "size": 28,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-orange9-v003.webp",
+          "skinMode": "9",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": false,
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "dismissHint",
+          "name": "Txt_TSV_TS08_dismissHint",
+          "rect": {
+            "x": 120,
+            "y": 856,
+            "w": 264,
+            "h": 30
+          },
+          "parent": "root",
+          "text": "빈 곳을 탭하여 닫기",
+          "size": 18,
+          "weight": 700,
+          "color": "#E0EDEA",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        }
+      ],
+      "notes": [
+        "거대적돌출그림/경고리본/native문구수치/보상모두분리.",
+        "타이머고정관측값. countdown/습격로직미확인.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음."
+      ],
+      "proposedLinks": [
+        {
+          "action": "X/빈곳",
+          "target": null,
+          "basis": "visible-only",
+          "proposal": "호출부dismiss제안",
+          "payload": {}
+        },
+        {
+          "action": "이동하기",
+          "target": null,
+          "basis": "destination unverified",
+          "proposal": "목적건물/좌표근거없이TS03/05오연결금지",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [
+        {
+          "slot": "brownCard",
+          "needed": "갈색별카드정확원화",
+          "currentProposal": "기본갈색카드+native☆",
+          "sourceVisualEquivalence": false
+        },
+        {
+          "slot": "ribbon",
+          "needed": "붉은경고리본/삼각경고아이콘",
+          "currentProposal": "nativebackplate+native!",
+          "sourceVisualEquivalence": false
+        }
+      ],
+      "observedStates": {
+        "timer": "00:58:41",
+        "rewards": [
+          {
+            "gem": 100
+          },
+          {
+            "purpleStarCard": 1
+          },
+          {
+            "brownStarCard": 3
+          }
+        ]
+      },
+      "sourceReferences": [
+        "TS08-R01"
+      ]
+    },
+    {
+      "id": "TS10",
+      "name": "Modal_TSV_BuildingUpgradeSuccess",
+      "nativeKind": "modal",
+      "purpose": "일반 건물 업그레이드 성공 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "button",
+          "key": "root",
+          "name": "Btn_TSV_TS10_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "skinMode": "9",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "plain",
+          "key": "backdrop",
+          "name": "Panel_TSV_TS10_backdrop",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": "root",
+          "fill": "#153744",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_TSV_TS10_title",
+          "rect": {
+            "x": 76,
+            "y": 92,
+            "w": 352,
+            "h": 34
+          },
+          "parent": "root",
+          "text": "제련 공방 업그레이드 성공",
+          "size": 25,
+          "weight": 700,
+          "color": "#FFE4AF",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "ribbon",
+          "name": "Panel_TSV_TS10_ribbon",
+          "rect": {
+            "x": 32,
+            "y": 258,
+            "w": 440,
+            "h": 108
+          },
+          "parent": "root",
+          "fill": "#DF4119",
+          "strokeWidth": 0,
+          "radius": 20,
+          "opacity": 1,
+          "anchorPreset": "center"
+        },
+        {
+          "op": "text",
+          "key": "level",
+          "name": "Txt_TSV_TS10_level",
+          "rect": {
+            "x": 132,
+            "y": 268,
+            "w": 240,
+            "h": 64
+          },
+          "parent": "ribbon",
+          "text": "Lv.2",
+          "size": 54,
+          "weight": 900,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "statLabel",
+          "name": "Txt_TSV_TS10_statLabel",
+          "rect": {
+            "x": 28,
+            "y": 402,
+            "w": 294,
+            "h": 34
+          },
+          "parent": "root",
+          "text": "금속 생산 속도:",
+          "size": 22,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "text",
+          "key": "before",
+          "name": "Txt_TSV_TS10_before",
+          "rect": {
+            "x": 374,
+            "y": 402,
+            "w": 40,
+            "h": 34
+          },
+          "parent": "root",
+          "text": "50",
+          "size": 22,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "image",
+          "key": "statArrow",
+          "name": "Img_TSV_TS10_statArrow",
+          "rect": {
+            "x": 410,
+            "y": 404,
+            "w": 30,
+            "h": 28
+          },
+          "parent": "root",
+          "fit": "contain",
+          "ref": "sha256-d02e94dd952a375008db99fcab008f33e7fe582492c82ab3a3717f0e2e1f8861.webp",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "text",
+          "key": "after",
+          "name": "Txt_TSV_TS10_after",
+          "rect": {
+            "x": 440,
+            "y": 402,
+            "w": 50,
+            "h": 34
+          },
+          "parent": "root",
+          "text": "100",
+          "size": 22,
+          "weight": 700,
+          "color": "#5BE62B",
+          "align": "left",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "panel",
+          "key": "gem",
+          "name": "BG_TSV_TS10_gem",
+          "rect": {
+            "x": 154,
+            "y": 516,
+            "w": 92,
+            "h": 92
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-purple9-v003.webp",
+          "skinMode": "9",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "image",
+          "key": "gemIcon",
+          "name": "Img_TSV_TS10_gemIcon",
+          "rect": {
+            "x": 159,
+            "y": 521,
+            "w": 82,
+            "h": 79
+          },
+          "parent": "gem",
+          "fit": "contain",
+          "ref": "sha256-796431a7cd9958dd1c1d89eb01c1ac872fe0e44f471763fdea738feee0c95b0e.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "gemCount",
+          "name": "Txt_TSV_TS10_gemCount",
+          "rect": {
+            "x": 157,
+            "y": 584,
+            "w": 86,
+            "h": 22
+          },
+          "parent": "gem",
+          "text": "x10",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "furniture",
+          "name": "BG_TSV_TS10_furniture",
+          "rect": {
+            "x": 262,
+            "y": 516,
+            "w": 92,
+            "h": 92
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-teal9-v003.webp",
+          "skinMode": "9",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "text",
+          "key": "dismissHint",
+          "name": "Txt_TSV_TS10_dismissHint",
+          "rect": {
+            "x": 120,
+            "y": 808,
+            "w": 264,
+            "h": 30
+          },
+          "parent": "root",
+          "text": "아무 곳이나 터치해 닫으세요.",
+          "size": 18,
+          "weight": 700,
+          "color": "#E0EDEA",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "image",
+          "key": "furnitureIcon",
+          "name": "Img_TSV_TS10_furnitureIcon",
+          "rect": {
+            "x": 267,
+            "y": 521,
+            "w": 82,
+            "h": 79
+          },
+          "parent": "furniture",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/celebration-a-atlas-ui-v002.png",
+          "region": [
+            25,
+            56,
+            272,
+            232
+          ],
+          "fit": "contain",
+          "anchorPreset": "percent"
+        }
+      ],
+      "notes": [
+        "대표제련공방Lv.2/50→100/보석10/모루.민가침대상태와혼합금지.",
+        "닫기후목적지미관측.호출부backstack복귀제안.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "카드의모루수량표시는원본없음.목재/물자상자등다른아이콘을대신넣지않음.",
+        "모루신규원화직접확인후furnitureIcon추가.원본카드/글자/수량없는투명그림이며native수량별도(모루원본수량표시없음)."
+      ],
+      "proposedLinks": [
+        {
+          "action": "아무곳터치",
+          "target": null,
+          "basis": "source hint visible",
+          "proposal": "실제호출부dismiss;정확입력시점미관측",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [
+        {
+          "slot": "ribbon",
+          "needed": "리본장식/광선/색종이",
+          "currentProposal": "native붉은판과level문자,장식미제공",
+          "sourceVisualEquivalence": false
+        }
+      ],
+      "observedStates": {},
+      "sourceReferences": [
+        "TS10-R01"
+      ],
+      "screenInputRequired": [
+        {
+          "key": "root",
+          "behavior": "전체화면터치닫기",
+          "route": "dismiss actual caller",
+          "sourceHint": "아무 곳이나 터치해 닫으세요."
+        }
+      ]
+    },
+    {
+      "id": "TS11",
+      "name": "Modal_TSV_PowerplantRecord",
+      "nativeKind": "modal",
+      "purpose": "발전소 레벨 증가 기록판 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "button",
+          "key": "root",
+          "name": "Btn_TSV_TS11_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "skinMode": "9",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "plain",
+          "key": "backdrop",
+          "name": "Panel_TSV_TS11_backdrop",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": "root",
+          "fill": "#153744",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_TSV_TS11_title",
+          "rect": {
+            "x": 112,
+            "y": 92,
+            "w": 284,
+            "h": 34
+          },
+          "parent": "root",
+          "text": "발전소 업그레이드 성공",
+          "size": 25,
+          "weight": 700,
+          "color": "#FFE4AF",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "plantEmblem",
+          "name": "Img_TSV_TS11_plantEmblem",
+          "rect": {
+            "x": 140,
+            "y": 184,
+            "w": 226,
+            "h": 142
+          },
+          "parent": "root",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/powerplant-emblem-ui-v003.png",
+          "region": [
+            0,
+            105,
+            316,
+            150
+          ],
+          "anchorPreset": "center"
+        },
+        {
+          "op": "panel",
+          "key": "record",
+          "name": "BG_TSV_TS11_record",
+          "rect": {
+            "x": 54,
+            "y": 374,
+            "w": 396,
+            "h": 380
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "plain",
+          "key": "ribbon",
+          "name": "Panel_TSV_TS11_ribbon",
+          "rect": {
+            "x": 36,
+            "y": 316,
+            "w": 432,
+            "h": 104
+          },
+          "parent": "root",
+          "fill": "#E34D17",
+          "strokeWidth": 0,
+          "radius": 20,
+          "opacity": 1,
+          "anchorPreset": "center"
+        },
+        {
+          "op": "text",
+          "key": "level",
+          "name": "Txt_TSV_TS11_level",
+          "rect": {
+            "x": 136,
+            "y": 320,
+            "w": 232,
+            "h": 66
+          },
+          "parent": "ribbon",
+          "text": "Lv.4",
+          "size": 52,
+          "weight": 900,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "powerLabel",
+          "name": "Txt_TSV_TS11_powerLabel",
+          "rect": {
+            "x": 80,
+            "y": 458,
+            "w": 194,
+            "h": 32
+          },
+          "parent": "record",
+          "text": "전투력 증가:",
+          "size": 22,
+          "weight": 700,
+          "color": "#827657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "powerBefore",
+          "name": "Txt_TSV_TS11_powerBefore",
+          "rect": {
+            "x": 230,
+            "y": 458,
+            "w": 78,
+            "h": 32
+          },
+          "parent": "record",
+          "text": "16.37K",
+          "size": 21,
+          "weight": 700,
+          "color": "#B88B3F",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "powerArrow",
+          "name": "Img_TSV_TS11_powerArrow",
+          "rect": {
+            "x": 314,
+            "y": 459,
+            "w": 30,
+            "h": 28
+          },
+          "parent": "record",
+          "fit": "contain",
+          "ref": "sha256-d02e94dd952a375008db99fcab008f33e7fe582492c82ab3a3717f0e2e1f8861.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "powerAfter",
+          "name": "Txt_TSV_TS11_powerAfter",
+          "rect": {
+            "x": 350,
+            "y": 458,
+            "w": 78,
+            "h": 32
+          },
+          "parent": "record",
+          "text": "24.39K",
+          "size": 21,
+          "weight": 700,
+          "color": "#60A641",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "heroCapLabel",
+          "name": "Txt_TSV_TS11_heroCapLabel",
+          "rect": {
+            "x": 80,
+            "y": 494,
+            "w": 214,
+            "h": 32
+          },
+          "parent": "record",
+          "text": "영웅 레벨 상한:",
+          "size": 22,
+          "weight": 700,
+          "color": "#827657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "heroCapBefore",
+          "name": "Txt_TSV_TS11_heroCapBefore",
+          "rect": {
+            "x": 342,
+            "y": 494,
+            "w": 22,
+            "h": 32
+          },
+          "parent": "record",
+          "text": "5",
+          "size": 21,
+          "weight": 700,
+          "color": "#B88B3F",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "heroCapArrow",
+          "name": "Img_TSV_TS11_heroCapArrow",
+          "rect": {
+            "x": 366,
+            "y": 495,
+            "w": 30,
+            "h": 28
+          },
+          "parent": "record",
+          "fit": "contain",
+          "ref": "sha256-d02e94dd952a375008db99fcab008f33e7fe582492c82ab3a3717f0e2e1f8861.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "heroCapAfter",
+          "name": "Txt_TSV_TS11_heroCapAfter",
+          "rect": {
+            "x": 398,
+            "y": 494,
+            "w": 34,
+            "h": 32
+          },
+          "parent": "record",
+          "text": "10",
+          "size": 21,
+          "weight": 700,
+          "color": "#60A641",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "gridLabel",
+          "name": "Txt_TSV_TS11_gridLabel",
+          "rect": {
+            "x": 80,
+            "y": 532,
+            "w": 214,
+            "h": 32
+          },
+          "parent": "record",
+          "text": "전기 공급 구역:",
+          "size": 22,
+          "weight": 700,
+          "color": "#827657",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "gridBefore",
+          "name": "Txt_TSV_TS11_gridBefore",
+          "rect": {
+            "x": 342,
+            "y": 532,
+            "w": 22,
+            "h": 32
+          },
+          "parent": "record",
+          "text": "8",
+          "size": 21,
+          "weight": 700,
+          "color": "#B88B3F",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "gridArrow",
+          "name": "Img_TSV_TS11_gridArrow",
+          "rect": {
+            "x": 366,
+            "y": 533,
+            "w": 30,
+            "h": 28
+          },
+          "parent": "record",
+          "fit": "contain",
+          "ref": "sha256-d02e94dd952a375008db99fcab008f33e7fe582492c82ab3a3717f0e2e1f8861.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "gridAfter",
+          "name": "Txt_TSV_TS11_gridAfter",
+          "rect": {
+            "x": 398,
+            "y": 532,
+            "w": 34,
+            "h": 32
+          },
+          "parent": "record",
+          "text": "9",
+          "size": 21,
+          "weight": 700,
+          "color": "#60A641",
+          "align": "left",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "exp",
+          "name": "BG_TSV_TS11_exp",
+          "rect": {
+            "x": 176,
+            "y": 600,
+            "w": 72,
+            "h": 72
+          },
+          "parent": "record",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "expIcon",
+          "name": "Txt_TSV_TS11_expIcon",
+          "rect": {
+            "x": 180,
+            "y": 614,
+            "w": 64,
+            "h": 38
+          },
+          "parent": "exp",
+          "text": "EXP",
+          "size": 21,
+          "weight": 700,
+          "color": "#FFBC36",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "expCount",
+          "name": "Txt_TSV_TS11_expCount",
+          "rect": {
+            "x": 179,
+            "y": 648,
+            "w": 66,
+            "h": 22
+          },
+          "parent": "exp",
+          "text": "x40,000",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "gem",
+          "name": "BG_TSV_TS11_gem",
+          "rect": {
+            "x": 258,
+            "y": 600,
+            "w": 72,
+            "h": 72
+          },
+          "parent": "record",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-purple9-v003.webp",
+          "skinMode": "9",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "image",
+          "key": "gemIcon",
+          "name": "Img_TSV_TS11_gemIcon",
+          "rect": {
+            "x": 263,
+            "y": 605,
+            "w": 62,
+            "h": 59
+          },
+          "parent": "gem",
+          "fit": "contain",
+          "ref": "sha256-796431a7cd9958dd1c1d89eb01c1ac872fe0e44f471763fdea738feee0c95b0e.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "gemCount",
+          "name": "Txt_TSV_TS11_gemCount",
+          "rect": {
+            "x": 261,
+            "y": 648,
+            "w": 66,
+            "h": 22
+          },
+          "parent": "gem",
+          "text": "x10",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "dismissHint",
+          "name": "Txt_TSV_TS11_dismissHint",
+          "rect": {
+            "x": 120,
+            "y": 810,
+            "w": 264,
+            "h": 30
+          },
+          "parent": "root",
+          "text": "화면을 터치하여 계속하세요.",
+          "size": 18,
+          "weight": 700,
+          "color": "#E0EDEA",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        }
+      ],
+      "notes": [
+        "직접본대표TS11-R01은Lv.4. catalog에섞인Lv.3/10.07K→16.37K/6→8은다른state.",
+        "대표HUD43,992/04:56/6/8/9.75K/보석790을현행TS03지갑과혼합하지않음.",
+        "우하단설정tooltip/Steam채팅은게임UI제외.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "새가로형금빛발전소/월계수원화powerplant-emblem-ui-v003를직접시각확인.초기atlas-a오른쪽발전소cell사용하지않음."
+      ],
+      "proposedLinks": [
+        {
+          "action": "화면터치",
+          "target": "TS03",
+          "basis": "sequence-observed02→03s",
+          "proposal": "기존TS03위dismiss,returnToScreenId보존;독립선택은복귀대상별도기록",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [
+        {
+          "slot": "ribbon/record",
+          "needed": "붉은리본/방패꼴하단장식",
+          "currentProposal": "native붉은판/기본종이9프레임",
+          "sourceVisualEquivalence": false
+        }
+      ],
+      "observedStates": {
+        "level": 4,
+        "powerBefore": "16.37K",
+        "powerAfter": "24.39K",
+        "heroCapBefore": 5,
+        "heroCapAfter": 10,
+        "gridBefore": 8,
+        "gridAfter": 9,
+        "exp": 40000,
+        "gem": 10
+      },
+      "sourceReferences": [
+        "TS11-R01"
+      ],
+      "screenInputRequired": [
+        {
+          "key": "root",
+          "behavior": "전체화면터치닫기",
+          "route": "dismiss TS03 caller; otherwise actual caller",
+          "sourceHint": "화면을 터치하여 계속하세요."
+        }
+      ]
+    },
+    {
+      "id": "TS17",
+      "name": "Modal_TSV_ChapterRewards",
+      "nativeKind": "modal",
+      "purpose": "챕터 완료 보상 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "button",
+          "key": "root",
+          "name": "Btn_TSV_TS17_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "text": "",
+          "size": 0,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "skin": null,
+          "skinMode": "9",
+          "tintPress": true,
+          "labelMode": "native-child",
+          "transparent": true,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "plain",
+          "key": "backdrop",
+          "name": "Panel_TSV_TS17_backdrop",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": "root",
+          "fill": "#153744",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "image",
+          "key": "confettiDecor",
+          "name": "Img_TSV_TS17_confettiDecor",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/celebration-b-atlas-ui-v002.png",
+          "region": [
+            339,
+            19,
+            278,
+            268
+          ],
+          "fit": "contain",
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "image",
+          "key": "rainbowDecor",
+          "name": "Img_TSV_TS17_rainbowDecor",
+          "rect": {
+            "x": 36,
+            "y": 84,
+            "w": 432,
+            "h": 170
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/celebration-b-atlas-ui-v002.png",
+          "region": [
+            21,
+            47,
+            280,
+            190
+          ],
+          "fit": "contain",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "congratulations",
+          "name": "Txt_TSV_TS17_congratulations",
+          "rect": {
+            "x": 58,
+            "y": 124,
+            "w": 392,
+            "h": 90
+          },
+          "parent": "root",
+          "text": "축하합니다!",
+          "size": 60,
+          "weight": 900,
+          "color": "#FFE92D",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "subtitle",
+          "name": "Txt_TSV_TS17_subtitle",
+          "rect": {
+            "x": 74,
+            "y": 226,
+            "w": 364,
+            "h": 32
+          },
+          "parent": "root",
+          "text": "챕터 미션 완료를 축하드립니다! 획득 보상:",
+          "size": 20,
+          "weight": 700,
+          "color": "#E8AC39",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "missionComplete",
+          "name": "Txt_TSV_TS17_missionComplete",
+          "rect": {
+            "x": 174,
+            "y": 260,
+            "w": 168,
+            "h": 30
+          },
+          "parent": "root",
+          "text": "미션 완료",
+          "size": 24,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "panel",
+          "key": "exp",
+          "name": "BG_TSV_TS17_exp",
+          "rect": {
+            "x": 40,
+            "y": 306,
+            "w": 92,
+            "h": 92
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "expIcon",
+          "name": "Txt_TSV_TS17_expIcon",
+          "rect": {
+            "x": 44,
+            "y": 320,
+            "w": 84,
+            "h": 58
+          },
+          "parent": "exp",
+          "text": "EXP",
+          "size": 27,
+          "weight": 700,
+          "color": "#FFBC36",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "expUnit",
+          "name": "Txt_TSV_TS17_expUnit",
+          "rect": {
+            "x": 42,
+            "y": 307,
+            "w": 88,
+            "h": 22
+          },
+          "parent": "exp",
+          "text": "1K",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "expCount",
+          "name": "Txt_TSV_TS17_expCount",
+          "rect": {
+            "x": 43,
+            "y": 374,
+            "w": 86,
+            "h": 22
+          },
+          "parent": "exp",
+          "text": "x5",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "speedup",
+          "name": "BG_TSV_TS17_speedup",
+          "rect": {
+            "x": 152,
+            "y": 306,
+            "w": 92,
+            "h": 92
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "speedupIcon",
+          "name": "Img_TSV_TS17_speedupIcon",
+          "rect": {
+            "x": 157,
+            "y": 311,
+            "w": 82,
+            "h": 79
+          },
+          "parent": "speedup",
+          "fit": "contain",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/objects-a-atlas-ui-v003.png",
+          "region": [
+            450,
+            0,
+            150,
+            150
+          ],
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "speedupUnit",
+          "name": "Txt_TSV_TS17_speedupUnit",
+          "rect": {
+            "x": 154,
+            "y": 307,
+            "w": 88,
+            "h": 22
+          },
+          "parent": "speedup",
+          "text": "1분",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "center",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "speedupCount",
+          "name": "Txt_TSV_TS17_speedupCount",
+          "rect": {
+            "x": 155,
+            "y": 374,
+            "w": 86,
+            "h": 22
+          },
+          "parent": "speedup",
+          "text": "x5",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "gem",
+          "name": "BG_TSV_TS17_gem",
+          "rect": {
+            "x": 264,
+            "y": 306,
+            "w": 92,
+            "h": 92
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-purple9-v003.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "gemIcon",
+          "name": "Img_TSV_TS17_gemIcon",
+          "rect": {
+            "x": 269,
+            "y": 311,
+            "w": 82,
+            "h": 79
+          },
+          "parent": "gem",
+          "fit": "contain",
+          "ref": "sha256-796431a7cd9958dd1c1d89eb01c1ac872fe0e44f471763fdea738feee0c95b0e.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "gemCount",
+          "name": "Txt_TSV_TS17_gemCount",
+          "rect": {
+            "x": 267,
+            "y": 374,
+            "w": 86,
+            "h": 22
+          },
+          "parent": "gem",
+          "text": "x200",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "wood",
+          "name": "BG_TSV_TS17_wood",
+          "rect": {
+            "x": 376,
+            "y": 306,
+            "w": 92,
+            "h": 92
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "woodIcon",
+          "name": "Img_TSV_TS17_woodIcon",
+          "rect": {
+            "x": 381,
+            "y": 311,
+            "w": 82,
+            "h": 79
+          },
+          "parent": "wood",
+          "fit": "contain",
+          "ref": "sha256-46dbd170bfe8e6e45b0704bdd4f760a7230ef6bb9d1002dcdcbb0215c8a78201.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "woodCount",
+          "name": "Txt_TSV_TS17_woodCount",
+          "rect": {
+            "x": 379,
+            "y": 374,
+            "w": 86,
+            "h": 22
+          },
+          "parent": "wood",
+          "text": "x720",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "panel",
+          "key": "food",
+          "name": "BG_TSV_TS17_food",
+          "rect": {
+            "x": 40,
+            "y": 418,
+            "w": 92,
+            "h": 92
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "foodIcon",
+          "name": "Img_TSV_TS17_foodIcon",
+          "rect": {
+            "x": 45,
+            "y": 423,
+            "w": 82,
+            "h": 79
+          },
+          "parent": "food",
+          "fit": "contain",
+          "ref": "sha256-5c29f9b896b622122e161c0db772449e83b2899f2d07eb1108967143c70dcbb0.webp",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "foodCount",
+          "name": "Txt_TSV_TS17_foodCount",
+          "rect": {
+            "x": 43,
+            "y": 486,
+            "w": 86,
+            "h": 22
+          },
+          "parent": "food",
+          "text": "x400",
+          "size": 18,
+          "weight": 700,
+          "color": "#FFFFFF",
+          "align": "right",
+          "anchorPreset": "percent"
+        },
+        {
+          "op": "text",
+          "key": "dismissHint",
+          "name": "Txt_TSV_TS17_dismissHint",
+          "rect": {
+            "x": 120,
+            "y": 826,
+            "w": 264,
+            "h": 30
+          },
+          "parent": "root",
+          "text": "화면을 터치하여 계속하세요.",
+          "size": 18,
+          "weight": 700,
+          "color": "#E0EDEA",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        }
+      ],
+      "notes": [
+        "TSV04챕터3보상:1K EXP×5/1분×5/보석×200/목재×720/식량×400직접확인.",
+        "TS09-R01챕터2목재600과혼합금지.",
+        "배경은TS09미션창강한블러.실제모달배경유지+nativeblur제안;전체JPG금지.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "무지개/색종이신규투명원화직접확인후native문자앞(낮은z)에배치.축하문구/아이템/수량은그림에없음."
+      ],
+      "proposedLinks": [
+        {
+          "action": "화면터치",
+          "target": "TS18",
+          "basis": "TSV02reward→intro sequence; input unverified",
+          "proposal": "보이는계속입력으로소개를여는제작예시.자동타이머추가금지/returnToTS03보존",
+          "payload": {
+            "chapterId": 3
+          }
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [],
+      "observedStates": {
+        "chapterId": 3,
+        "rewards": {
+          "exp1k": 5,
+          "minute1": 5,
+          "gem": 200,
+          "wood": 720,
+          "food": 400
+        }
+      },
+      "sourceReferences": [
+        "TS17-R01"
+      ],
+      "screenInputRequired": [
+        {
+          "key": "root",
+          "behavior": "전체화면터치계속",
+          "route": "TS18 when safe return supported; else caller dismiss",
+          "sourceHint": "화면을 터치하여 계속하세요."
+        }
+      ]
+    },
+    {
+      "id": "TS18",
+      "name": "Modal_TSV_NewChapter",
+      "nativeKind": "modal",
+      "purpose": "신규 챕터 소개 카드 · 원본관측fixture를native부품으로독립조립",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Panel_TSV_TS18_root",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#143C50",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "panel",
+          "key": "intro",
+          "name": "BG_TSV_TS18_intro",
+          "rect": {
+            "x": 16,
+            "y": 268,
+            "w": 472,
+            "h": 216
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "skinMode": "9",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "image",
+          "key": "banner",
+          "name": "Img_TSV_TS18_banner",
+          "rect": {
+            "x": 22,
+            "y": 276,
+            "w": 460,
+            "h": 172
+          },
+          "parent": "intro",
+          "fit": "cover",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/banners-b-atlas-ui-v003.png",
+          "region": [
+            4,
+            86,
+            312,
+            190
+          ],
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "bottomBand",
+          "name": "Panel_TSV_TS18_bottomBand",
+          "rect": {
+            "x": 18,
+            "y": 448,
+            "w": 468,
+            "h": 34
+          },
+          "parent": "intro",
+          "fill": "#FFFFFF",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "plain",
+          "key": "chapterBadge",
+          "name": "Panel_TSV_TS18_chapterBadge",
+          "rect": {
+            "x": 18,
+            "y": 418,
+            "w": 62,
+            "h": 64
+          },
+          "parent": "intro",
+          "fill": "#FFFFFF",
+          "strokeWidth": 0,
+          "radius": 26,
+          "opacity": 1,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "text",
+          "key": "chapterNumber",
+          "name": "Txt_TSV_TS18_chapterNumber",
+          "rect": {
+            "x": 30,
+            "y": 424,
+            "w": 48,
+            "h": 44
+          },
+          "parent": "intro",
+          "text": "3",
+          "size": 36,
+          "weight": 700,
+          "color": "#404954",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "text",
+          "key": "chapterLabel",
+          "name": "Txt_TSV_TS18_chapterLabel",
+          "rect": {
+            "x": 24,
+            "y": 456,
+            "w": 54,
+            "h": 24
+          },
+          "parent": "intro",
+          "text": "챕터",
+          "size": 20,
+          "weight": 700,
+          "color": "#404954",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_TSV_TS18_title",
+          "rect": {
+            "x": 170,
+            "y": 450,
+            "w": 240,
+            "h": 32
+          },
+          "parent": "intro",
+          "text": "용사 집결",
+          "size": 25,
+          "weight": 700,
+          "color": "#80838F",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        }
+      ],
+      "notes": [
+        "버튼/닫기X/터치안내없음.임시가짜닫기추가금지.",
+        "175→176초아트뒤숫자/제목등장.자동복귀처럼보이나시간/입력정책미확인.",
+        "목록단독보기권장;닫기없는연결로실행흐름에가두지않음.",
+        "모든rect는ABS논리504×894. UI수행시부모local좌표로변환.",
+        "모달은독립화면;뒤페이지나임시게임진입버튼을추가하지않음.",
+        "원본은자동복귀처럼보이나입력/타이밍미확인.닫기X/계속버튼없음.실행도구의목록선택/되돌리기만사용,가짜게임입구나닫기추가금지.",
+        "원본3D배경대신독립단색배경.배너는새chapter-heroes그림이며TS09와공유."
+      ],
+      "proposedLinks": [
+        {
+          "action": "목록단독보기",
+          "target": null,
+          "basis": "source controls absent",
+          "proposal": "전환없는시각샘플.실행도구수준복귀만,가짜게임닫기금지",
+          "payload": {}
+        },
+        {
+          "action": "월드복귀",
+          "target": "TS03",
+          "basis": "automatic-looking sequence; exact input unverified",
+          "proposal": "근거없는자동복귀연결미검수로기록",
+          "payload": {}
+        }
+      ],
+      "inputControlsRequired": [],
+      "missingArtwork": [],
+      "observedStates": {
+        "chapter": 3,
+        "title": "용사 집결"
+      },
+      "sourceReferences": [
+        "TS18-R01"
+      ]
+    }
+  ],
+  "remainingFamilyIds": [],
+  "completedRecipeOnly": true,
+  "scope": {
+    "families": 7,
+    "actions": 125
+  },
+  "validation": {
+    "acceptedOps": true,
+    "uniqueKeys": true,
+    "allParentsCreatedEarlier": true,
+    "allPositiveRects": true,
+    "imageAndSkinPathsExist": true,
+    "assetRefsInReadMap": true,
+    "nativeGUIExecuted": false,
+    "allParentChainsAcyclic": true,
+    "atlasRegionsWithinSourcePixels": true,
+    "finalFourArtPathsConfirmed": true
+  },
+  "updatedAtKST": "2026-11-19T09:37:28.464517+09:00",
+  "artFinalization": {
+    "title": "/ui-studio/source/assets/import-staging/tile-finish-20261119/title-illustration-ui-v005.png",
+    "anvil": {
+      "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/celebration-a-atlas-ui-v002.png",
+      "region": [
+        25,
+        56,
+        272,
+        232
+      ]
+    },
+    "plant": {
+      "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/powerplant-emblem-ui-v003.png",
+      "region": [
+        0,
+        105,
+        316,
+        150
+      ]
+    },
+    "rainbow": {
+      "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/celebration-b-atlas-ui-v002.png",
+      "region": [
+        21,
+        47,
+        280,
+        190
+      ]
+    },
+    "confetti": {
+      "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/celebration-b-atlas-ui-v002.png",
+      "region": [
+        339,
+        19,
+        278,
+        268
+      ]
+    },
+    "directlyViewedAllFinalProductionFiles": true
+  }
+}

@@ -1,0 +1,797 @@
+{
+  "checkedAt": "2026-11-16T16:54:30.999Z",
+  "revision": 146,
+  "baselineRevision": 107,
+  "usageGuard": {
+    "observedBefore": 89,
+    "stopThreshold": 90,
+    "source": "mcp__codex_app__get_usage_limits; parent owns final guard"
+  },
+  "checks": [
+    {
+      "name": "actualModel.validateDocument",
+      "pass": true
+    },
+    {
+      "name": "firstSixScreensPreserved",
+      "pass": true
+    },
+    {
+      "name": "baselineTenTransitionsPreserved",
+      "pass": true
+    },
+    {
+      "name": "counts",
+      "pass": true,
+      "detail": {
+        "screens": 7,
+        "parts": 630,
+        "warehouseParts": 89,
+        "transitions": 13
+      }
+    },
+    {
+      "name": "threeAlwaysEdges",
+      "pass": true,
+      "detail": [
+        {
+          "label": "창고에서 이전 화면으로",
+          "action": "back",
+          "condition": "always"
+        },
+        {
+          "label": "상단 방패 → 창고",
+          "action": "navigate",
+          "condition": "always"
+        },
+        {
+          "label": "메뉴 SHOWROOM → 창고",
+          "action": "navigate",
+          "condition": "always"
+        }
+      ]
+    },
+    {
+      "name": "Btn_Showroom_EquippedSlotEqualGeometry",
+      "pass": true,
+      "detail": [
+        {
+          "name": "Btn_Showroom_EquippedSlot01",
+          "x": 59.97,
+          "y": 220.94,
+          "w": 101.2,
+          "h": 139
+        },
+        {
+          "name": "Btn_Showroom_EquippedSlot02",
+          "x": 168.67000000000002,
+          "y": 220.94,
+          "w": 101.2,
+          "h": 139
+        },
+        {
+          "name": "Btn_Showroom_EquippedSlot03",
+          "x": 277.37,
+          "y": 220.94,
+          "w": 101.2,
+          "h": 139
+        },
+        {
+          "name": "Btn_Showroom_EquippedSlot04",
+          "x": 386.07000000000005,
+          "y": 220.94,
+          "w": 101.2,
+          "h": 139
+        }
+      ]
+    },
+    {
+      "name": "Group_Showroom_ShelfEqualGeometry",
+      "pass": true,
+      "detail": [
+        {
+          "name": "Group_Showroom_Shelf01",
+          "x": 44.98,
+          "y": 375.03,
+          "w": 455.42,
+          "h": 165.24
+        },
+        {
+          "name": "Group_Showroom_Shelf02",
+          "x": 44.98,
+          "y": 542.12,
+          "w": 455.42,
+          "h": 165.24
+        },
+        {
+          "name": "Group_Showroom_Shelf03",
+          "x": 44.98,
+          "y": 709.21,
+          "w": 455.42,
+          "h": 165.24
+        }
+      ]
+    },
+    {
+      "name": "fourNativeIconTabsNamedShieldOnlyPanel",
+      "pass": true,
+      "detail": [
+        {
+          "value": "category01",
+          "label": "모자"
+        },
+        {
+          "value": "category02",
+          "label": "방패",
+          "panelId": "element-c439ada3-8a26-4e34-92d8-a1f8107af191"
+        },
+        {
+          "value": "category03",
+          "label": "주사위"
+        },
+        {
+          "value": "category04",
+          "label": "표정"
+        }
+      ]
+    },
+    {
+      "name": "warehouse-art-assets.jsonCount",
+      "pass": true,
+      "detail": 7
+    },
+    {
+      "name": "localSHA:cabinet-background",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-icons/common_warehouse-cabinet_background_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-icons/common_warehouse-cabinet_background_normal_v001.webp",
+        "sha256": "e03fed37827fd25d8891837b23e29a989a9ebe410a883baa7bdd17e503bbeaff"
+      }
+    },
+    {
+      "name": "localSHA:orange-shield",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-icons/common_warehouse-orange-shield_icon_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-icons/common_warehouse-orange-shield_icon_normal_v001.webp",
+        "sha256": "7a61ed33510f84a9baa01feb99c8f468a296af45db5565521992a8ab6968d85b"
+      }
+    },
+    {
+      "name": "localSHA:shield-pedestal",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-icons/common_warehouse-shield-pedestal_icon_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-icons/common_warehouse-shield-pedestal_icon_normal_v001.webp",
+        "sha256": "e02c53267a292a613ed2a13d4a0dfd8c656d11cd376405014b4f4c88d76099e1"
+      }
+    },
+    {
+      "name": "localSHA:cash-dice-bundle",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-icons/common_warehouse-cash-dice-bundle_icon_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-icons/common_warehouse-cash-dice-bundle_icon_normal_v001.webp",
+        "sha256": "13d8b7f3359c03fe2928f16abb3df0f4924b3d2334221d2653c5ce4e6b1ffb5a"
+      }
+    },
+    {
+      "name": "localSHA:gift-dice-bundle",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-icons/common_warehouse-gift-dice-bundle_icon_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-icons/common_warehouse-gift-dice-bundle_icon_normal_v001.webp",
+        "sha256": "8b3a68e5a4848bb132a80b560d7d29297359d2f9ad0a8b77e63b921e873219ca"
+      }
+    },
+    {
+      "name": "localSHA:cash-pack-bundle",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-icons/common_warehouse-cash-pack-bundle_icon_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-icons/common_warehouse-cash-pack-bundle_icon_normal_v001.webp",
+        "sha256": "e4f6d09c9310b97cb34c208b54829bec554ba10184a27759bc05bb6c7ae103fc"
+      }
+    },
+    {
+      "name": "localSHA:top-hat",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-icons/common_warehouse-top-hat_icon_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-icons/common_warehouse-top-hat_icon_normal_v001.webp",
+        "sha256": "42697c2b36de0ff61aebc9defca1a6278ad391a2a171d590538f36776f2ed0b4"
+      }
+    },
+    {
+      "name": "warehouse-ui-assets.jsonCount",
+      "pass": true,
+      "detail": 12
+    },
+    {
+      "name": "localSHA:case-fill9",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_case-fill9_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_case-fill9_normal_v001.webp",
+        "sha256": "d70aef0f9bf92bbb519bb4e25f4c0b8502d7502bfbf9e79b82e837ba16081843"
+      }
+    },
+    {
+      "name": "localSHA:case-metallic-frame9",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_case-metallic-frame9_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_case-metallic-frame9_normal_v001.webp",
+        "sha256": "a5d81269ab6a870b915442be92e5ae2dfb04f77b42fc63d058ef56d37ae439b1"
+      }
+    },
+    {
+      "name": "localSHA:case-hinge-fixed",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_case-hinge-fixed_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_case-hinge-fixed_normal_v001.webp",
+        "sha256": "c661bc856b4b6627a5be1e74e2b9569f3a358a4268472e7cbb264d1441a49b17"
+      }
+    },
+    {
+      "name": "localSHA:category-selected-bg-fixed",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_category-selected-bg-fixed_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_category-selected-bg-fixed_normal_v001.webp",
+        "sha256": "aeea2e149fbf2f5e06509972f0fa01e6979e1d1f7846ca3962d6918062198c25"
+      }
+    },
+    {
+      "name": "localSHA:selection-check-bg-fixed",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_selection-check-bg-fixed_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_selection-check-bg-fixed_normal_v001.webp",
+        "sha256": "e5a2e6d9ab62095f9ad2612bbd3659c26c084d15183d273072e73b5b6f9feab2"
+      }
+    },
+    {
+      "name": "localSHA:subheader-count-pill3",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_subheader-count-pill3_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_subheader-count-pill3_normal_v001.webp",
+        "sha256": "292670da998364d379d72047c765e163c03bf42d8d2ebd2789d853871f1ece6f"
+      }
+    },
+    {
+      "name": "localSHA:category-smile-fixed",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_category-smile-fixed_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_category-smile-fixed_normal_v001.webp",
+        "sha256": "1b483baacea43c2e631809c3f05c9640987299183a1055fa23fd21fbdfbaeb54"
+      }
+    },
+    {
+      "name": "localSHA:background-peach-solid-fill9",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_background-peach-solid-fill9_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_background-peach-solid-fill9_normal_v001.webp",
+        "sha256": "a45122cbba063761523d82014ca130fb0a0572bf08147ce749fb5a7b771dae25"
+      }
+    },
+    {
+      "name": "localSHA:pillar-ivory-solid-fill9",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_pillar-ivory-solid-fill9_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_pillar-ivory-solid-fill9_normal_v001.webp",
+        "sha256": "30e32e822744faa45976b080aa0c28b9d4825fd877792b96177f822f0b9bfbac"
+      }
+    },
+    {
+      "name": "localSHA:category-idle-bg-fixed",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_category-idle-bg-fixed_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_category-idle-bg-fixed_normal_v001.webp",
+        "sha256": "dac9d272bf1e32b42c1b2926a0884ee1d8bbdf0d59683f536e592026d2ff2e5c"
+      }
+    },
+    {
+      "name": "localSHA:single-die-white-fixed",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_single-die-white-fixed_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_single-die-white-fixed_normal_v001.webp",
+        "sha256": "d3872a8c3e0a1c90305d10fd424b3ce940ebc7d05837778ed3704b6e46b736af"
+      }
+    },
+    {
+      "name": "localSHA:single-die-beige-fixed",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-ui/common_warehouse_single-die-beige-fixed_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-ui/common_warehouse_single-die-beige-fixed_normal_v001.webp",
+        "sha256": "11790365fb73b2865b7ea3c3a7003483b1ee286dc561e61f7c385d19aa2c42dc"
+      }
+    },
+    {
+      "name": "warehouse-products-assets.jsonCount",
+      "pass": true,
+      "detail": 4
+    },
+    {
+      "name": "localSHA:gold-medallion",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-products/common_warehouse-gold-medallion_icon_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-products/common_warehouse-gold-medallion_icon_normal_v001.webp",
+        "sha256": "00231d8709fdf0d4591fd55f1384a8d1866d8ff6ee7428b1cd8a6f9d72827ef5"
+      }
+    },
+    {
+      "name": "localSHA:grey-medallion",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-products/common_warehouse-grey-medallion_icon_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-products/common_warehouse-grey-medallion_icon_normal_v001.webp",
+        "sha256": "aae2e4e5893f63c1f66825b6c81fb13ea6c1ed64ff07b234a375ab8773c26ff7"
+      }
+    },
+    {
+      "name": "localSHA:gift-box",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-products/common_warehouse-gift-box_icon_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-products/common_warehouse-gift-box_icon_normal_v001.webp",
+        "sha256": "81d6bb59f5b662e919c5a2369f3dfe3852b3e8bf6ebd3d09b3b7a039db397996"
+      }
+    },
+    {
+      "name": "localSHA:orange-pack-pair",
+      "pass": true,
+      "detail": {
+        "production": "samples/monopoly-go/ui-studio/assets/production/warehouse-products/common_warehouse-orange-pack-pair_icon_normal_v001.webp",
+        "mirror": "src/tools/uxStudio/assets/import-staging/warehouse-products/common_warehouse-orange-pack-pair_icon_normal_v001.webp",
+        "sha256": "763681332474364ca52b555f78ff25fdb07eb2d217c03897515cb2b85bc3a01f"
+      }
+    },
+    {
+      "name": "warehouseUsedRefs20New5Reused",
+      "pass": true,
+      "detail": {
+        "total": 25,
+        "new": 20,
+        "reused": 5,
+        "reusedRefs": [
+          "sha256-9077bed744487f5cb63244093020a3df075df16b1401a85c71896286b510b69a.webp",
+          "sha256-150bc918192c946962c0c7ac6b8a769fa3ed0c1fe9e52b1d52220039bc143918.webp",
+          "sha256-3768626bc5f097e2f9b63097114b765bfaf0f0f5e8f103996faf102089a3f65c.webp",
+          "sha256-8bbd66d08ba8b912330fe6ff7268c32017e1ce09bec0614f4ae03e2dff17d792.webp",
+          "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp"
+        ],
+        "unusedNewAssets": [
+          "cash-dice-bundle",
+          "gift-dice-bundle",
+          "cash-pack-bundle"
+        ]
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-9077bed744487f5cb63244093020a3df075df16b1401a85c71896286b510b69a.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "9077bed744487f5cb63244093020a3df075df16b1401a85c71896286b510b69a"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-150bc918192c946962c0c7ac6b8a769fa3ed0c1fe9e52b1d52220039bc143918.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "150bc918192c946962c0c7ac6b8a769fa3ed0c1fe9e52b1d52220039bc143918"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-a45122cbba063761523d82014ca130fb0a0572bf08147ce749fb5a7b771dae25.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "a45122cbba063761523d82014ca130fb0a0572bf08147ce749fb5a7b771dae25"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-30e32e822744faa45976b080aa0c28b9d4825fd877792b96177f822f0b9bfbac.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "30e32e822744faa45976b080aa0c28b9d4825fd877792b96177f822f0b9bfbac"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-e03fed37827fd25d8891837b23e29a989a9ebe410a883baa7bdd17e503bbeaff.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "e03fed37827fd25d8891837b23e29a989a9ebe410a883baa7bdd17e503bbeaff"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-292670da998364d379d72047c765e163c03bf42d8d2ebd2789d853871f1ece6f.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "292670da998364d379d72047c765e163c03bf42d8d2ebd2789d853871f1ece6f"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-e02c53267a292a613ed2a13d4a0dfd8c656d11cd376405014b4f4c88d76099e1.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "e02c53267a292a613ed2a13d4a0dfd8c656d11cd376405014b4f4c88d76099e1"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-7a61ed33510f84a9baa01feb99c8f468a296af45db5565521992a8ab6968d85b.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "7a61ed33510f84a9baa01feb99c8f468a296af45db5565521992a8ab6968d85b"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-3768626bc5f097e2f9b63097114b765bfaf0f0f5e8f103996faf102089a3f65c.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "3768626bc5f097e2f9b63097114b765bfaf0f0f5e8f103996faf102089a3f65c"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-e5a2e6d9ab62095f9ad2612bbd3659c26c084d15183d273072e73b5b6f9feab2.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "e5a2e6d9ab62095f9ad2612bbd3659c26c084d15183d273072e73b5b6f9feab2"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-d70aef0f9bf92bbb519bb4e25f4c0b8502d7502bfbf9e79b82e837ba16081843.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "d70aef0f9bf92bbb519bb4e25f4c0b8502d7502bfbf9e79b82e837ba16081843"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-00231d8709fdf0d4591fd55f1384a8d1866d8ff6ee7428b1cd8a6f9d72827ef5.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "00231d8709fdf0d4591fd55f1384a8d1866d8ff6ee7428b1cd8a6f9d72827ef5"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-dac9d272bf1e32b42c1b2926a0884ee1d8bbdf0d59683f536e592026d2ff2e5c.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "dac9d272bf1e32b42c1b2926a0884ee1d8bbdf0d59683f536e592026d2ff2e5c"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-aae2e4e5893f63c1f66825b6c81fb13ea6c1ed64ff07b234a375ab8773c26ff7.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "aae2e4e5893f63c1f66825b6c81fb13ea6c1ed64ff07b234a375ab8773c26ff7"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-aeea2e149fbf2f5e06509972f0fa01e6979e1d1f7846ca3962d6918062198c25.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "aeea2e149fbf2f5e06509972f0fa01e6979e1d1f7846ca3962d6918062198c25"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-42697c2b36de0ff61aebc9defca1a6278ad391a2a171d590538f36776f2ed0b4.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "42697c2b36de0ff61aebc9defca1a6278ad391a2a171d590538f36776f2ed0b4"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-11790365fb73b2865b7ea3c3a7003483b1ee286dc561e61f7c385d19aa2c42dc.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "11790365fb73b2865b7ea3c3a7003483b1ee286dc561e61f7c385d19aa2c42dc"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-8bbd66d08ba8b912330fe6ff7268c32017e1ce09bec0614f4ae03e2dff17d792.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "8bbd66d08ba8b912330fe6ff7268c32017e1ce09bec0614f4ae03e2dff17d792"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-1b483baacea43c2e631809c3f05c9640987299183a1055fa23fd21fbdfbaeb54.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "1b483baacea43c2e631809c3f05c9640987299183a1055fa23fd21fbdfbaeb54"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-c661bc856b4b6627a5be1e74e2b9569f3a358a4268472e7cbb264d1441a49b17.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "c661bc856b4b6627a5be1e74e2b9569f3a358a4268472e7cbb264d1441a49b17"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-81d6bb59f5b662e919c5a2369f3dfe3852b3e8bf6ebd3d09b3b7a039db397996.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "81d6bb59f5b662e919c5a2369f3dfe3852b3e8bf6ebd3d09b3b7a039db397996"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-763681332474364ca52b555f78ff25fdb07eb2d217c03897515cb2b85bc3a01f.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "763681332474364ca52b555f78ff25fdb07eb2d217c03897515cb2b85bc3a01f"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-d3872a8c3e0a1c90305d10fd424b3ce940ebc7d05837778ed3704b6e46b736af.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "d3872a8c3e0a1c90305d10fd424b3ce940ebc7d05837778ed3704b6e46b736af"
+      }
+    },
+    {
+      "name": "HTTP7018:sha256-a5d81269ab6a870b915442be92e5ae2dfb04f77b42fc63d058ef56d37ae439b1.webp",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "sha256": "a5d81269ab6a870b915442be92e5ae2dfb04f77b42fc63d058ef56d37ae439b1"
+      }
+    }
+  ],
+  "limitations": [
+    "Source/model/local asset SHA and HTTP7018 checks only; no browser/visual equivalence, game policy, or acceptance claim."
+  ],
+  "pass": true,
+  "passed": 60,
+  "total": 60,
+  "priorHttpAttempts": [
+    {
+      "workspace": null,
+      "checkedAt": "2026-11-16T16:53:45.012Z",
+      "checks": [
+        {
+          "name": "HTTP7018:sha256-9077bed744487f5cb63244093020a3df075df16b1401a85c71896286b510b69a.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "b49d0c036b613564c88c16f05dadf42e98cb740f6a2058a2a92ca62ff247736b"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-150bc918192c946962c0c7ac6b8a769fa3ed0c1fe9e52b1d52220039bc143918.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "177a3cd25e6a0e40f4f2fb7d74d0e6865105015b815748a7294c75b2ae7f8150"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-a45122cbba063761523d82014ca130fb0a0572bf08147ce749fb5a7b771dae25.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "114aac94998177bd34df3de7f1dab5f13273e2463d0e1cf36882e6083fcdfc69"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-30e32e822744faa45976b080aa0c28b9d4825fd877792b96177f822f0b9bfbac.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "ea7f1ca79b82a2e612bb676aa861b4ee1513c426aec16d845582cc7d51fa815b"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-e03fed37827fd25d8891837b23e29a989a9ebe410a883baa7bdd17e503bbeaff.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "8c3c405011acc42f580afa478fe32bbbd3d2d36b1ba0acd9ea27e9024057261b"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-292670da998364d379d72047c765e163c03bf42d8d2ebd2789d853871f1ece6f.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "7f0363345fe0849f2263e8f78fc5531d7ebcf389c136f4c2fa6c8051a257d1b6"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-e02c53267a292a613ed2a13d4a0dfd8c656d11cd376405014b4f4c88d76099e1.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "2b06c7abf9dad35be3148572f50b6ef0cc909a25f0f40d4054a14babbd56653a"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-7a61ed33510f84a9baa01feb99c8f468a296af45db5565521992a8ab6968d85b.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "c0943ff55a55420fb5e05de8d7279f3b2522d8f467b601ddd3eb25c2fc383833"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-3768626bc5f097e2f9b63097114b765bfaf0f0f5e8f103996faf102089a3f65c.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "e8ea18ccbff78d50e2c432cf09269625e8dced4c9bf6009054b9cc1332c823c5"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-e5a2e6d9ab62095f9ad2612bbd3659c26c084d15183d273072e73b5b6f9feab2.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "6928667d1e5a0320e122c18685274335fa974141bf668a877300a62ab6d2d4ae"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-d70aef0f9bf92bbb519bb4e25f4c0b8502d7502bfbf9e79b82e837ba16081843.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "439308af123d3ca1b11119b08be60112b3094258efddfc49bd7478741d2dff65"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-00231d8709fdf0d4591fd55f1384a8d1866d8ff6ee7428b1cd8a6f9d72827ef5.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "38f7865e2922bb26a19dd653c6c12eca4a1462b4d5c2da2757c3febd45c28b3f"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-aae2e4e5893f63c1f66825b6c81fb13ea6c1ed64ff07b234a375ab8773c26ff7.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "240e1d821c05d3e9d63756f881fd5748630360efb6b2387372e7e5586f7940b0"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-dac9d272bf1e32b42c1b2926a0884ee1d8bbdf0d59683f536e592026d2ff2e5c.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "63359d115172c6283ac6a8184661e1b122ce4744502ed559109d0f57af36070e"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-aeea2e149fbf2f5e06509972f0fa01e6979e1d1f7846ca3962d6918062198c25.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "8ede75d15215568de75396c2d96be99bd7cc90d7a512898c9581bbe9f9a230b4"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-42697c2b36de0ff61aebc9defca1a6278ad391a2a171d590538f36776f2ed0b4.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "e2b1ca1401d70e1eb0036abd81181514812ad539de33fafb9ac44e627d1ff96c"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-11790365fb73b2865b7ea3c3a7003483b1ee286dc561e61f7c385d19aa2c42dc.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "29469a6514fe22fa375d110cc97e004f3feb5adfbc30a32afd28ffa3a574d72a"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-1b483baacea43c2e631809c3f05c9640987299183a1055fa23fd21fbdfbaeb54.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "6c49e948f1421b10b910586866b9afe3da0dbe6f6e794b31d70aa75bac1c2d0c"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-8bbd66d08ba8b912330fe6ff7268c32017e1ce09bec0614f4ae03e2dff17d792.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "b4df15072421004cd6b221d89be6737e03195d52461dc3fa9db799b2e473d638"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "5676c71be51580f21cf327b6865412e5029cf03e9faefe25efca7f06a71d1d6d"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-a5d81269ab6a870b915442be92e5ae2dfb04f77b42fc63d058ef56d37ae439b1.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "0daae540ff84c3ad6164d9b53844288285b25915e501442514813e46562b99b4"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-c661bc856b4b6627a5be1e74e2b9569f3a358a4268472e7cbb264d1441a49b17.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "be9c7cc761fa0d85c94b5349169eebc89b4fd9d826d45f04a06b1d5022e0039a"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-81d6bb59f5b662e919c5a2369f3dfe3852b3e8bf6ebd3d09b3b7a039db397996.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "2127e26ccab1ed5c40a5b19895cefa48791f866ab81ed3e60c6d4dee9f2ad58c"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-763681332474364ca52b555f78ff25fdb07eb2d217c03897515cb2b85bc3a01f.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "2479972d02f1b8df731b9d5e783043a1ff2aaee8213e75b338fb6abb679b8a3e"
+          }
+        },
+        {
+          "name": "HTTP7018:sha256-d3872a8c3e0a1c90305d10fd424b3ce940ebc7d05837778ed3704b6e46b736af.webp",
+          "pass": false,
+          "detail": {
+            "status": 404,
+            "sha256": "05b8faa65a29ef75895fb986fbfbce9c0abdde2ae826627286196178ff8a2bf9"
+          }
+        }
+      ]
+    }
+  ],
+  "httpWorkspace": "workspace-8e0f09e7-4699-4ac6-81b3-d545c7046ef6"
+}

@@ -1,0 +1,193 @@
+{
+  "kind": "normal-ui-transition-candidates-not-design",
+  "recipe": "recipes-lists-shops.reviewed-v007.json",
+  "status": "source-known candidates for root review; not UI-created by this helper",
+  "sourceInventory": [
+    "../unidentified-game-20261120/video-a/family-inventory.json",
+    "../unidentified-game-20261120/video-b/inventory.json"
+  ],
+  "candidates": [
+    {
+      "fromFamily": "OverdriveRecruit",
+      "key": "Packs",
+      "toFamily": "ACE10L",
+      "action": "navigate",
+      "condition": "always",
+      "source": "B06 30.48-30.98s",
+      "caveat": "Limited is the observed B entry state, not a universal default tab rule."
+    },
+    {
+      "fromFamily": "ACE10L",
+      "key": "Mode2",
+      "toFamily": "ACE10C",
+      "action": "navigate",
+      "condition": "always",
+      "source": "A10 38-41s",
+      "caveat": "Chapter view; sequence does not prove an unseen exact gesture."
+    },
+    {
+      "fromFamily": "ACE10C",
+      "key": "Mode1",
+      "toFamily": "ACE10L",
+      "action": "navigate",
+      "condition": "always",
+      "source": "A10 38-41s",
+      "caveat": "Limited-Time view."
+    },
+    {
+      "fromFamily": "ACE10L",
+      "key": "NavItemShop",
+      "toFamily": "ACE14T",
+      "action": "navigate",
+      "condition": "always",
+      "source": "A85-86s",
+      "caveat": "Shared bottom Item Shop role; representative Tempus view. Exact per-board click is not recorded."
+    },
+    {
+      "fromFamily": "ACE10C",
+      "key": "NavItemShop",
+      "toFamily": "ACE14T",
+      "action": "navigate",
+      "condition": "always",
+      "source": "A85-86s",
+      "caveat": "Shared bottom Item Shop role; representative Tempus view. Exact per-board click is not recorded."
+    },
+    {
+      "fromFamily": "ACE10L",
+      "key": "NavCumulative",
+      "toFamily": "ACE15P",
+      "action": "navigate",
+      "condition": "always",
+      "source": "A91-92s",
+      "caveat": "Shared bottom tab correspondence is inferred. The preceding source view is Medal, not Tempus."
+    },
+    {
+      "fromFamily": "ACE10C",
+      "key": "NavCumulative",
+      "toFamily": "ACE15P",
+      "action": "navigate",
+      "condition": "always",
+      "source": "A91-92s",
+      "caveat": "Shared bottom tab correspondence is inferred. The preceding source view is Medal, not Tempus."
+    },
+    {
+      "fromFamily": "ACE14T",
+      "key": "NavCumulative",
+      "toFamily": "ACE15P",
+      "action": "navigate",
+      "condition": "always",
+      "source": "A91-92s",
+      "caveat": "Shared bottom tab correspondence is inferred. The preceding source view is Medal, not Tempus."
+    },
+    {
+      "fromFamily": "ACE15P",
+      "key": "LocalTab1",
+      "toFamily": "ACE15M",
+      "action": "navigate",
+      "condition": "always",
+      "source": "A15 92-96s",
+      "caveat": "Cumulative Purchase view."
+    },
+    {
+      "fromFamily": "ACE15M",
+      "key": "LocalTab0",
+      "toFamily": "ACE15P",
+      "action": "navigate",
+      "condition": "always",
+      "source": "A15 100-104s",
+      "caveat": "Period Rewards view."
+    },
+    {
+      "fromFamily": "ACE10L",
+      "key": "Back",
+      "toFamily": null,
+      "action": "back",
+      "condition": "always",
+      "source": "Visible source back control; v007 Back",
+      "caveat": "Use navigation history, not fixed Lobby target."
+    },
+    {
+      "fromFamily": "ACE10C",
+      "key": "Back",
+      "toFamily": null,
+      "action": "back",
+      "condition": "always",
+      "source": "Visible source back control; v007 Back",
+      "caveat": "Use navigation history, not fixed Lobby target."
+    },
+    {
+      "fromFamily": "ACE14T",
+      "key": "Back",
+      "toFamily": null,
+      "action": "back",
+      "condition": "always",
+      "source": "Visible source back control; v007 Back",
+      "caveat": "Use navigation history, not fixed Lobby target."
+    },
+    {
+      "fromFamily": "ACE15P",
+      "key": "Back",
+      "toFamily": null,
+      "action": "back",
+      "condition": "always",
+      "source": "Visible source back control; v007 Back",
+      "caveat": "Use navigation history, not fixed Lobby target."
+    },
+    {
+      "fromFamily": "ACE15M",
+      "key": "Back",
+      "toFamily": null,
+      "action": "back",
+      "condition": "always",
+      "source": "Visible source back control; v007 Back",
+      "caveat": "Use navigation history, not fixed Lobby target."
+    }
+  ],
+  "keySemantics": {
+    "ACE14T": {
+      "Mode1": "Medal Shop; unbuilt variation",
+      "Mode2": "Tempus Shop"
+    },
+    "ACE15P/ACE15M": {
+      "LocalTab0": "Period Rewards",
+      "LocalTab1": "Cumulative Purchase"
+    },
+    "ACE02": {
+      "inputKeys": [
+        "Filter",
+        "Advance",
+        "Pilot1",
+        "Pilot2",
+        "Pilot3",
+        "Pilot4",
+        "Pilot5",
+        "Pilot6",
+        "Pilot7",
+        "Pilot8",
+        "Pilot9"
+      ],
+      "displayOnly": [
+        "CollectionPilotCaption",
+        "CollectionPappoCaption"
+      ],
+      "hasBackAction": false
+    }
+  },
+  "held": [
+    "Unknown purchase/cash/draw/claim/tier and quantity outcomes remain unlinked.",
+    "NavTopPick and cross-shop NavSpecialPack initial mode are unknown.",
+    "ACE14T Mode1 Medal and ACE10C Difficulty1 Elite targets are not built.",
+    "Pilot Filter/Advance/individual Pilot/Pappo destinations are unobserved.",
+    "Lobby Pilots and Honk PilotRecruit have no exact input-to-PilotList evidence; sequence alone does not authorize a link."
+  ],
+  "nativeSelectors": {
+    "screen": "[data-tree=\"screens\"] then .screen-list button[data-screen=\"<sid>\"]",
+    "inputRoot": "[data-tree=\"layers\"] then button.layer-select[data-element=\"<rootId>\"]",
+    "tab": "[data-tab=\"connections\"]",
+    "add": "[data-action=\"add-edge\"]",
+    "form": "fieldset[data-edge-form=\"<new edgeId>\"]",
+    "field": "[data-edge-field=\"targetScreen|action|label|returnPolicy|condition\"]",
+    "order": "Target first, action and metadata next, condition always LAST. Reacquire after rerender. Exactly one new edge ID. Select root input, not caption.",
+    "defaultCaveat": "New edge defaults are unresolved feedback/unknown; navigate/open needs target. Unknown routes must not gain generic success edges."
+  }
+}

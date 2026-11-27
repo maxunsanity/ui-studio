@@ -1,0 +1,278 @@
+--- a/src/tools/uxStudio/main.mjs
++++ b/src/tools/uxStudio/main.mjs
+@@ -4,7 +4,9 @@
+ import {DEVICE_PROFILES as profiles,canvasDevicePreview} from './canvas-device-preview.mjs';
+ import {BUTTON_STATES,createButtonState,buttonStateOwner,buttonMotionTargets} from './button-state.mjs';
+ import {changeControl} from './model.mjs';
+-import {projectContext} from './project-context.mjs';
++import {projectContext,designURL} from './project-context.mjs';
++import {PRESENTATION_MODES,normalizePresentationMode} from './presentation.mjs';
++import {mountSampleScreen,sampleSize,sampleFit} from './sample-preview.mjs';
+ import {assetSource, assetUrl} from './asset-reference.mjs';
+ import {uploadImageAsset, copyDocumentAssets} from './asset-client.mjs';
+ import {applyControlConfig,controlInspectorHTML,applyTabTexture} from './control-inspector.mjs';
+@@ -36,6 +38,7 @@
+ import { attachEditor } from './editor.mjs';
+ import { readDesignFile, clone, validateDocument, screenById, resolveRect, filteredRowY, adjustRect, audit, createRuntime, activate, settlePurchase, replayScenario, CONDITIONS, ACTIONS, KINDS } from './model.mjs';
+ const workspaceId = new URLSearchParams(location.search).get('workspace') || null;
++let presentationMode = normalizePresentationMode(new URLSearchParams(location.search).get('view'));
+ const lastProjectKey = scopedKey('ux-studio.last-project', workspaceId);
+ let folderProject = null, projectSwitchAllowed = false, studioSettings = {catalogEnabled: false};
+ const $ = s => document.querySelector(s), esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
+@@ -372,10 +375,47 @@
+ function select(label, name, value, choices) {
+     return `<label>${label}<select data-field="${name}">${choices.map(([id, title]) => `<option value="${esc(id)}" ${value === id ? 'selected' : ''}>${esc(title)}</option>`).join('')}</select></label>`;
+ }
++function rememberPresentation() {
++    const url = new URL(location.href);
++    url.searchParams.set('view',presentationMode);
++    history.replaceState(null,'',url);
++}
++function openCurrentPreview({screenId = selectedScreen,elementId = selectedElement,presentationMode:view = presentationMode} = {}) {
++    const snapshot = clone(doc), screen = screenById(snapshot,screenId), opener = document.activeElement;
++    if (!screen) return notify('미리 볼 화면을 찾지 못했습니다.');
++    const dialog = document.createElement('dialog'); dialog.className = 'studio-screen-preview';
++    const heading = document.createElement('header'), info = document.createElement('div'), title = document.createElement('h2'), detail = document.createElement('p');
++    title.id = 'screen-preview-' + crypto.randomUUID(); title.textContent = screen.name + ' · 미리보기';
++    dialog.setAttribute('aria-labelledby',title.id);
++    const selected = screen.elements.find(item => item.id === elementId);
++    detail.textContent = (folderProject?.name || '공용 저장공간') + ' · ' + snapshot.name + ' · 현재 설계' + (dirty ? ' · 미저장 수정 포함' : expectedRevision === null ? ' · 파일 저장 전' : ' · 저장된 내용과 같음') + (selected ? ' · 선택 ' + selected.name : '');
++    info.append(title,detail);
++    const close = document.createElement('button'); close.type = 'button'; close.textContent = '편집으로 돌아가기'; close.onclick = () => dialog.close();
++    heading.append(info,close);
++    const viewport = document.createElement('div'); viewport.className = 'studio-screen-preview-viewport';
++    const stage = document.createElement('div'), host = document.createElement('div'); stage.className = 'studio-screen-preview-stage'; host.className = 'studio-screen-preview-host'; stage.append(host); viewport.append(stage);
++    dialog.append(heading,viewport); document.body.append(dialog);
++    let viewer, observer;
++    const fit = () => {
++        if (!viewer) return;
++        const size = sampleSize(snapshot,screen), scale = sampleFit(size,viewport.clientWidth,viewport.clientHeight);
++        host.style.width = size.w + 'px'; host.style.height = size.h + 'px'; host.style.transform = `scale(${scale})`;
++        stage.style.width = size.w * scale + 'px'; stage.style.height = size.h * scale + 'px';
++    };
++    dialog.addEventListener('keydown',event => event.stopPropagation());
++    dialog.addEventListener('close',() => { observer?.disconnect(); viewer?.dispose(); dialog.remove(); if(opener?.isConnected)opener.focus(); },{once:true});
++    try {
++        dialog.showModal();
++        viewer = mountSampleScreen(host,snapshot,{screenId,workspaceId,presentationMode:normalizePresentationMode(view)});
++        if (typeof ResizeObserver === 'function') { observer = new ResizeObserver(fit); observer.observe(viewport); }
++        fit(); close.focus();
++    } catch(error) { dialog.close(); notify(error.message); }
++}
+ function header() {
+     const context = projectContext({workspaceId,workspace:folderProject,document:doc,dirty});
+-    return `<header class="studio-header"><div class="project-context" aria-label="현재 프로젝트"><div><strong>UI 스튜디오</strong><span class="project-label">${esc(context.label)} · ${esc(context.name)}</span></div><div class="project-directory" title="${esc(context.directory)}">${esc(context.directory)}</div><small>${esc(context.design)}</small></div><div class="save-controls"><button data-action="project-folders">프로젝트 폴더</button><button data-action="manual">가이드</button><span id="save-status" class="${dirty ? 'dirty' : ''}">${dirty ? '● 미저장 수정' : expectedRevision === null ? '파일 저장 전' : '저장됨 · r' + expectedRevision}</span><button data-action="save" ${saveBusy ? 'disabled' : ''}>${saveBusy ? '저장 중' : '파일에 저장'}</button>${expectedRevision !== null ? `<a class="consumer-link" target="_blank" rel="noopener" href="${esc(scopeURL('/ui-studio/source/sample-preview.html?project=' + encodeURIComponent(doc.projectId) + '&screen=' + encodeURIComponent(selectedScreen), workspaceId))}">저장 샘플 보기 ↗</a><a class="consumer-link" href="${esc(scopeURL('/ui-studio/canvas.html?project=' + encodeURIComponent(doc.projectId), workspaceId))}">전체 캔버스 ↗</a>` : ''}<details class="file-menu"><summary>파일 · 공유</summary><div><label>설계 이름<input data-project-field="name" value="${esc(doc.name)}"></label><label>저장한 설계<select data-open-project><option value="">선택해서 열기</option>${projects.map(p => `<option value="${esc(p.id)}">${esc(p.name)} · r${p.revision}</option>`).join('')}</select></label><button data-action="reopen" ${expectedRevision === null ? 'disabled' : ''}>현재 파일 다시 열기</button><button data-action="new-project">새 설계</button><fieldset><legend>제작 단계 기준판</legend><label>보존할 단계<select data-baseline-stage>${Object.entries(baselineLabels).map(([key, label]) => `<option value="${key}" ${baselineStage === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select></label><button data-action="baseline-capture" ${dirty || expectedRevision === null || saveBusy || baselineBusy ? 'disabled' : ''}>현재 저장판을 기준판으로 보존</button><button data-action="baseline-list" ${baselineBusy ? 'disabled' : ''}>기준판 목록 읽기</button><label>기준판 불러오기<select data-open-baseline ${dirty || saveBusy || baselineBusy ? 'disabled' : ''}><option value="">단계 · 버전 선택</option>${baselineItems.map(b => `<option value="${b.stage}:${b.revision}">${esc(baselineLabels[b.stage])} · r${b.revision} · ${esc(b.name)}</option>`).join('')}</select></label><small>현재 수정을 먼저 저장하세요. 기준판 불러오기는 자동 저장하지 않습니다.</small></fieldset><button data-action="wireframe-style">클릭 타원 · 표시 직각으로 정리</button>${workspaceId || studioSettings.catalogEnabled === false ? '' : '<button data-action="lobby-design">공통 설정으로 로비 설계 만들기</button>'}<label class="file-label">설계 JSON 불러오기<input type="file" id="import-file" accept=".json,application/json"></label><button data-action="export">설계 JSON 내보내기</button>${expectedRevision !== null ? `<a class="consumer-link" target="_blank" rel="noopener" href="${esc(scopeURL('/ui-studio/preview.html?project=' + encodeURIComponent(doc.projectId), workspaceId))}">동작 시험 보기 ↗</a>` : ''}<button data-action="context">선택 정보 공유 파일</button><button data-action="export-plan">기획·연결 설명 내보내기</button><button data-action="export-handoff">AI 연결 명세 JSON</button><button data-action="glossary">UI 용어 찾아보기</button><button data-action="manual">툴 기획·설명서</button></div></details></div></header>
+- <div class="toolbar"><div class="seg"><button data-action="edit" aria-pressed="${mode === 'edit'}">배치 편집</button><button data-action="play" aria-pressed="${mode === 'play'}">동작 시험</button></div><button data-action="unit-library">유닛 추가</button><button data-action="design-guide" ${mode === 'play' ? 'disabled' : ''}>디자인 가이드 보기</button>${workspaceId || studioSettings.catalogEnabled === false ? '' : '<button data-action="build-current-ui">현재 로비 UI 구조 적용</button>'}<label class="inline">표현<select data-asset-view><option value="wire" ${assetView === 'wire' ? 'selected' : ''}>구조 보기</option><option value="art" ${assetView === 'art' ? 'selected' : ''}>게임 보기</option></select></label><button data-action="shortcuts">단축키 ?</button><details class="file-menu edit-menu"><summary>편집</summary><div>${[['copy', '복사'], ['cut', '잘라내기'], ['paste', '붙여넣기'], ['duplicate', '복제'], ['delete', '삭제'], ['all', '전체 선택'], ['group', '그룹'], ['ungroup', '그룹 해제'], ['layer-back', '맨 뒤로'], ['layer-front', '맨 앞으로']].map(([id, n]) => `<button data-edit-command="${id}">${n}</button>`).join('')}</div></details><button data-action="undo" ${!undo.length || mode === 'play' ? 'disabled' : ''}>되돌리기</button><button data-action="redo" ${!redo.length || mode === 'play' ? 'disabled' : ''}>다시하기</button><label class="inline">기기<select data-setting="profile">${Object.entries(profiles).map(([id, p]) => `<option value="${id}" ${id === profile ? 'selected' : ''}>${p.name} ${id==='design'?detailDevicePreview(screenById(doc,selectedScreen),'design').reference.w:p.w}×${id==='design'?detailDevicePreview(screenById(doc,selectedScreen),'design').reference.h:p.h}</option>`).join('')}</select></label><label class="inline">확대<select data-setting="zoom">${[['fit', '화면 맞춤'], ['0.25', '25%'], ['0.5', '50%'], ['0.75', '75%'], ['1', '100%'], ['1.5', '150%'], ['2', '200%'], ['3', '300%'], ...(!['fit', '0.25', '0.5', '0.75', '1', '1.5', '2', '3'].includes(String(zoom)) ? [[String(zoom), Math.round(Number(zoom) * 100) + '%']] : [])].map(([id, n]) => `<option value="${id}" ${id === zoom ? 'selected' : ''}>${n}</option>`).join('')}</select></label><button data-action="zoom-out" aria-label="캔버스 축소">−</button><button data-action="zoom-in" aria-label="캔버스 확대">＋</button><button data-action="canvas-fit">화면 맞춤</button><button data-action="hand" aria-pressed="${handTool}">손 도구 H</button><button data-action="grid" aria-pressed="${grid}">선택 가이드</button><button data-action="snap" aria-pressed="${snap}">1% 스냅</button><button data-action="show-flow">화면 관계</button><details class="file-menu frame-menu"><summary>작업 영역 ↘</summary><div><p>모서리를 끌어 전체 작업 영역 크기를 바꿉니다.</p><label>너비 px<input data-frame-size="w" type="number" min="760" value="${workspacePrefs.frame?.w || innerWidth}"></label><label>높이 px<input data-frame-size="h" type="number" min="500" value="${workspacePrefs.frame?.h || innerHeight}"></label><button data-action="apply-frame">크기 적용</button><button data-action="frame-fit">창에 맞춤</button><label>작업 배경색<input type="color" data-editor-color="stageColor" value="${workspacePrefs.stageColor}"></label><label>캔버스색<input type="color" data-editor-color="canvasColor" value="${workspacePrefs.canvasColor}"></label></div></details></div>
++    const current = screenById(doc,selectedScreen), navigation = {workspaceId,projectId:doc.projectId,screenId:selectedScreen,elementId:selectedElement,presentationMode};
++    return `<header class="studio-header"><div class="project-context" aria-label="현재 프로젝트"><div><strong>UI 스튜디오</strong><span class="project-label">${esc(context.label)} · ${esc(context.name)}</span></div><div class="studio-current-screen">${esc(current.name)}</div><small>${esc(context.design)}</small><div class="project-directory" title="${esc(context.directory)}">${esc(context.directory)}</div></div><div class="save-controls"><span id="save-status" class="${dirty ? 'dirty' : ''}">${dirty ? '● 미저장 수정' : expectedRevision === null ? '파일 저장 전' : '저장됨 · r' + expectedRevision}</span><button data-action="save" ${saveBusy ? 'disabled' : ''}>${saveBusy ? '저장 중' : '파일에 저장'}</button><details class="file-menu"><summary>파일 · 공유</summary><div><button data-action="project-folders">프로젝트 폴더</button><button data-action="manual">가이드</button>${expectedRevision !== null ? `<a class="consumer-link" target="_blank" rel="noopener" href="${esc(designURL('sample',navigation))}">저장 샘플 보기 ↗</a>` : ''}<label>설계 이름<input data-project-field="name" value="${esc(doc.name)}"></label><label>저장한 설계<select data-open-project><option value="">선택해서 열기</option>${projects.map(p => `<option value="${esc(p.id)}">${esc(p.name)} · r${p.revision}</option>`).join('')}</select></label><button data-action="reopen" ${expectedRevision === null ? 'disabled' : ''}>현재 파일 다시 열기</button><button data-action="new-project">새 설계</button><fieldset><legend>제작 단계 기준판</legend><label>보존할 단계<select data-baseline-stage>${Object.entries(baselineLabels).map(([key, label]) => `<option value="${key}" ${baselineStage === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select></label><button data-action="baseline-capture" ${dirty || expectedRevision === null || saveBusy || baselineBusy ? 'disabled' : ''}>현재 저장판을 기준판으로 보존</button><button data-action="baseline-list" ${baselineBusy ? 'disabled' : ''}>기준판 목록 읽기</button><label>기준판 불러오기<select data-open-baseline ${dirty || saveBusy || baselineBusy ? 'disabled' : ''}><option value="">단계 · 버전 선택</option>${baselineItems.map(b => `<option value="${b.stage}:${b.revision}">${esc(baselineLabels[b.stage])} · r${b.revision} · ${esc(b.name)}</option>`).join('')}</select></label><small>현재 수정을 먼저 저장하세요. 기준판 불러오기는 자동 저장하지 않습니다.</small></fieldset><button data-action="wireframe-style">클릭 타원 · 표시 직각으로 정리</button>${workspaceId || studioSettings.catalogEnabled === false ? '' : '<button data-action="lobby-design">공통 설정으로 로비 설계 만들기</button>'}<label class="file-label">설계 JSON 불러오기<input type="file" id="import-file" accept=".json,application/json"></label><button data-action="export">설계 JSON 내보내기</button>${expectedRevision !== null ? `<a class="consumer-link" target="_blank" rel="noopener" href="${esc(designURL('preview',navigation))}">동작 시험 보기 ↗</a>` : ''}<button data-action="context">선택 정보 공유 파일</button><button data-action="export-plan">기획·연결 설명 내보내기</button><button data-action="export-handoff">AI 연결 명세 JSON</button><button data-action="glossary">UI 용어 찾아보기</button><button data-action="manual">툴 기획·설명서</button></div></details></div></header>
++ <div class="toolbar studio-navigation"><nav class="studio-stage-nav" aria-label="제작 단계"><a href="${esc(designURL('canvas',navigation))}">전체 캔버스</a><span aria-hidden="true">›</span><button data-action="edit" aria-current="step">상세 편집</button><span aria-hidden="true">›</span><button data-action="design-guide" ${mode === 'play' ? 'disabled' : ''}>디자인 가이드</button></nav><label class="inline">표현<select data-presentation-mode aria-label="표현">${PRESENTATION_MODES.map(({id,label}) => `<option value="${id}" ${presentationMode === id ? 'selected' : ''}>${label}</option>`).join('')}</select></label><button data-action="preview-current">미리보기</button><details class="file-menu studio-tools"><summary>편집 도구</summary><div><button data-action="unit-library">유닛 추가</button><button data-action="play">동작 시험</button>${workspaceId || studioSettings.catalogEnabled === false ? '' : '<button data-action="build-current-ui">현재 로비 UI 구조 적용</button>'}<button data-action="shortcuts">단축키 ?</button>${[['copy', '복사'], ['cut', '잘라내기'], ['paste', '붙여넣기'], ['duplicate', '복제'], ['delete', '삭제'], ['all', '전체 선택'], ['group', '그룹'], ['ungroup', '그룹 해제'], ['layer-back', '맨 뒤로'], ['layer-front', '맨 앞으로']].map(([id, n]) => `<button data-edit-command="${id}">${n}</button>`).join('')}<label class="inline">기기<select data-setting="profile">${Object.entries(profiles).map(([id, p]) => `<option value="${id}" ${id === profile ? 'selected' : ''}>${p.name} ${id==='design'?detailDevicePreview(screenById(doc,selectedScreen),'design').reference.w:p.w}×${id==='design'?detailDevicePreview(screenById(doc,selectedScreen),'design').reference.h:p.h}</option>`).join('')}</select></label><label class="inline">확대<select data-setting="zoom">${[['fit', '화면 맞춤'], ['0.25', '25%'], ['0.5', '50%'], ['0.75', '75%'], ['1', '100%'], ['1.5', '150%'], ['2', '200%'], ['3', '300%'], ...(!['fit', '0.25', '0.5', '0.75', '1', '1.5', '2', '3'].includes(String(zoom)) ? [[String(zoom), Math.round(Number(zoom) * 100) + '%']] : [])].map(([id, n]) => `<option value="${id}" ${id === zoom ? 'selected' : ''}>${n}</option>`).join('')}</select></label><button data-action="zoom-out" aria-label="캔버스 축소">−</button><button data-action="zoom-in" aria-label="캔버스 확대">＋</button><button data-action="canvas-fit">화면 맞춤</button><button data-action="hand" aria-pressed="${handTool}">손 도구 H</button><button data-action="grid" aria-pressed="${grid}">선택 가이드</button><button data-action="snap" aria-pressed="${snap}">1% 스냅</button><button data-action="show-flow">화면 관계</button><p>모서리를 끌어 전체 작업 영역 크기를 바꿉니다.</p><label>너비 px<input data-frame-size="w" type="number" min="760" value="${workspacePrefs.frame?.w || innerWidth}"></label><label>높이 px<input data-frame-size="h" type="number" min="500" value="${workspacePrefs.frame?.h || innerHeight}"></label><button data-action="apply-frame">크기 적용</button><button data-action="frame-fit">창에 맞춤</button><label>작업 배경색<input type="color" data-editor-color="stageColor" value="${workspacePrefs.stageColor}"></label><label>캔버스색<input type="color" data-editor-color="canvasColor" value="${workspacePrefs.canvasColor}"></label></div></details></div>
+  ${status ? `<div class="notice" role="status">${esc(status)}</div>` : ''}`;
+ }
+ function layerBrowserKey() {
+@@ -1176,6 +1216,9 @@
+         case 'project-folders':
+             await showProjectManager();
+             break;
++        case 'preview-current':
++            openCurrentPreview();
++            break;
+         case 'design-guide': {
+             const screenId = selectedScreen, size = rootSize(screenById(doc,screenId));
+             const selectGuidePart = id => {
+@@ -1185,7 +1228,11 @@
+                 editingComponent=id?componentRoot(screen,id)?.id||null:null;
+                 mode='edit';focusPanel('properties');tab='layout';render();
+             };
+-            try { openDesignGuide({document:clone(doc),screenId,elementId:selectedElement,workspaceId,size,onChange:change=>{
++            try { openDesignGuide({document:clone(doc),screenId,elementId:selectedElement,workspaceId,size,presentationMode,context:{projectName:folderProject?.name || '공용 저장공간',dirty},onNavigate:selection=>{
++                presentationMode=selection.presentationMode;
++                if(selection.stage==='overview') location.assign(designURL('canvas',{workspaceId,projectId:doc.projectId,...selection}));
++                else selectGuidePart(selection.elementId);
++            },onPreview:selection=>openCurrentPreview(selection),onPresentationChange:value=>{presentationMode=value;rememberPresentation();render();},onChange:change=>{
+                 if(!edited(()=>{doc=applyDesignGuideChange(doc,screenId,change.elementId,change,size);}))throw Error(status||'가이드 변경을 적용하지 못했습니다.');
+                 assetView='art';return clone(doc);
+             },onImportImage:input=>importGuideImage(input,workspaceId),onSelect:selectGuidePart,onEdit:selectGuidePart}); }
+@@ -1854,6 +1901,12 @@
+             selected.effects = {...selected.effects, shadow};
+             validateDocument(doc);
+         });
++        return;
++    }
++    if (input.matches('[data-presentation-mode]')) {
++        presentationMode = normalizePresentationMode(input.value);
++        rememberPresentation();
++        render();
+         return;
+     }
+     if (input.matches('[data-asset-view]')) {
+--- a/src/tools/uxStudio/design-guide-view.mjs
++++ b/src/tools/uxStudio/design-guide-view.mjs
+@@ -1,5 +1,5 @@
+ import {buildDesignGuide} from './design-guides.mjs';
+-import {renderLayout} from './layout-view.mjs';
++import {PRESENTATION_MODES,normalizePresentationMode,renderPresentation} from './presentation.mjs';
+ import {isAutoLayoutChild} from './responsive-layout.mjs';
+ 
+ const NS = 'http://www.w3.org/2000/svg';
+@@ -66,7 +66,8 @@
+ ].join('\n') : '글자 설정 없음';
+ 
+ /** Guide edits flow through the caller's validated document and undo handling. */
+-export function openDesignGuide({document:design,screenId,elementId = null,workspaceId = null,size,onSelect,onEdit,onChange,onImportImage} = {}) {
++export function openDesignGuide({document:design,screenId,elementId = null,workspaceId = null,size,onSelect,onEdit,onChange,onImportImage,context = {},presentationMode = 'ui',onNavigate,onPreview,onPresentationChange} = {}) {
++    let presentation = normalizePresentationMode(presentationMode);
+     let snapshot = structuredClone(design);
+     let guide = buildDesignGuide(snapshot,screenId,elementId,size);
+     let screen = snapshot.screens.find(item => item.id === screenId);
+@@ -87,7 +88,7 @@
+ .ux-design-guide::backdrop{background:#102034aa}.ux-design-guide[open]{display:flex;flex-direction:column}
+ .ux-design-guide *{box-sizing:border-box}.ux-design-guide header{padding:14px 18px;display:flex;gap:12px;align-items:start;border-bottom:1px solid #d4dce7;flex:none}.ux-design-guide .dg-heading{min-width:0;flex:1}.ux-design-guide h2{font-size:17px;line-height:1.4;margin:0;overflow-wrap:anywhere}.ux-design-guide .dg-subtitle{margin:3px 0 0;color:#596b81;font-size:12px;overflow-wrap:anywhere}
+ .ux-design-guide button{font:inherit;background:#fff;color:inherit;border:1px solid #aab9ca;border-radius:6px;padding:6px 10px;cursor:pointer;min-height:32px;max-width:100%;overflow-wrap:anywhere}.ux-design-guide button:disabled{cursor:default;opacity:.45}.ux-design-guide button:focus-visible{outline:3px solid #3567bd;outline-offset:2px}.ux-design-guide button[aria-current=true]{background:#edf2fb;border-color:#3567bd;color:#244f9e;font-weight:600}
+-.ux-design-guide .dg-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 18px;border-bottom:1px solid #d4dce7;flex:none}.ux-design-guide .dg-breadcrumbs{display:flex;align-items:center;gap:6px;flex:1;flex-wrap:wrap;min-width:0}.ux-design-guide .dg-breadcrumbs button{font-size:12px}.ux-design-guide .dg-zoom{display:flex;align-items:center;gap:6px}.ux-design-guide .dg-scale{min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
++.ux-design-guide .dg-stage-toolbar{background:#edf3f8}.ux-design-guide .studio-stage-nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;flex:1;min-width:0}.ux-design-guide .studio-stage-nav button[aria-current=step]{background:#dce7fb;border-color:#3567bd;color:#244f9e;font-weight:600}.ux-design-guide .dg-stage-toolbar select{font:inherit;max-width:150px;padding:6px;border:1px solid #aab9ca;border-radius:5px;background:#fff;color:#253247}.ux-design-guide .dg-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 18px;border-bottom:1px solid #d4dce7;flex:none}.ux-design-guide .dg-breadcrumbs{display:flex;align-items:center;gap:6px;flex:1;flex-wrap:wrap;min-width:0}.ux-design-guide .dg-breadcrumbs button{font-size:12px}.ux-design-guide .dg-zoom{display:flex;align-items:center;gap:6px}.ux-design-guide .dg-scale{min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
+ .ux-design-guide .dg-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;min-height:0;flex:1}.ux-design-guide .dg-stage{position:relative;min-width:0;min-height:220px;background:#e8edf5}.ux-design-guide iframe{width:100%;height:100%;display:block;border:0}.ux-design-guide .dg-sidebar{padding:14px;min-width:0;overflow:auto;border-left:1px solid #d4dce7;background:#fff}.ux-design-guide h3{font-size:13px;margin:0 0 8px}.ux-design-guide .dg-summary{white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 14px;font:12px/1.7 ui-monospace,SFMono-Regular,monospace}.ux-design-guide .dg-children{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}.ux-design-guide .dg-children button{text-align:left;font-size:11px;min-height:26px;max-width:150px;padding:3px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ux-design-guide .dg-line-swatch{display:inline-block;width:14px;margin-right:5px;vertical-align:middle}.ux-design-guide .dg-line-fields{display:grid;grid-template-columns:1fr 58px 1fr;gap:6px}.ux-design-guide .dg-line-swatches{display:flex;gap:5px;flex-wrap:wrap}.ux-design-guide .dg-line-swatches button{font-size:11px;padding:3px 8px;min-height:26px}.ux-design-guide .dg-line-fields select{font:inherit;min-width:0;width:100%;padding:6px 3px;border:1px solid #aab9ca;border-radius:5px}.ux-design-guide .dg-note{margin:0;color:#5c6e84;font-size:12px;overflow-wrap:anywhere}
+ .ux-design-guide .dg-data{border-top:1px solid #d4dce7;max-height:35%;overflow:auto;background:#fff;flex:none}.ux-design-guide .dg-data>summary{cursor:pointer;padding:9px 14px;font-weight:600;background:#edf3f8}.ux-design-guide .dg-data>.dg-summary{padding:10px 14px;margin:0}.ux-design-guide .dg-note-details>summary{cursor:pointer;font-size:12px;color:#596b81}.ux-design-guide .dg-note-details p{padding-top:8px}.ux-design-guide table{width:100%;border-collapse:collapse;min-width:1060px;text-align:left;font-size:12px;font-variant-numeric:tabular-nums}.ux-design-guide caption{text-align:left;padding:9px 14px;font-weight:600}.ux-design-guide th,.ux-design-guide td{padding:8px 10px;border-top:1px solid #e2e8f0;vertical-align:top;white-space:pre-line;overflow-wrap:anywhere}.ux-design-guide th{background:#f0f4f9;position:sticky;top:0;z-index:1}.ux-design-guide td:first-child{min-width:150px;max-width:230px}.ux-design-guide .dg-metrics{min-width:128px}.ux-design-guide .dg-font{min-width:245px}.ux-design-guide .dg-dimensions{padding:10px 14px;display:flex;gap:8px 18px;flex-wrap:wrap;border-top:1px solid #e2e8f0}.ux-design-guide .dg-dimensions span{font-size:12px;color:#a12134}.ux-design-guide footer{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 18px;border-top:1px solid #d4dce7;flex:none}.ux-design-guide .dg-edit{background:#315fba;color:#fff;border-color:#315fba}
+ .ux-design-guide input,.ux-design-guide textarea{font:inherit;min-width:0;width:100%;padding:6px;border:1px solid #aab9ca;border-radius:5px;color:inherit;background:#fff}.ux-design-guide input:disabled,.ux-design-guide textarea:disabled{background:#edf0f4;color:#718096}.ux-design-guide .dg-editor{display:grid;gap:8px;margin:14px 0}.ux-design-guide .dg-editor h3{margin:8px 0 0}.ux-design-guide .dg-rect-fields{display:grid;grid-template-columns:1fr 1fr;gap:6px}.ux-design-guide .dg-editor label{display:grid;gap:3px;font-size:12px}.ux-design-guide .dg-editor label,.ux-design-guide .dg-option{color:#46566d}.ux-design-guide select,.ux-design-guide input,.ux-design-guide textarea{color:#253247;background:#fff}.ux-design-guide .dg-editor textarea{resize:vertical;min-height:54px}.ux-design-guide .dg-image-actions{display:flex;gap:6px;flex-wrap:wrap}.ux-design-guide .dg-error{color:#a71932;background:#fff0f3;border:1px solid #efb5c1;padding:8px;overflow-wrap:anywhere;margin:8px 0}.ux-design-guide .dg-option{display:flex;align-items:center;gap:5px;white-space:nowrap;font-size:12px}.ux-design-guide .dg-option input{width:auto}.ux-design-guide .dg-edit-hint{font-size:12px;color:#465a7a;margin:0}
+@@ -101,6 +102,32 @@
+     headingWrap.append(title,subtitle);
+     const close = action('닫기',() => dialog.close()); close.setAttribute('aria-label','디자인 가이드 닫기');
+     header.append(headingWrap,close);
++    const stageToolbar = make('div'); stageToolbar.className = 'dg-toolbar dg-stage-toolbar';
++    const stageNav = make('nav'); stageNav.className = 'studio-stage-nav'; stageNav.setAttribute('aria-label','제작 단계');
++    const navigationSelection = () => ({screenId,elementId:guide.unit.id,presentationMode:presentation});
++    for (const [index,stage,label] of [[0,'overview','전체 캔버스'],[1,'detail','상세 편집'],[2,'guide','디자인 가이드']]) {
++        if (index) stageNav.append(make('span','›'));
++        const pick = action(label,() => {
++            if (stage === 'guide') return;
++            const selection = {stage,...navigationSelection()};
++            dialog.close(); onNavigate?.(selection);
++        });
++        if (stage === 'guide') pick.setAttribute('aria-current','step');
++        else pick.disabled = typeof onNavigate !== 'function';
++        stageNav.append(pick);
++    }
++    const presentationLabel = make('label','표현'); presentationLabel.className = 'dg-option';
++    const presentationSelect = make('select'); presentationSelect.setAttribute('aria-label','표현');
++    for (const {id,label} of PRESENTATION_MODES) { const choice = make('option',label); choice.value = id; presentationSelect.append(choice); }
++    presentationSelect.value = presentation;
++    presentationSelect.addEventListener('change',() => {
++        presentation = normalizePresentationMode(presentationSelect.value); presentationSelect.value = presentation;
++        renderStage(); onPresentationChange?.(presentation);
++    });
++    presentationLabel.append(presentationSelect);
++    const preview = action('미리보기',() => { const selection = navigationSelection(); dialog.close(); onPreview?.(selection); });
++    preview.disabled = typeof onPreview !== 'function';
++    stageToolbar.append(stageNav,presentationLabel,preview);
+     const toolbar = make('div'); toolbar.className = 'dg-toolbar';
+     const breadcrumbs = make('nav'); breadcrumbs.className = 'dg-breadcrumbs'; breadcrumbs.setAttribute('aria-label','부모 부품 경로');
+     const zoomBar = make('div'); zoomBar.className = 'dg-zoom';
+@@ -204,7 +231,7 @@
+         if (guide.unit.id === null || typeof onEdit !== 'function') return;
+         const id = guide.unit.id; dialog.close(); onEdit(id);
+     }); edit.className = 'dg-edit';
+-    footer.append(status,edit); dialog.append(style,header,toolbar,body,data,footer);
++    footer.append(status,edit); dialog.append(style,header,stageToolbar,toolbar,body,data,footer);
+ 
+     let closed = false, zoom = 1, fitting = true, frameDocument, scroller, spacer, scene, host, overlay, drag = null, importRequest = 0, importBusy = false, lineColors = {...LINE_DEFAULTS};
+     const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { if (fitting) fitStage(); }) : null;
+@@ -276,6 +303,7 @@
+             if (!next || !Array.isArray(next.screens)) throw Error('편집 결과 문서를 받지 못했습니다.');
+             const copy = structuredClone(next), nextGuide = buildDesignGuide(copy,screenId,id,size);
+             snapshot = copy; screen = copy.screens.find(item => item.id === screenId); guide = nextGuide;
++            context = {...context,dirty:true};
+             errorBox.hidden = true; refresh(false);
+             status.textContent = '현재 설계에 반영했습니다. 저장은 편집기의 저장을 사용하세요.';
+             return true;
+@@ -298,9 +326,9 @@
+     }
+     function refresh(refit = true) {
+         dialog.dataset.element = guide.unit.id ?? '';
+-        title.textContent = '디자인 가이드 · ' + guide.unit.name;
++        title.textContent = (context.projectName || snapshot.name || 'UI 스튜디오') + ' · ' + guide.screen.name;
+         selectedTitle.textContent = guide.unit.name;
+-        subtitle.textContent = `${guide.screen.name} · 기준 ${number(guide.screen.width)} × ${number(guide.screen.height)} 논리 px · ${editable() ? '편집 가능' : '읽기 전용'}`;
++        subtitle.textContent = `${snapshot.name || '현재 설계'} · 디자인 가이드 · ${context.dirty ? '미저장 수정 포함 · ' : ''}기준 ${number(guide.screen.width)} × ${number(guide.screen.height)} 논리 px · ${editable() ? '편집 가능' : '읽기 전용'}`;
+         breadcrumbs.replaceChildren();
+         const trail = [{id:null,name:guide.screen.name},...guide.ancestors.filter(item => item.id !== null),...(guide.unit.id === null ? [] : [guide.unit])];
+         for (const [index,item] of trail.entries()) {
+@@ -335,11 +363,12 @@
+         if (closed || !doc?.body || frameDocument === doc) return;
+         frameDocument = doc;
+         const shared = doc.createElement('link'); shared.rel = 'stylesheet'; shared.href = '/ui-studio/source/styles.css';
++        const presentationStyle = doc.createElement('link'); presentationStyle.rel = 'stylesheet'; presentationStyle.href = '/ui-studio/source/presentation.css';
+         const local = doc.createElement('style'); local.textContent = `
+ html,body{margin:0!important;padding:0!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;overflow:hidden!important;background:#e8edf5!important}
+ .dg-scroller{width:100%;height:100%;overflow:auto;padding:0;background:repeating-conic-gradient(#e6e9ed 0 25%,#f2f4f7 0 50%) 0/16px 16px;overscroll-behavior:contain;touch-action:pan-x pan-y}.dg-spacer{position:relative;margin:0;min-width:100%;min-height:100%;overflow:hidden}.dg-scene{position:absolute;transform-origin:0 0;isolation:isolate}.dg-host{position:absolute;inset:0;background:transparent;box-shadow:none}.dg-host .ui-element{cursor:pointer!important}.dg-host .ui-element:focus-visible{outline:1px solid #2f66c8!important}.dg-host .component-role-badge,.dg-host .element-badge,.dg-host .selection-hatch{display:none!important}.dg-host .isolation-shell>:not(.ui-element):not(.layout-extent){display:none!important}.dg-overlay{position:absolute;inset:0;overflow:visible;pointer-events:none;z-index:2147483646}.dg-overlay .dg-boundary{fill:none;stroke:#d52c48;stroke-width:1.5;stroke-dasharray:6 4;vector-effect:non-scaling-stroke}.dg-overlay .dg-parent{stroke:#9b5261;stroke-dasharray:3 4}.dg-overlay .dg-child{stroke:#8a9baa;stroke-width:1;stroke-dasharray:3 4}.dg-overlay .dg-unit{stroke:#2f66c8;stroke-width:1.5}.dg-overlay .dg-handle{pointer-events:none;stroke-width:1.5;stroke-dasharray:none;vector-effect:non-scaling-stroke}.dg-overlay .dg-hit{pointer-events:stroke;stroke:transparent;stroke-width:12;stroke-dasharray:none;cursor:ew-resize;touch-action:none;vector-effect:non-scaling-stroke}.dg-overlay .dg-handle-y{cursor:ns-resize}.dg-overlay .dg-move{pointer-events:all;fill:#f6f8fb;stroke:#2f66c8;stroke-width:1;cursor:move;touch-action:none;vector-effect:non-scaling-stroke}.dg-overlay .dg-drag-ghost{fill:none;stroke:#2f66c8;stroke-width:1.5;stroke-dasharray:5 3;pointer-events:none;vector-effect:non-scaling-stroke}.dg-overlay line{stroke:#d52c48;stroke-width:1;stroke-dasharray:4 3;vector-effect:non-scaling-stroke}.dg-overlay text{fill:#b31835;font-family:Arial,sans-serif;font-weight:600;text-anchor:middle;dominant-baseline:central}.dg-overlay .dg-label-bg{fill:#fff;fill-opacity:.94;stroke:#e8b1bb;stroke-width:1;vector-effect:non-scaling-stroke}
+ `;
+-        doc.head.append(shared,local); doc.body.replaceChildren();
++        doc.head.append(shared,presentationStyle,local); doc.body.replaceChildren();
+         scroller = doc.createElement('div'); scroller.className = 'dg-scroller';
+         spacer = doc.createElement('div'); spacer.className = 'dg-spacer';
+         scene = doc.createElement('div'); scene.className = 'dg-scene';
+@@ -367,8 +396,8 @@
+     function renderStage() {
+         if (!host || closed) return;
+         const descendants = new Set(guide.elements.map(item => item.id)), ancestors = new Set(guide.ancestors.map(item => item.id));
+-        renderLayout(screen,host,{
+-            mode:'edit',assetView:'art',workspaceId,
++        renderPresentation(screen,host,{
++            mode:'edit',assetView:'art',workspaceId,presentationMode:presentation,
+             visible:item => descendants.has(item.id) || ancestors.has(item.id),
+             shell:item => ancestors.has(item.id),
+             menuState:Object.fromEntries(screen.elements.filter(item => item.menu).map(item => [item.id,true]))
+--- a/src/tools/uxStudio/project-context.mjs
++++ b/src/tools/uxStudio/project-context.mjs
+@@ -1,4 +1,5 @@
+ import {scopeURL} from './project-manager.mjs';
++import {normalizePresentationMode} from './presentation.mjs';
+ 
+ export const STUDIO_DIRECTORY = '/Users/max/projest_max/ui-studio';
+ 
+@@ -11,13 +12,14 @@
+   design:document ? `${document.name} · r${document.revision}${dirty ? ' · 미저장 수정' : ' · 저장됨'}` : '설계 읽는 중…'};
+ }
+ 
+-export function designURL(view, {workspaceId = null, projectId, screenId, elementId}) {
+- const paths = {detail:'/ui-studio/?editor=detail',canvas:'/ui-studio/canvas.html',preview:'/ui-studio/preview.html'};
++export function designURL(view, {workspaceId = null, projectId, screenId, elementId, presentationMode}) {
++ const paths = {detail:'/ui-studio/?editor=detail',canvas:'/ui-studio/canvas.html',preview:'/ui-studio/preview.html',sample:'/ui-studio/source/sample-preview.html'};
+  if (!Object.hasOwn(paths,view)) throw Error('알 수 없는 편집 화면입니다.');
+  const url = new URL(paths[view],'http://127.0.0.1');
+  if (projectId) url.searchParams.set('project',projectId);
+  if (screenId) url.searchParams.set('screen',screenId);
+  if (elementId) url.searchParams.set('element',elementId);
++ if (presentationMode !== undefined) url.searchParams.set('view',normalizePresentationMode(presentationMode));
+  return scopeURL(url.pathname+url.search,workspaceId);
+ }
+ 
+--- a/src/tools/uxStudio/styles.css
++++ b/src/tools/uxStudio/styles.css
+@@ -2662,3 +2662,28 @@
+ .ui-control.control-tabs > button[aria-selected="true"]:not(.native-tab-skin) { box-shadow: inset 0 -3px 0 currentColor; }
+ .ui-control.control-tabs > .native-tab-skin { border-radius: 0!important; outline: 0; }
+ .ui-control.control-tabs > .native-tab-skin:focus-visible { outline: 2px solid #64717f; outline-offset: -2px; }
++
++/* Shared stage positions keep whole-screen, detail and guide navigation familiar. */
++.studio-current-screen{font-weight:600;overflow-wrap:anywhere;font-size:14px;margin-top:4px}
++.studio-navigation{gap:10px}
++.studio-stage-nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;min-width:0;flex:1}
++.studio-stage-nav a,.studio-stage-nav button{font:inherit;font-size:13px;border:1px solid transparent;border-radius:6px;padding:7px 9px;color:inherit;text-decoration:none;background:transparent}
++.studio-stage-nav a:hover,.studio-stage-nav button:hover{background:#28394c}
++.studio-stage-nav [aria-current=step]{border-color:#4e718d;background:#263e51;font-weight:600}
++.studio-stage-nav>span{color:#92a7ba}
++.studio-tools>div{max-height:min(70dvh,640px);overflow:auto}
++.studio-tools .inline{flex-wrap:wrap}
++.studio-header .save-controls{flex-wrap:wrap;justify-content:flex-end;gap:8px}
++.studio-screen-preview{width:min(1440px,calc(100vw - 24px));height:calc(100dvh - 24px);max-width:none;max-height:none;padding:0;border:1px solid #71859c;border-radius:12px;background:#17212d;color:#e5edf5}
++.studio-screen-preview::backdrop{background:#08121dcc}
++.studio-screen-preview[open]{display:flex;flex-direction:column}
++.studio-screen-preview>header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #405064;flex:none}
++.studio-screen-preview>header>div{min-width:0}
++.studio-screen-preview h2{font-size:17px;line-height:1.4;margin:0;overflow-wrap:anywhere}
++.studio-screen-preview p{font-size:12px;color:#b7c8d8;margin:4px 0 0;overflow-wrap:anywhere}
++.studio-screen-preview-viewport{flex:1;min-height:0;min-width:0;overflow:auto;display:flex;align-items:center;justify-content:center;padding:12px}
++.studio-screen-preview-stage{position:relative;flex:none}
++.studio-screen-preview-host{position:absolute;top:0;left:0;transform-origin:0 0}
++.studio-screen-preview-host .sample-screen{position:relative;overflow:hidden;background:transparent}
++.studio-screen-preview-host .sample-panel{position:absolute;overflow:hidden}
++@media(max-width:760px){.studio-header .project-directory{font-size:11px}.studio-header .save-controls{justify-content:flex-start}.studio-navigation{align-items:flex-start}.studio-stage-nav{flex-basis:100%}.studio-stage-nav a,.studio-stage-nav button{padding:6px;font-size:12px}.studio-navigation .file-menu>div{right:0;max-width:calc(100vw - 24px)}.studio-screen-preview{width:calc(100vw - 12px);height:calc(100dvh - 12px)}.studio-screen-preview>header{align-items:flex-start;flex-wrap:wrap;padding:10px}}

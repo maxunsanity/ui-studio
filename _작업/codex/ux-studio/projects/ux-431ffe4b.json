@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "projectId": "ux-431ffe4b",
+  "revision": 1,
+  "name": "새 UX 설계",
+  "entryScreen": "main",
+  "screens": [
+    {
+      "id": "main",
+      "name": "첫 화면",
+      "kind": "page",
+      "purpose": "",
+      "elements": [
+        {
+          "id": "element-0888daf4-211e-4986-a39f-f653c22c1c75",
+          "name": "육각형 버튼",
+          "kind": "button",
+          "x": 22,
+          "y": 34,
+          "w": 35,
+          "h": 8,
+          "text": "버튼",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#d7e7f5",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "hexagon"
+          }
+        }
+      ]
+    },
+    {
+      "id": "common-4860fd15-93c6-4e85-8b3a-23bc29d22eca",
+      "name": "공통 바텀시트",
+      "kind": "sheet",
+      "purpose": "현재 화면 위에서 공통 출현·닫힘을 시험합니다.",
+      "presentation": {
+        "type": "sheet",
+        "effect": "slide",
+        "durationMs": 240,
+        "autoCloseMs": 0,
+        "dim": true
+      },
+      "elements": [
+        {
+          "id": "common-4860fd15-93c6-4e85-8b3a-23bc29d22eca-title",
+          "name": "제목",
+          "kind": "text",
+          "x": 8,
+          "y": 8,
+          "w": 75,
+          "h": 15,
+          "text": "공통 바텀시트",
+          "purpose": "공통 UI 시험",
+          "info": ""
+        },
+        {
+          "id": "common-4860fd15-93c6-4e85-8b3a-23bc29d22eca-body",
+          "name": "안내 내용",
+          "kind": "text",
+          "x": 8,
+          "y": 28,
+          "w": 84,
+          "h": 37,
+          "text": "표시할 내용을 편집하세요",
+          "purpose": "공통 UI 시험",
+          "info": ""
+        },
+        {
+          "id": "common-4860fd15-93c6-4e85-8b3a-23bc29d22eca-close",
+          "name": "닫기",
+          "kind": "button",
+          "x": 10,
+          "y": 76,
+          "w": 80,
+          "h": 16,
+          "text": "닫기",
+          "purpose": "공통 UI 시험",
+          "info": ""
+        }
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "id": "edge-f92dcfa3-f883-460d-8fc8-cd2d8b09e3b2",
+      "fromScreen": "common-4860fd15-93c6-4e85-8b3a-23bc29d22eca",
+      "fromElement": "common-4860fd15-93c6-4e85-8b3a-23bc29d22eca-close",
+      "event": "click",
+      "action": "close",
+      "condition": "always",
+      "label": "닫고 원래 화면 유지",
+      "returnPolicy": "선택/스크롤 유지"
+    },
+    {
+      "id": "edge-8ce8c000-2f26-4710-8c1f-79e62e376f5d",
+      "fromScreen": "main",
+      "fromElement": "element-0888daf4-211e-4986-a39f-f653c22c1c75",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "targetScreen": "common-4860fd15-93c6-4e85-8b3a-23bc29d22eca",
+      "label": "육각형 버튼 → 공통 바텀시트",
+      "returnPolicy": "원래 화면 선택/스크롤 유지"
+    }
+  ],
+  "fixtures": {
+    "balance": 0,
+    "items": []
+  },
+  "savedAt": "2026-11-13T01:49:24.498Z"
+}

@@ -1,0 +1,271 @@
+--- before/README.md
++++ after/README.md
+@@ -30,7 +30,7 @@
+ 
+ samples/monopoly-go/는 검증용 게임 UI 샘플입니다. 명시적으로 변환 안 함(independent)을 선택했고 ui-studio/designs/ux-902404d6.json의 r4가 현재 검수 설계입니다. 3페이지·1모달·24부품·6연결이며 기존 ux-gjs-61ad2d1f r14는 보존했습니다. samples/folder-check/는 저장·폴더 격리 시험 fixture이며 게임 샘플이 아닙니다. 원 Figma는 열람만 합니다. 대표 W/P/U/S 종합검수는 0/4입니다. 본게임 로직 작업은 병행할 수 있습니다. 이번 계획 도구 기능은 구현했고 다음 제작은 모노폴리 GO 정식 UI입니다. 그래픽·전체 샘플·실제 게임 연결은 미완료입니다. 전체 Unity/Figma 호환·엔진 어댑터 자동 생성은 현재 제공 범위 밖이며 새 선행 조건으로 추가하지 않습니다.
+ 
+-공통 내장 가이드 정본은 2026-11-16.6입니다. 실제 생성·읽기를 확인한 두 프로젝트의 guide 사본과 project.json의 guideVersion은 2026-11-16.4로 보존합니다. 재열기 때 자동 갱신하지 않습니다.
++공통 내장 가이드 정본은 2026-11-16.7입니다. 실제 생성·읽기를 확인한 두 프로젝트의 guide 사본과 project.json의 guideVersion은 2026-11-16.4로 보존합니다. 재열기 때 자동 갱신하지 않습니다.
+ 
+ ## 협업과 보고
+ 협업 진입점은 docs/collaboration/README.md이며 이 루트 AGENTS.md가 우선 정본입니다. 진행 기록은 docs/collaboration/STATUS.md에 append만 합니다. 이번 전환 보고는 docs/collaboration/reports/20261116_independence.md에 모읍니다. 기존 상세 작업 보고 docs/reports/20261116-project-workspaces.md는 보존합니다. 현재 작업의 지시·진행·결과를 다른 프로젝트의 공유 폴더에서 운영하지 않습니다.
+@@ -40,4 +40,4 @@
+ 
+ 케이팝의 중복 도구 101파일은 이 루트 docs/planning/_backup/20261116_단이/1012_kpop중복정리/로 이동했으며 manifest.json에 경로·크기·SHA-256을 기록했습니다. 케이팝 src/tools/uxStudio/에는 기존 gameUiHost·Node 시험을 위한 model.mjs·consumer.mjs export 연결 두 개와 README만 남겼습니다. 이는 케이팝 소비자에서 독립 도구로 향하는 단방향 참조이며 도구 실행 조건이 아닙니다. 케이팝 기획서·시뮬레이터·공유 기록·옛 설계 데이터는 보존했습니다. 옛 공유 루트는 이관 출처와 종료 기록으로만 다룹니다. 7007에서 도구 mount·저장 플러그인·API 연결을 제거했습니다. 옛 도구 주소는 7018 이동 안내로 연결하고 옛 API는 HTTP 410으로 거부하여 오래된 창의 쓰기를 막습니다. 앱의 UI 스튜디오 바로가기는 이 정식 루트·자체 start·7018 URL로 저장했으며 다른 다섯 항목은 유지했습니다.
+ 
+-툴 기획·요구사항·Unity 비교·샘플 목록의 이관 시점 원문은 docs/reference/t04/에 보존했습니다. manifest.json이 출처와 해시를 기록합니다. 옛 상대링크·7007 공유 실행·기존 /docs/planning/ 진입은 당시 이력이며 현재 운영 안내는 아닙니다. 현재 공통 가이드 판은 2026-11-16.6이며 실제 생성한 프로젝트 사본 .4는 보존합니다. 과거 211/211 시험이나 Browser 7007 접근권한 거절은 7018의 기동·실제 화면 검수와 분리합니다. 권한 거절을 피하려는 목적으로 다른 주소를 사용하지 않습니다.
++툴 기획·요구사항·Unity 비교·샘플 목록의 이관 시점 원문은 docs/reference/t04/에 보존했습니다. manifest.json이 출처와 해시를 기록합니다. 옛 상대링크·7007 공유 실행·기존 /docs/planning/ 진입은 당시 이력이며 현재 운영 안내는 아닙니다. 현재 공통 가이드 판은 2026-11-16.7이며 실제 생성한 프로젝트 사본 .4는 보존합니다. 과거 211/211 시험이나 Browser 7007 접근권한 거절은 7018의 기동·실제 화면 검수와 분리합니다. 권한 거절을 피하려는 목적으로 다른 주소를 사용하지 않습니다.
+--- before/AGENTS.md
++++ after/AGENTS.md
+@@ -7,7 +7,7 @@
+ 
+ 기존 게임 변환은 반드시 먼저 질문합니다. 폴더 열기는 변환 동의가 아닙니다. 거절 시 원 게임 소스 무수정, 선택게임/ui-studio 내부 독립 저장을 유지합니다. 허용 시 전체 화면 조사·백업·대응표·회귀와 미완료를 기록합니다. 미정 게임 수치·기능·승인을 만들지 않습니다.
+ 
+-도구 URL과 게임별 저장공간을 구분합니다. 프로젝트 폴더 workspace ID와 설계 document.projectId/revision을 함께 확인하고 API·미리보기·저장 통지를 같은 workspace 범위로 유지합니다. 심볼릭 링크·상위 경로 탈출과 저장 충돌 검사를 우회하지 않습니다. 공통 내장 가이드는 .6이고 실제 생성·읽기를 확인한 프로젝트 사본은 .4입니다. 기존 프로젝트의 guide·project.json guideVersion을 자동 덮어쓰지 않습니다. samples/folder-check는 게임 샘플이 아닌 저장·격리 시험 fixture입니다.
++도구 URL과 게임별 저장공간을 구분합니다. 프로젝트 폴더 workspace ID와 설계 document.projectId/revision을 함께 확인하고 API·미리보기·저장 통지를 같은 workspace 범위로 유지합니다. 심볼릭 링크·상위 경로 탈출과 저장 충돌 검사를 우회하지 않습니다. 공통 내장 가이드는 .7이고 실제 생성·읽기를 확인한 프로젝트 사본은 .4입니다. 기존 프로젝트의 guide·project.json guideVersion을 자동 덮어쓰지 않습니다. samples/folder-check는 게임 샘플이 아닌 저장·격리 시험 fixture입니다.
+ 
+ 변경 전 이 루트 docs/planning/_backup/YYYYMMDD_단이/에 백업하고 자기 임시 작업은 _작업/codex/에 둡니다. 보호 대상과 다른 담당 소스를 수정하지 않습니다. 외부 발송·공개게시·결제·시크릿 접근·원본 삭제·지시 없는 서버 시작/재시작·빌드·감시·예약은 금지합니다.
+ 
+--- before/src/tools/uxStudio/guide/README.md
++++ after/src/tools/uxStudio/guide/README.md
+@@ -1,5 +1,5 @@
+ # UI 스튜디오 내장 안내
+-가이드 판: 2026-11-16.6
++가이드 판: 2026-11-16.7
+ 작성자: codex(단이) · 상태: 제안(검수 대기)
+ 독립 정본 보정: 2026-11-16
+ 
+@@ -37,7 +37,7 @@
+ - PROGRESS.md: 현재 관찰, 구현 계약, 남은 작업과 미확인
+ 
+ ## 공통 정본과 프로젝트 사본
+-공통 정본은 독립 루트 /Users/max/projest_max/ui-studio/의 src/tools/uxStudio/guide/입니다. index.json의 version이 이 묶음의 판입니다. 상단 가이드의 공통 안내는 이 정본을 읽습니다. 프로젝트 안내는 선택한 게임의 ui-studio/guide/ 사본을 읽습니다. 현재 공통판은 .6이며 실제 생성·읽기를 확인한 프로젝트 사본은 .4입니다. 내용이 다르면 판과 프로젝트 상황을 확인하세요. 공통 UI의 판 표기는 index.json을 읽으며 프로젝트 안내는 자기 사본 index의 판을 표시합니다.
++공통 정본은 독립 루트 /Users/max/projest_max/ui-studio/의 src/tools/uxStudio/guide/입니다. index.json의 version이 이 묶음의 판입니다. 상단 가이드의 공통 안내는 이 정본을 읽습니다. 프로젝트 안내는 선택한 게임의 ui-studio/guide/ 사본을 읽습니다. 현재 공통판은 .7이며 실제 생성·읽기를 확인한 프로젝트 사본은 .4입니다. 내용이 다르면 판과 프로젝트 상황을 확인하세요. 공통 UI의 판 표기는 index.json을 읽으며 프로젝트 안내는 자기 사본 index의 판을 표시합니다.
+ 
+ 처음 만드는 프로젝트에만 공통 안내의 사본을 넣습니다. 기존 프로젝트를 다시 열 때 안내나 설계를 조용히 덮어쓰지 않습니다. 공통 안내가 바뀌어도 프로젝트 사본이 자동으로 최신이 되었다고 간주하지 않습니다. 갱신 작업은 차이를 확인하고 기존판을 보존한 뒤 별도로 수행해야 합니다.
+ 
+--- before/src/tools/uxStudio/guide/AI_GUIDE.md
++++ after/src/tools/uxStudio/guide/AI_GUIDE.md
+@@ -1,11 +1,11 @@
+ # AI 사용·수정 규칙
+-가이드 판: 2026-11-16.6 · 제안(검수 대기)
++가이드 판: 2026-11-16.7 · 제안(검수 대기)
+ 독립 정본 보정: 2026-11-16
+ 
+ ## AI 진입점
+ 먼저 독립 도구 루트 /Users/max/projest_max/ui-studio/의 README.md와 AGENTS.md, 이 guide/를 읽습니다. 도구 소스·의존성·실행·기본 저장공간·문서·보고는 이 루트에서 독립 운영합니다. 소스 정본은 src/tools/uxStudio/입니다. root AGENTS.md가 우선 정본이며 docs/collaboration/README.md가 협업 진입점입니다. 다른 프로젝트 서버·설치 위치·공유 폴더를 현재 운영 조건으로 추가하지 않습니다. 그다음 사용자가 선택한 게임 폴더의 상위 AGENTS.md와 해당 프로젝트 지침을 읽고 ui-studio/README.md, ui-studio/AGENTS.md, project.json, integration.md와 guide/를 읽습니다. 상위 지침과 최신 사용자 직접 지시가 우선합니다. 이 공통 가이드가 기존 프로젝트의 AGENTS나 게임 정책을 대체하지 않습니다.
+ 
+-공통 가이드 정본은 독립 도구 루트의 src/tools/uxStudio/guide/입니다. samples/monopoly-go/는 검증용 샘플이며 실제 게임 전체와 동일하다고 가정하지 않습니다. 현재 공통 정본은 .6이고 실제 생성·읽기를 확인한 프로젝트 사본은 .4입니다. 프로젝트 사본은 특정 판의 안내와 해당 게임의 문맥을 제공합니다. 판 차이를 확인하고 기록하세요. 기존 프로젝트 사본을 폴더 재열기 때 덮어쓰거나 공통판과 동일하다고 추정하지 않습니다.
++공통 가이드 정본은 독립 도구 루트의 src/tools/uxStudio/guide/입니다. samples/monopoly-go/는 검증용 샘플이며 실제 게임 전체와 동일하다고 가정하지 않습니다. 현재 공통 정본은 .7이고 실제 생성·읽기를 확인한 프로젝트 사본은 .4입니다. 프로젝트 사본은 특정 판의 안내와 해당 게임의 문맥을 제공합니다. 판 차이를 확인하고 기록하세요. 기존 프로젝트 사본을 폴더 재열기 때 덮어쓰거나 공통판과 동일하다고 추정하지 않습니다.
+ 
+ ## 작업 전 확인
+ 1. 현재 사용자 요청과 허용 범위, 이 루트 docs/collaboration/의 협업 규칙을 확인합니다. 과거 역할표·STATUS·미완료 기록을 새 실행 승인으로 해석하지 않습니다.
+@@ -34,6 +34,15 @@
+ 
+ 새 PNG/JPEG/WebP는 workspace별 assets/에 sha256 내용 해시 참조로 보존합니다. 경로·MIME·파일 내용·크기와 참조 존재 검사를 우회하지 않습니다. 기존 data URI는 보존합니다. 다른 workspace로 사본을 만들 때 참조 파일도 보존해야 합니다. 개별 래스터 300,000bytes·원본 가로/세로 1~4096px, 전체 설계 2,000,000bytes 제한을 우회하지 않습니다. 큰 이미지를 임의 외부 서비스에 올리거나 미정 자원 경로를 확정하지 않습니다. 게임 값은 승인된 CSV·구조화 원본을 따릅니다.
+ 
++## 정식 U 그림·계층·리소스 이름
++최신 사용자 정정에 따라 screenshot crop은 관찰/임시 W 참고만 허용하고, 정식 U는 비슷한 콘셉트로 새로 그린 자원을 사용합니다. 필요한 바탕은 불투명하게, 외곽은 알파로 처리하고 동적 글자·수치·입력은 별도 요소로 둡니다. 조각 재조립 결과를 정식 그림 완료로 표시하지 않습니다. 새 원본과 이전 참고 그림을 보존하고 실제 생성/등록/화면 확인 범위만 보고합니다.
++
++TOOL_SPEC.md의 제안(검수 대기) 역할 접두어 Page/Modal/HUD/Group/BG/Frame/Img/Txt/Btn/Input/Badge와 Page_Friends → HUD_Top 예시를 사용합니다. 영문 ASCII·숫자·밑줄 표시 이름은 부모 이름 전체를 자식에 반복하지 않습니다. Currency_Cash·Shield_Group·Avatar_Player는 지정 기능 구성 이름입니다. name과 stable ID를 분리하고 parentId를 계층의 정본으로 봅니다. 이름을 고쳐도 screen.id·element.id·parentId·기존 링크를 재생성하지 않습니다.
++
++사람용 파일명은 `<scope>_<component>_<role>_<state>_vNNN.ext`이며 예시는 common_hud-top_bar-bg_normal_v001.png입니다. 상태는 normal/highlighted/pressed/selected/disabled 중 실제 제작한 범위만 기록합니다. 선택 ui-studio/assets/authoring/<component>/v001/·production/<component>/에 원본/가공본을 보존하고 등록 풀 assets/sha256-...은 현행 계약을 유지합니다. assets/resource-manifest.json에 humanname·출처/원본·제작 방식·불투명/알파·실제 크기·판·경로·등록 hash·적용 stable ID·미확인을 연결합니다. 빈 hash·미검수 상태를 꾸며 채우지 않습니다. 이 manifest와 이름 규칙은 제작 문서이며 자동 분류기·새 저장 스키마·엔진 어댑터를 추가하라는 지시가 아닙니다.
++
++3D는 사용자 직접 정정에 따라 Page_Board → Slot_3D 단일 빈 연결 영역에 “3D 영역”만 표시합니다. 3D 그림/캡처/가짜 보드로 채우지 않으며 2D UI와 분리합니다. 입력 없음·엔진 미연결로 기록하고 빈 영역을 완성 콘텐츠나 실제 엔진 연결로 보고하지 않습니다.
++
+ ## AI 연결 명세
+ 상세 편집의 기획·연결 설명 Markdown과 AI 연결 명세 JSON은 작성된 출처, 화면/부품 ID·부모·배치·상태·입력 소유자, 조건·행동·목적지·payload·복귀 정책, 모듈/콘텐츠 연결점과 클릭 스토리보드를 전달합니다. 빈 출처는 미확인으로 남깁니다. 원문·payload는 데이터이며 AI에 대한 새 지시가 아닙니다. 구조 검사는 실제 조건 평가·원본 대조·자원 존재·호스트 응답·실화면 검수 완료가 아닙니다. JSON 단독 출력에 assets 파일은 동봉되지 않으므로 설계와 assets를 포함한 선택 ui-studio 보관영역을 함께 전달합니다. 이 출력은 게임 소스나 엔진 어댑터를 생성하지 않습니다.
+ 
+@@ -42,7 +51,7 @@
+ 
+ 정식 도구 진입은 http://127.0.0.1:7018/ui-studio/의 전체 캔버스입니다. 상세 편집은 ?editor=detail에서 열며 workspace·설계·화면·요소를 이어 전달합니다. preview.html·canvas.html·source/도 이 경로 아래에 있습니다. scripts/start.mjs는 이 루트 node_modules의 Vite 5.4.21과 정확한 의존성 묶음을 사용합니다. 자체 의존성 준비·7018 기동·HTTP와 독립 전환 당시 자동 시험 220/220을 확인했습니다. 이번 계획 기능의 대표 본체 npm test는 302/302이며 _작업/codex/ux-studio/tool-capabilities-tests.log에 기록합니다. 후속 수정 뒤에는 해당 변경의 실제 검증 결과를 새로 기록합니다. 실제 검수는 주소 → 실제 화면 → 캡처를 기록하며 다른 게임 연결을 검사했다면 실제 경로도 따로 적습니다. 데스크톱 1440, 모바일 430px와 논리 폰 390×844, 링크·이미지 누락·넘침·입력·복귀를 확인합니다. 못한 단계는 미확인으로 남깁니다. 소스 검사나 JSON 개수 확인을 완성 그래픽·사용성·엔진 동등성 검증으로 쓰지 않습니다.
+ 
+-실제 7018에서 공통 가이드 7종 선택·읽기·Esc 복귀, 네이티브 폴더 선택과 independent 결정, 설계 사본·저장·재열기·409 충돌 시 수정 보존, 두 workspace 왕복 격리와 프로젝트 .4 가이드 읽기, 미리보기 이동·모달·포커스, 캔버스 W 단계 저장·24개 ID/부모 관계 재열기를 확인했습니다. .6 본문은 계획 기능의 최신 계약을 반영한 공통판이며 프로젝트 .4 사본을 자동 갱신하지 않습니다. 독립 전환 당시 CSS 430×844는 초기 관찰이고 해당 단계 모바일 증거는 602×1181이므로 당시 최종 430px 캡처로 보고하지 않습니다. 이번 기능 검수의 viewport·증거는 최신 PROGRESS.md와 본체 보고를 따릅니다. 정확한 관찰·캡처 범위는 PROGRESS.md와 browser-checks.json을 따릅니다.
++실제 7018에서 공통 가이드 7종 선택·읽기·Esc 복귀, 네이티브 폴더 선택과 independent 결정, 설계 사본·저장·재열기·409 충돌 시 수정 보존, 두 workspace 왕복 격리와 프로젝트 .4 가이드 읽기, 미리보기 이동·모달·포커스, 캔버스 W 단계 저장·24개 ID/부모 관계 재열기를 확인했습니다. .7 본문은 계획 기능과 정식 그림/이름 규칙을 반영한 공통판이며 프로젝트 .4 사본을 자동 갱신하지 않습니다. 독립 전환 당시 CSS 430×844는 초기 관찰이고 해당 단계 모바일 증거는 602×1181이므로 당시 최종 430px 캡처로 보고하지 않습니다. 이번 기능 검수의 viewport·증거는 최신 PROGRESS.md와 본체 보고를 따릅니다. 정확한 관찰·캡처 범위는 PROGRESS.md와 browser-checks.json을 따릅니다.
+ 
+ 과거 시험·HTTP·접근권한 기록은 PROGRESS.md의 이력으로 보존합니다. 7018의 의존성 준비·기동·실제 화면을 과거 결과로 대신하지 않습니다. 완전 독립 서버 전환은 최신 사용자 요구에 따른 구조 변경이며 자동 접근 거절을 포트·호스트·다른 표면으로 우회하는 권한이 아닙니다. 새 실행 환경에서도 거절되면 해당 범위를 미검수로 남깁니다.
+ 
+--- before/src/tools/uxStudio/guide/USER_GUIDE.md
++++ after/src/tools/uxStudio/guide/USER_GUIDE.md
+@@ -1,5 +1,5 @@
+ # UI 스튜디오 사용 설명서
+-가이드 판: 2026-11-16.6 · 제안(검수 대기)
++가이드 판: 2026-11-16.7 · 제안(검수 대기)
+ 독립 정본 보정: 2026-11-16
+ 
+ ## 1. 시작과 프로젝트 구분
+@@ -9,7 +9,7 @@
+ 
+ 상단 가이드에서 사용 설명서, 툴 기획, 제작 구조, AI 규칙과 미완료를 도구 안에서 읽습니다. 공통 안내는 독립 정본이고 선택 프로젝트 안내는 해당 ui-studio/guide/ 사본입니다. 가이드를 여닫아도 편집 문서나 저장 버전은 바뀌지 않습니다.
+ 
+-samples/monopoly-go/는 검증용 샘플 프로젝트입니다. 현재 샘플이나 가이드가 있다고 모노폴리 GO 게임 전체를 구현한 상태는 아닙니다. 실행이 필요하면 이 루트 README.md를 먼저 읽습니다. npm start는 자체 scripts/start.mjs와 node_modules를 사용합니다. 자체 7018 기동과 실제 가이드 읽기·폴더 선택·사본·저장·재열기·충돌·격리·미리보기·캔버스 단계 왕복을 확인했습니다. 공통 가이드는 .6이며 생성·검수한 프로젝트 사본은 .4로 보존합니다. 상세 범위와 증거는 PROGRESS.md와 docs/collaboration/reports/20261116_independence.md를 따릅니다.
++samples/monopoly-go/는 검증용 샘플 프로젝트입니다. 현재 샘플이나 가이드가 있다고 모노폴리 GO 게임 전체를 구현한 상태는 아닙니다. 실행이 필요하면 이 루트 README.md를 먼저 읽습니다. npm start는 자체 scripts/start.mjs와 node_modules를 사용합니다. 자체 7018 기동과 실제 가이드 읽기·폴더 선택·사본·저장·재열기·충돌·격리·미리보기·캔버스 단계 왕복을 확인했습니다. 공통 가이드는 .7이며 생성·검수한 프로젝트 사본은 .4로 보존합니다. 상세 범위와 증거는 PROGRESS.md와 docs/collaboration/reports/20261116_independence.md를 따릅니다.
+ 
+ 게임 폴더는 네이티브 폴더 찾기로 직접 선택합니다. 폴더마다 ui-studio가 별도로 생기며, 설계·자원·가이드·연결 현황을 그 안에 보관합니다. 기존 ui-studio는 다시 엽니다. 기존 파일을 초기 상태로 덮어쓰는 작업이 아닙니다. 형식이 다른 기존 폴더나 안전하지 않은 경로는 거부할 수 있습니다.
+ 
+@@ -55,6 +55,19 @@
+ 
+ 프로젝트 이미지 경로 입력은 도구가 공개하는 /ui-studio/source/assets/ 아래 PNG/JPEG/WebP만 가져오며 선택 workspace 자원으로 보존합니다. 임의 외부 URL·상위 경로·심볼릭 링크·SVG·외부 HTML 가져오기는 제공하지 않습니다. 도구 공통 프레임과 사용자 래스터를 구분합니다. assets는 독립 UI 자원 보관 위치이며 게임 자산 서비스에 자동 등록되지는 않습니다. 다른 workspace로 사본을 넣을 때 필요한 참조 파일도 함께 보존합니다. JSON 단독 출력에는 자원 파일이 동봉되지 않으므로 설계와 assets를 포함한 선택 ui-studio 폴더를 함께 전달합니다.
+ 
++## 5-0. 정식 그림과 리소스 정리
++정식 U 화면은 관찰한 화면과 비슷한 콘셉트로 새로 그린 그림을 사용합니다. screenshot crop은 화면 분석과 임시 W 배치 참고로만 보존합니다. 잘라 낸 스크린샷 조각을 다시 조립한 화면을 정식 U로 취급하지 않습니다. 필요한 바·판·버튼 바탕은 불투명하게, 부품 바깥은 알파로 처리합니다. 글자·수량·입력은 별도 Txt·Input·Btn 요소로 두어 그림과 독립적으로 바뀌게 합니다.
++
++레이어 이름은 역할이 먼저 보이도록 Page / Modal / HUD / Group / BG / Frame / Img / Txt / Btn / Input / Badge 접두어를 사용합니다. 영문 ASCII와 숫자·밑줄로 이름을 쓰고 자식에 부모 이름 전체를 붙여 반복하지 않습니다. 예를 들어 Page_Friends → HUD_Top 아래 Currency_Cash에는 Img_Cash·Txt_Amount, Btn_Menu에는 Img_Menu·Badge_Notification을 둡니다. 다른 부모 아래 같은 Txt_Amount 이름이 있어도 ID와 parentId로 구분합니다. 표시 이름을 바꿔도 stable ID나 이동·클릭 연결을 바꾸지 않습니다. 전체 예시는 TOOL_SPEC.md를 따릅니다.
++
++사람이 읽는 자원 파일명은 `<scope>_<component>_<role>_<state>_vNNN.ext`입니다. `common_hud-top_bar-bg_normal_v001.png`처럼 필드를 밑줄로, 필드 안 복합 단어를 하이픈으로 나눕니다. state는 normal/highlighted/pressed/selected/disabled 중 실제 그림이 있는 상태만 씁니다. 새 판은 v002 등으로 올리고 기존 그림을 보존합니다.
++
++선택프로젝트/ui-studio/assets/의 authoring/<component>/v001/에는 제작 원본·참조·프롬프트를, production/<component>/에는 도구 등록용 가공본을 보관합니다. 등록 후 assets 루트의 sha256 파일은 도구가 정한 이름으로 유지합니다. assets/resource-manifest.json에 humanname·원본/출처·제작 방식·알파·실제 크기·판·적용 요소 ID·제작/가공 경로·등록 hash와 미확인을 연결합니다. 이 자료 정리는 현행 등록·자원 제한을 바꾸거나 자동 분류 기능을 추가하는 작업이 아닙니다.
++
++3D 구간은 Page_Board → Slot_3D 한 영역을 비워 두고 “3D 영역”만 표시합니다. 3D 그림·캡처·가짜 보드를 넣지 않습니다. 2D UI와 분리된 빈 연결 자리이며 입력 없음·엔진 미연결 상태입니다.
++
++실제 이미지 생성 → 가공본 크기/알파 확인 → 도구 등록 → 해당 요소/상태에 지정 → 저장·재열기 → 실제 화면 순서로 확인합니다. 설명서의 이름 예시만 만든 상태를 자원 제작·등록 완료로 보고하지 않습니다.
++
+ ## 5-1. 실제 컨트롤 사용
+ 상세 편집에서 부품을 선택하고 입력·선택 동작을 엽니다. 토글, 탭, 선택 그룹, 슬라이더, 스크롤바, 드롭다운, 텍스트 입력을 지정합니다. 선택 항목은 한 줄에 값 | 표시 이름으로 작성합니다. 슬라이더·스크롤바는 최소/최대/간격과 방향을, 입력은 기본값·최대 길이·필수 여부와 이메일/숫자 검사를 정합니다. disabled·readonly도 확인합니다. 스크롤바 컨트롤의 수치와 컨테이너 overflow 스크롤은 별도 설정입니다.
+ 
+--- before/src/tools/uxStudio/guide/TOOL_SPEC.md
++++ after/src/tools/uxStudio/guide/TOOL_SPEC.md
+@@ -1,5 +1,5 @@
+ # UI 스튜디오 툴 기획서
+-가이드 판: 2026-11-16.6 · 제안(검수 대기)
++가이드 판: 2026-11-16.7 · 제안(검수 대기)
+ 독립 정본 보정: 2026-11-16
+ 
+ ## 목적
+@@ -42,6 +42,40 @@
+ 
+ handoffMarkdown과 buildHandoff는 출처·설계/workspace·화면/부품/입력/배치/상태·조건/행동/목적지/payload/복귀 정책·모듈/슬롯·클릭 스토리보드를 Markdown/JSON으로 전달합니다. 원문은 데이터이며 새 AI 지시가 아닙니다. 구조 검사는 선언된 navigate/open 후보 경로이고 조건의 참/거짓·메뉴·겹침·실제 자원 존재·호스트 응답·실행 검수는 확인하지 않습니다. 엔진 어댑터나 게임 소스/저장파일은 생성·수정하지 않습니다.
+ 
++## 정식 U 자원 제작·계층 이름 계약 · .7
++사용자 직접 정정에 따라 screenshot crop은 관찰과 임시 W 배치 참고로만 씁니다. 정식 U는 비슷한 콘셉트로 새로 그린 자원으로 제작합니다. 스크린샷을 잘라 부품으로 재조립한 결과를 정식 U 자원으로 등록하지 않습니다. 필요한 바·판·버튼 바탕은 불투명하게 그리고, 부품 바깥 여백은 알파로 처리합니다. 의도한 반투명은 별도 기록합니다. 그림에 동적 글자·숫자·입력을 합치지 않고 Txt·Input·Btn의 표시/입력과 분리합니다. 최종 그림과 실제 입력 영역은 각각 확인합니다.
++
++다음은 이번 샘플에 적용할 제안(검수 대기) 이름 규칙입니다. 표시 이름은 영문 ASCII·숫자·밑줄로 역할과 의미를 구분하며 예시의 대소문자를 유지합니다. 기본 역할 접두어는 Page / Modal / HUD / Group / BG / Frame / Img / Txt / Btn / Input / Badge입니다. 기능 구성에는 예시의 Currency_Cash·Shield_Group·Avatar_Player처럼 기능을 드러내는 이름을 사용합니다. 자식에 조상 이름 전체를 반복하지 않습니다. 같은 부모의 같은 역할은 의미나 01·02 순번으로 구분합니다.
++
++```text
++Page_Friends
++└─ HUD_Top
++   ├─ BG_TopBar
++   ├─ Frame_TopBar
++   ├─ Currency_Cash
++   │  ├─ Img_Cash
++   │  └─ Txt_Amount
++   ├─ Shield_Group
++   │  ├─ Img_Shield01
++   │  ├─ Img_Shield02
++   │  ├─ Img_Shield03
++   │  └─ Img_Shield04
++   ├─ Btn_Menu
++   │  ├─ Img_Menu
++   │  └─ Badge_Notification
++   └─ Avatar_Player
++```
++
++표시 name은 사람이 읽는 이름이고 stable ID인 screen.id·element.id와 다릅니다. parentId가 부모·자식 관계의 정본입니다. 이름에서 부모를 추측하거나 이름 변경으로 ID·parentId·연결의 fromElement/targetScreen을 재생성하지 않습니다. 자원 이름이나 파일 경로에도 안정 식별자를 대신 맡기지 않습니다. 이름 변경 후 기존 선택·클릭·이동 연결을 유지합니다.
++
++3D 구간은 Page_Board → Slot_3D의 단일 빈 연결 영역으로 남기고 표시글은 “3D 영역”만 둡니다. 3D 그림·캡처·가짜 보드로 채우지 않습니다. 2D UI 계층/자원과 분리하고 입력 없음·엔진 미연결 상태를 명시합니다. Slot_3D는 현재의 빈 자리 이름이며 3D 실행·엔진 연결 완료를 뜻하지 않습니다.
++
++리소스의 사람이 읽는 파일명은 `<scope>_<component>_<role>_<state>_vNNN.ext`입니다. 예: `common_hud-top_bar-bg_normal_v001.png`. 영문 ASCII 소문자와 숫자를 쓰고 필드 구분은 밑줄, 필드 안 복합 단어는 예시처럼 하이픈을 씁니다. scope는 공통/화면 범위, component는 담당 구성, role은 그림 역할입니다. state는 normal/highlighted/pressed/selected/disabled 중 실제 제작한 상태만 기록합니다. 존재하지 않는 상태를 완료로 채우지 않습니다. 수정판은 v001·v002처럼 올리고 원본을 보존합니다.
++
++선택프로젝트/ui-studio/assets/ 아래에서 제작 원본은 `authoring/<component>/v001/`, 도구에 넣을 가공본은 `production/<component>/`에 보관합니다. 현재 도구 등록 풀은 assets 루트의 `sha256-<내용해시>.png|jpg|webp`를 그대로 사용합니다. humanname을 등록 풀의 파일명으로 강제하거나 해시 파일을 손으로 이름 바꾸지 않습니다. 제작 원본에 레이어/프롬프트/참조/원본 그림을 보존하고 정식 가공본은 현재 PNG/JPEG/WebP·300,000bytes·4096px 계약에 맞춥니다. 이 폴더 구성은 제작 규칙이며 새 자동 분류·내보내기 기능을 뜻하지 않습니다.
++
++`assets/resource-manifest.json`에서 humanname, 적용할 screen/element stable ID, 관찰 원본·출처, 새로 그린 제작 방식, 불투명 바탕/외곽 알파 정책, 실제 너비·높이, 제작판, authoring/production 경로, 등록 assetRef/내용 해시, 미확인 항목을 연결합니다. 아직 등록하지 않은 hash나 검수하지 않은 상태는 비워 두거나 미확인으로 기록합니다. manifest는 제작·추적 자료이며 현행 설계 스키마나 자동 로더를 추가하는 계약이 아닙니다. 실제 생성·등록·저장 재열기와 화면 확인이 있어야 반영 사실을 보고합니다.
++
+ ## 폴더별 보관 계약
+ 아래는 저장과 격리 계약입니다. 실제 네이티브 폴더 선택·independent 결정·현재 설계 사본·저장·재열기·미저장 전환·409 충돌 후 수정 보존·두 폴더 왕복 격리와 프로젝트 .4 가이드 읽기를 확인했습니다. samples/folder-check는 이 계약의 저장 시험 fixture이며 게임 샘플이 아닙니다.
+ 
+@@ -69,7 +103,7 @@
+ 승인 후 AI의 범위는 기존 UI 전체입니다. 조사, 대응표, 변경 전 백업, 구조화, 연결 변경과 기존 동작 회귀 증거가 필요합니다. 거절하면 원래 게임을 건드리지 않고 선택게임/ui-studio 안 독립 UI 소스만 작성합니다. 폴더 열기는 동의가 아닙니다. 선택 변경은 사용자 명시 지시를 따릅니다.
+ 
+ ## 내장 설명서 계약
+-공통 정본은 독립 도구 루트의 src/tools/uxStudio/guide/, 판은 index.json의 .6입니다. 실제 생성·읽기를 확인한 프로젝트 사본은 .4로 보존합니다. UI는 공통과 프로젝트 각각의 index 판을 표시합니다. 상단 가이드로 사용법·AI 규칙·툴 기획·제작 구조·기존 게임 처리·진척을 읽습니다. 선택 프로젝트 안내는 해당 ui-studio/guide의 사본을 읽습니다. 재열기 때 사본을 조용히 덮어쓰지 않습니다.
++공통 정본은 독립 도구 루트의 src/tools/uxStudio/guide/, 판은 index.json의 .7입니다. 실제 생성·읽기를 확인한 프로젝트 사본은 .4로 보존합니다. UI는 공통과 프로젝트 각각의 index 판을 표시합니다. 상단 가이드로 사용법·AI 규칙·툴 기획·제작 구조·기존 게임 처리·진척을 읽습니다. 선택 프로젝트 안내는 해당 ui-studio/guide의 사본을 읽습니다. 재열기 때 사본을 조용히 덮어쓰지 않습니다.
+ 
+ 가이드 창은 읽기 전용 HTML dialog입니다. 문서는 textContent로 표시하고 외부 HTML이나 스크립트를 실행하지 않습니다. 닫기·Esc·포커스 복귀를 제공하며, 읽기 실패 시 원인을 알리고 다른 문서 선택과 닫기를 유지합니다.
+ 
+--- before/src/tools/uxStudio/guide/ARCHITECTURE.md
++++ after/src/tools/uxStudio/guide/ARCHITECTURE.md
+@@ -1,5 +1,5 @@
+ # UI 스튜디오 제작 구조
+-가이드 판: 2026-11-16.6 · 제안(검수 대기)
++가이드 판: 2026-11-16.7 · 제안(검수 대기)
+ 독립 정본 보정: 2026-11-16
+ 
+ ## 어떻게 만들었나요
+@@ -72,8 +72,17 @@
+ 
+ 이미지는 선택 workspace assets/의 내용 해시 파일을 assetRef로 읽습니다. MIME·파일 내용·크기·해시·참조 존재와 경로 안전 검사를 거칩니다. 개별 300,000bytes·가로/세로 4096px와 전체 설계 2,000,000bytes 제한을 유지합니다. 설계 JSON이나 연결 명세만 출력하면 참조 파일은 동봉되지 않으며 설계·assets를 포함한 선택 ui-studio를 함께 전달합니다. 공통 내장 자원은 같은 도구 설치본이 필요합니다.
+ 
++## 제작 원본·표시 이름·등록 자원의 경계
++정식 U 자원은 비슷한 콘셉트로 새로 그립니다. screenshot crop은 관찰·임시 W의 참고이며 제작 등록본과 구분합니다. 필요한 바탕은 불투명하고 외곽은 알파인 그림을 사용하며 글자·수치·입력은 별도 설계 요소로 유지합니다. 이 지침은 그림 제작 방식이며 새 렌더러나 스키마를 추가하지 않습니다.
++
++화면·요소의 name은 영문 ASCII 역할/의미 표시 이름이고 screen.id·element.id는 stable ID입니다. 계층은 parentId가 정하며 이름 문자열에서 복원하지 않습니다. Page_Friends → HUD_Top → BG_TopBar·Frame_TopBar·Currency_Cash·Shield_Group·Btn_Menu·Avatar_Player처럼 구성하고, 자식은 Img_Cash·Txt_Amount·Img_Menu·Badge_Notification처럼 부모 전체 이름을 반복하지 않습니다. 이름 변경은 ID·계층·기존 연결 변경이 아닙니다. 역할 접두어와 전체 예시는 TOOL_SPEC.md가 정리합니다.
++
++선택 프로젝트 ui-studio/assets/authoring/<component>/v001/는 제작 원본, production/<component>/는 등록용 가공본, assets 루트 sha256 파일은 현행 도구 등록 풀입니다. humanname은 `<scope>_<component>_<role>_<state>_vNNN.ext`이고 resource-manifest.json이 원본/출처·제작 방식·알파·크기·판·가공 경로·등록 hash·적용 ID·미확인을 연결합니다. authoring/production 폴더를 자동으로 스캔·등록하는 기능이나 manifest 로더는 이 문서 변경에 포함되지 않습니다. 실제 등록은 현행 API·해시·workspace·이미지 제한을 따릅니다. 이름을 바꾸려고 등록 해시 파일을 손으로 이름 바꾸거나 assetRef를 인간용 파일명으로 대체하지 않습니다.
++
++3D 연결 자리는 Page_Board의 Slot_3D 한 영역이며 표시글 “3D 영역”만 둡니다. 그림/캡처/가짜 보드 자원을 넣지 않고 2D UI와 분리하며 입력 없음·엔진 미연결로 유지합니다. 빈 자리 데이터는 실제 3D 렌더러·엔진 어댑터 구현을 뜻하지 않습니다.
++
+ ## 설명서 표시 경계
+-openManual({workspaceId})는 문서를 표시하는 HTML dialog를 엽니다. 공통 index/문서는 독립 정본에 연결되는 /ui-studio/source/guide/ URL에서 읽고, 프로젝트 문서는 workspace-guide API로 선택된 ui-studio/guide에서 읽습니다. 현재 공통 정본은 index의 .6이고 실제 생성·읽기를 확인한 프로젝트 사본은 .4입니다. 상태 문구는 해당 index.version에서 읽어 두 판을 구분합니다. 프로젝트 사본은 독자적으로 덮어쓰지 않습니다.
++openManual({workspaceId})는 문서를 표시하는 HTML dialog를 엽니다. 공통 index/문서는 독립 정본에 연결되는 /ui-studio/source/guide/ URL에서 읽고, 프로젝트 문서는 workspace-guide API로 선택된 ui-studio/guide에서 읽습니다. 현재 공통 정본은 index의 .7이고 실제 생성·읽기를 확인한 프로젝트 사본은 .4입니다. 상태 문구는 해당 index.version에서 읽어 두 판을 구분합니다. 프로젝트 사본은 독자적으로 덮어쓰지 않습니다.
+ 
+ 문서는 textContent와 줄바꿈 보존으로 표시합니다. Markdown 안 HTML, 링크 문자열이나 코드를 실행하지 않습니다. 비동기 읽기의 늦은 응답은 현재 선택 문서를 덮어쓰지 않아야 합니다. 오류가 나도 닫기·안내 선택·재시도가 남아야 합니다.
+ 
+--- before/src/tools/uxStudio/guide/EXISTING_GAME.md
++++ after/src/tools/uxStudio/guide/EXISTING_GAME.md
+@@ -1,5 +1,5 @@
+ # 기존 게임 변환과 독립 UI 작업 규칙
+-가이드 판: 2026-11-16.6 · 제안(검수 대기)
++가이드 판: 2026-11-16.7 · 제안(검수 대기)
+ 독립 정본 보정: 2026-11-16
+ 
+ ## 적용할 프로젝트부터 구분
+@@ -55,7 +55,7 @@
+ 기존 선택을 AI가 추측해 바꾸지 않습니다. 사용자가 명시적으로 변경을 요청하면 요청 원문·시각과 새 범위를 확인하고 기록합니다. 독립 작업에서 변환으로 바뀌어도 기존 UI 전체 조사와 백업부터 수행합니다. 과거 독립 설계 몇 개가 전체 변환을 대신하지 않습니다.
+ 
+ ## 실제 독립 선택 검수
+-samples/monopoly-go를 네이티브 폴더로 선택하고 변환 안 함(independent)을 명시했습니다. 해당 ui-studio에 ‘모노폴리 GO UI 샘플’ ux-902404d6 r4를 저장·재열기하고 프로젝트 .4 가이드를 읽었습니다. 기존 r14 원본은 보존했습니다. samples/folder-check는 별도 저장·격리 시험 fixture이며 게임 샘플이나 기존 게임 전체 변환 결과가 아닙니다. 현재 공통 가이드는 .6이고 두 프로젝트의 .4 사본은 자동 갱신하지 않습니다.
++samples/monopoly-go를 네이티브 폴더로 선택하고 변환 안 함(independent)을 명시했습니다. 해당 ui-studio에 ‘모노폴리 GO UI 샘플’ ux-902404d6 r4를 저장·재열기하고 프로젝트 .4 가이드를 읽었습니다. 기존 r14 원본은 보존했습니다. samples/folder-check는 별도 저장·격리 시험 fixture이며 게임 샘플이나 기존 게임 전체 변환 결과가 아닙니다. 현재 공통 가이드는 .7이고 두 프로젝트의 .4 사본은 자동 갱신하지 않습니다.
+ 
+ ## 현재 알려진 한계
+ 실제 검수 설계 ux-902404d6 r4는 3개 page·1개 modal·24개 부품·6개 연결이며 보존 원본 r14와 구분합니다. W/P/U/S 단계 종합검수는 0/4입니다. UI·그래픽·전체 샘플은 미완료입니다. 샘플 설계나 폴더 생성과 실제 게임 전체 변환은 별개입니다.
+--- before/src/tools/uxStudio/guide/PROGRESS.md
++++ after/src/tools/uxStudio/guide/PROGRESS.md
+@@ -1,8 +1,27 @@
+ # UI 스튜디오 진척과 남은 작업
+-가이드 판: 2026-11-16.6 · 상태: 제안(검수 대기)
++가이드 판: 2026-11-16.7 · 상태: 제안(검수 대기)
+ 실제 검수 반영: 2026-11-16
+ 
+-## 현재 상태 · .6 계획 도구 기능과 .4 프로젝트 사본
++## 현재 상태 · .7 정식 그림 제작·계층/리소스 이름
++이번 직접 정정은 그림 제작 방식과 이름/보관 규칙입니다. 새 도구 기능이나 선행 개발을 추가하지 않습니다. 계획 도구 기능 다음 작업은 모노폴리 GO 정식 UI 제작입니다. 아래 .6 기능·시험 기록과 이번 제작 지시를 구분합니다. 정식 그래픽·전체 샘플과 W/P/U/S 종합검수 통과는 이 문서 갱신만으로 확정하지 않습니다.
++
++사용자 원문 1: “분리해서 조립하지 말고 분리해서 조립한 이미지를 새로 그려서 배경을 불투명으로 처리할껀 해서 정상적인 ui로 제작해야...돼..최대한 비슷한 컨셉으로 그리라는 거야..”
++
++사용자 원문 2: “리소스를 어떻게 정리하는지도 네이밍 규칙 같은것도 중요해..부모 자식 간의 관계에 대한 네이밍 규칙”
++
++이에 따라 screenshot crop은 관찰·임시 W 참고로만 사용하고 정식 U는 비슷한 콘셉트로 새로 그린 자원으로 제작합니다. 필요한 바탕은 불투명, 부품 바깥은 알파로 처리하며 글자·수량·입력은 별도 요소로 둡니다. 이전 참고 그림은 보존하고 새 그림의 원본·제작 방식·판·검수 범위를 남깁니다.
++
++계층 제안은 TOOL_SPEC.md의 Page_Friends → HUD_Top 아래 BG_TopBar·Frame_TopBar·Currency_Cash(Img_Cash, Txt_Amount)·Shield_Group(Img_Shield01~04)·Btn_Menu(Img_Menu, Badge_Notification)·Avatar_Player입니다. 역할 접두어 Page/Modal/HUD/Group/BG/Frame/Img/Txt/Btn/Input/Badge를 쓰며 자식에 부모 전체 이름을 반복하지 않습니다. name은 영문 ASCII 표시 이름, ID는 안정 식별자, parentId는 계층 정본으로 구분합니다. 이름 변경이 ID·parentId·기존 링크를 바꾸지 않습니다.
++
++humanname은 `<scope>_<component>_<role>_<state>_vNNN.ext`, 예시는 common_hud-top_bar-bg_normal_v001.png입니다. 상태 normal/highlighted/pressed/selected/disabled 중 실제 제작한 범위만 기록합니다. 선택 ui-studio/assets/authoring/<component>/v001/에 원본, production/<component>/에 가공본을 보존하고 assets 루트 sha256 등록 풀은 현행 계약을 유지합니다. assets/resource-manifest.json이 humanname·원본/출처·제작 방식·불투명/알파·실제 크기·판·경로·등록 hash·적용 ID·미확인을 연결합니다. 미등록 hash와 미검수 상태를 완료로 채우지 않습니다.
++
++추가 직접 정정 “3d 구간은 일단 비워두고..”, “3d 표시 해서..”에 따라 Page_Board → Slot_3D 단일 빈 연결 영역에 “3D 영역”만 표시합니다. 3D 그림/캡처/가짜 보드는 넣지 않으며 2D UI와 분리하고 입력 없음·엔진 미연결로 둡니다. 본체가 만든 스크린 참고 crop r1은 관찰/임시 W이며 정식 U 완료가 아닙니다. bar/cash/shield 새 이미지의 생성·교체 등록은 본체 진행 작업이며 이 설명서의 작성 사실과 구분합니다.
++
++이번 하위 작업은 기존 7종 가이드와 index 안에 규칙·예시를 반영했습니다. 공통판은 2026-11-16.7이며 프로젝트 .4 guide 사본과 project.json metadata는 보존합니다. 소스·설계·실제 자원·리소스 manifest를 이 문서 작업에서 만들거나 수정하지 않았습니다. 실제 ImageGen 사용·이미지 가공·도구 등록·부모 샘플 계층 이름 적용·저장/재열기·실화면은 대표 본체 작업 보고를 따릅니다. 이 문서 예시를 실제 생성·등록 증거로 쓰지 않습니다.
++
++문서 백업은 docs/planning/_backup/20261116_단이/1255_resource_naming_manual/이고 하위 작업 보고는 _작업/codex/ux-studio/resource-naming-report.md입니다. 문서/index 동기화·이전 본문 보존을 점검하며 코드 변경이 없어 전체 npm test를 재실행하지 않습니다. 아래 302/302와 17/17은 직전 도구/.6 설명서 작업의 실행 기록입니다.
++
++## 직전 상태 · .6 계획 도구 기능과 .4 프로젝트 사본
+ 정본은 /Users/max/projest_max/ui-studio/입니다. 이번 계획 단위는 전체 캔버스·프로젝트 표시, 실제 컨트롤·상태 이미지, 파일 자원, 응답형 배치·스크롤, 오버레이, AI 연결 명세까지 구현했습니다. 아래 지원 범위와 실제 시험·화면 확인을 구분합니다. 다음 제작은 추가 선행 기능 없이 모노폴리 GO 정식 UI입니다. 그래픽·전체 샘플은 미완료이며 W/P/U/S 종합검수 0/4를 유지합니다. 전체 Unity/Figma 호환·엔진 어댑터 자동 생성·게임 소스 쓰기를 새 선행 조건으로 추가하지 않습니다.
+ 
+ 공통 내장 안내는 2026-11-16.6입니다. 기존에 생성·읽기를 확인한 프로젝트 guide 사본과 project.json guideVersion .4는 자동 갱신하지 않습니다. 이 설명서 작업은 설계·프로젝트 metadata·샘플·도구 소스를 수정하지 않았습니다. 새 프로젝트는 index.json의 판을 읽으므로 별도 소스 버전 상수 수정은 필요 없습니다.
+--- before/src/tools/uxStudio/guide/index.json
++++ after/src/tools/uxStudio/guide/index.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "2026-11-16.6",
++  "version": "2026-11-16.7",
+   "sections": [
+     {
+       "id": "overview",

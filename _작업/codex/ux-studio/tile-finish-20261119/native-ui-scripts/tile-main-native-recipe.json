@@ -1,0 +1,490 @@
+{
+  "documentType": "normal-UI-action-instructions-not-saved-design",
+  "reason": "original425s fixture; exact3Dscene leaf removed;48square quickcircle/native v006 art/observed quest fragment",
+  "family": {
+    "id": "TS03",
+    "name": "Page_TSV_Territory",
+    "existingScreen": "main",
+    "nativeKind": "page",
+    "priority": 1,
+    "existingedits": [
+      {
+        "id": "element-ef783622-78d2-4242-af0e-25db38834f18",
+        "desiredName": "Img_TSV_TerritoryScene",
+        "remove": true,
+        "removeScope": "Exact image element only; no descendants; preserve asset file and other roots"
+      },
+      {
+        "id": "element-039d35eb-e1f4-490a-805c-cde674440c99",
+        "desiredName": "Btn_TSV_Territory_Building",
+        "enabled": true,
+        "stateRequired": true
+      }
+    ],
+    "actions": [
+      {
+        "op": "plain",
+        "key": "stage",
+        "name": "Slot_TSV_Territory_3D",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 504,
+          "h": 894
+        },
+        "parent": null,
+        "fill": "#102c45",
+        "strokeWidth": 0,
+        "radius": 0,
+        "opacity": 1,
+        "role": "Slot_3D",
+        "layerIntent": "send behind all existing roots",
+        "anchorPreset": "stretch"
+      },
+      {
+        "op": "text",
+        "key": "stageLabel",
+        "name": "Txt_TSV_Territory_3D",
+        "rect": {
+          "x": 130,
+          "y": 280,
+          "w": 244,
+          "h": 44
+        },
+        "parent": "stage",
+        "text": "3D",
+        "size": 24,
+        "weight": 600,
+        "color": "#93b5c9",
+        "align": "center"
+      },
+      {
+        "op": "button",
+        "key": "event",
+        "name": "Btn_TSV_Territory_Event",
+        "rect": {
+          "x": 8,
+          "y": 130,
+          "w": 88,
+          "h": 62
+        },
+        "parent": null,
+        "text": "",
+        "size": 18,
+        "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "center",
+        "press": "tint",
+        "anchorPreset": "top-left"
+      },
+      {
+        "op": "button",
+        "key": "survivor",
+        "name": "Btn_TSV_Territory_SurvivorEntry",
+        "rect": {
+          "x": 8,
+          "y": 650,
+          "w": 48,
+          "h": 50
+        },
+        "parent": null,
+        "text": "",
+        "size": 18,
+        "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "center",
+        "press": "tint",
+        "anchorPreset": "bottom-left"
+      },
+      {
+        "op": "image",
+        "key": "survivorPortrait",
+        "name": "Img_TSV_Territory_SurvivorEntry",
+        "rect": {
+          "x": 13,
+          "y": 654,
+          "w": 38,
+          "h": 42
+        },
+        "parent": "survivor",
+        "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+        "fit": "contain",
+        "region": [
+          0,
+          150,
+          150,
+          150
+        ]
+      },
+      {
+        "op": "text",
+        "key": "survivorPlus",
+        "name": "Txt_TSV_Territory_SurvivorPlus",
+        "rect": {
+          "x": 34,
+          "y": 675,
+          "w": 20,
+          "h": 23
+        },
+        "parent": "survivor",
+        "text": "+",
+        "size": 24,
+        "weight": 800,
+        "color": "#72f45c",
+        "align": "center"
+      },
+      {
+        "op": "plain",
+        "key": "survivorBadge",
+        "name": "Badge_TSV_Territory_Survivor",
+        "rect": {
+          "x": 40,
+          "y": 649,
+          "w": 17,
+          "h": 17
+        },
+        "parent": "survivor",
+        "fill": "#ed2b20",
+        "strokeWidth": 0,
+        "radius": 9,
+        "opacity": 1
+      },
+      {
+        "op": "text",
+        "key": "survivorCount",
+        "name": "Txt_TSV_Territory_SurvivorCount",
+        "rect": {
+          "x": 40,
+          "y": 649,
+          "w": 17,
+          "h": 17
+        },
+        "parent": "survivorBadge",
+        "text": "2",
+        "size": 12,
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "center"
+      },
+      {
+        "op": "button",
+        "key": "quick01",
+        "name": "Btn_TSV_Territory_Quick01",
+        "rect": {
+          "x": 448,
+          "y": 658,
+          "w": 48,
+          "h": 48
+        },
+        "parent": null,
+        "text": "",
+        "size": 18,
+        "skin": "/ui-studio/source/assets/import-staging/tile-finish-20261119/hero-circle-blue64-v003.png",
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "center",
+        "press": "tint",
+        "anchorPreset": "bottom-right",
+        "skinMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "inputShape": "ellipse"
+      },
+      {
+        "op": "plain",
+        "key": "quick01Badge",
+        "name": "Badge_TSV_Territory_Quick01",
+        "rect": {
+          "x": 479,
+          "y": 657,
+          "w": 16,
+          "h": 16
+        },
+        "parent": "quick01",
+        "fill": "#ed2b20",
+        "strokeWidth": 0,
+        "radius": 8,
+        "opacity": 1
+      },
+      {
+        "op": "text",
+        "key": "quick01Count",
+        "name": "Txt_TSV_Territory_Quick01Count",
+        "rect": {
+          "x": 479,
+          "y": 657,
+          "w": 16,
+          "h": 16
+        },
+        "parent": "quick01Badge",
+        "text": "1",
+        "size": 12,
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "center"
+      },
+      {
+        "op": "button",
+        "key": "quick02",
+        "name": "Btn_TSV_Territory_Quick02",
+        "rect": {
+          "x": 448,
+          "y": 716,
+          "w": 48,
+          "h": 48
+        },
+        "parent": null,
+        "text": "",
+        "size": 18,
+        "skin": "/ui-studio/source/assets/import-staging/tile-finish-20261119/hero-circle-blue64-v003.png",
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "center",
+        "press": "tint",
+        "anchorPreset": "bottom-right",
+        "skinMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "inputShape": "ellipse"
+      },
+      {
+        "op": "button",
+        "key": "quest",
+        "name": "Btn_TSV_Territory_ChapterQuest",
+        "rect": {
+          "x": 0,
+          "y": 776,
+          "w": 446,
+          "h": 46
+        },
+        "parent": null,
+        "text": "",
+        "size": 18,
+        "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "center",
+        "press": "tint",
+        "anchorPreset": "bottom-left"
+      },
+      {
+        "op": "image",
+        "key": "questIcon",
+        "name": "Img_TSV_Territory_ChapterQuest",
+        "rect": {
+          "x": 2,
+          "y": 769,
+          "w": 52,
+          "h": 52
+        },
+        "parent": "quest",
+        "path": "/ui-studio/source/assets/import-staging/tile-survival-nav-v001/quest-scroll.webp",
+        "fit": "contain"
+      },
+      {
+        "op": "panel",
+        "key": "questTrack",
+        "name": "BG_TSV_Territory_QuestTrack",
+        "rect": {
+          "x": 52,
+          "y": 783,
+          "w": 370,
+          "h": 30
+        },
+        "parent": "quest",
+        "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v002/quest-track-blue3-v002.webp",
+        "opacity": 1
+      },
+      {
+        "op": "text",
+        "key": "questFragment",
+        "name": "Txt_TSV_Territory_QuestObservedFragment",
+        "rect": {
+          "x": 64,
+          "y": 784,
+          "w": 346,
+          "h": 27
+        },
+        "parent": "quest",
+        "text": "레벨 달성 [1/3]",
+        "size": 18,
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "left",
+        "requiresReview": true,
+        "fragmentOnly": true,
+        "condition": "Optional visiblefragment only; omit until root confirms desired fixture. Not a reconstructed full quest."
+      },
+      {
+        "op": "image",
+        "key": "eventPortrait",
+        "name": "Img_TSV_Territory_EventPortrait",
+        "rect": {
+          "x": 10,
+          "y": 132,
+          "w": 84,
+          "h": 58
+        },
+        "parent": "event",
+        "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/main-event-portrait-ui-v006.png",
+        "fit": "contain",
+        "region": [
+          0,
+          0,
+          256,
+          192
+        ]
+      },
+      {
+        "op": "image",
+        "key": "quick01Icon",
+        "name": "Img_TSV_Territory_Quick01",
+        "rect": {
+          "x": 460,
+          "y": 661,
+          "w": 24,
+          "h": 42
+        },
+        "parent": "quick01",
+        "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/main-quick01-ui-v006.png",
+        "fit": "contain",
+        "region": [
+          0,
+          0,
+          67,
+          155
+        ]
+      },
+      {
+        "op": "image",
+        "key": "quick02Icon",
+        "name": "Img_TSV_Territory_Quick02",
+        "rect": {
+          "x": 456,
+          "y": 723,
+          "w": 32,
+          "h": 34
+        },
+        "parent": "quick02",
+        "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/main-quick02-ui-v006.png",
+        "fit": "contain",
+        "region": [
+          0,
+          0,
+          129,
+          136
+        ]
+      }
+    ],
+    "notes": [
+      "Remove only element-ef783622-78d2-4242-af0e-25db38834f18. Keep all HUD/Nav/GemShop/Building input and all their descendants.",
+      "No entire-scene screenshot overlay or scene illustration replaces empty3D. Plain stage must be behind preserved UI.",
+      "New engineer atlas is a helmeted-worker role match, not exact original identity. If root rejects role approximation, omit portrait rather than falsely identifying it.",
+      "Event/Quick frames remain partial without exact icons; missingAssets explicitly records them. Do not put enemy-ogre in place of original gorilla or use generic gem/medal icons.",
+      "The425s mission is obscured: do not mix110s 민가1/2/2 copy. Optional fragment is labelled incomplete. No fabricated chat text/event timer/unknown control mapping.",
+      "Reference rectangles/geometry/font/colors are production approximations. Bottom anchor intent preserves same offset from894px bottom. Badge/scroll decoration deliberately protrudes a few px; parent input must pass to wrapper.",
+      "Chat preview is an observed separate TS03 state gap, not silently completed by quest strip. Preserve it as deferredObservedStates; no extra action/copy is added to this49+12 plan."
+    ],
+    "missingAssets": [
+      {
+        "role": "Event gorilla portrait",
+        "key": "event",
+        "reason": "No matching gorilla in image map/art manifest; enemy-ogre is not a truthful substitute."
+      },
+      {
+        "role": "Quick01 exact colored function icon",
+        "key": "quick01",
+        "reason": "Identity unresolved; no unrelated replacement."
+      },
+      {
+        "role": "Quick02 document/card UI glyph",
+        "key": "quick02",
+        "reason": "No exact matched UI art. Quest-scroll is a different glyph."
+      },
+      {
+        "role": "Full quest copy at425s",
+        "key": "questFragment",
+        "reason": "Only observed fragment available; no unseen target/name reconstructed."
+      }
+    ],
+    "proposedLinks": [
+      {
+        "from": "quest",
+        "action": "open",
+        "target": "TS09",
+        "evidence": "TS03 observedLinks TSV02 165→169 quest entrance→chapter note; root connects only actual TS09."
+      },
+      {
+        "from": "survivor",
+        "action": null,
+        "target": "TS14",
+        "evidence": "Family entry candidate only; exact425s control sequence unverified.",
+        "confidence": "candidate-not-linked"
+      },
+      {
+        "from": "event",
+        "action": null,
+        "target": null,
+        "evidence": "Visible only; no fabricated family target."
+      },
+      {
+        "from": "quick01",
+        "action": null,
+        "target": null,
+        "evidence": "Visible only; unknown identity."
+      },
+      {
+        "from": "quick02",
+        "action": null,
+        "target": null,
+        "evidence": "Document shape does not prove TS15 or TS29."
+      }
+    ],
+    "referenceState": "TS03-R03 TSV02 requested425 actual424.9783333333; TS03-R01 only supplies structural quest-icon observation, not mixed text/count.",
+    "optionalActions": [
+      {
+        "op": "text",
+        "key": "questFragment",
+        "name": "Txt_TSV_Territory_QuestObservedFragment",
+        "rect": {
+          "x": 64,
+          "y": 784,
+          "w": 346,
+          "h": 27
+        },
+        "parent": "quest",
+        "text": "레벨 달성 [1/3]",
+        "size": 18,
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "left",
+        "requiresReview": true,
+        "fragmentOnly": true,
+        "condition": "Optional visiblefragment only; omit until root confirms desired fixture. Not a reconstructed full quest."
+      }
+    ],
+    "deferredObservedStates": [
+      {
+        "role": "ChatPreview",
+        "status": "not part of425s representative action list; separate state requires source/readback choice",
+        "catalogReference": "/Users/max/projest_max/ui-studio/samples/tile-survival/docs/reference/catalog.json#TS03",
+        "observedRegion": [
+          0,
+          783,
+          504,
+          48
+        ],
+        "reason": "Catalog chat preview region belongs to a different observation/state;425s proposed quest occupies776..822. Adding both would mix states. No transcript/line count from425s is established.",
+        "execution": "Do not add placeholder chat text, blank fake chat button or guessed link. Reopen compatible source frame before a separate optional state recipe."
+      }
+    ]
+  }
+}

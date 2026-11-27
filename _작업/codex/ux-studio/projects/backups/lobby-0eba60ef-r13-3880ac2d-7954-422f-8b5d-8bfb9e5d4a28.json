@@ -1,0 +1,4017 @@
+{
+  "schemaVersion": 3,
+  "projectId": "lobby-0eba60ef",
+  "revision": 13,
+  "name": "로비 · 공통 UI 설계",
+  "entryScreen": "lobby-common",
+  "screens": [
+    {
+      "id": "lobby-common",
+      "moduleId": "simulator_module_dice",
+      "name": "로비",
+      "kind": "page",
+      "purpose": "현재 공통 화면 구성을 사용한 UI 배치 초안.3D/게임 상태를 불러오지 않습니다.",
+      "elements": [
+        {
+          "id": "lobby-title",
+          "name": "로비 제목",
+          "kind": "text",
+          "x": 2.564102564102564,
+          "y": 0.35545023696682465,
+          "w": 94.87179487179486,
+          "h": 2.3696682464454977,
+          "text": "로비 · 공통 UI 설계",
+          "purpose": "로비 제목",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#ffffff",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json"
+        },
+        {
+          "id": "currency-dice",
+          "name": "주사위",
+          "kind": "panel",
+          "x": 2.564102564102564,
+          "y": 3.3175355450236967,
+          "w": 31.111111111111107,
+          "h": 2.6066350710900474,
+          "text": "",
+          "purpose": "주사위",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "skin": {
+            "preset": "backplate",
+            "version": 1,
+            "name": "정보 백판",
+            "mode": "9",
+            "asset": "frame",
+            "tone": "#dbe2e9",
+            "slices": [
+              12,
+              12,
+              12,
+              12
+            ],
+            "edges": [
+              6,
+              6,
+              6,
+              6
+            ],
+            "padding": [
+              6,
+              8,
+              6,
+              8
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "currency-gems",
+          "name": "보석",
+          "kind": "panel",
+          "x": 34.18803418803418,
+          "y": 3.3175355450236967,
+          "w": 31.111111111111107,
+          "h": 2.6066350710900474,
+          "text": "",
+          "purpose": "보석",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "skin": {
+            "preset": "backplate",
+            "version": 1,
+            "name": "정보 백판",
+            "mode": "9",
+            "asset": "frame",
+            "tone": "#dbe2e9",
+            "slices": [
+              12,
+              12,
+              12,
+              12
+            ],
+            "edges": [
+              6,
+              6,
+              6,
+              6
+            ],
+            "padding": [
+              6,
+              8,
+              6,
+              8
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "currency-money",
+          "name": "돈",
+          "kind": "panel",
+          "x": 65.8119658119658,
+          "y": 3.3175355450236967,
+          "w": 31.111111111111107,
+          "h": 2.6066350710900474,
+          "text": "",
+          "purpose": "돈",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "skin": {
+            "preset": "backplate",
+            "version": 1,
+            "name": "정보 백판",
+            "mode": "9",
+            "asset": "frame",
+            "tone": "#dbe2e9",
+            "slices": [
+              12,
+              12,
+              12,
+              12
+            ],
+            "edges": [
+              6,
+              6,
+              6,
+              6
+            ],
+            "padding": [
+              6,
+              8,
+              6,
+              8
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "gauge-badEnergy",
+          "name": "나쁜 기운",
+          "kind": "panel",
+          "x": 2.564102564102564,
+          "y": 6.872037914691944,
+          "w": 31.111111111111107,
+          "h": 6.161137440758293,
+          "text": "",
+          "purpose": "나쁜 기운",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "skin": {
+            "preset": "backplate",
+            "version": 1,
+            "name": "정보 백판",
+            "mode": "9",
+            "asset": "frame",
+            "tone": "#dbe2e9",
+            "slices": [
+              12,
+              12,
+              12,
+              12
+            ],
+            "edges": [
+              6,
+              6,
+              6,
+              6
+            ],
+            "padding": [
+              6,
+              8,
+              6,
+              8
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "gauge-fans",
+          "name": "팬",
+          "kind": "panel",
+          "x": 34.18803418803418,
+          "y": 6.872037914691944,
+          "w": 31.111111111111107,
+          "h": 6.161137440758293,
+          "text": "",
+          "purpose": "팬",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "skin": {
+            "preset": "backplate",
+            "version": 1,
+            "name": "정보 백판",
+            "mode": "9",
+            "asset": "frame",
+            "tone": "#dbe2e9",
+            "slices": [
+              12,
+              12,
+              12,
+              12
+            ],
+            "edges": [
+              6,
+              6,
+              6,
+              6
+            ],
+            "padding": [
+              6,
+              8,
+              6,
+              8
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "gauge-enterPower",
+          "name": "엔터파워",
+          "kind": "panel",
+          "x": 65.8119658119658,
+          "y": 6.872037914691944,
+          "w": 31.111111111111107,
+          "h": 6.161137440758293,
+          "text": "",
+          "purpose": "엔터파워",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "skin": {
+            "preset": "backplate",
+            "version": 1,
+            "name": "정보 백판",
+            "mode": "9",
+            "asset": "frame",
+            "tone": "#dbe2e9",
+            "slices": [
+              12,
+              12,
+              12,
+              12
+            ],
+            "edges": [
+              6,
+              6,
+              6,
+              6
+            ],
+            "padding": [
+              6,
+              8,
+              6,
+              8
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "info-team",
+          "name": "팀 정보",
+          "kind": "button",
+          "x": 2.564102564102564,
+          "y": 13.981042654028434,
+          "w": 31.111111111111107,
+          "h": 3.7914691943127963,
+          "text": "",
+          "purpose": "팀 정보",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "info-members",
+          "name": "멤버",
+          "kind": "button",
+          "x": 34.18803418803418,
+          "y": 13.981042654028434,
+          "w": 31.111111111111107,
+          "h": 3.7914691943127963,
+          "text": "",
+          "purpose": "멤버",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "info-abilities",
+          "name": "능력",
+          "kind": "button",
+          "x": 65.8119658119658,
+          "y": 13.981042654028434,
+          "w": 31.111111111111107,
+          "h": 3.7914691943127963,
+          "text": "",
+          "purpose": "능력",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "slot-world",
+          "name": "3D 도시·보드 영역",
+          "kind": "panel",
+          "x": 0,
+          "y": 18.246445497630333,
+          "w": 100,
+          "h": 29.85781990521327,
+          "text": "3D 도시·보드 자리\n편집기에서는 3D를 읽지 않습니다",
+          "purpose": "3D 도시·보드 영역",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#d8e9ed",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "content-slot",
+            "slot": "world"
+          },
+          "skin": {
+            "preset": "background",
+            "version": 1,
+            "name": "비조작 배경",
+            "mode": "9",
+            "asset": "frame",
+            "tone": "#56616f",
+            "slices": [
+              12,
+              12,
+              12,
+              12
+            ],
+            "edges": [
+              4,
+              4,
+              4,
+              4
+            ],
+            "padding": [
+              8,
+              8,
+              8,
+              8
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "slot-filler",
+          "name": "필러·대사 연출 영역",
+          "kind": "panel",
+          "x": 0,
+          "y": 48.1042654028436,
+          "w": 100,
+          "h": 28.436018957345972,
+          "text": "필러 · 대사 · 결과 연출 자리",
+          "purpose": "필러·대사 연출 영역",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "content-slot",
+            "slot": "filler"
+          },
+          "skin": {
+            "preset": "background",
+            "version": 1,
+            "name": "비조작 배경",
+            "mode": "9",
+            "asset": "frame",
+            "tone": "#56616f",
+            "slices": [
+              12,
+              12,
+              12,
+              12
+            ],
+            "edges": [
+              4,
+              4,
+              4,
+              4
+            ],
+            "padding": [
+              8,
+              8,
+              8,
+              8
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "record",
+          "name": "기록장",
+          "kind": "button",
+          "x": 2.564102564102564,
+          "y": 77.13270142180097,
+          "w": 20.51282051282051,
+          "h": 2.843601895734597,
+          "text": "",
+          "purpose": "기록장",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "intentionalNoAction": true,
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": false,
+            "shape": "rectangle",
+            "reason": "기능 연결 정의가 아직 없습니다."
+          }
+        },
+        {
+          "id": "news",
+          "name": "소식",
+          "kind": "button",
+          "x": 25.64102564102564,
+          "y": 77.13270142180097,
+          "w": 20.51282051282051,
+          "h": 2.843601895734597,
+          "text": "",
+          "purpose": "소식",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "intentionalNoAction": true,
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": false,
+            "shape": "rectangle",
+            "reason": "기능 연결 정의가 아직 없습니다."
+          }
+        },
+        {
+          "id": "roll",
+          "name": "굴리기",
+          "kind": "button",
+          "x": 5.128205128205128,
+          "y": 80.56872037914692,
+          "w": 89.74358974358975,
+          "h": 6.6350710900473935,
+          "text": "",
+          "purpose": "굴리기",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "intentionalNoAction": true,
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": false,
+            "shape": "rectangle",
+            "reason": "기능 연결 정의가 아직 없습니다."
+          }
+        },
+        {
+          "id": "menu-cardbook",
+          "name": "카드북",
+          "kind": "button",
+          "x": 0,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "카드북",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_cardbook",
+            "action": "open",
+            "label": "카드",
+            "docId": "P168"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "menu-mons",
+          "name": "몬스",
+          "kind": "button",
+          "x": 16.666666666666664,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "몬스",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_mons_inventory",
+            "action": "open",
+            "label": "몬스",
+            "docId": "P96"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "menu-shop",
+          "name": "상점",
+          "kind": "button",
+          "x": 33.33333333333333,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "상점",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_shop",
+            "action": "open",
+            "label": "상점",
+            "docId": "P108"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "menu-adventure",
+          "name": "모험",
+          "kind": "button",
+          "x": 50,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "모험",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_journey",
+            "action": "open",
+            "label": "모험",
+            "docId": "P152"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "menu-build",
+          "name": "건설",
+          "kind": "button",
+          "x": 66.66666666666666,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "건설",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_building",
+            "action": "open",
+            "label": "건설",
+            "docId": "P106"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "menu-mission",
+          "name": "미션",
+          "kind": "button",
+          "x": 83.33333333333334,
+          "y": 88.38862559241706,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "미션",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_mission",
+            "action": "open",
+            "label": "미션",
+            "docId": "P108"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "menu-crew",
+          "name": "크루",
+          "kind": "button",
+          "x": 0,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "크루",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_music_crew",
+            "action": "open",
+            "label": "응원 크루",
+            "docId": "P221"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "menu-festival",
+          "name": "주간",
+          "kind": "button",
+          "x": 16.666666666666664,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "주간",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_music_festival",
+            "action": "open",
+            "label": "주간 페스티벌",
+            "docId": "P207"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "menu-worldFestival",
+          "name": "월드",
+          "kind": "button",
+          "x": 33.33333333333333,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "월드",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_music_world_festival",
+            "action": "open",
+            "label": "월드 페스티벌",
+            "docId": "P207"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "menu-album",
+          "name": "앨범",
+          "kind": "button",
+          "x": 50,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "앨범",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_album_release",
+            "action": "open",
+            "label": "앨범 발매",
+            "docId": "P228"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "menu-chart",
+          "name": "차트",
+          "kind": "button",
+          "x": 66.66666666666666,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "차트",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_music_chart",
+            "action": "open",
+            "label": "음악 차트",
+            "docId": "P230"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "menu-media",
+          "name": "음악 앱",
+          "kind": "button",
+          "x": 83.33333333333334,
+          "y": 94.19431279620854,
+          "w": 16.666666666666664,
+          "h": 5.450236966824645,
+          "text": "",
+          "purpose": "음악 앱",
+          "info": "공통 설정 기반 편집용 배치 초안 · 현재 로비 실측 확정값 아님",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          },
+          "sourceRef": "data/simulator/mobile-frame.json",
+          "binding": {
+            "type": "simulator-module",
+            "moduleId": "simulator_module_music_app",
+            "action": "open",
+            "label": "음악 앱",
+            "docId": "P207"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "currency-dice-ui-image",
+          "parentId": "currency-dice-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "주사위 · 아이콘",
+          "x": 5,
+          "y": 17,
+          "w": 14,
+          "h": 66,
+          "text": "",
+          "purpose": "주사위의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "주사위 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "currency-dice-ui-label",
+          "parentId": "currency-dice-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "주사위 · 텍스트",
+          "x": 23,
+          "y": 4,
+          "w": 72,
+          "h": 92,
+          "text": "주사위  —",
+          "purpose": "주사위의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "currency-gems-ui-image",
+          "parentId": "currency-gems-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "보석 · 아이콘",
+          "x": 5,
+          "y": 17,
+          "w": 14,
+          "h": 66,
+          "text": "",
+          "purpose": "보석의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "보석 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "currency-gems-ui-label",
+          "parentId": "currency-gems-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "보석 · 텍스트",
+          "x": 23,
+          "y": 4,
+          "w": 72,
+          "h": 92,
+          "text": "보석  —",
+          "purpose": "보석의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "currency-money-ui-image",
+          "parentId": "currency-money-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "돈 · 아이콘",
+          "x": 5,
+          "y": 17,
+          "w": 14,
+          "h": 66,
+          "text": "",
+          "purpose": "돈의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "돈 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "currency-money-ui-label",
+          "parentId": "currency-money-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "돈 · 텍스트",
+          "x": 23,
+          "y": 4,
+          "w": 72,
+          "h": 92,
+          "text": "돈  —",
+          "purpose": "돈의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "gauge-badEnergy-ui-image",
+          "parentId": "gauge-badEnergy-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "나쁜 기운 · 아이콘",
+          "x": 7,
+          "y": 12,
+          "w": 18,
+          "h": 35,
+          "text": "",
+          "purpose": "나쁜 기운의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "나쁜 기운 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "gauge-badEnergy-ui-label",
+          "parentId": "gauge-badEnergy-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "나쁜 기운 · 텍스트",
+          "x": 8,
+          "y": 50,
+          "w": 84,
+          "h": 43,
+          "text": "나쁜 기운\n값 연결 영역",
+          "purpose": "나쁜 기운의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "gauge-fans-ui-image",
+          "parentId": "gauge-fans-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "팬 · 아이콘",
+          "x": 7,
+          "y": 12,
+          "w": 18,
+          "h": 35,
+          "text": "",
+          "purpose": "팬의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "팬 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "gauge-fans-ui-label",
+          "parentId": "gauge-fans-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "팬 · 텍스트",
+          "x": 8,
+          "y": 50,
+          "w": 84,
+          "h": 43,
+          "text": "팬\n값 연결 영역",
+          "purpose": "팬의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "gauge-enterPower-ui-image",
+          "parentId": "gauge-enterPower-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "엔터파워 · 아이콘",
+          "x": 7,
+          "y": 12,
+          "w": 18,
+          "h": 35,
+          "text": "",
+          "purpose": "엔터파워의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "엔터파워 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "gauge-enterPower-ui-label",
+          "parentId": "gauge-enterPower-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "엔터파워 · 텍스트",
+          "x": 8,
+          "y": 50,
+          "w": 84,
+          "h": 43,
+          "text": "엔터파워\n값 연결 영역",
+          "purpose": "엔터파워의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "info-team-ui-image",
+          "parentId": "info-team-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "팀 정보 · 아이콘",
+          "x": 5,
+          "y": 17,
+          "w": 14,
+          "h": 66,
+          "text": "",
+          "purpose": "팀 정보의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "팀 정보 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "info-team-ui-label",
+          "parentId": "info-team-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "팀 정보 · 텍스트",
+          "x": 23,
+          "y": 4,
+          "w": 72,
+          "h": 92,
+          "text": "팀 정보",
+          "purpose": "팀 정보의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "info-members-ui-image",
+          "parentId": "info-members-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "멤버 · 아이콘",
+          "x": 5,
+          "y": 17,
+          "w": 14,
+          "h": 66,
+          "text": "",
+          "purpose": "멤버의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "멤버 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "info-members-ui-label",
+          "parentId": "info-members-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "멤버 · 텍스트",
+          "x": 23,
+          "y": 4,
+          "w": 72,
+          "h": 92,
+          "text": "멤버",
+          "purpose": "멤버의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "info-abilities-ui-image",
+          "parentId": "info-abilities-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "능력 · 아이콘",
+          "x": 5,
+          "y": 17,
+          "w": 14,
+          "h": 66,
+          "text": "",
+          "purpose": "능력의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "능력 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "info-abilities-ui-label",
+          "parentId": "info-abilities-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "능력 · 텍스트",
+          "x": 23,
+          "y": 4,
+          "w": 72,
+          "h": 92,
+          "text": "능력",
+          "purpose": "능력의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "record-ui-image",
+          "parentId": "record-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "기록장 · 아이콘",
+          "x": 5,
+          "y": 17,
+          "w": 14,
+          "h": 66,
+          "text": "",
+          "purpose": "기록장의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "기록장 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "record-ui-label",
+          "parentId": "record-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "기록장 · 텍스트",
+          "x": 23,
+          "y": 4,
+          "w": 72,
+          "h": 92,
+          "text": "기록장",
+          "purpose": "기록장의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "news-ui-image",
+          "parentId": "news-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "소식 · 아이콘",
+          "x": 5,
+          "y": 17,
+          "w": 14,
+          "h": 66,
+          "text": "",
+          "purpose": "소식의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "소식 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "news-ui-label",
+          "parentId": "news-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "소식 · 텍스트",
+          "x": 23,
+          "y": 4,
+          "w": 72,
+          "h": 92,
+          "text": "소식",
+          "purpose": "소식의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "roll-ui-image",
+          "parentId": "roll-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "굴리기 · 아이콘",
+          "x": 5,
+          "y": 17,
+          "w": 14,
+          "h": 66,
+          "text": "",
+          "purpose": "굴리기의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "굴리기 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "roll-ui-label",
+          "parentId": "roll-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "굴리기 · 텍스트",
+          "x": 23,
+          "y": 4,
+          "w": 72,
+          "h": 92,
+          "text": "굴리기 · 동작 연결 정의",
+          "purpose": "굴리기의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 16
+        },
+        {
+          "id": "menu-cardbook-ui-image",
+          "parentId": "menu-cardbook-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "카드북 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "카드북의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "카드북 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-cardbook-ui-label",
+          "parentId": "menu-cardbook-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "카드북 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "카드북",
+          "purpose": "카드북의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "menu-mons-ui-image",
+          "parentId": "menu-mons-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "몬스 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "몬스의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "몬스 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-mons-ui-label",
+          "parentId": "menu-mons-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "몬스 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "몬스",
+          "purpose": "몬스의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "menu-shop-ui-image",
+          "parentId": "menu-shop-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "상점 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "상점의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "상점 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-shop-ui-label",
+          "parentId": "menu-shop-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "상점 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "상점",
+          "purpose": "상점의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "menu-adventure-ui-image",
+          "parentId": "menu-adventure-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "모험 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "모험의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "모험 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-adventure-ui-label",
+          "parentId": "menu-adventure-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "모험 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "모험",
+          "purpose": "모험의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "menu-build-ui-image",
+          "parentId": "menu-build-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "건설 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "건설의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "건설 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-build-ui-label",
+          "parentId": "menu-build-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "건설 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "건설",
+          "purpose": "건설의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "menu-mission-ui-image",
+          "parentId": "menu-mission-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "미션 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "미션의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "미션 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-mission-ui-label",
+          "parentId": "menu-mission-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "미션 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "미션",
+          "purpose": "미션의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "menu-crew-ui-image",
+          "parentId": "menu-crew-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "크루 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "크루의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "크루 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-crew-ui-label",
+          "parentId": "menu-crew-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "크루 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "크루",
+          "purpose": "크루의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "menu-festival-ui-image",
+          "parentId": "menu-festival-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "주간 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "주간의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "주간 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-festival-ui-label",
+          "parentId": "menu-festival-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "주간 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "주간",
+          "purpose": "주간의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "menu-worldFestival-ui-image",
+          "parentId": "menu-worldFestival-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "월드 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "월드의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "월드 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-worldFestival-ui-label",
+          "parentId": "menu-worldFestival-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "월드 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "월드",
+          "purpose": "월드의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "menu-album-ui-image",
+          "parentId": "menu-album-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "앨범 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "앨범의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "앨범 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-album-ui-label",
+          "parentId": "menu-album-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "앨범 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "앨범",
+          "purpose": "앨범의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "menu-chart-ui-image",
+          "parentId": "menu-chart-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "차트 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "차트의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "차트 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-chart-ui-label",
+          "parentId": "menu-chart-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "차트 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "차트",
+          "purpose": "차트의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "menu-media-ui-image",
+          "parentId": "menu-media-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "음악 앱 · 아이콘",
+          "x": 30,
+          "y": 7,
+          "w": 40,
+          "h": 46,
+          "text": "",
+          "purpose": "음악 앱의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "음악 앱 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "menu-media-ui-label",
+          "parentId": "menu-media-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "음악 앱 · 텍스트",
+          "x": 2,
+          "y": 57,
+          "w": 96,
+          "h": 34,
+          "text": "음악 앱",
+          "purpose": "음악 앱의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 11
+        },
+        {
+          "id": "currency-dice-ui-background",
+          "parentId": "currency-dice",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "주사위 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "주사위 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dbe2e9",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "currency-gems-ui-background",
+          "parentId": "currency-gems",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "보석 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "보석 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dbe2e9",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "currency-money-ui-background",
+          "parentId": "currency-money",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "돈 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "돈 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dbe2e9",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "gauge-badEnergy-ui-background",
+          "parentId": "gauge-badEnergy",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "나쁜 기운 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "나쁜 기운 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dbe2e9",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "gauge-fans-ui-background",
+          "parentId": "gauge-fans",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "팬 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "팬 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dbe2e9",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "gauge-enterPower-ui-background",
+          "parentId": "gauge-enterPower",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "엔터파워 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "엔터파워 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dbe2e9",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "info-team-ui-background",
+          "parentId": "info-team",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "팀 정보 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "팀 정보 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "info-members-ui-background",
+          "parentId": "info-members",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "멤버 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "멤버 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "info-abilities-ui-background",
+          "parentId": "info-abilities",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "능력 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "능력 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "record-ui-background",
+          "parentId": "record",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "기록장 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "기록장 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "news-ui-background",
+          "parentId": "news",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "소식 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "소식 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "roll-ui-background",
+          "parentId": "roll",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "굴리기 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "굴리기 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-cardbook-ui-background",
+          "parentId": "menu-cardbook",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "카드북 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "카드북 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-mons-ui-background",
+          "parentId": "menu-mons",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "몬스 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "몬스 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-shop-ui-background",
+          "parentId": "menu-shop",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "상점 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "상점 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-adventure-ui-background",
+          "parentId": "menu-adventure",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "모험 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "모험 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-build-ui-background",
+          "parentId": "menu-build",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "건설 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "건설 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-mission-ui-background",
+          "parentId": "menu-mission",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "미션 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "미션 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-crew-ui-background",
+          "parentId": "menu-crew",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "크루 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "크루 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-festival-ui-background",
+          "parentId": "menu-festival",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "주간 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "주간 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-worldFestival-ui-background",
+          "parentId": "menu-worldFestival",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "월드 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "월드 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-album-ui-background",
+          "parentId": "menu-album",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "앨범 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "앨범 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-chart-ui-background",
+          "parentId": "menu-chart",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "차트 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "차트 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "menu-media-ui-background",
+          "parentId": "menu-media",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "음악 앱 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "음악 앱 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "common-info",
+      "name": "공통 정보",
+      "kind": "modal",
+      "purpose": "현재 화면 위에서 공통 출현·닫힘을 시험합니다.",
+      "presentation": {
+        "type": "modal",
+        "effect": "fade",
+        "durationMs": 240,
+        "autoCloseMs": 0,
+        "dim": true
+      },
+      "elements": [
+        {
+          "id": "common-info-title",
+          "name": "제목",
+          "kind": "text",
+          "x": 8,
+          "y": 8,
+          "w": 75,
+          "h": 15,
+          "text": "공통 모달",
+          "purpose": "공통 UI 시험",
+          "info": "",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          }
+        },
+        {
+          "id": "common-info-body",
+          "name": "안내 내용",
+          "kind": "text",
+          "x": 8,
+          "y": 28,
+          "w": 84,
+          "h": 37,
+          "text": "표시할 내용을 편집하세요",
+          "purpose": "공통 UI 시험",
+          "info": "",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          }
+        },
+        {
+          "id": "common-info-close",
+          "name": "닫기",
+          "kind": "button",
+          "x": 10,
+          "y": 76,
+          "w": 80,
+          "h": 16,
+          "text": "닫기",
+          "purpose": "공통 UI 시험",
+          "info": "",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#8c9aa8",
+            "textColor": "#243549",
+            "strokeWidth": 1,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "ellipse"
+          }
+        }
+      ],
+      "skin": {
+        "preset": "modal",
+        "version": 1,
+        "name": "모달창",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#e8e1f3",
+        "slices": [
+          12,
+          12,
+          12,
+          12
+        ],
+        "edges": [
+          10,
+          10,
+          10,
+          10
+        ],
+        "padding": [
+          16,
+          16,
+          16,
+          16
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch"
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "id": "info-close",
+      "fromScreen": "common-info",
+      "fromElement": "common-info-close",
+      "event": "click",
+      "action": "close",
+      "condition": "always",
+      "label": "닫기",
+      "returnPolicy": "화면 유지"
+    },
+    {
+      "id": "open-info-team",
+      "fromScreen": "lobby-common",
+      "fromElement": "info-team",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "targetScreen": "common-info",
+      "label": "팀 정보 보기",
+      "returnPolicy": "원래 화면 유지"
+    },
+    {
+      "id": "open-info-members",
+      "fromScreen": "lobby-common",
+      "fromElement": "info-members",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "targetScreen": "common-info",
+      "label": "멤버 보기",
+      "returnPolicy": "원래 화면 유지"
+    },
+    {
+      "id": "open-info-abilities",
+      "fromScreen": "lobby-common",
+      "fromElement": "info-abilities",
+      "event": "click",
+      "action": "open",
+      "condition": "always",
+      "targetScreen": "common-info",
+      "label": "능력 보기",
+      "returnPolicy": "원래 화면 유지"
+    },
+    {
+      "id": "module-menu-cardbook",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-cardbook",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_cardbook",
+        "label": "카드"
+      },
+      "label": "카드 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-mons",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-mons",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_mons_inventory",
+        "label": "몬스"
+      },
+      "label": "몬스 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-shop",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-shop",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_shop",
+        "label": "상점"
+      },
+      "label": "상점 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-adventure",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-adventure",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_journey",
+        "label": "모험"
+      },
+      "label": "모험 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-build",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-build",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_building",
+        "label": "건설"
+      },
+      "label": "건설 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-mission",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-mission",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_mission",
+        "label": "미션"
+      },
+      "label": "미션 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-crew",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-crew",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_music_crew",
+        "label": "응원 크루"
+      },
+      "label": "응원 크루 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-festival",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-festival",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_music_festival",
+        "label": "주간 페스티벌"
+      },
+      "label": "주간 페스티벌 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-worldFestival",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-worldFestival",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_music_world_festival",
+        "label": "월드 페스티벌"
+      },
+      "label": "월드 페스티벌 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-album",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-album",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_album_release",
+        "label": "앨범 발매"
+      },
+      "label": "앨범 발매 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-chart",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-chart",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_music_chart",
+        "label": "음악 차트"
+      },
+      "label": "음악 차트 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    },
+    {
+      "id": "module-menu-media",
+      "fromScreen": "lobby-common",
+      "fromElement": "menu-media",
+      "event": "click",
+      "condition": "always",
+      "action": "module",
+      "payload": {
+        "moduleId": "simulator_module_music_app",
+        "label": "음악 앱"
+      },
+      "label": "음악 앱 열기",
+      "returnPolicy": "현재 게임 진행 유지"
+    }
+  ],
+  "fixtures": {
+    "balance": 0,
+    "items": []
+  },
+  "sourceRefs": [
+    "data/simulator/simulator_module.csv",
+    "data/simulator/menu.json",
+    "data/simulator/mobile-frame.json"
+  ],
+  "designBasis": {
+    "type": "common-frame-config",
+    "logicalSize": {
+      "width": 390,
+      "height": 844
+    },
+    "status": "draft-layout-not-measured-lobby",
+    "notes": "필러/진행/하단메뉴 높이는 공통 설정,상단/정보/도시 잔여배치는 편집용 제안. 실제 게임 원본 복사 아님."
+  },
+  "savedAt": "2026-11-13T06:59:38.210Z"
+}

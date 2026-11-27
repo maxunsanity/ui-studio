@@ -1,0 +1,1279 @@
+{
+  "documentType": "native-ui-action-recipe-not-saved-design",
+  "createdDateKST": "2026-11-19",
+  "status": "proposal-awaiting-review",
+  "logicalSize": [
+    504,
+    894
+  ],
+  "sourceSnapshot": {
+    "projectId": "ux-25ecc98a",
+    "auditedRevision": 64,
+    "auditedSavedAt": "2026-11-18T23:49:37.730Z",
+    "auditedSHA256": "f0af4046cfdb4fc25f983184f2c0e6b071ca5c5801bb53d3250c2b0517f21c37",
+    "stableIdsCrossCheckedAgainst": "r63 backup + r64 audited document",
+    "imageMapRevision": 63
+  },
+  "coordinateContract": "All rects ABSOLUTE504x894 logical pixels. parent is prior key or existing:<ID>. Normal native UI executor converts to parentlocal; not a saved-model patch/import.",
+  "operationContract": {
+    "panel": "native 9-slice panel, skin is an existing exact staging URL; no composite artwork/text baked",
+    "button": "native compound button: Btn wrapper + BG skin + separate native Txt label, default pressed tint; child image/text/group must pass input to owner",
+    "plain": "raw container with fill/strokeWidth/radius/opacity1; overflow optional clip/scroll-y",
+    "image": "existing URL image with exact atlas region optional; never a reference JPG",
+    "text": "native text with exact fixture copy; size/weight/color/align are production proposals"
+  },
+  "metadataContract": {
+    "existingScreen": "Existing stable screen ID; no duplicate screen",
+    "existingedits": "Native UI instructions; not model mutations",
+    "stateRequired": "Native owner feedback/select state; no invented data state",
+    "anchorPreset": "Human-readable anchor intent; preserve fixed geometry and existing responsive contracts",
+    "remove": "Delete exact selected element only through native UI; preserve source asset and otherdescendants"
+  },
+  "globalNotes": [
+    "Root alone executes normal UI and adds navigation later. This subtask edits only independent action recipe.",
+    "Check current native ID/screen/readback before each edit; rootdocument is newer than auditedr64 and additional root work must be preserved.",
+    "New names includeTSV. Slot_TSV_*_3D is emptySlot_3D role with native3D label.",
+    "ReferenceJPGs/crops never enter product resources. Existing staging URLs/art-manifest production region only.",
+    "panel/text/image/button/plain only. OptionalActions require explicit root check; not automatic.",
+    "All button/card children pass input to owner; no duplicate label actions.",
+    "Missing exact art/copy remains missingAssets and partial. Unrelated icons are never disguised as exact originals.",
+    "No invented balance values/game logic/API/unknown destination. New bounds/fonts/colors are production proposals."
+  ],
+  "families": [
+    {
+      "id": "TS03",
+      "name": "Page_TSV_Territory",
+      "existingScreen": "main",
+      "nativeKind": "page",
+      "priority": 1,
+      "existingedits": [
+        {
+          "id": "element-ef783622-78d2-4242-af0e-25db38834f18",
+          "desiredName": "Img_TSV_TerritoryScene",
+          "remove": true,
+          "removeScope": "Exact image element only; no descendants; preserve asset file and other roots"
+        },
+        {
+          "id": "element-039d35eb-e1f4-490a-805c-cde674440c99",
+          "desiredName": "Btn_TSV_Territory_Building",
+          "enabled": true,
+          "stateRequired": true
+        }
+      ],
+      "actions": [
+        {
+          "op": "plain",
+          "key": "stage",
+          "name": "Slot_TSV_Territory_3D",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#102c45",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "role": "Slot_3D",
+          "layerIntent": "send behind all existing roots",
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "text",
+          "key": "stageLabel",
+          "name": "Txt_TSV_Territory_3D",
+          "rect": {
+            "x": 130,
+            "y": 280,
+            "w": 244,
+            "h": 44
+          },
+          "parent": "stage",
+          "text": "3D",
+          "size": 24,
+          "weight": 600,
+          "color": "#93b5c9",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "event",
+          "name": "Btn_TSV_Territory_Event",
+          "rect": {
+            "x": 8,
+            "y": 130,
+            "w": 88,
+            "h": 62
+          },
+          "parent": null,
+          "text": "",
+          "size": 18,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "survivor",
+          "name": "Btn_TSV_Territory_SurvivorEntry",
+          "rect": {
+            "x": 8,
+            "y": 650,
+            "w": 48,
+            "h": 50
+          },
+          "parent": null,
+          "text": "",
+          "size": 18,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "image",
+          "key": "survivorPortrait",
+          "name": "Img_TSV_Territory_SurvivorEntry",
+          "rect": {
+            "x": 13,
+            "y": 654,
+            "w": 38,
+            "h": 42
+          },
+          "parent": "survivor",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+          "fit": "contain",
+          "region": [
+            0,
+            150,
+            150,
+            150
+          ]
+        },
+        {
+          "op": "text",
+          "key": "survivorPlus",
+          "name": "Txt_TSV_Territory_SurvivorPlus",
+          "rect": {
+            "x": 34,
+            "y": 675,
+            "w": 20,
+            "h": 23
+          },
+          "parent": "survivor",
+          "text": "+",
+          "size": 24,
+          "weight": 800,
+          "color": "#72f45c",
+          "align": "center"
+        },
+        {
+          "op": "plain",
+          "key": "survivorBadge",
+          "name": "Badge_TSV_Territory_Survivor",
+          "rect": {
+            "x": 40,
+            "y": 649,
+            "w": 17,
+            "h": 17
+          },
+          "parent": "survivor",
+          "fill": "#ed2b20",
+          "strokeWidth": 0,
+          "radius": 9,
+          "opacity": 1
+        },
+        {
+          "op": "text",
+          "key": "survivorCount",
+          "name": "Txt_TSV_Territory_SurvivorCount",
+          "rect": {
+            "x": 40,
+            "y": 649,
+            "w": 17,
+            "h": 17
+          },
+          "parent": "survivorBadge",
+          "text": "2",
+          "size": 12,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "quick01",
+          "name": "Btn_TSV_Territory_Quick01",
+          "rect": {
+            "x": 449,
+            "y": 658,
+            "w": 46,
+            "h": 49
+          },
+          "parent": null,
+          "text": "",
+          "size": 18,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "bottom-right"
+        },
+        {
+          "op": "plain",
+          "key": "quick01Badge",
+          "name": "Badge_TSV_Territory_Quick01",
+          "rect": {
+            "x": 479,
+            "y": 657,
+            "w": 16,
+            "h": 16
+          },
+          "parent": "quick01",
+          "fill": "#ed2b20",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1
+        },
+        {
+          "op": "text",
+          "key": "quick01Count",
+          "name": "Txt_TSV_Territory_Quick01Count",
+          "rect": {
+            "x": 479,
+            "y": 657,
+            "w": 16,
+            "h": 16
+          },
+          "parent": "quick01Badge",
+          "text": "1",
+          "size": 12,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "quick02",
+          "name": "Btn_TSV_Territory_Quick02",
+          "rect": {
+            "x": 449,
+            "y": 716,
+            "w": 46,
+            "h": 50
+          },
+          "parent": null,
+          "text": "",
+          "size": 18,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "bottom-right"
+        },
+        {
+          "op": "button",
+          "key": "quest",
+          "name": "Btn_TSV_Territory_ChapterQuest",
+          "rect": {
+            "x": 0,
+            "y": 776,
+            "w": 446,
+            "h": 46
+          },
+          "parent": null,
+          "text": "",
+          "size": 18,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "image",
+          "key": "questIcon",
+          "name": "Img_TSV_Territory_ChapterQuest",
+          "rect": {
+            "x": 2,
+            "y": 769,
+            "w": 52,
+            "h": 52
+          },
+          "parent": "quest",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-nav-v001/quest-scroll.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "panel",
+          "key": "questTrack",
+          "name": "BG_TSV_Territory_QuestTrack",
+          "rect": {
+            "x": 52,
+            "y": 783,
+            "w": 370,
+            "h": 30
+          },
+          "parent": "quest",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v002/quest-track-blue3-v002.webp",
+          "opacity": 1
+        }
+      ],
+      "notes": [
+        "Remove only element-ef783622-78d2-4242-af0e-25db38834f18. Keep all HUD/Nav/GemShop/Building input and all their descendants.",
+        "No entire-scene screenshot overlay or scene illustration replaces empty3D. Plain stage must be behind preserved UI.",
+        "New engineer atlas is a helmeted-worker role match, not exact original identity. If root rejects role approximation, omit portrait rather than falsely identifying it.",
+        "Event/Quick frames remain partial without exact icons; missingAssets explicitly records them. Do not put enemy-ogre in place of original gorilla or use generic gem/medal icons.",
+        "The425s mission is obscured: do not mix110s 민가1/2/2 copy. Optional fragment is labelled incomplete. No fabricated chat text/event timer/unknown control mapping.",
+        "Reference rectangles/geometry/font/colors are production approximations. Bottom anchor intent preserves same offset from894px bottom. Badge/scroll decoration deliberately protrudes a few px; parent input must pass to wrapper."
+      ],
+      "missingAssets": [
+        {
+          "role": "Event gorilla portrait",
+          "key": "event",
+          "reason": "No matching gorilla in image map/art manifest; enemy-ogre is not a truthful substitute."
+        },
+        {
+          "role": "Quick01 exact colored function icon",
+          "key": "quick01",
+          "reason": "Identity unresolved; no unrelated replacement."
+        },
+        {
+          "role": "Quick02 document/card UI glyph",
+          "key": "quick02",
+          "reason": "No exact matched UI art. Quest-scroll is a different glyph."
+        },
+        {
+          "role": "Full quest copy at425s",
+          "key": "questFragment",
+          "reason": "Only observed fragment available; no unseen target/name reconstructed."
+        }
+      ],
+      "proposedLinks": [
+        {
+          "from": "quest",
+          "action": "open",
+          "target": "TS09",
+          "evidence": "TS03 observedLinks TSV02 165→169 quest entrance→chapter note; root connects only actual TS09."
+        },
+        {
+          "from": "survivor",
+          "action": null,
+          "target": "TS14",
+          "evidence": "Family entry candidate only; exact425s control sequence unverified.",
+          "confidence": "candidate-not-linked"
+        },
+        {
+          "from": "event",
+          "action": null,
+          "target": null,
+          "evidence": "Visible only; no fabricated family target."
+        },
+        {
+          "from": "quick01",
+          "action": null,
+          "target": null,
+          "evidence": "Visible only; unknown identity."
+        },
+        {
+          "from": "quick02",
+          "action": null,
+          "target": null,
+          "evidence": "Document shape does not prove TS15 or TS29."
+        }
+      ],
+      "referenceState": "TS03-R03 TSV02 requested425 actual424.9783333333; TS03-R01 only supplies structural quest-icon observation, not mixed text/count.",
+      "optionalActions": [
+        {
+          "op": "text",
+          "key": "questFragment",
+          "name": "Txt_TSV_Territory_QuestObservedFragment",
+          "rect": {
+            "x": 64,
+            "y": 784,
+            "w": 346,
+            "h": 27
+          },
+          "parent": "quest",
+          "text": "레벨 달성 [1/3]",
+          "size": 18,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "left",
+          "requiresReview": true,
+          "fragmentOnly": true,
+          "condition": "Optional visiblefragment only; omit until root confirms desired fixture. Not a reconstructed full quest."
+        }
+      ]
+    },
+    {
+      "id": "TS25",
+      "name": "Page_TSV_Heroes",
+      "existingScreen": "screen-f6d00d61-09cc-45f5-bf29-fc0f2f6b5417",
+      "nativeKind": "page",
+      "priority": 2,
+      "existingedits": [
+        {
+          "id": "element-705a5f67-88c2-46f4-b425-ba75c513577b",
+          "desiredName": "Txt_TSV_Hero01_Status",
+          "rect": {
+            "x": 46,
+            "y": 248,
+            "w": 76,
+            "h": 25
+          },
+          "partRole": "label"
+        },
+        {
+          "id": "element-95872032-d555-4844-9fa4-e0fa7a368e34",
+          "desiredName": "Txt_TSV_Hero02_Status",
+          "rect": {
+            "x": 165,
+            "y": 248,
+            "w": 76,
+            "h": 25
+          },
+          "partRole": "label"
+        },
+        {
+          "id": "group-f38b54ec-923b-46aa-a57c-d575fa199556",
+          "desiredName": "Tab_TSV_Heroes_Filter01",
+          "enabled": true,
+          "stateRequired": true,
+          "selectedRepresentative": true,
+          "interactionIntent": "Use native owner/select control; preserve initialAll selected skin; no invented filter results."
+        },
+        {
+          "id": "group-57f9e302-7b93-47c5-a9bd-989ae7932609",
+          "desiredName": "Tab_TSV_Heroes_Filter02",
+          "enabled": true,
+          "stateRequired": true,
+          "selectedRepresentative": false,
+          "interactionIntent": "Use native owner/select control; preserve initialAll selected skin; no invented filter results."
+        },
+        {
+          "id": "group-6723f7bc-edb0-4ad9-8cf9-79cbbd844934",
+          "desiredName": "Tab_TSV_Heroes_Filter03",
+          "enabled": true,
+          "stateRequired": true,
+          "selectedRepresentative": false,
+          "interactionIntent": "Use native owner/select control; preserve initialAll selected skin; no invented filter results."
+        },
+        {
+          "id": "group-0b552ab6-0a83-4a0d-82ad-3db663ab9660",
+          "desiredName": "Tab_TSV_Heroes_Filter04",
+          "enabled": true,
+          "stateRequired": true,
+          "selectedRepresentative": false,
+          "interactionIntent": "Use native owner/select control; preserve initialAll selected skin; no invented filter results."
+        },
+        {
+          "id": "group-3a3f4494-0292-4bde-8fc6-bed0dee78c98",
+          "desiredName": "Card_TSV_Hero01",
+          "enabled": true,
+          "stateRequired": true,
+          "interactionIntent": "Single card owner; preserve existingID/parent/children; root connects later."
+        },
+        {
+          "id": "group-6b1224b0-e311-4258-830b-cce77ed90ec5",
+          "desiredName": "Card_TSV_Hero02",
+          "enabled": true,
+          "stateRequired": true,
+          "interactionIntent": "Single card owner; preserve existingID/parent/children; root connects later."
+        },
+        {
+          "id": "group-a767b9e3-a826-49c7-b6cc-8ec6004e3ff8",
+          "desiredName": "Card_TSV_Hero03",
+          "enabled": true,
+          "stateRequired": true,
+          "interactionIntent": "Single card owner; preserve existingID/parent/children; root connects later."
+        },
+        {
+          "id": "group-d0d58b5b-070f-4b17-83bd-5e0b87d43085",
+          "desiredName": "Card_TSV_Hero04",
+          "enabled": true,
+          "stateRequired": true,
+          "interactionIntent": "Single card owner; preserve existingID/parent/children; root connects later."
+        },
+        {
+          "id": "group-c9d72508-b73c-41af-81c5-f1aaf702fd78",
+          "desiredName": "Card_TSV_Hero05",
+          "enabled": true,
+          "stateRequired": true,
+          "interactionIntent": "Single card owner; preserve existingID/parent/children; root connects later."
+        },
+        {
+          "id": "group-dd7ddd7a-20fd-45ba-b840-199529f425b5",
+          "desiredName": "Card_TSV_Hero06",
+          "enabled": true,
+          "stateRequired": true,
+          "interactionIntent": "Single card owner; preserve existingID/parent/children; root connects later."
+        },
+        {
+          "id": "group-d50577c2-0a10-4410-baa4-7d2b187572e2",
+          "desiredName": "Card_TSV_Hero07",
+          "enabled": true,
+          "stateRequired": true,
+          "interactionIntent": "Single card owner; preserve existingID/parent/children; root connects later."
+        },
+        {
+          "id": "group-7d21ad75-7ee0-4079-b75e-26a2cffe66a9",
+          "desiredName": "Card_TSV_Hero08",
+          "enabled": true,
+          "stateRequired": true,
+          "interactionIntent": "Single card owner; preserve existingID/parent/children; root connects later."
+        },
+        {
+          "id": "group-97c417a3-a719-4a8a-83f7-2051db1dea85",
+          "desiredName": "Card_TSV_Hero09",
+          "enabled": true,
+          "stateRequired": true,
+          "interactionIntent": "Single card owner; preserve existingID/parent/children; root connects later."
+        },
+        {
+          "id": "group-e8df7c88-12c9-4a89-8368-d80c3e9ec891",
+          "desiredName": "Card_TSV_Hero10",
+          "enabled": true,
+          "stateRequired": true,
+          "interactionIntent": "Single card owner; preserve existingID/parent/children; root connects later."
+        },
+        {
+          "id": "group-6b46efcc-41b8-4c04-9c67-a43cbe1392e6",
+          "desiredName": "Card_TSV_Hero11",
+          "enabled": true,
+          "stateRequired": true,
+          "interactionIntent": "Single card owner; preserve existingID/parent/children; root connects later."
+        },
+        {
+          "id": "element-a9cb88c6-679f-4c19-8e22-46a516f92347",
+          "desiredName": "Btn_TSV_Heroes_Recruit",
+          "enabled": true,
+          "stateRequired": true
+        }
+      ],
+      "actions": [
+        {
+          "op": "plain",
+          "key": "attributeBadge01",
+          "name": "BG_TSV_Hero01_Attribute",
+          "rect": {
+            "x": 25,
+            "y": 248,
+            "w": 21,
+            "h": 22
+          },
+          "parent": "existing:group-3a3f4494-0292-4bde-8fc6-bed0dee78c98",
+          "fill": "#45b2d1",
+          "strokeWidth": 0,
+          "radius": 3,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "attributeIcon01",
+          "name": "Img_TSV_Hero01_Attribute",
+          "rect": {
+            "x": 26,
+            "y": 251,
+            "w": 19,
+            "h": 16
+          },
+          "parent": "existing:group-3a3f4494-0292-4bde-8fc6-bed0dee78c98",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-filter-cloud-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "attributeBadge02",
+          "name": "BG_TSV_Hero02_Attribute",
+          "rect": {
+            "x": 144,
+            "y": 248,
+            "w": 21,
+            "h": 22
+          },
+          "parent": "existing:group-6b1224b0-e311-4258-830b-cce77ed90ec5",
+          "fill": "#45b2d1",
+          "strokeWidth": 0,
+          "radius": 3,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "attributeIcon02",
+          "name": "Img_TSV_Hero02_Attribute",
+          "rect": {
+            "x": 145,
+            "y": 251,
+            "w": 19,
+            "h": 16
+          },
+          "parent": "existing:group-6b1224b0-e311-4258-830b-cce77ed90ec5",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-filter-cloud-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "attributeBadge03",
+          "name": "BG_TSV_Hero03_Attribute",
+          "rect": {
+            "x": 263,
+            "y": 248,
+            "w": 21,
+            "h": 22
+          },
+          "parent": "existing:group-a767b9e3-a826-49c7-b6cc-8ec6004e3ff8",
+          "fill": "#7ac850",
+          "strokeWidth": 0,
+          "radius": 3,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "attributeIcon03",
+          "name": "Img_TSV_Hero03_Attribute",
+          "rect": {
+            "x": 264,
+            "y": 251,
+            "w": 19,
+            "h": 16
+          },
+          "parent": "existing:group-a767b9e3-a826-49c7-b6cc-8ec6004e3ff8",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-filter-mountain-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "attributeBadge04",
+          "name": "BG_TSV_Hero04_Attribute",
+          "rect": {
+            "x": 382,
+            "y": 248,
+            "w": 21,
+            "h": 22
+          },
+          "parent": "existing:group-d0d58b5b-070f-4b17-83bd-5e0b87d43085",
+          "fill": "#7ac850",
+          "strokeWidth": 0,
+          "radius": 3,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "attributeIcon04",
+          "name": "Img_TSV_Hero04_Attribute",
+          "rect": {
+            "x": 383,
+            "y": 251,
+            "w": 19,
+            "h": 16
+          },
+          "parent": "existing:group-d0d58b5b-070f-4b17-83bd-5e0b87d43085",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-filter-mountain-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "attributeBadge05",
+          "name": "BG_TSV_Hero05_Attribute",
+          "rect": {
+            "x": 25,
+            "y": 438,
+            "w": 21,
+            "h": 22
+          },
+          "parent": "existing:group-c9d72508-b73c-41af-81c5-f1aaf702fd78",
+          "fill": "#deb33a",
+          "strokeWidth": 0,
+          "radius": 3,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "attributeIcon05",
+          "name": "Img_TSV_Hero05_Attribute",
+          "rect": {
+            "x": 26,
+            "y": 441,
+            "w": 19,
+            "h": 16
+          },
+          "parent": "existing:group-c9d72508-b73c-41af-81c5-f1aaf702fd78",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-filter-sand-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "attributeBadge06",
+          "name": "BG_TSV_Hero06_Attribute",
+          "rect": {
+            "x": 144,
+            "y": 438,
+            "w": 21,
+            "h": 22
+          },
+          "parent": "existing:group-dd7ddd7a-20fd-45ba-b840-199529f425b5",
+          "fill": "#deb33a",
+          "strokeWidth": 0,
+          "radius": 3,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "attributeIcon06",
+          "name": "Img_TSV_Hero06_Attribute",
+          "rect": {
+            "x": 145,
+            "y": 441,
+            "w": 19,
+            "h": 16
+          },
+          "parent": "existing:group-dd7ddd7a-20fd-45ba-b840-199529f425b5",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-filter-sand-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "attributeBadge07",
+          "name": "BG_TSV_Hero07_Attribute",
+          "rect": {
+            "x": 263,
+            "y": 438,
+            "w": 21,
+            "h": 22
+          },
+          "parent": "existing:group-d50577c2-0a10-4410-baa4-7d2b187572e2",
+          "fill": "#deb33a",
+          "strokeWidth": 0,
+          "radius": 3,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "attributeIcon07",
+          "name": "Img_TSV_Hero07_Attribute",
+          "rect": {
+            "x": 264,
+            "y": 441,
+            "w": 19,
+            "h": 16
+          },
+          "parent": "existing:group-d50577c2-0a10-4410-baa4-7d2b187572e2",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-filter-sand-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "attributeBadge08",
+          "name": "BG_TSV_Hero08_Attribute",
+          "rect": {
+            "x": 382,
+            "y": 438,
+            "w": 21,
+            "h": 22
+          },
+          "parent": "existing:group-7d21ad75-7ee0-4079-b75e-26a2cffe66a9",
+          "fill": "#deb33a",
+          "strokeWidth": 0,
+          "radius": 3,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "attributeIcon08",
+          "name": "Img_TSV_Hero08_Attribute",
+          "rect": {
+            "x": 383,
+            "y": 441,
+            "w": 19,
+            "h": 16
+          },
+          "parent": "existing:group-7d21ad75-7ee0-4079-b75e-26a2cffe66a9",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-filter-sand-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "attributeBadge09",
+          "name": "BG_TSV_Hero09_Attribute",
+          "rect": {
+            "x": 25,
+            "y": 628,
+            "w": 21,
+            "h": 22
+          },
+          "parent": "existing:group-97c417a3-a719-4a8a-83f7-2051db1dea85",
+          "fill": "#7ac850",
+          "strokeWidth": 0,
+          "radius": 3,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "attributeIcon09",
+          "name": "Img_TSV_Hero09_Attribute",
+          "rect": {
+            "x": 26,
+            "y": 631,
+            "w": 19,
+            "h": 16
+          },
+          "parent": "existing:group-97c417a3-a719-4a8a-83f7-2051db1dea85",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-filter-mountain-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "attributeBadge10",
+          "name": "BG_TSV_Hero10_Attribute",
+          "rect": {
+            "x": 144,
+            "y": 628,
+            "w": 21,
+            "h": 22
+          },
+          "parent": "existing:group-e8df7c88-12c9-4a89-8368-d80c3e9ec891",
+          "fill": "#45b2d1",
+          "strokeWidth": 0,
+          "radius": 3,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "attributeIcon10",
+          "name": "Img_TSV_Hero10_Attribute",
+          "rect": {
+            "x": 145,
+            "y": 631,
+            "w": 19,
+            "h": 16
+          },
+          "parent": "existing:group-e8df7c88-12c9-4a89-8368-d80c3e9ec891",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-filter-cloud-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "attributeBadge11",
+          "name": "BG_TSV_Hero11_Attribute",
+          "rect": {
+            "x": 263,
+            "y": 628,
+            "w": 21,
+            "h": 22
+          },
+          "parent": "existing:group-6b46efcc-41b8-4c04-9c67-a43cbe1392e6",
+          "fill": "#7ac850",
+          "strokeWidth": 0,
+          "radius": 3,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "attributeIcon11",
+          "name": "Img_TSV_Hero11_Attribute",
+          "rect": {
+            "x": 264,
+            "y": 631,
+            "w": 19,
+            "h": 16
+          },
+          "parent": "existing:group-6b46efcc-41b8-4c04-9c67-a43cbe1392e6",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-filter-mountain-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "rankSlots01",
+          "name": "Txt_TSV_Hero01_RankSlots",
+          "rect": {
+            "x": 24,
+            "y": 278,
+            "w": 100,
+            "h": 17
+          },
+          "parent": "existing:group-3a3f4494-0292-4bde-8fc6-bed0dee78c98",
+          "text": "◆◆◆◆◆◆",
+          "size": 14,
+          "weight": 700,
+          "color": "#713b9e",
+          "align": "center",
+          "geometryOnly": true,
+          "rankFilledValue": "unconfirmed"
+        },
+        {
+          "op": "text",
+          "key": "rankSlots02",
+          "name": "Txt_TSV_Hero02_RankSlots",
+          "rect": {
+            "x": 143,
+            "y": 278,
+            "w": 100,
+            "h": 17
+          },
+          "parent": "existing:group-6b1224b0-e311-4258-830b-cce77ed90ec5",
+          "text": "◆◆◆◆◆◆",
+          "size": 14,
+          "weight": 700,
+          "color": "#006f91",
+          "align": "center",
+          "geometryOnly": true,
+          "rankFilledValue": "unconfirmed"
+        },
+        {
+          "op": "plain",
+          "key": "hero02Alert",
+          "name": "Badge_TSV_Hero02_Alert",
+          "rect": {
+            "x": 234,
+            "y": 119,
+            "w": 14,
+            "h": 14
+          },
+          "parent": "existing:group-6b1224b0-e311-4258-830b-cce77ed90ec5",
+          "fill": "#f42f29",
+          "strokeWidth": 0,
+          "radius": 7,
+          "opacity": 1
+        }
+      ],
+      "notes": [
+        "Actual map motif:01cloud/02cloud/03mountain/04mountain/05sand/06sand/07sand/08sand/09mountain/10cloud/11mountain, directly observed in TS25-R01. Existing matching filter motif is reused, not currency/medal substitutes.",
+        "Six native◆ are observed base rank-diamond slots on owned2cards, not earned rank. No fill-value invented. Original font/material remains unverified. Currency diamond-purple is not rank art.",
+        "Owned Lv labels move20px right to clear added attribute; Lv.5/Lv.1 values unchanged.",
+        "Preserve111x180 cards/gap8,10/List scroll-y/Header108/Footer76 and existing back edge. All added leaves pass input to card owner.",
+        "No new duplicate card overlaid on originals. Existing panel/group owners get native input/normal-pressed state. Selected filter skin may be native fixture only; actual filtering outcome unknown.",
+        "Role glyphs and vertical growth arrow remain missingAssets. No horizontal-arrow rotation or circularmedal substitution is claimed exact.",
+        "No level/shard/rank/count invented. Red notification dot is unnumbered."
+      ],
+      "missingAssets": [
+        {
+          "role": "11 per-card role weapon/shield glyphs",
+          "source": "TS25-R01 top-left cards",
+          "reason": "No exact semantic role set in image-map. Need authoring and per-card role verification; no false substitutions."
+        },
+        {
+          "role": "Card02 green vertical upgrade arrow",
+          "source": "TS25-R01 near234,249",
+          "reason": "arrow-right-green and medal-arrow-up are different. No correct plain up-arrow in map; omitted."
+        },
+        {
+          "role": "Earned rank fill",
+          "source": "TS25-R01 owned01/02",
+          "reason": "Six base slots observed; exact fill/earned rank is unconfirmed, only geometry proposed."
+        }
+      ],
+      "proposedLinks": [
+        {
+          "from": "existing:group-3a3f4494-0292-4bde-8fc6-bed0dee78c98",
+          "action": "navigate",
+          "target": "TS26",
+          "evidence": "TSV03 sage card→detail; root supplies actual target/payload."
+        },
+        {
+          "from": "existing:group-6b1224b0-e311-4258-830b-cce77ed90ec5",
+          "action": "navigate",
+          "target": "TS26",
+          "evidence": "TSV03 14→15 ghost card→detail; root later."
+        },
+        {
+          "from": "existing:element-a9cb88c6-679f-4c19-8e22-46a516f92347",
+          "action": "navigate",
+          "target": "TS22",
+          "evidence": "TSV02 306→307; root connects after actualTS22."
+        }
+      ],
+      "referenceState": "TS25-R01 TSV02 requested330 actual329.9783333333;2owned Lv5/Lv1 +9shardcards."
+    },
+    {
+      "id": "TS05",
+      "name": "Page_TSV_BuildingInterior",
+      "existingScreen": "screen-102560cd-a9db-4e4a-89ea-8138bd7bf0c6",
+      "nativeKind": "page",
+      "priority": 3,
+      "existingedits": [
+        {
+          "id": "element-1314bf62-e3ec-48cc-b37e-f4bf6ba599c1",
+          "desiredName": "Img_TSV_Building_Greenhouse",
+          "remove": true,
+          "removeScope": "Exact image only; no descendants; preserve source asset."
+        },
+        {
+          "id": "group-72ca6f64-54b6-4624-9169-f1d3a613f4ef",
+          "desiredName": "Slot_TSV_Building_3D",
+          "partRole": "container",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 614
+          },
+          "anchorPreset": "stretch-with-bottom-280",
+          "preserveChildrenIds": [
+            "element-969b2f9b-2a75-4666-ba11-6c8c12fa207d",
+            "element-9af74eeb-9785-4833-950a-ea1b86204310"
+          ]
+        },
+        {
+          "id": "group-a62d2c31-0ee6-4fb1-aeb0-f78c55fd36e5",
+          "desiredName": "HUD_TSV_Building_Resource",
+          "rect": {
+            "x": 44,
+            "y": 0,
+            "w": 335,
+            "h": 29
+          },
+          "anchorPreset": "top-left",
+          "anchorIntent": "min=max=pivot[0,1]; position44,0; fixed335x29 via native fields"
+        }
+      ],
+      "actions": [
+        {
+          "op": "plain",
+          "key": "stageBack",
+          "name": "BG_TSV_Building_3D",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 614
+          },
+          "parent": "existing:group-72ca6f64-54b6-4624-9169-f1d3a613f4ef",
+          "fill": "#102c45",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "role": "Slot_3D",
+          "layerIntent": "send behind kept levelBG/Txt inside existingScene"
+        },
+        {
+          "op": "text",
+          "key": "stageLabel",
+          "name": "Txt_TSV_Building_3D",
+          "rect": {
+            "x": 130,
+            "y": 260,
+            "w": 244,
+            "h": 44
+          },
+          "parent": "existing:group-72ca6f64-54b6-4624-9169-f1d3a613f4ef",
+          "text": "3D",
+          "size": 24,
+          "weight": 600,
+          "color": "#93b5c9",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "resident",
+          "name": "Btn_TSV_Building_Resident",
+          "rect": {
+            "x": 402,
+            "y": 419,
+            "w": 87,
+            "h": 109
+          },
+          "parent": null,
+          "text": "",
+          "size": 18,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "bottom-right",
+          "anchorIntent": "Fixed87x109; right15px and bottom366px at504x894, keeping86px above current280px bottom panel as height changes."
+        },
+        {
+          "op": "plain",
+          "key": "residentInner",
+          "name": "BG_TSV_Building_ResidentInner",
+          "rect": {
+            "x": 409,
+            "y": 427,
+            "w": 73,
+            "h": 93
+          },
+          "parent": "resident",
+          "fill": "#7fdaeb",
+          "strokeWidth": 0,
+          "radius": 8,
+          "opacity": 1
+        },
+        {
+          "op": "image",
+          "key": "residentPortrait",
+          "name": "Img_TSV_Building_Resident",
+          "rect": {
+            "x": 410,
+            "y": 437,
+            "w": 72,
+            "h": 87
+          },
+          "parent": "resident",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+          "fit": "contain",
+          "region": [
+            0,
+            150,
+            150,
+            150
+          ]
+        },
+        {
+          "op": "plain",
+          "key": "residentClipStem",
+          "name": "BG_TSV_Building_ResidentClipStem",
+          "rect": {
+            "x": 439,
+            "y": 407,
+            "w": 14,
+            "h": 16
+          },
+          "parent": "resident",
+          "fill": "#008baa",
+          "strokeWidth": 0,
+          "radius": 2,
+          "opacity": 1
+        },
+        {
+          "op": "plain",
+          "key": "residentClipBar",
+          "name": "BG_TSV_Building_ResidentClipBar",
+          "rect": {
+            "x": 428,
+            "y": 417,
+            "w": 36,
+            "h": 9
+          },
+          "parent": "resident",
+          "fill": "#008baa",
+          "strokeWidth": 0,
+          "radius": 2,
+          "opacity": 1
+        },
+        {
+          "op": "plain",
+          "key": "residentAlert",
+          "name": "Badge_TSV_Building_ResidentAlert",
+          "rect": {
+            "x": 478,
+            "y": 418,
+            "w": 13,
+            "h": 13
+          },
+          "parent": "resident",
+          "fill": "#ed2b20",
+          "strokeWidth": 0,
+          "radius": 7,
+          "opacity": 1
+        }
+      ],
+      "notes": [
+        "Only greenhouse image is deleted. Do not delete Scene/group wholesale or any other root. Keep original2D building level BG/Txt.",
+        "Engineer portrait is new construction-worker concept appropriate to observed clipboard worker role, not original identity equivalence. Clip is fresh plain geometry.",
+        "Clip stem intentionally protrudes12px above wrapper. Root may extend owner bounds preservingABS child positions to include it; no screen overflow.",
+        "Furniture110x170/gap10 preserved. Repeated4on/2off differs from source35, but exact per-card dots/disabled state requires sourcezoom before editing values. No guessed counts.",
+        "No furniture prices/production deltas/selection results/unknown resident destination invented."
+      ],
+      "missingAssets": [
+        {
+          "role": "Exact furniture per-card level/disabled fixture",
+          "reason": "Need enlarged source35 dot-count observation; do not substitute guessed ranks."
+        }
+      ],
+      "proposedLinks": [
+        {
+          "from": "resident",
+          "action": null,
+          "target": null,
+          "evidence": "Visible worker clipboard; destination unverified, leave edge absent."
+        }
+      ],
+      "referenceState": "TSV03 fine/frame_00035.jpg requested35 actual34.9916666667."
+    },
+    {
+      "id": "TS07",
+      "name": "Modal_TSV_BuildingUpgrade",
+      "existingScreen": "screen-69d5b36b-cc28-4ecd-a95a-96be618354e2",
+      "nativeKind": "modal",
+      "priority": 4,
+      "existingedits": [
+        {
+          "id": "element-759fb74d-e722-4af0-bc61-17d1d3a49dc8",
+          "desiredName": "Btn_TSV_Upgrade_Confirm",
+          "enabled": true,
+          "stateRequired": true,
+          "preserveTransitionIds": [
+            "edge-8f2c6d91-ead8-4f49-add7-907c142f9857"
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "op": "text",
+          "key": "originalDuration",
+          "name": "Txt_TSV_Upgrade_OriginalDuration",
+          "rect": {
+            "x": 124,
+            "y": 799,
+            "w": 256,
+            "h": 27
+          },
+          "parent": "existing:group-5ac03180-2697-46f8-b864-04584cda425c",
+          "text": "원본 시간: 00:00:03",
+          "size": 18,
+          "weight": 700,
+          "color": "#314955",
+          "align": "center"
+        }
+      ],
+      "notes": [
+        "Existing CTA inner timer differs from newly added independent 원본시간. Label fits conditionsbottom792→CTA833 gap.",
+        "Do not duplicate backdrop scene or full-page image. Empty3D area label may be supplied by current baseSlot; root checks standalone separately before optionalAction.",
+        "Keep bottomfixed458 sheet,4rewards/2conditions,Confirm305x55@(104,833),all observed values and intentionalNEW2px protrusion.",
+        "Keep dim/block/Escape and navigate→main. Do not add unobservedX to satisfy audit warning.",
+        "Current fulfilled fixture only. TSV01 210/215/220 are all unfulfilled/gray. No canUpgrade/game timer invented."
+      ],
+      "missingAssets": [],
+      "proposedLinks": [],
+      "referenceState": "TSV03 fine/frame_00038.jpg requested38 actual37.9916666667; satisfied greenhouseLv3→4.",
+      "optionalActions": [
+        {
+          "op": "text",
+          "key": "standalone3DLabel",
+          "name": "Txt_TSV_Upgrade_3D",
+          "rect": {
+            "x": 130,
+            "y": 196,
+            "w": 244,
+            "h": 44
+          },
+          "parent": null,
+          "text": "3D",
+          "size": 24,
+          "weight": 600,
+          "color": "#93b5c9",
+          "align": "center",
+          "condition": "Only if standalone upperempty3D lacks3Dlabel; do not add worldpicture or duplicated base page."
+        }
+      ]
+    }
+  ],
+  "sourceDocuments": [
+    "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-finish-20261119/existing-audit/existing-four-screen-audit-r64.md",
+    "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-finish-20261119/spec-b/existing-image-map.json",
+    "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-finish-20261119/art/art-manifest.json",
+    "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-finish-20261119/recipes/b-actions.json"
+  ]
+}

@@ -1,0 +1,1 @@
+/Users/max/projest_max/ui-studio/src/tools/uxStudio/scroll-pin.mjs

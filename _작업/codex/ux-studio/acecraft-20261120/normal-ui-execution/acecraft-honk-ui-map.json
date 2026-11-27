@@ -1,0 +1,945 @@
+{
+  "family": {
+    "id": "HonkDepot",
+    "name": "Page_ACE_HonkDepot",
+    "nativeKind": "page",
+    "purpose": "A0에서 관찰한 Honk 모집 화면. 개방 기계/거위 기술자와 wingman, 1회/10회 모집과 모집 종류 탭을 표시한다. 게임 추첨 기능은 연결하지 않는다.",
+    "reference": "video-a/frames/frame_00000.jpg",
+    "notes": [
+      "420×924 원본 가시 구역의 근사 ABS 좌표이다. 수치는 제작용 제안이며 원본 Unity 설정을 확정하지 않는다.",
+      "Honk 원화는 새 거위 기술자+작은 기체 일러스트다. 원본 고유 캐릭터 외모 및 원형 모집 기계는 동일 복제하지 않는다. SwitchBase는 기하 정보판 대체이며 원본 원형/금속 기계 동등을 주장하지 않는다.",
+      "원본 우측 중간 회색 영어 도구 말풍선은 영상의 외부 overlay로 판단하여 제외했다. 원본 promotion 말풍선의 세부 일러스트/입구는 이번 30동작 조립에서 미포함이다.",
+      "공통 전역 메뉴 5개의 관찰된 이름은 첫 Recruit만 확정했다. 나머지 메뉴에는 관찰되지 않은 이름/목적지를 붙이지 않고 무문자 generic glyph proxy로 둔다. 정본 공통 메뉴가 조립되면 정상 UI 복제로 교체를 권장한다.",
+      "우측 Packs/Missions의 원본 원형 아이콘 대신 라벨 버튼만 우선 조립한다. Shared family의 30동작 제한 때문에 세부 그림은 후속 교체 대상이다.",
+      "원본 4번째 모집 탭 이름은 화면 오른쪽에서 잘려 Sky Re…로만 보이므로 그대로 표시한다. 카운터의 ◇/▣ 기호는 native 표시용 근사이고 실제 토큰 아이콘은 미완성이다.",
+      "History/Preview/Switch/Packs/Missions/Recruit/탭의 실제 이동/추첨/보상 연결은 본 명세에 없다. 관찰되지 않은 성공/재화 차감 결과를 만들지 않는다.",
+      "외부 그림자는 원화/프레임에 굽지 않는다. 현재 recipe는 shadow를 켜지 않으며 필요하면 해당 부품의 effects.shadow를 별도 정상 UI 요청으로 적용한다."
+    ],
+    "actions": [
+      {
+        "key": "root",
+        "op": "plain",
+        "name": "BG_HonkDepot_root",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "inputMode": "none",
+        "fill": "#191922"
+      },
+      {
+        "key": "Backdrop",
+        "op": "image",
+        "name": "Img_HonkDepot_Backdrop",
+        "rect": {
+          "x": 0,
+          "y": 130,
+          "w": 420,
+          "h": 688
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-lobby-background-v001.webp",
+        "fit": "cover"
+      },
+      {
+        "key": "HonkWingman",
+        "op": "image",
+        "name": "Img_HonkDepot_HonkWingman",
+        "rect": {
+          "x": 0,
+          "y": 317,
+          "w": 420,
+          "h": 365
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-honk-wingman-v001.webp",
+        "fit": "contain"
+      },
+      {
+        "key": "TitleFrame",
+        "op": "panel",
+        "name": "Frame_HonkDepot_TitleFrame",
+        "rect": {
+          "x": 72,
+          "y": 74,
+          "w": 276,
+          "h": 70
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+        "skinMetrics4": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "Title",
+        "op": "text",
+        "name": "Txt_HonkDepot_Title",
+        "rect": {
+          "x": 97,
+          "y": 90,
+          "w": 230,
+          "h": 31
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "HONK'S DEPOT",
+        "size": 24,
+        "weight": 900,
+        "color": "#f8d462",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "Remaining",
+        "op": "text",
+        "name": "Txt_HonkDepot_Remaining",
+        "rect": {
+          "x": 93,
+          "y": 122,
+          "w": 246,
+          "h": 20
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "◷  Remaining Time: 25d 23h",
+        "size": 13,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "Currencies",
+        "op": "text",
+        "name": "Txt_HonkDepot_Currencies",
+        "rect": {
+          "x": 220,
+          "y": 48,
+          "w": 195,
+          "h": 25
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "▣  5       +       ◇ 4199  +",
+        "size": 13,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "Packs",
+        "op": "button",
+        "name": "Btn_HonkDepot_Packs",
+        "rect": {
+          "x": 355,
+          "y": 153,
+          "w": 57,
+          "h": 67
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Packs",
+        "size": 12,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "Missions",
+        "op": "button",
+        "name": "Btn_HonkDepot_Missions",
+        "rect": {
+          "x": 355,
+          "y": 226,
+          "w": 57,
+          "h": 67
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Missions",
+        "size": 11,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "SwitchBase",
+        "op": "plain",
+        "name": "Frame_HonkDepot_WingmanDisplayArea",
+        "rect": {
+          "x": 119,
+          "y": 511,
+          "w": 182,
+          "h": 108
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "role": "frame",
+        "fill": "#ffffff"
+      },
+      {
+        "key": "Switch",
+        "op": "button",
+        "name": "Btn_HonkDepot_Switch",
+        "rect": {
+          "x": 159,
+          "y": 548,
+          "w": 103,
+          "h": 42
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Switch",
+        "size": 18,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_hud_darkbrownpill3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "History",
+        "op": "button",
+        "name": "Btn_HonkDepot_History",
+        "rect": {
+          "x": 328,
+          "y": 580,
+          "w": 81,
+          "h": 32
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "◴ History",
+        "size": 13,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_hud_darkbrownpill3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "Preview",
+        "op": "button",
+        "name": "Btn_HonkDepot_Preview",
+        "rect": {
+          "x": 328,
+          "y": 630,
+          "w": 81,
+          "h": 32
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "▣ Preview",
+        "size": 13,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_hud_darkbrownpill3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "Guarantees",
+        "op": "text",
+        "name": "Txt_HonkDepot_Guarantees",
+        "rect": {
+          "x": 104,
+          "y": 623,
+          "w": 226,
+          "h": 67
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "Excellent or better Wingman\nComes in 10 Draw(s)\nEpic Wingman Comes in 50\nDraw(s)",
+        "size": 12,
+        "weight": 800,
+        "color": "#e8d9a8",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "FreeRecruit",
+        "op": "button",
+        "name": "Btn_HonkDepot_FreeRecruit",
+        "rect": {
+          "x": 33,
+          "y": 714,
+          "w": 57,
+          "h": 49
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "FREE\n×10",
+        "size": 12,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "RecruitOnce",
+        "op": "button",
+        "name": "Btn_HonkDepot_RecruitOnce",
+        "rect": {
+          "x": 115,
+          "y": 709,
+          "w": 122,
+          "h": 53
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Recruit ×1\n▣ ×1",
+        "size": 15,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "RecruitTen",
+        "op": "button",
+        "name": "Btn_HonkDepot_RecruitTen",
+        "rect": {
+          "x": 266,
+          "y": 709,
+          "w": 123,
+          "h": 53
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Recruit ×10\n◇ ×3000",
+        "size": 15,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "PilotRecruit",
+        "op": "button",
+        "name": "Btn_HonkDepot_PilotRecruit",
+        "rect": {
+          "x": 16,
+          "y": 796,
+          "w": 118,
+          "h": 35
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Pilot Recruit",
+        "size": 13,
+        "weight": 800,
+        "color": "#eee5c6",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "CloudHub",
+        "op": "button",
+        "name": "Btn_HonkDepot_CloudHub",
+        "rect": {
+          "x": 134,
+          "y": 796,
+          "w": 112,
+          "h": 35
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Cloud Hub",
+        "size": 13,
+        "weight": 800,
+        "color": "#eee5c6",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "HonkDepotTab",
+        "op": "button",
+        "name": "Btn_HonkDepot_HonkDepotTab",
+        "rect": {
+          "x": 246,
+          "y": 796,
+          "w": 130,
+          "h": 35
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Honk's Depot",
+        "size": 13,
+        "weight": 800,
+        "color": "#35596a",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "ClippedSkyTab",
+        "op": "button",
+        "name": "Btn_HonkDepot_ClippedSkyTab",
+        "rect": {
+          "x": 376,
+          "y": 796,
+          "w": 42,
+          "h": 35
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Sky\nRe…",
+        "size": 13,
+        "weight": 800,
+        "color": "#eee5c6",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "GlobalNav1",
+        "op": "button",
+        "name": "Btn_HonkDepot_GlobalNav1",
+        "rect": {
+          "x": 0,
+          "y": 842,
+          "w": 84,
+          "h": 82
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Recruit",
+        "size": 14,
+        "weight": 700,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+        "skinMetrics4": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "GlobalNav2",
+        "op": "button",
+        "name": "Btn_HonkDepot_GlobalNav2",
+        "rect": {
+          "x": 84,
+          "y": 842,
+          "w": 84,
+          "h": 82
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "",
+        "size": 12,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+        "skinMetrics4": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "GlobalNav3",
+        "op": "button",
+        "name": "Btn_HonkDepot_GlobalNav3",
+        "rect": {
+          "x": 168,
+          "y": 842,
+          "w": 84,
+          "h": 82
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "",
+        "size": 12,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+        "skinMetrics4": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "GlobalNav4",
+        "op": "button",
+        "name": "Btn_HonkDepot_GlobalNav4",
+        "rect": {
+          "x": 252,
+          "y": 842,
+          "w": 84,
+          "h": 82
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "",
+        "size": 12,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+        "skinMetrics4": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "GlobalNav5",
+        "op": "button",
+        "name": "Btn_HonkDepot_GlobalNav5",
+        "rect": {
+          "x": 336,
+          "y": 842,
+          "w": 84,
+          "h": 82
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "",
+        "size": 12,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+        "skinMetrics4": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "GlobalNavGlyph2",
+        "op": "image",
+        "name": "Img_HonkDepot_GlobalNavGlyph2",
+        "rect": {
+          "x": 96,
+          "y": 842,
+          "w": 60,
+          "h": 60
+        },
+        "inputMode": "parent",
+        "parent": "GlobalNav2",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-lobby-icons-atlas-v001.webp",
+        "fit": "contain",
+        "region": [
+          150,
+          450,
+          150,
+          150
+        ]
+      },
+      {
+        "key": "GlobalNavGlyph3",
+        "op": "image",
+        "name": "Img_HonkDepot_GlobalNavGlyph3",
+        "rect": {
+          "x": 180,
+          "y": 842,
+          "w": 60,
+          "h": 60
+        },
+        "inputMode": "parent",
+        "parent": "GlobalNav3",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-lobby-icons-atlas-v001.webp",
+        "fit": "contain",
+        "region": [
+          450,
+          300,
+          150,
+          150
+        ]
+      },
+      {
+        "key": "GlobalNavGlyph4",
+        "op": "image",
+        "name": "Img_HonkDepot_GlobalNavGlyph4",
+        "rect": {
+          "x": 264,
+          "y": 842,
+          "w": 60,
+          "h": 60
+        },
+        "inputMode": "parent",
+        "parent": "GlobalNav4",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-lobby-icons-atlas-v001.webp",
+        "fit": "contain",
+        "region": [
+          300,
+          450,
+          150,
+          150
+        ]
+      },
+      {
+        "key": "GlobalNavGlyph5",
+        "op": "image",
+        "name": "Img_HonkDepot_GlobalNavGlyph5",
+        "rect": {
+          "x": 348,
+          "y": 842,
+          "w": 60,
+          "h": 60
+        },
+        "inputMode": "parent",
+        "parent": "GlobalNav5",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-lobby-icons-atlas-v001.webp",
+        "fit": "contain",
+        "region": [
+          450,
+          450,
+          150,
+          150
+        ]
+      },
+      {
+        "key": "GlobalNavGlyph1",
+        "op": "image",
+        "name": "Img_HonkDepot_GlobalNavGlyph1",
+        "rect": {
+          "x": 12,
+          "y": 842,
+          "w": 60,
+          "h": 60
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-lobby-icons-atlas-v001.webp",
+        "region": [
+          0,
+          450,
+          150,
+          150
+        ],
+        "parent": "GlobalNav1",
+        "inputMode": "parent"
+      },
+      {
+        "key": "GlobalNavCaption2",
+        "op": "text",
+        "name": "Txt_HonkDepot_GlobalNav2_Caption",
+        "rect": {
+          "x": 86,
+          "y": 904,
+          "w": 80,
+          "h": 20
+        },
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#fff3d8",
+        "align": "center",
+        "parent": "GlobalNav2",
+        "inputMode": "parent"
+      },
+      {
+        "key": "GlobalNavCaption3",
+        "op": "text",
+        "name": "Txt_HonkDepot_GlobalNav3_Caption",
+        "rect": {
+          "x": 170,
+          "y": 904,
+          "w": 80,
+          "h": 20
+        },
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#fff3d8",
+        "align": "center",
+        "parent": "GlobalNav3",
+        "inputMode": "parent"
+      },
+      {
+        "key": "GlobalNavCaption4",
+        "op": "text",
+        "name": "Txt_HonkDepot_GlobalNav4_Caption",
+        "rect": {
+          "x": 254,
+          "y": 904,
+          "w": 80,
+          "h": 20
+        },
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#fff3d8",
+        "align": "center",
+        "parent": "GlobalNav4",
+        "inputMode": "parent"
+      },
+      {
+        "key": "GlobalNavCaption5",
+        "op": "text",
+        "name": "Txt_HonkDepot_GlobalNav5_Caption",
+        "rect": {
+          "x": 338,
+          "y": 904,
+          "w": 80,
+          "h": 20
+        },
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#fff3d8",
+        "align": "center",
+        "parent": "GlobalNav5",
+        "inputMode": "parent"
+      }
+    ]
+  },
+  "sid": "screen-b2d3fc3c-4995-4a96-a162-368ce5dc35f9",
+  "i": 35,
+  "map": {
+    "root": "element-6e22872a-ce40-4cb7-ad26-66d1daa88a3d",
+    "Backdrop": "element-a139237b-f674-4495-8689-de0e3869bdc3",
+    "HonkWingman": "element-e4a52797-3665-46c5-bbab-917749121590",
+    "TitleFrame": "element-a3dab04f-e6a5-42f6-8ec7-72ff2623014b",
+    "Title": "element-034c60f1-9e0d-41db-b1a5-5fdb3170eaef",
+    "Remaining": "element-a82c48f1-1896-46f0-a76e-5900289a3ca5",
+    "Currencies": "element-2d7fc819-1167-49d3-8acc-1b762cde305d",
+    "Packs": "element-7cd6b977-c023-4d3f-a3b8-4686d0a337a1",
+    "Missions": "element-168760a3-60bc-4cc9-9dc1-51bc24ea996e",
+    "SwitchBase": "element-cd299642-e2e9-47e7-a930-f9c88a74365e",
+    "Switch": "element-86e8d4b3-c205-434b-b54b-4351cc85807b",
+    "History": "element-7fe85025-f5ef-4bf2-826d-038b8f5a4cc1",
+    "Preview": "element-b6bf14c9-25cf-4e72-8baa-c8b8695abc30",
+    "Guarantees": "element-6c2abca7-da90-45c8-8580-55ddc51775a5",
+    "FreeRecruit": "element-23a03dc0-23b5-4142-942a-c674373dc10b",
+    "RecruitOnce": "element-77890cb3-ba08-426c-b114-6bb4bb484f84",
+    "RecruitTen": "element-31074c8c-28c6-48cd-b756-4b421dcd75ad",
+    "PilotRecruit": "element-5ce33ec5-d343-413c-9b88-d0913a6a434b",
+    "CloudHub": "element-e8bf89fa-df68-4fd2-aa38-ffe9158d2c8d",
+    "HonkDepotTab": "element-e90d2164-e0dd-4838-9d16-92c4233faaab",
+    "ClippedSkyTab": "element-6270b5d8-e143-431a-a8cc-35b8c9d3f615",
+    "GlobalNav1": "element-764f396f-bbed-4e73-abd5-9688c849aed9",
+    "GlobalNav2": "element-5b424a0f-c293-4aed-a22d-6c3b496926f5",
+    "GlobalNav3": "element-c54ca7ba-e8f8-459b-82a2-f192ab86967c",
+    "GlobalNav4": "element-826dd9d2-506c-4896-ad87-9753e29848a2",
+    "GlobalNav5": "element-c126c7cc-f0a3-4e44-9ebb-e97d90a81462",
+    "GlobalNavGlyph2": "element-29eff483-e6b1-4a77-a6ff-54084559894e",
+    "GlobalNavGlyph3": "element-cd7235fd-9746-4d21-b97a-e499a8cb0846",
+    "GlobalNavGlyph4": "element-785f2956-f584-4840-83d0-2abc8cddbc1b",
+    "GlobalNavGlyph5": "element-4350af49-5a3f-4556-ad7f-96bb6fa69386",
+    "GlobalNavGlyph1": "element-83a34536-f1f4-4a11-910d-8e6f0b13b4d5",
+    "GlobalNavCaption1": "element-2e9d9fc6-c48a-4fc2-8474-f4ad72494174",
+    "GlobalNavCaption2": "element-ba185552-9e8e-4169-818d-360548182a05",
+    "GlobalNavCaption3": "element-773895af-7901-46be-9c5f-b9289051110e",
+    "GlobalNavCaption4": "element-7ddcb364-8892-4314-9dfd-6dcb87cbed8d",
+    "GlobalNavCaption5": "element-c077e8ad-bf2d-4d03-8dd3-a634539dfc22"
+  },
+  "footerGroup": "group-596541ec-6140-4938-ba3c-b5504e496a73",
+  "notes": [
+    "WingmanDisplayArea는 논리 제작구역만 보존하고 신규캐릭터/wingman 그림을 가리던 임시 갈색 백판을 본UI에서 제거. 원본 원형받침대 세부재현은 미완료."
+  ]
+}

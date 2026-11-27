@@ -1,0 +1,1424 @@
+{
+  "title": "07 창고·방패 측정표",
+  "status": "제안(검수 대기) · 측정 준비만",
+  "createdAtKST": "2026-11-17 00:05 KST",
+  "reference": {
+    "path": "docs/reference/monopoly-go/20261116-ten-screens/07_shields.png",
+    "size": [
+      294,
+      530
+    ],
+    "sha256": "2c971e59b4a14b4a41a09d70c9ae42a27216673c1c8618296ac9157fe65702e6",
+    "actuallyViewed": true,
+    "pixelsCopied": false
+  },
+  "designSnapshot": {
+    "projectId": "ux-gjs-0d80d7fe",
+    "revision": 90,
+    "sha256": "33fbd0d3fee5eeda2738ce3ac67668989a0bc5ce10699a17a816e1c906ddb331",
+    "mainElementCount": 175,
+    "totalElementCount": 460,
+    "screens": 5,
+    "connections": 8,
+    "source": "Read at task start; parent may save later revisions. This worksheet does not modify or freeze the parent design."
+  },
+  "coordinateContract": {
+    "targetSize": [
+      551,
+      984
+    ],
+    "sourceSize": [
+      294,
+      530
+    ],
+    "sx": 1.8741496598639455,
+    "sy": 1.8566037735849057,
+    "rectFormat": "[x,y,w,h] px",
+    "local": "Parent origin subtracted in source coordinates before axis scaling.",
+    "precision": "Visual source bounds ±2 px. Decimal precision is calculation precision, not visual equivalence.",
+    "artAspect": "Placement uses sx/sy; each art uses contain to preserve its own source ratio. Fixed arches/circles must not be stretched into 9-slice.",
+    "mobile": "Whole logical root uniform fit; no per-element independent reflow inferred."
+  },
+  "rectangles": [
+    {
+      "key": "Group_Showroom_Cabinet",
+      "parent": "root",
+      "sourceRect": [
+        0,
+        6,
+        294,
+        447
+      ],
+      "globalRect551": [
+        0.0,
+        11.14,
+        551.0,
+        829.9
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        11.14,
+        551.0,
+        829.9
+      ],
+      "role": "cabinet-group"
+    },
+    {
+      "key": "Img_Showroom_HeaderArch",
+      "parent": "Group_Showroom_Cabinet",
+      "sourceRect": [
+        0,
+        6,
+        294,
+        108
+      ],
+      "globalRect551": [
+        0.0,
+        11.14,
+        551.0,
+        200.51
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        551.0,
+        200.51
+      ],
+      "role": "fixed-ratio-arch-art",
+      "notes": "Orange arch/white wooden ornament without title/counter text; do not stretch entire cabinet as one image."
+    },
+    {
+      "key": "Txt_Showroom_Shields_Title",
+      "parent": "Group_Showroom_Cabinet",
+      "sourceRect": [
+        92,
+        52,
+        105,
+        26
+      ],
+      "globalRect551": [
+        172.42,
+        96.54,
+        196.79,
+        48.27
+      ],
+      "parentRelativeRect551": [
+        172.42,
+        85.4,
+        196.79,
+        48.27
+      ],
+      "role": "native-text",
+      "observedText": "SHIELDS"
+    },
+    {
+      "key": "Img_Showroom_Crest",
+      "parent": "Group_Showroom_Cabinet",
+      "sourceRect": [
+        134,
+        17,
+        18,
+        14
+      ],
+      "globalRect551": [
+        251.14,
+        31.56,
+        33.73,
+        25.99
+      ],
+      "parentRelativeRect551": [
+        251.14,
+        20.42,
+        33.73,
+        25.99
+      ],
+      "role": "small-emblem-art",
+      "notes": "Pale stylized mark; exact lettering not established."
+    },
+    {
+      "key": "BG_Showroom_Count",
+      "parent": "Group_Showroom_Cabinet",
+      "sourceRect": [
+        123,
+        96,
+        44,
+        14
+      ],
+      "globalRect551": [
+        230.52,
+        178.23,
+        82.46,
+        25.99
+      ],
+      "parentRelativeRect551": [
+        230.52,
+        167.09,
+        82.46,
+        25.99
+      ],
+      "role": "counter-background"
+    },
+    {
+      "key": "Txt_Showroom_Count",
+      "parent": "Group_Showroom_Cabinet",
+      "sourceRect": [
+        129,
+        98,
+        32,
+        10
+      ],
+      "globalRect551": [
+        241.77,
+        181.95,
+        59.97,
+        18.57
+      ],
+      "parentRelativeRect551": [
+        241.77,
+        170.81,
+        59.97,
+        18.57
+      ],
+      "role": "native-text",
+      "observedText": "2"
+    },
+    {
+      "key": "Btn_Showroom_Info",
+      "parent": "root",
+      "sourceRect": [
+        2,
+        4,
+        18,
+        20
+      ],
+      "globalRect551": [
+        3.75,
+        7.43,
+        33.73,
+        37.13
+      ],
+      "parentRelativeRect551": [
+        3.75,
+        7.43,
+        33.73,
+        37.13
+      ],
+      "role": "native-input-wrapper",
+      "notes": "Info destination/API not observed."
+    },
+    {
+      "key": "BG_Showroom_Info",
+      "parent": "Btn_Showroom_Info",
+      "sourceRect": [
+        3,
+        5,
+        16,
+        18
+      ],
+      "globalRect551": [
+        5.62,
+        9.28,
+        29.99,
+        33.42
+      ],
+      "parentRelativeRect551": [
+        1.87,
+        1.86,
+        29.99,
+        33.42
+      ],
+      "role": "circle-background"
+    },
+    {
+      "key": "Txt_Showroom_Info",
+      "parent": "Btn_Showroom_Info",
+      "sourceRect": [
+        7,
+        7,
+        8,
+        13
+      ],
+      "globalRect551": [
+        13.12,
+        13.0,
+        14.99,
+        24.14
+      ],
+      "parentRelativeRect551": [
+        9.37,
+        5.57,
+        14.99,
+        24.14
+      ],
+      "role": "native-text",
+      "observedText": "i"
+    },
+    {
+      "key": "BG_Showroom_Display",
+      "parent": "Group_Showroom_Cabinet",
+      "sourceRect": [
+        28,
+        111,
+        239,
+        82
+      ],
+      "globalRect551": [
+        52.48,
+        206.08,
+        447.92,
+        152.24
+      ],
+      "parentRelativeRect551": [
+        52.48,
+        194.94,
+        447.92,
+        152.24
+      ],
+      "role": "display-compartment-background"
+    },
+    {
+      "key": "Group_Showroom_EquippedDisplay",
+      "parent": "Group_Showroom_Cabinet",
+      "sourceRect": [
+        32,
+        115,
+        229,
+        79
+      ],
+      "globalRect551": [
+        59.97,
+        213.51,
+        429.18,
+        146.67
+      ],
+      "parentRelativeRect551": [
+        59.97,
+        202.37,
+        429.18,
+        146.67
+      ],
+      "role": "four-equal-display-slots",
+      "notes": "Plan compartment [32,115,229,77]; visual check reaches193, so worksheet includes79px to retain check/base extent."
+    },
+    {
+      "key": "Btn_Showroom_EquippedSlot01",
+      "parent": "Group_Showroom_EquippedDisplay",
+      "sourceRect": [
+        32,
+        119,
+        54,
+        73
+      ],
+      "globalRect551": [
+        59.97,
+        220.94,
+        101.2,
+        135.53
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        7.43,
+        101.2,
+        135.53
+      ],
+      "role": "native-input-wrapper",
+      "notes": "Input/selection behavior is a production proposal, not source gameplay verification."
+    },
+    {
+      "key": "Btn_Showroom_EquippedSlot01_Pedestal",
+      "parent": "Btn_Showroom_EquippedSlot01",
+      "sourceRect": [
+        35,
+        171,
+        47,
+        16
+      ],
+      "globalRect551": [
+        65.6,
+        317.48,
+        88.09,
+        29.71
+      ],
+      "parentRelativeRect551": [
+        5.62,
+        96.54,
+        88.09,
+        29.71
+      ],
+      "role": "pedestal-art"
+    },
+    {
+      "key": "Btn_Showroom_EquippedSlot02",
+      "parent": "Group_Showroom_EquippedDisplay",
+      "sourceRect": [
+        90,
+        119,
+        54,
+        73
+      ],
+      "globalRect551": [
+        168.67,
+        220.94,
+        101.2,
+        135.53
+      ],
+      "parentRelativeRect551": [
+        108.7,
+        7.43,
+        101.2,
+        135.53
+      ],
+      "role": "native-input-wrapper",
+      "notes": "Input/selection behavior is a production proposal, not source gameplay verification."
+    },
+    {
+      "key": "Btn_Showroom_EquippedSlot02_Pedestal",
+      "parent": "Btn_Showroom_EquippedSlot02",
+      "sourceRect": [
+        93,
+        171,
+        47,
+        16
+      ],
+      "globalRect551": [
+        174.3,
+        317.48,
+        88.09,
+        29.71
+      ],
+      "parentRelativeRect551": [
+        5.62,
+        96.54,
+        88.09,
+        29.71
+      ],
+      "role": "pedestal-art"
+    },
+    {
+      "key": "Btn_Showroom_EquippedSlot03",
+      "parent": "Group_Showroom_EquippedDisplay",
+      "sourceRect": [
+        148,
+        119,
+        54,
+        73
+      ],
+      "globalRect551": [
+        277.37,
+        220.94,
+        101.2,
+        135.53
+      ],
+      "parentRelativeRect551": [
+        217.4,
+        7.43,
+        101.2,
+        135.53
+      ],
+      "role": "native-input-wrapper",
+      "notes": "Input/selection behavior is a production proposal, not source gameplay verification."
+    },
+    {
+      "key": "Btn_Showroom_EquippedSlot03_Pedestal",
+      "parent": "Btn_Showroom_EquippedSlot03",
+      "sourceRect": [
+        151,
+        171,
+        47,
+        16
+      ],
+      "globalRect551": [
+        283.0,
+        317.48,
+        88.09,
+        29.71
+      ],
+      "parentRelativeRect551": [
+        5.62,
+        96.54,
+        88.09,
+        29.71
+      ],
+      "role": "pedestal-art"
+    },
+    {
+      "key": "Btn_Showroom_EquippedSlot04",
+      "parent": "Group_Showroom_EquippedDisplay",
+      "sourceRect": [
+        206,
+        119,
+        54,
+        73
+      ],
+      "globalRect551": [
+        386.07,
+        220.94,
+        101.2,
+        135.53
+      ],
+      "parentRelativeRect551": [
+        326.1,
+        7.43,
+        101.2,
+        135.53
+      ],
+      "role": "native-input-wrapper",
+      "notes": "Input/selection behavior is a production proposal, not source gameplay verification."
+    },
+    {
+      "key": "Btn_Showroom_EquippedSlot04_Pedestal",
+      "parent": "Btn_Showroom_EquippedSlot04",
+      "sourceRect": [
+        209,
+        171,
+        47,
+        16
+      ],
+      "globalRect551": [
+        391.7,
+        317.48,
+        88.09,
+        29.71
+      ],
+      "parentRelativeRect551": [
+        5.62,
+        96.54,
+        88.09,
+        29.71
+      ],
+      "role": "pedestal-art"
+    },
+    {
+      "key": "Img_Showroom_Shield01",
+      "parent": "Btn_Showroom_EquippedSlot01",
+      "sourceRect": [
+        38,
+        129,
+        42,
+        47
+      ],
+      "globalRect551": [
+        71.22,
+        239.5,
+        78.71,
+        87.26
+      ],
+      "parentRelativeRect551": [
+        11.24,
+        18.57,
+        78.71,
+        87.26
+      ],
+      "role": "shield-art",
+      "notes": "Orange plain shield visible."
+    },
+    {
+      "key": "Img_Showroom_Shield02",
+      "parent": "Btn_Showroom_EquippedSlot02",
+      "sourceRect": [
+        91,
+        124,
+        47,
+        51
+      ],
+      "globalRect551": [
+        170.55,
+        230.22,
+        88.09,
+        94.69
+      ],
+      "parentRelativeRect551": [
+        1.87,
+        9.28,
+        88.09,
+        94.69
+      ],
+      "role": "shield-art",
+      "notes": "Pirate shield visible; existing Main pirate-shield art can be reviewed for reuse, not automatically registered here."
+    },
+    {
+      "key": "Badge_Showroom_Selected",
+      "parent": "Btn_Showroom_EquippedSlot02",
+      "sourceRect": [
+        104,
+        172,
+        23,
+        21
+      ],
+      "globalRect551": [
+        194.91,
+        319.34,
+        43.11,
+        38.99
+      ],
+      "parentRelativeRect551": [
+        26.24,
+        98.4,
+        43.11,
+        38.99
+      ],
+      "role": "selection-check",
+      "notes": "Green/white check on the second of four display positions; selection API/state change not verified."
+    },
+    {
+      "key": "Viewport_Showroom_Shelves",
+      "parent": "Group_Showroom_Cabinet",
+      "sourceRect": [
+        23,
+        202,
+        247,
+        251
+      ],
+      "globalRect551": [
+        43.11,
+        375.03,
+        462.91,
+        466.01
+      ],
+      "parentRelativeRect551": [
+        43.11,
+        363.89,
+        462.91,
+        466.01
+      ],
+      "role": "shelf-viewport",
+      "notes": "Only visible area measured. Scroll behavior is unobserved; clip-only is a screenshot-matching proposal."
+    },
+    {
+      "key": "Group_Showroom_Shelf01",
+      "parent": "Viewport_Showroom_Shelves",
+      "sourceRect": [
+        24,
+        202,
+        243,
+        89
+      ],
+      "globalRect551": [
+        44.98,
+        375.03,
+        455.42,
+        165.24
+      ],
+      "parentRelativeRect551": [
+        1.87,
+        0.0,
+        455.42,
+        165.24
+      ],
+      "role": "shelf-row-visible",
+      "notes": "Bright open-looking cabinet."
+    },
+    {
+      "key": "Group_Showroom_Shelf01_Frame",
+      "parent": "Group_Showroom_Shelf01",
+      "sourceRect": [
+        24,
+        202,
+        243,
+        89
+      ],
+      "globalRect551": [
+        44.98,
+        375.03,
+        455.42,
+        165.24
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        455.42,
+        165.24
+      ],
+      "role": "separate-cabinet-frame"
+    },
+    {
+      "key": "Group_Showroom_Shelf02",
+      "parent": "Viewport_Showroom_Shelves",
+      "sourceRect": [
+        24,
+        292,
+        243,
+        89
+      ],
+      "globalRect551": [
+        44.98,
+        542.13,
+        455.42,
+        165.24
+      ],
+      "parentRelativeRect551": [
+        1.87,
+        167.09,
+        455.42,
+        165.24
+      ],
+      "role": "shelf-row-visible",
+      "notes": "Muted/darker glass-looking cabinet; do not infer ownership, unlock price or disabled game policy."
+    },
+    {
+      "key": "Group_Showroom_Shelf02_Frame",
+      "parent": "Group_Showroom_Shelf02",
+      "sourceRect": [
+        24,
+        292,
+        243,
+        89
+      ],
+      "globalRect551": [
+        44.98,
+        542.13,
+        455.42,
+        165.24
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        455.42,
+        165.24
+      ],
+      "role": "separate-cabinet-frame"
+    },
+    {
+      "key": "Group_Showroom_Shelf03",
+      "parent": "Viewport_Showroom_Shelves",
+      "sourceRect": [
+        24,
+        382,
+        243,
+        71
+      ],
+      "globalRect551": [
+        44.98,
+        709.22,
+        455.42,
+        131.82
+      ],
+      "parentRelativeRect551": [
+        1.87,
+        334.19,
+        455.42,
+        131.82
+      ],
+      "role": "shelf-row-visible",
+      "notes": "Muted/darker glass-looking cabinet; do not infer ownership, unlock price or disabled game policy. Third row bottom is occluded by tab bar; full row90px is a repeated-template proposal only."
+    },
+    {
+      "key": "Group_Showroom_Shelf03_Frame",
+      "parent": "Group_Showroom_Shelf03",
+      "sourceRect": [
+        24,
+        382,
+        243,
+        71
+      ],
+      "globalRect551": [
+        44.98,
+        709.22,
+        455.42,
+        131.82
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        455.42,
+        131.82
+      ],
+      "role": "separate-cabinet-frame"
+    },
+    {
+      "key": "Img_Showroom_Shelf01_Cash",
+      "parent": "Group_Showroom_Shelf01",
+      "sourceRect": [
+        35,
+        229,
+        89,
+        51
+      ],
+      "globalRect551": [
+        65.6,
+        425.16,
+        166.8,
+        94.69
+      ],
+      "parentRelativeRect551": [
+        20.62,
+        50.13,
+        166.8,
+        94.69
+      ],
+      "role": "art"
+    },
+    {
+      "key": "Img_Showroom_Shelf01_Dice",
+      "parent": "Group_Showroom_Shelf01",
+      "sourceRect": [
+        197,
+        224,
+        47,
+        58
+      ],
+      "globalRect551": [
+        369.21,
+        415.88,
+        88.09,
+        107.68
+      ],
+      "parentRelativeRect551": [
+        324.23,
+        40.85,
+        88.09,
+        107.68
+      ],
+      "role": "art"
+    },
+    {
+      "key": "Img_Showroom_Shelf01_Seal",
+      "parent": "Group_Showroom_Shelf01",
+      "sourceRect": [
+        124,
+        225,
+        44,
+        52
+      ],
+      "globalRect551": [
+        232.39,
+        417.74,
+        82.46,
+        96.54
+      ],
+      "parentRelativeRect551": [
+        187.41,
+        42.7,
+        82.46,
+        96.54
+      ],
+      "role": "gold-emblem-art"
+    },
+    {
+      "key": "Img_Showroom_Shelf02_Cash",
+      "parent": "Group_Showroom_Shelf02",
+      "sourceRect": [
+        36,
+        319,
+        63,
+        50
+      ],
+      "globalRect551": [
+        67.47,
+        592.26,
+        118.07,
+        92.83
+      ],
+      "parentRelativeRect551": [
+        22.49,
+        50.13,
+        118.07,
+        92.83
+      ],
+      "role": "art"
+    },
+    {
+      "key": "Img_Showroom_Shelf02_Dice",
+      "parent": "Group_Showroom_Shelf02",
+      "sourceRect": [
+        72,
+        316,
+        50,
+        53
+      ],
+      "globalRect551": [
+        134.94,
+        586.69,
+        93.71,
+        98.4
+      ],
+      "parentRelativeRect551": [
+        89.96,
+        44.56,
+        93.71,
+        98.4
+      ],
+      "role": "art"
+    },
+    {
+      "key": "Img_Showroom_Shelf02_Gift",
+      "parent": "Group_Showroom_Shelf02",
+      "sourceRect": [
+        172,
+        313,
+        78,
+        58
+      ],
+      "globalRect551": [
+        322.35,
+        581.12,
+        146.18,
+        107.68
+      ],
+      "parentRelativeRect551": [
+        277.37,
+        38.99,
+        146.18,
+        107.68
+      ],
+      "role": "art"
+    },
+    {
+      "key": "Img_Showroom_Shelf02_Seal",
+      "parent": "Group_Showroom_Shelf02",
+      "sourceRect": [
+        123,
+        314,
+        45,
+        51
+      ],
+      "globalRect551": [
+        230.52,
+        582.97,
+        84.34,
+        94.69
+      ],
+      "parentRelativeRect551": [
+        185.54,
+        40.85,
+        84.34,
+        94.69
+      ],
+      "role": "grey-emblem-art"
+    },
+    {
+      "key": "Img_Showroom_Shelf03_Cash",
+      "parent": "Group_Showroom_Shelf03",
+      "sourceRect": [
+        35,
+        407,
+        66,
+        45
+      ],
+      "globalRect551": [
+        65.6,
+        755.64,
+        123.69,
+        83.55
+      ],
+      "parentRelativeRect551": [
+        20.62,
+        46.42,
+        123.69,
+        83.55
+      ],
+      "role": "art"
+    },
+    {
+      "key": "Img_Showroom_Shelf03_Dice",
+      "parent": "Group_Showroom_Shelf03",
+      "sourceRect": [
+        91,
+        430,
+        27,
+        22
+      ],
+      "globalRect551": [
+        170.55,
+        798.34,
+        50.6,
+        40.85
+      ],
+      "parentRelativeRect551": [
+        125.57,
+        89.12,
+        50.6,
+        40.85
+      ],
+      "role": "art"
+    },
+    {
+      "key": "Img_Showroom_Shelf03_Cards",
+      "parent": "Group_Showroom_Shelf03",
+      "sourceRect": [
+        172,
+        396,
+        79,
+        57
+      ],
+      "globalRect551": [
+        322.35,
+        735.22,
+        148.06,
+        105.83
+      ],
+      "parentRelativeRect551": [
+        277.37,
+        25.99,
+        148.06,
+        105.83
+      ],
+      "role": "art"
+    },
+    {
+      "key": "Img_Showroom_Shelf03_Seal",
+      "parent": "Group_Showroom_Shelf03",
+      "sourceRect": [
+        123,
+        403,
+        45,
+        49
+      ],
+      "globalRect551": [
+        230.52,
+        748.21,
+        84.34,
+        90.97
+      ],
+      "parentRelativeRect551": [
+        185.54,
+        38.99,
+        84.34,
+        90.97
+      ],
+      "role": "grey-emblem-art"
+    },
+    {
+      "key": "Group_Showroom_CategoryTabs",
+      "parent": "root",
+      "sourceRect": [
+        0,
+        453,
+        294,
+        38
+      ],
+      "globalRect551": [
+        0.0,
+        841.04,
+        551.0,
+        70.55
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        841.04,
+        551.0,
+        70.55
+      ],
+      "role": "four-native-input-tabs",
+      "notes": "Only icon tabs are visible; no category label text observed. Tab04 badge overlaps3px above this visual bar."
+    },
+    {
+      "key": "Btn_Showroom_Category01",
+      "parent": "Group_Showroom_CategoryTabs",
+      "sourceRect": [
+        32,
+        453,
+        56,
+        35
+      ],
+      "globalRect551": [
+        59.97,
+        841.04,
+        104.95,
+        64.98
+      ],
+      "parentRelativeRect551": [
+        59.97,
+        0.0,
+        104.95,
+        64.98
+      ],
+      "role": "native-input-wrapper",
+      "notes": "Selected gold tab2; other three contents unknown. Internal category numbers are production names, not source labels."
+    },
+    {
+      "key": "Btn_Showroom_Category01_Icon",
+      "parent": "Btn_Showroom_Category01",
+      "sourceRect": [
+        39,
+        454,
+        42,
+        25
+      ],
+      "globalRect551": [
+        73.09,
+        842.9,
+        78.71,
+        46.42
+      ],
+      "parentRelativeRect551": [
+        13.12,
+        1.86,
+        78.71,
+        46.42
+      ],
+      "role": "art-viewport"
+    },
+    {
+      "key": "Btn_Showroom_Category02",
+      "parent": "Group_Showroom_CategoryTabs",
+      "sourceRect": [
+        89,
+        453,
+        56,
+        35
+      ],
+      "globalRect551": [
+        166.8,
+        841.04,
+        104.95,
+        64.98
+      ],
+      "parentRelativeRect551": [
+        166.8,
+        0.0,
+        104.95,
+        64.98
+      ],
+      "role": "native-input-wrapper",
+      "notes": "Selected gold tab2; other three contents unknown. Internal category numbers are production names, not source labels."
+    },
+    {
+      "key": "Btn_Showroom_Category02_Icon",
+      "parent": "Btn_Showroom_Category02",
+      "sourceRect": [
+        96,
+        454,
+        42,
+        25
+      ],
+      "globalRect551": [
+        179.92,
+        842.9,
+        78.71,
+        46.42
+      ],
+      "parentRelativeRect551": [
+        13.12,
+        1.86,
+        78.71,
+        46.42
+      ],
+      "role": "art-viewport"
+    },
+    {
+      "key": "Btn_Showroom_Category03",
+      "parent": "Group_Showroom_CategoryTabs",
+      "sourceRect": [
+        146,
+        453,
+        56,
+        35
+      ],
+      "globalRect551": [
+        273.63,
+        841.04,
+        104.95,
+        64.98
+      ],
+      "parentRelativeRect551": [
+        273.63,
+        0.0,
+        104.95,
+        64.98
+      ],
+      "role": "native-input-wrapper",
+      "notes": "Selected gold tab2; other three contents unknown. Internal category numbers are production names, not source labels."
+    },
+    {
+      "key": "Btn_Showroom_Category03_Icon",
+      "parent": "Btn_Showroom_Category03",
+      "sourceRect": [
+        153,
+        454,
+        42,
+        25
+      ],
+      "globalRect551": [
+        286.74,
+        842.9,
+        78.71,
+        46.42
+      ],
+      "parentRelativeRect551": [
+        13.12,
+        1.86,
+        78.71,
+        46.42
+      ],
+      "role": "art-viewport"
+    },
+    {
+      "key": "Btn_Showroom_Category04",
+      "parent": "Group_Showroom_CategoryTabs",
+      "sourceRect": [
+        203,
+        453,
+        56,
+        35
+      ],
+      "globalRect551": [
+        380.45,
+        841.04,
+        104.95,
+        64.98
+      ],
+      "parentRelativeRect551": [
+        380.45,
+        0.0,
+        104.95,
+        64.98
+      ],
+      "role": "native-input-wrapper",
+      "notes": "Selected gold tab2; other three contents unknown. Internal category numbers are production names, not source labels."
+    },
+    {
+      "key": "Btn_Showroom_Category04_Icon",
+      "parent": "Btn_Showroom_Category04",
+      "sourceRect": [
+        210,
+        454,
+        42,
+        25
+      ],
+      "globalRect551": [
+        393.57,
+        842.9,
+        78.71,
+        46.42
+      ],
+      "parentRelativeRect551": [
+        13.12,
+        1.86,
+        78.71,
+        46.42
+      ],
+      "role": "art-viewport"
+    },
+    {
+      "key": "Badge_Showroom_Category04",
+      "parent": "Group_Showroom_CategoryTabs",
+      "sourceRect": [
+        239,
+        450,
+        9,
+        9
+      ],
+      "globalRect551": [
+        447.92,
+        835.47,
+        16.87,
+        16.71
+      ],
+      "parentRelativeRect551": [
+        447.92,
+        -5.57,
+        16.87,
+        16.71
+      ],
+      "role": "compound-notification-dot",
+      "notes": "Red core7×7 at240,451; ring/bbox9² measured. No numeric count observed."
+    },
+    {
+      "key": "Footer_Showroom_CloseStrip",
+      "parent": "root",
+      "sourceRect": [
+        0,
+        491,
+        294,
+        39
+      ],
+      "globalRect551": [
+        0.0,
+        911.59,
+        551.0,
+        72.41
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        911.59,
+        551.0,
+        72.41
+      ],
+      "role": "fixed-footer"
+    },
+    {
+      "key": "Line_Showroom_Footer",
+      "parent": "Footer_Showroom_CloseStrip",
+      "sourceRect": [
+        0,
+        491,
+        294,
+        3
+      ],
+      "globalRect551": [
+        0.0,
+        911.59,
+        551.0,
+        5.57
+      ],
+      "parentRelativeRect551": [
+        0.0,
+        0.0,
+        551.0,
+        5.57
+      ],
+      "role": "top-divider"
+    },
+    {
+      "key": "Txt_Showroom_Close",
+      "parent": "Footer_Showroom_CloseStrip",
+      "sourceRect": [
+        138,
+        503,
+        14,
+        15
+      ],
+      "globalRect551": [
+        258.63,
+        933.87,
+        26.24,
+        27.85
+      ],
+      "parentRelativeRect551": [
+        258.63,
+        22.28,
+        26.24,
+        27.85
+      ],
+      "role": "native-close-glyph",
+      "observedText": "×",
+      "notes": "Native × is a proposed replacement for the observed cross silhouette."
+    }
+  ],
+  "planRead": "docs/plans/20261116-ten-screen-assembly.md:109-116",
+  "observations": {
+    "nativeText": [
+      "SHIELDS",
+      "2",
+      "i"
+    ],
+    "displayPositions": 4,
+    "visibleShieldArt": 2,
+    "selectedPosition": 2,
+    "emptyDisplayPositions": [
+      3,
+      4
+    ],
+    "visibleShelfRows": 3,
+    "shelfRow3": "Partial bottom; no hidden items invented.",
+    "rowArt": [
+      "Cash stacks + dice + gold medallion",
+      "Cash stacks + dice + gift + grey medallion",
+      "Cash stacks + small dice + orange collectible-card shapes + grey medallion; partially occluded"
+    ],
+    "tabArt": [
+      "beige top hat",
+      "gold shield-like selected icon",
+      "beige die",
+      "beige circular emblem"
+    ],
+    "selectedTab": 2,
+    "redDotTab": 4,
+    "tabLabels": "None visible; do not invent original category names.",
+    "otherThreeTabContents": "unobserved",
+    "row2and3Policy": "Muted/darker appearance observed; locked/unowned/disabled policy unknown."
+  },
+  "existingTrigger": {
+    "screenId": "main",
+    "id": "group-41e56a24-ea67-4991-9af8-3cb43c446a11",
+    "name": "Btn_HUD_Shields",
+    "authoredRect551": [
+      376,
+      37,
+      88,
+      36
+    ],
+    "preserveId": true
+  },
+  "proposedModel": {
+    "kind": "page",
+    "logicalSize": [
+      551,
+      984
+    ],
+    "actualNewTargetId": null,
+    "navigation": "Main Shields or Menu MY SHOWROOM→navigate this page; Close→back toMain. No drawer auto-reopen policy inferred.",
+    "tabs": "Native four inputs with second selected. Other three can have explicitly blank unobserved panels if needed; no category content/API invented.",
+    "shelfTemplate": "Repeated row90 source px is a production proposal; third row visible71px only. Clip viewport251px is observed-area matching, not proof of source scrolling.",
+    "tabProductionProposal": "To contain the dot, outer input/group can begin sourceY450/H41 while visual bar remainsY453/H38; preserve screenshot overlap explicitly.",
+    "footerProductionProposal": "Bottom-anchored551×72.4 with own44² Close hit area centered; native × glyph separate.",
+    "fullscreenRootSupport": "Sheet/fullscreen-root opt-in is documented by parent; this page measurement does not claim sheet runtime validation."
+  },
+  "proposedStyles": {
+    "title": {
+      "fontSize": 40,
+      "weight": 900,
+      "lineHeight": 46,
+      "align": "center",
+      "color": "#fcf7f2",
+      "strokeWidth": 2,
+      "strokeColor": "#9a8c7a",
+      "note": "Native font substitute; source font unidentified."
+    },
+    "counter": {
+      "fontSize": 17,
+      "weight": 600,
+      "lineHeight": 20,
+      "align": "center",
+      "color": "#ffffff",
+      "backgroundApprox": "#b0a5a1"
+    },
+    "info": {
+      "fontSize": 21,
+      "weight": 800,
+      "lineHeight": 25,
+      "align": "center",
+      "color": "#ffffff"
+    },
+    "tabs": {
+      "normalApprox": "#b5a592",
+      "selectedApprox": "#ffcc23",
+      "state": "Second gold; no source hover/pressed states observed."
+    },
+    "mutedRows": {
+      "observed": "Lower two rows darker/grey seals",
+      "proposedOverlay": "rgba(60,55,67,.28)",
+      "exactTintOpacity": "unknown",
+      "doNotInfer": [
+        "unlock conditions",
+        "ownership",
+        "price",
+        "disabled input policy"
+      ]
+    },
+    "buttonState": {
+      "enabled": true,
+      "mode": "tint",
+      "targetGraphic": "own tab or display art child",
+      "normal": "#ffffff",
+      "hover": "#f2f2f2",
+      "pressed": "#bdbdbd",
+      "disabled": "#999999",
+      "note": "Production interaction proposal only."
+    },
+    "close": {
+      "nativeGlyph": "×",
+      "fontSize": 32,
+      "weight": 700,
+      "lineHeight": 44,
+      "inputSize": [
+        44,
+        44
+      ],
+      "color": "#b6b3aa"
+    }
+  },
+  "assemblyOrder": [
+    "Create new page target, preserving Main shield trigger ID; separate fixed-ratio header arch/art, cabinet frames and nativeSHIELDS/counter2/info.",
+    "Four equal display slots→two shield arts→second-slot separate green check→three cabinet rows with separate frame/art/seal/muted overlay. Preserve partial third-row boundary.",
+    "Separate native four tabs with second selected and fourth red dot; other three contents remain blank/unobserved. FooterClose separate from tabs.",
+    "Only after actual target creation connect Main/Showroom→page and back; save/reopen and390/430/1440 keyboard/tab/check/clip/focus actual verification remain pending."
+  ],
+  "limitations": [
+    "Static observation only; no asset creation/import, UI editing, source or browser checks.",
+    "Actual source filename07_shields.png; output worksheet is namedwarehouse07 by delegated task.",
+    "Only second category is observed. Scroll, info, equip API, unlock/ownership and other categories unknown.",
+    "Arch/cabinet/frame/art/native title/counter/check/tabs/footer must remain separate; no whole-screen screenshot texture."
+  ]
+}

@@ -1,0 +1,352 @@
+--- before/src/tools/uxStudio/controls.mjs
++++ after/src/tools/uxStudio/controls.mjs
+@@ -1,4 +1,6 @@
+ import { hiddenByMenu } from './menu-state.mjs';
++import {validateSkin,applySkin} from './skins.mjs';
++import {typographyStyles} from './parts.mjs';
+ 
+ export const CONTROL_TYPES = {
+     toggle: '토글', tabs: '탭', 'toggle-group': '선택 그룹', slider: '슬라이더', scrollbar: '스크롤바', dropdown: '드롭다운', input: '텍스트 입력'
+@@ -36,7 +38,7 @@
+ export function validateControl(control) {
+     if (control === undefined) return;
+     if (!control || typeof control !== 'object' || Array.isArray(control) || !Object.hasOwn(CONTROL_TYPES, control.type)) fail();
+-    const fields = ['type', 'value', 'defaultValue', 'disabled', 'readonly', ...(control.type === 'toggle' ? ['group'] : range(control.type) ? ['min', 'max', 'step', 'orientation'] : choices(control.type) ? ['options'] : ['maxLength', 'required', 'placeholder', 'validation'])];
++    const fields = ['type', 'value', 'defaultValue', 'disabled', 'readonly', ...(control.type === 'toggle' ? ['group'] : range(control.type) ? ['min', 'max', 'step', 'orientation'] : choices(control.type) ? ['options', ...(control.type === 'tabs' ? ['tabSkin'] : [])] : ['maxLength', 'required', 'placeholder', 'validation'])];
+     if (Object.keys(control).some(k => !fields.includes(k))) fail();
+     for (const key of ['disabled', 'readonly', 'required'])
+         if (control[key] !== undefined && typeof control[key] !== 'boolean') fail();
+@@ -48,9 +50,14 @@
+         if (!Array.isArray(control.options) || !control.options.length || control.options.length > 100) fail();
+         const seen = new Set();
+         for (const o of control.options) {
+-            if (!o || typeof o !== 'object' || Array.isArray(o) || Object.keys(o).some(k => !['value', 'label', 'disabled'].includes(k)) || typeof o.value !== 'string' || o.value.length > 256 || seen.has(o.value) || typeof o.label !== 'string' || o.label.length > 1000 || o.disabled !== undefined && typeof o.disabled !== 'boolean') fail();
++            if (!o || typeof o !== 'object' || Array.isArray(o) || Object.keys(o).some(k => !['value', 'label', 'disabled', ...(control.type === 'tabs' ? ['panelId'] : [])].includes(k)) || typeof o.value !== 'string' || o.value.length > 256 || seen.has(o.value) || typeof o.label !== 'string' || o.label.length > 1000 || o.disabled !== undefined && typeof o.disabled !== 'boolean') fail();
++            if (o.panelId !== undefined && (typeof o.panelId !== 'string' || !/^[\p{L}\p{N}_.:-]{1,128}$/u.test(o.panelId))) fail();
+             seen.add(o.value);
+         }
++    }
++    if (control.tabSkin !== undefined) {
++        validateSkin(control.tabSkin);
++        if (control.tabSkin.mode !== '3' || Object.keys(control.tabSkin.textures || {}).some(state => !['normal','selected'].includes(state))) fail();
+     }
+     if (control.type === 'input') {
+         if (control.maxLength !== undefined && (!Number.isSafeInteger(control.maxLength) || control.maxLength < 0 || control.maxLength > 10000) || control.placeholder !== undefined && (typeof control.placeholder !== 'string' || control.placeholder.length > 1000) || control.validation !== undefined && !['none', 'email', 'number'].includes(control.validation)) fail();
+@@ -59,12 +66,29 @@
+         if (Object.hasOwn(control, key)) assertValue(control, control[key]);
+ }
+ export function validateControlGroups(screen) {
++    const byId = new Map(screen.elements.map(e => [e.id,e])), panels = new Set();
++    for (const e of screen.elements.filter(e => e.control?.type === 'tabs')) {
++        const targets = e.control.options.map(o => o.panelId).filter(Boolean);
++        for (const id of targets) {
++            if (!byId.has(id) || panels.has(id) || isWithin(screen,e.id,id) || targets.some(other => other !== id && isWithin(screen,id,other))) throw Error('탭 본문은 같은 화면의 겹치지 않는 레이어로 지정하세요.');
++            panels.add(id);
++        }
++    }
+     const selected = new Set();
+     for (const e of screen.elements) {
+         if (e.control?.type !== 'toggle' || !e.control.group || !initialControlValue(e.control)) continue;
+         if (selected.has(e.control.group)) throw Error('컨트롤 그룹의 초기 선택은 하나만 지정하세요.');
+         selected.add(e.control.group);
+     }
++}
++
++function isWithin(screen, id, ancestor) {
++    const byId = new Map(screen.elements.map(e => [e.id,e])), seen = new Set();
++    while (id && !seen.has(id)) { if (id === ancestor) return true; seen.add(id); id = byId.get(id)?.parentId; }
++    return false;
++}
++export function hiddenByTabs(screen, elementId, runtime = {}) {
++    return !!screen?.elements.some(e => e.control?.type === 'tabs' && e.control.options.some(o => o.panelId && o.value !== controlValue(screen,e,runtime) && isWithin(screen,elementId,o.panelId)));
+ }
+ 
+ export function controlInteractive(element) {
+@@ -110,8 +134,9 @@
+ const rootScopes = new WeakMap();
+ let scopeSequence = 0;
+ /** Reuses native fields. onChange(change, nativeEvent) may return the authoritative next runtime. */
+-export function attachControls(root, screen, runtime = {}, { mode = 'view', onChange, onInvalid } = {}) {
++export function attachControls(root, screen, runtime = {}, { mode = 'view', onChange, onInvalid, workspaceId = root._controlWorkspaceId, assetView = root._controlAssetView || 'art' } = {}) {
+     if (!rootScopes.has(root)) rootScopes.set(root, ++scopeSequence);
++    root._controlWorkspaceId = workspaceId; root._controlAssetView = assetView;
+     let count = 0;
+     const byId = new Map(screen.elements.map(e => [e.id, e]));
+     for (const node of root.querySelectorAll('.ui-element')) {
+@@ -132,12 +157,40 @@
+             box._controlKey = key;
+             node.append(box);
+         }
+-        box._context = { root, screen, runtime, element, mode, onChange, onInvalid };
++        box._context = { root, screen, runtime, element, mode, onChange, onInvalid, workspaceId, assetView };
+         syncNativeControl(box);
+         count++;
+     }
++    syncTabPanels(root,screen,runtime);
+     return count;
+ }
++function syncTabPanels(root,screen,runtime) {
++    const nodes = new Map([...root.querySelectorAll('.ui-element')].filter(n => n.dataset.screen === screen.id).map(n => [n.dataset.element,n]));
++    for (const node of nodes.values()) {
++        if (!node._tabPanelRestore) continue;
++        const restore = node._tabPanelRestore;
++        for (const [key,value] of Object.entries(restore.attributes)) value === null ? node.removeAttribute(key) : node.setAttribute(key,value);
++        node.style.display = restore.display; node.inert = restore.inert; delete node._tabPanelRestore;
++    }
++    for (const element of screen.elements.filter(e => e.control?.type === 'tabs')) {
++        const box = nodes.get(element.id)?.querySelector(':scope > .ui-control');
++        if (!box) continue;
++        for (const [index,option] of element.control.options.entries()) {
++            const field = box._fields[index], node = nodes.get(option.panelId);
++            if (!node) { field.removeAttribute('aria-controls'); continue; }
++            const prefix = 'ui-tabs-' + rootScopes.get(root) + '-' + screen.id + '-' + element.id;
++            const selected = option.value === controlValue(screen,element,runtime);
++            node._tabPanelRestore = {display:node.style.display || '',inert:!!node.inert,attributes:Object.fromEntries(['id','role','aria-hidden','aria-labelledby'].map(key => [key,node.getAttribute(key)]))};
++            field.setAttribute('id',prefix + '-tab-' + index);
++            node.setAttribute('id',prefix + '-panel-' + index);node.setAttribute('role','tabpanel');
++            node.setAttribute('aria-labelledby',field.getAttribute('id'));node.setAttribute('aria-hidden',String(!selected));
++            field.setAttribute('aria-controls',node.getAttribute('id'));
++            node.style.display = selected ? node._tabPanelRestore.display : 'none';node.inert = node._tabPanelRestore.inert || !selected;
++            if (!selected && node.contains(node.ownerDocument.activeElement)) box._fields.find(f => f.getAttribute('aria-selected') === 'true')?.focus();
++        }
++    }
++}
++
+ function createNativeControl(doc, element) {
+     const c = element.control, box = doc.createElement('div');
+     box.className = 'ui-control control-' + c.type;
+@@ -175,7 +228,7 @@
+             const field = make(c.type === 'tabs' ? 'button' : 'input', option);
+             if (c.type === 'tabs') {
+                 field.type = 'button'; field.textContent = option.label; field.setAttribute('role', 'tab');
+-                Object.assign(field.style, { flex: '1', minWidth: '0', height: '100%' });
++                Object.assign(field.style, { flex: '1 1 0px', minWidth: '0', height: '100%' });
+                 box.append(field);
+             } else {
+                 field.type = 'radio';
+@@ -200,7 +253,7 @@
+     return box;
+ }
+ function syncNativeControl(box) {
+-    const { element, screen, runtime, root, mode } = box._context, c = element.control, value = controlValue(screen, element, runtime), status = controlValidity(c, value);
++    const { element, screen, runtime, root, mode, workspaceId, assetView } = box._context, c = element.control, value = controlValue(screen, element, runtime), status = controlValidity(c, value);
+     const edit = mode === 'edit', disabled = edit || !!c.disabled || !!runtime.pending || element.interaction?.enabled === false || !!element.interaction?.mode && element.interaction.mode !== 'action';
+     box.style.pointerEvents = edit ? 'none' : '';
+     if (box._label) box._label.textContent = element.text || element.name;
+@@ -224,6 +277,10 @@
+             const selected = field.dataset.controlValue === value;
+             field.setAttribute('aria-selected', String(selected));
+             field.tabIndex = selected && !field.disabled ? 0 : -1;
++            const textStyle = typographyStyles(element); delete textStyle.width;
++            Object.assign(field.style,textStyle,{fontSize:(element.fontSize || 16) + 'px',color:element.appearance?.textColor || 'inherit'});
++            if (c.tabSkin || field.classList?.contains('game-skin')) {applySkin(field,c.tabSkin,{workspaceId,view:assetView,state:selected?'selected':'normal'});field.style.setProperty('--skin-text',element.appearance?.textColor || 'inherit');}
++            field.classList?.toggle('native-tab-skin',!!c.tabSkin);
+         } else if (field.value !== String(value)) field.value = String(value);
+         if (c.type === 'input') {
+             field.readOnly = !!c.readonly; field.maxLength = c.maxLength ?? 10000; field.required = !!c.required; field.placeholder = c.placeholder || '';
+@@ -235,7 +292,7 @@
+     event.stopPropagation();
+     const ctx = box._context, { element, screen, runtime, root } = ctx, c = element.control;
+     if (!root.contains(box)) return;
+-    if (ctx.mode === 'edit' || !controlInteractive(element) || field.disabled || runtime.pending || box.closest('[inert]') || hiddenByMenu(screen, element.id, runtime.menuOpen)) { syncNativeControl(box); return; }
++    if (ctx.mode === 'edit' || !controlInteractive(element) || field.disabled || runtime.pending || box.closest('[inert]') || hiddenByMenu(screen, element.id, runtime.menuOpen) || hiddenByTabs(screen,element.id,runtime)) { syncNativeControl(box); return; }
+     const value = c.type === 'toggle' ? field.checked : c.type === 'toggle-group' || c.type === 'tabs' ? field.dataset.controlValue : range(c.type) ? Number(field.value) : field.value;
+     try {
+         const result = updateControlValue(screen, runtime, element, value, eventType);
+--- before/src/tools/uxStudio/control-inspector.mjs
++++ after/src/tools/uxStudio/control-inspector.mjs
+@@ -1,4 +1,5 @@
+ import {createControl,validateControl} from './controls.mjs';
++import {createSkin,skinSource} from './skins.mjs';
+ 
+ const types=[['','표시·일반 버튼'],['toggle','토글'],['tabs','선택 탭'],['toggle-group','단일 선택 목록'],['slider','슬라이더'],['scrollbar','스크롤바'],['dropdown','선택 상자'],['input','텍스트 입력']];
+ const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+@@ -22,24 +23,52 @@
+   if(!optionsType(c.type)||typeof raw!=='string')throw Error('선택 항목 형식 오류');
+   c.options=raw.split('\n').filter(line=>line.trim()).map(line=>{
+    const split=line.indexOf('|');const value=(split<0?line:line.slice(0,split)).trim();
+-   return {value,label:(split<0?line:line.slice(split+1)).trim()};
++   const previous=c.options.find(o=>o.value===value);
++   return {...previous,value,label:(split<0?line:line.slice(split+1)).trim()};
+   });
+   if(!c.options.some(o=>o.value===c.value&&!o.disabled))c.value=c.options.find(o=>!o.disabled)?.value??'';
++ }else if(field.startsWith('panel.')&&c.type==='tabs'){
++  const option=c.options.find(o=>o.value===field.slice(6));if(!option)throw Error('탭 항목을 확인하세요.');
++  if(raw)option.panelId=raw;else delete option.panelId;
++ }else if(field==='tabSkin.enabled'&&c.type==='tabs'){
++  if(typeof raw!=='boolean')throw Error('켜짐·꺼짐 값을 확인하세요.');
++  if(raw)c.tabSkin={...createSkin('button'),padding:[0,0,0,0]};else delete c.tabSkin;
++ }else if(/^tabSkin\.(slices|edges)\.[13]$/.test(field)&&c.type==='tabs'&&c.tabSkin){
++  const [,key,index]=field.split('.');if(String(raw).trim()==='')throw Error('숫자 값을 입력하세요.');c.tabSkin[key][Number(index)]=Number(raw);
+  }else if(['group','orientation','placeholder','validation'].includes(field))c[field]=raw;
+  else throw Error('지원하지 않는 입력 속성입니다.');
+  validateControl(c);return result;
+ }
+ 
+-export function controlInspectorHTML(element){
++export function applyTabTexture(element,state,texture){
++ if(element.control?.type!=='tabs'||!['normal','selected'].includes(state))throw Error('탭 이미지 상태를 확인하세요.');
++ const result=structuredClone(element),c=result.control;
++ c.tabSkin ||= {...createSkin('button'),padding:[0,0,0,0]};
++ c.tabSkin.textures={...c.tabSkin.textures,[state]:texture};validateControl(c);return result;
++}
++
++export function controlInspectorHTML(element,screen={elements:[]}){
+  const c=element.control;
+- const field=(label,key,value,type='text',attrs='')=>`<label>${label}<input data-control-field="${key}" type="${type}" value="${esc(value)}" ${attrs}></label>`;
+- const check=(label,key,value)=>`<label class="inline"><input data-control-field="${key}" type="checkbox" ${value?'checked':''}>${label}</label>`;
+- const select=(label,key,value,choices)=>`<label>${label}<select data-control-field="${key}">${choices.map(([v,n])=>`<option value="${esc(v)}" ${v===value?'selected':''}>${n}</option>`).join('')}</select></label>`;
++ const field=(label,key,value,type='text',attrs='')=>`<label>${label}<input data-control-field="${esc(key)}" type="${type}" value="${esc(value)}" ${attrs}></label>`;
++ const check=(label,key,value)=>`<label class="inline"><input data-control-field="${esc(key)}" type="checkbox" ${value?'checked':''}>${label}</label>`;
++ const select=(label,key,value,choices)=>`<label>${esc(label)}<select data-control-field="${esc(key)}">${choices.map(([v,n])=>`<option value="${esc(v)}" ${v===value?'selected':''}>${esc(n)}</option>`).join('')}</select></label>`;
+  let body=select('입력 종류','type',c?.type||'',types);
+  if(c){
+   const value=c.value??c.defaultValue;
+   body+=numericType(c.type)?`<div class="field-grid">${field('최소값','min',c.min,'number')}${field('최대값','max',c.max,'number')}${field('간격','step',c.step,'number','step="any"')}${field('기본값','value',value,'number','step="any"')}</div>`:c.type==='toggle'?check('기본 켜짐','value',value):field('기본값','value',value);
+   if(optionsType(c.type))body+=`<label>선택 항목 · 한 줄에 값 | 표시 이름<textarea data-control-field="options" rows="4">${esc(c.options.map(o=>o.value+' | '+o.label).join('\n'))}</textarea></label>`;
++  if(c.type==='tabs'){
++   const layers=screen.elements.filter(e=>e.id!==element.id);
++   body+=c.options.map(o=>select(o.label+' · 본문','panel.'+o.value,o.panelId||'',[['','연결 안 함'],...layers.map(e=>[e.id,e.name+' · '+e.id])])).join('');
++   body+=check('탭 프레임 · 3슬라이스','tabSkin.enabled',!!c.tabSkin);
++   if(c.tabSkin){
++    body+='<div class="field-grid">'+[1,3].map(i=>field('분할 '+(i===1?'우':'좌'),'tabSkin.slices.'+i,c.tabSkin.slices[i],'number','min="0" max="96"')+field('고정폭 '+(i===1?'우':'좌'),'tabSkin.edges.'+i,c.tabSkin.edges[i],'number','min="0" max="96"')).join('')+'</div>';
++    for(const state of ['normal','selected']){
++     const image=skinSource(c.tabSkin,state);
++     body+=`<label>${state==='normal'?'기본':'선택'} 프레임 · 원본 ${image.w}×${image.h}px<input data-tab-project-image="${state}" placeholder="프로젝트 이미지 경로" value=""><input type="file" data-tab-image="${state}" accept="image/png,image/jpeg,image/webp"></label>`;
++    }
++   }
++  }
+   if(numericType(c.type))body+=select('방향','orientation',c.orientation||'horizontal',[['horizontal','가로'],['vertical','세로']]);
+   if(c.type==='toggle')body+=field('단일 선택 그룹 · 비우면 독립','group',c.group||'');
+   if(c.type==='input')body+=field('안내 문구','placeholder',c.placeholder||'')+field('최대 글자 수','maxLength',c.maxLength??1000,'number','min="1"')+select('입력 검사','validation',c.validation||'none',[['none','검사 없음'],['email','이메일'],['number','숫자']])+check('필수 입력','required',c.required);
+--- before/src/tools/uxStudio/layout-view.mjs
++++ after/src/tools/uxStudio/layout-view.mjs
+@@ -273,7 +273,7 @@
+         painted.splice(from, 1); painted.splice(index, 0, node);
+     }
+     if (parentId === null) {
+-        attachControls(container, screen, {}, {mode:'edit'});
++        attachControls(container, screen, runtime, {mode:'edit',workspaceId,assetView});
+         attachButtonStates(container,screen,runtime,{mode,assetView,transitions,shell,preview:buttonPreview,previewElement:buttonElement,renderGraphic:(node,element,image)=>renderImagePart(node,{...element,image},assetView,false,workspaceId)});
+     }
+ }
+--- before/src/tools/uxStudio/main.mjs
++++ after/src/tools/uxStudio/main.mjs
+@@ -7,7 +7,7 @@
+ import {projectContext} from './project-context.mjs';
+ import {assetSource, assetUrl} from './asset-reference.mjs';
+ import {uploadImageAsset, copyDocumentAssets} from './asset-client.mjs';
+-import {applyControlConfig,controlInspectorHTML} from './control-inspector.mjs';
++import {applyControlConfig,controlInspectorHTML,applyTabTexture} from './control-inspector.mjs';
+ import {createNotification} from './notification.mjs';
+ // Canonical source: independent UI스튜디오 project.
+ import { scopeURL, scopedKey, emptyDesign, openProjectManager } from './project-manager.mjs';
+@@ -248,7 +248,7 @@
+     copied.revision = 0;
+     copied.name += ' · 사본';
+     validateDocument(copied);
+-    const hasAssets = copied.screens.some(screen => Object.values(screen.skin?.textures || {}).some(t => t.assetRef) || screen.elements.some(element => element.image?.assetRef || Object.values(element.buttonState?.images || {}).some(t=>t.assetRef) || Object.values(element.skin?.textures || {}).some(t => t.assetRef)));
++    const hasAssets = copied.screens.some(screen => Object.values(screen.skin?.textures || {}).some(t => t.assetRef) || screen.elements.some(element => element.image?.assetRef || Object.values(element.buttonState?.images || {}).some(t=>t.assetRef) || Object.values(element.control?.tabSkin?.textures || {}).some(t=>t.assetRef) || Object.values(element.skin?.textures || {}).some(t => t.assetRef)));
+     if (hasAssets) await copyDocumentAssets(copied, workspaceId, targetWorkspaceId);
+     const result = await api('project', {
+         method: 'POST', headers: {'Content-Type': 'application/json'},
+@@ -428,7 +428,7 @@
+     return `<details class="typography-panel"><summary>텍스트 · 크기와 줄맞춤</summary>${field('텍스트 크기 px','fontSize',e.fontSize || 16,'number','min="1" max="256" step="0.1"')}${selectType('글꼴','family',[['system','시스템 UI'],['arial','Arial'],['georgia','Georgia'],['mono','고정폭']])}<p class="subtle">해당 글꼴이 없으면 대체 글꼴로 표시됩니다. 원본 게임의 폰트가 확인되었다는 뜻은 아닙니다.</p>${field('글자 굵기 1~1000','typography.weight',t.weight ?? '','number','min="1" max="1000" placeholder="기본 유지"')}${field('줄높이 px','typography.lineHeight',t.lineHeight ?? '','number','min="1" max="512" step="0.1" placeholder="기본 유지"')}${field('자간 px','typography.letterSpacing',t.letterSpacing ?? '','number','min="-10" max="64" step="0.1" placeholder="기본 유지"')}${field('글자 외곽선 두께 px','typography.strokeWidth',t.strokeWidth ?? '','number','min="0" max="12" step="0.1" placeholder="기본 유지"')}${field('글자 외곽선 색','typography.strokeColor',t.strokeColor || '#000000','color')}${selectType('글자 가로 정렬','align',[['left','왼쪽'],['center','가운데'],['right','오른쪽']])}${selectType('글자 세로 정렬','vertical',[['top','위'],['middle','가운데'],['bottom','아래']])}${selectType('글자 줄바꿈','wrap',[['wrap','여러 줄'],['nowrap','한 줄']])}${selectType('글자 넘침','overflow',[['visible','영역 밖 표시'],['clip','영역에서 자르기'],['ellipsis','한 줄 말줄임표']])}<p class="subtle">빈 값은 기존 기본값을 유지합니다. 말줄임표는 한 줄 모드에서 사용합니다. 수치는 캔버스 논리 px이며 편집 확대율과 별개입니다.</p></details>`;
+ }
+ function generalPanel(s, e) {
+-    return e ? `${partsPanel(s, e)}${controlInspectorHTML(e)}${field('요소 이름', 'name', e.name)}${e.binding ? `<div class="binding-note"><b>${e.binding.type === 'content-slot' ? '콘텐츠 영역 · ' + esc(e.binding.slot) : '게임 기능 · ' + esc(e.binding.label)}</b><p class="subtle">${e.binding.type === 'content-slot' ? '여기서는 자리 표시만 합니다. 게임 화면에서는 같은 영역에 실제 콘텐츠를 표시합니다.' : '기능 연결 정의입니다. 실제 게임 코드는 이 편집기에서 실행하지 않습니다.'}</p></div>` : ''}${e.skin ? '' : appearancePanel(e)}${select('UI 종류', 'kind', e.kind, Object.entries(kinds))}${textarea('어떤 기능인가요?', 'purpose', e.purpose)}${textarea('표시할 정보 / 설명', 'info', e.info)}${textarea('화면에 표시할 글', 'text', e.text)}${typographyPanel(e)}<div class="source-note"><b>가능한 행동</b>${doc.transitions.filter(t => t.fromElement === e.id).map(t => `<button data-edge="${esc(t.id)}">${esc(t.label || actionNames[t.action])} → ${esc(screenById(doc, t.targetScreen)?.name || actionNames[t.action])}</button>`).join('') || '<p>연결·조건 탭에서 행동을 추가하세요.</p>'}</div><details><summary>식별자 · 출처</summary><code>${esc(e.id)}</code><p>${esc(e.sourceRef || 'T04 첫 판 · 시험용 제안')}</p></details><button class="danger" data-action="delete-element">요소와 하위 요소 삭제</button>` : `${field('화면 이름', 'screen.name', s.name)}${textarea('이 화면은 무엇을 하나요?', 'screen.purpose', s.purpose)}<p class="subtle">화면 안의 요소를 선택하면 그 요소의 기능을 작성할 수 있습니다.</p>`;
++    return e ? `${partsPanel(s, e)}${controlInspectorHTML(e,s)}${field('요소 이름', 'name', e.name)}${e.binding ? `<div class="binding-note"><b>${e.binding.type === 'content-slot' ? '콘텐츠 영역 · ' + esc(e.binding.slot) : '게임 기능 · ' + esc(e.binding.label)}</b><p class="subtle">${e.binding.type === 'content-slot' ? '여기서는 자리 표시만 합니다. 게임 화면에서는 같은 영역에 실제 콘텐츠를 표시합니다.' : '기능 연결 정의입니다. 실제 게임 코드는 이 편집기에서 실행하지 않습니다.'}</p></div>` : ''}${e.skin ? '' : appearancePanel(e)}${select('UI 종류', 'kind', e.kind, Object.entries(kinds))}${textarea('어떤 기능인가요?', 'purpose', e.purpose)}${textarea('표시할 정보 / 설명', 'info', e.info)}${textarea('화면에 표시할 글', 'text', e.text)}${typographyPanel(e)}<div class="source-note"><b>가능한 행동</b>${doc.transitions.filter(t => t.fromElement === e.id).map(t => `<button data-edge="${esc(t.id)}">${esc(t.label || actionNames[t.action])} → ${esc(screenById(doc, t.targetScreen)?.name || actionNames[t.action])}</button>`).join('') || '<p>연결·조건 탭에서 행동을 추가하세요.</p>'}</div><details><summary>식별자 · 출처</summary><code>${esc(e.id)}</code><p>${esc(e.sourceRef || 'T04 첫 판 · 시험용 제안')}</p></details><button class="danger" data-action="delete-element">요소와 하위 요소 삭제</button>` : `${field('화면 이름', 'screen.name', s.name)}${textarea('이 화면은 무엇을 하나요?', 'screen.purpose', s.purpose)}<p class="subtle">화면 안의 요소를 선택하면 그 요소의 기능을 작성할 수 있습니다.</p>`;
+ }
+ function connectionPanel(s, e) {
+     if (!e)
+@@ -1591,6 +1591,30 @@
+         return;
+     }
+     const input = event.target;
++    if(input.matches('[data-tab-project-image]') || input.matches('[data-tab-image]') && input.files[0]){
++        const design=doc,screenId=selectedScreen,id=selectedElement,element=selection(),control=element?.control,state=input.dataset.tabProjectImage || input.dataset.tabImage;
++        if(mode!=='edit'||control?.type!=='tabs')return;
++        const current=()=>doc===design&&selectedScreen===screenId&&selectedElement===id&&mode==='edit'&&selection()===element&&element.control===control;
++        try{
++            let texture,asset;
++            if(input.matches('[data-tab-project-image]')){
++                const image=await importGuideImage({path:input.value.trim()},workspaceId);
++                texture={src:'',assetRef:image.assetRef,w:image.sourceSize[0],h:image.sourceSize[1]};
++            }else{
++                const src=await readImageFile(input.files[0]),image=new Image();image.src=src;await image.decode();
++                if(image.naturalWidth>4096||image.naturalHeight>4096)throw Error('프레임 이미지는4096px 이하입니다.');
++                if(!current())return;
++                asset=await uploadImageAsset(input.files[0],workspaceId);
++                if(asset.width!==image.naturalWidth||asset.height!==image.naturalHeight)throw Error('프레임 이미지 원본 크기가 다릅니다.');
++                texture={src:'',assetRef:asset.assetRef,w:asset.width,h:asset.height};
++            }
++            if(!current())return notify('선택 또는 설계가 바뀌어 탭 이미지 교체를 취소했습니다.');
++            const next=applyTabTexture(element,state,texture);
++            edited(()=>{element.control=next.control;});
++            if(asset)workspaceAssets=[...workspaceAssets.filter(item=>item.assetRef!==asset.assetRef),asset];
++        }catch(error){notify(error.message);}
++        return;
++    }
+     if(input.matches('[data-responsive-field]')){
+         const screen=screenById(doc,selectedScreen);
+         edited(()=>doc=applyResponsiveEdit(doc,selectedScreen,selection()?.id,input.dataset.responsiveField,input.type==='checkbox'?input.checked:input.value,rootSize(screen)));
+--- before/src/tools/uxStudio/styles.css
++++ after/src/tools/uxStudio/styles.css
+@@ -2481,7 +2481,7 @@
+   z-index: 7;
+ }
+ /* Shared image assembly: one border-image, not nine visual DOM fragments. */
+-.ui-element.game-skin,.preview-overlay.game-skin {
++.ui-element.game-skin,.preview-overlay.game-skin,.ui-control > .native-tab-skin {
+   border: 0 solid transparent!important;
+   border-image-source: var(--skin-source)!important;
+   border-image-slice: var(--skin-slices)!important;
+@@ -2651,3 +2651,10 @@
+ .studio-header .project-label{display:inline;font-size:13px;color:#b6c8d5}
+ 
+ .preview-project-context{font-size:12px;line-height:1.6;overflow-wrap:anywhere;color:#6a7d90;max-width:70vw}
++
++/* Native tabs share authored text and the existing frame-image contract. */
++.ui-control.control-tabs { gap: 0!important; padding: 0!important; }
++.ui-control.control-tabs > button { font: inherit; color: inherit; box-sizing: border-box; margin: 0; }
++.ui-control.control-tabs > button[aria-selected="true"]:not(.native-tab-skin) { box-shadow: inset 0 -3px 0 currentColor; }
++.ui-control.control-tabs > .native-tab-skin { border-radius: 0!important; outline: 0; }
++.ui-control.control-tabs > .native-tab-skin:focus-visible { outline: 2px solid #64717f; outline-offset: -2px; }
+--- before/src/tools/uxStudio/model.mjs
++++ after/src/tools/uxStudio/model.mjs
+@@ -6,7 +6,7 @@
+ import { validateMenu, menuIsOpen, hiddenByMenu } from './menu-state.mjs';
+ import { validateBinding, requestFromTransition } from './bindings.mjs';
+ import { validateAppearance, validatePresentation } from './units.mjs';
+-import { validateControl, validateControlGroups, createControlState, updateControlValue, controlInteractive } from './controls.mjs';
++import { validateControl, validateControlGroups, createControlState, updateControlValue, controlInteractive, hiddenByTabs } from './controls.mjs';
+ import {validateEffects} from './visual-effects.mjs';
+ import {validateNotification} from './notification.mjs';
+ import {validateButtonStates,createButtonSelections,toggleButtonSelection} from './button-state.mjs';
+@@ -204,7 +204,7 @@
+     const next = clone(r);
+     next.lastAction = null;
+     const screen = screenById(d, screenId), element = screen?.elements.find(e => e.id === elementId);
+-    if (!element?.control || !controlInteractive(element) || next.pending || hiddenByMenu(screen, elementId, next.menuOpen)) return next;
++    if (!element?.control || !controlInteractive(element) || next.pending || hiddenByMenu(screen, elementId, next.menuOpen) || hiddenByTabs(screen,elementId,next)) return next;
+     if (!canOverlayInput(d,next,screenId)) return next;
+     const result = updateControlValue(screen, next, element, value, event);
+     if (!result) return next;
+@@ -230,6 +230,7 @@
+ export function activate(d, r, screenId, elementId) {
+     const next = clone(r);
+     next.lastAction = null;
++    if (hiddenByTabs(screenById(d,screenId),elementId,next)) return next;
+     const owner = inputOwner(screenById(d, screenId), elementId, d.transitions);
+     if (!owner)
+         return next;
+--- before/src/tools/uxStudio/asset-reference.mjs
++++ after/src/tools/uxStudio/asset-reference.mjs
+@@ -33,6 +33,7 @@
+         for (const element of screen.elements || []) {
+             if (element.image) images.push(element.image);
+             images.push(...Object.values(element.skin?.textures || {}));
++            images.push(...Object.values(element.control?.tabSkin?.textures || {}));
+             images.push(...Object.values(element.buttonState?.images || {}));
+         }
+     }

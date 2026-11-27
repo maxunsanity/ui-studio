@@ -1,0 +1,115 @@
+--- a/src/tools/uxStudio/design-guide-view.mjs
++++ b/src/tools/uxStudio/design-guide-view.mjs
+@@ -1,5 +1,5 @@
+ import {buildDesignGuide} from './design-guides.mjs';
+-import {renderLayout} from './layout-view.mjs';
++import {PRESENTATION_MODES,normalizePresentationMode,renderPresentation} from './presentation.mjs';
+ import {isAutoLayoutChild} from './responsive-layout.mjs';
+ 
+ const NS = 'http://www.w3.org/2000/svg';
+@@ -66,7 +66,8 @@
+ ].join('\n') : '글자 설정 없음';
+ 
+ /** Guide edits flow through the caller's validated document and undo handling. */
+-export function openDesignGuide({document:design,screenId,elementId = null,workspaceId = null,size,onSelect,onEdit,onChange,onImportImage} = {}) {
++export function openDesignGuide({document:design,screenId,elementId = null,workspaceId = null,size,onSelect,onEdit,onChange,onImportImage,context = {},presentationMode = 'ui',onNavigate,onPreview,onPresentationChange} = {}) {
++    let presentation = normalizePresentationMode(presentationMode);
+     let snapshot = structuredClone(design);
+     let guide = buildDesignGuide(snapshot,screenId,elementId,size);
+     let screen = snapshot.screens.find(item => item.id === screenId);
+@@ -87,7 +88,7 @@
+ .ux-design-guide::backdrop{background:#102034aa}.ux-design-guide[open]{display:flex;flex-direction:column}
+ .ux-design-guide *{box-sizing:border-box}.ux-design-guide header{padding:14px 18px;display:flex;gap:12px;align-items:start;border-bottom:1px solid #d4dce7;flex:none}.ux-design-guide .dg-heading{min-width:0;flex:1}.ux-design-guide h2{font-size:17px;line-height:1.4;margin:0;overflow-wrap:anywhere}.ux-design-guide .dg-subtitle{margin:3px 0 0;color:#596b81;font-size:12px;overflow-wrap:anywhere}
+ .ux-design-guide button{font:inherit;background:#fff;color:inherit;border:1px solid #aab9ca;border-radius:6px;padding:6px 10px;cursor:pointer;min-height:32px;max-width:100%;overflow-wrap:anywhere}.ux-design-guide button:disabled{cursor:default;opacity:.45}.ux-design-guide button:focus-visible{outline:3px solid #3567bd;outline-offset:2px}.ux-design-guide button[aria-current=true]{background:#edf2fb;border-color:#3567bd;color:#244f9e;font-weight:600}
+-.ux-design-guide .dg-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 18px;border-bottom:1px solid #d4dce7;flex:none}.ux-design-guide .dg-breadcrumbs{display:flex;align-items:center;gap:6px;flex:1;flex-wrap:wrap;min-width:0}.ux-design-guide .dg-breadcrumbs button{font-size:12px}.ux-design-guide .dg-zoom{display:flex;align-items:center;gap:6px}.ux-design-guide .dg-scale{min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
++.ux-design-guide .dg-stage-toolbar{background:#edf3f8}.ux-design-guide .studio-stage-nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;flex:1;min-width:0}.ux-design-guide .studio-stage-nav button[aria-current=step]{background:#dce7fb;border-color:#3567bd;color:#244f9e;font-weight:600}.ux-design-guide .dg-stage-toolbar select{font:inherit;max-width:150px;padding:6px;border:1px solid #aab9ca;border-radius:5px;background:#fff;color:#253247}.ux-design-guide .dg-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 18px;border-bottom:1px solid #d4dce7;flex:none}.ux-design-guide .dg-breadcrumbs{display:flex;align-items:center;gap:6px;flex:1;flex-wrap:wrap;min-width:0}.ux-design-guide .dg-breadcrumbs button{font-size:12px}.ux-design-guide .dg-zoom{display:flex;align-items:center;gap:6px}.ux-design-guide .dg-scale{min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
+ .ux-design-guide .dg-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;min-height:0;flex:1}.ux-design-guide .dg-stage{position:relative;min-width:0;min-height:220px;background:#e8edf5}.ux-design-guide iframe{width:100%;height:100%;display:block;border:0}.ux-design-guide .dg-sidebar{padding:14px;min-width:0;overflow:auto;border-left:1px solid #d4dce7;background:#fff}.ux-design-guide h3{font-size:13px;margin:0 0 8px}.ux-design-guide .dg-summary{white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 14px;font:12px/1.7 ui-monospace,SFMono-Regular,monospace}.ux-design-guide .dg-children{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}.ux-design-guide .dg-children button{text-align:left;font-size:11px;min-height:26px;max-width:150px;padding:3px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ux-design-guide .dg-line-swatch{display:inline-block;width:14px;margin-right:5px;vertical-align:middle}.ux-design-guide .dg-line-fields{display:grid;grid-template-columns:1fr 58px 1fr;gap:6px}.ux-design-guide .dg-line-swatches{display:flex;gap:5px;flex-wrap:wrap}.ux-design-guide .dg-line-swatches button{font-size:11px;padding:3px 8px;min-height:26px}.ux-design-guide .dg-line-fields select{font:inherit;min-width:0;width:100%;padding:6px 3px;border:1px solid #aab9ca;border-radius:5px}.ux-design-guide .dg-note{margin:0;color:#5c6e84;font-size:12px;overflow-wrap:anywhere}
+ .ux-design-guide .dg-data{border-top:1px solid #d4dce7;max-height:35%;overflow:auto;background:#fff;flex:none}.ux-design-guide .dg-data>summary{cursor:pointer;padding:9px 14px;font-weight:600;background:#edf3f8}.ux-design-guide .dg-data>.dg-summary{padding:10px 14px;margin:0}.ux-design-guide .dg-note-details>summary{cursor:pointer;font-size:12px;color:#596b81}.ux-design-guide .dg-note-details p{padding-top:8px}.ux-design-guide table{width:100%;border-collapse:collapse;min-width:1060px;text-align:left;font-size:12px;font-variant-numeric:tabular-nums}.ux-design-guide caption{text-align:left;padding:9px 14px;font-weight:600}.ux-design-guide th,.ux-design-guide td{padding:8px 10px;border-top:1px solid #e2e8f0;vertical-align:top;white-space:pre-line;overflow-wrap:anywhere}.ux-design-guide th{background:#f0f4f9;position:sticky;top:0;z-index:1}.ux-design-guide td:first-child{min-width:150px;max-width:230px}.ux-design-guide .dg-metrics{min-width:128px}.ux-design-guide .dg-font{min-width:245px}.ux-design-guide .dg-dimensions{padding:10px 14px;display:flex;gap:8px 18px;flex-wrap:wrap;border-top:1px solid #e2e8f0}.ux-design-guide .dg-dimensions span{font-size:12px;color:#a12134}.ux-design-guide footer{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 18px;border-top:1px solid #d4dce7;flex:none}.ux-design-guide .dg-edit{background:#315fba;color:#fff;border-color:#315fba}
+ .ux-design-guide input,.ux-design-guide textarea{font:inherit;min-width:0;width:100%;padding:6px;border:1px solid #aab9ca;border-radius:5px;color:inherit;background:#fff}.ux-design-guide input:disabled,.ux-design-guide textarea:disabled{background:#edf0f4;color:#718096}.ux-design-guide .dg-editor{display:grid;gap:8px;margin:14px 0}.ux-design-guide .dg-editor h3{margin:8px 0 0}.ux-design-guide .dg-rect-fields{display:grid;grid-template-columns:1fr 1fr;gap:6px}.ux-design-guide .dg-editor label{display:grid;gap:3px;font-size:12px}.ux-design-guide .dg-editor label,.ux-design-guide .dg-option{color:#46566d}.ux-design-guide select,.ux-design-guide input,.ux-design-guide textarea{color:#253247;background:#fff}.ux-design-guide .dg-editor textarea{resize:vertical;min-height:54px}.ux-design-guide .dg-image-actions{display:flex;gap:6px;flex-wrap:wrap}.ux-design-guide .dg-error{color:#a71932;background:#fff0f3;border:1px solid #efb5c1;padding:8px;overflow-wrap:anywhere;margin:8px 0}.ux-design-guide .dg-option{display:flex;align-items:center;gap:5px;white-space:nowrap;font-size:12px}.ux-design-guide .dg-option input{width:auto}.ux-design-guide .dg-edit-hint{font-size:12px;color:#465a7a;margin:0}
+@@ -101,6 +102,32 @@
+     headingWrap.append(title,subtitle);
+     const close = action('닫기',() => dialog.close()); close.setAttribute('aria-label','디자인 가이드 닫기');
+     header.append(headingWrap,close);
++    const stageToolbar = make('div'); stageToolbar.className = 'dg-toolbar dg-stage-toolbar';
++    const stageNav = make('nav'); stageNav.className = 'studio-stage-nav'; stageNav.setAttribute('aria-label','제작 단계');
++    const navigationSelection = () => ({screenId,elementId:guide.unit.id,presentationMode:presentation});
++    for (const [index,stage,label] of [[0,'overview','전체 캔버스'],[1,'detail','상세 편집'],[2,'guide','디자인 가이드']]) {
++        if (index) stageNav.append(make('span','›'));
++        const pick = action(label,() => {
++            if (stage === 'guide') return;
++            const selection = {stage,...navigationSelection()};
++            dialog.close(); onNavigate?.(selection);
++        });
++        if (stage === 'guide') pick.setAttribute('aria-current','step');
++        else pick.disabled = typeof onNavigate !== 'function';
++        stageNav.append(pick);
++    }
++    const presentationLabel = make('label','표현'); presentationLabel.className = 'dg-option';
++    const presentationSelect = make('select'); presentationSelect.setAttribute('aria-label','표현');
++    for (const {id,label} of PRESENTATION_MODES) { const choice = make('option',label); choice.value = id; presentationSelect.append(choice); }
++    presentationSelect.value = presentation;
++    presentationSelect.addEventListener('change',() => {
++        presentation = normalizePresentationMode(presentationSelect.value); presentationSelect.value = presentation;
++        renderStage(); onPresentationChange?.(presentation);
++    });
++    presentationLabel.append(presentationSelect);
++    const preview = action('미리보기',() => { const selection = navigationSelection(); dialog.close(); onPreview?.(selection); });
++    preview.disabled = typeof onPreview !== 'function';
++    stageToolbar.append(stageNav,presentationLabel,preview);
+     const toolbar = make('div'); toolbar.className = 'dg-toolbar';
+     const breadcrumbs = make('nav'); breadcrumbs.className = 'dg-breadcrumbs'; breadcrumbs.setAttribute('aria-label','부모 부품 경로');
+     const zoomBar = make('div'); zoomBar.className = 'dg-zoom';
+@@ -204,7 +231,7 @@
+         if (guide.unit.id === null || typeof onEdit !== 'function') return;
+         const id = guide.unit.id; dialog.close(); onEdit(id);
+     }); edit.className = 'dg-edit';
+-    footer.append(status,edit); dialog.append(style,header,toolbar,body,data,footer);
++    footer.append(status,edit); dialog.append(style,header,stageToolbar,toolbar,body,data,footer);
+ 
+     let closed = false, zoom = 1, fitting = true, frameDocument, scroller, spacer, scene, host, overlay, drag = null, importRequest = 0, importBusy = false, lineColors = {...LINE_DEFAULTS};
+     const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { if (fitting) fitStage(); }) : null;
+@@ -276,6 +303,7 @@
+             if (!next || !Array.isArray(next.screens)) throw Error('편집 결과 문서를 받지 못했습니다.');
+             const copy = structuredClone(next), nextGuide = buildDesignGuide(copy,screenId,id,size);
+             snapshot = copy; screen = copy.screens.find(item => item.id === screenId); guide = nextGuide;
++            context = {...context,dirty:true};
+             errorBox.hidden = true; refresh(false);
+             status.textContent = '현재 설계에 반영했습니다. 저장은 편집기의 저장을 사용하세요.';
+             return true;
+@@ -298,9 +326,9 @@
+     }
+     function refresh(refit = true) {
+         dialog.dataset.element = guide.unit.id ?? '';
+-        title.textContent = '디자인 가이드 · ' + guide.unit.name;
++        title.textContent = (context.projectName || snapshot.name || 'UI 스튜디오') + ' · ' + guide.screen.name;
+         selectedTitle.textContent = guide.unit.name;
+-        subtitle.textContent = `${guide.screen.name} · 기준 ${number(guide.screen.width)} × ${number(guide.screen.height)} 논리 px · ${editable() ? '편집 가능' : '읽기 전용'}`;
++        subtitle.textContent = `${snapshot.name || '현재 설계'} · 디자인 가이드 · ${context.dirty ? '미저장 수정 포함 · ' : ''}기준 ${number(guide.screen.width)} × ${number(guide.screen.height)} 논리 px · ${editable() ? '편집 가능' : '읽기 전용'}`;
+         breadcrumbs.replaceChildren();
+         const trail = [{id:null,name:guide.screen.name},...guide.ancestors.filter(item => item.id !== null),...(guide.unit.id === null ? [] : [guide.unit])];
+         for (const [index,item] of trail.entries()) {
+@@ -335,11 +363,12 @@
+         if (closed || !doc?.body || frameDocument === doc) return;
+         frameDocument = doc;
+         const shared = doc.createElement('link'); shared.rel = 'stylesheet'; shared.href = '/ui-studio/source/styles.css';
++        const presentationStyle = doc.createElement('link'); presentationStyle.rel = 'stylesheet'; presentationStyle.href = '/ui-studio/source/presentation.css';
+         const local = doc.createElement('style'); local.textContent = `
+ html,body{margin:0!important;padding:0!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;overflow:hidden!important;background:#e8edf5!important}
+ .dg-scroller{width:100%;height:100%;overflow:auto;padding:0;background:repeating-conic-gradient(#e6e9ed 0 25%,#f2f4f7 0 50%) 0/16px 16px;overscroll-behavior:contain;touch-action:pan-x pan-y}.dg-spacer{position:relative;margin:0;min-width:100%;min-height:100%;overflow:hidden}.dg-scene{position:absolute;transform-origin:0 0;isolation:isolate}.dg-host{position:absolute;inset:0;background:transparent;box-shadow:none}.dg-host .ui-element{cursor:pointer!important}.dg-host .ui-element:focus-visible{outline:1px solid #2f66c8!important}.dg-host .component-role-badge,.dg-host .element-badge,.dg-host .selection-hatch{display:none!important}.dg-host .isolation-shell>:not(.ui-element):not(.layout-extent){display:none!important}.dg-overlay{position:absolute;inset:0;overflow:visible;pointer-events:none;z-index:2147483646}.dg-overlay .dg-boundary{fill:none;stroke:#d52c48;stroke-width:1.5;stroke-dasharray:6 4;vector-effect:non-scaling-stroke}.dg-overlay .dg-parent{stroke:#9b5261;stroke-dasharray:3 4}.dg-overlay .dg-child{stroke:#8a9baa;stroke-width:1;stroke-dasharray:3 4}.dg-overlay .dg-unit{stroke:#2f66c8;stroke-width:1.5}.dg-overlay .dg-handle{pointer-events:none;stroke-width:1.5;stroke-dasharray:none;vector-effect:non-scaling-stroke}.dg-overlay .dg-hit{pointer-events:stroke;stroke:transparent;stroke-width:12;stroke-dasharray:none;cursor:ew-resize;touch-action:none;vector-effect:non-scaling-stroke}.dg-overlay .dg-handle-y{cursor:ns-resize}.dg-overlay .dg-move{pointer-events:all;fill:#f6f8fb;stroke:#2f66c8;stroke-width:1;cursor:move;touch-action:none;vector-effect:non-scaling-stroke}.dg-overlay .dg-drag-ghost{fill:none;stroke:#2f66c8;stroke-width:1.5;stroke-dasharray:5 3;pointer-events:none;vector-effect:non-scaling-stroke}.dg-overlay line{stroke:#d52c48;stroke-width:1;stroke-dasharray:4 3;vector-effect:non-scaling-stroke}.dg-overlay text{fill:#b31835;font-family:Arial,sans-serif;font-weight:600;text-anchor:middle;dominant-baseline:central}.dg-overlay .dg-label-bg{fill:#fff;fill-opacity:.94;stroke:#e8b1bb;stroke-width:1;vector-effect:non-scaling-stroke}
+ `;
+-        doc.head.append(shared,local); doc.body.replaceChildren();
++        doc.head.append(shared,presentationStyle,local); doc.body.replaceChildren();
+         scroller = doc.createElement('div'); scroller.className = 'dg-scroller';
+         spacer = doc.createElement('div'); spacer.className = 'dg-spacer';
+         scene = doc.createElement('div'); scene.className = 'dg-scene';
+@@ -367,8 +396,8 @@
+     function renderStage() {
+         if (!host || closed) return;
+         const descendants = new Set(guide.elements.map(item => item.id)), ancestors = new Set(guide.ancestors.map(item => item.id));
+-        renderLayout(screen,host,{
+-            mode:'edit',assetView:'art',workspaceId,
++        renderPresentation(screen,host,{
++            mode:'edit',assetView:'art',workspaceId,presentationMode:presentation,
+             visible:item => descendants.has(item.id) || ancestors.has(item.id),
+             shell:item => ancestors.has(item.id),
+             menuState:Object.fromEntries(screen.elements.filter(item => item.menu).map(item => [item.id,true]))

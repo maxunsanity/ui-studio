@@ -1,0 +1,676 @@
+{
+  "family": {
+    "id": "OverdriveRecruit",
+    "name": "Page_ACE_OverdriveRecruit",
+    "nativeKind": "page",
+    "purpose": "B1의 Overdrive Special Recruit 모집: Joey 드릴 일러스트와 Total Rewards·모집 1회/10회·관찰된 보장 문구를 조립한다. 실제 가챠/보상 처리는 연결하지 않는다.",
+    "reference": "video-b/frames/frame_00001.jpg",
+    "notes": [
+      "원본 420×924 기준 가시 구역 근사 ABS 제작값이다. ticket18/gem1349, Remaining25d23h, Total Rewards ×2/10/10, pity4/54, free countdown23:58:34는 해당 시점의 관찰 문자열이며 임의 밸런스나 실시간 값이 아니다.",
+      "신규 기계 협곡 배경과 Joey drill 신작을 별도 이미지로 쓴다. 배경 내 실제 비행/플레이 기능은 없다.",
+      "상단 Overdrive+Special Recruit는 두 native 글자와 서로 다른 프레임이다. 큰 제목 프레임의 고정 장식/나사/펜촉 등 고유 원화는 공용3slice로 근사한다.",
+      "Total Rewards의 장식은 신규9slice 판틀과 powercube glyph로 근사한다. Packs/Path of Growth는 관찰된 이름과 역할 glyph를 쓰며 실제 내용/도달 조건은 만들지 않는다.",
+      "원본 제목 끝 ?와 History/Preview/Back은 관찰된 control이다. 클릭 목적지·자동 팝업·보상 획득·추첨 결과는 미연결 상태로 둔다.",
+      "Recruit ×1/×10의 하위 파란 ticket 그림은 부모 입력 전달이다. Original small plane ticket motif와 generic atlas blue ticket는 서로 다른 새 그림이며 원본 동등을 자칭하지 않는다.",
+      "표시 문구는 native text/버튼 caption으로 남긴다. illustration에 제목·영어 bubble·버튼·확률을 굽지 않는다.",
+      "외부 shadow 필요 시 effects.shadow로 별도 정상 UI 요청을 수행한다. 이 recipe는 효과·상태·연결을 자동 적용하거나 실제 GUI 통과를 주장하지 않는다.",
+      "Joey 신작은 원본 영상보다 세로 실루엣이 길어 box420×565를 사용한다. 실제 미리보기에서 drill tip·pity 문구 겹침을 별도 확인한다. ? 도움말의 27px 버튼만 source/edge8의 작은 프레임 variant다."
+    ],
+    "actions": [
+      {
+        "key": "root",
+        "op": "plain",
+        "name": "BG_OverdriveRecruit_root",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "inputMode": "none",
+        "fill": "#203b46"
+      },
+      {
+        "key": "Backdrop",
+        "op": "image",
+        "name": "Img_OverdriveRecruit_Backdrop",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-canyon-bg-v1.webp",
+        "fit": "cover"
+      },
+      {
+        "key": "JoeyDrill",
+        "op": "image",
+        "name": "Img_OverdriveRecruit_JoeyDrill",
+        "rect": {
+          "x": 0,
+          "y": 222,
+          "w": 420,
+          "h": 565
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-joey-drill-v1.webp",
+        "fit": "contain"
+      },
+      {
+        "key": "RecruitTitleFrame",
+        "op": "panel",
+        "name": "Frame_OverdriveRecruit_RecruitTitleFrame",
+        "rect": {
+          "x": 75,
+          "y": 79,
+          "w": 274,
+          "h": 49
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "OverdriveRibbon",
+        "op": "panel",
+        "name": "Frame_OverdriveRecruit_OverdriveRibbon",
+        "rect": {
+          "x": 53,
+          "y": 64,
+          "w": 134,
+          "h": 26
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowtitle_ribbon3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          32,
+          0,
+          32
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "Overdrive",
+        "op": "text",
+        "name": "Txt_OverdriveRecruit_Overdrive",
+        "rect": {
+          "x": 62,
+          "y": 66,
+          "w": 117,
+          "h": 24
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "Overdrive",
+        "size": 18,
+        "weight": 900,
+        "color": "#f6d744",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "Title",
+        "op": "text",
+        "name": "Txt_OverdriveRecruit_Title",
+        "rect": {
+          "x": 108,
+          "y": 85,
+          "w": 218,
+          "h": 35
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "Special Recruit",
+        "size": 25,
+        "weight": 900,
+        "color": "#f8d363",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "Remaining",
+        "op": "text",
+        "name": "Txt_OverdriveRecruit_Remaining",
+        "rect": {
+          "x": 106,
+          "y": 126,
+          "w": 251,
+          "h": 22
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "◷ Remaining Time: 25d 23h",
+        "size": 13,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "Currencies",
+        "op": "text",
+        "name": "Txt_OverdriveRecruit_Currencies",
+        "rect": {
+          "x": 219,
+          "y": 48,
+          "w": 197,
+          "h": 26
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "▣ 18       ◇ 1349  +",
+        "size": 13,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "Help",
+        "op": "button",
+        "name": "Btn_OverdriveRecruit_Help",
+        "rect": {
+          "x": 375,
+          "y": 96,
+          "w": 27,
+          "h": 27
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "?",
+        "size": 18,
+        "weight": 800,
+        "color": "#765333",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+        "skinMetrics4": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "TotalRewardsFrame",
+        "op": "panel",
+        "name": "Frame_OverdriveRecruit_TotalRewardsFrame",
+        "rect": {
+          "x": 15,
+          "y": 154,
+          "w": 85,
+          "h": 154
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "TotalRewardsTitle",
+        "op": "text",
+        "name": "Txt_OverdriveRecruit_TotalRewardsTitle",
+        "rect": {
+          "x": 27,
+          "y": 160,
+          "w": 63,
+          "h": 43
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "Total\nRewards",
+        "size": 13,
+        "weight": 900,
+        "color": "#fff2bd",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "TotalRewardsIcon",
+        "op": "image",
+        "name": "Img_OverdriveRecruit_TotalRewardsIcon",
+        "rect": {
+          "x": 31,
+          "y": 208,
+          "w": 53,
+          "h": 53
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "fit": "contain",
+        "region": [
+          128,
+          64,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "TotalRewardsCount",
+        "op": "text",
+        "name": "Txt_OverdriveRecruit_TotalRewardsCount",
+        "rect": {
+          "x": 29,
+          "y": 247,
+          "w": 58,
+          "h": 47
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "×2\n10/10",
+        "size": 14,
+        "weight": 900,
+        "color": "#fff2bd",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "Packs",
+        "op": "button",
+        "name": "Btn_OverdriveRecruit_Packs",
+        "rect": {
+          "x": 355,
+          "y": 152,
+          "w": 55,
+          "h": 69
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Packs",
+        "size": 12,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "PathGrowth",
+        "op": "button",
+        "name": "Btn_OverdriveRecruit_PathGrowth",
+        "rect": {
+          "x": 353,
+          "y": 220,
+          "w": 60,
+          "h": 73
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Path of\nGrowth",
+        "size": 11,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "History",
+        "op": "button",
+        "name": "Btn_OverdriveRecruit_History",
+        "rect": {
+          "x": 327,
+          "y": 652,
+          "w": 83,
+          "h": 31
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "◴ History",
+        "size": 13,
+        "weight": 800,
+        "color": "#5d3d2d",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "Preview",
+        "op": "button",
+        "name": "Btn_OverdriveRecruit_Preview",
+        "rect": {
+          "x": 327,
+          "y": 701,
+          "w": 83,
+          "h": 31
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "▣ Preview",
+        "size": 13,
+        "weight": 800,
+        "color": "#5d3d2d",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "Guarantees",
+        "op": "text",
+        "name": "Txt_OverdriveRecruit_Guarantees",
+        "rect": {
+          "x": 98,
+          "y": 767,
+          "w": 225,
+          "h": 65
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "Excellent or better Pilot Comes in\n4 Draw(s)\nExplorer Joey Comes in 54\nDraw(s)",
+        "size": 12,
+        "weight": 800,
+        "color": "#f0d9a0",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "FreeCountdown",
+        "op": "text",
+        "name": "Txt_OverdriveRecruit_FreeCountdown",
+        "rect": {
+          "x": 73,
+          "y": 843,
+          "w": 73,
+          "h": 15
+        },
+        "inputMode": "none",
+        "parent": "root",
+        "text": "23:58:34",
+        "size": 10,
+        "weight": 800,
+        "color": "#f7eacb",
+        "align": "center",
+        "strokeWidth": 0
+      },
+      {
+        "key": "Back",
+        "op": "button",
+        "name": "Btn_OverdriveRecruit_Back",
+        "rect": {
+          "x": 17,
+          "y": 855,
+          "w": 55,
+          "h": 54
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "↶",
+        "size": 29,
+        "weight": 800,
+        "color": "#614735",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+        "skinMetrics4": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "FreeRecruit",
+        "op": "button",
+        "name": "Btn_OverdriveRecruit_FreeRecruit",
+        "rect": {
+          "x": 77,
+          "y": 858,
+          "w": 52,
+          "h": 45
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "FREE\n×10",
+        "size": 11,
+        "weight": 800,
+        "color": "#4f584e",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+        "skinMetrics4": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "RecruitOnce",
+        "op": "button",
+        "name": "Btn_OverdriveRecruit_RecruitOnce",
+        "rect": {
+          "x": 146,
+          "y": 852,
+          "w": 123,
+          "h": 55
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Recruit ×1\n×1",
+        "size": 15,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "RecruitTen",
+        "op": "button",
+        "name": "Btn_OverdriveRecruit_RecruitTen",
+        "rect": {
+          "x": 281,
+          "y": 852,
+          "w": 123,
+          "h": 55
+        },
+        "inputMode": "action",
+        "parent": "root",
+        "text": "Recruit ×10\n×10",
+        "size": 15,
+        "weight": 800,
+        "color": "#fff0cf",
+        "align": "center",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics4": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "skinPadding4": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strokeWidth": 0
+      },
+      {
+        "key": "RecruitOnceToken",
+        "op": "image",
+        "name": "Img_OverdriveRecruit_RecruitOnceToken",
+        "rect": {
+          "x": 153,
+          "y": 878,
+          "w": 24,
+          "h": 24
+        },
+        "inputMode": "parent",
+        "parent": "RecruitOnce",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "fit": "contain",
+        "region": [
+          192,
+          0,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "RecruitTenToken",
+        "op": "image",
+        "name": "Img_OverdriveRecruit_RecruitTenToken",
+        "rect": {
+          "x": 289,
+          "y": 878,
+          "w": 24,
+          "h": 24
+        },
+        "inputMode": "parent",
+        "parent": "RecruitTen",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "fit": "contain",
+        "region": [
+          192,
+          0,
+          64,
+          64
+        ]
+      }
+    ]
+  },
+  "sid": "screen-a1264c79-4692-4b79-868e-3fc2fa358808",
+  "i": 26,
+  "map": {
+    "root": "element-938d0415-88a2-4bb6-85dc-05df27650d2b",
+    "Backdrop": "element-8453c2a3-fb96-4712-acc6-5db6029233c3",
+    "JoeyDrill": "element-4590f85f-5656-4262-b7af-20804ab1b907",
+    "RecruitTitleFrame": "element-bb72f08c-6134-4540-acf2-a35064f36b2c",
+    "OverdriveRibbon": "element-d58152e0-33c8-44bf-b414-700034e40152",
+    "Overdrive": "element-e4b4e5a5-ea64-4402-8ae9-a5ba22fe940b",
+    "Title": "element-311e34c1-99cd-4a49-a57b-38588d8bcb86",
+    "Remaining": "element-e41a0145-9171-4be0-9e9c-91c271238601",
+    "Currencies": "element-35e2fbc9-c877-4b14-962e-15b6f5cb7417",
+    "Help": "element-61c608bd-8b60-4a08-8547-31423c7c3dc6",
+    "TotalRewardsFrame": "element-59045968-09ba-48ec-a7cd-a44dd2072f90",
+    "TotalRewardsTitle": "element-31572958-eab1-4e56-b7bb-539f1447aa52",
+    "TotalRewardsIcon": "element-7b4a7b5a-ec86-415f-bc62-e7ac549a5f6d",
+    "TotalRewardsCount": "element-a67e586e-2513-4682-b7c5-efb00801d600",
+    "Packs": "element-ad209258-8b64-4493-a6bb-c9b339dfa18c",
+    "PathGrowth": "element-ec1e1eba-fd57-43bb-a64f-655e07a943a0",
+    "History": "element-f7d02831-9890-4f02-8e9b-45f35ef741c6",
+    "Preview": "element-7e6dba79-8078-455d-8ced-0b27c4f4ac2e",
+    "Guarantees": "element-56dd608e-8b5c-4fb5-9ce5-9f1ee111bf19",
+    "FreeCountdown": "element-977d946f-1512-4d54-bad5-37be2161dde4",
+    "Back": "element-b717455d-7dd6-42d0-a549-8782e5ef0bae",
+    "FreeRecruit": "element-6ee481cd-42fa-4441-8c59-8a13eb71c149",
+    "RecruitOnce": "element-8cc081fb-f20f-4203-a399-9c5a951b38a2",
+    "RecruitTen": "element-b4b454fe-e998-480c-8957-4985b0a2b3d3",
+    "RecruitOnceToken": "element-b6e25833-223c-4c9d-bff5-857febf6a5bc",
+    "RecruitTenToken": "element-2ca4ebbc-5597-47d6-990e-4f828dfab40b"
+  }
+}

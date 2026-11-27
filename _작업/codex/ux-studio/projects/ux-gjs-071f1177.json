@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 3,
+  "projectId": "ux-gjs-071f1177",
+  "revision": 1,
+  "name": "새 UX 설계 · GrapesJS 편집 사본",
+  "entryScreen": "main",
+  "screens": [
+    {
+      "id": "main",
+      "name": "첫 화면",
+      "kind": "page",
+      "purpose": "",
+      "elements": [
+        {
+          "id": "element-d43bec39-315b-414b-96a7-17a543cc8aab",
+          "name": "버튼",
+          "kind": "button",
+          "x": 25,
+          "y": 45.61493698290844,
+          "w": 50,
+          "h": 8,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "skin": {
+            "preset": "button",
+            "version": 1,
+            "name": "버튼",
+            "mode": "3",
+            "asset": "button",
+            "tone": "#dcefe8",
+            "slices": [
+              0,
+              16,
+              0,
+              16
+            ],
+            "edges": [
+              0,
+              12,
+              0,
+              12
+            ],
+            "padding": [
+              5,
+              12,
+              5,
+              12
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": "기능 연결 정의가 아직 없습니다."
+          }
+        },
+        {
+          "id": "element-d43bec39-315b-414b-96a7-17a543cc8aab-ui-image",
+          "parentId": "element-d43bec39-315b-414b-96a7-17a543cc8aab-ui-background",
+          "partRole": "image",
+          "kind": "image",
+          "name": "버튼 · 아이콘",
+          "x": 7,
+          "y": 12,
+          "w": 18,
+          "h": 35,
+          "text": "",
+          "purpose": "버튼의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "asset": "icon",
+            "alt": "버튼 아이콘",
+            "fit": "contain",
+            "compact": true
+          }
+        },
+        {
+          "id": "element-d43bec39-315b-414b-96a7-17a543cc8aab-ui-label",
+          "parentId": "element-d43bec39-315b-414b-96a7-17a543cc8aab-ui-background",
+          "partRole": "label",
+          "kind": "text",
+          "name": "버튼 · 텍스트",
+          "x": 8,
+          "y": 50,
+          "w": 84,
+          "h": 43,
+          "text": "버튼",
+          "purpose": "버튼의 label",
+          "info": "표시 문구·수치. 입력은 전체 버튼에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12
+        },
+        {
+          "id": "element-d43bec39-315b-414b-96a7-17a543cc8aab-ui-background",
+          "parentId": "element-d43bec39-315b-414b-96a7-17a543cc8aab",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "버튼 · 바탕 이미지",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "inset": [
+            2,
+            12,
+            3,
+            12
+          ],
+          "text": "",
+          "purpose": "프레임 안쪽 바탕. 이미지 등록 시 임시 색판을 숨깁니다.",
+          "info": "입력은 전체 버튼에 전달합니다. 아이콘·텍스트는 이 바탕의 자식입니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "버튼 바탕",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#dcefe8",
+            "strokeWidth": 0,
+            "opacity": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "screen-d4b796d6-38e5-43fc-88f6-37f779cf0bfb",
+      "name": "연결 검수 · 두 번째 화면",
+      "kind": "page",
+      "purpose": "",
+      "elements": []
+    }
+  ],
+  "transitions": [
+    {
+      "id": "link-3249403d-856d-43cf-a541-e307d24d925c",
+      "fromScreen": "main",
+      "fromElement": "element-d43bec39-315b-414b-96a7-17a543cc8aab",
+      "event": "click",
+      "action": "navigate",
+      "condition": "always",
+      "targetScreen": "screen-d4b796d6-38e5-43fc-88f6-37f779cf0bfb"
+    }
+  ],
+  "fixtures": {
+    "balance": 0,
+    "items": []
+  },
+  "savedAt": "2026-11-15T06:07:26.629Z"
+}

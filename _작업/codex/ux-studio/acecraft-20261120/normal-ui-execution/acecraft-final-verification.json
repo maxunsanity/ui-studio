@@ -1,0 +1,72 @@
+{
+  "designSHA": "52cc5afd5f27d7387d32afb3e78613bae6d7e93db8934660972c8be86d6276f1",
+  "readOnlySHAUnchanged": true,
+  "results": [
+    {
+      "name": "structural",
+      "exit": 0,
+      "counts": {
+        "screens": 20,
+        "elements": 800,
+        "links": 29,
+        "parentChecks": 1611,
+        "regionChecks": 159
+      },
+      "errors": 0,
+      "notbuilt": 0,
+      "status": "structural-checks-clear-ui-verification-still-pending",
+      "command": [
+        "node",
+        "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/audit-acecraft.mjs",
+        "--design",
+        "/Users/max/projest_max/ui-studio/samples/acecraft/ui-studio/designs/ux-96eff1ad.json",
+        "--assets",
+        "/Users/max/projest_max/ui-studio/samples/acecraft/ui-studio/assets"
+      ]
+    },
+    {
+      "name": "images",
+      "exit": 0,
+      "counts": {
+        "mapFiles": 29,
+        "bindingsChecked": 296,
+        "imageBindings": 127,
+        "skinBindings": 169,
+        "mismatches": 0,
+        "notbuilt": 0,
+        "skipped": 42,
+        "intentionalOverrides": 17
+      },
+      "errors": 0,
+      "notbuilt": 0,
+      "status": "mapped-bindings-match-ui-verification-still-pending",
+      "command": [
+        "node",
+        "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/audit-expected-images.mjs",
+        "--design",
+        "/Users/max/projest_max/ui-studio/samples/acecraft/ui-studio/designs/ux-96eff1ad.json",
+        "--maps-dir",
+        "/Users/max/Documents/Codex/2026-11-11/new-chat",
+        "--overrides",
+        "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/image-expectation-overrides.json"
+      ]
+    },
+    {
+      "name": "copied",
+      "exit": 0,
+      "counts": {
+        "checkedParts": 110,
+        "rawAssetSources": 4
+      },
+      "errors": 0,
+      "notbuilt": 0,
+      "status": "match",
+      "command": [
+        "node",
+        "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/acecraft-20261120/audit-copied-ui.mjs",
+        "--revision",
+        "45"
+      ]
+    }
+  ]
+}

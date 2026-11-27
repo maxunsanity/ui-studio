@@ -1,0 +1,732 @@
+{
+  "documentType": "normal-ui-action-instructions-not-design-model",
+  "status": "proposal-awaiting-review",
+  "readOnlySnapshot": {
+    "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/designs/ux-25ecc98a.json",
+    "projectId": "ux-25ecc98a",
+    "revision": 251,
+    "screens": 28,
+    "note": "Root editing concurrently; recheck actual current IDs/revision."
+  },
+  "scope": {
+    "browserActions": 0,
+    "sourceChanges": 0,
+    "savedDesignChanges": 0,
+    "sharedReportChanges": 0
+  },
+  "latestRootHandoff": "Approved own7018 restart; new choice fields saved/reopened r242/r244 and TS12 native tests passed per root. Old pending-validator restriction superseded. This subagent did not perform those actions.",
+  "sourceEvidence": [
+    {
+      "file": "src/tools/uxStudio/control-inspector.mjs",
+      "lines": [
+        9,
+        26,
+        33,
+        53,
+        62,
+        65
+      ],
+      "finding": "type resets control; options lines preserve panel only by unchanged value; empty panel allowed; options before value"
+    },
+    {
+      "file": "src/tools/uxStudio/controls.mjs",
+      "lines": [
+        14,
+        42,
+        71,
+        93,
+        125,
+        159,
+        172,
+        197,
+        263,
+        285,
+        304
+      ],
+      "finding": "seven types; same-screen nonoverlapping panel validation; display:none/inert; group unique initial true; radio vs checkbox; whitespace text; native disabled in edit"
+    },
+    {
+      "file": "src/tools/uxStudio/main.mjs",
+      "lines": [
+        1696,
+        1850,
+        2010,
+        2073,
+        2725,
+        2741
+      ],
+      "finding": "change commit; effect off retains object; mode none removes buttonState; parent dropdown moveInto"
+    },
+    {
+      "file": "src/tools/uxStudio/button-state.mjs",
+      "lines": [
+        20,
+        23
+      ],
+      "finding": "any buttonState plus control invalid even enabled:false"
+    },
+    {
+      "file": "src/tools/uxStudio/layout-view.mjs",
+      "lines": [
+        75,
+        81,
+        134,
+        272
+      ],
+      "finding": "control ancestors DIV; none image/text pointer pass-through; none panel intercepts; sibling model order"
+    },
+    {
+      "file": "src/tools/uxStudio/styles.css",
+      "lines": [
+        2681,
+        2682,
+        2683
+      ],
+      "finding": "tabs equal flex cells, zero gap/padding, one common normal/selected skin"
+    }
+  ],
+  "selectors": {
+    "screen": "button[data-screen=\"<id>\"]",
+    "layer": "button.layer-select[data-element=\"<id>\"]",
+    "generalTab": "[data-tab=\"general\"]",
+    "propertyPane": "[data-panel-tab=\"properties\"]",
+    "layerPane": "[data-panel-tab=\"layer\"]",
+    "inputMode": "[data-part-field=\"mode\"]",
+    "controlType": "[data-control-field=\"type\"]",
+    "value": "[data-control-field=\"value\"]",
+    "options": "textarea[data-control-field=\"options\"]",
+    "panel": "select[data-control-field=\"panel.<exact-option-value>\"]",
+    "group": "[data-control-field=\"group\"]",
+    "labelMode": "[data-control-field=\"labelMode\"]",
+    "tabSkin": "[data-control-field=\"tabSkin.enabled\"]",
+    "tabTexture": "[data-tab-project-image=\"normal|selected\"]",
+    "text": "[data-field=\"text\"]",
+    "parent": "[data-layer-parent]",
+    "geometry": "[data-transform-field=\"x|y|w|h\"]",
+    "bringFront": "[data-edit-command=\"layer-front\"]",
+    "sendBack": "[data-edit-command=\"layer-back\"]",
+    "save": "[data-action=\"save\"]",
+    "runtime": ".ui-element[data-screen=\"<sid>\"][data-element=\"<eid>\"] > .ui-control",
+    "runtimeTab": ".ui-control.control-tabs [role=\"tab\"][data-control-value=\"<value>\"]"
+  },
+  "executionOrder": [
+    "Read current normal UI workspace/project/revision and actual selected ID.",
+    "Known body wrappers first: raw rectangle tool, blank text, frame role, stroke0, input none. Get generated actual ID.",
+    "Move only listed observed roots via parent dropdown; preserve absolute rect and audit/reapply responsive anchors after reparenting.",
+    "Create raw tabs strip, parent first then local logical rect derived from absolute504x894. Role frame, stroke0, blank text, action enabled, no buttonState.",
+    "Set type tabs; commit options textarea first, value next, panel selectors last. Unknown panel stays empty.",
+    "Preserve separate text/icons: labelMode icon; option labels remain accessibility names. For tabSkin normal/selected import existing textures and wait field clears.",
+    "Old tab roots mode none removes buttonState; send behind native strip. Move old foreground Txt/Img to shared sibling parent preserving absolute rect; mode none and bring front. Panels must not cover strip because they intercept clicks.",
+    "Native cells equal contiguous widths, no per-option frame/gap contract. Record visual difference, not pixel equality.",
+    "For existing root direct conversion to toggle/input: mode none then action THEN control type. Effect off alone is insufficient.",
+    "Toggle text one ASCII space prevents technical-name fallback. Keep external original label. Do not hide entire control by opacity0.",
+    "TS06 set rightfalse before lefttrue with same group; TS14 group absent and bothtrue.",
+    "Retain static chosen layers/assets, opacity0 only; actual native checked mark is sole dynamic marker.",
+    "Text/textarea: fresh locator, Meta+A, pressSequentially, Tab. Empty Meta+A Backspace Tab. Select selectOption. Checkbox setChecked. Refind after rerender.",
+    "Save/reopen normal UI then inspect saved file read-only. Real input testing in play/consumer, not disabled edit mode."
+  ],
+  "recipes": [
+    {
+      "family": "TS21",
+      "type": "tabs",
+      "newRawOwner": {
+        "name": "Tabs_TSV_TS21_Statistics",
+        "absoluteLogicalRect": [
+          41,
+          354,
+          424,
+          49
+        ],
+        "parent": {
+          "name": "Group_TSV_TS21_BattleStats",
+          "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+          "id": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec",
+          "parentId": "element-50912d5b-8f08-4eb7-b362-819fa3ea902a"
+        }
+      },
+      "optionsText": "attack | 공격&치료\ndamage | 받은 데미지",
+      "value": "attack",
+      "oldButtons": [
+        {
+          "name": "Btn_TSV_TS21_AttackHealing",
+          "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+          "id": "element-5a3e367f-0c9a-49fe-93cc-65535cfd6d76",
+          "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+        },
+        {
+          "name": "Btn_TSV_TS21_ReceivedDamage",
+          "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+          "id": "element-5445e06b-0b09-42ab-a769-abdfc33a5127",
+          "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+        }
+      ],
+      "preserveForegroundLabels": [
+        {
+          "name": "Txt_TSV_TS21_AttackHealing",
+          "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+          "id": "element-5a3e367f-0c9a-49fe-93cc-65535cfd6d76-ui-label",
+          "parentId": "element-5a3e367f-0c9a-49fe-93cc-65535cfd6d76"
+        },
+        {
+          "name": "Txt_TSV_TS21_ReceivedDamage",
+          "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+          "id": "element-5445e06b-0b09-42ab-a769-abdfc33a5127-ui-label",
+          "parentId": "element-5445e06b-0b09-42ab-a769-abdfc33a5127"
+        }
+      ],
+      "panelBindings": {
+        "attack": "<actual new known-body wrapper ID>",
+        "damage": null
+      },
+      "knownBodyWrapper": {
+        "name": "Panel_TSV_TS21_AttackHealingBody",
+        "absoluteLogicalRect": [
+          40,
+          405,
+          427,
+          338
+        ],
+        "parent": {
+          "name": "Group_TSV_TS21_BattleStats",
+          "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+          "id": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec",
+          "parentId": "element-50912d5b-8f08-4eb7-b362-819fa3ea902a"
+        },
+        "moveExisting": [
+          {
+            "name": "Img_TSV_TS21_Stat_sage",
+            "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+            "id": "element-9153bfde-1224-4b72-b929-e4c752565a14",
+            "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+          },
+          {
+            "name": "Txt_TSV_TS21_StatName_sage",
+            "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+            "id": "element-d3f1cbd5-f65a-4d54-9264-04ccca61ff28",
+            "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+          },
+          {
+            "name": "BG_TSV_TS21_StatBar_sage",
+            "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+            "id": "element-62d28a4c-5ae2-4327-aa8f-df268902d2b6",
+            "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+          },
+          {
+            "name": "BG_TSV_TS21_StatFill_sage",
+            "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+            "id": "element-51c77136-5534-4e03-a2c9-11422b0480a7",
+            "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+          },
+          {
+            "name": "Txt_TSV_TS21_StatValue_sage",
+            "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+            "id": "element-ff7f85fd-7799-42a7-85ac-01e2f1a4be20",
+            "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+          },
+          {
+            "name": "Img_TSV_TS21_Stat_lucky",
+            "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+            "id": "element-1f89dadf-eb62-427c-b8bb-6710e4d62d52",
+            "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+          },
+          {
+            "name": "Txt_TSV_TS21_StatName_lucky",
+            "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+            "id": "element-03295e6d-676b-40bf-8425-567a1d4266e6",
+            "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+          },
+          {
+            "name": "BG_TSV_TS21_StatBar_lucky",
+            "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+            "id": "element-4e796f56-a81a-430c-b1c1-ba5d051e095f",
+            "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+          },
+          {
+            "name": "BG_TSV_TS21_StatFill_lucky",
+            "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+            "id": "element-0aaef0c2-6221-4bf7-ac7a-517ed15a7f18",
+            "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+          },
+          {
+            "name": "Txt_TSV_TS21_StatValue_lucky",
+            "screenId": "screen-83044942-f30b-4cb9-98e1-de69ac1da1ec",
+            "id": "element-f0645bc5-0807-49e2-a766-3c25bbad2aa5",
+            "parentId": "element-6746e90c-0628-4c5f-b7ff-cd9d9fece1ec"
+          }
+        ]
+      },
+      "boundary": "Damage body unobserved. Only known attack rows hide/restore; no duplicate numbers."
+    },
+    {
+      "family": "TS22",
+      "type": "tabs",
+      "newRawOwner": {
+        "name": "Tabs_TSV_TS22_Recruit",
+        "absoluteLogicalRect": [
+          76,
+          815,
+          283,
+          72
+        ],
+        "parent": {
+          "name": "HUD_TSV_TS22_Bottom",
+          "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+          "id": "element-fd8f171e-dc80-4e5c-b37f-8fe9f132df9f",
+          "parentId": "element-bdb30195-dff9-4867-b0d9-70119fdf17f5"
+        }
+      },
+      "optionsText": "advanced | 고급\nnormal | 일반",
+      "value": "normal",
+      "oldButtons": [
+        {
+          "name": "Btn_TSV_TS22_RecruitAdvanced",
+          "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+          "id": "element-df7dd4dc-f02b-425a-96f6-2baefeb49cb0",
+          "parentId": "element-fd8f171e-dc80-4e5c-b37f-8fe9f132df9f"
+        },
+        {
+          "name": "Btn_TSV_TS22_RecruitNormal",
+          "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+          "id": "element-dcb5857e-f78c-497a-9d65-28516f1511eb",
+          "parentId": "element-fd8f171e-dc80-4e5c-b37f-8fe9f132df9f"
+        }
+      ],
+      "preserveForegroundLabels": [
+        {
+          "name": "Txt_TSV_TS22_RecruitAdvanced",
+          "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+          "id": "element-2ddc59ce-0a4b-4b53-a3a6-c088eaa6ddbe",
+          "parentId": "element-df7dd4dc-f02b-425a-96f6-2baefeb49cb0"
+        },
+        {
+          "name": "Txt_TSV_TS22_RecruitNormal",
+          "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+          "id": "element-be0ff57c-723f-4182-ba63-9a8401b06b00",
+          "parentId": "element-dcb5857e-f78c-497a-9d65-28516f1511eb"
+        }
+      ],
+      "panelBindings": {
+        "advanced": null,
+        "normal": "<actual new known-body wrapper ID>"
+      },
+      "knownBodyWrapper": {
+        "name": "Panel_TSV_TS22_NormalRecruitBody",
+        "absoluteLogicalRect": [
+          0,
+          137,
+          504,
+          660
+        ],
+        "parent": {
+          "name": "Page_TSV_Recruit",
+          "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+          "id": "element-bdb30195-dff9-4867-b0d9-70119fdf17f5",
+          "parentId": null
+        },
+        "moveExisting": [
+          {
+            "name": "Img_TSV_TS22_RecruitTrio",
+            "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+            "id": "element-21e18c76-850b-4ca6-9d97-4acb125e96f5",
+            "parentId": "element-bdb30195-dff9-4867-b0d9-70119fdf17f5"
+          },
+          {
+            "name": "Txt_TSV_TS22_RecruitType",
+            "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+            "id": "element-e322375d-54af-4715-bc6d-3e359add4b6e",
+            "parentId": "element-bdb30195-dff9-4867-b0d9-70119fdf17f5"
+          },
+          {
+            "name": "BG_TSV_TS22_Tutorial",
+            "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+            "id": "element-e353f4a2-0516-410e-b7ee-fd1d2488c2ea",
+            "parentId": "element-bdb30195-dff9-4867-b0d9-70119fdf17f5"
+          },
+          {
+            "name": "Txt_TSV_TS22_FreeCount",
+            "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+            "id": "element-ff3ec3d3-d538-494a-8b74-2b3074523289",
+            "parentId": "element-bdb30195-dff9-4867-b0d9-70119fdf17f5"
+          },
+          {
+            "name": "Btn_TSV_TS22_RecruitFree",
+            "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+            "id": "element-9d452f28-0489-4964-9000-8b187584cc66",
+            "parentId": "element-bdb30195-dff9-4867-b0d9-70119fdf17f5"
+          }
+        ]
+      },
+      "preserveForegroundIconsAndBadges": [
+        {
+          "name": "Img_TSV_TS22_RecruitAdvanced",
+          "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+          "id": "element-4ea2b567-7e64-4190-a309-f2948dbc9a0f",
+          "parentId": "element-df7dd4dc-f02b-425a-96f6-2baefeb49cb0"
+        },
+        {
+          "name": "Img_TSV_TS22_RecruitNormal",
+          "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+          "id": "element-1c3f6d55-04a0-4ae0-9ea7-5c7d55dee22d",
+          "parentId": "element-dcb5857e-f78c-497a-9d65-28516f1511eb"
+        },
+        {
+          "name": "Txt_TSV_TS22_AdvancedFree",
+          "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+          "id": "element-77d91790-509d-4a6b-9bc2-7784e3f3dde2",
+          "parentId": "element-df7dd4dc-f02b-425a-96f6-2baefeb49cb0"
+        },
+        {
+          "name": "Txt_TSV_TS22_NormalFree",
+          "screenId": "screen-0b93cc6f-8ab1-4c94-9538-1589f22f52f0",
+          "id": "element-54cda40f-e732-4a2f-9350-8ecbc0b16175",
+          "parentId": "element-dcb5857e-f78c-497a-9d65-28516f1511eb"
+        }
+      ],
+      "boundary": "Advanced panel unlinked. No new texts/panels/numbers; shared header/currency/rewards/record remain common."
+    },
+    {
+      "family": "TS26",
+      "type": "tabs",
+      "newRawOwner": {
+        "name": "Tabs_TSV_TS26_HeroDetail",
+        "absoluteLogicalRect": [
+          90,
+          818,
+          404,
+          64
+        ],
+        "parent": {
+          "name": "HUD_TSV_TS26_Bottom",
+          "screenId": "screen-f2adfdd1-8ef6-4586-88c2-05df8e58ef6b",
+          "id": "element-f8b389cf-2b41-4901-952c-26ed7f4626c5",
+          "parentId": "element-7508df8f-a04d-470b-a4da-782d27b47c26"
+        }
+      },
+      "optionsText": "attributes | 속성\nskills | 스킬",
+      "value": "attributes",
+      "oldButtons": [
+        {
+          "name": "Btn_TSV_TS26_AttributesTab",
+          "screenId": "screen-f2adfdd1-8ef6-4586-88c2-05df8e58ef6b",
+          "id": "element-26d2f13b-bf5b-4cfe-b313-6cdeac2a1b7f",
+          "parentId": "element-f8b389cf-2b41-4901-952c-26ed7f4626c5"
+        },
+        {
+          "name": "Btn_TSV_TS26_SkillsTab",
+          "screenId": "screen-f2adfdd1-8ef6-4586-88c2-05df8e58ef6b",
+          "id": "element-27018df7-f8a6-4176-a50b-070a174f7347",
+          "parentId": "element-f8b389cf-2b41-4901-952c-26ed7f4626c5"
+        }
+      ],
+      "preserveForegroundLabels": [
+        {
+          "name": "Txt_TSV_TS26_AttributesTab",
+          "screenId": "screen-f2adfdd1-8ef6-4586-88c2-05df8e58ef6b",
+          "id": "element-26d2f13b-bf5b-4cfe-b313-6cdeac2a1b7f-ui-label",
+          "parentId": "element-26d2f13b-bf5b-4cfe-b313-6cdeac2a1b7f"
+        },
+        {
+          "name": "Txt_TSV_TS26_SkillsTab",
+          "screenId": "screen-f2adfdd1-8ef6-4586-88c2-05df8e58ef6b",
+          "id": "element-27018df7-f8a6-4176-a50b-070a174f7347-ui-label",
+          "parentId": "element-27018df7-f8a6-4176-a50b-070a174f7347"
+        }
+      ],
+      "panelBindings": {
+        "attributes": {
+          "name": "Group_TSV_TS26_HeroStats",
+          "screenId": "screen-f2adfdd1-8ef6-4586-88c2-05df8e58ef6b",
+          "id": "element-52162a5d-9865-4b2c-b063-fe88dfe92ce0",
+          "parentId": "element-7508df8f-a04d-470b-a4da-782d27b47c26"
+        },
+        "skills": null
+      },
+      "boundary": "Only existing HeroStats is connected. Skills body unobserved. Shared rank/power/building condition scope remains unconfirmed."
+    },
+    {
+      "family": "TS24",
+      "type": "toggle",
+      "existingOwner": {
+        "name": "BG_TSV_TS24_SkipCheckbox",
+        "screenId": "screen-0defcffd-60c1-4c6a-8971-d667f62dd6b4",
+        "id": "element-5e7b8bdb-4b00-41d5-83e7-b031dc86c383",
+        "parentId": "element-74109401-875d-4818-bc83-63cbf66f806d"
+      },
+      "value": false,
+      "displayText": " ",
+      "keepSeparateLabel": {
+        "name": "Txt_TSV_TS24_SkipVideo",
+        "screenId": "screen-0defcffd-60c1-4c6a-8971-d667f62dd6b4",
+        "id": "element-64519828-92cd-44b0-85a7-f8287f4f3566",
+        "parentId": "element-74109401-875d-4818-bc83-63cbf66f806d"
+      },
+      "group": "absent; do not edit",
+      "choiceAppearanceProposal": {
+        "choiceShape": "square",
+        "choiceSize": 18,
+        "choiceColor": "#36ca5c"
+      },
+      "boundary": "26px owner fits18px marker with4px native padding each side.32px TS12 marker would overflow. No actual playback behavior."
+    },
+    {
+      "family": "TS06",
+      "type": "two grouped toggles",
+      "existingOwners": [
+        {
+          "name": "Btn_TSV_TS06_open",
+          "screenId": "screen-028c9a6e-a9cf-49ec-8864-49abd823e618",
+          "id": "element-5e9c1ffd-429f-4911-899d-db847292d645",
+          "parentId": "element-65bdb7c2-248f-4388-8ecb-25a379969874"
+        },
+        {
+          "name": "Btn_TSV_TS06_electric",
+          "screenId": "screen-028c9a6e-a9cf-49ec-8864-49abd823e618",
+          "id": "element-15445811-006f-4228-a727-22506793a58b",
+          "parentId": "element-65bdb7c2-248f-4388-8ecb-25a379969874"
+        }
+      ],
+      "values": [
+        true,
+        false
+      ],
+      "group": "tsv-ts06-response",
+      "displayText": " ",
+      "hideStaticArtOpacityZero": [
+        {
+          "name": "Panel_TSV_TS06_selectionTop",
+          "screenId": "screen-028c9a6e-a9cf-49ec-8864-49abd823e618",
+          "id": "element-a56b55eb-2df6-48e7-9935-552eda831a76",
+          "parentId": "element-65bdb7c2-248f-4388-8ecb-25a379969874"
+        },
+        {
+          "name": "Panel_TSV_TS06_selectionBottom",
+          "screenId": "screen-028c9a6e-a9cf-49ec-8864-49abd823e618",
+          "id": "element-896240cd-80e9-4b00-9654-882cbcb57cc6",
+          "parentId": "element-65bdb7c2-248f-4388-8ecb-25a379969874"
+        }
+      ],
+      "keepForegroundArtAndText": [
+        {
+          "name": "Img_TSV_TS06_openArt",
+          "screenId": "screen-028c9a6e-a9cf-49ec-8864-49abd823e618",
+          "id": "element-b6e94aef-9a3e-4b8a-8cd5-08930f4c9191",
+          "parentId": "element-5e9c1ffd-429f-4911-899d-db847292d645"
+        },
+        {
+          "name": "Txt_TSV_TS06_openText",
+          "screenId": "screen-028c9a6e-a9cf-49ec-8864-49abd823e618",
+          "id": "element-631203bb-0a1e-4852-8fca-706ca74bd449",
+          "parentId": "element-5e9c1ffd-429f-4911-899d-db847292d645"
+        },
+        {
+          "name": "Img_TSV_TS06_electricArt",
+          "screenId": "screen-028c9a6e-a9cf-49ec-8864-49abd823e618",
+          "id": "element-0e4970c5-b104-4cb6-863b-e3b220bd9f3e",
+          "parentId": "element-15445811-006f-4228-a727-22506793a58b"
+        },
+        {
+          "name": "Txt_TSV_TS06_electricText",
+          "screenId": "screen-028c9a6e-a9cf-49ec-8864-49abd823e618",
+          "id": "element-feab2951-3563-45b3-a38b-76b8a771641a",
+          "parentId": "element-15445811-006f-4228-a727-22506793a58b"
+        }
+      ],
+      "knownDescription": {
+        "name": "Panel_TSV_TS06_descriptionPanel",
+        "screenId": "screen-028c9a6e-a9cf-49ec-8864-49abd823e618",
+        "id": "element-b018ad6e-de59-4564-9a8a-9c3154f320b0",
+        "parentId": "element-65bdb7c2-248f-4388-8ecb-25a379969874"
+      },
+      "boundary": "Toggle group only enforces exclusive checked values. Existing left-description panel does not auto-hide on right; right description/result unknown. Do not claim content switch.",
+      "tabsAlternative": {
+        "name": "Tabs_TSV_TS06_Response",
+        "absoluteLogicalRect": [
+          64,
+          256,
+          376,
+          230
+        ],
+        "optionsText": "open | 문을 열어 수용하기\nelectric | 바로 방전하기",
+        "value": "open",
+        "panelBindings": {
+          "open": {
+            "name": "Panel_TSV_TS06_descriptionPanel",
+            "screenId": "screen-028c9a6e-a9cf-49ec-8864-49abd823e618",
+            "id": "element-b018ad6e-de59-4564-9a8a-9c3154f320b0",
+            "parentId": "element-65bdb7c2-248f-4388-8ecb-25a379969874"
+          },
+          "electric": null
+        },
+        "tradeoff": "Actual description hiding possible; native2 contiguous188px cells differ from source164px cards+48px gap. Root chooses visual tradeoff; no fabricated right body."
+      }
+    },
+    {
+      "family": "TS14",
+      "type": "two independent toggles",
+      "existingOwners": [
+        {
+          "name": "Btn_TSV_TS14_susan",
+          "screenId": "screen-fbb6e6b2-36d3-4574-b754-b2b2cc8a923c",
+          "id": "element-70bc57bc-6261-4834-af13-95962545ead5",
+          "parentId": "element-1d63ebf3-9efa-4b1e-99df-ee4d9b919982"
+        },
+        {
+          "name": "Btn_TSV_TS14_jimmy",
+          "screenId": "screen-fbb6e6b2-36d3-4574-b754-b2b2cc8a923c",
+          "id": "element-83431c16-3b5c-463f-86db-a8c3d37a910c",
+          "parentId": "element-1d63ebf3-9efa-4b1e-99df-ee4d9b919982"
+        }
+      ],
+      "values": [
+        true,
+        true
+      ],
+      "displayText": " ",
+      "group": "absent; do not edit",
+      "hideStaticArtOpacityZero": [
+        {
+          "name": "Panel_TSV_TS14_susanSelectedShade",
+          "screenId": "screen-fbb6e6b2-36d3-4574-b754-b2b2cc8a923c",
+          "id": "element-e4ef6780-fa89-458a-b0e8-48df489c3fd9",
+          "parentId": "element-70bc57bc-6261-4834-af13-95962545ead5"
+        },
+        {
+          "name": "Img_TSV_TS14_susanCheck",
+          "screenId": "screen-fbb6e6b2-36d3-4574-b754-b2b2cc8a923c",
+          "id": "element-c98e6f19-f33b-4db0-9167-5961836a39b2",
+          "parentId": "element-70bc57bc-6261-4834-af13-95962545ead5"
+        },
+        {
+          "name": "Panel_TSV_TS14_jimmySelectedShade",
+          "screenId": "screen-fbb6e6b2-36d3-4574-b754-b2b2cc8a923c",
+          "id": "element-39f4eac5-7b46-4e1c-b15e-a7d041fe12a2",
+          "parentId": "element-83431c16-3b5c-463f-86db-a8c3d37a910c"
+        },
+        {
+          "name": "Img_TSV_TS14_jimmyCheck",
+          "screenId": "screen-fbb6e6b2-36d3-4574-b754-b2b2cc8a923c",
+          "id": "element-153a6da3-c6fd-4591-84d7-fa543a128896",
+          "parentId": "element-83431c16-3b5c-463f-86db-a8c3d37a910c"
+        }
+      ],
+      "keepForegroundArtAndText": [
+        {
+          "name": "Img_TSV_TS14_susanPortrait",
+          "screenId": "screen-fbb6e6b2-36d3-4574-b754-b2b2cc8a923c",
+          "id": "element-07059fc0-7f37-4b3b-9e27-7eef97ed12cb",
+          "parentId": "element-70bc57bc-6261-4834-af13-95962545ead5"
+        },
+        {
+          "name": "Txt_TSV_TS14_susanName",
+          "screenId": "screen-fbb6e6b2-36d3-4574-b754-b2b2cc8a923c",
+          "id": "element-e578bb7f-53b3-4ed7-9d6b-3eafed8fb2de",
+          "parentId": "element-1d63ebf3-9efa-4b1e-99df-ee4d9b919982"
+        },
+        {
+          "name": "Img_TSV_TS14_jimmyPortrait",
+          "screenId": "screen-fbb6e6b2-36d3-4574-b754-b2b2cc8a923c",
+          "id": "element-fdd91bfa-7789-45f7-9152-9bec317af7b0",
+          "parentId": "element-83431c16-3b5c-463f-86db-a8c3d37a910c"
+        },
+        {
+          "name": "Txt_TSV_TS14_jimmyName",
+          "screenId": "screen-fbb6e6b2-36d3-4574-b754-b2b2cc8a923c",
+          "id": "element-285d2b66-7e19-4f2e-913c-0ef5a0662732",
+          "parentId": "element-1d63ebf3-9efa-4b1e-99df-ee4d9b919982"
+        }
+      ],
+      "choiceAppearanceProposal": {
+        "choiceShape": "square",
+        "choiceSize": 32,
+        "choiceColor": "#36ca5c"
+      },
+      "boundary": "R02 both selected. Native independent checkbox values only; no dynamic portrait shader/population/beds/accept result."
+    },
+    {
+      "family": "TS29",
+      "type": "tabs",
+      "status": "future IDs: resolve after normal UI assembly; never invent IDs",
+      "sourceRecipe": "recipes/b-actions.json",
+      "screenName": "Page_TSV_Chat",
+      "newRawOwner": {
+        "name": "Tabs_TSV_TS29_Chat",
+        "absoluteLogicalRect": [
+          17,
+          48,
+          473,
+          64
+        ],
+        "parentRecipeKey": "root"
+      },
+      "oldButtonRecipeKeys": [
+        "stateTab",
+        "privateTab"
+      ],
+      "optionsText": "state | 스테이트\nprivate | 개인",
+      "value": "state",
+      "panelBindings": {
+        "state": "<actual existing feed ID>",
+        "private": null
+      },
+      "boundary": "Unobserved alternate bodies stay unlinked. No cloned feed/story/reward text. No fake game/send/server effects.",
+      "input": {
+        "existingRawRecipeKey": "input",
+        "value": "",
+        "placeholder": "",
+        "maxLength": 1000,
+        "required": false,
+        "validation": "none",
+        "rect": {
+          "x": 120,
+          "y": 829,
+          "w": 230,
+          "h": 47
+        },
+        "parentRecipeKey": "footer",
+        "boundary": "Native input only. Preserve real counter outside input; do not render duplicate child placeholder.1000 is observed authoring limit, not universal backend policy."
+      }
+    },
+    {
+      "family": "TS31",
+      "type": "tabs",
+      "status": "future IDs: resolve after normal UI assembly; never invent IDs",
+      "sourceRecipe": "recipes/b-actions.json",
+      "screenName": "Modal_TSV_SurvivorProfile",
+      "newRawOwner": {
+        "name": "Tabs_TSV_TS31_Story",
+        "absoluteLogicalRect": [
+          69,
+          685,
+          364,
+          44
+        ],
+        "parentRecipeKey": "content"
+      },
+      "oldButtonRecipeKeys": [
+        "storyTabI",
+        "storyTabII",
+        "storyTabIII",
+        "storyTabIV"
+      ],
+      "optionsText": "story-i | 스토리 I\nstory-ii | 스토리 II\nstory-iii | 스토리 III\nstory-iv | 스토리 IV",
+      "value": "story-i",
+      "panelBindings": {
+        "story-i": "<actual existing story ID>",
+        "story-ii": null,
+        "story-iii": null,
+        "story-iv": null
+      },
+      "boundary": "Unobserved alternate bodies stay unlinked. No cloned feed/story/reward text. No fake game/send/server effects."
+    }
+  ],
+  "verification": [
+    "Actual refs resolve to current expected screen/name; future IDs resolve after UI assembly.",
+    "No control owner retains any buttonState. Native interactive mode action/enabledtrue.",
+    "Tabs actual value/aria-selected, known panel display/inert change and restore; click/Enter/Space/arrows/Home/End.",
+    "Unobserved panel-unlinked options explicitly incomplete, no cloned numbers/text/rewards.",
+    "Radio exclusive or checkbox independent actual checked; fixed chosen art hidden when native controls own state.",
+    "Actual input typing/runtime values, no fake send and no automatic authored-default rewrite.",
+    "CSS1440x900/430x844 image failures/overflow/focus/foreground pass-through; actual capture pixels separate.",
+    "Only recipe/ref checks by this subagent; no product test/browser pass claimed."
+  ]
+}

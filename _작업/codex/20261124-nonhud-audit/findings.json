@@ -1,0 +1,98 @@
+{
+  "defense": {
+    "name": "디펜스",
+    "parts": "스킬 15종의 2D 보드와 별도로 악귀 12종, 용형 보스 1종, 효과 6종을 두 개의 컬러 3D 보드에 등록했습니다. 작업 명세에서 GLB·Blender 원본과 전체 클립을 열 수 있습니다.",
+    "issues": [
+      ["연동 대기", "defense-battle.next-skill", "스킬 후보는 검수용 첫 타이머로 열립니다. 다음 선택 HUD와 실제 전투 선택·피니시·보상은 게임 엔진 연결이 필요합니다."],
+      ["연동 대기", "defense-failed.facade-state", "기획은 한 단계 전 건물 파손 외형입니다. 와이어프레임은 같은 건설 이미지에 균열을 겹친 장면으로, 단계별 실제 모델은 연결 대기입니다."],
+      ["일치", "defense-gauge-full · defense-skills · defense-success · defense-failed", "정보창과 스킬·결과는 모달입니다. 스킬은 전장을 유지하며 겹치고, 결과 수리비는 파손 상태에서만 표시됩니다."]
+    ]
+  },
+  "build": {
+    "name": "건설",
+    "parts": "시설 사진 3종과 진행률 예시는 있습니다. 편집 가능한 지붕 표식·터치 면, 카드 상태·확대/파손 컷은 부품 보드와 ID 연결이 빠져 있습니다.",
+    "issues": [
+      ["높음", "facility-confirm-one.back · facility-confirm-one.cancel", "일반 건설 현황에서 진입하면 두 버튼이 각각 전체 현황과 시설 상세로 돌아갑니다. HUD에서 진입하는 경우의 복귀 규칙은 별개입니다."],
+      ["높음", "city-damaged ↔ construction-assembly-max · facility-fanshop ↔ facility-confirm · facility-repair-battle ↔ facility-confirm-new", "저장 캔버스의 390×844 화면 세 쌍이 같은 위치를 차지합니다."],
+      ["보통", "construction-parts.card-dance", "카드 사진 원본은 실제 카드와 같지만 작업 명세의 117px에 비해 보드 예시는 112px입니다. 현재 r7인데 작업 명세에 r6 대표 캡처가 남아 있습니다."],
+      ["일치", "facility-confirm-*", "견적을 같은 마을의 전체 화면으로 보여 주는 것은 해당 기능 기획서와 일치합니다."]
+    ]
+  },
+  "photocard": {
+    "name": "포토카드",
+    "parts": "카드 앞뒷면·명함·보상 슬롯·9분할 상태는 보드에서 확인할 수 있습니다. 포토카드와 프로필이 공유하는 5·10인 무대와 전신 외형 항목이 부품표에 없습니다.",
+    "issues": [
+      ["높음", "pack-result.done · pack-opening", "결과 버튼은 목록으로 돌아가지만 바깥을 눌러 닫으면 직전 개봉 화면에 남아 결과를 다시 열 수 있습니다. 런타임에서 재현했습니다."],
+      ["보통", "list.locked · card-detail.card-frame · parts.c0r0-1", "가변 카드에 쓰는 일부 외곽이 9분할 없이 둥근 벡터로 남았습니다."],
+      ["보통", "parts · card-detail", "전체 58화면 중 35개만 화면별 명세에 매핑되어 있습니다. 부품 ID 연결은 3개이며 작업 명세 앞부분에 r22·r26 자료가 섞여 있습니다."]
+    ]
+  },
+  "schedule": {
+    "name": "스케줄",
+    "parts": "장소 배경, 진행·결과·편성 조건·인벤토리·기록장 부품은 있습니다. 몇몇 편성·기록장 조작은 하나의 글 레이어이고, 진행 장면의 전신·전투 연동부와 그 부품표가 비어 있습니다.",
+    "issues": [
+      ["높음", "puzzle-selected-3.grid-cell-3 · puzzle-selected-7/8 · puzzle-story.part-16", "퍼즐 조각을 놓거나 이야기를 확인하면 모달이 페이지로 바뀌며 도감의 오버레이 스택이 사라집니다. 이후 X가 동작하지 않는 상태를 런타임에서 재현했습니다."],
+      ["보통", "story-edit.part-10/13/16 · parts.inventory-action-copy", "이야기 주제·행동·대상 선택처럼 보이는 UI가 실제 입력으로 구성되어 있지 않습니다. 편성 조작 설명 일부도 하나의 레이어입니다."],
+      ["일치", "collection · collection-item 외", "6개 시트와 19개 모달의 374×748 규격, 하단·중앙 배치와 슬라이드·페이드가 명세와 일치합니다."],
+      ["연동 대기", "running.part-4 · running-mons.part-4 · mons-attack", "진행 장면은 장소 이미지와 상태가 있고 팀이 걷는 3D 대표 장면이 없습니다. 몬스 3D 전투 호출은 P265에 연동 대기로 명시돼 있습니다."]
+    ]
+  },
+  "relation": {
+    "name": "관계",
+    "parts": "관계 카드, 정렬, 함께 보낼 장소, 프로필 전신을 재사용합니다. 관계도 필터·아이템 상태·전후 라포와 3D 전신의 사용 화면 연결을 더 명세해야 합니다.",
+    "issues": [
+      ["높음", "relationship-map-member · relationship-map", "선택 대상 관계도의 숨김 ID 15개가 아래 시트를 대상으로 합니다. 동작 미리보기는 페이지에만 숨김을 적용하므로 아래 시트의 기존 관계선이 남습니다. 정적 보드는 같은 마스크를 시트에도 적용합니다."],
+      ["보통", "relationship-item.inventory-icon · relationship-parts.item-flow", "관계 아이템 그림 자리에 ‘라포’ 문구가 있고, 아이템 행 선택과 재고 없음 시안이 빠져 있습니다."],
+      ["일치", "relationship-order · relationship-staff-focus", "선택 전환은 같은 영역에서 딤과 입력 차단 없이 열립니다. 관계 변화 장면의 스케줄 자동 호출은 기획상 게임 연동 대기입니다."]
+    ]
+  },
+  "mission": {
+    "name": "미션",
+    "parts": "목표 아이콘 16종과 버튼 5상태가 있습니다. 차트·의상 전신의 3D 대표 이미지, 팩 도움말·보상 창과 변형 카드의 부품 연결이 부족합니다.",
+    "issues": [
+      ["높음", "chart-reward · daily-fifth.part-102", "P265는 받기를 눌러야 닫힌다고 설명하지만, 현재는 바깥과 Escape로 닫을 수 있고 받기 후에도 수령 직전 화면이 남습니다. 런타임에서 재현했습니다."],
+      ["높음", "reward-hint · weekly-reward", "기획의 보상 옆 말풍선 대신 입력을 차단하는 가운데 모달입니다. 실제 호출 위치보다 112px 이상 아래에 고정됩니다. 카드·업적·가이드 쪽 진입 연결도 빠져 있습니다."],
+      ["높음", "parts ↔ season-pass-costume / event-costume-acquired / event-costume-acquired-locked", "저장 캔버스에서 부품 보드가 의상 관련 화면 3개를 덮습니다."],
+      ["보통", "daily.part-34/48/62/76/88 · weekly.part-32/46/60/74/86", "일반 카드 외곽, 도움말과 차트 보상 창 일부에 9분할이 없습니다."]
+    ]
+  },
+  "shop": {
+    "name": "상점",
+    "parts": "주사위 6종, 묶음 2종과 성장별 팩 5종을 재사용합니다. 루비 4종 비교, 꾸밈 상품과 획득 상태가 부품 보드에 없습니다.",
+    "issues": [
+      ["높음", "purchase-confirm.part-45 · need-ruby.part-28", "루비 부족창을 닫으면 기획서의 상점 복귀 대신 구매 확인창이 남는 것을 런타임에서 재현했습니다."],
+      ["높음", "packs · refill-dice", "기획은 전 탭에 무료 선물을 요구하지만 팩 탭에서 빠져 있습니다. 주사위 채우기의 명세에 있는 받기·대기 예시도 화면에 없습니다."],
+      ["높음", "parts ↔ cosmetics-preview / cosmetics-acquired / cosmetics-acquired-locked", "1280×1200 부품 보드가 꾸밈 화면 3개의 390×300 구역을 덮습니다."],
+      ["보통", "purchase-confirm.part-38 · need-ruby.part-22 · refill-dice.part-4", "일부 구매 관련 모달이 가운데 기준보다 위에 있고 가변 카드·모달 외곽 일부에 9분할이 없습니다. 꾸밈 모달과 대상 시트는 정렬 기준에 맞습니다."]
+    ]
+  },
+  "mons": {
+    "name": "몬스",
+    "parts": "카드와 간식, 합성 상태, 게이지, 창 유형을 확인할 수 있습니다. 팩 그림, 수호 후보 상태, 시뮬레이터 전장·결과의 3D 대표 이미지와 사용 ID를 묶은 부품 등록이 빠져 있습니다.",
+    "issues": [
+      ["높음", "mons-storage.packs-new · mons-packs-ready · mons-packs-duplicate · mons-packs-exchange", "일반 팩 진입은 수량 0 상태로만 이어집니다. 보유·교환 가능 시안에 진입 링크가 없고 개봉 확인은 첫 획득 결과로 고정됩니다. 런타임으로 확인했습니다."],
+      ["높음", "mons-ward.idol-0-mon · mons-ward.idol-0-real-mon", "같은 수호 슬롯에서 피그미하마와 아홀로틀 그림이 겹칩니다. 다른 두 수호 슬롯에도 예전 그림과 새 그림이 함께 남아 있습니다."],
+      ["보통", "mons-attribute.check-0..5 · mons-snack-result.confirm", "속성 드롭다운 선택은 전체·수목 고정 예시입니다. 필터 적용 중 간식을 주고 확인하면 전체 목록으로 돌아갑니다."],
+      ["보통", "mons-ward.idol-0 · mons-ward.idol-0-ward", "가변 수호 카드의 일부 외곽이 9분할 없이 둥근 벡터로 남았습니다."]
+    ]
+  },
+  "crew": {
+    "name": "크루",
+    "parts": "전용 부품 보드가 없습니다. 커버와 영상, 초상·엠블럼, 권한 체크, 작품·미션·보상 상태 및 3D 대표 그림의 공통 참조를 묶어야 합니다.",
+    "issues": [
+      ["높음", "crew-mission-stage-claimed · crew-mission-personal-claimed · crew-mission-claimed", "명세는 가운데 모달입니다. 현재 390×844 불투명 화면 두 장이 겹쳐 열리고, 뒤로 가면 미션 화면을 건너뛰어 멤버 화면으로 돌아갑니다. 런타임에서 재현했습니다."],
+      ["보통", "crew-image-picker.error", "이미지 교체 시트 위에서 오류 모달을 엽니다. 캔버스 문맥에서는 이미지 교체 시트가 빠져 실제 열림 순서를 보여 주지 못합니다."],
+      ["보통", "roster.team-crest · world.team-crest", "동일 엠블럼 이미지는 재사용 중입니다. 반복 부품의 변형·사용 위치 명세와 최신 r9 대표 캡처가 필요합니다."]
+    ]
+  },
+  "profile": {
+    "name": "프로필·의상",
+    "parts": "부위·판정 게이지와 창 유형이 있습니다. 5·10인 무대, 전신 착용 전후, 장비 슬롯 빈칸·보유·선택·착용 비교가 부품 보드에 없습니다.",
+    "issues": [
+      ["높음", "closet-hanseoa-locked ↔ idol-hanseoa-applied · closet-hanseoa-fit ↔ outfit-discard-hanseoa", "저장 캔버스의 390×844 화면 두 쌍이 같은 위치에 있습니다."],
+      ["보통", "outfit-presets.save-0/1/2 · outfit-preset-save.confirm", "어느 슬롯에서 열었는지 값이 전달되지 않으며, 확인해도 시안 슬롯 상태가 바뀌지 않습니다. 런타임으로 확인했습니다."],
+      ["연동 대기", "new-costume-member.choose-1", "첫 캐릭터만 착용 경로가 연결되는 검수용 제한입니다. 기획에는 선택한 아이돌의 미리보기를 여는 흐름이 있습니다."],
+      ["일치", "프로필 창 유형", "7개 시트는 폭 374px 하단, 10개 모달은 폭 342px 중앙으로 저장돼 있습니다."]
+    ]
+  }
+}

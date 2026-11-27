@@ -1,0 +1,11 @@
+--- a/src/tools/uxStudio/main.mjs
++++ b/src/tools/uxStudio/main.mjs
+@@ -1611,7 +1611,7 @@
+             break;
+         }
+         case 'export':
+-            download(doc.projectId + '.json', doc);
++            download(doc.projectId + '.json', JSON.stringify(doc));
+             break;
+         case 'context':
+             download(doc.projectId + '-선택정보.json', {

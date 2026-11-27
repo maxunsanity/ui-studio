@@ -1,0 +1,1722 @@
+{
+  "documentType": "native-ui-action-recipe-not-saved-design",
+  "status": "proposal-awaiting-review",
+  "logicalSize": [
+    504,
+    894
+  ],
+  "coordinates": "absolute logical pixels; all parent bounds are absolute; convert to native parent coordinates only while operating the UI",
+  "families": [
+    {
+      "id": "TS22",
+      "name": "Page_TSV_Recruit",
+      "nativeKind": "page",
+      "purpose": "일반모집 무료5회 대표상태의 상단재화·새원화·튜토리얼·모집CTA·고급/일반입구",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Page_TSV_Recruit",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#9954c3",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_Title",
+          "rect": {
+            "x": 8,
+            "y": 4,
+            "w": 260,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "영웅 모집",
+          "size": 28,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "panel",
+          "key": "currency",
+          "name": "BG_Currency",
+          "rect": {
+            "x": 245,
+            "y": 46,
+            "w": 251,
+            "h": 36
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "opacity": 1,
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "image",
+          "key": "gem",
+          "name": "Img_Gem",
+          "rect": {
+            "x": 246,
+            "y": 47,
+            "w": 30,
+            "h": 28
+          },
+          "parent": "currency",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry/diamond-purple.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "gemAmount",
+          "name": "Txt_GemAmount",
+          "rect": {
+            "x": 283,
+            "y": 47,
+            "w": 54,
+            "h": 28
+          },
+          "parent": "currency",
+          "text": "700",
+          "size": 18,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "left"
+        },
+        {
+          "op": "button",
+          "key": "gemPlus",
+          "name": "Btn_GemPlus",
+          "rect": {
+            "x": 342,
+            "y": 46,
+            "w": 28,
+            "h": 30
+          },
+          "parent": "currency",
+          "text": "+",
+          "size": 22,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-orange9-v003.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        },
+        {
+          "op": "image",
+          "key": "ticket",
+          "name": "Img_Ticket",
+          "rect": {
+            "x": 377,
+            "y": 46,
+            "w": 29,
+            "h": 30
+          },
+          "parent": "currency",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/objects-a-atlas-ui-v003.png",
+          "fit": "contain",
+          "region": [
+            0,
+            150,
+            150,
+            150
+          ]
+        },
+        {
+          "op": "text",
+          "key": "ticketCount",
+          "name": "Txt_TicketCount",
+          "rect": {
+            "x": 423,
+            "y": 47,
+            "w": 40,
+            "h": 28
+          },
+          "parent": "currency",
+          "text": "x0",
+          "size": 18,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "left"
+        },
+        {
+          "op": "button",
+          "key": "ticketPlus",
+          "name": "Btn_TicketPlus",
+          "rect": {
+            "x": 470,
+            "y": 46,
+            "w": 28,
+            "h": 30
+          },
+          "parent": "currency",
+          "text": "+",
+          "size": 22,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-orange9-v003.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        },
+        {
+          "op": "image",
+          "key": "recruitArt",
+          "name": "Img_RecruitTrio",
+          "rect": {
+            "x": 0,
+            "y": 137,
+            "w": 504,
+            "h": 420
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/banners-c-atlas-ui-v003.png",
+          "fit": "contain",
+          "region": [
+            4,
+            86,
+            312,
+            190
+          ],
+          "anchorPreset": "center"
+        },
+        {
+          "op": "button",
+          "key": "rewards",
+          "name": "Btn_Rewards",
+          "rect": {
+            "x": 418,
+            "y": 87,
+            "w": 82,
+            "h": 58
+          },
+          "parent": "root",
+          "text": "보상품 보기",
+          "size": 14,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "button",
+          "key": "record",
+          "name": "Btn_RecruitRecord",
+          "rect": {
+            "x": 418,
+            "y": 153,
+            "w": 82,
+            "h": 58
+          },
+          "parent": "root",
+          "text": "모집 기록",
+          "size": 16,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "text",
+          "key": "recruitType",
+          "name": "Txt_RecruitType",
+          "rect": {
+            "x": 26,
+            "y": 506,
+            "w": 452,
+            "h": 68
+          },
+          "parent": "root",
+          "text": "일반모집",
+          "size": 52,
+          "weight": 800,
+          "color": "#f9d4ff",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "panel",
+          "key": "tutorial",
+          "name": "BG_Tutorial",
+          "rect": {
+            "x": 97,
+            "y": 577,
+            "w": 301,
+            "h": 94
+          },
+          "parent": "root",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "opacity": 1,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "image",
+          "key": "tutorialPortrait",
+          "name": "Img_TutorialSage",
+          "rect": {
+            "x": 101,
+            "y": 578,
+            "w": 81,
+            "h": 90
+          },
+          "parent": "tutorial",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-heroes/sage-portrait-v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "tutorialName",
+          "name": "Txt_TutorialName",
+          "rect": {
+            "x": 192,
+            "y": 580,
+            "w": 191,
+            "h": 26
+          },
+          "parent": "tutorial",
+          "text": "세이지",
+          "size": 20,
+          "weight": 700,
+          "color": "#084e69",
+          "align": "left"
+        },
+        {
+          "op": "text",
+          "key": "tutorialCopy",
+          "name": "Txt_TutorialCopy",
+          "rect": {
+            "x": 192,
+            "y": 609,
+            "w": 191,
+            "h": 58
+          },
+          "parent": "tutorial",
+          "text": "터치하여 일반 모집을 시작하세요.",
+          "size": 20,
+          "weight": 600,
+          "color": "#084e69",
+          "align": "left"
+        },
+        {
+          "op": "text",
+          "key": "freeCount",
+          "name": "Txt_FreeCount",
+          "rect": {
+            "x": 148,
+            "y": 704,
+            "w": 208,
+            "h": 27
+          },
+          "parent": "root",
+          "text": "무료 횟수: 5",
+          "size": 18,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "button",
+          "key": "recruitFree",
+          "name": "Btn_RecruitFree",
+          "rect": {
+            "x": 120,
+            "y": 733,
+            "w": 266,
+            "h": 64
+          },
+          "parent": "root",
+          "text": "무료 모집",
+          "size": 26,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/button-green3.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "plain",
+          "key": "footer",
+          "name": "HUD_Bottom",
+          "rect": {
+            "x": 0,
+            "y": 818,
+            "w": 504,
+            "h": 76
+          },
+          "parent": "root",
+          "fill": "#096b8c",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "button",
+          "key": "back",
+          "name": "Btn_Back",
+          "rect": {
+            "x": 0,
+            "y": 822,
+            "w": 74,
+            "h": 64
+          },
+          "parent": "footer",
+          "text": "",
+          "size": 26,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        },
+        {
+          "op": "image",
+          "key": "backIcon",
+          "name": "Img_Back",
+          "rect": {
+            "x": 18,
+            "y": 835,
+            "w": 38,
+            "h": 38
+          },
+          "parent": "back",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-back-arrow-white-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "button",
+          "key": "tabAdvanced",
+          "name": "Btn_RecruitAdvanced",
+          "rect": {
+            "x": 76,
+            "y": 815,
+            "w": 141,
+            "h": 72
+          },
+          "parent": "footer",
+          "text": "",
+          "size": 20,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-orange9-v003.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        },
+        {
+          "op": "image",
+          "key": "advancedFace",
+          "name": "Img_RecruitAdvanced",
+          "rect": {
+            "x": 80,
+            "y": 817,
+            "w": 60,
+            "h": 66
+          },
+          "parent": "tabAdvanced",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-heroes/pink-scout-portrait-v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "button",
+          "key": "tabNormal",
+          "name": "Btn_RecruitNormal",
+          "rect": {
+            "x": 218,
+            "y": 815,
+            "w": 141,
+            "h": 72
+          },
+          "parent": "footer",
+          "text": "",
+          "size": 20,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-purple9-v003.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        },
+        {
+          "op": "image",
+          "key": "normalFace",
+          "name": "Img_RecruitNormal",
+          "rect": {
+            "x": 223,
+            "y": 817,
+            "w": 59,
+            "h": 66
+          },
+          "parent": "tabNormal",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-heroes/sage-portrait-v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "advancedFree",
+          "name": "Txt_AdvancedFree",
+          "rect": {
+            "x": 168,
+            "y": 858,
+            "w": 43,
+            "h": 22
+          },
+          "parent": "tabAdvanced",
+          "text": "무료",
+          "size": 16,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "left"
+        },
+        {
+          "op": "text",
+          "key": "normalFree",
+          "name": "Txt_NormalFree",
+          "rect": {
+            "x": 311,
+            "y": 858,
+            "w": 43,
+            "h": 22
+          },
+          "parent": "tabNormal",
+          "text": "무료",
+          "size": 16,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "left"
+        },
+        {
+          "op": "text",
+          "key": "advancedLabel",
+          "name": "Txt_RecruitAdvanced",
+          "rect": {
+            "x": 142,
+            "y": 828,
+            "w": 69,
+            "h": 30
+          },
+          "parent": "tabAdvanced",
+          "text": "고급",
+          "size": 20,
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "right"
+        },
+        {
+          "op": "text",
+          "key": "normalLabel",
+          "name": "Txt_RecruitNormal",
+          "rect": {
+            "x": 284,
+            "y": 828,
+            "w": 69,
+            "h": 30
+          },
+          "parent": "tabNormal",
+          "text": "일반",
+          "size": 20,
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "right"
+        }
+      ],
+      "notes": [
+        "R01 일반 무료5 대표. 일반/고급은 동일가족의 상태이며 추가별도화면생성은필요없음.",
+        "recruitArt는 새 2D 홍보삽화이며 원본의 전체아트/인물동등이 아님.",
+        "버튼compound의 글자는 native Txt로 분리. 이미지/글자/중간그룹 입력은 parent.",
+        "고급상태 문구: 고급모집,60회 모집 시 전설 영웅 반드시 획득,전설급 영웅,60회 남음,무료 횟수:1. 이 recipe 기본상태에혼합금지.",
+        "고급/일반 탭은 실제 tabs control로 전환할지 root가 current guide로 구성. 미관측 유료모집/기록/재화 동작추가금지."
+      ],
+      "proposedLinks": [
+        {
+          "from": "recruitFree",
+          "action": "모집",
+          "target": "CIN03",
+          "evidence": "TSV02 272→275초 / TSV03 69→70초 sequence_observed",
+          "note": "열차연출범위없으면연결미완료명시. 결과로직접생략은원본동일흐름아님."
+        },
+        {
+          "from": "back",
+          "action": "뒤로",
+          "target": "TS03",
+          "evidence": "TSV03 30→31초/84→85초"
+        }
+      ]
+    },
+    {
+      "id": "TS26",
+      "name": "Page_TSV_HeroDetail",
+      "nativeKind": "page",
+      "purpose": "세이지 성장후 안정상태:5,744/레벨5/EXP52,500/500/발전소Lv4조건",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Page_TSV_HeroDetail",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#2b86af",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "plain",
+          "key": "stage",
+          "name": "Slot_3D",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": "root",
+          "fill": "#102c45",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "text",
+          "key": "stageLabel",
+          "name": "Txt_3DArea",
+          "rect": {
+            "x": 130,
+            "y": 290,
+            "w": 244,
+            "h": 44
+          },
+          "parent": "stage",
+          "text": "3D 영역",
+          "size": 24,
+          "weight": 600,
+          "color": "#93b5c9",
+          "align": "center",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "text",
+          "key": "name",
+          "name": "Txt_HeroName",
+          "rect": {
+            "x": 145,
+            "y": 6,
+            "w": 214,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "세이지",
+          "size": 28,
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "image",
+          "key": "class",
+          "name": "Img_HeroClass",
+          "rect": {
+            "x": 220,
+            "y": 43,
+            "w": 32,
+            "h": 28
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry/population-hat.webp",
+          "fit": "contain",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "text",
+          "key": "rarity",
+          "name": "Txt_HeroRarity",
+          "rect": {
+            "x": 8,
+            "y": 78,
+            "w": 100,
+            "h": 60
+          },
+          "parent": "root",
+          "text": "SR",
+          "size": 52,
+          "weight": 800,
+          "color": "#f763db",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "button",
+          "key": "profile",
+          "name": "Btn_HeroProfile",
+          "rect": {
+            "x": 450,
+            "y": 80,
+            "w": 46,
+            "h": 46
+          },
+          "parent": "root",
+          "text": "",
+          "size": 20,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "button",
+          "key": "info",
+          "name": "Btn_HeroInfo",
+          "rect": {
+            "x": 450,
+            "y": 134,
+            "w": 46,
+            "h": 46
+          },
+          "parent": "root",
+          "text": "",
+          "size": 20,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "top-right"
+        },
+        {
+          "op": "button",
+          "key": "previous",
+          "name": "Btn_PreviousHero",
+          "rect": {
+            "x": 12,
+            "y": 411,
+            "w": 44,
+            "h": 52
+          },
+          "parent": "root",
+          "text": "",
+          "size": 22,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "image",
+          "key": "previousIcon",
+          "name": "Img_PreviousHero",
+          "rect": {
+            "x": 16,
+            "y": 417,
+            "w": 36,
+            "h": 40
+          },
+          "parent": "previous",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-back-arrow-white-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "button",
+          "key": "next",
+          "name": "Btn_NextHero",
+          "rect": {
+            "x": 448,
+            "y": 411,
+            "w": 44,
+            "h": 52
+          },
+          "parent": "root",
+          "text": "",
+          "size": 22,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "image",
+          "key": "nextIcon",
+          "name": "Img_NextHero",
+          "rect": {
+            "x": 452,
+            "y": 417,
+            "w": 36,
+            "h": 40
+          },
+          "parent": "next",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-building-icons-v001/arrow-right-green.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "image",
+          "key": "powerIcon",
+          "name": "Img_Power",
+          "rect": {
+            "x": 190,
+            "y": 531,
+            "w": 28,
+            "h": 28
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry/power-fist.webp",
+          "fit": "contain",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "text",
+          "key": "power",
+          "name": "Txt_Power",
+          "rect": {
+            "x": 219,
+            "y": 525,
+            "w": 91,
+            "h": 38
+          },
+          "parent": "root",
+          "text": "5,744",
+          "size": 28,
+          "weight": 800,
+          "color": "#ffdcaa",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "button",
+          "key": "powerHelp",
+          "name": "Btn_PowerHelp",
+          "rect": {
+            "x": 307,
+            "y": 529,
+            "w": 29,
+            "h": 31
+          },
+          "parent": "root",
+          "text": "!",
+          "size": 20,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "plain",
+          "key": "rank",
+          "name": "Group_HeroRank",
+          "rect": {
+            "x": 74,
+            "y": 580,
+            "w": 381,
+            "h": 61
+          },
+          "parent": "root",
+          "fill": "#0c6089",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "image",
+          "key": "rankIcon",
+          "name": "Img_HeroRank",
+          "rect": {
+            "x": 78,
+            "y": 581,
+            "w": 46,
+            "h": 49
+          },
+          "parent": "rank",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/objects-b-atlas-ui-v003.png",
+          "fit": "contain",
+          "region": [
+            450,
+            0,
+            150,
+            150
+          ]
+        },
+        {
+          "op": "text",
+          "key": "star0",
+          "name": "Txt_StarSlot01",
+          "rect": {
+            "x": 139,
+            "y": 585,
+            "w": 40,
+            "h": 44
+          },
+          "parent": "rank",
+          "text": "★",
+          "size": 40,
+          "weight": 800,
+          "color": "#074a70",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "star1",
+          "name": "Txt_StarSlot02",
+          "rect": {
+            "x": 187,
+            "y": 585,
+            "w": 40,
+            "h": 44
+          },
+          "parent": "rank",
+          "text": "★",
+          "size": 40,
+          "weight": 800,
+          "color": "#074a70",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "star2",
+          "name": "Txt_StarSlot03",
+          "rect": {
+            "x": 235,
+            "y": 585,
+            "w": 40,
+            "h": 44
+          },
+          "parent": "rank",
+          "text": "★",
+          "size": 40,
+          "weight": 800,
+          "color": "#074a70",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "star3",
+          "name": "Txt_StarSlot04",
+          "rect": {
+            "x": 283,
+            "y": 585,
+            "w": 40,
+            "h": 44
+          },
+          "parent": "rank",
+          "text": "★",
+          "size": 40,
+          "weight": 800,
+          "color": "#074a70",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "star4",
+          "name": "Txt_StarSlot05",
+          "rect": {
+            "x": 331,
+            "y": 585,
+            "w": 40,
+            "h": 44
+          },
+          "parent": "rank",
+          "text": "★",
+          "size": 40,
+          "weight": 800,
+          "color": "#074a70",
+          "align": "center"
+        },
+        {
+          "op": "button",
+          "key": "promote",
+          "name": "Btn_HeroPromote",
+          "rect": {
+            "x": 410,
+            "y": 581,
+            "w": 43,
+            "h": 45
+          },
+          "parent": "rank",
+          "text": "",
+          "size": 22,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        },
+        {
+          "op": "image",
+          "key": "promoteIcon",
+          "name": "Img_HeroPromote",
+          "rect": {
+            "x": 414,
+            "y": 585,
+            "w": 35,
+            "h": 37
+          },
+          "parent": "promote",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-building-icons-v001/medal-arrow-up.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "stats",
+          "name": "Group_HeroStats",
+          "rect": {
+            "x": 67,
+            "y": 649,
+            "w": 383,
+            "h": 77
+          },
+          "parent": "root",
+          "fill": "#07597f",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "text",
+          "key": "guardiansLabel",
+          "name": "Txt_guardiansLabel",
+          "rect": {
+            "x": 68,
+            "y": 652,
+            "w": 126,
+            "h": 29
+          },
+          "parent": "stats",
+          "text": "가디언 수량",
+          "size": 18,
+          "weight": 700,
+          "color": "#c8e8f0",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "guardiansValue",
+          "name": "Txt_guardiansValue",
+          "rect": {
+            "x": 68,
+            "y": 681,
+            "w": 126,
+            "h": 40
+          },
+          "parent": "stats",
+          "text": "+2",
+          "size": 28,
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "levelLabel",
+          "name": "Txt_levelLabel",
+          "rect": {
+            "x": 195,
+            "y": 652,
+            "w": 126,
+            "h": 29
+          },
+          "parent": "stats",
+          "text": "레벨",
+          "size": 18,
+          "weight": 700,
+          "color": "#c8e8f0",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "levelValue",
+          "name": "Txt_levelValue",
+          "rect": {
+            "x": 195,
+            "y": 681,
+            "w": 126,
+            "h": 40
+          },
+          "parent": "stats",
+          "text": "5",
+          "size": 28,
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "capacityLabel",
+          "name": "Txt_capacityLabel",
+          "rect": {
+            "x": 322,
+            "y": 652,
+            "w": 126,
+            "h": 29
+          },
+          "parent": "stats",
+          "text": "부대 용량",
+          "size": 18,
+          "weight": 700,
+          "color": "#c8e8f0",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "capacityValue",
+          "name": "Txt_capacityValue",
+          "rect": {
+            "x": 322,
+            "y": 681,
+            "w": 126,
+            "h": 40
+          },
+          "parent": "stats",
+          "text": "+50",
+          "size": 28,
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center"
+        },
+        {
+          "op": "image",
+          "key": "expIcon",
+          "name": "Img_EXP",
+          "rect": {
+            "x": 173,
+            "y": 731,
+            "w": 31,
+            "h": 32
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/objects-a-atlas-ui-v003.png",
+          "fit": "contain",
+          "region": [
+            300,
+            0,
+            150,
+            150
+          ],
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "text",
+          "key": "exp",
+          "name": "Txt_EXP",
+          "rect": {
+            "x": 207,
+            "y": 732,
+            "w": 157,
+            "h": 31
+          },
+          "parent": "root",
+          "text": "52,500/500",
+          "size": 20,
+          "weight": 700,
+          "color": "#7aef54",
+          "align": "center",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "button",
+          "key": "buildingRequired",
+          "name": "Btn_BuildingRequired",
+          "rect": {
+            "x": 126,
+            "y": 770,
+            "w": 58,
+            "h": 36
+          },
+          "parent": "root",
+          "text": "",
+          "size": 18,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "image",
+          "key": "buildingRequiredArrow",
+          "name": "Img_BuildingRequiredArrow",
+          "rect": {
+            "x": 134,
+            "y": 773,
+            "w": 43,
+            "h": 30
+          },
+          "parent": "buildingRequired",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-building-icons-v001/arrow-right-green.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "image",
+          "key": "powerplant",
+          "name": "Img_PowerplantRequirement",
+          "rect": {
+            "x": 192,
+            "y": 767,
+            "w": 43,
+            "h": 43
+          },
+          "parent": "root",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-building-icons-v001/powerplant-requirement.webp",
+          "fit": "contain",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "text",
+          "key": "requiredCopy",
+          "name": "Txt_BuildingRequired",
+          "rect": {
+            "x": 238,
+            "y": 774,
+            "w": 211,
+            "h": 31
+          },
+          "parent": "root",
+          "text": "Lv.4발전소 필요!",
+          "size": 22,
+          "weight": 800,
+          "color": "#ff9c84",
+          "align": "left",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "plain",
+          "key": "footer",
+          "name": "HUD_Bottom",
+          "rect": {
+            "x": 0,
+            "y": 818,
+            "w": 504,
+            "h": 76
+          },
+          "parent": "root",
+          "fill": "#096b8c",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "button",
+          "key": "back",
+          "name": "Btn_Back",
+          "rect": {
+            "x": 0,
+            "y": 822,
+            "w": 74,
+            "h": 64
+          },
+          "parent": "footer",
+          "text": "",
+          "size": 26,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        },
+        {
+          "op": "image",
+          "key": "backIcon",
+          "name": "Img_Back",
+          "rect": {
+            "x": 18,
+            "y": 835,
+            "w": 38,
+            "h": 38
+          },
+          "parent": "back",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-back-arrow-white-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "button",
+          "key": "attributes",
+          "name": "Btn_AttributesTab",
+          "rect": {
+            "x": 90,
+            "y": 818,
+            "w": 200,
+            "h": 64
+          },
+          "parent": "footer",
+          "text": "속성",
+          "size": 24,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "weight": 800,
+          "color": "#2c6076",
+          "align": "center",
+          "press": "tint"
+        },
+        {
+          "op": "button",
+          "key": "skills",
+          "name": "Btn_SkillsTab",
+          "rect": {
+            "x": 294,
+            "y": 818,
+            "w": 200,
+            "h": 64
+          },
+          "parent": "footer",
+          "text": "스킬",
+          "size": 24,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        }
+      ],
+      "notes": [
+        "R02 안정상태. 3D모델은빈Slot_3D; 전신그림투입없음.",
+        "상단정보2개/별슬롯/좌우화살표는위치/역할제안. 원본없는상세본문이나입력결과창작금지.",
+        "발전소조건이보이는상태라업그레이드녹색CTA동시표시금지. 다른state추가는별도notes에만.",
+        "속성/스킬은실제tabs control필요. 스킬본문미확인.",
+        "원본총아이콘·우상단책/목록정보아이콘의정확그림없음. 잘못된fist/모집권대체없음. 해당입구wrapper는있고누락원화는root검수항목."
+      ],
+      "proposedLinks": [
+        {
+          "from": "back",
+          "action": "뒤로",
+          "target": "TS25",
+          "evidence": "TSV02 305→306초,TSV03 20→21초"
+        },
+        {
+          "from": null,
+          "action": "업그레이드 상태변화",
+          "target": "TS26",
+          "evidence": "다른관측시점18~20초레벨5→10",
+          "note": "현기본잠금상태에서는실제성장실행없음."
+        }
+      ]
+    },
+    {
+      "id": "TS19",
+      "name": "Page_TSV_Formation",
+      "nativeKind": "page",
+      "purpose": "소대설정·양측전투력·사건·선택된후보·일괄출전/출격",
+      "actions": [
+        {
+          "op": "plain",
+          "key": "root",
+          "name": "Page_TSV_Formation",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": null,
+          "fill": "#096787",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "plain",
+          "key": "stage",
+          "name": "Slot_3D",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "parent": "root",
+          "fill": "#102c45",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch"
+        },
+        {
+          "op": "text",
+          "key": "stageLabel",
+          "name": "Txt_3DArea",
+          "rect": {
+            "x": 130,
+            "y": 290,
+            "w": 244,
+            "h": 44
+          },
+          "parent": "stage",
+          "text": "3D 영역",
+          "size": 24,
+          "weight": 600,
+          "color": "#93b5c9",
+          "align": "center",
+          "anchorPreset": "center"
+        },
+        {
+          "op": "text",
+          "key": "title",
+          "name": "Txt_FormationTitle",
+          "rect": {
+            "x": 8,
+            "y": 5,
+            "w": 270,
+            "h": 39
+          },
+          "parent": "root",
+          "text": "소대 설정",
+          "size": 28,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "left",
+          "anchorPreset": "top-left"
+        },
+        {
+          "op": "plain",
+          "key": "encounter",
+          "name": "HUD_Encounter",
+          "rect": {
+            "x": 0,
+            "y": 49,
+            "w": 504,
+            "h": 67
+          },
+          "parent": "root",
+          "fill": "#0b6082",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "stretch-x"
+        },
+        {
+          "op": "image",
+          "key": "friendlyPortrait",
+          "name": "Img_FriendlyPortrait",
+          "rect": {
+            "x": 7,
+            "y": 54,
+            "w": 54,
+            "h": 54
+          },
+          "parent": "encounter",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-profile/commander_portrait_v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "image",
+          "key": "friendlyPowerIcon",
+          "name": "Img_FriendlyPower",
+          "rect": {
+            "x": 67,
+            "y": 70,
+            "w": 24,
+            "h": 24
+          },
+          "parent": "encounter",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry/power-fist.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "friendlyPower",
+          "name": "Txt_FriendlyPower",
+          "rect": {
+            "x": 95,
+            "y": 66,
+            "w": 86,
+            "h": 32
+          },
+          "parent": "encounter",
+          "text": "7.42K",
+          "size": 20,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "left"
+        },
+        {
+          "op": "panel",
+          "key": "encounterFrame",
+          "name": "BG_Encounter",
+          "rect": {
+            "x": 191,
+            "y": 49,
+            "w": 122,
+            "h": 67
+          },
+          "parent": "encounter",
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/paper-blue9.webp",
+          "opacity": 1
+        },
+        {
+          "op": "text",
+          "key": "encounterTitle",
+          "name": "Txt_EncounterTitle",
+          "rect": {
+            "x": 194,
+            "y": 67,
+            "w": 116,
+            "h": 34
+          },
+          "parent": "encounter",
+          "text": "스토리 사건",
+          "size": 24,
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center"
+        },
+        {
+          "op": "text",
+          "key": "enemyPower",
+          "name": "Txt_EnemyPower",
+          "rect": {
+            "x": 328,
+            "y": 66,
+            "w": 86,
+            "h": 32
+          },
+          "parent": "encounter",
+          "text": "3.63K",
+          "size": 20,
+          "weight": 700,
+          "color": "#72ed56",
+          "align": "left"
+        },
+        {
+          "op": "image",
+          "key": "enemyPortrait",
+          "name": "Img_EnemyPortrait",
+          "rect": {
+            "x": 444,
+            "y": 54,
+            "w": 54,
+            "h": 54
+          },
+          "parent": "encounter",
+          "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/objects-b-atlas-ui-v003.png",
+          "fit": "contain",
+          "region": [
+            0,
+            0,
+            150,
+            150
+          ]
+        },
+        {
+          "op": "plain",
+          "key": "tray",
+          "name": "HUD_Candidates",
+          "rect": {
+            "x": 0,
+            "y": 584,
+            "w": 504,
+            "h": 234
+          },
+          "parent": "root",
+          "fill": "#106d8c",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "overflow": "clip",
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "button",
+          "key": "candidate",
+          "name": "Btn_CandidateGhost",
+          "rect": {
+            "x": 18,
+            "y": 600,
+            "w": 110,
+            "h": 70
+          },
+          "parent": "tray",
+          "text": "",
+          "size": 18,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-card-purple9-v003.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        },
+        {
+          "op": "image",
+          "key": "candidateFace",
+          "name": "Img_CandidateGhost",
+          "rect": {
+            "x": 22,
+            "y": 604,
+            "w": 102,
+            "h": 62
+          },
+          "parent": "candidate",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-heroes/ghost-portrait-v001.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "text",
+          "key": "candidateLevel",
+          "name": "Txt_CandidateLevel",
+          "rect": {
+            "x": 80,
+            "y": 603,
+            "w": 43,
+            "h": 23
+          },
+          "parent": "candidate",
+          "text": "Lv.1",
+          "size": 16,
+          "weight": 700,
+          "color": "#ffffff",
+          "align": "left"
+        },
+        {
+          "op": "image",
+          "key": "candidateSelected",
+          "name": "Img_CandidateSelected",
+          "rect": {
+            "x": 47,
+            "y": 617,
+            "w": 48,
+            "h": 45
+          },
+          "parent": "candidate",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-building-icons-v001/check-green.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "plain",
+          "key": "footer",
+          "name": "HUD_Bottom",
+          "rect": {
+            "x": 0,
+            "y": 818,
+            "w": 504,
+            "h": 76
+          },
+          "parent": "root",
+          "fill": "#096b8c",
+          "strokeWidth": 0,
+          "radius": 0,
+          "opacity": 1,
+          "anchorPreset": "bottom-left"
+        },
+        {
+          "op": "button",
+          "key": "back",
+          "name": "Btn_Back",
+          "rect": {
+            "x": 0,
+            "y": 822,
+            "w": 74,
+            "h": 64
+          },
+          "parent": "footer",
+          "text": "",
+          "size": 26,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        },
+        {
+          "op": "image",
+          "key": "backIcon",
+          "name": "Img_Back",
+          "rect": {
+            "x": 18,
+            "y": 835,
+            "w": 38,
+            "h": 38
+          },
+          "parent": "back",
+          "path": "/ui-studio/source/assets/import-staging/tile-survival-geometry-v003/hero-back-arrow-white-v003.webp",
+          "fit": "contain"
+        },
+        {
+          "op": "button",
+          "key": "deployAll",
+          "name": "Btn_DeployAll",
+          "rect": {
+            "x": 84,
+            "y": 820,
+            "w": 200,
+            "h": 64
+          },
+          "parent": "footer",
+          "text": "일괄 출전",
+          "size": 26,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/button-green3.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        },
+        {
+          "op": "button",
+          "key": "startBattle",
+          "name": "Btn_StartBattle",
+          "rect": {
+            "x": 290,
+            "y": 820,
+            "w": 200,
+            "h": 64
+          },
+          "parent": "footer",
+          "text": "출격",
+          "size": 26,
+          "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/button-green3.webp",
+          "weight": 800,
+          "color": "#ffffff",
+          "align": "center",
+          "press": "tint"
+        }
+      ],
+      "notes": [
+        "R01:7.42K/3.63K·후보1명선택. 다른시점12.79K/5.86K혼합금지.",
+        "전장·배치캐릭터·배치칸은빈3D슬롯이며가상배치/계산없음.",
+        "후보선택/일괄출전입력결과미확인. 스크롤미관측,현재tray는clip.",
+        "버튼내모든그림·글자·중간부모parent전달."
+      ],
+      "proposedLinks": [
+        {
+          "from": "startBattle",
+          "action": "출격",
+          "target": "TS20",
+          "evidence": "TSV02 210→215초 sequence_observed"
+        },
+        {
+          "from": "back",
+          "action": "뒤로",
+          "target": null,
+          "evidence": "아이콘관찰·정확복귀미확인",
+          "note": "호출원복귀는제작제안"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+export function installOptions(t,th,write){
+t.actionModeBase=t.action;t.action=async a=>{let id=await t.actionModeBase(a);if(a.inputMode){await t.pick(id);await t.tab('general');await t.set('[data-part-field="mode"]',a.inputMode);}if(a.op!=='plain'&&a.overflow){await t.pick(id);await t.tab('layout');await t.set('[data-responsive-field="overflow"]',a.overflow);await t.set('[data-responsive-field="scrollbar"]','hidden');}if(a.skinMetrics){await t.pick(id);await t.tab('general');for(let k of ['slices','edges'])for(let i=0;i<4;i++)await t.set('[data-skin-field="'+k+'.'+i+'"]',a.skinMetrics[i]);}if(a.inputShape){await t.pick(id);await t.tab('general');await t.set('[data-part-field="shape"]',a.inputShape);}return id;};
+}

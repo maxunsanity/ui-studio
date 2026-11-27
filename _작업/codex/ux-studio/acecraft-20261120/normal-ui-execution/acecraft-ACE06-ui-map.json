@@ -1,0 +1,675 @@
+{
+  "family": {
+    "id": "ACE06",
+    "name": "Modal_ACE_Friends",
+    "nativeKind": "modal",
+    "purpose": "영상 A 14초 대표 FRIENDS 목록 화면의 정상 UI 조립 지침. 배후 게임 UI는 포함하지 않음.",
+    "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00014.jpg",
+    "actions": [
+      {
+        "key": "root",
+        "op": "plain",
+        "name": "Panel_ACE_Friends_Root",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "fill": "#17232a"
+      },
+      {
+        "key": "Body",
+        "op": "panel",
+        "name": "Panel_ACE_Friends_Body",
+        "rect": {
+          "x": 10,
+          "y": 177,
+          "w": 400,
+          "h": 647
+        },
+        "parent": "root",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+        "skinMetrics": [
+          20,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "key": "Title",
+        "op": "text",
+        "name": "Txt_ACE_Friends_Title",
+        "rect": {
+          "x": 67,
+          "y": 202,
+          "w": 280,
+          "h": 51
+        },
+        "parent": "Body",
+        "text": "FRIENDS",
+        "size": 37,
+        "weight": "bold",
+        "color": "#b96850",
+        "align": "center"
+      },
+      {
+        "key": "Close",
+        "op": "button",
+        "name": "Btn_ACE_Friends_Close",
+        "rect": {
+          "x": 366,
+          "y": 166,
+          "w": 42,
+          "h": 46
+        },
+        "parent": "root",
+        "text": "×",
+        "size": 28,
+        "color": "#fff8e7",
+        "fill": "#b86451",
+        "skin": null,
+        "skinMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "FriendCount",
+        "op": "text",
+        "name": "Txt_ACE_Friends_FriendCount",
+        "rect": {
+          "x": 31,
+          "y": 272,
+          "w": 145,
+          "h": 21
+        },
+        "parent": "Body",
+        "text": "Friends 4/50",
+        "size": 13,
+        "weight": "bold",
+        "color": "#8a765a",
+        "align": "left"
+      },
+      {
+        "key": "Sort",
+        "op": "button",
+        "name": "Btn_ACE_Friends_Sort",
+        "rect": {
+          "x": 264,
+          "y": 260,
+          "w": 122,
+          "h": 31
+        },
+        "parent": "Body",
+        "text": "By Level",
+        "size": 12,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Remove",
+        "op": "button",
+        "name": "Btn_ACE_Friends_Remove",
+        "rect": {
+          "x": 218,
+          "y": 259,
+          "w": 32,
+          "h": 32
+        },
+        "parent": "Body",
+        "text": "⌫",
+        "size": 17,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "List",
+        "op": "plain",
+        "name": "Panel_ACE_Friends_List",
+        "rect": {
+          "x": 26,
+          "y": 298,
+          "w": 368,
+          "h": 380
+        },
+        "parent": "Body",
+        "fill": "#ece1c6",
+        "overflow": "scroll-y"
+      },
+      {
+        "key": "Friend1",
+        "op": "panel",
+        "name": "Panel_ACE_Friends_Friend1",
+        "rect": {
+          "x": 29,
+          "y": 301,
+          "w": 363,
+          "h": 83
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Avatar1",
+        "op": "image",
+        "name": "Img_ACE_Friends_Avatar1",
+        "rect": {
+          "x": 43,
+          "y": 314,
+          "w": 47,
+          "h": 47
+        },
+        "parent": "Friend1",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          64,
+          128,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "FriendText1",
+        "op": "text",
+        "name": "Txt_ACE_Friends_FriendText1",
+        "rect": {
+          "x": 104,
+          "y": 308,
+          "w": 180,
+          "h": 66
+        },
+        "parent": "Friend1",
+        "text": "SamplePilot01 · Lv.60\nChordwind Grove 16-7\n10h ago",
+        "size": 12,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "EnergySend1",
+        "op": "button",
+        "name": "Btn_ACE_Friends_EnergySend1",
+        "rect": {
+          "x": 290,
+          "y": 324,
+          "w": 36,
+          "h": 36
+        },
+        "parent": "Friend1",
+        "text": "ϟ",
+        "size": 23,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "EnergyClaim1",
+        "op": "button",
+        "name": "Btn_ACE_Friends_EnergyClaim1",
+        "rect": {
+          "x": 332,
+          "y": 324,
+          "w": 36,
+          "h": 36
+        },
+        "parent": "Friend1",
+        "text": "ϟ",
+        "size": 23,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Friend2",
+        "op": "panel",
+        "name": "Panel_ACE_Friends_Friend2",
+        "rect": {
+          "x": 29,
+          "y": 393,
+          "w": 363,
+          "h": 83
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Avatar2",
+        "op": "image",
+        "name": "Img_ACE_Friends_Avatar2",
+        "rect": {
+          "x": 43,
+          "y": 406,
+          "w": 47,
+          "h": 47
+        },
+        "parent": "Friend2",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          64,
+          128,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "FriendText2",
+        "op": "text",
+        "name": "Txt_ACE_Friends_FriendText2",
+        "rect": {
+          "x": 104,
+          "y": 400,
+          "w": 180,
+          "h": 66
+        },
+        "parent": "Friend2",
+        "text": "SamplePilot02 · Lv.60\nThe Elsewhere 15-2\nLast online 30d ago",
+        "size": 12,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "EnergySend2",
+        "op": "button",
+        "name": "Btn_ACE_Friends_EnergySend2",
+        "rect": {
+          "x": 290,
+          "y": 416,
+          "w": 36,
+          "h": 36
+        },
+        "parent": "Friend2",
+        "text": "ϟ",
+        "size": 23,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "EnergyClaim2",
+        "op": "button",
+        "name": "Btn_ACE_Friends_EnergyClaim2",
+        "rect": {
+          "x": 332,
+          "y": 416,
+          "w": 36,
+          "h": 36
+        },
+        "parent": "Friend2",
+        "text": "ϟ",
+        "size": 23,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Friend3",
+        "op": "panel",
+        "name": "Panel_ACE_Friends_Friend3",
+        "rect": {
+          "x": 29,
+          "y": 485,
+          "w": 363,
+          "h": 83
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Avatar3",
+        "op": "image",
+        "name": "Img_ACE_Friends_Avatar3",
+        "rect": {
+          "x": 43,
+          "y": 498,
+          "w": 47,
+          "h": 47
+        },
+        "parent": "Friend3",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          64,
+          128,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "FriendText3",
+        "op": "text",
+        "name": "Txt_ACE_Friends_FriendText3",
+        "rect": {
+          "x": 104,
+          "y": 492,
+          "w": 180,
+          "h": 66
+        },
+        "parent": "Friend3",
+        "text": "SamplePilot03 · Lv.60\nJollyhats Jubilee 14-6\n6d ago",
+        "size": 12,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "EnergySend3",
+        "op": "button",
+        "name": "Btn_ACE_Friends_EnergySend3",
+        "rect": {
+          "x": 290,
+          "y": 508,
+          "w": 36,
+          "h": 36
+        },
+        "parent": "Friend3",
+        "text": "ϟ",
+        "size": 23,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "EnergyClaim3",
+        "op": "button",
+        "name": "Btn_ACE_Friends_EnergyClaim3",
+        "rect": {
+          "x": 332,
+          "y": 508,
+          "w": 36,
+          "h": 36
+        },
+        "parent": "Friend3",
+        "text": "ϟ",
+        "size": 23,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Friend4",
+        "op": "panel",
+        "name": "Panel_ACE_Friends_Friend4",
+        "rect": {
+          "x": 29,
+          "y": 577,
+          "w": 363,
+          "h": 83
+        },
+        "parent": "List",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Avatar4",
+        "op": "image",
+        "name": "Img_ACE_Friends_Avatar4",
+        "rect": {
+          "x": 43,
+          "y": 590,
+          "w": 47,
+          "h": 47
+        },
+        "parent": "Friend4",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          64,
+          128,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "FriendText4",
+        "op": "text",
+        "name": "Txt_ACE_Friends_FriendText4",
+        "rect": {
+          "x": 104,
+          "y": 584,
+          "w": 180,
+          "h": 66
+        },
+        "parent": "Friend4",
+        "text": "SamplePilot04 · Lv.60\nJollyhats Jubilee 14-4\nLast online 7d ago",
+        "size": 12,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "EnergySend4",
+        "op": "button",
+        "name": "Btn_ACE_Friends_EnergySend4",
+        "rect": {
+          "x": 290,
+          "y": 600,
+          "w": 36,
+          "h": 36
+        },
+        "parent": "Friend4",
+        "text": "ϟ",
+        "size": 23,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "EnergyClaim4",
+        "op": "button",
+        "name": "Btn_ACE_Friends_EnergyClaim4",
+        "rect": {
+          "x": 332,
+          "y": 600,
+          "w": 36,
+          "h": 36
+        },
+        "parent": "Friend4",
+        "text": "ϟ",
+        "size": 23,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Claims",
+        "op": "text",
+        "name": "Txt_ACE_Friends_Claims",
+        "rect": {
+          "x": 216,
+          "y": 681,
+          "w": 176,
+          "h": 21
+        },
+        "parent": "Body",
+        "text": "Today’s Claims 0/5",
+        "size": 14,
+        "weight": "bold",
+        "color": "#6f6959",
+        "align": "left"
+      },
+      {
+        "key": "NewFriends",
+        "op": "button",
+        "name": "Btn_ACE_Friends_NewFriends",
+        "rect": {
+          "x": 61,
+          "y": 705,
+          "w": 138,
+          "h": 56
+        },
+        "parent": "Body",
+        "text": "New Friends",
+        "size": 17,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "SendClaim",
+        "op": "button",
+        "name": "Btn_ACE_Friends_SendClaim",
+        "rect": {
+          "x": 224,
+          "y": 705,
+          "w": 142,
+          "h": 56
+        },
+        "parent": "Body",
+        "text": "Send and\nClaim All",
+        "size": 16,
+        "color": "#ffffff",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "key": "Reset",
+        "op": "text",
+        "name": "Txt_ACE_Friends_Reset",
+        "rect": {
+          "x": 44,
+          "y": 770,
+          "w": 337,
+          "h": 23
+        },
+        "parent": "Body",
+        "text": "Claiming chances reset daily at 00:00.",
+        "size": 11,
+        "weight": "bold",
+        "color": "#9a8a69",
+        "align": "center"
+      }
+    ],
+    "notes": [
+      "SamplePilot01–04 are fictional proposed replacements for account/friend names. No personal IDs are copied.",
+      "Prepared friend glyph substitutes for portraits; native ϟ labels substitute for energy icons. All same-role energy buttons are 36×36."
+    ]
+  },
+  "sid": "screen-42c82cb7-49d5-46af-b2c9-05b4fd78c05e",
+  "i": 32,
+  "map": {
+    "root": "element-73cd527b-7570-4f78-9e1e-df8180f99cc9",
+    "Body": "element-01e480c7-942a-4d5e-a216-837192a062c7",
+    "Title": "element-35f3300c-bc81-4e96-abda-39b7789197f3",
+    "Close": "element-5e1a9260-72d3-44f6-9198-2b443b657daa",
+    "FriendCount": "element-6c12a9c3-3685-4e38-83fd-314857eb2f72",
+    "Sort": "element-df598525-4ffe-4852-b230-ad2f549be909",
+    "Remove": "element-cbe61e98-6612-4b8b-b59c-cc7b91f2375c",
+    "List": "element-943e2627-06d5-413d-a654-7217a7977b09",
+    "Friend1": "element-8300d760-a785-42f5-84b3-2a1b9eb00d28",
+    "Avatar1": "element-83f94788-0a10-473d-b42d-ccc00c99f2a6",
+    "FriendText1": "element-942e022b-6b29-4887-97bb-9052fb22c136",
+    "EnergySend1": "element-4bbb7993-0e19-4d2f-b733-ea03138b29ce",
+    "EnergyClaim1": "element-6fed1851-7c15-4924-943d-1bf485b66ee5",
+    "Friend2": "element-c9bd76e7-f9d8-4b61-9a50-05dee4b3e605",
+    "Avatar2": "element-ad88572f-e169-477a-9bea-50bba3ae4509",
+    "FriendText2": "element-0ea6506c-2c85-44ff-b725-434d4119d8f4",
+    "EnergySend2": "element-8fcd9be3-52c3-44ba-bc8f-0e211765466c",
+    "EnergyClaim2": "element-7d66c89b-fde7-4709-b0f8-58ec469a9c4e",
+    "Friend3": "element-4ae506c6-0905-4ad3-98fc-a606c9bd0901",
+    "Avatar3": "element-f0657c96-7243-42f6-83ea-cd56fa0970b1",
+    "FriendText3": "element-a60ce8e3-a7f4-43cf-bb88-c4ad7eb28529",
+    "EnergySend3": "element-7c64bf7c-c4eb-4168-be75-3fb9be24ebae",
+    "EnergyClaim3": "element-1dda354e-9dde-4b75-91b9-c43790ee4300",
+    "Friend4": "element-5082392a-b631-42bb-bfe6-3feb06b6f835",
+    "Avatar4": "element-a5dd83a0-d381-4a61-a60b-2aca3db0b417",
+    "FriendText4": "element-fccbb10c-3970-463a-afde-1a064bb95302",
+    "EnergySend4": "element-36a2bca1-9539-4269-ba7a-285972685244",
+    "EnergyClaim4": "element-e74e1cd8-058e-4624-84b7-d4d79305c922",
+    "Claims": "element-be415fff-2436-4391-82d5-3882b152c51a",
+    "NewFriends": "element-8520d3fa-feee-470b-b5a2-99adb5772c20",
+    "SendClaim": "element-a8be6ecc-2585-4539-8d6b-523a8a2bd4d2",
+    "Reset": "element-a9fdb62c-ecdf-4492-9a9e-6577942d38d8"
+  }
+}

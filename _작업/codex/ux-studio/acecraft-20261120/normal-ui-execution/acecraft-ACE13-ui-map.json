@@ -1,0 +1,273 @@
+{
+  "family": {
+    "id": "ACE13",
+    "name": "Modal_ACE_ItemInfo",
+    "nativeKind": "modal",
+    "purpose": "영상 A 75초 대표 Overdrive Ticket 정보 화면의 정상 UI 조립 지침. 배후 게임 UI는 포함하지 않음.",
+    "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00075.jpg",
+    "actions": [
+      {
+        "key": "root",
+        "op": "plain",
+        "name": "Panel_ACE_ItemInfo_Root",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "fill": "#17232a"
+      },
+      {
+        "key": "Close",
+        "op": "button",
+        "name": "Btn_ACE_ItemInfo_Close",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "parent": "root",
+        "text": "",
+        "size": 1,
+        "color": "#17232a",
+        "fill": "#17232a",
+        "skin": null,
+        "skinMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "hitAreaOnly": true
+      },
+      {
+        "key": "Body",
+        "op": "panel",
+        "name": "Panel_ACE_ItemInfo_Body",
+        "rect": {
+          "x": 10,
+          "y": 333,
+          "w": 400,
+          "h": 301
+        },
+        "parent": "root",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+        "skinMetrics": [
+          20,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "key": "OwnedBadge",
+        "op": "plain",
+        "name": "Panel_ACE_ItemInfo_OwnedBadge",
+        "rect": {
+          "x": 286,
+          "y": 379,
+          "w": 108,
+          "h": 23
+        },
+        "parent": "Body",
+        "fill": "#d8d2c5"
+      },
+      {
+        "key": "OwnedLabel",
+        "op": "text",
+        "name": "Txt_ACE_ItemInfo_OwnedLabel",
+        "rect": {
+          "x": 289,
+          "y": 379,
+          "w": 65,
+          "h": 22
+        },
+        "parent": "OwnedBadge",
+        "text": "Owned:",
+        "size": 14,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "left"
+      },
+      {
+        "key": "OwnedCount",
+        "op": "text",
+        "name": "Txt_ACE_ItemInfo_OwnedCount",
+        "rect": {
+          "x": 353,
+          "y": 379,
+          "w": 36,
+          "h": 22
+        },
+        "parent": "OwnedBadge",
+        "text": "20",
+        "size": 14,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "right"
+      },
+      {
+        "key": "ItemTile",
+        "op": "panel",
+        "name": "Panel_ACE_ItemInfo_ItemTile",
+        "rect": {
+          "x": 174,
+          "y": 404,
+          "w": 79,
+          "h": 80
+        },
+        "parent": "Body",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "key": "Ticket",
+        "op": "image",
+        "name": "Img_ACE_ItemInfo_Ticket",
+        "rect": {
+          "x": 183,
+          "y": 412,
+          "w": 61,
+          "h": 60
+        },
+        "parent": "ItemTile",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-shop-items-atlas-v001.webp",
+        "region": [
+          400,
+          0,
+          200,
+          200
+        ],
+        "fit": "contain"
+      },
+      {
+        "key": "Title",
+        "op": "text",
+        "name": "Txt_ACE_ItemInfo_Title",
+        "rect": {
+          "x": 103,
+          "y": 495,
+          "w": 214,
+          "h": 30
+        },
+        "parent": "Body",
+        "text": "Overdrive Ticket",
+        "size": 20,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "center"
+      },
+      {
+        "key": "Rule",
+        "op": "plain",
+        "name": "Panel_ACE_ItemInfo_Rule",
+        "rect": {
+          "x": 49,
+          "y": 526,
+          "w": 321,
+          "h": 1
+        },
+        "parent": "Body",
+        "fill": "#a99777"
+      },
+      {
+        "key": "DetailLine1",
+        "op": "text",
+        "name": "Txt_ACE_ItemInfo_DetailLine1",
+        "rect": {
+          "x": 43,
+          "y": 533,
+          "w": 335,
+          "h": 21
+        },
+        "parent": "Body",
+        "text": "An event item used to participate in Special",
+        "size": 12,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "center"
+      },
+      {
+        "key": "DetailLine2",
+        "op": "text",
+        "name": "Txt_ACE_ItemInfo_DetailLine2",
+        "rect": {
+          "x": 43,
+          "y": 552,
+          "w": 335,
+          "h": 21
+        },
+        "parent": "Body",
+        "text": "Recruit. It will be converted to Skyward Recruit",
+        "size": 12,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "center"
+      },
+      {
+        "key": "DetailLine3",
+        "op": "text",
+        "name": "Txt_ACE_ItemInfo_DetailLine3",
+        "rect": {
+          "x": 43,
+          "y": 571,
+          "w": 335,
+          "h": 21
+        },
+        "parent": "Body",
+        "text": "Tickets at a 1:1 ratio and sent to you via mail",
+        "size": 12,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "center"
+      },
+      {
+        "key": "DetailLine4",
+        "op": "text",
+        "name": "Txt_ACE_ItemInfo_DetailLine4",
+        "rect": {
+          "x": 43,
+          "y": 590,
+          "w": 335,
+          "h": 21
+        },
+        "parent": "Body",
+        "text": "after the event ends.",
+        "size": 12,
+        "weight": "bold",
+        "color": "#4f3d2b",
+        "align": "center"
+      }
+    ],
+    "notes": [
+      "Close is a native backdrop target; no visible X is shown in this reference.",
+      "Description transcription is from the enlarged original frame.",
+      "v004 artwork-only patch: Ticket → blue. Uses the newly drawn six-cell shop atlas; source item identity and exact original shape are not claimed. Text, quantities, duration, positions, parents, inputs and button behavior are unchanged."
+    ]
+  },
+  "sid": "screen-ba94cdc6-9391-47fb-8c07-37f2369770bb",
+  "i": 14,
+  "map": {
+    "root": "element-3261bf72-cfb5-4041-ad6d-57ee2d62267d",
+    "Close": "element-fed137b1-6191-436e-abfe-040561bb281a",
+    "Body": "element-dd53fb0f-326b-42b0-966f-91c28449255b",
+    "OwnedBadge": "element-c8adca3a-1eff-4a10-8cc0-77ee67fef5da",
+    "OwnedLabel": "element-0ec723f8-d873-4e25-ae20-c0d78a27cf25",
+    "OwnedCount": "element-0c64fa3d-c122-45d3-82b5-aa53e45b9d68",
+    "ItemTile": "element-c2c225f1-df2b-438b-a921-961cc12efdc3",
+    "Ticket": "element-bc4b1995-8d78-4129-8789-33f5746c3dae",
+    "Title": "element-d91503bc-3b42-4520-9228-1c3197ea70aa",
+    "Rule": "element-c4c3d30a-f4c7-44a3-a515-8b0e9fe9e35b",
+    "DetailLine1": "element-675daf7e-9d1b-4ff1-9464-1168502f66f6",
+    "DetailLine2": "element-e259ef35-6abe-4994-8342-746f4050b1ad",
+    "DetailLine3": "element-a5a359a4-7427-4e76-9680-f54090c4d552",
+    "DetailLine4": "element-48c60550-6f9d-4565-adaf-00cdf9674510"
+  }
+}

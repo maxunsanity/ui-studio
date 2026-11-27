@@ -1,0 +1,848 @@
+{
+  "family": {
+    "id": "ACE02",
+    "name": "Page_ACE_PilotList",
+    "nativeKind": "page",
+    "purpose": "Pilot collection: nine equal cards, observed first six level labels, filter and amplification affordance.",
+    "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00005.jpg",
+    "actions": [
+      {
+        "op": "plain",
+        "key": "root",
+        "name": "Panel_ACE02_root",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "fill": "#594b3c"
+      },
+      {
+        "op": "panel",
+        "key": "Header",
+        "name": "Panel_ACE02_Header",
+        "rect": {
+          "x": 73,
+          "y": 50,
+          "w": 277,
+          "h": 67
+        },
+        "parent": "root",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_brownheader9_normal_v001.png",
+        "skinMetrics": [
+          20,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "op": "text",
+        "key": "Title",
+        "name": "Txt_ACE02_Title",
+        "rect": {
+          "x": 85,
+          "y": 65,
+          "w": 255,
+          "h": 40
+        },
+        "parent": "root",
+        "text": "PILOT LIST",
+        "size": 29,
+        "weight": 800,
+        "color": "#fff0bd",
+        "align": "center"
+      },
+      {
+        "op": "button",
+        "key": "Filter",
+        "name": "Btn_ACE02_Filter",
+        "rect": {
+          "x": 17,
+          "y": 167,
+          "w": 122,
+          "h": 35
+        },
+        "parent": "root",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_bluecta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "op": "text",
+        "key": "FilterLabel",
+        "name": "Txt_ACE02_FilterLabel",
+        "rect": {
+          "x": 24,
+          "y": 175,
+          "w": 108,
+          "h": 23
+        },
+        "parent": "Filter",
+        "text": "All",
+        "size": 17,
+        "weight": 700,
+        "color": "#493329",
+        "align": "left"
+      },
+      {
+        "op": "text",
+        "key": "Collection",
+        "name": "Txt_ACE02_Collection",
+        "rect": {
+          "x": 254,
+          "y": 171,
+          "w": 145,
+          "h": 25
+        },
+        "parent": "root",
+        "text": "Pilots 28/29",
+        "size": 16,
+        "weight": 700,
+        "color": "#fff0ad",
+        "align": "center"
+      },
+      {
+        "op": "text",
+        "key": "Amplification",
+        "name": "Txt_ACE02_Amplification",
+        "rect": {
+          "x": 62,
+          "y": 230,
+          "w": 240,
+          "h": 43
+        },
+        "parent": "root",
+        "text": "900/81\nMax Pilot Lv. +0 after Amplification.",
+        "size": 12,
+        "weight": 700,
+        "color": "#493329",
+        "align": "center"
+      },
+      {
+        "op": "button",
+        "key": "Advance",
+        "name": "Btn_ACE02_Advance",
+        "rect": {
+          "x": 322,
+          "y": 240,
+          "w": 74,
+          "h": 32
+        },
+        "parent": "root",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "op": "text",
+        "key": "AdvanceLabel",
+        "name": "Txt_ACE02_AdvanceLabel",
+        "rect": {
+          "x": 325,
+          "y": 248,
+          "w": 68,
+          "h": 21
+        },
+        "parent": "Advance",
+        "text": "Advance",
+        "size": 13,
+        "weight": 700,
+        "color": "#493329",
+        "align": "center"
+      },
+      {
+        "op": "plain",
+        "key": "ListViewport",
+        "name": "Frame_ACE02_ListViewport",
+        "rect": {
+          "x": 0,
+          "y": 280,
+          "w": 420,
+          "h": 520
+        },
+        "parent": "root",
+        "fill": "#00000000",
+        "partRole": "frame",
+        "overflow": "scroll-y"
+      },
+      {
+        "op": "button",
+        "key": "Pilot1",
+        "name": "Btn_ACE02_Pilot1",
+        "rect": {
+          "x": 18,
+          "y": 286,
+          "w": 113,
+          "h": 176
+        },
+        "parent": "ListViewport",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "op": "image",
+        "key": "Pilot1Portrait",
+        "name": "Img_ACE02_Pilot1Portrait",
+        "rect": {
+          "x": 22,
+          "y": 298,
+          "w": 105,
+          "h": 118
+        },
+        "parent": "Pilot1",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+        "fit": "contain",
+        "region": [
+          0,
+          0,
+          200,
+          200
+        ]
+      },
+      {
+        "op": "button",
+        "key": "Pilot2",
+        "name": "Btn_ACE02_Pilot2",
+        "rect": {
+          "x": 153,
+          "y": 286,
+          "w": 113,
+          "h": 176
+        },
+        "parent": "ListViewport",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "op": "image",
+        "key": "Pilot2Portrait",
+        "name": "Img_ACE02_Pilot2Portrait",
+        "rect": {
+          "x": 157,
+          "y": 298,
+          "w": 105,
+          "h": 118
+        },
+        "parent": "Pilot2",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+        "fit": "contain",
+        "region": [
+          200,
+          0,
+          200,
+          200
+        ]
+      },
+      {
+        "op": "button",
+        "key": "Pilot3",
+        "name": "Btn_ACE02_Pilot3",
+        "rect": {
+          "x": 288,
+          "y": 286,
+          "w": 113,
+          "h": 176
+        },
+        "parent": "ListViewport",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "op": "image",
+        "key": "Pilot3Portrait",
+        "name": "Img_ACE02_Pilot3Portrait",
+        "rect": {
+          "x": 292,
+          "y": 298,
+          "w": 105,
+          "h": 118
+        },
+        "parent": "Pilot3",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+        "fit": "contain",
+        "region": [
+          400,
+          0,
+          200,
+          200
+        ]
+      },
+      {
+        "op": "button",
+        "key": "Pilot4",
+        "name": "Btn_ACE02_Pilot4",
+        "rect": {
+          "x": 18,
+          "y": 484,
+          "w": 113,
+          "h": 176
+        },
+        "parent": "ListViewport",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "op": "image",
+        "key": "Pilot4Portrait",
+        "name": "Img_ACE02_Pilot4Portrait",
+        "rect": {
+          "x": 22,
+          "y": 496,
+          "w": 105,
+          "h": 118
+        },
+        "parent": "Pilot4",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+        "fit": "contain",
+        "region": [
+          0,
+          200,
+          200,
+          200
+        ]
+      },
+      {
+        "op": "button",
+        "key": "Pilot5",
+        "name": "Btn_ACE02_Pilot5",
+        "rect": {
+          "x": 153,
+          "y": 484,
+          "w": 113,
+          "h": 176
+        },
+        "parent": "ListViewport",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "op": "image",
+        "key": "Pilot5Portrait",
+        "name": "Img_ACE02_Pilot5Portrait",
+        "rect": {
+          "x": 157,
+          "y": 496,
+          "w": 105,
+          "h": 118
+        },
+        "parent": "Pilot5",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+        "fit": "contain",
+        "region": [
+          200,
+          200,
+          200,
+          200
+        ]
+      },
+      {
+        "op": "button",
+        "key": "Pilot6",
+        "name": "Btn_ACE02_Pilot6",
+        "rect": {
+          "x": 288,
+          "y": 484,
+          "w": 113,
+          "h": 176
+        },
+        "parent": "ListViewport",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "op": "image",
+        "key": "Pilot6Portrait",
+        "name": "Img_ACE02_Pilot6Portrait",
+        "rect": {
+          "x": 292,
+          "y": 496,
+          "w": 105,
+          "h": 118
+        },
+        "parent": "Pilot6",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+        "fit": "contain",
+        "region": [
+          400,
+          200,
+          200,
+          200
+        ]
+      },
+      {
+        "op": "button",
+        "key": "Pilot7",
+        "name": "Btn_ACE02_Pilot7",
+        "rect": {
+          "x": 18,
+          "y": 682,
+          "w": 113,
+          "h": 176
+        },
+        "parent": "ListViewport",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "op": "image",
+        "key": "Pilot7Portrait",
+        "name": "Img_ACE02_Pilot7Portrait",
+        "rect": {
+          "x": 22,
+          "y": 694,
+          "w": 105,
+          "h": 118
+        },
+        "parent": "Pilot7",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+        "fit": "contain",
+        "region": [
+          0,
+          400,
+          200,
+          200
+        ]
+      },
+      {
+        "op": "button",
+        "key": "Pilot8",
+        "name": "Btn_ACE02_Pilot8",
+        "rect": {
+          "x": 153,
+          "y": 682,
+          "w": 113,
+          "h": 176
+        },
+        "parent": "ListViewport",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "op": "image",
+        "key": "Pilot8Portrait",
+        "name": "Img_ACE02_Pilot8Portrait",
+        "rect": {
+          "x": 157,
+          "y": 694,
+          "w": 105,
+          "h": 118
+        },
+        "parent": "Pilot8",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+        "fit": "contain",
+        "region": [
+          200,
+          400,
+          200,
+          200
+        ]
+      },
+      {
+        "op": "button",
+        "key": "Pilot9",
+        "name": "Btn_ACE02_Pilot9",
+        "rect": {
+          "x": 288,
+          "y": 682,
+          "w": 113,
+          "h": 176
+        },
+        "parent": "ListViewport",
+        "text": "",
+        "size": 14,
+        "weight": 700,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_itemtilecream9_normal_v001.png",
+        "skinMetrics": [
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "op": "image",
+        "key": "Pilot9Portrait",
+        "name": "Img_ACE02_Pilot9Portrait",
+        "rect": {
+          "x": 292,
+          "y": 694,
+          "w": 105,
+          "h": 118
+        },
+        "parent": "Pilot9",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-pilot-portraits-atlas-v1.webp",
+        "fit": "contain",
+        "region": [
+          400,
+          400,
+          200,
+          200
+        ]
+      },
+      {
+        "op": "text",
+        "key": "Level1",
+        "name": "Txt_ACE02_Level1",
+        "rect": {
+          "x": 36,
+          "y": 293,
+          "w": 88,
+          "h": 25
+        },
+        "parent": "Pilot1",
+        "text": "Lv.60",
+        "size": 14,
+        "weight": 700,
+        "color": "#fff9dc",
+        "align": "center"
+      },
+      {
+        "op": "text",
+        "key": "Level2",
+        "name": "Txt_ACE02_Level2",
+        "rect": {
+          "x": 171,
+          "y": 293,
+          "w": 88,
+          "h": 25
+        },
+        "parent": "Pilot2",
+        "text": "Lv.35",
+        "size": 14,
+        "weight": 700,
+        "color": "#fff9dc",
+        "align": "center"
+      },
+      {
+        "op": "text",
+        "key": "Level3",
+        "name": "Txt_ACE02_Level3",
+        "rect": {
+          "x": 306,
+          "y": 293,
+          "w": 88,
+          "h": 25
+        },
+        "parent": "Pilot3",
+        "text": "Lv.60",
+        "size": 14,
+        "weight": 700,
+        "color": "#fff9dc",
+        "align": "center"
+      },
+      {
+        "op": "text",
+        "key": "Level4",
+        "name": "Txt_ACE02_Level4",
+        "rect": {
+          "x": 36,
+          "y": 491,
+          "w": 88,
+          "h": 25
+        },
+        "parent": "Pilot4",
+        "text": "Lv.40",
+        "size": 14,
+        "weight": 700,
+        "color": "#fff9dc",
+        "align": "center"
+      },
+      {
+        "op": "text",
+        "key": "Level5",
+        "name": "Txt_ACE02_Level5",
+        "rect": {
+          "x": 171,
+          "y": 491,
+          "w": 88,
+          "h": 25
+        },
+        "parent": "Pilot5",
+        "text": "Lv.60",
+        "size": 14,
+        "weight": 700,
+        "color": "#fff9dc",
+        "align": "center"
+      },
+      {
+        "op": "text",
+        "key": "Level6",
+        "name": "Txt_ACE02_Level6",
+        "rect": {
+          "x": 306,
+          "y": 491,
+          "w": 88,
+          "h": 25
+        },
+        "parent": "Pilot6",
+        "text": "Lv.60",
+        "size": 14,
+        "weight": 700,
+        "color": "#fff9dc",
+        "align": "center"
+      },
+      {
+        "op": "panel",
+        "key": "CollectionTabs",
+        "name": "Panel_ACE02_CollectionTabs",
+        "rect": {
+          "x": 12,
+          "y": 798,
+          "w": 396,
+          "h": 40
+        },
+        "parent": "root",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+        "skinMetrics": [
+          20,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "op": "text",
+        "key": "CollectionPilotCaption",
+        "name": "Txt_ACE02_CollectionPilotCaption",
+        "rect": {
+          "x": 14,
+          "y": 806,
+          "w": 190,
+          "h": 25
+        },
+        "parent": "CollectionTabs",
+        "text": "Pilot",
+        "size": 17,
+        "weight": 700,
+        "color": "#493329",
+        "align": "center"
+      },
+      {
+        "op": "text",
+        "key": "CollectionPappoCaption",
+        "name": "Txt_ACE02_CollectionPappoCaption",
+        "rect": {
+          "x": 212,
+          "y": 806,
+          "w": 190,
+          "h": 25
+        },
+        "parent": "CollectionTabs",
+        "text": "Pappo",
+        "size": 17,
+        "weight": 700,
+        "color": "#493329",
+        "align": "center"
+      }
+    ],
+    "notes": [
+      "Nine freshly generated portrait cells are reference-inspired approximations, not confirmed character identities.",
+      "Source steampunk wall is approximated by a flat brown root because a matching clean backdrop is unavailable.",
+      "Original rarity badges, ability sub-icons and global icon navigation are omitted; first six level labels are retained. Third-row labels are behind the source bottom tabs and omitted.",
+      "Pilot and Pappo are two separate native text captions. Pappo destination content is unobserved; no Pappo input route is added.",
+      "v007 native tab/filter/advance captions are children of their corresponding button, preserving two-part copy/reuse and the correct button input/state ownership.",
+      "v007 Pilot list uses a transparent role-frame ListViewport ABS(0,280,420,520), overflow=scroll-y. Pilot1..9 are its children with original ABS rectangles unchanged; portrait/level descendants remain under their cards. The viewport clips at y800 so third-row content does not cross CollectionTabs/footer, and normal native scrolling can expose it. Actual scrolling is not verified by this recipe review."
+    ]
+  },
+  "sid": "screen-19f02dda-af71-4a0c-87ef-e559fbcf328b",
+  "i": 37,
+  "map": {
+    "root": "element-72cb760b-f6ad-4866-aa78-63a06dcbf5e4",
+    "Header": "element-d9f6ef6c-9d2f-417a-923f-24591fb4269a",
+    "Title": "element-f596a294-4ebf-4e2e-87e9-9cc8a8129653",
+    "Filter": "element-2db0d490-ab32-410e-9af5-b98356f27841",
+    "FilterLabel": "element-534d4912-6f25-4bcd-b59f-1794a3cd8604",
+    "Collection": "element-c501d6f2-5272-4a66-8d7b-960d223da815",
+    "Amplification": "element-7d0f7c7c-7d65-43bd-9b9e-dbdac15bcdcd",
+    "Advance": "element-5f72e55d-6c13-43bb-9e50-543e2c227dbd",
+    "AdvanceLabel": "element-fe9b748e-155a-44e4-ba54-7324ecaa0c63",
+    "ListViewport": "element-d0c97adb-6ba8-485d-9c59-83eacd4f9efe",
+    "Pilot1": "element-a2d4da8e-8a8f-4507-9fd6-02bd8992a50d",
+    "Pilot1Portrait": "element-67c6f32d-6229-4456-9ebf-ac678cdc7d50",
+    "Pilot2": "element-00959ba6-a535-47cd-a975-08b76c821f32",
+    "Pilot2Portrait": "element-92857474-bf90-4973-ad84-ddba9d70b2c6",
+    "Pilot3": "element-352cde3c-a1e6-4bce-a897-8615e04e5bf5",
+    "Pilot3Portrait": "element-9ad6db62-ba16-4b90-9615-4ba9a9dce689",
+    "Pilot4": "element-3763729d-0863-47ab-ae48-ac812825ea51",
+    "Pilot4Portrait": "element-7d189a00-b1a6-4ed3-83a7-2d0b8656b95a",
+    "Pilot5": "element-096b512f-7b63-4d88-994c-5032a586dc8f",
+    "Pilot5Portrait": "element-e872164e-a21b-4528-aa5e-9270a3d1b2d3",
+    "Pilot6": "element-f85c6cf1-9b4c-4efc-bc0e-677c1c30ad1d",
+    "Pilot6Portrait": "element-462a818e-08db-488e-9668-706affcc0f8e",
+    "Pilot7": "element-c97fdf61-513c-40a8-b2dc-d7bb893972bd",
+    "Pilot7Portrait": "element-83952473-ae53-4eaa-9c21-0c47e0f4d889",
+    "Pilot8": "element-348d8179-e1ff-48e2-829b-a954ea54c951",
+    "Pilot8Portrait": "element-98cfaa2b-1955-444e-a514-36d7dc28e1a6",
+    "Pilot9": "element-e3d344d4-7a27-4416-9f66-0604367e67dd",
+    "Pilot9Portrait": "element-59aa7f02-ee8a-4cfe-9b00-44800c6cbb15",
+    "Level1": "element-f1226b2d-617c-4814-8d51-90b90517a54e",
+    "Level2": "element-4468273d-5216-4d55-a6aa-8fc7e857621e",
+    "Level3": "element-ec3c35e5-60c3-4225-8f73-6d6c8bf56a67",
+    "Level4": "element-c96a40bc-5c0c-44c7-a01e-e2cebb1f447b",
+    "Level5": "element-643d8714-ebb3-4750-a6fd-64d5e30ef344",
+    "Level6": "element-78b7089e-500e-43ac-a7e6-7c09a69e6b74",
+    "CollectionTabs": "element-af10b4d4-4284-4f71-89c7-15f55e99a5a4",
+    "CollectionPilotCaption": "element-55a19da0-7dea-42ee-bcc5-77bca6dc0821",
+    "CollectionPappoCaption": "element-f2269c22-7186-4c5d-8d43-b619322ce5b1"
+  },
+  "footer": {
+    "group": "element-2755c012-54ca-4c50-883f-7b4df0092c30",
+    "parts": [
+      {
+        "id": "element-2755c012-54ca-4c50-883f-7b4df0092c30",
+        "name": "Panel_ACE_HonkDepot_GlobalNav 복사"
+      },
+      {
+        "id": "element-e73e8448-e83b-470f-adfd-d04fcba68437",
+        "name": "Btn_HonkDepot_GlobalNav1 복사"
+      },
+      {
+        "id": "element-481aef6f-fe59-45e8-9e51-534bc0439f46",
+        "name": "Txt_HonkDepot_GlobalNav1_Caption 복사"
+      },
+      {
+        "id": "element-b74506d8-0957-4b08-ae2b-d11b6f8eb204",
+        "name": "Img_HonkDepot_GlobalNavGlyph1 복사"
+      },
+      {
+        "id": "element-10c564d9-573e-4cd8-855d-4e38d8cfa0dc",
+        "name": "Btn_HonkDepot_GlobalNav2 복사"
+      },
+      {
+        "id": "element-7f2eab18-63f2-4b8c-a055-d5f544175d2d",
+        "name": "Img_HonkDepot_GlobalNavGlyph2 복사"
+      },
+      {
+        "id": "element-00cb2b75-0da1-433b-8923-cb2850c2200b",
+        "name": "Txt_HonkDepot_GlobalNav2_Caption 복사"
+      },
+      {
+        "id": "element-093ef727-cb61-4254-a139-f4c8d3ba2dd7",
+        "name": "Btn_HonkDepot_GlobalNav3 복사"
+      },
+      {
+        "id": "element-747f4dd2-8af8-40d4-83d7-53c6d8ea70ba",
+        "name": "Img_HonkDepot_GlobalNavGlyph3 복사"
+      },
+      {
+        "id": "element-ea2c1484-b447-4a64-9d25-d041602d7ffa",
+        "name": "Txt_HonkDepot_GlobalNav3_Caption 복사"
+      },
+      {
+        "id": "element-f383fa5d-7906-49a7-a735-b16927b380fd",
+        "name": "Btn_HonkDepot_GlobalNav4 복사"
+      },
+      {
+        "id": "element-f3e8b6ec-3800-4cc5-85a7-1f110ed587e0",
+        "name": "Img_HonkDepot_GlobalNavGlyph4 복사"
+      },
+      {
+        "id": "element-a7231561-c8f8-4bfb-9455-a3845c1913de",
+        "name": "Txt_HonkDepot_GlobalNav4_Caption 복사"
+      },
+      {
+        "id": "element-ccf61bb6-f712-40f8-992e-2b049b964f4f",
+        "name": "Btn_HonkDepot_GlobalNav5 복사"
+      },
+      {
+        "id": "element-97c1fe6c-9900-4c43-b78a-9c8358f58c6e",
+        "name": "Img_HonkDepot_GlobalNavGlyph5 복사"
+      },
+      {
+        "id": "element-d2ffef56-d087-4762-a084-718b503dfedf",
+        "name": "Txt_HonkDepot_GlobalNav5_Caption 복사"
+      }
+    ]
+  }
+}

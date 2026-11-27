@@ -1,0 +1,3714 @@
+{
+  "sample": "monopoly-go",
+  "workspaceId": "workspace-8e0f09e7-4699-4ac6-81b3-d545c7046ef6",
+  "projectId": "ux-gjs-0d80d7fe",
+  "revision": 354,
+  "id": "screen-5b226528-5446-48d2-b4b1-f7aaceff7f7b",
+  "name": "Page_Build_City",
+  "kind": "page",
+  "logicalSize": {
+    "w": 551,
+    "h": 984
+  },
+  "purpose": "원본01_build의 해안 도시와 5개 랜드마크 선택 카드를 새 그림·독립 텍스트·9슬라이스·엔진 그림자로 구성한 검증 화면. 메인 짓기→이전 화면 복귀를 연결했습니다. 금액·완료 표시는 관찰용 fixture이며 건설·차감·상단 메뉴 목적지는 미연결입니다.",
+  "elements": [
+    {
+      "id": "element-8f2a53da-0bf7-4ce4-940f-f27c0e122074",
+      "name": "Slot_Build_Scene",
+      "kind": "panel",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "appearance": {
+        "fill": "#edf1f4",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "hierarchyPath": "Slot_Build_Scene",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        0.0,
+        0.0,
+        551.0,
+        984.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/0"
+    },
+    {
+      "id": "element-aa7c99c5-bd77-4370-bb6e-aecc8e304845",
+      "name": "Img_Build_City_Backdrop",
+      "kind": "image",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rounded",
+        "variant": "image"
+      },
+      "image": {
+        "src": "",
+        "alt": "새로 그린 해안 도시와 다섯 랜드마크",
+        "fit": "cover",
+        "assetRef": "sha256-ab9086bad9bfe18fee8d57f9e3939a83b5a20eca566762c3120fab5107e53a99.webp",
+        "sourceSize": [
+          941,
+          1672
+        ]
+      },
+      "parentId": "element-8f2a53da-0bf7-4ce4-940f-f27c0e122074",
+      "hierarchyPath": "Slot_Build_Scene/Img_Build_City_Backdrop",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        0.0,
+        0.0,
+        551.0,
+        984.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/1"
+    },
+    {
+      "id": "element-8902fb67-9905-456f-9e9f-4dfe55495e71",
+      "name": "Btn_Build_Landmark01",
+      "kind": "button",
+      "x": 1.17967332123412,
+      "y": 0.7352941176470588,
+      "w": 18.148820326678766,
+      "h": 62.86764705882353,
+      "text": "",
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "component": "image-frame",
+      "partRole": "container",
+      "interaction": {
+        "mode": "action",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "group-a4af32cc-1b6d-4464-99d6-11bcca35927b",
+      "buttonState": {
+        "enabled": true,
+        "mode": "tint",
+        "targetGraphic": "element-8902fb67-9905-456f-9e9f-4dfe55495e71-image",
+        "selectable": false,
+        "selected": false,
+        "tints": {
+          "normal": "#ffffff",
+          "hover": "#f2f2f2",
+          "pressed": "#bdbdbd",
+          "selected": "#d8e8ff",
+          "disabled": "#999999"
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark01",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        6.5,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/2"
+    },
+    {
+      "id": "element-8902fb67-9905-456f-9e9f-4dfe55495e71-background",
+      "parentId": "element-8902fb67-9905-456f-9e9f-4dfe55495e71",
+      "partRole": "background",
+      "kind": "panel",
+      "name": "BG_Build_Landmark01",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-01ff4cb0e22cd9f0623400729df16d592f3903e1f677b018e3c108f751d8d218.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "effects": {
+        "shadow": {
+          "enabled": true,
+          "color": "#000000",
+          "opacity": 0.25,
+          "x": 0,
+          "y": 3,
+          "blur": 4
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark01/BG_Build_Landmark01",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        6.5,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/3"
+    },
+    {
+      "id": "element-8902fb67-9905-456f-9e9f-4dfe55495e71-image",
+      "parentId": "element-8902fb67-9905-456f-9e9f-4dfe55495e71",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Landmark01",
+      "x": 6,
+      "y": 19.883040935672515,
+      "w": 88,
+      "h": 58.47953216374269,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "alt": "새로 그린 shop 랜드마크",
+        "fit": "contain",
+        "assetRef": "sha256-b5d5c28c5a7231d598957b24b4b2eaca01b24bab2378d40121ee21dba76a0a44.webp",
+        "sourceSize": [
+          303,
+          301
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark01/Img_Build_Landmark01",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        12.5,
+        748.0,
+        88.0,
+        100.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/4"
+    },
+    {
+      "id": "element-8902fb67-9905-456f-9e9f-4dfe55495e71-label",
+      "parentId": "element-8902fb67-9905-456f-9e9f-4dfe55495e71",
+      "partRole": "label",
+      "kind": "text",
+      "name": "Txt_Build_Landmark01_Price",
+      "x": 36,
+      "y": 79.53216374269006,
+      "w": 58,
+      "h": 16.374269005847953,
+      "text": "240",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "fontSize": 24,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ffffff",
+        "strokeWidth": 0
+      },
+      "typography": {
+        "family": "system",
+        "align": "center",
+        "vertical": "middle",
+        "wrap": "nowrap",
+        "weight": 700,
+        "lineHeight": 28
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark01/Txt_Build_Landmark01_Price",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        42.5,
+        850.0,
+        58.0,
+        28.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/5"
+    },
+    {
+      "id": "element-8902fb67-9905-456f-9e9f-4dfe55495e71-frame",
+      "parentId": "element-8902fb67-9905-456f-9e9f-4dfe55495e71",
+      "partRole": "frame",
+      "kind": "panel",
+      "name": "Frame_Build_Landmark01",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 0,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-33871ab0e0f89239cb9b1b033315b3275834c05f7df382a672427cab2b5016e0.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark01/Frame_Build_Landmark01",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        6.5,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/6"
+    },
+    {
+      "id": "element-47cb4829-22f4-42db-b859-84fccfe7573f",
+      "name": "BG_Build_Landmark01_Header",
+      "kind": "panel",
+      "x": 4,
+      "y": 2.3391812865497075,
+      "w": 92,
+      "h": 16.374269005847953,
+      "text": "",
+      "appearance": {
+        "fill": "#afeaf4",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 8,
+        "opacity": 1,
+        "shape": "rounded"
+      },
+      "parentId": "element-8902fb67-9905-456f-9e9f-4dfe55495e71",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark01/BG_Build_Landmark01_Header",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        10.5,
+        718.0,
+        92.0,
+        28.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/7"
+    },
+    {
+      "id": "element-97cf6820-9278-4b32-8d30-0a16f04a260f",
+      "name": "Shape_Build_Landmark01_Level01",
+      "kind": "panel",
+      "x": 30,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "parentId": "element-8902fb67-9905-456f-9e9f-4dfe55495e71",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark01/Shape_Build_Landmark01_Level01",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        36.5,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/8"
+    },
+    {
+      "id": "element-d9af2765-1348-45c6-b5de-09175144955f",
+      "name": "Shape_Build_Landmark01_Level02",
+      "kind": "panel",
+      "x": 44,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "element-8902fb67-9905-456f-9e9f-4dfe55495e71",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark01/Shape_Build_Landmark01_Level02",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        50.5,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/9"
+    },
+    {
+      "id": "element-986dfbcb-f63d-446c-8565-840bdddc0be2",
+      "name": "Shape_Build_Landmark01_Level03",
+      "kind": "panel",
+      "x": 58,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "element-8902fb67-9905-456f-9e9f-4dfe55495e71",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark01/Shape_Build_Landmark01_Level03",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        64.5,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/10"
+    },
+    {
+      "id": "element-4537d4dd-49d2-4167-8cf9-513ea8ef7a44",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Landmark01_Cash",
+      "x": 6,
+      "y": 82.45614035087719,
+      "w": 28,
+      "h": 11.695906432748536,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "assetRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "alt": "현금 아이콘",
+        "fit": "contain",
+        "region": [
+          148,
+          308,
+          959,
+          680
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "parentId": "element-8902fb67-9905-456f-9e9f-4dfe55495e71",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark01/Img_Build_Landmark01_Cash",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        12.5,
+        855.0,
+        28.0,
+        20.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/11"
+    },
+    {
+      "id": "element-d707f95d-b3b0-4387-b1a0-6668cda90695",
+      "name": "Btn_Build_Landmark02",
+      "kind": "button",
+      "x": 21.098003629764065,
+      "y": 0.7352941176470588,
+      "w": 18.148820326678766,
+      "h": 62.86764705882353,
+      "text": "",
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "component": "image-frame",
+      "partRole": "container",
+      "interaction": {
+        "mode": "action",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "group-a4af32cc-1b6d-4464-99d6-11bcca35927b",
+      "buttonState": {
+        "enabled": true,
+        "mode": "tint",
+        "targetGraphic": "element-1c82b037-3ff5-41dd-a582-a245a3c63788",
+        "selectable": false,
+        "selected": false,
+        "tints": {
+          "normal": "#ffffff",
+          "hover": "#f2f2f2",
+          "pressed": "#bdbdbd",
+          "selected": "#d8e8ff",
+          "disabled": "#999999"
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark02",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        116.25,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/12"
+    },
+    {
+      "id": "element-9040d70c-7434-4599-bbae-4ef5c4b65de8",
+      "parentId": "element-d707f95d-b3b0-4387-b1a0-6668cda90695",
+      "partRole": "background",
+      "kind": "panel",
+      "name": "BG_Build_Landmark02",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-01ff4cb0e22cd9f0623400729df16d592f3903e1f677b018e3c108f751d8d218.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "effects": {
+        "shadow": {
+          "enabled": true,
+          "color": "#000000",
+          "opacity": 0.25,
+          "x": 0,
+          "y": 3,
+          "blur": 4
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark02/BG_Build_Landmark02",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        116.25,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/13"
+    },
+    {
+      "id": "element-1c82b037-3ff5-41dd-a582-a245a3c63788",
+      "parentId": "element-d707f95d-b3b0-4387-b1a0-6668cda90695",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Landmark02",
+      "x": 6,
+      "y": 19.883040935672515,
+      "w": 88,
+      "h": 58.47953216374269,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "alt": "새로 그린 townhouse 랜드마크",
+        "fit": "contain",
+        "assetRef": "sha256-e5bbdc4815c23ce6be73565367c832f919a7bf450775629d58ef96f57e1c6707.webp",
+        "sourceSize": [
+          294,
+          544
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark02/Img_Build_Landmark02",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        122.25,
+        748.0,
+        88.0,
+        100.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/14"
+    },
+    {
+      "id": "element-ee95a63b-7763-47d7-960f-cc00776c8aaf",
+      "parentId": "element-d707f95d-b3b0-4387-b1a0-6668cda90695",
+      "partRole": "label",
+      "kind": "text",
+      "name": "Txt_Build_Landmark02_Price",
+      "x": 36,
+      "y": 79.53216374269006,
+      "w": 58,
+      "h": 16.374269005847953,
+      "text": "312",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "fontSize": 24,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ffffff",
+        "strokeWidth": 0
+      },
+      "typography": {
+        "family": "system",
+        "align": "center",
+        "vertical": "middle",
+        "wrap": "nowrap",
+        "weight": 700,
+        "lineHeight": 28
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark02/Txt_Build_Landmark02_Price",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        152.25,
+        850.0,
+        58.0,
+        28.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/15"
+    },
+    {
+      "id": "element-a5e9bcea-badb-4167-aa24-d494b0e9b59f",
+      "parentId": "element-d707f95d-b3b0-4387-b1a0-6668cda90695",
+      "partRole": "frame",
+      "kind": "panel",
+      "name": "Frame_Build_Landmark02",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 0,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-33871ab0e0f89239cb9b1b033315b3275834c05f7df382a672427cab2b5016e0.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark02/Frame_Build_Landmark02",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        116.25,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/16"
+    },
+    {
+      "id": "element-d48b7de5-6d01-42e1-ac2c-b2ee8c63620a",
+      "name": "BG_Build_Landmark02_Header",
+      "kind": "panel",
+      "x": 4,
+      "y": 2.3391812865497075,
+      "w": 92,
+      "h": 16.374269005847953,
+      "text": "",
+      "appearance": {
+        "fill": "#afeaf4",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 8,
+        "opacity": 1,
+        "shape": "rounded"
+      },
+      "parentId": "element-d707f95d-b3b0-4387-b1a0-6668cda90695",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark02/BG_Build_Landmark02_Header",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        120.25,
+        718.0,
+        92.0,
+        28.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/17"
+    },
+    {
+      "id": "element-780dc77c-3d71-4dd2-9c56-4616ecb02e48",
+      "name": "Shape_Build_Landmark02_Level01",
+      "kind": "panel",
+      "x": 30,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "parentId": "element-d707f95d-b3b0-4387-b1a0-6668cda90695",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark02/Shape_Build_Landmark02_Level01",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        146.25,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/18"
+    },
+    {
+      "id": "element-9782a153-aa07-4af2-9d21-98e71ce76b27",
+      "name": "Shape_Build_Landmark02_Level02",
+      "kind": "panel",
+      "x": 44,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "element-d707f95d-b3b0-4387-b1a0-6668cda90695",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark02/Shape_Build_Landmark02_Level02",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        160.25,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/19"
+    },
+    {
+      "id": "element-b337577e-2a2a-42b1-8686-61a3c51771e6",
+      "name": "Shape_Build_Landmark02_Level03",
+      "kind": "panel",
+      "x": 58,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "element-d707f95d-b3b0-4387-b1a0-6668cda90695",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark02/Shape_Build_Landmark02_Level03",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        174.25,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/20"
+    },
+    {
+      "id": "element-d3b08745-d6df-43f6-8814-df89d195f047",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Landmark02_Cash",
+      "x": 6,
+      "y": 82.45614035087719,
+      "w": 28,
+      "h": 11.695906432748536,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "assetRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "alt": "현금 아이콘",
+        "fit": "contain",
+        "region": [
+          148,
+          308,
+          959,
+          680
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "parentId": "element-d707f95d-b3b0-4387-b1a0-6668cda90695",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark02/Img_Build_Landmark02_Cash",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        122.25,
+        855.0,
+        28.0,
+        20.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/21"
+    },
+    {
+      "id": "element-a7962d91-1f5b-458e-a6a6-58ddb64cfa35",
+      "name": "Btn_Build_Landmark03",
+      "kind": "button",
+      "x": 41.01633393829401,
+      "y": 0.7352941176470588,
+      "w": 18.148820326678766,
+      "h": 62.86764705882353,
+      "text": "",
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "component": "image-frame",
+      "partRole": "container",
+      "interaction": {
+        "mode": "action",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "group-a4af32cc-1b6d-4464-99d6-11bcca35927b",
+      "buttonState": {
+        "enabled": true,
+        "mode": "tint",
+        "targetGraphic": "element-34450bdd-9cac-485c-8c18-249302dab137",
+        "selectable": false,
+        "selected": false,
+        "tints": {
+          "normal": "#ffffff",
+          "hover": "#f2f2f2",
+          "pressed": "#bdbdbd",
+          "selected": "#d8e8ff",
+          "disabled": "#999999"
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark03",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        226.0,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/22"
+    },
+    {
+      "id": "element-e90a3a82-2029-40d5-b575-8639f3aa363f",
+      "parentId": "element-a7962d91-1f5b-458e-a6a6-58ddb64cfa35",
+      "partRole": "background",
+      "kind": "panel",
+      "name": "BG_Build_Landmark03",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-01ff4cb0e22cd9f0623400729df16d592f3903e1f677b018e3c108f751d8d218.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "effects": {
+        "shadow": {
+          "enabled": true,
+          "color": "#000000",
+          "opacity": 0.25,
+          "x": 0,
+          "y": 3,
+          "blur": 4
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark03/BG_Build_Landmark03",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        226.0,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/23"
+    },
+    {
+      "id": "element-34450bdd-9cac-485c-8c18-249302dab137",
+      "parentId": "element-a7962d91-1f5b-458e-a6a6-58ddb64cfa35",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Landmark03",
+      "x": 6,
+      "y": 19.883040935672515,
+      "w": 88,
+      "h": 58.47953216374269,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "alt": "새로 그린 clocktower 랜드마크",
+        "fit": "contain",
+        "assetRef": "sha256-24014d1fcfb6f249c37c1ae7a5d5fa4665f4790b2aaad83c3ca0ea5f311d550d.webp",
+        "sourceSize": [
+          256,
+          662
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark03/Img_Build_Landmark03",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        232.0,
+        748.0,
+        88.0,
+        100.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/24"
+    },
+    {
+      "id": "element-3c9279da-ceda-4907-ae6f-c49f418693d2",
+      "parentId": "element-a7962d91-1f5b-458e-a6a6-58ddb64cfa35",
+      "partRole": "label",
+      "kind": "text",
+      "name": "Txt_Build_Landmark03_Price",
+      "x": 36,
+      "y": 79.53216374269006,
+      "w": 58,
+      "h": 16.374269005847953,
+      "text": "384",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "fontSize": 24,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ffffff",
+        "strokeWidth": 0
+      },
+      "typography": {
+        "family": "system",
+        "align": "center",
+        "vertical": "middle",
+        "wrap": "nowrap",
+        "weight": 700,
+        "lineHeight": 28
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark03/Txt_Build_Landmark03_Price",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        262.0,
+        850.0,
+        58.0,
+        28.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/25"
+    },
+    {
+      "id": "element-16654373-2d00-4bf5-926b-8fd84907f78a",
+      "parentId": "element-a7962d91-1f5b-458e-a6a6-58ddb64cfa35",
+      "partRole": "frame",
+      "kind": "panel",
+      "name": "Frame_Build_Landmark03",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 0,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-33871ab0e0f89239cb9b1b033315b3275834c05f7df382a672427cab2b5016e0.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark03/Frame_Build_Landmark03",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        226.0,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/26"
+    },
+    {
+      "id": "element-6edf927c-baab-4cbc-8149-29f4aca7728c",
+      "name": "BG_Build_Landmark03_Header",
+      "kind": "panel",
+      "x": 4,
+      "y": 2.3391812865497075,
+      "w": 92,
+      "h": 16.374269005847953,
+      "text": "",
+      "appearance": {
+        "fill": "#afeaf4",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 8,
+        "opacity": 1,
+        "shape": "rounded"
+      },
+      "parentId": "element-a7962d91-1f5b-458e-a6a6-58ddb64cfa35",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark03/BG_Build_Landmark03_Header",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        230.0,
+        718.0,
+        92.0,
+        28.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/27"
+    },
+    {
+      "id": "element-b2ceb745-2ebf-49b0-befd-077035f1d2fc",
+      "name": "Shape_Build_Landmark03_Level01",
+      "kind": "panel",
+      "x": 30,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "parentId": "element-a7962d91-1f5b-458e-a6a6-58ddb64cfa35",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark03/Shape_Build_Landmark03_Level01",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        256.0,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/28"
+    },
+    {
+      "id": "element-99f20be9-733b-4786-84f4-40d68280c7b4",
+      "name": "Shape_Build_Landmark03_Level02",
+      "kind": "panel",
+      "x": 44,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "element-a7962d91-1f5b-458e-a6a6-58ddb64cfa35",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark03/Shape_Build_Landmark03_Level02",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        270.0,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/29"
+    },
+    {
+      "id": "element-cccbabbb-e4fe-4960-89b9-a91d314ae546",
+      "name": "Shape_Build_Landmark03_Level03",
+      "kind": "panel",
+      "x": 58,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "element-a7962d91-1f5b-458e-a6a6-58ddb64cfa35",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark03/Shape_Build_Landmark03_Level03",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        284.0,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/30"
+    },
+    {
+      "id": "element-f1d94ca2-2ab5-49e9-9aa4-8c1711b79d3f",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Landmark03_Cash",
+      "x": 6,
+      "y": 82.45614035087719,
+      "w": 28,
+      "h": 11.695906432748536,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "assetRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "alt": "현금 아이콘",
+        "fit": "contain",
+        "region": [
+          148,
+          308,
+          959,
+          680
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "parentId": "element-a7962d91-1f5b-458e-a6a6-58ddb64cfa35",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark03/Img_Build_Landmark03_Cash",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        232.0,
+        855.0,
+        28.0,
+        20.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/31"
+    },
+    {
+      "id": "element-d443b5d7-12be-4b4e-85b3-3264b55025e3",
+      "name": "Btn_Build_Landmark04",
+      "kind": "button",
+      "x": 60.93466424682396,
+      "y": 0.7352941176470588,
+      "w": 18.148820326678766,
+      "h": 62.86764705882353,
+      "text": "",
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "component": "image-frame",
+      "partRole": "container",
+      "interaction": {
+        "mode": "action",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "group-a4af32cc-1b6d-4464-99d6-11bcca35927b",
+      "buttonState": {
+        "enabled": true,
+        "mode": "tint",
+        "targetGraphic": "element-69acace6-d711-4432-8209-7230bc342755",
+        "selectable": false,
+        "selected": false,
+        "tints": {
+          "normal": "#ffffff",
+          "hover": "#f2f2f2",
+          "pressed": "#bdbdbd",
+          "selected": "#d8e8ff",
+          "disabled": "#999999"
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark04",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        335.75,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/32"
+    },
+    {
+      "id": "element-7a52d162-f28c-44b4-b6e4-40d65762b841",
+      "parentId": "element-d443b5d7-12be-4b4e-85b3-3264b55025e3",
+      "partRole": "background",
+      "kind": "panel",
+      "name": "BG_Build_Landmark04",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-01ff4cb0e22cd9f0623400729df16d592f3903e1f677b018e3c108f751d8d218.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "effects": {
+        "shadow": {
+          "enabled": true,
+          "color": "#000000",
+          "opacity": 0.25,
+          "x": 0,
+          "y": 3,
+          "blur": 4
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark04/BG_Build_Landmark04",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        335.75,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/33"
+    },
+    {
+      "id": "element-69acace6-d711-4432-8209-7230bc342755",
+      "parentId": "element-d443b5d7-12be-4b4e-85b3-3264b55025e3",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Landmark04",
+      "x": 6,
+      "y": 19.883040935672515,
+      "w": 88,
+      "h": 58.47953216374269,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "alt": "새로 그린 liberty 랜드마크",
+        "fit": "contain",
+        "assetRef": "sha256-4bcaf6de548ff2dd4b3390623b53256aedab762557289dd62d457afab7d1ef92.webp",
+        "sourceSize": [
+          272,
+          639
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark04/Img_Build_Landmark04",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        341.75,
+        748.0,
+        88.0,
+        100.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/34"
+    },
+    {
+      "id": "element-6440ffbb-1633-450f-bf00-18107598e3d8",
+      "parentId": "element-d443b5d7-12be-4b4e-85b3-3264b55025e3",
+      "partRole": "frame",
+      "kind": "panel",
+      "name": "Frame_Build_Landmark04",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 0,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-33871ab0e0f89239cb9b1b033315b3275834c05f7df382a672427cab2b5016e0.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark04/Frame_Build_Landmark04",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        335.75,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/35"
+    },
+    {
+      "id": "element-79ad2887-9ff4-4f35-8c2e-8906d68174ad",
+      "name": "BG_Build_Landmark04_Header",
+      "kind": "panel",
+      "x": 4,
+      "y": 2.3391812865497075,
+      "w": 92,
+      "h": 16.374269005847953,
+      "text": "",
+      "appearance": {
+        "fill": "#afeaf4",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 8,
+        "opacity": 1,
+        "shape": "rounded"
+      },
+      "parentId": "element-d443b5d7-12be-4b4e-85b3-3264b55025e3",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark04/BG_Build_Landmark04_Header",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        339.75,
+        718.0,
+        92.0,
+        28.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/36"
+    },
+    {
+      "id": "element-3968d814-6722-4276-ad15-8ccd3994a8e3",
+      "name": "Shape_Build_Landmark04_Level01",
+      "kind": "panel",
+      "x": 30,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#2cadd7",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "parentId": "element-d443b5d7-12be-4b4e-85b3-3264b55025e3",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark04/Shape_Build_Landmark04_Level01",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        365.75,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/37"
+    },
+    {
+      "id": "element-78e96596-90bc-402d-b436-127582272946",
+      "name": "Shape_Build_Landmark04_Level02",
+      "kind": "panel",
+      "x": 44,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#2cadd7",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "element-d443b5d7-12be-4b4e-85b3-3264b55025e3",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark04/Shape_Build_Landmark04_Level02",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        379.75,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/38"
+    },
+    {
+      "id": "element-fa5a6503-6beb-4ef1-aa7f-d46c9d2acc4c",
+      "name": "Shape_Build_Landmark04_Level03",
+      "kind": "panel",
+      "x": 58,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#2cadd7",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "element-d443b5d7-12be-4b4e-85b3-3264b55025e3",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark04/Shape_Build_Landmark04_Level03",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        393.75,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/39"
+    },
+    {
+      "id": "element-10dd1b99-a5f6-4bb9-bbd7-9c545f552ce1",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Landmark04_Complete",
+      "x": 36,
+      "y": 81.87134502923976,
+      "w": 28,
+      "h": 12.865497076023392,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "alt": "랜드마크 완료 체크",
+        "fit": "contain",
+        "assetRef": "sha256-a07400ab919be996b1fa45b98b66b9326ba2a5ed69f0acb985fe9a7443c0813d.webp",
+        "sourceSize": [
+          324,
+          240
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "parentId": "element-d443b5d7-12be-4b4e-85b3-3264b55025e3",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark04/Img_Build_Landmark04_Complete",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        371.75,
+        854.0,
+        28.0,
+        22.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/40"
+    },
+    {
+      "id": "element-cdd47f2e-35a1-42a4-90e0-691c939e4ddc",
+      "name": "Btn_Build_Landmark05",
+      "kind": "button",
+      "x": 80.8529945553539,
+      "y": 0.7352941176470588,
+      "w": 18.148820326678766,
+      "h": 62.86764705882353,
+      "text": "",
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "component": "image-frame",
+      "partRole": "container",
+      "interaction": {
+        "mode": "action",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "group-a4af32cc-1b6d-4464-99d6-11bcca35927b",
+      "buttonState": {
+        "enabled": true,
+        "mode": "tint",
+        "targetGraphic": "element-64074291-41fb-4abd-95be-c9785092ac10",
+        "selectable": false,
+        "selected": false,
+        "tints": {
+          "normal": "#ffffff",
+          "hover": "#f2f2f2",
+          "pressed": "#bdbdbd",
+          "selected": "#d8e8ff",
+          "disabled": "#999999"
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark05",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        445.5,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/41"
+    },
+    {
+      "id": "element-14555b41-5635-418d-b58e-5aa3ac1d8b25",
+      "parentId": "element-cdd47f2e-35a1-42a4-90e0-691c939e4ddc",
+      "partRole": "background",
+      "kind": "panel",
+      "name": "BG_Build_Landmark05",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-01ff4cb0e22cd9f0623400729df16d592f3903e1f677b018e3c108f751d8d218.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "effects": {
+        "shadow": {
+          "enabled": true,
+          "color": "#000000",
+          "opacity": 0.25,
+          "x": 0,
+          "y": 3,
+          "blur": 4
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark05/BG_Build_Landmark05",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        445.5,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/42"
+    },
+    {
+      "id": "element-64074291-41fb-4abd-95be-c9785092ac10",
+      "parentId": "element-cdd47f2e-35a1-42a4-90e0-691c939e4ddc",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Landmark05",
+      "x": 6,
+      "y": 19.883040935672515,
+      "w": 88,
+      "h": 58.47953216374269,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "alt": "새로 그린 promenade 랜드마크",
+        "fit": "contain",
+        "assetRef": "sha256-ad8d11de174399cd4c90e50d33a569d859042898470dcdd6e637a684b581dc45.webp",
+        "sourceSize": [
+          311,
+          351
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark05/Img_Build_Landmark05",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        451.5,
+        748.0,
+        88.0,
+        100.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/43"
+    },
+    {
+      "id": "element-9447b446-46bd-42ed-a3d7-7c57532cffa5",
+      "parentId": "element-cdd47f2e-35a1-42a4-90e0-691c939e4ddc",
+      "partRole": "label",
+      "kind": "text",
+      "name": "Txt_Build_Landmark05_Price",
+      "x": 36,
+      "y": 79.53216374269006,
+      "w": 58,
+      "h": 16.374269005847953,
+      "text": "528",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "fontSize": 24,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ffffff",
+        "strokeWidth": 0
+      },
+      "typography": {
+        "family": "system",
+        "align": "center",
+        "vertical": "middle",
+        "wrap": "nowrap",
+        "weight": 700,
+        "lineHeight": 28
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark05/Txt_Build_Landmark05_Price",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        481.5,
+        850.0,
+        58.0,
+        28.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/44"
+    },
+    {
+      "id": "element-d022ffbe-7ee7-42b3-ac52-d3289b326433",
+      "parentId": "element-cdd47f2e-35a1-42a4-90e0-691c939e4ddc",
+      "partRole": "frame",
+      "kind": "panel",
+      "name": "Frame_Build_Landmark05",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 0,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          18,
+          18,
+          18,
+          18
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-33871ab0e0f89239cb9b1b033315b3275834c05f7df382a672427cab2b5016e0.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark05/Frame_Build_Landmark05",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        445.5,
+        714.0,
+        100.0,
+        171.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/45"
+    },
+    {
+      "id": "element-87de2713-8cb1-476d-98c2-f12c7ba4c890",
+      "name": "BG_Build_Landmark05_Header",
+      "kind": "panel",
+      "x": 4,
+      "y": 2.3391812865497075,
+      "w": 92,
+      "h": 16.374269005847953,
+      "text": "",
+      "appearance": {
+        "fill": "#afeaf4",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 8,
+        "opacity": 1,
+        "shape": "rounded"
+      },
+      "parentId": "element-cdd47f2e-35a1-42a4-90e0-691c939e4ddc",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark05/BG_Build_Landmark05_Header",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        449.5,
+        718.0,
+        92.0,
+        28.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/46"
+    },
+    {
+      "id": "element-e2f97c76-e359-4ae3-b93a-c4b426331313",
+      "name": "Shape_Build_Landmark05_Level01",
+      "kind": "panel",
+      "x": 30,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "parentId": "element-cdd47f2e-35a1-42a4-90e0-691c939e4ddc",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark05/Shape_Build_Landmark05_Level01",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        475.5,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/47"
+    },
+    {
+      "id": "element-e603a639-6868-4ff7-b474-3c6d6c99a3cc",
+      "name": "Shape_Build_Landmark05_Level02",
+      "kind": "panel",
+      "x": 44,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "element-cdd47f2e-35a1-42a4-90e0-691c939e4ddc",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark05/Shape_Build_Landmark05_Level02",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        489.5,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/48"
+    },
+    {
+      "id": "element-8f24b632-3040-41b5-a23a-b64a6f606c10",
+      "name": "Shape_Build_Landmark05_Level03",
+      "kind": "panel",
+      "x": 58,
+      "y": 5.847953216374268,
+      "w": 12,
+      "h": 7.017543859649122,
+      "text": "",
+      "appearance": {
+        "fill": "#737661",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "element-cdd47f2e-35a1-42a4-90e0-691c939e4ddc",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark05/Shape_Build_Landmark05_Level03",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        503.5,
+        724.0,
+        12.0,
+        12.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/49"
+    },
+    {
+      "id": "element-51aafa69-5d38-4725-a1c5-0ac9e2d1c02d",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Landmark05_Cash",
+      "x": 6,
+      "y": 82.45614035087719,
+      "w": 28,
+      "h": 11.695906432748536,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "assetRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "alt": "현금 아이콘",
+        "fit": "contain",
+        "region": [
+          148,
+          308,
+          959,
+          680
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "parentId": "element-cdd47f2e-35a1-42a4-90e0-691c939e4ddc",
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Landmark05/Img_Build_Landmark05_Cash",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        451.5,
+        855.0,
+        28.0,
+        20.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/50"
+    },
+    {
+      "id": "element-f7a6ccde-d23b-4109-8996-c5b21edb48b6",
+      "name": "Group_Build_TopBar",
+      "kind": "panel",
+      "x": 0,
+      "y": 16.666666666666668,
+      "w": 100,
+      "h": 58.333333333333336,
+      "text": "",
+      "appearance": {
+        "fill": "#aaa798",
+        "stroke": "#c2c3bd",
+        "textColor": "#243549",
+        "strokeWidth": 3,
+        "radius": 20,
+        "opacity": 1,
+        "shape": "rounded"
+      },
+      "partRole": "container",
+      "component": "image-frame",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "parentId": "element-eec7d22a-09e0-464f-a13f-7a095f4f3224",
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        0.0,
+        13.3333,
+        551.0,
+        46.6667
+      ],
+      "sourceJsonPointer": "/screens/1/elements/51"
+    },
+    {
+      "id": "element-5e62da42-ba9a-49ed-8871-2f85d1c0382b",
+      "parentId": "element-f7a6ccde-d23b-4109-8996-c5b21edb48b6",
+      "partRole": "background",
+      "kind": "panel",
+      "name": "BG_Build_TopBar",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#f0ebdb",
+        "stroke": "#c2c3bd",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 4,
+        "opacity": 1,
+        "shape": "capsule"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-01ff4cb0e22cd9f0623400729df16d592f3903e1f677b018e3c108f751d8d218.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "effects": {
+        "shadow": {
+          "enabled": true,
+          "color": "#000000",
+          "opacity": 0.25,
+          "x": 0,
+          "y": 2,
+          "blur": 3
+        }
+      },
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/BG_Build_TopBar",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        0.0,
+        13.3333,
+        551.0,
+        46.6667
+      ],
+      "sourceJsonPointer": "/screens/1/elements/52"
+    },
+    {
+      "id": "element-17ee3393-29bc-4009-acdd-c1fe93136913",
+      "parentId": "element-bcdcf6f6-5495-4b38-a06f-0538fc11b99a",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Cash",
+      "x": 0,
+      "y": 0,
+      "w": 21.02803738317757,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "assetRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "alt": "현금 아이콘",
+        "fit": "contain",
+        "region": [
+          148,
+          308,
+          959,
+          680
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Group_Build_Cash/Img_Build_Cash",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        131.828,
+        22.5,
+        46.3458,
+        28.3333
+      ],
+      "sourceJsonPointer": "/screens/1/elements/53"
+    },
+    {
+      "id": "element-406d176c-d691-4131-8d7f-5971874bbf98",
+      "parentId": "element-bcdcf6f6-5495-4b38-a06f-0538fc11b99a",
+      "partRole": "label",
+      "kind": "text",
+      "name": "Txt_Build_Cash_Amount",
+      "x": 27.102803738317757,
+      "y": 0,
+      "w": 72.89719626168224,
+      "h": 100,
+      "text": "4,404",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "fontSize": 28,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#aaa798",
+        "strokeWidth": 0
+      },
+      "typography": {
+        "weight": 800,
+        "align": "center",
+        "vertical": "middle",
+        "lineHeight": 34,
+        "family": "system",
+        "wrap": "nowrap",
+        "strokeWidth": 0
+      },
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Group_Build_Cash/Txt_Build_Cash_Amount",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        191.5626,
+        22.5,
+        160.6654,
+        28.3333
+      ],
+      "sourceJsonPointer": "/screens/1/elements/54"
+    },
+    {
+      "id": "element-da828a07-4294-4b03-958e-6f5e852cdbe7",
+      "parentId": "element-f7a6ccde-d23b-4109-8996-c5b21edb48b6",
+      "partRole": "frame",
+      "kind": "panel",
+      "name": "Frame_Build_TopBar",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 99.99999999999999,
+      "text": "",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "appearance": {
+        "fill": "#aaa798",
+        "stroke": "#ffffff",
+        "textColor": "#243549",
+        "strokeWidth": 4,
+        "radius": 4,
+        "opacity": 1,
+        "shape": "capsule"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "edges": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-33871ab0e0f89239cb9b1b033315b3275834c05f7df382a672427cab2b5016e0.webp",
+            "w": 128,
+            "h": 64
+          }
+        }
+      },
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Frame_Build_TopBar",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        0.0,
+        13.3333,
+        551.0,
+        46.6667
+      ],
+      "sourceJsonPointer": "/screens/1/elements/55"
+    },
+    {
+      "id": "element-b83d0716-08c2-4898-9e9d-8ac5e27f7207",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Houses",
+      "x": 0,
+      "y": 0,
+      "w": 40.90909090909091,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "alt": "새로 그린 녹색 건물 스택",
+        "fit": "contain",
+        "assetRef": "sha256-51fc7792fa017e9ff258323399fe074d750f8324e63fb46e3b5fe5ffafdd2b08.webp",
+        "sourceSize": [
+          567,
+          409
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "parentId": "element-2690e6be-e07d-4f05-a115-1e91e850d3c3",
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Group_Build_Houses/Img_Build_Houses",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        379.0056,
+        21.6667,
+        37.0766,
+        30.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/56"
+    },
+    {
+      "id": "element-06f95a8c-9148-43e8-85c9-fe5df4522d2c",
+      "name": "Btn_Build_Menu",
+      "kind": "button",
+      "x": 90.2803738317757,
+      "y": 22.916666666666668,
+      "w": 8.22429906542056,
+      "h": 45.833333333333336,
+      "text": "",
+      "appearance": {
+        "fill": "#fff0cf",
+        "stroke": "#71839a",
+        "textColor": "#c3a75b",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "fontSize": 24,
+      "parentId": "element-eec7d22a-09e0-464f-a13f-7a095f4f3224",
+      "component": "image-frame",
+      "partRole": "container",
+      "interaction": {
+        "mode": "action",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "buttonState": {
+        "enabled": true,
+        "mode": "tint",
+        "targetGraphic": "element-b4735c71-a89f-4e40-9ccc-48d9baae8b85",
+        "selectable": false,
+        "selected": false,
+        "tints": {
+          "normal": "#ffffff",
+          "hover": "#f2f2f2",
+          "pressed": "#bdbdbd",
+          "selected": "#d8e8ff",
+          "disabled": "#999999"
+        }
+      },
+      "hierarchyPath": "HUD_Build_Top/Btn_Build_Menu",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        497.4449,
+        18.3333,
+        45.3159,
+        36.6667
+      ],
+      "sourceJsonPointer": "/screens/1/elements/57"
+    },
+    {
+      "id": "element-bcdcf6f6-5495-4b38-a06f-0538fc11b99a",
+      "name": "Group_Build_Cash",
+      "kind": "panel",
+      "x": 23.925233644859812,
+      "y": 19.642857142857142,
+      "w": 40,
+      "h": 60.714285714285715,
+      "text": "",
+      "isGroup": true,
+      "parentId": "element-f7a6ccde-d23b-4109-8996-c5b21edb48b6",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ffffff",
+        "stroke": "#71839a",
+        "strokeWidth": 0,
+        "opacity": 1,
+        "textColor": "#243549"
+      },
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Group_Build_Cash",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        131.828,
+        22.5,
+        220.4,
+        28.3333
+      ],
+      "sourceJsonPointer": "/screens/1/elements/58"
+    },
+    {
+      "id": "element-2690e6be-e07d-4f05-a115-1e91e850d3c3",
+      "name": "Group_Build_Houses",
+      "kind": "panel",
+      "x": 68.78504672897196,
+      "y": 17.857142857142858,
+      "w": 16.44859813084112,
+      "h": 64.28571428571429,
+      "text": "",
+      "isGroup": true,
+      "parentId": "element-f7a6ccde-d23b-4109-8996-c5b21edb48b6",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ffffff",
+        "stroke": "#71839a",
+        "strokeWidth": 0,
+        "opacity": 1,
+        "textColor": "#243549"
+      },
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Group_Build_Houses",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        379.0056,
+        21.6667,
+        90.6318,
+        30.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/59"
+    },
+    {
+      "id": "element-b4735c71-a89f-4e40-9ccc-48d9baae8b85",
+      "parentId": "element-06f95a8c-9148-43e8-85c9-fe5df4522d2c",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_MenuBars",
+      "x": 18.181818181818183,
+      "y": 18.181818181818183,
+      "w": 63.63636363636363,
+      "h": 63.63636363636363,
+      "text": "",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "assetRef": "sha256-5ee8af213df20c8ac28f4c901103369d3246de3a7962d3a82abd04cf3731151b.webp",
+        "sourceSize": [
+          264,
+          224
+        ],
+        "alt": "Btn_Menu 이미지",
+        "fit": "contain"
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "hierarchyPath": "HUD_Build_Top/Btn_Build_Menu/Img_Build_MenuBars",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        505.6841,
+        25.0,
+        28.8374,
+        23.3333
+      ],
+      "sourceJsonPointer": "/screens/1/elements/60"
+    },
+    {
+      "id": "element-763a125e-a9fe-46c6-ab03-b762912d215e",
+      "name": "Line_Build_Level_Cash",
+      "kind": "panel",
+      "x": 20.934579439252335,
+      "y": 14.285714285714286,
+      "w": 0.37383177570093457,
+      "h": 71.42857142857143,
+      "text": "",
+      "appearance": {
+        "fill": "#d8cd7e",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "parentId": "element-f7a6ccde-d23b-4109-8996-c5b21edb48b6",
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Line_Build_Level_Cash",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        115.3495,
+        20.0,
+        2.0598,
+        33.3333
+      ],
+      "sourceJsonPointer": "/screens/1/elements/61"
+    },
+    {
+      "id": "element-e3f0d4d1-d1d1-49a2-9c82-b0584e12a111",
+      "name": "Line_Build_Cash_Houses",
+      "kind": "panel",
+      "x": 65.79439252336448,
+      "y": 14.285714285714286,
+      "w": 0.37383177570093457,
+      "h": 71.42857142857143,
+      "text": "",
+      "appearance": {
+        "fill": "#d8cd7e",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "parentId": "element-f7a6ccde-d23b-4109-8996-c5b21edb48b6",
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Line_Build_Cash_Houses",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        362.5271,
+        20.0,
+        2.0598,
+        33.3333
+      ],
+      "sourceJsonPointer": "/screens/1/elements/62"
+    },
+    {
+      "id": "element-88e71a6b-54a6-4546-936b-ac953e59170b",
+      "name": "Line_Build_Houses_Menu",
+      "kind": "panel",
+      "x": 88.22429906542057,
+      "y": 14.285714285714286,
+      "w": 0.37383177570093457,
+      "h": 71.42857142857143,
+      "text": "",
+      "appearance": {
+        "fill": "#d8cd7e",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "parentId": "element-f7a6ccde-d23b-4109-8996-c5b21edb48b6",
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Line_Build_Houses_Menu",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        486.1159,
+        20.0,
+        2.0598,
+        33.3333
+      ],
+      "sourceJsonPointer": "/screens/1/elements/63"
+    },
+    {
+      "id": "element-eec7d22a-09e0-464f-a13f-7a095f4f3224",
+      "name": "HUD_Build_Top",
+      "kind": "panel",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 8.130081300813007,
+      "text": "",
+      "isGroup": true,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ffffff",
+        "stroke": "#71839a",
+        "strokeWidth": 0,
+        "opacity": 1,
+        "textColor": "#243549"
+      },
+      "rectTransform": {
+        "min": [
+          0,
+          1
+        ],
+        "max": [
+          0,
+          1
+        ],
+        "pivot": [
+          0,
+          1
+        ],
+        "position": [
+          8,
+          -12
+        ],
+        "sizeDelta": [
+          535,
+          96
+        ]
+      },
+      "hierarchyPath": "HUD_Build_Top",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        0.0,
+        0.0,
+        551.0,
+        80.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/64"
+    },
+    {
+      "id": "element-b43b8ef6-7785-4e45-92a8-a6dc8c19f2fb",
+      "partRole": "label",
+      "kind": "text",
+      "name": "Txt_Build_Houses_Count",
+      "x": 54.54545454545455,
+      "y": 2.7777777777777777,
+      "w": 45.45454545454545,
+      "h": 94.44444444444444,
+      "text": "0",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "fontSize": 28,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#aaa798",
+        "strokeWidth": 0
+      },
+      "typography": {
+        "weight": 800,
+        "align": "center",
+        "vertical": "middle",
+        "lineHeight": 34,
+        "family": "system",
+        "wrap": "nowrap",
+        "strokeWidth": 0
+      },
+      "parentId": "element-2690e6be-e07d-4f05-a115-1e91e850d3c3",
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Group_Build_Houses/Txt_Build_Houses_Count",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        428.4411,
+        22.5,
+        41.1963,
+        28.3333
+      ],
+      "sourceJsonPointer": "/screens/1/elements/65"
+    },
+    {
+      "id": "element-2dba5ec8-ac11-492c-bf55-cb1ded106e85",
+      "name": "BG_Build_Level_Count",
+      "kind": "panel",
+      "x": 16.666666666666668,
+      "y": 5.555555555555555,
+      "w": 83.33333333333333,
+      "h": 88.88888888888889,
+      "text": "",
+      "appearance": {
+        "fill": "#5c5e45",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "capsule"
+      },
+      "parentId": "element-3b9e092f-c0da-46d5-9a26-cc193ebff9d0",
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Group_Build_Level/BG_Build_Level_Count",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        24.7178,
+        23.3333,
+        82.3925,
+        26.6667
+      ],
+      "sourceJsonPointer": "/screens/1/elements/66"
+    },
+    {
+      "id": "element-4f215546-df2f-4d54-a364-a0d98997b120",
+      "parentId": "element-3b9e092f-c0da-46d5-9a26-cc193ebff9d0",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Build_Level_Star",
+      "x": 0,
+      "y": 0,
+      "w": 37.5,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "alt": "새로 그린 파란 별 등급 아이콘",
+        "fit": "contain",
+        "assetRef": "sha256-3c0961fc3082224d471599cc0113243f9c8f7a3c0eb3f90244d9abb161be4a4c.webp",
+        "sourceSize": [
+          477,
+          471
+        ]
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Group_Build_Level/Img_Build_Level_Star",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        8.2393,
+        21.6667,
+        37.0766,
+        30.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/67"
+    },
+    {
+      "id": "element-3b9e092f-c0da-46d5-9a26-cc193ebff9d0",
+      "name": "Group_Build_Level",
+      "kind": "panel",
+      "x": 1.4953271028037383,
+      "y": 17.857142857142858,
+      "w": 17.94392523364486,
+      "h": 64.28571428571429,
+      "text": "",
+      "isGroup": true,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ffffff",
+        "stroke": "#71839a",
+        "strokeWidth": 0,
+        "opacity": 1,
+        "textColor": "#243549"
+      },
+      "parentId": "element-f7a6ccde-d23b-4109-8996-c5b21edb48b6",
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Group_Build_Level",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        8.2393,
+        21.6667,
+        98.871,
+        30.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/68"
+    },
+    {
+      "id": "element-11aae658-6f12-4673-874d-eafdb3c7c6aa",
+      "parentId": "element-3b9e092f-c0da-46d5-9a26-cc193ebff9d0",
+      "partRole": "label",
+      "kind": "text",
+      "name": "Txt_Build_Level_Count",
+      "x": 35.416666666666664,
+      "y": 2.7777777777777777,
+      "w": 64.58333333333333,
+      "h": 94.44444444444444,
+      "text": "0",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "fontSize": 28,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#aaa798",
+        "strokeWidth": 0,
+        "textColor": "#243549"
+      },
+      "typography": {
+        "weight": 800,
+        "align": "center",
+        "vertical": "middle",
+        "lineHeight": 34,
+        "family": "system",
+        "wrap": "nowrap",
+        "strokeWidth": 0
+      },
+      "hierarchyPath": "HUD_Build_Top/Group_Build_TopBar/Group_Build_Level/Txt_Build_Level_Count",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        43.2561,
+        22.5,
+        63.8542,
+        28.3333
+      ],
+      "sourceJsonPointer": "/screens/1/elements/69"
+    },
+    {
+      "id": "element-f9ad9ef0-2f09-4c3c-9c4d-056eb7ce05a5",
+      "name": "Badge_Notification_Build_Menu",
+      "kind": "panel",
+      "x": 59.09090909090909,
+      "y": -18.181818181818183,
+      "w": 40.90909090909091,
+      "h": 40.90909090909091,
+      "text": "",
+      "appearance": {
+        "fill": "#f40c16",
+        "stroke": "#ffffff",
+        "textColor": "#ffffff",
+        "strokeWidth": 3,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "partRole": "badge",
+      "fontSize": 20,
+      "component": "image-frame",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "notification": {
+        "enabled": true,
+        "mode": "dot",
+        "value": 1,
+        "hideZero": true,
+        "maxDisplay": 99,
+        "valueKey": "nav.albumCount"
+      },
+      "parentId": "element-06f95a8c-9148-43e8-85c9-fe5df4522d2c",
+      "hierarchyPath": "HUD_Build_Top/Btn_Build_Menu/Badge_Notification_Build_Menu",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        524.2224,
+        11.6667,
+        18.5383,
+        15.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/70"
+    },
+    {
+      "id": "element-5908ba8b-74fb-4547-9c44-81008a2b7400",
+      "parentId": "element-f9ad9ef0-2f09-4c3c-9c4d-056eb7ce05a5",
+      "partRole": "image",
+      "kind": "image",
+      "name": "Img_Notification_BG",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "image": {
+        "src": "",
+        "assetRef": "sha256-8bbd66d08ba8b912330fe6ff7268c32017e1ce09bec0614f4ae03e2dff17d792.webp",
+        "sourceSize": [
+          112,
+          112
+        ],
+        "alt": "Badge_Bottom_Build 이미지",
+        "fit": "contain"
+      },
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#f4f5f7",
+        "stroke": "#a2acb5",
+        "strokeWidth": 1,
+        "radius": 0
+      },
+      "hierarchyPath": "HUD_Build_Top/Btn_Build_Menu/Badge_Notification_Build_Menu/Img_Notification_BG",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        524.2224,
+        11.6667,
+        18.5383,
+        15.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/71"
+    },
+    {
+      "id": "element-a2db9f68-ca9c-45d8-b1a0-0d6a6182ab75",
+      "parentId": "element-f9ad9ef0-2f09-4c3c-9c4d-056eb7ce05a5",
+      "partRole": "label",
+      "kind": "text",
+      "name": "Txt_Notification_Count",
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100,
+      "text": "5",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "fontSize": 18,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ffffff",
+        "strokeWidth": 0,
+        "textColor": "#ffffff"
+      },
+      "typography": {
+        "weight": 700,
+        "align": "center",
+        "vertical": "middle"
+      },
+      "hierarchyPath": "HUD_Build_Top/Btn_Build_Menu/Badge_Notification_Build_Menu/Txt_Notification_Count",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        524.2224,
+        11.6667,
+        18.5383,
+        15.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/72"
+    },
+    {
+      "id": "element-3e24bfb6-d26d-4697-9a3c-051abc1e2a0f",
+      "name": "BG_Build_Footer",
+      "kind": "panel",
+      "x": 0,
+      "y": 73.52941176470588,
+      "w": 100,
+      "h": 26.470588235294116,
+      "text": "",
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "edges": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-9077bed744487f5cb63244093020a3df075df16b1401a85c71896286b510b69a.webp",
+            "w": 32,
+            "h": 32
+          }
+        }
+      },
+      "parentId": "group-a4af32cc-1b6d-4464-99d6-11bcca35927b",
+      "hierarchyPath": "HUD_Build_Bottom/BG_Build_Footer",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        0.0,
+        912.0,
+        551.0,
+        72.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/73"
+    },
+    {
+      "id": "element-4ede6e35-a6c9-4bb4-a93f-ab683b1f3d9b",
+      "name": "Line_Build_Footer",
+      "kind": "panel",
+      "x": 0,
+      "y": 73.52941176470588,
+      "w": 100,
+      "h": 2.2058823529411766,
+      "text": "",
+      "appearance": {
+        "fill": "#e8edf2",
+        "stroke": "#71839a",
+        "textColor": "#243549",
+        "strokeWidth": 1.5,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "rectangle"
+      },
+      "partRole": "background",
+      "skin": {
+        "preset": "backplate",
+        "version": 1,
+        "name": "정보 백판",
+        "mode": "9",
+        "asset": "frame",
+        "tone": "#dbe2e9",
+        "slices": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "edges": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "defaultState": "normal",
+        "repeat": "stretch",
+        "textures": {
+          "normal": {
+            "src": "",
+            "assetRef": "sha256-150bc918192c946962c0c7ac6b8a769fa3ed0c1fe9e52b1d52220039bc143918.webp",
+            "w": 32,
+            "h": 32
+          }
+        }
+      },
+      "parentId": "group-a4af32cc-1b6d-4464-99d6-11bcca35927b",
+      "hierarchyPath": "HUD_Build_Bottom/Line_Build_Footer",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        0.0,
+        912.0,
+        551.0,
+        6.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/74"
+    },
+    {
+      "id": "element-c213d8da-6121-4e8b-8105-f4ce9ccdf858",
+      "partRole": "label",
+      "kind": "text",
+      "name": "Txt_Build_City_Progress",
+      "x": 0,
+      "y": 76.47058823529412,
+      "w": 100,
+      "h": 7.352941176470588,
+      "text": "NEW YORK CITY 3/15",
+      "interaction": {
+        "mode": "none",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "fontSize": 20,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#aaa798",
+        "strokeWidth": 0
+      },
+      "typography": {
+        "weight": 700,
+        "align": "center",
+        "vertical": "middle",
+        "lineHeight": 20,
+        "family": "system",
+        "wrap": "nowrap",
+        "strokeWidth": 0
+      },
+      "parentId": "group-a4af32cc-1b6d-4464-99d6-11bcca35927b",
+      "hierarchyPath": "HUD_Build_Bottom/Txt_Build_City_Progress",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        0.0,
+        920.0,
+        551.0,
+        20.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/75"
+    },
+    {
+      "id": "element-5e26bedc-dfc1-4f1e-bf20-9937a0fec415",
+      "name": "Btn_Build_Back",
+      "kind": "button",
+      "x": 46.007259528130675,
+      "y": 83.82352941176471,
+      "w": 7.985480943738657,
+      "h": 16.176470588235293,
+      "text": "",
+      "appearance": {
+        "fill": "#f5f2df",
+        "stroke": "#71839a",
+        "textColor": "#aaa797",
+        "strokeWidth": 0,
+        "radius": 12,
+        "opacity": 1,
+        "shape": "circle"
+      },
+      "fontSize": 40,
+      "typography": {
+        "weight": 500,
+        "lineHeight": 44,
+        "family": "system",
+        "align": "center",
+        "vertical": "middle",
+        "wrap": "nowrap"
+      },
+      "parentId": "group-a4af32cc-1b6d-4464-99d6-11bcca35927b",
+      "buttonState": {
+        "enabled": true,
+        "mode": "tint",
+        "targetGraphic": "self",
+        "selectable": false,
+        "selected": false,
+        "tints": {
+          "normal": "#ffffff",
+          "hover": "#f2f2f2",
+          "pressed": "#bdbdbd",
+          "selected": "#d8e8ff",
+          "disabled": "#999999"
+        }
+      },
+      "component": "image-frame",
+      "partRole": "container",
+      "interaction": {
+        "mode": "action",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Back",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        253.5,
+        940.0,
+        44.0,
+        44.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/76"
+    },
+    {
+      "id": "group-a4af32cc-1b6d-4464-99d6-11bcca35927b",
+      "name": "HUD_Build_Bottom",
+      "kind": "panel",
+      "x": 0,
+      "y": 72.35772357723577,
+      "w": 100,
+      "h": 27.64227642276423,
+      "text": "",
+      "isGroup": true,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ffffff",
+        "stroke": "#71839a",
+        "strokeWidth": 0,
+        "opacity": 1,
+        "textColor": "#243549"
+      },
+      "rectTransform": {
+        "min": [
+          0,
+          0
+        ],
+        "max": [
+          0,
+          0
+        ],
+        "pivot": [
+          0,
+          0
+        ],
+        "position": [
+          0,
+          -5.684341886080802e-14
+        ],
+        "sizeDelta": [
+          551,
+          272.00000000000006
+        ]
+      },
+      "hierarchyPath": "HUD_Build_Bottom",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        0.0,
+        712.0,
+        551.0,
+        272.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/77"
+    },
+    {
+      "id": "element-5e26bedc-dfc1-4f1e-bf20-9937a0fec415-label",
+      "parentId": "element-5e26bedc-dfc1-4f1e-bf20-9937a0fec415",
+      "partRole": "label",
+      "kind": "text",
+      "name": "Txt_Build_CloseGlyph",
+      "x": 18.181818181818183,
+      "y": 18.181818181818183,
+      "w": 63.63636363636363,
+      "h": 63.63636363636363,
+      "text": "×",
+      "interaction": {
+        "mode": "parent",
+        "enabled": true,
+        "shape": "rectangle",
+        "reason": ""
+      },
+      "fontSize": 32,
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ffffff",
+        "strokeWidth": 0,
+        "textColor": "#72756d"
+      },
+      "typography": {
+        "weight": 500,
+        "lineHeight": 28,
+        "strokeWidth": 0,
+        "align": "center",
+        "vertical": "middle"
+      },
+      "hierarchyPath": "HUD_Build_Bottom/Btn_Build_Back/Txt_Build_CloseGlyph",
+      "sourceLine": 1,
+      "derivedLogicalBoxFromStoredPercent": [
+        261.5,
+        948.0,
+        28.0,
+        28.0
+      ],
+      "sourceJsonPointer": "/screens/1/elements/78"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "edge-d53e22c1-2281-4e50-bd09-fd32870c1162",
+      "fromScreen": "screen-5b226528-5446-48d2-b4b1-f7aaceff7f7b",
+      "fromElement": "element-5e26bedc-dfc1-4f1e-bf20-9937a0fec415",
+      "event": "click",
+      "action": "back",
+      "condition": "always",
+      "label": "짓기 닫기 · 이전 화면",
+      "payload": {
+        "message": "시험 안내"
+      },
+      "returnPolicy": "호출한 이전 화면으로 복귀",
+      "fromElementName": "Btn_Build_Back",
+      "targetScreenName": null
+    }
+  ],
+  "sourceLine": 1,
+  "sourceJsonPointer": "/screens/1"
+}

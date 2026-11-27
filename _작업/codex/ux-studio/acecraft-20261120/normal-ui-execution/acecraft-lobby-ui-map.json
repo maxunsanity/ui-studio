@@ -1,0 +1,1232 @@
+{
+  "family": {
+    "kind": "normal-ui-action-recipes-not-design",
+    "id": "ACE01",
+    "name": "Page_ACE_Lobby",
+    "nativeKind": "page",
+    "purpose": "영상A7초의 로비 고정HUD/중앙캐릭터/양옆퀵메뉴/5개하단탭. 새그림과 native텍스트 분리. 원본캐릭터와복장차이 및glyph대체는자료표참조.",
+    "actions": [
+      {
+        "key": "Scene",
+        "op": "image",
+        "name": "Img_ACE_Lobby_Scene",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 420,
+          "h": 924
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-lobby-background-v001.webp"
+      },
+      {
+        "key": "HUD",
+        "op": "plain",
+        "name": "Panel_ACE_Lobby_HUD",
+        "rect": {
+          "x": 8,
+          "y": 38,
+          "w": 404,
+          "h": 74
+        },
+        "role": "frame",
+        "fill": "#ffffff"
+      },
+      {
+        "key": "Profile",
+        "op": "panel",
+        "name": "Panel_ACE_Lobby_Profile",
+        "rect": {
+          "x": 8,
+          "y": 43,
+          "w": 191,
+          "h": 55
+        },
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+        "skinMetrics": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "parent": "HUD"
+      },
+      {
+        "key": "ProfileIcon",
+        "op": "image",
+        "name": "Img_ACE_Lobby_ProfileIcon",
+        "rect": {
+          "x": 15,
+          "y": 47,
+          "w": 44,
+          "h": 44
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "Profile",
+        "region": [
+          64,
+          128,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "Name",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_Name",
+        "rect": {
+          "x": 62,
+          "y": 48,
+          "w": 130,
+          "h": 21
+        },
+        "text": "SamplePilot",
+        "size": 15,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Profile",
+        "align": "center"
+      },
+      {
+        "key": "Level",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_Level",
+        "rect": {
+          "x": 62,
+          "y": 70,
+          "w": 90,
+          "h": 18
+        },
+        "text": "Lv. 43",
+        "size": 12,
+        "color": "#876843",
+        "weight": 700,
+        "parent": "Profile",
+        "align": "center"
+      },
+      {
+        "key": "EnergyIcon",
+        "op": "image",
+        "name": "Img_ACE_Lobby_EnergyIcon",
+        "rect": {
+          "x": 208,
+          "y": 47,
+          "w": 24,
+          "h": 24
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "HUD",
+        "region": [
+          128,
+          0,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "Energy",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_Energy",
+        "rect": {
+          "x": 203,
+          "y": 76,
+          "w": 72,
+          "h": 21
+        },
+        "text": "237/60",
+        "size": 12,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "HUD",
+        "align": "center"
+      },
+      {
+        "key": "GemsIcon",
+        "op": "image",
+        "name": "Img_ACE_Lobby_GemsIcon",
+        "rect": {
+          "x": 278,
+          "y": 47,
+          "w": 24,
+          "h": 24
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "HUD",
+        "region": [
+          64,
+          0,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "Gems",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_Gems",
+        "rect": {
+          "x": 273,
+          "y": 76,
+          "w": 72,
+          "h": 21
+        },
+        "text": "4,209",
+        "size": 12,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "HUD",
+        "align": "center"
+      },
+      {
+        "key": "CoinsIcon",
+        "op": "image",
+        "name": "Img_ACE_Lobby_CoinsIcon",
+        "rect": {
+          "x": 345,
+          "y": 47,
+          "w": 24,
+          "h": 24
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "HUD",
+        "region": [
+          0,
+          0,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "Coins",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_Coins",
+        "rect": {
+          "x": 340,
+          "y": 76,
+          "w": 72,
+          "h": 21
+        },
+        "text": "8,012",
+        "size": 12,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "HUD",
+        "align": "center"
+      },
+      {
+        "key": "Pass",
+        "op": "panel",
+        "name": "Panel_ACE_Lobby_NavigatorPass",
+        "rect": {
+          "x": 119,
+          "y": 211,
+          "w": 188,
+          "h": 100
+        },
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_paper9_normal_v001.png",
+        "skinMetrics": [
+          20,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "key": "PassTitle",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_PassTitle",
+        "rect": {
+          "x": 130,
+          "y": 223,
+          "w": 166,
+          "h": 27
+        },
+        "text": "NAVIGATOR PASS",
+        "size": 17,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Pass",
+        "align": "center"
+      },
+      {
+        "key": "PassProgress",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_PassProgress",
+        "rect": {
+          "x": 142,
+          "y": 265,
+          "w": 142,
+          "h": 25
+        },
+        "text": "0 / 100",
+        "size": 18,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Pass",
+        "align": "center"
+      },
+      {
+        "key": "Mascot",
+        "op": "image",
+        "name": "Img_ACE_Lobby_Mascot",
+        "rect": {
+          "x": 119,
+          "y": 298,
+          "w": 183,
+          "h": 399
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft-lobby-mascot-proposal-v001.webp",
+        "parent": null,
+        "region": [
+          75,
+          0,
+          350,
+          768
+        ]
+      },
+      {
+        "key": "Store",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_Store",
+        "rect": {
+          "x": 9,
+          "y": 155,
+          "w": 58,
+          "h": 65
+        },
+        "text": "",
+        "transparent": true
+      },
+      {
+        "key": "StoreGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_StoreGlyph",
+        "rect": {
+          "x": 19,
+          "y": 155,
+          "w": 38,
+          "h": 38
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "Store",
+        "region": [
+          192,
+          0,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "StoreLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_StoreLabel",
+        "rect": {
+          "x": 9,
+          "y": 193,
+          "w": 58,
+          "h": 27
+        },
+        "text": "Store",
+        "size": 10,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Store",
+        "align": "center"
+      },
+      {
+        "key": "FirstPurchase",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_FirstPurchase",
+        "rect": {
+          "x": 9,
+          "y": 226,
+          "w": 58,
+          "h": 65
+        },
+        "text": "",
+        "transparent": true
+      },
+      {
+        "key": "FirstPurchaseGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_FirstPurchaseGlyph",
+        "rect": {
+          "x": 19,
+          "y": 226,
+          "w": 38,
+          "h": 38
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "FirstPurchase",
+        "region": [
+          64,
+          64,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "FirstPurchaseLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_FirstPurchaseLabel",
+        "rect": {
+          "x": 9,
+          "y": 264,
+          "w": 58,
+          "h": 27
+        },
+        "text": "First\nPurchase",
+        "size": 10,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "FirstPurchase",
+        "align": "center"
+      },
+      {
+        "key": "Privileges",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_Privileges",
+        "rect": {
+          "x": 9,
+          "y": 297,
+          "w": 58,
+          "h": 65
+        },
+        "text": "",
+        "transparent": true
+      },
+      {
+        "key": "PrivilegesGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_PrivilegesGlyph",
+        "rect": {
+          "x": 19,
+          "y": 297,
+          "w": 38,
+          "h": 38
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "Privileges",
+        "region": [
+          0,
+          0,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "PrivilegesLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_PrivilegesLabel",
+        "rect": {
+          "x": 9,
+          "y": 335,
+          "w": 58,
+          "h": 27
+        },
+        "text": "Privileges",
+        "size": 10,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Privileges",
+        "align": "center"
+      },
+      {
+        "key": "SpecialRecruit",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_SpecialRecruit",
+        "rect": {
+          "x": 9,
+          "y": 368,
+          "w": 58,
+          "h": 65
+        },
+        "text": "",
+        "transparent": true
+      },
+      {
+        "key": "SpecialRecruitGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_SpecialRecruitGlyph",
+        "rect": {
+          "x": 19,
+          "y": 368,
+          "w": 38,
+          "h": 38
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "SpecialRecruit",
+        "region": [
+          192,
+          0,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "SpecialRecruitLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_SpecialRecruitLabel",
+        "rect": {
+          "x": 9,
+          "y": 406,
+          "w": 58,
+          "h": 27
+        },
+        "text": "Special\nRecruit",
+        "size": 10,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "SpecialRecruit",
+        "align": "center"
+      },
+      {
+        "key": "RadiantPact",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_RadiantPact",
+        "rect": {
+          "x": 9,
+          "y": 439,
+          "w": 58,
+          "h": 65
+        },
+        "text": "",
+        "transparent": true
+      },
+      {
+        "key": "RadiantPactGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_RadiantPactGlyph",
+        "rect": {
+          "x": 19,
+          "y": 439,
+          "w": 38,
+          "h": 38
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "RadiantPact",
+        "region": [
+          128,
+          64,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "RadiantPactLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_RadiantPactLabel",
+        "rect": {
+          "x": 9,
+          "y": 477,
+          "w": 58,
+          "h": 27
+        },
+        "text": "Radiant\nPact",
+        "size": 10,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "RadiantPact",
+        "align": "center"
+      },
+      {
+        "key": "Menu",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_Menu",
+        "rect": {
+          "x": 353,
+          "y": 155,
+          "w": 58,
+          "h": 65
+        },
+        "text": "",
+        "transparent": true
+      },
+      {
+        "key": "MenuGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_MenuGlyph",
+        "rect": {
+          "x": 363,
+          "y": 155,
+          "w": 38,
+          "h": 38
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "Menu",
+        "region": [
+          128,
+          128,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "MenuLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_MenuLabel",
+        "rect": {
+          "x": 353,
+          "y": 193,
+          "w": 58,
+          "h": 27
+        },
+        "text": "Menu",
+        "size": 10,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Menu",
+        "align": "center"
+      },
+      {
+        "key": "FlightLog",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_FlightLog",
+        "rect": {
+          "x": 353,
+          "y": 226,
+          "w": 58,
+          "h": 65
+        },
+        "text": "",
+        "transparent": true
+      },
+      {
+        "key": "FlightLogGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_FlightLogGlyph",
+        "rect": {
+          "x": 363,
+          "y": 226,
+          "w": 38,
+          "h": 38
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "FlightLog",
+        "region": [
+          0,
+          128,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "FlightLogLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_FlightLogLabel",
+        "rect": {
+          "x": 353,
+          "y": 264,
+          "w": 58,
+          "h": 27
+        },
+        "text": "Flight Log",
+        "size": 10,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "FlightLog",
+        "align": "center"
+      },
+      {
+        "key": "Patrol",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_Patrol",
+        "rect": {
+          "x": 353,
+          "y": 297,
+          "w": 58,
+          "h": 65
+        },
+        "text": "",
+        "transparent": true
+      },
+      {
+        "key": "PatrolGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_PatrolGlyph",
+        "rect": {
+          "x": 363,
+          "y": 297,
+          "w": 38,
+          "h": 38
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "Patrol",
+        "region": [
+          192,
+          64,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "PatrolLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_PatrolLabel",
+        "rect": {
+          "x": 353,
+          "y": 335,
+          "w": 58,
+          "h": 27
+        },
+        "text": "Patrol",
+        "size": 10,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Patrol",
+        "align": "center"
+      },
+      {
+        "key": "Events",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_Events",
+        "rect": {
+          "x": 353,
+          "y": 368,
+          "w": 58,
+          "h": 65
+        },
+        "text": "",
+        "transparent": true
+      },
+      {
+        "key": "EventsGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_EventsGlyph",
+        "rect": {
+          "x": 363,
+          "y": 368,
+          "w": 38,
+          "h": 38
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "Events",
+        "region": [
+          128,
+          0,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "EventsLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_EventsLabel",
+        "rect": {
+          "x": 353,
+          "y": 406,
+          "w": 58,
+          "h": 27
+        },
+        "text": "Events",
+        "size": 10,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Events",
+        "align": "center"
+      },
+      {
+        "key": "MysticVisit",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_MysticVisit",
+        "rect": {
+          "x": 353,
+          "y": 439,
+          "w": 58,
+          "h": 65
+        },
+        "text": "",
+        "transparent": true
+      },
+      {
+        "key": "MysticVisitGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_MysticVisitGlyph",
+        "rect": {
+          "x": 363,
+          "y": 439,
+          "w": 38,
+          "h": 38
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "MysticVisit",
+        "region": [
+          0,
+          64,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "MysticVisitLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_MysticVisitLabel",
+        "rect": {
+          "x": 353,
+          "y": 477,
+          "w": 58,
+          "h": 27
+        },
+        "text": "Mystic Visit",
+        "size": 10,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "MysticVisit",
+        "align": "center"
+      },
+      {
+        "key": "Recruit",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_Recruit",
+        "rect": {
+          "x": 353,
+          "y": 510,
+          "w": 58,
+          "h": 65
+        },
+        "text": "",
+        "transparent": true
+      },
+      {
+        "key": "RecruitGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_RecruitGlyph",
+        "rect": {
+          "x": 363,
+          "y": 510,
+          "w": 38,
+          "h": 38
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "Recruit",
+        "region": [
+          192,
+          0,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "RecruitLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_RecruitLabel",
+        "rect": {
+          "x": 353,
+          "y": 548,
+          "w": 58,
+          "h": 27
+        },
+        "text": "Recruit",
+        "size": 10,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Recruit",
+        "align": "center"
+      },
+      {
+        "key": "Period",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_Period",
+        "rect": {
+          "x": 116,
+          "y": 701,
+          "w": 200,
+          "h": 24
+        },
+        "text": "New Period Begins · Limited-Time",
+        "size": 12,
+        "color": "#493329",
+        "weight": 700,
+        "align": "center"
+      },
+      {
+        "key": "Start",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_Start",
+        "rect": {
+          "x": 95,
+          "y": 766,
+          "w": 230,
+          "h": 55
+        },
+        "text": "Start",
+        "size": 26,
+        "color": "#493329",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_common_yellowcta3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ],
+        "parent": null
+      },
+      {
+        "key": "Trial",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_Trial",
+        "rect": {
+          "x": 5,
+          "y": 790,
+          "w": 84,
+          "h": 26
+        },
+        "text": "Realm Trial",
+        "size": 11,
+        "color": "#493329",
+        "weight": 700,
+        "align": "center"
+      },
+      {
+        "key": "Apple",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_Apple",
+        "rect": {
+          "x": 330,
+          "y": 790,
+          "w": 85,
+          "h": 26
+        },
+        "text": "Golden Apple",
+        "size": 11,
+        "color": "#493329",
+        "weight": 700,
+        "align": "center"
+      },
+      {
+        "key": "BottomNav",
+        "op": "plain",
+        "name": "Panel_ACE_Lobby_BottomNav",
+        "rect": {
+          "x": 0,
+          "y": 852,
+          "w": 420,
+          "h": 72
+        },
+        "role": "frame",
+        "fill": "#ffffff"
+      },
+      {
+        "key": "Pilots",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_Pilots",
+        "rect": {
+          "x": 0,
+          "y": 852,
+          "w": 84,
+          "h": 72
+        },
+        "text": "",
+        "transparent": true,
+        "parent": "BottomNav"
+      },
+      {
+        "key": "PilotsGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_PilotsGlyph",
+        "rect": {
+          "x": 22,
+          "y": 857,
+          "w": 40,
+          "h": 40
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "Pilots",
+        "region": [
+          64,
+          128,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "PilotsLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_PilotsLabel",
+        "rect": {
+          "x": 2,
+          "y": 899,
+          "w": 80,
+          "h": 20
+        },
+        "text": "Pilots",
+        "size": 12,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Pilots",
+        "align": "center"
+      },
+      {
+        "key": "RecruitNav",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_RecruitNav",
+        "rect": {
+          "x": 84,
+          "y": 852,
+          "w": 84,
+          "h": 72
+        },
+        "text": "",
+        "transparent": true,
+        "parent": "BottomNav"
+      },
+      {
+        "key": "RecruitNavGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_RecruitNavGlyph",
+        "rect": {
+          "x": 106,
+          "y": 857,
+          "w": 40,
+          "h": 40
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "RecruitNav",
+        "region": [
+          192,
+          0,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "RecruitNavLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_RecruitNavLabel",
+        "rect": {
+          "x": 86,
+          "y": 899,
+          "w": 80,
+          "h": 20
+        },
+        "text": "Recruit",
+        "size": 12,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "RecruitNav",
+        "align": "center"
+      },
+      {
+        "key": "Adventure",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_Adventure",
+        "rect": {
+          "x": 168,
+          "y": 852,
+          "w": 84,
+          "h": 72
+        },
+        "text": "",
+        "transparent": true,
+        "parent": "BottomNav"
+      },
+      {
+        "key": "AdventureGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_AdventureGlyph",
+        "rect": {
+          "x": 190,
+          "y": 857,
+          "w": 40,
+          "h": 40
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "Adventure",
+        "region": [
+          128,
+          0,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "AdventureLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_AdventureLabel",
+        "rect": {
+          "x": 170,
+          "y": 899,
+          "w": 80,
+          "h": 20
+        },
+        "text": "Adventure",
+        "size": 12,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Adventure",
+        "align": "center"
+      },
+      {
+        "key": "Shop",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_Shop",
+        "rect": {
+          "x": 252,
+          "y": 852,
+          "w": 84,
+          "h": 72
+        },
+        "text": "",
+        "transparent": true,
+        "parent": "BottomNav"
+      },
+      {
+        "key": "ShopGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_ShopGlyph",
+        "rect": {
+          "x": 274,
+          "y": 857,
+          "w": 40,
+          "h": 40
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "Shop",
+        "region": [
+          192,
+          64,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "ShopLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_ShopLabel",
+        "rect": {
+          "x": 254,
+          "y": 899,
+          "w": 80,
+          "h": 20
+        },
+        "text": "Shop",
+        "size": 12,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "Shop",
+        "align": "center"
+      },
+      {
+        "key": "PassNav",
+        "op": "button",
+        "name": "Btn_ACE_Lobby_PassNav",
+        "rect": {
+          "x": 336,
+          "y": 852,
+          "w": 84,
+          "h": 72
+        },
+        "text": "",
+        "transparent": true,
+        "parent": "BottomNav"
+      },
+      {
+        "key": "PassNavGlyph",
+        "op": "image",
+        "name": "Img_ACE_Lobby_PassNavGlyph",
+        "rect": {
+          "x": 358,
+          "y": 857,
+          "w": 40,
+          "h": 40
+        },
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "parent": "PassNav",
+        "region": [
+          0,
+          64,
+          64,
+          64
+        ]
+      },
+      {
+        "key": "PassNavLabel",
+        "op": "text",
+        "name": "Txt_ACE_Lobby_PassNavLabel",
+        "rect": {
+          "x": 338,
+          "y": 899,
+          "w": 80,
+          "h": 20
+        },
+        "text": "Pass",
+        "size": 12,
+        "color": "#493329",
+        "weight": 700,
+        "parent": "PassNav",
+        "align": "center"
+      }
+    ]
+  },
+  "sid": "main",
+  "i": 69,
+  "map": {
+    "Scene": "element-50a4826a-50a2-4dd9-ad83-f9e744cb1138",
+    "HUD": "element-adea4808-5f05-4868-8706-c96a14fd43f9",
+    "Profile": "element-9568ea8e-d943-46d5-b507-f875f1b6b69d",
+    "ProfileIcon": "element-7c327c2b-5a7c-4311-84d0-4137ea1789c9",
+    "Name": "element-af387dfe-3ded-4dea-9cf9-fd699b20d212",
+    "Level": "element-803a5d7a-55bb-4c72-ab26-5b0d192cfb9e",
+    "EnergyIcon": "element-4e1537fe-7a5d-4dbf-be62-4558e173bbe9",
+    "Energy": "element-affb5272-e058-4575-8086-fe99fd68bb2a",
+    "GemsIcon": "element-09d1afb7-e0ee-41fc-9a85-86f40cfa1dc5",
+    "Gems": "element-6342982b-38a7-481b-959d-9b48c42f8855",
+    "CoinsIcon": "element-df153569-f2cd-403b-96e1-03626b5b9a52",
+    "Coins": "element-06f827e5-00c6-40c2-a286-1ca11abfb34d",
+    "Pass": "element-1349b2d4-09ec-4497-b79c-0616c30f4fe4",
+    "PassTitle": "element-1925b74a-0d33-4784-b1d9-bcc3dff68245",
+    "PassProgress": "element-8201aafe-6538-4bfd-99e1-98a1bc02b224",
+    "Mascot": "element-268cbf90-4f68-4052-95fb-5e1a345784c3",
+    "Store": "element-806b2e40-63bc-4bf2-b274-a249b70744d6",
+    "StoreGlyph": "element-716d344a-42d8-4e28-a52e-b399c67fec7f",
+    "StoreLabel": "element-0772f300-1509-4acb-8db0-135e737e5e47",
+    "FirstPurchase": "element-ec48296c-95e3-4a57-b215-9436d1ce0b50",
+    "FirstPurchaseGlyph": "element-7e205168-6d4b-4447-8e8d-fbd226f38f5e",
+    "FirstPurchaseLabel": "element-e418df06-1a0c-45d3-b779-9d31c283bf3f",
+    "Privileges": "element-3ebf9187-a967-43a7-88ed-094f2e7c048f",
+    "PrivilegesGlyph": "element-1e502a6a-4064-4144-8cda-c714cca6deb8",
+    "PrivilegesLabel": "element-23acad83-6be4-4de3-9403-7f60098e50b4",
+    "SpecialRecruit": "element-38e69188-5660-40d3-b7e5-ba0191821de4",
+    "SpecialRecruitGlyph": "element-1b9f1d03-1354-4a21-91bb-518290437da2",
+    "SpecialRecruitLabel": "element-3c9ea2f8-220c-4b3d-b622-baab5465b453",
+    "RadiantPact": "element-fab0ecfc-58ff-42a8-a04d-034f4b3fe12f",
+    "RadiantPactGlyph": "element-4b1a1565-bfe5-4073-84d5-ec358642c18b",
+    "RadiantPactLabel": "element-60afa801-d589-4cf2-a861-730c15ceb3aa",
+    "Menu": "element-249b32d6-6777-401d-bd16-6d4bce7a208b",
+    "MenuGlyph": "element-cb6e4dd7-1c55-4f67-b88e-cc06352c34ac",
+    "MenuLabel": "element-99209730-3beb-4dab-854d-866415194840",
+    "FlightLog": "element-e1e19983-fa06-40cd-960b-93d93cb5c0a2",
+    "FlightLogGlyph": "element-6ab799e9-3e0b-44a3-9109-5eb4755d63de",
+    "FlightLogLabel": "element-838d341f-8cd3-4016-924d-e77a38e1e3c3",
+    "Patrol": "element-c7f1574b-41c4-4251-a954-d839373ac9e2",
+    "PatrolGlyph": "element-f7e8fe58-2dd7-4fc6-857f-3c357025baa5",
+    "PatrolLabel": "element-c3ea3fd9-6924-47aa-bbc1-67cd9b35ea0e",
+    "Events": "element-7bb22f65-6fd2-4710-bb7b-e1d7f5283be1",
+    "EventsGlyph": "element-13c0b155-ed08-4739-ac20-192693d99ace",
+    "EventsLabel": "element-527cd9e8-37fc-42be-a5ee-335990fc78bf",
+    "MysticVisit": "element-9e4470a1-7e37-4d61-9bb4-c5aec89ec1f1",
+    "MysticVisitGlyph": "element-c4c4f2f0-c775-4e9a-9c06-09f16334c7db",
+    "MysticVisitLabel": "element-e3dffa34-30d8-401d-a880-91e61119fbb3",
+    "Recruit": "element-d32cbbd6-3f27-4350-9e05-f0b0fc93c870",
+    "RecruitGlyph": "element-2d5df7a6-975d-44ce-9edf-3caca72eb751",
+    "RecruitLabel": "element-eb8f09c5-1d0e-4f81-bfcc-d0605c1c47cc",
+    "Period": "element-a3c60191-1d0b-4619-bbc2-41a133dad781",
+    "Start": "element-35dd4bfc-aee7-40b2-8f5f-1bb7cdbec0cc",
+    "Trial": "element-2914920d-e9a8-4ad6-ab50-d8665cb4e66f",
+    "Apple": "element-026e4850-750a-4715-aabe-25aa8612dd8d",
+    "BottomNav": "element-89d486e0-1814-498a-aca6-28ebbe82846e",
+    "Pilots": "element-4a23956c-7b84-42f7-80bc-4b13412b2b8e",
+    "PilotsGlyph": "element-b30afb1b-532a-4e9b-81c0-316bf3df3ba9",
+    "PilotsLabel": "element-334da8cf-d762-4553-995c-054b7ea9abf1",
+    "RecruitNav": "element-1b14e734-02e6-4701-a7ca-ff93c4e884a0",
+    "RecruitNavGlyph": "element-8f6592cf-16f7-4433-b898-f5e01b707d0f",
+    "RecruitNavLabel": "element-2f6529a3-a141-4c93-990f-b2b2a7912842",
+    "Adventure": "element-fb4f0742-c117-4ea4-b915-e1a2142d1b9c",
+    "AdventureGlyph": "element-4a5e9844-e6b1-46c4-a74c-327a66679304",
+    "AdventureLabel": "element-2e490687-40ed-4015-892c-3b52c654f8f2",
+    "Shop": "element-74b74b36-b714-4ca0-bcc2-5d3f9641c126",
+    "ShopGlyph": "element-1998ce95-5998-449e-819f-a68c4ec39ba8",
+    "ShopLabel": "element-03782ebe-de49-43e2-ad15-caf56b573e0a",
+    "PassNav": "element-7eda7b34-6fa0-42c5-9312-8c580e23782b",
+    "PassNavGlyph": "element-bb779a04-9327-4137-a286-dcc2954460d1",
+    "PassNavLabel": "element-5d99dafb-ec1e-4304-9f71-47cbfedebd01"
+  }
+}

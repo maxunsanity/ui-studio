@@ -1,0 +1,25 @@
+--- a/src/tools/uxStudio/project-context.mjs
++++ b/src/tools/uxStudio/project-context.mjs
+@@ -1,4 +1,5 @@
+ import {scopeURL} from './project-manager.mjs';
++import {normalizePresentationMode} from './presentation.mjs';
+ 
+ export const STUDIO_DIRECTORY = '/Users/max/projest_max/ui-studio';
+ 
+@@ -11,13 +12,14 @@
+   design:document ? `${document.name} · r${document.revision}${dirty ? ' · 미저장 수정' : ' · 저장됨'}` : '설계 읽는 중…'};
+ }
+ 
+-export function designURL(view, {workspaceId = null, projectId, screenId, elementId}) {
+- const paths = {detail:'/ui-studio/?editor=detail',canvas:'/ui-studio/canvas.html',preview:'/ui-studio/preview.html'};
++export function designURL(view, {workspaceId = null, projectId, screenId, elementId, presentationMode}) {
++ const paths = {detail:'/ui-studio/?editor=detail',canvas:'/ui-studio/canvas.html',preview:'/ui-studio/preview.html',sample:'/ui-studio/source/sample-preview.html'};
+  if (!Object.hasOwn(paths,view)) throw Error('알 수 없는 편집 화면입니다.');
+  const url = new URL(paths[view],'http://127.0.0.1');
+  if (projectId) url.searchParams.set('project',projectId);
+  if (screenId) url.searchParams.set('screen',screenId);
+  if (elementId) url.searchParams.set('element',elementId);
++ if (presentationMode !== undefined) url.searchParams.set('view',normalizePresentationMode(presentationMode));
+  return scopeURL(url.pathname+url.search,workspaceId);
+ }
+ 

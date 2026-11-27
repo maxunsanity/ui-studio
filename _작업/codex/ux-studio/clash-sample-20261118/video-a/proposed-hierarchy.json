@@ -1,0 +1,1036 @@
+{
+  "status": "제안(검수 대기)",
+  "originalGameLayerTreeObserved": false,
+  "coordinateSpace": "원본캡처1080×2340의수동대략범위;논리/native규격아님",
+  "fontsMeasured": false,
+  "families": [
+    {
+      "id": "A-F01",
+      "name": "캐릭터 로고 로딩",
+      "representative": "representatives/A-F01_014994ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "screen",
+          "description": "원본 전체 1080×2340",
+          "approxSourceRectXYWH": [
+            0,
+            0,
+            1080,
+            2340
+          ]
+        },
+        {
+          "id": "Img_Splash",
+          "parent": "ROOT",
+          "role": "image",
+          "description": "캐릭터 전면 원화"
+        },
+        {
+          "id": "Img_Logo",
+          "parent": "ROOT",
+          "role": "image+text",
+          "description": "게임 로고",
+          "approxSourceRectXYWH": [
+            257,
+            149,
+            668,
+            367
+          ]
+        },
+        {
+          "id": "Progress_Loading",
+          "parent": "ROOT",
+          "role": "progress",
+          "description": "하단 진행바와 별도 백분율",
+          "approxSourceRectXYWH": [
+            0,
+            2224,
+            1080,
+            116
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A-X01",
+      "name": "Android 알림 허용창",
+      "representative": "representatives/A-X01_000000ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "overlay",
+          "description": "로딩 배후"
+        },
+        {
+          "id": "Sheet_OSPermission",
+          "parent": "ROOT",
+          "role": "system-sheet",
+          "description": "벨/질문/세로 두 선택",
+          "approxSourceRectXYWH": [
+            29,
+            1680,
+            1022,
+            638
+          ]
+        },
+        {
+          "id": "Img_Bell",
+          "parent": "Sheet_OSPermission",
+          "role": "image",
+          "description": "알림 벨"
+        },
+        {
+          "id": "Txt_Prompt",
+          "parent": "Sheet_OSPermission",
+          "role": "text",
+          "description": "알림 허용 질문"
+        },
+        {
+          "id": "Btn_Allow",
+          "parent": "Sheet_OSPermission",
+          "role": "button",
+          "description": "허용"
+        },
+        {
+          "id": "Btn_Deny",
+          "parent": "Sheet_OSPermission",
+          "role": "button",
+          "description": "허용 안함"
+        }
+      ]
+    },
+    {
+      "id": "A-F02",
+      "name": "나이 선택 모달",
+      "representative": "representatives/A-F02_004983ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "overlay",
+          "description": "로딩 배후"
+        },
+        {
+          "id": "Panel_Age",
+          "parent": "ROOT",
+          "role": "panel",
+          "description": "중앙 회색 외틀",
+          "approxSourceRectXYWH": [
+            51,
+            519,
+            977,
+            1389
+          ]
+        },
+        {
+          "id": "Txt_Title",
+          "parent": "Panel_Age",
+          "role": "text",
+          "description": "나이가 어떻게 되세요?"
+        },
+        {
+          "id": "Img_King",
+          "parent": "Panel_Age",
+          "role": "image",
+          "description": "상단 파랑 킹 초상"
+        },
+        {
+          "id": "Group_Slider",
+          "parent": "Panel_Age",
+          "role": "input-group",
+          "description": "설명/숫자 말풍선/초록 트랙/파랑 손잡이/좌우 삼각"
+        },
+        {
+          "id": "Txt_Age",
+          "parent": "Group_Slider",
+          "role": "text",
+          "description": "슬라이더 표시값"
+        },
+        {
+          "id": "Slider_Age",
+          "parent": "Group_Slider",
+          "role": "slider",
+          "description": "연령 입력"
+        },
+        {
+          "id": "Btn_ConfirmAge",
+          "parent": "Panel_Age",
+          "role": "button",
+          "description": "확인",
+          "approxSourceRectXYWH": [
+            406,
+            1552,
+            269,
+            120
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A-F03",
+      "name": "중요 공지 하단판",
+      "representative": "representatives/A-F03_009991ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "overlay",
+          "description": "로딩 배후+딤"
+        },
+        {
+          "id": "Panel_Notice",
+          "parent": "ROOT",
+          "role": "panel",
+          "description": "하단 안내판",
+          "approxSourceRectXYWH": [
+            29,
+            1761,
+            1022,
+            558
+          ]
+        },
+        {
+          "id": "Txt_NoticeTitle",
+          "parent": "Panel_Notice",
+          "role": "text",
+          "description": "중요 공지"
+        },
+        {
+          "id": "Txt_NoticeBody",
+          "parent": "Panel_Notice",
+          "role": "text",
+          "description": "이용약관·개인정보 안내"
+        },
+        {
+          "id": "Group_Actions",
+          "parent": "Panel_Notice",
+          "role": "row",
+          "description": "확인/개인정보 처리방침/이용 약관"
+        },
+        {
+          "id": "Btn_Confirm",
+          "parent": "Group_Actions",
+          "role": "button",
+          "description": "확인"
+        },
+        {
+          "id": "Btn_Privacy",
+          "parent": "Group_Actions",
+          "role": "button",
+          "description": "개인정보 처리방침"
+        },
+        {
+          "id": "Btn_Terms",
+          "parent": "Group_Actions",
+          "role": "button",
+          "description": "이용 약관"
+        }
+      ]
+    },
+    {
+      "id": "A-X02",
+      "name": "Usercentrics 개인정보 동의판",
+      "representative": "representatives/A-X02_012983ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "overlay",
+          "description": "로딩 배후+딤"
+        },
+        {
+          "id": "OS_Status",
+          "parent": "ROOT",
+          "role": "system",
+          "description": "시간/기록/배터리 상태바; 샘플 콘텐츠에서 제외"
+        },
+        {
+          "id": "Panel_Consent",
+          "parent": "ROOT",
+          "role": "panel",
+          "description": "파란 개인정보 동의판",
+          "approxSourceRectXYWH": [
+            35,
+            887,
+            1010,
+            1377
+          ]
+        },
+        {
+          "id": "Img_Logo",
+          "parent": "Panel_Consent",
+          "role": "image",
+          "description": "작은 CLASH ROYALE 로고"
+        },
+        {
+          "id": "Txt_Title",
+          "parent": "Panel_Consent",
+          "role": "text",
+          "description": "개인 정보"
+        },
+        {
+          "id": "Txt_ConsentBody",
+          "parent": "Panel_Consent",
+          "role": "text",
+          "description": "cookies·tracking·광고·분석 파트너 안내"
+        },
+        {
+          "id": "Group_Links",
+          "parent": "Panel_Consent",
+          "role": "row",
+          "description": "보호정책/약관/자세한 정보"
+        },
+        {
+          "id": "Btn_Accept",
+          "parent": "Panel_Consent",
+          "role": "button",
+          "description": "모두 수락"
+        },
+        {
+          "id": "Btn_Reject",
+          "parent": "Panel_Consent",
+          "role": "button",
+          "description": "전체 거부"
+        },
+        {
+          "id": "Txt_Vendor",
+          "parent": "Panel_Consent",
+          "role": "text",
+          "description": "Usercentrics 공급자 표기"
+        }
+      ]
+    },
+    {
+      "id": "A-F04",
+      "name": "훈련 전투 아레나",
+      "representative": "representatives/A-F04_105997ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "screen",
+          "description": "아레나 전면",
+          "approxSourceRectXYWH": [
+            0,
+            0,
+            1080,
+            2340
+          ]
+        },
+        {
+          "id": "Scene_Arena",
+          "parent": "ROOT",
+          "role": "scene-reference",
+          "description": "타워/잔디/울타리/강/다리; 원본 Unity 계층 미확인"
+        },
+        {
+          "id": "HUD_Opponent",
+          "parent": "ROOT",
+          "role": "hud",
+          "description": "좌상 방패·교관 이름·로얄 훈련관"
+        },
+        {
+          "id": "HUD_Towers",
+          "parent": "ROOT",
+          "role": "hud",
+          "description": "양측 타워 HP/왕관 레벨"
+        },
+        {
+          "id": "Group_Tutorial",
+          "parent": "ROOT",
+          "role": "overlay",
+          "description": "킹/대사/손가락/선택안내"
+        },
+        {
+          "id": "Img_KingGuide",
+          "parent": "Group_Tutorial",
+          "role": "image",
+          "description": "하단 킹 인물"
+        },
+        {
+          "id": "Txt_Bubble",
+          "parent": "Group_Tutorial",
+          "role": "text",
+          "description": "흰 말풍선 대사"
+        },
+        {
+          "id": "Img_HandGuide",
+          "parent": "Group_Tutorial",
+          "role": "image",
+          "description": "드래그·클릭 유도 손"
+        },
+        {
+          "id": "Group_Deploy",
+          "parent": "ROOT",
+          "role": "overlay",
+          "description": "금지영역/카드 이름/유닛 미리보기"
+        },
+        {
+          "id": "HUD_Hand",
+          "parent": "ROOT",
+          "role": "hud",
+          "description": "하단 파란 카드·엘릭서 판(표시 상태에만)",
+          "approxSourceRectXYWH": [
+            0,
+            1970,
+            1080,
+            370
+          ]
+        },
+        {
+          "id": "NextCard",
+          "parent": "HUD_Hand",
+          "role": "card",
+          "description": "다음 카드/라벨"
+        },
+        {
+          "id": "HandCards",
+          "parent": "HUD_Hand",
+          "role": "row",
+          "description": "4카드 슬롯/엘릭서 비용/회색 비활성"
+        },
+        {
+          "id": "ElixirBar",
+          "parent": "HUD_Hand",
+          "role": "progress",
+          "description": "수치와 분홍 게이지"
+        }
+      ]
+    },
+    {
+      "id": "A-F05",
+      "name": "훈련 승리 결과 오버레이",
+      "representative": "representatives/A-F05_071983ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "overlay",
+          "description": "전장 배후+딤"
+        },
+        {
+          "id": "OpponentResult",
+          "parent": "ROOT",
+          "role": "ribbon",
+          "description": "적 이름/문장/빈 왕관쿠션",
+          "approxSourceRectXYWH": [
+            60,
+            605,
+            950,
+            319
+          ]
+        },
+        {
+          "id": "Txt_VS",
+          "parent": "ROOT",
+          "role": "text",
+          "description": "VS"
+        },
+        {
+          "id": "PlayerResult",
+          "parent": "ROOT",
+          "role": "ribbon",
+          "description": "아군 이름/클랜없음/왕관3",
+          "approxSourceRectXYWH": [
+            61,
+            1094,
+            949,
+            374
+          ]
+        },
+        {
+          "id": "Reward_Chest",
+          "parent": "ROOT",
+          "role": "card",
+          "description": "보상/상자",
+          "approxSourceRectXYWH": [
+            398,
+            1497,
+            286,
+            351
+          ]
+        },
+        {
+          "id": "Btn_ConfirmResult",
+          "parent": "ROOT",
+          "role": "button",
+          "description": "확인",
+          "approxSourceRectXYWH": [
+            430,
+            1950,
+            220,
+            107
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A-F06",
+      "name": "상자 보상 발표",
+      "representative": "representatives/A-F06_078991ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "screen",
+          "description": "파란 다이아 무늬"
+        },
+        {
+          "id": "Group_RewardReveal",
+          "parent": "ROOT",
+          "role": "panel",
+          "description": "카드/제목/보유량",
+          "approxSourceRectXYWH": [
+            180,
+            426,
+            762,
+            460
+          ]
+        },
+        {
+          "id": "Img_RewardCard",
+          "parent": "Group_RewardReveal",
+          "role": "image",
+          "description": "좌측 카드"
+        },
+        {
+          "id": "Txt_RewardTitle",
+          "parent": "Group_RewardReveal",
+          "role": "text",
+          "description": "이름/등급"
+        },
+        {
+          "id": "Txt_Quantity",
+          "parent": "Group_RewardReveal",
+          "role": "text",
+          "description": "+18 또는x1"
+        },
+        {
+          "id": "Progress_Ownership",
+          "parent": "Group_RewardReveal",
+          "role": "progress",
+          "description": "보유수/업그레이드가능"
+        },
+        {
+          "id": "Chest",
+          "parent": "ROOT",
+          "role": "image",
+          "description": "열린상자/발광",
+          "approxSourceRectXYWH": [
+            362,
+            1134,
+            379,
+            347
+          ]
+        },
+        {
+          "id": "Badge_Remaining",
+          "parent": "Chest",
+          "role": "badge",
+          "description": "4→3→2→1→0"
+        },
+        {
+          "id": "RewardSummary",
+          "parent": "ROOT",
+          "role": "row",
+          "description": "요약상태에서 하단4카드"
+        }
+      ]
+    },
+    {
+      "id": "A-F07",
+      "name": "훈련 전투 홈",
+      "representative": "representatives/A-F07_101993ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "screen",
+          "description": "홈 전면"
+        },
+        {
+          "id": "HUD_Currency",
+          "parent": "ROOT",
+          "role": "row",
+          "description": "경험(왕관카드)/골드/보석",
+          "approxSourceRectXYWH": [
+            0,
+            108,
+            1080,
+            80
+          ]
+        },
+        {
+          "id": "ProfileRow",
+          "parent": "ROOT",
+          "role": "row",
+          "description": "이름/클랜없음/친구/소식/메뉴",
+          "approxSourceRectXYWH": [
+            12,
+            239,
+            1035,
+            117
+          ]
+        },
+        {
+          "id": "TrainingProgress",
+          "parent": "ROOT",
+          "role": "progress",
+          "description": "훈련진행도/멀티플레이해제/1/3",
+          "approxSourceRectXYWH": [
+            187,
+            385,
+            725,
+            146
+          ]
+        },
+        {
+          "id": "Img_ArenaDiorama",
+          "parent": "ROOT",
+          "role": "scene-reference",
+          "description": "중앙 훈련장 모형",
+          "approxSourceRectXYWH": [
+            271,
+            904,
+            542,
+            589
+          ]
+        },
+        {
+          "id": "EventRewards",
+          "parent": "ROOT",
+          "role": "panel",
+          "description": "이벤트 제목/체크와 상자들",
+          "approxSourceRectXYWH": [
+            367,
+            1588,
+            353,
+            216
+          ]
+        },
+        {
+          "id": "Btn_Battle",
+          "parent": "ROOT",
+          "role": "button",
+          "description": "노란 전투",
+          "approxSourceRectXYWH": [
+            365,
+            1817,
+            361,
+            211
+          ]
+        },
+        {
+          "id": "Tutorial",
+          "parent": "ROOT",
+          "role": "overlay",
+          "description": "손가락/전투안내"
+        },
+        {
+          "id": "BottomNav",
+          "parent": "ROOT",
+          "role": "tabbar",
+          "description": "5개메뉴; 선택 전투",
+          "approxSourceRectXYWH": [
+            0,
+            2157,
+            1080,
+            183
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A-F08",
+      "name": "덱 편집 본문",
+      "representative": "representatives/A-F08_084999ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "screen",
+          "description": "카드관리 공통셸"
+        },
+        {
+          "id": "HUD_Currency",
+          "parent": "ROOT",
+          "role": "row",
+          "description": "경험/골드/보석"
+        },
+        {
+          "id": "Tabs_Mode",
+          "parent": "ROOT",
+          "role": "tabbar",
+          "description": "덱·컬렉션",
+          "approxSourceRectXYWH": [
+            105,
+            236,
+            868,
+            119
+          ]
+        },
+        {
+          "id": "DeckBanner",
+          "parent": "ROOT",
+          "role": "ribbon",
+          "description": "전투 덱"
+        },
+        {
+          "id": "DeckGrid",
+          "parent": "ROOT",
+          "role": "grid",
+          "description": "2행×4카드",
+          "approxSourceRectXYWH": [
+            18,
+            583,
+            1040,
+            761
+          ]
+        },
+        {
+          "id": "DeckCard",
+          "parent": "DeckGrid",
+          "role": "repeat-card",
+          "description": "비용/초상/레벨/NEW/수량게이지는별도역할"
+        },
+        {
+          "id": "AverageElixir",
+          "parent": "ROOT",
+          "role": "stat",
+          "description": "보라 엘릭서3.6"
+        },
+        {
+          "id": "TowerUnits",
+          "parent": "ROOT",
+          "role": "panel",
+          "description": "킹/타워캐릭터/레벨/진행/연필/타워유닛카드"
+        },
+        {
+          "id": "BottomNav",
+          "parent": "ROOT",
+          "role": "tabbar",
+          "description": "공통5메뉴"
+        }
+      ]
+    },
+    {
+      "id": "A-F09",
+      "name": "컬렉션 목록 본문",
+      "representative": "representatives/A-F09_088986ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "screen",
+          "description": "카드관리공통셸"
+        },
+        {
+          "id": "HUD_Currency",
+          "parent": "ROOT",
+          "role": "row",
+          "description": "경험/골드/보석(스크롤중에도 화면상단유지)"
+        },
+        {
+          "id": "Tabs_Mode",
+          "parent": "ROOT",
+          "role": "tabbar",
+          "description": "덱·컬렉션"
+        },
+        {
+          "id": "Tabs_Category",
+          "parent": "ROOT",
+          "role": "tabbar",
+          "description": "5개아이콘; 카드/다른4종"
+        },
+        {
+          "id": "Scroll_Collection",
+          "parent": "ROOT",
+          "role": "scroll",
+          "description": "세로 카드본문"
+        },
+        {
+          "id": "Toolbar",
+          "parent": "Scroll_Collection",
+          "role": "row",
+          "description": "찾음·필터슬라이더아이콘·정렬삼각·레벨기준"
+        },
+        {
+          "id": "DiscoveredGrid",
+          "parent": "Scroll_Collection",
+          "role": "grid",
+          "description": "발견함 4열 카드"
+        },
+        {
+          "id": "UndiscoveredGrid",
+          "parent": "Scroll_Collection",
+          "role": "grid",
+          "description": "미발견 회색 4열 아레나해제카드"
+        },
+        {
+          "id": "TowerUnitSection",
+          "parent": "Scroll_Collection",
+          "role": "grid",
+          "description": "하단 타워유닛4카드"
+        },
+        {
+          "id": "SelectedCardPopover",
+          "parent": "Scroll_Collection",
+          "role": "popover",
+          "description": "선택 카드 확장과 업그레이드/정보+사용"
+        },
+        {
+          "id": "BottomNav",
+          "parent": "ROOT",
+          "role": "tabbar",
+          "description": "5메뉴;컬렉션선택"
+        }
+      ]
+    },
+    {
+      "id": "A-F10",
+      "name": "기사 카드 상세 모달",
+      "representative": "representatives/A-F10_091990ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "overlay",
+          "description": "컬렉션 배후+딤"
+        },
+        {
+          "id": "Img_KnightFigure",
+          "parent": "ROOT",
+          "role": "image",
+          "description": "판 위 돌출 기사모형",
+          "approxSourceRectXYWH": [
+            301,
+            163,
+            556,
+            593
+          ]
+        },
+        {
+          "id": "Panel_Detail",
+          "parent": "ROOT",
+          "role": "panel",
+          "description": "파란 상세판",
+          "approxSourceRectXYWH": [
+            46,
+            758,
+            994,
+            1258
+          ]
+        },
+        {
+          "id": "Btn_Close",
+          "parent": "Panel_Detail",
+          "role": "button",
+          "description": "우상 빨강X",
+          "approxSourceRectXYWH": [
+            935,
+            779,
+            72,
+            75
+          ]
+        },
+        {
+          "id": "Card_Preview",
+          "parent": "Panel_Detail",
+          "role": "card",
+          "description": "좌측비용3/기사/레벨/2/2"
+        },
+        {
+          "id": "Txt_NameLevel",
+          "parent": "Panel_Detail",
+          "role": "text",
+          "description": "기사/레벨1"
+        },
+        {
+          "id": "Stat_Rarity",
+          "parent": "Panel_Detail",
+          "role": "stat",
+          "description": "희귀도/일반"
+        },
+        {
+          "id": "Stat_Type",
+          "parent": "Panel_Detail",
+          "role": "stat",
+          "description": "유형/유닛"
+        },
+        {
+          "id": "Scene_Demo",
+          "parent": "Panel_Detail",
+          "role": "scene-reference",
+          "description": "아레나 시연장면"
+        },
+        {
+          "id": "Pager_Demo",
+          "parent": "Panel_Detail",
+          "role": "indicator",
+          "description": "시연아래 점들"
+        },
+        {
+          "id": "Btn_Upgrade",
+          "parent": "Panel_Detail",
+          "role": "button",
+          "description": "업그레이드5골드"
+        },
+        {
+          "id": "Btn_Use",
+          "parent": "Panel_Detail",
+          "role": "button",
+          "description": "사용"
+        },
+        {
+          "id": "TutorialHand",
+          "parent": "ROOT",
+          "role": "image",
+          "description": "업그레이드유도손"
+        }
+      ]
+    },
+    {
+      "id": "A-F11",
+      "name": "업그레이드 보상 확인 말풍선",
+      "representative": "representatives/A-F11_092690ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "overlay",
+          "description": "상세 배후+추가딤"
+        },
+        {
+          "id": "Panel_UpgradeConfirm",
+          "parent": "ROOT",
+          "role": "popover",
+          "description": "말풍선테두리/아래꼬리",
+          "approxSourceRectXYWH": [
+            297,
+            1373,
+            489,
+            453
+          ]
+        },
+        {
+          "id": "Txt_Title",
+          "parent": "Panel_UpgradeConfirm",
+          "role": "text",
+          "description": "업그레이드 보상(일부가림)"
+        },
+        {
+          "id": "Reward_CrownCards",
+          "parent": "Panel_UpgradeConfirm",
+          "role": "row",
+          "description": "왕관카드아이콘1"
+        },
+        {
+          "id": "Reward_Star",
+          "parent": "Panel_UpgradeConfirm",
+          "role": "row",
+          "description": "금색별아이콘4"
+        },
+        {
+          "id": "Btn_Confirm",
+          "parent": "Panel_UpgradeConfirm",
+          "role": "button",
+          "description": "확인5골드"
+        },
+        {
+          "id": "TutorialHand",
+          "parent": "ROOT",
+          "role": "image",
+          "description": "확인유도손"
+        }
+      ]
+    },
+    {
+      "id": "A-F12",
+      "name": "카드 업그레이드 발표",
+      "representative": "representatives/A-F12_097997ms.jpg",
+      "hierarchyProposal": [
+        {
+          "id": "ROOT",
+          "parent": null,
+          "role": "screen",
+          "description": "파란 다이아 배경"
+        },
+        {
+          "id": "Txt_CardName",
+          "parent": "ROOT",
+          "role": "text",
+          "description": "기사",
+          "approxSourceRectXYWH": [
+            443,
+            351,
+            190,
+            105
+          ]
+        },
+        {
+          "id": "Progress_Card",
+          "parent": "ROOT",
+          "role": "progress",
+          "description": "화살표/0/4",
+          "approxSourceRectXYWH": [
+            328,
+            463,
+            452,
+            111
+          ]
+        },
+        {
+          "id": "Img_Card",
+          "parent": "ROOT",
+          "role": "card",
+          "description": "발광카드/레벨2",
+          "approxSourceRectXYWH": [
+            366,
+            671,
+            341,
+            420
+          ]
+        },
+        {
+          "id": "Stat_UpgradeRows",
+          "parent": "ROOT",
+          "role": "column",
+          "description": "피해량86+7/초당피해량71+6/HP759+69",
+          "approxSourceRectXYWH": [
+            392,
+            1134,
+            405,
+            414
+          ]
+        },
+        {
+          "id": "Stat_Icon",
+          "parent": "Stat_UpgradeRows",
+          "role": "image",
+          "description": "각행아이콘"
+        },
+        {
+          "id": "Stat_Name",
+          "parent": "Stat_UpgradeRows",
+          "role": "text",
+          "description": "항목명"
+        },
+        {
+          "id": "Stat_Base",
+          "parent": "Stat_UpgradeRows",
+          "role": "text",
+          "description": "현재표시수치"
+        },
+        {
+          "id": "Stat_Delta",
+          "parent": "Stat_UpgradeRows",
+          "role": "text",
+          "description": "녹색증가량"
+        }
+      ]
+    }
+  ]
+}

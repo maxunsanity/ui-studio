@@ -1,0 +1,2547 @@
+{
+  "title": "타일 서바이벌 native 구조 독립 검토 v001",
+  "author": "codex(단이)",
+  "status": "제안(검수 대기)",
+  "reviewType": "saved JSON/source only; not actual screen QA",
+  "sourceSnapshot": {
+    "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/designs/ux-25ecc98a.json",
+    "readAtKST": "2026-11-18T14:12:09+09:00",
+    "revision": 35,
+    "savedAt": "2026-11-18T05:10:22.684Z",
+    "sha256": "8d2363d24a14456d6fd7ba40fda5a1e9c98e75430737ee6ca3991ae2a8ef36b0",
+    "screenCount": 3,
+    "firstTwoElementCount": 67,
+    "totalTransitionCount": 0
+  },
+  "initialFindingSnapshot": {
+    "revision": 27,
+    "readAtKST": "2026-11-18T14:04:36+09:00",
+    "sha256": "a29642f2e490efbaf2f1f64608628c15b714447e619c2c1e053034f01afc39e5",
+    "finding": "BG_TSV_Building_Upgrade retained helmet icon image and green 3slice skin"
+  },
+  "endRead": {
+    "readAtKST": "2026-11-18T14:12:09+09:00",
+    "revision": 35,
+    "sha256": "8d2363d24a14456d6fd7ba40fda5a1e9c98e75430737ee6ca3991ae2a8ef36b0",
+    "changedDuringAnalysis": false
+  },
+  "firstTwoSchemaValidation": {
+    "passed": true,
+    "scope": "first two screens; cross-scope transitions excluded"
+  },
+  "screens": [
+    {
+      "screenId": "main",
+      "screenName": "Page_TSV_Territory",
+      "elementCount": 19,
+      "logicalSize": {
+        "w": 504,
+        "h": 894
+      },
+      "missingParents": [],
+      "cycles": [],
+      "outsideViewport": [],
+      "outsideParents": [],
+      "emptyImages": [],
+      "duplicateNames": [],
+      "elements": [
+        {
+          "id": "element-ef783622-78d2-4242-af0e-25db38834f18",
+          "name": "Img_TSV_TerritoryScene",
+          "kind": "image",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/0/elements/0",
+          "logicalBox": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 894
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-ac8252341468ca1144c8db05c6b37839a5a75b52315463c0669b1ee71a85a438.webp",
+              "declaredSize": [
+                504,
+                894
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-1c5be100-3368-4481-931d-6b7eaee96877",
+          "name": "BG_TSV_HUD_TopBar",
+          "kind": "panel",
+          "parentId": "group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8",
+          "parentName": "HUD_TSV_Top",
+          "sourceJsonPointer": "/screens/0/elements/1",
+          "logicalBox": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 32
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "skin.textures.normal",
+              "ref": "sha256-4184b0ac8f27b7d10bf8adcf9efab78f7c935d01374c055ca95cc4442a5cc137.webp",
+              "declaredSize": [
+                64,
+                64
+              ]
+            }
+          ],
+          "skinMode": "9",
+          "slices": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "edges": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-bbf566b8-d06b-4f58-94be-fcdaab065500",
+          "name": "Txt_TSV_HUD_Power",
+          "kind": "text",
+          "parentId": "group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8",
+          "parentName": "HUD_TSV_Top",
+          "sourceJsonPointer": "/screens/0/elements/2",
+          "logicalBox": {
+            "x": 86,
+            "y": 3,
+            "w": 112,
+            "h": 24
+          },
+          "nativeText": "17,649",
+          "fontSize": 17,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-bf2fc8b6-76b5-483a-9881-f48a15024b57",
+          "name": "Txt_TSV_HUD_Population",
+          "kind": "text",
+          "parentId": "group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8",
+          "parentName": "HUD_TSV_Top",
+          "sourceJsonPointer": "/screens/0/elements/3",
+          "logicalBox": {
+            "x": 352,
+            "y": 3,
+            "w": 42.0,
+            "h": 24
+          },
+          "nativeText": "2/2",
+          "fontSize": 17,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-55477143-99fa-4c56-8f3d-f2c48e498111",
+          "name": "Txt_TSV_HUD_Wood",
+          "kind": "text",
+          "parentId": "group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8",
+          "parentName": "HUD_TSV_Top",
+          "sourceJsonPointer": "/screens/0/elements/4",
+          "logicalBox": {
+            "x": 440,
+            "y": 3,
+            "w": 60.0,
+            "h": 24
+          },
+          "nativeText": "700",
+          "fontSize": 17,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-64d5ed75-779d-439d-b2e7-f0d148242a11",
+          "name": "Img_TSV_HUD_Power",
+          "kind": "image",
+          "parentId": "group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8",
+          "parentName": "HUD_TSV_Top",
+          "sourceJsonPointer": "/screens/0/elements/5",
+          "logicalBox": {
+            "x": 66.0,
+            "y": 3,
+            "w": 22,
+            "h": 25
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-1b58af09c668409876699d72160aac06c378461d9dcffcf4cd14781183756711.webp",
+              "declaredSize": [
+                36,
+                36
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-43414463-ed5e-4ece-ac89-7bf3b3547e75",
+          "name": "Img_TSV_HUD_Population",
+          "kind": "image",
+          "parentId": "group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8",
+          "parentName": "HUD_TSV_Top",
+          "sourceJsonPointer": "/screens/0/elements/6",
+          "logicalBox": {
+            "x": 307.0,
+            "y": 2,
+            "w": 30.0,
+            "h": 25
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-209701a2921543f4e4900e5c49b3492995d108babb1cbf5120e7867fe8f0dce4.webp",
+              "declaredSize": [
+                40,
+                32
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-4d69a28d-a5e2-4988-b0a7-19946142e984",
+          "name": "Img_TSV_HUD_Wood",
+          "kind": "image",
+          "parentId": "group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8",
+          "parentName": "HUD_TSV_Top",
+          "sourceJsonPointer": "/screens/0/elements/7",
+          "logicalBox": {
+            "x": 406,
+            "y": 3,
+            "w": 30.0,
+            "h": 24
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-46dbd170bfe8e6e45b0704bdd4f760a7230ef6bb9d1002dcdcbb0215c8a78201.webp",
+              "declaredSize": [
+                40,
+                32
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-1f6e147a-58d7-4dcd-bb9b-97b0060c45d8",
+          "name": "Img_TSV_HUD_Commander",
+          "kind": "image",
+          "parentId": "group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8",
+          "parentName": "HUD_TSV_Top",
+          "sourceJsonPointer": "/screens/0/elements/8",
+          "logicalBox": {
+            "x": 4,
+            "y": 4,
+            "w": 60.0,
+            "h": 60
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-10dca7801fd94ed1ae7e3693d6f214d13add26fd8259f6fb9625805ab8966fd5.webp",
+              "declaredSize": [
+                256,
+                256
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "group-ccc9abdd-7b7c-4251-baf8-db31ba4570a8",
+          "name": "HUD_TSV_Top",
+          "kind": "panel",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/0/elements/9",
+          "logicalBox": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 64
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-37a27157-fede-4258-a701-02589eb7ed22",
+          "name": "BG_TSV_Nav",
+          "kind": "panel",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/0/elements/10",
+          "logicalBox": {
+            "x": 0,
+            "y": 830,
+            "w": 504,
+            "h": 64
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "skin.textures.normal",
+              "ref": "sha256-4184b0ac8f27b7d10bf8adcf9efab78f7c935d01374c055ca95cc4442a5cc137.webp",
+              "declaredSize": [
+                64,
+                64
+              ]
+            }
+          ],
+          "skinMode": "9",
+          "slices": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "edges": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-1bef8636-8c89-49f1-b6cd-ef72e60272f5",
+          "name": "Img_TSV_Nav_Lock01",
+          "kind": "image",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/0/elements/11",
+          "logicalBox": {
+            "x": 24,
+            "y": 850,
+            "w": 24,
+            "h": 28
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-96b45318d8f205accdf5b22bf96a072808f8a7644b913a74adb4f2a35634c19d.webp",
+              "declaredSize": [
+                32,
+                36
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-4fadd33e-303f-419e-8e03-df431f831190",
+          "name": "Img_TSV_Nav_Lock03",
+          "kind": "image",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/0/elements/12",
+          "logicalBox": {
+            "x": 192,
+            "y": 850,
+            "w": 24,
+            "h": 28
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-96b45318d8f205accdf5b22bf96a072808f8a7644b913a74adb4f2a35634c19d.webp",
+              "declaredSize": [
+                32,
+                36
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-ce3d0716-6f52-404e-b98d-d390f84364bf",
+          "name": "Img_TSV_Nav_Lock04",
+          "kind": "image",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/0/elements/13",
+          "logicalBox": {
+            "x": 276.0,
+            "y": 850,
+            "w": 24,
+            "h": 28
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-96b45318d8f205accdf5b22bf96a072808f8a7644b913a74adb4f2a35634c19d.webp",
+              "declaredSize": [
+                32,
+                36
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-6951f40f-77df-404c-b3f6-d1facc1af8d8",
+          "name": "Img_TSV_Nav_Lock05",
+          "kind": "image",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/0/elements/14",
+          "logicalBox": {
+            "x": 360,
+            "y": 850,
+            "w": 24,
+            "h": 28
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-96b45318d8f205accdf5b22bf96a072808f8a7644b913a74adb4f2a35634c19d.webp",
+              "declaredSize": [
+                32,
+                36
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-5853d51a-c2cb-4a81-b656-cf39fe7b7109",
+          "name": "Img_TSV_Nav_Lock06",
+          "kind": "image",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/0/elements/15",
+          "logicalBox": {
+            "x": 444.0,
+            "y": 850,
+            "w": 24,
+            "h": 28
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-96b45318d8f205accdf5b22bf96a072808f8a7644b913a74adb4f2a35634c19d.webp",
+              "declaredSize": [
+                32,
+                36
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-0829ac2b-fe35-4a88-9124-073e0f75dbc0",
+          "name": "Btn_TSV_Nav_Heroes",
+          "kind": "button",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/0/elements/16",
+          "logicalBox": {
+            "x": 84.0,
+            "y": 830,
+            "w": 84.0,
+            "h": 64
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": {
+            "enabled": true,
+            "mode": "tint",
+            "targetGraphic": "element-0829ac2b-fe35-4a88-9124-073e0f75dbc0-image",
+            "selectable": false,
+            "selected": false,
+            "tints": {
+              "normal": "#ffffff",
+              "hover": "#f2f2f2",
+              "pressed": "#bdbdbd",
+              "selected": "#d8e8ff",
+              "disabled": "#999999"
+            }
+          },
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-0829ac2b-fe35-4a88-9124-073e0f75dbc0-image",
+          "name": "Img_TSV_Nav_Heroes",
+          "kind": "image",
+          "parentId": "element-0829ac2b-fe35-4a88-9124-073e0f75dbc0",
+          "parentName": "Btn_TSV_Nav_Heroes",
+          "sourceJsonPointer": "/screens/0/elements/17",
+          "logicalBox": {
+            "x": 102.0,
+            "y": 830,
+            "w": 48,
+            "h": 48
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-b74e83ebe50a5afb1103738e4d3470e509cb8793251bfc33eff2216fd049f1e2.webp",
+              "declaredSize": [
+                128,
+                128
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-0829ac2b-fe35-4a88-9124-073e0f75dbc0-label",
+          "name": "Txt_TSV_Nav_Heroes",
+          "kind": "text",
+          "parentId": "element-0829ac2b-fe35-4a88-9124-073e0f75dbc0",
+          "parentName": "Btn_TSV_Nav_Heroes",
+          "sourceJsonPointer": "/screens/0/elements/18",
+          "logicalBox": {
+            "x": 84.0,
+            "y": 874,
+            "w": 84.0,
+            "h": 20
+          },
+          "nativeText": "영웅",
+          "fontSize": 14,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "layout": null,
+          "overflow": null
+        }
+      ],
+      "nativeTextCount": 4,
+      "imageCount": 11,
+      "buttonCount": 1,
+      "nineSliceCount": 2,
+      "threeSliceCount": 0,
+      "furnitureCards": [],
+      "furnitureGaps": [],
+      "furniture110x170": null
+    },
+    {
+      "screenId": "screen-102560cd-a9db-4e4a-89ea-8138bd7bf0c6",
+      "screenName": "Page_TSV_BuildingInterior",
+      "elementCount": 48,
+      "logicalSize": {
+        "w": 504,
+        "h": 894
+      },
+      "missingParents": [],
+      "cycles": [],
+      "outsideViewport": [],
+      "outsideParents": [],
+      "emptyImages": [],
+      "duplicateNames": [],
+      "elements": [
+        {
+          "id": "element-1314bf62-e3ec-48cc-b37e-f4bf6ba599c1",
+          "name": "Img_TSV_Building_Greenhouse",
+          "kind": "image",
+          "parentId": "group-72ca6f64-54b6-4624-9169-f1d3a613f4ef",
+          "parentName": "Scene_TSV_Building",
+          "sourceJsonPointer": "/screens/1/elements/0",
+          "logicalBox": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 614.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-b72852dcd6e61f3dc2a5a897f953b2199f5e99df4b7de70c5df221e6a6bbec39.webp",
+              "declaredSize": [
+                840,
+                1008
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-9ccc801c-bb23-4495-9257-91d1b234f93d",
+          "name": "BG_TSV_Building_Bottom",
+          "kind": "panel",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "parentName": "Panel_TSV_Building_Bottom",
+          "sourceJsonPointer": "/screens/1/elements/1",
+          "logicalBox": {
+            "x": 0,
+            "y": 614.0,
+            "w": 504,
+            "h": 280
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "skin.textures.normal",
+              "ref": "sha256-41c8b9bf974d8661aec22457375a5c5942c0136c4accfe520fdb3f37b0e0cce0.webp",
+              "declaredSize": [
+                96,
+                96
+              ]
+            }
+          ],
+          "skinMode": "9",
+          "slices": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "edges": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-df4dcd08-3935-4775-8c7f-5154d0251086",
+          "name": "Txt_TSV_Building_Rate",
+          "kind": "text",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "parentName": "Panel_TSV_Building_Bottom",
+          "sourceJsonPointer": "/screens/1/elements/2",
+          "logicalBox": {
+            "x": 392.0,
+            "y": 675,
+            "w": 100,
+            "h": 26
+          },
+          "nativeText": "1.11K /시간",
+          "fontSize": 18,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-ae6b84ab-d092-44f3-a6e8-2166492ff07d",
+          "name": "BG_TSV_Building_Header",
+          "kind": "panel",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "parentName": "Panel_TSV_Building_Bottom",
+          "sourceJsonPointer": "/screens/1/elements/3",
+          "logicalBox": {
+            "x": 0,
+            "y": 614.0,
+            "w": 504,
+            "h": 54.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "skin.textures.normal",
+              "ref": "sha256-4184b0ac8f27b7d10bf8adcf9efab78f7c935d01374c055ca95cc4442a5cc137.webp",
+              "declaredSize": [
+                64,
+                64
+              ]
+            }
+          ],
+          "skinMode": "9",
+          "slices": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "edges": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-dd316e6c-427b-4148-a3ea-cae47bc63f35",
+          "name": "Txt_TSV_Building_RateLabel",
+          "kind": "text",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "parentName": "Panel_TSV_Building_Bottom",
+          "sourceJsonPointer": "/screens/1/elements/4",
+          "logicalBox": {
+            "x": 18.0,
+            "y": 675,
+            "w": 137.0,
+            "h": 26
+          },
+          "nativeText": "시간당 생산량",
+          "fontSize": 18,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 22,
+            "align": "left"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-f437c12b-4ff3-4813-92d7-fba681d6588a",
+          "name": "BG_TSV_Furniture01",
+          "kind": "panel",
+          "parentId": "group-82aeed56-cd32-40b0-8a26-0cc9b35cc954",
+          "parentName": "Card_TSV_Furniture01",
+          "sourceJsonPointer": "/screens/1/elements/5",
+          "logicalBox": {
+            "x": 10.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "skin.textures.normal",
+              "ref": "sha256-41c8b9bf974d8661aec22457375a5c5942c0136c4accfe520fdb3f37b0e0cce0.webp",
+              "declaredSize": [
+                96,
+                96
+              ]
+            }
+          ],
+          "skinMode": "9",
+          "slices": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "edges": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-ba0e5bd1-b46a-4072-9728-f3eb3523eb71",
+          "name": "Img_TSV_Furniture01",
+          "kind": "image",
+          "parentId": "group-82aeed56-cd32-40b0-8a26-0cc9b35cc954",
+          "parentName": "Card_TSV_Furniture01",
+          "sourceJsonPointer": "/screens/1/elements/6",
+          "logicalBox": {
+            "x": 26,
+            "y": 752,
+            "w": 78,
+            "h": 87
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-a295bbfbe5282c053e9183b681dd3e0119f27f5fbbedf203fe133713b4e97dd4.webp",
+              "declaredSize": [
+                256,
+                288
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-249e5b60-a10a-44d6-acbb-7c91a858778a",
+          "name": "Img_TSV_Furniture01_Lock",
+          "kind": "image",
+          "parentId": "group-82aeed56-cd32-40b0-8a26-0cc9b35cc954",
+          "parentName": "Card_TSV_Furniture01",
+          "sourceJsonPointer": "/screens/1/elements/7",
+          "logicalBox": {
+            "x": 54,
+            "y": 852,
+            "w": 22,
+            "h": 25
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-195c586e2bcedc54b212fedca674c6c055c5185632061eb4e40e30d47af07d08.webp",
+              "declaredSize": [
+                128,
+                128
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-9c533c9c-b9fd-417e-aa91-029507e5acf9",
+          "name": "Txt_TSV_Furniture01_LevelOn",
+          "kind": "text",
+          "parentId": "group-82aeed56-cd32-40b0-8a26-0cc9b35cc954",
+          "parentName": "Card_TSV_Furniture01",
+          "sourceJsonPointer": "/screens/1/elements/8",
+          "logicalBox": {
+            "x": 18.0,
+            "y": 719,
+            "w": 64,
+            "h": 22
+          },
+          "nativeText": "●●●●",
+          "fontSize": 16,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-f654f7ac-8278-49b9-8e5f-1508b107d978",
+          "name": "Txt_TSV_Furniture01_LevelOff",
+          "kind": "text",
+          "parentId": "group-82aeed56-cd32-40b0-8a26-0cc9b35cc954",
+          "parentName": "Card_TSV_Furniture01",
+          "sourceJsonPointer": "/screens/1/elements/9",
+          "logicalBox": {
+            "x": 80.0,
+            "y": 719,
+            "w": 33.0,
+            "h": 22
+          },
+          "nativeText": "●●",
+          "fontSize": 16,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-fc4a98cb-b1ac-435e-befb-c7d2d6c522ce",
+          "name": "Img_TSV_Building_Tomato",
+          "kind": "image",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "parentName": "Panel_TSV_Building_Bottom",
+          "sourceJsonPointer": "/screens/1/elements/10",
+          "logicalBox": {
+            "x": 364.0,
+            "y": 676,
+            "w": 23,
+            "h": 24
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-5c29f9b896b622122e161c0db772449e83b2899f2d07eb1108967143c70dcbb0.webp",
+              "declaredSize": [
+                128,
+                128
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-7c0b7b01-5b34-4330-97a4-940123ef474e",
+          "name": "Line_TSV_Furniture01",
+          "kind": "panel",
+          "parentId": "group-82aeed56-cd32-40b0-8a26-0cc9b35cc954",
+          "parentName": "Card_TSV_Furniture01",
+          "sourceJsonPointer": "/screens/1/elements/11",
+          "logicalBox": {
+            "x": 19,
+            "y": 849,
+            "w": 92.0,
+            "h": 1
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "group-82aeed56-cd32-40b0-8a26-0cc9b35cc954",
+          "name": "Card_TSV_Furniture01",
+          "kind": "panel",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "parentName": "Panel_TSV_Building_Bottom",
+          "sourceJsonPointer": "/screens/1/elements/12",
+          "logicalBox": {
+            "x": 10.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-222c977e-f54b-4a57-8dbf-ba1e800a9365",
+          "name": "Card_TSV_Furniture02",
+          "kind": "panel",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "parentName": "Panel_TSV_Building_Bottom",
+          "sourceJsonPointer": "/screens/1/elements/13",
+          "logicalBox": {
+            "x": 130.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-80408e42-1882-4253-999c-21dd2edc1fbc",
+          "name": "BG_TSV_Furniture02",
+          "kind": "panel",
+          "parentId": "element-222c977e-f54b-4a57-8dbf-ba1e800a9365",
+          "parentName": "Card_TSV_Furniture02",
+          "sourceJsonPointer": "/screens/1/elements/14",
+          "logicalBox": {
+            "x": 130.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "skin.textures.normal",
+              "ref": "sha256-41c8b9bf974d8661aec22457375a5c5942c0136c4accfe520fdb3f37b0e0cce0.webp",
+              "declaredSize": [
+                96,
+                96
+              ]
+            }
+          ],
+          "skinMode": "9",
+          "slices": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "edges": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-dd804f91-8116-4ac9-b4d1-35ad060afa39",
+          "name": "Img_TSV_Furniture02",
+          "kind": "image",
+          "parentId": "element-222c977e-f54b-4a57-8dbf-ba1e800a9365",
+          "parentName": "Card_TSV_Furniture02",
+          "sourceJsonPointer": "/screens/1/elements/15",
+          "logicalBox": {
+            "x": 146.0,
+            "y": 752,
+            "w": 78,
+            "h": 87
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-9fb1e8b2744caf47f3390866c3a346ed5eb824945f65b252a51ae048336403ad.webp",
+              "declaredSize": [
+                256,
+                288
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-e305cc7a-9dff-4ee4-8a7a-ea57478a7e3f",
+          "name": "Img_TSV_Furniture02_Lock",
+          "kind": "image",
+          "parentId": "element-222c977e-f54b-4a57-8dbf-ba1e800a9365",
+          "parentName": "Card_TSV_Furniture02",
+          "sourceJsonPointer": "/screens/1/elements/16",
+          "logicalBox": {
+            "x": 174.0,
+            "y": 852,
+            "w": 22,
+            "h": 25
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-195c586e2bcedc54b212fedca674c6c055c5185632061eb4e40e30d47af07d08.webp",
+              "declaredSize": [
+                128,
+                128
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-5bf17b19-6e1d-4813-9b37-68614b810086",
+          "name": "Txt_TSV_Furniture02_LevelOn",
+          "kind": "text",
+          "parentId": "element-222c977e-f54b-4a57-8dbf-ba1e800a9365",
+          "parentName": "Card_TSV_Furniture02",
+          "sourceJsonPointer": "/screens/1/elements/17",
+          "logicalBox": {
+            "x": 138.0,
+            "y": 719,
+            "w": 64,
+            "h": 22
+          },
+          "nativeText": "●●●●",
+          "fontSize": 16,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-02614f37-40bf-494b-82b4-25a93aec2fc0",
+          "name": "Txt_TSV_Furniture02_LevelOff",
+          "kind": "text",
+          "parentId": "element-222c977e-f54b-4a57-8dbf-ba1e800a9365",
+          "parentName": "Card_TSV_Furniture02",
+          "sourceJsonPointer": "/screens/1/elements/18",
+          "logicalBox": {
+            "x": 200,
+            "y": 719,
+            "w": 33.0,
+            "h": 22
+          },
+          "nativeText": "●●",
+          "fontSize": 16,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-13ebab2f-7225-47f9-bd3a-844ea8121cc3",
+          "name": "Line_TSV_Furniture02",
+          "kind": "panel",
+          "parentId": "element-222c977e-f54b-4a57-8dbf-ba1e800a9365",
+          "parentName": "Card_TSV_Furniture02",
+          "sourceJsonPointer": "/screens/1/elements/19",
+          "logicalBox": {
+            "x": 139.0,
+            "y": 849,
+            "w": 92.0,
+            "h": 1
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-9674ac23-dca8-4431-a791-3f8b7228d187",
+          "name": "Card_TSV_Furniture03",
+          "kind": "panel",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "parentName": "Panel_TSV_Building_Bottom",
+          "sourceJsonPointer": "/screens/1/elements/20",
+          "logicalBox": {
+            "x": 250.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-fc3b5b76-f1d0-4793-a78d-95a0d342a1cb",
+          "name": "BG_TSV_Furniture03",
+          "kind": "panel",
+          "parentId": "element-9674ac23-dca8-4431-a791-3f8b7228d187",
+          "parentName": "Card_TSV_Furniture03",
+          "sourceJsonPointer": "/screens/1/elements/21",
+          "logicalBox": {
+            "x": 250.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "skin.textures.normal",
+              "ref": "sha256-41c8b9bf974d8661aec22457375a5c5942c0136c4accfe520fdb3f37b0e0cce0.webp",
+              "declaredSize": [
+                96,
+                96
+              ]
+            }
+          ],
+          "skinMode": "9",
+          "slices": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "edges": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-1a7f095b-a559-4b39-9566-2374a64782e6",
+          "name": "Img_TSV_Furniture03",
+          "kind": "image",
+          "parentId": "element-9674ac23-dca8-4431-a791-3f8b7228d187",
+          "parentName": "Card_TSV_Furniture03",
+          "sourceJsonPointer": "/screens/1/elements/22",
+          "logicalBox": {
+            "x": 266,
+            "y": 752,
+            "w": 78,
+            "h": 87
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-a295bbfbe5282c053e9183b681dd3e0119f27f5fbbedf203fe133713b4e97dd4.webp",
+              "declaredSize": [
+                256,
+                288
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-7fbafc48-4947-4b12-a46f-0ab1f4c4cc77",
+          "name": "Img_TSV_Furniture03_Lock",
+          "kind": "image",
+          "parentId": "element-9674ac23-dca8-4431-a791-3f8b7228d187",
+          "parentName": "Card_TSV_Furniture03",
+          "sourceJsonPointer": "/screens/1/elements/23",
+          "logicalBox": {
+            "x": 294,
+            "y": 852,
+            "w": 22,
+            "h": 25
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-195c586e2bcedc54b212fedca674c6c055c5185632061eb4e40e30d47af07d08.webp",
+              "declaredSize": [
+                128,
+                128
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-8585d25b-ecb0-47cf-8139-f8edeaaef683",
+          "name": "Txt_TSV_Furniture03_LevelOn",
+          "kind": "text",
+          "parentId": "element-9674ac23-dca8-4431-a791-3f8b7228d187",
+          "parentName": "Card_TSV_Furniture03",
+          "sourceJsonPointer": "/screens/1/elements/24",
+          "logicalBox": {
+            "x": 258,
+            "y": 719,
+            "w": 64,
+            "h": 22
+          },
+          "nativeText": "●●●●",
+          "fontSize": 16,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-32609f27-2245-4b22-aae6-87bad96d4f01",
+          "name": "Txt_TSV_Furniture03_LevelOff",
+          "kind": "text",
+          "parentId": "element-9674ac23-dca8-4431-a791-3f8b7228d187",
+          "parentName": "Card_TSV_Furniture03",
+          "sourceJsonPointer": "/screens/1/elements/25",
+          "logicalBox": {
+            "x": 320,
+            "y": 719,
+            "w": 33.0,
+            "h": 22
+          },
+          "nativeText": "●●",
+          "fontSize": 16,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-77bde50f-bbdc-4526-b1ea-a275ec80b432",
+          "name": "Line_TSV_Furniture03",
+          "kind": "panel",
+          "parentId": "element-9674ac23-dca8-4431-a791-3f8b7228d187",
+          "parentName": "Card_TSV_Furniture03",
+          "sourceJsonPointer": "/screens/1/elements/26",
+          "logicalBox": {
+            "x": 259.0,
+            "y": 849,
+            "w": 92.0,
+            "h": 1
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-ab2c0db8-ea73-4243-b715-72ee9743a554",
+          "name": "Card_TSV_Furniture04",
+          "kind": "panel",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "parentName": "Panel_TSV_Building_Bottom",
+          "sourceJsonPointer": "/screens/1/elements/27",
+          "logicalBox": {
+            "x": 370.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-fe3c9c44-7aad-4bf3-b6ce-a44885b5b6cf",
+          "name": "BG_TSV_Furniture04",
+          "kind": "panel",
+          "parentId": "element-ab2c0db8-ea73-4243-b715-72ee9743a554",
+          "parentName": "Card_TSV_Furniture04",
+          "sourceJsonPointer": "/screens/1/elements/28",
+          "logicalBox": {
+            "x": 370.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "skin.textures.normal",
+              "ref": "sha256-41c8b9bf974d8661aec22457375a5c5942c0136c4accfe520fdb3f37b0e0cce0.webp",
+              "declaredSize": [
+                96,
+                96
+              ]
+            }
+          ],
+          "skinMode": "9",
+          "slices": [
+            12,
+            12,
+            12,
+            12
+          ],
+          "edges": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-95f8d33d-b560-4872-9a76-831a41ff7f20",
+          "name": "Img_TSV_Furniture04",
+          "kind": "image",
+          "parentId": "element-ab2c0db8-ea73-4243-b715-72ee9743a554",
+          "parentName": "Card_TSV_Furniture04",
+          "sourceJsonPointer": "/screens/1/elements/29",
+          "logicalBox": {
+            "x": 386.0,
+            "y": 752,
+            "w": 78,
+            "h": 87
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-cd10266ca5670719cae610895e501c147ab7e7e9f5b75846ae22c8fde5c8d787.webp",
+              "declaredSize": [
+                256,
+                288
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-2077d5b6-b939-46b1-8052-c070910a6569",
+          "name": "Img_TSV_Furniture04_Lock",
+          "kind": "image",
+          "parentId": "element-ab2c0db8-ea73-4243-b715-72ee9743a554",
+          "parentName": "Card_TSV_Furniture04",
+          "sourceJsonPointer": "/screens/1/elements/30",
+          "logicalBox": {
+            "x": 414.0,
+            "y": 852,
+            "w": 22,
+            "h": 25
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-195c586e2bcedc54b212fedca674c6c055c5185632061eb4e40e30d47af07d08.webp",
+              "declaredSize": [
+                128,
+                128
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-2af9bf6c-1fa9-48dd-837f-261b6f262979",
+          "name": "Txt_TSV_Furniture04_LevelOn",
+          "kind": "text",
+          "parentId": "element-ab2c0db8-ea73-4243-b715-72ee9743a554",
+          "parentName": "Card_TSV_Furniture04",
+          "sourceJsonPointer": "/screens/1/elements/31",
+          "logicalBox": {
+            "x": 378.0,
+            "y": 719,
+            "w": 64,
+            "h": 22
+          },
+          "nativeText": "●●●●",
+          "fontSize": 16,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-ca1897d2-1f23-4bfe-a411-b53f1f6c65ad",
+          "name": "Txt_TSV_Furniture04_LevelOff",
+          "kind": "text",
+          "parentId": "element-ab2c0db8-ea73-4243-b715-72ee9743a554",
+          "parentName": "Card_TSV_Furniture04",
+          "sourceJsonPointer": "/screens/1/elements/32",
+          "logicalBox": {
+            "x": 440.0,
+            "y": 719,
+            "w": 33.0,
+            "h": 22
+          },
+          "nativeText": "●●",
+          "fontSize": 16,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-2b93c4fd-ec34-4eea-be17-3de376e470ac",
+          "name": "Line_TSV_Furniture04",
+          "kind": "panel",
+          "parentId": "element-ab2c0db8-ea73-4243-b715-72ee9743a554",
+          "parentName": "Card_TSV_Furniture04",
+          "sourceJsonPointer": "/screens/1/elements/33",
+          "logicalBox": {
+            "x": 379.0,
+            "y": 849,
+            "w": 92.0,
+            "h": 1
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-95cbb933-2ce2-4bb5-9470-edd85f48447a",
+          "name": "BG_TSV_Building_ResourceHUD",
+          "kind": "panel",
+          "parentId": "group-a62d2c31-0ee6-4fb1-aeb0-f78c55fd36e5",
+          "parentName": "HUD_TSV_Building_Resource",
+          "sourceJsonPointer": "/screens/1/elements/34",
+          "logicalBox": {
+            "x": 44,
+            "y": 0,
+            "w": 335,
+            "h": 29.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "skin.textures.normal",
+              "ref": "sha256-4184b0ac8f27b7d10bf8adcf9efab78f7c935d01374c055ca95cc4442a5cc137.webp",
+              "declaredSize": [
+                64,
+                64
+              ]
+            }
+          ],
+          "skinMode": "9",
+          "slices": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "edges": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-5d4a449e-ba41-4136-bb71-62137ed9aae0",
+          "name": "Img_TSV_Building_Wood",
+          "kind": "image",
+          "parentId": "group-a62d2c31-0ee6-4fb1-aeb0-f78c55fd36e5",
+          "parentName": "HUD_TSV_Building_Resource",
+          "sourceJsonPointer": "/screens/1/elements/35",
+          "logicalBox": {
+            "x": 144.0,
+            "y": 0,
+            "w": 30.0,
+            "h": 26
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-46dbd170bfe8e6e45b0704bdd4f760a7230ef6bb9d1002dcdcbb0215c8a78201.webp",
+              "declaredSize": [
+                40,
+                32
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-3974a3f1-6722-414b-bfc5-93f668ad5b94",
+          "name": "Txt_TSV_Building_Wood",
+          "kind": "text",
+          "parentId": "group-a62d2c31-0ee6-4fb1-aeb0-f78c55fd36e5",
+          "parentName": "HUD_TSV_Building_Resource",
+          "sourceJsonPointer": "/screens/1/elements/36",
+          "logicalBox": {
+            "x": 182.0,
+            "y": 2.0,
+            "w": 75,
+            "h": 25
+          },
+          "nativeText": "9.75K",
+          "fontSize": 18,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 22,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-c59da5dc-f1d5-4ec7-b51f-c6cb34b8a4c3",
+          "name": "Img_TSV_Building_Metal",
+          "kind": "image",
+          "parentId": "group-a62d2c31-0ee6-4fb1-aeb0-f78c55fd36e5",
+          "parentName": "HUD_TSV_Building_Resource",
+          "sourceJsonPointer": "/screens/1/elements/37",
+          "logicalBox": {
+            "x": 254.0,
+            "y": 0,
+            "w": 28.0,
+            "h": 26
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "image",
+              "ref": "sha256-fbf7dd9795069cae93f3b57e61a9628f74c9d84f0a981c1307763323d5c2fbad.webp",
+              "declaredSize": [
+                128,
+                128
+              ]
+            }
+          ],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-075d7cf8-39b2-414a-8eb6-932db6b2db30",
+          "name": "Txt_TSV_Building_Metal",
+          "kind": "text",
+          "parentId": "group-a62d2c31-0ee6-4fb1-aeb0-f78c55fd36e5",
+          "parentName": "HUD_TSV_Building_Resource",
+          "sourceJsonPointer": "/screens/1/elements/38",
+          "logicalBox": {
+            "x": 294,
+            "y": 2.0,
+            "w": 65.0,
+            "h": 25
+          },
+          "nativeText": "327",
+          "fontSize": 18,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 22,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-6e83c55a-ccd4-4421-9bf3-f78a23148f60",
+          "name": "Txt_TSV_Building_Title",
+          "kind": "text",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "parentName": "Panel_TSV_Building_Bottom",
+          "sourceJsonPointer": "/screens/1/elements/39",
+          "logicalBox": {
+            "x": 8,
+            "y": 620,
+            "w": 260.0,
+            "h": 38
+          },
+          "nativeText": "온실 Lv. 3",
+          "fontSize": 23,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-43e5fc2d-bc68-4355-83ad-2b7af4c3c3f2",
+          "name": "Btn_TSV_Building_Upgrade",
+          "kind": "button",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "parentName": "Panel_TSV_Building_Bottom",
+          "sourceJsonPointer": "/screens/1/elements/40",
+          "logicalBox": {
+            "x": 340.0,
+            "y": 624,
+            "w": 154,
+            "h": 36.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": {
+            "enabled": true,
+            "mode": "tint",
+            "targetGraphic": "self",
+            "selectable": false,
+            "selected": false,
+            "tints": {
+              "normal": "#ffffff",
+              "hover": "#f2f2f2",
+              "pressed": "#bdbdbd",
+              "selected": "#d8e8ff",
+              "disabled": "#999999"
+            }
+          },
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-c13c6a78-aa59-4788-bcd9-d25fd9f170ea",
+          "name": "BG_TSV_Building_Upgrade",
+          "kind": "panel",
+          "parentId": "element-43e5fc2d-bc68-4355-83ad-2b7af4c3c3f2",
+          "parentName": "Btn_TSV_Building_Upgrade",
+          "sourceJsonPointer": "/screens/1/elements/41",
+          "logicalBox": {
+            "x": 340.0,
+            "y": 624,
+            "w": 154,
+            "h": 36.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "skin.textures.normal",
+              "ref": "sha256-114adf9fa11a14e1b42f5e6323374f3cd86936654434c4426c1776a601f8aff1.webp",
+              "declaredSize": [
+                160,
+                64
+              ]
+            }
+          ],
+          "skinMode": "3",
+          "slices": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "edges": [
+            0,
+            12,
+            0,
+            12
+          ],
+          "buttonState": null,
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-7d179452-4546-4a40-9d51-5e8edc2a78f0",
+          "name": "Txt_TSV_Building_Upgrade",
+          "kind": "text",
+          "parentId": "element-43e5fc2d-bc68-4355-83ad-2b7af4c3c3f2",
+          "parentName": "Btn_TSV_Building_Upgrade",
+          "sourceJsonPointer": "/screens/1/elements/42",
+          "logicalBox": {
+            "x": 345.0,
+            "y": 626,
+            "w": 144.0,
+            "h": 32.0
+          },
+          "nativeText": "업그레이드",
+          "fontSize": 21,
+          "typography": {
+            "weight": 800,
+            "lineHeight": 26,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-969b2f9b-2a75-4666-ba11-6c8c12fa207d",
+          "name": "BG_TSV_Building_Level",
+          "kind": "panel",
+          "parentId": "group-72ca6f64-54b6-4624-9169-f1d3a613f4ef",
+          "parentName": "Scene_TSV_Building",
+          "sourceJsonPointer": "/screens/1/elements/43",
+          "logicalBox": {
+            "x": 160.0,
+            "y": 507,
+            "w": 61,
+            "h": 45
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [
+            {
+              "field": "skin.textures.normal",
+              "ref": "sha256-4184b0ac8f27b7d10bf8adcf9efab78f7c935d01374c055ca95cc4442a5cc137.webp",
+              "declaredSize": [
+                64,
+                64
+              ]
+            }
+          ],
+          "skinMode": "9",
+          "slices": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "edges": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "element-9af74eeb-9785-4833-950a-ea1b86204310",
+          "name": "Txt_TSV_Building_Level",
+          "kind": "text",
+          "parentId": "group-72ca6f64-54b6-4624-9169-f1d3a613f4ef",
+          "parentName": "Scene_TSV_Building",
+          "sourceJsonPointer": "/screens/1/elements/44",
+          "logicalBox": {
+            "x": 167,
+            "y": 509,
+            "w": 47,
+            "h": 37.0
+          },
+          "nativeText": "3",
+          "fontSize": 30,
+          "typography": {
+            "weight": 700,
+            "lineHeight": 37,
+            "align": "center"
+          },
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "group-72ca6f64-54b6-4624-9169-f1d3a613f4ef",
+          "name": "Scene_TSV_Building",
+          "kind": "panel",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/1/elements/45",
+          "logicalBox": {
+            "x": 0,
+            "y": 0,
+            "w": 504,
+            "h": 614.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "group-a62d2c31-0ee6-4fb1-aeb0-f78c55fd36e5",
+          "name": "HUD_TSV_Building_Resource",
+          "kind": "panel",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/1/elements/46",
+          "logicalBox": {
+            "x": 44,
+            "y": 0,
+            "w": 335,
+            "h": 29.0
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        },
+        {
+          "id": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "name": "Panel_TSV_Building_Bottom",
+          "kind": "panel",
+          "parentId": null,
+          "parentName": null,
+          "sourceJsonPointer": "/screens/1/elements/47",
+          "logicalBox": {
+            "x": 0,
+            "y": 614.0,
+            "w": 504,
+            "h": 280
+          },
+          "nativeText": null,
+          "fontSize": null,
+          "typography": null,
+          "assets": [],
+          "skinMode": null,
+          "slices": null,
+          "edges": null,
+          "buttonState": null,
+          "interaction": null,
+          "layout": null,
+          "overflow": null
+        }
+      ],
+      "nativeTextCount": 15,
+      "imageCount": 12,
+      "buttonCount": 1,
+      "nineSliceCount": 8,
+      "threeSliceCount": 1,
+      "furnitureCards": [
+        {
+          "id": "group-82aeed56-cd32-40b0-8a26-0cc9b35cc954",
+          "name": "Card_TSV_Furniture01",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "logicalBox": {
+            "x": 10.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          }
+        },
+        {
+          "id": "element-222c977e-f54b-4a57-8dbf-ba1e800a9365",
+          "name": "Card_TSV_Furniture02",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "logicalBox": {
+            "x": 130.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          }
+        },
+        {
+          "id": "element-9674ac23-dca8-4431-a791-3f8b7228d187",
+          "name": "Card_TSV_Furniture03",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "logicalBox": {
+            "x": 250.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          }
+        },
+        {
+          "id": "element-ab2c0db8-ea73-4243-b715-72ee9743a554",
+          "name": "Card_TSV_Furniture04",
+          "parentId": "group-303c5234-25ac-4bd3-ade5-6ff538539085",
+          "logicalBox": {
+            "x": 370.0,
+            "y": 714,
+            "w": 110,
+            "h": 170.0
+          }
+        }
+      ],
+      "furnitureGaps": [
+        10.0,
+        10.0,
+        10.0
+      ],
+      "furniture110x170": true
+    }
+  ],
+  "assetChecks": {
+    "uniqueReferences": 17,
+    "missingOrShaMismatch": [],
+    "sourceSizeMismatches": [],
+    "assets": {
+      "sha256-ac8252341468ca1144c8db05c6b37839a5a75b52315463c0669b1ee71a85a438.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-ac8252341468ca1144c8db05c6b37839a5a75b52315463c0669b1ee71a85a438.webp",
+        "exists": true,
+        "sha256": "ac8252341468ca1144c8db05c6b37839a5a75b52315463c0669b1ee71a85a438",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          504,
+          894
+        ]
+      },
+      "sha256-4184b0ac8f27b7d10bf8adcf9efab78f7c935d01374c055ca95cc4442a5cc137.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-4184b0ac8f27b7d10bf8adcf9efab78f7c935d01374c055ca95cc4442a5cc137.webp",
+        "exists": true,
+        "sha256": "4184b0ac8f27b7d10bf8adcf9efab78f7c935d01374c055ca95cc4442a5cc137",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          64,
+          64
+        ]
+      },
+      "sha256-1b58af09c668409876699d72160aac06c378461d9dcffcf4cd14781183756711.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-1b58af09c668409876699d72160aac06c378461d9dcffcf4cd14781183756711.webp",
+        "exists": true,
+        "sha256": "1b58af09c668409876699d72160aac06c378461d9dcffcf4cd14781183756711",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          36,
+          36
+        ]
+      },
+      "sha256-209701a2921543f4e4900e5c49b3492995d108babb1cbf5120e7867fe8f0dce4.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-209701a2921543f4e4900e5c49b3492995d108babb1cbf5120e7867fe8f0dce4.webp",
+        "exists": true,
+        "sha256": "209701a2921543f4e4900e5c49b3492995d108babb1cbf5120e7867fe8f0dce4",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          40,
+          32
+        ]
+      },
+      "sha256-46dbd170bfe8e6e45b0704bdd4f760a7230ef6bb9d1002dcdcbb0215c8a78201.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-46dbd170bfe8e6e45b0704bdd4f760a7230ef6bb9d1002dcdcbb0215c8a78201.webp",
+        "exists": true,
+        "sha256": "46dbd170bfe8e6e45b0704bdd4f760a7230ef6bb9d1002dcdcbb0215c8a78201",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          40,
+          32
+        ]
+      },
+      "sha256-10dca7801fd94ed1ae7e3693d6f214d13add26fd8259f6fb9625805ab8966fd5.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-10dca7801fd94ed1ae7e3693d6f214d13add26fd8259f6fb9625805ab8966fd5.webp",
+        "exists": true,
+        "sha256": "10dca7801fd94ed1ae7e3693d6f214d13add26fd8259f6fb9625805ab8966fd5",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          256,
+          256
+        ]
+      },
+      "sha256-96b45318d8f205accdf5b22bf96a072808f8a7644b913a74adb4f2a35634c19d.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-96b45318d8f205accdf5b22bf96a072808f8a7644b913a74adb4f2a35634c19d.webp",
+        "exists": true,
+        "sha256": "96b45318d8f205accdf5b22bf96a072808f8a7644b913a74adb4f2a35634c19d",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          32,
+          36
+        ]
+      },
+      "sha256-b74e83ebe50a5afb1103738e4d3470e509cb8793251bfc33eff2216fd049f1e2.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-b74e83ebe50a5afb1103738e4d3470e509cb8793251bfc33eff2216fd049f1e2.webp",
+        "exists": true,
+        "sha256": "b74e83ebe50a5afb1103738e4d3470e509cb8793251bfc33eff2216fd049f1e2",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          128,
+          128
+        ]
+      },
+      "sha256-b72852dcd6e61f3dc2a5a897f953b2199f5e99df4b7de70c5df221e6a6bbec39.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-b72852dcd6e61f3dc2a5a897f953b2199f5e99df4b7de70c5df221e6a6bbec39.webp",
+        "exists": true,
+        "sha256": "b72852dcd6e61f3dc2a5a897f953b2199f5e99df4b7de70c5df221e6a6bbec39",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          840,
+          1008
+        ]
+      },
+      "sha256-41c8b9bf974d8661aec22457375a5c5942c0136c4accfe520fdb3f37b0e0cce0.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-41c8b9bf974d8661aec22457375a5c5942c0136c4accfe520fdb3f37b0e0cce0.webp",
+        "exists": true,
+        "sha256": "41c8b9bf974d8661aec22457375a5c5942c0136c4accfe520fdb3f37b0e0cce0",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          96,
+          96
+        ]
+      },
+      "sha256-a295bbfbe5282c053e9183b681dd3e0119f27f5fbbedf203fe133713b4e97dd4.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-a295bbfbe5282c053e9183b681dd3e0119f27f5fbbedf203fe133713b4e97dd4.webp",
+        "exists": true,
+        "sha256": "a295bbfbe5282c053e9183b681dd3e0119f27f5fbbedf203fe133713b4e97dd4",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          256,
+          288
+        ]
+      },
+      "sha256-195c586e2bcedc54b212fedca674c6c055c5185632061eb4e40e30d47af07d08.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-195c586e2bcedc54b212fedca674c6c055c5185632061eb4e40e30d47af07d08.webp",
+        "exists": true,
+        "sha256": "195c586e2bcedc54b212fedca674c6c055c5185632061eb4e40e30d47af07d08",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          128,
+          128
+        ]
+      },
+      "sha256-5c29f9b896b622122e161c0db772449e83b2899f2d07eb1108967143c70dcbb0.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-5c29f9b896b622122e161c0db772449e83b2899f2d07eb1108967143c70dcbb0.webp",
+        "exists": true,
+        "sha256": "5c29f9b896b622122e161c0db772449e83b2899f2d07eb1108967143c70dcbb0",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          128,
+          128
+        ]
+      },
+      "sha256-9fb1e8b2744caf47f3390866c3a346ed5eb824945f65b252a51ae048336403ad.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-9fb1e8b2744caf47f3390866c3a346ed5eb824945f65b252a51ae048336403ad.webp",
+        "exists": true,
+        "sha256": "9fb1e8b2744caf47f3390866c3a346ed5eb824945f65b252a51ae048336403ad",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          256,
+          288
+        ]
+      },
+      "sha256-cd10266ca5670719cae610895e501c147ab7e7e9f5b75846ae22c8fde5c8d787.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-cd10266ca5670719cae610895e501c147ab7e7e9f5b75846ae22c8fde5c8d787.webp",
+        "exists": true,
+        "sha256": "cd10266ca5670719cae610895e501c147ab7e7e9f5b75846ae22c8fde5c8d787",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          256,
+          288
+        ]
+      },
+      "sha256-fbf7dd9795069cae93f3b57e61a9628f74c9d84f0a981c1307763323d5c2fbad.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-fbf7dd9795069cae93f3b57e61a9628f74c9d84f0a981c1307763323d5c2fbad.webp",
+        "exists": true,
+        "sha256": "fbf7dd9795069cae93f3b57e61a9628f74c9d84f0a981c1307763323d5c2fbad",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          128,
+          128
+        ]
+      },
+      "sha256-114adf9fa11a14e1b42f5e6323374f3cd86936654434c4426c1776a601f8aff1.webp": {
+        "path": "/Users/max/projest_max/ui-studio/samples/tile-survival/ui-studio/assets/sha256-114adf9fa11a14e1b42f5e6323374f3cd86936654434c4426c1776a601f8aff1.webp",
+        "exists": true,
+        "sha256": "114adf9fa11a14e1b42f5e6323374f3cd86936654434c4426c1776a601f8aff1",
+        "fileNameShaMatches": true,
+        "decodedSize": [
+          160,
+          64
+        ]
+      }
+    }
+  },
+  "imageAndSkinResidues": [],
+  "newScreenImageAndSkinResidues": [],
+  "newScreenScope": "Only bootstrap/copied dual image+skin fields checked after follow-up; no general new-modal completeness review",
+  "residueInterpretation": "Assembly-data residue to review; not confirmed product defect. layout-view.mjs:191-195 renders image then skin.",
+  "remainingAssembly": {
+    "territory": [
+      "Quest strip/progress, gem wallet/badge, clock/meal and contextual/event entries beyond saved parts",
+      "World action markers, tutorial examples, Heroes/outside destinations and screen wiring"
+    ],
+    "building": [
+      "Current 4 static cards still need selected/unlocked/cost/growth variants and input examples",
+      "If additional cards are authored, decide horizontal rail/scroll; absence is unfinished scope, not a product defect",
+      "Resource/building data variants, return/help behavior and screen wiring"
+    ],
+    "visualQA": [
+      "Browser/keyboard/390/430/1440, clipping, HTTP asset loading, text fit and state/transition behavior not checked",
+      "Source font/material/pixel equivalence and actual game/3D calculations not checked",
+      "Upgrade targetGraphic=self is supported whole-wrapper tint including child text; verify desired pressed appearance later"
+    ]
+  },
+  "untouched": [
+    "saved JSON",
+    "product source",
+    "other samples",
+    "public reports",
+    "STATUS",
+    "server",
+    "browser"
+  ]
+}

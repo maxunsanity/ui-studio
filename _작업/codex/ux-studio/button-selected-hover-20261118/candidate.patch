@@ -1,0 +1,5 @@
+--- a/src/tools/uxStudio/button-state.mjs
++++ b/src/tools/uxStudio/button-state.mjs
+@@ -87,1 +87,1 @@
+-   ctx.renderGraphic?.(target,ctx.graphic,c.images?.[state]||c.images?.normal||ctx.graphic.image);imageApplied=true;
++   ctx.renderGraphic?.(target,ctx.graphic,c.images?.[state]||(state==='hover'&&buttonSelected(ctx.screen,ctx.owner,ctx.runtime)&&c.images?.selected)||c.images?.normal||ctx.graphic.image);imageApplied=true;

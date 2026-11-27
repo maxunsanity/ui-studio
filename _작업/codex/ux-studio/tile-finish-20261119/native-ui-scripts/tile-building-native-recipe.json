@@ -1,0 +1,212 @@
+{
+  "documentType": "normal-UI-action-instructions-not-saved-design",
+  "reason": "exact old3Dscene leaf removed; preservedgroup/levelIDs;fixedHUD;resident clipboard sourceobserved",
+  "family": {
+    "id": "TS05",
+    "name": "Page_TSV_BuildingInterior",
+    "existingScreen": "screen-102560cd-a9db-4e4a-89ea-8138bd7bf0c6",
+    "nativeKind": "page",
+    "priority": 3,
+    "existingedits": [
+      {
+        "id": "element-1314bf62-e3ec-48cc-b37e-f4bf6ba599c1",
+        "desiredName": "Img_TSV_Building_Greenhouse",
+        "remove": true,
+        "removeScope": "Exact image only; no descendants; preserve source asset."
+      },
+      {
+        "id": "group-72ca6f64-54b6-4624-9169-f1d3a613f4ef",
+        "desiredName": "Slot_TSV_Building_3D",
+        "partRole": "container",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 504,
+          "h": 614
+        },
+        "anchorPreset": "stretch-with-bottom-280",
+        "preserveChildrenIds": [
+          "element-969b2f9b-2a75-4666-ba11-6c8c12fa207d",
+          "element-9af74eeb-9785-4833-950a-ea1b86204310"
+        ]
+      },
+      {
+        "id": "group-a62d2c31-0ee6-4fb1-aeb0-f78c55fd36e5",
+        "desiredName": "HUD_TSV_Building_Resource",
+        "rect": {
+          "x": 44,
+          "y": 0,
+          "w": 335,
+          "h": 29
+        },
+        "anchorPreset": "top-left",
+        "anchorIntent": "min=max=pivot[0,1]; position44,0; fixed335x29 via native fields"
+      }
+    ],
+    "actions": [
+      {
+        "op": "plain",
+        "key": "stageBack",
+        "name": "BG_TSV_Building_3D",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 504,
+          "h": 614
+        },
+        "parent": "existing:group-72ca6f64-54b6-4624-9169-f1d3a613f4ef",
+        "fill": "#102c45",
+        "strokeWidth": 0,
+        "radius": 0,
+        "opacity": 1,
+        "role": "Slot_3D",
+        "layerIntent": "send behind kept levelBG/Txt inside existingScene"
+      },
+      {
+        "op": "text",
+        "key": "stageLabel",
+        "name": "Txt_TSV_Building_3D",
+        "rect": {
+          "x": 130,
+          "y": 260,
+          "w": 244,
+          "h": 44
+        },
+        "parent": "existing:group-72ca6f64-54b6-4624-9169-f1d3a613f4ef",
+        "text": "3D",
+        "size": 24,
+        "weight": 600,
+        "color": "#93b5c9",
+        "align": "center"
+      },
+      {
+        "op": "button",
+        "key": "resident",
+        "name": "Btn_TSV_Building_Resident",
+        "rect": {
+          "x": 402,
+          "y": 419,
+          "w": 87,
+          "h": 109
+        },
+        "parent": null,
+        "text": "",
+        "size": 18,
+        "skin": "/ui-studio/source/assets/import-staging/tile-survival-geometry/hud-blue9.webp",
+        "weight": 700,
+        "color": "#ffffff",
+        "align": "center",
+        "press": "tint",
+        "anchorPreset": "bottom-right",
+        "anchorIntent": "Fixed87x109; right15px and bottom366px at504x894, keeping86px above current280px bottom panel as height changes."
+      },
+      {
+        "op": "plain",
+        "key": "residentInner",
+        "name": "BG_TSV_Building_ResidentInner",
+        "rect": {
+          "x": 409,
+          "y": 427,
+          "w": 73,
+          "h": 93
+        },
+        "parent": "resident",
+        "fill": "#7fdaeb",
+        "strokeWidth": 0,
+        "radius": 8,
+        "opacity": 1
+      },
+      {
+        "op": "image",
+        "key": "residentPortrait",
+        "name": "Img_TSV_Building_Resident",
+        "rect": {
+          "x": 410,
+          "y": 437,
+          "w": 72,
+          "h": 87
+        },
+        "parent": "resident",
+        "path": "/ui-studio/source/assets/import-staging/tile-finish-20261119/residents-atlas-ui-v001.png",
+        "fit": "contain",
+        "region": [
+          0,
+          150,
+          150,
+          150
+        ]
+      },
+      {
+        "op": "plain",
+        "key": "residentClipStem",
+        "name": "BG_TSV_Building_ResidentClipStem",
+        "rect": {
+          "x": 439,
+          "y": 407,
+          "w": 14,
+          "h": 16
+        },
+        "parent": "resident",
+        "fill": "#008baa",
+        "strokeWidth": 0,
+        "radius": 2,
+        "opacity": 1
+      },
+      {
+        "op": "plain",
+        "key": "residentClipBar",
+        "name": "BG_TSV_Building_ResidentClipBar",
+        "rect": {
+          "x": 428,
+          "y": 417,
+          "w": 36,
+          "h": 9
+        },
+        "parent": "resident",
+        "fill": "#008baa",
+        "strokeWidth": 0,
+        "radius": 2,
+        "opacity": 1
+      },
+      {
+        "op": "plain",
+        "key": "residentAlert",
+        "name": "Badge_TSV_Building_ResidentAlert",
+        "rect": {
+          "x": 478,
+          "y": 418,
+          "w": 13,
+          "h": 13
+        },
+        "parent": "resident",
+        "fill": "#ed2b20",
+        "strokeWidth": 0,
+        "radius": 7,
+        "opacity": 1
+      }
+    ],
+    "notes": [
+      "Only greenhouse image is deleted. Do not delete Scene/group wholesale or any other root. Keep original2D building level BG/Txt.",
+      "Engineer portrait is new construction-worker concept appropriate to observed clipboard worker role, not original identity equivalence. Clip is fresh plain geometry.",
+      "Clip stem intentionally protrudes12px above wrapper. Root may extend owner bounds preservingABS child positions to include it; no screen overflow.",
+      "Furniture110x170/gap10 preserved. Repeated4on/2off differs from source35, but exact per-card dots/disabled state requires sourcezoom before editing values. No guessed counts.",
+      "No furniture prices/production deltas/selection results/unknown resident destination invented.",
+      "interiorGreenhouseImage is exactly element-1314bf62-e3ec-48cc-b37e-f4bf6ba599c1. Preserve Scene group and the two existing level BG/Txt IDs; only image deletion is authorized."
+    ],
+    "missingAssets": [
+      {
+        "role": "Exact furniture per-card level/disabled fixture",
+        "reason": "Need enlarged source35 dot-count observation; do not substitute guessed ranks."
+      }
+    ],
+    "proposedLinks": [
+      {
+        "from": "resident",
+        "action": null,
+        "target": null,
+        "evidence": "Visible worker clipboard; destination unverified, leave edge absent."
+      }
+    ],
+    "referenceState": "TSV03 fine/frame_00035.jpg requested35 actual34.9916666667."
+  }
+}

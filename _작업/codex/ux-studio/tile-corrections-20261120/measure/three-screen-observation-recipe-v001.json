@@ -1,0 +1,598 @@
+{
+  "status": "Proposal awaiting review. Observation recipe for parent authoring in normal UI only. No model/source edits performed by measuring agent.",
+  "logicalSize": [
+    504,
+    894
+  ],
+  "sourceRevisionObserved": 345,
+  "preservation": "Keep same three screen IDs and latest-state correction. Preserve previous states in full r345 backup/history and this extraction. Do not add screens or merge incompatible values.",
+  "referenceRoot": "/var/folders/dn/m763zzn15514kpgp2jhdyft40000gn/T",
+  "screens": [
+    {
+      "id": "screen-f2adfdd1-8ef6-4586-88c2-05df8e58ef6b",
+      "family": "TS26",
+      "reference": "codex-clipboard-9101f14d-9e65-4778-9293-86a5d0677944.png",
+      "oldState": "sage-growth-stable-power5744-level5-exp52500/500-powerplantLv4",
+      "newState": "sage-tutorial-upgrade-power4300",
+      "parts": [
+        {
+          "name": "HeroName",
+          "bounds": [
+            145,
+            6,
+            214,
+            38
+          ],
+          "fontPx": 28,
+          "weight": 800,
+          "reuse": "Txt_TSV_TS26_HeroName"
+        },
+        {
+          "name": "Power",
+          "bounds": [
+            218,
+            526,
+            81,
+            34
+          ],
+          "value": "4,300",
+          "fontPx": 28,
+          "weight": 800,
+          "reuse": "Txt_TSV_TS26_Power"
+        },
+        {
+          "name": "UpgradeCTA",
+          "bounds": [
+            85,
+            734,
+            335,
+            64
+          ],
+          "fontPx": 24,
+          "weight": 800,
+          "asset": "Existing green 3-slice can be reused. EXP icon and first-row value separate from label."
+        },
+        {
+          "name": "TutorialBubble",
+          "bounds": [
+            95,
+            620,
+            304,
+            102
+          ],
+          "fontPx": 22,
+          "weight": 700,
+          "children": [
+            {
+              "name": "SagePortrait",
+              "bounds": [
+                98,
+                622,
+                86,
+                96
+              ]
+            },
+            {
+              "name": "TutorialSpeaker",
+              "bounds": [
+                182,
+                623,
+                210,
+                31
+              ],
+              "fontPx": 22,
+              "weight": 800
+            },
+            {
+              "name": "TutorialCopy",
+              "bounds": [
+                194,
+                659,
+                196,
+                52
+              ],
+              "fontPx": 22,
+              "weight": 700,
+              "color": "#335969"
+            }
+          ]
+        },
+        {
+          "name": "TutorialHand",
+          "bounds": [
+            287,
+            702,
+            107,
+            72
+          ],
+          "description": "White glove pointing lower-left toward upgrade CTA, yellow glow. Keep independent from CTA text."
+        },
+        {
+          "name": "BottomTabs",
+          "bounds": [
+            0,
+            817,
+            504,
+            67
+          ],
+          "description": "Existing Back / attributes / skills positions match closely."
+        }
+      ],
+      "occlusion": [
+        "EXP visible prefix is 53,500/1...; denominator covered by hand, do not infer.",
+        "Right-side capacity suffix 10 is visible. Old +50 must not remain as a verified new-state value. Plus sign is covered/unverified.",
+        "Guardians count and level are covered by tutorial. Do not label old values as new reference observations.",
+        "Top recruitment ticker is a transient overlapping broadcast; full copy is not reliably readable."
+      ],
+      "layerOrder": "Background/3D -> hero HUD/rank/stats/tabs/CTA -> portrait+bubble+copy -> hand+glow. Exclude magenta recording cursor."
+    },
+    {
+      "id": "screen-4673cfcd-95d2-4370-9c42-a3aaaec902e4",
+      "family": "TS16",
+      "reference": "codex-clipboard-5fce9e14-847c-4093-b207-b948948a19d8.png",
+      "state": "jason-trade-request",
+      "parts": [
+        {
+          "name": "OrangePortraitBack",
+          "bounds": [
+            60,
+            214,
+            392,
+            176
+          ],
+          "description": "Rounded orange top panel. Existing location is correct."
+        },
+        {
+          "name": "JasonPortrait",
+          "bounds": [
+            130,
+            144,
+            260,
+            232
+          ],
+          "description": "Very large black beard, black slicked hair, white tank top and bare shoulders. Current grey beard/tool vest atlas does not match."
+        },
+        {
+          "name": "SpeakerName",
+          "bounds": [
+            174,
+            333,
+            160,
+            40
+          ],
+          "fontPx": 30,
+          "weight": 800,
+          "color": "#fff1d8"
+        },
+        {
+          "name": "Close",
+          "bounds": [
+            421,
+            189,
+            52,
+            53
+          ],
+          "fontPx": 36,
+          "description": "Orange round close with light rim, not generic teal 40px backplate."
+        },
+        {
+          "name": "BindingRingsLeft",
+          "bounds": [
+            73,
+            354,
+            34,
+            36
+          ],
+          "description": "Two brass rings in front of paper"
+        },
+        {
+          "name": "BindingRingsRight",
+          "bounds": [
+            408,
+            354,
+            34,
+            36
+          ],
+          "description": "Two brass rings in front of paper"
+        },
+        {
+          "name": "TradePanel",
+          "bounds": [
+            50,
+            367,
+            414,
+            365
+          ],
+          "description": "Teal rounded bottom panel. Existing [50,374,414,356] is close; reference estimate includes exposed tabs/shadow."
+        },
+        {
+          "name": "CreamPaper",
+          "bounds": [
+            60,
+            374,
+            392,
+            262
+          ],
+          "description": "Warm cream paper, shallow V fold top center, small lower-right fold. Current blue paper differs."
+        },
+        {
+          "name": "Request",
+          "bounds": [
+            90,
+            408,
+            334,
+            82
+          ],
+          "fontPx": 22,
+          "weight": 700,
+          "lineHeightPx": 27,
+          "color": "#344c58",
+          "description": "Same copy as current model; three lines in reference."
+        },
+        {
+          "name": "RewardPanel",
+          "bounds": [
+            73,
+            500,
+            359,
+            119
+          ],
+          "description": "Pale yellow body; gold title strip height34; title 24px left."
+        },
+        {
+          "name": "SpeedupTile",
+          "bounds": [
+            197,
+            547,
+            59,
+            61
+          ],
+          "value": "5 minutes / x1",
+          "description": "Green tile; existing speedup atlas icon reusable."
+        },
+        {
+          "name": "SuppliesTile",
+          "bounds": [
+            263,
+            547,
+            58,
+            61
+          ],
+          "value": "x10",
+          "description": "Green tile; existing supplies atlas icon reusable."
+        },
+        {
+          "name": "LaterCTA",
+          "bounds": [
+            85,
+            649,
+            163,
+            61
+          ],
+          "fontPx": 28,
+          "weight": 800,
+          "description": "Rounded orange CTA. Current 111x180 brown hero card texture is incorrectly stretched."
+        },
+        {
+          "name": "ExchangeCTA",
+          "bounds": [
+            264,
+            649,
+            162,
+            61
+          ],
+          "fontPx": [
+            20,
+            24
+          ],
+          "weight": 800,
+          "description": "Wood icon + 1000 first row, exchange label second row. Existing green CTA/wood icon reusable."
+        },
+        {
+          "name": "DismissHint",
+          "bounds": [
+            120,
+            862,
+            264,
+            28
+          ],
+          "fontPx": 18,
+          "weight": 700
+        }
+      ],
+      "layerOrder": "Blur/dim -> orange panel/decor -> portrait -> name/close -> trade panel -> cream paper -> text/rewards -> binding rings -> CTA -> dismiss hint. Exclude magenta recording cursor."
+    },
+    {
+      "id": "screen-fbb6e6b2-36d3-4574-b754-b2b2cc8a923c",
+      "family": "TS14",
+      "reference": "codex-clipboard-c8bbc9f3-5168-4d86-9d01-529270fa3a99.png",
+      "oldState": "acceptance-selected-susan-jimmy-pop4plus2-beds6",
+      "newState": "full-beds-fiona-blaine-pop6-beds6-waiting2",
+      "parts": [
+        {
+          "name": "Clipboard",
+          "bounds": [
+            6,
+            65,
+            494,
+            768
+          ],
+          "reuse": "BG_TSV_TS14_clipboard"
+        },
+        {
+          "name": "Paper",
+          "bounds": [
+            21,
+            119,
+            464,
+            606
+          ],
+          "reuse": "BG_TSV_TS14_paper"
+        },
+        {
+          "name": "MetalClip",
+          "bounds": [
+            149,
+            50,
+            209,
+            96
+          ],
+          "description": "Grey plate, dark horizontal upper bar, inverted-U wire handle; current plain panels lack contour/depth."
+        },
+        {
+          "name": "Close",
+          "bounds": [
+            454,
+            78,
+            36,
+            37
+          ],
+          "fontPx": 36,
+          "description": "White X without separate circular backplate"
+        },
+        {
+          "name": "Title",
+          "bounds": [
+            158,
+            154,
+            154,
+            42
+          ],
+          "fontPx": 28,
+          "weight": 800,
+          "color": "#2d7a8e"
+        },
+        {
+          "name": "Help",
+          "bounds": [
+            310,
+            154,
+            39,
+            40
+          ],
+          "fontPx": 26,
+          "weight": 800,
+          "description": "Round teal question button"
+        },
+        {
+          "name": "CapacityBand",
+          "bounds": [
+            16,
+            200,
+            474,
+            99
+          ],
+          "description": "Light translucent blue with dashed stitching near top/bottom. Vertical divider [252,224,2,52]."
+        },
+        {
+          "name": "PopulationIcon",
+          "bounds": [
+            57,
+            224,
+            47,
+            31
+          ],
+          "description": "Three-person silhouette, not current person+up medal."
+        },
+        {
+          "name": "PopulationLabel",
+          "bounds": [
+            45,
+            259,
+            73,
+            25
+          ],
+          "fontPx": 18,
+          "weight": 700
+        },
+        {
+          "name": "PopulationValue",
+          "bounds": [
+            140,
+            234,
+            43,
+            42
+          ],
+          "value": "6",
+          "fontPx": 40,
+          "weight": 800,
+          "description": "No +2"
+        },
+        {
+          "name": "BedIcon",
+          "bounds": [
+            320,
+            225,
+            46,
+            31
+          ],
+          "description": "Real bed silhouette, not current rectangle text glyph."
+        },
+        {
+          "name": "BedLabel",
+          "bounds": [
+            313,
+            259,
+            78,
+            25
+          ],
+          "fontPx": 18,
+          "weight": 700
+        },
+        {
+          "name": "BedsValue",
+          "bounds": [
+            407,
+            234,
+            42,
+            42
+          ],
+          "value": "6",
+          "fontPx": 40,
+          "weight": 800
+        },
+        {
+          "name": "Waiting",
+          "bounds": [
+            148,
+            309,
+            224,
+            34
+          ],
+          "value": "2",
+          "fontPx": 22,
+          "weight": 700
+        },
+        {
+          "name": "Fiona",
+          "bounds": [
+            40,
+            347,
+            132,
+            146
+          ],
+          "labelBounds": [
+            40,
+            498,
+            132,
+            30
+          ],
+          "fontPx": 22,
+          "weight": 700,
+          "description": "Long blonde hair, pink outfit. No selected shade/check."
+        },
+        {
+          "name": "Blaine",
+          "bounds": [
+            188,
+            347,
+            132,
+            146
+          ],
+          "labelBounds": [
+            188,
+            498,
+            132,
+            30
+          ],
+          "fontPx": 22,
+          "weight": 700,
+          "description": "Short red hair, guitar, sleeveless outfit. No selected shade/check."
+        },
+        {
+          "name": "FullBedsCopy",
+          "bounds": [
+            29,
+            758,
+            372,
+            32
+          ],
+          "fontPx": 22,
+          "weight": 800,
+          "color": "#f65f6a",
+          "description": "Single-line red bed expansion instruction. No central green accept CTA."
+        },
+        {
+          "name": "BedExpansionCTA",
+          "bounds": [
+            416,
+            757,
+            69,
+            36
+          ],
+          "description": "Small blue/teal CTA, white/cream double-chevron. Destination not observed."
+        },
+        {
+          "name": "TutorialHand",
+          "bounds": [
+            365,
+            679,
+            73,
+            85
+          ],
+          "description": "White glove, yellow glow, lower-right pointer toward expansion CTA."
+        },
+        {
+          "name": "DismissHint",
+          "bounds": [
+            120,
+            862,
+            264,
+            28
+          ],
+          "fontPx": 18,
+          "weight": 700
+        }
+      ],
+      "layerOrder": "Blur/dim -> clipboard -> paper -> metal clip -> title/help -> capacity band/icons/figures -> waiting/cards/labels -> fullbeds instruction/CTA -> tutorial hand/glow -> dismiss hint. Exclude magenta recording cursor."
+    }
+  ],
+  "assetAudit": [
+    {
+      "assetRef": "sha256-8b5de469e4f387ad4e43681ac841cc2aafe89ce6572249f0a8d475b98f7ac2b3.png",
+      "size": [
+        450,
+        300
+      ],
+      "finding": "3x2 atlas. Current Jason grey beard/tool vest is row0col1, Susan nurse row1col1, Jimmy glasses row1col2. New Fiona/Blaine not present."
+    },
+    {
+      "assetRef": "sha256-4184b0ac8f27b7d10bf8adcf9efab78f7c935d01374c055ca95cc4442a5cc137.webp",
+      "finding": "Empty teal frame: reusable for teal panels, not orange round close or green reward tiles."
+    },
+    {
+      "assetRef": "sha256-41c8b9bf974d8661aec22457375a5c5942c0136c4accfe520fdb3f37b0e0cce0.webp",
+      "finding": "Blue paper with blue top strip: near TS14 base, differs from TS16 cream paper."
+    },
+    {
+      "assetRef": "sha256-8467ae367cfcd160c719d060f9f484b0d5390b4ef07062a3f79ce83aea5f95d3.webp",
+      "finding": "111x180 brown vertical card, currently misused as TS16 Later CTA."
+    },
+    {
+      "assetRef": "sha256-4d30ace4433ecf5a33802d00477cfc2830e1e6c4897686cf6228f5e55a24680d.webp",
+      "finding": "Person+up medal, differs from TS14 three-person population silhouette."
+    },
+    {
+      "assetRef": "sha256-114adf9fa11a14e1b42f5e6323374f3cd86936654434c4426c1776a601f8aff1.webp",
+      "finding": "160x64 green 3-slice reusable for hero upgrade and TS16 exchange."
+    },
+    {
+      "assetRef": "sha256-6f3d559bc3cfa1400301ffd57a5dc6e0d2c15116b1db5d8ba72542b45260e09d.png",
+      "finding": "TS26 profile/search/class/up atlas reusable."
+    },
+    {
+      "assetRef": "sha256-b0437ff02a1a9186df6651e533c0522283a1e842265a7aa2b177b4f7f7a51e43.png",
+      "finding": "TS26 rank hex/previous/next chevrons reusable."
+    }
+  ],
+  "experimentalChecksForParentWithinOnlyThree": [
+    "TS26 tutorial speech/portrait, hand/glow, EXP/upgrade CTA, circular profile glyphs and diamond background",
+    "TS16 Jason new look, cream paper/brass rings, orange round close and Later CTA, green reward tiles",
+    "TS14 metal clip, population/bed silhouettes, two new portraits, band stitching, fullbed instruction/small forward/hand"
+  ],
+  "limits": [
+    "Experimental UI not opened by measuring agent. Parent checks only the same three screens.",
+    "Static screenshots do not verify close/trade/accept/expansion/upgrade behavior. No guessed transitions.",
+    "No edits to normal design JSON, product source, public STATUS or reports."
+  ]
+}

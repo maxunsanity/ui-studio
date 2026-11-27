@@ -1,0 +1,45 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {readDesign,shape,text} from '../20261124-defense-simple/shared.mjs';
+import {validateDocument} from '../../../src/tools/uxStudio/model.mjs';
+const d=readDesign('kpop-defense-ui');
+const manifest=JSON.parse(readFileSync('/Users/max/projest_max/kpopmonsters/data/res/defense_motion_v01/manifest.json'));
+const map=new Map([...manifest.characters,...manifest.projectiles,...manifest.effects].map(row=>[row.asset_id,row]));
+const chosen=['spawn_fog','area_warning','death_dissolve','boss_charge','boss_missile','phase_wave'];
+const assets={};
+const board=(id,title,purpose)=>{
+ const screen={id,name:title,kind:'page',wireframeReview:true,logicalSize:{w:390,h:844},canvasPosition:{x:24+(d.screens.length%4)*424,y:44+Math.floor(d.screens.length/4)*898},purpose,elements:[]};
+ d.screens.push(screen);
+ shape(screen,'background','보드 배경','panel',0,0,390,844,{fill:'#eff3f6'});
+ shape(screen,'head','제목 배경','panel',0,0,390,60,{frame:'#ffffff'});
+ text(screen,'title',title,14,12,365,36,{size:18,weight:810});
+ return screen;
+};
+function art(s,id,x,y,w,h,hero=false){
+ const row=map.get(id);
+ const dir=chosen.includes(id)?'images/':'../20261124-defense-enemies/images/';
+ const path=new URL(dir+id+'.png',import.meta.url);
+ const bytes=readFileSync(path);
+ const ref='sha256-'+createHash('sha256').update(bytes).digest('hex')+'.png';
+ assets[ref]=decodeURIComponent(path.pathname);
+ shape(s,id+'.frame',row.label_ko+' 카드','panel',x,y,w,h,{frame:'#ffffff'});
+ const e=shape(s,id+'.model',row.label_ko+' 3D 대표 이미지','image',x+6,y+6,w-12,h-(hero?44:53),{role:'image'});
+ e.image={assetRef:ref,src:'',sourceSize:[bytes.readUInt32BE(16),bytes.readUInt32BE(20)],fit:'contain',alt:row.label_ko+' 원본 GLB 컬러'};
+ text(s,id+'.label',row.label_ko,x+6,y+h-48,w-12,20,{size:13,weight:820,align:hero?'left':'center'});
+ const desc=chosen.includes(id)?row.default_clip:row.category==='boss'?'공중 · 보스':row.layer==='air'?'공중':'지상';
+ text(s,id+'.role',desc,x+6,y+h-29,w-12,17,{size:10,color:'#4d6474',align:hero?'left':'center'});
+ text(s,id+'.id',id,x+6,y+h-15,w-12,14,{size:9,color:'#4d6474',align:hero?'right':'center'});
+}
+const regular=board('defense-enemy-models','⑤ 악귀 3D 모델 부품','지상 10종과 공중 2종의 컬러 원본을 같은 카드 규격에 정리합니다.');
+text(regular,'summary','지상 10종 · 공중 2종',14,63,362,34,{size:14,weight:760});
+const rows=manifest.characters.filter(r=>r.category==='enemies');
+assert.equal(rows.length,12);
+rows.forEach((r,i)=>art(regular,r.asset_id,14+i%3*122,105+Math.floor(i/3)*174,116,165));
+const special=board('defense-enemy-boss-fx','⑥ 보스와 전투 효과 3D 부품','용형 공중 보스와 3D 효과 6종의 컬러 원본을 확인합니다.');
+art(special,'boss_air_dragon',14,74,362,206,true);
+text(special,'fx-title','출현 · 포격 · 소멸 효과',14,288,362,31,{size:15,weight:810});
+chosen.forEach((id,i)=>art(special,id,14+i%2*184,326+Math.floor(i/2)*164,178,153));
+text(special,'scope','동작 클립과 원본 파일은 작업 명세의 3D 부품표에서 확인',14,815,362,21,{size:10});
+validateDocument(d);
+for(const [name,value] of [['defense.json',d],['defense-assets.json',assets]])writeFileSync(new URL(name,import.meta.url),JSON.stringify(value));

@@ -1,0 +1,442 @@
+{
+  "family": {
+    "kind": "normal-ui-action-recipes-not-design",
+    "game": "ACECRAFT",
+    "id": "ACE_ShopCurrencyPatch",
+    "patchOnly": true,
+    "createNewBoard": false,
+    "targetFamily": "ACE10L",
+    "name": "Patch_ACE10L_ShopCurrencyHeader",
+    "nativeKind": "page",
+    "purpose": "Build one display-only header group in the already existing Limited board, then root may reuse it through normal UI clipboard. Not an additional catalog board.",
+    "coordinateSpace": {
+      "width": 420,
+      "height": 924,
+      "rects": "stage ABS including descendants"
+    },
+    "externalParents": {
+      "root": "existing ACE10L root; do not create a new screen or duplicate full root"
+    },
+    "reference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00038.jpg",
+    "relatedReference": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/unidentified-game-20261120/video-a/frames/frame_00041.jpg",
+    "actions": [
+      {
+        "op": "plain",
+        "key": "CurrencyHeader",
+        "name": "Frame_ACE10L_CurrencyHeader",
+        "rect": {
+          "x": 0,
+          "y": 43,
+          "w": 420,
+          "h": 52
+        },
+        "parent": "root",
+        "fill": "#00000000",
+        "partRole": "frame"
+      },
+      {
+        "op": "panel",
+        "key": "CashPill",
+        "name": "Frame_ACE10L_CashPill",
+        "rect": {
+          "x": 5,
+          "y": 49,
+          "w": 100,
+          "h": 18
+        },
+        "parent": "CurrencyHeader",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_hud_darkbrownpill3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "op": "image",
+        "key": "CashGlyph",
+        "name": "Img_ACE10L_CashGlyph",
+        "rect": {
+          "x": 7,
+          "y": 50,
+          "w": 16,
+          "h": 16
+        },
+        "parent": "CashPill",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          64,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "op": "text",
+        "key": "CashValue",
+        "name": "Txt_ACE10L_CashValue",
+        "rect": {
+          "x": 27,
+          "y": 49,
+          "w": 58,
+          "h": 18
+        },
+        "parent": "CashPill",
+        "text": "8012",
+        "size": 11,
+        "weight": 700,
+        "color": "#fff0cd",
+        "align": "left"
+      },
+      {
+        "op": "panel",
+        "key": "GemPill",
+        "name": "Frame_ACE10L_GemPill",
+        "rect": {
+          "x": 107,
+          "y": 49,
+          "w": 100,
+          "h": 18
+        },
+        "parent": "CurrencyHeader",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_hud_darkbrownpill3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "op": "image",
+        "key": "GemGlyph",
+        "name": "Img_ACE10L_GemGlyph",
+        "rect": {
+          "x": 109,
+          "y": 50,
+          "w": 16,
+          "h": 16
+        },
+        "parent": "GemPill",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          64,
+          0,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "op": "text",
+        "key": "GemValue",
+        "name": "Txt_ACE10L_GemValue",
+        "rect": {
+          "x": 129,
+          "y": 49,
+          "w": 58,
+          "h": 18
+        },
+        "parent": "GemPill",
+        "text": "4219",
+        "size": 11,
+        "weight": 700,
+        "color": "#fff0cd",
+        "align": "left"
+      },
+      {
+        "op": "image",
+        "key": "GemPlus",
+        "name": "Img_ACE10L_GemPlus",
+        "rect": {
+          "x": 193,
+          "y": 52,
+          "w": 12,
+          "h": 12
+        },
+        "parent": "GemPill",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          192,
+          128,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "op": "panel",
+        "key": "RecruitTicketPill",
+        "name": "Frame_ACE10L_RecruitTicketPill",
+        "rect": {
+          "x": 209,
+          "y": 49,
+          "w": 100,
+          "h": 18
+        },
+        "parent": "CurrencyHeader",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_hud_darkbrownpill3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "op": "image",
+        "key": "RecruitTicketGlyph",
+        "name": "Img_ACE10L_RecruitTicketGlyph",
+        "rect": {
+          "x": 211,
+          "y": 50,
+          "w": 16,
+          "h": 16
+        },
+        "parent": "RecruitTicketPill",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          192,
+          0,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "op": "text",
+        "key": "RecruitTicketValue",
+        "name": "Txt_ACE10L_RecruitTicketValue",
+        "rect": {
+          "x": 231,
+          "y": 49,
+          "w": 58,
+          "h": 18
+        },
+        "parent": "RecruitTicketPill",
+        "text": "76",
+        "size": 11,
+        "weight": 700,
+        "color": "#fff0cd",
+        "align": "left"
+      },
+      {
+        "op": "image",
+        "key": "RecruitTicketPlus",
+        "name": "Img_ACE10L_RecruitTicketPlus",
+        "rect": {
+          "x": 295,
+          "y": 52,
+          "w": 12,
+          "h": 12
+        },
+        "parent": "RecruitTicketPill",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          192,
+          128,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "op": "panel",
+        "key": "EventTokenPill",
+        "name": "Frame_ACE10L_EventTokenPill",
+        "rect": {
+          "x": 311,
+          "y": 49,
+          "w": 100,
+          "h": 18
+        },
+        "parent": "CurrencyHeader",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_hud_darkbrownpill3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "op": "image",
+        "key": "EventTokenGlyph",
+        "name": "Img_ACE10L_EventTokenGlyph",
+        "rect": {
+          "x": 313,
+          "y": 50,
+          "w": 16,
+          "h": 16
+        },
+        "parent": "EventTokenPill",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          0,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "op": "text",
+        "key": "EventTokenValue",
+        "name": "Txt_ACE10L_EventTokenValue",
+        "rect": {
+          "x": 333,
+          "y": 49,
+          "w": 58,
+          "h": 18
+        },
+        "parent": "EventTokenPill",
+        "text": "5",
+        "size": 11,
+        "weight": 700,
+        "color": "#fff0cd",
+        "align": "left"
+      },
+      {
+        "op": "image",
+        "key": "EventTokenPlus",
+        "name": "Img_ACE10L_EventTokenPlus",
+        "rect": {
+          "x": 397,
+          "y": 52,
+          "w": 12,
+          "h": 12
+        },
+        "parent": "EventTokenPill",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          192,
+          128,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "op": "panel",
+        "key": "PowerCubePill",
+        "name": "Frame_ACE10L_PowerCubePill",
+        "rect": {
+          "x": 311,
+          "y": 77,
+          "w": 100,
+          "h": 18
+        },
+        "parent": "CurrencyHeader",
+        "skin": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_hud_darkbrownpill3_normal_v001.png",
+        "skinMetrics": [
+          0,
+          18,
+          0,
+          18
+        ]
+      },
+      {
+        "op": "image",
+        "key": "PowerCubeGlyph",
+        "name": "Img_ACE10L_PowerCubeGlyph",
+        "rect": {
+          "x": 313,
+          "y": 78,
+          "w": 16,
+          "h": 16
+        },
+        "parent": "PowerCubePill",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          128,
+          64,
+          64,
+          64
+        ],
+        "fit": "contain"
+      },
+      {
+        "op": "text",
+        "key": "PowerCubeValue",
+        "name": "Txt_ACE10L_PowerCubeValue",
+        "rect": {
+          "x": 333,
+          "y": 77,
+          "w": 58,
+          "h": 18
+        },
+        "parent": "PowerCubePill",
+        "text": "5",
+        "size": 11,
+        "weight": 700,
+        "color": "#fff0cd",
+        "align": "left"
+      },
+      {
+        "op": "image",
+        "key": "PowerCubePlus",
+        "name": "Img_ACE10L_PowerCubePlus",
+        "rect": {
+          "x": 397,
+          "y": 80,
+          "w": 12,
+          "h": 12
+        },
+        "parent": "PowerCubePill",
+        "path": "/ui-studio/source/assets/import-staging/acecraft-20261120/acecraft_resource_glyph_atlas4x3_normal_v001.png",
+        "region": [
+          192,
+          128,
+          64,
+          64
+        ],
+        "fit": "contain"
+      }
+    ],
+    "notes": [
+      "Source A38/A41 header snapshot only: cash8012 / gem4219 / blue ticket76 / event token5 / Power Cube5. These are not live or approved balance values.",
+      "The source event-token glyph is round/gold; the prepared redticket glyph is a declared red-tag proxy, not an exact currency identity.",
+      "The four green plus signs are prepared display images, not new payment/navigation inputs. No action is invented for them.",
+      "Pill skin is existing darkbrownpill3 with source caps[0,18,0,18]; keep padding0. All header parts are display-only; native values are separate text.",
+      "When using image dropdowns, wait for the expected glyph-atlas src256×192 before applying64×64 crop. Source identity guard is required; bounds alone is insufficient.",
+      "Root must delete the already-built old CurrencyValues through normal UI before or after building this group. This recipe itself never edits a saved design.",
+      "When copying this group to another shop, preserve same-role geometry, assign target-family names, and rebind the actual visible currencies/counts from that target source. Tempus shows two top resources; do not carry five Limited balances into it or invent zeros.",
+      "The existing plus glyph was visually inspected. The 16px leading resource icons and12px plus sprites use explicit existing atlas regions."
+    ],
+    "verification": {
+      "actionCount": 20,
+      "pills": 5,
+      "resourceGlyphs": 5,
+      "nativeValues": 5,
+      "greenPlusImages": 4,
+      "actualUiApplied": false
+    }
+  },
+  "sid": "screen-cb246290-bf34-4e9e-9dc1-54cb671eaa1f",
+  "i": 20,
+  "map": {
+    "root": "element-15bb18cd-ade1-4026-b3ef-cc01f8d5c095",
+    "CurrencyHeader": "element-b9af957a-ce18-4a6c-ab4f-7e6dc04fd053",
+    "CashPill": "element-f93c438d-98d2-4604-b2c0-c81393d2546a",
+    "CashGlyph": "element-de66d1d7-d269-4894-bd92-cd9a175b14d9",
+    "CashValue": "element-537c75e8-d6f3-48ea-8299-15815795e342",
+    "GemPill": "element-091e99d2-302b-4fa1-be54-da2225eb573b",
+    "GemGlyph": "element-549402ea-dd59-40f8-b42f-d714c57957af",
+    "GemValue": "element-cd9b9d37-56f2-4508-98cb-79dad2bf444c",
+    "GemPlus": "element-910bd11e-b031-4a0d-9041-8f20a10f46a0",
+    "RecruitTicketPill": "element-92b28c81-1375-4a1b-b070-7d8d9fb6f830",
+    "RecruitTicketGlyph": "element-828eec4b-75a4-437e-9e50-e7ccbec96c30",
+    "RecruitTicketValue": "element-a33af608-5498-4f4a-b412-3964ba60fd98",
+    "RecruitTicketPlus": "element-9e810682-351a-4d49-b695-1037b7b13625",
+    "EventTokenPill": "element-a8ddf194-79d0-42ae-9e4c-f6e96dd24bf8",
+    "EventTokenGlyph": "element-bf860bb4-874e-40ca-90e3-4338ec8e4b9f",
+    "EventTokenValue": "element-ceb6d810-c95f-44bf-875a-f841c0a5ff4e",
+    "EventTokenPlus": "element-036d744b-65dc-4a42-ba19-7b060ad63c87",
+    "PowerCubePill": "element-df5665a1-22d1-421c-9b36-3818046d852f",
+    "PowerCubeGlyph": "element-fe481437-3aa7-44df-8166-9e5a74406df4",
+    "PowerCubeValue": "element-e9ac672a-efd8-4180-a56a-c68916ff9a56",
+    "PowerCubePlus": "element-02ba4e36-6a04-46fe-adfc-b487b41afc4d"
+  }
+}

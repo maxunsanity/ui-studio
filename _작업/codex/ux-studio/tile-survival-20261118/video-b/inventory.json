@@ -1,0 +1,1871 @@
+{
+  "title": "타일 서바이벌 영상3·4 UI 판틀 관측 목록",
+  "status": "제안(검수 대기)",
+  "purpose": "UI스튜디오 참고샘플 제작을 위한 관찰. 실제 편집·게임연동 완료 아님.",
+  "scope": "TSV03/TSV04 영상만, 영상1·2와 중복은 본체가 통합",
+  "coordinateSpace": {
+    "width": 504,
+    "height": 894,
+    "units": "reference-image pixels",
+    "method": "프레임 육안 근사 구역. 실제 UI 계층/정확한 터치영역 아님."
+  },
+  "sources": [
+    {
+      "id": "TSV03",
+      "path": "/Users/max/projest_max/영상작업 모음/타일서바이벌3.mov",
+      "displayName": "타일서바이벌3.mov",
+      "durationSeconds": 107.41333333333333,
+      "dimensions": [
+        504,
+        894
+      ],
+      "coarseStepSeconds": 6,
+      "coarseFrameCount": 18,
+      "fineFrameCount": 87,
+      "coarseContactSheet": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/contact-coarse.jpg",
+      "fineContactSheets": [
+        "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/contact-fine-01.jpg",
+        "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/contact-fine-02.jpg",
+        "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/contact-fine-03.jpg",
+        "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/contact-fine-04.jpg",
+        "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/contact-fine-05.jpg"
+      ]
+    },
+    {
+      "id": "TSV04",
+      "path": "/Users/max/projest_max/영상작업 모음/타일 서바이벌4.mov",
+      "displayName": "타일 서바이벌4.mov",
+      "durationSeconds": 4.4816666666666665,
+      "dimensions": [
+        504,
+        894
+      ],
+      "coarseStepSeconds": 6,
+      "coarseFrameCount": 1,
+      "fineFrameCount": 10,
+      "coarseContactSheet": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV04/contact-coarse.jpg",
+      "fineContactSheets": [
+        "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV04/contact-fine-01.jpg"
+      ]
+    }
+  ],
+  "screenCount": 17,
+  "items": [
+    {
+      "id": "TSV03-01",
+      "title": "영지 기본 화면",
+      "kind": "screen",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 3,
+        "timecode": "00:03.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-01.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00003.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "상단 자원 HUD",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            54
+          ],
+          "observedContent": "프로필·전투력·시간·인구·자원·보석"
+        },
+        {
+          "name": "영지 조작 영역",
+          "boundsPx": [
+            0,
+            54,
+            504,
+            687
+          ],
+          "observedContent": "건물·주민·수집 말풍선·건설 타이머·카메라 이동"
+        },
+        {
+          "name": "이벤트 바로가기",
+          "boundsPx": [
+            8,
+            119,
+            84,
+            70
+          ],
+          "observedContent": "좌측 이벤트 초상"
+        },
+        {
+          "name": "우측 기능",
+          "boundsPx": [
+            446,
+            631,
+            58,
+            114
+          ],
+          "observedContent": "알림 배지·기능 아이콘"
+        },
+        {
+          "name": "미션 안내",
+          "boundsPx": [
+            0,
+            741,
+            504,
+            42
+          ],
+          "observedContent": "챕터 보상 수령"
+        },
+        {
+          "name": "채팅 미리보기",
+          "boundsPx": [
+            0,
+            783,
+            504,
+            48
+          ],
+          "observedContent": "스테이트 채팅 2줄"
+        },
+        {
+          "name": "하단 내비게이션",
+          "boundsPx": [
+            0,
+            831,
+            504,
+            63
+          ],
+          "observedContent": "영웅·외출·잠김 슬롯"
+        }
+      ],
+      "visibleTexts": [
+        "챕터 보상 수령",
+        "스테이트",
+        "영웅",
+        "외출"
+      ],
+      "controls": [
+        {
+          "label": "채팅 미리보기",
+          "targetId": "TSV03-03",
+          "evidence": "08초 영지 → 09초 채팅 전체 화면"
+        },
+        {
+          "label": "하단 영웅",
+          "targetId": "TSV03-04",
+          "evidence": "13초 하단 영웅 부근 커서 → 14초 목록"
+        },
+        {
+          "label": "온실 건물",
+          "targetId": "TSV03-07",
+          "evidence": "34초 온실 선택·확대 → 35초 내부 편집"
+        },
+        {
+          "label": "민가 건물",
+          "targetId": "TSV03-07",
+          "evidence": "58초 민가 부근 커서 → 60초 내부 편집"
+        },
+        {
+          "label": "주민 말풍선",
+          "targetId": "TSV03-11",
+          "evidence": "86초 말풍선 부근 커서 → 87초 교환 모달"
+        }
+      ],
+      "states": [
+        {
+          "name": "기본",
+          "timeSeconds": 3
+        },
+        {
+          "name": "건설중",
+          "timeSeconds": 39,
+          "difference": "건설 아이콘·00:00:03 타이머"
+        },
+        {
+          "name": "카메라 이동/미개척 안개",
+          "timeSeconds": 104,
+          "difference": "기본 HUD 유지, 배경 영역 이동"
+        }
+      ],
+      "entryObserved": "00~02초 성공 오버레이 뒤 03초 영지로 복귀",
+      "returnObserved": "각 기능 화면과 모달의 기반 화면",
+      "notes": [
+        "카메라 위치·건물 종류·보석 수집 애니메이션은 독립 판틀로 늘리지 않음",
+        "이벤트·우측 작은 아이콘의 정확한 명칭은 읽히는 범위 외 미확인"
+      ]
+    },
+    {
+      "id": "TSV03-02",
+      "title": "건물 업그레이드 성공",
+      "kind": "overlay",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-01",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 0.8,
+        "timecode": "00:00.80",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-02.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00000.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "배경 차광",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "observedContent": "영지 전체 어둡게"
+        },
+        {
+          "name": "성공 제목",
+          "boundsPx": [
+            115,
+            77,
+            280,
+            35
+          ],
+          "observedContent": "발전소 업그레이드 성공"
+        },
+        {
+          "name": "중앙 배너",
+          "boundsPx": [
+            40,
+            145,
+            420,
+            553
+          ],
+          "observedContent": "LV.4·증가 전후 3행·보상"
+        },
+        {
+          "name": "계속 안내",
+          "boundsPx": [
+            170,
+            810,
+            170,
+            45
+          ],
+          "observedContent": "화면 터치 안내"
+        }
+      ],
+      "visibleTexts": [
+        "발전소 업그레이드 성공",
+        "LV.4",
+        "전투력 증가",
+        "영웅 레벨 상한",
+        "전기 공급 구역",
+        "계속하세요."
+      ],
+      "controls": [
+        {
+          "label": "화면 터치",
+          "targetId": "TSV03-01",
+          "evidence": "02초 오버레이 → 03초 영지"
+        }
+      ],
+      "states": [],
+      "entryObserved": "영상 시작 시 이미 표시됨",
+      "returnObserved": "03초 영지 기본화면",
+      "notes": [
+        "00초 OS 알림 배너가 있으므로 가림이 없는 00.8초를 대표로 선택",
+        "증가 수치·보상 수량은 영상 관측값이며 게임 데이터 확정값 아님"
+      ]
+    },
+    {
+      "id": "TSV03-03",
+      "title": "채팅",
+      "kind": "screen",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-01",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 9,
+        "timecode": "00:09.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-03.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00009.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "제목/상단 기능",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            41
+          ],
+          "observedContent": "채팅·선물·아이콘·설정"
+        },
+        {
+          "name": "채널 탭",
+          "boundsPx": [
+            0,
+            43,
+            504,
+            69
+          ],
+          "observedContent": "스테이트/개인"
+        },
+        {
+          "name": "메시지 피드",
+          "boundsPx": [
+            0,
+            112,
+            504,
+            701
+          ],
+          "observedContent": "시스템 배너·유저 초상·등급·말풍선·번역 아이콘"
+        },
+        {
+          "name": "하단 작성 바",
+          "boundsPx": [
+            0,
+            813,
+            504,
+            81
+          ],
+          "observedContent": "뒤로·채널·입력칸·이모티콘·발송"
+        }
+      ],
+      "visibleTexts": [
+        "채팅",
+        "선물",
+        "스테이트",
+        "개인",
+        "발송",
+        "영문 알파벳은 최대 1000자 입력할 수 있습니다."
+      ],
+      "controls": [
+        {
+          "label": "좌하단 뒤로",
+          "targetId": "TSV03-01",
+          "evidence": "11초 뒤로 부근 커서 → 12초 영지"
+        }
+      ],
+      "states": [],
+      "entryObserved": "08초 채팅 미리보기 부근 커서 → 09초 채팅",
+      "returnObserved": "12초 영지",
+      "notes": [
+        "개인 탭·설정·입력/발송의 작동은 관측되지 않음",
+        "메시지 내용·초상 변경은 동일 피드 상태로 통합"
+      ]
+    },
+    {
+      "id": "TSV03-04",
+      "title": "영웅 목록",
+      "kind": "screen",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-01",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 14,
+        "timecode": "00:14.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-04.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00014.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "제목",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            43
+          ],
+          "observedContent": "영웅"
+        },
+        {
+          "name": "필터 탭",
+          "boundsPx": [
+            0,
+            49,
+            504,
+            64
+          ],
+          "observedContent": "전체·3개 계열 아이콘"
+        },
+        {
+          "name": "영웅 카드 그리드",
+          "boundsPx": [
+            12,
+            116,
+            479,
+            566
+          ],
+          "observedContent": "4열, 보유 레벨·조각 진행률·알림점"
+        },
+        {
+          "name": "하단 행동",
+          "boundsPx": [
+            0,
+            817,
+            504,
+            77
+          ],
+          "observedContent": "뒤로·모집"
+        }
+      ],
+      "visibleTexts": [
+        "영웅",
+        "전체",
+        "Lv.5",
+        "0/10",
+        "1/10",
+        "모집"
+      ],
+      "controls": [
+        {
+          "label": "고스트 카드",
+          "targetId": "TSV03-05",
+          "evidence": "14초 두 번째 카드 커서 → 15초 고스트 상세"
+        },
+        {
+          "label": "세이지 카드",
+          "targetId": "TSV03-05",
+          "evidence": "17초 목록 → 18초 세이지 상세"
+        },
+        {
+          "label": "좌하단 뒤로",
+          "targetId": "TSV03-01",
+          "evidence": "24초 뒤로 커서 → 25초 영지"
+        },
+        {
+          "label": "모집",
+          "targetId": "TSV03-06",
+          "evidence": "버튼은 보이나 이 버튼으로 진입한 연속 장면은 미확인"
+        }
+      ],
+      "states": [
+        {
+          "name": "초기 보유 영웅 레벨5",
+          "timeSeconds": 14
+        },
+        {
+          "name": "성장 후",
+          "timeSeconds": 24,
+          "difference": "Lv.10 및 전투력 증가 리본"
+        }
+      ],
+      "entryObserved": "13초 영웅 버튼 → 14초 목록",
+      "returnObserved": "25초 영지",
+      "notes": [
+        "필터 선택·잠긴 영웅 카드 눌렀을 때 결과는 미확인"
+      ]
+    },
+    {
+      "id": "TSV03-05",
+      "title": "영웅 상세 / 성장",
+      "kind": "screen",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-04",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 18,
+        "timecode": "00:18.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-05.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00018.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "이름/등급/계열",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            140
+          ],
+          "observedContent": "세이지·SR·계열·무기 아이콘"
+        },
+        {
+          "name": "캐릭터 모델",
+          "boundsPx": [
+            0,
+            140,
+            504,
+            389
+          ],
+          "observedContent": "모델·좌우 전환 화살표"
+        },
+        {
+          "name": "전투력/성급",
+          "boundsPx": [
+            64,
+            528,
+            411,
+            113
+          ],
+          "observedContent": "전투력·별/등급 슬롯·승급 화살표"
+        },
+        {
+          "name": "능력 요약",
+          "boundsPx": [
+            67,
+            651,
+            383,
+            75
+          ],
+          "observedContent": "가디언 수량·레벨·부대 용량"
+        },
+        {
+          "name": "성장 CTA",
+          "boundsPx": [
+            86,
+            735,
+            344,
+            65
+          ],
+          "observedContent": "보유 EXP/요구량·업그레이드"
+        },
+        {
+          "name": "하단 탭",
+          "boundsPx": [
+            0,
+            817,
+            504,
+            77
+          ],
+          "observedContent": "뒤로·속성·스킬"
+        }
+      ],
+      "visibleTexts": [
+        "세이지",
+        "SR",
+        "가디언 수량",
+        "레벨",
+        "부대 용량",
+        "업그레이드",
+        "속성",
+        "스킬",
+        "Lv.5 발전소 필요!"
+      ],
+      "controls": [
+        {
+          "label": "업그레이드",
+          "targetId": "TSV03-05",
+          "evidence": "18~20초 연속 클릭 후 레벨5→10·성장 리본"
+        },
+        {
+          "label": "좌하단 뒤로",
+          "targetId": "TSV03-04",
+          "evidence": "20초 뒤로 커서 → 21초 목록"
+        }
+      ],
+      "states": [
+        {
+          "name": "고스트/R",
+          "timeSeconds": 15,
+          "difference": "인물·등급·수치만 다르고 같은 판틀"
+        },
+        {
+          "name": "세이지/SR",
+          "timeSeconds": 18
+        },
+        {
+          "name": "업그레이드 중",
+          "timeSeconds": 19,
+          "difference": "능력 증가 효과·레벨 변동"
+        },
+        {
+          "name": "상한 도달",
+          "timeSeconds": 20,
+          "difference": "CTA 대신 Lv.5 발전소 필요! 조건·이동 화살표"
+        },
+        {
+          "name": "고스트 상한",
+          "timeSeconds": 23,
+          "difference": "세이지와 동일 제한 판틀"
+        }
+      ],
+      "entryObserved": "14초 목록 카드 → 15초 상세; 17초 목록 → 18초 상세",
+      "returnObserved": "21초 또는24초 목록",
+      "notes": [
+        "스킬·성급·프로필/문서 아이콘·좌우 화살표 실제 동작은 미확인",
+        "인물·레벨·전투력 수치 변화는 하나의 성장 화면 상태로 통합"
+      ]
+    },
+    {
+      "id": "TSV03-06",
+      "title": "영웅 모집",
+      "kind": "screen",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-01",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 30,
+        "timecode": "00:30.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-06.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00030.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "제목/재화",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            88
+          ],
+          "observedContent": "영웅 모집·보석·티켓·추가 아이콘"
+        },
+        {
+          "name": "모집 아트",
+          "boundsPx": [
+            0,
+            81,
+            504,
+            595
+          ],
+          "observedContent": "고급모집/일반모집 아트·제목"
+        },
+        {
+          "name": "보조 기능",
+          "boundsPx": [
+            421,
+            89,
+            83,
+            120
+          ],
+          "observedContent": "보상품 보기·모집 기록"
+        },
+        {
+          "name": "설명/모집 CTA",
+          "boundsPx": [
+            70,
+            703,
+            410,
+            97
+          ],
+          "observedContent": "무료까지 남은 시간·1회/10연속 또는 무료 모집"
+        },
+        {
+          "name": "하단 전환",
+          "boundsPx": [
+            0,
+            810,
+            372,
+            84
+          ],
+          "observedContent": "뒤로·고급/일반 선택 탭"
+        }
+      ],
+      "visibleTexts": [
+        "영웅 모집",
+        "고급모집",
+        "일반모집",
+        "보상품 보기",
+        "모집 기록",
+        "1회 뽑기",
+        "10연속 뽑기",
+        "무료 모집",
+        "무료 횟수: 4",
+        "60회 모집 시 전설 영웅 반드시 획득"
+      ],
+      "controls": [
+        {
+          "label": "일반 탭",
+          "targetId": "TSV03-06",
+          "evidence": "68~69초 일반모집 판틀; 탭 선택 시점은 미확인"
+        },
+        {
+          "label": "무료 모집",
+          "targetId": "TSV03-09",
+          "evidence": "69초 버튼 부근 커서 → 70초 기찻길 연출"
+        },
+        {
+          "label": "뒤로",
+          "targetId": "TSV03-01",
+          "evidence": "30초 모집 → 31초 영지; 84초 뒤로 커서 → 85초 영지"
+        }
+      ],
+      "states": [
+        {
+          "name": "고급모집",
+          "timeSeconds": 30,
+          "difference": "주황 아트·1회/10연속 CTA"
+        },
+        {
+          "name": "일반모집 무료",
+          "timeSeconds": 68,
+          "referencePath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00052.jpg",
+          "difference": "보라 아트·무료 모집 단일 CTA"
+        },
+        {
+          "name": "일반모집 무료 소진",
+          "timeSeconds": 74,
+          "difference": "대기시간 및 1회/10연속 CTA로 전환"
+        },
+        {
+          "name": "고급모집 보장 안내",
+          "timeSeconds": 84,
+          "difference": "60회 보장 안내 노출"
+        }
+      ],
+      "entryObserved": "29초 영지 → 30초 모집; 67초 전후 진입 조작은 추출 범위 밖",
+      "returnObserved": "31초/75초/85초 영지",
+      "notes": [
+        "고급/일반은 공통 상단·하단 판틀이므로 샘플 중복 생성보다 상태/탭으로 통합 권장",
+        "보상품 보기·모집 기록·유료 모집·추가 재화 동작은 미확인"
+      ]
+    },
+    {
+      "id": "TSV03-07",
+      "title": "건물 내부 / 가구 성장",
+      "kind": "screen",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-01",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 35,
+        "timecode": "00:35.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-07.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00035.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "간소화 자원 HUD",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            31
+          ],
+          "observedContent": "목재·건축 자원"
+        },
+        {
+          "name": "건물 내부 확대",
+          "boundsPx": [
+            0,
+            31,
+            504,
+            583
+          ],
+          "observedContent": "가구·주민·선택 말풍선·손가락 안내"
+        },
+        {
+          "name": "건물 헤더",
+          "boundsPx": [
+            0,
+            614,
+            504,
+            54
+          ],
+          "observedContent": "온실 Lv.3·업그레이드"
+        },
+        {
+          "name": "효과 요약",
+          "boundsPx": [
+            10,
+            672,
+            484,
+            35
+          ],
+          "observedContent": "시간당 생산량 또는 수면/기분"
+        },
+        {
+          "name": "가구 카드 레일",
+          "boundsPx": [
+            10,
+            714,
+            494,
+            180
+          ],
+          "observedContent": "가구 이미지·레벨점·잠금·가격/전설 표시"
+        }
+      ],
+      "visibleTexts": [
+        "온실 Lv.3",
+        "업그레이드",
+        "시간당 생산량",
+        "민가-1 Lv.3",
+        "수면",
+        "기분",
+        "전설"
+      ],
+      "controls": [
+        {
+          "label": "온실 업그레이드",
+          "targetId": "TSV03-08",
+          "evidence": "37초 버튼 커서 → 38초 업그레이드 조건 시트"
+        },
+        {
+          "label": "가구 카드",
+          "targetId": "TSV03-07",
+          "evidence": "60~62초 침대/의자 카드 부근 커서와 가구 성장 효과·수면/기분 수치 증가"
+        }
+      ],
+      "states": [
+        {
+          "name": "온실",
+          "timeSeconds": 35,
+          "difference": "생산량·온실 가구·우측 주민 카드"
+        },
+        {
+          "name": "가구 상한 토스트",
+          "timeSeconds": 37,
+          "difference": "레벨 상한에 도달했습니다. 건물을 업그레이드하세요."
+        },
+        {
+          "name": "민가",
+          "timeSeconds": 60,
+          "referencePath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00049.jpg",
+          "difference": "수면/기분·침대/의자/세면대 카드, 헤더에 진행 표시"
+        },
+        {
+          "name": "현재 가구 상한",
+          "timeSeconds": 62,
+          "difference": "다른 가구를 먼저 업그레이드하라는 토스트"
+        }
+      ],
+      "entryObserved": "34초 온실 선택 →35초 내부;58초 민가 선택→60초 내부",
+      "returnObserved": "39초 영지 건설중;64초 영지",
+      "notes": [
+        "온실/민가는 상단자원·확대장면·하단가구레일이 같아 콘텐츠 상태로 통합",
+        "주민 카드·가구 잠금 해제 상세·가구 교체 기능은 미확인",
+        "별도 닫기 버튼은 보이지 않으며 바깥 영역 선택 후 영지로 복귀한 것으로만 관측"
+      ]
+    },
+    {
+      "id": "TSV03-08",
+      "title": "건물 업그레이드 조건",
+      "kind": "bottom-sheet",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-07",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 38,
+        "timecode": "00:38.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-08.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00038.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "건물 확대 배경",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            436
+          ],
+          "observedContent": "온실 장면·상한 토스트"
+        },
+        {
+          "name": "시트 헤더",
+          "boundsPx": [
+            0,
+            436,
+            504,
+            55
+          ],
+          "observedContent": "온실 Lv.3 → Lv.4·도움말"
+        },
+        {
+          "name": "업그레이드 보상",
+          "boundsPx": [
+            12,
+            500,
+            480,
+            173
+          ],
+          "observedContent": "잠금 해제·전투력·생존자 수량·식량"
+        },
+        {
+          "name": "업그레이드 조건",
+          "boundsPx": [
+            12,
+            676,
+            480,
+            116
+          ],
+          "observedContent": "발전소 Lv.4·목재 보유/요구·체크"
+        },
+        {
+          "name": "시간/CTA",
+          "boundsPx": [
+            104,
+            793,
+            305,
+            101
+          ],
+          "observedContent": "원본 시간·00:00:03·업그레이드"
+        }
+      ],
+      "visibleTexts": [
+        "온실 Lv.3 → Lv.4",
+        "업그레이드 보상",
+        "잠금 해제",
+        "전투력",
+        "생존자 수량",
+        "식량",
+        "업그레이드 조건",
+        "발전소 Lv.4",
+        "원본 시간: 00:00:03",
+        "업그레이드"
+      ],
+      "controls": [
+        {
+          "label": "업그레이드",
+          "targetId": "TSV03-01",
+          "evidence": "38초 CTA 커서 → 39초 영지 건설 3초 타이머"
+        }
+      ],
+      "states": [],
+      "entryObserved": "37초 온실 헤더의 업그레이드 선택 →38초 시트",
+      "returnObserved": "39초 영지 건설중",
+      "notes": [
+        "조건 미충족 상태·도움말·취소 동작은 미확인"
+      ]
+    },
+    {
+      "id": "TSV03-09",
+      "title": "모집 연출",
+      "kind": "transient-screen",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-06",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 70,
+        "timecode": "01:10.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-09.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00054.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "연출",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            850
+          ],
+          "observedContent": "사막 협곡·기찻길·빛"
+        },
+        {
+          "name": "스킵",
+          "boundsPx": [
+            387,
+            849,
+            117,
+            45
+          ],
+          "observedContent": "스킵 버튼"
+        }
+      ],
+      "visibleTexts": [
+        "스킵"
+      ],
+      "controls": [
+        {
+          "label": "스킵",
+          "targetId": "TSV03-10",
+          "evidence": "70초 스킵 부근 커서 →71초 결과 등장"
+        }
+      ],
+      "states": [],
+      "entryObserved": "69초 무료 모집 →70초 연출",
+      "returnObserved": "71~72초 모집 결과",
+      "notes": [
+        "영상 장면 재생을 UI스튜디오에서 구현했다는 뜻이 아님. 정지 참조/선택적 중간판틀로만 제안"
+      ]
+    },
+    {
+      "id": "TSV03-10",
+      "title": "모집 결과",
+      "kind": "screen",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-06",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 72,
+        "timecode": "01:12.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-10.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00056.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "제목",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            41
+          ],
+          "observedContent": "모집 결과"
+        },
+        {
+          "name": "재화/스킵",
+          "boundsPx": [
+            0,
+            56,
+            504,
+            46
+          ],
+          "observedContent": "보석·티켓·추가 버튼·영상 스킵 체크"
+        },
+        {
+          "name": "결과 카드",
+          "boundsPx": [
+            181,
+            225,
+            143,
+            453
+          ],
+          "observedContent": "조각 초상·x3·러스터(조각)"
+        },
+        {
+          "name": "하단 행동",
+          "boundsPx": [
+            0,
+            816,
+            504,
+            78
+          ],
+          "observedContent": "뒤로·1회/10회 재모집"
+        }
+      ],
+      "visibleTexts": [
+        "모집 결과",
+        "영상 스킵",
+        "러스터 (조각)",
+        "x3",
+        "재모집"
+      ],
+      "controls": [
+        {
+          "label": "뒤로",
+          "targetId": "TSV03-06",
+          "evidence": "73초 뒤로 커서 →74초 일반모집"
+        }
+      ],
+      "states": [],
+      "entryObserved": "70초 연출 →71초 카드 등장 →72초 안정",
+      "returnObserved": "74초 일반모집",
+      "notes": [
+        "재모집·영상 스킵 토글·복수 결과 그리드는 미확인"
+      ]
+    },
+    {
+      "id": "TSV03-11",
+      "title": "주민 자원 교환",
+      "kind": "modal",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-01",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 87,
+        "timecode": "01:27.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-11.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00069.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "블러 배경",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "observedContent": "영지"
+        },
+        {
+          "name": "주민 초상/이름",
+          "boundsPx": [
+            58,
+            190,
+            419,
+            198
+          ],
+          "observedContent": "제이슨·우상단 X"
+        },
+        {
+          "name": "대화",
+          "boundsPx": [
+            62,
+            381,
+            387,
+            119
+          ],
+          "observedContent": "공구 수리에 필요한 나무와 토마토 교환 요청"
+        },
+        {
+          "name": "획득 보상",
+          "boundsPx": [
+            74,
+            500,
+            357,
+            138
+          ],
+          "observedContent": "5분 가속·물자"
+        },
+        {
+          "name": "행동",
+          "boundsPx": [
+            86,
+            648,
+            342,
+            67
+          ],
+          "observedContent": "다음에 / 목재1000 교환"
+        },
+        {
+          "name": "닫기 안내",
+          "boundsPx": [
+            155,
+            857,
+            195,
+            30
+          ],
+          "observedContent": "빈 곳을 탭하여 닫기"
+        }
+      ],
+      "visibleTexts": [
+        "제이슨",
+        "저기, 사장님! 공구를 수리할 나무가 부족한데 모아둔 토마토와 바꿀 수 있을까?",
+        "획득",
+        "다음에",
+        "1000 교환",
+        "빈 곳을 탭하여 닫기"
+      ],
+      "controls": [
+        {
+          "label": "교환",
+          "targetId": "TSV03-12",
+          "evidence": "88초 교환 부근 커서 →89초 영지 자원 차감 →90초 친밀도 보상"
+        },
+        {
+          "label": "다음에 / X / 배경",
+          "targetId": "TSV03-01",
+          "evidence": "화면에 닫기 수단은 보이지만 각각의 클릭 결과는 미확인"
+        }
+      ],
+      "states": [],
+      "entryObserved": "86초 주민 말풍선 →87초 모달",
+      "returnObserved": "89초 영지 후90초 보상",
+      "notes": [
+        "교환 비용·보상 수량은 예시 영상 관측값이며 설정 승인이 아님"
+      ]
+    },
+    {
+      "id": "TSV03-12",
+      "title": "친밀도 상승 보상",
+      "kind": "overlay",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-11",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 90,
+        "timecode": "01:30.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-12.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00072.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "제목/진행",
+          "boundsPx": [
+            55,
+            85,
+            401,
+            196
+          ],
+          "observedContent": "축하합니다!·친밀도 증가·등급 진행"
+        },
+        {
+          "name": "대상/관계",
+          "boundsPx": [
+            94,
+            260,
+            313,
+            190
+          ],
+          "observedContent": "제이슨 카드·지인 → 동료"
+        },
+        {
+          "name": "사건 보상",
+          "boundsPx": [
+            150,
+            491,
+            213,
+            183
+          ],
+          "observedContent": "물자·5분 가속"
+        },
+        {
+          "name": "CTA",
+          "boundsPx": [
+            141,
+            685,
+            224,
+            63
+          ],
+          "observedContent": "편지함으로"
+        },
+        {
+          "name": "계속 안내",
+          "boundsPx": [
+            149,
+            830,
+            220,
+            38
+          ],
+          "observedContent": "화면을 터치하여 계속하세요."
+        }
+      ],
+      "visibleTexts": [
+        "축하합니다!",
+        "친밀도 증가",
+        "제이슨",
+        "지인",
+        "동료",
+        "사건 보상",
+        "편지함으로",
+        "화면을 터치하여 계속하세요."
+      ],
+      "controls": [
+        {
+          "label": "편지함으로",
+          "targetId": "TSV03-13",
+          "evidence": "91초 버튼 커서 →92초 근거지 편지함"
+        }
+      ],
+      "states": [
+        {
+          "name": "증가 연출",
+          "timeSeconds": 90,
+          "difference": "진행 1/3에서 변동"
+        },
+        {
+          "name": "증가 완료",
+          "timeSeconds": 91,
+          "difference": "2/3 진행"
+        }
+      ],
+      "entryObserved": "88초 교환 선택 후90초 보상",
+      "returnObserved": "92초 근거지 편지함",
+      "notes": [
+        "배경 터치로 닫는 결과는 미확인",
+        "챕터 보상과 같은 축하 헤더를 재사용 가능하나 관계변경·CTA가 있는 별도 몸체"
+      ]
+    },
+    {
+      "id": "TSV03-13",
+      "title": "근거지 편지함",
+      "kind": "screen",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-01",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 92,
+        "timecode": "01:32.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-13.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00074.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "제목",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            111
+          ],
+          "observedContent": "근거지 편지함·도움말"
+        },
+        {
+          "name": "근거지 상태",
+          "boundsPx": [
+            12,
+            117,
+            479,
+            237
+          ],
+          "observedContent": "설명·선물·식량/수면/기분 막대"
+        },
+        {
+          "name": "생존자 사건",
+          "boundsPx": [
+            18,
+            359,
+            473,
+            125
+          ],
+          "observedContent": "현재 특수 사건 없음"
+        },
+        {
+          "name": "생존자 평가",
+          "boundsPx": [
+            18,
+            488,
+            473,
+            324
+          ],
+          "observedContent": "초상·이름·평가 텍스트·좋아요"
+        },
+        {
+          "name": "하단 탭",
+          "boundsPx": [
+            0,
+            817,
+            504,
+            77
+          ],
+          "observedContent": "뒤로·근거지 편지함·생존자 도감"
+        }
+      ],
+      "visibleTexts": [
+        "근거지 편지함",
+        "생존자들에게 약간의 불만이 있지만, 그래도 여전히 당신을 믿고 있습니다!",
+        "생존자 사건",
+        "현재 근거지에 특수 사건이 없습니다.",
+        "생존자 평가",
+        "생존자 도감"
+      ],
+      "controls": [
+        {
+          "label": "생존자 도감 탭",
+          "targetId": "TSV03-14",
+          "evidence": "93초 우하단 탭 커서 →94초 도감"
+        }
+      ],
+      "states": [],
+      "entryObserved": "91초 편지함으로 선택 →92초 편지함",
+      "returnObserved": "94초 생존자 도감",
+      "notes": [
+        "선물·도움말·평가 좋아요 동작은 미확인",
+        "화면 전환 중 친밀도 막대가 일시 중첩되므로 고정 UI와 분리"
+      ]
+    },
+    {
+      "id": "TSV03-14",
+      "title": "생존자 도감",
+      "kind": "screen",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-13",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 94,
+        "timecode": "01:34.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-14.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00076.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "제목",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            111
+          ],
+          "observedContent": "생존자 도감·도움말"
+        },
+        {
+          "name": "진행 배너",
+          "boundsPx": [
+            13,
+            117,
+            478,
+            234
+          ],
+          "observedContent": "설명·삽화·진행바"
+        },
+        {
+          "name": "목록 헤더",
+          "boundsPx": [
+            21,
+            359,
+            457,
+            46
+          ],
+          "observedContent": "생존자 명단·잠금 해제됨(6/24)"
+        },
+        {
+          "name": "생존자 그리드",
+          "boundsPx": [
+            41,
+            412,
+            426,
+            387
+          ],
+          "observedContent": "3열 초상·이름·관계·알림"
+        },
+        {
+          "name": "일괄 수령",
+          "boundsPx": [
+            410,
+            734,
+            93,
+            84
+          ],
+          "observedContent": "보물상자·일괄수령"
+        },
+        {
+          "name": "하단 탭",
+          "boundsPx": [
+            0,
+            817,
+            504,
+            77
+          ],
+          "observedContent": "뒤로·편지함·도감"
+        }
+      ],
+      "visibleTexts": [
+        "생존자 도감",
+        "사건 처리 시 의무가 증가하며, 의무 증가 시 생존자가 근거지에 모여들 수 있습니다.",
+        "생존자 명단",
+        "잠금 해제됨 (6/24)",
+        "미아",
+        "제이슨",
+        "데이몬",
+        "옴",
+        "수잔",
+        "지미",
+        "동료",
+        "지인",
+        "일괄 수령"
+      ],
+      "controls": [
+        {
+          "label": "수잔 카드",
+          "targetId": "TSV03-15",
+          "evidence": "95초 수잔 카드 부근 커서 →96초 프로필"
+        },
+        {
+          "label": "좌하단 뒤로",
+          "targetId": "TSV03-01",
+          "evidence": "97초 뒤로 커서 →98초 영지"
+        }
+      ],
+      "states": [],
+      "entryObserved": "93초 도감 탭 →94초 그리드",
+      "returnObserved": "96초 프로필·98초 영지",
+      "notes": [
+        "일괄수령·미해금 카드·다른 생존자 내용은 미확인",
+        "편지함과 헤더/하단탭은 공통 컴포넌트, 중앙 몸체는 별도 판틀로 제안"
+      ]
+    },
+    {
+      "id": "TSV03-15",
+      "title": "생존자 프로필 / 이야기",
+      "kind": "modal",
+      "videoId": "TSV03",
+      "proposedParentId": "TSV03-14",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 96,
+        "timecode": "01:36.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV03-15.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV03/fine/frame_00078.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "블러 배경",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "observedContent": "도감 유지"
+        },
+        {
+          "name": "닫기",
+          "boundsPx": [
+            442,
+            29,
+            62,
+            56
+          ],
+          "observedContent": "X"
+        },
+        {
+          "name": "프로필 카드",
+          "boundsPx": [
+            33,
+            99,
+            438,
+            223
+          ],
+          "observedContent": "초상·수잔·29세·전직 간호사·합류일·관계"
+        },
+        {
+          "name": "스토리 본문",
+          "boundsPx": [
+            46,
+            332,
+            414,
+            352
+          ],
+          "observedContent": "프로필 서사"
+        },
+        {
+          "name": "스토리 탭",
+          "boundsPx": [
+            45,
+            685,
+            415,
+            53
+          ],
+          "observedContent": "스토리 I~IV·알림점·보상상자"
+        },
+        {
+          "name": "닫기 안내",
+          "boundsPx": [
+            164,
+            853,
+            184,
+            31
+          ],
+          "observedContent": "빈 곳을 탭하여 닫기"
+        }
+      ],
+      "visibleTexts": [
+        "수잔",
+        "29세",
+        "전직 간호사",
+        "2026/11/17 00:22 근거지 합류",
+        "관계: 지인",
+        "수잔은 의대생이었으며 섬세한 성격에 쉽게 긴장했습니다.",
+        "스토리 I",
+        "스토리 II",
+        "스토리 III",
+        "스토리 IV",
+        "빈 곳을 탭하여 닫기"
+      ],
+      "controls": [
+        {
+          "label": "닫기 X",
+          "targetId": "TSV03-14",
+          "evidence": "96초 우상단 X 부근 커서 →97초 도감"
+        }
+      ],
+      "states": [],
+      "entryObserved": "95초 수잔 선택→96초 프로필",
+      "returnObserved": "97초 도감",
+      "notes": [
+        "스토리 II~IV·보상상자·관계 도움말 동작은 미확인",
+        "날짜는 게임 화면 텍스트이며 실제 사용자 사건으로 해석하지 않음"
+      ]
+    },
+    {
+      "id": "TSV04-01",
+      "title": "챕터 미션",
+      "kind": "modal",
+      "videoId": "TSV04",
+      "proposedParentId": "TSV03-01",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 0,
+        "timecode": "00:00.00",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV04-01.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV04/fine/frame_00000.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "블러 배경",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "observedContent": "기반 화면 불명확"
+        },
+        {
+          "name": "닫기",
+          "boundsPx": [
+            443,
+            23,
+            48,
+            41
+          ],
+          "observedContent": "X"
+        },
+        {
+          "name": "챕터 배너",
+          "boundsPx": [
+            23,
+            95,
+            455,
+            181
+          ],
+          "observedContent": "챕터3 용사집결 아트"
+        },
+        {
+          "name": "미션 목록",
+          "boundsPx": [
+            20,
+            277,
+            456,
+            344
+          ],
+          "observedContent": "미션 설명·보상·수령 또는 체크, 세로 잘림"
+        },
+        {
+          "name": "챕터 보상",
+          "boundsPx": [
+            20,
+            631,
+            456,
+            161
+          ],
+          "observedContent": "이번 챕터 미션 보상·아이템 레일·모두 수령"
+        },
+        {
+          "name": "닫기 안내",
+          "boundsPx": [
+            148,
+            851,
+            219,
+            40
+          ],
+          "observedContent": "빈 곳을 탭하여 닫기"
+        }
+      ],
+      "visibleTexts": [
+        "챕터3",
+        "용사집결",
+        "3-8 발전소 4레벨 달성 (4/4)",
+        "3-3 영웅 지구 건설 (1/1)",
+        "3-1 생존자 구조 (1/1)",
+        "수령",
+        "이번 챕터 미션 보상",
+        "모두 수령",
+        "빈 곳을 탭하여 닫기"
+      ],
+      "controls": [
+        {
+          "label": "모두 수령",
+          "targetId": "TSV04-02",
+          "evidence": "01.5초 모두 수령 커서 →02초 보상 비행 →02.5~04.4초 챕터 보상"
+        },
+        {
+          "label": "개별 수령 / X / 배경",
+          "targetId": null,
+          "evidence": "표시는 확인, 실제 클릭 결과 미확인"
+        }
+      ],
+      "states": [],
+      "entryObserved": "영상 시작 시 이미 미션 모달 표시; 진입 버튼 미확인",
+      "returnObserved": "02.5초 챕터 완료 보상",
+      "notes": [
+        "부모 영지 연결은 제작 제안이며 해당 4초 영상에서 기반 화면으로 복귀하지 않음",
+        "미션 행의 수령 가능/기수령은 동일 리스트 내 상태"
+      ]
+    },
+    {
+      "id": "TSV04-02",
+      "title": "챕터 미션 완료 보상",
+      "kind": "overlay",
+      "videoId": "TSV04",
+      "proposedParentId": "TSV04-01",
+      "status": "제안(검수 대기)",
+      "reference": {
+        "timeSeconds": 4.4,
+        "timecode": "00:04.40",
+        "path": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/references/TSV04-02.jpg",
+        "extractedPath": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/tile-survival-20261118/video-b/TSV04/fine/frame_00009.jpg",
+        "width": 504,
+        "height": 894
+      },
+      "regions": [
+        {
+          "name": "블러 배경",
+          "boundsPx": [
+            0,
+            0,
+            504,
+            894
+          ],
+          "observedContent": "챕터 미션 모달 유지"
+        },
+        {
+          "name": "축하 헤더",
+          "boundsPx": [
+            44,
+            80,
+            418,
+            204
+          ],
+          "observedContent": "무지개·축하합니다!·챕터 미션 완료"
+        },
+        {
+          "name": "보상 그리드",
+          "boundsPx": [
+            29,
+            299,
+            452,
+            242
+          ],
+          "observedContent": "EXP·1분 가속·보석·목재·식량"
+        },
+        {
+          "name": "계속 안내",
+          "boundsPx": [
+            150,
+            856,
+            229,
+            28
+          ],
+          "observedContent": "화면을 터치하여 계속하세요."
+        }
+      ],
+      "visibleTexts": [
+        "축하합니다!",
+        "챕터 미션 완료를 축하드립니다! 획득 보상:",
+        "미션 완료",
+        "1K EXP x5",
+        "1분 x5",
+        "보석 x200",
+        "목재 x720",
+        "식량 x400",
+        "화면을 터치하여 계속하세요."
+      ],
+      "controls": [
+        {
+          "label": "화면 터치",
+          "targetId": null,
+          "evidence": "계속 안내는 보이나 영상 종료까지 닫은 결과는 미확인"
+        }
+      ],
+      "states": [],
+      "entryObserved": "01.5초 모두 수령 →02.5초 보상 오버레이",
+      "returnObserved": "04.48초 영상 종료; 복귀 결과 미확인",
+      "notes": [
+        "보상 수량은 대표 프레임에서 읽은 관측값",
+        "TSV03 친밀도 보상과 축하 헤더/계속 안내 재사용 가능; 몸체는 관계변경 없는 보상그리드"
+      ]
+    }
+  ],
+  "parentChildProposal": [
+    {
+      "id": "TSV",
+      "title": "타일 서바이벌",
+      "children": [
+        "TSV03-01"
+      ]
+    },
+    {
+      "id": "TSV03-01",
+      "children": [
+        "TSV03-02",
+        "TSV03-03",
+        "TSV03-04",
+        "TSV03-06",
+        "TSV03-07",
+        "TSV03-11",
+        "TSV03-13",
+        "TSV04-01"
+      ]
+    },
+    {
+      "id": "TSV03-04",
+      "children": [
+        "TSV03-05"
+      ]
+    },
+    {
+      "id": "TSV03-06",
+      "children": [
+        "TSV03-09",
+        "TSV03-10"
+      ]
+    },
+    {
+      "id": "TSV03-07",
+      "children": [
+        "TSV03-08"
+      ]
+    },
+    {
+      "id": "TSV03-11",
+      "children": [
+        "TSV03-12"
+      ]
+    },
+    {
+      "id": "TSV03-13",
+      "children": [
+        "TSV03-14"
+      ]
+    },
+    {
+      "id": "TSV03-14",
+      "children": [
+        "TSV03-15"
+      ]
+    },
+    {
+      "id": "TSV04-01",
+      "children": [
+        "TSV04-02"
+      ]
+    }
+  ],
+  "sharedComponentsProposal": [
+    "영지 HUD",
+    "뒤로 버튼",
+    "하단 탭바",
+    "아이템 보상 카드",
+    "자원 바",
+    "초상/관계 카드",
+    "축하 헤더/색종이/계속 안내",
+    "건물 가구 카드 레일",
+    "미션/조건 완료 체크",
+    "성장/전투력 증가 리본",
+    "경고 토스트"
+  ],
+  "deduplicationRulesApplied": [
+    "고스트/세이지, 레벨/전투력 변화는 영웅상세 상태로 통합",
+    "고급/일반 모집은 동일 판틀의 탭·CTA 상태로 통합",
+    "온실/민가는 건물 내부 공통 프레임의 콘텐츠 상태로 통합",
+    "미션별 문구/보상/수령 상태는 리스트 행 상태로 통합",
+    "카메라 이동·수집 비행·건설/성장 효과는 영지 상태 또는 공통 효과이며 독립판틀 제외"
+  ],
+  "unverified": [
+    "Unity 내부 계층·Canvas·Prefab·구현 방식",
+    "각 클릭의 실제 히트박스와 모든 버튼 동작",
+    "영상에 없는 스킬·보상품·모집기록·다른 스토리·미해금 상태",
+    "TSV04 모달 진입과 보상 닫기 이후 복귀 경로",
+    "영상1·2 중복 및 실제 샘플 데이터 조립 여부",
+    "게임 정식 수치·정책 승인·연동 완료"
+  ],
+  "extraction": {
+    "tool": "/Users/max/projest_max/ui-studio/_작업/codex/ux-studio/video-analysis/mgv04_05_09/extract_video",
+    "sourceRead": true,
+    "framework": "AVFoundation",
+    "sourceVideosModified": false,
+    "newPackagesInstalled": false,
+    "visualInspection": "모든 coarse/fine 연락시트와 대표 상세 프레임 실제 view_image 확인"
+  }
+}
