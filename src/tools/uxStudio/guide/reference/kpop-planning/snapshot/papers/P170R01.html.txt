@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>인물 이야기 미리보기</title>
+  <style>
+    :root{color-scheme:light;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:#383247;background:#f8f5fa;line-height:1.7}
+    *{box-sizing:border-box} body{margin:0} main{max-width:960px;margin:auto;padding:36px 20px 72px}
+    h1,h2,h3,p{margin:0} h1{font-size:clamp(1.8rem,5vw,2.5rem);line-height:1.3} h2{font-size:1.35rem} h3{font-size:1.05rem}
+    .intro{max-width:720px;margin-top:12px;color:#645b70} .notice{margin:18px 0;background:#f0e9f5;border-radius:14px;padding:14px 16px;color:#604c6b}
+    button{border:0;border-radius:12px;padding:13px 22px;background:#74528c;color:white;font:inherit;font-weight:700;cursor:pointer} button:disabled{opacity:.55;cursor:wait}
+    #status{margin:12px 0;min-height:1.7em;color:#665b70} #result[hidden],details[hidden]{display:none}
+    .section{margin-top:28px} .section>p{margin-top:6px;color:#716779} .story{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:12px;margin-top:14px}
+    .box{min-width:0;background:#fff;border:1px solid #e8e0eb;border-radius:15px;padding:18px;box-shadow:0 3px 12px #4a305809}
+    .box p{margin-top:9px;white-space:pre-wrap;overflow-wrap:anywhere} .box .label{color:#86718f;font-size:.9rem} .box .quote{border-left:3px solid #d4c0dc;padding-left:12px;color:#735879}
+    .identity{font-size:1.12rem;font-weight:700} .pending{color:#867c89} details{margin-top:22px;color:#6f6675} summary{cursor:pointer} ul{padding-left:1.25em;overflow-wrap:anywhere}
+  </style>
+</head>
+<body>
+<main>
+  <h1>인물 이야기 미리보기</h1>
+  <p class="intro">새 인물을 만들고, 배경 조합과 그 이야기의 시작부터 마지막까지 읽어 보세요.</p>
+  <p class="notice">이 화면은 이야기 미리보기예요. 실제 인물을 영입하거나 저장하지 않으며, 성장이나 이야기 공개 단계도 바꾸지 않아요.</p>
+  <button id="create" type="button" disabled>새 인물 만들기</button>
+  <p id="status" role="status" aria-live="polite">이야기 자료를 불러오고 있어요.</p>
+  <div id="result" hidden>
+    <section class="section"><p id="identity" class="identity"></p><p id="background-combination"></p></section>
+    <section class="section"><h2>성장하면서 펼쳐질 이야기</h2><p>아직 열리지 않은 이야기도 미리 함께 보여 드려요.</p><div id="chapters" class="story"></div></section>
+    <section class="section"><h2>마지막 이야기</h2><div id="ending" class="story"></div></section>
+  </div>
+  <details id="details" hidden><summary>자료 확인이 필요한 부분</summary><ul id="issues"></ul></details>
+</main>
+<script type="module" src="./member-story-preview.mjs"></script>
+</body>
+</html>

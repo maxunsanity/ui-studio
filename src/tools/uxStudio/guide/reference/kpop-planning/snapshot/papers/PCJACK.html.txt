@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>잭팟 | K-POP MONSTERS</title>
+<style>
+:root{--bg:#090d18;--panel:#151d30;--line:#34425d;--ink:#f7f8ff;--muted:#c1cbe0;--soft:#95a6c3;--pink:#ff85bf;--cyan:#68e5e9;--gold:#ffd77c}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Inter,Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}button{font:inherit}body{display:grid;place-content:center;gap:12px;padding:14px}.deck,.controls{width:min(96vw,calc((100vh - 84px)*16/9))}.slide{display:none;width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;border:1px solid #43516c;border-radius:16px;background:radial-gradient(circle at 86% 7%,#283659 0,transparent 33%),linear-gradient(135deg,#121b2e,#090e1b 75%);container-type:inline-size}.slide.active{display:flex;flex-direction:column;padding:3.1cqw 3.7cqw 2.4cqw}.slide::before{content:"";position:absolute;inset:0 auto 0 0;width:.56cqw;background:linear-gradient(var(--gold),var(--cyan))}h1,h2,h3,p{margin:0}h1,h2{font-size:3.15cqw;letter-spacing:-.05em;line-height:1.13;margin:1cqw 0 .35cqw}h1{font-size:3.45cqw}.meta{display:flex;gap:.8cqw;align-items:center;color:var(--gold);font-weight:900;font-size:.95cqw;letter-spacing:.1em}.meta .tag{margin-left:auto;letter-spacing:0;color:#ffe7b0;border:1px solid #8a7340;border-radius:100px;padding:.35cqw .8cqw;font-size:.84cqw}.lead{font-size:1.28cqw;line-height:1.42;color:var(--muted);max-width:90cqw;font-weight:650}.body{display:grid;grid-template-columns:1.15fr .85fr;gap:1.15cqw;min-height:0;flex:1;margin-top:1.25cqw}.panel{min-height:0;border:1px solid var(--line);border-radius:1cqw;background:rgba(20,29,48,.93);padding:1.2cqw 1.35cqw;display:flex;flex-direction:column}.panel h3{font-size:1.05cqw;letter-spacing:.06em;color:var(--cyan);margin-bottom:.8cqw}.point{display:flex;gap:.75cqw;padding:.62cqw 0;border-bottom:1px solid #35425c;align-items:flex-start}.point:last-child{border-bottom:0}.point em{font-style:normal;color:var(--gold);font-weight:900;font-size:1.12cqw;min-width:1.4cqw}.point div{font-size:1.08cqw;line-height:1.34;color:var(--muted)}.point b{display:block;color:var(--ink);margin-bottom:.12cqw}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:.7cqw;flex:1;margin-top:1.2cqw;min-height:0}.flow .card{border:1px solid #52617b;border-radius:.85cqw;background:#1b2840;padding:.9cqw;display:flex;flex-direction:column}.flow .card b{font-size:1.35cqw;margin:.2cqw 0 .35cqw}.flow .card span{font-size:1cqw;line-height:1.32;color:var(--muted)}.num{font-size:.8cqw;color:var(--gold);font-weight:900;letter-spacing:.12em}.footer{border-top:1px solid #35415c;margin-top:.9cqw;padding-top:.55cqw;display:flex;align-items:center;gap:1cqw;font-size:.88cqw;color:var(--soft);font-weight:700}.footer a{color:#ffe7b0;text-decoration:none;border-bottom:1px solid #8a7340}.footer .page{margin-left:auto;white-space:nowrap}.callout{margin-top:auto;border:1px solid #8a7340;background:#3a3018;border-radius:.75cqw;padding:.75cqw .95cqw;color:#ffe7b0;font-size:1.05cqw;font-weight:800;line-height:1.35}.wait{color:#ffd77c;font-weight:900}.table{width:100%;border-collapse:collapse;font-size:1.02cqw}.table th,.table td{text-align:left;padding:.55cqw .4cqw;border-bottom:1px solid #35425c;vertical-align:top;line-height:1.3}.table th{color:var(--cyan);font-size:.9cqw;letter-spacing:.04em}.table td:first-child{color:var(--ink);font-weight:800;width:28%}.controls{display:flex;align-items:center;gap:8px}.controls button{border:1px solid #485875;background:#1b2940;color:var(--ink);border-radius:99px;padding:7px 16px;font-size:13px;font-weight:800;cursor:pointer}.controls .count{font-size:13px;color:var(--muted);min-width:68px;text-align:center}.controls .bar{flex:1;height:4px;border-radius:99px;background:#34425a;overflow:hidden}.controls .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--cyan));width:25%}.toc{position:fixed;inset:0;background:#080c17f5;display:none;z-index:5;padding:7vh 10vw}.toc.open{display:block}.toc h3{font-size:24px;margin:0 0 18px}.toc button{display:block;width:100%;text-align:left;margin:8px 0;border:1px solid #4b5b75;background:#1a2840;color:#fff;border-radius:10px;padding:14px;cursor:pointer}
+@media(max-width:800px){body{display:block;padding:8px}.deck,.controls{width:100%}}@media print{body{display:block;padding:0;background:#fff}.deck{width:100%}.slide{display:flex!important;border:0;border-radius:0;page-break-after:always}.controls,.toc{display:none!important}}
+.rl-body{display:grid;grid-template-columns:.62fr 1fr .78fr;gap:1cqw;min-height:0;flex:1;margin-top:1.2cqw}
+.rl-body .img img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.rl-body .img .cap{position:absolute;left:.7cqw;right:.7cqw;bottom:.7cqw;background:#0b1220e6;border:1px solid #4b5b75;border-radius:.5cqw;padding:.4cqw .6cqw;font-size:.86cqw;font-weight:800;line-height:1.3}
+.rl-list{display:flex;flex-direction:column;gap:.55cqw;min-height:0}
+.rl-head{display:flex;align-items:center;gap:.7cqw;border:1px solid #6a5a99;border-radius:.8cqw;background:#251f3d;padding:.6cqw .9cqw;font-size:1.1cqw;font-weight:900}
+.rl-head .wheel{font-size:2cqw}
+.rl-head small{display:block;font-size:.84cqw;color:var(--muted);font-weight:650}
+.rl{flex:1;display:grid;grid-template-columns:5.4cqw 1fr;gap:.8cqw;align-items:center;border:1px solid #52617b;border-radius:.8cqw;background:#1b2840;padding:.6cqw .9cqw}
+.rl .tier{text-align:center;font-weight:900;border-radius:.6cqw;padding:.5cqw 0;font-size:1.3cqw}
+.rl.big .tier{background:#ff7ab8;color:#2a0a1a}.rl.mid .tier{background:#68e5e9;color:#08262a}.rl.low .tier{background:#4a556d;color:#e6e9f2}
+.rl b{font-size:1.12cqw}.rl p{font-size:.92cqw;color:var(--muted);line-height:1.3;margin-top:.15cqw}
+.rl small{display:block;font-size:.8cqw;color:var(--gold);font-weight:800;margin-top:.2cqw}
+.rl.big{border-color:#c46d9b}
+.rl-jack{border:2px solid #e0b24a;border-radius:1cqw;background:linear-gradient(160deg,#3a2c12,#1d1a2c);padding:1cqw 1.1cqw;display:flex;flex-direction:column;gap:.5cqw}
+.rl-jack .ic{font-size:3cqw}
+.rl-jack b{font-size:1.45cqw;color:#ffe3a0}
+.rl-jack p{font-size:.98cqw;line-height:1.38;color:#f2e6c8}
+.rl-jack .path{font-size:.95cqw;font-weight:900;color:#fff;background:#4a3a14;border-radius:.6cqw;padding:.5cqw .7cqw;line-height:1.45}
+.rl-jack small{font-size:.82cqw;color:#ffd77c;font-weight:800;line-height:1.35}
+.dec-ok{border-color:#3f8f6a!important;background:linear-gradient(160deg,#143426,#121c2e)!important}
+.dec-ok h3{color:#9ff0c4!important}.dec-ok .point em{color:#9ff0c4}
+.dec-wait{border-color:#a6815e!important;background:linear-gradient(160deg,#3a2e16,#121c2e)!important}
+.dec-wait h3{color:#ffd77c!important}.dec-wait .point em{color:#ffd77c}
+.dec-ok .point,.dec-wait .point{flex:1;align-items:center;font-size:1.02cqw}
+.dec-ok .point b,.dec-wait .point b{font-size:1.2cqw;margin-bottom:.2cqw}
+.dec-ok .point em,.dec-wait .point em{font-size:1.4cqw}
+.dec-ok h3,.dec-wait h3{font-size:1.25cqw!important}
+.point .no{display:inline-block;font-size:.78cqw;font-weight:900;color:#2a1f05;background:#ffd77c;border-radius:99px;padding:0 .5cqw;margin-left:.4cqw;vertical-align:middle}
+</style>
+<style>.img{flex:1;min-height:0;border:1px solid var(--line);border-radius:1cqw;overflow:hidden;background:#0d1424;position:relative}.img img{width:100%;height:100%;object-fit:cover;display:block}.img iframe{width:100%;height:100%;border:0;display:block}.img .cap{position:absolute;left:.6cqw;bottom:.6cqw;background:#000a;color:#ffe7b0;font-size:.85cqw;padding:.25cqw .6cqw;border-radius:.4cqw}</style><style>.flow .card{display:flex;flex-direction:column}.flow .card .img{min-height:8cqw}.sub{display:block;margin-top:.5cqw;font-size:.85cqw;color:#c9d3ea;line-height:1.4}</style><link href="../proposal-layout.css?v=20261003-2" rel="stylesheet"/><link href="../proposal-support-layout.css?v=20261003-2" rel="stylesheet"/><style id="deck-copy-css">.deck-copy{margin:.55em 0 0;font-size:clamp(15px,1.45vw,21px);font-weight:700;line-height:1.45;color:inherit;opacity:.92;letter-spacing:-.01em;max-width:62em}.deck-copy-sub{margin:.35em 0 0;font-size:clamp(13px,1.1vw,16px);font-weight:600;line-height:1.45;color:inherit;opacity:.78}</style></head>
+<style>.flow{grid-template-columns:1fr .13fr 1fr;grid-template-rows:minmax(0,1fr);gap:1cqw}.flow .card{padding:1.2cqw;min-height:0;overflow:hidden}.flow .card b{font-size:1.55cqw}.flow .card span{font-size:1.12cqw}.flow .card .img{flex:1 1 0;height:0;min-height:0;margin-top:.7cqw}.flow .flow-arrow{align-self:center;text-align:center;color:var(--gold);font-size:3cqw;font-weight:900}.sub{font-size:.95cqw}.compare-controls{display:flex;gap:.5cqw;margin-top:.5cqw}.compare-controls button{border:1px solid #7c8da5;border-radius:.55cqw;background:#25354d;color:#fff;padding:.55cqw .7cqw;font-size:1cqw;font-weight:900;cursor:pointer}.compare-controls button[aria-pressed=true]{background:#66502b;border-color:var(--gold)}.sim-preview img{object-fit:contain;background:#0d1424}.sim-embed{position:relative;overflow:hidden;background:#07070d;border-radius:1cqw;min-height:0}.sim-embed iframe{position:absolute;left:0;top:0;width:920px;height:700px;border:0;transform-origin:0 0}</style>
+<body data-proposal-kind="jackpot" data-proposal-layout="20261003">
+<main aria-label="잭팟 제안" class="deck">
+<section class="slide active" data-title="드문 팬 대박">
+<div class="meta">K-POP MONSTERS <span>게임 경제 · 잭팟</span><span class="tag">제안(검수 대기)</span></div>
+<h1>랩 스튜디오에 도착하면 팬들이 모입니다 — 드물게, 그 무대가 잭팟이 됩니다<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h1><aside class="document-reading" aria-label="문서 읽기 안내" style="font-size:1.05cqw;line-height:1.4"><p><b>이 문서는</b> 잭팟 통과 도착 대박·팬 집결 연출을 구분하는 제안서입니다.</p><p><b>보는 법</b> 현재 연결은 P210을 먼저 보고, 3장의 팬 집결 화면과 하단 이전 질문은 과거 컨셉으로 읽습니다.</p><p><b>지금 상태</b> 공통 경제의 통 누적·지급과 독립 문서 시안은 있습니다. 실제 UI·피드·운영 전체 검수와 최종 수치는 남아 있습니다.</p></aside><p class="deck-copy">잭팟, 랩 스튜디오·예능 방송국에서 시즌 최고의 수익이 터질 수 있습니다</p>
+<p class="lead">현재 공통 경제는 콘서트장·방송국의 대박 뒤 통 지급을 별도로 추첨합니다. 팬 집결은 연출이며 현재 팬 보정 계수는 대기입니다. 아래 팬×배수 화면은 과거 설명 시연으로 구분합니다.</p>
+<div style="margin-top:.5cqw;font-size:1cqw;color:#ffe7b0;font-weight:800">랩 스튜디오·방송출연 위치와 낮은 확률은 현중 10/01 16:35·16:37 방향. 10/04 현중: 잭팟 = 팬이 많을수록 커지는 큰 수익(팬 증가 아님). 현재 통 지급·후속 룰렛의 연결과 최종 발란스·이전 질문은 P210에서 구분합니다.</div>
+<div class="flow">
+<div class="card"><span class="num">평소 · 기본 결과</span><b>도착한 칸의 활동 수익</b><span>랩 스튜디오·방송출연 칸에서도 평소에는 팬 규모에 따른 도착한 칸의 수익에 주사위 배수가 붙습니다.</span><div class="img"><img alt="랩 스튜디오 일반 도착한 칸의 수익 예시" src="/docs/planning/proposal-concept/img/jackpot-sim-step2.jpg"/><span class="cap">랩 스튜디오 화면 예시</span></div><small class="sub">건물마다 팬이 포진한 모습 · 수치는 시안 값</small></div>
+<div aria-hidden="true" class="flow-arrow">✦</div>
+<div class="card"><span class="num">드물게 · 특별한 결과</span><b>팬이 많을수록 커지는 잭팟</b><span>랩 스튜디오나 방송출연 칸에서 드물게 큰 수익이 터집니다. 도시 팬이 랩 스튜디오로 모이는 것은 연출이고, 잭팟으로 팬이 늘지는 않습니다.</span><div class="img"><img alt="랩 스튜디오로 팬이 몰리는 잭팟 연출 예시" src="/docs/planning/proposal-concept/img/jackpot-sim-step3.jpg"/><span class="cap">팬 집결 연출 · 예시</span></div><small class="sub">수익 규모 · 확률은 결정 대기</small></div>
+</div>
+<div class="callout">평소에는 칸 수익, 잭팟 때에는 팬 규모에 따라 커지는 큰 수익. 금액과 확률은 결정 대기입니다.</div>
+<div class="footer"><span>근거: 현중 10/01 11:19·15:03·16:35·16:37·16:46. 10/04: 잭팟은 팬이 많을수록 큰 수익(팬 증가 아님).</span><a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=PCJACKMD&amp;content=whole" target="_top">상세 MD ↗</a><a href="/docs/planning/proposal-concept/jackpot-sim.html" target="_top">팬 이동 시뮬 ↗</a><a href="/docs/planning/proposal-concept/gauge.html" target="_top">팬덤 ↗</a><a href="/docs/planning/proposal-concept/dice.html" target="_top">주사위 ↗</a><span class="page">01 / 04</span></div>
+</section>
+<section class="slide" data-title="도착하면 도는 룰렛">
+<div class="meta">02 / 보드 도착 판정 <span class="tag">기존 기획 031 정리 · 검수 대기</span></div>
+<h2>방송·공연 칸에 도착하면 룰렛이 돌아 결과를 정합니다<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p class="lead">예능 방송국 27·28·30과 콘서트장 32·33·35는 현재 잭팟 표에 연결됩니다. 경제 대박 뒤 통 추첨과 올킬 후속 룰렛은 별도입니다. 아래 그림은 기존 판정 연출이며 일반 건물 표시 필러의 대상과 같은 범위로 합치지 않습니다.</p>
+<div class="rl-body">
+<div class="img"><img alt="방송 칸 도착 화면 — 가운데 판정 배지(중박)" src="/docs/planning/proposal-concept/img/jackpot_filler_arrival.jpg"/><span class="cap">도착하면 판정 배지가 뜬다<br/><span style="color:var(--soft);font-weight:650">기존 시안(03 칸 도착한 칸 · 유르넷) · 글자·숫자는 예시</span></span></div>
+<div class="rl-list">
+<div class="rl-head"><span class="wheel">🎡</span><div>도착 룰렛<small>판정 칸 6곳에서만 돕니다 · 칸 22·서사 칸에는 없음(R-02-3)</small></div></div>
+<div class="rl big"><span class="tier">대박</span><div><b>그 무대에서 한 급 위에 선다</b><p>기존 무대 연출의 대박 표현입니다. 실제 팬 변화는 별도 성장·팬 계산과 구분합니다.</p><small>연출 · 플래시 강 · 큰 배너</small></div></div>
+<div class="rl mid"><span class="tier">중박</span><div><b>같은 급에서 잘합니다</b><p>보너스가 붙고 수익은 중간.</p><small>연출 · 플래시 중 · 배너 중</small></div></div>
+<div class="rl low"><span class="tier">운망</span><div><b>제자리 — 떨어지지는 않습니다</b><p>수익이 작게 끝납니다. 세계가 켜지다 꺼지는 연출.</p><small>연출 · 플래시 약 · 배너 약</small></div></div>
+</div>
+<div class="rl-jack"><span class="ic">✨</span><b>잭팟 = 드문 대박</b><p>대박 중에서도 드물게 터지는 큰 수익입니다. 팬이 많을수록 커지고, <b style="font-size:inherit">도시 곳곳의 팬이 무대로 몰려드는 장면</b>으로 보여 줍니다.</p>
+<div class="path">랩 스튜디오 · 방송 칸 도착 → 팬이 모입니다 → 도착 룰렛 → 대박 → 드물게 잭팟(큰 수익)</div><div class="img" style="flex:1;min-height:0"><img alt="랩 스튜디오로 팬이 몰리는 잭팟 연출 예시" src="/docs/planning/proposal-concept/img/jackpot-sim-step3.jpg" style="width:100%;height:100%;object-fit:cover"/></div>
+<small>확률은 낮게(현중 16:35 「대박이 나면 잿팟 · 필러 대박」). 대박이 잭팟을 여는지 별도 추첨인지(058 #20) · 확률 · 금액은 결정 대기. 대박은 그날의 사건 — 건물은 업그레이드로만 자랍니다(10/01).</small></div>
+</div>
+<div class="footer"><span>근거: 031 보드 판정(초기 기획서 툴) · 현중 9/29 15:23 「보드 도착 시 중박·대박·운망 회전 = 초기 기획서 툴」 · 필러 = 모노 등급 필러 · 확률·금액 미잠금</span><a href="/docs/planning/proposal-concept/economy.html#slide-3" target="_top">경제 3장 ↗</a><a href="/docs/planning/board1-hit-outcomes-table.html" target="_top">판정 표 031 ↗</a><span class="page">02 / 04</span></div>
+</section>
+<section class="slide" data-title="이전 팬 집결 컨셉 시연">
+<div class="meta">03 / 그림 <span class="tag">화면용 예시</span></div>
+<h2>같은 랩 스튜디오, 팬이 모이는 장면을 비교합니다<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p class="lead">아래는 이전 팬 집결 컨셉 시연입니다. 팬×배수·버튼 선택으로 장면을 비교하며 현재 통 계산·추첨·지갑의 실행 증거가 아닙니다. 현재 P210의 독립 통 시안도 실제 운영과 구분합니다.</p>
+<div class="body" style="grid-template-columns:1.62fr .38fr">
+<div class="img sim-embed" id="simBox"><iframe id="simFrame" loading="lazy" src="/docs/planning/proposal-concept/jackpot-sim.html" title="잭팟 팬 이동 시뮬"></iframe></div>
+<div class="panel"><h3>직접 눌러 보기<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h3>
+<div class="point"><em>1</em><div><b>평소 도착</b>그 칸의 팬 규모에 따른 활동 수익 × 배수.</div></div>
+<div class="point"><em>2</em><div><b>드문 대박</b>도시의 팬이 무대로 모이는 장면과 함께, 팬이 많을수록 커지는 큰 수익을 받습니다. 금액은 결정 대기.</div></div>
+<div class="point"><em>3</em><div><b>시뮬</b>왼쪽 화면 아래 버튼으로 한 단계씩 진행합니다. 큰 화면은 아래 링크로 열 수 있어요.</div></div>
+</div></div>
+<div class="footer"><span>타이쿤 도시 시안 활용 · 팬 수·확률·보상값은 설명용입니다.</span><a href="/docs/planning/proposal-concept/jackpot-sim.html" target="_top">팬 이동 시뮬 크게 ↗</a><span class="page">03 / 04</span></div>
+</section>
+<section class="slide" data-title="현재 연결과 남은 검수" style="overflow:auto"><div class="meta">04 / 현재 연결 · 원문 비교 <span class="tag">수치·승인 새 판정 없음</span></div><h2>현재 연결과 남은 검수</h2><div class="body" style="grid-template-columns:1fr"><div class="panel"><p>통 누적은 배수 없이, 통 지급은 표 조건의 배수와 함께 계산합니다. 통 추첨 chance와 올킬 후속 룰렛은 별도입니다.</p><p>독립 시안은 지급 뒤 0, 공통 경제는 시작 통 금액으로 복원합니다. 팬 보정 항은 현재 대기이며 팬 집결 연출과 구분합니다.</p><p>최종 수치·피드·운영 저장·실제 UI는 미검수입니다. 이전 미정 질문과 현행 연결을 같은 승인 상태로 합치지 않습니다.</p><details><summary>이전 확정 표기·결정 대기 질문 원문</summary>
+<div class="meta">04 / 확정 · 결정 대기 <span class="tag">현중 결정만 확정</span></div>
+<h2>어디서 · 무엇을 받는지는 정했고, 금액과 확률은 아직 정하지 않았습니다<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p class="lead">현중이 직접 정한 것만 <b style="color:#9ff0c4">확정</b>, 정하지 않았거나 해석인 것은 <b style="color:#ffd77c">결정 대기</b>로 나눴습니다. 결정 대기는 058 목록 번호를 함께 적습니다.</p>
+<div class="body" style="grid-template-columns:1fr 1fr">
+<div class="panel dec-ok"><h3>✓ 확정 · 현중 결정<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h3>
+<div class="point"><em>✓</em><div><b>랩 스튜디오에 도착하면 팬들이 모입니다</b>잭팟은 랩 스튜디오·예능 방송국 보드에서 이루어집니다 (10/02) （현중 10/04 20:43 결정）</div></div><div class="point"><em>✓</em><div><b>잭팟 장소 = 랩 스튜디오 + 방송 칸</b>예능 방송국 27·28·30도 잭팟 장소 (10/01 16:37 · 16:46 · 10/02 재확인)</div></div>
+<div class="point"><em>✓</em><div><b>잭팟 = 도착 판정의 드문 대박</b>「대박이 나면 잿팟 · 필러 대박 · 확률을 줄여 놓으면」 (10/01 16:35)</div></div>
+<div class="point"><em>✓</em><div><b>평소 도착한 칸 = 칸 수익 × 주사위 배수 · 랩 스튜디오 최대</b>잭팟이 아니어도 받는 기본 수익 (9/30 14:48 · 10/01 11:19)</div></div>
+<div class="point"><em>✓</em><div><b>잭팟 = 팬이 많을수록 큰 수익</b>팬이 랩 스튜디오로 모이는 것은 연출이고, 잭팟으로 팬이 늘지는 않습니다 (10/04)</div></div>
+</div>
+<div class="panel dec-wait"><h3>? 결정 대기<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h3>
+<div class="point"><em>?</em><div><b>잭팟 금액 계산식</b>팬이 많을수록 커지는 것은 확정(10/04) · 계산식과 상한은 결정 대기</div></div>
+<div class="point"><em>?</em><div><b>확률 <span class="no">058 #18</span></b>「새 팬 증가」 해석은 10/04에 폐기 · 건물 영향</div></div>
+<div class="point"><em>?</em><div><b>판정 대박과 잭팟이 같은 것인지 <span class="no">058 #20</span></b>대박이 잭팟을 여는지, 별도로 추첨하는지</div></div>
+<div class="point"><em>?</em><div><b>팬이 어디까지 모이나 <span class="no">058 #21</span></b>주변 여러 건물(12:46) · 범위 미정</div></div>
+<div class="point"><em>?</em><div><b>배수 단계 <span class="no">058 #19</span></b>배수가 잭팟에도 붙는지</div></div>
+</div></div>
+<div class="footer"><span>확정 칸에는 현중 원문이 있는 것만 넣었습니다. 해석 · 제안은 모두 결정 대기.</span><a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=058&amp;content=whole" target="_top">058 결정 대기 목록 ↗</a><a href="/docs/planning/proposal-concept/dice.html" target="_top">주사위 ↗</a><span class="page">04 / 04</span></div>
+</details><p><a href="./jackpot.md">짝 MD에서 현재 경계와 이전 원문 보기</a></p></div></div></section>
+<details id="source-reading-history"><summary>정정 전 원문과 읽기 검수 기록</summary><p><a href="./jackpot.log.md">짝 로그에서 직전 MD·HTML 전체 원문 보기</a> · 문서·소스 정적 대조이며 새 실행·화면 검수·수치 결정이 아닙니다.</p></details>
+</main>
+<nav aria-label="슬라이드 이동" class="controls"><button id="tocBtn" type="button">목차</button><button id="prev" type="button">← 이전</button><span class="count" id="count">01 / 04</span><button id="next" type="button">다음 →</button><span class="bar"><i id="progress"></i></span></nav>
+<div aria-label="목차" class="toc" id="toc" role="dialog"><h3>잭팟<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h3><div id="tocItems"></div></div>
+<script>
+(()=>{const slides=[...document.querySelectorAll('.slide')],count=document.getElementById('count'),progress=document.getElementById('progress'),toc=document.getElementById('toc');let index=0;function show(n){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===index));count.textContent=String(index+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');progress.style.width=(100*(index+1)/slides.length)+'%';toc.classList.remove('open');location.hash='slide-'+(index+1)}slides.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.textContent=String(i+1).padStart(2,'0')+' · '+s.dataset.title;b.onclick=()=>show(i);document.getElementById('tocItems').appendChild(b)});document.getElementById('prev').onclick=()=>show(index-1);document.getElementById('next').onclick=()=>show(index+1);document.getElementById('tocBtn').onclick=()=>toc.classList.toggle('open');toc.onclick=e=>{if(e.target===toc)toc.classList.remove('open')};document.addEventListener('keydown',e=>{if(e.target.matches('input,button')&&e.key===' ')return;if(e.key==='ArrowRight'||e.key==='PageDown'){show(index+1);e.preventDefault()}if(e.key==='ArrowLeft'||e.key==='PageUp'){show(index-1);e.preventDefault()}if(e.key==='Escape')toc.classList.remove('open')});const m=location.hash.match(/slide-(\d+)/);show(m?Number(m[1])-1:0);window.addEventListener('hashchange',()=>{const h=location.hash.match(/slide-(\d+)/);if(h)show(Number(h[1])-1)})})();
+</script>
+<script>
+(()=>{const box=document.getElementById('simBox'),fr=document.getElementById('simFrame');if(!box||!fr)return;const W=920,H=700;fr.addEventListener('load',()=>{try{const d=fr.contentDocument,st=d.createElement('style');st.textContent='.side{display:none}body{padding:10px;min-height:0}';d.head.appendChild(st)}catch(e){}});function fit(){const w=box.clientWidth,h=box.clientHeight;if(!w||!h)return;const k=Math.min(w/W,h/H);fr.style.transform='scale('+k+')';fr.style.left=((w-W*k)/2)+'px';fr.style.top=((h-H*k)/2)+'px'}new ResizeObserver(fit).observe(box);addEventListener('resize',fit);fit()})();
+</script>
+<script src="../proposal-navigation.js?v=20261003-2"></script><section class="removed-2026-10-05" style="max-width:960px;margin:2em auto;padding:1em 1.5em;color:#9aa4b8;font-size:13px;line-height:1.6"><h2 style="font-size:15px">뺀 것 (2026-10-05 이올카 원본대조)<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2><ul><li>확정 패널 첫 줄: 「잭팟은 랩 스튜디오 보드에서 이루어집니다 (10/02)」 — 옛 안 → 10/04 20:43 (잭팟 칸은 랩 스튜디오·예능 방송국 둘 다)</li></ul></section>
+</body>
+</html>

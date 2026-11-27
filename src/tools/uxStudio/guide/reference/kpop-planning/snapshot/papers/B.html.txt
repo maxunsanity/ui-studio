@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>케이팝 몬스터즈 · 제안서 B — 엔터 사장 시점</title>
+<style>
+:root{
+  --bg:#07070d; --ink:#f6f4ff; --dim:#a29ec0; --faint:#6a6688;
+  --pur:#a855f7; --pnk:#f472b6; --blu:#60a5fa;
+  --line:rgba(255,255,255,.12); --panel:rgba(255,255,255,.045);
+}
+*{box-sizing:border-box}
+s{text-decoration:none}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased}
+body{display:flex;flex-direction:column;min-height:100vh;align-items:center;justify-content:center;gap:10px;padding:14px}
+
+.stage{width:min(97vw, calc((100vh - 96px) * 16 / 9));flex:0 0 auto}
+.slide{position:relative;aspect-ratio:16/9;width:100%;container-type:inline-size;
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0b0b14;display:none}
+.slide.on{display:block}
+.pad{position:absolute;inset:0;padding:6.2cqw 7cqw 4.6cqw;display:flex;flex-direction:column}
+
+/* 카피 */
+.kick{font-size:1.25cqw;font-weight:900;letter-spacing:.24em;color:var(--pur);margin:0}
+.kick s{color:var(--faint);letter-spacing:.08em;margin-left:.8cqw}
+h2{font-size:4.4cqw;font-weight:900;line-height:1.15;margin:1.5cqw 0 0;letter-spacing:-.035em}
+h2.sm{font-size:3.6cqw}
+h2 em{font-style:normal;color:var(--pnk)}
+.sub{font-size:1.8cqw;line-height:1.55;color:var(--dim);margin:1.7cqw 0 0;max-width:74cqw;font-weight:600}
+.sub b{color:var(--ink);font-weight:800}
+.num{position:absolute;right:5.5cqw;top:4.8cqw;font-size:7cqw;font-weight:900;
+  color:rgba(168,85,247,.13);letter-spacing:-.05em;line-height:1}
+
+/* 바닥 잔글씨 — 근거는 남기되 카피를 안 가린다 */
+.note{margin-top:auto;padding-top:.62cqw;border-top:1px solid var(--line);
+  font-size:1.02cqw;line-height:1.45;color:var(--faint);font-weight:600;
+  /* 바닥 줄(.foot)과 겹치지 않게 높이를 묶는다 */
+  flex:0 0 auto;overflow:hidden}
+.note b{color:var(--dim)}
+.note em{font-style:normal;color:var(--pnk);font-weight:800}
+
+/* 큰 칩 */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw;margin-top:2.6cqw}
+.trio.four{grid-template-columns:repeat(4,1fr);gap:1.3cqw}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:1.1cqw;
+  padding:2cqw 1.9cqw;display:flex;flex-direction:column;gap:.85cqw}
+.tile .cap{font-size:1.08cqw;font-weight:900;letter-spacing:.16em;color:var(--faint)}
+.tile .big{font-size:2.05cqw;font-weight:900;line-height:1.28;letter-spacing:-.02em}
+.tile .lil{font-size:1.24cqw;line-height:1.55;color:var(--dim);font-weight:600}
+.tile.hot{background:linear-gradient(160deg,rgba(168,85,247,.24),rgba(244,114,182,.1));border-color:rgba(168,85,247,.5)}
+.tile.hot .cap{color:#e9d5ff}
+.tile.ent{background:linear-gradient(160deg,rgba(96,165,250,.17),rgba(59,130,246,.04));border-color:rgba(96,165,250,.4)}
+.tile.ent .cap{color:#93c5fd}
+.tile.fan{background:linear-gradient(160deg,rgba(244,114,182,.18),rgba(168,85,247,.05));border-color:rgba(244,114,182,.45)}
+.tile.fan .cap{color:#f9a8d4}
+
+/* 번호 줄 */
+.list{display:flex;flex-direction:column;gap:2.4cqw;margin:auto 0;padding:2.4cqw 0}
+.li{display:flex;gap:2cqw;align-items:baseline}
+.li .n{font-size:2.5cqw;font-weight:900;color:rgba(168,85,247,.55);line-height:1;min-width:3.2cqw;letter-spacing:-.04em}
+.li .h{font-size:2.3cqw;font-weight:900;line-height:1.26;letter-spacing:-.02em}
+.li .p{font-size:1.3cqw;color:var(--dim);line-height:1.6;margin-top:.55cqw;font-weight:600}
+/* 항목이 넷 이상이면 한 단 줄인다 */
+.list.snug{gap:.85cqw;padding:.9cqw 0;margin:0}
+.list.snug .h{font-size:1.85cqw}
+.list.snug .p{font-size:1.14cqw;line-height:1.5;margin-top:.3cqw}
+.list.snug .n{font-size:1.9cqw}
+.li .p i{font-style:normal;color:var(--faint);font-weight:900;letter-spacing:.06em}
+.li .p em{font-style:normal;color:var(--pnk);font-weight:800}
+
+/* 사다리 */
+.ladder{display:flex;align-items:center;gap:.8cqw;flex-wrap:wrap;margin-top:2.2cqw}
+.ladder span{font-size:1.45cqw;font-weight:800;padding:.8cqw 1.4cqw;border-radius:99px;
+  background:rgba(255,255,255,.055);border:1px solid var(--line);color:var(--dim)}
+.ladder span.end{background:linear-gradient(90deg,var(--pur),var(--pnk));color:#fff;border-color:transparent}
+.ladder i{font-style:normal;color:var(--faint);font-size:1.25cqw}
+
+/* 갈래 둘 */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw;margin-top:2.2cqw}
+.arm{border-radius:1.1cqw;padding:1.9cqw;display:flex;flex-direction:column;gap:.65cqw;
+  background:var(--panel);border:1px solid var(--line)}
+.arm.new{background:linear-gradient(160deg,rgba(244,114,182,.17),rgba(168,85,247,.05));border-color:rgba(244,114,182,.45)}
+.arm .tag{font-size:1.06cqw;font-weight:900;letter-spacing:.1em;color:var(--pur)}
+.arm.new .tag{color:#f9a8d4}
+.arm .ttl{font-size:1.9cqw;font-weight:900;line-height:1.28}
+.arm .txt{font-size:1.24cqw;color:var(--dim);line-height:1.55;font-weight:600}
+.arm .to{font-size:1.08cqw;color:var(--faint);font-weight:900;margin-top:.15cqw}
+.arm .res{font-size:1.6cqw;font-weight:900;color:var(--pnk);line-height:1.3}
+
+/* 강조 띠 */
+.band{margin-top:1.3cqw;border:1px dashed rgba(168,85,247,.5);border-radius:1cqw;
+  padding:.9cqw 1.6cqw;font-size:1.36cqw;font-weight:800;line-height:1.45;text-align:center}
+.band em{font-style:normal;color:var(--pnk)}
+
+/* 표 (부록) */
+table.dense{font-size:1.16cqw}
+table.dense th,table.dense td{padding:.5cqw .8cqw}
+table{width:100%;border-collapse:collapse;font-size:1.06cqw;margin-top:1.2cqw}
+th,td{padding:.42cqw .8cqw;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+th{font-size:.96cqw;font-weight:900;letter-spacing:.1em;color:var(--faint);border-bottom:1px solid rgba(168,85,247,.45)}
+td:first-child{font-weight:800;color:var(--dim)}
+td.us{color:var(--pnk);font-weight:800}
+tr.mark td{background:rgba(168,85,247,.09)}
+tr.grp td{background:rgba(168,85,247,.16);color:#e9d5ff;font-weight:900;font-size:.94cqw;letter-spacing:.06em;border-bottom:0}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:0 2.6cqw;margin-top:1.3cqw}
+.twocol table{margin-top:0}
+
+/* 숫자판 */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5cqw;margin-top:2.6cqw}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:1.1cqw;padding:2cqw 1.6cqw;text-align:center}
+.stat b{display:block;font-size:3.8cqw;font-weight:900;color:var(--pnk);line-height:1;letter-spacing:-.04em}
+.stat span{display:block;font-size:1.18cqw;color:var(--dim);margin-top:.9cqw;font-weight:800}
+
+/* 표지 · 간지 */
+.cover .bgimg,.chap .bgimg{position:absolute;inset:0;background-size:cover;background-position:50% 55%}
+.cover .veil{position:absolute;inset:0;background:linear-gradient(103deg,rgba(7,7,13,.95) 36%,rgba(7,7,13,.4))}
+.chap .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,7,13,.94) 44%,rgba(7,7,13,.3))}
+.cover .pad,.chap .pad{justify-content:center}
+.cover h1{font-size:7.4cqw;font-weight:900;margin:.6cqw 0 0;letter-spacing:-.04em;line-height:1.01}
+.cover h1 em{font-style:normal;background:linear-gradient(92deg,var(--pnk),var(--pur));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .tag{font-size:2.25cqw;color:var(--ink);margin-top:2.3cqw;font-weight:900}
+.cover .tag b{color:var(--pnk)}
+.cover .tag2{font-size:1.55cqw;color:var(--dim);margin:1cqw 0 0;font-weight:600}
+.cover .why{margin-top:2.6cqw;max-width:60cqw;padding:1cqw 1.5cqw;border-left:.3cqw solid var(--pur);
+  background:rgba(168,85,247,.08);border-radius:0 .8cqw .8cqw 0;font-size:1.28cqw;line-height:1.6;color:var(--dim);font-weight:600}
+.cover .why b{color:var(--ink);font-weight:800}
+.cover .why i{font-style:normal;display:block;font-size:1.02cqw;font-weight:900;letter-spacing:.14em;color:var(--pur);margin-bottom:.3cqw}
+.cover .meta{position:absolute;left:7cqw;bottom:5.5cqw;font-size:1.22cqw;color:var(--faint);
+  display:flex;gap:1.4cqw;align-items:center;font-weight:700}
+.chap .kk{font-size:1.4cqw;font-weight:900;letter-spacing:.26em;color:var(--pnk)}
+.chap h2{font-size:5.4cqw;margin-top:1.4cqw}
+.chap .sub{font-size:1.85cqw;max-width:50cqw}
+
+/* 살아있는 일정 보드 */
+/* 살아있는 화면 — 위에 탭(제목 줄)을 두고, 화면은 그 아래에 들어간다 */
+.live{position:absolute;inset:0;background:#0b0b14;overflow:hidden;display:flex;flex-direction:column}
+.livehead{flex:0 0 auto;display:flex;align-items:baseline;justify-content:space-between;gap:1.5cqw;
+  padding:.95cqw 2.4cqw 1cqw;background:var(--bg);border-bottom:1px solid var(--line)}
+.livehead .lt{display:flex;align-items:baseline;gap:1.2cqw;min-width:0}
+.livehead .ttl{margin:0;font-size:1.78cqw;font-weight:900;letter-spacing:-.03em;line-height:1.1;color:var(--ink)}
+.livehead .ttl em{font-style:normal;color:var(--pnk)}
+.livehead .sub{margin:0;font-size:1.04cqw;color:var(--faint);font-weight:700;line-height:1.3}
+.livehead a{flex:0 0 auto;color:#fff;text-decoration:none;background:linear-gradient(90deg,var(--pur),var(--pnk));
+  font-size:1.04cqw;font-weight:900;padding:.5cqw 1.25cqw;border-radius:99px}
+.livehead a:hover{filter:brightness(1.12)}
+.livebody{position:relative;flex:1;min-height:0;overflow:hidden;background:#eef1f6}
+.live.plain .livebody{background:#07070d}
+.live .fit{position:absolute;left:0;top:0;transform-origin:0 0}
+.live iframe{border:0;display:block}
+
+/* 인게임 목업 장 — 왼쪽 설명 · 오른쪽 폰 */
+.mock{display:grid;grid-template-columns:1fr 21%;gap:3.4cqw;flex:1;min-height:0;margin-top:1.6cqw}
+.mock .txt{min-width:0;display:flex;flex-direction:column;justify-content:center}
+.mock .dev{position:relative;min-height:0;border-radius:1.6cqw;overflow:hidden;background:#07070d}
+.mock .dev iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.mock .step{display:flex;gap:1.6cqw;align-items:flex-start;margin-bottom:1.5cqw}
+.mock .step .n{flex:0 0 auto;width:4.4cqw;height:4.4cqw;border-radius:50%;
+  background:linear-gradient(160deg,var(--pur),var(--pnk));color:#fff;
+  font-size:1.9cqw;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:.3cqw}
+.mock .step .h{font-size:2.2cqw;font-weight:900;line-height:1.3;letter-spacing:-.02em}
+.mock .step .h em{font-style:normal;color:var(--pnk)}
+.mock .step .p{font-size:1.28cqw;color:var(--dim);line-height:1.55;margin-top:.35cqw;font-weight:600}
+
+.links{display:flex;gap:1.1cqw;margin-top:2.2cqw;flex-wrap:wrap}
+.links a{font-size:1.22cqw;font-weight:800;color:var(--dim);text-decoration:none;
+  border:1px solid var(--line);border-radius:99px;padding:.85cqw 1.6cqw;background:var(--panel)}
+.links a:hover{color:var(--ink);border-color:var(--pur)}
+.links a.main{background:linear-gradient(90deg,var(--pur),var(--pnk));color:#fff;border-color:transparent;
+  font-size:1.5cqw;font-weight:900;padding:1cqw 2.2cqw}
+
+.foot{position:absolute;left:7cqw;right:7cqw;bottom:1.7cqw;display:flex;justify-content:space-between;
+  font-size:1.03cqw;color:var(--faint);font-weight:700}
+.foot .src{color:rgba(255,255,255,.18)}
+
+/* 조작 */
+.bar{display:flex;align-items:center;gap:10px;padding:4px 0 14px;flex:0 0 auto}
+.bar button{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink);
+  border-radius:99px;padding:7px 15px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit}
+.bar button:hover{border-color:var(--pur)}
+.bar .count{font-size:13px;color:var(--faint);font-weight:800;min-width:56px;text-align:center;font-variant-numeric:tabular-nums}
+.dots{display:flex;gap:5px;max-width:52vw;flex-wrap:wrap;justify-content:center}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;display:block}
+.dots i.on{background:var(--pnk);transform:scale(1.35)}
+
+.toc{position:fixed;inset:0;background:rgba(5,5,10,.96);z-index:20;display:none;padding:46px 5vw;overflow:auto}
+.toc.on{display:block}
+.toc h3{font-size:16px;letter-spacing:.2em;color:var(--pur);margin:0 0 22px;font-weight:900}
+.toc .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:9px}
+.toc .grid button{text-align:left;background:var(--panel);border:1px solid var(--line);color:var(--ink);
+  border-radius:9px;padding:13px 15px;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:700;
+  display:flex;gap:11px;align-items:baseline}
+.toc .grid button:hover{border-color:var(--pur)}
+.toc .grid button s{color:var(--faint);font-weight:900;min-width:20px;font-variant-numeric:tabular-nums}
+.toc .grid button.sec{background:rgba(168,85,247,.14);border-color:rgba(168,85,247,.4)}
+
+@media print{
+  body{padding:0;background:#fff}
+  .bar,.toc{display:none}
+  .stage{width:100%}
+  .slide{display:block!important;page-break-after:always;border-radius:0;border:0;margin:0}
+}
+</style>
+</head>
+<body><section class="part current-note" id="part-board1021"><h2>10/21 보드 개편 · 「제안(검수 대기)」</h2><h3>「제안(검수 대기)」 (현중 10:09 배치 · 10:25 확정 · 09:41 안은 히스토리)</h3>
+<p>&gt; 현중 원문 10:09: 「모노폴리고는 30번이고..10번과 20번이 모서리잖아.. 우리 기분이면 31번이 감옥이고 11번과 21번은 숙소가 되어야지..1번은 사옥이고 / 감옥으로 가기 없어 / 그냥 감옥 도착이야」</p>
+<table><tr><th>칸</th><th>전</th><th>후</th><th>왜 (현중 시각)</th><th>막는 문제</th></tr><tr><td>1</td><td>출발</td><td><b>사옥</b>(출발). 지나면 돈 · 사옥 건설 기회 유지</td><td>모노폴리GO 0번 출발 자리 (10:09 · 09:45)</td><td>—</td></tr><tr><td>11</td><td>스탠바이(감옥 규칙)</td><td>숙소 · <b>기숙사</b> · 짓기 없음 · 회복 · 팀 단합</td><td>모노폴리GO 10번 모서리 자리 (10:09 · 10:25 기숙사 확정)</td><td>모서리 배치가 모노폴리GO와 어긋나는 것</td></tr><tr><td>21</td><td>코너 온에어(효과 없음)</td><td>숙소 · <b>본가</b> · 짓기 없음 · 회복 · 태도 회복</td><td>모노폴리GO 20번 모서리 자리 (10:09 · 10:25 본가 확정)</td><td>효과 없는 코너</td></tr><tr><td>31</td><td>코너 병가(11로 보냄)</td><td><b>감옥 도착</b> 칸 = 도착하면 바로 갇힘, 더블 굴리기 3번으로 탈출(못 나오면 벌금 내고 나옴). 옛 11번 스탠바이 규칙(탈출 돈 · 주사위 · 벌금) 옮김. 「감옥으로 가기」 칸 없음</td><td>모노폴리GO 30번 자리 (10:09)</td><td>감옥 가는 길이 없던 문제 · 벌칙 칸이 둘로 갈리는 것</td></tr><tr><td>2·37·39</td><td>숙소 건물(휴식·태도·외국어)</td><td><b>아카데미</b> 건물(외국어·교양·태도·성실성 공부, 30단계)</td><td>늘어난 공부 스탯을 키울 건물 (09:41)</td><td>공부 스탯이 '본가' 칸에 억지로 붙던 것</td></tr><tr><td>건물 없는 칸</td><td>섞여 있음</td><td>짓기 없는 일반 칸. 건물 칸은 <b>24칸</b></td><td>(09:41)</td><td>코너·이벤트 칸에 건설 표가 생기는 것</td></tr><tr><td>8·23·38</td><td>스케줄</td><td><b>찬스</b></td><td>같은 역할이 두 이름 (09:41)</td><td>카드 표 중복</td></tr><tr><td>수익 짝</td><td>비어 있음</td><td>음반 = 보컬 녹음실 + 프로듀싱 · 공연 = 랩 · 굿즈 = 팬샵 · 영상·광고 = 예능 방송국 + 뷰티 · 팬클럽 = 사옥 · 성장만 = 댄스 + 아카데미</td><td>(09:42)</td><td>어느 칸에서 돈이 나오는지 비던 것</td></tr><tr><td>칸 수익</td><td>—</td><td>그 칸 건물 단계를 따라 오름 (모노폴리GO 보드 단계 역할)</td><td>(09:44)</td><td>수익이 건물과 따로 노는 것</td></tr><tr><td>엔터 파워</td><td>통합 레벨</td><td>건물 단계 1당 +1, 최대 270. 기획사 능력 레벨 합과 같은 값(한 번만 셈). 주사위 배수 상한을 풂</td><td>(09:45)</td><td>두 번 세기 · 팬 수 잠금 고리</td></tr><tr><td>규칙</td><td>—</td><td>보드·수익 규칙은 모노폴리GO를 따름. 모노폴리GO 0·10·20·30번 = 우리 1·11·21·31번 (1번부터 세서 하나씩 밀림)</td><td>(09:45 · 10:09)</td><td>기준이 갈리는 것</td></tr></table>
+<ul><li>모노폴리GO 대응: 팬 반응 = 공동기금 · 정산 = 세금 · 쟁탈 = 철도 · 31 = 감옥(도착).</li><li>숫자는 모두 발란스 대기. 결정(현중 10:25): 11 기숙사 · 21 본가 · 31 도착하면 바로 갇히고 더블 3번으로 탈출(현중 10:09 「그냥 감옥 도착」 · 영상 기준). 정산은 받는 칸(10:13).</li></ul></section><h2 class="part" id="part-history-board1021" style="margin-top:28px">히스토리 · 10/21 보드 개편 이전 본문 (그대로 보존)</h2><div class="old-plan"><h4>옛 안 · 10/21 09:41 보드 개편 (현중 10:09에 11·21·31 배치가 바뀜)</h4>
+<table><tr><th>칸</th><th>전</th><th>후</th><th>왜 (현중 시각)</th><th>막는 문제</th></tr><tr><td>21</td><td>코너 온에어(효과 없음)</td><td>숙소 · <b>기숙사</b> (짓기 없음, 회복 · 팀 단합)</td><td>쉬는 곳을 코너로 모음 (09:41)</td><td>효과 없는 코너가 남는 것</td></tr><tr><td>31</td><td>코너 병가(11로 보냄)</td><td>숙소 · <b>본가</b> (짓기 없음, 회복 · 태도 회복)</td><td>같은 이유 (09:41)</td><td>벌칙 코너와 휴식이 섞이는 것</td></tr><tr><td>2·37·39</td><td>숙소 건물(휴식·태도·외국어)</td><td><b>아카데미</b> 건물(외국어·교양·태도·성실성 공부, 30단계)</td><td>늘어난 공부 스탯을 키울 건물 (09:41)</td><td>공부 스탯이 '본가' 칸에 억지로 붙던 것</td></tr><tr><td>건물 없는 칸</td><td>섞여 있음</td><td>짓기 없는 일반 칸. 건물 칸은 <b>24칸</b></td><td>(09:41)</td><td>코너·이벤트 칸에 건설 표가 생기는 것</td></tr><tr><td>8·23·38</td><td>스케줄</td><td><b>찬스</b></td><td>같은 역할이 두 이름 (09:41)</td><td>카드 표 중복</td></tr><tr><td>수익 짝</td><td>비어 있음</td><td>음반 = 보컬 녹음실 + 프로듀싱 · 공연 = 랩 · 굿즈 = 팬샵 · 영상·광고 = 예능 방송국 + 뷰티 · 팬클럽 = 사옥 · 성장만 = 댄스 + 아카데미</td><td>(09:42)</td><td>어느 칸에서 돈이 나오는지 비던 것</td></tr><tr><td>칸 수익</td><td>—</td><td>그 칸 건물 단계를 따라 오름 (모노폴리GO 보드 단계 역할)</td><td>(09:44)</td><td>수익이 건물과 따로 노는 것</td></tr><tr><td>엔터 파워</td><td>통합 레벨</td><td>건물 단계 1당 +1, 최대 270. 기획사 능력 레벨 합과 같은 값(한 번만 셈). 주사위 배수 상한을 풂</td><td>(09:45)</td><td>두 번 세기 · 팬 수 잠금 고리</td></tr><tr><td>규칙</td><td>—</td><td>보드·수익 규칙은 모노폴리GO를 따름. 출발 칸 지나면 돈 · 사옥 건설 기회 유지</td><td>(09:45)</td><td>기준이 갈리는 것</td></tr></table>
+<ul><li>모노폴리GO 대응: 팬 반응 = 공동기금 · 정산 = 세금 · 캐스팅 = 철도 · 11 = 감옥.</li><li>숫자는 모두 발란스 대기. 남은 질문: 31이 본가가 되면 11로 가는 길(찬스 카드로만?) · 세금은 내는데 정산은 받음.</li></ul></div>
+
+<div class="stage" id="stage">
+
+<section class="slide cover on" data-t="표지">
+  <div class="bgimg" style="background-image:url('_img/image23213.png')"></div>
+  <div class="veil"></div>
+  <div class="pad">
+    <p class="kick">제안서 B · 엔터 사장 시점</p>
+    <h1>케이팝<br><em>몬스터즈</em></h1>
+    <p class="tag"><b>아이돌을 키우는 기획사 경영 보드게임</b></p>
+    <p class="tag2">작은 기획사에서 대형 기획사까지</p>
+    <p class="why"><i>왜 두 벌인가</i>팬과 사장을 한 게임에 같이 두니 <b>이 돈이 누구 돈인지</b> 헷갈렸다.
+      그래서 시점을 하나씩 나눴다.<br>이 제안서는 <b>엔터 사장의 눈</b>으로 본다 — 팬의 눈은 제안서 A.</p>
+    <div class="meta"><span>기획 제안서</span><s>|</s><span>2026.09</span><s>|</s><span>엔터 사장 시점</span></div>
+  </div>
+</section>
+
+<section class="slide" data-t="01 산업">
+  <div class="pad">
+    <span class="num">01</span>
+    <p class="kick">이 산업의 현실 <s>한국콘텐츠진흥원 · 보도 자료</s></p>
+    <h2 class="sm">같은 아이돌 한 팀인데<br><em>서른 배가 갈린다</em></h2>
+    <div class="trio">
+      <div class="tile"><span class="cap">중소 기획사</span><span class="big">14.9억</span>
+        <span class="lil">연간 음악 제작비. 신인 한 팀 안착에 10~40억.</span></div>
+      <div class="tile hot"><span class="cap">격차</span><span class="big">30배</span>
+        <span class="lil">같은 일인데 자릿수가 다르다.</span></div>
+      <div class="tile"><span class="cap">대형 기획사</span><span class="big">431억</span>
+        <span class="lil">신인 안착까지 100~150억. 뮤직비디오 한 편 15억.</span></div>
+    </div>
+    <div class="ladder">
+      <span>캐스팅 1만 : 1</span><i>→</i><span>연습생 2년 · 10억</span><i>→</i><span>데뷔 3.6억</span><i>→</i><span class="end">유지 연 7억</span>
+    </div>
+    <div class="note"><b>데뷔 전에 제일 큰돈이 나간다</b> — 연습생 2년에 10억, 그동안 수입은 0. 금액은 보도 기준이고, 캐스팅 비용은 회사 내부라 공개된 숫자가 없다.</div>
+  </div>
+  <div class="foot"><span>산업</span><span class="src">R22 · 085</span></div>
+</section>
+
+<section class="slide" data-t="02 한 바퀴">
+  <div class="pad">
+    <span class="num">02</span>
+    <p class="kick">게임 한 바퀴</p>
+    <h2 class="sm">굴려서 투자하고,<br><em>일정마다 돈을 쓴다</em></h2>
+    <p class="sub">40칸은 <b>소속 아이돌의 일정표</b>다. 도착한 일정에 회사가 돈을 쓰고, 그만큼 아이돌이 준비된다.</p>
+    <div class="trio">
+      <div class="tile"><span class="cap">투자</span><span class="big">얼마를 걸까</span>
+        <span class="lil">주사위 배수를 올리면 한 번에 크게 건다. 크게 걸수록 크게 쓰고 크게 번다.</span></div>
+      <div class="tile"><span class="cap">준비</span><span class="big">연습 · 합숙</span>
+        <span class="lil">연습실 · 트레이너 · 숙소에 돈이 나가고 준비도가 오른다 — 기량 · 컨디션 · 케미.</span></div>
+      <div class="tile hot"><span class="cap">무대</span><span class="big">방송 · 공연</span>
+        <span class="lil">여기서 번다. 준비가 잘 됐을수록 대박이 난다.</span></div>
+    </div>
+    <div class="band">회사가 넣은 만큼 크는 게 아니라, <em>얼마나 잘 썼느냐</em>만큼 큰다</div>
+    <div class="note">비용 비율은 <b>현실 그대로</b> — 홍보 28 · 뮤직비디오 22 · 곡·녹음 19 · 의상·스타일 32. 비율은 두고 금액의 자릿수만 게임에 맞게 줄인다.</div>
+  </div>
+  <div class="foot"><span>한 바퀴</span><span class="src">094 · 066 · 061</span></div>
+</section>
+
+<section class="slide" data-t="03 회사가 큰다">
+  <div class="pad">
+    <span class="num">03</span>
+    <p class="kick">들어오는 돈 <s>사업보고서 · 공식 수치</s></p>
+    <h2 class="sm">판을 넘길 때마다<br><em>회사가 한 체급 커진다</em></h2>
+    <div class="trio four">
+      <div class="tile"><span class="cap">음반 · 음원</span><span class="big">36~43%</span>
+        <span class="lil">방송 일정에서 들어온다.</span></div>
+      <div class="tile hot"><span class="cap">굿즈</span><span class="big">22~25%</span>
+        <span class="lil">공식 굿즈 · MD에서 들어온다.</span></div>
+      <div class="tile"><span class="cap">콘서트</span><span class="big">17~18%</span>
+        <span class="lil">공연 일정에서 들어온다.</span></div>
+      <div class="tile"><span class="cap">광고</span><span class="big">5.7%</span>
+        <span class="lil">스케줄 변경의 CF 자리.</span></div>
+    </div>
+    <div class="band">첫 판은 <em>중소 기획사의 세계</em>, 판이 넘어갈수록 <em>대형 기획사의 세계</em></div>
+    <div class="note"><b>번 돈이 바로 이익은 아니다</b> — 회사가 투자 원가를 먼저 회수하고 남은 것을 나눈다. 화제성이 높으면 같은 무대에서 더 번다.
+      게임에서 만들어지는 굿즈 · 음원 · 영상은 실제로 판다.</div>
+  </div>
+  <div class="foot"><span>회사가 큰다</span><span class="src">R22 · 085 · 095</span></div>
+</section>
+
+<section class="slide" data-t="04 사장의 보드">
+  <div class="pad">
+    <span class="num">04</span>
+    <p class="kick">사장의 일정 보드 <s>40칸 중 7칸을 회사의 자리로 바꿨다</s></p>
+    <h2 class="sm">모든 칸이<br><em>회사 돈이 나가는 자리</em></h2>
+    <p class="sub">보드는 거의 그대로다 — 원래 아이돌의 일정표라서. 바뀌는 건 <b>칸마다 사장이 하는 일</b>이다.</p>
+    <div class="list snug">
+      <div class="li"><span class="n">40</span><div><div class="h">칸마다 「사장은」 무엇에 돈을 쓰나</div>
+        <div class="p">연습실엔 <em>대관비</em>, 합숙엔 <em>안무가 · 숙소비</em>, 방송엔 <em>PD 미팅</em>, 정산 칸엔 <em>투자 원가 회수.</em> 40칸이 전부 회사 장부의 한 줄이다.</div></div></div>
+      <div class="li"><span class="n">4</span><div><div class="h">캐스팅은 먼저 잡는 싸움</div>
+        <div class="p"><i>팬덤 게이트 4칸 →</i> 쟁탈 · 방송국 · 광고주 · 공연기획 · 다른 도시. 다른 기획사가 잡은 자리에 내 아이돌 이름을 올린다. <em>뺏는 게 아니라 먼저 하는 것.</em></div></div></div>
+      <div class="li"><span class="n">3</span><div><div class="h">팬은 보드 밖에서 반응으로 온다</div>
+        <div class="p"><i>응원 3칸 →</i> 팬덤 반응. 사장은 응원을 못 한다, 반응을 본다. 뜨거우면 밀고, 식으면 판을 다시 짠다 — <em>같은 무대에서 버는 돈이 달라진다.</em></div></div></div>
+    </div>
+    <div class="band">준비하며 <em>쓰는 칸</em> 16개, 무대에서 <em>버는 칸</em> 6개 — 사장은 어디에 먼저 쓸지를 고른다</div>
+    <div class="note">그대로 둔 33칸 — 연습 · 합숙 · 쉬는 칸 · 방송 · 공연 · 정산 · 회의 · 스케줄 변경. 다음 장에서 <b>칸을 눌러 보면</b> 칸마다 「사장은」 무엇을 하는지 나온다.</div>
+  </div>
+  <div class="foot"><span>사장의 보드</span><span class="src">030 · 034 · D-074</span></div>
+</section>
+
+<section class="slide" data-t="▶ 사장의 보드">
+  <div class="live">
+  <div class="livehead">
+    <div class="lt"><p class="ttl">사장의 <em>일정 보드</em></p><p class="sub">칸마다 회사 돈이 나간다 · 칸을 누르면 「사장은」이 나온다</p></div>
+    <a href="./board-40-places-table.html?view=ent" target="_blank">크게 열기 ↗</a>
+  </div>
+  <div class="livebody"><div class="fit"><iframe data-src="./board-40-places-table.html?view=ent" title="사장의 일정 보드"></iframe></div></div>
+</div>
+</section>
+
+<section class="slide" data-t="▶ 경제 자료">
+  <div class="live">
+  <div class="livehead">
+    <div class="lt"><p class="ttl">경제 <em>자료</em></p><p class="sub">엔터 경제 9항목 · 항목을 누르면 현실 금액과 출처가 열립니다</p></div>
+    <a href="./economy-two-sides.html?side=ent" target="_blank">크게 열기 ↗</a>
+  </div>
+  <div class="livebody"><div class="fit"><iframe data-src="./economy-two-sides.html?side=ent" title="경제 자료"></iframe></div></div>
+</div>
+</section>
+</div>
+
+<div class="bar">
+  <button type="button" id="tocBtn">목차</button>
+  <button type="button" id="prev">◀</button>
+  <span class="count" id="count">1 / 1</span>
+  <button type="button" id="next">▶</button>
+  <div class="dots" id="dots"></div>
+</div>
+
+<div class="toc" id="toc">
+  <h3>목차 — 아무 데나 누르세요</h3>
+  <div class="grid" id="tocGrid"></div>
+</div>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var dots = document.getElementById("dots");
+  var count = document.getElementById("count");
+  var tocGrid = document.getElementById("tocGrid");
+  var toc = document.getElementById("toc");
+  var cur = 0;
+
+  slides.forEach(function (s, i) {
+    var d = document.createElement("i");
+    d.addEventListener("click", function () { go(i); });
+    dots.appendChild(d);
+
+    var b = document.createElement("button");
+    var t = s.getAttribute("data-t") || ("장 " + (i + 1));
+    if (t.indexOf("—") === 0) b.className = "sec";
+    b.innerHTML = '<s>' + (i + 1) + '</s><span>' + t + '</span>';
+    b.addEventListener("click", function () { toc.classList.remove("on"); go(i); });
+    tocGrid.appendChild(b);
+  });
+
+  // 끼워 넣은 일정 보드를 칸에 꽉 채운다
+  var MIN_W = 1480; // 보드가 짜인 기준 폭
+  function fitAll() {
+    document.querySelectorAll(".live").forEach(function (live) {
+      var body = live.querySelector(".livebody") || live;
+      var fit = live.querySelector(".fit");
+      var fr = live.querySelector("iframe");
+      if (!fit || !fr) return;
+      var w = body.clientWidth, h = body.clientHeight;
+      if (!w || !h) return;
+      // 기준 폭보다 좁으면 줄인다. 위에 탭이 붙어 자리가 16:9가 아니므로 높이도 같이 본다.
+      var lw = Math.max(MIN_W, w);
+      var lh = Math.round(lw * 9 / 16);
+      fr.style.width = lw + "px";
+      fr.style.height = lh + "px";
+      fit.style.width = lw + "px";
+      fit.style.height = lh + "px";
+      var sc = Math.min(w / lw, h / lh);
+      // 남는 쪽은 가운데로 민다
+      fit.style.transform = "translate(" + ((w - lw * sc) / 2) + "px," + ((h - lh * sc) / 2) + "px) scale(" + sc + ")";
+    });
+  }
+  // 보드 자체 제목줄은 덱 안에서 자리만 먹는다. 임베드에서만 감춘다 (파일은 그대로).
+  function trimHeader(fr) {
+    try {
+      // 살아있는 보드 화면에만 먹인다. 인게임 목업은 제 레이아웃이 있어서 건드리면 깨진다.
+      if ((fr.getAttribute("data-src") || "").indexOf("board-40") < 0) return;
+      var d = fr.contentDocument;
+      if (!d || d.getElementById("deckTrim")) return;
+      var st = d.createElement("style");
+      st.id = "deckTrim";
+      st.textContent =
+        "header{display:none!important}" +
+        "html,body{height:100%}" +
+        ".deck{max-width:none!important;height:100%;padding-top:8px!important;display:flex;flex-direction:column}" +
+        ".deck-main{flex:1;min-height:0}" +
+        ".slide{aspect-ratio:auto!important;height:100%}";
+      d.head.appendChild(st);
+    } catch (e) { /* 못 건드리면 그냥 둔다 */ }
+  }
+  window.addEventListener("resize", fitAll);
+
+
+  // 정적 호스팅이 frame-ancestors로 iframe을 막는다.
+  // src로 불러오는 대신 내용을 받아 srcdoc에 심는다 — HTTP 응답이 없어 그 헤더가 안 걸린다.
+  function mount(fr) {
+    var url = fr.getAttribute("data-src");
+    var q = url.split("?")[1] || "";
+    var attrs = "";
+    if (/bare=1/.test(q)) attrs += ' data-bare="1"';
+    var sm = q.match(/side=(fan|ent)/);
+    if (sm) attrs += ' data-side="' + sm[1] + '"';
+    var vm = q.match(/view=(fan|ent)/);
+    if (vm) attrs += ' data-view="' + vm[1] + '"';
+    fetch(url.split("?")[0]).then(function (r) { return r.text(); }).then(function (html) {
+      if (attrs) html = html.replace("<body>", "<body" + attrs + ">");
+      fr.setAttribute("srcdoc", html);
+    }).catch(function () {
+      fr.setAttribute("src", url);   // 못 받아오면 원래대로 — 크게 열기 버튼은 살아 있다
+    });
+  }
+
+  function go(i) {
+    cur = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function (s, n) { s.classList.toggle("on", n === cur); });
+    Array.prototype.forEach.call(dots.children, function (d, n) { d.classList.toggle("on", n === cur); });
+    count.textContent = (cur + 1) + " / " + slides.length;
+    // 켜진 장에만 일정 보드를 띄운다. 안 보이는 데서 돌릴 이유가 없다.
+    var fr = slides[cur].querySelector("iframe[data-src]");
+    if (fr && !fr.dataset.mounted) {
+      fr.dataset.mounted = "1";
+      fr.addEventListener("load", function () { trimHeader(fr); fitAll(); });
+      mount(fr);
+    }
+    fitAll();
+    // 인게임 목업은 장이 열릴 때 한 번 저절로 돈다
+    var auto = slides[cur].querySelector("iframe[data-autoplay]");
+    if (auto) {
+      var ping = function () {
+        try { auto.contentWindow.postMessage("kpm:play", "*"); } catch (e) {}
+      };
+      auto.addEventListener("load", function () { setTimeout(ping, 420); }, { once: true });
+      if (auto.getAttribute("srcdoc")) setTimeout(ping, 420);
+    }
+  }
+
+  document.getElementById("prev").addEventListener("click", function () { go(cur - 1); });
+  document.getElementById("next").addEventListener("click", function () { go(cur + 1); });
+  document.getElementById("tocBtn").addEventListener("click", function () { toc.classList.toggle("on"); });
+  toc.addEventListener("click", function (e) { if (e.target === toc) toc.classList.remove("on"); });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { go(cur + 1); e.preventDefault(); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { go(cur - 1); e.preventDefault(); }
+    else if (e.key === "Home") go(0);
+    else if (e.key === "End") go(slides.length - 1);
+    else if (e.key === "Escape") toc.classList.remove("on");
+  });
+
+  go(0);
+})();
+</script>
+</body>
+</html>

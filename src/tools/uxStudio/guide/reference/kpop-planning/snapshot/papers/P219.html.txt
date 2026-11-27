@@ -1,0 +1,145 @@
+<!doctype html><html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P219 · 새 도시 진출 · 대표 개발 기획서</title><link rel="stylesheet" href="../%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/format.css"><link rel="stylesheet" href="../%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/sample-document.css"><link rel="stylesheet" href="%EB%A6%AC%EC%86%8C%EC%8A%A4/%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88_%EC%8B%9C%EB%AE%AC_20261102/sim.css"><script type="module" src="%EB%A6%AC%EC%86%8C%EC%8A%A4/%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88_%EC%8B%9C%EB%AE%AC_20261102/visit.mjs"></script><style>.sample-document .mermaid{min-width:0;margin:8px 0}.sample-document .mermaid svg{max-width:100%;height:auto}.sample-document .doc-ui-section{margin-top:32px;padding-top:20px;border-top:1px solid var(--line)}.sample-document [data-sim-host]{min-width:0;overflow:auto}.sample-document .doc-diagram{overflow:auto}.sample-document .local-nav{position:sticky;top:0}@media(max-width:680px){.sample-document .local-nav{position:static}}</style><link rel="stylesheet" href="/src/simulator/music-career/view.css"><script type="module" src="/src/simulator/music-career/document-preview.mjs"></script><style data-music-diagram-fit>.sample-document .part img{max-width:100%;height:auto;display:block}</style></head><body class="sample-document"><main><header><div class="eyebrow">P219 · 기획서</div><h1>새 도시 진출 · 대표 개발 기획서</h1><p><strong>본진에서 성장한 뒤 다른 지역을 열고 방문 보드에서 활동하고 귀환하는 콘텐츠입니다.</strong></p>
+<p><strong>현재 상태:</strong> 지역 방문 비교 시안과 기존 지역 원본이 있습니다. 실제 지역 방문·입장권·현지 팬·귀환 원장 연결은 제작 전입니다. <a href="%EC%8B%9C%ED%8B%B0%ED%88%AC%EC%96%B4_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">시티 투어 레이싱</a>은 독립 기획서로 관리합니다.</p>
+</header><nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav><section class="part" id="part-1"><h2>1. 개요</h2><p>본진 성장 → 지역 조건 확인 → 입장권 사용 → 현지 방문·활동 → 정산·귀환으로 이어집니다. 레이싱 참가를 실제 도시 방문 완료로 기록하지 않습니다.</p>
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+<th>문서</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%83%88%EB%8F%84%EC%8B%9C%EC%A7%84%EC%B6%9C_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P193 · 새 도시 진출 상세</a></td>
+<td>지역·방문·정산·귀환 계약</td>
+</tr>
+<tr>
+<td><a href="%EC%83%88%EB%8F%84%EC%8B%9C%EC%A7%84%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">기존 방문 기획 P109</a></td>
+<td>기존 시즌 방문 계산과 비교 시안</td>
+</tr>
+<tr>
+<td><a href="%EC%84%B1%EC%9E%A5%EA%B4%80%EA%B3%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">성장·관계</a> · <a href="%ED%8C%80%EA%B2%B0%EC%84%B1_%ED%8C%80%EC%8A%A4%ED%83%AF_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">팀 스탯</a></td>
+<td>지역 열림 조건의 원본</td>
+</tr>
+<tr>
+<td><a href="%EC%95%A8%EB%B2%94%EB%B0%9C%EB%A7%A4_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">앨범 발매</a></td>
+<td>방문 중 곡 활동/지역 성적의 연결 대상</td>
+</tr>
+<tr>
+<td><a href="%EC%8B%9C%ED%8B%B0%ED%88%AC%EC%96%B4_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P231 · 시티 투어</a></td>
+<td>앨범 재화·멤버 능력으로 달리는 독립 레이싱</td>
+</tr>
+</tbody></table></div>
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2><p>기존 방문 비교 시안은 <a href="%EC%83%88%EB%8F%84%EC%8B%9C%EC%A7%84%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P109</a>와 하단 비교 자료에서 확인합니다. 시험 입장권·팬·정산은 실제 계정 원장과 구분합니다. 운영 지역 방문 모듈의 실제 저장/귀환 연결은 제작 전입니다.</p>
+<p>앨범에서 참가하는 레이싱은 <a href="%EC%8B%9C%ED%8B%B0%ED%88%AC%EC%96%B4_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">시티 투어 기획서</a>와 <a href="/docs/planning/game-simulator.html?module=simulator_module_music_city">공용 게임 시뮬레이터</a>로 연결합니다.</p>
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>규칙/구현 범위</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>본진</td>
+<td>기존 도시·시설·성장 원본 사용</td>
+</tr>
+<tr>
+<td>지역</td>
+<td>기존 영어권·중국어권·일본어권 지역 원본, 대표 도시 이름은 세계관 기획 대상</td>
+</tr>
+<tr>
+<td>열림</td>
+<td>기존 개인·팀·외국어 조건 참조. 미정 문턱을 충족으로 처리하지 않음</td>
+</tr>
+<tr>
+<td>입장</td>
+<td>입장권·방문 분량을 지역 방문 규칙으로 판정</td>
+</tr>
+<tr>
+<td>현지 활동</td>
+<td>지역별 활동·팬·곡 성적을 구분</td>
+</tr>
+<tr>
+<td>귀환</td>
+<td>완료/중도 귀환과 정산·수령의 중복 방지 필요</td>
+</tr>
+<tr>
+<td>시티 투어</td>
+<td>별도 앨범 레이싱 원장. 레이싱 급유 재화를 지역 방문 입장권으로 바꾸지 않음</td>
+</tr>
+</tbody></table></div>
+<p>방문 중 본진 진행과 크루 소속의 유지 범위, 시즌 초기화와 지역 기록의 보존 범위는 기존 시즌/도시 원본과 맞춰 연결합니다. 지역 조건·입장권 수량·방문 보상은 확정 원표와 연결하기 전 임의 값으로 운영하지 않습니다.</p>
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+<th>리소스</th>
+<th>사용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>지역 지도·잠금/열림 표시</td>
+<td>방문할 지역과 조건 확인</td>
+</tr>
+<tr>
+<td>지역 방문 보드·현지 무대</td>
+<td>현지 활동</td>
+</tr>
+<tr>
+<td>현지 성적·정산·귀환 화면</td>
+<td>방문 결과와 본진 복귀</td>
+</tr>
+</tbody></table></div>
+<p>기존 방문 비교 시안은 실제 운영 화면과 구분합니다. 자동차·차고·고가도로·레이싱 시상 UI는 <a href="%EC%8B%9C%ED%8B%B0%ED%88%AC%EC%96%B4_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html#part-5">시티 투어</a>에 둡니다.</p>
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+<th>원본</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/data/core_proposal/city_visit_region.csv">city_visit_region.csv</a></td>
+<td>공용 지역과 방문 규칙</td>
+</tr>
+<tr>
+<td><a href="/data/game/board_tile.csv">board_tile.csv</a></td>
+<td>지역 관련 보드 기능</td>
+</tr>
+<tr>
+<td>지역 방문/현지 팬/귀환 원장</td>
+<td>운영 연결 제작 전</td>
+</tr>
+</tbody></table></div>
+<p>기존 원표와 방문 비교 계산을 참조하며 레이싱의 앨범 이벤트 재화/수령 원장과 합치지 않습니다.</p>
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>현재 상태</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>기존 지역/방문 비교 시안</td>
+<td>기존 자료 참조, 실제 방문 원장과 구분</td>
+</tr>
+<tr>
+<td>지역 조건·입장권·방문·귀환</td>
+<td>운영 데이터/저장 연결 제작 전</td>
+</tr>
+<tr>
+<td>현지 팬·곡 성적·정산</td>
+<td>지역별 원장과 중복/복구 계약 구현 필요</td>
+</tr>
+<tr>
+<td>앨범 레이싱</td>
+<td>P231·P232의 독립 시티 투어 기획/실행으로 연결</td>
+</tr>
+<tr>
+<td>실제 브라우저/플레이</td>
+<td>사용자 확인. 이번 문서 분리에서는 실행하지 않음</td>
+</tr>
+</tbody></table></div>
+</section><details><summary>작업 기록</summary>
+
+<p>관련 원본은 2장과 6장에 연결합니다. <a href="./%EC%83%88%EB%8F%84%EC%8B%9C%EC%A7%84%EC%B6%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.log.md">로그·변경 이력과 지난 기록</a></p>
+<details class="doc-legacy-ui"><summary>이전 구현 시뮬레이터·비교 자료</summary><p>현재 본문의 최신 기획과 구분하는 이전 구현 자료입니다.</p><section class="doc-ui-section" aria-label="하단 시뮬레이터"><h3>지역 방문 · 임시 시안</h3><p>시험 입력을 사용하는 비교 도구입니다. 실제 계정·제작·발매·회차 집계와 구분합니다.</p><details id="sim-preview"><summary>시뮬레이터 펼치기</summary><div data-sim-host="visit"></div></details></section><section class="doc-ui-section" id="ui-preview"><h3>UI 시안·간단 시뮬레이션</h3><p>문서 UI 시안 · 시험 입력 · 실제 노래를 연결하기 전에도 앨범 정보를 준비할 수 있어요.</p><div class="mc-document-preview" data-music-career-preview="city"></div><div data-music-career-operator></div></section></details></details>
+</main><script type="module">import mermaid from "/node_modules/mermaid/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:true,securityLevel:"strict",theme:"neutral",flowchart:{useMaxWidth:true,htmlLabels:true}});</script></body></html>

@@ -1,0 +1,396 @@
+# S06a · 화면 구조 — 모노 장면 · 화면 · 연출 · 소리 이식 (이식)
+
+**이 문서는** 장면·화면·연출·소리의 구조를 읽는 이식 부록입니다. 원형 표·규칙·당시 규모와 모노 근거를 보존해 봅니다.
+
+**보는 법** 아래 현재 읽기 범위를 확인하고 간략에서 세부로 내려갑니다. 기존 S06·S06b 연결과 [S14 구현 구조](S14_구현구조.md)를 함께 읽습니다.
+
+**지금 상태** 이식 기획과 포트의 일부 코드·현재 등록 허브의 계약을 정적으로 대조한 제안(검수 대기) 문서입니다. 상위 연결과 실제 화면·소리·저장 동작은 미검수입니다.
+
+> 절 표기(현중 10/12): **(이식)** 그 줄의 구조나 방법이 모노에 있음 · **(신규)** 케이팝 이름 · 값 · 현중 결정만 · 한 줄에 둘이 섞이면 줄을 쪼갠다(이스라트 11:24 기준). 제목에 표기가 없는 절은 줄 끝마다 (이식) · (신규)를 단다. 제목 표기와 다른 줄은 그 줄 끝에 따로 단다. 옛 안 → 「근거」 칸 첫 출처 기준. 목차 · 간략 · 문서 정보는 안내라 표기하지 않음.
+
+## 목차
+- [간략](#간략)
+- [세부](#세부)
+  - [0. 한 줄](#0-한-줄-이식)
+  - [1. 컨셉](#1-컨셉-이식)
+  - [2. 시스템 R-S06a](#2-시스템-r-s06a-이식)
+    - [2-1. 장면 틀](#2-1-장면-틀-이식)
+    - [2-2. 전환 순서](#2-2-전환-순서-이식)
+    - [2-3. 장면 15개](#2-3-장면-15개-이식)
+    - [2-4. 화면 61개](#2-4-화면-61개-이식)
+    - [2-5. UI 연출 58개](#2-5-ui-연출-58개-이식)
+    - [2-6. 소리 3단](#2-6-소리-3단-이식)
+    - [2-7. 글자 · 아이콘 · 구역 배치](#2-7-글자-아이콘-구역-배치-이식)
+  - [3. 화면 V-S06a](#3-화면-v-s06a-이식)
+  - [4. 표와 값 칸](#4-표와-값-칸-이식)
+    - [4-1. 연출 표 30개](#4-1-연출-표-30개-이식)
+    - [4-2. 케이팝 연출 표 이름 · 칸](#4-2-케이팝-연출-표-이름-칸-이식)
+    - [4-3. 케이팝 소리 표 이름 · 칸](#4-3-케이팝-소리-표-이름-칸-이식)
+    - [4-4. 아이콘 원본 목록 줄](#4-4-아이콘-원본-목록-줄-이식)
+    - [4-5. 구역 배치 표](#4-5-구역-배치-표-이식)
+    - [4-6. 연출 툴 · 검사](#4-6-연출-툴-검사-이식)
+  - [5. 이어지는 시스템](#5-이어지는-시스템-이식)
+  - [6. 이게 아닌 것](#6-이게-아닌-것-이식)
+  - [7. 아직 안 한 것 · 확인 필요](#7-아직-안-한-것-확인-필요-이식)
+- [문서 정보](#문서-정보)
+
+---
+
+**현재 읽기 범위 — 정적 대조**
+
+- **장면·허브** — 포트의 `enter/exit/afterEnter`와 현재 등록 허브의 `mount/activate/deactivate/serialize/dispose`는 서로 다른 계약입니다. 포트 장면 전체가 현재 허브에 연결됐다는 뜻은 아닙니다.
+
+- **연출 값·저장** — 점 전환에는 코드 상수가 있고, FX 설정에는 코드 기본값·툴의 로컬 저장 묶음·CSV 덮기 경로가 있습니다. 각 reader가 무엇을 읽는지는 나눠 확인합니다. 저장 helper의 존재와 실제 저장 성공을 구분합니다.
+
+- **소리 연결** — cue·bind·asset과 대체음 코드는 있으나 읽은 포트 runtime은 `action_type` 중심입니다. `scene.enter/exit`가 현재 배경음까지 이어지는 연결·실제 재생은 미확인입니다.
+
+- **배치·원표** — `pageLayout`은 배치·글자·초상 크기를 적용하는 코드이며, `scene_*` 대표행은 도시 공간 시안, `text_ko`는 표·개체·필드별 표시 문구 연결입니다. 이름만으로 모든 화면의 동일 원천으로 합치지 않습니다.
+
+- **주소·공급** — 상대 CSV 주소·`csvRoot`·번들 조회와 실행 페이지의 상위 연결은 미확인입니다. 확인한 기본 경로의 부재를 원표 전역 부재나 현재 실행 오류로 확대하지 않습니다.
+
+- **당시 기록** — 아래 규모·표·도식·키·원값과 기획의 미정·제외 범위는 당시 기록으로 보존합니다. 현재 부분 코드 확인을 새 정책·운영값 확정이나 모든 기능의 구현 완료로 쓰지 않습니다.
+
+## 간략
+
+**머리표** 시스템 기획 · S06a · 화면 구조 · 모노 장면 15 · 화면 61 · UI 연출 58 · 연출 표 30 · 소리 3단 · 글자 · 아이콘 · 구역 배치 이식(바꿔서 옮김)
+
+**제목** 화면 구조 — 장면은 조립만, 박자 · 소리 · 글자 · 자리는 모두 표가 정한다
+
+**훅** 코드는 「무슨 일이 났다」만 알리고, 어떻게 보이고 들릴지는 표 한 줄을 바꿔서 고친다.
+
+**두 줄 요약**
+- 화면은 네 겹이다: **장면**(통째로 바뀜 · 로비 ↔ 인게임 · 이벤트는 얹기) → **화면**(장면 안 부품) → **연출**(표가 정한 박자) → **소리**(신호 → 연결 → 파일).
+- 연출 · 소리 · 글자 · 아이콘 · 구역 배치 값은 모두 `data/game/`의 `ui_fx_*` · `sfx_*` · `text_ko` · `tool_icon_source` 표에 두고, 코드는 키만 부른다. 값은 임시 시안 · 전투 줄은 뺀다.
+
+```mermaid
+flowchart LR
+  S[장면 · 들어가기 / 나가기 / 들어간 뒤] -->|scene.enter · exit 신호| SFX[소리 3단 · 신호 → 연결 → 파일]
+  S --> V[화면 · 장면 안 부품]
+  V --> FX[연출 · 표 값을 읽어 박자대로]
+  FX --> T1[ui_fx_* key 표 · 줄 표]
+  V --> TX[글자 text_ko · 아이콘 icon 칸 · 구역 ui_fx_page_layout]
+  SFX --> T2[sfx_cue · sfx_bind · sfx_asset]
+```
+
+1. **바꾼다** — 로비 ↔ 인게임은 완전 교체(점 연출 닫힘 → 나가기 → 들어가기 → 열림 → 인트로). 이벤트 · 창은 위에 얹고 닫는다.
+2. **그린다** — 장면은 화면 부품을 조립만 한다. 게임 규칙은 장면에 넣지 않는다.
+3. **움직인다** — 연출은 `ui_fx_*` 표 값을 박자대로 읽는다. 코드에 시간 · 크기를 박지 않는다.
+4. **울린다** — 신호가 나면 `sfx_bind` → `sfx_cue` → `sfx_asset` 순으로 소리를 고르고, 파일이 없으면 대체 삐.
+
+| 왜 지금 | 이게 핵심 | 이게 아닌 것 |
+|---|---|---|
+| 케이팝 프로토에는 장면 전환 · 결과창 · 연출 표 · 소리 표가 없고 기획서도 없어, 모노 원본 없이 화면을 다시 만들 수 있게 구조를 옮겨 둬야 한다 | 장면 3박자 · 바꾸기 둘 · 표가 값을 정함 · 소리 3단 · 키 이름은 모노와 같게 | 인게임 화면 층 설계가 아니다(→ S06) · 모노 숫자 · 색 복사가 아니다 · 전투 연출이 아니다 |
+
+---
+
+## 세부
+
+**머리 블록**
+
+| 칸 | 내용 |
+|---|---|
+| 문서 | S06a · 화면 구조 — 모노 장면 · 화면 · 연출 · 소리 이식 |
+| 대응표 v2 | C 화면 · 화면 이동 · UI 연출 → [S01 대응표](../게임프로토타입/모노컨셉대응표_v2.md) |
+| 기준 자료 | 제나 0950 대조(장면 15 · 화면 61 · 연출 58 · 연출 표 30 · 소리 4 · 글자 · 아이콘 · 배치 4 · 툴 · 검사 20) · 제나 1037 점검 1~3 · 모노 원본(읽기만, 문서 정보 참고) |
+| 상위 문서 | [S06 인게임 화면 틀](S06_인게임화면틀.md)(화면 층 · 하단 탭 · 도착 연출) |
+| 같이 보기 | 미니게임 연출 다섯: [S07](S07_칸콘텐츠_상점_카드덱.md) 3-4 · 표 사이 연결: [S08 표 구조 · 연결 지도](S08_표구조_연결지도.md) · 툴 검사: [S02 발란스 툴](S02_발란스툴.md) 4-8 |
+| 상태 | 제안(검수 대기) |
+
+### 0. 한 줄 (이식)
+화면은 **장면(통째로 바뀜) → 화면(장면 안 부품) → 연출(표가 정한 박자) → 소리(신호 → 연결 → 파일)** 네 겹이다. 글자 · 배치 · 연출 값은 모두 표에 두고 코드는 키만 부른다.
+
+### 1. 컨셉 (이식)
+
+| 모노에서 | 케이팝에서 | 근거 |
+|---|---|---|
+| 섬 로비 · 인게임 · 이벤트 장면 · 모험 · 원정 | 기획사 로비(모노대로 · ☐ 제안 내용과 다름) · 인게임(v6 B안) · 이벤트 장면 6 · 부스트. 모험 · 원정은 (이식) · 전투만 뺌 · 현중 10/12 | 모노 `src/scenes` · 제나 0950 |
+| 점 연출 전환 · 얹기 · 닫기 | 그대로 구조 이식 · 시간은 임시 시안 | 모노 `SceneManager.ts` · `dotTransition` |
+| `src/uiFx` 연출 + `data/ui_fx` 손잡이 표 | `data/game/ui_fx_*` 납작한 이름 · 키는 모노와 같게 · 전투 줄 뺌 | 모노 `data/ui_fx` · 제나 1037 |
+| 소리 신호 · 연결 · 파일 표 | `sfx_cue` · `sfx_bind` · `sfx_asset` · 장면 신호에 실제로 붙임(모노는 안 읽음) | 모노 `sfx_*_config` |
+| 화면 글자 표 `ui_text_config` | `text_ko`(클로드 몫 · 이미 key 구조) | 모노 `ui_text_config` |
+| 모노 색 | 10/06 파스텔 · 배치만 옮김 | 대응표 규칙 |
+
+### 2. 시스템 R-S06a (이식)
+
+### 2-1. 장면 틀 (이식)
+
+모노 `src/scenes/Scene.ts` · `SceneManager.ts`.
+
+| ID | 규칙 | 근거 |
+|---|---|---|
+| R-S06a-1 | 장면은 셋만 가진다: **들어가기**(`enter` · 화면 붙이고 준비) · **나가기**(`exit` · 듣기 끄고 떼기) · **들어간 뒤**(`afterEnter` · 인트로처럼 긴 연출) | 모노 `Scene.ts` |
+| R-S06a-2 | 장면은 조립만 한다. 게임 규칙은 장면에 넣지 않는다(규칙 = 경제 · 흐름 코드, 그림 = 화면 코드) | 모노 53 §3.2 |
+| R-S06a-3 | **바꾸기 두 가지**: 완전 교체(`start` · 로비 ↔ 인게임) · 얹기(`launch` · 창 · 전체 화면 미니게임) / 얹은 것 닫기(`pop`) | 모노 `SceneManager.ts` |
+| R-S06a-4 | 장면이 들어가고 나갈 때 신호를 낸다(`scene.enter` · `scene.exit` + 장면 id). 소리 · 연출은 이 신호에 붙는다(2-6) | 모노 `SceneManager.ts` |
+
+### 2-2. 전환 순서 (이식)
+
+| ID | 규칙 | 근거 |
+|---|---|---|
+| R-S06a-8 | **완전 교체**: ① 점 연출 닫힘 ② 쌓인 장면을 위에서부터 모두 나가기(장면마다 `scene.exit` 신호) ③ 새 장면 들어가기 + `scene.enter` 신호 ④ 잠깐 멈춤 ⑤ 점 연출 열림 ⑥ 들어간 뒤(인트로). 처음 켤 때는 점 연출 없이 ②③⑥만 | 모노 `SceneManager.ts` |
+| R-S06a-9 | **얹기**: 아래 장면은 그대로 두고 ③ → ⑥ | 모노 `SceneManager.ts` |
+| R-S06a-10 | **닫기**: 맨 위 장면만 나가기 → 아래 장면으로 | 모노 `SceneManager.ts` |
+| R-S06a-11 | 점 연출(모노 `dotTransition`)은 닫힘 · 멈춤 · 열림 세 박자. 길이는 표 값 · 임시 시안(모노 값 옮기지 않음). 긴 연출을 전환 안에 넣으면 화면이 멈추므로 ⑥으로 뺀다 | 모노 `dotTransition.ts` |
+
+### 2-3. 장면 15개 (이식)
+
+| 모노 장면 | 줄 | 케이팝 | 표시 |
+|---|---|---|---|
+| 로비 `LobbyScene` | M166 | **로비** — 모노대로 넣음(섬 로비 → 기획사 로비 · 들어가기 버튼 · 출석 창이 뜨는 곳) · 구역 · 규칙은 [S12 로비](S12_로비.md)(10/12 2차 4단계) | ☐ 제안 내용과 다름(W03에 로비 없음 · Q1) |
+| 인게임 `IngameScene` | M164 | 인게임 메인(v6 B안 · [S06](S06_인게임화면틀.md) 2절) | — |
+| 양궁 `ArcheryScene` | M159 | 이벤트 「하루 기록 순위」 장면 → [S07](S07_칸콘텐츠_상점_카드덱.md) 6-2 | 얹기 |
+| 바람종 `BellScene` | M160 | 이벤트 「하루 게이지 협동」 | 얹기 |
+| 숨은 사원 `HiddenScene` | M163 | 이벤트 「하루 관문 · 반복」 | 얹기 |
+| 용암 `LavaScene` | M165 | 이벤트 「하루 단계 생존」 | 얹기 |
+| 하늘 경주 `SkyScene` | M170 | 이벤트 「하루 레이스 협동」 | 얹기 |
+| 상금 낙하 `PrizeDropScene` | M167 | 이벤트 「하루 드랍 마일스톤」 | 얹기 |
+| 부스트 `BoostScene` | M161 | 버프 시간 · 특가 화면 | 얹기 · 세일 MO-5 확인 필요 |
+| 모험 `AdventureScene` | M158 | 여정 · 출동 | (이식) · 전투만 뺌 · 현중 10/12 |
+| 원정 `ExpeditionScene` | M162 | 원정(주사위 0) | (이식) · 전투만 뺌 · 현중 10/12 |
+| 장면 틀 `Scene` | M168 | 2-1 | — |
+| 장면 관리 `SceneManager` | M169 | 2-1 · 2-2 | — |
+| 점 전환 `dotTransition` · CSS | M171 · M710 | 2-2 · 배치만(모노 색 뺌) | — |
+
+케이팝 이벤트 장면 내용(놀이 규칙)은 기획서 없음 — 장면 자리와 이동만 이 문서에, 놀이는 S07.
+
+### 2-4. 화면 61개 (이식)
+
+모노 `src/ui` 줄 37 + 화면 배치 CSS 24. CSS는 **배치만** 옮기고 모노 색은 뺀다(10/06 파스텔).
+
+| 묶음 | 모노 화면(줄) | 케이팝 | 표시 |
+|---|---|---|---|
+| 인게임 | 인게임 화면 `GameView`(M180 · 전투 패널 뺌) · 하단 탭 허브 `hub`(M201) · 하단 탭 아이콘 `navIcons`(M207) | 인게임 메인 · 하단 5탭 → S06 R-S06-3 | — |
+| 건설 | 건설 자리 화면 `buildLotView`(M189) · 건설 정거장 연출 `stationFx`(M219) | **건설 시트 · 건설 탭** — 모노대로 → [S04](S04_건설시설.md) | ☐ 제안 내용과 다름(W03 B안에서 빠짐) |
+| 이벤트 | 양궁 · 종 · 숨은 사원 · 용암 · 하늘 경주 · 상금 낙하 · 부스트 화면(M185 · M187 · M200 · M203 · M216 · M208 · M188) · 이벤트 HUD(M194) · 미니게임 공통(M206) | 2-3 이벤트 장면 안 화면 · 이벤트 HUD = 인게임 위 작은 자리(왼쪽 · 가운데 · 오른쪽 = `event_template.slot_side`) | 놀이 내용 기획서 없음 |
+| 카드 · 상점 | 카드면 · 도감(M190 · 모노 그림 뺌) · 특가(M210) | 카드북 탭 · 상점 탭 → S07 | 카드덱 보류 · 특가 MO-5 |
+| 공통 창 | 도움말 창(M199) · 열림 알림 창(M220) · 기록 상자(M205) · 빨간 점(M209) · 지갑으로 보상 날아가기(M221) · 아이템 날아가기(M202) · 공통 효과(M193) | 그대로 구조 이식 · 빨간 점 = 받을 것 있음 표시 | — |
+| 연출 신호 | 연출 신호 `fxCue`(M197) · 연출 표식 `fxMark`(M198 · 전투 표식 뺌) · 정찰 보드 연출(M211) | 2-5 · 4-1 | — |
+| 소셜 | 소셜 피드(M217 · 파일 4) | 팬덤 반응 · 필러 로그와 겹치는지 확인 필요 | 기획서 없음 |
+| 스킬 | 스킬 아이콘(M213) · 스킬 단계 색(M215 · 케이팝 색으로) | 카드 별 · 아이돌 능력 표시 자리 | 확인 필요 |
+| 모험 · 원정 | 모험(M184) · 원정(M195) | 여정 · 출동 · 원정 | (이식) · 전투만 뺌 · 현중 10/12 |
+| **개발용(샌드박스 숨김)** | 개발 메뉴(M183) · 자동 플레이(M186 · 검사용) · FPS 측정(M196) · 세션 로그 패널(M212) | 개발 메뉴 → [S02](S02_발란스툴.md) V-S02-8 · 경제 기록 패널(있음) | 샌드박스 빌드에서 숨김 |
+| 배치 CSS 24 | 장면 · 화면별 CSS(M751~M778) | 배치만 · 색은 10/06 파스텔 | 모노 색 뺌 |
+
+### 2-5. UI 연출 58개 (이식)
+
+모노 `src/uiFx`(파일 · 폴더 63 · 제나 집계 58줄 · CSS는 짝 파일로 묶음). 연출은 **표 값을 읽어 박자대로** 움직이고, 코드에 시간 · 크기를 박지 않는다.
+
+| 갈래 | 모노 연출 | 케이팝 쓰임 | 표 |
+|---|---|---|---|
+| 보드 카메라 · 테두리 · 손질 | `boardCam` · `boardChrome` · `boardPolish` | 착지 확대(도착 줌 T0) · 보드 테두리 | `boardcam*` · `board_polish` · 규칙 · 박자 · 값은 [S06b](S06b_보드연출계승.md) 2~4절 |
+| 창 | `chromeBox` · `chromeTypes` · `windowCss` | 모든 창 테두리 · 창 팝 | `chrome` · `window` |
+| 입장 | `introBanner` | 장면 들어간 뒤 배너(2-2 ⑥) | `intro` |
+| 결과 | `resultWindow` · `resultKind` | 결과창(이벤트 끝 · 시즌 끝) | `result` · `result_kind` |
+| 고르기 · 돌리기 | `wheelSpin` · `wordReel` · `choiceReel` · `choicePick` · `colorPick` · `luckySlots` · `towerFloors` · `tileOpen` · `packReveal` | **미니게임 연출 다섯**(휠 · 글자 릴 · 신화 슬롯 · 보물 파내기 · 계약 창) → [S07](S07_칸콘텐츠_상점_카드덱.md) 3-4 한 항목 · 돌림판(덤 보상 풀) · 팩 열기 | `wheel` · `wordreel` · `reelkind` · `choicekind` · `choiceopt` · `slot` · `pack` · `dig` · `pact` |
+| 필러 | `fillerEnterFx` · `fillerRevealLaser` | 필러 첫 카드 · 판정 배지 같은 프레임(S06 R-S06-13) | `fx_bind` |
+| 보드 움직임 | `diceHandoff` · `jailDice` · `runnerTrail` · `runFloorFx` | 주사위 넘김 · 병가 탈출 주사위(S03 2-4) · 말 꼬리 | `board_polish` |
+| 빛 · 입자 · 재화 | `laserOverlay` · `particleFx` · `resourceFx` | 비전투 레이저만(S06 R-S06-17) · 재화 칩 날아가기 | `fx_bind` |
+| 구역 배치 | `pageLayout` | 4-5 | `page_layout` |
+| 공통 바탕 | `ease` · `frameClock` · `store` · `player` · `defaults` · `types` · `previewHost` · `livePlay` · `fxBind` · `sliceIcon` | 박자 시계 · 연출 재생 · 미리보기 | — |
+| ~~확인 필요~~ 풀림(10/12) | `towerFloors` = 동그라미 룰렛 연출(전투 아님 · 위 줄로 옮김) · `castPresent` = 전투 시작 띠 · 신화 스킬 연출(전투 → 뺌) | 옛 안 → 층 쌓기 · 캐스트 연출 — 전투 쪽인지 확인 필요 | — |
+| **뺌(전투)** | `battleEndCut` · `vsCut` · `skillOffer` · `skillSlot` | — | `battleend` · `vs` |
+
+### 2-6. 소리 3단 (이식)
+
+**신호 → 연결 → 파일**(모노 `sfx_cue_config` · `sfx_bind_config` · `sfx_asset_config`). 코드는 「무슨 일이 났다」만 알리고, 어떤 소리를 낼지는 표가 정한다.
+
+| 단 | 표 | 칸 | 뜻 |
+|---|---|---|---|
+| 1 신호 | `sfx_cue_config` | `cue_id` · `layer`(ui · fx · bgm) · `asset_id` · 볼륨 · 다시 울림 간격 · 진동 · 대체 삐(주파수 · 길이) · 켬 | 소리 하나의 성격 |
+| 2 연결 | `sfx_bind_config` | `owner_kind`(ui · scene) · `owner_id` · `cue_id` · `slot` | 어느 버튼 · 장면 신호에 어떤 소리 |
+| 3 파일 | `sfx_asset_config` | `asset_id` · `path` · `kind`(한 번 · 반복) · 미리 읽기 | 실제 파일 · 없으면 대체 삐 |
+
+| ID | 규칙 | 근거 |
+|---|---|---|
+| R-S06a-12 | 장면 신호(`scene.enter` · `scene.exit`)에 배경음(bgm)이 붙는다(R-S06a-4) | 모노 `SceneManager.ts` · `sfx_bind_config` |
+| R-S06a-13 | **고르는 순서**: 신호 id → `sfx_cue`(켬 · 다시 울림 간격 확인 · 진동) → `sfx_asset.path` 있으면 그 파일 · 없으면 대체 삐 | 모노 `sfx_cue_config` · `sfx_asset_config` |
+| R-S06a-14 | 연결 단의 `action_type`(근접 공격 등) 줄은 전투라 뺀다 | 전투 제외 |
+| R-S06a-15 | ☐ 모노와 다름: 모노는 `scene` · `ui` 연결 줄이 표에 있어도 게임 코드가 읽지 않는다(전투 `action_type`만 읽음). 케이팝은 장면 신호(R-S06a-4)에 `scene` 줄을 실제로 붙인다 | 모노 `sfx_bind_config` 22줄 대조 |
+
+옛 안 → 케이팝에는 소리 표가 아직 없다 — 다음 개발 단계 · 파일이 없어도 대체 삐로 돈다.
+
+### 2-7. 글자 · 아이콘 · 구역 배치 (이식)
+
+| ID | 규칙 | 모노 | 케이팝 |
+|---|---|---|---|
+| R-S06a-5 | **화면 글자는 표에서**: 코드에 문장을 박지 않고 key로 부른다 | `ui_text_config`(`key` · `text` · `ui_` 줄 약 490) · 이벤트 문장 `event_text_pool` | `text_ko`(클로드 몫 · 이미 key 구조) |
+| R-S06a-6 | **아이콘 원본 목록**: 아이콘을 어느 표 · 칸에서 가져오는지 줄로 적는다(종류 · 표 · id 칸 · 이름 칸 · 아이콘 칸 · 거르기 · 정렬) | `tool_icon_source` | 같은 구조 · 줄은 4-4 |
+| R-S06a-7 | **구역 배치**: 페이지마다 구역(`title` · `grid` · `buttons`)의 자리 · 크기(화면 대비 %) · 글자 크기 · 초상 비율 · 켬 · 밀기 여부를 표로 | `page_layout`(`page_id` · `zone_id` · `x` · `y` · `w` · `h` · `font_px` · `char_scale` · `on` · `place`) | 4-5 |
+| R-S06a-16 | 아이콘은 따로 표가 없고 **각 데이터 줄의 `icon` 칸**에 있다(이모지 · 그림 경로 · 칸 그림은 id로 만든 경로). 게임은 경로면 그림, 아니면 글자로 그린다 | 모노 `sliceIcon` · `tool_icon_source` | 케이팝 표 대부분에 아직 `icon` 칸 없음 → 게임 소스 이식 때 |
+| R-S06a-17 | 화면 코드는 구역 요소에 `data-pl-zone` 표시만 달고, 자리 · 크기는 표가 정한다 | 모노 `pageLayout.ts` | 4-5 |
+
+### 3. 화면 V-S06a (이식)
+
+| ID | 화면 | 근거 |
+|---|---|---|
+| V-S06a-1 | 점 전환: 닫힘 · 멈춤 · 열림 세 박자 → 들어간 뒤 인트로 배너(`ui_fx_intro`) | 모노 `dotTransition` · `introBanner` |
+| V-S06a-2 | 결과창: 시즌 끝 · 이벤트 끝 두 종류(`ui_fx_result_kind`) · 판 클리어 · 실패 줄은 뺌. 도착 수입 칩과 다른 화면 | 모노 `resultWindow` · `resultKind` |
+| V-S06a-3 | 창 팝 · 창 테두리 한 벌(`ui_fx_window` · `ui_fx_chrome`) · 색은 10/06 파스텔 | 모노 `chromeBox` · `windowCss` |
+| V-S06a-4 | 이벤트 HUD = 인게임 위 작은 자리(왼쪽 · 가운데 · 오른쪽) · 이벤트 장면은 얹기 | 모노 이벤트 HUD(M194) |
+| V-S06a-5 | 공통 창: 도움말 · 열림 알림 · 기록 상자 · 빨간 점 · 지갑으로 보상 날아가기 | 모노 M199 · M220 · M205 · M209 · M221 |
+| V-S06a-6 | 미니게임 연출 다섯(휠 · 글자 릴 · 신화 슬롯 · 보물 파내기 · 계약 창) → [S07](S07_칸콘텐츠_상점_카드덱.md) 3-4 | 모노 `src/uiFx` |
+| V-S06a-7 | 개발용 화면(개발 메뉴 · 자동 플레이 · FPS · 세션 로그)은 샌드박스 빌드에서 숨김 → S02 V-S02-8 | 모노 M183 · M186 · M196 · M212 |
+| V-S06a-8 | **배수 버튼**: 버튼 하나 · 누를 때마다 **쓸 수 있는 배수만** 차례로 돈다(끝에서 처음으로) · 바꾸면 토스트 「배수 ×N」 · 굴리는 중 · 도전 불가 때는 버튼이 막힘(「도전 가능할 때만 배수 변경」). 잠긴 배수는 **숨긴다** — 자물쇠 · 문턱 숫자 표시 없음. 두 경우 모두 같다: ① **팬이 모자라 잠긴 배수**(`dice_mult.fan_min` 미만 · 모노 번영 잠금) = 목록에서 빠짐 ② **열렸지만 보유 주사위가 굴림 문턱(배수 × `gate_min_rolls`)에 못 미친 배수**(모노 `diceMaxMult`) = 목록에서 빠짐 · 지금 걸려 있던 배수가 문턱 아래로 떨어지면 **쓸 수 있는 가장 큰 배수로 자동으로 내려감**(`clampMultiplierToStage`). 「잠긴 배수와 다음 문턱을 보여 줄지」는 모노에 없어 넣지 않음 → 확인 필요(제나) | 모노 `IngameScene.ts` 233–243줄 `onCycleMult` · `session.ts` `allowedMultipliers` · `usableMaxMult` = min(판 · 번영 · 보유) · `GameView.syncMultLock` (이식) · 2차수정 19번 묶음(제나 13:28 · 비앙카 13:29) · 판 상한은 케이팝에 판이 없어 뺌(S03 R-S03-7) |
+
+### 4. 표와 값 칸 (이식)
+
+숫자는 쓰지 않는다. 키 이름은 모노와 같게(코드가 키로 부름) · 값은 모두 임시 시안.
+
+### 4-1. 연출 표 30개 (이식)
+
+제나 집계 30(`data/ui_fx` 표 27 가운데 전투 2 뺌 + 묶음 폴더). `data/fx`의 `cast_*` 표(캐스트 연출)는 전투 쪽인지 확인 필요. 표 모양은 둘: **key 표**(`key,value` · 연출 손잡이) · **줄 표**(줄마다 하나).
+
+| 표 | 모양 | 뜻 | 케이팝 |
+|---|---|---|---|
+| `boardcam` · `board_polish` · `intro` · `result` · `slot` · `wheel` · `window` · `wordreel` · `dig` · `pack` · `pact` · `stat` | key | 연출마다 시간 · 크기 · 흔들림 손잡이 | 같은 key 구조 · 값 임시 시안 |
+| `boardcam_family` | 줄(`family` · `label` · 위 · 가장자리 · 결) | 카메라 계열 | 같음 |
+| `boardcam_shots` | 줄(`id` · `group` · `label` · `hint`) | 카메라 컷 | 같음 |
+| `boardcam_tiles` | 줄(`idx` · 짧은 이름 · 긴 이름 · `family` · `icon`) | 칸별 카메라 계열 | 40칸 · `board_tile`과 짝 |
+| `chrome` | 줄(테두리 · 9조각 · 채움 · 그림) | 창 크롬 | 색은 10/06 파스텔 |
+| `choicekind` · `choiceopt` | 줄(선택 종류 · 선택지 · 아이콘) | 분기 · 고르기 | 분기 기획서 없음 · 틀만 |
+| `reelkind` | 줄(릴 종류 · 글자 · 회전 배수) | 글자 릴 | 필러 슬롯 |
+| `result_kind` | 줄(`id` · 띠 · 문구 · 버튼 · 톤) | 결과창 종류 | 판 클리어 · 실패 줄은 뺌 → 시즌 끝 · 이벤트 끝 |
+| `fx_bind` | 줄(`clip_id` · 박자 · 때 · ms · 레이저 · 층 · 자리 · 개수) | **연출 연결**: 어느 장면 · 박자에 어떤 빛을 붙이나 | 비전투 줄만 |
+| `page_layout` | 줄(4-5) | 구역 배치 | 4-5 |
+| ~~`battleend` · `vs`~~ | key | 전투 끝 · 대결 컷 | 뺌(전투) |
+
+옛 안 → 케이팝 표 자리 · 이름(`data/ui_fx/` 그대로 또는 `ui_fx_*`)은 확인 필요 · 다음 개발 단계.
+
+모노 읽기: 키 표는 기본값 위에 표 값을 덮는다 — 기본값에 없는 키는 무시(표에 새 키를 넣어도 코드가 모르면 안 바뀜 → `audit-ui-fx` 검사 · 4-6).
+
+### 4-2. 케이팝 연출 표 이름 · 칸 (이식)
+
+**자리 · 이름(정함 · 임시)**: `data/game/` 한 곳에 `ui_fx_` 머리를 붙인 납작한 이름(등록부 · 검사기가 `data/game`만 보므로 하위 폴더를 만들지 않음). 공통 칸 `resource_id` · `resource_stage` 등은 [S08](S08_표구조_연결지도.md) 규칙대로. 키 이름은 모노와 같게(코드가 키로 부름) · 값은 임시 시안.
+
+**key 표**(머리 줄 = 케이팝 key 표 공통 `key,value,unit,name_ko` + 공통 칸 — `event_boost_config`와 같은 모양)
+
+| 케이팝 표 | 모노 | 줄(key) |
+|---|---|---|
+| `ui_fx_window` | `window` | dimMs · popMs · fromScale · overshoot · dimAlpha |
+| `ui_fx_intro` | `intro` | holdMs · slideMs · shakeMs · copyFadeMs · exitMs · staggerMs · slidePx · dimAlpha · skip · ribbonText · title · body · imgVignette · imgPlaque · imgRibbon · copyL · copyR · copyT · copyB · titleFontMax · titleFontMin · bodyFontMax · bodyFontMin |
+| `ui_fx_result` | `result` | variant · dimMs · dimAlpha · staggerMs · raySpinMs · glow · days · worldName · bannerText · captionText · nextHint · ctaText · failBannerText · failCaptionText · failNextHint · failCtaText · failDays · imgDir · imgVignette · imgRays · imgGlow · imgSpark · imgBanner · imgPlate · imgBar · imgCrest · imgOrnamentL (모노 learnedLabel · showLearned · failShowLearned = 스킬 → 뺌) |
+| `ui_fx_pick` | `slot`의 고르기 손맛만 | pickSparkN · pickFlashPeak · pickShakePx · pickPop · shakePx · exitMs · imgFlash · imgSpark (모노 `slot` 나머지 = 스킬 슬롯 → 뺌) |
+| `ui_fx_stat` | `stat` | overlayAlpha · overlayMs · pickHoldMs |
+| `ui_fx_boardcam` | `boardcam` | diceSum · hot · heroOff · diceShot · hopShot · landShot · stepMs · landHoldMs · earlyWalkFrac · earlyStepMul · accelStepMul · diceMs · viewScale · travelZoom · landZoom · establish · diceReadMs · diceFlyMs · headToLandMs · commitMs · clothHoldMs · riseMs · nudgeMs · chanceInMs · chanceHoldMs · chanceOutMs · chanceWordPx · startWord · startInMs · startHoldMs · startOutMs · startWordPx · clothTilePx · clothAlpha · imgPlateFine · imgPlateRare · imgPlateEpic · imgFlash · imgSpark · imgSparkCoin · imgDieDir · imgCloth · boxDepth · plateDepth · slabDepth |
+| `ui_fx_board_polish` | `board_polish` | title · note · original · improved · texture · impact · sound · replay · texture_opacity · texture_size · impact_ms · sound_gain · sound_frequency · dice_depth · type_depth · type_preview · type_depth_px · dice_depth_px |
+| `ui_fx_wheel` | `wheel` | dimMs · dimAlpha · spinMs · turns · landMs · shakePx · flashPng · sparkPng |
+| `ui_fx_wordreel` | `wordreel` | dimMs · dimAlpha · spinMs · stopStaggerMs · bounce · landFlashMs · itemH · letterDir · flashPng · spinSpeed · stampMs · stampStaggerMs · stampFromY · slideMs · slideHoldMs · exitMs · exitStaggerMs · exitToY · countMs · demoGold |
+| `ui_fx_dig` | `dig` | dimMs · dimAlpha · stampMs · stampStaggerMs · stampFromY · openMs · autoTapMs · flashPng |
+| `ui_fx_pact` | `pact` | scrimAlpha · mascotA · mascotB · mascotGeneric (모노 devilMascot · medusaMascot · genericMascot → 케이팝 이름 확인 필요) |
+| `ui_fx_pack` | `pack` | newPower · dupePower · tearPower · rareStarMin · stampMs · soloHoldMs · multiHoldMs · desat · teaseMs · teaseRareMs · landMs · flipMs · gatherN · backPng · crestPng · packArt_* (팩 보류 → 표 자리만) |
+
+**줄 표**
+
+| 케이팝 표 | 모노 | 칸 | 한 줄 |
+|---|---|---|---|
+| `ui_fx_chrome` | `chrome` | `ui_fx_chrome_id` · label · hint · borderPx · slice · fill · bgTop · bgMid · bgBot · frameImage · title · body · plateImage · cornerImage · edgeImage · cornerPx · edgePx · edgeColor · plateAlpha · sampleW · sampleH · overlayX · overlayY · overlayScale | 창 테두리 한 벌 |
+| `ui_fx_choice_kind` | `choicekind` | `ui_fx_choice_kind_id` · label · title · sub · cell_png · layout(줄 · 제안 · 두 편) · opt_group · hole_x · hole_y · hole_w · hole_h · overlay_x · overlay_y · overlay_scale | 고르기 릴 하나 — 행: `stat`(두 갈래) · `pact` · `lucky` · `myth` |
+| `ui_fx_choice_opt` | `choiceopt` | `ui_fx_choice_kind_id` · `ui_fx_choice_opt_id` · label · desc · icon | 선택 칸 하나 |
+| `ui_fx_reel_kind` | `reelkind` | `ui_fx_reel_kind_id` · label · word · spin_mult · cell_png · enter(찍힘 · 밀림) · hole_x · hole_y · hole_w · hole_h · glyph_y · rail_png | 글자 릴 하나 — 잭팟 셋 · 찬스 → 케이팝 잭팟 · 세로 슬롯 |
+| `ui_fx_result_kind` | `result_kind` | `ui_fx_result_kind_id` · label · banner · caption · world · hint · cta · days · crest · tone | 결과창 종류(시즌 끝 · 이벤트 끝) |
+| `ui_fx_bind` | `fx_bind` | `clip_id` · beat · when · at_ms · laser_id · tex · layer · pos · pos_x · pos_y · count · look_id · note | 연출 박자에 붙는 빛 · 입자 하나(비전투 clip만) |
+| `ui_fx_boardcam_shot` · `ui_fx_boardcam_tile` · `ui_fx_boardcam_family` | `boardcam_shots` · `_tiles` · `_family` | id · group · label · hint / idx · short · full · family · icon / family · label · top · edge · grain | 카메라 컷 · 칸(40칸 `board_tile`과 짝) · 칸 무리 색 |
+| `tool_ui_fx_source` | `tool_ui_fx_source` | source_id · table · source_note | 연출 툴이 읽는 표 목록(툴 표) |
+
+뺌(전투): `battleend` · `vs` · `data/fx/*`(cast · laser 손잡이) — 단 `ui_fx_bind`가 부르는 레이저 · 입자 모양(모노 `laser_fx` · `particle_looks`)은 비전투 줄만 옮길 자리가 필요 → 확인 필요.
+
+### 4-3. 케이팝 소리 표 이름 · 칸 (이식)
+
+| 케이팝 표 | 모노 | 칸 | 값 갈래 |
+|---|---|---|---|
+| `sfx_cue` | `sfx_cue_config` | `sfx_cue_id` · `layer` · `sfx_asset_id` · `volume` · `cooldown_ms` · `vibrate` · `fallback_freq` · `fallback_dur` · `enabled` · `note` + 공통 칸 | `layer`: ui · fx · bgm |
+| `sfx_bind` | `sfx_bind_config` | `sfx_bind_id` · `owner_kind` · `owner_id` · `sfx_cue_id` · `slot` · `note` | `owner_kind`: ui · scene(케이팝) · ~~action_type~~(전투 뺌) / `slot`: ui · bgm · buff |
+| `sfx_asset` | `sfx_asset_config` | `sfx_asset_id` · `path` · `kind` · `preload` · `note` | `kind`: 한 번 · 반복 |
+| `tool_sfx_source` | `tool_sfx_source` | source_id · role · table · id_col · label_col · cue_col · href_tpl · source_note | 소리 툴 읽기 목록(전투 칸 cast · hit · upgrade · base 뺌) |
+
+- 장면 이름(`owner_id` · scene): 로비 · 인게임 · 이벤트 장면 6 · 부스트(2-3 목록).
+- 소리 툴 읽기 목록(`tool_sfx_source`)은 툴 표 규칙대로 `tool_` 이름.
+- id 칸 이름은 S08 링크 규칙(`…_id`로 끝남 = 그 표의 열쇠)에 맞춰 `sfx_cue_id` · `sfx_asset_id`로 바꿈(모노 `cue_id` · `asset_id`).
+
+### 4-4. 아이콘 원본 목록 줄 (이식)
+
+표 `tool_icon_source`(툴 표 · 모노와 같은 이름). 칸: `source_id` · `kind` · `table` · `id_col` · `id_fallback_col` · `label_col` · `value_col` · `value_tpl` · `emoji_col` · `form`(빈칸 = 이모지 · 경로 / image) · `filter_col` · `filter_val` · `require_value` · `dedupe_col` · `preview_px` · `source_note` · `sort`.
+
+| 케이팝 줄(임시) | 표 | 아이콘 칸 | 모노 짝 |
+|---|---|---|---|
+| `facility_icon` | `facility` | `icon` | `build_icon` |
+| `card_theme_icon` | `card_theme` | `icon` | `character_card` |
+| `tile_svg` | `board_tile` | `value_tpl` = 칸 id로 만든 그림 경로 | `tile_svg` |
+| `tile_card_icon` | `tile_card` | `icon` | `effect_icon` |
+| `minigame_reward_icon` | `bonus_reward_pool` | `icon`(S07 3-2 더할 칸) | `reward_icon` |
+| `branch_category_icon` | `branch_category` | `icon` | (분기 무리) |
+| `sale_icon` | `sale_offer_reward` | `reward_kind`로 고정 아이콘 | `shop_icon` |
+| 뺌 | — | — | `skill_icon` · `enemy_*` · `mission_icon`(10/12 [S11 미션](S11_미션.md)이 생김 → 다시 넣을지 2차 4단계 확인 필요 · S11 V-S11-11 · 옛 안 → 미션 기획서 없음) · `item_icon` · `event_asset_icon`(이벤트 재화 → 이벤트 표 생길 때) |
+
+### 4-5. 구역 배치 표 (이식)
+
+표 `ui_fx_page_layout`. 칸: `page_id` · `zone_id` · `label` · `on` · `place` · `x` · `y` · `w` · `h` · `font_px` · `char_scale` · `note` + 공통 칸. 열쇠 = `page_id` + `zone_id`.
+
+| 칸 | 뜻(모노 `pageLayout.ts`) |
+|---|---|
+| `on` | 툴 미리보기에서만 숨김(게임은 늘 있음) |
+| `place` | 0 = 원래 흐름 그대로 · 글자 · 초상 크기만 / 1 = `x · y · w · h`(패널 대비 %)로 딱 놓기 |
+| `font_px` | 0보다 크면 글자 크기 |
+| `char_scale` | 초상 크기 배율 |
+
+| 페이지(`page_id`) | 구역(`zone_id`) | 모노 짝 |
+|---|---|---|
+| `lobby` · `ingame` · `cardbook` · `mission` · `pack` · `shop` | 페이지마다 `title` · `grid` · `buttons` 셋 → 18줄 | 모노 9페이지 27줄 가운데 `expedition` · `adventure`(보류) · `combat`(전투) 뺌 |
+
+### 4-6. 연출 툴 · 검사 (이식)
+
+| 모노 | 하는 일 | 케이팝 |
+|---|---|---|
+| UI 연출 허브 + 툴별 확인 화면(카메라 · 창 · 결과 · 릴 · 휠 등) | 표 값을 바꾸며 연출을 바로 봄 | 명세 = **[S06b 보드 연출 계승](S06b_보드연출계승.md) 5절**(허브 틀 R-S06b-23~30 · 확인 화면 다섯 손잡이 · 범위 · 값 · 쓰는 곳 · 전투 클립 뺌 · 10/12 2차 4단계 · 문서만 · 툴은 개발 단계). 옛 안 → 모노 툴 그대로 이식 대상 — 확인 화면 다섯(카메라 · 창 · 결과 · 릴 · 휠) 모두 · 모노이식마무리 3단계 뒤에 넣음(제나 11:2x · 이스라트 11:53) · 옛 안 → 없음 · 다음 개발 단계 (이식) |
+| `audit-ui-fx` | 연출 표 키 ↔ 코드 키가 같은지(어긋나면 표를 고쳐도 게임이 안 바뀜) | 없음 → [S02](S02_발란스툴.md) 4-8 · R-S02-17 |
+
+### 5. 이어지는 시스템 (이식)
+
+| 보내는 쪽 | 받는 쪽 | 무엇 |
+|---|---|---|
+| S06a | [S06 인게임 화면 틀](S06_인게임화면틀.md) | 장면 전환 · 결과창 · 창 · 연출 박자(도착 줌 T0 = `ui_fx_boardcam`) |
+| S06a | [S07 칸 콘텐츠](S07_칸콘텐츠_상점_카드덱.md) | 미니게임 연출 다섯 · 이벤트 장면 자리 · 특가 화면 |
+| S06a | [S04 건설 · 시설](S04_건설시설.md) | 건설 시트 · 건설 탭 화면 |
+| [S03 보드 경제](S03_보드주사위경제.md) | S06a | 병가 탈출 주사위 · 잭팟 릴 연출 신호 |
+| S06a | [S02 발란스 툴](S02_발란스툴.md) | 개발 메뉴 · `audit-ui-fx` 검사 |
+| S06a | [S08 표 구조](S08_표구조_연결지도.md) | `ui_fx_*` · `sfx_*` · `tool_icon_source` 표 등록 · 공통 칸 |
+| `text_ko`(클로드 몫) | S06a | 화면 글자 key |
+
+### 6. 이게 아닌 것 (이식)
+인게임 화면 층 · 하단 탭 설계가 아니다(→ S06) · 모노 숫자 · 시간 · 색을 옮기는 게 아니다 · 이벤트 놀이 규칙이 아니다(→ S07 · 기획서 없음) · 전투 연출(대결 컷 · 전투 끝 · 스킬 슬롯 · 캐스트)이 아니다.
+
+### 7. 아직 안 한 것 · 확인 필요 (이식)
+
+**제안 내용과 다름**(모노 구조대로 넣고 체크만 · 묻지 않음)
+- ☐ **로비 장면**: W03에 로비 없음 → 모노대로 넣음(2-3).
+- ☐ **건설 시트 · 건설 탭**: W03 B안에서 빠짐 → 모노대로 넣음(2-4 · S04 V-S04-4).
+- 색: 모노 색은 빼고 10/06 파스텔(대응표 규칙 그대로) — 다름 아님.
+
+**확인 필요 · 다음 단계**
+- 케이팝 이벤트 장면 놀이 규칙 — 기획서 없음(S07).
+- 소셜 피드 · 스킬 아이콘 자리 — 확인 필요. 옛 안 → `towerFloors` · `castPresent` 전투 여부(10/12 풀림 · 2-5).
+- 연출 표 · 소리 표 · 아이콘 목록 · 구역 배치 표 — 자리 · 이름 · 칸은 4-2 · 4-3 · 4-4 · 4-5로 정함. 표 파일을 만드는 것은 게임 소스 이식 때. 레이저 · 입자 모양 표 비전투 줄 · 계약 창 마스코트 이름 — 확인 필요.
+- 케이팝 표에 `icon` 칸 더하기 — 게임 소스 이식 때(R-S06a-16).
+- 감옥(병가) 전용 화면 없음 — 보드 칸 흐름 안 연출(S03 2-4 · 제나 겹침 메모).
+
+---
+
+## 문서 정보
+
+<details>
+<summary>이전 작성·수정 근거</summary>
+
+> 시스템 기획(모노 이식) · 헌법 W00c 양식(간략 B + 세부 A) · [S06 인게임 화면 틀](S06_인게임화면틀.md)의 하위 문서 · 제안(검수 대기) · 단서 2026-10-10 · 양식 맞춤 2026-10-12
+> 근거: 제나 `보고/20261010_0950_화면구조대조_제나.md`(줄 목록 98줄) · 모노 원본(읽기만) `src/scenes` · `src/ui` · `src/uiFx` · `data/ui_fx` · `data/sfx_*` · `data/ui_text_config.csv` · `data/tool_icon_source.csv`. 모노 숫자(시간 · 크기 · 색)는 옮기지 않고 구조 · 칸 · 순서만. 값은 임시 시안. 전투 제외 · 원정 보류.
+
+- 작성: 단서(커서) · 2026-10-10 · 지시 `입력/기획-책갈피모노구조채우기.md` 2번 · 제나 0950 대조(장면 15 · 화면 61 · 연출 58 · 연출 표 30 · 소리 4 · 글자 · 아이콘 · 배치 4 · 툴 · 검사 20)
+- 본 자료: 모노 `src/scenes/Scene.ts` · `SceneManager.ts` · `dotTransition.ts` · `src/uiFx/` 파일 목록 · `data/ui_fx/*.csv` 머리 줄 · `data/sfx_*_config.csv` · `ui_text_config.csv` · `tool_icon_source.csv`(모두 읽기만)
+- 모노이식마무리 1단계: 단서 · 2026-10-12 · 지시 `입력/개발-모노이식마무리.md` 1번(연출 다섯 → S07 3-4 한 항목) · 6번(옛 4-1 · 5-1 · 6-1 · 6-2) · 제나 1037 1~3 반영
+- 양식 맞춤: 단서 · 2026-10-12 11시대 · 현중 「책갈피 양식대로」 · 내용은 그대로 두고 헌법 W00c 양식(간략 · 머리 블록 · 컨셉 · R · V · 표 · 이어지는 시스템 · 이게 아닌 것)으로 다시 묶음. 새로 붙인 ID: R-S06a-8부터 17까지 · V-S06a-1부터 7까지(옛 글을 규칙 줄로 옮긴 것 · 새 규칙 아님)
+- 옛 절 → 새 절: 1-1 → 2-1 · 1-2 → 2-2 · 1-3 → 2-3 · 2 → 2-4 · 3 → 2-5 · 4 → 4-1 · 4-1 → 4-2 · 5 → 2-6 · 5-1 → 4-3 · 6 → 2-7 · 6-1 → 4-4 · 6-2 → 4-5 · 7 → 4-6 · 8 · 9 → 7
+- 모노이식마무리 1단계 수정: 단서 · 2026-10-12 · 지시 `입력/개발-모노이식마무리_1단계수정.md` · (이식)/(신규) 새 기준으로 다시 달기 · 제나 · 이스라트 11:53(4-6 UI 연출 허브 = 이식 대상 · 3단계 뒤)
+- 모노기획서이식 2차 1단계: 단서 · 2026-10-12 · 아이콘 「뺌」 줄의 `mission_icon` 사유를 S11로 이음(표시만)
+- 모노기획서이식 2차 4단계: 단서 · 2026-10-12 · 2-3 로비 줄 → [S12](S12_로비.md) · 2-5 보드 카메라 줄 · 4-6 UI 연출 허브 줄 → [S06b](S06b_보드연출계승.md)(옛 안 남김)
+- 상태: 제안(검수 대기)
+
+</details>

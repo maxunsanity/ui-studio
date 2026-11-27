@@ -1,0 +1,542 @@
+/* All audition styling is scoped; the shared host's other modules remain unchanged. */
+body[data-mode="audition"] .sim-layout{display:block}body[data-mode="audition"] .sim-controls{width:100%;max-width:none}body[data-mode="audition"] #world-panel{display:none}body[data-mode="audition"] .sim-controls .audition-app h2{font-size:inherit}body[data-mode="audition"] .sim-controls .audition-app p{font-size:inherit}body[data-mode="audition"] .sim-controls .audition-app button{width:auto}
+.au-standalone{margin:0;background:#0b0915;color:#f5edf9;font-family:Inter,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}.au-standalone #audition-root{min-height:100vh}.audition-app{--au-accent:#f58bc5;--au-violet:#a98aff;--au-cyan:#91efff;--au-ink:#f9effb;--au-muted:#b7abc8;--au-bg:#100d20;--au-flip-ms:420ms;position:relative;isolation:isolate;overflow:hidden;min-height:780px;background:radial-gradient(ellipse at 20% 25%,#52244550,transparent 48%),radial-gradient(ellipse at 80% 45%,#41326850,transparent 47%),linear-gradient(145deg,#141024,#0b0b18 70%);color:var(--au-ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;border-radius:20px;border:1px solid #d2b6ff26;box-shadow:0 28px 90px #0005;padding:0 42px 22px}.au-standalone .audition-app{min-height:100vh;border-radius:0;border:0}.audition-app *{box-sizing:border-box}.audition-app button,.audition-app a{font:inherit}.audition-app button{border:1px solid #9672b380;background:#271c3a;color:#f0deff;border-radius:10px;padding:12px 18px;cursor:pointer;transition:background .15s,box-shadow .15s,transform .15s;font-weight:700;line-height:1.25}.audition-app button:hover{background:#3a2750}.audition-app button:active{transform:translateY(1px)}.audition-app button:disabled{cursor:default;opacity:.55}.audition-app button:focus-visible,.audition-app a:focus-visible,.audition-app summary:focus-visible{outline:3px solid var(--au-cyan);outline-offset:4px}.audition-app a{color:#cfb9ec;text-decoration:none}.audition-app h1,.audition-app h2,.audition-app p{margin:0}.audition-app .au-primary{background:linear-gradient(115deg,#f4c3e9,#c8b3ff);color:#231331;border-color:#ffe1f7;box-shadow:0 4px 25px #f393d426;font-weight:900}.audition-app .au-primary:hover{background:linear-gradient(115deg,#ffe4f3,#dacbff);box-shadow:0 0 35px #f393d450}.audition-app .au-secondary{background:transparent;color:#c9bad9;border-color:#8e70934d}.audition-app:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.14;background-image:linear-gradient(#e4c7ff0d 1px,transparent 1px),linear-gradient(90deg,#e4c7ff0d 1px,transparent 1px);background-size:50px 50px;mask-image:linear-gradient(transparent,#000)}
+.au-top{display:flex;gap:24px;align-items:center;padding:24px 0;border-bottom:1px solid #ead4ff1a;position:relative;z-index:3}.au-top .au-brand{font-size:16px;font-weight:950;letter-spacing:-.06em;color:#fff}.au-brand span{color:var(--au-accent);padding:0 3px}.au-top>span{font-size:10px;color:#9d8faf;letter-spacing:.16em}.au-top-mark{margin-left:auto;letter-spacing:.18em;color:#b09ac5;font-size:9px}.au-top-mark b{font-size:13px;color:var(--au-accent);padding-left:8px}.au-eyebrow{font-size:10px;line-height:1.4;letter-spacing:.2em;font-weight:900;color:var(--au-accent);display:block}.au-intro{min-height:630px;display:grid;grid-template-columns:.9fr 1.1fr;align-items:center;gap:10px;max-width:1250px;margin:auto}.au-intro-copy{z-index:2}.au-intro h1{font-size:clamp(36px,5.4vw,80px);line-height:1.08;letter-spacing:-.065em;margin:22px 0;background:linear-gradient(115deg,#fff 30%,#fbcce8,#bda9ff);-webkit-background-clip:text;background-clip:text;color:transparent;word-break:keep-all}.au-intro p{font-size:15px;line-height:1.85;color:var(--au-muted);max-width:360px;word-break:keep-all}.audition-app .au-start{display:flex;justify-content:space-between;align-items:center;width:280px;padding:19px 24px;margin-top:34px;font-size:17px}.au-start span{font-size:25px}.au-intro-rule{display:flex;align-items:center;gap:9px;color:#81748f;margin-top:35px;font-size:10px}.au-intro-rule span{color:#b794cf;font-weight:900}.au-intro-rule i{height:14px;border-left:1px solid #61516f;margin:0 6px}.au-intro-cards{position:relative;perspective:1400px;min-height:530px}.au-intro-card{position:absolute;left:50%;top:50%;width:260px;aspect-ratio:3/4;border:5px solid #b993d0;border-radius:22px;overflow:hidden;box-shadow:0 30px 65px #0009,0 0 0 1px #ffd9ff;transform:translate(-50%,-50%);background:#22142f}.au-intro-card-0{transform:translate(-106%,-46%) rotate(-13deg) scale(.85);filter:brightness(.65);z-index:0}.au-intro-card-1{transform:translate(-6%,-46%) rotate(13deg) scale(.85);filter:brightness(.65);z-index:0}.au-intro-card-2{transform:translate(-50%,-53%) rotate(-4deg);z-index:1;border-color:#e0b9ef}.au-intro-card b{position:absolute;bottom:0;left:0;right:0;padding:22px;background:linear-gradient(transparent,#140921);color:white;font-size:23px}.au-portrait{position:absolute;inset:0;background-repeat:no-repeat;background-position:center;background-size:cover}.au-intro-card:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,#fff4 43%,transparent 50%);pointer-events:none}
+.au-match-heading{display:flex;justify-content:space-between;align-items:center;gap:24px;max-width:1120px;margin:26px auto 16px}.au-match-heading h1{font-size:clamp(16px,2vw,24px);font-weight:700;letter-spacing:-.03em;margin-top:7px;line-height:1.35;word-break:keep-all}.au-round-counter{white-space:nowrap}.au-round-counter b{font-size:36px;letter-spacing:-.08em;font-weight:900}.au-round-counter span{color:#81708e;font-size:13px;margin-left:8px}.au-bracket-bar{display:flex;align-items:center;gap:18px;max-width:1120px;margin:auto;color:#9686a7;font-size:10px}.au-bracket-bar>span{white-space:nowrap}.au-bracket-bar b{color:#ebd5f5;margin-left:4px}.au-progress{flex:1;height:3px;background:#dbc0ed19;border-radius:4px;overflow:hidden}.au-progress i{display:block;height:100%;background:linear-gradient(90deg,var(--au-violet),var(--au-accent));transition:width .3s}.au-advance-slot{width:94px;height:38px;display:flex;align-items:center;justify-content:center;gap:7px;border:1px dashed #b392ca66;border-radius:7px;color:#bfa4d0;transition:box-shadow .2s;flex:none}.au-advance-slot span{color:var(--au-accent);font-size:17px}.au-advance-slot.has-landed{box-shadow:0 0 30px #fa9bdc88;border-color:#ffd9f5}.au-duel{display:flex;align-items:center;justify-content:center;gap:42px;padding:28px 0 16px;perspective:1500px;min-height:490px}.au-versus{display:flex;flex-direction:column;align-items:center;gap:12px;flex:none;color:var(--au-accent)}.au-versus span{font-size:34px;font-weight:950;font-style:italic;letter-spacing:-.07em;text-shadow:0 0 30px #f493cf55}.au-versus i{height:45px;width:1px;background:linear-gradient(transparent,#c36dad88,transparent)}.au-card{position:relative;width:clamp(210px,23vw,302px);flex:none;z-index:1;transform-origin:center;transition:transform .2s,filter .2s;--au-pointer-x:50%;--au-pointer-y:35%}.au-card:hover:not(.is-flipped):not(.is-eliminated):not(.is-chosen){transform:translateY(-9px);z-index:4}.au-card-perspective{position:relative;aspect-ratio:3/4;perspective:1400px}.au-card-flipper{width:100%;height:100%;transform-style:preserve-3d;transition:transform var(--au-flip-ms) cubic-bezier(.22,.75,.2,1)}.au-card.is-flipped .au-card-flipper{transform:rotateY(180deg)}.au-card-face{position:absolute;inset:0;border-radius:18px;padding:5px;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:repeating-linear-gradient(135deg,#ffffff55 0 2px,transparent 2px 6px),linear-gradient(135deg,#f1d3fc 0%,#9671ca 13%,#dac9fd 20%,#ca81bc 34%,#644088 50%,#d8e6fa 64%,#8060c4 80%,#ebc9ed);box-shadow:inset 0 0 0 1px #f3defb99,0 18px 45px #0009;overflow:hidden}.au-card-face:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--au-pointer-x) var(--au-pointer-y),#ffe7ff24,transparent 45%),linear-gradient(115deg,transparent 28%,#ffd9fb2e 31%,transparent 36%,transparent 64%,#d0e6ff20 70%,transparent 77%);mix-blend-mode:screen;pointer-events:none;border-radius:inherit}.au-card-art{position:relative;height:100%;border-radius:13px;overflow:hidden;background:#211528}.au-card-title{position:absolute;top:0;left:0;right:0;padding:16px 15px 34px;background:linear-gradient(#180d32d9,#180d3244,transparent);z-index:2}.au-card-title small{font-size:7px;letter-spacing:.13em;color:#dcc2f0}.audition-app .au-card-title h2{font-size:24px!important;margin:4px 0 0;line-height:1;color:white;text-shadow:0 2px 9px #180620}.au-card-bottom{position:absolute;bottom:0;left:0;right:0;padding:8px;text-align:center;font-size:8px;color:#dccbe5;background:#190f2cda;z-index:2}.au-card-radar{position:absolute;left:9px;bottom:37px;width:47%;background:#121024d9;border:1px solid #b39acb88;border-radius:11px;padding:7px 5px 5px;backdrop-filter:blur(8px);text-align:center}.au-card-radar>span{font-size:8px;font-weight:800;color:#ebceeb;letter-spacing:.06em}.au-card-radar>small{display:block;font-size:7px;color:#bda4c9;margin-top:-4px}.au-radar{display:block;width:100%;overflow:visible}.au-radar-cross{stroke:#958ba145;fill:none}.au-radar-grid{fill:none;stroke:#aaa2b5;stroke-width:1.8;stroke-dasharray:4 4}.au-radar-grid.inner{opacity:.3;stroke-width:1}.au-radar-area{fill:#f890c650;stroke:#ff9bce;stroke-width:2.2;stroke-linejoin:round}.au-radar text{font-size:9px;fill:#e8ddec;font-weight:700}.au-axis-icon{fill:none;stroke:#e6c9ef;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.au-card-back{transform:rotateY(180deg)}.au-back-inner{height:100%;border-radius:13px;background:radial-gradient(ellipse at 90% 0%,#70377166,transparent 55%),linear-gradient(140deg,#271933,#0e1022);padding:23px 20px;display:flex;flex-direction:column;gap:10px}.au-back-inner>small{font-size:10px;color:#d9b1eb;letter-spacing:.1em}.audition-app .au-back-inner h2{font-size:26px!important;line-height:1.3}.au-stat-bars{display:flex;flex-direction:column;gap:20px;margin-top:20px}.au-stat>div:first-child{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:#e2d5e9}.au-stat b{color:#ffb2d8;font-size:19px}.au-stat b small{font-size:11px;color:#aa92ba;font-weight:500}.au-stat-track{position:relative;height:5px;border-radius:5px;background:#bea6dc22;margin-top:5px}.au-stat-track em,.au-stat-track i{position:absolute;inset:0 auto 0 0;border-radius:5px}.au-stat-track em{background:#e4a2e32c}.au-stat-track i{background:linear-gradient(90deg,#ad8ded,#ffa2cb)}.au-stat-track>span{position:absolute;top:-3px;bottom:-3px;border-left:1px dashed #ebc3ee}.au-stat-total{border-top:1px solid #dac5f733;padding-top:13px;margin-top:12px;display:flex;justify-content:space-between;align-items:baseline;font-size:10px;color:#bba3cb}.au-stat-total>b{font-size:20px;color:#f7e9ff}.au-stat-total small{font-size:11px;color:#bba3cb}.audition-app .au-back-inner p{font-size:9px!important;line-height:1.65;color:#ae95bd}.au-back-inner .au-scale-note{font-size:8px;letter-spacing:0;margin-top:auto;color:#927daa}.au-card-actions{display:grid;grid-template-columns:1fr;gap:6px;margin-top:11px}.audition-app .au-card-actions button{width:100%;font-size:11px;padding:10px 8px;border-radius:8px;line-height:1.2}.audition-app .au-card-actions .au-flip{background:#1b1429d9;border-color:#8b6da66b;color:#d4bce5;font-weight:500}.au-flip span{margin-right:4px}.audition-app .au-card-actions .au-pick{background:linear-gradient(110deg,#d9b5f3,#b9a3e5);color:#27143a;font-weight:900;border-color:#d9bdea;display:flex;justify-content:space-between;padding:11px 15px}.au-card.is-chosen{z-index:8}.au-card.is-chosen .au-card-face{box-shadow:0 0 0 2px #ffe0f3,0 0 25px #ed83cbbb,0 0 75px #ba72d377,0 20px 50px #0007}.au-card.is-eliminated{filter:saturate(.22)}.au-card-stamp{display:none;position:absolute;z-index:4;top:45%;left:50%;transform:translate(-50%,-50%) rotate(-9deg);background:#a0307ce8;border:2px solid #ffd6ef;color:white;border-radius:7px;padding:10px 16px;white-space:nowrap;font-size:19px;font-weight:950;box-shadow:0 5px 20px #170a2688}.is-chosen .au-card-stamp,.is-eliminated .au-card-stamp{display:block}.is-eliminated .au-card-stamp{background:#211b33e8;border-color:#9e8aad;color:#d4bfdf;font-size:13px;transform:translate(-50%,-50%) rotate(7deg)}.au-match-note{text-align:center;color:#96839f;font-size:10px!important;padding:11px 0 16px}.au-match-note span{padding:0 12px;color:#65556c}.au-section-heading{text-align:center;padding:26px 0 17px}.au-section-heading h1{font-size:clamp(24px,3vw,40px);letter-spacing:-.05em;margin-top:8px;line-height:1.2}.au-section-heading p{font-size:12px!important;color:#ac97b9;margin-top:10px}.au-review-layout{display:grid;grid-template-columns:1fr 1fr;gap:65px;max-width:780px;margin:16px auto 34px;align-items:center}.au-review-card{display:flex;justify-content:center}.au-review-copy h2{font-size:42px!important;margin:10px 0 17px;letter-spacing:-.06em}.au-review-copy>p{font-size:14px!important;color:#c3adcc;line-height:1.8;word-break:keep-all}.au-unassigned{display:flex;gap:13px;align-items:center;border:1px dashed #8e639988;border-radius:12px;padding:17px 15px;margin:25px 0}.au-unassigned>span{width:40px;height:40px;display:grid;place-items:center;border:1px solid #a986c2;border-radius:50%;font-size:24px;color:#cba8e4;flex:none}.au-unassigned small{color:#a98bba;font-size:9px;letter-spacing:.12em;display:block;margin-bottom:5px}.au-unassigned b{font-size:11px;line-height:1.6;font-weight:500;color:#d4bddf;display:block;word-break:keep-all}.au-review-copy>button{width:100%!important;margin-top:9px;padding:16px!important}.au-review-copy .au-primary{display:flex;justify-content:space-between}.au-team{display:flex;align-items:center;justify-content:center;gap:48px;margin:22px auto 25px;max-width:1040px}.au-member-result .au-card{width:260px}.au-team-plus{font-size:43px;color:#bc82c9;font-weight:200}.au-mons-result{position:relative;width:320px;align-self:stretch;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.au-mons-result>h2{font-size:32px!important;letter-spacing:-.04em;margin-top:5px}.au-mons-result .au-eyebrow{position:relative;z-index:2}.au-mons-orbit{position:absolute;width:95%;aspect-ratio:1;border:1px solid #b576bf33;border-radius:50%;background:radial-gradient(circle,#c686f027,transparent 65%);box-shadow:0 0 0 24px #b77bc706,0 0 0 55px #b77bc704;top:21%}.au-mons-model{position:relative;width:100%;height:330px;margin-top:8px;z-index:1}.au-mons-fallback{position:absolute;inset:15% 4% 0;width:92%;height:80%;object-fit:contain;filter:drop-shadow(0 20px 20px #0006)}.au-mons-model canvas{position:absolute;inset:0;width:100%;height:100%;display:block}.au-mons-model.has-3d>.au-mons-fallback{display:none}.au-element{display:inline-block;border:1px solid #b594cc66;color:#cbb3dc;border-radius:20px;padding:6px 12px;font-size:10px;margin-top:10px}.au-result-links{display:flex;align-items:center;justify-content:center;gap:22px;padding:10px 0 22px;font-size:10px;color:#9c85ad}.au-result-links small{font-size:8px;color:#695671}.au-review-tools{max-width:1120px;margin:18px auto 0;border-top:1px solid #c5a6d420;padding-top:15px;font-size:10px;color:#867492}.au-review-tools summary{cursor:pointer;width:fit-content}.au-review-tools button{font-size:10px!important;padding:8px 12px!important;margin:12px 5px 0 0}.au-review-tools p{font-size:9px!important;color:#907a9f;padding:9px 0;line-height:1.6}.au-warning{font-size:11px!important;color:#ffcab0;text-align:center}.au-announcement{position:absolute;bottom:10px;left:20px;font-size:11px;color:#ffd0e9;pointer-events:none}.au-dialog-backdrop{position:absolute;inset:0;z-index:100;background:#0c071cbb;backdrop-filter:blur(12px);display:grid;place-items:center;padding:22px}.au-dialog{max-width:450px;border:1px solid #cea6e3;border-radius:18px;background:#21162e;padding:28px;box-shadow:0 30px 80px #000a}.au-dialog h2{font-size:23px!important}.au-dialog p{font-size:13px!important;color:#c6b0d1;line-height:1.75;margin:18px 0}.au-dialog>div{display:flex;gap:9px}.au-dialog button{font-size:12px}.au-particle{position:absolute;border-radius:2px;background:var(--particle-color);box-shadow:0 0 10px var(--particle-color);z-index:80;pointer-events:none}.au-frame-trail{position:absolute;border:2px solid #f9bce7;border-radius:20px;box-shadow:0 0 12px #cf8cec,inset 0 0 10px #bba8ff;z-index:7;pointer-events:none}.au-flight-card{position:absolute;z-index:25;border:3px solid #e5bdff;border-radius:13px;overflow:hidden;transform-origin:top left;box-shadow:0 0 25px #e9a6da77;pointer-events:none}.au-flight-card>.au-portrait{inset:0}.au-hero{position:absolute;inset:0;min-height:650px;z-index:60;background:#11091c;overflow:hidden;isolation:isolate}.au-hero-world{position:absolute;inset:15% 35%;border:4px solid #f5c9f0;border-radius:25px;overflow:hidden;box-shadow:0 0 30px #bd7add88,0 0 100px #f3a0db66;transition:inset .85s cubic-bezier(.2,.55,.1,1),border-width .5s,border-radius .6s,opacity .25s;transform:scale(.96)}.au-hero-world>.au-portrait{filter:brightness(.85);transform:scale(1);transition:transform 1.1s,filter .8s}.au-hero-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 43%,transparent 25%,#0e071b70 70%);pointer-events:none}.au-hero-lens{position:absolute;left:50%;top:47%;width:4px;height:4px;border-radius:50%;box-shadow:0 0 50px 24px #ffd3ed90,0 0 130px 55px #b689df50;transform:translate(-50%,-50%) scale(.2);opacity:0;transition:transform .55s,opacity .55s;mix-blend-mode:screen}.au-hero-outline{position:absolute;inset:14% 34%;border:2px solid #ffcaf4;border-radius:27px;box-shadow:0 0 16px #ffbde9,inset 0 0 15px #b6b4ff;opacity:0;transform:scale(.97);transition:transform .7s,opacity .7s}.au-hero[data-stage="charge"] .au-hero-outline{opacity:1;transform:scale(1.025)}.au-hero[data-stage="charge"] .au-hero-lens{opacity:.5;transform:translate(-50%,-50%) scale(1)}.au-hero[data-stage="expand"] .au-hero-world{inset:-7% -2%;border-width:0;border-radius:0;transform:scale(1)}.au-hero[data-stage="expand"] .au-hero-world>.au-portrait{transform:scale(1.18);filter:brightness(1.1)}.au-hero[data-stage="expand"] .au-hero-outline{opacity:0;transform:scale(2)}.au-hero[data-stage="expand"] .au-hero-lens{opacity:1;transform:translate(-50%,-50%) scale(1.7)}.au-hero-curtain{position:absolute;top:-10%;bottom:-10%;width:58%;z-index:4;background:repeating-linear-gradient(90deg,#170e2c 0,#3e1a46 7%,#170c2b 13%,#622649 18%,#21102e 23%);box-shadow:0 0 50px #0009;transition:transform .55s cubic-bezier(.6,0,.35,1);border:1px solid #aa669a33}.au-hero-curtain-left{left:-8%;transform:translateX(-115%) skewX(-9deg)}.au-hero-curtain-right{right:-8%;transform:translateX(115%) skewX(-9deg)}.au-hero[data-stage="curtain"] .au-hero-curtain-left,.au-hero[data-stage="curtain"] .au-hero-curtain-right{transform:translateX(0) skewX(-9deg)}.au-hero[data-stage="curtain"] .au-hero-world{inset:-7% -2%;border-width:0}.au-hero-stage{position:absolute;inset:14% 10% 10%;display:flex;justify-content:center;align-items:center;gap:4%;opacity:0;transform:translateY(25px) scale(1.12);transition:opacity .55s,transform 1s;z-index:3}.au-hero-member{position:relative;width:35%;height:78%;overflow:hidden;filter:drop-shadow(0 15px 25px #0008)}.au-hero-member>.au-portrait{inset:0;border-radius:15px;mask-image:linear-gradient(#000 86%,transparent)}.au-hero-plus{font-size:44px;color:#edb8ee;font-weight:200}.au-hero-mons{width:30%;height:65%;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 20px 30px #12031c)}.au-hero-mons>img{max-width:100%;max-height:100%;object-fit:contain}.au-hero-floor{position:absolute;bottom:8%;left:10%;right:10%;height:24%;border:1px solid #ddb4f370;border-radius:50%;transform:rotateX(65deg);z-index:-1;background:radial-gradient(ellipse,#a15bb966,transparent 67%);box-shadow:0 0 50px #bf77d233}.au-hero[data-stage="reveal"] .au-hero-stage,.au-hero[data-stage="settle"] .au-hero-stage,.au-hero[data-stage="name"] .au-hero-stage{opacity:1;transform:translateY(0) scale(1)}.au-hero[data-stage="reveal"] .au-hero-world,.au-hero[data-stage="settle"] .au-hero-world,.au-hero[data-stage="name"] .au-hero-world{opacity:0}.au-hero[data-stage="reveal"] .au-hero-lens,.au-hero[data-stage="settle"] .au-hero-lens,.au-hero[data-stage="name"] .au-hero-lens{opacity:0}.au-hero-name{position:absolute;left:0;right:0;bottom:7%;text-align:center;z-index:6;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .6s}.au-hero-name>span{color:#ecc2f5;letter-spacing:.35em;font-size:11px;font-weight:900}.au-hero-name h2{font-size:clamp(35px,5vw,76px)!important;line-height:1.1;margin:9px 0 11px;font-weight:950;letter-spacing:-.06em;text-shadow:0 0 24px #ff9ddb88}.au-hero-name p{font-size:13px!important;color:#e1c5eb;letter-spacing:.06em}.au-hero-name i{font-style:normal;margin:0 10px;color:#a07dae}.au-hero[data-stage="name"] .au-hero-name{opacity:1;transform:translateY(0)}.au-hero[data-stage="name"] .au-hero-stage{transform:translateY(-7%) scale(.88)}.audition-app .au-skip{position:absolute;right:24px;top:22px;z-index:20;background:#130c24aa;border-color:#c398d877;font-size:11px;backdrop-filter:blur(8px)}.is-hero-playing>.au-top,.is-hero-playing>.au-review-tools{visibility:hidden}.audition-app.is-paused{visibility:hidden}
+@media(min-width:1500px){.au-intro{min-height:720px}.au-duel{padding-top:40px;padding-bottom:20px}.au-card{width:318px}.au-tournament{max-width:1300px;margin:auto}.au-intro-card{width:290px}}
+@media(max-width:900px){.audition-app{padding:0 22px 18px;min-height:700px}.au-top>span{display:none}.au-intro{grid-template-columns:1fr 1fr;min-height:610px}.au-intro-cards{min-height:450px}.au-intro-card{width:205px}.au-intro h1{font-size:46px}.au-duel{gap:23px;min-height:430px}.au-card{width:250px}.au-versus span{font-size:25px}.au-review-layout{gap:35px;max-width:700px}.au-team{gap:28px}.au-mons-result{width:270px}.au-mons-model{height:280px}.au-member-result .au-card{width:240px}.au-match-heading{margin-top:20px}.au-hero-world{inset:18% 30%}.au-hero-outline{inset:17% 29%}}
+@media(max-width:640px){.audition-app{padding:0 13px 15px;border-radius:12px;min-height:700px}.au-top{padding:18px 0;gap:10px}.au-top .au-brand{font-size:13px}.au-top-mark{font-size:8px}.au-intro{display:flex;flex-direction:column-reverse;gap:0;min-height:0;padding:24px 0 35px}.au-intro-cards{width:100%;min-height:295px}.au-intro-card{width:150px;border-width:3px;border-radius:12px}.au-intro-card b{font-size:15px;padding:15px}.au-intro-copy{text-align:center}.au-intro h1{font-size:40px;margin:13px 0}.au-intro p{font-size:12px;max-width:320px;margin:auto}.au-intro .au-eyebrow{font-size:8px}.audition-app .au-start{margin:22px auto 0;width:255px;padding:15px 22px;font-size:15px}.au-intro-rule{justify-content:center;margin-top:20px;font-size:8px}.au-match-heading{gap:12px;margin:20px 0 15px}.au-match-heading h1{font-size:15px;max-width:230px}.au-match-heading .au-eyebrow{font-size:8px}.au-round-counter b{font-size:27px}.au-round-counter span{font-size:10px;margin-left:3px}.au-bracket-bar{gap:10px;font-size:9px}.au-advance-slot{width:75px;height:32px;font-size:8px}.au-duel{gap:9px;padding-top:30px;min-height:0;align-items:center}.au-card{width:calc((100vw - 83px)/2);max-width:230px}.au-versus{gap:7px}.au-versus span{font-size:18px}.au-versus i{height:24px}.au-card-face{padding:3px;border-radius:11px}.au-card-art,.au-back-inner{border-radius:8px}.au-card-title{padding:11px 8px 24px}.au-card-title small{font-size:5px;letter-spacing:.03em}.audition-app .au-card-title h2{font-size:17px!important}.au-card-radar{left:5px;bottom:24px;border-radius:7px;padding:4px 1px 3px;width:48%}.au-card-radar>span{font-size:6px}.au-card-radar>small{font-size:5px;margin-top:-3px}.au-card-bottom{font-size:5px;padding:5px}.au-card-actions{gap:5px;margin-top:8px}.audition-app .au-card-actions button{font-size:8px;padding:9px 3px;min-height:36px}.audition-app .au-card-actions .au-pick{padding:11px 8px;font-size:10px;min-height:42px}.au-back-inner{padding:14px 11px;gap:7px}.au-back-inner>small{font-size:7px}.audition-app .au-back-inner h2{font-size:18px!important}.au-stat-bars{gap:11px;margin-top:7px}.au-stat>div:first-child{font-size:9px}.au-stat b{font-size:14px}.au-stat b small{font-size:8px}.au-stat-track{height:3px;margin-top:3px}.au-stat-total{padding-top:8px;margin-top:3px;font-size:8px}.au-stat-total>b{font-size:15px}.au-stat-total small{font-size:8px}.audition-app .au-back-inner p{font-size:6px!important;line-height:1.45}.au-back-inner .au-scale-note{font-size:6px}.au-card-stamp{font-size:13px;padding:6px 10px}.is-eliminated .au-card-stamp{font-size:8px;padding:6px}.au-match-note{font-size:8px!important;line-height:1.65;padding:11px 7px}.au-match-note span{padding:0 3px}.au-section-heading{padding:23px 0 16px}.au-section-heading h1{font-size:24px}.au-section-heading p{font-size:10px!important;line-height:1.6}.au-review-layout{grid-template-columns:.9fr 1.1fr;gap:18px;margin:14px 0 30px}.au-review-card .au-card{width:100%}.au-review-copy h2{font-size:26px!important;margin:8px 0 10px}.au-review-copy .au-eyebrow{font-size:8px}.au-review-copy>p{font-size:10px!important;line-height:1.65}.au-unassigned{gap:7px;padding:10px 8px;margin:15px 0}.au-unassigned>span{width:28px;height:28px;font-size:17px}.au-unassigned small{font-size:6px}.au-unassigned b{font-size:8px}.au-review-copy>button{font-size:10px;padding:13px 8px!important;min-height:42px}.au-team{gap:9px;align-items:center;margin-top:10px}.au-member-result{width:45%}.au-member-result .au-card{width:100%}.au-team-plus{font-size:23px}.au-mons-result{width:44%;min-height:310px}.au-mons-model{height:190px}.au-mons-result>h2{font-size:22px!important}.au-mons-result .au-eyebrow{font-size:8px}.au-element{font-size:8px;padding:5px 8px}.au-result-links{flex-wrap:wrap;gap:12px;font-size:9px}.au-result-links small{width:100%;text-align:center;font-size:7px}.au-hero{min-height:570px}.au-hero-world{inset:20% 22%}.au-hero-outline{inset:19% 21%}.au-hero-stage{inset:12% 2% 12%;gap:2%}.au-hero-member{width:47%;height:70%}.au-hero-mons{width:35%;height:55%}.au-hero-plus{font-size:28px}.au-hero-name{bottom:14%}.au-hero-name h2{font-size:40px!important}.au-hero-name>span{font-size:9px}.au-hero-name p{font-size:10px!important}.audition-app .au-skip{right:13px;top:16px;font-size:9px;padding:10px}.au-dialog{padding:22px}.au-dialog h2{font-size:20px!important}.au-dialog p{font-size:12px!important}}
+@media(prefers-reduced-motion:reduce){.audition-app *{animation:none!important;transition:none!important;scroll-behavior:auto!important}.au-card:hover:not(.is-flipped):not(.is-eliminated):not(.is-chosen){transform:none}.au-hero-world,.au-hero-lens,.au-hero-outline,.au-hero-curtain{display:none}}
+
+/* The atlas stores a webtoon portrait above its matching voxel character. Reveal the lower half without making a new asset. */
+.au-hero-member{height:auto;aspect-ratio:3/2;width:37%;overflow:hidden;align-self:center;transform:translateY(10%)}
+.au-hero-member>.au-portrait{height:200%;top:-100%;bottom:auto;mask-image:linear-gradient(#000 89%,transparent);border-radius:0}
+.au-hero-world>.au-portrait{inset:auto;top:50%;left:50%;height:135%;width:auto;aspect-ratio:3/4;transform:translate(-50%,-42%) scale(1.06);filter:brightness(.85)}
+.au-hero[data-stage="expand"] .au-hero-world>.au-portrait{transform:translate(-50%,-26%) scale(1.55);filter:brightness(1.05)}
+.au-hero-world{background:radial-gradient(ellipse,#814174,#1e122d 70%)}
+.au-asset-note{display:block;font-size:9px;color:#776286;text-align:center;margin-top:10px}
+@media(max-width:640px){.au-hero-member{width:52%;aspect-ratio:3/2}.au-hero-world>.au-portrait{height:125%}.au-hero[data-stage="expand"] .au-hero-world>.au-portrait{transform:translate(-50%,-24%) scale(1.3)}.au-stat-bars{gap:8px}.au-stat-total{margin-top:0}.au-back-inner{gap:5px}.au-back-inner p{display:none}}
+
+.au-card-grain{position:absolute;inset:40% 0 0;background:linear-gradient(transparent,#180f29ed 58%);z-index:1;pointer-events:none}.au-card-voxel{position:absolute;right:-3%;bottom:30px;width:69%;aspect-ratio:3/2;overflow:hidden;z-index:2;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 89%,transparent)}.au-card-voxel>.au-portrait{height:200%;top:-100%;bottom:auto;mask-image:linear-gradient(#000 85%,transparent)}.au-card-radar{z-index:3}.au-hero[data-stage="settle"] .au-hero-stage{transform:translateY(-2%) scale(.95)}
+@media(max-width:640px){.au-card-voxel{bottom:20px;width:69%}}
+/* Small phones preserve readable card numbers instead of shrinking two cards. */
+.au-radar text{font-size:14px}
+@media(max-width:480px){
+ .au-duel{flex-direction:column;gap:16px;padding:24px 0 12px}.au-card{width:min(78vw,280px);max-width:none}.au-versus{flex-direction:row;gap:13px}.au-versus i{width:50px;height:1px;background:linear-gradient(90deg,transparent,#c36dad88,transparent)}.au-versus span{font-size:24px}
+ .au-card-face{padding:4px;border-radius:16px}.au-card-art,.au-back-inner{border-radius:12px}.au-card-title{padding:15px 13px 28px}.au-card-title small{font-size:7px}.audition-app .au-card-title h2{font-size:23px!important}.au-card-bottom{font-size:8px;padding:7px}.au-card-radar{width:45%;min-width:120px;left:7px;bottom:33px;padding:6px 3px}.au-card-radar>span{font-size:9px}.au-card-radar>small{font-size:8px;margin-top:-1px}.au-card-voxel{bottom:29px;width:66%}
+ .audition-app .au-card-actions button{font-size:12px;min-height:44px;padding:11px 9px}.audition-app .au-card-actions .au-pick{font-size:13px;min-height:46px;padding:12px 15px}.au-card-actions{gap:7px;margin-top:10px}
+ .au-back-inner{padding:19px 18px;gap:7px}.au-back-inner>small{font-size:10px}.audition-app .au-back-inner h2{font-size:25px!important}.au-stat-bars{gap:15px;margin-top:12px}.au-stat>div:first-child{font-size:12px}.au-stat b{font-size:18px}.au-stat b small{font-size:11px}.au-stat-track{height:5px;margin-top:5px}.au-stat-total{padding-top:11px;margin-top:9px;font-size:11px}.au-stat-total>b{font-size:20px}.au-stat-total small{font-size:11px}.au-back-inner .au-scale-note{font-size:8px;margin-top:auto}.au-card-stamp{font-size:18px}.is-eliminated .au-card-stamp{font-size:12px}
+ .au-match-note{font-size:10px!important;max-width:300px;margin:auto}.au-match-heading h1{font-size:17px}.au-bracket-bar{font-size:10px}.au-advance-slot{font-size:9px}.au-asset-note{font-size:9px;line-height:1.6}
+ .au-review-layout{display:flex;flex-direction:column;gap:26px;margin:15px auto 30px;max-width:310px}.au-review-card .au-card{width:min(78vw,280px)}.au-review-copy{width:100%}.au-review-copy>p{font-size:13px!important}.au-unassigned b{font-size:11px}.au-unassigned small{font-size:9px}.au-unassigned>span{width:36px;height:36px}.au-review-copy>button{font-size:13px!important;min-height:48px}.au-review-copy .au-eyebrow{font-size:10px}
+ .au-team{flex-direction:column;gap:20px}.au-member-result{width:min(78vw,280px)}.au-member-result .au-card{width:100%}.au-team-plus{font-size:34px}.au-mons-result{width:280px;min-height:320px}.au-mons-model{height:270px}.au-mons-result>h2{font-size:28px!important}.au-element{font-size:11px}.au-mons-result .au-eyebrow{font-size:10px}.au-result-links{font-size:11px}.au-hero{position:fixed;min-height:0}.au-hero-world{inset:18% 15%}.au-hero-outline{inset:17% 14%}.au-hero-stage{inset:10% 0 24%}.au-hero-name{bottom:12%}.au-review-tools summary{font-size:11px}
+}
+@media(max-width:360px){.au-back-inner{padding:16px 16px;gap:6px}.au-stat-bars{gap:11px;margin-top:7px}.au-stat-total{padding-top:8px;margin-top:4px}.au-back-inner .au-scale-note{margin-top:7px;font-size:8px}}
+
+/* A winner holds their slot while each challenger enters the other side. */
+.au-timer{position:relative;max-width:460px;margin:20px auto 0;padding:12px 17px 10px;border:1px solid #cf9ee844;border-radius:12px;background:linear-gradient(120deg,#291835bb,#14152bcc);box-shadow:inset 0 1px 0 #ffd7f20d;text-align:center}
+.au-timer>div:first-child{display:flex;justify-content:center;align-items:baseline;gap:8px;line-height:1}
+.au-timer-label{font-size:10px;font-weight:900;letter-spacing:.14em;color:#d6b9e9;margin-right:7px}
+.au-timer [data-timer-value]{min-width:2.1ch;font-size:32px;font-weight:950;font-variant-numeric:tabular-nums;letter-spacing:-.06em;color:#f8def3;text-shadow:0 0 20px #ed9bce44}
+.au-timer small{font-size:10px;color:#aa92bd}
+.au-timer-track{height:4px;background:#b6a0d322;border-radius:4px;overflow:hidden;margin:9px 0 7px}
+.au-timer-track i{display:block;width:100%;height:100%;transform-origin:left center;background:linear-gradient(90deg,var(--au-violet),var(--au-accent),#ffdbed);box-shadow:0 0 11px #ffb7e4;will-change:transform}
+.audition-app .au-timer-caption{font-size:10px;line-height:1.55;color:#bca7ce;word-break:keep-all}
+.au-timer.is-urgent{border-color:#ff81b49c;box-shadow:0 0 23px #ed548229,inset 0 0 18px #f3679220}
+.au-timer.is-urgent [data-timer-value]{color:#ffafcc;text-shadow:0 0 18px #ff7cad77}
+.au-timer.is-urgent .au-timer-track i{background:linear-gradient(90deg,#ec649f,#ffc1d8)}
+.au-timer.is-manual{border-style:dashed;background:#1c1424a8;box-shadow:none}
+.au-timer.is-manual .au-timer-track{opacity:.28}
+.au-timer.is-manual [data-timer-value]{font-size:26px;color:#bda4d0}
+.au-contender-label{position:absolute;left:50%;top:-22px;transform:translateX(-50%);font-size:9px;line-height:1.3;font-weight:900;letter-spacing:.1em;white-space:nowrap;color:#b5a7d9;display:flex;align-items:center;gap:6px}
+.au-contender-label:before{content:"";width:4px;height:4px;border:1px solid currentColor;transform:rotate(45deg)}
+.au-contender-label.is-incumbent{color:#ffb7dc;text-shadow:0 0 12px #eaa5dc66}
+.au-contender-label.is-incumbent:before{background:currentColor;box-shadow:0 0 10px #ffb7dc}
+.au-card.is-entering,.au-card.is-attacking{transition:none;pointer-events:none}
+.au-card.is-eliminated{opacity:0;pointer-events:none}
+.au-card.is-entering:hover,.au-card.is-attacking:hover{transform:none}
+.audition-app.is-busy .au-card-actions{pointer-events:none}
+.au-versus{position:relative;z-index:4;pointer-events:none}
+.au-versus span{background:linear-gradient(150deg,#fff4fc 13%,#ffb4df 46%,#ad8ce8 85%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #3b164c);text-shadow:0 0 27px #f493cf55}
+.au-vs-burst{position:absolute;z-index:32;display:flex;justify-content:center;align-items:center;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap;filter:drop-shadow(0 7px 0 #402148) drop-shadow(0 0 23px #f995dd88)}
+.au-vs-burst b{display:block;line-height:1;font-size:clamp(72px,10vw,142px);font-style:italic;font-weight:1000;letter-spacing:-.09em;background:linear-gradient(165deg,#fff7ff 15%,#ffd3ea 47%,#cd99fa 75%,#9376d4);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1px #ffe8fba8}
+.au-impact-flare{position:absolute;width:230px;height:230px;z-index:29;pointer-events:none;mix-blend-mode:screen;background:radial-gradient(ellipse,#fffaff 0%,#ffd6ee 8%,#f79ce480 24%,#bc8de631 42%,transparent 69%)}
+.au-impact-ring{position:absolute;width:125px;height:125px;z-index:30;pointer-events:none;border:2px solid #ffe3f8;border-radius:50%;box-shadow:0 0 18px #fb9bdc,inset 0 0 15px #c8a7ff}
+.au-impact-ring:nth-of-type(even){border-color:#c4b2ff}
+.au-impact-slash{position:absolute;width:min(600px,80vw);height:5px;z-index:31;pointer-events:none;background:linear-gradient(90deg,transparent,#c8adff 20%,#fff 50%,#ffb9e1 80%,transparent);box-shadow:0 0 12px #ffdbf1,0 0 30px #d9a6ff}
+.audition-app:after{content:"";position:absolute;inset:0;z-index:24;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 50% 52%,#f7c2fa1f,transparent 65%),linear-gradient(90deg,#e4a5ff20,transparent 12%,transparent 88%,#ffb6d824)}
+.audition-app.is-impact:after{opacity:1}
+@media(max-width:640px){.au-timer{margin:16px auto 0;padding:10px 12px 8px;max-width:370px}.au-timer-label{font-size:9px}.au-timer [data-timer-value]{font-size:28px}.audition-app .au-timer-caption{font-size:9px}.au-contender-label{font-size:8px;top:-19px}.au-vs-burst b{font-size:78px}.au-impact-flare{width:180px;height:180px}}
+@media(max-width:480px){.au-duel{gap:29px;padding-top:37px}.au-contender-label{font-size:10px;top:-22px}.au-timer{max-width:310px}.au-versus{margin:0}.au-vs-burst b{font-size:92px}}
+@media(prefers-reduced-motion:reduce){.au-vs-burst,.au-impact-flare,.au-impact-ring,.au-impact-slash,.audition-app.is-impact:after{display:none}.au-timer-track i{will-change:auto}}
+
+/* Keep the decision clock visible while comparing vertically stacked mobile cards. */
+@media(max-width:480px){.audition-app{overflow:clip}.au-timer{position:sticky;top:10px;z-index:12;background:#171126f5;box-shadow:0 10px 22px #09061177}}
+/* 2단계(신규 · 10/13 클로드): 연습생 이야기 탭 */
+.audition-app .au-card-actions .au-story-open{position:relative;background:#1b1429d9;border-color:#c78fd97a;color:#f0d3f7;font-weight:600}.au-story-badge{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:9px;background:#ff7fc4;color:#2a0f2a;font-style:normal;font-size:.82em;font-weight:900}.au-story-layer{position:absolute;inset:0;z-index:120}.au-story-backdrop{position:absolute;inset:0}.audition-app .au-story{width:min(560px,100%);max-width:560px;padding:22px 24px;display:flex;flex-direction:column;gap:14px}.au-story-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.au-story-head small{font-size:10px;letter-spacing:.12em;color:#d9b1eb}.audition-app .au-story-head h2{font-size:26px!important;margin-top:4px}.audition-app .au-story-close{padding:6px 11px;font-size:13px;background:transparent}.au-story-tabs{display:flex;gap:6px;flex-wrap:wrap}.audition-app .au-story-tab{position:relative;padding:7px 12px;font-size:12px;border-radius:20px;background:#2a1d3d;font-weight:600}.audition-app .au-story-tab.is-active{background:linear-gradient(115deg,#f4c3e9,#c8b3ff);color:#231331;border-color:#ffe1f7}.audition-app .au-story-tab.is-locked{opacity:.6}.au-story-dot{position:absolute;top:-3px;right:-3px;width:9px;height:9px;border-radius:50%;background:#ff7fc4;box-shadow:0 0 8px #ff7fc4}.au-story-page{min-height:190px;border:1px solid #b98fd04d;border-radius:14px;background:radial-gradient(ellipse at 90% 0%,#70377144,transparent 55%),#1a1228;padding:20px 20px 16px;display:flex;flex-direction:column;gap:10px}.audition-app .au-story-page h3{margin:0;font-size:19px;color:#ffe3f6}.audition-app .au-story-text{font-size:14px!important;line-height:1.85!important;color:#ead9f2!important;margin:0!important;word-break:keep-all}.au-story-src{margin-top:auto;font-size:10px;color:#9f86ae}.au-story-new{align-self:flex-start;padding:3px 10px;border-radius:12px;background:#ff7fc4;color:#2a0f2a;font-size:11px;font-weight:900}.au-story-lock{margin:auto;text-align:center;color:#b7a1c7}.au-story-lock>span{font-size:30px}.audition-app .au-story-lock p{font-size:13px!important;margin:8px 0 0!important}.au-story-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px;color:#a58fb6}.audition-app .au-story-foot button{padding:8px 14px;font-size:12px}
+@media(max-width:640px){.audition-app .au-story{padding:16px}.audition-app .au-story-head h2{font-size:21px!important}.audition-app .au-story-text{font-size:13px!important}}
+/* 3단계(신규 · 10/13 클로드): 연습 미니게임 후보 단추 · 보상 창 */
+.au-mg-panel{max-width:1040px;margin:4px auto 18px;border:1px solid #c5a6d433;border-radius:16px;padding:16px 18px;background:#160f24b3}.au-mg-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-bottom:12px}.audition-app .au-mg-head p{font-size:11px!important;color:#ae95bd;line-height:1.6}.au-mg-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:9px}.audition-app .au-mg{display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:11px 12px;text-align:left;background:#21172f;border-color:#8e6fa96b;font-weight:500}.au-mg>b{font-size:13px;color:#f4e3fb}.au-mg-icons{display:flex;flex-wrap:wrap;gap:5px}.au-mg-icons>span{display:inline-flex;align-items:center;gap:3px;padding:2px 7px 2px 4px;border-radius:12px;background:#f58bc51f;color:#ffc7e6;font-size:10px}.au-mg-icons em{font-style:normal}.au-mg-icon{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.au-mg>small{font-size:10px;color:#a48db6}.au-mg-facts{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:0;font-size:12px}.au-mg-facts dt{color:#b49bc6}.au-mg-facts dd{margin:0;color:#ecdcf3;line-height:1.6}.au-mg-facts small{display:block;color:#9883a8;font-size:10px}.au-mg-bars{display:flex;flex-direction:column;gap:9px;border:1px solid #b98fd04d;border-radius:14px;padding:14px 16px;background:#1a1228}.au-mg-bars>small{font-size:10px;letter-spacing:.1em;color:#d9b1eb}.au-mg-bar{display:grid;grid-template-columns:86px 1fr 42px;align-items:center;gap:10px;font-size:12px;color:#e2d5e9}.au-mg-bar>span{display:inline-flex;align-items:center;gap:5px}.au-mg-bar b{text-align:right;color:#ffb2d8}.audition-app .au-mg-pending{font-size:11px!important;color:#ffcab0;margin:0!important}
+@media(max-width:640px){.au-mg-panel{padding:12px}.au-mg-row{grid-template-columns:repeat(2,1fr)}.au-mg-bar{grid-template-columns:72px 1fr 38px}}
+/* 4단계(신규 · 10/13 클로드): 4방향 그래프 두 겹 — 재능 = 테두리 선 · 현재(성장) = 안쪽 채움 · 3단계 이름 한 줄 */
+.au-radar-area.au-radar-talent{fill:none;stroke:#ff9bce;stroke-width:2.4;stroke-linejoin:round}.au-radar-current{fill:#ffa6d2b3;stroke:#ffd3ea;stroke-width:1.2;stroke-linejoin:round}.au-mg>b{white-space:nowrap;font-size:clamp(11px,.9vw,13px);letter-spacing:-.02em}
+/* 10/14 클로드 · 오디션-시뮬레이터재능표시수정 2단계: 카드 앞면 재능 그래프 칸 확대 · 꼭짓점 숫자 (그래프와 칸만) */
+.audition-app .au-card .au-card-radar.au-card-radar-v2{left:8px;bottom:32px;width:63%;min-width:0;padding:7px 6px 4px;border-radius:12px;background:#120f24e6}
+.audition-app .au-card .au-card-radar-v2>span{display:block;font-size:12px;letter-spacing:.03em;color:#f3d9f0;white-space:nowrap}
+.audition-app .au-card .au-card-radar-v2>span>small{display:inline;font-size:11px;font-weight:700;letter-spacing:0;color:#cdb8da;margin-left:4px}
+.au-radar.au-radar-v2{width:100%;margin-top:2px}
+.au-radar-v2 text.au-radar-axis{font-size:16px;fill:#e9dcef;font-weight:800}
+.au-radar-v2 text.au-radar-num{font-size:21px;fill:#fff;font-weight:900;paint-order:stroke;stroke:#130e25;stroke-width:5px;stroke-linejoin:round}
+.au-radar-v2 .au-radar-grid.faint{stroke-opacity:.3}
+.au-radar-v2 .au-radar-area.au-radar-talent{fill:#ff8fc866;stroke:#ff9bce;stroke-width:2.6;stroke-linejoin:round}
+.au-radar-v2 .au-radar-dot{fill:#fff;stroke:#ff6fb5;stroke-width:2}
+@media(max-width:640px){.audition-app .au-card .au-card-radar.au-card-radar-v2{left:6px;bottom:27px;width:64%;padding:6px 4px 3px}.audition-app .au-card .au-card-radar-v2>span{font-size:11px}.audition-app .au-card .au-card-radar-v2>span>small{font-size:10px}}
+/* 10/14 클로드 · 보류 처리: 미니게임 핵심 4 · 확장 후보 표시 · 팀(멤버 추가 오디션 검토용) · 축 아이콘 다시 */
+.au-mg-group{font-style:normal;font-size:9.5px;letter-spacing:.06em;padding:2px 7px;border-radius:9px;background:#ffffff14;color:#cdb8da}.audition-app .au-mg.is-core{border-color:#f58bc5a8;background:#2a1736}.au-mg.is-core .au-mg-group{background:#f58bc533;color:#ffd0ea}.au-mg-details{font-size:10.5px;color:#e8d6f2;line-height:1.5}.au-mg-details em{font-style:normal;color:#ffc27a}
+.au-team-panel{max-width:1040px;margin:4px auto 14px;border:1px solid #f58bc54d;border-radius:16px;padding:14px 18px;background:#1d1129cc}.au-team-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.au-team-chip{display:inline-flex;flex-direction:column;gap:2px;padding:7px 12px;border-radius:12px;background:#2a1d3d;border:1px solid #8e6fa96b}.au-team-chip.is-first{border-color:#f58bc5}.au-team-chip b{font-size:13px;color:#f4e3fb}.au-team-chip small{font-size:10px;color:#b49bc6}.audition-app .au-team-open{padding:9px 14px;font-size:12px;font-weight:800;background:linear-gradient(115deg,#f4c3e9,#c8b3ff);color:#231331;border-color:#ffe1f7}.au-team-toast{margin:10px 0 0;font-size:12px;color:#ffd0ea}
+.audition-app .au-team-dialog{width:min(760px,100%);max-width:760px}.audition-app .au-team-note{font-size:12px!important;color:#cdb8da!important;margin:0!important;line-height:1.6!important}.au-team-cands{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.audition-app .au-team-cand{display:flex;flex-direction:column;gap:5px;align-items:stretch;padding:8px;text-align:left;background:#21172f;border-color:#8e6fa96b;font-weight:500}.au-team-cand .au-team-portrait{position:relative;height:120px;border-radius:10px;overflow:hidden}.au-team-cand b{font-size:14px;color:#f4e3fb}.au-team-cand small{font-size:10.5px;color:#b49bc6}.au-team-tal{display:grid;grid-template-columns:1fr 1fr;gap:2px 6px;font-size:10px;color:#cdb8da}.au-team-tal i{font-style:normal}.au-team-tal em{font-style:normal;color:#fff;font-weight:800}.au-team-cta{margin-top:2px;font-size:11px;font-weight:800;color:#ffc7e6}
+.au-radar-v2 .au-axis-icon-v2 path{fill:none;stroke:#e9dcef;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:640px){.au-team-panel{padding:12px}}
+.audition-app .au-team-cand{width:100%;min-width:0}
+.audition-app .au-team-dialog .au-team-cands{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+.audition-app .au-team-curr{display:block;font-size:11px;opacity:.75;margin-top:4px;line-height:1.35}
+/* 10/14 16:1x 제미나이 · C안: 카드 앞면은 그대로, 뒷면 · 이야기 창에 6축 칩 · 어학 도장 · 약점 점 4개 · 6칸 서사 표시 */
+.audition-app .au-card .au-back-inner{padding:14px 14px 11px;gap:5px;overflow:hidden}
+.audition-app .au-card .au-back-inner h2{font-size:20px!important;line-height:1.15}
+.audition-app .au-card .au-stat-bars{gap:7px;margin-top:4px}
+.audition-app .au-card .au-stat>div:first-child{font-size:10.5px}
+.audition-app .au-card .au-stat b{font-size:14px}
+.audition-app .au-card .au-stat b small{font-size:9.5px}
+.audition-app .au-card .au-stat-track{height:4px;margin-top:2px}
+.audition-app .au-card .au-stat-total{padding-top:6px;margin-top:2px;font-size:9.5px}
+.audition-app .au-card .au-stat-total>b{font-size:15px}
+.au-back-bg{display:flex;flex-direction:column;gap:5px;margin-top:3px;padding-top:6px;border-top:1px dashed #dac5f72e;min-height:0}
+.au-bg-chips{display:flex;flex-wrap:wrap;gap:3.5px;align-items:center}
+.au-chip{display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:99px;font-size:9.5px;font-weight:800;line-height:1.25;border:1px solid transparent;white-space:nowrap}
+.au-chip small{font-size:8.5px;opacity:.78;font-weight:700;margin-right:1px}
+.au-chip-family{background:#ffd36e1f;border-color:#ffd36e99;color:#ffe49e}
+.au-chip-home{background:#7fd3ff1f;border-color:#7fd3ff99;color:#bce8ff}
+.au-chip-motive{background:#ff8fc81f;border-color:#ff8fc899;color:#ffc4e2}
+.au-chip-weakness{background:#b7abc824;border-color:#b7abc888;color:#e3daef}
+.au-chip-weakness.is-cleared{background:#ffd36e29;border-color:#ffd36ecc;color:#fff0be}
+.au-chip-career{background:#c9a8ff1f;border-color:#c9a8ff99;color:#e4d2ff}
+.au-chip-hidden{background:#68e5e91f;border-color:#68e5e999;color:#b8f7f9}
+.au-weak-dots{display:inline-flex;align-items:center;gap:2px;margin-left:2px}
+.au-weak-dots i{width:5px;height:5px;border-radius:50%;border:1px solid #cbbbe0;background:transparent;display:inline-block}
+.au-weak-dots i.is-on{background:#ff8fc8;border-color:#ffc4e2;box-shadow:0 0 4px #ff8fc8}
+.au-weak-dots.is-cleared i.is-on{background:#ffd36e;border-color:#fff0be}
+.au-weak-dots b{font-size:9px;color:#ffd36e;margin-left:1px}
+.au-study-stamp{display:inline-flex;align-items:center;padding:1.5px 5.5px;border-radius:6px;font-size:9px;font-weight:900;background:#1e2948;border:1px solid #6b8fd488;color:#bdd4ff;white-space:nowrap}
+.au-study-stamp.is-star{background:#3a2d14;border-color:#ffd36ecc;color:#ffe28a;box-shadow:0 0 8px #ffd36e44}
+.au-bg-intro{display:flex;flex-direction:column;gap:1.5px;background:#140d22b3;border:1px solid #b993d033;border-radius:8px;padding:5px 7px;font-size:9.2px;line-height:1.38;color:#e8daf2;word-break:keep-all}
+.au-bg-intro>span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.au-story-bg{padding:8px 10px;border-radius:11px;background:#160f24cc;border:1px solid #b98fd038}
+.au-story-bg .au-chip{font-size:11px;padding:3px 8px}
+.au-story-bg .au-study-stamp{font-size:10.5px;padding:2.5px 7px}
+.au-story-lines{margin:2px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:13.5px;line-height:1.65;color:#f0e3f8;word-break:keep-all}
+.au-story-quote{margin:6px 0 0;padding:9px 12px;border-radius:10px;background:linear-gradient(120deg,#341c42aa,#1f1633cc);border-left:3px solid var(--au-accent);display:flex;align-items:center;gap:8px;font-size:13px;color:#ffe4f4}
+.au-story-quote>span{font-size:10px;font-weight:900;color:#ffb7dc;padding:2px 6px;border-radius:6px;background:#ff8fc81f;white-space:nowrap}
+.au-story-quote>b{font-weight:800;line-height:1.45;word-break:keep-all}
+.au-story-tab.is-long{border-color:#ffd36e66;color:#ffe5a3}
+.au-story-tab.is-long.is-active{background:linear-gradient(120deg,#4a3318,#2c1e38);border-color:#ffd36ecc;color:#fff3c4}
+.au-story-long{display:flex;flex-direction:column;gap:9px;margin:4px 0;max-height:310px;overflow-y:auto;padding-right:4px}
+.au-story-long>p{margin:0;padding:9px 12px;border-radius:10px;background:#160e24b8;border:1px solid #c69ee029;font-size:13px;line-height:1.72;color:#f1e6fa;word-break:keep-all}
+.au-para-num{display:inline-block;margin-right:7px;padding:1px 6px;border-radius:5px;font-size:10px;font-weight:900;background:#ff8fc826;color:#ffb7dc;vertical-align:middle}
+.au-recruit-story{margin:18px auto 0;max-width:920px;padding:18px 20px;border-radius:18px;background:linear-gradient(145deg,#211534eb,#150d24f2);border:1px solid #d7a9ff45;box-shadow:0 14px 36px #07030f66;display:flex;flex-direction:column;gap:12px}
+.au-recruit-story.is-epilogue{border-color:#ffd36eaa;background:linear-gradient(145deg,#2c1f18f0,#191029f5);box-shadow:0 14px 40px #ffd36e24}
+.au-recruit-story-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.au-recruit-story-head h3{margin:4px 0 0;font-size:18px;color:#fff5fb}
+.au-recruit-story-btns{display:flex;gap:8px;flex-wrap:wrap}
+.au-story-open.is-gold{border-color:#ffd36ecc!important;color:#ffe699!important;background:#3a2a14aa!important}
+/* 10/15 10:3x 제미나이 · 16장 카드 오프닝 연출 + 선택/탈락 서사 필러 채팅 + 01 사옥 출발 브릿지 */
+.au-opening-16{position:fixed;inset:0;z-index:80;background:radial-gradient(ellipse at 50% 25%,#3b1d5ae8,#090612fa 78%);backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;color:#fff;animation:auOpenFade .35s ease-out}
+@keyframes auOpenFade{from{opacity:0}to{opacity:1}}
+.au-open16-head{text-align:center;max-width:760px}
+.au-open16-head h2{margin:4px 0;font-size:clamp(22px,3vw,34px);letter-spacing:-.03em;color:#fff5fc;text-shadow:0 0 24px #ff85bf88}
+.au-open16-head p{margin:0;font-size:13.5px;color:#d6c5e8}
+.au-open16-grid{display:grid;grid-template-columns:repeat(8,minmax(68px,96px));gap:10px;max-width:880px;width:100%;justify-content:center;perspective:1200px;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .5s}
+.au-opening-16.is-converging .au-open16-grid{transform:scale(.35) rotateY(22deg);opacity:0}
+.au-open16-card{position:relative;aspect-ratio:3/4;border-radius:10px;overflow:hidden;border:1.5px solid #9c7bc766;background:#181029;display:flex;flex-direction:column;justify-content:flex-end;padding:6px;box-shadow:0 8px 20px #0009;animation:auCardFly .55s cubic-bezier(.16,.84,.3,1) backwards;animation-delay:calc(var(--card-idx,0) * 32ms);transition:transform .3s,border-color .3s,box-shadow .3s}
+@keyframes auCardFly{from{opacity:0;transform:translate3d(0,48px,-220px) rotateX(28deg) scale(.6)}to{opacity:1;transform:translate3d(0,0,0) rotateX(0) scale(1)}}
+.au-open16-card.is-spot{transform:translateY(-8px) scale(1.13);z-index:4;border-color:#ff85bf;box-shadow:0 0 0 2px #ffd77c,0 0 26px #ff85bfcc}
+.au-open16-art{position:absolute;inset:0;z-index:0;opacity:.88}
+.au-open16-card::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 38%,#0d071be8 94%);z-index:1}
+.au-open16-card b,.au-open16-card span{position:relative;z-index:2;display:block;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.au-open16-card b{font-size:11.5px;color:#fff}
+.au-open16-card span{font-size:8.5px;color:#ffd77c;margin-top:2px}
+.au-open16-spot{min-height:66px;width:min(760px,94vw);position:relative;display:grid;place-items:center}
+.au-open16-banner{grid-area:1/1;width:100%;opacity:0;transform:translateY(8px) scale(.97);transition:opacity .28s,transform .28s;padding:11px 16px;border-radius:14px;background:linear-gradient(125deg,#331b46eb,#1b1330eb);border:1.5px solid #ff85bfaa;box-shadow:0 10px 30px #0008;text-align:center;pointer-events:none}
+.au-open16-banner.is-on{opacity:1;transform:translateY(0) scale(1)}
+.au-open16-tag{display:inline-block;font-size:11px;font-weight:800;color:#ffd77c;margin-bottom:4px;letter-spacing:.02em}
+.au-open16-banner b{display:block;font-size:14.5px;color:#fff6fb;word-break:keep-all}
+.au-duel .au-card{position:relative}
+.au-duel-chat{position:absolute;left:8px;right:8px;bottom:56px;z-index:9;padding:8px 11px;border-radius:12px;display:flex;flex-direction:column;gap:2px;backdrop-filter:blur(8px);box-shadow:0 10px 26px #05020ccc;animation:auChatPop .26s cubic-bezier(.2,.85,.3,1);pointer-events:none}
+@keyframes auChatPop{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}
+.au-duel-chat>span{font-size:9.5px;font-weight:900;letter-spacing:.05em}
+.au-duel-chat>b{font-size:12px;line-height:1.38;word-break:keep-all}
+.au-duel-chat.is-pick{background:linear-gradient(135deg,#4d1b42f2,#281336f5);border:1.5px solid #ff85bf;color:#fff4fa;box-shadow:0 0 22px #ff85bf66}
+.au-duel-chat.is-pick>span{color:#ffd77c}
+/* 10/15 13:30 제미나이 · 16종 숨은 특기 스킬 아이콘(4x4 스프라이트) 및 승리 시 획득 능력 표기 */
+.au-skill-icon{display:inline-block;flex:none;width:28px;height:28px;border-radius:7px;background-image:url("about:blank");background-size:400% 400%;background-repeat:no-repeat;border:1px solid #ffd36eaa;box-shadow:0 2px 8px #000a;vertical-align:middle}
+.au-skill-icon-sm{width:20px;height:20px;border-radius:5px;margin-right:4px}
+.au-skill-icon-md{width:30px;height:30px;border-radius:8px}
+.au-skill-icon-lg{width:38px;height:38px;border-radius:10px}
+.au-chat-skill-gain{display:flex;align-items:center;gap:8px;margin-top:5px;padding:5px 8px;border-radius:9px;background:#140b22dd;border:1px solid #ffd36ecc;box-shadow:0 4px 12px #0008}
+.au-chat-skill-gain small{display:block;font-size:9px;font-weight:900;color:#ffd36e;line-height:1.2}
+.au-chat-skill-gain b{display:block;font-size:10.5px;font-weight:900;color:#fff6dc;line-height:1.3;word-break:keep-all}
+.au-duel-chat.is-drop{background:linear-gradient(135deg,#172238f2,#101626f5);border:1.5px solid #7aa2e3aa;color:#d9e6ff}
+.au-duel-chat.is-drop>span{color:#91efff}
+.au-board-bridge{margin-top:6px;padding:12px 15px;border-radius:13px;background:linear-gradient(125deg,#1d2d3be8,#171c32f2);border:1px solid #68e5e988;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.au-board-bridge-info{display:flex;flex-direction:column;gap:3px}
+.au-board-bridge-info b{font-size:13.5px;color:#e8fcff;word-break:keep-all}
+.au-board-bridge-info small{font-size:11.5px;color:#b8d4e3}
+.au-board-go{display:inline-flex;align-items:center;gap:6px;padding:9px 15px;border-radius:99px;background:linear-gradient(120deg,#68e5e9,#a98aff);color:#120d24;font-weight:900;font-size:12.5px;text-decoration:none;white-space:nowrap;box-shadow:0 6px 18px #68e5e944}
+.au-board-go:hover{filter:brightness(1.08)}
+/* 10/15 10:5x 제미나이 · 철권 셀렉트 스타일 「첫인상 선택 (FIRST IMPRESSION PICK)」 화면 */
+.au-fi-backdrop{z-index:85;padding:12px}
+.au-fi-screen{width:min(1120px,96vw);max-height:94vh;overflow-y:auto;border-radius:20px;background:radial-gradient(ellipse at 26% 35%,#4a1e4d99,transparent 58%),radial-gradient(ellipse at 82% 20%,#24326688,transparent 55%),linear-gradient(155deg,#140c24f8,#080512fc);border:1.5px solid #ff85bf88;box-shadow:0 24px 64px #000d,inset 0 0 36px #ff85bf1f;padding:16px 20px;display:flex;flex-direction:column;gap:12px;color:#fff}
+.au-fi-top{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #ffffff1f;padding-bottom:10px}
+.au-fi-top h2{margin:2px 0 0;font-size:clamp(18px,2.2vw,25px);letter-spacing:-.03em;color:#fff4fb}
+.au-fi-timer-badge{margin-left:auto;display:flex;flex-direction:column;align-items:center;padding:4px 12px;border-radius:10px;background:#1b1230;border:1px solid #ffd36eaa}
+.au-fi-timer-badge span{font-size:9px;font-weight:900;letter-spacing:.1em;color:#ffd36e}
+.au-fi-timer-badge b{font-size:20px;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.au-fi-main{display:grid;grid-template-columns:.95fr 1.25fr;gap:16px;align-items:stretch;min-height:0}
+.au-fi-hero{position:relative;border-radius:16px;overflow:hidden;border:1.5px solid #e7b5ff66;background:radial-gradient(circle at 50% 30%,#61296b88,#130b24 78%);min-height:320px;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;box-shadow:inset 0 0 40px #000a}
+.au-fi-video-layer{position:absolute;top:10px;left:12px;z-index:3;padding:3px 9px;border-radius:99px;background:#0c0718cc;border:1px dashed #91efff88;font-size:9.5px;font-weight:800;color:#91efff;letter-spacing:.05em}
+.au-fi-portrait-wrap{position:absolute;inset:0;z-index:1}
+.au-fi-big-art{width:100%;height:100%;filter:contrast(1.04) saturate(1.08)}
+.au-fi-voxel-mini{position:absolute;right:12px;bottom:84px;width:64px;height:82px;border-radius:10px;overflow:hidden;border:1.5px solid #ffd36ecc;background:#150d26dd;box-shadow:0 8px 18px #000b;z-index:3}
+.au-fi-voxel-img{width:100%;height:100%}
+.au-fi-hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,transparent 35%,#100820cc 74%,#0c0618f5 100%);pointer-events:none}
+.au-fi-nameplate{position:relative;z-index:3;display:flex;flex-direction:column;gap:4px}
+.au-fi-spec{display:inline-flex;align-self:flex-start;padding:2px 9px;border-radius:99px;background:#ff85bf2e;border:1px solid #ff85bfaa;font-size:10.5px;font-weight:900;color:#ffc9e5;letter-spacing:.05em}
+.au-fi-nameplate h3{margin:0;font-size:clamp(26px,3.2vw,38px);font-weight:900;letter-spacing:-.03em;color:#fff;text-shadow:0 3px 16px #000}
+.au-fi-buff{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;padding:4px 11px;border-radius:8px;background:linear-gradient(120deg,#4a1938e6,#2c1538e6);border:1px solid #ffd36ecc;font-size:11.5px;color:#ffe7a8;box-shadow:0 0 16px #ff85bf44}
+.au-fi-story{border-radius:16px;border:1px solid #ffd36e66;background:linear-gradient(145deg,#211536eb,#140d24f5);padding:14px 16px;display:flex;flex-direction:column;gap:9px;min-height:0}
+.au-fi-story-head{display:flex;flex-direction:column;gap:2px;border-bottom:1px solid #ffffff1a;padding-bottom:7px}
+.au-fi-story-head b{font-size:16px;color:#fff4dc}
+.au-fi-lines{display:flex;flex-direction:column;gap:3px;padding:7px 10px;border-radius:10px;background:#120b20cc;border:1px solid #b993d038;font-size:12px;color:#f2e4fa}
+.au-fi-pro{display:flex;flex-direction:column;gap:6px;max-height:115px;overflow-y:auto;padding-right:4px}
+.au-fi-pro p{margin:0;font-size:12px;line-height:1.58;color:#e3d4f0;word-break:keep-all}
+.au-fi-rule{padding:7px 10px;border-radius:9px;background:#2b1f14aa;border:1px dashed #ffd36e88;font-size:11.2px;line-height:1.45;color:#f5e3b8;display:flex;flex-direction:column;gap:2px}
+.au-fi-rule b{color:#ffd36e;font-size:11.5px}
+.au-fi-actions{margin-top:auto;padding-top:4px}
+.au-fi-confirm{width:100%;justify-content:center;font-size:14px!important;padding:11px 16px!important;background:linear-gradient(115deg,#ff85bf,#ffd36e)!important;color:#240e29!important;font-weight:900!important;box-shadow:0 8px 24px #ff85bf55!important}
+.au-fi-roster{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items: stretch;padding-top:8px;border-top:1px solid #ffffff1f}
+.au-fi-grid-side{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.au-fi-slot{position:relative;aspect-ratio:1/1.08;border-radius:9px;overflow:hidden;border:1.5px solid #6c5a8a88;background:#160f26;padding:0;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .16s,border-color .16s,box-shadow .16s}
+.au-fi-slot:hover{transform:translateY(-2px);border-color:#ffd36e}
+.au-fi-slot.is-active{border:2px solid #ff85bf;box-shadow:0 0 0 2px #ffd36e,0 0 16px #ff85bfaa;transform:translateY(-3px) scale(1.04);z-index:2}
+.au-fi-thumb{position:absolute;inset:0;width:100%;height:100%}
+.au-fi-slot span{position:relative;z-index:2;display:block;width:100%;background:linear-gradient(transparent,#0a0514f0 70%);padding:8px 3px 3px;font-size:10px;font-weight:800;color:#fff;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.au-fi-slot i{position:absolute;top:3px;right:3px;z-index:2;font-style:normal;font-size:8px;font-weight:900;padding:1px 4px;border-radius:4px;background:#ff85bfdd;color:#1b0820}
+.au-fi-random{width:54px;border-radius:10px;border:1.5px dashed #ffd36eaa;background:linear-gradient(160deg,#2d1f3d,#150f24);color:#ffd36e;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.au-fi-random b{font-size:22px;line-height:1}
+.au-fi-random small{font-size:8px;font-weight:900;letter-spacing:.06em}
+.au-contender-label.is-first-imp b{color:#ffd36e;margin-left:4px;font-weight:900}
+/* 10/15 12:38 제미나이 · 숨은 특기 3단 패시브 스킬 트리 UX & 웹 가로 / 모바일 세로(Portrait) 듀얼 뷰포트 */
+.au-vp-switch{display:inline-flex;border-radius:99px;border:1px solid #8a6db888;background:#140d24cc;padding:2px;gap:2px;margin-left:auto}
+.au-vp-switch button{border:0;background:transparent;color:#cbbbe0;font-size:11px;font-weight:800;padding:4px 10px;border-radius:99px;cursor:pointer;white-space:nowrap}
+.au-vp-switch button.is-on{background:linear-gradient(120deg,#ff85bf,#ffd36e);color:#200b26;box-shadow:0 2px 10px #ff85bf55}
+.au-fi-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:3px;border-radius:11px;background:#120a20cc;border:1px solid #ffffff1a}
+.au-fi-tab{border:1px solid transparent;background:transparent;color:#c9b8de;font-size:12px;font-weight:800;padding:7px 10px;border-radius:8px;cursor:pointer;text-align:center;transition:all .16s}
+.au-fi-tab.is-on{background:linear-gradient(135deg,#3b1d4e,#25163a);border-color:#ff85bfaa;color:#fff5fc;box-shadow:0 4px 14px #0006}
+.au-fi-tab-panel{display:flex;flex-direction:column;gap:8px;min-height:0;flex:1}
+.au-skill-tree{display:flex;flex-direction:column;gap:8px;padding:10px 12px;border-radius:13px;background:radial-gradient(ellipse at 50% 0%,#3c215966,#120b20e6 75%);border:1px solid #c9a8ff55}
+.au-st-guide-banner{padding:7px 10px;border-radius:9px;background:linear-gradient(120deg,#362140cc,#1c1433cc);border:1px solid #ffd36e66;display:flex;flex-direction:column;gap:2px}
+.au-st-guide-banner>b{font-size:12px;color:#ffe89e;line-height:1.3}
+.au-st-guide-banner>span{font-size:10.5px;color:#ded0f0;line-height:1.35}
+.au-st-dual-cols{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch}
+.au-st-col{border-radius:11px;padding:9px 10px;background:#160e26e0;border:1.5px solid #6e5a8c66;display:flex;flex-direction:column;gap:4px;cursor:pointer;transition:all .18s;opacity:.82}
+.au-st-col:hover{opacity:1;transform:translateY(-1px)}
+.au-st-col.is-selected{opacity:1;background:linear-gradient(155deg,#2a1940f5,#17102bf5);border-color:#ffd36ecc;box-shadow:0 0 18px #ffd36e33}
+.au-st-col-a.is-selected{border-color:#ff85bfdd;box-shadow:0 0 18px #ff85bf44}
+.au-st-col-b.is-selected{border-color:#68e5e9dd;box-shadow:0 0 18px #68e5e944}
+.au-st-col-head{display:flex;flex-direction:column;gap:2px;padding-bottom:5px;border-bottom:1px dashed #ffffff24}
+.au-st-col-pill{display:inline-flex;align-self:flex-start;padding:2px 8px;border-radius:99px;font-size:10.5px;font-weight:900}
+.au-st-col-pill.is-pink{background:#ff85bf33;border:1px solid #ff85bfaa;color:#ffd2e9}
+.au-st-col-pill.is-cyan{background:#68e5e926;border:1px solid #68e5e9aa;color:#c2f8fa}
+.au-st-col-head small{font-size:10px;color:#cbbbe0;line-height:1.25}
+.au-st-step{padding:6px 8px;border-radius:8px;background:#110a1fcc;border:1px solid #8a73ad44;display:flex;flex-direction:column;gap:1.5px}
+.au-st-step.is-main{background:linear-gradient(135deg,#3e1938cc,#1d102ccc);border-color:#ff85bf99}
+.au-st-step.is-scout{background:linear-gradient(135deg,#163242cc,#16132ecc);border-color:#68e5e999}
+.au-st-step.is-unlocked{border-color:#ffd36ecc;background:#332614cc}
+.au-st-step-tag{font-size:9px;font-weight:900;color:#ffd36e;letter-spacing:.02em}
+.au-st-step b{font-size:12px;color:#fff;line-height:1.2}
+.au-st-step p{margin:0;font-size:10.5px;color:#dfd2f2;line-height:1.35;word-break:keep-all}
+.au-st-arrow{text-align:center;font-size:11px;font-weight:900;color:#ffd36eaa;line-height:1}
+.au-st-vs-divider{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0 2px}
+.au-st-vs-divider span{padding:4px 6px;border-radius:99px;background:#291b3d;border:1px solid #ffd36e88;font-size:10px;font-weight:900;color:#ffd36e}
+.au-st-vs-divider small{font-size:9px;color:#b8abc9;text-align:center;line-height:1.2}
+.au-card-skill-strip{margin-top:5px;padding:6px 8px;border-radius:10px;background:linear-gradient(125deg,#1d1433eb,#130d22f2);border:1.5px solid #68e5e988;display:flex;flex-direction:column;gap:4px}
+.au-card-skill-strip.is-fi-route{border-color:#ff85bfcc;background:linear-gradient(125deg,#3a1638f2,#170e26f5);box-shadow:0 0 14px #ff85bf33}
+.au-card-skill-strip.is-scout-route{border-color:#68e5e9cc;background:linear-gradient(125deg,#152f42f2,#130e26f5);box-shadow:0 0 14px #68e5e933}
+.au-card-skill-strip.is-scout-preview{border:1.5px dashed #ffd36ecc;background:linear-gradient(125deg,#2a1f16eb,#140e24f2)}
+.au-css-toggle{width:100%;border:0;background:transparent;color:inherit;padding:0;display:flex;align-items:center;gap:6px;cursor:pointer;text-align:left}
+.au-css-title{font-size:10.5px;font-weight:900;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.au-card-skill-strip.is-fi-route .au-css-title{color:#ffd2e9}
+.au-card-skill-strip.is-scout-preview .au-css-title{color:#ffe69e}
+.au-css-hint{margin-left:auto;text-decoration:none;font-size:9px;font-weight:800;color:#cbbbe0;padding:1px 5px;border-radius:99px;background:#ffffff14;white-space:nowrap}
+.au-fi-compact-skills{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.au-fi-icon-pill{border:1px solid #8a73ad66;background:#150d26dd;color:#fff;border-radius:8px;padding:4px 6px;display:flex;align-items:center;gap:4px;cursor:pointer;font-size:9.5px;font-weight:800;text-align:left;min-width:0}
+.au-fi-icon-pill.is-fi{border-color:#ff85bfaa;background:#2f1332dd;color:#ffd8ec}
+.au-fi-icon-pill.is-scout{border-color:#68e5e9aa;background:#132636dd;color:#c8f7fa}
+.au-fi-icon-pill.is-on{box-shadow:0 0 0 1.5px #ffd36e}
+.au-fi-icon-pill span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.au-fi-icon-pill i{font-style:normal;width:14px;height:14px;border-radius:50%;background:#ffffff1f;color:#ffd36e;font-size:9px;font-weight:900;display:grid;place-items:center;flex:none}
+.au-fi-skill-pop{padding:6px 8px;border-radius:8px;background:#10081ef2;border:1px solid #ffd36ecc;font-size:10px;line-height:1.35;color:#f5ebff;animation:auChatPop .18s ease-out}
+.au-fi-skill-pop b{display:block;color:#ffe69e;margin-bottom:2px;font-size:10.5px}
+/* 모바일 세로에서는 스킬 설명을 기본적으로 숨기고 클릭(.is-expanded) 시에만 팝오버로 표시 */
+.audition-app.is-mobile-portrait .au-card-skill-strip .au-skill-stack-list{display:none}
+.audition-app.is-mobile-portrait .au-card-skill-strip.is-expanded .au-skill-stack-list{display:flex;margin-top:4px;padding-top:4px;border-top:1px dashed #ffffff26}
+.audition-app.is-mobile-portrait .au-match-note,.audition-app.is-mobile-portrait .au-timer-caption{display:none}
+.audition-app.is-mobile-portrait .au-card-bottom{display:none}
+.audition-app.is-mobile-portrait .au-bracket-bar{padding:5px 8px;margin-bottom:4px}
+.audition-app.is-mobile-portrait .au-timer{padding:5px 8px;margin-bottom:6px}
+.au-fi-dual-skill-preview{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.au-fi-dsp-box{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:9px;background:#140c24dd;border:1px solid #8a73ad55}
+.au-fi-dsp-box.is-fi{border-color:#ff85bfaa;background:linear-gradient(135deg,#341534dd,#160d26dd)}
+.au-fi-dsp-box.is-scout{border-color:#68e5e9aa;background:linear-gradient(135deg,#142938dd,#140d26dd)}
+.au-fi-dsp-box small{display:block;font-size:8.5px;font-weight:900;color:#ffd36e;line-height:1.15}
+.au-fi-dsp-box.is-fi small{color:#ffb7dc}
+.au-fi-dsp-box.is-scout small{color:#91efff}
+.au-fi-dsp-box b{display:block;font-size:10.5px;color:#fff;line-height:1.2;margin-top:1px}
+.au-fi-dsp-box span{display:block;font-size:9.5px;color:#dfd2f2;line-height:1.25;word-break:keep-all}
+.au-fi-backdrop.is-mobile .au-fi-dual-skill-preview{grid-template-columns:1fr;gap:4px}
+.au-fi-backdrop.is-mobile .au-fi-dsp-box{padding:5px 7px}
+.au-css-body{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.au-css-top{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:10px}
+.au-css-top>span{color:#91efff;font-weight:900}
+.au-card-skill-strip.is-fi-route .au-css-top>span{color:#ffb7dc}
+.au-css-top>b{color:#ffe5a3;font-weight:900}
+.au-slot-counter{display:inline-flex;align-items:center;gap:3px;font-size:9.5px}
+.au-slot-counter em{font-style:normal;color:#ffd36e;margin-left:2px}
+.au-slot-pill{font-style:normal;padding:1px 4px;border-radius:4px;background:#ffffff14;border:1px solid #ffffff26;color:#9b8cb0;font-size:8.5px;font-weight:900}
+.au-slot-pill.is-on{background:#ffd36e33;border-color:#ffd36ecc;color:#ffe89e;box-shadow:0 0 6px #ffd36e44}
+.au-skill-stack-list{display:flex;flex-direction:column;gap:3px;margin-top:3px}
+.au-stack-row{display:flex;align-items:center;gap:5px;padding:3px 6px;border-radius:6px;font-size:9.8px;line-height:1.3;word-break:keep-all}
+.au-stack-row.is-on{background:#120b20cc;border:1px solid #ffd36e77;color:#f5ebff}
+.au-stack-row.is-on b{color:#ffe69e}
+.au-stack-row.is-locked{background:#0d081888;border:1px dashed #6b5a8855;color:#8e7ea6;font-size:9.2px}
+.au-stack-row.is-locked i{font-style:normal;font-weight:900;color:#9b8cb0}
+.au-fsb-item.is-locked{opacity:.48;filter:grayscale(.6);border-style:dashed}
+.au-css-body>small{font-size:10px;color:#dfd2ef;line-height:1.35;word-break:keep-all}
+.au-css-body>small b{color:#fff}
+.au-css-body>small em{font-style:normal;color:#ffd36e;font-weight:800}
+.au-fi-top-controls{display:flex;align-items:center;gap:6px;margin-left:auto;flex-wrap:wrap}
+.au-skill-eye-btn{border:1px solid #ffd36eaa;background:#261a38;color:#ffe69e;font-size:11px;font-weight:800;padding:5px 10px;border-radius:99px;cursor:pointer;white-space:nowrap}
+.au-skill-eye-btn.is-on{background:#ffd36e33;border-color:#ffd36e;color:#fff}
+.au-fi-pro-short{margin:0;font-size:11px;line-height:1.45;color:#dfd0f0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.au-final-skill-box{padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,#2d183df2,#16102bf5);border:1.5px solid #ff85bfaa;box-shadow:0 8px 24px #0008;display:flex;flex-direction:column;gap:8px}
+.au-final-skill-box.is-scout{border-color:#68e5e9aa;background:linear-gradient(135deg,#152a3df2,#14102bf5)}
+.au-fsb-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding-bottom:6px;border-bottom:1px dashed #ffffff26}
+.au-fsb-badge{padding:2px 8px;border-radius:99px;background:#ffd36e2e;border:1px solid #ffd36eaa;font-size:10px;font-weight:900;color:#ffe69e}
+.au-fsb-head>b{font-size:13px;color:#fff}
+.au-fsb-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.au-fsb-item{padding:8px 10px;border-radius:10px;background:#120b20cc;border:1px solid #8a73ad44;display:flex;align-items:center;gap:9px}
+.au-fsb-copy{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.au-fsb-item.is-primary{border-color:#ffd36ecc;background:#2b1e14cc}
+.au-fsb-item.is-unlocked{border-color:#68e5e9cc;background:#142834cc}
+.au-fsb-copy small{font-size:9px;font-weight:900;color:#ffd36e}
+.au-fsb-copy b{font-size:12px;color:#fff}
+.au-fsb-copy span{font-size:10.5px;color:#dfd2f2;line-height:1.35;word-break:keep-all}
+.au-hidden-notice{margin:0;padding:10px 12px;border-radius:10px;background:#130c22aa;border:1px dashed #8a73ad66;font-size:11.5px;color:#cbbbe0;text-align:center}
+/* 모바일 세로 모드 (Portrait 430px · 실제 유저 화면 · 좌우 배치 & 잘림 0% 완벽 스케일) */
+.audition-app.is-mobile-portrait{max-width:430px;margin:0 auto;border:2px solid #9c7bc766;border-radius:28px;box-shadow:0 20px 60px #000c;overflow:hidden;padding:10px 10px 14px;min-height:0}
+.audition-app.is-mobile-portrait .au-top{padding:8px 4px;gap:6px;flex-wrap:wrap;justify-content:space-between}
+.audition-app.is-mobile-portrait .au-top>span{display:none}
+.audition-app.is-mobile-portrait .au-top .au-brand{font-size:14px}
+.audition-app.is-mobile-portrait .au-vp-top{margin-left:0}
+.audition-app.is-mobile-portrait .au-top-mark{margin-left:0;font-size:8.5px}
+.audition-app.is-mobile-portrait .au-section-heading{padding:12px 0 8px}
+.audition-app.is-mobile-portrait .au-section-heading h1{font-size:22px;margin-top:4px}
+.audition-app.is-mobile-portrait .au-section-heading p{font-size:10.5px!important;margin-top:5px;line-height:1.45}
+.audition-app.is-mobile-portrait .au-match-heading{margin:10px 0 8px;gap:8px}
+.audition-app.is-mobile-portrait .au-match-heading h1{font-size:15px}
+.audition-app.is-mobile-portrait .au-round-counter b{font-size:24px}
+.audition-app.is-mobile-portrait .au-duel{display:grid!important;grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr)!important;gap:4px!important;align-items:start!important;padding:18px 0 8px!important;min-height:0!important}
+.audition-app.is-mobile-portrait .au-duel .au-card,.audition-app.is-mobile-portrait .au-member-result .au-card,.audition-app.is-mobile-portrait .au-review-card .au-card{width:100%!important;max-width:none!important;min-width:0!important}
+.audition-app.is-mobile-portrait .au-versus{margin:0!important;transform:scale(.62);align-self:center}
+.audition-app.is-mobile-portrait .au-card-face{padding:3px;border-radius:12px}
+.audition-app.is-mobile-portrait .au-card-art,.audition-app.is-mobile-portrait .au-back-inner{border-radius:9px}
+.audition-app.is-mobile-portrait .au-card-title{padding:9px 8px 18px}
+.audition-app.is-mobile-portrait .au-card-title small{font-size:5.5px;letter-spacing:.04em}
+.audition-app.is-mobile-portrait .au-card-title h2{font-size:16px!important}
+.audition-app.is-mobile-portrait .au-card .au-card-radar.au-card-radar-v2{left:5px;bottom:8px;width:62%;padding:4px 3px 2px;border-radius:8px}
+.audition-app.is-mobile-portrait .au-card .au-card-radar-v2>span{font-size:8px}
+.audition-app.is-mobile-portrait .au-card .au-card-radar-v2>span>small{font-size:7px;display:block;margin-left:0}
+.audition-app.is-mobile-portrait .au-card-voxel{bottom:8px;width:62%}
+.audition-app.is-mobile-portrait .au-card .au-back-inner{padding:8px 8px 6px;gap:3px}
+.audition-app.is-mobile-portrait .au-card .au-back-inner h2{font-size:14px!important}
+.audition-app.is-mobile-portrait .au-card .au-stat-bars{gap:3px;margin-top:2px}
+.audition-app.is-mobile-portrait .au-card .au-stat>div:first-child{font-size:8px}
+.audition-app.is-mobile-portrait .au-card .au-stat b{font-size:11px}
+.audition-app.is-mobile-portrait .au-card .au-stat b small{font-size:7.5px}
+.audition-app.is-mobile-portrait .au-card .au-stat-total{padding-top:3px;font-size:7.5px}
+.audition-app.is-mobile-portrait .au-card .au-stat-total>b{font-size:11.5px}
+.audition-app.is-mobile-portrait .au-card .au-chip{font-size:7.5px;padding:1px 4px}
+.audition-app.is-mobile-portrait .au-card .au-study-stamp{font-size:7px;padding:1px 3.5px}
+.audition-app.is-mobile-portrait .au-card .au-bg-intro{font-size:7.5px;padding:3px 4px;line-height:1.25}
+.audition-app.is-mobile-portrait .au-card-skill-strip{padding:4px 6px;margin-top:4px;border-radius:8px}
+.audition-app.is-mobile-portrait .au-css-toggle{gap:4px}
+.audition-app.is-mobile-portrait .au-css-title{font-size:9px}
+.audition-app.is-mobile-portrait .au-slot-pill{font-size:7.5px;padding:1px 3px}
+.audition-app.is-mobile-portrait .au-css-hint{font-size:8px;padding:1px 4px}
+.audition-app.is-mobile-portrait .au-card-actions{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:4px}
+.audition-app.is-mobile-portrait .au-card-actions button{padding:5px 4px;font-size:9.5px;min-height:28px;border-radius:6px}
+.audition-app.is-mobile-portrait .au-card-actions .au-pick{grid-column:1/-1;padding:6px 8px;font-size:11px;min-height:32px}
+/* 결승 재확인(review) & 영입 완료(recruited) 모바일 세로 좌우 배치 */
+.audition-app.is-mobile-portrait .au-review-layout{display:grid!important;grid-template-columns:46% 1fr!important;gap:10px!important;margin:10px auto 16px!important;max-width:100%!important;align-items:start!important}
+.audition-app.is-mobile-portrait .au-review-copy h2{font-size:22px!important;margin:4px 0 8px}
+.audition-app.is-mobile-portrait .au-review-copy>p{font-size:11px!important;line-height:1.45}
+.audition-app.is-mobile-portrait .au-unassigned{margin:10px 0;padding:8px;gap:8px}
+.audition-app.is-mobile-portrait .au-unassigned>span{width:28px;height:28px;font-size:16px}
+.audition-app.is-mobile-portrait .au-review-copy>button{padding:10px 12px!important;font-size:11.5px!important;margin-top:6px}
+.audition-app.is-mobile-portrait .au-team{display:grid!important;grid-template-columns:minmax(0,48%) 18px minmax(0,1fr)!important;gap:6px!important;align-items:start!important;margin:10px auto 12px!important;max-width:100%!important}
+.audition-app.is-mobile-portrait .au-member-result{width:100%!important;min-width:0!important}
+.audition-app.is-mobile-portrait .au-team-plus{font-size:20px;text-align:center;align-self:center}
+.audition-app.is-mobile-portrait .au-mons-result{width:100%!important;min-width:0!important;min-height:210px!important;justify-content:flex-start;padding-top:6px}
+.audition-app.is-mobile-portrait .au-mons-orbit{width:92%;top:14%}
+.audition-app.is-mobile-portrait .au-mons-model{height:155px!important;margin-top:2px}
+.audition-app.is-mobile-portrait .au-mons-result>h2{font-size:19px!important;margin-top:2px}
+.audition-app.is-mobile-portrait .au-element{font-size:9px;padding:3px 8px;margin-top:4px}
+.audition-app.is-mobile-portrait .au-result-links{padding:4px 0 10px;gap:10px;font-size:9px;flex-wrap:wrap}
+.audition-app.is-mobile-portrait .au-recruit-story{padding:12px;margin-top:8px;gap:8px;border-radius:14px}
+.audition-app.is-mobile-portrait .au-recruit-story-head{gap:6px}
+.audition-app.is-mobile-portrait .au-recruit-story-head h3{font-size:14px}
+.audition-app.is-mobile-portrait .au-recruit-story-btns{gap:4px;width:100%}
+.audition-app.is-mobile-portrait .au-recruit-story-btns button{padding:5px 8px;font-size:10px;flex:1}
+.audition-app.is-mobile-portrait .au-story-bg{padding:6px 8px}
+.audition-app.is-mobile-portrait .au-story-bg .au-chip{font-size:9px;padding:2px 5px}
+.audition-app.is-mobile-portrait .au-story-bg .au-study-stamp{font-size:8.5px;padding:1.5px 5px}
+.audition-app.is-mobile-portrait .au-final-skill-box{padding:9px 10px;gap:6px}
+.audition-app.is-mobile-portrait .au-fsb-head>b{font-size:11px}
+.audition-app.is-mobile-portrait .au-fsb-grid{grid-template-columns:1fr;gap:5px}
+.audition-app.is-mobile-portrait .au-fsb-item{padding:6px 8px;gap:7px}
+.audition-app.is-mobile-portrait .au-skill-icon-lg{width:28px;height:28px;border-radius:7px}
+.audition-app.is-mobile-portrait .au-fsb-copy b{font-size:11px}
+.audition-app.is-mobile-portrait .au-fsb-copy span{font-size:9.5px}
+.audition-app.is-mobile-portrait .au-story-long{max-height:150px;gap:5px}
+.audition-app.is-mobile-portrait .au-story-long>p{padding:6px 8px;font-size:10.5px;line-height:1.5}
+.audition-app.is-mobile-portrait .au-board-bridge{padding:9px 10px;gap:8px}
+.audition-app.is-mobile-portrait .au-board-bridge-info b{font-size:11px}
+.audition-app.is-mobile-portrait .au-board-bridge-info small{font-size:9.5px}
+.audition-app.is-mobile-portrait .au-board-go{width:100%;justify-content:center;padding:8px 12px;font-size:11.5px}
+.audition-app.is-mobile-portrait .au-team-panel,.audition-app.is-mobile-portrait .au-mg-panel{padding:10px 12px;margin-top:8px}
+.audition-app.is-mobile-portrait .au-mg-row{grid-template-columns:1fr 1fr;gap:6px}
+.au-fi-backdrop.is-mobile .au-fi-screen{width:min(420px,96vw);max-height:94vh;padding:10px 11px;gap:8px;border-radius:24px;overflow:hidden}
+.au-fi-backdrop.is-mobile .au-fi-top{padding-bottom:5px}
+.au-fi-backdrop.is-mobile .au-fi-top h2{font-size:13px}
+.au-fi-backdrop.is-mobile .au-fi-main{display:grid!important;grid-template-columns:.88fr 1.12fr!important;gap:8px!important;align-items:stretch!important}
+.au-fi-backdrop.is-mobile .au-fi-hero{min-height:220px;max-height:250px;padding:8px}
+.au-fi-backdrop.is-mobile .au-fi-nameplate h3{font-size:19px}
+.au-fi-backdrop.is-mobile .au-fi-buff{font-size:9.5px;padding:3px 7px}
+.au-fi-backdrop.is-mobile .au-fi-voxel-mini{width:38px;height:48px;bottom:52px;right:6px}
+.au-fi-backdrop.is-mobile .au-fi-story{padding:8px 9px;gap:5px;justify-content:space-between}
+.au-fi-backdrop.is-mobile .au-fi-story-head b{font-size:12px}
+.au-fi-backdrop.is-mobile .au-fi-lines{font-size:10px;padding:5px 7px;gap:2px}
+.au-fi-backdrop.is-mobile .au-fi-pro-short{font-size:10px;line-height:1.38;-webkit-line-clamp:2}
+.au-fi-backdrop.is-mobile .au-story-quote{padding:5px 7px;font-size:10px;margin-top:2px}
+.au-fi-backdrop.is-mobile .au-fi-confirm{font-size:11.5px!important;padding:8px 10px!important}
+.au-fi-backdrop.is-mobile .au-fi-roster{display:grid!important;grid-template-columns:1fr 34px 1fr!important;gap:4px!important;padding-top:6px}
+.au-fi-backdrop.is-mobile .au-fi-grid-side{grid-template-columns:repeat(4,minmax(0,1fr));gap:3px}
+.au-fi-backdrop.is-mobile .au-fi-slot span{font-size:8px;padding:5px 1px 2px}
+.au-fi-backdrop.is-mobile .au-fi-random{width:34px;padding:2px;flex-direction:column;gap:1px}
+.au-fi-backdrop.is-mobile .au-fi-random b{font-size:15px}
+.au-fi-backdrop.is-mobile .au-fi-random small{font-size:6.5px}
+@media(max-width:760px){
+ .au-fi-main{grid-template-columns:.88fr 1.12fr;gap:8px}
+ .au-fi-hero{min-height:210px}
+ .au-st-dual-cols{grid-template-columns:1fr 1fr}
+ .au-st-vs-divider{display:none}
+ .au-fi-roster{grid-template-columns:1fr 34px 1fr;gap:4px}
+}
+@media(max-width:640px){
+ .au-open16-grid{grid-template-columns:repeat(4,minmax(58px,76px));gap:6px}
+ .au-duel-chat{bottom:48px;padding:6px 8px}
+ .au-duel-chat>b{font-size:10.5px}
+}
+@media(max-width:640px){
+ .audition-app .au-card .au-back-inner{padding:10px 9px 8px;gap:3px}
+ .audition-app .au-card .au-back-inner h2{font-size:15px!important}
+ .audition-app .au-card .au-stat-bars{gap:4px;margin-top:2px}
+ .audition-app .au-card .au-stat>div:first-child{font-size:8.5px}
+ .audition-app .au-card .au-stat b{font-size:11.5px}
+ .audition-app .au-card .au-stat-total{padding-top:4px;font-size:8px}
+ .audition-app .au-card .au-stat-total>b{font-size:12px}
+ .au-chip{font-size:8px;padding:1.5px 4.5px}
+ .au-study-stamp{font-size:7.5px;padding:1px 4px}
+ .au-bg-intro{font-size:8px;padding:4px 5px;line-height:1.3}
+}
+@media(max-width:480px){
+ .audition-app .au-card .au-back-inner{padding:14px 13px 10px;gap:5px}
+ .audition-app .au-card .au-back-inner h2{font-size:19px!important}
+ .audition-app .au-card .au-stat-bars{gap:6px;margin-top:3px}
+ .audition-app .au-card .au-stat>div:first-child{font-size:10.5px}
+ .audition-app .au-card .au-stat b{font-size:14px}
+ .au-chip{font-size:9.5px;padding:2px 6px}
+ .au-study-stamp{font-size:9px;padding:1.5px 5px}
+ .au-bg-intro{font-size:9.2px;padding:5px 7px}
+}
+
+/* 15:40 현중: 첫인상 카드 그림 늘어남 수정 — 아틀라스 칸(3:4)을 비율 그대로, 박스를 덮고 위(얼굴) 기준 */
+.au-fi-portrait-wrap,.au-fi-voxel-mini{container-type:size}
+.au-fi-portrait-wrap>.au-portrait,.au-fi-voxel-mini>.au-portrait{inset:0 auto auto 50%;transform:translateX(-50%);aspect-ratio:3/4;width:max(100cqw,75cqh);height:auto}
+.au-fi-slot .au-portrait{inset:0 auto auto 50%;transform:translateX(-50%);aspect-ratio:3/4;height:100%;width:auto}
+
+/* 10/16 15:31 현중 · 카드 재능 6축 하단 띠 · 스킬 이름 줄 · 주 버튼 */
+.audition-app .au-card .au-card-radar.au-card-radar-band{position:relative;left:auto;right:auto;bottom:auto;top:auto;width:auto;margin:4px 0 0;padding:6px 6px 2px;border-radius:12px;background:#120b1f;border:1px solid #ffffff1f;box-shadow:none;transform:none}
+.audition-app .au-card .au-card-radar-band>span{display:block;font-size:12px;font-weight:800;color:#f3d9f0;text-align:center}
+.audition-app .au-card .au-radar-6{display:block;width:100%;max-width:300px;height:auto;margin:0 auto}
+.audition-app .au-card .au-radar-6 .au-radar-axis{font-size:15px}.audition-app .au-card .au-radar-6 .au-radar-num{font-weight:900;fill:#ffd36e}
+.au-card-skill-strip .au-css-names{font-size:11px;line-height:1.35;color:#efe6ff;padding:3px 2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.audition-app .au-card-actions{display:grid!important;grid-template-columns:1fr 1fr;gap:6px}
+.audition-app .au-card-actions .au-pick{grid-column:1/-1;order:-1;font-size:16px!important;min-height:52px!important;font-weight:900}
+.audition-app .au-card-actions .au-flip,.audition-app .au-card-actions .au-story-open{font-size:11px!important;min-height:34px!important;padding:6px 8px!important;opacity:.9}
+
+/* 15:45 · 재능 띠는 카드 밖 아래(초상 · 미니 캐릭터 가림 없음) · 모바일 압축 */
+.audition-app .au-card>.au-card-radar.au-card-radar-band{display:flex;align-items:center;gap:4px;margin-top:5px;padding:2px 4px}
+.audition-app .au-card>.au-card-radar-band>span{writing-mode:vertical-rl;font-size:11px;letter-spacing:.1em}
+.audition-app .au-card>.au-card-radar-band .au-radar-6{flex:1;min-width:0;max-height:150px}
+@media(max-width:640px){
+ .audition-app .au-card>.au-card-radar-band .au-radar-6{max-height:104px}
+ .audition-app .au-card-perspective{aspect-ratio:4/5}
+ .audition-app .au-timer{padding:4px 10px!important;margin:4px auto 0!important}
+ .audition-app .au-match-heading{margin:6px auto 4px!important}
+ .audition-app .au-match-heading h1{font-size:15px!important}
+ .audition-app .au-duel{padding-top:26px!important;gap:14px!important}
+ .audition-app .au-card-actions .au-pick{min-height:42px!important;font-size:15px!important}
+ .audition-app .au-card-actions .au-flip,.audition-app .au-card-actions .au-story-open{min-height:28px!important;padding:3px 6px!important}
+ .au-card-skill-strip{margin-top:3px;padding:3px 6px}
+}
+@media(max-width:640px){.audition-app .au-card>.au-card-radar-band{padding:0}.audition-app .au-card>.au-card-radar-band>span{display:none}.audition-app .au-card>.au-card-radar-band .au-radar-6{max-height:138px;width:100%}.audition-app .au-card .au-radar-6 .au-radar-axis{font-size:21px;font-weight:800}}
+
+/* 15:40 현중 「이미지 깨지네」: 그림 비율 원복(늘어남 방지) · 모바일 그래프 범례 · 한 줄 버튼 · 스킬 이름 두 줄 */
+.au-radar-legend{display:none}
+@media(max-width:640px){
+ .audition-app .au-card-perspective{aspect-ratio:3/4}
+ .audition-app .au-card>.au-card-radar-band{flex-direction:column;align-items:stretch;gap:2px}
+ .audition-app .au-card>.au-card-radar-band .au-radar-6{max-height:92px}
+ .audition-app .au-card .au-radar-6 .au-radar-axis{display:none}
+ .au-radar-legend{display:grid;grid-template-columns:1fr 1fr;gap:1px 6px;margin:0;padding:0 2px 2px;list-style:none}
+ .au-radar-legend li{display:flex;justify-content:space-between;font-size:10px;line-height:1.35;color:#e9dcf5;white-space:nowrap}
+ .au-radar-legend b{color:#ffd36e;font-weight:900}
+ .audition-app .au-card-actions .au-flip,.audition-app .au-card-actions .au-story-open{white-space:nowrap;font-size:11px!important}
+ .au-card-skill-strip .au-css-names{white-space:normal;font-size:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ .audition-app main{scroll-margin-top:52px}
+}
+.audition-app .au-card>.au-card-radar.au-card-radar-band{width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;box-sizing:border-box;position:relative!important;inset:auto!important}
+@media(max-width:640px){.audition-app .au-card>.au-card-radar-band{background:#120b1fcc!important;border:1px solid #ffffff26!important;border-radius:10px!important;padding:3px 4px!important}.audition-app .au-card>.au-card-radar-band .au-radar-6{background:none!important;border:0!important;box-shadow:none!important}.au-radar-legend li{font-size:9.5px}}
+
+/* 15:41 현중 「오버랩」: 재능 그래프를 그림 하단 그라데이션 위에 겹침 · 왼쪽 그래프+범례 / 오른쪽 미니 캐릭터 · 얼굴은 위쪽 */
+.audition-app .au-card .au-card-art>.au-card-radar.au-card-radar-over{position:absolute!important;left:3%!important;bottom:3%!important;top:auto!important;right:auto!important;width:52%!important;height:auto!important;margin:0!important;padding:2px 3px!important;z-index:3;background:linear-gradient(180deg,#120b1f00,#120b1fb3 30%,#120b1fd9)!important;border:0!important;border-radius:10px!important;box-shadow:none!important;display:flex;flex-direction:column;align-items:stretch;gap:1px}
+.audition-app .au-card .au-card-art>.au-card-radar-over>span{display:none}
+.audition-app .au-card .au-card-art>.au-card-radar-over .au-radar-6{width:100%;max-height:none;background:none!important;border:0!important}
+.audition-app .au-card .au-card-art>.au-card-radar-over .au-radar-axis{display:none}
+.audition-app .au-card .au-card-art>.au-card-radar-over .au-radar-legend{display:grid;grid-template-columns:1fr 1fr;gap:0 4px;margin:0;padding:0;list-style:none}
+.audition-app .au-card .au-card-art>.au-card-radar-over .au-radar-legend li{display:flex;justify-content:space-between;font-size:9px;line-height:1.25;color:#efe3f8;white-space:nowrap}
+.audition-app .au-card .au-card-art>.au-card-radar-over .au-radar-legend b{color:#ffd36e}
+.audition-app .au-card .au-card-art .au-card-voxel{right:0!important;left:auto!important;bottom:3%!important;width:46%!important}
+.audition-app .au-card .au-card-art .au-card-grain{inset:38% 0 0!important;background:linear-gradient(transparent,#180f29f0 55%)!important}
+.audition-app .au-card .au-card-art .au-card-bottom{display:none}
+@media(max-width:640px){.audition-app .au-card .au-card-art>.au-card-radar-over .au-radar-legend li{font-size:8px}.audition-app .au-card .au-card-art>.au-card-radar-over{width:54%!important}}
+.audition-app .au-card .au-card-art .au-card-voxel{width:40%!important}.audition-app .au-card .au-card-art>.au-card-radar-over{width:58%!important}@media(max-width:640px){.audition-app .au-card .au-card-art>.au-card-radar-over{width:58%!important}.audition-app .au-card .au-card-art>.au-card-radar-over .au-radar-6{max-height:62px}}

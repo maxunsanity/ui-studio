@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P109 · 새 도시 진출</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"></head><body class="sample-document"><main><header><div class="eyebrow">P109 · 개발 기획</div><h1>새 도시 진출</h1><div class="actions"><a href="./새도시진출_기획서.md">짝 MD를 봅니다</a><a href="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/작성기준_v02/작성규칙.html">공통 작성 기준 보기</a><a href="#document-history" data-open-history>로그 보기</a></div></header><nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+<p><b>이 문서는</b> 다른 도시 방문의 기획과 기존 핵심제안 시즌 모델의 표·계산을 설명하는 상세 기획서입니다.</p>
+
+<p><b>보는 법</b> <a href="#part-2">2장</a>의 현재 대표·상세 문서와 원형 제안·그림 → <a href="#part-4">4장</a>의 시험 계산·단위 → <a href="#part-7">7장</a>의 연결 대기·미검수 범위 순서로 읽습니다.</p>
+
+<p><b>지금 상태</b> 기존 core 자동 방문 계산은 코드 경로가 있습니다. 현재 지역 선택 활동의 로컬 시험·기록은 P219/P193에서 구분합니다. 실제 20칸 방문·입장권·현지 공연 원장·귀환·저장 복원은 연결 대기이며, 실구동 확인 범위는 7장에 적었습니다.</p>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (신규) <a href="/docs/planning/proposal-concept/city-expand.html" data-paper-path="docs/planning/proposal-concept/city-expand.html">새 도시 진출 원형 제안·그림</a>과 핵심제안 시즌 계산·지역 표.</p>
+
+<p>내 도시를 영구히 옮기는 대신 다른 도시의 20칸 보드를 다녀오는 방향입니다. 방문 중에는 현지 활동으로 수익을 얻고 내 도시의 시설 성장을 계속 진행하지 않는 기획입니다. 진입 조건·방문 길이·지역별 값은 결정되지 않았으며 <b>발란스 대기</b>입니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1341 100" width="1341" height="100" role="img" aria-labelledby="title-P109-0"><title id="title-P109-0">설명 흐름도 P109-0</title><defs><marker id="arrow-P109-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L243,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-0)"/><path d="M423,50 L445.5,50 L468,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-0)"/><path d="M648,50 L670.5,50 L693,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-0)"/><path d="M873,50 L895.5,50 L918,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-0)"/><path d="M1098,50 L1120.5,50 L1143,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-0)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">내 도시에서 성장</tspan></text><rect x="243" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">다른 도시 열림 조건</tspan></text><rect x="468" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">방문</tspan></text><rect x="693" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">현지 보드 활동</tspan></text><rect x="918" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1008" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1008" dy="0">방문 정산</tspan></text><rect x="1143" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1233" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1233" dy="0">내 도시로 돌아오기</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">내 도시에서 성장 → 다른 도시 열림 조건 / 다른 도시 열림 조건 → 방문 / 방문 → 현지 보드 활동 / 현지 보드 활동 → 방문 정산 / 방문 정산 → 내 도시로 돌아오기</p></figure>
+
+
+
+<p>이 그림은 제안의 목표 흐름입니다. 실제 독립 화면·저장 복원까지 완성된 플레이를 뜻하지 않습니다. 시즌 모델은 임시 조건과 지역 데이터를 사용해 방문 수익을 계산합니다.</p>
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>이 문서와 연결되는 역할</th></tr></thead><tbody><tr><td><a href="새도시진출_핵심제안서.md">P219 현재 대표</a> · <a href="새도시진출_핵심제안서.html">원형 HTML·시안</a></td><td>지역 선택 로컬 시험·기록과 실제 방문 연결 대기</td></tr><tr><td><a href="../../기획서/산출_기획서_새도시진출_보완판_v1_클로드.md">P193 현재 상세</a> · <a href="../../기획서/산출_기획서_새도시진출_보완판_v1_클로드.html">원형 HTML·시안</a></td><td>지역·방문·정산·시티 투어의 기획과 미완 경계</td></tr><tr><td><a href="/docs/planning/proposal-concept/city-expand.html" data-paper-path="docs/planning/proposal-concept/city-expand.html">새 도시 진출 원형 제안·그림</a> · <a href="../../../../proposal-concept/city-expand.md">기획 기록 MD</a></td><td>방문형 도시와 내 도시 귀환의 기획 출발점</td></tr><tr><td><a href="/docs/planning/proposal-concept/city.html" data-paper-path="docs/planning/proposal-concept/city.html">도시 원형 제안·그림</a></td><td>내 도시의 육성 본거지와 활동 맥락</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%95%84%EC%9D%B4%EB%8F%8C%EB%8A%A5%EB%A0%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%95%84%EC%9D%B4%EB%8F%8C%EB%8A%A5%EB%A0%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P107 아이돌 성장</a></td><td>팀 능력과 성장 단계, 지역 열림 검토</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%AC%EA%B3%BC%EC%88%98%EC%9D%B5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%AC%EA%B3%BC%EC%88%98%EC%9D%B5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P108 팬과 수익</a></td><td>현지 팬·수익과 내 도시 경제의 경계</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P106 건물 성장</a></td><td>돌아온 뒤 내 도시 시설에 재투자</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/%EB%B3%B4%EB%93%9C%EA%B8%B0%EB%B3%B8%EA%B5%AC%EC%84%B1_%EC%83%98%ED%94%8C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/%EB%B3%B4%EB%93%9C%EA%B8%B0%EB%B3%B8%EA%B5%AC%EC%84%B1_%EC%83%98%ED%94%8C.html">P87 보드 기본 구성</a></td><td>내 도시 보드의 이동과 칸 구성</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EB%B0%9C%EB%9E%80%EC%8A%A4/%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88_%EB%B0%9C%EB%9E%80%EC%8A%A4%EA%B5%AC%EC%A1%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EB%B0%9C%EB%9E%80%EC%8A%A4/%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88_%EB%B0%9C%EB%9E%80%EC%8A%A4%EA%B5%AC%EC%A1%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P110 시즌 경제 참고</a></td><td>지역 문턱·수익·방문 길이 비교</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: 내 도시 → 진입 조건 확인 → 다른 도시 활동 → 정산 → 내 도시 복귀. 전용 20칸 실방문과 원장·저장 복원 연결은 대기 상태입니다. 기존 core 자동 방문 계산과 P219의 지역 선택 로컬 시험·기록은 서로 다른 범위로 읽습니다.</p>
+
+<h3 id="발란스-툴-열기"><a href="/docs/planning/balance-tool.html" data-paper-path="docs/planning/balance-tool.html">▶ 발란스 툴 열기</a></h3>
+
+<p>핵심제안 모델의 시즌 시험은 팀 능력에 따른 지역 열림과 입장권, 지역별 방문 굴림 수·현지 수익·정산 보너스를 임시 표에서 읽습니다. 이는 자동 계산 결과이며 플레이어가 20칸 보드 화면에서 직접 방문하고 저장을 복원했다는 뜻은 아닙니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 891 188" width="891" height="188" role="img" aria-labelledby="title-P109-1"><title id="title-P109-1">설명 흐름도 P109-1</title><defs><marker id="arrow-P109-1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L251.1818181818182,62" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-1)"/><path d="M198,138 L220.5,138 L251.1818181818182,126" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-1)"/><path d="M423,94 L445.5,94 L468,94" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-1)"/><path d="M648,94 L670.5,94 L693,94" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-1)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">임시 지역 표</tspan></text><rect x="243" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">시즌 모델</tspan></text><rect x="18" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">팀 능력과 입장권</tspan></text><rect x="468" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">방문 굴림과 수익 계산</tspan></text><rect x="693" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">시즌 결과에 정산</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">임시 지역 표 → 시즌 모델 / 팀 능력과 입장권 → 시즌 모델 / 시즌 모델 → 방문 굴림과 수익 계산 / 방문 굴림과 수익 계산 → 시즌 결과에 정산</p></figure>
+
+
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서">한 판 순서</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>목표: 조건을 만족하면 방문하고 정산 뒤 내 도시로 돌아옵니다. 전용 화면은 작업 전입니다.</td></tr><tr><td>입력·출력</td><td>지역·조건·방문 굴림과 현지 칸 데이터를 읽어 수익과 정산을 계산합니다.</td></tr><tr><td>상태와 전이</td><td>시즌 모델은 지역 열림 → 입장권 소모 → 방문 진행 → 굴림 소진 후 정산을 계산합니다.</td></tr><tr><td>판정</td><td>진입 조건 A·B·C와 문턱은 결정 대기입니다. 현재 시즌 모델은 임시 능력 문턱과 입장권을 사용합니다.</td></tr><tr><td>오류·예외</td><td>지역 선택 실패, 중도 귀환, 주사위 부족 등 실제 플레이 처리: 작업 전.</td></tr><tr><td>저장·복원</td><td>내 도시의 위치와 방문 중 기록을 실제 저장·복원하는 기능: 작업 전.</td></tr><tr><td>다른 모듈</td><td>아이돌 능력·보드·수익·내 도시 성장과 연결을 검토합니다.</td></tr></tbody></table></div>
+
+<h3 id="방문을-여는-조건-결정-대기">방문을 여는 조건 · 결정 대기</h3>
+
+<div class="table-scroll"><table><thead><tr><th>선택지</th><th>내용</th><th>결정 상태</th></tr></thead><tbody><tr><td>A 능력</td><td>팀 능력이나 성장 기준에 도달하면 지역이 열림</td><td>결정 대기</td></tr><tr><td>B 찬스</td><td>찬스로 입장 기회를 얻음</td><td>결정 대기</td></tr><tr><td>C 둘 다</td><td>능력으로 지역을 열고 입장권으로 방문</td><td>기획안 · 결정 대기</td></tr></tbody></table></div>
+
+<p>시즌 모델은 임시로 팀 능력에 따른 열림과 입장권을 함께 사용합니다. 같은 코드의 입장권 획득 위치 등은 시험 모델의 과거 가정이므로 현재 보드의 확정 입장 규칙으로 보지 않습니다. 그룹 능력 문턱, 획득 확률과 지역별 조건은 발란스 대기입니다.</p>
+
+<p>현재 core는 멤버별 능력 합의 멤버 평균으로 지역 문턱을 비교합니다. 지역 표의 unlock_stage_id를 직접 판정하지 않으며, 자동 방문 정책에서는 열린 지역 중 표 순서가 가장 뒤인 지역을 선택합니다. 입장권 획득 위치는 city_ticket_tile_id 시험 설정과 지역 확률을 사용하는 경로로, 실제 지역 선택·외국어·운영 조건과 구분합니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 891 188" width="891" height="188" role="img" aria-labelledby="title-P109-2"><title id="title-P109-2">설명 흐름도 P109-2</title><defs><marker id="arrow-P109-2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,138 L220.5,138 L243,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-2)"/><path d="M423,50 L445.5,50 L476.1818181818182,62" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-2)"/><path d="M423,138 L445.5,138 L476.1818181818182,126" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-2)"/><path d="M648,94 L670.5,94 L693,94" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-2)"/><rect x="18" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">팀 능력</tspan></text><rect x="243" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">지역 열림 시험</tspan></text><rect x="243" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">시험 입장권</tspan></text><rect x="468" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">방문 가능 여부</tspan></text><rect x="693" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">방문 세션</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">팀 능력 → 지역 열림 시험 / 시험 입장권 → 방문 가능 여부 / 지역 열림 시험 → 방문 가능 여부 / 방문 가능 여부 → 방문 세션</p></figure>
+
+
+
+<h3 id="20칸-구성과-현지-활동-시험-표">20칸 구성과 현지 활동 · 시험 표</h3>
+
+<p><code>city_visit_tile.csv</code>에는 공용 20칸의 시험 틀이 있습니다. 출발·쉼·행운·정산의 코너 4칸, 무대 8칸, 거리 활동 6칸, 찬스 2칸으로 나뉩니다. 표의 지역 ID 빈칸은 공용 틀을 뜻합니다. 칸 구성과 효과는 기획·시험 자료이며 최종 확정이 아닙니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>구분</th><th>시험 틀의 역할</th></tr></thead><tbody><tr><td>코너</td><td>시작·쉼·행운·정산 자리</td></tr><tr><td>무대</td><td>현지 활동과 판정이 있는 자리</td></tr><tr><td>거리 활동</td><td>현지 수익을 시험하는 자리</td></tr><tr><td>찬스</td><td>현지 기회 자리</td></tr></tbody></table></div>
+
+<p>핵심제안 모델은 지역의 현지 팬·수익 배율과 칸 가중치·판정을 사용해 수익을 계산하고 방문 굴림이 끝나면 정산 보너스를 계산합니다. 현지 능력 증가의 6축 값은 세부 능력으로 옮길 기준이 없어 계산하지 않고 발란스 대기로 기록합니다. 지역 이름·팬·배율·보너스·방문 수는 임시이며 발란스 대기입니다.</p>
+
+<p>현재 core 방문 돈은 (칸 기본 % + 고정 지역 팬 곡선 %)에 칸 가중·지역 배율·조건부 판정·주사위 배수를 반영하고 S 대비 %로 환산합니다. local_fan_base는 새로 지급되는 팬이 아니라 고정 시험 입력입니다. 방문 함수는 현지 팬이나 세부 능력을 지급하지 않고 능력 대기 로그만 남깁니다.</p>
+
+<p>20칸은 판의 크기, visit_rolls는 방문 굴림 수, 원형의 시간 예시는 별도 기획입니다. 모델은 방문 중 본진 이동·시설 성장을 진행하지 않고 방문 굴림마다 돈을 더합니다. 남은 방문 굴림이 끝나면 누적 방문 수익에 정산 보너스 %를 추가하고 본진 진행으로 돌아갑니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1341 100" width="1341" height="100" role="img" aria-labelledby="title-P109-3"><title id="title-P109-3">설명 흐름도 P109-3</title><defs><marker id="arrow-P109-3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L243,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-3)"/><path d="M423,50 L445.5,50 L468,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-3)"/><path d="M648,50 L670.5,50 L693,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-3)"/><path d="M873,50 L895.5,50 L918,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-3)"/><path d="M1098,50 L1120.5,50 L1143,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P109-3)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">지역 설정과 현지 칸</tspan></text><rect x="243" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">현지 팬과 칸 가중치</tspan></text><rect x="468" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">판정과 수익 계산</tspan></text><rect x="693" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">방문 수익 누적</tspan></text><rect x="918" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1008" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1008" dy="0">남은 굴림 종료</tspan></text><rect x="1143" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1233" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1233" dy="0">정산 보너스</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">지역 설정과 현지 칸 → 현지 팬과 칸 가중치 / 현지 팬과 칸 가중치 → 판정과 수익 계산 / 판정과 수익 계산 → 방문 수익 누적 / 방문 수익 누적 → 남은 굴림 종료 / 남은 굴림 종료 → 정산 보너스</p></figure>
+
+
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>지역 열림·입장 기회, 방문 진행, 현지 보드 이동, 현지 수익, 정산과 내 도시 복귀가 필요합니다. 전용 20칸 실방문·원장·실제 저장 복원 연결은 확인 대기이며, P219의 지역 선택 로컬 시험과 구분합니다. 다른 도시를 <a href="/docs/planning/proposal-fansim-expedition.html" data-paper-path="docs/planning/proposal-fansim-expedition.html">원정</a>과 같은 기능으로 취급하지 않습니다.</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<p>아래 목록은 전용 20칸 실방문 경험의 제작·검수 상태를 가리킵니다. 지역 선택 활동의 로컬 시험·기록은 2장의 현재 대표·상세 문서에서 별도로 읽습니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>장면</th><th>보여 줄 내용</th><th>상태</th></tr></thead><tbody><tr><td>열림 알림</td><td>지역과 진입 가능 여부</td><td>작업 전</td></tr><tr><td>20칸 보드</td><td>지역·위치·남은 방문 진행</td><td>작업 전</td></tr><tr><td>현지 활동</td><td>칸 종류와 활동 결과</td><td>작업 전</td></tr><tr><td>정산·귀환</td><td>방문 수익과 내 도시 복귀</td><td>작업 전</td></tr></tbody></table></div>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<p>진입 A·B·C, 지역 수·이름, 방문 길이와 중도 귀환, 지역별 능력 문턱·수익 배율·현지 팬·정산 보너스는 결정 대기 또는 <b>발란스 대기</b>입니다. 현지 팬을 내 도시 팬과 합칠지, 시즌당 재방문 횟수도 결정 대기입니다.</p>
+
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<p><a class="open-action" href="/docs/planning/proposal-concept/_assets/overseas-activity-map-v1.png" target="_blank" rel="noopener">눌러서 다른 도시 활동 지도 시안 확인</a></p>
+
+<div class="table-scroll"><table><thead><tr><th>리소스</th><th>사용 위치·역할</th><th>상태</th></tr></thead><tbody><tr><td>다른 도시 활동 지도</td><td>지역 선택과 활동 방향을 보여 주는 제안 그림</td><td>시안</td></tr><tr><td>20칸 보드와 위치 표시</td><td>현지 방문·이동</td><td>작업 전</td></tr><tr><td>열림·정산·귀환 화면</td><td>진입과 방문 결과 설명</td><td>작업 전</td></tr></tbody></table></div>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<p>현지 보드와 출발·정산·귀환에 필요한 화면과 연출은 작업 전입니다. 지역별 제작 범위는 지역 결정 후 정합니다.</p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일</th><th>역할</th><th>연결과 주의</th></tr></thead><tbody><tr><td><code>data/core_proposal/city_visit_region.csv</code></td><td>지역 순서·능력 기준·방문 수·현지 팬·배율·정산</td><td><code>city_visit_region_id</code> · 모든 수치는 임시, 발란스 대기</td></tr><tr><td><code>data/core_proposal/city_visit_tile.csv</code></td><td>20칸의 종류·위치·판정·수익 가중치</td><td><code>city_visit_tile_id</code>, <code>pos</code> · 빈 지역 ID는 공용 틀</td></tr><tr><td><code>data/core_proposal/fan_income_config.csv</code></td><td>시즌 모델의 현지 팬 곡선 설정</td><td>시험값 · 발란스 대기</td></tr><tr><td><code>data/core_proposal/idol_growth_stage.csv</code></td><td>성장 단계와 문턱의 시험 자료</td><td>지역 문턱과 혼동하지 않음</td></tr><tr><td><code>data/game/board_tile.csv</code></td><td>내 도시 보드 칸과 시설 연결</td><td><code>tile_id</code>, <code>pos</code> · 방문 표와 별도</td></tr><tr><td><code>data/simulator/simulator_module.csv</code></td><td>공용 시뮬레이터 모듈 등록</td><td>지역 선택 시험과 전용 20칸 실방문 연결을 구분</td></tr></tbody></table></div>
+
+<p>지역·현지 칸·팬 곡선·성장 단계의 core_proposal 원표는 직접 reader가 시즌 계산에 읽습니다. 스키마 현황의 미등록 상태와 실제 계산 소비를 구분하며, 열 목록이나 일부 ID 소속 대조를 정식 PK/FK 등록·운영 전수 검증으로 보지 않습니다. 빈 지역 ID는 공용 틀이며 필수 숫자칸이 비면 reader는 값을 만들지 않고 멈춥니다.</p>
+
+<p>주사위 환산: 미완 · 방문 굴림 수는 표의 임시 시험값이며 실제 지급·소비 기준은 발란스 대기입니다.</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<p>확인 범위는 원문·허용 표·기존 core reader/계산의 정적 대조입니다. 지역 선택 로컬 시험·기록은 현재 P219/P193의 범위와 구분해 읽었습니다. 보호된 상위 직접 연결, 실제 20칸 이동·입장권·지갑 지급·현지 공연 원장·저장 복원·중도 귀환은 검수하지 않았습니다. 시즌 총굴림이 먼저 끝나는 경우의 방문 종료도 별도 확인 대상입니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>상태</th><th>확인 범위·다음 작업</th></tr></thead><tbody><tr><td>지역·20칸 시험 데이터</td><td>시험표 확인</td><td>기존 raw 표·공용 틀·스키마 등록 범위를 구분. 최종 값은 발란스 대기</td></tr><tr><td>기존 core 자동 방문 계산</td><td>코드 경로 확인</td><td>자동 지역 선택·방문 돈·종료 추가 보너스. 현지 팬·세부 능력 지급은 계산하지 않음</td></tr><tr><td>현재 지역 선택 활동·지역별 성적</td><td>로컬 시험·기록 범위</td><td>현재 P219/P193에서 확인 범위와 실제 방문·현지 공연 원장 미완을 구분</td></tr><tr><td>전용 20칸 실방문·입장·귀환</td><td>연결 대기</td><td>현재 지역 선택 로컬 시험과 구분. 실제 원장과 입장·복귀 경험 검수 필요</td></tr><tr><td>방문 저장·중도 복구</td><td>연결 대기·미검수</td><td>실제 저장 계약·종료 예외·중도 귀환·중복 정산 검수 필요</td></tr><tr><td>지역 수치와 방문 정책</td><td>기획 중</td><td>발란스 대기·결정 대기</td></tr></tbody></table></div>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<ul>
+<li>진입 조건을 정하고 방문 전후 내 도시 위치·시설·팬이 어떻게 유지되는지 실제 화면에서 확인합니다.</li>
+<li>현지 20칸 이동, 방문 종료와 정산을 실제 지급과 맞춰 검증합니다.</li>
+<li>방문 중 종료와 복원, 중도 귀환·주사위 부족을 결정한 규칙대로 확인합니다.</li>
+<li>시험값과 실제 구현·최종 수치를 구분합니다.</li>
+</ul>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p>기존 문서의 이전 보드 배치와 결정 이력은 짝 로그의 접힌 원문에 그대로 보존합니다. 이미 존재하는 지역 표를 새 표 미제작으로 표현한 옛 설명을 현재 표와 구분했습니다.</p>
+
+<details>
+<summary>작업 기록</summary>
+
+<ul>
+<li>기존 MD·HTML·제안서와 핵심제안 모델·시즌 계산·지역 표를 대조했습니다. 이번 문서 작업에서 새 실행·캡처·빌드는 하지 않았습니다.</li>
+<li>이전 원문과 근거 경로는 짝 로그와 작업 백업에 보존합니다.</li>
+</ul>
+
+</details>
+</section><details class="history" id="document-history" data-log-src="./새도시진출_기획서.log.md"><summary>이전 로그와 변경 기록 펼치기</summary><div class="log-body"></div></details></main><script src="../작성기준_v02/sample-document.js" defer></script><script src="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/development-links.js" defer></script></body></html>

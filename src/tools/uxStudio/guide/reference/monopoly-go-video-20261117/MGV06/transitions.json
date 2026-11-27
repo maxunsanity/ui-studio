@@ -1,0 +1,309 @@
+{
+  "format": "ui-studio-video-transitions",
+  "version": 1,
+  "videoId": "MGV06",
+  "basis": "observed sample sequence, no input event proof",
+  "count": 12,
+  "transitions": [
+    {
+      "id": "MGV06-T01",
+      "scope": "screen",
+      "fromScreenId": "MGV06-S01",
+      "toScreenId": "MGV06-S02",
+      "fromStateId": "MGV06-S01-A",
+      "toStateId": "MGV06-S02-A",
+      "observedWindowSeconds": [
+        1.5,
+        4.5
+      ],
+      "evidence": [
+        "captures/validated/frame_001.png",
+        "captures/validated/frame_002.png"
+      ],
+      "observedOutcome": "메뉴 이후 GO!CHAT 안내가 보임",
+      "trigger": null,
+      "visibleControlCandidate": "GO!CHAT 행 후보",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    },
+    {
+      "id": "MGV06-T02",
+      "scope": "screen",
+      "fromScreenId": "MGV06-S02",
+      "toScreenId": "MGV06-S03",
+      "fromStateId": "MGV06-S02-A",
+      "toStateId": "MGV06-S03-A",
+      "observedWindowSeconds": [
+        4.5,
+        7.0
+      ],
+      "evidence": [
+        "captures/validated/frame_002.png",
+        "captures/validated/frame_003.png"
+      ],
+      "observedOutcome": "안내 뒤 메인 보드가 보임",
+      "trigger": null,
+      "visibleControlCandidate": "하단 × 후보",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    },
+    {
+      "id": "MGV06-T03",
+      "scope": "screen",
+      "fromScreenId": "MGV06-S03",
+      "toScreenId": "MGV06-S04",
+      "fromStateId": "MGV06-S03-A",
+      "toStateId": "MGV06-S04-A",
+      "observedWindowSeconds": [
+        7.0,
+        14.0
+      ],
+      "evidence": [
+        "captures/validated/frame_003.png",
+        "captures/validated/frame_004.png"
+      ],
+      "observedOutcome": "중간 메뉴/안내 반복을 거쳐 외부 스토어가 보임",
+      "trigger": null,
+      "visibleControlCandidate": "앱 받기 후보; 중간 전환은 JPEG 리뷰 참고",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    },
+    {
+      "id": "MGV06-T04",
+      "scope": "state",
+      "fromScreenId": "MGV06-S04",
+      "toScreenId": "MGV06-S04",
+      "fromStateId": "MGV06-S04-A",
+      "toStateId": "MGV06-S04-B",
+      "observedWindowSeconds": [
+        14.0,
+        18.208333
+      ],
+      "evidence": [
+        "captures/validated/frame_004.png",
+        "captures/validated/frame_005.png"
+      ],
+      "observedOutcome": "스토어 다운로드 진행으로 바뀜",
+      "trigger": null,
+      "visibleControlCandidate": "설치 후보",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    },
+    {
+      "id": "MGV06-T05",
+      "scope": "state",
+      "fromScreenId": "MGV06-S04",
+      "toScreenId": "MGV06-S04",
+      "fromStateId": "MGV06-S04-B",
+      "toStateId": "MGV06-S04-C",
+      "observedWindowSeconds": [
+        18.208333,
+        22.0
+      ],
+      "evidence": [
+        "captures/validated/frame_005.png",
+        "captures/validated/frame_006.png"
+      ],
+      "observedOutcome": "스토어 열기 버튼 활성 상태",
+      "trigger": null,
+      "visibleControlCandidate": "다운로드 완료; 입력 미확인",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    },
+    {
+      "id": "MGV06-T06",
+      "scope": "screen",
+      "fromScreenId": "MGV06-S04",
+      "toScreenId": "MGV06-S05",
+      "fromStateId": "MGV06-S04-C",
+      "toStateId": "MGV06-S05-A",
+      "observedWindowSeconds": [
+        22.0,
+        27.25
+      ],
+      "evidence": [
+        "captures/validated/frame_006.png",
+        "captures/validated/frame_009.png"
+      ],
+      "observedOutcome": "앱 로고/로딩을 거쳐 동의 화면",
+      "trigger": null,
+      "visibleControlCandidate": "열기 후보",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    },
+    {
+      "id": "MGV06-T07",
+      "scope": "screen",
+      "fromScreenId": "MGV06-S05",
+      "toScreenId": "MGV06-S06",
+      "fromStateId": "MGV06-S05-A",
+      "toStateId": "MGV06-S06-A",
+      "observedWindowSeconds": [
+        27.25,
+        29.166667
+      ],
+      "evidence": [
+        "captures/validated/frame_009.png",
+        "captures/validated/frame_010.png"
+      ],
+      "observedOutcome": "동의 안내 뒤 빈 채팅 목록",
+      "trigger": null,
+      "visibleControlCandidate": "동의합니다 후보",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    },
+    {
+      "id": "MGV06-T08",
+      "scope": "screen",
+      "fromScreenId": "MGV06-S06",
+      "toScreenId": "MGV06-S07",
+      "fromStateId": "MGV06-S06-A",
+      "toStateId": "MGV06-S07-A",
+      "observedWindowSeconds": [
+        29.166667,
+        30.5
+      ],
+      "evidence": [
+        "captures/validated/frame_010.png",
+        "captures/validated/frame_011.png"
+      ],
+      "observedOutcome": "새 채팅 안내 오버레이 표시",
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    },
+    {
+      "id": "MGV06-T09",
+      "scope": "screen",
+      "fromScreenId": "MGV06-S07",
+      "toScreenId": "MGV06-S08",
+      "fromStateId": "MGV06-S07-A",
+      "toStateId": "MGV06-S08-A",
+      "observedWindowSeconds": [
+        30.5,
+        32.0
+      ],
+      "evidence": [
+        "captures/validated/frame_011.png",
+        "captures/validated/frame_012.png"
+      ],
+      "observedOutcome": "받는 사람 선택창 표시",
+      "trigger": null,
+      "visibleControlCandidate": "새 채팅 + 후보",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    },
+    {
+      "id": "MGV06-T10",
+      "scope": "state",
+      "fromScreenId": "MGV06-S08",
+      "toScreenId": "MGV06-S08",
+      "fromStateId": "MGV06-S08-A",
+      "toStateId": "MGV06-S08-B",
+      "observedWindowSeconds": [
+        32.0,
+        32.208333
+      ],
+      "evidence": [
+        "captures/validated/frame_012.png",
+        "captures/validated/frame_013.png"
+      ],
+      "observedOutcome": "로딩 표시 소멸·친구 없음 유지",
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    },
+    {
+      "id": "MGV06-T11",
+      "scope": "screen",
+      "fromScreenId": "MGV06-S08",
+      "toScreenId": "MGV06-S09",
+      "fromStateId": "MGV06-S08-B",
+      "toStateId": "MGV06-S09-A",
+      "observedWindowSeconds": [
+        32.208333,
+        33.5
+      ],
+      "evidence": [
+        "captures/validated/frame_013.png",
+        "captures/validated/frame_014.png"
+      ],
+      "observedOutcome": "친구 없음 안내 팝업 표시",
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    },
+    {
+      "id": "MGV06-T12",
+      "scope": "screen",
+      "fromScreenId": "MGV06-S09",
+      "toScreenId": "MGV06-S03",
+      "fromStateId": "MGV06-S09-A",
+      "toStateId": "MGV06-S03-B",
+      "observedWindowSeconds": [
+        33.5,
+        36.0
+      ],
+      "evidence": [
+        "captures/validated/frame_014.png",
+        "captures/validated/frame_015.png"
+      ],
+      "observedOutcome": "녹화된 화면이 메인 보드로 복귀",
+      "trigger": null,
+      "visibleControlCandidate": "게임 열기 후보",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "runtimeTarget": null,
+      "notes": [
+        "The visible before/after sequence is observed. Input event, exact activation time and external URI remain unverified."
+      ]
+    }
+  ]
+}

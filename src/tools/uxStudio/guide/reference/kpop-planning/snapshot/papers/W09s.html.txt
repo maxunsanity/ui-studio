@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09 팬덤 정원</title>
+<style>
+  body{margin:0;background:#f6f0e4;color:#2a241c;font-family:Georgia,"Iowan Old Style","Apple SD Gothic Neo",serif}
+  main{max-width:920px;margin:0 auto;padding:22px 18px 32px}
+  .kicker{font-size:11px;letter-spacing:.06em;color:#7a6e60;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  h1{font-size:28px;margin:4px 0 2px}
+  .hook{color:#9a3d4e;font-weight:700;margin:0 0 8px}
+  .sum{background:rgba(255,252,246,.8);border:1px solid #e4d3b4;border-radius:8px;padding:8px 12px;font-size:14px;line-height:1.45}
+  .mid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin:14px 0;align-items:center}
+  .flow,.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+  .n{background:#fffaf2;border:1px solid #c4a46a;border-radius:8px;padding:7px 9px;font-size:13px;font-weight:700;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  .good{background:#e7f8ee}.bad{background:#fde8ee}
+  .arr{color:#c4a46a;font-weight:700}
+  ol{margin:0;padding-left:1.1em;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  li{margin:8px 0}
+  li b{display:block}
+  li span{color:#7a6e60;font-size:13px;font-weight:400}
+  .foot{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;border-top:1px solid #c4a46a;padding-top:8px;font-size:12px;line-height:1.4;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  .foot b{display:block;color:#7a6e60;font-size:11px;margin-bottom:2px}
+  .fig{background:#fffaf2;border:1px solid #e4d3b4;border-radius:10px;padding:6px;margin-bottom:8px;overflow:auto}
+  pre.mermaid{margin:0}
+  .more{font-size:11px;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  a{color:#7a4b22}
+  @media(max-width:800px){.mid,.foot{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">전체기획서 · 09 · 케이팝몬스터즈 · 제안(검수 대기) · R52 재생성 09-30</div>
+  <h1>팬덤정원·아바타·필러</h1>
+  <p class="hook">팬은 숫자가 아니라 정원</p>
+  <div class="sum">씨앗에서 희귀 개화까지. 악플과 안티는 시듦과 가시.<br>파츠로 만든 캐릭터 하나가 다음 시즌까지 간다. 사진은 없다.</div>
+  <div class="mid">
+    <div>
+      <div class="fig"><pre class="mermaid">flowchart LR
+  A[기획사] --> B[아이돌] --> C[팬덤] --> A</pre></div>
+      <div class="row">
+        <div class="n">씨앗</div><div class="n">모종</div><div class="n">새싹</div><div class="n">봉오리</div><div class="n">개화</div><div class="n">희귀개화</div>
+      </div>
+      <div class="row">
+        <div class="n good">물 · 햇빛 · 비료</div>
+        <div class="n bad">시듦 · 악플 · 가시덩굴</div>
+        <div class="n">파츠 아바타 · 사진 없음</div>
+        <div class="n">칸 도착 말 · 중박 · 대박 · 운망</div>
+      </div>
+    </div>
+    <ol>
+      <li><b>자란다</b><span>물, 햇빛, 비료</span></li>
+      <li><b>상한다</b><span>시듦, 악플, 가시덩굴</span></li>
+      <li><b>지킨다</b><span>보호꽃이 쉴드</span></li>
+      <li><b>남긴다</b><span>꾸민 캐릭터 하나</span></li>
+    </ol>
+  </div>
+  <div class="foot">
+    <div><b>왜 지금</b>팬덤은 숫자판이 아니라 따로 보이는 콘텐츠다.</div>
+    <div><b>이게 핵심</b>사람은 사람이고, 꽃은 그 위에 겹친다.</div>
+    <div><b>이게 아닌 것</b>사진 업로드. 팬 수 전광판. 카드와 로비를 따로 꾸미기.</div>
+  </div>
+  <p class="more"><a href="../디자인컨셉/산출_디자인컨셉_팬덤정원_순환가시화_v0_단서.html">순환 원본</a></p>
+</main>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true, theme: "neutral", securityLevel: "loose" });
+</script>
+</body>
+</html>

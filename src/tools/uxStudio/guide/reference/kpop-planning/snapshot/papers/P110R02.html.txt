@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>실시간 플레이 로그 · 기준 비교</title>
+</head>
+<body>
+  <div class="top">
+    <div>
+      <h1>📡 실시간 플레이 로그</h1>
+      <div class="sub">이 브라우저 게임 저장본의 경제 기록 vs <b>기준(시즌 자동 플레이)</b> 비교 · 불러오기 버튼으로만 갱신 · 저장하면 <b>실측 분석</b> 툴로 넘김</div>
+      <div data-planning-rooms hidden></div>
+    </div>
+  </div>
+  <div class="controls">
+    <label>비교 축
+      <select id="alignAxis">
+        <option value="day">시즌 일차</option>
+        <option value="fans">기획사 팬 총합</option>
+      </select>
+    </label>
+    <button type="button" class="primary" id="btnLoad">불러오기</button>
+    <button type="button" class="primary" id="btnSave">저장 → 실측 분석</button>
+    <a class="pill" href="/docs/planning/game-prototype.html" target="_blank" rel="noopener">게임 열기</a>
+  </div>
+  <div class="status" id="status">준비 중…</div>
+  <div class="pl-main">
+    <div class="pl-grid" style="margin-bottom:12px">
+      <div class="panel" id="econFiles"><h2>경제 기록 · 쌓인 양</h2><p class="note">불러오기 후 표시</p></div>
+      <div class="panel"><h2>지금 vs 기준 · 한눈에</h2><div class="kpis" id="kpi"></div><p class="note" id="alignNote"></p></div>
+    </div>
+    <div class="pl-grid">
+      <div class="panel"><h2>쓴 주사위(기록 순서 누적)</h2><div id="chDice"></div></div>
+      <div class="panel"><h2>돈 순증감(기록 순서 누적)</h2><div id="chMoney"></div></div>
+      <div class="panel"><h2>받은 주사위(충전 · 상점)</h2><div id="chFree"></div></div>
+      <div class="panel"><h2>최근 기록</h2><div id="recent" class="scroll"></div></div>
+    </div>
+  </div>
+<script type="module" src="/src/tools/playlog/live.ts"></script>
+</body>
+</html>

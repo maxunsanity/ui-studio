@@ -1,0 +1,219 @@
+# 포즈 미션 기획서 v01
+
+**이 문서는** 카드 12장으로 여는 포즈가 아닌, 보상으로 얻는 기타 포즈를 「포즈 미션」으로 기획한 초안입니다. 대상은 아이돌만입니다.
+
+**보는 법** 1장 목적 → 2장 범위 · 장수 · 보너스 칸 수 → 3장 읽은 원본 → 4장 구조도 → 5장 출처 6종 조건 → 6장 미션 조건 구조 표 → 7장 기존 미션 표와 연결 → 8장 이스라트에게 요청할 연결 열 → 9장 초안 파일 순서로 읽습니다.
+
+**지금 상태** 산출 폴더 초안입니다. 라이브 `data/` · 유르넷 모션 파일은 바꾸지 않았습니다. 작성 이올카(콘텐츠 기획) · 2026-11-14 (KST).
+
+---
+
+## 1. 목적
+
+- 현중 11/14 15:21: 「미션으로 해야 겠네」 「포즈 미션 만들고」. 이스라트 15:21 전달.
+- 카드 12장 포즈 말고, 보상으로 얻는 기타 포즈를 포즈 미션 조건에 묶는다.
+- 현중 15:23: 「아이돌만 있으면 되겠지」. 포즈와 포즈 미션은 아이돌만 둔다.
+
+## 2. 범위 · 장수 · 보너스 칸 수
+
+### 2-1. 범위
+
+- `npc_kind`는 `idol`만. 행의 `character_id`는 `{character_master_id}` 틀이다. 보유한 아이돌마다 같은 조건 구조를 쓴다(아이돌 최대 30명).
+- 스태프·팬회장 포즈 미션은 두지 않는다.
+
+### 2-2. 유르넷 기준 장수 (카드 · 대표 · 대기)
+
+읽은 시각: 2026-11-14 15:25 KST.
+
+| 항목 | 값 | 출처 |
+|---|---|---|
+| 아이돌 1명 포즈 그림 최대 | 14장 = 대표 포즈 1 + 기본 대기 포즈 1 + 카드 12칸 포즈 | `산출/개발진행기획_v01/캐릭터_기본동작_모션목록_v01.md` L73 |
+| 아이돌 1명 모션 최대 | 13개 = 기본 대기 1 + 카드 12 | 같은 문서 L14 · L73 |
+| 아이돌 최대 인원 | 30명 | 같은 문서 L17(아이돌 최대 30 + 스태프 9 + 팬회장 1 = 40자리) |
+| 아이돌 30명 × 14장 | 420장 | 위 두 수를 곱한 값. 유르넷 파일 본문에 「420장」이라는 숫자는 없음(같은 문서 L291의 420은 다른 기획서 줄 번호) |
+
+### 2-3. 포즈 미션 보너스 칸 수
+
+**유르넷 파일에 보너스 칸 수 없음(읽은 시각 2026-11-14 15:25 KST).**
+
+확인한 파일과 mtime: `캐릭터_기본동작_모션목록_v01.md`(15:17) · `character_motion_v01.csv`(15:15, 37행=공통 대기 1+아이돌 12+스태프 12+팬회장 12) · `character_motion_unlock_v01.csv`(15:15, 39행=3종류×(0칸+12칸), 「얻는 곳」 열 없음) · `보고/20261114_1518_유르넷_캐릭터기본동작_모션목록.md`(15:18). 「보너스」「기타 포즈」「포즈 미션」「추가 칸」 검색 0건. 카드 12장 몫이 아닌 기타 포즈 `motion_id`는 없다.
+
+보너스 칸 수는 유르넷이 기획서에 정한다. 이 문서와 `pose_mission_v01.csv`는 칸 수를 정하지 않고, 출처 6종의 **미션 조건 구조**만 적는다. 보상 포즈 이름은 기획 안으로만 두고, 칸 수처럼 세지 않는다.
+
+### 2-4. 뺀 것
+
+현중 15:23 범위 정정(아이돌만). 산출 파일을 쓰기 전에 범위를 맞춰, 스태프·팬회장 포즈 미션 행·보상 포즈는 만들지 않았다. 지울 스태프·팬회장 산출 본문은 없다. 유르넷 모션 목록의 스태프·팬회장 12칸은 원본 확인용으로만 읽었다.
+
+---
+
+## 3. 읽은 원본
+
+| 원본 | 읽은 내용 | 이 기획서에 쓴 곳 |
+|---|---|---|
+| `산출/개발진행기획_v01/캐릭터_기본동작_모션목록_v01.md` | 14장·13모션·아이돌 30·카드 해금 구조. 보너스 칸 수 없음 | 2장 |
+| `character_motion_v01.csv` (37행) | 기타 포즈 없음. 아이돌 12칸은 카드 해금 | 2-3 · 6장 보상 ID |
+| `character_motion_unlock_v01.csv` (39행) | 칸 0~12만. 「얻는 곳」 열 없음(유르넷 추가 중, 수정 안 함) | 2-3 · 8장 요청 |
+| `보고/20261114_1518_유르넷_캐릭터기본동작_모션목록.md` | 모션 37=대기1+종류별 12. 최대 13개 | 2장 |
+| `산출/전체기획서/08_월드페스티벌전투오리지널16_클로드.md` | R-08-1 구역 100 · R-08-6 바퀴 보상 · R-08-8 가산점 비어 있음 · R-08-14 9주 전원 참가 · L125 63일 | 5-1 · 5-2 |
+| `data/game/season_config.csv` L2 | `season_days=63` | 5-2 · 5-6 |
+| `data/game/festival_ticket.csv` L2~L5 | 출전권 4등급 틀, `fest_id` 공란, `level_min` 140·1100·6000·15000 | 참고만. 순위·참가 조건으로 쓰지 않음 |
+| `data/game/event_milestone.csv` L2~L11 · `event_template.csv` L2 | 10단 문턱 21~323, 72시간, 시즌당 20회 | 5-3 |
+| `data/game/board_tile.csv` (40칸) · `board_tile_group.csv` | 시설·캐스팅·팬 반응·스케줄 등 칸 종류 | 5-3 참고 |
+| `data/game/adventure_grade.csv` L2 · `adventure_success_rate.csv` L2 · `data/rapport_sim/rapport_adventure_gain.csv` L2 | 대성공=`adventure_grade_perfect`, 별 3, 보상 100%, 풀편성 확률 92% | 5-4 |
+| `data/rapport_sim/rapport_stage.csv` L2~L6 · `data/master/condition.csv` L35~L44 · `condition_group.csv` | 좋은 쪽 5단계 문턱 0·20·40·60·80 | 5-5 |
+| `data/game/staff_rapport_bonus.csv` | 스태프 9자리 단계 1~3 = 5·10·15% | 읽기만. 아이돌 미션 조건에 넣지 않음 |
+| `산출/전체기획서/13_유료화_제안서_클로드.md` R-13-22 L453 | 패스 기본 줄 + 유료 줄 | 5-6 |
+| `산출/개발진행기획_v01/콘텐츠별_v03/유료화_핵심제안서.md` | 시즌 패스 절이 있음. 단계 수 없음 | 5-6 |
+| `산출/시스템기획/S11_미션.md` · `S11a_출석.md` | 미션 탭·초기화 규칙, 출석 기획서 | 7장 |
+| `data/game/mission_config.csv` (64행) · `mission_tab_config.csv` · `mission_type_config.csv` · `mission_track_event.csv` | 보상은 dice·pack. 출처 6종을 세는 열쇠는 `event_ms`·`adventure_start`만 가깝고, 대성공·페스티벌 순위·월드 참가·라포·패스는 없음 | 7장 |
+| `보고/20261114_1515_비앙카_모션해금_별비중표제안.md` | 카드 12+대기 별 비중. 포즈 미션 칸 수 없음 | 참고만 |
+
+숫자는 위 표에 있는 값만 썼다. 표에 없으면 조건 종류만 적고, 수치는 「기존 표 근거 없음」으로 적는다. 「비어 있음(0으로 동작)」은 원본이 그렇게 적은 칸에만 그대로 옮긴다.
+
+---
+
+## 4. 구조도
+
+```mermaid
+flowchart TD
+  IDOL["보유 아이돌<br/>character_master_id · 최대 30"] --> BASE["기본 14장<br/>대표 1 + 대기 1 + 카드 12"]
+  IDOL --> PM["포즈 미션 조건 구조 6종<br/>pose_mission_v01"]
+  BASE --> CARD["카드 12칸 획득<br/>character_motion_unlock 1~12"]
+  CARD --> M12["카드 포즈 · 모션 12"]
+  PM --> S1["주간 페스티벌 순위"]
+  PM --> S2["월드 참가"]
+  PM --> S3["보드 이벤트"]
+  PM --> S4["모험 대성공"]
+  PM --> S5["라포 단계"]
+  PM --> S6["시즌 패스"]
+  S1 --> BONUS["보상 포즈(기획 안 이름)<br/>보너스 칸 수는 유르넷 기획서에 정함"]
+  S2 --> BONUS
+  S3 --> BONUS
+  S4 --> BONUS
+  S5 --> BONUS
+  S6 --> BONUS
+```
+
+- 왼쪽 14장은 유르넷 모션 목록의 현재 세팅이다.
+- 오른쪽 포즈 미션은 새 표다. 칸 수가 정해지기 전에는 조건 구조만 연결한다.
+- 기존 `mission_config` 64행의 보상(주사위·팩)과 포즈 해금은 겹치지 않는다. 연결은 7장 · 8장.
+
+---
+
+## 5. 출처 6종 조건
+
+조건 창(주간·시즌)과 포즈 해금(해당 아이돌 1회)을 구분한다. `repeat_cycle`은 조건 창이다.
+
+### 5-1. 주간 페스티벌 순위
+
+- 조건 종류: 1~8주 주간 페스티벌 100명 구역 순위(출품 팀의 아이돌).
+- 표에 있는 값: 구역 인원 100(`08` R-08-1 L69, 현재 세팅값).
+- 관련 기존 보상(포즈 아님): 매주 7일째 START 통과 때 5명 무리 순위대로 돈 500~100 · 팬 20~4 · 능력 0.25~0.05(R-08-6 L74). 등수별 숫자의 5단 분해는 같은 줄에 범위로만 적혀 있다.
+- 기존 표 근거 없음: 포즈를 주는 등수 컷.
+- 원본이 비어 있음(0으로 동작)이라고 적은 것: 등수별 월드 가산점(R-08-8 L76).
+- 반복: 주간(1~8주). 포즈 해금은 해당 아이돌 1회.
+
+### 5-2. 월드 참가
+
+- 조건 종류: 9주차 월드 페스티벌 참가(출품 팀의 아이돌).
+- 표에 있는 값: 전원 참가(R-08-14 L92). 시즌 63일 = 9주 × 7일(`season_config.csv` L2 `season_days=63` · `08` L125).
+- 기존 표 근거 없음: R-08-14의 「기준 점수 이하」의 점수 숫자.
+- 참고: 리그 보상은 비어 있음(0으로 동작)(`08` L140). 참가 조건에는 쓰지 않음.
+- 반복: 시즌. 포즈 해금은 해당 아이돌 1회.
+
+### 5-3. 보드 이벤트
+
+- 조건 종류: 보드·이벤트 마일스톤 단계 도달.
+- 표에 있는 값: 10단 `required_point` 21 · 46 · 75 · 108 · 146 · 188 · 233 · 275 · 302 · 323(`event_milestone.csv` L2~L11 열 `step`·`required_point`). 틀은 `event_template_three_day_milestone`, `run_hours=72`, `runs_per_season=20`(`event_template.csv` L2). 기존 미션 목표 `event_ms` 일일 1 · 주간 3(`mission_config.csv` L8 · L17).
+- 기존 표 근거 없음: 포즈를 주는 단계 컷. 10단 숫자를 칸 수나 포즈 장수로 쓰지 않는다.
+- 참고: 보드 40칸의 그룹은 시설 24 · 캐스팅 4 · 팬 반응 3 · 스케줄 3 등(`board_tile.csv`). 칸 종류는 조건 보조 설명이고, 포즈 컷이 아니다.
+- 반복: 시즌(업적·이벤트 단계와 같은 창). 포즈 해금은 해당 아이돌 1회.
+
+### 5-4. 모험 대성공
+
+- 조건 종류: 모험 결과가 대성공인 출동에 그 아이돌이 참가.
+- 표에 있는 값: `grade_id=adventure_grade_perfect`, 한글명 대성공(`rapport_adventure_gain.csv` L2 열 `grade_ko`). 별 3 · 보상 100% · `rapport_outcome=good`(`adventure_grade.csv` L2).
+- 관련 값(조건 컷이 아님): 풀편성 대성공 확률 92%(`adventure_success_rate.csv` L2 `rate_pct`).
+- 기존 표 근거 없음: 포즈 미션의 횟수 목표. 기존 미션은 `adventure_start`(출발)만 센다.
+- 반복: 1회. 포즈 해금은 해당 아이돌 1회.
+
+### 5-5. 라포 단계
+
+- 조건 종류: 아이돌 쌍의 좋은 쪽 라포 단계 도달.
+- 표에 있는 값(문턱은 신뢰·이해 둘 다 `gte`, `match_mode=all`):
+
+| 단계 | name_ko | 신뢰·이해 문턱 | 출처 |
+|---|---|---:|---|
+| rapport_stage_first_meeting | 처음 봄 | 0 | `rapport_stage.csv` L2 · `condition.csv` L35~L36 `value` |
+| rapport_stage_acquaintance | 아는 사이 | 20 | L3 · L37~L38 |
+| rapport_stage_colleague | 동료 | 40 | L4 · L39~L40 |
+| rapport_stage_close_colleague | 친한 동료 | 60 | L5 · L41~L42 |
+| rapport_stage_best_friend | 단짝 | 80 | L6 · L43~L44 |
+
+- 기존 표 근거 없음: 어느 단계에서 포즈를 주는지. 5단계를 포즈 5장으로 세지 않는다.
+- 긴장 쪽 3단계(평온 0 · 긴장 중 30 · 갈림 45, `condition.csv` L45~L47)는 표에 있으나, 이 행의 조건 종류는 좋은 쪽 단계로만 둔다.
+- `staff_rapport_bonus.csv`의 단계 1~3(5·10·15%)은 스태프 9자리용이라 이 행에 넣지 않는다.
+- 반복: 1회. 포즈 해금은 해당 아이돌 1회.
+
+### 5-6. 시즌 패스
+
+- 조건 종류: 시즌 한 바퀴 패스 줄(기본 줄) 진행.
+- 표에 있는 값: 시즌 일수 63(`season_config.csv` L2). 기획서 구조는 기본 줄 + 유료 줄(`13` R-13-22 L453).
+- 기존 표 근거 없음: 패스 단계 수, 포즈가 나오는 칸. `data/` 아래 시즌 패스 단계·보상 CSV는 파일명 검색 0건이고, `schema_table`에도 `season_pass` 표가 없다.
+- 반복: 시즌. 포즈 해금은 해당 아이돌 1회.
+
+---
+
+## 6. 미션 조건 구조 표
+
+`pose_mission_v01.csv`와 같다. 6행, 모두 `npc_kind=idol`. 이 6은 출처 6종의 조건 구조 행 수이며, 보너스 칸 수가 아니다.
+
+| pose_mission_id | source_kind | mission_condition | condition_value | repeat_cycle | reward_motion_id | value_status |
+|---|---|---|---|---|---|---|
+| pose_mission_idol_weekly_festival_rank | weekly_festival_rank | 1~8주 주간 페스티벌 100명 구역 순위에 오름(출품 팀의 아이돌) | 구역인원=100; 등수컷=기존 표 근거 없음 | 주간 | character_motion_idol_pose_mission_weekly_festival_rank | 현재 세팅값 |
+| pose_mission_idol_world_enter | world_enter | 9주차 월드 페스티벌에 참가(출품 팀의 아이돌) | 주차=9; 시즌일수=63; 기준점수=기존 표 근거 없음 | 시즌 | character_motion_idol_pose_mission_world_enter | 현재 세팅값 |
+| pose_mission_idol_board_event | board_event | 보드·이벤트 마일스톤 단계에 도달 | 10단 required_point=21/46/75/108/146/188/233/275/302/323; 포즈를 주는 단계컷=기존 표 근거 없음 | 시즌 | character_motion_idol_pose_mission_board_event | 현재 세팅값 |
+| pose_mission_idol_adventure_perfect | adventure_perfect | 모험 결과가 대성공인 출동에 그 아이돌이 참가 | grade_id=adventure_grade_perfect; grade_ko=대성공; star=3; reward_pct=100; 횟수목표=기존 표 근거 없음 | 1회 | character_motion_idol_pose_mission_adventure_perfect | 현재 세팅값 |
+| pose_mission_idol_rapport_stage | rapport_stage | 아이돌 쌍의 좋은 쪽 라포 단계에 도달 | 단계문턱(신뢰·이해 둘 다 gte)=처음봄 0/아는사이 20/동료 40/친한동료 60/단짝 80; 포즈를 주는 단계=기존 표 근거 없음 | 1회 | character_motion_idol_pose_mission_rapport_stage | 현재 세팅값 |
+| pose_mission_idol_season_pass | season_pass | 시즌 한 바퀴 패스 줄(기본 줄)을 진행 | 시즌일수=63; 패스단계수=기존 표 근거 없음; 포즈가 나오는 칸=기존 표 근거 없음 | 시즌 | character_motion_idol_pose_mission_season_pass | 현재 세팅값 |
+
+- `value_status`의 「현재 세팅값」은 그 행에서 인용한 기존 표 숫자(구역 100, 시즌 63, 마일스톤 문턱, 대성공 등급, 라포 문턱)를 가리킨다. 같은 칸에 적힌 「기존 표 근거 없음」 항목은 숫자를 채우지 않는다.
+- `reward_motion_id`는 기획 안 이름이다. `character_motion_v01.csv`에 없는 ID이며, 보너스 칸이 정해진 뒤에 유르넷 모션 목록에 넣을지 이스라트·유르넷이 정한다(8장).
+- 열 `condition_source` · `reward_note`의 전문은 CSV에 있다.
+
+---
+
+## 7. 기존 미션 표와 연결
+
+- 기획서 `산출/시스템기획/S11_미션.md`. 탭 초기화는 `mission_tab_config.csv` L2~L7: 일일 `day` · 주간 `week` · 업적 `season` · 도전 `season` · 가이드 `never` · 이벤트 `round`.
+- 라이브 `mission_config.csv`는 64행, `active=1`. `reward_type`은 `dice` 51 · `pack` 13. 포즈 보상 행은 0이다.
+- 포즈 미션은 새 표 `pose_mission_v01.csv`로 두고, 지금 `mission_config`에 행을 더하지 않는다(라이브 표를 수정하지 않음).
+- 기존 열쇠와의 거리:
+  - `event_ms`: 보드 이벤트 단계와 같은 계열. 지금 보상은 주사위·팩.
+  - `adventure_start`: 모험 출발 횟수. 대성공(`adventure_grade_perfect`)을 세지 않음.
+  - 주간 페스티벌 순위 · 월드 참가 · 라포 단계 · 시즌 패스를 세는 `track_event`는 `mission_track_event.csv` 24행에 없다.
+- 출석(`S11a_출석.md`, 미션 `attend`)은 이번 출처 6종에 넣지 않았다.
+
+---
+
+## 8. 이스라트에게 요청할 연결 열
+
+유르넷 파일과 라이브 `character_master`는 이 작업에서 고치지 않는다. 아래는 다음 순서(유르넷)를 위한 요청 목록이다.
+
+1. **보너스 칸 수**를 유르넷 모션 목록 기획서에 적을 것. 이 표의 행 수(6)는 칸 수가 아니다. 칸 수가 정해지면 `pose_mission_v01.csv` 행을 그 수에 맞출 수 있다.
+2. **`character_motion_unlock_v01.csv`에 「얻는 곳」 열**을 더할 때, 카드 칸 이외 해금이면 `pose_mission_id`를 넣을 수 있게 할 것. (유르넷이 이 열을 추가 중 — 열 이름만 맞춰 달라.)
+3. **`character_motion_v01.csv`에 기타 포즈 행**을 보너스 칸 수만큼 넣을 것. 이 문서의 `reward_motion_id`(예: `character_motion_idol_pose_mission_weekly_festival_rank`)는 기획 안 이름이므로, 유르넷이 최종 `character_motion_*` 이름을 정하면 이쪽 표를 맞춘다.
+4. **모션 최대 13개 · 포즈 그림 최대 14장** 문구(모션 목록 L14 · L73)는 보너스 칸이 정해진 뒤에 고칠 자리. 지금 이올카가 그 파일을 고치지 않는다.
+5. **`resource_link` 슬롯**: 보너스 포즈 그림 이름 규칙(`card_pose_13` 이후인지, `pose_mission_*` 슬롯인지)을 유르넷이 정할 것. `character_resource_slot_v01.csv`는 지금 `card_pose_00`~`12`만 있다.
+6. **`character_master` 추가 열**은 필수는 아니다. 해금은 `character_motion_unlock` + `pose_mission_id`로 충분한지, `motion_set_id` 옆에 보너스 세트 ID가 필요한지만 정해 달라.
+7. **`mission_track_event` 새 열쇠**(예: `festival_zone_rank` · `world_enter` · `adventure_perfect` · `rapport_stage` · `season_pass_progress`)는 엔진 연결 때 아론 쪽 순서. 기획 표만으로 라이브 미션 64행에 넣지 말 것.
+
+---
+
+## 9. 초안 파일
+
+| 파일 | 행 | 내용 |
+|---|---|---|
+| `포즈미션_v01.md` | 이 문서 | 조건 구조 · 출처 · 요청 열 |
+| `포즈미션_v01.html` | 짝 화면 | 같은 내용, 가로 1400 |
+| `pose_mission_v01.csv` | 6(헤더 제외) | 출처 6종 조건 구조, `npc_kind=idol`만 |

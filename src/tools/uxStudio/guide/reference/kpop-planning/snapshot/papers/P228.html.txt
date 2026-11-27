@@ -1,0 +1,708 @@
+<!doctype html><html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P228 · 앨범 발매 · 핵심제안</title><link rel="stylesheet" href="../%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/format.css"><link rel="stylesheet" href="../%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/sample-document.css"><style>.table-scroll{overflow:auto}.mermaid svg{max-width:100%;height:auto}.doc-diagram{overflow:auto}</style><link rel="stylesheet" href="/src/simulator/music-career/view.css"><script type="module" src="/src/simulator/music-career/document-preview.mjs"></script><style data-music-diagram-fit>.sample-document .part img{max-width:100%;height:auto;display:block}</style></head><body class="sample-document"><main><header><div class="eyebrow">P228 · 기획서</div><h1>앨범 발매 · 핵심제안</h1><p><strong>이 문서는</strong> 만든 싱글의 발매·목록·차트·크루 공유와, 첫 발매 후 방송/공연6칸의 이름·가동 조명 전환을 설명합니다.</p>
+<p><strong>보는 법</strong> 1장 흐름 → 3장 실행 → 5장 화면·상태를 보고, 저장/계산은 연결된 P191 상세에서 확인합니다.</p>
+<p><strong>지금 상태</strong> 로컬 구현 · 기존 앨범 원장 연결. 음악 우선·현재 팀 전원 기본 참여·추가 옵션/참여·제작 정보 접기·자동 미리듣기·큰 재킷·기존 제작/발매를 연결했습니다. 격리된 실제 UI에서 생성 1회 결제→재킷→제작→발매→새로고침 보존을 확인했습니다. 실제 AI 모델·회원 매칭 서버는 연결하지 않았습니다.</p>
+<p><strong>이번 추가 기획</strong> <a href="#album-board-activation">첫 발매와6칸 이름·점등</a> · 제안(검수 대기), 제품 구현 없음.</p></header><nav class="local-nav" aria-label="기획서 7장"><a href="#album-stage-festival-ui-flow">먼저 보기 · 앨범·공연·페스티벌</a><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav><p><a href="/docs/planning/proposal-concept/song.html#slide-3">제안서 속 UI 시안</a> · <a href="_assets/음악콘텐츠_UI기획_v04.html">앨범·페스티벌 공통 시안 v04</a> · <a href="월드페스티벌_핵심제안서.html#weekly-personal-album-buff-ui">함께 보는 월드페스티벌_핵심제안서</a></p><section id="festival-entry-current-contract"><h2>개인 신청·크루 투표·주간7일째 버프</h2><div data-music-app-current-flow><style>[data-music-app-current-flow]{margin:18px 0;padding:18px;background:#f7f0fc;border:1px solid #d8c1e7;border-radius:16px;min-width:0;overflow-wrap:anywhere}[data-music-app-current-flow] .flow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}[data-music-app-current-flow] .flow-grid span{background:white;border:1px solid #dfcbe9;padding:12px;border-radius:12px;text-align:center;font-weight:700}[data-music-app-current-flow] ul{padding-left:20px;line-height:1.85}[data-music-app-current-flow] a{overflow-wrap:anywhere}@media(max-width:600px){[data-music-app-current-flow]{padding:13px}[data-music-app-current-flow] .flow-grid{grid-template-columns:minmax(0,1fr)}}</style><h3>음악 앱 메인·내 음원·투표·인기 응원</h3><p><strong>2026-11-10 16:33 KST · 현중 직접 지시 반영 · 제안(검수 대기)</strong></p><div class="flow-grid"><span>음원<br><small>음악·차트·보관함</small></span><span>공연<br><small>실시간·내 공연·다시보기</small></span><span>숏츠<br><small>짧은 영상 발견</small></span></div><ul><li><strong>내 음원 강조:</strong> 실제 내 팀 발매곡을 박스와 ‘내 발매곡’ 표시로 음원·차트·보관함에서 구분합니다.</li><li><strong>메인 순위:</strong> 내 현재 순위를 별도 표시합니다. 일반·주간·월드 목록은 연결된 순위가 있을 때 10위 이내에서 최대 10개만 표시합니다. 10위 밖의 내 곡은 내 순위에만 표시합니다.</li><li><strong>기간·출전 구분:</strong> 주간/월드는 현재 기간 또는 단독 시험 선택 범위를 따릅니다. 개인과 크루 순위를 합치지 않습니다.</li><li><strong>음원 목록:</strong> 발매곡·다른 출전자 곡·시험 음원 목록입니다. 추천순·인기 급상승순으로 꾸미지 않으며 추천·급등은 별도 차트 지표입니다.</li><li><strong>투표:</strong> 감상 → 찜 → 보관함 → 곡·대회 확인 → ‘이 곡에 투표하시겠습니까?’ → 확정. 음원 목록의 직접 투표를 제거합니다. 취소·닫기는 쓰지 않고 확정 때 최신 팀·회차·찜·자격·한도·투표 상태를 확인합니다. 확정한 투표는 취소할 수 없습니다. 감상 초수는 미정값을 보존합니다.</li><li><strong>인기 응원:</strong> 월드 차트 → 인기 → 곡의 인기 응원 → 수량 확인 → 사용 → 해당 곡의 기여 인기와 차트 갱신. 투표·추천·찜·레이싱 연료와 별도입니다.</li></ul><p data-favorite-vote-fix><strong>찜·투표 보정:</strong> 찜은 채운 하트·‘찜 완료’로 표시하고 현재 실행/세션/시즌/내 팀의 보관함에 유지합니다. 찜한 출전곡은 보관함과 상세/재생 화면에서 투표 확인창을 엽니다. 감상용 시험곡은 투표 대상이 아님을 표시하고 주간·월드 출전곡 입구로 안내합니다. 음원 목록 직접 투표와 시험곡의 대회 후보 변조는 하지 않습니다.</p><p><strong>자유 시험:</strong> 전송 데이터도 인기 무제한을 적용합니다. 공통 실행·세션·시즌·내 팀 범위의 사용 영수증과 기여를 보관하고 전체 초기화 때 새 범위를 엽니다. 사용한 인기 누적량의 시험 순위이며, 실제 활동의 인기 획득·유한 지갑·지급량·상한·최종 우승 비중은 운영/발란스 대기입니다. 기존 월드 종합 시험 순위와 구분합니다.</p><p><a href="/docs/planning/game-simulator.html?module=simulator_module_music_app&amp;testPage=simulator_module_free_test">음악 앱 메인 실행</a> · <a href="/docs/planning/game-simulator.html?module=simulator_module_music_ui_preview&amp;testPage=simulator_module_free_test">음원 단독 시험</a></p></div><div data-chart-reward-board-contract><style>[data-chart-reward-board-contract] table{min-width:0!important;width:100%;table-layout:fixed}[data-chart-reward-board-contract] th,[data-chart-reward-board-contract] td{white-space:normal!important;overflow-wrap:anywhere}</style><h3>세 차트 보상·앨범 누적·월드 보드 전환</h3><p><strong>2026-11-10 15:16 KST - 현중 직접 지시 반영 · 제안(검수 대기)</strong></p><table><thead><tr><th>차트</th><th>보상 종류</th><th>용도</th></tr></thead><tbody><tr><td>일반 랭킹</td><td>한 바퀴 보상</td><td>START 통과 정산·일반 성장</td></tr><tr><td>주간 페스티벌</td><td>레이싱 연료</td><td>레이싱 사용</td></tr><tr><td>월드 페스티벌</td><td>인기 재화</td><td>월드 출전곡 인기 기여</td></tr></tbody></table><p><strong>현중 직접 정정:</strong> 일반 차트·주간 차트·월드 차트의 세 개로 구분합니다. 주간과 월드는 개최 기간이 겹치지 않습니다. 일반은 한 바퀴 보상, 주간은 레이싱 연료, 월드는 인기 재화로 획득 내역과 표시를 분리합니다. 지급 수량·상한·정확한 획득 사건은 발란스 대기이며 인기 재화를 연료로 대체하지 않습니다.</p><p><strong>앨범 누적 기여:</strong> 대표곡 한 곡을 우대하고 지난 발매곡들도 낮은 가중치로 기여하는 기존 기획을 일반 한 바퀴 보상에 명확히 연결하는 제안입니다. 1개와 8개의 차이를 보유곡 기여·직전 성적 계승·출전곡 선택 폭으로 구분합니다. 앨범 수만으로 활성 버프를 8중 적용하지 않습니다. 대표곡/구작/시간 감쇠 계수는 정본 미정값을 보존합니다.</p><p><strong>월드 신청과 보드 복귀:</strong> 성공한 월드 신청의 출전곡·현재 팀을 확인한 뒤 게임으로 돌아오면 같은 보드의 연습실·녹음실 등에 공연용 간판과 월드 표시를 적용합니다. 표시가 준비된 뒤 폰 내부 모달 「월드 공연 보드로 전환됐어요」와 「공연 보드 확인」 버튼을 보여 줍니다. 신청 실패·취소·보기만 한 경우·주간에는 표시하지 않습니다. 확인한 같은 시즌/팀의 전환 알림은 재진입·새로고침·개인/크루 중복 출전으로 반복하지 않습니다. 표시가 준비되기 전에 알림을 소비하지 않습니다.</p><p><strong>기간·보존:</strong> 일반 연결은 실제 월드 기간의 유효 신청을 확인합니다. 단독 테스트는 명시적으로 선택한 월드 시험만 전환하며 주간 시험으로 바꾸면 일반 보드로 복원합니다. 개인/크루 성공 기록은 보존합니다. 다음 시즌·새 공통 시험 데이터는 별도 범위로 처리합니다. 월드 종료 시 원래 시설 간판을 복원합니다.</p><p><strong>현재 구현 범위:</strong> 월드 간판·표시 프로필과 1회 복귀 모달은 이번 로컬 연결 대상입니다. 건물 위치·레벨·기존 경제 writer를 바꾸거나 공연 결과·인기 재화·상금을 이 표시만으로 새 지급하지 않습니다. 실제 공연 조작/정산·월드 일반 성장 효과의 유지/대체·세 보상의 최종 지급표·누적 기여 계수는 후속 연결/발란스 대기입니다.</p></div><p><strong>현재 단독 테스트 · 2026-11-10 13:58 KST · 제안(검수 대기)</strong></p><p>게임 시뮬레이터 단독 테스트는 상위 메뉴를 주간 페스티벌과 월드 페스티벌로 나눕니다. 폰 하단도 주간·월드로 바로 엽니다. 일반 월드 입구는 개인 출전이며, 크루 출전은 응원 크루의 고정된 크루장 전용 신청 버튼에서만 시작합니다. 크루 화면에는 앨범의 데뷔 준비·앨범 활동·차트·파이널 단계표를 표시하지 않습니다. 주간 신청 뒤에는 레이싱 입장과 주간 진행·레이싱 기록을 바로 볼 수 있습니다. 레이싱 입장은 같은 발매 앨범의 기존 시티 투어 자동차 레이싱으로 연결합니다. 기록은 기본 펼침으로 표시합니다.</p><p>단독 테스트에서 월드 메뉴(개인·크루)에 진입하면 현재 주간 신청·버프·자동 연료/레이싱 진행을 새 시험 상태로 초기화합니다. 원본 신청 영수증은 이력으로 보존하고 현재 유효한 신청에서 제외합니다. 다시 주간에 들어오면 앨범 선택·신청부터 시작합니다. 앨범·공통 팀·이미 지급된 공통 재화·월드 신청·크루 투표는 지우지 않습니다. 이전 자동 진행 기록은 다음 실제 보드 저장에서 보관하며 활성 기록과 분리합니다. 이 초기화는 단독 테스트만의 조작이며 실제 운영 일정·게임 일차·일반 연결 플레이의 버프 정책을 바꾸지 않습니다.</p><p>자유 테스트에서는 이전 앨범의24시간 차트가 진행 중이어도 새 앨범을 먼저 발매할 수 있습니다. 기존 차트·실적·제작비 결제·발매곡을 보존하고 새 곡의 이벤트 참가는 순서대로 대기합니다. 기존 순차 차트 진입 경로를 사용하며 일반 연결 플레이의 차트 잠금과 운영 수치는 변경하지 않습니다.</p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-label="개인 신청과 크루 신청의 별도 흐름" style="display:block;width:100%;max-width:640px;min-width:0;height:auto;margin:16px auto;font-family:sans-serif"><rect x="10" y="20" width="290" height="72" rx="14" fill="#f2e8fa"/><text x="155" y="49" text-anchor="middle" font-size="19" fill="#5b4170">주간·월드 개인 입구</text><text x="155" y="74" text-anchor="middle" font-size="14" fill="#80638f">내 앨범 선택 → 개인 신청</text><path d="M155 93v35" stroke="#9877ac" stroke-width="2"/><rect x="10" y="130" width="290" height="92" rx="14" fill="#e5f4e9"/><text x="155" y="159" text-anchor="middle" font-size="17" fill="#386447">주간: 해당 주7일째 버프</text><text x="155" y="190" text-anchor="middle" font-size="17" fill="#386447">월드: 내 출전곡 활동 로비</text><rect x="340" y="20" width="290" height="72" rx="14" fill="#f2e8fa"/><text x="485" y="49" text-anchor="middle" font-size="19" fill="#5b4170">크루 페이지</text><text x="485" y="74" text-anchor="middle" font-size="14" fill="#80638f">멤버 곡 투표 · 결과는 참고만</text><path d="M485 93v35" stroke="#9877ac" stroke-width="2"/><rect x="340" y="130" width="290" height="92" rx="14" fill="#f9edcf"/><text x="485" y="159" text-anchor="middle" font-size="17" fill="#775a32">크루장 최종 공유곡 선택</text><text x="485" y="190" text-anchor="middle" font-size="17" fill="#775a32">사용 동의 확인 → 크루 월드 신청</text><text x="320" y="270" text-anchor="middle" font-size="18" fill="#5b4170">크루장·크루원도 개인 출전 가능 · 두 신청 별도</text></svg>
+<p>주간·월드의 일반 입구는 모두 개인 신청입니다. 내 발매 앨범을 선택하고 같은 화면에서 신청하며, 월드는 성공 뒤 내 출전곡 참여 로비를 엽니다. 개인/크루 선택·선택되지 않은 곡 확인·별도 준비 단계를 두지 않습니다. 크루 소속·직책과 관계없이 크루장과 멤버도 개인 월드에 출전할 수 있습니다.</p><p>크루 월드 신청은 크루 페이지에서 크루장에게만 켭니다. 현재 멤버가 공유된 발매곡 한 곡에 내부 투표합니다. 한 번 투표하면 바꾸거나 취소할 수 없습니다. 투표 결과는 참고용이며, 크루장이 득표와 무관하게 최종 공유곡·원소유자 사용 동의를 확인해 신청합니다. 원소유자는 일반 크루원이어도 크루 페이지에서 자기 곡의 회차 사용 동의·철회를 할 수 있습니다. 내부 곡 투표는 관객의 공식 페스티벌 투표·점수·재화와 별개입니다. 개인 출전과 크루 출전을 서로 잠그지 않습니다.</p><p>주간 버프는 신청한 경우에만 해당 주의7일째부터 공통 주간 마감까지 적용합니다. 7일째 중간에 신청하면 신청 이후 남은 기간만 받습니다. 신청일부터24시간을 새로 주지 않으며, 신청 전 활동을 소급하지 않습니다. 미신청·다음 주·월드 기간에는 주간 버프가 없습니다. 다음 주에는 새로 신청합니다. 게임 시뮬레이터의 표시는 현재 게임 일차·실제 굴림 시계를 사용하며 실제 서버 시계와 구분합니다.</p></section><section id="weekly-personal-album-buff-ui" data-weekly-personal-ui><h2>주간 · 개인 앨범 신청과 상단 버프</h2><p>주간 페스티벌은 개인만 참여합니다. 들어가자마자 내 발매 앨범 선택과 신청만 보여 주고, 신청한 해당 주의7일째에만 게임 창 상단 버프 중 팝업을 표시합니다. 월드도 일반 입구는 개인 신청이며 크루 신청은 크루 페이지에서 크루장만 진행합니다.</p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 390" role="img" aria-label="주간 개인 앨범 신청과 게임 상단 버프 표시" style="display:block;width:100%;min-width:0!important;max-width:440px;height:auto;margin:16px auto;font-family:-apple-system,Apple SD Gothic Neo,sans-serif"><rect x="20" y="12" width="350" height="72" rx="14" fill="#f3eafa" stroke="#c4a8d7"/><text x="195" y="41" text-anchor="middle" font-size="18" fill="#5b4170" font-weight="700">내 발매 앨범 선택</text><text x="195" y="64" text-anchor="middle" font-size="13" fill="#816e91">개인 전용 · 내 발매곡 한 곡</text><path d="M195 85 V102 m-5 -5 l5 5 5 -5" fill="none" stroke="#9678ac" stroke-width="2"/><rect x="20" y="108" width="350" height="72" rx="14" fill="#f3eafa" stroke="#c4a8d7"/><text x="195" y="137" text-anchor="middle" font-size="18" fill="#5b4170" font-weight="700">주간 페스티벌 신청</text><text x="195" y="160" text-anchor="middle" font-size="13" fill="#816e91">앨범 선택과 신청을 같은 화면에서</text><path d="M195 181 V198 m-5 -5 l5 5 5 -5" fill="none" stroke="#9678ac" stroke-width="2"/><rect x="20" y="204" width="350" height="72" rx="14" fill="#f3eafa" stroke="#c4a8d7"/><text x="195" y="233" text-anchor="middle" font-size="18" fill="#5b4170" font-weight="700">신청 성공 확인</text><text x="195" y="256" text-anchor="middle" font-size="13" fill="#816e91">같은 앨범·회차 고정 · 중복 신청 방지</text><path d="M195 277 V294 m-5 -5 l5 5 5 -5" fill="none" stroke="#9678ac" stroke-width="2"/><rect x="20" y="300" width="350" height="72" rx="14" fill="#e5f4e9" stroke="#c4a8d7"/><text x="195" y="329" text-anchor="middle" font-size="18" fill="#5b4170" font-weight="700">게임 상단 버프 중</text><text x="195" y="352" text-anchor="middle" font-size="13" fill="#816e91">선택 앨범 · 실제 버프 원본 연결</text></svg><p>로컬 구현 · 신청 흐름은 시안 v04와 실제 게임에서 확인합니다. 기존 신청 원장과 신청자 한정 주간7일째 혜택·공통 상단 표시를 로컬 코드로 연결했습니다. 공식 운영 시계·온라인 계정 연결은 별도입니다.</p><p><a href="_assets/음악콘텐츠_UI기획_v04.html">주간 UI 시안 v04</a></p><style>[data-weekly-personal-ui] table{width:100%;min-width:0!important;table-layout:fixed}[data-weekly-personal-ui] td,[data-weekly-personal-ui] th{overflow-wrap:anywhere}</style><div class="table-scroll"><table><thead><tr><th>화면·상태</th><th>UI 계약</th></tr></thead><tbody><tr><td>주간 진입</td><td>주간 기간의 개인 전용 화면을 바로 엽니다. 개인/크루·대회 선택·중간 신청 준비 화면을 두지 않습니다.</td></tr><tr><td>내 앨범 선택</td><td>현재 소유자·현재 팀의 발매 완료 앨범만 표시하고 그중 한 곡을 선택합니다. 제작 중 초안·타인 앨범·임의 샘플을 본게임 출전곡으로 넣지 않습니다.</td></tr><tr><td>신청</td><td>선택한 앨범과 주간 회차로 한 번 제출합니다. 선택 전·기간 밖·처리 중은 비활성, 실패는 선택 유지·재시도 사유를 표시합니다. 별도 내용 확인 체크 화면을 주간에 추가하지 않습니다.</td></tr><tr><td>신청 성공</td><td>성공 영수증의 앨범·회차로 개인 출전을 고정하고 재신청을 막습니다. 주간 전용의 큰 활동 로비로 강제 이동하지 않습니다. 같은 화면에 완료를 표시하고 보드 복귀를 제공합니다.</td></tr><tr><td>상단 버프 팝업</td><td>게임 창 상단 기존 시간 버프 영역에 주간 페스티벌 버프 중과 선택 앨범을 표시합니다. 보드로 돌아와도 유지하고 팝업 접기는 표시만 줄입니다. 새 버프 지급·공연·투표 사건을 만들지 않습니다.</td></tr><tr><td>효과·시간</td><td>실제 효과·수치·시작/종료·남은 시간은 기존 공통 버프 원본을 연결합니다. 운영 수치가 없으면 임의 배수/타이머를 만들지 않습니다. 준비/실패/만료를 버프 중으로 오인 표시하지 않습니다.</td></tr><tr><td>빈 목록</td><td>내 발매 앨범이 없으면 신청을 막고 기존 앨범 제작으로 연결합니다. 사용자 초안을 덮어쓰지 않습니다. 공통 단독 시험곡은 출처를 명시하며 본게임의 실제 소유 발매곡과 구분합니다.</td></tr><tr><td>월드와 구분</td><td>월드는 개인 앨범 신청·등록곡 활동 로비를 사용하고 크루장은 크루 페이지에서 별도로 신청합니다. 주간 개인 출전은 솔로 가수만이라는 뜻이 아니며 내 팀/유닛의 발매곡도 개인 명의로 제출할 수 있습니다.</td></tr></tbody></table></div></section><section id="music-ui-production-plan" data-music-ui-plan><h2>UI 기획 · 개별 화면 시험과 연동 제작 계획</h2><p>앨범·공연·음악 앱·페스티벌은 각각 열어 시험할 수 있는 모듈로 만듭니다. 연동에서는 같은 팀·곡·공연·대회 정보를 사용하고 각 모듈의 진행 결과를 공유합니다. 감상 입구는 음악 앱에 모으며, 제작·활동·신청 UI를 하나의 거대한 화면으로 합치지 않습니다.</p><p>현재 개발되지 않음, 진행 중 · 이번에는 UI 기획과 메모리 시안을 작성했습니다. 기존 앨범/신청/음악 앱은 재사용하고 실제 공연 공급·공식 평가/인기 경제는 후속 제작으로 구분합니다.</p><p><a href="_assets/음악콘텐츠_UI기획_v04.html">UI 시안 v04 · 개별 화면/연동 흐름 보기</a></p><style>[data-music-ui-plan] table{width:100%;min-width:0!important;table-layout:fixed}[data-music-ui-plan] td,[data-music-ui-plan] th{overflow-wrap:anywhere}</style><figure><a href="_assets/음악콘텐츠_UI기획_v04.html"><img src="_assets/음악콘텐츠_UI배치_v04.jpg" alt="음악 콘텐츠 UI 기획 시안" style="display:block;width:100%;height:auto;max-width:1100px"></a><figcaption>UI 기획 시안 v04 · 주간·월드 개인 앨범 선택과 크루 별도 신청 화면. 왼쪽 개별 진입, 가운데 모바일, 오른쪽 연동/복귀 기준을 확인합니다. 실제 게임 실행 화면과 구분합니다.</figcaption></figure><h3>주간·월드의 별도 UI</h3><p>주간·월드 신청 UI는 별도로 제작합니다. 실제 플레이는 현재 주간 기간이면 주간만, 월드 기간이면 월드만 신청할 수 있게 표시합니다. 시뮬레이터의 개별 시험 입구에서는 두 화면을 각각 열어 해당 기간·미개막 상태를 시험합니다. 월드는 시즌 피날레용 무대·포스터·색/빛 연출과 출전 방법·참여 경험·시즌 기록 안내를 강화합니다. 내 출전곡 소개·시즌 순위 경쟁은 기존 흐름을 사용하고, 베스트 컷·발견 노출·시즌 회고 혜택은 기존 후속 기획으로 구분합니다. 추가 보상 종류·수량·인기 경제는 결정/발란스 대기입니다.</p><h3>메뉴별 시험 시작점</h3><p>앨범 발매 상위 메뉴의 기본 진입은 음원 제작입니다. 새 공통 테스트에서는 음원 제작 전 음악 선택 화면으로 시작하고 자동 시험 발매를 실행하지 않습니다. 작성 중인 초안은 이어가고 기존 발매곡은 보존합니다. 시티 투어는 제작·발매된 곡과 필요한 리그를 준비한 뒤 차량 선택·급유로 바로 시험합니다. 곡이 필요한 하위 콘텐츠의 준비와 제작 메뉴의 미제작 출발을 구분합니다.</p><h3>화면 구성·주동작·복귀</h3><div class="table-scroll"><table><thead><tr><th>화면</th><th>먼저 보는 내용</th><th>버튼·배치</th><th>이동/복귀</th></tr></thead><tbody><tr><td>앨범 제작</td><td>현재 단계·선택 음악·참여 팀·큰 재킷</td><td>음악/재킷/제작·발매 주동작과 비용·오류를 하단 고정. 참여 옵션은 접기</td><td>음악→재킷→제작 완료→발매. 같은 초안 보존</td></tr><tr><td>앨범 활동</td><td>발매곡·앨범 이벤트 차트·남은 시간·현재 활동</td><td>보드에서 활동 / 같은 곡 감상 / 페스티벌 신청. 자세한 계산은 접기</td><td>선택 이동은 모바일 내부 확인, 같은 곡으로 복귀</td></tr><tr><td>보드 공연</td><td>보드 유지·현재 곡/장소·내 공연 작은 창</td><td>작은 창에 같은 공연 보기·줄이기·닫기. 주사위와 주요 조작을 가리지 않음</td><td>유효 장소 도착→공연 시작. 작은 창을 눌러 같은 공연 관람</td></tr><tr><td>음악 앱 관람</td><td>음악/차트/보관함·공통 미니플레이어</td><td>곡 상세→같은 곡 스테이지 / 홈→공연 목록 / 별도 숏츠 발견</td><td>앱 내부 상세는 직접 이동. 게임 복귀 때 원래 보드/대회 로비 유지</td></tr><tr><td>주간 신청 UI</td><td>개인 전용·내 발매 앨범 목록·선택 상태</td><td>앨범 선택과 주간 신청 버튼만</td><td>신청 완료·보드 복귀 → 해당 주7일째에 상단 버프</td></tr><tr><td>월드 신청 UI</td><td>월드 기간·시즌 무대·내 앨범·참여 경험/혜택, 크루 입구 별도</td><td>화려한 무대·내 앨범 선택과 신청, 상세 안내 접기</td><td>월드의 성공 출전곡만 월드 활동 로비</td></tr><tr><td>페스티벌 참여</td><td>현재 회차·등록곡·참여 중·순위 또는 집계 전</td><td>순위·다른 곡 듣기 / 대회 보기. 재신청 폼 숨김</td><td>같은 회차 음악 앱→같은 출전곡 로비로 복귀</td></tr></tbody></table></div><h3>개별 시험과 연동의 경계</h3><div class="table-scroll"><table><thead><tr><th>모듈</th><th>개별 화면</th><th>시험 준비</th><th>연동할 원본</th></tr></thead><tbody><tr><td>앨범 모듈</td><td>제작→발매→목록/활동</td><td>시험 팀·현재 초안 또는 발매곡 입력. 1회 준비, 사용자 초안/영수증 보존</td><td>발매곡·참여자·재킷·실제 발매 결과를 기존 저장에서 공급</td></tr><tr><td>공연 모듈</td><td>장소 활동→공연 상태→PIP·관람</td><td>발매곡·장소·공연 상태를 시험 입력으로 제공. 시안 표식 유지</td><td>같은 실제 활동 사건의 공연 ID·곡·장소·시각/매체. 공식 결과는 별도 검증</td></tr><tr><td>음악 앱 모듈</td><td>곡/차트·공연·숏츠 감상</td><td>시험곡/공연/회차 adapter로 바로 진입. 새 지갑·발매 원장 생성 없음</td><td>기존 음악 source/controller·재생기·큐와 실제 공급자 공유</td></tr><tr><td>페스티벌 모듈</td><td>주간:앨범 선택/개인 신청/상단 버프 · 월드:대회/신청/활동 로비</td><td>주간 개인·내 앨범/버프, 월드 개인/크루·권한·기간·성공/실패 단독 확인</td><td>현재 발매곡·권한·동의·성공 entry를 기존 명령으로 재검증</td></tr></tbody></table></div><h3>같은 데이터로 연결할 항목</h3><div class="table-scroll"><table><thead><tr><th>묶음</th><th>계약</th></tr></thead><tbody><tr><td>실행·팀</td><td>현재 session/run/season·소유자·team. 현재 저장/조회 계약을 재사용</td></tr><tr><td>곡</td><td>같은 albumId/trackRef·발매 상태·고정 참여자·재킷/매체 출처</td></tr><tr><td>공연</td><td>performanceId·활동 원인·장소/채널·공연 상태·시작/종료·매체/권한 공급. 신규 필드명/저장 형식은 U1에서 기존 계약과 대조</td></tr><tr><td>대회</td><td>roundType/roundId·entryMode/entryId·출전곡·사용 동의/자격·집계 기준 시각</td></tr><tr><td>복귀·재생</td><td>진입 출처·선택 곡/공연·목록 위치·플레이어/큐. 감상 이동과 게임 진행/지급을 분리</td></tr></tbody></table></div><h3>UI 흐름에 따른 제작 순서</h3><div class="table-scroll"><table><thead><tr><th>단계</th><th>제작 범위</th><th>완료를 판단할 기준</th></tr></thead><tbody><tr><td>U0 · 이번 UI 기획</td><td>7개 화면·개별/연동 시안·상태표·핵심제안 정리</td><td>이 단계는 화면 검토용. 실제 발매/공연/공식 표 완료와 구분</td></tr><tr><td>U1 · 공통 연결 준비</td><td>팀/곡/공연/회차·출처·복귀 계약과 화면별 시험 입력 adapter</td><td>모든 화면에 직접 진입 가능. 같은 데이터와 결과 공유, 새 원장/메뉴별 저장 복제 없음</td></tr><tr><td>U2 · 앨범 UI 정리</td><td>기존 제작·재킷·발매·앨범 차트/활동 입구 재사용</td><td>초안 복귀·중복 결제/발매 방지·시험곡 준비·발란스 수신 보존 확인</td></tr><tr><td>U3 · 공연 UI와 공급 연결</td><td>장소 도착 활동→공연 상태/PIP→음악 앱의 같은 공연</td><td>처음은 시험 공급자로 단독 확인, 실제 사건 공급자는 별도 연결. 공연 ID별 한 번, 인터뷰 자동 환산 없음</td></tr><tr><td>U4 · 음악 앱 관람 정리</td><td>같은 곡 상세·공연 목록/관람·숏츠·공통 재생기</td><td>실제 공연 없음/연결 중/종료/권한 없음 구분. 같은 곡·위치·큐·원래 화면 복귀</td></tr><tr><td>U5 · 페스티벌 연결</td><td>기존 대회/신청/로비 UI→같은 회차 음악 앱</td><td>권한·동의·중복·미개막·집계 전·같은 출전곡 복귀. 인기/공식 투표 공급은 정책 준비 후</td></tr><tr><td>U6 · 개별·연동 검수</td><td>각 모듈 직접 진입 검수 후 전체 선택 흐름·재접속·초기화</td><td>화면/정산/서버를 분리 보고. 미연결은 시안/대기, 시험 원본을 공식 결과로 승격하지 않음</td></tr></tbody></table></div><h3>개별·연동 검수 계획</h3><div class="table-scroll"><table><thead><tr><th>시험</th><th>진입 순서</th><th>확인할 결과</th></tr></thead><tbody><tr><td>개별 진입</td><td>앨범·공연·음악 앱·페스티벌 어디든 바로 열기</td><td>이전 메뉴 완료 요구 없음. 누락된 시험 준비만 1회 수행, 초안 보존</td></tr><tr><td>앨범↔보드</td><td>발매곡의 활동 입구→보드→곡 차트</td><td>같은 팀·곡·기존 활동/START 영수증. 왕복으로 새 발매/지급 없음</td></tr><tr><td>보드↔공연</td><td>해당 장소의 실제 공연 시작→PIP→확인→관람→복귀</td><td>같은 공연 ID·채널·곡·종료 상태. 취소는 이동만 취소, PIP 닫기는 공연 취소 아님</td></tr><tr><td>대회↔음악 앱</td><td>신청 성공→활동 로비→확인→같은 회차 차트→복귀</td><td>같은 round/entry·개인/크루·곡. 조회/재생이 투표 제출이 아님</td></tr><tr><td>누락·오류</td><td>곡 없음·사용자 초안·공연 없음·미개막·동의 없음·원본 연결 대기</td><td>없는 원본은 대기/빈 화면. 다른 공연·곡·회차로 대신 채우지 않음</td></tr><tr><td>공유·복원</td><td>발란스 가져오기→여러 메뉴 조작→재접속→전체 초기화</td><td>가져온 데이터/결과 공통 유지·시험 재화 무제한. 초기화 전 새 수신/메뉴 진입이 덮어쓰지 않음</td></tr></tbody></table></div><p>시험 조작·상태 선택은 오른쪽/외부 검수 패널에 둡니다. 모바일 본문에는 현재 행동·대상·비용/실패 사유를 먼저 보입니다. 다른 콘텐츠 이동은 모바일 내부 확인을 거치며, 같은 음악 앱의 곡/공연 상세 이동은 직접 처리합니다. 페스티벌 점수 설정·투표 시험·월드 인기·우승은 기존의 접힌 보조 도구 안에 함께 둡니다. 음악 앱의 하위 메뉴는 음원·공연·숏츠이며 같은 음악 앱 안에서 각각 시험합니다.</p></section><section id="album-stage-festival-ui-flow" data-album-stage-festival-flow><style data-album-flow-layout>section[data-album-stage-festival-flow] table{min-width:0!important;width:100%;table-layout:fixed}section[data-album-stage-festival-flow] td,section[data-album-stage-festival-flow] th{overflow-wrap:anywhere}</style><h2>먼저 보기 · 앨범·공연·페스티벌 UI 흐름</h2><p>앨범을 발매한 뒤 보드의 방송·공연 활동과 페스티벌 신청을 선택합니다. 공연은 해당 장소의 실제 활동에서 시작하고, 음악 앱은 같은 곡·공연·대회 차트를 감상하는 공통 입구입니다.</p><figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 810" role="img" aria-label="앨범 발매와 보드 공연, 페스티벌이 음악 앱으로 이어지는 UI 흐름" style="display:block;width:100%;min-width:0!important;max-width:520px;height:auto;margin:16px auto;font-family:-apple-system,BlinkMacSystemFont,Apple SD Gothic Neo,sans-serif"><title>앨범·보드 공연·페스티벌 UI 흐름</title><defs><marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10Z" fill="#7d668e"/></marker></defs><rect width="440" height="810" rx="20" fill="#fcf9ff"/><rect x="60" y="18" width="320" height="70" rx="12" fill="#f2eafa" stroke="#b994d1" stroke-width="1.5"/><text x="220.0" y="46" text-anchor="middle" font-size="18" font-weight="700" fill="#493954">음악 선택·제작</text><text x="220.0" y="69" text-anchor="middle" font-size="14" fill="#62556d">현재 팀 → 음악 → 재킷 → 제작 완료</text><path d="M220 88 V112" fill="none" stroke="#7d668e" stroke-width="2" marker-end="url(#flow-arrow)"/><rect x="60" y="114" width="320" height="70" rx="12" fill="#eaf6f0" stroke="#87b79f" stroke-width="1.5"/><text x="220.0" y="142" text-anchor="middle" font-size="18" font-weight="700" fill="#493954">플레이어가 앨범 발매</text><text x="220.0" y="165" text-anchor="middle" font-size="14" fill="#62556d">같은 발매곡·참여자·재킷을 공유</text><path d="M220 184 V207 H118 V232" fill="none" stroke="#7d668e" stroke-width="2" marker-end="url(#flow-arrow)"/><path d="M220 207 H322 V232" fill="none" stroke="#7d668e" stroke-width="2" marker-end="url(#flow-arrow)"/><rect x="18" y="234" width="200" height="70" rx="12" fill="#fff4e7" stroke="#d3a35a" stroke-width="1.5"/><text x="118.0" y="262" text-anchor="middle" font-size="18" font-weight="700" fill="#493954">방송국·공연장 도착</text><text x="118.0" y="285" text-anchor="middle" font-size="14" fill="#62556d">공연에 해당하는 활동 시작</text><rect x="232" y="234" width="190" height="70" rx="12" fill="#f2eafa" stroke="#b994d1" stroke-width="1.5"/><text x="327.0" y="262" text-anchor="middle" font-size="18" font-weight="700" fill="#493954">월드 페스티벌 신청</text><text x="327.0" y="285" text-anchor="middle" font-size="14" fill="#62556d">월드 · 개인/크루</text><path d="M118 304 V350" fill="none" stroke="#7d668e" stroke-width="2" marker-end="url(#flow-arrow)" stroke-dasharray="6 5"/><path d="M327 304 V350" fill="none" stroke="#7d668e" stroke-width="2" marker-end="url(#flow-arrow)"/><text x="118" y="331" text-anchor="middle" font-size="13" fill="#936b34">실제 공연 공급 미연결</text><rect x="18" y="352" width="200" height="70" rx="12" fill="#fff4e7" stroke="#d3a35a" stroke-width="1.5"/><text x="118.0" y="380" text-anchor="middle" font-size="18" font-weight="700" fill="#493954">보드의 내 공연 창</text><text x="118.0" y="403" text-anchor="middle" font-size="14" fill="#62556d">곡·장소·공연 중 표시</text><rect x="232" y="352" width="190" height="70" rx="12" fill="#f2eafa" stroke="#b994d1" stroke-width="1.5"/><text x="327.0" y="380" text-anchor="middle" font-size="18" font-weight="700" fill="#493954">내 출전곡 활동 로비</text><text x="327.0" y="403" text-anchor="middle" font-size="14" fill="#62556d">신청 성공한 같은 회차·곡</text><path d="M118 422 V466" fill="none" stroke="#7d668e" stroke-width="2" marker-end="url(#flow-arrow)" stroke-dasharray="6 5"/><path d="M327 422 V466" fill="none" stroke="#7d668e" stroke-width="2" marker-end="url(#flow-arrow)"/><text x="118" y="449" text-anchor="middle" font-size="13" fill="#62556d">눌러서 관람 · 이동 확인</text><text x="327" y="449" text-anchor="middle" font-size="13" fill="#62556d">순위·다른 곡 듣기</text><rect x="18" y="468" width="200" height="70" rx="12" fill="#eaf6f0" stroke="#87b79f" stroke-width="1.5"/><text x="118.0" y="496" text-anchor="middle" font-size="18" font-weight="700" fill="#493954">음악 앱 · 같은 공연</text><text x="118.0" y="519" text-anchor="middle" font-size="14" fill="#62556d">관람 → 같은 곡 상세</text><rect x="232" y="468" width="190" height="70" rx="12" fill="#eaf6f0" stroke="#87b79f" stroke-width="1.5"/><text x="327.0" y="496" text-anchor="middle" font-size="18" font-weight="700" fill="#493954">음악 앱 · 대회 차트</text><text x="327.0" y="519" text-anchor="middle" font-size="14" fill="#62556d">감상·허용 반응/투표</text><path d="M118 538 V561 H220 V584" fill="none" stroke="#7d668e" stroke-width="2" marker-end="url(#flow-arrow)"/><path d="M327 538 V561 H220" fill="none" stroke="#7d668e" stroke-width="2" marker-end="url(#flow-arrow)"/><rect x="60" y="586" width="320" height="70" rx="12" fill="#eaf6f0" stroke="#87b79f" stroke-width="1.5"/><text x="220.0" y="614" text-anchor="middle" font-size="18" font-weight="700" fill="#493954">음악 앱 안에서 함께 보기</text><text x="220.0" y="637" text-anchor="middle" font-size="14" fill="#62556d">음악 · 차트 · 보관함 / 공연 · 숏츠</text><path d="M220 656 V685" fill="none" stroke="#7d668e" stroke-width="2" marker-end="url(#flow-arrow)"/><rect x="60" y="687" width="320" height="70" rx="12" fill="#f2eafa" stroke="#b994d1" stroke-width="1.5"/><text x="220.0" y="715" text-anchor="middle" font-size="18" font-weight="700" fill="#493954">돌아온 위치와 맥락 유지</text><text x="220.0" y="738" text-anchor="middle" font-size="14" fill="#62556d">보드 또는 같은 대회·출전곡 로비</text><text x="220" y="787" text-anchor="middle" font-size="13" fill="#62556d">점선: 기획된 실제 공연 연결 · 화면 시안과 구분</text></svg><figcaption>기획 흐름입니다. 공연장·방송국 도착으로 공연이 시작되는 기획과 실제 음악 앱 관람 연결의 구현 범위를 아래에서 구분합니다. 음악 앱으로 이동하기 위해 공연이나 투어를 의무로 완료하지 않습니다.</figcaption></figure><h3>화면마다 무엇을 누르나요</h3><div class="table-scroll"><table><thead><tr><th>화면</th><th>보여 줄 흐름</th><th>주동작·다음/복귀</th></tr></thead><tbody><tr><td>앨범 준비</td><td>현재 팀·음악·참여 옵션 → 재킷·제작 조건</td><td>제작 완료 → 앨범 발매 · 이전으로 가면 같은 초안 유지</td></tr><tr><td>발매 직후</td><td>같은 곡의 발매 결과·앨범 이벤트 차트</td><td>보드로 복귀 / 음악 앱에서 감상 / 페스티벌 신청을 선택</td></tr><tr><td>보드 방송·공연</td><td>해당 장소 도착 → 유효한 공연 시작 → 내 공연 작은 창</td><td>작은 창을 누르면 같은 공연 관람. 도착만으로 음악 앱 강제 이동 없음</td></tr><tr><td>페스티벌 신청</td><td>주간은 개인·내 앨범 선택/신청, 월드는 개인·크루·발매곡 확인</td><td>신청 확인 → 성공한 출전곡의 활동 로비. 공연·투어 완료를 새 필수 조건으로 만들지 않음</td></tr><tr><td>페스티벌 활동 로비</td><td>내 등록곡·현재 회차·순위 또는 집계 전</td><td>순위·다른 곡 듣기 → 같은 회차 음악 앱 / 대회 보기 → 대회 선택</td></tr><tr><td>음악 앱</td><td>음악·차트·보관함을 기본으로 공연·숏츠 연결</td><td>곡 상세 → 이 곡의 스테이지 / 홈 → 지금 공연 중 / 상단 → 숏츠 발견</td></tr><tr><td>감상 후 복귀</td><td>같은 곡·공연·회차와 원래 위치</td><td>뒤로는 직전 곡·목록, 게임 복귀는 보드 또는 진입한 대회 로비를 유지하는 기획</td></tr></tbody></table></div><h3>같은 곡으로 연결할 기준</h3><div class="table-scroll"><table><thead><tr><th>기준</th><th>UI·데이터 관계</th></tr></thead><tbody><tr><td>같은 곡</td><td>앨범 ID·곡 참조·고정 참여자를 유지합니다. 실제 곡에 공연이 없으면 연결 없음으로 표시하고 다른 시안 공연으로 채우지 않습니다.</td></tr><tr><td>같은 공연</td><td>장소/채널·공연 ID·시작/종료·매체/공연 상태를 함께 연결하는 기획입니다. 인터뷰만 한 사건은 노래 공연으로 자동 환산하지 않습니다.</td></tr><tr><td>같은 대회</td><td>대회 유형·회차·개인/크루·출전곡 ID를 보존합니다. 일반 곡 감상에 임의 대회/투표 대상을 붙이지 않습니다.</td></tr><tr><td>세 차트</td><td>일반 차트·주간 차트·월드 차트를 각각 표시합니다. 일반은 앨범 활동·팬 중심이고 주간/월드는 해당 대회에 접수된 곡의 평가입니다. 주간과 월드의 기간·기록·재화는 구분하며 앨범 등수나 이전 주간 점수를 월드 점수로 옮기지 않습니다.</td></tr><tr><td>시험 도구</td><td>페스티벌 점수 설정·투표 시험·월드 인기·우승은 기존 보조 도구 안에 함께 둡니다. 이용자의 감상·허용 반응/투표는 음악 앱에 연결합니다. 음원·공연·숏츠는 음악 앱의 하위 메뉴이며 별도 검수 그룹을 만들지 않습니다.</td></tr><tr><td>시뮬레이터 이동</td><td>모든 메뉴는 같은 팀·수신 데이터·결과를 공유합니다. 자동 콘텐츠 이동을 멈추고 다른 콘텐츠로 가야 할 때는 모바일 내부 이동 확인을 거칩니다. 음악 앱 안의 곡·공연 전환은 같은 앱의 상세 이동입니다.</td></tr><tr><td>시험 시작·초기화</td><td>발란스 수신 데이터는 전체 초기화 전까지 보존하며 재화 무제한은 시험 환경에 적용합니다. 발매곡이 없으면 기존 시험곡을 준비하고 작성 중인 앨범·기존 발매곡은 보존합니다. 본게임의 제작·발매 조건을 폐지하는 정책이 아닙니다.</td></tr></tbody></table></div><h3>공연은 어디까지 만들어졌나요</h3><div class="table-scroll"><table><thead><tr><th>범위</th><th>현재 구분</th></tr></thead><tbody><tr><td>앨범 제작·발매 / 음악 앱 연결</td><td>로컬 구현. 실제 AI 제작·외부 음원 유통과 구분</td></tr><tr><td>방송·공연 사건 → 앨범 활동·START 정산</td><td>기존 보드 활동 기록/정산 연결과 공연 관람 기능을 구분</td></tr><tr><td>음악 앱 내부 스테이지·숏츠 / 공연 관람·PIP</td><td>로컬 시안 제작. 현재 목록·내 공연 표시는 임시 데이터·시안 조작</td></tr><tr><td>실제 장소 도착 → 공연 생성 → 내 PIP·공연 목록 공급</td><td>현재 개발되지 않음, 진행 중. 시안 연결만으로 구현 완료로 표시하지 않음</td></tr><tr><td>실제 공연 결과 → 주간/월드 공식 인정·최종 평가</td><td>현재 개발되지 않음, 진행 중. 공식 유효표·인기 경제·비중/보상은 별도 결정/연결 대기</td></tr></tbody></table></div><p>공연의 시작·작은 창·관람 기준: <a href="공연스테이지_핵심제안서.html#part-3">공연 간략 P233</a> · <a href="../../기획서/산출_기획서_공연스테이지_상세_v1.html#stage-screen">공연 상세 P234</a>. 구현 상태는 각 문서의 시안/미개발 구분을 따릅니다.</p></section><section class="part" id="part-1"><h2>1. 개요</h2><figure class="doc-diagram"><div class="mermaid">flowchart LR
+ A[&quot;음악·장르 · 현재 팀 · 제작비&quot;] --&gt; B[&quot;미리듣기·큰 재킷&quot;] --&gt; C[&quot;조건 확인·제작 완료&quot;]
+ C --&gt; D[&quot;앨범 발매&quot;] --&gt; E[&quot;상단 앨범 · 하단 목록/차트&quot;]
+ D --&gt; F[&quot;가입 크루에 자동 공유&quot;]
+</div></figure>
+<p>발매는 플레이어가 누르는 별도 행동입니다. 한 곡당 싱글 하나, 데뷔 포함 시즌 최대8곡입니다. 발매한 곡 중 대표곡 한 곡을 고릅니다. 자동 초안·샘플 완료를 발매로 세지 않습니다.</p>
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+<th>함께 볼 곳</th>
+<th>확인할 내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="%EC%9D%8C%EC%9B%90%EC%98%81%EC%83%81_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P208 음원 제작</a></td>
+<td>멤버·파트·간편/프로·제작비·다시 만들기</td>
+</tr>
+<tr>
+<td><a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%8C%EC%9B%90%C3%97%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P191 상세</a></td>
+<td>소유·저장·중복/복구와 구현 필드</td>
+</tr>
+<tr>
+<td><a href="%EC%9D%8C%EC%95%85%EB%B0%A9%EC%86%A1%EC%B0%A8%ED%8A%B8_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">앨범 차트</a></td>
+<td>곡별1일 이벤트·팬/활동·순위와 전용 재화</td>
+</tr>
+<tr>
+<td><a href="%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">응원 크루</a></td>
+<td>발매 후 소속 크루 내부 자동 공유</td>
+</tr>
+<tr>
+<td><a href="%EC%8B%9C%ED%8B%B0%ED%88%AC%EC%96%B4_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P231 · 시티 투어</a></td>
+<td>앨범에서 참가하는 독립 레이싱 · 급유·주사위/카드 보상</td>
+</tr>
+</tbody></table></div>
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2><h3>공용 게임 상단 메뉴</h3>
+<p>상위에는 <strong>앨범 발매·페스티벌·응원 크루</strong>를 둡니다. 앨범 발매 또는 그 하위 화면을 열면 바로 아래 관련 행에 <strong>음원 제작·방송·공연·음악 차트·시티 투어</strong>가 보입니다. 다른 메뉴를 열면 해당 행을 숨깁니다. 직접 음악 차트 주소로 들어와도 앨범 가족과 현재 하위 메뉴를 표시합니다. 관계·순서·문구는 <a href="/data/simulator/menu.json">공용 메뉴 데이터</a>를 읽으며, 페스티벌 점수 설정·투표 시험·월드 인기·우승도 기존 보조 도구에 함께 둡니다.</p>
+<p><a href="/docs/planning/planning-docs-tool.html?face=development&doc=P228&plan=planning_development_plan_album_release">7007 P228 목록·카드</a> → 실행 → <a href="/docs/planning/game-simulator.html?module=simulator_module_album_release">공용 게임의 앨범</a>.</p>
+<ol>
+<li>음악·장르를 고르면 현재 팀 전원이 기본 참여합니다. 필요할 때 추가 옵션을 펼쳐 멤버·파트·음성·간편/프로를 조정하고, 제작비를 확인해 샘플과 재킷을 준비합니다.</li>
+<li>제목·소개·재킷을 다듬고 필요하면 <strong>다시 만들기</strong>를 사용합니다.</li>
+<li>기존 제작 조건을 채워 <strong>앨범 제작 완료</strong>를 누릅니다.</li>
+<li>발매 조건을 다시 확인해 <strong>앨범 발매</strong>를 누릅니다.</li>
+<li>상단💿을 눌러 멤버·곡 정보·샘플을 봅니다. <strong>앨범 목록/이 곡의 차트</strong>는 선택한 곡으로 이동합니다.</li>
+<li>하단 <strong>앨범</strong>은 발매 목록, <strong>차트</strong>는 곡별 순위/남은 시간/효과, <strong>크루</strong>는 자동 공유 결과를 확인합니다.</li>
+<li>이후2~8번째는 같은 팀의 다음 차수로 준비하며9번째 발매는 막힙니다.</li>
+</ol>
+<p>직접 플레이와 연속 발매 확인은 사용자가 진행합니다. 실제 테스트를 대신 실행하거나 사용자 저장을 초기화하지 않습니다.</p>
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2><h3>앨범 버프·보드·급유 연결</h3>
+<figure class="doc-diagram"><div class="mermaid">flowchart LR
+ A[&quot;앨범 발매&quot;] --&gt; B[&quot;앨범 이벤트 버프 1일&quot;]
+ B --&gt; C[&quot;보드 활동 실적 적립&quot;]
+ C --&gt; D[&quot;출발점 통과 정산&quot;]
+ D --&gt; E[&quot;앨범 이벤트 재화&quot;]
+ E --&gt; F[&quot;내 차 급유 · 1개당 ¼바퀴&quot;]
+ F --&gt; G[&quot;5팀 · 5바퀴 레이스&quot;]
+ G --&gt; H[&quot;최종 순위 · 주사위/카드&quot;]
+</div></figure>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>현재 기획</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>획득 기간</td>
+<td>선택 앨범의 원본 차트 이벤트 시작부터 1일. 참가나 메뉴 이동으로 연장하지 않음</td>
+</tr>
+<tr>
+<td>적립/지급</td>
+<td>기간 내 유효 보드 활동분을 적립하고 기존 출발점 통과 정산에서 전용 재화 지급</td>
+</tr>
+<tr>
+<td>재화</td>
+<td>기존 albumEventWallet를 급유와 함께 사용. 현금 수익에 더하지 않고 두 번째 연료 재화를 만들지 않음</td>
+</tr>
+<tr>
+<td>거리</td>
+<td>재화 1개=¼바퀴, 4개=1바퀴, 20개=5바퀴. 속도와 멤버 수로 단위 거리를 바꾸지 않음</td>
+</tr>
+<tr>
+<td>속도</td>
+<td>같은 능력 입력 기준 기존 주행 속도의 50%. 기본 한 바퀴 시간 6초→12초, 초·중·후반 능력 배율은 유지</td>
+</tr>
+<tr>
+<td>종료</td>
+<td>버프 마감 후 새 활동 적립·새 급유·새 참가를 중단. 만료 전에 생긴 미정산분은 기존 START 계약을 따름. 잔여 재화를 임의 삭제하지 않음</td>
+</tr>
+<tr>
+<td>담당</td>
+<td>보상 수량·획득량·경제 균형·보드 연계 후속은 그룩 담당. 발란스 시뮬과 현황판 복구 소스는 별도 담당 보호</td>
+</tr>
+</tbody></table></div>
+<p><strong>구현 구분:</strong> 앨범 재화 급유와 보드 START 적립/정산 경로는 소스에 있습니다. 속도 50%는 기본 랩 시간 12000ms로 설정에 반영했습니다. 새 설정을 불러와 만든 경기부터 적용하고 기존 경기는 저장된 원래 속도를 유지합니다. 실제 목표는 10바퀴이며 기획의 5바퀴 전환은 별도 후속입니다. 보드 획득→급유 전체 검증은 남아 있습니다. 저장된 기존 경기는 원래 목표·속도·영수증으로 복원하고, 새 경기에서 최신 규칙을 채택합니다. 검증을 끄거나 기존 저장을 새 규칙으로 덮어쓰지 않습니다.</p>
+<h3>모바일은 현재 단계부터 보여 줍니다</h3>
+<p>앨범 진행 표시는 작은 점과 현재 단계 이름으로 줄입니다. <strong>음악·장르 → 현재 팀 전원 기본 참여 → 재킷·정보 → 제작/발매</strong>에서 현재 선택과 필수 버튼을 먼저 보이며, 이전·다음·제작·발매 버튼은 기존 하단 공통 슬롯에 둡니다. 본문만 세로로 스크롤하고 가로 잘림이나 버튼 내부 스크롤을 만들지 않습니다.</p>
+<p>음악·장르와 현재 팀 요약을 먼저 보여 줍니다. 솔로·유닛 선택, 멤버·파트·음성 확인과 간편/프로 기능은 삭제하지 않고 기본 접힘 추가 옵션에 보존합니다. 긴 샘플 설명·참여 요약·제작 조건·발매 전 예상 순위는 기본 접힘 참여·제작 정보에서 펼칩니다. 재킷은 기존 구성·색상 선택을 유지한 큰 정사각형 미리보기로 보여 줍니다. 비용·부족 사유·실패 안내와 필수 조작은 하단 공통 구역에서 바로 확인합니다.</p>
+<h3>연계 데이터와 단독 시험</h3><p>현재 공용 게임 시뮬레이터의 시험 기준은 <a href="#album-stage-festival-ui-flow">앞의 UI 흐름</a>을 따릅니다. 오디션을 필수로 거치지 않으며 모든 메뉴가 같은 팀·발란스 수신 데이터·진행 결과를 공유합니다. 메뉴별 재진입으로 데이터를 교체하지 않고 전체 초기화 전까지 유지합니다. 시험용 재화 보충과 시험곡 자동 준비를 본게임의 운영 조건·정식 발매로 해석하지 않습니다. 작성 중인 앨범·발매곡·영수증은 보존하며 원본 연결 오류는 별도 사유로 표시합니다.</p><h3>제작 전에 보는 대략의 시작 순위</h3>
+<p><strong>음악·장르 선택 → 기본 팀 또는 조정한 참여자의 능력·팬으로 예상 순위 확인 → 재킷 → 발매 때 실제 시작 순위 확정</strong> 순서입니다. 첫 음반도 현재 팀과 참여 멤버의 능력을 반영합니다. 다음 음반은 같은 계산에 직전 앨범의 최종 성적을 더합니다. 화면의 예상은 대략의 범위이며 발매 때의 능력·팬·새 상대에 따라 달라집니다.</p>
+<p>팀 평균과 참여자 평균이 모두 원점수500이고 팬이 없는 수학 예시는 <strong>대략40~53위</strong>입니다. 음반 차수로 등수를 강제하지 않으며 2번째부터도 같은 공통 계산을 씁니다. 가중치·곡선·상한·예상 범위 폭은 <a href="/data/music_career/music_career_rules.json">음악 규칙 데이터</a>의 <code>albumLeague.entry</code>에서 조절합니다.</p>
+<h3>음악 선택과 기본 팀 제작</h3><div class="table-scroll"><table><thead><tr><th>기본 화면</th><th>행동과 경계</th></tr></thead><tbody><tr><td>기본 제작</td><td>현재 팀 전원과 기존 파트 기본값으로 바로 준비. 원본 팀·멤버가 없으면 연결 대기</td></tr><tr><td>선택곡</td><td>실제 팀 이름과 함께 등장하고 기존 단일 플레이어로 자동 미리듣기. 새 선택은 이전 재생을 교체</td></tr><tr><td>추가 옵션</td><td>멤버·솔로/유닛·파트·목소리 확인·간편/프로를 펼쳐 조정. 음성 유효성 검사는 유지</td></tr><tr><td>재킷·결제</td><td>기존 재킷 선택을 크게 표시. 샘플 생성/환불·제작/발매 권한과 중복 결제 검사를 유지</td></tr></tbody></table></div><p>선택곡은 라이선스 시험 음원이며 실제 AI 생성이나 참여 멤버의 실제 음색을 뜻하지 않습니다. 재킷에 신규 업로드 기능을 추가하지 않습니다.</p><p>실제 100위 컷 원본이 공급되지 않아 자동 차트아웃 판정은 대기합니다. 현재 비교군의 마지막 행이나 화면상의 100위를 실제 운영 탈락선으로 대신하지 않습니다.</p>
+<h3>음악 다음에 재킷, 발매 다음에 차트</h3>
+<p><strong>음악 완성 → 재킷·앨범 정보 확인 → 제작 완료 → 발매 → 약2.8초 순위 공개 → 이 곡 차트</strong> 순서입니다.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>보이는 것·행동</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>음악 준비</td>
+<td>팀 이름과 선택곡 등장·자동 미리듣기, 기본 팀과 펼친 추가 옵션의 참여자 확인</td>
+</tr>
+<tr>
+<td>재킷·앨범 정보</td>
+<td>기존 구성3종·색상3종을 바꾸며 크게 미리보기. 곡명/앨범명/소개도 수정</td>
+</tr>
+<tr>
+<td>고정 버튼</td>
+<td>앨범으로 / 이 재킷으로 다음. 반영 후 같은 앨범 ID에 저장</td>
+</tr>
+<tr>
+<td>제작·발매</td>
+<td>기존 조건을 검사하고 제작 완료·발매. 재킷 확인이 비용을 다시 청구하지 않음</td>
+</tr>
+<tr>
+<td>발매 연출</td>
+<td>참여 멤버·저장 재킷→발매 표시→재킷이 차트 행으로 이동→계산된 순위·남은 시간</td>
+</tr>
+<tr>
+<td>차트 이동</td>
+<td>연출 종료/차트 보기 → 같은 곡의 상단 순위표 → 내 행1회 자동 이동·강조</td>
+</tr>
+<tr>
+<td>크루 공유</td>
+<td>실제 공유 게시물이 연결됐을 때만 작은 완료 한 줄</td>
+</tr>
+</tbody></table></div>
+<p>재킷은 기존 템플릿·팔레트 기능을 연결한 것이며 AI 이미지 생성이 아닙니다. 편집 후 목록·차트·상단 상세와 연출에서 같은 저장값을 사용합니다. 발매한 앨범의 과거 재킷을 소급 변경하지 않습니다.</p>
+<h3>공용 고정 버튼 구역</h3>
+<p>이전·다음·음악 만들기·재생성·앨범 제작/발매의 주동작은 <strong>기존 게임 공용 버튼 구역</strong>에 둡니다. 내용·멤버 목록·파트·옵션만 스크롤합니다. 버튼을 찾으려고 맨 아래로 내려갈 필요가 없습니다.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>위치</th>
+<th>표시</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>본문</td>
+<td>멤버/파트/음악 옵션·샘플·곡 정보·조건·상세 설명</td>
+</tr>
+<tr>
+<td>고정 버튼 위</td>
+<td>필요한 돈·보유 돈 한 줄과 차단/처리/오류 요약</td>
+</tr>
+<tr>
+<td>고정 버튼</td>
+<td>현재 단계의 이전/다음/제작. 생성 중 잠금·미충족 비활성화 유지</td>
+</tr>
+<tr>
+<td>메뉴 이동</td>
+<td>음악 버튼은 숨기고 기존 다른 기능의 버튼 구역을 복원</td>
+</tr>
+</tbody></table></div>
+<h3>단독 실행과 연계 실행</h3><p>현재 공용 게임 시뮬레이터의 시험 기준은 <a href="#album-stage-festival-ui-flow">앞의 UI 흐름</a>을 따릅니다. 오디션을 필수로 거치지 않으며 모든 메뉴가 같은 팀·발란스 수신 데이터·진행 결과를 공유합니다. 메뉴별 재진입으로 데이터를 교체하지 않고 전체 초기화 전까지 유지합니다. 시험용 재화 보충과 시험곡 자동 준비를 본게임의 운영 조건·정식 발매로 해석하지 않습니다. 작성 중인 앨범·발매곡·영수증은 보존하며 원본 연결 오류는 별도 사유로 표시합니다.</p><h3>화면 단계와 공용 UI</h3>
+<p>음악을 고른 뒤에는 <strong>앨범 활동 준비</strong> 단계를 유지하고 해당 음악 폼으로 이어집니다. 멤버 선정으로 되돌아가거나 데뷔 준비 첫 화면을 다시 보여 주지 않습니다. 발매곡에 연결되는 앨범 방송·공연 활동은 발매 후에 시작하며, 발매 전에도 기존6칸의 홍보·버스킹과 기본 보드 활동·성장은 유지하는 기획입니다. 스크롤 밖 공용 고정 버튼 바로 위에 필요/보유 돈·차단 사유·처리중/오류를 표시합니다. 단계 전환/사용자 조작 결과 때만 해당 안내를 보여 주고 주기 갱신은 스크롤을 유지합니다.</p>
+<p>본문에는 단독 테스트·지원금·시험조건 안내 박스를 추가하지 않습니다. 현재 잔액과 제작비·진행을 막는 이유만 해당 위치에 표시합니다.</p>
+<p>화면은 기존 시뮬레이터와 같은 <strong>크림 배경·보라색 정보/선택·민트색 완료 표시·둥근 카드/버튼</strong>을 사용합니다. 참여 멤버 이름·선택 테두리·입력·오류 안내와 상단 앨범 상세도 같은 대비로 맞춥니다.</p>
+<h3>상태와 비용</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>상태</th>
+<th>가능한 행동</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>초안</td>
+<td>멤버/파트·옵션 준비·유료 생성·정보 수정</td>
+</tr>
+<tr>
+<td>샘플 준비</td>
+<td>재생·원곡 정보·정보 수정·유료 다시 만들기·조건 충족 후 제작 완료</td>
+</tr>
+<tr>
+<td>제작 완료</td>
+<td>조건 재확인 후 발매. 다시 만들면 같은 곡의 초안으로 돌아감</td>
+</tr>
+<tr>
+<td>발매</td>
+<td>목록/상단 상세/곡별 차트·대표곡·다음 싱글 준비. 지난 곡 재생성 불가</td>
+</tr>
+</tbody></table></div>
+<h3>음악 만들기 비용</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>싱글 차수</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>첫 음악 만들기 · 기존 돈</td>
+<td>5,000</td>
+<td>7,500</td>
+<td>10,000</td>
+<td>12,500</td>
+<td>15,000</td>
+<td>17,500</td>
+<td>20,000</td>
+<td>22,500</td>
+</tr>
+<tr>
+<td>다시 만들기 · 기존 돈</td>
+<td>2,500</td>
+<td>3,750</td>
+<td>5,000</td>
+<td>6,250</td>
+<td>7,500</td>
+<td>8,750</td>
+<td>10,000</td>
+<td>11,250</td>
+</tr>
+</tbody></table></div>
+<p>실행자가 정한 <strong>로컬 임시 발란스</strong>입니다. 기존 게임 돈을 사용하고 만들기 전에 <strong>필요·보유·부족 금액</strong>을 보여 줍니다. 돈이 부족하거나 현재 지갑 원본을 읽지 못하면 시작하지 않습니다. 다시 만들기는 성공한 샘플이 있는 같은 앨범에 적용하며 비용은50%입니다. 첫 생성이 실패해 샘플이 없으면 다음 시도는 첫 제작비입니다.</p>
+<p>요청/작업이 같으면 한 번만 결제합니다. 샘플 파일을 연결하지 못해 작업이 실패하면 해당 제작비를 한 번 환불합니다. 제목 수정·샘플 듣기·제작 완료·발매 버튼은 이 제작비를 다시 청구하지 않습니다. 실제 AI 토큰이나 현금 결제는 없습니다.</p>
+<p>샘플 대기 시계: 보드 진행이 멈춰 있어도 샘플 연결은 실제 경과 시간으로 완료합니다. 기존 진행 중 작업은 같은 작업·결제·참여자를 보존해 짧게 재대기하며, 복원이나 새로고침으로 제작비를 다시 청구하지 않습니다. 게임 시계·리그 시간·보드 진행을 앞당기지 않습니다.</p>
+
+<p>제작 완료와 발매는 추가 제작비를 청구하지 않습니다. 다시 만들기는 같은 앨범 차수여서8곡 한도를 늘리거나 소모하지 않습니다.</p>
+<h3>멤버·곡 데이터 연결</h3>
+<p>앨범은 고정 ID로 연결합니다. 현재 팀에서 고른 참여자·파트·계수와 목소리 구성, 음악 옵션·sampleId·제목/소개·재킷을 같은 앨범에 저장합니다. 명단을 바꾸려면 발매 전 새 생성 작업을 거칩니다. 발매 이후 대상·파트·계수를 바꾸지 않고 신규 합류 멤버를 지난 곡의 버프에 끼우지 않습니다.</p>
+
+<a id="album-bgm"></a><h3>내 발매곡을 게임 BGM으로 듣기</h3><div class="table-scroll"><table><thead><tr><th>동작</th><th>현재 로컬 범위</th></tr></thead><tbody><tr><td>선택 가능</td><td>현재 소유 팀의 실제 발매 앨범이며 검증된 재생 src가 있는 곡만</td></tr><tr><td>유지</td><td>선택한 곡을 반복 재생하며 보드 왕복에 유지. 실행 중 메모리 상태만 사용</td></tr><tr><td>전환·중단</td><td>다른 명시 재생으로 오디오 초점을 넘기면 BGM 선택을 끝내고 기존 반복 설정을 복원</td></tr><tr><td>저장 경계</td><td>새 저장키·지갑·보상 기록을 만들지 않음. 새로고침 뒤 BGM 선택/재생 복원은 보장하지 않음</td></tr></tbody></table></div>
+<h3>발매 후 자동 처리</h3>
+<ul>
+<li>소속 크루가 있으면 그 크루 내부에 앨범을 한 번 공유합니다. 없으면 공유를 생략하고 차트 등록은 이어갑니다.</li>
+<li>차트 등록과 발매별 이벤트 입장은 같은 발매 처리에 연결합니다. 단, 자유 테스트에서 앞 차트가 진행 중이면 새 곡은 발매를 저장하고 이벤트 참가만 대기합니다. 로컬은 본인+가상99명이며 실제 회원 매칭 서버는 없습니다.</li>
+<li>첫 발매 뒤 상단💿아이콘이 표시됩니다. 클릭하면 발매곡을 골라 멤버·파트·음악 옵션·샘플·원곡 크레딧을 봅니다.</li>
+<li>하단 앨범 목록과 차트는 동일한 albumId를 사용합니다. 지난 곡은 지난 리그를 보여 주고 현재 활동곡으로 몰래 바꾸지 않습니다.</li>
+<li>발매 자체가 돈·팬·능력·전용재화를 즉시 주지는 않습니다.1일 이벤트 실적에 따른 추가 효과를 기존START에서 정산합니다.</li>
+</ul>
+<p><a id="album-board-activation"></a></p>
+<h3>첫 앨범 발매 · 방송/공연 6칸의 이름과 불빛</h3>
+<p><strong>제안(검수 대기) · 기획만.</strong> 첫 유효 앨범 발매를 계기로, 같은6개 칸의 신인 홍보·버스킹이 정식 방송·공연으로 보이게 바뀝니다. 건물의 성장 단계와 이 전환은 별개입니다.</p>
+<table>
+<thead>
+<tr>
+<th>칸</th>
+<th>첫 발매 전 · 신인 활동</th>
+<th>첫 발매 후 · 정식 활동</th>
+<th>역할 방향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>27 · 방송</td>
+<td><strong>거리 인터뷰</strong></td>
+<td><strong>예능 방송국</strong></td>
+<td>얼굴과 이름 알리기 → 앨범을 내건 예능·토크 출연</td>
+</tr>
+<tr>
+<td>28 · 방송</td>
+<td><strong>온라인 홍보방송</strong></td>
+<td><strong>라디오 방송국</strong></td>
+<td>짧은 자기소개·소통 → 신곡 소개·보이는 라디오</td>
+</tr>
+<tr>
+<td>30 · 방송</td>
+<td><strong>신인 소개방송</strong></td>
+<td><strong>음악 방송국</strong></td>
+<td>신인 소개·가벼운 무대 → 발매곡의 정식 음악방송</td>
+</tr>
+<tr>
+<td>32 · 공연</td>
+<td><strong>거리 버스킹</strong></td>
+<td><strong>라이브 공연장</strong></td>
+<td>가까운 관객과 연습 무대 → 내 발매곡 라이브</td>
+</tr>
+<tr>
+<td>33 · 공연</td>
+<td><strong>공원 버스킹</strong></td>
+<td><strong>쇼케이스 공연장</strong></td>
+<td>작은 야외 무대 → 새 앨범 소개와 대표 무대</td>
+</tr>
+<tr>
+<td>35 · 공연</td>
+<td><strong>오픈마이크 무대</strong></td>
+<td><strong>콘서트장</strong></td>
+<td>자유 참가 무대 → 발매곡 중심의 정식 공연</td>
+</tr>
+</tbody>
+</table>
+<p>아레나·돔처럼 건물의 크기나 등급이 갑자기 오른 것으로 보이는 이름 대신, <strong>활동 성격이 바뀌는 이름</strong>을 사용한 안입니다. 기존 시설 그룹 방송/콘서트와 위치는 그대로이고, 이름은 아직 확정하지 않습니다.</p>
+<figure class="doc-diagram"><div class="mermaid">flowchart LR
+ A[&quot;첫 앨범 발매 전&lt;br&gt;홍보·버스킹 이름·준비 조명&quot;] --&gt; B[&quot;기존 발매 성공·같은 팀 확인&quot;]
+ B --&gt; C[&quot;6칸 간판 이름 전환&quot;]
+ C --&gt; D[&quot;방송 ON AIR·공연 LIVE 조명&quot;]
+ D --&gt; E[&quot;발매곡으로 정식 활동&lt;br&gt;기존 보드 흐름 계속&quot;]
+</div></figure>
+<table>
+<thead>
+<tr>
+<th>연출 순서</th>
+<th>보여 줄 것</th>
+<th>게임 흐름</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>발매 성공</td>
+<td>기존 발매 완료와 재킷을 보여 주며6개 칸을 짧게 강조</td>
+<td>기존 발매가 실제 저장된 뒤 적용</td>
+</tr>
+<tr>
+<td>간판 변화</td>
+<td>신인 활동 이름에서 정식 활동 이름으로 전환, 같은 위치를 유지</td>
+<td>칸/시설을 새로 만들거나 이동하지 않음</td>
+</tr>
+<tr>
+<td>건물 점등</td>
+<td>방송 간판의 <strong>ON AIR</strong>, 공연장의 <strong>LIVE</strong>·무대 조명·입구 조명이 켜짐</td>
+<td>기본 건물 조명과 정식 활동 조명을 구분</td>
+</tr>
+<tr>
+<td>보드 복귀</td>
+<td>조명이 켜진 장소가 남고 플레이어는 다음 기존 행동을 진행</td>
+<td>추가 확인 버튼·의무 팝업·별도 입장 절차를 만들지 않음</td>
+</tr>
+</tbody>
+</table>
+<p>발매 전도 닫힌 시설처럼 보이지 않게 합니다. 기본 로비·연습 조명은 유지하고 정식 간판/메인무대 조명만 준비 상태로 둡니다. 발매 전6칸에서도 <strong>기존 보드 활동·성장·기본 보상</strong>은 유지합니다. 발매곡에 연결되는 앨범 활동 기록/추가 정산만 발매 후에 시작합니다.</p>
+<p>현재 지도에는 시설별 공통 이름/짧은 이름이 있으므로 이 표는 <strong>6개 위치별 칸·활동 간판의 표시명</strong> 제안입니다. 공통 건물명·시설ID·0~30단계 성장을 대체하지 않습니다. 작은 칸에서는 짧은 이름을, 도착 안내/상세에서는 전체 이름을 표시하는 안입니다.</p>
+<details><summary>작은 칸 표기와 전환·복원 규칙</summary>
+<table>
+<thead>
+<tr>
+<th>칸</th>
+<th>짧은 칸 표기 · 발매 전 → 후</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>27</td>
+<td>인터뷰 → 예능</td>
+</tr>
+<tr>
+<td>28</td>
+<td>홍보방송 → 라디오</td>
+</tr>
+<tr>
+<td>30</td>
+<td>신인소개 → 음악방송</td>
+</tr>
+<tr>
+<td>32</td>
+<td>거리버스킹 → 라이브</td>
+</tr>
+<tr>
+<td>33</td>
+<td>공원버스킹 → 쇼케이스</td>
+</tr>
+<tr>
+<td>35</td>
+<td>오픈무대 → 콘서트</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>첫 발매 기준:</strong> 같은 run/session/season·owner/team에서 소유한 앨범의 기존 발매가 성공한 상태입니다. 같은 팀의 솔로·유닛·팀 발매도 첫 유효 발매에 포함하는 안입니다. 초안·샘플 생성·외부 크루 공유곡·시험 표시 문구만으로 정식 발매로 세지 않습니다. 명시적 단독 검수는 해당 시험 범위의 기존 발매 상태로 전환을 관찰하되 시험 구분을 유지합니다.</li>
+<li><strong>연출과 상태 분리:</strong> 첫 발매 성공 때 한 번 강조하고, 이후 발매는 정식 상태를 유지합니다. 새로고침·메뉴 이동·차트 갱신마다 이름을 되돌리거나 개막 연출을 반복하지 않습니다. 표시 상태는 기존 발매 기록에서 파생하고 연출은 기존 발매 성공 알림에 연결하는 방향이며 별도의 대용량 이력·원문·새 저장키를 이 기획만으로 추가하지 않습니다. 이미 발매한 구 저장은 전환된 최종 모습으로 바로 복원합니다.</li>
+<li><strong>성장 보존:</strong> 단계·크기·부속동·구매·증설 조건은 기존 규칙입니다. 단계0 빈 부지는 칸의 이름/발매 표식으로 전환을 알리고 새 건물을 자동 생성하거나 무료로 성장시키지 않습니다.</li>
+<li><strong>오류/생략:</strong> 간판·조명 연출이 실패하거나 생략돼도 발매를 취소·재실행하지 않습니다. 바로 최종 이름·가동 상태를 보여 주고 기존 보드 진행을 계속합니다. 효과를 줄이는 환경에서는 짧은 색/간판 변화만 사용합니다.</li>
+<li><strong>유지:</strong> 앨범1일 버프·앨범 차트가 끝나도 정식 이름과 가동 조명은 유지합니다. 다음 시즌은 기존 시즌/팀 보존·초기화 정책을 따르며 임의 영구 해금으로 만들지 않습니다.</li>
+<li><strong>월드 기간:</strong> 별도의 월드 공연 프로필은 그 위에 기간 연출로 적용하는 안입니다. 월드 종료가 첫 발매 이전의 이름으로 돌아가는 이유가 되지 않습니다.</li>
+<li><strong>아직 정하지 않은 것:</strong> 평소 각 칸의 공연게임·배틀공연·조작 길이·보상·시도 정책은 후속 기획입니다. 이번 이름/점등만으로 새 게임·평가·지급을 열지 않습니다.</li>
+</ul>
+</details>
+<p><a href="%EB%B0%A9%EC%86%A1%EA%B3%B5%EC%97%B0%ED%99%9C%EB%8F%99_%EA%B8%B0%ED%9A%8D%EC%84%9C.html#broadcast-debut-transition">방송·공연 범위</a> · <a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%8C%EC%9B%90%C3%97%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html#album-board-activation-details">상세 책갈피 계약</a></p>
+
+<h3>기존 제작·발매 조건</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>싱글 차수</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>필요 엔터파워</td>
+<td>50</td>
+<td>100</td>
+<td>130</td>
+<td>160</td>
+<td>190</td>
+<td>220</td>
+<td>250</td>
+<td>280</td>
+</tr>
+</tbody></table></div>
+<p>로컬 임시값이며 기간·성장·미션을 함께 검사합니다. 실제 조건이 미공급이면 대기합니다. 시험창의 조건 변경은 실제 엔터파워나 지갑을 올리지 않습니다. 팀·시즌 최대8곡은 솔로/유닛이 나누어 사용합니다.</p>
+<h3>공통 시간 버프와 오른쪽 상세</h3>
+<p>시간 버프는 타입·출처·현재 저장 범위·기준 시계·시작/종료 시각·남은 시간·효과를 공통 형식으로 표시합니다. 앨범은 <code>album_rank</code> 타입입니다. 게임 연출 영역 <strong>오른쪽 아래 구석</strong>에 현재 순위·<strong>시:분:초</strong>만 작은 한 줄 칩으로 겹쳐 표시하고(11/18 클로드 · 현중 「앨범 버프 UI 다른 위치로 옮기면서 사이즈도 줄여줘」 · 전에는 오른쪽 위라 화면마다 맨 위 갈래 버튼을 가림 · 칩 높이 34→24px · 폭 160→120px), 누르면 같은 곡의 차트로 이동합니다. 차트 화면에서는 이 칩을 숨기고 오른쪽 상세는 유지합니다. 적립 기준·긴 설명은 오른쪽에 둡니다. 크기·위치·여백과 차트 숨김 대상은 공통 UI JSON에서 조절합니다. 오른쪽에는 곡·현재 순위·남은 시간·주요 효과의 대표 요약이 항상 보입니다. 참여자별 능력·미정산·시계와 상세 계산은 기본 접힌 상세 보기에 두고 펼칠 때 확인합니다. 시간/상태 갱신·오른쪽 host 이동에서도 펼친 상태를 유지합니다. 하단 차트는 실제 차트 화면에서만 선택 표시를 하고, 버프가 켜져 있다는 이유로 선택 표시하지 않습니다.</p>
+<p>오른쪽에는 곡·고정 참여자·현재 순위·유효 남은 시간, <strong>활동1회·배수1의 적립 기준</strong>, <strong>이 곡의 실제 START 미정산 합계</strong>를 구분해 표시합니다. 시험 적립은 별도입니다. 화면 숫자는 한 바퀴의 고정 지급량이 아니며, 유효 활동에서 쌓인 적립을 기존 출발점 정산에서 지급합니다. 만료되면 신규 적립과 활성 표시가 끝나며 이미 적립한 기록은 정산 대상으로 남습니다.</p>
+<p>공통 표시는 캐시된 시간만 매초 갱신하고 저장 전체를 매초 검증하지 않습니다. 숨은 화면은 타이머를 멈추고 복귀 시 원본을 확인합니다. 기존 멤버 시간 버프는 원래 <code>ends_at</code>과 계산을 유지하며, 명시한 시계 변환기를 통해 같은 표시 계약에 연결합니다. 비어 있는 기존 표에서 버프를 만들거나 다른 시계의 날짜를 임의로 합치지 않습니다.</p>
+<h3>출발점 추가 보상 필러·자동 결과 연결 — 후속 기획, 미구현</h3>
+<p><strong>출발점 통과 → 기존 정산 확정 → 일반 보상 → 앨범 버프 추가 보상</strong> 순서의 필러 연출이 필요합니다. 별도 앨범 줄에 실제 영수증의 전용 재화·팬·참여 멤버별 능력을 표시합니다. 클릭 전부터 정산 결과를 이해할 수 있어야 하며, 연출 재생이 지급을 다시 실행하면 안 됩니다.</p>
+<p>발란스 시뮬레이터도 같은 계산·정산 영수증을 결과로 내보내고, 현황판은 그 결과를 읽어 일반 보상/앨범 추가 보상과 실제 지급/대기를 나눠 표시해야 합니다. 현황판에서 별도 보상을 계산하거나 수동 지급하지 않습니다. 필러 연출·개별 writer·자동 결과 내보내기·현황판 상세 반영은 각각 후속 개발/검수 항목입니다.</p>
+<h3>솔로·유닛·팀의 참여와 보상</h3>
+<p><strong>한 명이 참여하면 솔로, 팀 일부의 두 명 이상이 참여하면 유닛, 팀 전원이 참여하면 팀 앨범</strong>입니다. 5명 팀에서 3명이 부르는 앨범은 유닛입니다. 한 명뿐인 팀의 첫 싱글도 솔로입니다. 처음 곡을 만들 때 고른 참여 멤버·파트를 앨범에 고정하며, 이 명단이 추가 능력을 받을 대상을 정합니다.</p>
+<p><strong>능력은 참여자 각자의 몫, 이벤트 재화는 팀에 한 번</strong>입니다. 같은 순위·활동량·배수·파트·개인 상태라면 한 멤버의 요청량은 솔로·유닛·팀에서 같습니다. 개인 보상을 참여 인원이나 참여계수 합계로 나누지 않습니다. 기존 파트 계수·세부 능력 비율·개인 성장 상한은 적용하며, 미참여자는 그 앨범의 추가 능력을 받지 않습니다.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>설명용 예시 · 같은 파트·조건, 개인 상한 여유 있음</th>
+<th>개인 능력 증가</th>
+<th>기존 팀 평균 능력 증가</th>
+<th>이벤트 재화</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1명 팀의 솔로</td>
+<td>그 멤버 +10</td>
+<td>+10</td>
+<td>팀에 10개</td>
+</tr>
+<tr>
+<td>5명 팀의 전원 참여</td>
+<td>각자 +10</td>
+<td>+10</td>
+<td>팀에 10개</td>
+</tr>
+<tr>
+<td>5명 팀 중 3명의 유닛</td>
+<td>참여자 각자 +10, 나머지 0</td>
+<td>+6</td>
+<td>팀에 10개</td>
+</tr>
+<tr>
+<td>5명 팀 중 한 명의 솔로</td>
+<td>참여자 +10, 나머지 0</td>
+<td>+2</td>
+<td>팀에 10개</td>
+</tr>
+</tbody></table></div>
+<p>표의 +10·재화10개는 단위를 설명하는 예시이며 새 발란스 값이 아닙니다. 기존 팀 능력은 현재 팀 전체 멤버의 평균으로 다시 읽습니다. 개인 증가 합계를 팀 능력에 한 번 더 더하지 않습니다. 유닛 전용 가산 보상은 없으며, 참여자가 많다는 이유만으로 재화·직접 팬을 늘리지 않습니다. 실제 순위·활동 실적·파트·개인 상한이 다르면 결과가 달라질 수 있습니다.</p>
+<p>오른쪽 상세에서 순위별 적립 기준과 고정 참여자별 능력 요청량을 구분합니다. 실제 지급은 START 영수증의 개인별 증가량으로 확인하고, 상한 때문에 못 받은 능력을 다른 멤버에게 옮기지 않습니다. 자동 발란스의 개별 멤버 writer는 연결 대기이며, 이번 확인은 소스 대조입니다.</p>
+<h3>영상 미리보기와 뮤직비디오 제작 상태</h3>
+<p><strong>현재 미리보기:</strong> 10차의 공통 영상 플레이어와 공연 이미지3종을 재사용합니다. 동영상 파일을 새로 만드는 기능이 아니라, 공연 이미지와 해당 앨범에 연결된 검증 샘플을 함께 보여 주는 임시 시뮬레이터입니다. 별도의 audio/video 플레이어를 중복 생성하지 않습니다.</p>
+<p>샘플 준비 후 <strong>영상으로 미리보기</strong>를 누르면 이미 생성된 music controller의 openAlbumVideo(album,current,{preview:false})를 호출합니다. 앨범 초안·제작·발매 원장, 생성 작업·제작비·환불을 쓰지 않습니다. 같은 공통 플레이어로 복귀/닫기를 처리하며 원곡·저작자·라이선스 링크는 유지합니다.</p>
+<p><strong>뮤직비디오 제작: 기획 준비중.</strong> 실제 동영상 생성·동작 영상 공급은 추가 기획/연결 대상입니다. 10차의 현재 결과는 정지 공연 이미지와 지속 미디어 플레이어이며 실제 영상 생성 완료로 표시하지 않습니다. 나중에 실제 파일이 공급되면 기존 album.media.videoSrc 또는 album.video.src의 검증된 /assets/ 경로로 연결합니다.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>재사용 원본</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/src/simulator/music-career/music-app-panel.mjs">공통 음악/영상 UI</a></td>
+<td>기존 controller 1개·openAlbumVideo·닫기/복귀</td>
+</tr>
+<tr>
+<td><a href="/src/simulator/music-career/music-player.mjs">미디어 엔진</a></td>
+<td>지속 media element 하나</td>
+</tr>
+<tr>
+<td><a href="/data/music_career/music_app_config.json">공연 이미지 설정</a></td>
+<td>posterAssets·명시 포스터 선택</td>
+</tr>
+<tr>
+<td><a href="/assets/music-career/video-preview/manifest.json">이미지 제작 근거</a></td>
+<td>참고 그림·프롬프트·정지 이미지 범위</td>
+</tr>
+<tr>
+<td><a href="/assets/music-career/video-preview/pink-vocal-v1.png">보컬</a> · <a href="/assets/music-career/video-preview/mint-city-v1.png">도시 군무</a> · <a href="/assets/music-career/video-preview/red-world-v1.png">월드 랩</a></td>
+<td>10차에서 제공한 공연 이미지3종</td>
+</tr>
+</tbody></table></div>
+<h3>시티 투어에서 이벤트 재화 사용</h3>
+<p><a href="%EC%8B%9C%ED%8B%B0%ED%88%AC%EC%96%B4_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">시티 투어: 앙코르 레이스</a>는 <strong>발매 앨범의 참가 버튼 → 차량 선택 → 현재 앨범 차고 → 급유 →5팀5바퀴 경기 →주사위·아이돌 카드 수령</strong>으로 연결합니다. 앨범 하위 시티 메뉴도 같은3D 게임이며 차량→급유→레이스→시상의 작은 진행 표시를 씁니다. 확대 시점/PIP·전원 순위/랩·미니맵은 표시 전용입니다. 기존2D 비교 시험의 입장비/돈상금과 구분합니다.</p>
+<p>추가 참가비는0, 급유 때만 기존 albumEventWallet의 재화를 사건 영수증으로 차감합니다. 재화1개=¼랩이고 인원수/속도로 거리를 바꾸지 않습니다. 현재 앨범의 고정 참여 멤버 raw18/보유 성향 평균으로 속도를 계산하고, 같은 원본 리그의24시간 마감/시험 상대 ID·seed를 사용합니다. 메뉴 이동/재접속으로 시간·재화를 보충하지 않습니다. 재화가 없으면 보드에서 모으기로 이어집니다.</p>
+<p>정상 경기의 본인1랩·연료4소모 이상이면 참가 기본+순위 추가 주사위/아이돌 카드 보상입니다. 제안 수량은 <a href="/event/cityTour/data/racing3d-rewards.json">보상 데이터</a>에서 읽습니다. 앨범 경로는 소유 full checkpoint/카드 보유 원천 확인 후 기존 held/카드 효과 원장과 career 수령 영수증을 복구 journal로 묶습니다. 독립URL은 시험 영수증만 기록합니다. 데이터가 부족하면 실제 지급 완료를 표시하지 않습니다.</p>
+<p>경주 결과를 차트1등으로 직접 대입하거나 가짜 보드 사건으로 변환하지 않습니다. 검증 resultId별 차트 기여량·반복 상한·경제 순환/서버 실유저 동기화는 후속 연결입니다. 기존 보드 돈·팬·고정 참여자 능력 START 정산은 변경하지 않습니다.</p>
+<h3>앨범 전반의 연계 자료 계약</h3>
+<p><strong>현재 팀·멤버 → 전체 성장 저장과 제작비 → 멤버를 고정한 곡 → 발매 → 크루 자동 공유/차트 등록 → 앨범 리그 → 시티 투어</strong> 순서로 같은 session/run/season/team을 유지합니다. 기능 이동이 새 팀·새 지갑을 만들지 않습니다. 같은 창의 성장 저장 알림도 구독하므로 제작비/능력 변경을 다시 읽습니다.</p>
+<p>우측 「앨범 데이터 연결」은 멤버·전체 성장·지갑·원시 팬 계층·엔터파워·18개 능력·시즌/일차의 연결 상태와 추가 제공자 상태를 접기/펼치기로 보여 줍니다. 입력 연결 완료와 제작/발매 조건 통과를 구분합니다. 요약만 있는 projection은 돈·일차를 가진 full checkpoint로 간주하지 않습니다. 원본이 누락되면 기존 보드 진행을 연결해야 합니다.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>입력</th>
+<th>채택 기준</th>
+<th>미공급 처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>멤버·현재 능력</td>
+<td>현재 handoff와 snapshot의 candidate_id·run/session 일치, 18개 원단위</td>
+<td>명칭으로 합치거나 가짜 멤버로 대체하지 않음</td>
+</tr>
+<tr>
+<td>돈·보드 진행</td>
+<td>동일 소유 full checkpoint의 money/day/season</td>
+<td>제작비 지갑·조건 관측 대기</td>
+</tr>
+<tr>
+<td>팬</td>
+<td>원시 light/core/concrete 숫자 또는 아래 검증된 공급자 자료</td>
+<td>손상/누락/화면0을 원시0으로 변환하지 않음</td>
+</tr>
+<tr>
+<td>기간 기준/미션 완료일</td>
+<td>날짜가 기록된 실제 사건/영수증</td>
+<td>현재일이나 시즌1일로 과거 사실을 만들지 않음</td>
+</tr>
+<tr>
+<td>제작·발매 문턱</td>
+<td>음악 규칙의 실제 값과 원표 참조</td>
+<td>null·미정 조건은 대기, 단독 preset과 분리</td>
+</tr>
+</tbody></table></div>
+<h3>선택 연계 공급자 API와 처리 순서</h3>
+<p>호스트가 dataSource.musicCareerObservation(request)를 제공할 수 있습니다. 현재 기본 host에는 이 공급자가 자동 설치되어 있지 않습니다. <a href="/src/simulator/music-career/linked-observation.mjs">수신 모듈</a>과 source.prepareMusicCareerObservation({refresh})가 수신 입구이며, 반환 자료는 메모리에서만 사용합니다. 음악 mount/활성화·현재 원본 갱신 때 준비하고, 동기 read()가 요청이나 쓰기를 시작하지 않습니다.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>필드</th>
+<th>요청/응답 계약</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>request.version</td>
+<td>1</td>
+</tr>
+<tr>
+<td>request.scope</td>
+<td>현재 runId/sessionId/seasonId</td>
+</tr>
+<tr>
+<td>request.actorId/teamId</td>
+<td>현재 소유 actor/team</td>
+</tr>
+<tr>
+<td>request.sourceRevision/sourceSignature/dataSignature</td>
+<td>현재 snapshot 버전·일치하는 full checkpoint signature·입력 signature</td>
+</tr>
+<tr>
+<td>request.day/memberIds/missionIds</td>
+<td>관측 게임 일차·현재 멤버·활성 미션 ID</td>
+</tr>
+<tr>
+<td>응답 version/status/request</td>
+<td>version=1, status=ready, 요청 내용을 값 기준으로 정확히 되돌림</td>
+</tr>
+<tr>
+<td>debutStartDay</td>
+<td>선택 {day,sourceRef}; 시즌 게임일차1 이상·현재일 이하의 실제 기준 사건</td>
+</tr>
+<tr>
+<td>missionCompletionReceipts</td>
+<td>선택 배열 {receiptId,missionId,completedDay,sourceRef}; 고유 영수증·등록 미션·현재일 이하</td>
+</tr>
+<tr>
+<td>fanLayers</td>
+<td>선택 {unit:raw_fan_amount,layers:{light,core,concrete},sourceRef}; 음수/문자열/누락/범위초과 거부</td>
+</tr>
+</tbody></table></div>
+<p>처리: 요청 소유/버전 동결→선택 공급자 호출→응답 whitelist/동일 요청/값 검증→현재 원본 다시 읽기→같은 증거일 때 메모리 채택→화면 갱신입니다. 멤버/세션/버전이 바뀐 늦은 응답은 폐기합니다. 요청 중복은 같은 promise를 재사용하며 dispose 후 응답은 채택하지 않습니다.</p>
+<p>이 입구는 돈·능력·멤버·시즌·일차 자체·전체 체크포인트를 받거나 덮어쓰지 않습니다. 미션 완료 증거로 completedDay/completed만 보완하고 claimed를 참으로 만들지 않습니다. 원시 팬층은 리그 계산 입력만 보완하며 허브 팬 저장이나 실제 팬 보상 writer가 되지 않습니다. 실패/미공급은 현재 원본을 유지하고 대기 사유를 표시합니다.</p>
+<p>기존 자료에는 최초 데뷔 기준일과 일부 미션 게임 완료일이 기록/전달되지 않았습니다. 실제 사건 생산자와 영수증 전송은 후속 공급 대상입니다. 음악 규칙의 미정 기간/성장/시설 문턱, 비활성인 이전 개인 growth_band 차트의 정밀도·운영 설정은 이번 수신 준비로 확정하지 않습니다.</p>
+<h3>명시 시티 단독 시험</h3>
+<p><a href="/docs/planning/game-simulator.html?module=simulator_module_music_city&testPage=simulator_module_music_city">시티 투어 단독</a>은 현재 시험 멤버로 고정 참여자 있는 음원 미연결 싱글·차트 리그·최초 급유 재화80개를 자동 준비합니다. 실제 샘플 생성/제작비 청구는 생략합니다. 기존 초안/종료 리그/소모 재화는 보존하고 연계 팀에는 적용하지 않습니다. 상세 준비·중복·만료 정책은 <a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%8B%9C%ED%8B%B0%ED%88%AC%EC%96%B4_%EC%83%81%EC%84%B8_v1.html">시티 투어 P232</a>를 따릅니다.</p>
+<h3>단독 시험 진행의 멤버 상태 보존</h3>
+<p>단독 시험의 전체 진행을 만들 때 현재 snapshot 멤버의 컨디션·몬스 배정·배정 revision도 그대로 보존합니다. 이를 빠뜨리면 공통 저장의 멤버 동일성 검사에서 거절되므로 제작 지갑/일차를 연결할 수 없습니다. 초기값을 새로 정하지 않고 기존 copyIdolConditionFields를 사용하며, 앨범과 시티 투어는 같은 준비 경로를 사용합니다.</p>
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+<figure data-current-execution-ui="20261106-album"><a href="../../../증거/20261106_194056_단이_회의결정순차반영/앨범_음악우선.png"><img src="../../../증거/20261106_194056_단이_회의결정순차반영/앨범_음악우선.png" alt="격리된 단독 실행 UI 일부 · 음악 먼저 선택 · 무료 시험 음원" loading="lazy" style="display:block;width:100%;max-width:245px;height:auto"></a><figcaption>격리된 단독 실행 UI 일부 · 음악 먼저 선택 · 무료 시험 음원</figcaption></figure><p><img src="/event/cityTour/design/album-entry-layout.svg" alt="앨범→시티 투어 참가→현재 멤버 차고 UI 기획 시안"></p>
+<p>기획 배치도이며 실제 실행 캡처가 아닙니다. 참가 정보·보유 재화·시간·보상만 먼저 보여주고 상세 규칙은 접습니다. 급유·출발·수령은 기존 폰 하단 버튼 구역을 사용합니다.</p>
+<p><a href="../../../%EC%A6%9D%EA%B1%B0/20261103_142753_%EB%8B%A8%EC%9D%B4_9%EC%B0%A8_%EC%95%A8%EB%B2%94%ED%81%AC%EB%A3%A8_%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%86%B5%ED%95%A9%EA%B0%9C%EB%B0%9C/planning-ui/album-release-storyboard.html">음악·재킷·발매·차트 흐름 UI와 짧은 연출 보기</a> · 예시 화면이며 게임 저장을 바꾸지 않습니다.</p>
+<h3>최신 기획 UI와 간단한 시험</h3>
+<p>기존 비용 그림은 기능 설명용이며 최신 화면의 색상은 공용 크림·보라·민트 테마입니다.</p>
+<p><img src="ui/core-album-generation-cost.svg" alt="제작비·샘플·다시 만들기의 UI 설명 시안"></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>위치</th>
+<th>첫 표시·상세</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>게임 상단💿</td>
+<td>첫 발매 후 등장·발매 수. 클릭하면 앨범 선택과 참여 멤버/파트/곡/샘플</td>
+</tr>
+<tr>
+<td>하단 앨범</td>
+<td>발매 목록·제작 중 곡·다음 싱글·정보/샘플 상세</td>
+</tr>
+<tr>
+<td>하단 차트</td>
+<td>선택 곡의 순위·잔여시간·활동/다음 시작 게이지·미정산 효과</td>
+</tr>
+<tr>
+<td>하단 크루</td>
+<td>발매 후 소속 크루 내부 공유. 생성/제작만 한 곡은 자동 공유하지 않음</td>
+</tr>
+<tr>
+<td>공용 고정 버튼 구역</td>
+<td>이전·다음·제작/발매와 비용/오류 요약. 본문 스크롤과 분리</td>
+</tr>
+<tr>
+<td>생성 비용 영역</td>
+<td>필요·보유·부족 돈과 다시 만들기 비용</td>
+</tr>
+<tr>
+<td>실패/대기</td>
+<td>이유·같은 작업 재확인·환불 상태. 중복 차감 금지</td>
+</tr>
+</tbody></table></div>
+<p>그림은 설명 시안이며 최신 실제 화면은 사용자가 확인합니다. 기존 재킷 템플릿과 실제 샘플10곡의 크레딧을 사용합니다. 실제AI 생성·외부 유통 완료라고 표시하지 않습니다.</p>
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2><p><a href="/data/simulator/music-career-test-scenario.json">음악 단독 시나리오 설정</a> · <a href="/src/simulator/music-career/linked-observation.mjs">현재 연계 수신</a> · <a href="/src/simulator/music-career/source.mjs">공통 앨범 source</a></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>원본</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/data/music_career/music_creation.json">생성 옵션·역할·제작비</a></td>
+<td>간편/프로 프리셋·파트 계수·샘플지연·차수별 제작비·재생성 비율</td>
+</tr>
+<tr>
+<td><a href="/data/music_career/music_samples.json">샘플10곡 카탈로그</a></td>
+<td>로컬 MP3·원곡명·작가·라이선스·SHA256·실제 길이</td>
+</tr>
+<tr>
+<td><a href="/data/music_career/music_career_rules.json">음악 규칙</a></td>
+<td>최대8곡·제작/발매 조건·리그 순위 효과</td>
+</tr>
+<tr>
+<td><a href="/data/music_career/music_career_resources.json">앨범 초안 리소스</a></td>
+<td>제목·설명·재킷·등록 장르/언어</td>
+</tr>
+<tr>
+<td><a href="/data/simulator/standalone-test-environment.json">단독 환경 설정</a></td>
+<td>단독 시작 돈·허용범위·초기 시험값</td>
+</tr>
+<tr>
+<td><a href="/data/music_career/album_library_ui.json">상단 앨범 UI</a></td>
+<td>앨범 아이콘·상세·목록/차트 연결 문구</td>
+</tr>
+</tbody></table></div>
+<p>앨범 저장은 sampleId 참조만 가집니다. MP3 원본·라이선스는 공용 카탈로그에서 읽고 요청마다 음원 본문을 복제하지 않습니다. 비용은 기존 money,1일 버프는 별도 album_event_currency입니다.</p>
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+<th>범위</th>
+<th>현재·남은 일</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>제작·발매·목록·대표곡·자동 공유</td>
+<td>로컬 구현, 실제 회원 서버 제외</td>
+</tr>
+<tr>
+<td>멤버/음악/비용·재생성·샘플</td>
+<td>로컬 UI 확인: 음악 우선·기본 팀·접기·같은 샘플·1회 결제·큰 재킷·제작/발매·새로고침 보존</td>
+</tr>
+<tr>
+<td>상단 상세·선택곡 목록/차트 연결</td>
+<td>기존 연결 보존. 최신 음악 목록·1회 조작 전체 플레이어·미디어 왕복·내 발매곡 BGM을 로컬 UI 확인</td>
+</tr>
+<tr>
+<td>1~8번째/9번째 차단</td>
+<td>기존 상한 유지·검증 코드 작성. 최신 직접 시나리오는 미실행</td>
+</tr>
+<tr>
+<td>운영</td>
+<td>제작 간격/일부 성장·미션·실제AI/회원 서버·새 재화 사용처 대기</td>
+</tr>
+</tbody></table></div>
+<p>수락 순서: 첫 앨범 생성/결제→재생성→제작/발매→상단 상세→하단 앨범/해당 곡 차트→2~8번째→9번째 차단→가입 크루에 발매곡 자동 공유입니다. 코드 구현과 실제 화면 통과를 구분합니다.</p>
+</section><details><summary>작업 기록</summary>
+
+<p>관련 원본은 2장과 6장에 연결합니다. <a href="./%EC%95%A8%EB%B2%94%EB%B0%9C%EB%A7%A4_%EA%B8%B0%ED%9A%8D%EC%84%9C.log.md">로그·변경 이력과 지난 기록</a></p>
+<details class="doc-legacy-ui"><summary>이전 구현 시뮬레이터·비교 자료</summary><p>현재 본문의 최신 기획과 구분하는 이전 구현 자료입니다.</p><section class="doc-ui-section" id="ui-preview"><h3>UI 시안·간단 시뮬레이션</h3><p>문서 UI 시안 · 시험 입력 · 실제 노래를 연결하기 전에도 앨범 정보를 준비할 수 있어요.</p><div class="mc-document-preview" data-music-career-preview="albums"></div><div data-music-career-operator></div></section></details><p>2026-11-06 · codex · 음악 우선·기본 팀·접힌 추가 옵션·큰 재킷과 기존 결제/생성/제작/발매를 정합화했습니다. 능력·팬·직전 성적의 첫 진입과 개인 성장 비분배는 보존하고 실제 100위 컷 미공급·BGM 메모리 경계를 명시했습니다. 교체 전 MD/HTML 전문은 짝 로그에 보존합니다.</p>
+<p>2026-11-06 20:50:09 KST · codex · 사용자 요청의 UI 시안 첨부에 따라 5장에 현재 실행 캡처 한 장을 추가했습니다. 격리된 단독 실행 UI 일부 · 음악 먼저 선택 · 무료 시험 음원 기존 이미지·본문·숫자·과거 기록은 삭제하지 않았습니다.</p>
+</details>
+</main><script type="module">import mermaid from "/node_modules/mermaid/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:true,securityLevel:"strict",theme:"neutral",flowchart:{useMaxWidth:true,htmlLabels:true}});</script></body></html>

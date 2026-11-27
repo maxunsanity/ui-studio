@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>케이팝몬스터즈 · 시스템·UI 기획서 — 11/11 회의 8대 핵심 변경</title>
+<style>
+:root{--bg:#eef1f6;--ink:#181a20;--muted:#5a6070;--line:#dde2ec;--brand:#5b4170;--brand-soft:#f5effa;--brand-border:#d7c3e8;
+--keep-bg:#e8f5ee;--keep-ink:#1f6b45;--chg-bg:#e8f1ff;--chg-ink:#1d4ed8;--add-bg:#fef0e6;--add-ink:#c2410c;--gold-bg:#fef8e2;--gold-ink:#92600a;--red-bg:#fff1f2;--red-ink:#be123c;
+--shadow:0 18px 46px rgba(24,26,32,.10)}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+a{color:var(--brand)}
+.deck-bar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.deck-title-group{display:flex;align-items:center;gap:10px}
+.deck-pill{background:var(--brand);color:#fff;font-size:13px;font-weight:800;padding:5px 12px;border-radius:999px}
+.deck-title{font-size:16px;font-weight:800}
+.deck-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);font-size:14px;font-weight:700;padding:7px 13px;border-radius:9px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:var(--brand-soft);border-color:var(--brand-border)}
+.btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.btn.link-main{background:linear-gradient(135deg,#5b4170,#8b5ea8);color:#fff;border-color:#5b4170}
+.btn.link-main:hover{filter:brightness(1.08)}
+.slide-select{border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:14px;font-weight:600;background:#fff;max-width:300px}
+.progress-track{height:4px;background:var(--line);width:100%}
+.progress-fill{height:100%;background:var(--brand);transition:width .2s ease}
+.deck-stage{max-width:1360px;margin:22px auto 48px;padding:0 20px}
+.slide{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:30px 44px 22px;min-height:760px;display:none;flex-direction:column;justify-content:space-between;position:relative}
+.slide.active{display:flex}
+body.view-all .slide{display:flex;margin-bottom:28px}
+body.view-all .nav-only{display:none}
+.slide-head{border-bottom:2px solid var(--brand-soft);padding-bottom:12px;margin-bottom:14px}
+.eyebrow{font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--brand);margin-bottom:4px}
+.slide h2{margin:0;font-size:29px;font-weight:800;line-height:1.3}
+.hl-bar{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px}
+.hl-chip{display:inline-flex;align-items:baseline;gap:8px;background:#fff7e6;border:1.5px solid #f5c26b;color:#7a4a00;border-radius:12px;padding:7px 14px;font-size:16px;font-weight:700}
+.hl-chip b{font-size:20px;font-weight:900;color:#b45309}
+.lead-box{background:var(--brand-soft);border-left:5px solid var(--brand);padding:11px 16px;border-radius:0 12px 12px 0;font-size:17.5px;font-weight:700;color:#3c294c;margin-bottom:16px;line-height:1.55}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:16px}
+.slide-foot{margin-top:16px;padding-top:10px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;font-size:14px;color:var(--muted);font-weight:600}
+.badge{display:inline-block;font-size:13px;font-weight:800;padding:3px 10px;border-radius:999px;vertical-align:middle;white-space:nowrap}
+.b-keep{background:var(--keep-bg);color:var(--keep-ink)}.b-chg{background:var(--chg-bg);color:var(--chg-ink)}.b-add{background:var(--add-bg);color:var(--add-ink)}.b-gold{background:var(--gold-bg);color:var(--gold-ink)}.b-red{background:var(--red-bg);color:var(--red-ink)}
+mark.hl{background:linear-gradient(transparent 52%,#ffe08a 52%);color:inherit;font-weight:800;padding:0 2px}
+.chip{display:inline-block;background:#ede7f6;color:#4b2f68;border-radius:8px;padding:1px 8px;font-weight:800}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{background:#fafbfd;border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.card.purple{background:#faf6fd;border-color:var(--brand-border)}.card.blue{background:#f4f8ff;border-color:#c7dafc}.card.orange{background:#fff7f2;border-color:#fed7bc}.card.green{background:#f2fbf6;border-color:#bce4cd}.card.red{background:#fff5f5;border-color:#fecaca}
+.card h3{margin:0 0 10px;font-size:19px;font-weight:800;display:flex;align-items:center;gap:8px;flex-wrap:wrap;line-height:1.35}
+.card p,.card li{margin:0;font-size:16px;line-height:1.62;color:#2b303a}
+.card ul,.card ol{margin:4px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+table{width:100%;border-collapse:collapse;font-size:15px;background:#fff;line-height:1.5}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:#f4f1f8;color:#3c294c;font-weight:800}
+tr:nth-child(even) td{background:#fcfcfd}
+tr.sum td{background:#f2effa;font-weight:800}
+.table-wrap{border-radius:12px;border:1px solid var(--line);overflow:hidden}
+.table-wrap table{border:none}
+.svg-box{background:#fcfbfe;border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.svg-box svg{max-width:100%;max-height:290px;height:auto;display:block;margin:0 auto}
+.cover-hero{background:linear-gradient(135deg,#4b3360 0%,#6d4c87 55%,#8b5ea8 100%);color:#fff;border-radius:16px;padding:34px 40px}
+.cover-hero h1{color:#fff;font-size:36px;margin:10px 0 12px;line-height:1.3}
+.cover-hero p{margin:0;font-size:18px;opacity:.95;line-height:1.6}
+.kpi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.kpi{background:#faf6fd;border:1px solid var(--brand-border);border-radius:14px;padding:14px 18px}
+.kpi .num{font-size:26px;font-weight:900;color:var(--brand)}
+.kpi .lbl{font-size:15.5px;color:var(--muted);font-weight:700;margin-top:2px}
+.link-bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:linear-gradient(135deg,#fff8e8,#fdf2ff);border:2px dashed #c9a4e6;border-radius:14px;padding:14px 18px}
+.link-bar .lb-title{font-size:16px;font-weight:800;color:#4b2f68;margin-right:4px}
+.link-bar a.big{background:linear-gradient(135deg,#5b4170,#8b5ea8);color:#fff;text-decoration:none;font-weight:800;font-size:17px;padding:11px 18px;border-radius:12px;box-shadow:0 6px 16px rgba(91,65,112,.25)}
+.link-bar a.sub{background:#fff;color:#4b2f68;text-decoration:none;font-weight:800;font-size:15.5px;padding:9px 14px;border-radius:10px;border:1.5px solid #c9a4e6}
+.big-number{display:flex;gap:16px;flex-wrap:wrap}
+.big-number .bn{flex:1;min-width:200px;background:#fff7e6;border:2px solid #f5c26b;border-radius:16px;padding:16px 20px;text-align:center}
+.big-number .bn .n{font-size:40px;font-weight:900;color:#b45309;line-height:1.15}
+.big-number .bn .t{font-size:16px;font-weight:700;color:#7a4a00;margin-top:4px}
+.flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
+.flow .st{flex:1;min-width:180px;background:#f4f8ff;border:1px solid #c7dafc;border-radius:12px;padding:12px 14px;font-size:16px;line-height:1.55}
+.flow .st b{display:block;font-size:17px;color:#1d4ed8;margin-bottom:2px}
+.flow .ar{align-self:center;font-size:24px;color:#7c5b99;font-weight:900}
+@media (max-width:900px){.slide{padding:20px;min-height:auto}.grid-2,.kpi-grid{grid-template-columns:1fr}}
+@media print{.deck-bar,.progress-track{display:none}body{background:#fff}.slide{display:flex!important;box-shadow:none;break-after:page;margin:0 0 16px;min-height:0}}
+
+.btn.zip{background:linear-gradient(135deg,#059669,#0284c7);color:#fff;border-color:transparent}
+.btn.music{background:#0f766e;color:#fff;border-color:#0f766e}
+.diag-card{background:#0b1120;border:1px solid #263552;border-radius:14px;padding:12px;color:#f1f5f9;margin-top:8px}
+.diag-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;font-size:14px;font-weight:800;color:#7dd3fc}
+.diag-top a{color:#6ee7b7;text-decoration:none;font-size:13px;padding:4px 10px;border:1px solid rgba(52,211,153,.4);border-radius:7px}
+.diag-card img{width:100%;max-height:460px;object-fit:contain;border-radius:8px;cursor:zoom-in;display:block;background:#090d16}
+.diag-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.diag-grid .diag-card img{max-height:300px}
+#lightbox{position:fixed;inset:0;background:rgba(5,8,17,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+#lightbox.open{display:flex}
+#lightbox img{max-width:96vw;max-height:92vh;border-radius:12px;border:1px solid #38bdf8}
+.link-bar a.zip{background:linear-gradient(135deg,#059669,#0284c7);color:#fff;text-decoration:none;font-weight:800;font-size:15.5px;padding:10px 16px;border-radius:10px}
+@media(max-width:900px){.diag-grid{grid-template-columns:1fr}}
+
+/* In-page & Floating Pager UX */
+.slide-foot{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px;color:var(--muted);font-weight:600;flex-wrap:wrap}
+.slide-pager{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;flex-wrap:wrap}
+.pager-left,.pager-right{display:flex;align-items:center;gap:8px}
+.pager-mid{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:800;color:var(--muted)}
+.pager-btn{border:1px solid var(--line);background:#fff;color:var(--ink);font-size:14px;font-weight:800;padding:9px 16px;border-radius:11px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.15s;text-decoration:none}
+.pager-btn:hover:not(:disabled){border-color:var(--brand);background:var(--brand-soft);color:var(--brand);transform:translateY(-1px)}
+.pager-btn.primary{background:linear-gradient(135deg,#5b4170,#8b5ea8);border-color:transparent;color:#fff;box-shadow:0 6px 18px rgba(91,65,112,.25)}
+.pager-btn.primary:hover:not(:disabled){filter:brightness(1.08);color:#fff;transform:translateY(-1px)}
+.pager-btn:disabled{opacity:.34;cursor:not-allowed}
+.side-arrow{position:fixed;top:54%;transform:translateY(-50%);z-index:80;width:46px;height:76px;border-radius:14px;border:1px solid var(--brand-border);background:rgba(255,255,255,.92);backdrop-filter:blur(8px);color:var(--brand);font-size:24px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(24,26,32,.14);transition:.15s}
+.side-arrow:hover:not(:disabled){background:var(--brand);color:#fff;border-color:var(--brand);transform:translateY(-50%) scale(1.05)}
+.side-arrow:disabled{opacity:.22;cursor:not-allowed}
+.side-arrow.prev{left:14px}
+.side-arrow.next{right:14px}
+.float-dock{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:85;display:none;align-items:center;gap:8px;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border:1px solid var(--brand-border);border-radius:999px;padding:6px 10px;box-shadow:0 12px 32px rgba(24,26,32,.18)}
+.float-dock .pager-btn{padding:7px 14px;font-size:13px;border-radius:999px}
+.float-dock .dock-num{font-size:13px;font-weight:800;color:var(--brand);padding:0 6px;white-space:nowrap}
+body.view-all .side-arrow,body.view-all .float-dock,body.view-all .slide-pager{display:none!important}
+@media(max-width:1500px){.side-arrow{display:none}.float-dock{display:flex}}
+@media(min-width:1501px){.deck-stage{padding:0 74px}}
+@media print{.side-arrow,.float-dock,.slide-pager{display:none!important}}
+
+</style>
+</head>
+<body>
+<header class="deck-bar">
+  <div class="deck-title-group"><span class="deck-pill">시스템·UI 기획서 PPT</span><span class="deck-title">케이팝몬스터즈 · 11/11 회의 8대 핵심 변경</span></div>
+  <div class="deck-controls">
+    <a class="btn" href="./brief.html">핵심 제안서 PPT</a>
+    <a class="btn music" href="./music_app.html">🎵 음악 앱 상세</a>
+    <a class="btn link-main" href="./spec_viewer.html">📄 상세 명세서 보기</a>
+    <a class="btn" href="./detail.html" onclick="return dlFile(event,'./detail.html','케이팝몬스터즈_상세기획서_PPT.html')">PPT 저장 ↓</a>
+    <a class="btn zip" href="#bundle-zip" onclick="return dlBundleZip(event,this)">📦 전체 ZIP</a>
+    <button class="btn nav-only" id="prevBtn" type="button">← 이전</button>
+    <select class="slide-select nav-only" id="slideSelect" aria-label="슬라이드 이동"><option value="0">01 · 표지 · 목차</option>
+<option value="1">02 · 8대 핵심 한눈에</option>
+<option value="2">03 · 8대 핵심 연결 구조</option>
+<option value="3">04 · 핵심 1 · 인물 카드</option>
+<option value="4">05 · 핵심 2 · 30슬롯</option>
+<option value="5">06 · 핵심 3 · 스태프 / 팬 분리</option>
+<option value="6">07 · 핵심 4 · 스태프 이원화</option>
+<option value="7">08 · 핵심 5 · 시즌 초기화</option>
+<option value="8">09 · 핵심 6 · 실시간 랭킹</option>
+<option value="9">10 · 핵심 7 · 월드 창작곡 혜택</option>
+<option value="10">11 · 핵심 8 · 음악 앱 독립 실행</option>
+<option value="11">12 · 음악 앱 외부 작업 고려사항</option>
+<option value="12">13 · 보조 · 11/11 회의 뼈대</option>
+<option value="13">14 · B · 40자리 · 480장 매트릭스</option>
+<option value="14">15 · B · 순수 기획사 ⑦ · ⑧</option>
+<option value="15">16 · B · 순수 기획사 ⑨ · 운영 공식</option>
+<option value="16">17 · B · 팬클럽 회장 12장</option>
+<option value="17">18 · B · 스태프 섭외 · 등급 · 졸업 · 해지</option>
+<option value="18">19 · B · 엔터파워 · 기획사 스탯 · 이월</option>
+<option value="19">20 · B · 균형 생성 · 전화위복 · 서사</option>
+<option value="20">21 · B · 몬스 27종 · 4축 로비</option>
+<option value="21">22 · B · 주간 페스티벌 1~8주</option>
+<option value="22">23 · B · 크루 협업 · 공유 철회</option>
+<option value="23">24 · B · 9주차 월드 · 차트인 수량</option>
+<option value="24">25 · 구조도 · 플로우 4종</option>
+<option value="25">26 · 정리 · 함께 보는 자료</option></select>
+    <button class="btn nav-only" id="nextBtn" type="button">다음 →</button>
+    <button class="btn" id="modeBtn" type="button">전체 펼쳐보기</button>
+    <button class="btn" onclick="window.print()" type="button">인쇄 / PDF</button>
+  </div>
+</header>
+<div class="progress-track nav-only"><div class="progress-fill" id="progressFill" style="width:4.00%"></div></div>
+<main class="deck-stage">
+<section class="slide active" data-index="0" id="s1">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 01 · SYSTEM &amp; UI SPEC</div><h2>케이팝몬스터즈 · 11/11 회의 8대 핵심 변경 — 시스템 · UI 기획서</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>8대 핵심</b> 앞부분</span><span class="hl-chip"><b>구체화 스펙</b> 뒷부분</span><span class="hl-chip"><b>132종</b> 명세서 MD</span></div>
+    <div class="lead-box">앞부분은 11/11(수) 회의 8대 핵심 변경과 음악 앱 외부 작업 고려사항, 뒷부분은 이를 구현하기 위해 구체화한 스펙입니다.</div>
+    <div class="slide-body"><div class="cover-hero"><span class="badge b-gold">기준일 2026-11-13 · 외부 전달용</span><h1>8대 핵심 변경을 구현 수준의 규칙과 화면으로</h1>
+<p>숫자가 정해진 항목은 <b>현재 세팅값</b>, 숫자가 비어 있는 항목은 <b>비어 있음(0으로 동작)</b>, 이름이 초안인 항목은 <b>초안 기준</b>으로 표기했습니다. 음악 앱의 통합 상세 기획서(<a href="./music_app.html"><b>음악 앱 상세 보기 ↗</b></a>)를 함께 제공합니다.</p></div><div class="grid-2"><div class="card purple"><h3>Part A · 8대 핵심 (02~13)</h3><p>8대 핵심 한눈에 · 연결 구조 · 핵심 1~8 · 음악 앱 외부 작업 고려사항 ①~⑦ · 11/11 보조 결정</p></div><div class="card blue"><h3>Part B · 구체화 스펙 (14~)</h3><p>40자리 매트릭스 · 순수 기획사 3자리 · 팬클럽 회장 · 스태프 운영 · 엔터파워 / 기획사 스탯 · 케미 · 몬스 · 주간 · 크루 · 월드 차트 인</p></div></div><div class="link-bar">
+  <span class="lb-title">📎 함께 보는 자료 · 내려받기</span>
+  <a class="big" href="./spec_viewer.html">상세 데이터 명세서(132종·480장) 보기 ↗</a>
+  <a class="sub" href="./music_app.html">🎵 음악 앱 통합 상세 기획서 ↗</a>
+  <a class="sub" href="./brief.html">← 핵심 제안서 PPT</a>
+  <a class="sub" href="./spec_full.md" download="케이팝몬스터즈_상세데이터명세서.md">명세서 MD ↓</a>
+  <a class="sub" href="./music_app.md" download="케이팝몬스터즈_음악앱_상세기획서.md">음악 앱 MD ↓</a>
+  <a class="sub" href="./detail.html" onclick="return dlFile(event,'./detail.html','케이팝몬스터즈_상세기획서_PPT.html')">이 PPT 저장 ↓</a>
+  <a class="zip" href="#bundle-zip" onclick="return dlBundleZip(event,this)">📦 전체 ZIP 받기 (HTML+MD+PNG)</a>
+</div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="-1" disabled>← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>1 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="1">다음 페이지 (2/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="1" id="s2">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 02 · 8 KEY CHANGES</div><h2>11/11 회의 8대 핵심 변경 — 기존 → 변경 → 연결 효과</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>1~4</b> 카드 · 인물</span><span class="hl-chip"><b>5</b> 시즌</span><span class="hl-chip"><b>6~7</b> 페스티벌</span><span class="hl-chip"><b>8</b> 음악 앱</span></div>
+    <div class="lead-box">이 기획서의 중심 축입니다. 뒷부분의 모든 세부 스펙은 이 8가지를 구현하기 위한 것입니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:5%">#</th><th style="width:20%">핵심 변경</th><th style="width:17%">기존</th><th style="width:35%">변경</th><th style="width:23%">연결 효과</th></tr></thead><tbody><tr><td><b>1</b></td><td><b>카드에 인물 개념 도입</b></td><td>고정 테마(이름) 덱</td><td><mark class="hl">랜덤 생성 인물 · 예명 연동, 아이돌 · 스태프 · 팬 전 덱을 인물 기준으로 통일</mark></td><td>성향 · 케미 · 3단 서사와 직결</td></tr><tr><td><b>2</b></td><td><b>카드 덱 추가 · 아이돌 30슬롯 확장</b></td><td>아이돌 5인 고정</td><td><mark class="hl">최대 30명 × 12장 = 360장, 엔터파워 기반 슬롯 해금</mark></td><td>보유 슬롯 아이돌 카드만 드랍</td></tr><tr><td><b>3</b></td><td><b>스태프 덱과 팬 덱 분리</b></td><td>회사 · 팬 카드 혼합</td><td><mark class="hl">스태프 9자리 / 팬클럽 회장 1자리(12장) 독립</mark></td><td>팬클럽 회장은 공식 데뷔 시 해금</td></tr><tr><td><b>4</b></td><td><b>스태프 덱 이원화</b></td><td>스태프 구분 모호</td><td><mark class="hl">아이돌 능력 6자리 + 기획사 능력(운영 효율) 3자리</mark></td><td>40자리 · 480장 통일, 가산(+) 계산</td></tr><tr><td><b>5</b></td><td><b>시즌 초기화 대상 변경</b></td><td>시즌마다 전체 초기화</td><td><mark class="hl">맵(도시) 교체에 맞춰 건물 · 맵 팬만 초기화</mark></td><td>인물 · 카드 · 능력 · 재화 · 엔터파워 · 총 팬 영구</td></tr><tr><td><b>6</b></td><td><b>주간 · 월드 실시간 랭킹 전환</b></td><td>앨범 이후 랭킹 일원화</td><td><mark class="hl">앨범 발매 후 = 더미 랭킹, 주간 · 월드 = 실제 실시간 랭킹</mark></td><td>월드 1~5분 준실시간 스냅샷</td></tr><tr><td><b>7</b></td><td><b>월드 창작곡 혜택 집중</b></td><td>주간 · 월드 혜택 구분 없음</td><td><mark class="hl">주간은 발주곡 · 창작곡 한 순위표, 월드에 창작곡 혜택 집중</mark></td><td>창작곡 탭 · 외부 영상 가산 · 실발매</td></tr><tr><td><b>8</b></td><td><b>음악 앱 독립 실행</b></td><td>게임 안 폰 화면 하나</td><td><mark class="hl">외부 독립 제작 앱 + 연동 계약</mark></td><td>외부 작업 고려사항 ①~⑦ · 상세 기획서 별도 제공</td></tr></tbody></table></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="0">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>2 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="2">다음 페이지 (3/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="2" id="s3">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 03 · STRUCTURE</div><h2>8대 핵심의 연결 구조</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>영구</b> 인물 · 카드 · 재화</span><span class="hl-chip"><b>초기화</b> 건물 · 맵 팬</span></div>
+    <div class="lead-box">카드 · 인물(1~4)이 영구 자산을 만들고, 시즌(5)은 건물만 새로 짓게 하며, 페스티벌(6 · 7)과 음악 앱(8)이 성과를 보여 줍니다.</div>
+    <div class="slide-body"><div class="svg-box"><svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" font-family="Apple SD Gothic Neo, Noto Sans KR, sans-serif">
+<defs><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#5b4170"/></marker></defs>
+<rect x="10" y="10" width="980" height="132" rx="14" fill="#f6f4fc" stroke="#cbc2eb"/>
+<text x="30" y="38" font-size="17" font-weight="800" fill="#44387a">카드 · 인물 (핵심 1~4) — 40자리 · 480장, 시즌이 끝나도 전부 유지</text>
+<rect x="30" y="52" width="290" height="76" rx="10" fill="#fff" stroke="#a899e6"/><text x="175" y="84" text-anchor="middle" font-size="17" font-weight="800" fill="#2b2254">아이돌 인물 최대 30명</text><text x="175" y="110" text-anchor="middle" font-size="15" fill="#475569">랜덤 생성 · 예명 · 360장</text>
+<path d="M324 90 H350" stroke="#5b4170" stroke-width="2.5" marker-end="url(#ar2)"/>
+<rect x="354" y="52" width="290" height="76" rx="10" fill="#fff" stroke="#7daaf7"/><text x="499" y="84" text-anchor="middle" font-size="17" font-weight="800" fill="#1e3a8a">스태프 인물 6 + 3자리</text><text x="499" y="110" text-anchor="middle" font-size="15" fill="#475569">아이돌 능력 / 기획사 능력 · 108장</text>
+<path d="M648 90 H674" stroke="#5b4170" stroke-width="2.5" marker-end="url(#ar2)"/>
+<rect x="678" y="52" width="290" height="76" rx="10" fill="#fff" stroke="#f5a265"/><text x="823" y="84" text-anchor="middle" font-size="17" font-weight="800" fill="#9a3412">팬클럽 회장 인물 1자리</text><text x="823" y="110" text-anchor="middle" font-size="15" fill="#475569">팬 덱 독립 · 12장 · 데뷔 시 해금</text>
+<rect x="10" y="158" width="320" height="132" rx="14" fill="#fff7f2" stroke="#fed7bc"/><text x="170" y="188" text-anchor="middle" font-size="17" font-weight="800" fill="#9a3412">시즌 (핵심 5)</text><text x="170" y="218" text-anchor="middle" font-size="15" fill="#374151">맵(도시) 교체</text><text x="170" y="244" text-anchor="middle" font-size="15" fill="#374151">건물 · 맵 팬만 초기화</text><text x="170" y="270" text-anchor="middle" font-size="15" fill="#374151">재능선 만렙 → 초월</text>
+<rect x="340" y="158" width="320" height="132" rx="14" fill="#e8f1ff" stroke="#c7dafc"/><text x="500" y="188" text-anchor="middle" font-size="17" font-weight="800" fill="#1d4ed8">페스티벌 (핵심 6 · 7)</text><text x="500" y="218" text-anchor="middle" font-size="15" fill="#374151">앨범 발매 후 더미 랭킹</text><text x="500" y="244" text-anchor="middle" font-size="15" fill="#374151">주간 · 월드 실시간 랭킹</text><text x="500" y="270" text-anchor="middle" font-size="15" fill="#374151">월드 = 창작곡 혜택 집중</text>
+<rect x="670" y="158" width="320" height="132" rx="14" fill="#f2fbf6" stroke="#bce4cd"/><text x="830" y="188" text-anchor="middle" font-size="17" font-weight="800" fill="#1f6b45">음악 앱 (핵심 8)</text><text x="830" y="218" text-anchor="middle" font-size="15" fill="#374151">외부 독립 제작 · 단독 실행</text><text x="830" y="244" text-anchor="middle" font-size="15" fill="#374151">감상 · 투표 · 찜 · 응원</text><text x="830" y="270" text-anchor="middle" font-size="15" fill="#374151">연동 계약 · 고려사항 ①~⑦</text>
+</svg></div><div class="table-wrap"><table><thead><tr><th style="width:16%">구분</th><th style="width:62%">대상</th><th style="width:22%">시즌 종료 시</th></tr></thead><tbody><tr><td><span class="badge b-keep">영구 유지</span></td><td>아이돌 인물 · 카드 덱 480장 · 카드로 올린 능력 · 스태프 · 팬클럽 회장 · 돈 · 주사위 · 엔터파워 · 기획사 스탯 · 총 팬</td><td><b>전부 이월</b></td></tr><tr><td><span class="badge b-add">초기화</span></td><td>사옥 · 시설 건물 단계, 맵 건물에 붙은 팬 · 악개 (맵 = 도시가 바뀜)</td><td><b>1단계 / 0</b> → 새 맵에서 재건설</td></tr></tbody></table></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="1">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>3 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="3">다음 페이지 (4/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="3" id="s4">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 04 · KEY 1 PERSON CARDS</div><h2>핵심 1 — 카드에 인물 개념 도입: 고정 이름 덱 → 랜덤 인물 덱</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>랜덤 생성</b> 인물</span><span class="hl-chip"><b>예명</b> 카드 · 무대 연동</span><span class="hl-chip"><b>3단 서사</b> 시즌 · 팀 · 개인</span></div>
+    <div class="lead-box">인물이 생성되면 그 인물의 12장 덱이 나옵니다. 아이돌 · 스태프 · 팬클럽 회장 모두 같은 인물 규칙을 따릅니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:20%">항목</th><th style="width:80%">규칙</th></tr></thead><tbody><tr><td>인물 생성</td><td>아이돌 · 스태프 모두 <mark class="hl">1~5등급 · 6방축 기준 랜덤 생성</mark>, 게임 시작과 게임 중간 모두 섭외 가능</td></tr><tr><td>예명</td><td>뽑힌 예명이 그 아이돌의 <b>12장 카드와 무대 기록</b>에 그대로 연동</td></tr><tr><td>카드 구성</td><td>인물 이미지 없이도 성립하는 카드 12장, 성장 단계는 장수 대신 등급 세분화</td></tr><tr><td>케미</td><td>처음 케미 「찰떡 · 보통 · 최악」, 고용 전 케미 미리보기 · 최악은 화해 서사로 뒤집혀 <mark class="hl">전화위복 보너스</mark></td></tr><tr><td>서사</td><td>시즌(전 유저 공통) · 팀(데뷔 · 1위 · 케미 기록) · 개인 + NPC 관계 서사</td></tr><tr><td>졸업 · 명예의 전당</td><td>만렙(재능선) · 초월 아이돌 졸업 → 가장 높은 분야의 고등급 스태프로 전직, 월드 우승 유저의 기획사 카드 편입 확장</td></tr></tbody></table></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="2">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>4 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="4">다음 페이지 (5/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="4" id="s5">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 05 · KEY 2 IDOL 30 SLOTS</div><h2>핵심 2 — 카드 덱 추가 · 아이돌 30슬롯 확장</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>30명</b> × 12장 = 360장</span><span class="hl-chip"><b>엔터파워</b> 슬롯 해금</span><span class="hl-chip"><b>보유 슬롯</b> 카드만 드랍</span></div>
+    <div class="lead-box">아이돌 5인 고정 구조를 최대 30명으로 넓혔습니다. 슬롯은 엔터파워로 열리고, 드랍은 보유 슬롯 아이돌 카드로 한정됩니다.</div>
+    <div class="slide-body"><div class="grid-2"><div class="card purple"><h3>확장 규칙</h3><ul><li>아이돌 <mark class="hl">최대 30명 × 12장 = 360장</mark></li><li>엔터파워 문턱으로 슬롯 1 → 30칸 단계 해금</li><li><b>보유 슬롯 아이돌의 카드만</b> 카드팩 · 보상에서 드랍</li><li>그룹 앨범은 팀 전원 기준(일부 멤버 선택 옵션 숨김)</li></ul></div><div class="card blue"><h3>30명 규모에서 달라지는 것</h3><ul><li>모험이 아이돌 위주로 바뀌며 <mark class="hl">라포</mark>가 핵심 관계로</li><li>여러 팀 · 유닛 운영과 팀 서사</li><li>계약 해지 시 데뷔조 0명이 되는 해지는 차단</li><li>카드 수가 늘어도 덱 구조는 ★1×4 · ★2×3 · ★3×2 · ★4×2 · ★5×1 공통</li></ul></div></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="3">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>5 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="5">다음 페이지 (6/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="5" id="s6">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 06 · KEY 3 STAFF / FAN SPLIT</div><h2>핵심 3 — 스태프 카드덱과 팬 카드덱 분리</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>스태프</b> 9자리 · 108장</span><span class="hl-chip"><b>팬클럽 회장</b> 1자리 · 12장</span><span class="hl-chip"><b>공식 데뷔</b> 회장 해금</span></div>
+    <div class="lead-box">회사 일을 하는 스태프 카드와 팬 활동 카드를 섞지 않고, 팬 덱은 팬클럽 회장 인물 1자리로 독립시켰습니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:14%">구분</th><th style="width:43%">스태프 덱</th><th style="width:43%">팬 덱 (팬클럽 회장)</th></tr></thead><tbody><tr><td>자리</td><td>9자리 (아이돌 능력 6 + 기획사 능력 3)</td><td>1자리</td></tr><tr><td>장수</td><td>108장 (자리당 12장 고정 장비)</td><td>12장</td></tr><tr><td>해금</td><td>게임 시작 · 게임 중 랜덤 섭외</td><td>연습생 기간 기본 팬 덱 → <mark class="hl">공식 데뷔 시 해금</mark></td></tr><tr><td>효과</td><td>아이돌 세부 능력 · 운영 효율</td><td>팬 증가 · 팬 돈 · 악개 감소 · 팬 상한</td></tr><tr><td>인물</td><td>1~5등급 인물 교체, 인물 고정 능력(+)</td><td>1~5등급 회장 영입 · 교체</td></tr></tbody></table></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="4">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>6 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="6">다음 페이지 (7/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="6" id="s7">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 07 · KEY 4 STAFF DUAL</div><h2>핵심 4 — 스태프 이원화: 아이돌 능력 6자리 vs 기획사 능력 3자리</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>6 + 3</b> 9자리</span><span class="hl-chip"><b>40자리</b> 480장</span><span class="hl-chip"><b>가산(+)</b> 장비 + 인물 + 라포</span></div>
+    <div class="lead-box">자리별 12장은 사람이 바뀌어도 남는 기획사 장비이며, 최종 효과는 곱셈 없이 가산(+)으로 계산합니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:18%">구분</th><th style="width:42%">자리</th><th style="width:40%">대표 카드 (★1 → ★5)</th></tr></thead><tbody><tr><td><b>아이돌 능력 6</b></td><td>① 보컬·랩 ② 댄스 ③ 작곡 ④ 연기 ⑤ 스타일리스트 ⑥ 무대 디렉터</td><td>호흡 연습 → 보컬·랩 마스터클래스 등 72장</td></tr><tr><td><b>기획사 능력 ⑦</b></td><td>매니지먼트·A&amp;R</td><td>일정 정리 · 대기실 관리 → A&amp;R 마스터클래스</td></tr><tr><td><b>기획사 능력 ⑧</b></td><td>홍보·마케팅</td><td>티저 공개 · 숏폼 바이럴 → 글로벌 PR 마스터클래스</td></tr><tr><td><b>기획사 능력 ⑨</b></td><td>비즈니스·레이블</td><td>계약서 검토 · 음원 유통 → 레이블 비즈니스 마스터클래스</td></tr></tbody></table></div><p style="margin-top:10px">자리 최종 효과 = <mark class="hl">자리 장비 12장</mark> + <mark class="hl">배치 인물 고정 능력(+)</mark> + <mark class="hl">아이돌 짝 라포 보너스</mark> · 전 카드 목록은 상세 데이터 명세서</p></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="5">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>7 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="7">다음 페이지 (8/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="7" id="s8">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 08 · KEY 5 SEASON RESET</div><h2>핵심 5 — 시즌 초기화는 건물과 맵 팬만 · 엔터파워 vs 기획사 스탯 분리</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>맵 교체</b> 건물만 초기화</span><span class="hl-chip"><b>엔터파워</b> 해금</span><span class="hl-chip"><b>기획사 스탯</b> 성능</span></div>
+    <div class="lead-box">맵(도시)이 바뀌는 시즌 전환에 맞춰 건물만 다시 짓고, 해금(엔터파워)과 회사 성능(기획사 스탯)은 둘 다 영구로 나눠 맡습니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:16%">구분</th><th style="width:30%">구성(원천)</th><th style="width:40%">역할</th><th style="width:14%">시즌 전환</th></tr></thead><tbody><tr><td><b>엔터파워</b></td><td>아이돌 + 스태프 9명 + 건물 영구 적립 + 총 팬</td><td>멤버 30칸 · 스케줄 · 자동충전 상한 등 <mark class="hl">잠금 · 상한 해제</mark></td><td>영구</td></tr><tr><td><b>기획사 스탯</b></td><td>스태프 9자리 기반 회사 능력 합</td><td>운영 효율 · 육성/무대 가점 · <mark class="hl">팀 등급 바탕</mark></td><td>영구</td></tr><tr><td><b>성장 상한</b></td><td>아이돌 재능선</td><td>재능선 = 통상 만렙, 그 이후 <mark class="hl">초월</mark></td><td>영구</td></tr><tr><td><b>건물 · 맵 팬</b></td><td>사옥 · 시설 단계, 맵 건물 팬 · 악개</td><td>새 맵에서 재건설</td><td><b>초기화</b></td></tr></tbody></table></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="6">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>8 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="8">다음 페이지 (9/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="8" id="s9">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 09 · KEY 6 LIVE RANKING</div><h2>핵심 6 — 앨범 후 더미 랭킹 · 주간 / 월드 실제 실시간 랭킹</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>더미</b> 앨범 직후</span><span class="hl-chip"><b>100명</b> 주간 동레벨 구역</span><span class="hl-chip"><b>파이널 1,000</b> 월드</span></div>
+    <div class="lead-box">실제 경쟁은 주간 · 월드에서만 일어납니다. 대규모 탭은 점수를 계속 쌓고 화면은 1~5분마다 스냅샷으로 갱신합니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:24%">구간</th><th style="width:32%">랭킹 방식</th><th style="width:44%">참가 · 콘텐츠</th></tr></thead><tbody><tr><td><b>앨범 발매 직후</b></td><td><mark class="hl">더미 데이터 랭킹</mark></td><td>내 앨범 차트 연출, 실제 경쟁 없음</td></tr><tr><td><b>주간 페스티벌 (1~8주)</b></td><td><mark class="hl">실제 실시간 랭킹</mark> · 동레벨 100명 구역</td><td>개인 · 크루 참가, 이미지 컷씬 뮤비(실제 동영상 없음), 내 아이돌 모션 샷</td></tr><tr><td><b>월드 페스티벌 (9주차)</b></td><td><mark class="hl">실제 실시간 랭킹</mark> · 실력별 리그</td><td>전원 참가, 100명 그룹 상위 4~10% 동시 차트 인 → 파이널 1,000</td></tr><tr><td><b>통합 · 창작곡 · 국가 · 크루 · 인기 탭</b></td><td>1~5분 주기 준실시간 스냅샷</td><td>1,000등까지 정밀 계산 · 상위 50명 노출 · 그 밖은 내 점수</td></tr></tbody></table></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="7">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>9 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="9">다음 페이지 (10/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="9" id="s10">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 10 · KEY 7 WORLD CREATIVE</div><h2>핵심 7 — 월드 페스티벌 창작곡 혜택 집중</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>32~36곡</b> 내부 발주곡</span><span class="hl-chip"><b>mp3</b> 3분 이내</span><span class="hl-chip"><b>5탭</b> 전체 · 국가 · 친구 · 크루 · 인기</span></div>
+    <div class="lead-box">주간은 공정한 한 순위표(창작곡도 같은 순위). 월드는 내부곡 영상끼리만 겨룹니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:14%">항목</th><th style="width:40%">주간 페스티벌 (1~8주)</th><th style="width:46%"><span class="badge b-chg">월드 페스티벌 (9주차)</span></th></tr></thead><tbody><tr><td>음원</td><td>내부 발주곡(4장르 32~36곡) + 창작곡 <b>한 순위표</b></td><td>내부곡 영상끼리만 겨룸 · 탭은 전체 · 국가 · 친구 · 크루 · 인기</td></tr><tr><td>영상</td><td>이미지 컷씬 뮤비 필수(음원만이면 아이돌 이미지 자동 영상)</td><td>외부 영상 업로드 없음. 내부에서 만든 영상으로 출전</td></tr><tr><td>가산점</td><td>창작곡 별도 가산 없음</td><td>별도 순위 갈래와 외부 영상 가산은 두지 않음</td></tr><tr><td>크루</td><td>크루 앨범 등록 · 투표로 고른 뮤비 출품</td><td>창작 음원 크루 공유 → 크루원 영상 → 투표 → <b>크루장 확정</b></td></tr><tr><td>이후</td><td>인기곡 월드 진출 연결</td><td>내부곡 영상끼리 겨룸. 외부 유통 발매 연계는 두지 않음</td></tr></tbody></table></div><div class="big-number"><div class="bn"><div class="n">32곡</div><div class="t">기본 발주: 4장르(댄스 팝·발라드·힙합·R&amp;B) × 각 8곡</div></div><div class="bn"><div class="n">36곡</div><div class="t">주력 댄스 팝 12곡 확장 시 총량</div></div><div class="bn"><div class="n">10곡</div><div class="t">테스트 샘플 — 발주 수량과 별도</div></div></div><div class="card blue" style="margin-top:10px;padding:12px 14px"><h3>음원 발주 4장르 × 4분위기 · 보컬 9종 · 3구간 납품 기준 (3분·1분·30초 / 보컬+MR / WAV+MP3 / 상용 독점권)</h3><ul><li><b>댄스 팝(8~12곡 · 120 BPM · C major · 청량):</b> 경쾌한 신스·후렴 훅 / <b>발라드(8곡 · 76 BPM · C major · 감성):</b> 피아노·스트링 클라이맥스</li><li><b>힙합(8곡 · 94 BPM · A minor · 파워풀):</b> 강한 808·그루브 / <b>R&amp;B(8곡 · 92 BPM · C major · 몽환):</b> 부드러운 EP·따뜻한 베이스(ID <code>rnb</code> 분리)</li><li><b>구성·권리:</b> 3단 템포(80/110/140), 보컬 9종(남·여·혼성 솔로/듀오/그룹+연주곡), 한·영·일 3종 배분 · 게임/독립앱/홍보 활용 권리 포함</li></ul></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="8">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>10 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="10">다음 페이지 (11/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="10" id="s11">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 11 · KEY 8 MUSIC APP</div><h2>핵심 8 — 음악 앱 독립 실행: 역할 분리와 연동 계약</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>외부 독립 제작</b> 시드라</span><span class="hl-chip"><b>API</b> 양방향 계약</span><span class="hl-chip"><b>별도 제공</b> 상세 기획서</span></div>
+    <div class="lead-box">음악 앱은 상업용 앱과 같은 수준의 독립 앱으로 외부 음악 앱 제작팀(시드라)이 제작합니다. 관련 상세 기획서는 별도 제공됩니다.</div>
+    <div class="slide-body"><div class="diag-card">
+      <div class="diag-top"><span>🎵 독립 음악 앱 역할 분리 · API · 5탭 연동 구조도 (클릭 시 확대)</span><a href="./diagrams/diagram_music_app.png" download="04_독립음악앱_연동구조도.png">PNG ↓</a></div>
+      <img src="./diagrams/diagram_music_app.png" alt="독립 음악 앱 구조도" onclick="zoomImg(this.src)">
+    </div><div class="table-wrap"><table><thead><tr><th style="width:18%">방향</th><th style="width:82%">주고받는 것</th></tr></thead><tbody><tr><td>게임 → 앱</td><td>내 발매곡(음원) · 출전 상태(주간/월드) · 공연 일정 · 아이돌 프로필</td></tr><tr><td>앱 → 게임</td><td>관객 투표 · 찜 · 인기 응원 · 감상 기록</td></tr></tbody></table></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="9">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>11 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="11">다음 페이지 (12/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="11" id="s12">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 12 · MUSIC APP CHECKLIST</div><h2>음악 앱 독립 실행 — 외부 작업 고려사항 ①~⑦</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>7개</b> 고려사항</span><span class="hl-chip"><b>별도 제공</b> 관련 상세 기획서</span></div>
+    <div class="lead-box">외부 독립 제작 시 먼저 경계를 맞춰야 할 7가지입니다. 화면 · 데이터의 관련 상세 기획서는 별도 제공됩니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:5%">#</th><th style="width:19%">고려사항</th><th style="width:46%">내용</th><th style="width:30%">정리 기준</th></tr></thead><tbody><tr><td><b>①</b></td><td><b>게임 ↔ 앱 역할 분리</b></td><td>게임 = 아티스트(제작 · 신청 · 출전) / 앱 = 청취자 · 팬(감상 · 투표 · 찜 · 응원)</td><td>앱에서는 신청하지 않고 「게임에서 신청하기」 딥링크만 둠</td></tr><tr><td><b>②</b></td><td><b>연동 계약(API) 경계</b></td><td>게임 → 앱: 음원 · 출전 상태(주간/월드) · 공연 일정 · 아이돌 프로필<br>앱 → 게임: 관객 투표 · 찜 · 인기 응원 · 감상 기록</td><td>기존 게임 내부 직접 참조를 계약 뒤로 이동</td></tr><tr><td><b>③</b></td><td><b>통합 계정 · 세션 · 앱 단독 실행</b></td><td>게임 플레이어 계정 = 팬 프로필, 게임을 켜지 않은 상태의 감상 · 알림 진입 지원</td><td>앱만 켠 사용자 경로 정의</td></tr><tr><td><b>④</b></td><td><b>음원 · 영상 업로드 · 숏츠 편집 · 검수</b></td><td>창작곡 <code>mp3</code>(3분 이내) 업로드, 숏츠 · 컷씬 편집</td><td>사람 / AI 검수 통과 배지 연동</td></tr><tr><td><b>⑤</b></td><td><b>랭킹 · 단일 원장</b></td><td>실시간 / 준실시간(1~5분 스냅샷) 랭킹, 찜 · 투표 · 인기 재화 단일 원장</td><td>찜 저장 위치 3곳(출전곡 · 감상곡 · 숏츠) → 보관함 하나로 통합</td></tr><tr><td><b>⑥</b></td><td><b>양방향 딥링크 · 알림함</b></td><td>게임 상단 칩 = 신청 · 마감 임박 · 보상 받기 / 앱 알림함 = 순위 변동 · 발매 · 결과</td><td>양쪽 이동 목적지 목록 공유</td></tr><tr><td><b>⑦</b></td><td><b>상업용 앱 UX 정돈</b></td><td>운영 · 시험 화면 제거, 5탭(홈 · 검색/둘러보기 · 차트 · 공연/숏츠 · 보관함)</td><td>아티스트 · 앨범 상세, 보드 · 스테이지 실황 실서버 연동</td></tr></tbody></table></div><p style="margin-top:8px"><a class="btn music" href="./music_app.html">🎵 음악 앱 통합 상세 기획서(공연·숏츠·음원·페스티벌) 열기 ↗</a> <a class="btn" href="./music_app.md" download="케이팝몬스터즈_음악앱_상세기획서.md">MD 내려받기 ↓</a></p></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="10">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>12 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="12">다음 페이지 (13/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="12" id="s13">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 13 · SUPPORTING DECISIONS</div><h2>보조 — 모험 통합 · 라포 · 서사 · 케미 · 보드 이벤트 · 슬롯 구조</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>#8 · #21 · #22 · #23 · #30</b> 11/11 결정</span></div>
+    <div class="lead-box">8대 핵심을 받쳐 주는 11/11 회의 결정입니다. 상세 규칙은 뒷부분 Part B와 상세 데이터 명세서에 있습니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:30%">11/11 결정</th><th style="width:70%">정리</th></tr></thead><tbody><tr><td>출동 + 모험 통합 (#30)</td><td>모두 「모험」으로 통합, 아이돌 위주 편성 → <mark class="hl">라포</mark>가 30명 규모의 핵심 관계</td></tr><tr><td>모험 · 몬스 재편 (#8 · #21)</td><td>몬스 성장 · 몬스 전용 콘텐츠, 여러 마리를 <b>유닛</b>으로 활동 (몬스 종합 로비로 정리)</td></tr><tr><td>보드 이벤트 · 슬롯 구조 (#22 · #23)</td><td>보드마다 이벤트 진행 기능, 슬롯머신은 연출이 아니라 <b>알고리즘 · 논리 구조</b> 차용</td></tr><tr><td>3단 서사 · 케미 (#12 · #33 · #36)</td><td>시즌 · 팀 · 개인 서사, 처음 케미 「찰떡 · 보통 · 최악」 — 최악은 화해로 뒤집혀 전화위복 보너스</td></tr><tr><td>앨범 멤버 선택 숨김 (#35)</td><td>그룹 앨범에 일부 멤버만 넣는 옵션은 쓰지 않음</td></tr></tbody></table></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="11">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>13 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="13">다음 페이지 (14/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="13" id="s14">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 14 · 40 SLOTS MATRIX</div><h2>활성 40자리(480장) 전체 구성 — 11개 덱 × 12장 = 132종</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>40자리</b> 30 + 9 + 1</span><span class="hl-chip"><b>480장</b> 활성 카드</span><span class="hl-chip"><b>132종</b> 카드 종류</span></div>
+    <div class="lead-box">동시에 켜지는 카드 슬롯은 아이돌 30 + 스태프 9 + 팬클럽 회장 1 = 40자리입니다. 모든 덱은 ★1×4 · ★2×3 · ★3×2 · ★4×2 · ★5×1 구성입니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:18%">구분</th><th style="width:18%">활성 자리 (장수)</th><th style="width:24%">인물 · 교체</th><th style="width:16%">해금 시점</th><th style="width:24%">효과 계산</th></tr></thead><tbody><tr><td><b>① 아이돌</b></td><td>최대 30 (360장)</td><td>보유 아이돌 · 졸업 시 스태프 전직</td><td>엔터파워 12문턱</td><td>세부 18종 직접 상승</td></tr><tr><td><b>② 기존 스태프 6</b></td><td>6 (72장)</td><td>1~5등급 랜덤 섭외</td><td>처음부터</td><td>장비 + 고정 능력(+) + 라포</td></tr><tr><td><b>③ 순수 기획사 3</b></td><td>3 (36장)</td><td>1~5등급 랜덤 섭외</td><td>처음부터</td><td>장비 + 고정 능력(+) + 라포</td></tr><tr><td><b>④ 팬클럽 회장</b></td><td>1 (12장)</td><td>1~5등급 랜덤 섭외</td><td><mark class="hl">공식 데뷔</mark></td><td>장비 + 회장 고정 능력(+)</td></tr><tr class="sum"><td>합계</td><td><b>40자리 · 480장</b></td><td>전원 인물 기반</td><td>시즌 이월</td><td>스킬 타입</td></tr></tbody></table></div><div class="link-bar">
+  <span class="lb-title">📎 함께 보는 자료 · 내려받기</span>
+  <a class="big" href="./spec_viewer.html">상세 데이터 명세서(132종·480장) 보기 ↗</a>
+  <a class="sub" href="./music_app.html">🎵 음악 앱 통합 상세 기획서 ↗</a>
+  <a class="sub" href="./brief.html">← 핵심 제안서 PPT</a>
+  <a class="sub" href="./spec_full.md" download="케이팝몬스터즈_상세데이터명세서.md">명세서 MD ↓</a>
+  <a class="sub" href="./music_app.md" download="케이팝몬스터즈_음악앱_상세기획서.md">음악 앱 MD ↓</a>
+  <a class="sub" href="./detail.html" onclick="return dlFile(event,'./detail.html','케이팝몬스터즈_상세기획서_PPT.html')">이 PPT 저장 ↓</a>
+  <a class="zip" href="#bundle-zip" onclick="return dlBundleZip(event,this)">📦 전체 ZIP 받기 (HTML+MD+PNG)</a>
+</div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="12">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>14 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="14">다음 페이지 (15/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="14" id="s15">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 15 · PURE AGENCY 1/2</div><h2>순수 기획사 스태프 ⑦ 매니지먼트·A&amp;R · ⑧ 홍보·마케팅 — 24장</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>컨디션 케어</b> 식사 + 휴식 통합</span><span class="hl-chip"><b>초안 기준</b> 카드명</span></div>
+    <div class="lead-box">순수 기획사 자리는 아이돌 세부와 겹치지 않는 운영 효율을 올립니다. 효과 수치는 비어 있음(0으로 동작)입니다.</div>
+    <div class="slide-body"><div class="grid-2"><div class="card orange"><h3>⑦ 매니지먼트·A&R</h3><p style="margin-bottom:8px">효과 축: <b>스케줄 시간 · 스케줄 보상 · 라포 · 대성공률 · 컨디션</b><br>역할: 스케줄 시간·보상·라포·대성공률 보정 + 현장 컨디션 관리</p><div class="table-wrap"><table><thead><tr><th style="width:16%">별</th><th style="width:84%">카드명 (효과)</th></tr></thead><tbody><tr><td><b>★1</b> ×4</td><td>일정 정리 <span style="color:#5a6070">(스케줄 시간 단축)</span> · 동선 조율 <span style="color:#5a6070">(스케줄 이동 효율)</span> · 대기실 관리 <span style="color:#5a6070">(현장 컨디션 소모 완화)</span> · 차량 배차 <span style="color:#5a6070">(스케줄 보상 보정)</span></td></tr><tr><td><b>★2</b> ×3</td><td>컨디션 케어 <span style="color:#5a6070">(식사·휴식 관리, 라포 상승량·회복 효율 +)</span> · 인터뷰 조율 <span style="color:#5a6070">(스태프·아이돌 라포 +)</span> · 스태프 조율 <span style="color:#5a6070">(스케줄 동시 진행·보정)</span></td></tr><tr><td><b>★3</b> ×2</td><td>긴급 스케줄 대응 <span style="color:#5a6070">(스케줄 대성공률 +)</span> · 정산 메모 <span style="color:#5a6070">(스케줄 재화 보정)</span></td></tr><tr><td><b>★4</b> ×2</td><td>시즌 스케줄 편성 <span style="color:#5a6070">(곡·활동 배정 효율 +)</span> · 매니지먼트 완주 <span style="color:#5a6070">(스케줄 보상·라포 동시 보정)</span></td></tr><tr><td><b>★5</b> ×1</td><td>A&R 마스터클래스 <span style="color:#5a6070">(스케줄 시간·보상·라포·대성공률 전부 보정)</span></td></tr></tbody></table></div></div><div class="card green"><h3>⑧ 홍보·마케팅</h3><p style="margin-bottom:8px">효과 축: <b>팬 유입 · 여론 방어 · 악개 억제 · 바이럴</b><br>역할: 팬 유입·여론 방어·악개 억제·바이럴 보정</p><div class="table-wrap"><table><thead><tr><th style="width:16%">별</th><th style="width:84%">카드명 (효과)</th></tr></thead><tbody><tr><td><b>★1</b> ×4</td><td>티저 공개 <span style="color:#5a6070">(팬 유입 +)</span> · 포스터 배포 <span style="color:#5a6070">(팬 유입 +)</span> · 매체 인터뷰 <span style="color:#5a6070">(팬 유입 +)</span> · 숏폼 바이럴 <span style="color:#5a6070">(바이럴 팬 유입 +)</span></td></tr><tr><td><b>★2</b> ×3</td><td>화보 공개 <span style="color:#5a6070">(팬 유입·여론 방어)</span> · 컴백 카운트다운 <span style="color:#5a6070">(팬 유입 +)</span> · 팬 이벤트 <span style="color:#5a6070">(팬 충성·악개 감소)</span></td></tr><tr><td><b>★3</b> ×2</td><td>비하인드 공개 <span style="color:#5a6070">(악개 감소·여론 완화)</span> · 컴백 데이 캠페인 <span style="color:#5a6070">(팬 유입·악개 감소)</span></td></tr><tr><td><b>★4</b> ×2</td><td>시즌 PR 캠페인 <span style="color:#5a6070">(전역 팬 유입·악개 억제)</span> · 키비주얼 전략 <span style="color:#5a6070">(전역 팬 유입·화제성 +)</span></td></tr><tr><td><b>★5</b> ×1</td><td>글로벌 PR 마스터클래스 <span style="color:#5a6070">(팬 유입·악개 억제·바이럴 극대화)</span></td></tr></tbody></table></div></div></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="13">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>15 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="15">다음 페이지 (16/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="15" id="s16">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 16 · PURE AGENCY 2/2</div><h2>순수 기획사 ⑨ 비즈니스·레이블 — 12장 & 자리 효과 공식</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>36장</b> 순수 3자리 합</span><span class="hl-chip"><b>가산(+)</b> 곱셈 없음</span></div>
+    <div class="lead-box">⑨는 제작비 절감 · 정산 · 사업 수익을 보정합니다. 모든 스태프 자리는 같은 가산 공식으로 계산합니다.</div>
+    <div class="slide-body"><div class="grid-2"><div class="card orange"><h3>⑨ 비즈니스·레이블</h3><p style="margin-bottom:8px">효과 축: <b>제작비 절감 · 정산 · 사업 수익</b><br>역할: 제작비 절감·정산·사업 수익 보정</p><div class="table-wrap"><table><thead><tr><th style="width:16%">별</th><th style="width:84%">카드명 (효과)</th></tr></thead><tbody><tr><td><b>★1</b> ×4</td><td>계약서 검토 <span style="color:#5a6070">(계약·제작비 절감)</span> · 음원 유통 <span style="color:#5a6070">(음원 수익 +)</span> · 재킷 제작 <span style="color:#5a6070">(앨범 제작비 절감)</span> · 발매 프로세스 <span style="color:#5a6070">(앨범 정산 +)</span></td></tr><tr><td><b>★2</b> ×3</td><td>쇼케이스 사업 <span style="color:#5a6070">(공연·행사 수익 +)</span> · 굿즈 재고 관리 <span style="color:#5a6070">(팬·상품 수익 +)</span> · 카탈로그 관리 <span style="color:#5a6070">(구작 누적 정산 +)</span></td></tr><tr><td><b>★3</b> ×2</td><td>해외 유통 계약 <span style="color:#5a6070">(해외·월드 수익 +)</span> · 분기 정산 <span style="color:#5a6070">(보드·앨범 돈 수익 +)</span></td></tr><tr><td><b>★4</b> ×2</td><td>시즌 발매 전략 <span style="color:#5a6070">(앨범·음원 수익 +)</span> · 레이블 브랜드 마크 <span style="color:#5a6070">(전체 사업 수익 +)</span></td></tr><tr><td><b>★5</b> ×1</td><td>레이블 비즈니스 마스터클래스 <span style="color:#5a6070">(제작비 절감·정산·수익 전부 보정)</span></td></tr></tbody></table></div></div><div class="card purple"><h3>자리 최종 효과 공식</h3><p style="font-size:17px"><mark class="hl">자리 장비 12장 효과</mark> + <mark class="hl">배치 인물 고정 능력(+)</mark> + <mark class="hl">아이돌 짝 라포 보너스</mark></p><ul><li>곱셈 배수(카드 × 별 × 선생님)는 쓰지 않음</li><li>1~5등급 고정 능력 · 라포 보너스 %: 비어 있음(0으로 동작)</li><li>⑧ 팬 유입 · ⑨ 정산 수익은 팬 돈 상한과 겹치지 않게 상한 · 비율을 함께 세팅</li><li>카드별 효과 전수는 명세서 MD 2-3절</li></ul></div></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="14">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>16 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="16">다음 페이지 (17/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="16" id="s17">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 17 · FAN PRESIDENT</div><h2>팬클럽 회장 1자리 · 12장 — 공식 데뷔 시 해금</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>4대 효과</b> 증가 · 팬 돈 · 악개 · 상한</span><span class="hl-chip"><b>배수 상한 +1</b> 제외 → 대체</span></div>
+    <div class="lead-box">연습생 기간엔 비어 있고 기본 팬 덱으로 동작합니다. 공식 데뷔 후 1~5등급 회장을 랜덤 섭외 · 교체합니다.</div>
+    <div class="slide-body"><div class="grid-2"><div class="card orange"><h3>⑩ 팬클럽 회장</h3><p style="margin-bottom:8px">세부: <b>팬 증가 · 팬 돈 · 악개 감소 · 팬 상한</b><br>역할: </p><div class="table-wrap"><table><thead><tr><th style="width:16%">별</th><th style="width:84%">카드명 (올리는 세부)</th></tr></thead><tbody><tr><td><b>★1</b> ×4</td><td>손편지 <span style="color:#5a6070">(팬 증가)</span> · 응원봉 <span style="color:#5a6070">(팬 돈)</span> · 팬카페 매너 공지 <span style="color:#5a6070">(악개 감소)</span> · 팬사인회 <span style="color:#5a6070">(팬 상한)</span></td></tr><tr><td><b>★2</b> ×3</td><td>팬미팅 <span style="color:#5a6070">(팬 증가·팬 돈)</span> · 공식 응원법 <span style="color:#5a6070">(팬 증가·악개 감소)</span> · 굿즈샵 <span style="color:#5a6070">(팬 돈·팬 상한)</span></td></tr><tr><td><b>★3</b> ×2</td><td>팬 콘서트 <span style="color:#5a6070">(팬 증가·팬 돈·팬 상한)</span> · 팬덤 이름 선포 <span style="color:#5a6070">(팬 증가·악개 감소·팬 돈)</span></td></tr><tr><td><b>★4</b> ×2</td><td>월드 팬미팅 <span style="color:#5a6070">(전 세부)</span> · 팬덤 기념일 <span style="color:#5a6070">(전 세부)</span></td></tr><tr><td><b>★5</b> ×1</td><td>레전드 팬덤 <span style="color:#5a6070">(전 세부)</span></td></tr></tbody></table></div></div><div class="card red"><h3><span class="badge b-red">수정</span> 12장 완성 보상</h3><ul><li><s>주사위 배수 상한 +1</s> <mark class="hl">제외</mark></li><li>1일차 ×10 · 2일차 ×20 · 3일차부터 배수 무제한 규칙과 충돌</li><li>대체: <mark class="hl">팬 상한 / 팬 돈 보정</mark> (수치 비어 있음 · 0으로 동작)</li><li>팬 상한 = 팬 돈 단계표 마지막 줄을 올리는 새 구조</li><li>팬 증가는 기존 스킬 사용, 팬 돈 · 악개 감소 · 팬 상한은 새 스킬 종류</li></ul></div></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="15">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>17 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="17">다음 페이지 (18/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="17" id="s18">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 18 · STAFF OPERATIONS</div><h2>스태프 랜덤 섭외 · 1~5등급 · 라포 · 졸업 전직 · 계약 해지</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>1~5등급</b> 랜덤 섭외</span><span class="hl-chip"><b>라포만</b> 성장</span><span class="hl-chip"><b>데뷔조 0명</b> 해지 차단</span></div>
+    <div class="lead-box">스태프와 팬클럽 회장은 성장하지 않는 고정 능력 인물입니다. 아이돌과의 짝 라포만 오르고, 졸업한 아이돌이 스태프로 들어옵니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:24%">규칙</th><th style="width:76%">명세</th></tr></thead><tbody><tr><td><b>랜덤 섭외 · 중도 캐스팅</b></td><td>고정 인물 풀 없이 1~5등급 · 6방축 랜덤 생성, 시작 때와 게임 중간 모두 섭외, <mark class="hl">고용 전 케미 미리보기</mark></td></tr><tr><td><b>등급 · 고정 능력(+)</b></td><td>등급이 높을수록 고정 능력이 큼 (등급별 수치 비어 있음 · 0으로 동작)</td></tr><tr><td><b>라포</b></td><td>아이돌 멤버별 짝 라포만 스케줄(24시간 연습 · 회식)로 상승 → 카드 효과 보너스. 초월 조건에는 쓰지 않음</td></tr><tr><td><b>케미</b></td><td>처음 케미 찰떡 · 보통 · 최악: 아이돌 슬롯 진입 때와 스태프 교체 때 정해짐</td></tr><tr><td><b>졸업 → 스태프 전직</b></td><td>만렙 또는 초월 이후 졸업 → 가장 높은 분야 고등급 스태프(명예의 전당), 아이돌 슬롯 비움</td></tr><tr><td><b>계약 해지</b></td><td>투자 재화 반환 없음 · 슬롯만 비움 · <mark class="hl">남은 데뷔조가 0명이 되는 해지는 차단</mark></td></tr></tbody></table></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="16">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>18 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="18">다음 페이지 (19/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="18" id="s19">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 19 · ENTERPOWER · AGENCY · CARRY-OVER</div><h2>엔터파워 vs 기획사 스탯 분리 · 4대 출처 · 시즌 2 이월</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>4대 출처</b> 환산 기준</span><span class="hl-chip"><b>100·130·160·190</b> 앞 4문턱</span></div>
+    <div class="lead-box">두 값 모두 영구 유지됩니다. 엔터파워는 4대 출처를 합쳐 잠금을 열고, 기획사 스탯은 팀 등급의 바탕이 됩니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:18%">출처</th><th style="width:50%">반영 방식</th><th style="width:32%">현재 세팅값</th></tr></thead><tbody><tr><td>아이돌</td><td>보유 아이돌 몫 (해지 시 그 몫만 감소, 연 슬롯 유지)</td><td>비어 있음(0으로 동작)</td></tr><tr><td>스태프 9명</td><td>배치 스태프 몫</td><td>비어 있음(0으로 동작)</td></tr><tr><td>건물 영구 적립</td><td>시즌 중 지은 건물 몫 영구 적립(비중 축소)</td><td>9건물 단계 합(9~270) → 눈금 1~1,000</td></tr><tr><td>총 팬</td><td>누적 총 팬 몫 (맵 위 팬과 분리)</td><td>비어 있음(0으로 동작)</td></tr></tbody></table></div><div class="grid-2"><div class="card blue"><h3>기획사 스탯</h3><ul><li>순수 3자리 운영 효율 · 기존 6자리 육성 · 무대 가점</li><li><mark class="hl">팀 등급 바탕</mark> = 기획사 스탯 (문턱 200 / 450 / 562 / 1,090 / 1,560 재계산)</li></ul></div><div class="card orange"><h3>시즌 2 이월 점검</h3><ul><li>돈 · 주사위 · 카드 · 스탯 · 총 팬 전부 이월</li><li>2시즌째 30단계 <mark class="hl">조기 완주 여부</mark>를 이월 출발 시뮬레이션으로 점검</li><li>5~12문턱: 출처 환산 확정 후 계산</li></ul></div></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="17">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>19 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="19">다음 페이지 (20/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="19" id="s20">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 20 · RNG · CHEMISTRY · STORY</div><h2>개성 균형 랜덤 생성 · 공개 분리 · 전화위복(#36) · 3단 서사</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>5값</b> 서로 상쇄</span><span class="hl-chip"><b>6 → 18</b> 공개 범위</span><span class="hl-chip"><b>양쪽</b> 전화위복 적용</span></div>
+    <div class="lead-box">꽝 없는 생성, 캐스팅 전후 정보 공개 분리, 최악 궁합의 반전 보너스로 인물마다 이야기가 생깁니다.</div>
+    <div class="slide-body"><div class="grid-2"><div class="card "><h3>균형 생성 · 공개 분리</h3><ul><li>재능선 · 초기 능력 · 초기 스킬 · 성실성 · 태도 <mark class="hl">5값 상쇄</mark>(다 나쁜 아이돌 없음)</li><li>나이(15~25) · 시작 팬 추가, 기분 → 「컨디션」 통합</li><li>캐스팅 전: <b>큰 축 6개 등급</b> → 캐스팅 후: <b>세부 18개 · 재능선 · 성실성 · 태도</b></li></ul></div><div class="card purple"><h3>전화위복(#36) · 3단 서사</h3><ul><li>처음 케미 찰떡 · 보통 · 최악 → 최악은 초반만 어긋나고 갈등 → 화해 서사로 반전</li><li>화해 뒤 <mark class="hl">「전화위복」 특별 보너스</mark></li><li><b>아이돌↔아이돌, 아이돌↔스태프 양쪽 적용</b></li><li>서사: 시즌(9주) · 팀 · 개인 + 스태프 · 회장 라포 서사 누적</li></ul></div></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="18">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>20 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="20">다음 페이지 (21/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="20" id="s21">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 21 · MONS LOBBY (UI FLOW ③)</div><h2>몬스 27종 · 버튼 없는 10단 자동 합성 · 4축 종합 로비(#21)</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>27종</b> 10 + 5 + 12</span><span class="hl-chip"><b>512마리</b> 10단 1마리</span><span class="hl-chip"><b>잔여 마리 수</b> 도감 표시</span></div>
+    <div class="lead-box">모든 몬스는 1단으로 나오고, 같은 종 · 같은 단 2마리가 모이면 자동으로 합쳐집니다. 로비 하나에서 4가지 일을 합니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:22%">4축</th><th style="width:78%">내용 · 화면 동선</th></tr></thead><tbody><tr><td><b>① 소속사 지킴이</b></td><td>방어 유닛 편성. 보드 방패(최대 3개) 1차 벽 → <mark class="hl">방패 소진 시 몬스 지킴이 연결</mark> 표시</td></tr><tr><td><b>② 아이돌 컨디션</b></td><td>아이돌별 수호 몬스 + 하루 1회 <mark class="hl">컨디션 회복 미니게임</mark></td></tr><tr><td><b>③ 스케줄 입장</b></td><td>지킴이 외 몬스를 유닛으로 묶어 로비에서 바로 스케줄</td></tr><tr><td><b>④ 도감 · 합성 · 행복</b></td><td>버튼 없는 자동 합성 연출(팩 열 때) · 종마다 <mark class="hl">다음 단까지 남은 마리 수</mark> · 행복 교환 · 소식함</td></tr></tbody></table></div><div class="grid-2"><div class="card green"><h3>종 · 획득 경로</h3><p>일반 10종(팩 · 보상) / <b>희귀 5종 · 12지신 12종</b>은 팩과 분리된 별도 경로</p></div><div class="card red"><h3>제외 · 유지</h3><p><b>제외</b>: 건물별 배치, 공 · 방 수치와 성장 / <b>유지</b>: 나쁜 기운 디펜스 스킬</p></div></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="19">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>21 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="21">다음 페이지 (22/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="21" id="s22">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 22 · WEEKLY FESTIVAL</div><h2>주간 페스티벌(1~8주) — 100명 그룹 · 영상 필수 · 미니게임 · 주간 바퀴</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>100명</b> 그룹</span><span class="hl-chip"><b>500~100</b> Day 7 돈</span><span class="hl-chip"><b>20~4</b> Day 7 팬</span></div>
+    <div class="lead-box">친구 먼저, 빈자리는 비슷한 엔터파워 등급으로 100명을 채운 예열전입니다. 창작곡도 같은 순위표에서 겨룹니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:22%">항목</th><th style="width:78%">명세</th></tr></thead><tbody><tr><td><b>100명 그룹</b></td><td>친구 → 비슷한 엔터파워 등급 순으로 100명</td></tr><tr><td><b>영상 필수</b></td><td>음원 단독 출품 불가 · 영상이 없으면 <mark class="hl">사진 컷씬 자동 연출</mark> + 직접 편집(박자 맞춤)</td></tr><tr><td><b>창작곡</b></td><td>출전 허용, 내부곡과 같은 순위표(전용 탭 · 외부 영상은 월드에서만)</td></tr><tr><td><b>미니게임</b></td><td>개인전 · 크루전 (보상 수치 비어 있음 · 0으로 동작)</td></tr><tr><td><b>주간 바퀴 (Day 7)</b></td><td>START 통과 때 5명 무리 순위: 돈 <mark class="hl">500~100</mark> · 팬 <mark class="hl">20~4</mark> · 능력 0.25~0.05</td></tr><tr><td><b>연료 · 매칭</b></td><td>7일째 연료 드랍(주 끝 소멸) → 5인 매칭 레이스</td></tr><tr><td><b>월드 가산점</b></td><td>100명 그룹 안 등수로 부여 (등수별 값 비어 있음 · 0으로 동작)</td></tr></tbody></table></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="20">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>22 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="22">다음 페이지 (23/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="22" id="s23">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 23 · CREW WORKFLOW</div><h2>크루 협업 — 자기 캐릭터 뮤비 · 크루장 1편 · 공유 철회 규칙</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>자기 캐릭터</b> 크루원 뮤비</span><span class="hl-chip"><b>1편</b> 회차당 대표작</span></div>
+    <div class="lead-box">개인 단독으로는 월드 우승이 어려우므로, 창작 음원을 크루에 「음악만」 공유하고 크루원이 각자 뮤비를 만듭니다.</div>
+    <div class="slide-body"><div class="flow"><div class="st"><b>1. 음악만 공유</b>원소유자 동의</div><div class="ar">→</div><div class="st"><b>2. 각자 뮤비</b>크루원이 <mark class="hl">자기 캐릭터</mark>로 제작</div><div class="ar">→</div><div class="st"><b>3. 크루 투표</b>크루 내부 참고</div><div class="ar">→</div><div class="st"><b>4. 크루장 확정</b>회차당 대표 1편</div></div><div class="grid-2"><div class="card blue"><h3>출품 범위</h3><ul><li>주간(1~8주) · 월드(9주) 모두 크루 출품 가능</li><li>개인 출품과 서로 잠그지 않음</li><li>1편 제한은 설정값으로 분리(추후 확장 가능)</li></ul></div><div class="card red"><h3>원소유자 공유 철회 (초안 기준)</h3><ul><li>철회 즉시 <mark class="hl">새 뮤비 제작 · 새 출품 차단</mark></li><li>이미 제출된 출품본은 그 회차 종료까지 유지 → 이후 비공개</li><li>확정된 순위 · 보상 기록은 유지</li></ul></div></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="21">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>23 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="23">다음 페이지 (24/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="23" id="s24">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 24 · WORLD FESTIVAL</div><h2>9주차 월드 — 실력별 1부 · 2부 리그 + 상위 4~10% 동시 차트인</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>4~10%</b> 그룹당 동시 차트인</span><span class="hl-chip"><b>1,000</b> 파이널 정원</span><span class="hl-chip"><b>와일드카드</b> 자투리 충원</span></div>
+    <div class="lead-box">「그룹 1등만 진출」하는 토너먼트가 아닙니다. 주간 성적 순으로 실력별 리그를 나누고, 라운드마다 상위 4~10명이 함께 차트인합니다.</div>
+    <div class="slide-body"><div class="table-wrap"><table><thead><tr><th style="width:16%">참가 규모</th><th style="width:14%">그룹 수</th><th style="width:56%">라운드별 동시 차트인 (7일)</th><th style="width:14%">파이널</th></tr></thead><tbody><tr><td>1,000명 이하</td><td>1~10</td><td>단계 없이 전원 파이널</td><td>전원</td></tr><tr><td>1만 명</td><td>100</td><td>예선: 그룹당 상위 <b>10명(10%)</b></td><td>1,000</td></tr><tr><td>10만 명</td><td>1,000</td><td>1차 10명(1만) → 2차 10명</td><td>1,000</td></tr><tr><td>100만 명</td><td>10,000</td><td>1차 10명(10만) → 2차 10명(1만) → 3차 10명</td><td>1,000</td></tr><tr><td>1,000만 명</td><td>100,000</td><td>1차 <b>5명</b>(50만) → 2차 5명(2.5만) → 3차 <b>4명(4%)</b></td><td>1,000</td></tr><tr><td>임의 인원</td><td>참가자/100 올림</td><td>그룹당 최소 4명 + <mark class="hl">와일드카드</mark></td><td>1,000</td></tr></tbody></table></div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="22">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>24 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="24">다음 페이지 (25/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="24" id="s25">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 25 · ARCHITECTURE DIAGRAMS</div><h2>전체 구조도 · 플로우 4종 (11/13 확정 기준 · 클릭 확대 / PNG 저장)</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>4종</b> 고화질 PNG</span><span class="hl-chip"><b>클릭</b> 전체 화면 확대</span><span class="hl-chip"><b>ZIP</b> 일괄 포함</span></div>
+    <div class="slide-body">
+      <div class="diag-grid">
+        <div class="diag-card">
+          <div class="diag-top"><span>① 카드 40자리 · 480장 스탯 구조도</span><a href="./diagrams/diagram_cards_40slots.png" download="01_카드40자리_스탯구조도.png">PNG ↓</a></div>
+          <img src="./diagrams/diagram_cards_40slots.png" alt="카드 40자리 스탯 구조도" onclick="zoomImg(this.src)">
+        </div>
+        <div class="diag-card">
+          <div class="diag-top"><span>② 스태프 · 아이돌 연관 플로우</span><a href="./diagrams/diagram_staff_idol_flow.png" download="02_스태프아이돌_연관플로우.png">PNG ↓</a></div>
+          <img src="./diagrams/diagram_staff_idol_flow.png" alt="스태프 아이돌 연관 플로우" onclick="zoomImg(this.src)">
+        </div>
+        <div class="diag-card">
+          <div class="diag-top"><span>③ 월드 페스티벌 · 창작곡 순서도</span><a href="./diagrams/diagram_world_festival.png" download="03_월드페스티벌_순서도.png">PNG ↓</a></div>
+          <img src="./diagrams/diagram_world_festival.png" alt="월드 페스티벌 순서도" onclick="zoomImg(this.src)">
+        </div>
+        <div class="diag-card">
+          <div class="diag-top"><span>④ 독립 음악 앱 · API 연동 구조도</span><a href="./diagrams/diagram_music_app.png" download="04_독립음악앱_연동구조도.png">PNG ↓</a></div>
+          <img src="./diagrams/diagram_music_app.png" alt="독립 음악 앱 구조도" onclick="zoomImg(this.src)">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="23">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>25 / 26</b></div><div class="pager-right"><button class="pager-btn primary" type="button" data-go="25">다음 페이지 (26/26) →</button></div></div></div>
+</section>
+<section class="slide" data-index="25" id="s26">
+  <div>
+    <div class="slide-head"><div class="eyebrow">SLIDE 25 · SUMMARY</div><h2>정리 — 8대 핵심과 구체화 스펙, 그리고 함께 보는 자료</h2></div>
+    <div class="hl-bar"><span class="hl-chip"><b>8대 핵심</b> 중심 축</span><span class="hl-chip"><b>132종</b> 명세서 MD</span><span class="hl-chip"><b>별도 제공</b> 음악 앱 상세 기획서</span></div>
+    <div class="lead-box">이 기획서의 기준은 11/11 회의 8대 핵심입니다. 전 카드 세부 능력과 현재 세팅값은 상세 데이터 명세서에서 확인합니다.</div>
+    <div class="slide-body"><div class="grid-2"><div class="card purple"><h3>8대 핵심 (Part A)</h3><ul><li>1~4 카드 · 인물: 인물 덱 · 30슬롯 · 스태프/팬 분리 · 스태프 이원화</li><li>5 시즌: 건물 · 맵 팬만 초기화</li><li>6~7 페스티벌: 실시간 랭킹 · 월드 창작곡 혜택</li><li>8 음악 앱: 독립 실행 · 고려사항 ①~⑦ (관련 상세 기획서는 별도 제공)</li></ul></div><div class="card green"><h3>상세 데이터 명세서에서</h3><ul><li><mark class="hl">전 카드 132종 · 480장 세부 능력</mark></li><li>현재 세팅값 · 비어 있음(0으로 동작) 항목</li><li>월드 차트 인 수량 · 음원 발주 요청 표</li></ul></div></div><div class="link-bar">
+  <span class="lb-title">📎 함께 보는 자료 · 내려받기</span>
+  <a class="big" href="./spec_viewer.html">상세 데이터 명세서(132종·480장) 보기 ↗</a>
+  <a class="sub" href="./music_app.html">🎵 음악 앱 통합 상세 기획서 ↗</a>
+  <a class="sub" href="./brief.html">← 핵심 제안서 PPT</a>
+  <a class="sub" href="./spec_full.md" download="케이팝몬스터즈_상세데이터명세서.md">명세서 MD ↓</a>
+  <a class="sub" href="./music_app.md" download="케이팝몬스터즈_음악앱_상세기획서.md">음악 앱 MD ↓</a>
+  <a class="sub" href="./detail.html" onclick="return dlFile(event,'./detail.html','케이팝몬스터즈_상세기획서_PPT.html')">이 PPT 저장 ↓</a>
+  <a class="zip" href="#bundle-zip" onclick="return dlBundleZip(event,this)">📦 전체 ZIP 받기 (HTML+MD+PNG)</a>
+</div></div>
+  </div>
+  <div class="slide-foot"><div class="slide-pager"><div class="pager-left"><button class="pager-btn" type="button" data-go="24">← 이전 페이지</button></div><div class="pager-mid"><span>시스템·UI 상세 기획서</span><span>·</span><b>26 / 26</b></div><div class="pager-right"><a class="pager-btn primary" href="./music_app.html">음악 앱 통합 상세 기획서 보기 →</a> <button class="pager-btn" type="button" data-go="0">처음으로 ↺</button></div></div></div>
+</section>
+</main>
+
+<button class="side-arrow prev nav-only" id="sidePrev" type="button" aria-label="이전 페이지" title="이전 페이지 (←)">‹</button>
+<button class="side-arrow next nav-only" id="sideNext" type="button" aria-label="다음 페이지" title="다음 페이지 (→)">›</button>
+<div class="float-dock nav-only" id="floatDock">
+  <button class="pager-btn" id="dockPrev" type="button">← 이전</button>
+  <span class="dock-num" id="dockNum">1 / 26</span>
+  <button class="pager-btn primary" id="dockNext" type="button">다음 →</button>
+</div>
+
+<script>
+(function(){
+  const slides=Array.from(document.querySelectorAll('.slide'));
+  const sel=document.getElementById('slideSelect');
+  const prog=document.getElementById('progressFill');
+  const prevBtn=document.getElementById('prevBtn');
+  const nextBtn=document.getElementById('nextBtn');
+  const sidePrev=document.getElementById('sidePrev');
+  const sideNext=document.getElementById('sideNext');
+  const dockPrev=document.getElementById('dockPrev');
+  const dockNext=document.getElementById('dockNext');
+  const dockNum=document.getElementById('dockNum');
+  let cur=0;
+  function show(i){
+    cur=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach((el,k)=>el.classList.toggle('active',k===cur));
+    if(sel)sel.value=String(cur);
+    if(prog)prog.style.width=(((cur+1)/slides.length)*100).toFixed(2)+'%';
+    if(dockNum)dockNum.textContent=(cur+1)+' / '+slides.length;
+    [prevBtn,sidePrev,dockPrev].forEach(b=>{if(b)b.disabled=(cur===0);});
+    [nextBtn,sideNext,dockNext].forEach(b=>{if(b)b.disabled=(cur===slides.length-1);});
+    if(location.hash!=='#'+(cur+1))history.replaceState(null,'','#'+(cur+1));
+    window.scrollTo({top:0});
+  }
+  [prevBtn,sidePrev,dockPrev].forEach(b=>{if(b)b.addEventListener('click',()=>show(cur-1));});
+  [nextBtn,sideNext,dockNext].forEach(b=>{if(b)b.addEventListener('click',()=>show(cur+1));});
+  document.querySelectorAll('[data-go]').forEach(b=>{
+    b.addEventListener('click',()=>show(Number(b.getAttribute('data-go'))));
+  });
+  if(sel)sel.addEventListener('change',e=>show(Number(e.target.value)));
+  const modeBtn=document.getElementById('modeBtn');
+  if(modeBtn)modeBtn.addEventListener('click',()=>{
+    const all=document.body.classList.toggle('view-all');
+    modeBtn.classList.toggle('active',all);
+    modeBtn.textContent=all?'슬라이드 보기':'전체 펼치기';
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){const lb=document.getElementById('lightbox');if(lb)lb.classList.remove('open');return;}
+    if(document.body.classList.contains('view-all'))return;
+    if(e.target&&(e.target.tagName==='SELECT'||e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'))return;
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(cur+1);}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(cur-1);}
+  });
+  function goHash(){const m=(location.hash||'').match(/(\d+)/);const h=m?parseInt(m[1],10):NaN;show(isNaN(h)?0:h-1);}
+  window.addEventListener('hashchange',goHash);
+  goHash();
+})();
+</script>
+<div id="lightbox" onclick="this.classList.remove('open')"><img id="lbImg" src="" alt=""></div>
+<script>
+function dlFile(e,url,name){
+  if(location.protocol==='file:') return true;
+  e.preventDefault();
+  fetch(url,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.blob();}).then(b=>{
+    const u=URL.createObjectURL(b),a=document.createElement('a');
+    a.href=u;a.download=name;document.body.appendChild(a);a.click();
+    setTimeout(()=>{URL.revokeObjectURL(u);a.remove();},1000);
+  }).catch(()=>{location.href=url;});
+  return false;
+}
+function zoomImg(src){document.getElementById('lbImg').src=src;document.getElementById('lightbox').classList.add('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const lb=document.getElementById('lightbox');if(lb)lb.classList.remove('open');}});
+
+
+
+(function(){
+  var MAP={'brief.html':'extBrief','detail.html':'extDetail','music_app.html':'extMusic','spec_viewer.html':'extSpec'};
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href]');
+    if(!a)return;
+    if(!window.__sbWritten || window.parent===window)return;
+    var href=(a.getAttribute('href')||'').split('#')[0].split('?')[0].replace(/^\.\//,'');
+    if(MAP[href]){
+      e.preventDefault();
+      window.parent.postMessage({pdCard:'open',id:MAP[href]},location.origin);
+    }
+  });
+})();
+
+async function dlBundleZip(e,btn){
+  if(e)e.preventDefault();
+  if(location.protocol==='file:'){alert('이미 로컬 폴더에 저장되어 있습니다. 같은 폴더의 파일을 직접 열어보세요.');return false;}
+  const orig=btn?btn.textContent:'';
+  if(btn)btn.textContent='📦 ZIP 묶는 중…';
+  try{
+    const files=[
+      ['brief.html','./brief.html'],
+      ['detail.html','./detail.html'],
+      ['music_app.html','./music_app.html'],
+      ['music_app.md','./music_app.md'],
+      ['spec_viewer.html','./spec_viewer.html'],
+      ['spec_full.md','./spec_full.md'],
+      ['diagrams/diagram_cards_40slots.png','./diagrams/diagram_cards_40slots.png'],
+      ['diagrams/diagram_staff_idol_flow.png','./diagrams/diagram_staff_idol_flow.png'],
+      ['diagrams/diagram_world_festival.png','./diagrams/diagram_world_festival.png'],
+      ['diagrams/diagram_music_app.png','./diagrams/diagram_music_app.png']
+    ];
+    const crcTable=new Uint32Array(256);
+    for(let i=0;i<256;i++){let c=i;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);crcTable[i]=c>>>0;}
+    const crc32=u8=>{let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=crcTable[(c^u8[i])&0xFF]^(c>>>8);return(c^0xFFFFFFFF)>>>0;};
+    const enc=new TextEncoder();
+    const parts=[],cds=[];let off=0,cnt=0;
+    const fetched=await Promise.all(files.map(async([name,url])=>{
+      const r=await fetch(url,{cache:'no-store'});
+      if(!r.ok)throw new Error(name+': '+r.status);
+      return [name,new Uint8Array(await r.arrayBuffer())];
+    }));
+    for(const[rawName,data]of fetched){
+      const fn=enc.encode('kpopmonsters_20261113_ext/'+rawName),crc=crc32(data);
+      const lfh=new Uint8Array(30+fn.length),lv=new DataView(lfh.buffer);
+      lv.setUint32(0,0x04034B50,true);lv.setUint16(4,20,true);lv.setUint16(6,0x0800,true);lv.setUint16(8,0,true);
+      lv.setUint16(10,0x6800,true);lv.setUint16(12,0x5D6D,true);
+      lv.setUint32(14,crc,true);lv.setUint32(18,data.length,true);lv.setUint32(22,data.length,true);lv.setUint16(26,fn.length,true);
+      lfh.set(fn,30);parts.push(lfh,data);
+      const cd=new Uint8Array(46+fn.length),cv=new DataView(cd.buffer);
+      cv.setUint32(0,0x02014B50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint16(8,0x0800,true);cv.setUint16(10,0,true);
+      cv.setUint16(12,0x6800,true);cv.setUint16(14,0x5D6D,true);
+      cv.setUint32(16,crc,true);cv.setUint32(20,data.length,true);cv.setUint32(24,data.length,true);lv.setUint16(26,fn.length,true);
+      cv.setUint16(28,fn.length,true);cv.setUint32(42,off,true);
+      cd.set(fn,46);cds.push(cd);off+=lfh.length+data.length;cnt++;
+    }
+    let cdSz=0;for(const cd of cds){parts.push(cd);cdSz+=cd.length;}
+    const eocd=new Uint8Array(22),ev=new DataView(eocd.buffer);
+    ev.setUint32(0,0x06054B50,true);ev.setUint16(8,cnt,true);ev.setUint16(10,cnt,true);ev.setUint32(12,cdSz,true);ev.setUint32(16,off,true);
+    parts.push(eocd);
+    const blob=new Blob(parts,{type:'application/zip'});
+    const u=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=u;a.download='kpopmonsters_20261113_ext_bundle.zip';document.body.appendChild(a);a.click();
+    setTimeout(()=>{URL.revokeObjectURL(u);a.remove();},1500);
+    if(btn)btn.textContent='📦 ZIP 완료 ✓';
+    setTimeout(()=>{if(btn)btn.textContent=orig;},2000);
+  }catch(err){
+    alert('ZIP 생성 중 오류가 발생했습니다: '+err.message);
+    if(btn)btn.textContent=orig;
+  }
+  return false;
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P170 · 랜덤 멤버 생성</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"></head><body class="sample-document"><main><header><div class="eyebrow">P170 · 개발 기획</div><h1>랜덤 멤버 생성</h1><div class="actions"><a href="./랜덤멤버생성_기획서.md">짝 MD를 봅니다</a><a href="/docs/planning/member-story-preview.html" target="_blank" rel="noopener">눌러서 인물 이야기 만들기</a><a href="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/작성기준_v02/작성규칙.html">공통 작성 기준 보기</a><a href="#document-history" data-open-history>로그 보기</a></div></header>
+<p><b>이 문서는</b> 후보의 이름·성격·배경·능력과 이야기를 한 사람의 자료로 묶어, 오디션에서 만난 후보가 합류 뒤에도 같은 아이돌로 이어지는 과정을 설명합니다.</p>
+<p><b>보는 법</b> 1장 개요 → 3장 생성·이야기 미리보기 → 4장 생성·저장·전달 → 6장 원표 → 7장 개발·검수 순서로 읽습니다. <a href="#part-7">개발·검수 범위</a></p>
+<p><b>지금 상태</b> 표·시드에 따른 후보 생성과 서사 조합, 보드 저장·합류 전달·정보 조회의 코드가 있습니다. 범위·합계·가중치·실행 인원은 임시 또는 발란스 대기이며, 대진 선택 경향의 오디션 재생성 연결과 개별 외형 생성은 작업전입니다. 이번 대조는 정적 원본 읽기이며 실제 생성·합류·복원·화면 검수는 하지 않았습니다.</p>
+<nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (합침) <a href="/docs/planning/proposal-concept/audition.html" data-paper-path="docs/planning/proposal-concept/audition.html">오디션 제안서</a>, 후보 생성·이야기 조합 소스와 이름·성격·배경 표.</p>
+
+<p>새 진행을 준비할 때 후보 묶음을 만듭니다. 후보마다 고유 ID와 이름·성격·재능·처음 능력·배경·이야기가 함께 생기며, 같은 진행에서 다시 만날 때 별개의 사람을 새로 만들지 않습니다. 후보 수·초기 범위와 가중치는 현재 실행의 임시값으로 <b>발란스 대기</b>입니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1116 276" width="1116" height="276" role="img" aria-labelledby="title-P170-0"><title id="title-P170-0">설명 흐름도 P170-0</title><defs><marker id="arrow-P170-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M189.8181818181818,170 L220.5,182 L243,182" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-0)"/><path d="M148.9090909090909,106 L220.5,50 L333,50 L445.5,50 L558,50 L670.5,50 L693,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-0)"/><path d="M414.8181818181818,150 L445.5,138 L468,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-0)"/><path d="M648,138 L670.5,138 L693,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-0)"/><path d="M414.8181818181818,214 L445.5,226 L558,226 L670.5,226 L693,226" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-0)"/><path d="M873,50 L895.5,50 L967.0909090909091,106" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-0)"/><path d="M873,138 L895.5,138 L918,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-0)"/><path d="M873,226 L895.5,226 L967.0909090909091,170" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-0)"/><rect x="18" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">새 진행의 시드와 원본 표</tspan></text><rect x="243" y="150" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="187" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">후보별 성격과 프로필</tspan></text><rect x="693" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">재능과 처음 능력</tspan></text><rect x="468" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">선택한 배경 조각</tspan></text><rect x="693" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">단계별 이야기 조합</tspan></text><rect x="693" y="194" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="231" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">후보 ID와 이름</tspan></text><rect x="918" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1008" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1008" dy="0">한 후보의 생성 결과</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">새 진행의 시드와 원본 표 → 후보별 성격과 프로필 / 새 진행의 시드와 원본 표 → 재능과 처음 능력 / 후보별 성격과 프로필 → 선택한 배경 조각 / 선택한 배경 조각 → 단계별 이야기 조합 / 후보별 성격과 프로필 → 후보 ID와 이름 / 재능과 처음 능력 → 한 후보의 생성 결과 / 단계별 이야기 조합 → 한 후보의 생성 결과 / 후보 ID와 이름 → 한 후보의 생성 결과</p></figure>
+
+
+
+<p><b>시드</b>는 같은 표와 생성 로직에서 같은 후보 묶음을 다시 만드는 시작값입니다. 생성기의 임시 설정을 사용하는 칸에는 출처와 발란스 대기를 남깁니다. 이미 보존한 후보의 배경과 이야기를 화면 전환 때 다시 추첨하지 않습니다.</p>
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>이 문서와 연결되는 역할</th></tr></thead><tbody><tr><td><a href="/docs/planning/proposal-concept/audition.html" data-paper-path="docs/planning/proposal-concept/audition.html">오디션 제안서</a></td><td>사람을 알아보고 선택하는 경험의 출발점</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%98%A4%EB%94%94%EC%85%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%98%A4%EB%94%94%EC%85%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P100 오디션</a></td><td>후보 만남·명함·대진·합류와 생성 결과의 전달</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%95%84%EC%9D%B4%EB%8F%8C%EB%8A%A5%EB%A0%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%95%84%EC%9D%B4%EB%8F%8C%EB%8A%A5%EB%A0%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P107 아이돌 성장</a></td><td>합류한 같은 멤버의 실제 능력·승급·이야기 공개</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%84%B1%EC%9E%A5%EA%B4%80%EA%B3%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%84%B1%EC%9E%A5%EA%B4%80%EA%B3%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P169 성장 관계</a></td><td>개인 성장·팀 평균·관계의 입력과 시험 경계</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%80%EA%B2%B0%EC%84%B1_%ED%8C%80%EC%8A%A4%ED%83%AF_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%80%EA%B2%B0%EC%84%B1_%ED%8C%80%EC%8A%A4%ED%83%AF_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P147 팀 결성·팀 스탯</a></td><td>예명·팀 이름과 팀 구성</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B8%B0%ED%9A%8D/S19_%EC%BA%90%EB%A6%AD%ED%84%B0%EC%A1%B0%ED%95%A9%EC%83%9D%EC%84%B1_%EA%B5%AC%EC%A1%B0_v01.md" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B8%B0%ED%9A%8D/S19_%EC%BA%90%EB%A6%AD%ED%84%B0%EC%A1%B0%ED%95%A9%EC%83%9D%EC%84%B1_%EA%B5%AC%EC%A1%B0_v01.md">S19 캐릭터 조합 생성</a></td><td>성격·배경·능력의 조합 구조</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B8%B0%ED%9A%8D/S18_%EB%A9%A4%EB%B2%84%EC%84%B1%EA%B2%A9%EC%83%9D%EC%84%B1_MBTI%EB%B0%A9%EC%8B%9D_v01.md" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B8%B0%ED%9A%8D/S18_%EB%A9%A4%EB%B2%84%EC%84%B1%EA%B2%A9%EC%83%9D%EC%84%B1_MBTI%EB%B0%A9%EC%8B%9D_v01.md">S18 멤버 성격 생성</a></td><td>성격 유형·축과 관계에 쓰는 정보</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: 오디션 시작 → 후보 만남·소개 → 선택과 합류 → 메인·성장 → 공통 인물정보. 이번 문서 작업에서 새 실행·화면 캡처는 하지 않았습니다.</p>
+
+<p><b>멤버 이야기 텍스트 미리보기</b>는 인물을 새로 조합해 배경과 소개, 성장 0~4 단계의 이야기, 마지막 회고를 한 번에 읽어 보는 기획 확인 도구입니다. 이야기의 흐름과 문장 조합을 살펴보는 용도이며, 여기서 읽는 것만으로 실제 게임의 성장 단계나 이야기 해금, 저장 내용이 바뀌지 않습니다. <a href="/docs/planning/member-story-preview.html" data-paper-path="docs/planning/member-story-preview.html">멤버 이야기 텍스트 미리보기 열기</a>. 실제 실행 화면 확인은 현중이 직접 할 예정입니다.</p>
+
+<h3 id="오디션-시뮬레이터-열기"><a href="/docs/planning/game-simulator.html?module=simulator_module_audition" data-paper-path="docs/planning/game-simulator.html">▶ 오디션 시뮬레이터 열기</a></h3>
+
+<ol>
+<li>새 진행을 시작하면 실행 설정의 후보 수만큼 한 묶음을 만듭니다. 같은 진행을 다시 열면 후보와 기존 선택 기록을 이어 봅니다.</li>
+<li>후보 소개에서 이름·성격·배경과 원본 이야기의 일부를 읽고 명함·패스·캐스팅을 선택합니다.</li>
+<li>대진 또는 직접 캐스팅으로 합류한 후보는 같은 후보 ID와 생성 자료를 성장 화면에 전달합니다.</li>
+<li>공통 인물정보에서 검증된 현재 성장 단계에 맞는 이야기를 봅니다. 시험용 단계 선택은 실제 승급이 아닙니다.</li>
+</ol>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1341 100" width="1341" height="100" role="img" aria-labelledby="title-P170-1"><title id="title-P170-1">설명 흐름도 P170-1</title><defs><marker id="arrow-P170-1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L243,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-1)"/><path d="M423,50 L445.5,50 L468,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-1)"/><path d="M648,50 L670.5,50 L693,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-1)"/><path d="M873,50 L895.5,50 L918,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-1)"/><path d="M1098,50 L1120.5,50 L1143,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-1)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">새 진행</tspan></text><rect x="243" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">후보 묶음 생성</tspan></text><rect x="468" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">보드에서 후보 만남</tspan></text><rect x="693" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">명함 또는 캐스팅</tspan></text><rect x="918" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1008" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1008" dy="0">합류 결과 전달</tspan></text><rect x="1143" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1233" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1233" dy="0">같은 멤버의 성장과 이야기</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">새 진행 → 후보 묶음 생성 / 후보 묶음 생성 → 보드에서 후보 만남 / 보드에서 후보 만남 → 명함 또는 캐스팅 / 명함 또는 캐스팅 → 합류 결과 전달 / 합류 결과 전달 → 같은 멤버의 성장과 이야기</p></figure>
+
+
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서">한 판 순서</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>새 진행의 후보 생성에서 시작해 선택된 후보를 합류 자료로 전달합니다.</td></tr><tr><td>입력·출력</td><td>시드·생성 순번·원본 표를 받아 후보 ID, 이름, 성격, 배경, 능력과 서사를 만듭니다.</td></tr><tr><td>상태와 전이</td><td>생성된 후보 → 만남·명함·대진 → 합류 → 성장 기록 연결입니다.</td></tr><tr><td>판정</td><td>생성 항목의 원본·범위와 가능한 조합을 확인하고 미정값은 출처와 대기 이유를 남깁니다.</td></tr><tr><td>오류·예외</td><td>자료가 없거나 조합이 불가능하면 임의의 인물·문장으로 채우지 않습니다.</td></tr><tr><td>저장·복원</td><td>생성 기록뿐 아니라 후보 스냅샷·선택 사건·이야기 공개 기록을 함께 보존합니다. 같은 시드 재현에는 같은 표와 로직이 필요합니다.</td></tr><tr><td>다른 모듈</td><td>오디션은 만남과 합류, 성장 시스템은 실제 수치·단계, 공통 인물정보는 공개 가능한 내용을 표시합니다.</td></tr></tbody></table></div>
+
+<h3 id="한-후보의-재료">한 후보의 재료</h3>
+
+<div class="table-scroll"><table><thead><tr><th>재료</th><th>현재 생성 경로와 의미</th></tr></thead><tbody><tr><td>이름</td><td>성·이름 조각을 조합하고 후보 ID와 함께 보존합니다. 예명은 별도 입력·추천 경로이며 화면별 연결 범위는 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%98%A4%EB%94%94%EC%85%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%98%A4%EB%94%94%EC%85%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">오디션</a>을 따릅니다.</td></tr><tr><td>성격</td><td>네 성격축의 조합으로 유형을 고르고 유형 범위의 축 값을 만듭니다. 별도 전체 축은 유형 조합 밖입니다.</td></tr><tr><td>배경</td><td>집안·사는 곳·지원 동기·약점·경력·숨은 특기에서 각각 조각을 고릅니다. 성격에 따른 가중 경로가 있지만 고향은 성격 쏠림에 넣지 않습니다.</td></tr><tr><td>재능·능력</td><td>18세부에 처음 값과 재능을 배분하고 세부 평균으로 6축을 만듭니다. 합계·범위는 임시 설정이며 발란스 대기입니다.</td></tr><tr><td>취미·언어·기수 등</td><td>프로필 목록의 원본 ID와 값을 고릅니다. 고향으로 언어를 추측하지 않습니다.</td></tr><tr><td>그림·스킬</td><td>기존 카드북 표지와 특기 축에 맞는 스킬 틀을 사용합니다. 수량·가중치는 임시이며 새 얼굴을 생성하는 기능은 작업 전입니다.</td></tr><tr><td>관계·포지션</td><td>관계는 멤버 쌍과 요인 자료가 필요합니다. 포지션 칭호의 실제 결정은 팀 결성에 맡기며 미정 문턱은 발란스 대기입니다.</td></tr></tbody></table></div>
+
+<p>공통 생성 함수는 대진 선택 기록을 입력받아 성격 경향에 반영하는 경로가 있습니다. <b>현재 오디션의 새 후보 생성 호출에는 그 선택 기록이 전달되지 않습니다.</b> 따라서 오디션은 먼저 만들어진 후보를 비교하고, 고른 뒤 성격을 다시 조합하는 연결은 작업 전입니다. 두 경로를 같은 구현으로 보지 않습니다.</p>
+
+<h3 id="같은-진행과-새-진행">같은 진행과 새 진행</h3>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1116 190" width="1116" height="190" role="img" aria-labelledby="title-P170-2"><title id="title-P170-2">설명 흐름도 P170-2</title><defs><marker id="arrow-P170-2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,95.5 L220.5,95.5 L243,95.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-2)"/><path d="M413.8988764044944,63.5 L445.5,51 L558,51 L670.5,51 L693,51" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-2)"/><path d="M413.8988764044944,127.5 L445.5,140 L468,140" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-2)"/><path d="M648,140 L670.5,140 L693,140" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-2)"/><path d="M873,51 L895.5,51 L927.1011235955057,63.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-2)"/><path d="M873,140 L895.5,140 L927.1011235955057,127.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-2)"/><rect x="18" y="63.5" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="100.5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">진행 열기</tspan></text><rect x="243" y="63.5" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="100.5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">저장과 생성 기록 확인</tspan></text><rect x="693" y="18" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">같은 진행의 후보와 선택 </tspan><tspan x="783" dy="20">복원</tspan></text><rect x="468" y="108" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="145" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">명시적 새 테스트</tspan></text><rect x="693" y="108" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="145" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">새 시드와 후보 묶음</tspan></text><rect x="918" y="63.5" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1008" y="100.5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1008" dy="0">기존 미합류 후보 재사용</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">진행 열기 → 저장과 생성 기록 확인 / 저장과 생성 기록 확인 → 같은 진행의 후보와 선택 복원 / 저장과 생성 기록 확인 → 명시적 새 테스트 / 명시적 새 테스트 → 새 시드와 후보 묶음 / 같은 진행의 후보와 선택 복원 → 기존 미합류 후보 재사용 / 새 시드와 후보 묶음 → 기존 미합류 후보 재사용</p></figure>
+
+
+
+<p>현재 오디션 실행 설정은 후보 묶음 16명과 대진 4명을 각각 따로 읽습니다. 이 수는 최종 인원이 아니라 발란스 대기인 실행값입니다. 보드 저장에는 후보 스냅샷·선택 사건·공개한 이야기 수와 합류 결과가 남습니다. 저장 지문이 맞지 않는 경우 정상 복원으로 단정하지 않습니다. 옛 고정 후보 저장과 새 생성 후보 저장도 구분합니다.</p>
+
+<h3 id="배경에서-이야기까지">배경에서 이야기까지</h3>
+
+<p>서사는 실시간으로 새 소설을 쓰는 방식이 아닙니다. 후보가 이미 뽑은 배경 조각과 <code>member_story_template.csv</code>의 문장 틀을 결합합니다. 장마다 고른 틀 ID·공개 단계·본문·대사를 결과에 보존합니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 891 188" width="891" height="188" role="img" aria-labelledby="title-P170-3"><title id="title-P170-3">설명 흐름도 P170-3</title><defs><marker id="arrow-P170-3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L251.1818181818182,62" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-3)"/><path d="M198,138 L220.5,138 L251.1818181818182,126" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-3)"/><path d="M423,94 L445.5,94 L468,94" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-3)"/><path d="M639.8181818181818,62 L670.5,50 L693,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-3)"/><path d="M639.8181818181818,126 L670.5,138 L693,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P170-3)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">후보의 배경 조각</tspan></text><rect x="243" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">장별 문장 틀</tspan></text><rect x="18" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">시드와 후보 순번</tspan></text><rect x="468" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">본문 대사와 공개 단계</tspan></text><rect x="693" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">후보 소개</tspan></text><rect x="693" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">합류 후 성장 이야기</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">후보의 배경 조각 → 장별 문장 틀 / 시드와 후보 순번 → 장별 문장 틀 / 장별 문장 틀 → 본문 대사와 공개 단계 / 본문 대사와 공개 단계 → 후보 소개 / 본문 대사와 공개 단계 → 합류 후 성장 이야기</p></figure>
+
+
+
+<div class="table-scroll"><table><thead><tr><th>장</th><th>역할</th></tr></thead><tbody><tr><td>오디션 소개·합격 프롤로그</td><td>집안·지원 동기·약점과 이전 경력을 소개</td></tr><tr><td>성장 <code>step_0</code>~<code>step_4</code></td><td>연습생부터 세계 무대까지 같은 약점과 경험을 이어 감</td></tr><tr><td>월드스타 에필로그</td><td>출발점과 지나온 경험을 돌아봄</td></tr></tbody></table></div>
+
+<p>서사 8장은 소개·프롤로그·성장 5장·에필로그의 구성이고, 멤버 성장 등급 8개를 뜻하지 않습니다. 이야기 조각의 짧은 이름과 원래 발언은 같은 배경에 속합니다. 예를 들어 약점 이름이 문장 틀에 들어갈 때 한국어 받침에 맞는 조사도 함께 붙입니다. 이 조합은 특정 플레이에서 해당 후보가 실제 경험한 사건을 새로 주장하지 않습니다.</p>
+
+<p>필요한 배경·틀·문구가 없거나 알 수 없는 변수가 남으면 그 장은 자료 대기로 둡니다. 이미 저장된 서사 배열은 일부만 있거나 비어 있어도 다시 추첨하지 않습니다. 공통 인물정보는 같은 멤버의 성장 단계가 확인된 뒤 공개·잠김·자료 대기를 구분하고, 문장을 읽는 행위가 능력이나 승급을 올리지 않습니다.</p>
+
+<p>화면별 전달 범위는 구분합니다. 현재 보드용 변환은 소개와 <code>step_0</code>~<code>step_4</code>를 전달하며 프롤로그·에필로그를 그 목록에 새로 넣지 않습니다. 생성 멤버의 전체 <code>story</code>는 합류 자료에 따로 담기고, 정보창은 확인된 공개 조건으로 조회합니다. 전체 서사 생성과 모든 화면의 같은 장 공개를 동일한 완료 범위로 보지 않습니다.</p>
+<h3 id="멤버-이야기-텍스트-미리보기">멤버 이야기 텍스트 미리보기</h3>
+
+<p>이 도구에서는 인물을 새로 조합한 뒤 그 인물에게 붙은 배경을 확인하고, 소개부터 성장 0~4 단계와 마지막 회고까지 이어서 읽습니다. 이야기가 같은 배경과 경험을 자연스럽게 이어 가는지, 빠지거나 어색한 문장이 없는지 살펴보는 데 사용합니다.</p>
+
+<p>미리보기는 실제 게임에서 성장 단계를 올리거나 잠긴 이야기를 해금하는 조작이 아닙니다. 생성해서 읽어 본 인물을 실제 진행의 멤버나 저장 기록으로 바꾸지도 않습니다. 실제 공개 여부는 게임의 현재 멤버와 성장 단계에 따라 별도로 판단합니다. 미리보기 화면은 만들어졌으며, 실제 실행 화면 확인은 현중이 직접 할 예정입니다.</p>
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>오디션은 후보 생성기에 시드·후보 수·원본 표를 전달하고 생성된 후보와 배경·이야기를 오디션 자료로 연결합니다. 후보 생성기는 시드 난수, 이름·프로필 목록, 성격·배경 연결, 18세부 능력·재능, 서사 틀, 후보 저장과 전달이 필요합니다. 표의 빈 값에 생성기 임시 설정을 쓰는 경우에는 출처와 발란스 대기를 남깁니다. 실제 관계 쌍이나 포지션 규칙이 아직 부족한 값은 완성된 결과로 바꾸지 않습니다.</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<div class="table-scroll"><table><thead><tr><th>화면</th><th>역할</th></tr></thead><tbody><tr><td>후보 소개</td><td>이름·성격·배경 칩과 소개 문장 확인</td></tr><tr><td>명함·대진</td><td>같은 후보를 비교하고 선택</td></tr><tr><td>합류 확인</td><td>후보 ID와 생성 자료를 다음 화면에 전달합니다. 현재 오디션은 몬스를 새로 지급하지 않으며, 옛 짝 몬스 정보는 호환 자료로 구분합니다</td></tr><tr><td>공통 인물정보</td><td>현재 성장 단계와 원본 서사의 공개 상태를 함께 확인</td></tr><tr><td>멤버 이야기 텍스트 미리보기</td><td>새로 조합한 인물의 배경·소개·성장 0~4·마지막 회고를 읽어 보는 미리보기 화면</td></tr></tbody></table></div>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<p>처음 능력·재능의 범위와 합, 후보 수·대진 선택 경향의 가중치, 성격·배경·관계 요인과 포지션 문턱은 <b>발란스 대기</b>입니다. 생성형 개별 외형과 오디션 선택 경향의 재생성 연결은 작업 전입니다.</p>
+
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<div class="table-scroll"><table><thead><tr><th>리소스</th><th>사용 위치와 역할</th><th>상태</th></tr></thead><tbody><tr><td>기존 카드북 표지</td><td>후보 표시용 기존 그림을 순환 사용</td><td>현재 생성 결과에서 참조</td></tr><tr><td>배경 칩과 소개 문장</td><td>후보의 동기·약점 등을 설명</td><td>표와 문장 틀 사용</td></tr><tr><td>생성형 얼굴·의상·3D 인물</td><td>후보마다 고유 외형</td><td>작업 전</td></tr></tbody></table></div>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<p>개별 외형 생성과 성장 장면의 새 연출은 작업 전입니다. 현재 기존 표지 재사용과 별도로 검토합니다.</p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일</th><th>역할</th><th>연결과 주의</th></tr></thead><tbody><tr><td><code>data/rapport_sim/member_init_rule.csv</code></td><td>처음 값의 대상과 범위</td><td><code>target_key</code> · 빈 범위와 임시 설정 출처 구분</td></tr><tr><td><code>data/rapport_sim/member_name_piece.csv</code> · <code>member_stage_name_piece.csv</code></td><td>본명 조각과 예명 추천 재료</td><td>조각 ID를 생성 결과에 보존</td></tr><tr><td><code>data/rapport_sim/member_profile_option.csv</code></td><td>취미·언어·기수 등 목록</td><td>항목 ID와 값 · 목록과 실제 화면 표시 구분</td></tr><tr><td><code>data/rapport_sim/personality_type.csv</code> · <code>personality_slider.csv</code> · <code>personality_slider_map.csv</code></td><td>성격 유형·축·유형별 범위</td><td>유형 ID·축 ID · 범위 발란스 대기</td></tr><tr><td><code>data/rapport_sim/personality_type_trait.csv</code> · <code>personality_source_map.csv</code> · <code>worldcup_carry_rule.csv</code></td><td>꼬리표·배경 연결과 선택 경향</td><td>현재 오디션 호출에서 선택 기록 전달 여부를 구분</td></tr><tr><td><code>data/audition_sim/audition_background_piece.csv</code></td><td>집안·고향·동기·약점·경력·특기의 칩과 발언</td><td><code>piece_id</code> · 같은 조각을 이야기에도 사용</td></tr><tr><td><code>data/rapport_sim/member_story_template.csv</code></td><td>장별 문장·대사·공개 단계</td><td><code>member_story_template_id</code>, <code>stage_code</code>, <code>unlock_step</code></td></tr><tr><td><code>data/idol_ability_sim/idol_growth_stat.csv</code></td><td>18세부와 6축의 관계</td><td><code>stat_id</code>, <code>parent_id</code></td></tr><tr><td><code>data/rapport_sim/rapport_axis.csv</code> · <code>rapport_factor.csv</code></td><td>관계 축과 처음 관계 요인</td><td>쌍별 자료·효과는 발란스 대기</td></tr><tr><td><code>data/audition_sim/profile.json</code></td><td>오디션의 현재 후보 수·실행 설정</td><td>후보 묶음과 대진 인원을 구분 · 임시</td></tr></tbody></table></div>
+
+<p>현재 능력·재능 범위 표에는 임시 값이 있지만, 이 생성 경로의 세부 범위·합계는 <code>src/simulator/growth-relation/idol-generator-config.mjs</code>의 <code>ability</code>를 직접 읽습니다. 표가 비었을 때만 쓰는 설정과 동일하지 않으며, 코드의 「member_init_rule 빈칸」 출처 진단도 현재 셀 상태와 구분합니다. 값의 오류·확정 여부를 새로 정하지 않습니다.</p>
+<p>주사위 환산: 해당 없음 · 후보 생성은 주사위 지급이나 소비를 직접 계산하지 않습니다.</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>상태</th><th>확인 범위·다음 작업</th></tr></thead><tbody><tr><td>후보 이름·성격·배경·능력 생성</td><td>개발 중</td><td>시드와 표·임시 설정으로 후보 묶음 생성. 수치 발란스 대기</td></tr><tr><td>서사 조합·합류 전달·성장 공개</td><td>개발 중</td><td>배경을 재사용하고 같은 멤버로 연결. 미공급과 잠김을 구분</td></tr><tr><td>오디션 대진 경향 재생성</td><td>기획 중</td><td>공통 함수 입력 경로와 달리 현재 오디션 호출 연결은 작업 전</td></tr><tr><td>관계 최초값·포지션 문턱</td><td>기획 중</td><td>필요한 요인·조건과 값 발란스 대기</td></tr><tr><td>개별 외형 생성</td><td>기획 중</td><td>작업 전. 현재는 기존 카드북 표지 사용</td></tr><tr><td>멤버 이야기 텍스트 미리보기</td><td>화면 생성 · 실행 검수 전</td><td>실제 화면 확인은 현중이 직접 예정. 실제 성장·해금·저장을 변경하지 않는 범위를 확인</td></tr></tbody></table></div>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<ul>
+<li>같은 진행의 후보 ID·이름·배경·이야기가 화면 이동과 복원 뒤에도 같은 사람인지 확인합니다.</li>
+<li>저장된 부분·빈 서사를 재추첨하지 않고 공개 단계에 따라 열림·잠김·자료 대기를 구분합니다.</li>
+<li>새 진행과 기존 진행, 공통 생성기의 선택 경향 기능과 현재 오디션 호출을 구분합니다.</li>
+<li>실제 0·미공급·임시 설정값을 구분하고 원본 표의 미정값을 확정하지 않습니다.</li>
+</ul>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p>직전 본문은 짝 로그의 접힌 원문에 그대로 보존했습니다. 예전 문서의 전달 미연결·생성기 미구현 설명과 현재 구현이 다른 곳은 이력으로 구분합니다.</p>
+
+<details>
+<summary>작업 기록</summary>
+
+<ul>
+<li>기존 MD·HTML·P100·P107, 생성기·서사·인물정보 코드와 실제 표를 대조했습니다. 이번 문서 작업에서 새 실행·화면 캡처·빌드는 하지 않았습니다.</li>
+<li>변경 전 원문과 근거 경로는 짝 로그와 작업 백업에 보존합니다.</li>
+</ul>
+
+</details>
+<details><summary>이번 원문·소스 대조 기록 · 실구동 미검수</summary><p>codex · 2026-11-03 22:43:39 KST · 제안(검수 대기). 대표 MD·HTML·관련 로그와 원표·로더·계산/조회·writer를 정적으로 대조했습니다. 보호 play는 읽기·검색·해시·실행을 포함해 접근하지 않았습니다. 실제 게임·브라우저·저장·서버·빌드 검수는 하지 않았으며 코드·표·메타·공용 기록도 바꾸지 않았습니다. 새 수치·정책·승인은 없습니다. 직전 전문은 <a href="./랜덤멤버생성_기획서.log.md">짝 로그</a>에 보존합니다.</p></details></section><details class="history" id="document-history" data-log-src="./랜덤멤버생성_기획서.log.md"><summary>이전 로그와 변경 기록 펼치기</summary><div class="log-body"></div></details></main><script src="../작성기준_v02/sample-document.js" defer></script><script src="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/development-links.js" defer></script></body></html>

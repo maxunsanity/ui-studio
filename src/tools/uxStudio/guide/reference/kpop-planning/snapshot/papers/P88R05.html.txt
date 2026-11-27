@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>악귀 디펜스 · 사용 CSV</title>
+<style>
+:root{color-scheme:light;--ink:#233d38;--muted:#657c73;--line:#d7e5dc;--cream:#f5f6eb;--green:#1e6958;--panel:#fcfcf6}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);background:var(--cream);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+button,input,a{font:inherit;color:inherit}
+button{cursor:pointer}
+a{text-decoration:none}
+main{max-width:1440px;margin:auto;padding:28px 32px 24px}
+.eyebrow{font-size:11px;letter-spacing:.16em;font-weight:800;color:var(--green)}
+header{display:flex;gap:20px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
+h1{font-size:clamp(26px,3vw,40px);line-height:1.15;letter-spacing:-.05em;margin:8px 0}
+h2{font-size:13px;margin:16px 0 8px;color:var(--muted)}
+p{margin:0}
+header p{color:var(--muted);font-size:13px}
+.back{display:inline-block;margin-bottom:8px;font-size:13px;font-weight:700;color:var(--green)}
+.status-pill{flex-shrink:0;border:1px solid #bfd4c6;background:#edf4e9;padding:7px 12px;border-radius:100px;font-size:11px;font-weight:700}
+.tools{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:14px}
+.nav-mini{display:flex;gap:6px}
+.nav-mini button,.save button{border:1px solid var(--line);background:white;border-radius:10px;padding:8px 12px;font-weight:700}
+.nav-mini button:disabled{opacity:.4;cursor:default}
+.save{display:flex;gap:6px;flex-wrap:wrap}
+.save .primary{background:var(--green);border-color:var(--green);color:white}
+#save-note{font-size:12px;color:var(--muted);align-self:center}
+.audit{margin:0 0 14px;padding:12px 14px;background:white;border:1px solid var(--line);border-radius:14px}
+.audit.has-warn{border-color:#e2c98a;background:#fff8ea}
+.audit.has-crit{border-color:#e3b2a8;background:#fff4ec}
+.audit p{font-size:13px;font-weight:750}
+.audit ul{list-style:none;margin:8px 0 0;padding:0;max-height:140px;overflow:auto}
+.audit li button{border:0;background:transparent;padding:3px 0;text-align:left;font-size:12px}
+.table-btn.has-warn small::before{content:"";display:inline-block;width:7px;height:7px;margin-right:4px;border-radius:50%;background:#c48a2a;vertical-align:middle}
+tr.problem{background:#fff4e8}
+tr.here{box-shadow:inset 3px 0 0 var(--green)}
+td .link{border:0;background:transparent;color:var(--green);font-weight:750;padding:0;text-decoration:underline}
+label{display:grid;gap:4px;font-size:11px;font-weight:700;color:var(--muted)}
+input[type="search"]{width:min(420px,100%);border:1px solid var(--line);background:white;border-radius:10px;padding:8px 12px}
+.workspace{display:grid;grid-template-columns:320px minmax(0,1fr);gap:16px;align-items:start}
+.list,.sheet-card{background:var(--panel);border:1px solid var(--line);border-radius:16px}
+.list{max-height:calc(100vh - 220px);overflow:auto;padding:8px 8px 14px}
+.group{margin:0;padding:0 6px}
+.table-btn{width:100%;display:flex;justify-content:space-between;gap:8px;align-items:center;text-align:left;border:0;background:transparent;border-radius:10px;padding:8px 10px}
+.table-btn .name{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+.table-btn .name b{font-weight:750}
+.table-btn .name i{font-style:normal;color:var(--muted);font-size:11px}
+.table-btn small{color:var(--muted);font-size:11px;white-space:nowrap}
+.table-btn[aria-current="true"]{background:#e7f3ec;color:var(--green)}
+.sheet-card{min-width:0;overflow:hidden}
+.sheet-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
+.sheet-head h2{margin:0;color:var(--ink);font-size:18px}
+.badges{display:flex;gap:6px;flex-wrap:wrap}
+.badge{border-radius:999px;padding:4px 8px;font-size:11px;font-weight:750}
+.owner-단서{background:#edf4e9;color:#1e6958}
+.owner-클로드{background:#e7f0f8;color:#2d5f8a}
+.owner-단이{background:#f8f1e4;color:#8a6a32}
+.owner-읽기전용{background:#eef1ea;color:#657c73}
+.badge.lock{background:#fde8e4;color:#8a3d32}
+.badge.warn{background:#fff1d6;color:#8a5a12}
+.columns{display:flex;gap:8px 12px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);font-size:12px}
+.columns label{display:flex;gap:4px;align-items:center;font-weight:650;color:var(--ink)}
+.sheet{overflow:auto;max-height:calc(100vh - 280px)}
+table{border-collapse:collapse;width:max-content;min-width:100%;font-size:12px}
+th,td{border-bottom:1px solid #e6eee6;padding:7px 10px;text-align:left;vertical-align:top;white-space:nowrap}
+th{position:sticky;top:0;background:#f7faf4;font-size:11px}
+td{max-width:280px;overflow:hidden;text-overflow:ellipsis}
+.empty{padding:22px 16px;color:var(--muted)}
+#error{display:none;white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;margin:0 0 14px;border:1px solid #cbaea1;background:#fff4ec;border-radius:12px;color:#7d3828;font-size:12px}
+footer{margin-top:14px;font-size:11px;color:#7b8c7f}
+@media(max-width:800px){
+  main{padding:18px 14px}
+  header{display:block}
+  .status-pill{display:inline-block;margin-top:10px}
+  .workspace{grid-template-columns:1fr}
+  .list,.sheet{max-height:46vh}
+  h1{font-size:28px}
+}
+
+.scope-bar{display:flex;gap:18px;align-items:center;padding:12px 16px;margin-bottom:14px;background:#e7f0e9;border:1px solid var(--line);border-radius:12px}.scope-bar select{font:inherit;max-width:100%;padding:8px;border:1px solid #bfd4c6;border-radius:8px;background:white}.scope-bar p{font-size:12px;flex:1}.inventory{min-width:0}.inventory-head{padding:10px 12px;background:white;border:1px solid var(--line);border-radius:12px 12px 0 0}.inventory-head b{font-size:13px}.inventory-head label{margin-top:6px}.inventory-head input{width:100%}.list{border-radius:0 0 12px 12px;max-height:65vh}.usage-kind{font-size:10px;color:var(--green);margin-top:5px}.table-btn{padding:11px 10px;align-items:start}.table-btn .name{overflow-wrap:anywhere}.source-panel{padding:12px 16px;font-size:12px;border-bottom:1px solid var(--line)}#source-meta{margin:0;display:grid;gap:5px}#source-meta>div{display:grid;grid-template-columns:68px minmax(0,1fr);gap:8px}#source-meta dt{color:var(--muted)}#source-meta dd{margin:0;overflow-wrap:anywhere}.source-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}.source-links a{color:var(--green);text-decoration:underline}#related-plans{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}#related-plans button,.pagination button{background:white;border:1px solid var(--line);border-radius:6px;padding:4px 7px;font-size:11px}#usage-source{margin-top:8px}#usage-source summary{cursor:pointer}#usage-source a{display:block;overflow-wrap:anywhere;color:var(--green);margin:5px 0}.field-options summary{padding:8px 16px;font-size:11px;cursor:pointer}.pagination{display:flex;gap:12px;align-items:center;padding:8px 16px;font-size:11px;border-block:1px solid var(--line)}.pagination button:disabled{opacity:.4}.sheet-head{flex-wrap:wrap}.sheet-head h2{overflow-wrap:anywhere}.sheet{max-height:58vh}.audit ul{max-height:85px}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #d79a67;outline-offset:2px}@media(max-width:800px){.scope-bar{display:block}.scope-bar p{margin-top:8px}.sheet-head{padding:12px}.source-panel{padding:10px}.inventory .list{max-height:32vh}.sheet{max-height:48vh}.sheet-head h2{font-size:16px}.tools label{width:100%}.tools input{width:100%}.save button{font-size:12px}}
+
+.audit summary{cursor:pointer;font-size:11px;font-weight:650}.table-selector{display:none;margin-bottom:10px}.table-selector select{font:inherit;width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;background:white}#selected-purpose{font-size:12px;color:var(--muted);padding:8px 16px}.source-panel summary{cursor:pointer;font-size:11px}.source-panel[open] #source-meta{margin-top:9px}.embedded main{padding:12px}.embedded>.back,.embedded main>.back,.embedded header{display:none}.embedded .scope-bar{margin-bottom:8px;padding:8px 10px}.embedded .scope-bar label{white-space:nowrap}.embedded .tools{gap:7px;margin-bottom:8px}.embedded .tools button{font-size:11px;padding:6px 8px}.embedded .tools input{font-size:11px;max-width:180px;padding:6px 8px}.embedded #save-note{display:none}.embedded .audit{padding:7px 10px;margin-bottom:8px}.embedded .workspace{grid-template-columns:230px minmax(0,1fr);gap:10px}.embedded .sheet-head{padding:9px 12px}.embedded .sheet-head h2{font-size:15px}.embedded .sheet{max-height:58vh}.embedded .list{max-height:68vh}.embedded .source-panel{padding:7px 12px}.embedded #selected-purpose{padding:6px 12px;font-size:11px}.embedded .inventory-head label{font-size:10px}.embedded .inventory-head input{font-size:11px}.embedded .table-btn{padding:9px 8px}.embedded .field-options summary{padding:6px 12px}
+@media(max-width:800px){.table-selector{display:grid}.embedded .workspace{grid-template-columns:1fr}.embedded .inventory{display:none}.embedded main{padding:9px}.embedded .scope-bar p{font-size:10px;margin-top:6px}.embedded .tools{margin:6px 0}.embedded .nav-mini{display:none}.embedded .tools label{width:auto;flex:1}.embedded .tools input{max-width:none;width:100%}.embedded .save{flex:1}.embedded #save-all{display:none}.embedded .table-selector{font-size:10px;margin-bottom:7px}.embedded .table-selector select{font-size:11px;padding:7px}.embedded .sheet-head h2{font-size:13px}.embedded .badges{display:none}.embedded .scope-bar label{display:flex;align-items:center;gap:8px}.embedded .scope-bar select{font-size:11px}.embedded .sheet{max-height:65vh}.embedded .audit summary{font-size:10px}}
+@media(max-width:800px){.embedded .scope-bar,.embedded .tools .save,.embedded .audit:not(.has-crit){display:none}.embedded .tools label{width:100%}.embedded .table-selector{margin-bottom:6px}}
+</style>
+</head>
+<body data-plan="planning_development_plan_defense">
+<main>
+<a class="back" href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P73" target="_top">← 기획으로 돌아갑니다</a>
+<header>
+  <div>
+    <div class="eyebrow">KPOP MONSTERS · COMMON TABLES</div>
+    <h1 id="scope-title">전체 테이블 · 공용 CSV</h1>
+    <p id="scope-summary">등록한 표를 불러옵니다.</p>
+  </div>
+  <div class="status-pill">제안(검수 대기)</div>
+</header>
+<div id="error" role="alert"></div>
+<section class="scope-bar"><label>기획별 목록<select id="scope"></select></label><p id="inventory-summary"></p></section><div class="tools">
+  <div class="nav-mini">
+    <button type="button" id="back" disabled>← 뒤로</button>
+    <button type="button" id="fwd" disabled>앞으로 →</button>
+  </div>
+  <label>검색<input id="q" type="search" placeholder="이름이나 칸 내용을 찾습니다"></label>
+  <div class="save">
+    <button type="button" id="save-one">이 표를 받습니다</button>
+    <button type="button" class="primary" id="save-all">전체 등록 CSV를 받습니다</button>
+  </div>
+  <p id="save-note">받은 파일은 복사본입니다.</p>
+</div>
+<details id="audit" class="audit" aria-live="polite"></details>
+<label class="table-selector">CSV 선택<select id="table-select"></select></label><div class="workspace">
+  <aside class="inventory"><div class="inventory-head"><b>CSV 목록 <span id="list-count"></span></b><label>목록 검색<input id="table-query" type="search" placeholder="파일명·용도·경로"></label></div><nav class="list" id="list" aria-label="표 목록"></nav></aside>
+  <section class="sheet-card" aria-label="고른 표">
+    <div class="sheet-head">
+      <h2 id="sheet-title">표를 불러옵니다.</h2>
+      <div class="badges" id="badges"></div>
+    </div>
+    <p id="selected-purpose"></p><details class="source-panel"><summary>원본 경로·용도·사용 기획을 봅니다</summary><dl id="source-meta"></dl><nav class="source-links"><a id="csv-source" target="_blank" rel="noopener"></a><a href="/docs/planning/game-table-tool.html" target="_blank" rel="noopener">전체 테이블을 봅니다</a></nav><div id="related-plans"></div><details id="usage-source" hidden></details></details><details class="field-options"><summary>표시할 열을 고릅니다</summary><div class="columns" id="columns"></div></details><div class="pagination"><button id="previous-page" type="button">이전 행</button><span id="page-count"></span><button id="next-page" type="button">다음 행</button></div>
+    <div class="sheet" id="sheet"></div>
+  </section>
+</div>
+<footer>공용 CSV 보기 · 원본 파일을 읽습니다. 받는 파일은 복사본입니다.</footer>
+</main>
+<script type="module" src="/docs/planning/game-table-tool.ts"></script>
+</body>
+</html>

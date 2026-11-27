@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="ko">
+<head><script src="/docs/planning/sb-loading.js"></script><script src="/docs/planning/fetch-dedupe.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>케이팝 몬스터즈 — 발란스표 툴</title>
+<link rel="stylesheet" href="/src/tools/balanceTool/styles.css" />
+<!-- 10/29 슈덴: 「성장 보기」 공통 창 입구(스타일 · 마운트 스크립트) 제거 · 계산 코드(commonWindow/*.ts)는 그대로 -->
+</head>
+<body class="ops-face-home">
+<!-- 10/12 claude: 기획서 툴과 같은 틀(왼쪽 주제 목록 + 오른쪽 화면). 계산 · 표는 그대로, 껍데기만 바꿈. 옛 화면은 _backup/20261012_claude/1400_발란스툴껍데기_전 -->
+<div class="bt-app">
+<header class="bt-top">
+  <h1>발란스 <span class="sub">케이팝 시즌 경제 · 주제별</span></h1>
+  <span class="sticker">현재 세팅값 · 표별 숫자·공급 상태</span>
+  <span class="badge" id="hdS0">S —</span>
+  <span class="badge" id="hdIssues">—</span>
+  <span class="sub" id="hdSrc">CSV 읽는 중…</span>
+  <a class="bt-top-link" href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S02" target="_top">S02 발란스 툴 기획서</a>
+</header>
+<div class="bt-cols">
+<nav class="bt-left" id="btTopics" aria-label="발란스 주제"></nav>
+<div class="bt-right">
+<section id="btTopicCard" class="bt-topic-card" aria-live="polite"></section>
+<section id="btTopicEmpty" class="bt-topic-empty" hidden></section>
+<main>
+  <div id="err"></div>
+
+  <div class="viewtabs" hidden>
+    <button type="button" class="vtab on" data-view="home">운영 홈</button>
+    <button type="button" class="vtab" data-view="work">작업</button>
+    <button type="button" class="vtab" data-view="econ">헌법</button>
+    <button type="button" class="vtab" data-view="ledger">원장</button>
+    <button type="button" class="vtab" data-view="diceflow">주사위</button>
+    <button type="button" class="vtab" data-view="season">시즌</button>
+    <button type="button" class="vtab" data-view="card">카드</button>
+    <button type="button" class="vtab" data-view="expadv">모험</button>
+    <button type="button" class="vtab" data-view="skillget">스킬 공급</button>
+    <button type="button" class="vtab" data-view="idolhex">아이돌 6각형</button>
+    <button type="button" class="vtab" data-view="build30">9건물 30단계</button>
+    <button type="button" class="vtab" data-view="bench">벤치</button>
+    <button type="button" class="vtab" data-view="const">조항</button>
+    <button type="button" class="vtab" data-view="eventops">이벤트</button>
+  </div>
+  <nav class="ops-subnav" id="opsSubnav" hidden>
+    <button type="button" data-go="home" data-nav="home">운영 홈</button>
+    <button type="button" data-go="work" data-nav="work">작업</button>
+    <span class="ops-here" id="opsHere"></span>
+    <span id="opsPlanning" data-planning-rooms hidden></span>
+  </nav>
+
+<section id="viewHome">
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>운영 홈 <span class="tag">케이팝 표 · 구조 반영 완료 · 표별 숫자·공급 상태</span></h2>
+    <p class="hint" style="margin:0">6각형(6축 18세부 + 외국어 3 + 숨긴 값 태도·성실성), 9건물 30단계(본관1+부속2 · 캐스팅권은 엔터 파워 문턱 · 값은 enter_power_level 표), 주사위 굴림 배수(×1~×1,000 선형) 구조가 연결되었습니다. 현재 숫자·미공급·검수 상태는 <span class="need">각 표에서 확인</span>합니다.</p>
+  </div>
+  <div class="ops-home-grid">
+    <button type="button" class="ops-tile" data-go="econ"><div class="ph"></div><div class="cap"><b>헌법</b><span>약속과 지금 표가 맞나 · 검산</span></div></button>
+    <button type="button" class="ops-tile" data-go="work"><div class="ph"></div><div class="cap"><b>작업</b><span>축별 작업실 · 주사위 · 골드 · 시즌</span></div></button>
+    <div class="ops-tile" style="min-height:auto;padding:14px 14px 12px;display:flex;flex-direction:column;gap:4px">
+      <b style="font-size:18px">실측</b>
+      <span class="hint" style="margin:0">게임 경제 기록 · 저장본 비교</span>
+      <div class="ops-mini">
+        <a href="/docs/planning/playlog-live-tool.html">📡 실시간</a>
+        <a href="/docs/planning/playlog-tool.html">📈 실측 분석</a>
+      </div>
+    </div>
+    <button type="button" class="ops-tile" data-go="eventops"><div class="ph"></div><div class="cap"><b>이벤트</b><span>보상 계획 · 재화 검사 · 버프</span></div></button>
+    <a class="ops-tile" href="/docs/planning/game-prototype.html" data-top-go><div class="ph"></div><div class="cap"><b>게임</b><span>프로토타입 · 같은 표로 굴림</span></div></a>
+    <a class="ops-tile" href="/docs/planning/planning-docs-tool.html" data-top-go><div class="ph"></div><div class="cap"><b>기획서</b><span>기획서 툴 · 7007</span></div></a>
+  </div>
+</section>
+
+<section id="viewWork" hidden>
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>작업실</h2>
+    <p class="hint" style="margin:0">
+      여기는 <b>숫자를 보는 방</b>이에요. 축을 고르면 그 작업실로 들어가요.
+      맞은지 틀린지만 보려면 <button type="button" class="btn" data-go="econ" style="padding:4px 10px;font-size:12px">헌법</button>
+    </p>
+  </div>
+  <div class="ops-work-grid">
+    <button type="button" data-go="idolhex">아이돌 능력 · 6각형 <small>6축 18세부 · 꼭짓점=축 평균 · 칭호 · 단계 문턱</small></button>
+    <button type="button" data-go="build30">9건물 30단계 <small>본관1+부속2 · 엔터 파워 문턱 캐스팅권</small></button>
+    <button type="button" data-go="diceflow">주사위 · 굴림 배수 <small>굴림 횟수 · 굴림당 배수(×1~×1,000 선형)</small></button>
+    <button type="button" data-go="ledger">골드 · 원장 <small>40칸마다 뭘 주나</small></button>
+    <button type="button" data-go="season">시즌 · 60일 <small>굴림 횟수 · 배수 기준 시뮬</small></button>
+    <button type="button" data-go="card">카드 <small>수집 보상 · 덤 보상 묶음</small></button>
+    <button type="button" data-go="skillget">스킬 공급 <small>효과 종류 · 판정 상한 · 티어</small></button>
+    <button type="button" data-go="expadv">모험 <small>탐험 · 친구 동행 · 우정 포인트 · 내 라포</small></button>
+    <button type="button" data-go="bench">참고 벤치 <small>모노폴리 GO · 참고만</small></button>
+    <button type="button" data-go="const">조항 · 비앙카 입력 자리 <small>표 값 전수 목록 · 숫자·공급 상태</small></button>
+    <button type="button" data-go="eventops">이벤트 <small>보상 계획 · 재화 검사 · 버프</small></button>
+  </div>
+</section>
+
+<section id="viewEcon" hidden>
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>목표와 검사 — 약속이 표와 맞나? <span class="tag">현재 세팅값 · 원본 값과 공급 현황</span></h2>
+    <p class="hint" style="margin:0">판 없이 한 시즌(60일) 동안 9건물(각 30단계 · 본관1+부속2)을 짓고, 6축 18세부로 아이돌을 키웁니다. 주사위는 굴림마다 거는 배수(×1~×1,000 선형)로 곱하며, 숫자·미공급·검수 상태는 <span class="need">각 표에서 확인</span>합니다.</p>
+  </div>
+  <div class="card" style="margin-bottom:14px"><h2>📌 비앙카 값 입력 자리 안내 (표 · 열 매핑) <span class="tag">값은 비앙카가 정함 · 표별 공급·검수 상태 확인</span></h2><div id="ecBiancaGuide" class="scroll"></div></div>
+  <div class="card" style="margin-bottom:14px"><h2>이 게임을 만들며 결정한 것 <span class="tag">축마다 하나씩</span></h2><div id="ecDecide"></div></div>
+  <div class="kpis" id="kpis"></div>
+  <div class="card" style="margin-bottom:14px"><h2>위반 · 주의 <span class="tag" id="issueCount"></span></h2><div id="issues"></div></div>
+  <div class="grid g2">
+    <div class="card"><h2>① 주사위 1개당 기대 수익 <span class="tag">배수마다 비슷해야</span></h2><div id="ecEv" class="scroll"></div></div>
+    <div class="card"><h2>② 상한이 걸리는 배수 <span class="tag">잭팟 한 방 S×30%</span></h2><div id="ecCap" class="scroll"></div></div>
+    <div class="card"><h2>③ 시즌 활성 시간 <span class="tag">모노 드라이 시간 → 시즌</span></h2><div id="ecDry"></div></div>
+    <div class="card"><h2>④ 60일 데드라인 <span class="tag">점검 일차 건설률</span></h2><div id="ecDeadline" class="scroll"></div></div>
+    <div class="card"><h2>⑤ 수입 구성 <span class="tag">시즌 합 · 칸 종류별</span></h2><div id="ecMix" class="scroll"></div></div>
+    <div class="card"><h2>⑩ 전 항목 S 비율 <span class="tag">economy_config</span></h2><div id="ecRatio" class="scroll"></div></div>
+  </div>
+</section>
+
+<section id="viewLedger" hidden>
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>칸별 수익 <span class="tag">40칸 · CSV 실시간</span></h2>
+    <p class="hint" style="margin:0">점프 칸이 없어서 오래 굴리면 칸마다 1/40씩 섭니다. 금액은 배수 ×1 · S 대비 %.</p>
+  </div>
+  <div class="kpis" id="ldHero"></div>
+  <div class="card" style="margin-bottom:14px"><h2>🩺 한 줄 판정</h2><div id="ldVerdict"></div></div>
+  <div class="grid g2">
+    <div class="card"><h2>🏅 등급이 몇 번 나오나 <span class="tag">대박 · 중박 · 운망</span></h2><div id="ldGrade" class="scroll"></div></div>
+    <div class="card"><h2>📊 무엇을 얼마나 받나 <span class="tag">칸 종류별</span></h2><div id="ldGroups" class="scroll"></div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h2>⚖️ 불균형 진단 <span class="tag" id="ldIssueCount"></span></h2><div id="ldIssues"></div></div>
+  <div class="card" style="margin-top:14px"><h2>📋 40칸 전부 <span class="tag">순서대로</span></h2><div id="ldTiles" class="scroll"></div></div>
+</section>
+
+<section id="viewDiceFlow" hidden>
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>주사위 · 굴림 배수 선형 모델 <span class="tag">굴림 횟수 · 굴림당 배수(×1~×1,000) · 선형 비례</span></h2>
+    <p class="hint" style="margin:0"><b>현중 10/16 정정 반영:</b> 옛 「하루 주사위 N개 · 배수 문턱」 전제 계산은 <b>폐기</b>했습니다. 입력은 <b>① 굴림 횟수</b>와 <b>② 굴림당 배수(×1~×1,000)</b> 둘로 나누며, 굴림 1번 비용 = 배수 × 기본 비용, 칸 보상·성장 = 배수 × 기본 값(선형), 이동은 배수와 무관하게 굴림 1번에 1번입니다. 배수 중간 단계·기본 비용·보상 값의 숫자·미공급·검수 상태는 <span class="need">각 표에서 확인</span>합니다.</p>
+  </div>
+  <div class="card" style="margin-bottom:14px"><h2>🎛 굴림 배수 선형 모델 입력 <span class="tag">입력 2개: 굴림 횟수 · 굴림당 배수(×1~×1,000)</span></h2>
+    <div class="knobs">
+      <div class="knob"><label>① 굴림 횟수 <b id="dfRollsV">30회</b></label><input type="range" id="dfRolls" min="1" max="200" step="1" value="30" /><div class="r"><span>1회</span><span>200회</span></div></div>
+      <div class="knob"><label>② 굴림당 배수 <b id="dfMultV">×1</b></label><input type="range" id="dfMult" min="0" max="0" step="1" value="0" /><div class="r"><span>×1</span><span id="dfMultMax">×1,000</span></div></div>
+      <div class="knob" hidden><label>기획사 팬 총합 <b id="dfProsV"></b></label><input type="range" id="dfPros" min="0" max="0" step="1" value="0" /><div class="r"><span>0</span><span id="dfProsMax"></span></div></div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:14px"><h2>📐 선형 배수 계산 결과 <span class="tag">이동 = 굴림 1번에 1번 · 비용·보상·성장 = 배수 × 기본 값</span></h2><div class="kpis" id="dfPeriodHero"></div><div id="dfUse" class="scroll"></div></div>
+  <div class="grid g2">
+    <div class="card"><h2>배수 단계 구조 (×1~×1,000) <span class="tag">배수 원본·숫자·검수 상태 확인</span></h2><div id="dfGate" class="scroll"></div></div>
+    <div class="card"><h2>플레이어 유형별 굴림 예시 <span class="tag">비앙카 11:00 수정 메모</span></h2><div id="dfKrw" class="scroll"></div></div>
+  </div>
+  <details class="card" style="margin-top:14px">
+    <summary style="cursor:pointer;font-weight:700">참고 보관 · 무료 주사위 채널 · 보관 상한 · 팬 마일스톤 (현재 표 값·공급 상태)</summary>
+    <div style="margin-top:12px" id="dfChannels"></div>
+    <div id="dfPeriod" class="scroll" style="margin-top:10px"></div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><h2>🎁 무료 지급원 <span class="tag">현재 표 값·공급 상태</span></h2><div id="dfGrant" class="scroll"></div></div>
+      <div class="card"><h2>📦 보관 상한 단계 <span class="tag">현재 표 값·공급 상태</span></h2><div id="dfCap" class="scroll"></div></div>
+      <div class="card full"><h2>🏗 팬 마일스톤 <span class="tag">현재 표 값·공급 상태</span></h2><div id="dfMilestone" class="scroll"></div></div>
+    </div>
+  </details>
+</section>
+
+<section id="viewSeason" hidden>
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>🏁 시즌 — 60일 안에 얼마나 짓나 <span class="tag">모노 클리어 탭 대신</span></h2>
+    <p class="hint" style="margin:0">하루 충전분을 쉬지 않고 받아 다 굴리고, 시설 칸이면 증설 · 남는 돈으로 대지를 짓는 자동 플레이입니다. 검사기(<code>audit-game-economy.mjs</code>)와 같은 계산이에요.</p>
+  </div>
+  <div class="card" style="margin-bottom:14px"><h2>손잡이 <span class="tag">툴 안에서만 · 표는 안 바뀜</span></h2>
+    <div class="knobs">
+      <div class="knob"><label>배수 <b id="snMultV"></b></label><input type="range" id="snMult" min="0" max="0" step="1" value="0" /><div class="r"><span>×1</span><span id="snMultMax"></span></div></div>
+      <div class="knob"><label>시즌 건설비 배율 <b id="snScaleV"></b></label><input type="range" id="snScale" min="25" max="200" step="5" value="100" /><div class="r"><span>표 값 ×0.25</span><span>×2</span></div></div>
+      <div class="knob"><label>돌릴 횟수 <b id="snRunsV"></b></label><input type="range" id="snRuns" min="1" max="16" step="1" value="8" /><div class="r"><span>1</span><span>16</span></div></div>
+      <div class="knob"><label>하루 주사위 입력 <b>무료 · 헤비</b></label><select id="snInput"><option value="table">표 값(기본)</option></select><div class="r"><span>표 core_proposal_config.csv</span><span>헤비 = 무료 포함</span></div></div>
+    </div>
+  </div>
+  <div class="kpis" id="snHero"></div>
+  <div class="grid g2">
+    <div class="card"><h2>시즌 진행별 건설률</h2><div id="snChart"></div><div class="lg"><span><i style="background:var(--primary)"></i>건설률(%)</span></div><p class="hint">기획사 팬 총합은 아래 점검 일차 표 · fan_gain 현재 세팅값(증설 1번 = 팬 100).</p></div>
+    <div class="card"><h2>★ 점검 일차 <span class="tag">tool_economy_season_budget_config</span></h2><div id="snCheck" class="scroll"></div></div>
+    <div class="card"><h2>🔓 팬 잠금 열린 날</h2><div id="snUnlock" class="scroll"></div></div>
+    <div class="card"><h2>🩺 진단</h2><div id="snIssues"></div></div>
+  </div>
+</section>
+
+<section id="viewCard" hidden>
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>🃏 카드 수집 · 덤 보상 <span class="tag">card_collection_reward · bonus_reward_pool</span></h2>
+    <p class="hint" style="margin:0">모노 종 완성 · 수집 % 보상과 완공 · 돌림판 · 미니게임 보상 묶음을 옮겼습니다. 주사위는 모노 × 5/12, 돈은 S 대비 % 현재 세팅값이에요.</p>
+  </div>
+  <div class="kpis" id="cdHero"></div>
+  <div class="grid g2">
+    <div class="card"><h2>수집 보상 <span class="tag">테마 완성 · 수집 %</span></h2><div id="cdCollect" class="scroll"></div></div>
+    <div class="card"><h2>덤 보상 묶음 기대값 <span class="tag">한 번 뽑을 때</span></h2><div id="cdPoolSum" class="scroll"></div></div>
+    <div class="card full"><h2>덤 보상 묶음 전부 <span class="tag">가중치 · 확률</span></h2><div id="cdPool" class="scroll"></div></div>
+  </div>
+</section>
+<section id="viewExpAdv" hidden></section>
+<section id="viewSkillGet" hidden>
+  <div class="card purpose" style="margin-bottom:14px"><h2>스킬 공급 <span class="tag">표를 읽어 보여 주기만 · 11/10 아론</span></h2>
+    <p>얻는 때(현중 결정): 생성 때 t1만(D47 · 11/10 14:07~14:08) · 데뷔조 승급 때 t2 하나(D48 · 11/10 14:24 · 값은 아직 비어 있음) · 라이징 스타 승급 때 t3(D48 · D49 11/10 14:56). 판정 스킬 합 상한은 하나(D44 · 11/10 12:49 · stack_group 에서 읽음).</p></div>
+  <div id="skillSupplyBody"><div class="card">스킬 공급 표 읽는 중…</div></div>
+</section>
+<script type="module" src="/src/tools/balanceTool/skillSupply.ts"></script>
+
+<section id="viewIdolHex" hidden>
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>⬡ 아이돌 능력 · 6각형 6축 18세부 <span class="tag">현중 10/16 11:12 확정 · 원본 값·검수 상태</span></h2>
+    <p class="hint" style="margin:0">6각형 꼭짓점 = 각 축 세부 3개의 평균(<code>AVG</code>). 성장 단계 판정 = 18세부 합 문턱(<span class="need">현재 표 값 확인</span>). 6각형 밖: 외국어 영·중·일(합계 제외) · 태도·성실성(숨긴 값). 칭호(메인·리드·센터·리더·막내)는 팀 안 순위 계산 결과로만 표시합니다.</p>
+  </div>
+  <div class="kpis" id="ihHero"></div>
+  <div class="grid g2">
+    <div class="card">
+      <h2>⬡ 6각형 그래프 (꼭짓점 = 축 평균) <span class="tag">시계 방향 6축 · 모양 확인용 슬라이더</span></h2>
+      <div id="ihHexWrap" style="display:grid;grid-template-columns:minmax(260px,320px) 1fr;gap:14px;align-items:center">
+        <div id="ihHexSvg"></div>
+        <div id="ihHexKnobs"></div>
+      </div>
+      <p class="hint" style="margin-top:8px">슬라이더는 6각형 꼭짓점(축 평균)과 팀 내 순위 칭호 계산을 시험하기 위한 모양 확인용입니다. 실제 시작값·상한·성장 수치와 검수 상태는 <span class="need">각 원본 표에서 확인</span>합니다.</p>
+    </div>
+    <div class="card">
+      <h2>👑 팀 안 순위 칭호 계산 (메인 · 리드 · 센터 · 리더 · 막내) <span class="tag">능력이 아니라 순위 결과</span></h2>
+      <div id="ihTitles" class="scroll"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <h2>📋 6축 18세부 + 6각형 밖(외국어 3 · 숨긴 값 태도·성실성) 전체 표 <span class="tag">stat.csv · build_axis.csv · source.csv 실시간</span></h2>
+    <div id="ihDetailTable" class="scroll"></div>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card">
+      <h2>🔄 옛 4축 → 6축 단일 대응표 <span class="tag">legacy_axis_map.csv · convertLegacy4To6Axes</span></h2>
+      <div id="ihLegacyMap" class="scroll"></div>
+    </div>
+    <div class="card">
+      <h2>🪜 성장 5단계 판정 문턱 자리 <span class="tag">stage_gate.csv · 문턱 값·검수 상태</span></h2>
+      <div id="ihStages" class="scroll"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <h2>🎤 팀 결성 · 팀 공통 6스탯 · 멤버 6축 영향표 <span class="tag">team_stat.csv · team_axis_influence.csv · 원본 이름·숫자·검수 상태</span></h2>
+    <p class="hint" style="margin:0 0 8px">두 번째 멤버가 들어오는 순간에 팀 이름을 넣습니다. 멤버 1명이면 그 사람 화면, 결성되면 팀 화면이 기본이고 멤버를 누르면 개인 화면으로 바뀝니다. 팀 스탯 이름은 기획 조사 자리입니다.</p>
+    <div id="ihTeamStats" class="scroll"></div>
+    <div id="ihTeamInfl" class="scroll" style="margin-top:10px"></div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <h2>📈 성장 10단계 필요량 <span class="tag">step_table 정본</span></h2>
+    <p class="hint" style="margin:0 0 8px">성장 단계 폭과 필요량 계수는 공통 단계표에서 읽습니다. 단계 시작이 재능 이상이면 능력별 2차 무게를 적용하고, 천장에서 멈춥니다.</p>
+    <div id="ihDecayTable" class="scroll"></div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <h2>🃏 카드 · 미니게임 · 칸 성장 출처 연결 (2-3) <span class="tag">작곡 카드→작사·작곡 · 플로우 타기 대박→플로우 · 6·16·26·36 쟁탈 보드 제외</span></h2>
+    <div id="ihSources" class="scroll"></div>
+  </div>
+</section>
+
+<section id="viewBuild30" hidden>
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>🏛 9건물 30단계 (본관 1 + 부속 2) · 멤버 자리(사옥 캐스팅권) <span class="tag">현중 10/16 12:32 건물 이름 승인 · 숫자·공급 상태는 각 표에서 확인</span></h2>
+    <p class="hint" style="margin:0">건물 9개 모두 <b>30단계</b>(1~10 본관 · 11~20 +부속1 · 21~30 +부속2, 구간 경계는 <span class="need">원본 표에서 확인</span>). 묶인 칸 도착 시 1단계 증설하며, <b>사옥</b>은 1번 출발 칸을 지날 때 증설합니다. 캐스팅권(+1, 최대 5명)은 사옥 단계가 아니라 <b>엔터 파워 문턱</b>에서 열립니다(문턱 값은 <code>enter_power_level.csv</code> casting_ticket 줄이 정본 · 세팅 값 적용 · 옛 사옥 단계 칸은 보관). 팬샵(12·14·15)·숙소(2·37·39)·사옥(1)은 6축을 직접 올리지 않습니다.</p>
+  </div>
+  <div class="kpis" id="b30Hero"></div>
+  <!-- 11/07 클로드(현중 14:06): 현황판에 연결한 4칸(건물 비용 · 레슨 배수 · 캐스팅권 · 무료 지급)의 표 값 -->
+  <div class="card" style="margin:14px 0"><h2>📊 현황판 연결 4칸 · 표 값 <span class="tag">현황판 11 · 12 카드와 같은 표</span></h2><div id="b30Board"></div></div>
+  <div class="grid g2">
+    <div class="card">
+      <h2>🏛 9건물 ↔ 6축 · 묶인 칸 · 증설 조건 총괄표 <span class="tag">build_axis.csv · facility_growth.csv</span></h2>
+      <div id="b30Summary" class="scroll"></div>
+    </div>
+    <div class="card">
+      <h2>🖼 30단계 외형 구간 (본관 1 + 부속 2) &amp; 사옥 캐스팅권 <span class="tag">1~10 본관 · 11~20 +부속1 · 21~30 +부속2</span></h2>
+      <div id="b30Visual"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px">
+      <h2 style="margin:0">📋 건물 × 30단계(270행) 비용 · 효과 표 자리 <span class="tag">building_level_30.csv · facility_growth_level.csv</span></h2>
+      <div id="b30Filter"></div>
+    </div>
+    <div id="b30Table" class="scroll"></div>
+  </div>
+</section>
+<section id="viewEventOps" hidden>
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>🎪 이벤트 운영 <span class="tag">event_template · tool_event_pack_reward_plan</span></h2>
+    <p class="hint" style="margin:0">모노 이벤트 틀 · 보상 계획 · 재화 검사(EPDR) · 버프를 옮겼습니다. 케이팝 이벤트 이름은 아직 없어 구조 이름만 씁니다. 보스전 · 카드 시즌전(전투)은 뺐고 모험 · 출동 · 원정은 보류, 세일은 확인 필요.</p>
+  </div>
+  <div class="kpis" id="evHero"></div>
+  <div class="card" style="margin-bottom:14px"><h2>🧪 이벤트 재화 검사 <span class="tag">모노 event-currency-audit 공식</span></h2><div id="evAudit" class="scroll"></div></div>
+  <div class="grid g2">
+    <div class="card"><h2>이벤트 틀 <span class="tag">목적 · 길이 · 시즌당 횟수</span></h2><div id="evTemplates" class="scroll"></div></div>
+    <div class="card"><h2>규칙 <span class="tag">보상 계획 규칙 줄</span></h2><div id="evRules" class="scroll"></div><h2 style="margin-top:12px">버프 <span class="tag">event_boost_config</span></h2><div id="evBoost" class="scroll"></div></div>
+    <div class="card full"><h2>보상 계획 전부 <span class="tag">단계 · 순위 · 묶음</span></h2><div id="evPlan" class="scroll"></div></div>
+  </div>
+</section>
+
+<section id="viewBench" hidden>
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>📕 모노폴리 GO 벤치마크 <span class="tag">참고만 · 케이팝 값 아님</span></h2>
+    <p class="hint" style="margin:0">MGO 숫자는 외부 조사 참고값입니다(현중 09:23). 금액을 옮기지 않고 <b>모양</b>만 견줍니다.</p>
+  </div>
+  <div class="kpis" id="bmHero"></div>
+  <div class="grid g2">
+    <div class="card"><h2>⑦ 온보딩 곡선 <span class="tag">CSV 실시간 · 9건물 30단계 개편 반영</span></h2><div id="bmCurve"></div><div class="lg"><span><i style="background:var(--primary)"></i>케이팝 시설 단계 비용(원본 값·공급 상태 확인)</span><span><i style="background:var(--dim)"></i>MGO 1~10판(참고)</span></div></div>
+    <div class="card"><h2>② 3단 곡선 <span class="tag">MGO 구간 설계 · 참고</span></h2><div id="bmPhases" class="scroll"></div></div>
+    <div class="card full"><h2>④ 구조 대조표 <span class="tag">보드 · 건설 · 주사위 · 배수</span></h2><div id="bmStruct" class="scroll"></div></div>
+    <div class="card"><h2>⑤ MGO 실측 보드 비용 <span class="tag">참고</span></h2><div id="bmCost" class="scroll"></div></div>
+    <div class="card"><h2>⑥ 배수 게이트 <span class="tag">MGO 참고 vs 케이팝 dice_mult</span></h2><div id="bmGate" class="scroll"></div></div>
+    <div class="card full"><h2>⑧ 주사위 은행 · 재생 <span class="tag">MGO 참고 vs 케이팝 충전</span></h2><div class="kpis" id="bmDiceHero"></div><div id="bmDice" class="scroll"></div></div>
+  </div>
+</section>
+
+<section id="viewConst" hidden>
+  <div class="card purpose" style="margin-bottom:14px">
+    <h2>기준 대조 · 비앙카 값 입력 자리 · 표 값 전수 목록 <span class="tag">표 값 · 근거 · 공급 상태</span></h2>
+    <p class="hint" style="margin:0">「지금 CSV」 칸은 실시간입니다. 규칙과 표가 다르면 <b class="bad">어긋남</b>으로 표시해요. 숫자·미공급·검수 상태는 <span class="need">각 표의 현재 표시로 확인</span>합니다.</p>
+  </div>
+  <div id="csBiancaGuide" class="card" style="margin-bottom:14px"></div>
+  <div id="csRules" class="card" style="margin-bottom:14px"></div>
+  <div id="csList"></div>
+</section>
+</main>
+</div>
+</div>
+</div>
+
+<script type="module" src="/src/tools/balanceTool/shell.ts"></script>
+<script type="module" src="/src/tools/balanceTool/main.ts"></script>
+</body>
+</html>

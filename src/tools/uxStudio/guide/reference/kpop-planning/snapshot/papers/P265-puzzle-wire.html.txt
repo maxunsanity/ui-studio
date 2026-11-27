@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>그림 조각 도감 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --dim:#e3e5e8; --red:#d0453a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  h2.grp { font-size:15px; margin:8px 24px 0; padding-top:12px; border-top:2px solid #c9ccd1; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .row { display:flex; flex-wrap:wrap; gap:40px; padding:16px 24px 24px 50px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .st { position:static; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .pill.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .red { color:var(--red); font-weight:700; }
+  .dot { position:absolute; width:12px; height:12px; border-radius:50%; background:var(--red); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .face { display:inline-block; width:30px; height:30px; border-radius:50%; background:var(--dim); border:1.5px solid var(--ln); flex:none; }
+  .ic { display:inline-block; width:22px; height:22px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); flex:none; }
+  .pic { background:repeating-linear-gradient(45deg,#e6e8eb 0 8px,#dcdfe3 8px 16px); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; text-align:center; }
+  .bar { display:block; height:6px; border:1px solid var(--ln); border-radius:3px; background:var(--box); overflow:hidden; }
+  .bar i { display:block; height:100%; background:var(--ink); }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); overflow:hidden; }
+  .sec { position:absolute; left:12px; font-weight:700; font-size:13px; }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  /* 흐름도 */
+  .fl { display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:12px 24px 4px; }
+  .fb { border:1.5px solid var(--ln); border-radius:8px; background:var(--box); padding:8px 12px; min-width:110px; text-align:center; }
+  .fb b { display:block; font-size:14px; }
+  .fb small { color:var(--soft); font-size:12px; }
+  .fb.win2 { border-style:dashed; background:var(--pane); }
+  .ar { font-size:18px; color:var(--ln); }
+  .flnote { margin:2px 24px 0; font-size:13px; }
+  .flnote span { display:inline-block; margin-right:16px; }
+  .dimbg { z-index:2; } .win { z-index:3; }
+  .cell { position:absolute; border:1.5px solid var(--ln); background:var(--box); display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--soft); }
+  .cell.got { background:repeating-linear-gradient(45deg,#d4d7dc 0 6px,#c8ccd2 6px 12px); color:var(--ink); font-weight:700; }
+  .rules { margin:8px 24px 0; padding:12px 16px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; max-width:1100px; font-size:13px; line-height:1.6; }
+  .rules h3 { font-size:14px; margin:8px 0 4px; } .rules ul { margin:0; padding-left:18px; }
+</style>
+</head>
+<body>
+<h1>그림 조각 도감 · 와이어프레임 1차 (390×844)</h1>
+<p class="flow">현중 11/23 「스케쥴에서 나오는 그림 조각 · 9등분된 그림을 맞추어야 보상 · 그림 도감 기획」 · 「9조각으로 합쳐」. 기준: P206 모험 발견 도감 · exploration-items / discovery-groups / puzzle / codex.json · 게임 시뮬레이터 모험 코드. 이름 · 수량은 예시, 「정할 것」은 아직 값이 없는 것.</p>
+<div class="rules">
+<h3>규칙(제안)</h3>
+<ul>
+<li><b>그림 한 장 = 도감 한 칸 = 조각 9개(3×3).</b> 지금 그림 27장 · 6분류(아이돌 이야기 12 · 팀의 추억 7 · 브랜드 연구 4 · 활동 재화 2 · 수호신의 흔적 1 · 보물 상자 1).</li>
+<li><b>조각 얻기</b> · 스케줄(아이돌 탐험 · 몬스 출동) 한 번에 1개(<code>discoveryPerRun 1</code> · <code>dispatchFragments.perRun 1</code>). 분류는 확률(아이돌 이야기 35 · 팀의 추억 35 · 보물 25 · 수호신 15 · 브랜드 15 · 활동 재화 15) → 그 스케줄 테마(연습 · 공연 · 방송 · 팬 · 동네 밖 · 밤과 쉼 · 만드는 사람들)에 맞는 그림 → 그 그림에서 <b>아직 없는 칸</b>이 먼저 나옴(새 규칙 · 같은 그림 9개 = 9칸).</li>
+<li><b>맞추기</b> · 같은 그림 조각 9개가 모이면 「맞추기」가 켜짐 · 조각을 끌어 제자리에 놓으면 붙고, 틀리면 되돌아감 · 「완성 그림」으로 미리 보기.</li>
+<li><b>첫 완성</b> · 조각 9개를 쓰고 그림이 도감에 들어감(흑백 실루엣 → 그림) · 이야기가 열림 · 첫 완성 보상 = 기획사 일반 카드팩 1 + 돈 · 주사위(<code>exploration-codex.json completionReward</code>) · 그림마다 한 번.</li>
+<li><b>다시 모으기</b> · 완성한 그림도 조각이 계속 나옴 · 9개 모일 때마다 n회차 맞추기 → 주사위 27(<code>exploration-puzzle.json rewardDice</code>).</li>
+<li><b>합친 것</b> · 옛 「조각 3개로 완성 · 조각은 안 씀」 규칙은 없앰. 옛 기록(3개 완성 · 12 · 24칸 회차)은 보존만.</li>
+<li><b>정할 것</b> · 분류를 다 모았을 때 보상 · 27장 전부 보상 · 그림 27장 그림체 · 회차 보상을 회차마다 올릴지.</li>
+</ul>
+</div>
+<h2 class="grp">흐름</h2>
+<div class="fl">
+  <div class="fb"><b>스케줄 ④ 결과</b><small>그림 조각 1개 · 악보 4/9</small></div><span class="ar">→ 도감 보기 ›</span>
+  <div class="fb win2"><b>Ⓐ 그림 도감</b><small>홈 📖 · 분류 · 그림 칸</small></div><span class="ar">→ 그림 누름 →</span>
+  <div class="fb win2"><b>Ⓐ-1 그림 상세</b><small>모은 칸 · 나오는 곳 · 보상</small></div><span class="ar">→ 9개면 맞추기 →</span>
+  <div class="fb win2"><b>Ⓐ-2 맞추기</b><small>3×3에 끌어 놓기</small></div><span class="ar">→ 다 맞춤 →</span>
+  <div class="fb win2"><b>Ⓐ-3 완성!</b><small>도감 등록 · 보상 · 이야기</small></div>
+</div>
+<div class="fl">
+  <div class="fb win2"><b>Ⓐ-4 완성한 그림</b><small>다시 모으기 n회차</small></div><span class="ar">→ 9개면 →</span>
+  <div class="fb win2"><b>Ⓐ-2 맞추기 (n회차)</b><small>주사위 27</small></div><span class="ar">·</span>
+  <div class="fb"><b>Ⓐ-1 나오는 곳 · 스케줄 ›</b><small>그 테마 스케줄로 바로</small></div>
+</div>
+<p class="flnote"><span>□ 화면</span><span>⬚ 창(점선)</span></p>
+<div id="screens"></div>
+<script>
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (on = 1) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) => `<div class="tab${i === on ? " on" : ""}" style="left:${i * 65}px"><i></i>${t}</div>`).join("");
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const go = (t, x) => `<span style="flex:none;border:1.5px solid var(--ln);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;background:var(--box);white-space:nowrap">${t}</span>`;
+const homeBg = `<div class="a val" style="left:16px;top:16px;font-size:16px">스케줄</div><div class="line" style="top:50px"></div>
+  ${[0, 1, 2].map(i => `<div class="b" style="left:12px;right:12px;top:${64 + i * 100}px;height:88px"></div>`).join("")}` + tabs();
+// 창 · 위에서 60 · 아래 탭 위까지
+const win = (title, body, back = false) => homeBg + `<div class="dimbg"></div><div class="win" style="left:0;right:0;top:60px;height:714px;border-radius:16px 16px 0 0">
+  <div class="a val" style="left:16px;top:16px;font-size:16px">${back ? "‹ " : ""}${title}</div><div class="b" style="right:12px;top:10px;width:32px;height:32px;font-size:16px">✕</div><div class="line" style="top:52px"></div>${body}</div>`;
+// 3×3 판 · got = 가진 칸 번호 · place = 놓인 칸
+const grid = (x, y, s, got = [], label = true) => [...Array(9)].map((_, k) => `<div class="cell${got.includes(k + 1) ? " got" : ""}" style="left:${x + (k % 3) * s}px;top:${y + Math.floor(k / 3) * s}px;width:${s + 1}px;height:${s + 1}px">${label ? (got.includes(k + 1) ? "" : k + 1) : ""}</div>`).join("");
+const reward = (y, items, head) => `<div class="a" style="left:16px;right:16px;top:${y}px"><b style="font-size:13px">${head}</b><div style="display:flex;gap:8px;margin-top:6px">${items.map(t => `<span style="display:flex;align-items:center;gap:4px;border:1.5px solid var(--ln);border-radius:8px;padding:4px 8px;background:var(--box);font-size:12px;font-weight:700"><i class="ic" style="width:18px;height:18px"></i>${t}</span>`).join("")}</div></div>`;
+const btn = (y, t, off = false, sub = "") => `<div class="b${off ? " off" : ""}" style="left:16px;right:16px;top:${y}px;height:52px;flex-direction:column;font-weight:700;font-size:15px">${t}${sub ? `<span class="sub" style="font-weight:400">${sub}</span>` : ""}</div>`;
+// 도감 칸 · 상태 done / doing / none
+const card = (x, y, name, st, cnt, round) => `<div class="b" style="left:${x}px;top:${y}px;width:110px;height:150px;display:block">
+  ${st === "done" ? `<div class="pic a" style="left:8px;top:8px;width:92px;height:92px">그림</div><b class="a" style="right:6px;top:6px;font-size:12px;background:var(--ink);color:#fff;border-radius:999px;padding:0 6px">✓</b>`
+   : st === "doing" ? grid(8, 8, 30.6, cnt, false) : `<div class="a" style="left:8px;top:8px;width:92px;height:92px;border:1.5px dashed var(--ln);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--soft)">?</div>`}
+  <b class="a" style="left:0;right:0;top:106px;text-align:center;font-size:12px">${st === "none" ? "아직 못 찾음" : name}</b>
+  <span class="a sub" style="left:0;right:0;top:126px;text-align:center;font-size:11px">${st === "done" ? (round ? round : "완성") : st === "doing" ? `조각 ${cnt.length} / 9` : "—"}</span></div>`;
+const cats = on => `<div class="a" style="left:12px;right:0;top:96px;display:flex;gap:6px;overflow:hidden">${["전체", "아이돌 이야기", "팀의 추억", "보물 상자", "브랜드 연구"].map((t, i) => `<span class="pill${i === on ? " on" : ""}" style="font-size:12px;padding:4px 10px">${t}</span>`).join("")}</div>`;
+
+const SCREENS = [
+ { grp: "화면" },
+ { cap: "④ 스케줄 결과 (조각을 받는 순간)", html: `<div class="pic a" style="left:0;right:0;top:0;height:200px;font-size:12px">장소 그림</div>
+   <div class="a val" style="left:0;right:0;top:214px;text-align:center;font-size:18px">잘 다녀왔어요! ★★★</div>
+   <div class="a" style="left:16px;top:256px;font-weight:700">받은 것</div>
+   <div class="a" style="left:16px;right:16px;top:280px;display:flex;gap:8px">${["카드팩 1", "주사위 4", "돈 400"].map(t => `<span class="b st" style="flex:1;height:64px;flex-direction:column;gap:4px;font-size:12px;font-weight:700"><i class="ic"></i>${t}</span>`).join("")}</div>
+   <div class="b" style="left:16px;right:16px;top:362px;height:132px;justify-content:flex-start;gap:14px;padding:0 14px">${grid(14, 14, 34, [1, 2, 3, 5], false).replace(/left:(\d+)px;top:(\d+)px/g, (m, a, b) => `left:${+a}px;top:${+b}px`)}
+     <div style="margin-left:116px;text-align:left"><span class="sub" style="font-size:12px">그림 조각 1개</span><div style="font-size:16px;font-weight:700;margin:2px 0">오래된 악보</div><div style="font-size:13px;font-weight:700">4 / 9 · 새 칸 5번</div><span class="bar" style="width:150px;margin-top:6px"><i style="width:44%"></i></span></div></div>
+   <div class="a" style="left:16px;right:16px;top:508px;display:flex;justify-content:flex-end">${go("도감 보기 ›")}</div>
+   ${btn(690, "확인")}` + tabs() + n(1, 4, 370) + n(2, 4, 420) + n(3, 270, 514),
+   notes: ["받은 것 아래에 그림 조각 칸 · 미니 3×3에 가진 칸이 채워지고 방금 받은 칸이 반짝임", "그림 이름 · 모은 수 n / 9 · 새로 채운 칸 번호 · 막대", "도감 보기 › → Ⓐ-1 그 그림 상세"] },
+
+ { grp: "창" },
+ { cap: "Ⓐ 그림 도감 (홈 📖)", html: win("📖 그림 도감", `
+   <div class="a" style="left:16px;right:16px;top:64px;display:flex;justify-content:space-between;align-items:center"><b style="font-size:14px">완성 3 / 27</b><span class="bar" style="width:180px;height:8px"><i style="width:11%"></i></span></div>
+   ${cats(1)}
+   <div class="a" style="left:16px;right:16px;top:138px;display:flex;justify-content:space-between"><b style="font-size:13px">아이돌 이야기 2 / 12</b><span class="sub" style="font-size:12px">다 모으면 분류 보상 · 정할 것</span></div>
+   ${card(14, 162, "동선 테이프", "done", [], "2회차 모으는 중")}${card(140, 162, "녹음 메모", "done", [])}${card(266, 162, "오래된 악보", "doing", [1, 2, 3, 5])}
+   ${card(14, 324, "연습 노트", "doing", [4, 8])}${card(140, 324, "", "none")}${card(266, 324, "입장권", "doing", [1])}
+   ${card(14, 486, "", "none")}${card(140, 486, "", "none")}${card(266, 486, "", "none")}
+   <div class="a sub" style="left:0;right:0;top:648px;text-align:center;font-size:12px">아래로 밀면 3장 더</div>`) +
+   n(1, 4, 124) + n(2, 4, 156) + n(3, 4, 198) + n(4, 4, 290) + n(5, 4, 450),
+   notes: ["전체 완성 수 · 막대", "분류 칩(전체 · 아이돌 이야기 · 팀의 추억 · 보물 상자 · 브랜드 연구 · 수호신 · 활동 재화) · 옆으로 밀기", "분류 진행 n / 전체 · 다 모았을 때 보상 자리(값 정할 것)", "그림 칸 3가지: 완성 = 그림 + ✓(회차 진행이 있으면 「n회차 모으는 중」) · 모으는 중 = 3×3 칸에 가진 칸만 채움 + 조각 n / 9 · 아직 못 찾음 = ? · 누르면 Ⓐ-1(완성은 Ⓐ-4)", "순서 = 완성 → 모으는 중(많이 모은 순) → 못 찾음"] },
+
+ { cap: "Ⓐ-1 그림 상세 (모으는 중)", html: win("오래된 악보", `
+   <span class="a sub" style="left:16px;top:62px;font-size:12px">아이돌 이야기 · 공연의 길</span>
+   ${grid(85, 86, 72, [1, 2, 3, 5])}
+   <div class="a" style="left:16px;right:16px;top:316px;display:flex;justify-content:space-between;align-items:center"><b style="font-size:15px">조각 4 / 9</b><span class="bar" style="width:200px;height:8px"><i style="width:44%"></i></span></div>
+   <div class="a" style="left:16px;top:352px;font-weight:700">나오는 곳 · 공연의 길 스케줄</div>
+   ${["밴드 합주의 첫 신호", "무대 입구에서 센터까지"].map((t, i) => `<div class="b" style="left:16px;right:16px;top:${376 + i * 46}px;height:40px;justify-content:space-between;padding:0 10px"><b style="font-size:13px">${t}</b>${go("스케줄 ›")}</div>`).join("")}
+   ${reward(476, ["카드팩 1", "돈", "주사위"], "첫 완성 보상")}
+   <div class="b off" style="left:16px;right:16px;top:540px;height:44px;font-size:13px">🔒 이야기 · 완성하면 열려요</div>
+   ${btn(612, "맞추기", true, "조각 5개 더 모으면 켜져요")}`) +
+   n(1, 4, 220) + n(2, 4, 380) + n(3, 4, 418) + n(4, 4, 540) + n(5, 4, 610) + n(6, 4, 690),
+   notes: ["3×3 판 · 가진 칸은 그림 조각(무늬) · 없는 칸은 번호만 · 어느 부분이 비었는지 보임", "모은 수 · 막대", "나오는 곳 = 이 그림 테마의 스케줄(예: 공연의 길) · 스케줄 › → 스케줄 화면 그 장소", "첫 완성 보상 · 아이콘 + 수량", "이야기는 완성하면 열림", "맞추기 · 9개 전에는 꺼짐 + 남은 수"] },
+
+ { cap: "Ⓐ-2 맞추기 (9개 모였을 때)", html: win("오래된 악보 · 맞추기", `
+   <span class="a sub" style="left:16px;top:62px;font-size:12px">조각을 끌어 맞는 자리에 놓아요</span>
+   ${grid(85, 86, 72, [1, 2, 4, 5, 6, 9])}
+   <div class="b" style="right:12px;top:86px;width:58px;height:44px;font-size:11px;font-weight:700;flex-direction:column">완성<br>그림</div>
+   <div class="a" style="left:16px;top:326px;font-weight:700">남은 조각 3</div>
+   <div class="a" style="left:16px;top:350px;display:flex;gap:10px">${[0, 1, 2].map(i => `<span class="cell got st" style="position:relative;width:64px;height:64px;border-radius:4px"></span>`).join("")}</div>
+   <div class="a sub" style="left:16px;right:16px;top:432px;font-size:12px;line-height:1.6">맞는 자리에 놓으면 딱 붙어요 · 틀리면 돌아와요<br>다 맞추면 조각 9개를 쓰고 도감에 들어가요</div>
+   ${reward(486, ["카드팩 1", "돈", "주사위"], "첫 완성 보상")}
+   ${btn(612, "완성하기", true, "3칸 남음")}`) +
+   n(1, 4, 220) + n(2, 300, 124) + n(3, 4, 386) + n(4, 4, 496) + n(5, 4, 690),
+   notes: ["3×3 판 · 놓은 칸은 그림 · 빈 칸은 번호", "완성 그림 · 누르고 있는 동안 완성 그림을 흐리게 겹쳐 보여 줌", "남은 조각 · 끌어서 놓기(누르고 자리 누르기도 됨)", "안내 두 줄 · 조각 9개를 쓴다는 것을 미리 알림", "다 맞추면 켜짐 → Ⓐ-3 · 회차면 보상 = 주사위 27"] },
+
+ { cap: "Ⓐ-3 완성! (도감에 들어갔어요)", html: win("완성!", `
+   <div class="pic a" style="left:85px;top:76px;width:220px;height:220px;font-size:13px">완성 그림</div>
+   <div class="a val" style="left:0;right:0;top:312px;text-align:center;font-size:18px">오래된 악보</div>
+   <div class="a sub" style="left:0;right:0;top:340px;text-align:center;font-size:13px">도감에 들어갔어요 · 아이돌 이야기 3 / 12</div>
+   ${reward(380, ["카드팩 1", "돈 400", "주사위 4"], "첫 완성 보상")}
+   <div class="b" style="left:16px;right:16px;top:456px;height:52px;justify-content:space-between;padding:0 12px"><b style="font-size:13px">이야기가 열렸어요</b>${go("이야기 보기 ›")}</div>
+   ${btn(612, "받기")}`) +
+   n(1, 4, 220) + n(2, 4, 380) + n(3, 4, 446) + n(4, 4, 524) + n(5, 4, 690),
+   notes: ["9칸이 합쳐지며 실루엣 → 그림으로 바뀌는 연출", "그림 이름 · 도감 등록 · 분류 진행", "첫 완성 보상(그림마다 한 번) · 회차면 「n회차 보상 · 주사위 27」", "이야기 보기 › → 이야기(물건의 단서 → 사연 → 아이돌 → 후일담)", "받기 → 보상 받고 Ⓐ-4"] },
+
+ { cap: "Ⓐ-4 완성한 그림 (다시 모으기)", html: win("녹음 메모", `
+   <span class="a sub" style="left:16px;top:62px;font-size:12px">아이돌 이야기 · 연습과 발견 · ✓ 완성 1번</span>
+   <div class="pic a" style="left:85px;top:86px;width:216px;height:216px;font-size:13px">완성 그림</div>
+   <div class="b" style="left:16px;right:16px;top:316px;height:44px;justify-content:space-between;padding:0 12px"><b style="font-size:13px">이야기</b>${go("다시 보기 ›")}</div>
+   <div class="a" style="left:16px;top:376px;font-weight:700">다시 모으기 · 2회차</div>
+   ${grid(16, 402, 40, [1, 3, 5, 7, 8], false)}
+   <div class="a" style="left:150px;top:410px;font-size:15px;font-weight:700">조각 5 / 9</div><span class="bar a" style="left:150px;top:438px;width:200px;height:8px"><i style="width:55%"></i></span>
+   <div class="a sub" style="left:150px;top:456px;font-size:12px">9개 모을 때마다 다시 맞추기</div>
+   ${reward(536, ["주사위 27"], "회차 보상")}
+   ${btn(612, "맞추기", true, "조각 4개 더")}`) +
+   n(1, 4, 220) + n(2, 4, 384) + n(3, 4, 440) + n(4, 4, 600) + n(5, 4, 690),
+   notes: ["완성한 그림 · 완성 횟수", "이야기 다시 보기(라포는 다시 오르지 않음)", "다시 모으기 n회차 · 작은 3×3 · 모은 수", "회차 보상 = 주사위 27(회차마다 같음 · 올릴지 정할 것)", "9개면 켜짐 → Ⓐ-2(회차)"] },
+];
+const SHOT = new URLSearchParams(location.search).get("shot");
+const PH = SCREENS.filter(s => !s.grp);
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${PH[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff";
+  for (const m of document.querySelectorAll(".phone .n")) if (m.style.left === "4px") m.style.top = (parseFloat(m.style.top) - 16) + "px"; }
+else {
+  let out = "", buf = [];
+  const flush = () => { if (buf.length) out += `<div class="row">${buf.join("")}</div>`; buf = []; };
+  for (const s of SCREENS) {
+    if (s.grp) { flush(); out += `<h2 class="grp">${s.grp}</h2>`; continue; }
+    buf.push(`<div><p class="cap">${s.cap}</p><div class="pw" style="position:relative"><div class="phone">${s.html}</div></div>
+      <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`);
+  }
+  flush();
+  document.getElementById("screens").innerHTML = out;
+  for (const ph of document.querySelectorAll(".phone")) for (const m of ph.querySelectorAll(".n"))
+    if (m.style.left === "4px") { m.style.left = "-26px"; m.style.top = (parseFloat(m.style.top) + 2) + "px"; ph.parentElement.append(m); }
+}
+</script>
+</body>
+</html>

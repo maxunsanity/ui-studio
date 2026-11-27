@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P172 · 엔터파워 · 대표 개발 기획서</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"><style id="yr-old-style">.yr-old,.yr-old *{color:#8b929c!important}.yr-old a{text-decoration-color:#b8bec6!important}.yr-old svg,.yr-old img,.yr-old .mermaid{opacity:.5}</style></head><body class="sample-document"><main><header><div class="eyebrow">P172 · 개발 기획</div><h1>엔터파워 · 대표 개발 기획서</h1><div class="actions"><a href="./엔터파워_기획서.md">짝 MD를 봅니다</a><a href="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/작성기준_v02/작성규칙.html">공통 작성 기준 보기</a><a href="#document-history" data-open-history>로그 보기</a></div></header><nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+<p><b>이 문서는</b> 네 지급처에서 받은 엔터재화를 쌓은 엔터파워(최고 도달 값 · 지금 값 두 값)와, 최고 도달 값으로 여는 아이돌 자리(12문턱) · 팀 칸 · 주사위 배수 · 자동 충전 등 해금, 시즌 투자, 그리고 앉은 스태프 평균으로 보여 주는 기획사 능력의 관계를 설명합니다(11/18 현중 결정 반영 · 옛 4원천 식은 버림).</p>
+
+<p><b>보는 법</b> 1장 · 1-1에서 엔터재화 4지급처와 기획사 능력을 보고 3장의 실행 화면과 4장의 문턱·예외를 확인해 주세요. 규칙 원문은 <a href="../../전체기획서/04_성장건물경제_클로드.html">전체기획서 04장</a> 「엔터파워」 · 「성장·40자리」입니다. 이전 원문은 짝 로그에 접어 보존합니다.</p>
+
+<p><b>지금 상태</b> 현재 개발되지 않음, 진행 중. 11/18 12:49 발란스(비앙카)가 엔터재화 표(<code>enter_currency_config.csv</code> · <code>enter_currency_grant.csv</code>)와 해금 표 문턱을 라이브에 적용했습니다. 코드의 엔터파워 계산은 아직 옛 4원천 식(<code>enter_power_source.csv</code>)과 스태프 고정 능력치 합(기획사 스탯)으로 동작하며, 엔터재화 식으로 바꾸는 코드는 현재 개발되지 않음, 진행 중입니다. <span class="yr-old">게임 세션의 캐스팅 문턱 판정은 건물 단계 합 기준으로 동작하며, 현중 11/14 12:34 지시로 지금 상태를 유지합니다. 3~4장의 건물 단계 합 · 눈금 설명은 이 세션 동작입니다.</span></p>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (신규) <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P106 건물 성장</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P171 발란스 시뮬레이터</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EB%B0%9C%EB%9E%80%EC%8A%A4/%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88_%EB%B0%9C%EB%9E%80%EC%8A%A4%EA%B5%AC%EC%A1%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EB%B0%9C%EB%9E%80%EC%8A%A4/%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88_%EB%B0%9C%EB%9E%80%EC%8A%A4%EA%B5%AC%EC%A1%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P110 시즌 경제 참고</a>. 이식 비교: 해당 없음.</p>
+
+<p>엔터파워는 잠금 · 상한 해제용 영구 지표이며 건물 단계 합이 아닙니다. 엔터파워 = <b>아이돌 몫</b>(보유 아이돌당 6 + 2 × 평균 성장 단계 + 초월 시 5) + <b>스태프 9명 몫</b>(배치 1명당 10 + 4 × 등급) + <b>건물 영구 적립 몫</b>(시즌 1 건물 단계 합 × 1.0, 시즌 2부터 × 0.65^(시즌-1) 누적) + <b>총 팬 몫</b>(영구 누적 팬 구간표)입니다(<code>enter_power_source.csv</code> 현재 세팅값). 63일 시즌 끝에 건물 단계가 초기화되어도 엔터파워는 이월됩니다(헌법 제4조). 계약 해지 때는 그 아이돌 몫만 줄고 이미 연 자리는 닫히지 않습니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 666 364" width="666" height="364" role="img" aria-labelledby="title-P172-0"><title id="title-P172-0">설명 흐름도 P172-0</title><defs><marker id="arrow-P172-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L305.8301886792453,150.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-0)"/><path d="M198,138 L220.5,138 L252.1011235955056,150.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-0)"/><path d="M198,226 L220.5,226 L250.24137931034483,214.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-0)"/><path d="M198,314 L220.5,314 L305.62357414448667,214.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-0)"/><path d="M373.44943820224717,150.5 L445.5,93.5 L468,93.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-0)"/><path d="M423,182.5 L445.5,182.5 L468,182.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-0)"/><path d="M373.9090909090909,214.5 L445.5,270.5 L468,270.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-0)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">아이돌 몫</tspan></text><rect x="243" y="150.5" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="187.5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">엔터파워 (영구)</tspan></text><rect x="18" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">스태프 9명 몫</tspan></text><rect x="18" y="194" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="231" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">건물 영구 적립 몫</tspan></text><rect x="18" y="282" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="319" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">총 팬 몫</tspan></text><rect x="468" y="60.5" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="88.5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">아이돌 자리 12문턱 (최대</tspan><tspan x="558" dy="20"> 30)</tspan></text><rect x="468" y="150.5" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="187.5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">팀 칸 (최대 10)</tspan></text><rect x="468" y="238.5" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="275.5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">주사위 배수 · 충전 상한</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">아이돌 몫 → 엔터파워 (영구) / 스태프 9명 몫 → 엔터파워 (영구) / 건물 영구 적립 몫 → 엔터파워 (영구) / 총 팬 몫 → 엔터파워 (영구) / 엔터파워 (영구) → 아이돌 자리 12문턱 (최대 30) / 엔터파워 (영구) → 팀 칸 (최대 10) / 엔터파워 (영구) → 주사위 배수 · 충전 상한</p></figure>
+
+
+
+<h3 id="콘텐츠-경계">콘텐츠 경계</h3>
+
+<p>시설 증설의 비용과 효과는 P106, 한 굴림의 경제는 P110과 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P171</a>, 실제 멤버 선발은 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%98%A4%EB%94%94%EC%85%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%98%A4%EB%94%94%EC%85%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P100 오디션</a>이 담당합니다. 엔터파워로 생기는 새 멤버 캐스팅권과 다른 기획사와 경쟁하는 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%BA%90%EC%8A%A4%ED%8C%85%EA%B6%8C%EB%8C%80%EC%A0%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%BA%90%EC%8A%A4%ED%8C%85%EA%B6%8C%EB%8C%80%EC%A0%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P98 출연권 대전</a>은 서로 다른 역할입니다.</p>
+
+<p><b>기획사 스탯</b>은 배치 스태프 9자리 고정 능력치 합(<code>staff_fixed_stat.csv</code> 1★ 600 · 2★ 1,200 · 3★ 1,800 · 4★ 2,700 · 5★ 3,600, 9 × 5★ = 32,400)으로 정해지는 영구 회사 성능이며 팀 등급의 바탕입니다. 팀 등급 문턱(<code>idol_team_grade.csv</code>)은 루키 0 · 대세 4,000 · 톱티어 10,000 · 국민돌 20,000 · 글로벌 아이콘 32,000입니다. 게임 세션에 스태프 배치 상태가 없어 게임 화면은 기획사 스탯 0 · 루키로 보입니다.</p>
+
+</section><section class="part" id="part-2">
+<h3>1-1. 엔터재화 · 최고 도달 값 · 지금 값 (11/18 현중 결정)</h3>
+<table>
+<thead>
+<tr>
+<th>무엇</th>
+<th>정한 것</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>엔터파워</td>
+<td>네 지급처에서 받은 엔터재화를 쌓은 값. 옛 4원천 식(아이돌 수 · 스태프 등급 · 건물 적립 0.65 감쇠 · 팬 단계 합)은 버림</td>
+<td>현중 11/18 10:06</td>
+</tr>
+<tr>
+<td>지급처 4가지</td>
+<td>건물 레벨업 45 · 스태프 카드 25 · 아이돌 능력 단계 상승 20 · 팬 카드 10(%)</td>
+<td>현중 09:27~09:41</td>
+</tr>
+<tr>
+<td>기준</td>
+<td>무료 유저 1년 9,000개 · 하루 12시간</td>
+<td>현중 09:48</td>
+</tr>
+<tr>
+<td>쌓기만 함</td>
+<td>엔터재화는 쌓기만 하고 그 값으로 해금을 정함. 한 번 오른 엔터파워(최고 도달 값)는 내려가지 않음. 계약 해지로 아이돌 몫이 빠지는 옛 규칙은 고침</td>
+<td>현중 09:24</td>
+</tr>
+<tr>
+<td>아이돌 능력 단계</td>
+<td>전직(승급) 4번: 연습생→데뷔조 · 데뷔조→라이징 스타 · 라이징 스타→톱스타 · 톱스타→월드스타</td>
+<td>현중 11/18</td>
+</tr>
+<tr>
+<td>두 값</td>
+<td><strong>최고 도달 값</strong>(받은 누계) · <strong>지금 값</strong>(최고 도달 값 − 시즌 투자로 넣은 합). 해금은 무조건 최고 도달 값 기준. 게이지에 두 값 모두 표기</td>
+<td>현중 12:44</td>
+</tr>
+<tr>
+<td>시즌 투자</td>
+<td>시즌 시작에 안 함 · 10% · 20% · 30% 중 하나만 고름(자유 비율 없음). 지금 값만 내려감</td>
+<td>현중 10:27~10:28 · 12:44</td>
+</tr>
+<tr>
+<td>카드 지급</td>
+<td>덱 칸 첫 입장만 지급 · 중복 0 · 유료로 받은 카드도 첫 칸이면 같은 양 · 등급이 높을수록 많이</td>
+<td>현중 11/18</td>
+</tr>
+<tr>
+<td>시즌 초기화</td>
+<td>시즌 초기화 뒤 같은 건물 단계를 다시 올리면 다시 지급 · 투자로 산 단계는 지급 0</td>
+<td>현중 11/18</td>
+</tr>
+<tr>
+<td>받을 때 연출</td>
+<td>돈 · 주사위처럼 아이콘이 빨려 들어감(UI는 이스라트)</td>
+<td>현중 09:27~09:41</td>
+</tr>
+</tbody>
+</table>
+<p><strong>라이브 값</strong> (11/18 12:49 발란스(비앙카) 적용 · <code>data/game/enter_currency_config.csv</code> · <code>enter_currency_grant.csv</code>)</p>
+<table>
+<thead>
+<tr>
+<th>지급처</th>
+<th>1번 지급</th>
+<th style="text-align: right;">무료 1년 합</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>건물 레벨업(그 단계로 오를 때)</td>
+<td>2단계 2 · 3단계 4 · 5단계 8 · 10단계 18 · 15단계 28 · 20단계 38 · 30단계 58(= 2×(단계−1))</td>
+<td style="text-align: right;">4,022</td>
+</tr>
+<tr>
+<td>스태프 카드(첫 입장)</td>
+<td>★1 6 · ★2 10 · ★3 12 · ★4 19 · ★5 24(앉은 사람ID:칸 첫 입장 · (2c) 11/18 17:24)</td>
+<td style="text-align: right;">2,250</td>
+</tr>
+<tr>
+<td>아이돌 능력 단계 상승</td>
+<td>25 · 60 · 95 · 144</td>
+<td style="text-align: right;">1,800</td>
+</tr>
+<tr>
+<td>팬 카드(첫 입장)</td>
+<td>★1 71 · ★2 112 · ★3 141 · ★4 211 · ★5 267(무료 개봉은 ★1~3 · ★4·★5 유료 · <code>card_book_config.csv</code> free_open_fan_president_star_max 3)</td>
+<td style="text-align: right;">902</td>
+</tr>
+<tr>
+<td><strong>합</strong></td>
+<td></td>
+<td style="text-align: right;"><strong>8,974</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>상한 없음(현중 11/19 14:55). <code>max_enter_currency</code> 값 칸 10,000은 남아 있으나 엔터재화 코드는 이 키를 읽지 않음(아론 15:00). 시즌 투자 엔터재화 1개 = 23,000원(<code>invest_money_per_enter_currency</code>) · 투자로 살 수 있는 최고 단계 10(<code>invest_max_level</code>).</li>
+<li>11/19 20:2x B안 반영(유르넷 19:5x 채택): 건물 2×(단계−1) · 아이돌 25/60/95/144 · 회장 ★4·★5 무료 개봉 제외(<code>card_book_config.csv</code>). 무료 1년 합은 표 기준(스태프 = (2c) 설계 2,250). 참고 실측(아론 ④ 멤버별 단계 전 · 시드 1000): 무료 365일 7,948(스태프 1,260 · 두 번째 회장부터 +902 · 보관 멤버 성장 · 스카우트 바꿔 앉힘은 게임 시뮬에 개발 안 됨) · 최종 실측은 아론 ④ 뒤.</li>
+<li>해금 문턱 줄 아래 숫자는 11/18 12:49 기록이고, 지금 값은 (2c) 확정 뒤 캐스팅 4번째 1,816 · 팀 칸 6~10 2,868 · 4,157 · 5,479 · 6,760 · 8,043(<code>enter_power_level.csv</code>).</li>
+<li>해금 문턱(라이브 <code>enter_power_level.csv</code>): 캐스팅 12문턱 <code>650 · 1,353 · 2,078 · 2,816 · 3,566 · 4,324 · 5,090 · 5,862 · 6,639 · 7,422 · 8,209 · 9,000</code> · 팀 칸 6~10 <code>4,020 · 5,051 · 6,094 · 7,147 · 8,209</code> · 몬스 팩 <code>312 · 1,739 · 3,244 · 4,788 · 6,361</code> · 자동 충전 <code>1 · 650 · 3,458</code>. 주사위 배수(<code>dice_mult_unlock_rule.csv</code>) ×10 <code>312</code> · ×20 <code>1,075</code> · ×50 <code>1,872</code> · ×100 <code>2,688</code> · ×200 <code>3,518</code> · ×500 <code>4,358</code> · ×1000 <code>5,208</code>.</li>
+<li>1년 끝(발란스(비앙카) <a href="../../../보고/20261118_1050_비앙카_엔터재화_계산안.md">엔터재화 계산안</a>):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>시즌 투자</th>
+<th style="text-align: right;">지금 값</th>
+<th style="text-align: right;">최고 도달 값</th>
+<th>열린 해금(최고 도달 기준)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>안 함</td>
+<td style="text-align: right;">9,000</td>
+<td style="text-align: right;">9,000</td>
+<td>전부</td>
+</tr>
+<tr>
+<td>10%</td>
+<td style="text-align: right;">6,078</td>
+<td style="text-align: right;">8,552</td>
+<td>캐스팅 11/12 · 여정 33/35</td>
+</tr>
+<tr>
+<td>20%</td>
+<td style="text-align: right;">4,191</td>
+<td style="text-align: right;">8,347</td>
+<td>캐스팅 11/12 · 여정 33/35</td>
+</tr>
+<tr>
+<td>30%</td>
+<td style="text-align: right;">2,981</td>
+<td style="text-align: right;">8,266</td>
+<td>캐스팅 11/12 · 여정 33/35</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>시즌 끝 평균 건물 단계(무료 · 시즌 2부터): 안 함 9.0 · 10% 9.78~10.11 · 20% 10.33~10.44 · 30% 10.67~10.78(같은 계산안).</li>
+<li>스태프 스카우트 팩(사람 얻기)은 엔터재화를 주지 않음(제안 · <a href="../../전체기획서/05_카드캐스팅미니게임_클로드.html">05장 3-6</a>).</li>
+</ul>
+<h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>엔터파워와의 관계</th></tr></thead><tbody><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P106 건물 성장</a></td><td>입력: 시설별 현재 전체 단계와 증설 조건</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EB%B0%9C%EB%9E%80%EC%8A%A4/%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88_%EB%B0%9C%EB%9E%80%EC%8A%A4%EA%B5%AC%EC%A1%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EB%B0%9C%EB%9E%80%EC%8A%A4/%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88_%EB%B0%9C%EB%9E%80%EC%8A%A4%EA%B5%AC%EC%A1%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P110 시즌 경제 참고</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P171 발란스 시뮬레이터</a></td><td>배수·주사위 상한과 시험 결과</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%98%A4%EB%94%94%EC%85%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%98%A4%EB%94%94%EC%85%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P100 오디션</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%80%EA%B2%B0%EC%84%B1_%ED%8C%80%EC%8A%A4%ED%83%AF_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%80%EA%B2%B0%EC%84%B1_%ED%8C%80%EC%8A%A4%ED%83%AF_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P147 팀 결성</a></td><td>새 멤버 합류와 팀 편성</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%AC%EA%B3%BC%EC%88%98%EC%9D%B5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%AC%EA%B3%BC%EC%88%98%EC%9D%B5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P108 팬과 수익</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%84%B1%EC%9E%A5%EA%B4%80%EA%B3%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%84%B1%EC%9E%A5%EA%B4%80%EA%B3%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P169 성장 관계</a></td><td>팬·성장 연결. 엔터파워 팬 보정 수치는 별도 대기</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%BA%90%EC%8A%A4%ED%8C%85%EA%B6%8C%EB%8C%80%EC%A0%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%BA%90%EC%8A%A4%ED%8C%85%EA%B6%8C%EB%8C%80%EC%A0%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P98 출연권 대전</a></td><td>대전의 상대 구간을 읽는 관련 콘텐츠</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: 시설 단계 확인 → 증설 → 엔터파워 표시 변화 → 배수·충전 상한·캐스팅권 확인. 이식 비교: 해당 없음.</p>
+
+<p><b><a href="/docs/planning/idle-sim.html" data-paper-path="docs/planning/idle-sim.html">발란스 시뮬레이터 열기</a></b> · <b><a href="/docs/planning/balance-tool.html" data-paper-path="docs/planning/balance-tool.html">발란스 툴 열기</a></b></p>
+
+<ol>
+<li>발란스 시뮬레이터에서 건물 단계와 상단 엔터파워 눈금을 함께 확인합니다. 시설을 증설하면 계산에 쓰는 건물 단계가 바뀌고 표시와 배수 조건을 다시 읽습니다.</li>
+<li>잠긴 배수의 이유가 엔터파워 문턱인지, 주사위 보유량인지, 그날의 배수 상한인지 구분합니다. 엔터파워가 높아도 해당 실행 경로에 적용되는 나머지 조건이 부족하면 사용할 수 없습니다.</li>
+<li>증설로 캐스팅권 문턱을 처음 넘으면 권한을 기록하는 경제 코드가 있습니다. 오디션은 엔터파워에 따른 빈자리 문턱을 별도로 읽으며, 권한 장부를 실제 합류 때 차감하는 전체 연결은 이번 대조에서 확인하지 않았습니다. 문턱 수치는 현재 시험 표를 따릅니다.</li>
+<li>일별 기록의 저장된 시설 단계로 당시 값을 다시 볼 수 있습니다. 단계 자료가 없으면 그 기록을 확인 대기로 두고 임의의 시작값으로 채우지 않습니다.</li>
+</ol>
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서">한 판 순서</h3>
+
+<p>엔터파워는 별도 전투 한 판이 아니라 시설 증설 뒤 계산하는 흐름입니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>증설 조건을 확인하고 단계·눈금과 문턱의 변화를 표시합니다.</td></tr><tr><td>입력·출력</td><td>시설별 전체 단계와 문턱 표를 받아 단계 합·눈금·열림 상태를 계산합니다.</td></tr><tr><td>상태와 전이</td><td>현재 단계 → 증설 성공 시 다음 단계 → 새 눈금입니다.</td></tr><tr><td>판정</td><td>배수·자동 충전 상한·자동 충전 단계와 미지급 캐스팅권 문턱을 각각 확인합니다.</td></tr><tr><td>오류·예외</td><td>최대 단계·돈 부족·비용 미공급은 증설을 막으며, 위치 조건은 도착·자유건설 경로에서 구분합니다.</td></tr><tr><td>저장·복원</td><td>기존 시설 단계와 문턱 지급 기록을 사용합니다. 저장 실패 시 정상 지급으로 처리하지 않습니다.</td></tr><tr><td>다른 모듈 연결</td><td>건물 성장·보드 경제·주사위와 오디션에 연결합니다.</td></tr></tbody></table></div>
+
+<h3 id="4-1-시설-단계-합과-눈금">4-1. 시설 단계 합과 눈금</h3>
+
+<div class="yr-old"><p>아홉 시설은 사옥·보컬 녹음실·댄스 연습실·콘서트장·뷰티 스튜디오·예능 방송국·프로듀싱 스튜디오·팬샵·아카데미입니다. 현재 계산은 각 시설의 전체 단계를 시설별 최대 단계 이내에서 합합니다. 같은 시설과 연결된 보드 칸이 여러 개이거나 시설의 본관·부속이 여러 동으로 보이더라도 시설 전체 단계는 한 번만 셉니다. 실제 빈 땅의 0은 0으로 유지합니다.</p>
+
+<p>현재 9개 시설을 모두 1단계로 시작하면 합은 9, 모두 30단계면 합은 270입니다. 문턱을 읽는 눈금은 현재 시험식 <code>반올림(1 + (눈금 최대 − 1) × (단계 합 − 9) ÷ 261)</code>이고 눈금 최대는 <strong>10,000</strong>입니다(11/17 현중 「엔터파워를 일단 10000으로 올려」 · 전에는 1,000이라 아이돌 자리 문턱 1,050 · 1,200의 9칸이 닿지 않았음). 예를 들어 합 9는 눈금 1, 한 시설을 1단계 올린 합 10은 눈금 39, 합 270은 눈금 10,000입니다. 문턱 표 값은 그대로라 모든 문턱(배수 · 충전 · 몬스 팩 · 자리 · 팀 칸)이 전보다 이른 단계 합에서 열립니다(자리 30칸은 합 41). 문턱 재배분은 비앙카 검토 항목입니다. 합과 눈금은 서로 다른 단위이므로 10단계 합을 눈금 10으로 읽지 않습니다. 건물 수·최대 단계·눈금식의 미래 변경 여부와 운영 문턱은 별도 검토합니다.</p></div>
+
+
+
+<figure class="doc-diagram yr-old"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1341 100" width="1341" height="100" role="img" aria-labelledby="title-P172-1"><title id="title-P172-1">설명 흐름도 P172-1</title><defs><marker id="arrow-P172-1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L243,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-1)"/><path d="M423,50 L445.5,50 L468,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-1)"/><path d="M648,50 L670.5,50 L693,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-1)"/><path d="M873,50 L895.5,50 L918,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-1)"/><path d="M1098,50 L1120.5,50 L1143,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-1)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">각 시설의 현재 전체 단계</tspan></text><rect x="243" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">시설별 최대 범위 확인</tspan></text><rect x="468" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">시설마다 한 번씩 합산</tspan></text><rect x="693" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">단계 합</tspan></text><rect x="918" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1008" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1008" dy="0">현재 시험식으로 눈금 변환</tspan></text><rect x="1143" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1233" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1233" dy="0">표의 문턱과 비교</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">각 시설의 현재 전체 단계 → 시설별 최대 범위 확인 / 시설별 최대 범위 확인 → 시설마다 한 번씩 합산 / 시설마다 한 번씩 합산 → 단계 합 / 단계 합 → 현재 시험식으로 눈금 변환 / 현재 시험식으로 눈금 변환 → 표의 문턱과 비교</p></figure>
+
+
+
+<h3 id="4-2-배수가-열려도-확인할-조건">4-2. 배수가 열려도 확인할 조건</h3>
+
+<p>현재 배수 문턱 표에는 처음부터 열리는 배수와 엔터파워를 요구하는 배수가 있습니다. 예를 들어 시험 표의 ×10 문턱은 눈금 50이고 ×20 문턱은 100입니다. 실제 적용 조건은 호출 경로를 구분합니다. 공통 <code>multOptions</code>는 엔터파워 문턱과 보유량을 검사하고, 일차 상한까지 검사하는 <code>maxOpenMultOn</code>은 별도 함수입니다. 현재 허용 범위에서 확인한 수동 경제 연결 함수의 <code>openMult</code>·<code>options</code>·<code>roll</code> 자체는 <code>multOptions</code>를 사용하며, 상위 호출의 추가 제한과 전체 화면 동작은 별도 확인 대상입니다. 시험 표는 1일차 최대 ×10, 2일차 최대 ×20을 두고 이후 일차에는 해당 상한 행이 없습니다. 이 수치는 운영 확정이 아닌 현재 시험값입니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1047 232" width="1047" height="232" role="img" aria-labelledby="title-P172-2"><title id="title-P172-2">설명 흐름도 P172-2</title><defs><marker id="arrow-P172-2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,94 L220.5,94 L243,94" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-2)"/><path d="M423,62.19277108433735 L457.5,50 L492,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-2)"/><rect x="441.5" y="57" width="32" height="25" rx="7" fill="#f3f8f7"/><text x="457.5" y="75" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">부족</text><path d="M423,125.80722891566265 L457.5,138 L492,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-2)"/><rect x="441.5" y="145" width="32" height="25" rx="7" fill="#f3f8f7"/><text x="457.5" y="163" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">통과</text><path d="M672,115.81512605042016 L760.5,94 L849,94" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-2)"/><rect x="690.5" y="101" width="140" height="25" rx="7" fill="#f3f8f7"/><text x="760.5" y="119" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">부족 또는 상한 초과</text><path d="M672,160.18487394957984 L760.5,182 L849,182" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-2)"/><rect x="744.5" y="189" width="32" height="25" rx="7" fill="#f3f8f7"/><text x="760.5" y="207" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">통과</text><rect x="18" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">배수 선택</tspan></text><rect x="243" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">엔터파워 문턱</tspan></text><rect x="492" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="582" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="582" dy="0">필요 눈금 표시</tspan></text><rect x="492" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="582" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="582" dy="0">보유 주사위와 일차 상한</tspan></text><rect x="849" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="939" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="939" dy="0">선택 제한 이유 표시</tspan></text><rect x="849" y="150" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="939" y="187" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="939" dy="0">해당 배수 사용</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">배수 선택 → 엔터파워 문턱 / 엔터파워 문턱 → [부족] 필요 눈금 표시 / 엔터파워 문턱 → [통과] 보유 주사위와 일차 상한 / 보유 주사위와 일차 상한 → [부족 또는 상한 초과] 선택 제한 이유 표시 / 보유 주사위와 일차 상한 → [통과] 해당 배수 사용</p></figure>
+
+
+
+<p>자동 충전 상한도 표에서 현재 눈금 이하에 해당하는 마지막 단계를 읽습니다. 하루 자동 충전량은 `enter_power_level`의 auto_charge 단계(눈금 1 → 60 · 100 → 90 · 250 → 120 · 현재 세팅값)에서 같은 방식으로 읽고, 문턱을 넘으면 현황판과 발란스 시뮬레이터가 날아가기와 화살표로 알립니다. 현재 표의 시작 눈금 1에는 같은 문턱의 상한 행이 둘 있으므로 마지막 해당 행을 사용합니다. 표·모델을 읽지 못한 때의 대체 동작은 각 기능에서 다르므로 없어진 값을 실제 0이나 정상 엔터파워로 꾸미지 않습니다.</p>
+
+<h3 id="4-3-새-멤버-캐스팅권">4-3. 새 멤버 캐스팅권</h3>
+
+<p>현재 표(<code>enter_power_level.csv</code>)는 아이돌 자리를 12문턱에 놓습니다. 증설 전 눈금보다 높고 증설 후 눈금 이하인 문턱을 확인하여, 아직 지급하지 않은 행만 기록합니다. 한 번의 증설에서 여러 문턱을 넘으면 해당 행을 각각 처리합니다. 시작 1칸은 이 12행 밖의 별도 자리입니다(R-05-1).</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1152 189" width="1152" height="189" role="img" aria-labelledby="title-P172-3"><title id="title-P172-3">설명 흐름도 P172-3</title><defs><marker id="arrow-P172-3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,51 L220.5,51 L251.1818181818182,63" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-3)"/><path d="M198,139 L220.5,139 L251.1818181818182,127" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-3)"/><path d="M423,95 L445.5,95 L468,95" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-3)"/><path d="M648,64.65517241379311 L688.5,51 L729,51" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-3)"/><rect x="666.5" y="58" width="44" height="25" rx="7" fill="#f3f8f7"/><text x="688.5" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">아니요</text><path d="M648,125.34482758620689 L688.5,139 L729,139" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-3)"/><rect x="678.5" y="146" width="20" height="25" rx="7" fill="#f3f8f7"/><text x="688.5" y="164" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">예</text><path d="M909,51 L931.5,51 L954,51" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-3)"/><rect x="18" y="19" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">증설 전 눈금</tspan></text><rect x="243" y="63" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">넘은 문턱 찾기</tspan></text><rect x="18" y="107" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="144" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">증설 후 눈금</tspan></text><rect x="468" y="63" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">이미 지급한 행인가요</tspan></text><rect x="729" y="19" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="819" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="819" dy="0">캐스팅권 지급과 기록</tspan></text><rect x="729" y="107" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="819" y="144" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="819" dy="0">중복 지급하지 않음</tspan></text><rect x="954" y="18" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1044" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1044" dy="0">빈 멤버 자리와 오디션 흐</tspan><tspan x="1044" dy="20">름</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">증설 전 눈금 → 넘은 문턱 찾기 / 증설 후 눈금 → 넘은 문턱 찾기 / 넘은 문턱 찾기 → 이미 지급한 행인가요 / 이미 지급한 행인가요 → [아니요] 캐스팅권 지급과 기록 / 이미 지급한 행인가요 → [예] 중복 지급하지 않음 / 캐스팅권 지급과 기록 → 빈 멤버 자리와 오디션 흐름</p></figure>
+
+
+
+<p>12문턱은 <code>100 · 130 · 160 · 190 · 260 · 360 · 480 · 610 · 750 · 900 · 1,050 · 1,200</code>이고, 문턱마다 <code>1 · 1 · 1 · 1 · 2 · 2 · 2 · 3 · 3 · 4 · 4 · 5</code>칸이 열려 시작 1칸과 합쳐 30자리입니다(R-05-2 현재 세팅값). 저장을 제공하는 환경에서 권한 저장이 실패하면 정상 지급으로 처리하지 않습니다.</p>
+
+<h3 id="4-3-1-몬스-팩-자동-지급-기획사-등급-보상-new-확정-현중-1102-1252">4-3-1. 몬스 팩 자동 지급 · 기획사 등급 보상과 현재 표</h3>
+<p>기존 몬스 팩 지급 방향의 기록과 현재 원표의 현재 세팅 상태를 구분합니다. 아래 문턱은 현재 표에 있는 값이며 운영 속도·경제·실제 지급이 검수 완료되었다는 뜻은 아닙니다. 이전 헤더와 원문은 짝 로그에 보존합니다.</p>
+
+<div class="doc-key"><b>핵심</b> 엔터파워가 <b>50 · 100 · 200 · 400 · 700</b>을 넘을 때마다 <b>몬스 팩 1개</b>를 자동으로 줍니다(5번). 캐스팅권과 같은 규칙으로, 문턱을 넘은 줄만 한 번 지급하고 이미 준 줄은 다시 주지 않습니다. 기획사 등급이 <b>5 · 10 · 15 · 20 · 25 · 30</b>으로 진화할 때도 한 번씩 줍니다(6번).</div>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1188 189" width="1188" height="189" role="img" aria-labelledby="title-P172new0-n0"><title id="title-P172new0-n0">설명 흐름도 P172new0-n0</title><defs><marker id="arrow-P172new0-n0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,95 L220.5,95 L243,95" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172new0-n0)"/><path d="M423,95 L445.5,95 L468,95" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172new0-n0)"/><path d="M648,68.33333333333333 L706.5,51 L765,51" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172new0-n0)"/><rect x="666.5" y="58" width="80" height="25" rx="7" fill="#f3f8f7"/><text x="706.5" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">예 · 처음</text><path d="M648,121.66666666666667 L706.5,139 L765,139" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172new0-n0)"/><rect x="672.5" y="146" width="68" height="25" rx="7" fill="#f3f8f7"/><text x="706.5" y="164" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">이미 받음</text><path d="M945,51 L967.5,51 L990,51" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172new0-n0)"/><rect x="18" y="63" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">증설</tspan></text><rect x="243" y="63" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">엔터파워 눈금 오름</tspan></text><rect x="468" y="62" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="90" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">50 · 100 · 200 · 400</tspan><tspan x="558" dy="20"> · 700 넘음</tspan></text><rect x="765" y="19" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="855" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="855" dy="0">몬스 팩 1 · 보관함</tspan></text><rect x="765" y="107" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="855" y="144" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="855" dy="0">다시 안 줌</tspan></text><rect x="990" y="18" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1080" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1080" dy="0">열기 · 몬스 인벤토리 · </tspan><tspan x="1080" dy="20">자동 합성</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">증설 → 엔터파워 눈금 오름 / 엔터파워 눈금 오름 → 50 · 100 · 200 · 400 · 700 넘음 / 50 · 100 · 200 · 400 · 700 넘음 → [예 · 처음] 몬스 팩 1 · 보관함 / 50 · 100 · 200 · 400 · 700 넘음 → [이미 받음] 다시 안 줌 / 몬스 팩 1 · 보관함 → 열기 · 몬스 인벤토리 · 자동 합성</p></figure>
+
+
+
+<div class="table-scroll"><table><thead><tr><th>문턱</th><th>지급</th><th>표(후보 줄)</th></tr></thead><tbody><tr><td>엔터파워 50 · 100 · 200 · 400 · 700</td><td>몬스 팩 1개씩 · 5번</td><td><code>enter_power_level</code> unlock_kind <code>mons_pack</code> · reward_group → <code>reward_group_entry</code> card_pack <code>item_master_card_pack_mons</code></td></tr><tr><td>기획사 등급 5 · 10 · 15 · 20 · 25 · 30</td><td>몬스 팩 1개씩 · 6번</td><td><code>data/game/agency_grade_reward.csv</code> → <code>reward_group</code> → <code>reward_group_entry</code> · 현재 <code>facility_company</code> 사옥 단계 1~30 기준 · 별도 기획사명·팀 등급 체계와 구분</td></tr></tbody></table></div>
+
+<ul>
+<li>코드: 엔터파워 줄의 reward_group에 카드팩 줄이 있으면 보관함에 넣도록 <code>config.ts</code>(줄의 card_pack 읽기) · <code>session.ts</code>(문턱 넘을 때 grantPack)에 더했습니다. 현재 원표와 보관함 지급 코드가 있으며, 실제 지급·저장·개봉의 전체 동작은 이번에 실행 검수하지 않았습니다. 열기 · 자동 합성은 <a href="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/몬스보유_핵심제안서.html" data-paper-path="docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/몬스보유_핵심제안서.html">P223 몬스 보유</a>의 <code>monsPack.ts</code>가 맡습니다.</li>
+<li>시험: <a href="/docs/planning/balance-tool.html?topic=balance_topic_mons_pack" data-paper-path="docs/planning/balance-tool.html">발란스 툴 「몬스 획득 · 합성」</a>에서 엔터파워 · 기획사 등급 막대를 움직이면 넘은 문턱마다 몬스 팩이 가방으로 날아갑니다.</li>
+<li>미션(5번) · 유료 샵까지 받는 곳 전체는 P223 4장 「얻기 — 몬스 팩」에 있습니다.</li>
+</ul>
+
+
+<p>현재 <code>enter_power_level</code>의 몬스 팩 행은 <code>reward_group</code>과 <code>reward_group_entry</code>에 연결되어 있고, 별도 사옥 단계 보상 표도 로더가 읽습니다. <code>grantPack</code>은 경제 상태의 팩 보관함과 출처를 쌓는 코드이며 즉시 열거나 합성하지 않습니다. 개봉·자동 합성·미션·상점 전체 연결은 해당 기획과 별도 검수 범위입니다.</p>
+<h3 id="4-4-비용-부족자료-누락과-표시">4-4. 비용 부족·자료 누락과 표시</h3>
+
+<p>증설할 시설·최대 단계·비용과 보유 돈을 먼저 확인합니다. 기본 도착 증설은 현재 위치도 검사하지만, <a href="P81_설명.html">자유건설</a>은 <code>freeConstruction</code> 경로에서 위치 조건을 제외하고 같은 단계 비용을 읽습니다. 자유건설이 비용 면제를 뜻하지는 않습니다. 실제 비용 0과 비용이 비어 확인할 수 없는 상태는 다르며, 거래의 단계·잔고·저장 버전 검증과 실패 처리는 별도입니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 192" width="1140" height="192" role="img" aria-labelledby="title-P172-4"><title id="title-P172-4">설명 흐름도 P172-4</title><defs><marker id="arrow-P172-4" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,96 L220.5,96 L243,96" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-4)"/><path d="M421.5333333333333,64 L457.5,51 L492,51" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-4)"/><rect x="441.5" y="58" width="32" height="25" rx="7" fill="#f3f8f7"/><text x="457.5" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">불가</text><path d="M421.5333333333333,128 L457.5,141 L492,141" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-4)"/><rect x="441.5" y="148" width="32" height="25" rx="7" fill="#f3f8f7"/><text x="457.5" y="166" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">가능</text><path d="M672,141 L694.5,141 L717,141" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-4)"/><path d="M897,141 L919.5,141 L942,141" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P172-4)"/><rect x="18" y="64" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="101" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">증설 요청</tspan></text><rect x="243" y="64" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="101" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">시설 위치 단계 비용 확인</tspan></text><rect x="492" y="18" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="582" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="582" dy="0">사유 표시와 기존 상태 유</tspan><tspan x="582" dy="20">지</tspan></text><rect x="492" y="108" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="582" y="136" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="582" dy="0">비용 차감과 시설 단계 갱</tspan><tspan x="582" dy="20">신</tspan></text><rect x="717" y="109" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="807" y="146" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="807" dy="0">눈금과 열린 문턱 갱신</tspan></text><rect x="942" y="109" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1032" y="146" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1032" dy="0">변화와 알림 표시</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">증설 요청 → 시설 위치 단계 비용 확인 / 시설 위치 단계 비용 확인 → [불가] 사유 표시와 기존 상태 유지 / 시설 위치 단계 비용 확인 → [가능] 비용 차감과 시설 단계 갱신 / 비용 차감과 시설 단계 갱신 → 눈금과 열린 문턱 갱신 / 눈금과 열린 문턱 갱신 → 변화와 알림 표시</p></figure>
+
+
+
+<p>발란스 시험 화면은 증설 전후 눈금 차이를 시각 효과로 보여 줄 수 있습니다. 움직임을 줄이거나 화면 연출이 생략돼도 실제 계산값을 다시 읽습니다. 현재 표의 캐스팅권 행은 <code>reward_group_id</code>가 비어 있고 몬스 팩 행에는 보상 묶음이 연결되어 있습니다. 몬스 팩 외 추가 혜택은 비앙카 장부 산정 항목입니다. 팬 증가 보정은 원표 <code>enter_power</code> 행의 중립 계수를 읽지만, 그 행의 상태는 <code>비앙카 장부 산정 항목</code>입니다. 곱해도 값을 바꾸지 않는 현재 중립 입력과 최종 보정값 결정을 구분합니다.</p>
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>시설 정본 단계와 비용, 엔터파워 합·눈금 계산, 배수·충전 상한 표와 캐스팅권 지급 기록이 필요합니다. 빈 값과 실제 0을 구분하고 각 기능의 자료 누락 처리를 따릅니다.</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<div class="table-scroll"><table><thead><tr><th>화면·연출</th><th>확인할 내용</th></tr></thead><tbody><tr><td>시설과 엔터파워</td><td>현재 시설 단계, 단계 합과 변환 눈금</td></tr><tr><td>배수 선택</td><td>엔터파워·보유 주사위·일차에 따른 잠김 이유</td></tr><tr><td>증설 후 안내</td><td>눈금 변화, 해금 및 캐스팅권 문턱 기록</td></tr></tbody></table></div>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<p>몬스 팩 외 추가 눈금 혜택과 최종 팬 증가 보정값은 비앙카 장부 산정 항목입니다. 건물 수·최대 단계·눈금식의 미래 변경 여부와 운영 문턱은 별도 검토합니다.</p>
+
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<div class="table-scroll"><table><thead><tr><th>자료</th><th>역할과 상태</th></tr></thead><tbody><tr><td><b><a href="/docs/planning/idle-sim.html" data-paper-path="docs/planning/idle-sim.html">발란스 시뮬레이터 실행</a></b></td><td>건물·엔터파워 눈금과 배수 조건을 함께 확인</td></tr><tr><td><b><a href="/docs/planning/balance-tool.html" data-paper-path="docs/planning/balance-tool.html">발란스 툴 실행</a></b></td><td>관련 표와 현재 수치 확인</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P106 건물 성장</a></td><td>각 시설의 단계와 건물 외형의 관계</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P171 발란스 시뮬레이터</a></td><td>눈금 변화와 굴림 시험의 전체 흐름</td></tr></tbody></table></div>
+
+<p>막대·증설 후 증가 숫자·배수 해금 카드는 화면에서 계산값을 보여 주는 표시 요소입니다. 추가 보상 이미지나 팬 보정 연출은 값과 동작이 정해진 뒤 검토합니다.</p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일</th><th>역할</th></tr></thead><tbody><tr><td><code>data/master/building_master_building_level_30.csv</code></td><td>시설 ID와 단계별 행. 시설별 최대 단계와 현재 합의 모델</td></tr><tr><td><code>data/core_proposal/facility_growth_level.csv</code></td><td>시설 성장의 비용·효과 관련 데이터</td></tr><tr><td><code>data/game/dice_mult_unlock_rule.csv</code></td><td>배수마다 필요한 엔터파워 눈금</td></tr><tr><td><code>data/game/dice_mult_day_cap.csv</code></td><td>일차별 배수 상한</td></tr><tr><td><code>data/game/dice_cap_level.csv</code></td><td>엔터파워 문턱별 자동 충전 상한</td></tr><tr><td><code>data/game/enter_power_level.csv</code></td><td>캐스팅권 문턱·추가 보상 묶음 자리 · 현재 몬스 팩 줄 50 · 100 · 200 · 400 · 700</td></tr><tr><td><code>data/game/agency_grade_reward.csv</code></td><td>현재 사옥 시설 단계별 보상 그룹. 별도 기획사명·팀 등급 체계와 구분</td></tr><tr><td><code>data/master/reward_group.csv</code> · <code>data/master/reward_group_entry.csv</code></td><td>엔터파워·사옥 단계의 몬스 팩 보상 묶음과 항목 조회</td></tr></tbody></table></div>
+
+<p>현재 문턱과 비용은 원표의 현재 세팅값·비앙카 장부 산정 항목 상태를 따릅니다. 빈 보상 칸은 확정 0으로 바꾸지 않습니다. 주사위 환산은 배수·충전 상한 표를 따르며 추가 보상량은 비앙카 장부 산정 항목입니다.</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>현재 상태</th><th>다음 확인</th></tr></thead><tbody><tr><td>시설별 단계 합과 눈금</td><td>현재 시험 계산 연결</td><td>시작·증설·최대·빈 시설 및 자료 누락 확인</td></tr><tr><td>배수·일차 상한·충전 상한</td><td>현재 시험 표 연결</td><td>각 제한 이유와 중복 문턱 행 확인</td></tr><tr><td>캐스팅권 문턱</td><td>현재 시험 표와 지급 기록 연결</td><td>다중 문턱·재지급 방지·저장 실패 검수</td></tr><tr><td>눈금 추가 보상·팬 보정</td><td>몬스 팩 외 혜택·최종 팬 보정 비앙카 장부 산정 항목</td><td>보상 묶음·보정 수치 결정</td></tr><tr><td>시즌 속도와 전체 난이도</td><td>장기 검수 필요</td><td>같은 조건으로 63일 결과 비교</td></tr></tbody></table></div>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<ul>
+<li>실제 시설 단계를 건물마다 한 번 합산하고 눈금과 원래 합을 구분합니다.</li>
+<li>배수의 엔터파워·보유량·일차 상한을 각각 확인하고 제한 사유를 설명합니다.</li>
+<li>캐스팅권은 넘은 미지급 문턱만 기록하며 자료 누락이나 비용 비어 있음은 0으로 바꾸지 않습니다.</li>
+</ul>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p class="yr-old">과거 상세 문턱 표와 이전 설명은 짝 로그에 보존했습니다. 추가 운영 수치·보상은 새로 만들지 않습니다.</p>
+
+<details><summary>작업 기록</summary>
+
+<p>P86·P100·P107, 기존 P172 MD/HTML/log, 엔터파워 계산·경제 세션·시험 엔진과 관련 표 및 구현 기록을 대조했습니다. 이번 문서 작업에서 굴림·증설·빌드는 하지 않았습니다. 보고 원문 경로는 짝 로그에 남깁니다.</p>
+
+<p>11/3 17:09 현중: 몬스팩 문턱 지금 표 기준으로 맞춤(50 · 100 · 200 · 400 · 700)</p>
+
+</details>
+<details><summary>이번 엔터파워 원문·소스 대조 · 실구동 미검수</summary><p>codex · 2026-11-04 00:17:20 KST · 제안. 현재 원문·원표·로더·계산·writer와 오디션 gate·자유건설 거래를 정적으로 대조했습니다. 보호 play는 어떤 접근도 하지 않았으며 P171·현황판·준비중 CSV로 확대하지 않았습니다. 실제 게임·브라우저·저장·지급·개봉/합성·장기 경제 검수 없음. 새 수치·정책·승인은 없고 옛 헤더와 직전 전문은 <a href="./엔터파워_기획서.log.md">짝 로그</a>에 보존합니다.</p></details></section><details class="history" id="document-history" data-log-src="./엔터파워_기획서.log.md"><summary>이전 로그와 변경 기록 펼치기</summary><div class="log-body"></div></details></main><script src="../작성기준_v02/sample-document.js" defer></script><script src="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/development-links.js" defer></script></body></html>

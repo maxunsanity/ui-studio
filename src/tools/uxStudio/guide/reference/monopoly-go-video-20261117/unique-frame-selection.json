@@ -1,0 +1,332 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-17T21:41:18.049145+09:00",
+  "status": "제안(검수 대기)",
+  "instruction": "비슷한건 만들지 말고 완전 다른 프레임을 가진것만 추려봐",
+  "scope": "Monopoly GO reference sample; source taxonomy retained separately from active new-frame production queue",
+  "basis": {
+    "revision": 335,
+    "screens": 14,
+    "parts": 1144,
+    "connections": 22,
+    "savedDesignSHA256": "b651bea0f3b52bfd71a090372d75789b2d894ff95ba52f7efee3475dba9c1e1a"
+  },
+  "criterion": [
+    "그림/문구/금액/색/캐릭터/보상수/상태/반복행/열 수만 다른 경우 새 프레임 제외",
+    "같은 외곽·분할·고정부/본문 구성은 기존 frame+명시 variant 재사용",
+    "전시/말풍선 혜택/진행·3열 안내처럼 전체 분할 구조가 다른 대표만 남김",
+    "새 기능 또는 연출이 있다는 것만으로 새 프레임으로 세지 않음",
+    "재사용 가능 판정은 이미 구현/시험했다는 뜻이 아님"
+  ],
+  "counts": {
+    "unstartedSourceFamiliesCompared": 17,
+    "uniqueFrameCandidates": 3,
+    "excludedFromNewFrameProduction": 14
+  },
+  "productionOrder": [
+    "showroom-token-detail",
+    "tournament-class-preview",
+    "beanstalk-bonanza-details"
+  ],
+  "selection": [
+    {
+      "family": "showroom-token-detail",
+      "title": "쇼룸 토큰 확대 상세",
+      "decision": "keep",
+      "framePattern": "확대 전시형",
+      "compareTo": "Page_Showroom_Shields",
+      "reason": "진열장 목록을 딤으로 남기고 개별 토큰 받침·위 명판·하단 돌출 장착버튼/좌우 탐색으로 전환. 아치/진열함 프레임과 다른 전체 구성.",
+      "reference": "MGV02/frames/game-crops/MGV02-S04-B.png",
+      "nativeImplementation": {
+        "family": "showroom-token-detail",
+        "screenId": "screen-fb2afd7d-f997-4bc8-90f5-40439ae2af76",
+        "name": "Modal_Showroom_TokenDetail",
+        "parts": 28,
+        "state": "native assembly / proposal awaiting review; source equivalence incomplete",
+        "currentRevision": 352,
+        "evidence": "unique-frames32/showroom-phone.jpg",
+        "evidenceRevision": 352,
+        "runtimeEntrance": null,
+        "runtimeCheck": "separate in-memory fixture opener; original saved target screen unchanged",
+        "remaining": [
+          "source font/material/micro slice-seam precision",
+          "unknown source entrance and game outcomes remain unset",
+          "equipping/previous/next/info game action unobserved",
+          "underlay reuses existing shield cabinet; token-list variant not assembled",
+          "new equip uses basic tint; separate 3D pressed illustration not produced"
+        ]
+      }
+    },
+    {
+      "family": "board-report",
+      "title": "보드 보고서",
+      "decision": "reuse",
+      "framePattern": "기존 타임라인",
+      "compareTo": "Modal_Friends_Timeline",
+      "reason": "크림색 둥근 목록판/사진·이름·행동·시간·오른쪽 아이콘 반복. 탭숨김/행높이/Close위치 차이는 variant.",
+      "reference": "MGV09/frames/game-crops/stable-frame_00006.png"
+    },
+    {
+      "family": "board-complete",
+      "title": "보드 완료",
+      "decision": "exclude-animation",
+      "framePattern": "기존 보드 연출",
+      "compareTo": "Page_Board",
+      "reason": "장면 위 제목과 하단 출발 버튼. 별도 새 외곽 판틀이 관찰되지 않음.",
+      "reference": "MGV05/frames/game-crops/stable-frame_00002.png"
+    },
+    {
+      "family": "stage-welcome-reward",
+      "title": "스테이지 환영 보상",
+      "decision": "merge-animation",
+      "framePattern": "공통 보상 연출",
+      "compareTo": "reward-overlay-pattern",
+      "reason": "딤·공중 보상 아이콘·하단 수집 버튼. 아래 보드러시/현금수집과 통합 기록하고 새 프레임에서 제외.",
+      "reference": "MGV04/frames/game-crops/stable-frame_00002.png"
+    },
+    {
+      "family": "board-rush-reward",
+      "title": "보드 러시 보상",
+      "decision": "merge-animation",
+      "framePattern": "공통 보상 연출",
+      "compareTo": "reward-overlay-pattern",
+      "reason": "환영 보상과 같은 배치에 로고/금액/수량만 변경.",
+      "reference": "MGV04/frames/game-crops/stable-frame_00003.png"
+    },
+    {
+      "family": "generic-cash-reward",
+      "title": "현금 수집",
+      "decision": "merge-animation",
+      "framePattern": "공통 보상 연출",
+      "compareTo": "reward-overlay-pattern",
+      "reason": "기존 순위창 위 현금/금액/수집 버튼. 보상 개수 차이를 새 판틀로 세지 않음.",
+      "reference": "MGV09/frames/game-crops/stable-frame_00001.png"
+    },
+    {
+      "family": "first-class-tournament",
+      "title": "퍼스트 클래스 순위",
+      "decision": "reuse",
+      "framePattern": "기존 토너먼트",
+      "compareTo": "Modal_Event_TycoonExpress",
+      "reason": "아치형 상단 삽화·진행바/타이머·순위목록·내순위 고정행이 동일.",
+      "reference": "MGV09/frames/game-crops/stable-frame_00012.png"
+    },
+    {
+      "family": "tournament-class-preview",
+      "title": "클래스 업그레이드·혜택 안내",
+      "decision": "keep",
+      "framePattern": "분할 헤더·혜택 말풍선형",
+      "compareTo": "Modal_Event_TycoonExpress",
+      "reason": "전체화면 상단 프로필/타이틀 2분할 정보판과 중앙 꼬리있는 혜택카드·하단 고정 닫기. 기존 아치 순위창과 분할 구조가 다름.",
+      "reference": "MGV09/frames/game-crops/stable-frame_00015.png",
+      "nativeImplementation": {
+        "family": "tournament-class-preview",
+        "screenId": "screen-348f94fc-51fe-4ce8-8d82-7fcd6bee4a30",
+        "name": "Page_Tournament_ClassBenefits",
+        "parts": 55,
+        "state": "native assembly / proposal awaiting review; source equivalence incomplete",
+        "currentRevision": 352,
+        "evidence": "unique-frames32/class-phone.jpg",
+        "evidenceRevision": 352,
+        "runtimeEntrance": null,
+        "runtimeCheck": "separate in-memory fixture opener; original saved target screen unchanged",
+        "remaining": [
+          "source font/material/micro slice-seam precision",
+          "unknown source entrance and game outcomes remain unset",
+          "information/trophy destination unobserved"
+        ]
+      }
+    },
+    {
+      "family": "beanstalk-bonanza-details",
+      "title": "콩나무 노다지 획득 안내",
+      "decision": "keep",
+      "framePattern": "진행·3열 획득 안내형",
+      "compareTo": "Modal_Event_RacingStarter",
+      "reason": "비정형 상단 윤곽→독립 진행바→3열 획득 안내→하단 배수 안내로 본문 분할. 기존 단일 포스터/구매 패널과 다름.",
+      "reference": "MGV09/frames/game-crops/stable-extra-frame_00000.png",
+      "nativeImplementation": {
+        "family": "beanstalk-bonanza-details",
+        "screenId": "screen-8f377ed0-d709-41bb-ba96-68c84b295c62",
+        "name": "Modal_Event_BeanstalkDetails",
+        "parts": 50,
+        "state": "native assembly / proposal awaiting review; source equivalence incomplete",
+        "currentRevision": 352,
+        "evidence": "unique-frames32/bean-phone.jpg",
+        "evidenceRevision": 352,
+        "runtimeEntrance": null,
+        "runtimeCheck": "separate in-memory fixture opener; original saved target screen unchanged",
+        "remaining": [
+          "source font/material/micro slice-seam precision",
+          "unknown source entrance and game outcomes remain unset",
+          "observed 5000-reward tooltip not assembled; trigger unknown"
+        ]
+      }
+    },
+    {
+      "family": "jack-beanstalk-intro",
+      "title": "잭과 콩나무 소개",
+      "decision": "reuse",
+      "framePattern": "기존 세로 행사 팝업",
+      "compareTo": "Modal_Event_RacingStarter",
+      "reason": "제목·대형삽화·하단설명·단일CTA. 아치/종이판 경계 차이만으로 새 프레임을 만들지 않음.",
+      "reference": "MGV09/frames/game-crops/stable-frame_00007.png"
+    },
+    {
+      "family": "fairy-luck-offer",
+      "title": "요정 행운 상품",
+      "decision": "reuse",
+      "framePattern": "기존 상품 카드",
+      "compareTo": "Modal_Shop_Store",
+      "reason": "보상/가격이 있는 상품카드 반복. 세로 배열·연결화살표는 배치/장식 variant.",
+      "reference": "MGV09/frames/game-crops/stable-frame_00004.png"
+    },
+    {
+      "family": "forest-discount-offer",
+      "title": "숲 할인 상품",
+      "decision": "reuse",
+      "framePattern": "기존 행사 구매 팝업",
+      "compareTo": "Modal_Event_RacingStarter",
+      "reason": "세로 라운드외곽/돌출제목/우상단X/본문보상/하단구매·타이머·횟수 동일.",
+      "reference": "MGV09/frames/game-crops/stable-frame_00002.png"
+    },
+    {
+      "family": "teatime-savings-offer",
+      "title": "티타임 저축 상품",
+      "decision": "reuse",
+      "framePattern": "기존 상품 카드",
+      "compareTo": "Modal_Shop_Store",
+      "reason": "동일 상품카드 2열 반복. 잠금·연결화살표·헤더그림 차이.",
+      "reference": "MGV09/frames/game-crops/stable-frame_00003.png"
+    },
+    {
+      "family": "winter-pick-one-offer",
+      "title": "겨울 1개 선택 상품",
+      "decision": "reuse",
+      "framePattern": "기존 상품 카드",
+      "compareTo": "Modal_Shop_Store",
+      "reason": "3열 상품카드. 높이/보상수/강조테두리는 규격/강조 variant이며 새 외곽틀이 아님.",
+      "reference": "MGV09/frames/game-crops/stable-frame_00005.png"
+    },
+    {
+      "family": "block-boutique-closing",
+      "title": "블록 부티크 종료 안내",
+      "decision": "reuse",
+      "framePattern": "기존 아치 삽화·본문",
+      "compareTo": "Modal_Event_TycoonExpress",
+      "reason": "상단 아치 삽화+하단 직사각 본문. 순위→안내문 및 경계돌출CTA만으로 새 틀로 세지 않음.",
+      "reference": "MGV07/captures/validated/frame_001-game.png"
+    },
+    {
+      "family": "go-chat-promo",
+      "title": "GO!CHAT 안내",
+      "decision": "reuse",
+      "framePattern": "기존 포스터·CTA",
+      "compareTo": "Modal_Event_RacingStarter",
+      "reason": "단일 포스터+CTA. 하단외부X/경계에걸친버튼은 배치 variant.",
+      "reference": "MGV06/captures/validated/frame_002-game.png"
+    },
+    {
+      "family": "cash-boost-explainer",
+      "title": "현금 부스트 안내",
+      "decision": "reuse",
+      "framePattern": "기존 포스터·CTA",
+      "compareTo": "Modal_Event_RacingStarter",
+      "reason": "GO!CHAT과 같은 구성으로 타이머/설명/그림 교체.",
+      "reference": "MGV09/frames/game-crops/stable-frame_00016.png"
+    }
+  ],
+  "newProductUI": 3,
+  "designChanged": true,
+  "readOnlyReviewers": [
+    "root:showroom/detail/report/base14",
+    "frame_rewards_events:8families",
+    "frame_offers:7families"
+  ],
+  "limits": [
+    "외곽/본문 프레임의 시각·구조 비교이며 Unity 내부 계층 추정 아님",
+    "외부앱6분류는 별도 reference-only",
+    "기존14화면/과거안은 삭제하지 않음",
+    "공통보상연출은 통합 패턴 기록일 뿐 구현완료 아님",
+    "선별된3프레임의 새 UI/그림은 아직 제작하지 않음"
+  ],
+  "history": [
+    {
+      "asOf": "2026-11-17T20:12:43.503082+09:00",
+      "phase": "selection-only",
+      "newProductUI": 0,
+      "designChanged": false,
+      "basis": {
+        "revision": 335,
+        "screens": 14,
+        "parts": 1144,
+        "connections": 22,
+        "savedDesignSHA256": "b651bea0f3b52bfd71a090372d75789b2d894ff95ba52f7efee3475dba9c1e1a"
+      }
+    }
+  ],
+  "productionStatus": {
+    "revision": 352,
+    "screens": 17,
+    "parts": 1277,
+    "connections": 25,
+    "newNativeFrames": [
+      {
+        "family": "showroom-token-detail",
+        "screenId": "screen-fb2afd7d-f997-4bc8-90f5-40439ae2af76",
+        "name": "Modal_Showroom_TokenDetail",
+        "parts": 28,
+        "state": "native assembly / proposal awaiting review; source equivalence incomplete",
+        "currentRevision": 352,
+        "evidence": "unique-frames32/showroom-phone.jpg",
+        "evidenceRevision": 352,
+        "runtimeEntrance": null,
+        "runtimeCheck": "separate in-memory fixture opener; original saved target screen unchanged",
+        "remaining": [
+          "source font/material/micro slice-seam precision",
+          "unknown source entrance and game outcomes remain unset",
+          "equipping/previous/next/info game action unobserved",
+          "underlay reuses existing shield cabinet; token-list variant not assembled",
+          "new equip uses basic tint; separate 3D pressed illustration not produced"
+        ]
+      },
+      {
+        "family": "tournament-class-preview",
+        "screenId": "screen-348f94fc-51fe-4ce8-8d82-7fcd6bee4a30",
+        "name": "Page_Tournament_ClassBenefits",
+        "parts": 55,
+        "state": "native assembly / proposal awaiting review; source equivalence incomplete",
+        "currentRevision": 352,
+        "evidence": "unique-frames32/class-phone.jpg",
+        "evidenceRevision": 352,
+        "runtimeEntrance": null,
+        "runtimeCheck": "separate in-memory fixture opener; original saved target screen unchanged",
+        "remaining": [
+          "source font/material/micro slice-seam precision",
+          "unknown source entrance and game outcomes remain unset",
+          "information/trophy destination unobserved"
+        ]
+      },
+      {
+        "family": "beanstalk-bonanza-details",
+        "screenId": "screen-8f377ed0-d709-41bb-ba96-68c84b295c62",
+        "name": "Modal_Event_BeanstalkDetails",
+        "parts": 50,
+        "state": "native assembly / proposal awaiting review; source equivalence incomplete",
+        "currentRevision": 352,
+        "evidence": "unique-frames32/bean-phone.jpg",
+        "evidenceRevision": 352,
+        "runtimeEntrance": null,
+        "runtimeCheck": "separate in-memory fixture opener; original saved target screen unchanged",
+        "remaining": [
+          "source font/material/micro slice-seam precision",
+          "unknown source entrance and game outcomes remain unset",
+          "observed 5000-reward tooltip not assembled; trigger unknown"
+        ]
+      }
+    ],
+    "excludedSimilarFamilies": 14,
+    "fullEquivalenceApproval": false,
+    "sourceSHA256": "68c206de41f339d0884a717b619ceed077ab3fcfdc4d3e5082c8e426cbe059fb"
+  }
+}

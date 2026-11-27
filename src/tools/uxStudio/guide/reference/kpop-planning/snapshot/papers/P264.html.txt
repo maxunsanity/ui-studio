@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI 기획 문서 규칙</title>
+<style>
+  body { margin:0; background:#f4f5f7; color:#22262c; font:15px/1.65 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  main { max-width:1080px; margin:0 auto; padding:28px 24px 64px; }
+  h1 { font-size:24px; margin:0 0 4px; }
+  .lead { margin:0 0 4px; font-size:16px; }
+  .meta { margin:0 0 20px; color:#6b7280; font-size:13px; }
+  .hero { display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start; background:#fff; border:1px solid #d6d9de; border-radius:10px; padding:20px; }
+  .key { flex:1; min-width:280px; }
+  .key h2 { font-size:16px; margin:0 0 8px; }
+  .key ul { margin:0; padding-left:18px; }
+  .key li { margin:0 0 6px; }
+  .form { width:300px; border:2px solid #4b515a; border-radius:8px; padding:10px; background:#f4f5f6; font-size:13px; }
+  .form .top { display:flex; gap:8px; margin-bottom:8px; }
+  .form .pic { width:110px; height:150px; border:1.5px dashed #8a9099; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#6b7280; background:#fff; }
+  .form .sum { flex:1; border:1.5px solid #4b515a; border-radius:6px; background:#fff; padding:6px; }
+  .form .fold { border:1.5px solid #4b515a; border-radius:6px; background:#fff; padding:3px 8px; margin-top:4px; }
+  details { background:#fff; border:1px solid #d6d9de; border-radius:10px; margin-top:12px; }
+  summary { cursor:pointer; padding:14px 18px; font-weight:700; font-size:16px; }
+  details > div { padding:0 18px 18px; }
+  table { border-collapse:collapse; width:100%; font-size:14px; margin:6px 0 10px; }
+  th, td { border:1px solid #d9dce2; padding:6px 9px; text-align:left; vertical-align:top; }
+  th { background:#f0f1f4; }
+  code { background:#f0f1f4; padding:0 4px; border-radius:3px; font-size:13px; }
+</style>
+</head>
+<body>
+<main>
+<h1>UI 기획 문서 규칙</h1>
+<p class="lead">「UI 기획」에 들어가는 UI 기획서는 모두 이 한 가지 모양으로 씁니다.</p>
+<p class="meta">v1 · 2026-11-20 클로드 · 현중 「대표적인 ui는 처음에 보이고 세부적인건 하단에 접기 메뉴로」 · 적용: <a href="산출_기획서_20261120_UI기획.html">UI 기획서(HUD · 포토카드 탭)</a></p>
+
+<section class="hero">
+  <div class="form">
+    <b>탭 줄: HUD | 포토카드 | …</b><br>제목 · 한 줄 설명 · 기준
+    <div class="top" style="margin-top:8px"><div class="pic">대표 화면<br>그림</div><div class="sum"><b>핵심</b><br>확정한 것<br>5~7줄</div></div>
+    <div class="fold">▸ 1. 목적 · 범위</div><div class="fold">▸ 2. 화면 목록 · 흐름</div><div class="fold">▸ 3. 화면 깊이 · 뒤로</div><div class="fold">▸ 4. 화면별 상세</div><div class="fold">▸ 5. 규칙 · 예외</div><div class="fold">▸ 6. 리소스 · 데이터</div><div class="fold">▸ 7. 남은 결정</div><div class="fold">▸ 8. 변경 기록</div>
+  </div>
+  <div class="key">
+    <h2>핵심</h2>
+    <ul>
+      <li>문서 형태는 <b>HTML</b>. 스크립트 없이 그림 · 표 · 접기만 씁니다(기획서 툴과 UI 스튜디오에서 똑같이 보이게).</li>
+      <li>맨 위에는 <b>대표 화면 그림과 핵심</b>만. 세부는 모두 아래 <b>접기 8항목</b>에.</li>
+      <li>접기 8항목은 문서마다 <b>같은 이름 · 같은 순서</b>. 비면 지우지 않고 「없음」.</li>
+      <li>그림은 작업자가 편한 것(HTML 와이어를 찍은 PNG 또는 이미지). 나중에 코덱스가 같은 파일 이름으로 이미지를 바꿉니다.</li>
+      <li>UI 기획서는 <b>한 페이지</b>이고 UI 하나 = <b>탭 하나</b>(HUD · 포토카드 · 다음 UI 순서). 탭은 위쪽 탭 줄에서 바꿔 봅니다.</li>
+    </ul>
+  </div>
+</section>
+
+<details>
+<summary>1. 접기 8항목에 쓰는 것</summary>
+<div>
+<table>
+<tr><th>항목</th><th>쓰는 것</th></tr>
+<tr><td>1. 목적 · 범위</td><td>무엇을 하는 화면인지 · 맡는 것 / 맡지 않는 것 · 원칙 · 한 판 순서 점검표(시작·종료 · 입력·출력 · 상태와 전이 · 판정 · 오류·예외 · 저장·복원)</td></tr>
+<tr><td>2. 화면 목록 · 흐름</td><td>흐름 한 줄 · 화면 · 종류(전체 화면 / 창 / 펼침 / 책갈피) · 깊이 · 들어오는 곳</td></tr>
+<tr><td>3. 화면 깊이 · 뒤로</td><td>공통 규칙은 HUD 3번 · 그 UI에만 있는 ← 뒤로 · 닫기 · 바로 가기</td></tr>
+<tr><td>4. 화면별 상세</td><td>화면마다 그림 + 자리 · 보이는 것 · 누르면 · 데이터 · 상태 · 버튼 / 글자 수 표</td></tr>
+<tr><td>5. 규칙 · 예외</td><td>게임 규칙은 원본 기획서 링크와 규칙 번호만 · 이 화면에만 있는 예외</td></tr>
+<tr><td>6. 리소스 · 데이터</td><td>그림 파일 · 와이어 원본 · 읽는 표 · 키 · 코드 · 게임 시뮬레이터와 다른 점. 2차 세부 와이어프레임의 3D 대표 이미지와 부품 보드 썸네일은 원본 색상을 유지합니다. 2D UI는 공통 흑백 스타일을 적용합니다.</td></tr>
+<tr><td>7. 남은 결정</td><td>번호 · 무엇 · 제안 · 누가 정할지</td></tr>
+<tr><td>8. 변경 기록</td><td>날짜 · 무엇 · 출처(현중 말 · 문서)</td></tr>
+</table>
+</div>
+</details>
+
+<details>
+<summary>2. 출처 순서 · 정리 기준</summary>
+<div>
+<p>같은 내용이 다르면 위쪽을 따르고, 고친 줄에 출처를 붙입니다.</p>
+<table>
+<tr><th>순서</th><th>출처</th></tr>
+<tr><td>1</td><td>현중 직접 조정(채팅 · 컨폼 그림)</td></tr>
+<tr><td>2</td><td>2차 명세(UI 스튜디오 규격 · 좌표)</td></tr>
+<tr><td>3</td><td>상세 기획서 본문(HUD v1.6 · 카드 기획서 등)</td></tr>
+<tr><td>4</td><td>1차 와이어 · 옛 시안</td></tr>
+</table>
+<ul>
+<li>옛 문서를 옮길 때: 화면에 필요한 것만 8항목에 넣고, 조사 근거(파일:줄) · 부품 이름 표 · 구동 방법 같은 것은 뺍니다. 옛 문서는 지우지 않고 「이전 기획」으로 둡니다.</li>
+<li>다른 담당 문서는 읽기만 하고 이 문서 쪽에 반영한 뒤 링크합니다.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>3. 그림 · 파일 이름</summary>
+<div>
+<table>
+<tr><th>무엇</th><th>규칙</th></tr>
+<tr><td>문서</td><td><code>산출_기획서_20261120_UI기획.html</code> 한 파일 · 새 UI는 탭(<code>&lt;section class="tab" id="..."&gt;</code>)을 더함</td></tr>
+<tr><td>그림 폴더</td><td><code>산출_기획서_20261120_UI기획_그림/</code></td></tr>
+<tr><td>그림 이름</td><td><code>{UI 약자}_{화면 번호}_{화면 이름}.png</code> (예: <code>pc_03-1_팀보기.png</code>) · 이미지로 바꿀 때 같은 이름으로 덮어씀</td></tr>
+<tr><td>크기</td><td>390×844 화면을 2배(788×1696)로</td></tr>
+</table>
+</div>
+</details>
+
+<details>
+<summary>4. 검수</summary>
+<div>
+<ul>
+<li>대표 화면 · 핵심 · 접기 8항목이 다 있고 이름 · 순서가 같은지.</li>
+<li>4번 화면별 상세의 요소가 그림과 빠짐없이 같은지.</li>
+<li>출처 순서대로 덮였는지(현중 조정 · 2차 명세 반영).</li>
+<li>기획서 툴과 UI 스튜디오에서 같은 파일이 열리고 그림 · 접기가 보이는지.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>5. 변경 기록</summary>
+<div>
+<table>
+<tr><th>날짜</th><th>무엇</th><th>출처</th></tr>
+<tr><td>2026-11-20</td><td>처음 씀 · HUD · 포토카드에 적용</td><td>현중 「hud 와 포토카드의 문서 규칙」 · 「작업 문서 형태는 html로 해」 · 「기획텝별로 볼 수 있게」 · 「하나의 페이지에 텝으로」</td></tr>
+</table>
+</div>
+</details>
+</main>
+</body>
+</html>

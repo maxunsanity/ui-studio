@@ -1,0 +1,346 @@
+# S08 · 표 구조와 연결 지도 — 표가 어떻게 이어지나 (이식)
+
+**이 문서는** 표가 어떤 열쇠로 이어지는지 읽는 시스템 연결 지도입니다. 당시 등록부·기획 근거와 현재 등록·로더의 역할을 구분해 설명합니다.
+
+**보는 법** 간략에서 연결의 큰 흐름을 보고 세부의 규칙·선 목록으로 내려갑니다. 아래 현재 읽기 기준을 먼저 확인하고, 개별 표 구조는 관련 정본과 함께 읽습니다.
+
+**지금 상태** 기획 연결 지도와 등록·코드 역할을 정적으로 대조한 제안(검수 대기) 문서입니다. 전체 값·참조·게임 구동의 정상이나 운영수치 확정을 뜻하지 않습니다.
+
+## 목차
+- [간략](#간략)
+- [세부](#세부)
+  - [0. 한 줄](#0-한-줄-이식)
+  - [1. 표 묶음](#1-표-묶음)
+  - [2. 연결 규칙 R-S08](#2-연결-규칙-r-s08)
+  - [3. 연결 지도](#3-연결-지도)
+  - [4. 시스템 문서 ↔ 표](#4-시스템-문서-표-신규)
+  - [5. 풀네임 후보](#5-풀네임-후보-신규)
+  - [6. 이게 아닌 것](#6-이게-아닌-것-신규)
+  - [7. 아직 안 한 것 · 확인 필요](#7-아직-안-한-것-확인-필요)
+- [문서 정보](#문서-정보)
+
+---
+
+## 간략
+
+**현재 등록·로더를 읽는 기준 — 정적 관측**
+
+**관측 대상·시점** — 2026-11-04 05:14 감사 마감 기준 등록 메타는 `table_registry.csv` 94행(`both` 87 · `tool` 7)입니다. `schema_table.csv` 전체 619기록은 보관·미등록 기록도 포함합니다. 생성된 `GAME_SCHEMAS` 94개, `GAME_MASTER_TABLES` 7개, `GAME_REF_TABLES` 15개는 각각 다른 필터의 대상입니다. 아래 37 · 47 · 83은 본문에 적힌 날짜의 등록부 기록으로 보존합니다.
+
+**생성 정본·생성물** — 원본 `schema_table.csv` · `schema_column.csv` · `schema_config_key.csv`를 `scripts/schema-generate.mjs`가 읽어 `src/data/schema.ts` · `data/game/table_registry.csv` · `data/planning_csv_table.csv`를 만듭니다. 생성물은 손으로 고치지 않습니다. 아래 「등록부 생성 스크립트 없음」은 이전 근거이며, 현재 생성기 소스와 구분합니다. 생성 비교·머리줄 확인을 전체 참조·운영 검수로 보지 않습니다. 이번에는 생성기나 `--check`를 실행하지 않았습니다.
+
+**논리 이름·실제 경로** — 등록부의 `rel_path`는 생성기에서 표 논리키로 쓰입니다. 실제 파일은 `schema_table.rel_path` 및 로더 경로를 함께 봅니다. 예를 들어 논리키 `facility_level`은 `GAME_TABLE_PATHS`를 통해 `data/core_proposal/facility_growth_level.csv`를 읽도록 되어 있습니다. `wire` · `read_game` 표시는 실제 호출·화면 연결·정상 구동의 증명과 구분합니다.
+
+**공통 칸·예외** — 아래 공통 `resource_id` · `resource_stage` · `check_id` 등의 설명은 당시 관리 원칙입니다. 현재 생성스키마에는 관리·툴·옛 표 등의 예외가 있으며 모든 표에 같은 칸이 있거나 모두 같은 검사를 통과했다는 뜻은 아닙니다.
+
+**연결선·검사 범위** — 게임 검사기는 `GAME_SCHEMAS`의 PK 이름과 접미사로 대상을 추론하고 명시 예외를 적용합니다. `board_tile`의 시설·잭팟·지도 선은 이 규칙으로 추론할 수 있지만 실제 행 참조 정상은 이번에 재검사하지 않았습니다. `commonLoader`는 명시된 `fk_target` 중 같은 호출에서 함께 읽은 대상만 확인하며, 머리줄·범위·참조 문제는 기본 경고입니다. 게임 로더의 CRIT 차단과 같은 범위로 합치지 않습니다.
+
+**CSV 호출 계약** — `src/toolkit/csv.ts`의 `parseCsv(text, sourceName?)`에는 별도 `strict` 옵션이 없습니다. 파일명 인자가 있을 때 셀 수 불일치를 오류로 처리합니다. `commonLoader`는 `parseCsv(..., name)`을, 게임 로더는 `parseGameCsv(..., name, parseCsv)`를 쓰고 그 안에서 `parseRows(..., tableName)`으로 이름을 넘깁니다. 이 두 호출 경로의 확인을 모든 파서·호출부의 전수 검수로 확대하지 않습니다.
+
+**이전 근거의 읽기 범위** — 아래 원형 도식·표의 숫자, 빈 `card` 예시, 풀네임 후보와 날짜 붙은 결정 인용은 당시 기획·설명 역할을 보존합니다. 새 운영값·새 이름 변경 승인으로 집행하지 않습니다. 기존 선택 37 CSV · 14 ID 관계의 부분 감사도 전체 표·FK·전환·게임 운영 검수와 구분합니다.
+
+**관련 정본 읽기** — [P148 현재 테이블 데이터 조합 구조](../개발진행기획_v01/콘텐츠별_v03/테이블데이터_조합구조_기획서.md) · [P86 작성·등록·검수 규칙](../개발진행기획_v01/작성기준_v02/작성규칙.md) · [S17 툴 제작 계약](S17_기획서툴_제작기본양식_v02.md)
+
+**머리표** 시스템 기획 · S08 · 표 · 모노 F31 표 구조 · 등록부 이식
+
+**제목** 표 구조와 연결 지도 — 칸 하나가 시설 · 잭팟 · 대지 · 지도로 이어진다
+
+**훅** 표 하나를 고치면 어디까지 흔들리는지 한 장으로 본다.
+
+**두 줄 요약**
+- 케이팝 표는 **83개**(등록부 `table_registry.csv` 10/27 기준 `usage`: 게임 · 툴 함께 76 · 툴 전용 7). 10/09 기준은 47개(40 · 7 · 단계 5 재개로 10개 더함), 옛 안 → 37개(31 · 6). 경제 묶음의 중심은 `board_tile`이고, 시설(`facility`) · 잭팟(`jackpot`) · 대지(`land_lot`) · 지도(`map_node`)가 여기서 갈라진다.
+- 모든 표는 공통 칸 `resource_id`(임시 리소스) · `check_id`(확인 목록)로 관리 표에 붙는다. 풀네임은 후보만 적는다.
+
+```mermaid
+flowchart LR
+  BT[board_tile 40] --> FAC[facility 6]
+  BT --> JP[jackpot 2]
+  BT -.map_node_id.-> MN[map_node 85]
+  LL[land_lot 22] --> BT
+  FL[building_master_level 270] --> FAC
+  IS[idol_stat 0] --> FAC
+  CARD[card 240] --> CT[card_theme 20]
+  EC[economy_config] -.key.-> BT
+  DM[item_master_dice_mult 10]
+  INC[income 5]
+  SC[season_config]
+  TBS[tool_balance_source] -.표 이름.-> EC & DM & JP & BT & FL & LL & SC
+```
+
+1. **칸** — `board_tile`이 40칸의 뼈대. 시설 · 잭팟 · 지도 노드를 가리킨다.
+2. **성장** — `building_master_level` · `idol_stat`이 건물(`building_master`)을 가리키고, 둘의 `fan_gain`만 팬을 늘린다.
+3. **설정** — `economy_config` · `season_config` 같은 key 표는 다른 표를 가리키지 않고 코드가 key로 읽는다.
+4. **툴** — `tool_*` 3개는 표 이름을 줄 값으로 적어 다른 표를 읽는다.
+
+| 왜 지금 | 이게 핵심 | 이게 아닌 것 |
+|---|---|---|
+| S02~S07이 같은 표를 여러 번 부르는데, 표끼리 잇는 선이 한 장에 없다 | `board_tile` 중심 · `fac_id` · `jp_id` · `tile_id` 세 선 · 공통 칸 2개 | 새 표를 만드는 문서가 아니다 · 이름을 바꾸는 문서가 아니다 |
+
+---
+
+## 세부
+
+**머리 블록**
+
+| 칸 | 내용 |
+|---|---|
+| 문서 | S08 · 표 구조와 연결 지도 |
+| 대응표 v2 | F31 표 구조 · 등록부 → [S01 대응표](../게임프로토타입/모노컨셉대응표_v2.md) |
+| 기준 자료 | `data/game/table_registry.csv`(10/09 기준 47줄 · 10/27 기준 83줄 · pk · usage) · 각 표 머리 줄 / P58 4-0 공통 칸 · 4-1 · 4-2 · 4-3 · 2-1 35 / `보고/20261009_0830_단계5풀네임후보_유르넷.md` / 현중 09:21 |
+| 상태 | 제안(검수 대기) |
+
+### 0. 한 줄 (이식)
+표끼리는 **열쇠 칸 이름(`fac_id` · `jp_id` · `tile_id` …)** 으로 잇는다. 이 지도는 그 선을 그대로 그린 것이다.
+
+### 1. 표 묶음
+
+**1-0. 등록부 칸 뜻** (이식)(`table_registry.csv` · 유르넷 E1)
+
+| 칸 | 뜻 | 값 |
+|---|---|---|
+| `rel_path` · `table_id` | 파일 이름 · 표 이름(둘이 같아야 함) | `board_tile` |
+| `owner` | 표를 고치는 쪽 | 단서 · 클로드 |
+| `usage` | 누가 쓰나 | game · tool · both. tool이면 이름이 `tool_`로 시작(관리 표 셋 빼고) |
+| `wire` | 연결 방식 | live(본편이 읽음) · csv(파일로만) |
+| `content_id` | 묶음 | game · siege · 표 이름 |
+| `role` | 연결 자리 | hub(여럿이 가리킴) · dep(남을 가리킴) · meta(관리) |
+| `pk` | 줄 열쇠 칸 | 표 머리 첫 칸과 같아야 함 |
+| `col_count` · `row_count` | 칸 수 · 줄 수 | 검사기가 실제와 대조 |
+| `read_game` · `read_tool` · `read_port` · `read_iframe` · `read_script` | 본편 · 툴 · 포트 · 미리보기 · 스크립트가 읽나 | 0 · 1 |
+| `schema_reg` · `doc_ok` | 스키마 등록 · 문서 있음 | 0 · 1 |
+| `rename_to` | 바꿀 이름 후보 | 비움 = 그대로 |
+| `note` | 메모 | — |
+
+- 모노는 등록부를 스크립트가 만든다(`build-table-registry.mjs`). 케이팝은 손 · 생성기로 쓰고, 검사기가 칸 수 · 줄 수 · pk를 대조한다 — **모노와 다름**(만드는 스크립트 없음 · 확인 필요 · 보류).
+- 옛 표 7개(`map_path` · `map_node` · `scene_*` · `text_ko` · `file_owner`)는 `role` 칸에 메모 글이 들어 있다 — 확인 필요 · 보류(`text_ko`는 클로드 몫).
+
+**1-1. 묶음**
+
+
+| 묶음 | 표(줄 수 · 등록부 기준 · 10/27 다시 셈 · 등록부에 없는 표는 옛 숫자 그대로) | 이 문서에서 |
+|---|---|---|
+| 보드 · 경제 | `board_tile`(40) · `item_master_dice_mult`(10 · 등록부에 줄 없음 K25 · `data/master/`) · `economy_config`(45 key) · `income`(5) · `jackpot`(2) · `casting`(2 · `defender` 칸은 모노 약탈 흔적 · 약탈 = 쟁탈 먼저 잡기(현중 14:05) · 세부 보류) | S03 (신규) |
+| 건설 · 시설 · 팬 | `building_master`(15줄: 건물 9 + 옛 이름 6) · `building_master_level`(270) · `land_lot`(22) · `idol_stat`(등록부에 줄 없음 — 확인 필요) · 건물 표는 `data/master/` 아래라 등록부에 줄이 없음(확인 필요 K25) | S04 · S05 (신규) |
+| 아이돌 · 카드 | `idol`(5) · `card_theme`(20) · `card`(240) · `tile_card`(0) · `audition_config`(4 key) · `festival_ticket`(4) | S07(카드 보류) (신규) |
+| 시즌 | `season_config`(8 key) | S09(보류) (신규) |
+| 지도 · 장면 | `map_node`(85) · `map_path`(2) · `scene_placement`(11) · `scene_visual`(11) · `scene_config`(45 key) | S06(도시 패널) (신규) |
+| 글자 | `text_ko`(185) | 전체 (신규) |
+| 보상 · 주사위 · 이벤트(단계 5) | `dice_grant_config`(15 key) · `dice_cap_level`(13) · `fan_milestone_reward`(8) · `card_collection_reward`(13) · `bonus_reward_pool`(18) · `event_template`(17) · `event_acquire`(6) · `event_demand`(6) · `event_boost_config`(5 key) | S02 · S05 · S07 (이식) |
+| 툴 | `tool_balance_source` · `tool_economy_season_budget_config`(28 key) · `tool_playlog_source`(6) · `tool_event_pack_reward_plan`(77) | S02 (이식) |
+| 관리 | `resource`(23) · `check_list`(49) · `table_registry`(83) · `table_link_exception`(105) · `file_owner`(21) | 전체 (이식) |
+| 전투 쪽(이 지도 밖) | `mons`(5) · `mons_skill`(0) · `akgwi`(3) · `akgwi_wave`(3) · `defense`(3) · `siege_config`(16 key) | 전투 제외 · 점선만 (신규) |
+
+### 2. 연결 규칙 R-S08
+
+**원칙 두 줄**(유르넷 E6 · 모노 51 §3 · 92 제8조) (이식)
+- 규칙은 데이터다. 값 · 문턱 · 보상은 표에 두고 코드에 숫자를 박지 않는다.
+- 세이브에는 「무엇을 가졌나」 키만 넣고, 수치는 불러올 때 표에서 다시 계산한다 → [S09](S09_시즌틀.md) 저장 · 불러오기.
+
+
+| ID | 규칙 | 근거 |
+|---|---|---|
+| R-S08-1 | 표마다 줄 열쇠(pk) 하나. 다른 표를 가리키는 칸은 **이름이 상대 표 pk 칸 이름이거나 `_<pk>`로 끝난다**(`fac_id` · `map_node_id` → `node_id`). 그래서 같은 표를 두 칸이 가리킬 수 있다. 케이팝 검사기도 같은 규칙(`gameValidation.ts` `inferredTargets`). 옛 안 → 「pk 칸 이름을 그대로」 | P58 4-0 · 모노 `audit-table-links.mjs` · 유르넷 E2 (이식) |
+| R-S08-1b | 어긋남 세 갈래: 상대 표 없음(모노 orphan · 케이팝 `missing target table` · `unresolved relationship`) · 값 일부 없음(partial · `dangling reference`) · 꼬리 같은 표 여럿(ambig · `ambiguous relationship`). 모두 CRIT | 모노 165 §3-1 · `gameValidation.ts` (이식) |
+| R-S08-2 | 모든 표의 공통 칸: `name_ko` · `resource_id`(→ `resource`) · `resource_stage` · `src_doc_id` · `src_line` · `check_id`(→ `check_list`) · `note` | P58 4-0 (신규) |
+| R-S08-3 | key 칸 설정 표(`economy_config` · `season_config` · `audition_config` · `scene_config` · `siege_config` · `tool_economy_season_budget_config`)는 다른 표를 가리키지 않는다. 코드가 key로 읽는다 | 등록부 pk=`key` (이식) |
+| R-S08-4 | ~~칸 이름이 pk와 다른 선은 손으로 적는다~~ — R-S08-1(「…로 끝난다」)로 `board_tile.map_node_id` → `map_node.node_id`도 규칙 안. 필요 없음. 옛 안 → 손으로 적음 | 유르넷 E2 (이식) |
+| R-S08-5 | 툴 표는 **표 이름을 줄 값으로** 적어 읽는다(`tool_balance_source` 10줄 · `tool_playlog_source` 6줄) → [S02](S02_발란스툴.md) | S02 4-1 · 4-4 (이식) |
+| R-S08-6 | 팬을 늘리는 칸은 `building_master_level.effect_fan_gain` · `idol_stat.fan_gain` 두 곳뿐. `jackpot.fan_gain`은 잭팟으로 팬이 늘지 않음(PCJACKMD 3 · 19 · 표 값 0) | P58 7장 394 · S05 (신규) |
+| R-S08-7 | 시즌 끝 리셋 대상은 표마다 칸을 두지 않고 `season_config.reset_items` 한 곳에서 정한다(기준은 보류) | 유르넷 1413 B2 · P58 2-2 57 (신규) |
+| R-S08-8 | 표 연결 검사: `audit-game-tables` · `audit-game-links` · `audit-game-economy` · `test-game-audits`. 예외는 `table_link_exception` · 기준은 아래 「검사 기준 표」 | 단계 1~4 검사기 (이식) |
+| R-S08-8b | **예외 표 칸**: `rel_path`(표) · `col`(칸) · `kind`(ref 다른 표 · poly 종류 칸 따라 갈래 · own 자기 표 · local 같은 표 안 · enum 정해진 값 · sentinel 특수값) · `target`(표.칸) · `pair_col`(poly의 종류 칸) · `allow_values`(enum · sentinel 값) · `reason`. **이유 칸은 꼭 적는다**(비면 CRIT) | 모노 예외 표 · `gameValidation.ts` 223~238 · 유르넷 E3 (이식) |
+| R-S08-9 | 빈 표(`idol_stat` · `card` · `tile_card` · `mons_skill`)는 칸만 있고 줄은 「값 미정 · 보류」. 새 빈 표를 맞추려고 만들지 않는다 | S02 R-S02-6 (신규) |
+| R-S08-10 | **줄 열쇠 모양** = `<표 이름>_<두 자리 번호 또는 영문 이름>`(`board_tile_01` · `facility_dance` · `facility_level_dance_01`) · 영문 소문자 · 숫자 · 밑줄만. key 표는 `key` 칸(`CONFIG_KEYS`에 적힌 열쇠만). `check_list`는 `check_list_NN`. 모양이 다른 표는 스키마 `idPattern`(예: `map_node`). 모노는 칸 종류 · 번호 · 단계 칸으로 열쇠를 만든다 — **모노와 다름** | `gameValidation.ts` 141~148 · 유르넷 E5 (이식) |
+
+**검사 기준 표**(유르넷 E4 · 케이팝 `gameValidation.ts` · `audit-game-*.mjs`) — CRIT · WARN · NOTE 세 등급은 모노 검사기 틀 (이식)
+
+| 등급 | 뜻 | 예 |
+|---|---|---|
+| CRIT | 고쳐야 게임이 돈다. 0이어야 넘어간다 | 등록부에 없는 표 · 표 없는 등록 줄 · 머리 줄이 스키마와 다름 · pk가 첫 칸 아님 · 열쇠 중복 · 열쇠 모양 틀림 · 등록부 pk · 칸 수 · 줄 수 어긋남 · `usage=tool`인데 `tool_` 아님 · 게임 표에 `resource_id` · `resource_stage` 없음 · 가리킨 값 없음 · 꼬리 같은 표 여럿 · 예외 이유 없음 · 숫자 칸에 글자 · key 표 열쇠 빠짐 |
+| WARN | 고칠 거리. 막지는 않음 | 빈 값인데 `check_id` 없음 · 이름 미정 줄 · 옛 용어 · 하루 무료 주사위가 기준 범위(800~900) 밖 |
+| NOTE | 알림 | 옛 표 `resource_*` 칸 없음(7개 예외) · 목표 값 비움 · 이벤트 연결 수 |
+
+- 모노에 있는 「얼굴 없음 · 구워진 표 · 안 읽는 표 · 쓰레기 줄 검사(`audit-table-junk`)」는 케이팝 검사기에 없다 — **모노와 다름** · 확인 필요 · 보류.
+
+### 3. 연결 지도
+
+머리 줄의 pk 칸 이름으로 찾은 선(공통 칸 `resource_id` · `check_id` 선은 모든 표에 있어 그림에서 뺌). 찾는 방법은 모노 `audit-table-links`(R-S08-1). (이식)
+
+```mermaid
+flowchart TB
+  subgraph 보드경제[보드 · 경제]
+    BT[board_tile]
+    JP[jackpot]
+    DM[item_master_dice_mult]
+    EC[economy_config]
+    INC[income]
+    CAST[casting]
+  end
+  subgraph 성장[건설 · 시설 · 팬]
+    FAC[facility]
+    FL[facility_level]
+    LL[land_lot]
+    IS[idol_stat]
+  end
+  subgraph 카드[아이돌 · 카드]
+    IDOL[idol]
+    CT[card_theme]
+    CARD[card]
+    TC[tile_card]
+  end
+  subgraph 지도[지도 · 장면]
+    MN[map_node]
+    MP[map_path]
+    SP[scene_placement]
+  end
+  subgraph 전투[전투 쪽 · 이 지도 밖]
+    MONS[mons]
+    MSK[mons_skill]
+    DEF[defense]
+    AW[akgwi_wave]
+    AK[akgwi]
+  end
+  BT -->|fac_id| FAC
+  BT -->|jp_id| JP
+  BT -.->|map_node_id| MN
+  LL -->|tile_id| BT
+  FL -->|fac_id| FAC
+  IS -->|fac_id| FAC
+  FAC -->|stat_id| IS
+  CARD -->|ctm_id| CT
+  MN -->|path_id| MP
+  SP -->|node_id| MN
+  FAC -.->|def_id| DEF
+  MONS -.->|idol_id| IDOL
+  MSK -.-> MONS
+  AW -.-> AK
+  AW -.->|path_id| MP
+```
+
+**선 목록** — 선 하나하나는 R-S08-1 방법으로 찾은 결과 (이식)
+
+| 보내는 표 · 칸 | 받는 표 | 묶음 |
+|---|---|---|
+| `board_tile.fac_id` | `facility` | 보드 → 시설 (이식) |
+| `board_tile.jp_id` | `jackpot` | 보드 → 잭팟 (이식) |
+| `board_tile.map_node_id` | `map_node` | 보드 → 지도(칸 이름 다름) (이식) |
+| `land_lot.tile_id` | `board_tile` | 대지 → 칸 (이식) |
+| `facility_level.fac_id` | `facility` | 단계 → 시설 (이식) |
+| `idol_stat.fac_id` | `facility` | 능력 → 시설 (이식) |
+| `facility.stat_id` | `idol_stat` | 시설 → 능력(서로 가리킴) (이식) |
+| `card.ctm_id` | `card_theme` | 카드 → 테마 (이식) |
+| `map_node.path_id` | `map_path` | 지도 (이식) |
+| `scene_placement.node_id` | `map_node` | 장면 → 지도 (이식) |
+| `facility.def_id` | `defense` | 전투 쪽(점선) (이식) |
+| `mons.idol_id` · `mons_skill.mons_id` · `akgwi_wave.akg_id` · `akgwi_wave.path_id` | `idol` · `mons` · `akgwi` · `map_path` | 전투 쪽(점선) (이식) |
+
+**선이 없는 표(코드 · key로만 읽힘)**: `item_master_dice_mult` · `economy_config` · `income` · `casting` · `tile_card` · `card_theme` · `idol` · `festival_ticket` · `season_config` · `audition_config` · `scene_visual` · `scene_config` · `text_ko` · `tool_*` 3개. key로 읽는 설정 표 방법은 모노 그대로(R-S08-3). (이식)
+
+**코드가 읽는 선(표 사이 열쇠 선은 아님 · 엔터 파워 → 배수 열림 · 팬 → 팬 합)** — 짓기마다 쌓은 값으로 배수를 여는 틀은 모노 번영(이식). 케이팝(신규)은 쌓는 값이 건물 단계 합이고, 엔터 파워(건물 9개 단계 합을 1~1000 눈금으로 옮긴 값)가 배수 열림 문턱을 읽는다(현중 10/26 17:39 · 10/27 12:05~12:06). 팬은 따로 쌓여 팬 합이 된다 — 아래 표에서 줄을 나눔
+
+```mermaid
+flowchart LR
+  FLg[building_master_level.effect_fan_gain] --> FS[건물별 팬 → 팬 합<br/>게임 저장값 · 이식 수정]
+  ISg[idol_stat.fan_gain] --> FS
+  EP[엔터 파워 건물 단계 합 ②A] --> PM[enter_power_level 배수 열림 문턱]
+  PPB[economy_config.prosperity_per_build] -.현재 표에 키 없음 · 번영 따로 없음.-> SES[session.ts prosperity]
+  PM --> SES
+```
+
+| 보내는 쪽 | 받는 쪽 | 상태 |
+|---|---|---|
+| 단계를 올릴 때 더하는 양 | 쌓인 값(게임 저장값) | 모노 `level_point` → 번영 틀 (이식) |
+| `building_master_level.effect_fan_gain` · `idol_stat.fan_gain` | 건물별 팬(`building_fan_assign`) → 팬 합 | 값 발란스 대기 (신규) |
+| 쌓인 값 | 배수 열림 문턱 | 모노 `prosperity_min` 틀 (이식) |
+| 엔터 파워 | `enter_power_level.enter_power_min`(옛 `dice_mult.fan_min`) | 문턱 = 엔터 파워(현중 10/26 17:39 · 10/27 12:05~12:06) (신규) |
+| `economy_config.prosperity_per_build` | `src/game/economy/session.ts` `prosperity`(옛 45 · 130 · 143 · 157줄) | 현재 `economy_config.csv`에 이 키가 없고 `session.ts`에도 `prosperity`가 없음(10/27 읽어 확인) · 번영은 따로 두지 않음 → [S05](S05_팬덤.md) (이식) |
+| `casting.casting_right` · `casting_guerrilla` | `income.income_casting_right` · `income_guerrilla` | 쟁탈 수입 · 약탈 세부 보류 → [S03](S03_보드주사위경제.md) (신규) |
+
+**표 사이에 선이 있어야 할 것 같은데 없는 곳(기획서 없음 · 확인 필요)** (신규)
+
+| 자리 | 지금 | 메모 |
+|---|---|---|
+| 칸 → 카드 칸 | `board_tile.content_kind` · `content_ref` 칸만 있음(비움) | `tile_card` 연결은 check_list_12 답 뒤 (신규) |
+| 칸 → 쟁탈 | 선 없음 | 쟁탈 칸 4 → `casting`(약탈 세부 보류) (신규) |
+| 수입 → 배수 | `income.dice_mult_apply` 표식만 | 코드에서 곱함 · 줄마다 배수 붙음 표식은 모노 `mult_apply` 방법 (이식) |
+| 카드 → 시설 · 게임 효과 | `card.game_link_kind` · `game_link_ref` 비움 | 카드덱 보류 (신규) |
+| 잭팟 통 | `economy_config.jackpot_pot_start_pct` · `jackpot_pot_add_pct` · `jackpot.payout_formula`=`pot_capped_great` · 코드 `src/game/economy/session.ts` `pot`(102 · 114 · 157줄)에도 있음 | 통 유지(현중 10/27 12:13) · 팬 합 보상은 `fan_income_modifier_jackpot` → [S03](S03_보드주사위경제.md) 4절 (이식) |
+
+**10/27 추가 표 연결** — 새 표 연결을 표(보내는 쪽 · 받는 쪽 · 상태)로 적음. 연결은 `table_registry.csv` · `data/master/schema_column.csv` · 각 표 머리 줄에서 읽은 것만, 값은 표에서 읽은 것만 쓰고 비어 있으면 「발란스 대기」. (신규)
+
+| 보내는 쪽 | 받는 쪽 | 상태 |
+|---|---|---|
+| `enter_power_level.unlock_target`(값 `item_master_dice_mult_50`~`_1000`) | `item_master_dice_mult` | 배수 해금 5줄. 문턱 `enter_power_min` = 66 · 166 · 261 · 361 · 460(표 값). 열림 기준은 엔터 파워(현중 10/26 17:39 · 10/27 12:05~12:06) (신규) |
+| `enter_power_level.reward_group_id` | `reward_group` | 칸만 있고 값 비어 있음 · 선 등록은 확인 필요 (신규) |
+| 엔터 파워 값 | `dice_cap_level.enter_power_min` | 열쇠 선이 아니라 같은 엔터 파워 값을 읽는 문턱 칸. 표 값: 2단 · 3단 1(시작 상한 50 유지) · 13단 1000, `max_dice_cap` 13단 120. 옛 `fan_min` 열은 계산에 안 씀(남길지는 확인 필요 J20) (신규) |
+| `fan_income_modifier`(6줄: `_per_fan` · `_jackpot` · `_anti` · `_concrete` · `_core` · `_light`) | `fan_tier`(층 줄은 `tier_id` 값이 `fan_tier_anti` 등 줄 열쇠와 같음) | 층 연결 등록은 확인 필요. `income_pct` 칸 값이 비어 있음 → 계수 발란스 대기(비면 더하는 돈 0) (신규) |
+| `building_fan_assign.fac_id` | `facility` | 줄 1개(`building_fan_assign_arrive`)이고 `fac_id` 칸이 비어 있어 선이 아직 안 이어짐. 균등 여부는 발란스 대기 (신규) |
+| `building_master_level.building_master_id` · `.fac_id` · `.cost_group_id` | `building_master` · `facility` · `cost_group` | 건설비 세 표(`building_master_level` · `facility_growth_level` · `cost_group_entry`)는 `cost`가 같은 값(270줄 대조함: 2단 3,000 · 3단 5,850 · 4단 10,140 · 5단 26,364). `facility_growth_level.fac_id` → `facility`, `cost_group_entry.cost_group_id` → `cost_group`. 정본이 어느 쪽인지는 확인 필요 J10 (신규) |
+| `jackpot` 두 줄(`jackpot_concert` · `jackpot_broadcast`) | `board_tile.jp_id`가 가리킴(위 선 목록) | 대박(잭팟)은 방송국 · 콘서트장 같은 규칙(현중 10/27 12:12). `second_roulette_chance_pct` 숫자 칸(표 값 50, 두 줄 같음)은 연결 선 없음. 팬 합 보상은 `fan_income_modifier_jackpot` 줄(계수 발란스 대기) (신규) |
+
+### 4. 시스템 문서 ↔ 표 (신규)
+
+| 문서 | 읽는 표 |
+|---|---|
+| [S02 발란스 툴](S02_발란스툴.md) | `tool_*` 3 · `economy_config` · `item_master_dice_mult`(옛 `dice_mult`) · `dice_cap_level` · `jackpot` · `board_tile` · `land_lot` · `season_config` · `facility_level`(읽기 목록에 아직 있는 옛 10단 참고표 · 건설비 정본 표는 확인 필요 J10). `building_master_level` · `enter_power_level` · `building_fan_assign` · `fan_income_modifier`는 읽기 목록(`tool_balance_source.csv`)에 없음 — 확인 필요(K25). `income` · `idol_stat`은 읽기 목록에 없음 — 확인 필요 · 보류(S02 4-1) |
+| [S03 보드 · 주사위](S03_보드주사위경제.md) | `board_tile` · `item_master_dice_mult` · `economy_config` · `income` · `jackpot` · `casting` |
+| [S04 건설 · 시설](S04_건설시설.md) | `building_master` · `building_master_level` · `land_lot` · `economy_config` |
+| [S05 팬덤](S05_팬덤.md) | `building_master_level` · `idol_stat` · `building_fan_assign` · `fan_income_modifier` · `jackpot` |
+| [S06 화면 틀](S06_인게임화면틀.md) | `map_node` · `map_path` · `scene_*`(도시 패널) |
+| [S07 칸 콘텐츠](S07_칸콘텐츠_상점_카드덱.md) | `tile_card` · `card_theme` · `card` · `economy_config` |
+| [S09 시즌 틀](S09_시즌틀.md) | `season_config` · `tool_economy_season_budget_config` |
+
+### 5. 풀네임 후보 (신규)
+
+**후보로만 적는다. 옮기는 표만 그 단계에서 바꾼다(현중 09:21).**
+
+| 지금 이름 | 후보 | 상태 | 근거 |
+|---|---|---|---|
+| `dice_mult` | `dice_multiplier` | 확인 필요(mult 줄임 · 바꾸면 23개 파일) | 유르넷 0830 2절 |
+| `board_proto/` | `board_prototype/` | 확인 필요(`filler_proto` · `mons_proto`와 같이) | 유르넷 0830 |
+| `tool_playlog_source` | `tool_play_log_source` | 확인 필요(띄어쓰기) | 유르넷 0830 6절 3 |
+| `tool_economy_stage_budget_config`(모노) | `tool_economy_season_budget_config` | 이미 바꿈 | 유르넷 0830 · 단계 5 작업물 |
+| `dice_mult.prosperity_min`(칸) | `fan_min` | 바꿈(10/10 단계 5 재개) | 현중 14:05 · 17:42 → 10/26 17:39 `enter_power_level.enter_power_min`로 대체 |
+| `economy_config.prosperity_per_build`(key) | 현재 표에 없음(번영 따로 없음) | 뺌(10/27 표 확인 · S05 165줄) | 현중 14:05 |
+| `tool_` 접두 | 남김 | 현중 확인 | P58 2-1 35 |
+| 나머지 경제 표(`economy_config` · `season_config` · `land_lot` · `board_tile` · `jackpot`) | 그대로 | 그대로 · `facility_level`은 건물 표(`building_master_level`)로 대체됨(옛 `facility_level` 60줄은 폐기 후보 · 확인 필요 J10) | 유르넷 0830 2절 |
+| 모노 단계 7 · 9 · 10 표(`land_house_rent_config` · `card_*` · `shop_*`) | 그 단계에서 | 뒤 단계 | 유르넷 0830 3절 |
+
+### 6. 이게 아닌 것 (신규)
+새 표를 만들지 않는다 · 표 이름 · 칸 이름을 바꾸지 않는다 · 값을 적지 않는다 · 전투 쪽 표의 연결을 설계하지 않는다(점선 표시만).
+
+### 7. 아직 안 한 것 · 확인 필요
+- 풀네임: `dice_multiplier` · `board_prototype` · playlog 띄어쓰기 · `tool_` 접두 · ~~팬 문턱 칸 이름~~(닫힘: 문턱 칸은 `enter_power_level.enter_power_min`). (신규)
+- 칸 → 카드 칸(check_list_12) · 칸 → 쟁탈 선 · 카드 → 게임 효과 선. (신규)
+- 리셋 대상 `season_config.reset_items` — 시즌 기준 보류. (신규)
+- 모노 아이템 · 효과 허브 표를 둘지(Q2). (이식)
+- 등록부를 만드는 스크립트 · 쓰레기 줄 검사 — 모노에만 있음 · 보류. (이식)
+- 옛 표 7개 `role` 칸 메모 글 — 확인 필요(`role` 칸은 모노 등록부 틀). (이식)
+- 라이브 확장 원칙(E1–E6 · 보상 묶음 · 유저 · 친구 표 자리) → [S08b 라이브 확장 데이터](S08b_라이브확장데이터.md)(모노 69 · 10/12 2차 5단계). 보상 표 다섯을 묶음 번호로 모을지 — 확인 필요 · 보류. (이식)
+
+---
+
+## 문서 정보
+
+<details>
+<summary>이전 작성·표기·수정 근거</summary>
+
+> 시스템 기획(모노 이식) · 헌법 W00c 양식(간략 B + 세부 A) · 제안(검수 대기) · 단서 2026-10-09
+> 근거: `data/game/table_registry.csv`(10/09 기준 47줄 · 10/27 기준 83줄을 세어 적음) · 각 표 머리 줄(읽기만) · P58 4장 · 유르넷 0830 풀네임 후보. 표 · 값은 바꾸지 않는다. 풀네임은 후보로만(현중 09:21).
+
+> 절 표기(현중 10/12): **(이식)** 그 줄의 구조나 방법이 모노에 있음 · **(신규)** 케이팝 이름 · 값 · 현중 결정만 · 한 줄에 둘이 섞이면 줄을 쪼갠다(이스라트 11:24 기준). 제목에 표기가 없는 절은 줄 끝마다 (이식) · (신규)를 단다. 제목 표기와 다른 줄은 그 줄 끝에 따로 단다. 옛 안 → 「근거」 칸 첫 출처 기준. 목차 · 간략 · 문서 정보는 안내라 표기하지 않음.
+
+- 작성: 단서(커서) · 2026-10-09 · 지시 `입력/기획-책갈피기획서_12시까지.md` 8칸
+- 수정 1차: 단서 · 2026-10-09 21시대 · 지시 `입력/기획-책갈피기획서수정_1차.md` · 검수 유르넷 2106 5-1~5-4 반영
+- 수정 2차: 단서 · 2026-10-09 22시대 · 지시 `입력/기획-책갈피기획서수정_2차.md` · 재검수 유르넷 2151 N3 · 현중 21:04 규칙 반영
+- 책갈피 채우기: 단서 · 2026-10-10 · 지시 `입력/기획-책갈피모노구조채우기.md` · 유르넷 E1~E6 반영(1-0 등록부 칸 · 원칙 두 줄 · R-S08-1 · 1b · 4 · 8b · 10 · 검사 기준 표 · 표 47개)
+- 본 자료: `table_registry.csv` · 각 표 머리 줄(파이썬으로 pk 칸 이름 대조, 읽기만) · 유르넷 0830
+- 모노이식마무리 1단계 수정: 단서 · 2026-10-12 · 지시 `입력/개발-모노이식마무리_1단계수정.md` · (이식)/(신규) 새 기준으로 다시 달기 · 관리 표 · 연결선 · 2절 줄마다 · 코드가 읽는 선 쪼갬
+- 모노기획서이식 2차 5단계: 단서 · 2026-10-12 · 7절에 [S08b](S08b_라이브확장데이터.md) 링크
+- 상태: 제안(검수 대기)
+- 새 기준 재작성(10/27 14:36 현중 J1 ③): 이스라트 · 2026-10-27 · 지시 `입력/개발-커서_책갈피S문서_새기준재작성_1027.md` · 엔터 파워 ②A · 대박 방송국·콘서트장 · 통 유지 + 팬 합 보상 · 악개 감산 + 팬 합 포함 · 팬 건물 9개 랜덤 · 건설비 안1(2단 3,000 · 3단 5,850) 반영 · 바꾼 줄 18개(새 소절 1 · 이력 1 별도) · 옛 문장은 `S08_표구조_연결지도.md.181724전_이스라트` · 값 없는 것은 발란스 대기
+- 후속 정정(10/27 18:2x · 총괄 유르넷 답): 이스라트 · 2026-10-27 · 사실 바로잡기 5건(표 줄 수 · `dice_mult` → `item_master_dice_mult` · 220줄 소제목 · `prosperity_per_build` 문장 · 7절 팬 문턱 칸 이름) · 바꾼 줄 15개 · 옛 문장은 `S08_표구조_연결지도.md.182204전_이스라트` · 값 없는 것은 발란스 대기
+
+- 2026-11-04 유르넷 · 하루 무료 주사위 새 구조(모든 무료 일일 보상 합 800~900 · 자동 충전 단계 · 미션 상향 · 「미개발 이벤트 보상」 한 칸 · 현황판 칸 · 발란스 시뮬 하단 30칸) 반영 · 근거 보고/아론_미션상향_master반영_20261104_1015.md · 보고/20261104_슈덴_무료800_화면세팅.md · 백업 `S08_표구조_연결지도.101920전_유르넷.md`
+
+</details>

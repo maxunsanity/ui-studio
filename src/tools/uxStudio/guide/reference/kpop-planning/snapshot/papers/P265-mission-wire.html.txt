@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>미션 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --dim:#e3e5e8; --red:#d0453a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  h2.grp { font-size:15px; margin:8px 24px 0; padding-top:12px; border-top:2px solid #c9ccd1; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .row { display:flex; flex-wrap:wrap; gap:40px; padding:16px 24px 24px 50px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .st { position:static; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .pill.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .red { color:var(--red); font-weight:700; }
+  .dot { position:absolute; width:12px; height:12px; border-radius:50%; background:var(--red); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .face { display:inline-block; width:30px; height:30px; border-radius:50%; background:var(--dim); border:1.5px solid var(--ln); flex:none; }
+  .ic { display:inline-block; width:22px; height:22px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); flex:none; }
+  .pic { background:repeating-linear-gradient(45deg,#e6e8eb 0 8px,#dcdfe3 8px 16px); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; text-align:center; }
+  .bar { display:block; height:6px; border:1px solid var(--ln); border-radius:3px; background:var(--box); overflow:hidden; }
+  .bar i { display:block; height:100%; background:var(--ink); }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); overflow:hidden; }
+  .sec { position:absolute; left:12px; font-weight:700; font-size:13px; }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  /* 흐름도 */
+  .fl { display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:12px 24px 4px; }
+  .fb { border:1.5px solid var(--ln); border-radius:8px; background:var(--box); padding:8px 12px; min-width:110px; text-align:center; }
+  .fb b { display:block; font-size:14px; }
+  .fb small { color:var(--soft); font-size:12px; }
+  .fb.win2 { border-style:dashed; background:var(--pane); }
+  .ar { font-size:18px; color:var(--ln); }
+  .flnote { margin:2px 24px 0; font-size:13px; }
+  .flnote span { display:inline-block; margin-right:16px; }
+</style>
+</head>
+<body>
+<h1>미션 · 와이어프레임 3차(보상 아이콘) (기존 탭 6개 · 위쪽 칸만 다르게 · 390×844)</h1>
+<p class="flow">기준: 미션 기획 S11 + 미션 표(mission_config 64줄 · 탭 6) · 탭 6개(일일 · 주간 · 업적 · 도전 · 가이드 · 이벤트)는 그대로 · 카드 · 정렬 · 받기는 모두 같음 · 위쪽 칸만 탭마다 다름(일일 = 차트 순위 · 주간 = 음방 트로피 · 가이드 = 전부 완료 n/6 · 업적 · 도전 = 시즌 · 이벤트 = 회차 남은 시간) · 미션 문장은 팬이 부탁하는 말투 · 참고: 붕괴 스타레일 일일 훈련(게이지 하나) · 모노폴리 고 퀵 승리(남은 시간) · 타일 서바이벌 챕터 미션(줄마다 받기)</p>
+<h2 class="grp">흐름</h2>
+<div class="fl">
+  <div class="fb"><b>아래 「미션」</b><small>받을 게 있으면 빨간 점</small></div><span class="ar">→</span>
+  <div class="fb"><b>미션 탭 6개</b><small>받을 게 있는 탭부터 열림</small></div><span class="ar">→ 5개째 받기 →</span>
+  <div class="fb win2"><b>⑥ 차트 1위!</b><small>일일 5개째 받기</small></div>
+</div>
+<div class="fl">
+  <div class="fb win2"><b>⑦ 보상 말풍선</b><small>게이지 칸 · 보상 칩을 누르면</small></div><span class="ar">→ 팩이면 →</span>
+  <div class="fb win2"><b>포토카드 ④-1 팩 안 카드</b><small>「팩 안 보기 ›」</small></div>
+</div>
+<div class="fl">
+  <div class="fb"><b>① 일일</b><small>차트 순위 게이지</small></div>
+  <div class="fb"><b>② 주간</b><small>음방 트로피 게이지</small></div>
+  <div class="fb"><b>③ 업적 · 도전</b><small>시즌 칸 · 업적은 단계 줄</small></div>
+  <div class="fb"><b>④ 가이드</b><small>전부 완료 n/6</small></div>
+  <div class="fb"><b>⑤ 이벤트</b><small>회차 남은 시간</small></div>
+</div>
+<p class="flnote"><span>□ 화면</span><span>⬚ 창(점선)</span><span>· 카드 「바로 가기」 → 그 일을 하는 곳(보드 · 스케줄 · 미니게임)</span></p>
+<div id="screens"></div>
+
+<script>
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (dot = false) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === 3 ? " on" : ""}" style="left:${(i * 386 / 6).toFixed(1)}px;width:${(386 / 6).toFixed(1)}px"><i></i>${t}</div>`).join("") + (dot ? `<span class="dot" style="left:224px;top:786px;width:10px;height:10px"></span>` : "");
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const bigBtn = (x, w, label, sub = "", off = false) =>
+  `<div class="b${off ? " off" : ""}" style="left:${x}px;top:706px;width:${w}px;height:60px;flex-direction:column;gap:2px;${off ? "" : "border-width:2px"}">
+    <span class="val" style="font-size:16px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const bottomBar = inner => `<div class="line" style="top:698px"></div>${inner}${tabs(true)}`;
+const mtop = `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div><div class="a val" style="left:52px;top:16px;font-size:16px">미션</div>
+  <span class="pill a" style="right:96px;top:13px;font-size:13px;padding:2px 10px">주사위 000</span><span class="pill a" style="right:12px;top:13px;font-size:13px;padding:2px 10px">루비 00</span><div class="line" style="top:50px"></div>`;
+// 탭 칩 · [이름, 빨간 숫자]
+const chips = on => `<div class="a" style="left:8px;right:0;top:58px;display:flex;gap:4px;overflow:hidden;white-space:nowrap">${[["일일", 2], ["주간", 1], ["업적", 0], ["도전", 0], ["가이드", 1], ["이벤트", 0]].map(([t, k], i) => `<span class="pill${i === on ? " on" : ""}" style="font-size:13px;padding:4px 12px">${t}${k ? ` <b style="color:${i === on ? "#fff" : "var(--red)"}">${k}</b>` : ""}</span>`).join("")}</div>`;
+// 차트 게이지 · nodes = 칸 이름, got = 채운 칸 수, last = 마지막 칸 보상
+const gauge = (y, title, time, big, nodes, got, last) => `<div class="b" style="left:12px;right:12px;top:${y}px;height:128px;display:block">
+  <div class="a val" style="left:12px;top:10px;font-size:14px">${title}</div><span class="a sub" style="right:12px;top:12px;font-size:12px">${time}</span>
+  <div class="a val" style="left:12px;top:32px;font-size:28px">${big}</div>
+  <div class="a" style="left:24px;width:292px;top:88px;border-top:3px solid #c9ccd1"></div><div class="a" style="left:24px;top:88px;width:${Math.max(0, got - 1) / (nodes.length - 1) * 292}px;border-top:3px solid var(--ink)"></div>
+  ${nodes.map((t, i) => { const x = 24 + i * (292 / (nodes.length - 1)); const end = i === nodes.length - 1; return `<span class="a" style="left:${x - (end ? 15 : 8)}px;top:${end ? 74 : 81}px;width:${end ? 30 : 16}px;height:${end ? 30 : 16}px;border:2px solid var(--ln);border-radius:${end ? "6px" : "50%"};background:${i < got ? "var(--ink)" : "var(--box)"}"></span><span class="a" style="left:${x - 22}px;top:108px;width:44px;text-align:center;font-size:11px;${i < got ? "font-weight:700" : "color:var(--soft)"}">${t}</span>`; }).join("")}
+  <span class="pill on a" style="right:10px;top:42px">${last}</span></div>`;
+// 미션 카드 · s = ready / run / lock / got · r = 보상 "이름 ×수" (여러 개면 배열)
+const gtile = t => `<span style="display:flex;align-items:center;gap:4px;border:1.5px solid var(--ln);border-radius:6px;padding:1px 7px 1px 2px;background:var(--box)"><i class="ic" style="width:20px;height:20px"></i><b style="font-size:11px;white-space:nowrap">${t}</b></span>`;
+const mcard = (y, c) => `<div class="b" style="left:12px;right:12px;top:${y}px;height:70px;justify-content:flex-start;gap:10px;padding:0 10px;${c.s === "lock" ? "background:var(--dim);border-style:dashed;color:var(--soft)" : c.s === "ready" ? "border-width:2.5px" : c.s === "got" ? "opacity:.5" : ""}">
+  <i class="face" style="width:34px;height:34px"></i>
+  <div style="flex:1;text-align:left;min-width:0"><b style="font-size:13px;white-space:nowrap">${c.t}</b><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="sub" style="font-size:11px;white-space:nowrap">${c.m}</span>${c.s === "lock" || c.s === "got" ? "" : `<span class="bar" style="flex:1;height:6px"><i style="width:${c.p}%"></i></span>`}</div>
+    <div style="display:flex;gap:6px;margin-top:5px">${[].concat(c.r).map(gtile).join("")}</div></div>
+  <div style="display:flex;justify-content:flex-end;align-items:center;width:70px;flex:none">${c.s === "ready" ? `<span class="pill on" style="font-size:13px;padding:4px 14px">받기</span>` : c.s === "run" ? `<span class="pill" style="font-size:11px">바로 가기 ›</span>` : c.s === "got" ? `<b style="font-size:24px">✓</b>` : `<span style="font-size:13px">🔒</span>`}</div></div>`;
+// 커리어 단계 줄
+const step = (y, t, m, steps, got, r) => `<div class="b" style="left:12px;right:12px;top:${y}px;height:58px;justify-content:flex-start;gap:8px;padding:0 10px">
+  <i class="ic" style="width:30px;height:30px"></i><div style="flex:1;text-align:left"><b style="font-size:13px">${t}</b><div class="sub" style="font-size:11px;margin-top:2px">${m}</div></div>
+  <div style="display:flex;gap:2px;align-items:center">${steps.map((s, i) => `<span style="display:flex;flex-direction:column;align-items:center;font-size:11px;width:32px"><i style="width:14px;height:14px;border-radius:50%;border:2px solid var(--ln);background:${i < got ? "var(--ink)" : i === got ? "var(--dim)" : "var(--box)"}"></i>${s}</span>`).join("")}</div>
+  <span class="pill" style="font-size:11px">${r}</span></div>`;
+
+// 보상 말풍선 · tip = 꼬리 x(말풍선 안 기준), up = 꼬리가 위(true) / 아래(false)
+const bubble = (l, t, w, h, tip, up, inner) => `<div class="a" style="left:${l}px;top:${t}px;width:${w}px;height:${h}px;border:2px solid var(--ln);border-radius:10px;background:var(--box);box-shadow:0 4px 12px rgba(0,0,0,.18);z-index:4;padding:10px 12px;text-align:left;font-size:12px">${inner}
+  <span style="position:absolute;left:${tip - 8}px;${up ? "top:-9px;border-bottom:9px solid var(--ln)" : "bottom:-9px;border-top:9px solid var(--ln)"};border-left:8px solid transparent;border-right:8px solid transparent;width:0;height:0"></span></div>`;
+const giftRow = list => `<div style="display:flex;gap:8px;margin-top:8px">${list.map(t => `<span style="display:flex;align-items:center;gap:4px"><i class="ic" style="width:20px;height:20px"></i><b>${t}</b></span>`).join("")}</div>`;
+const SCREENS = [
+ { grp: "화면" },
+ { cap: "① 일일 · 오늘의 차트", html: mtop + chips(0) +
+   gauge(96, "오늘의 차트", "자정까지 4:16", "37위 ▲", ["100위", "50위", "20위", "10위", "1위"], 3, "1위 보상") + `
+   <div class="a sub" style="left:16px;top:234px;font-size:12px">팬들의 부탁 · 들어주면 순위가 올라요</div>
+   ${mcard(254, { s: "ready", t: "오늘도 출근 도장 찍어 주세요!", m: "출석 1 / 1", p: 100, r: "루비 ×10" })}
+   ${mcard(330, { s: "ready", t: "신곡 8번만 들어 주세요", m: "굴림 8 / 8", p: 100, r: "카드팩 ×1" })}
+   ${mcard(406, { s: "run", t: "36번 스밍 같이 해요!", m: "굴림 20 / 36", p: 55, r: "주사위 ×00" })}
+   ${mcard(482, { s: "lock", t: "데뷔조 카드팩", m: "팀에 데뷔조가 있으면 열려요", p: 0, r: "아이돌팩 ×1" })}
+   ${mcard(558, { s: "got", t: "시설 칸에 3번 들러 주세요", m: "시설 칸 3 / 3 · 받음", p: 100, r: "주사위 ×00" })}
+   <div class="a sub" style="left:0;right:0;top:636px;text-align:center;font-size:11px">아래로 밀면 더 있음</div>
+   ` + bottomBar(bigBtn(8, 374, "전체 받기 · 2건")) +
+   n(1, 4, 62) + n(2, 4, 110) + n(3, 296, 140) + n(4, 4, 266) + n(5, 330, 252) + n(6, 4, 342) + n(7, 300, 410) + n(8, 4, 494) + n(9, 4, 570) + n(10, 362, 702),
+   notes: ["탭 6개 · 일일 · 주간 · 업적 · 도전 · 가이드 · 이벤트(기존 이름 그대로) · 숫자 = 받을 것 · 받을 게 있는 탭부터 열림", "위쪽 칸 · 일일 = 오늘의 차트 · 오늘 받은 일일 미션 수를 순위로 보여 줌(0개 순위 밖 → 1개 100위 → 5개 1위) · 실제 차트 · 팬 수와는 연결 없음 · 자정까지 남은 시간", "1위 칸 = 「오늘 미션 5개 완료」 묶음 보상(주사위 · 루비) · 받으면 ⑥ 창", "미션 카드 = 팬 한 명의 부탁 · 위 글 = 부탁 말투 · 회색 = 실제 할 일(굴림 · 출석 …) · 진행 막대 · 다 되면 진한 테두리", "받기 · 누르면 보상이 위 주사위 · 루비로 날아감 · 창 없음", "보상 칸 · 받을 것을 아이콘 + 수량으로 카드에 바로 보여 줌(여러 개면 나란히) · 누르면 ⑦ 말풍선", "바로 가기 › · 그 일을 하는 곳으로(굴림 → 보드 · 모험 → 스케줄 · 미니게임)", "잠김 · 팀 등급 · 팬덤 · 날짜 조건 문구 · 흐리게 · 보상은 보임", "받은 미션 · 접지 않고 ✓ 달고 흐리게 맨 아래 · 순서: 받기 → 진행 중 → 잠김 → 받음", "전체 받기 · 받을 것 n건 한 번에 · 0건이면 숨김"] },
+
+ { cap: "② 주간 · 주간 음악방송", html: mtop + chips(1) +
+   gauge(96, "주간 음악방송", "월요일까지 3일", "트로피 2 / 4", ["1", "2", "3", "4"], 2, "음방 1위") + `
+   <div class="a sub" style="left:16px;top:234px;font-size:12px">이번 주 팬들의 부탁</div>
+   ${mcard(254, { s: "ready", t: "이번 주 차트 1위 4번 해 주세요", m: "일일 5개 완료 4 / 4일", p: 100, r: "주사위 ×10" })}
+   ${mcard(330, { s: "run", t: "한 주 동안 146번 스밍!", m: "굴림 98 / 146", p: 67, r: "주사위 ×00" })}
+   ${mcard(406, { s: "run", t: "스케줄 7번 보내 주세요", m: "모험 · 출동 3 / 7", p: 43, r: "주사위 ×10" })}
+   ${mcard(482, { s: "lock", t: "월드스타 카드팩", m: "팀에 월드스타가 있으면 열려요", p: 0, r: "고급 아이돌팩 ×1" })}
+   ${mcard(558, { s: "got", t: "이벤트 무대 3번 올려 주세요", m: "이벤트 단계 3 / 3 · 받음", p: 100, r: "주사위 ×10" })}
+   ` + bottomBar(bigBtn(8, 374, "전체 받기 · 1건")) +
+   n(1, 4, 110) + n(2, 280, 140) + n(3, 4, 266),
+   notes: ["위쪽 칸 · 주간 = 음악방송 트로피 · 이번 주 받은 주간 미션 수 · 월요일 0시에 처음부터", "4번째 칸 = 「이번 주 미션 4개 완료」 묶음 보상", "일일 차트 1위(5개 완료)를 4일 하면 주간 미션 하나 · 두 탭이 이어짐"] },
+
+ { cap: "③ 업적 · 단계 줄 (도전도 같은 틀)", html: mtop + chips(2) + `
+   <div class="b" style="left:12px;right:12px;top:96px;height:70px;justify-content:flex-start;gap:12px;padding:0 12px;text-align:left"><i class="ic" style="width:40px;height:40px"></i><div><b style="font-size:14px">커리어 연표 · 시즌 1</b><div class="sub" style="font-size:12px;margin-top:3px">한 시즌 동안 쌓이는 기록 · 시즌이 끝나면 처음부터</div></div></div>
+   ${step(178, "누적 음원 재생", "굴림 1,000 / 1,200", ["300", "600", "1200"], 2, "주사위 ×00")}
+   ${step(242, "기획사 넓히기", "증설 · 건설 40 / 60", ["20", "40", "60"], 2, "주사위 ×00")}
+   ${step(306, "현장 방문", "시설 칸 90 / 150", ["50", "100", "150"], 1, "주사위 ×00")}
+   ${step(370, "이벤트 무대", "이벤트 단계 4 / 10", ["5", "10", "20"], 0, "주사위 ×00")}
+   ${step(434, "캐스팅 모으기", "캐스팅권 2 / 5", ["1", "3", "5"], 1, "몬스팩")}
+   <div class="a sub" style="left:16px;top:510px;font-size:12px;line-height:1.6">도전 탭 = 위 칸 「서바이벌 · 시즌 1」 + 미션 카드<br>(잭팟 · 완공 덤 3번 · 출연권 대전 승리 · 팬 마일스톤 8단)</div>
+   ` + bottomBar(bigBtn(8, 374, "전체 받기 · 0건", "받을 것이 없으면 꺼짐", true)) +
+   n(1, 4, 110) + n(2, 4, 190) + n(3, 250, 176) + n(4, 4, 514),
+   notes: ["위쪽 칸 · 업적 = 커리어 연표 · 시즌이 끝나면 처음부터", "단계 줄 · 업적 표의 같은 기록(누적 5번 · 15번 …)을 한 줄로 묶음 · 지금 값 / 다음 목표", "단계 점 · 진한 점 = 받음 · 회색 = 지금 단계 · 빈 점 = 다음 · 단계마다 받기", "도전 · 위 칸만 「서바이벌」 · 한 번씩 깨는 4개라 단계 줄 대신 미션 카드"] },
+
+ { cap: "④ 가이드 · 연습생 수첩 (한 번만)", html: mtop + chips(4) +
+   gauge(96, "연습생 수첩", "한 번만 · 처음 해 보기", "4 / 6", ["1", "2", "3", "4", "5", "6"], 4, "전부 완료") + `
+   <div class="a sub" style="left:16px;top:234px;font-size:12px">처음 해 볼 것들</div>
+   ${mcard(254, { s: "ready", t: "카드 처음 열어 볼까요?", m: "첫 카드 열기 1 / 1", p: 100, r: "주사위 ×3" })}
+   ${mcard(330, { s: "run", t: "스케줄 처음 보내 봐요", m: "첫 모험 · 출동 0 / 1", p: 0, r: "주사위 ×3" })}
+   ${mcard(406, { s: "got", t: "주사위 처음 굴려 봐요", m: "첫 굴림 · 받음", p: 100, r: "주사위 ×3" })}
+   ${mcard(482, { s: "got", t: "시설 칸에 처음 가 봐요", m: "첫 시설 칸 · 받음", p: 100, r: "주사위 ×3" })}
+   <div class="a sub" style="left:0;right:0;top:560px;text-align:center;font-size:11px">받은 것 2개 더 · 아래로 밀기</div>
+   ` + bottomBar(bigBtn(8, 374, "전체 받기 · 1건")) +
+   n(1, 4, 110) + n(2, 280, 140) + n(3, 4, 266),
+   notes: ["위쪽 칸 · 가이드 = 연습생 수첩 · 6개 중 받은 수 · 다시 처음부터 하지 않음", "마지막 칸 = 「가이드 전부 완료」 묶음 보상(주사위 · 몬스팩)", "다 받으면 탭이 사라지거나 맨 뒤로(남은 결정)"] },
+
+ { cap: "⑤ 이벤트 · 컴백 프로모션 (72시간 회차)", html: mtop + chips(5) + `
+   <div class="b" style="left:12px;right:12px;top:96px;height:70px;justify-content:flex-start;gap:12px;padding:0 12px;text-align:left"><i class="ic" style="width:40px;height:40px"></i><div style="flex:1"><b style="font-size:14px">컴백 프로모션 · 2회차</b><div class="sub" style="font-size:12px;margin-top:3px">이벤트 단계를 올리면 차요</div></div><div style="text-align:right"><span class="sub" style="font-size:12px">남은 시간</span><br><b style="font-size:16px">41:12</b></div></div>
+   ${mcard(178, { s: "ready", t: "컴백 무대 5번 응원할게요", m: "이벤트 단계 5 / 5", p: 100, r: "주사위 ×3" })}
+   ${mcard(254, { s: "run", t: "10단까지 완주해 주세요!", m: "이벤트 단계 7 / 10", p: 70, r: "몬스팩 ×1" })}
+   ` + bottomBar(bigBtn(8, 374, "전체 받기 · 1건")) +
+   n(1, 4, 110) + n(2, 4, 190),
+   notes: ["위쪽 칸 · 이벤트 = 회차 이름 · 남은 시간(72시간) · 회차가 바뀌면 처음부터", "이벤트 미션 2개 · 같은 카드"] },
+
+ { grp: "창" },
+ { cap: "⑥ 차트 1위! (일일 5개째 받을 때)", html: mtop + chips(0) + gauge(96, "오늘의 차트", "자정까지 4:16", "1위", ["100위", "50위", "20위", "10위", "1위"], 5, "1위 보상") + tabs(true) + `<div class="dimbg"></div>
+   <div class="win" style="left:30px;right:30px;top:180px;height:420px">
+     <div class="a val" style="left:0;right:0;top:24px;text-align:center;font-size:20px">오늘의 차트 1위!</div>
+     <div class="pic a" style="left:70px;right:70px;top:66px;height:150px;border-radius:8px">트로피 · 팀 단체 사진</div>
+     <div class="a" style="left:16px;right:16px;top:230px;text-align:center;font-size:13px;line-height:1.5">「1위 공약 지킬게요!」<br><span class="sub" style="font-size:12px">오늘 팬들의 부탁 5개를 들어줬어요</span></div>
+     <div class="a" style="left:0;right:0;top:296px;display:flex;justify-content:center;gap:8px"><span class="pill" style="font-size:12px;padding:3px 10px">주사위 ×114</span><span class="pill" style="font-size:12px;padding:3px 10px">루비 ×20</span></div>
+     <div class="b" style="left:20px;right:20px;top:340px;height:52px;font-weight:700;border-width:2px">받기</div>
+   </div>` + n(1, 40, 200) + n(2, 40, 412) + n(3, 40, 524),
+   notes: ["5개째를 받는 순간 · 순위가 1위로 올라가고 이 창", "팀 한마디(1위 공약) · 묶음 보상", "받기 → 위로 날아감 · 내일 자정에 다시 100위부터"] },
+ { cap: "⑦ 보상 말풍선 (칸 · 보상 칩을 누르면 · 예시 2개)", html: mtop + chips(0) +
+   gauge(96, "오늘의 차트", "자정까지 4:16", "37위 ▲", ["100위", "50위", "20위", "10위", "1위"], 3, "1위 보상") + `
+   ${mcard(254, { s: "ready", t: "오늘도 출근 도장 찍어 주세요!", m: "출석 1 / 1", p: 100, r: "루비 ×10" })}
+   ${mcard(330, { s: "run", t: "36번 스밍 같이 해요!", m: "굴림 20 / 36", p: 55, r: "주사위 ×00" })}
+   ${mcard(406, { s: "lock", t: "데뷔조 카드팩", m: "팀에 데뷔조가 있으면 열려요", p: 0, r: "아이돌팩 ×1" })}
+   ${bubble(150, 238, 228, 96, 178, true, `<b style="font-size:13px">1위 보상 · 오늘 미션 5개 완료</b>${giftRow(["주사위 ×114", "루비 ×20"])}<div class="sub" style="font-size:11px;margin-top:8px">2개 더 받으면 열려요</div>`)}
+   ${bubble(40, 484, 260, 112, 56, true, `<b style="font-size:13px">아이돌팩 ×1</b><div class="sub" style="font-size:12px;margin-top:4px">데뷔조 카드팩 · 팀에 데뷔조가 있으면 받을 수 있어요</div><div style="display:flex;justify-content:flex-end;margin-top:10px"><span class="pill on" style="font-size:12px;padding:2px 12px">팩 안 보기 ›</span></div>`)}
+   ` + bottomBar(bigBtn(8, 374, "전체 받기 · 1건")) +
+   n(1, 130, 240) + n(2, 20, 486) + n(3, 296, 568),
+   notes: ["게이지 칸(차트 1위 · 트로피 · 가이드 전부 완료 · 업적 단계 점)을 누르면 그 칸 아래 말풍선 · 보상 아이콘 + 수량 · 열리는 조건 한 줄", "카드의 보상 칸을 누르면 그 위 말풍선 · 같은 모양 · 잠긴 카드도 볼 수 있음 · 수량은 카드에 이미 보이므로 말풍선은 팩 안 · 조건 확인용", "팩 보상만 「팩 안 보기 ›」 → 포토카드 「④-1 팩 안 카드」 창을 그대로 엶 · 말풍선은 다른 곳을 누르면 닫힘 · 화면 이동 없음"] }
+];
+
+const SHOT = new URLSearchParams(location.search).get("shot");
+const PH = SCREENS.filter(s => !s.grp);
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${PH[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff";
+  // 한 장 찍기: 왼쪽 끝 번호는 글자를 가리지 않게 칸 윗선으로 올림
+  for (const m of document.querySelectorAll(".phone .n")) if (m.style.left === "4px") m.style.top = (parseFloat(m.style.top) - 16) + "px"; }
+else {
+  let out = "", buf = [];
+  const flush = () => { if (buf.length) out += `<div class="row">${buf.join("")}</div>`; buf = []; };
+  for (const s of SCREENS) {
+    if (s.grp) { flush(); out += `<h2 class="grp">${s.grp}</h2>`; continue; }
+    buf.push(`<div><p class="cap">${s.cap}</p><div class="pw" style="position:relative"><div class="phone">${s.html}</div></div>
+      <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`);
+  }
+  flush();
+  document.getElementById("screens").innerHTML = out;
+  // 왼쪽 끝 번호는 글자를 가리지 않게 화면 바깥 왼쪽으로
+  for (const ph of document.querySelectorAll(".phone")) for (const m of ph.querySelectorAll(".n"))
+    if (m.style.left === "4px") { m.style.left = "-26px"; m.style.top = (parseFloat(m.style.top) + 2) + "px"; ph.parentElement.append(m); }
+}
+</script>
+</body>
+</html>

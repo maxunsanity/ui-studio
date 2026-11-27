@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>상점 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --dim:#e3e5e8; --red:#d0453a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  h2.grp { font-size:15px; margin:8px 24px 0; padding-top:12px; border-top:2px solid #c9ccd1; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .row { display:flex; flex-wrap:wrap; gap:40px; padding:16px 24px 24px 50px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .st { position:static; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .pill.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .red { color:var(--red); font-weight:700; }
+  .dot { position:absolute; width:12px; height:12px; border-radius:50%; background:var(--red); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .face { display:inline-block; width:30px; height:30px; border-radius:50%; background:var(--dim); border:1.5px solid var(--ln); flex:none; }
+  .ic { display:inline-block; width:22px; height:22px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); flex:none; }
+  .pic { background:repeating-linear-gradient(45deg,#e6e8eb 0 8px,#dcdfe3 8px 16px); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; text-align:center; }
+  .bar { display:block; height:6px; border:1px solid var(--ln); border-radius:3px; background:var(--box); overflow:hidden; }
+  .bar i { display:block; height:100%; background:var(--ink); }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); overflow:hidden; }
+  .sec { position:absolute; left:12px; font-weight:700; font-size:13px; }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  /* 흐름도 */
+  .fl { display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:12px 24px 4px; }
+  .fb { border:1.5px solid var(--ln); border-radius:8px; background:var(--box); padding:8px 12px; min-width:110px; text-align:center; }
+  .fb b { display:block; font-size:14px; }
+  .fb small { color:var(--soft); font-size:12px; }
+  .fb.win2 { border-style:dashed; background:var(--pane); }
+  .ar { font-size:18px; color:var(--ln); }
+  .flnote { margin:2px 24px 0; font-size:13px; }
+  .flnote span { display:inline-block; margin-right:16px; }
+  .dimbg { z-index:2; } .win { z-index:3; }
+</style>
+</head>
+<body>
+<h1>상점 · 와이어프레임 1차 (탭 4개 · 390×844)</h1>
+<p class="flow">기준: 상점 표(shop_tab 켜진 탭 4 · item_master_shop_sku 15줄 · 루비 사다리 4단 · 무료 선물 30개 / 6시간) + 상점 기획 S07b · 꺼진 탭(패스 · 꾸밈)은 숨김 · 값은 표 그대로(팩 가격은 임시값) · 참고: 모노폴리 고 상점(위 큰 특가 + 상품 칸) · 와일드 캐슬(추천 · 최고 가치 표시) · 카피바라 고(무료 칸 맨 위)</p>
+<h2 class="grp">흐름</h2>
+<div class="fl">
+  <div class="fb"><b>아래 「상점」</b><small>무료 선물이 차면 빨간 점</small></div><span class="ar">→</span>
+  <div class="fb"><b>① 특가</b><small>기본 탭 · 맨 위 무료 선물</small></div>
+  <div class="fb"><b>② 주사위</b><small>6칸</small></div>
+  <div class="fb"><b>③ 루비</b><small>원화 4칸</small></div>
+  <div class="fb"><b>④ 팩</b><small>묶음 · 몬스 · 아이돌</small></div>
+</div>
+<div class="fl">
+  <div class="fb"><b>루비 가격 누름</b><small>주사위 · 팩</small></div><span class="ar">→</span>
+  <div class="fb win2"><b>⑤ 사기 확인</b><small>남는 루비</small></div><span class="ar">→ 모자라면 →</span>
+  <div class="fb win2"><b>⑥ 루비 모자람</b><small>「루비 탭으로 ›」</small></div>
+</div>
+<div class="fl">
+  <div class="fb"><b>보드 · 주사위 0</b><small>굴리려고 할 때</small></div><span class="ar">→</span>
+  <div class="fb win2"><b>⑦ 주사위 채움</b><small>주사위 탭 상품 다시 보기</small></div><span class="ar">→</span>
+  <div class="fb"><b>② 주사위</b><small>「상점 더 보기 ›」</small></div>
+</div>
+<p class="flnote"><span>□ 화면</span><span>⬚ 창(점선)</span><span>· 위 루비 칩 → ③ 루비 탭 · 돈 칩 → ① 특가 탭(로비 문서 확정 · 연결은 아직)</span></p>
+<div id="screens"><h2 class="grp">화면</h2><div class="row"><div><p class="cap">① 특가 (기본 탭)</p><div class="pw" style="position:relative"><div class="phone"><div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div><div class="a val" style="left:52px;top:16px;font-size:16px">상점</div>
+  <span class="pill a" style="right:96px;top:13px;font-size:13px;padding:2px 10px">주사위 000</span><span class="pill a" style="right:12px;top:13px;font-size:13px;padding:2px 10px">루비 00</span><div class="line" style="top:50px"></div><div class="a" style="left:8px;right:0;top:58px;display:flex;gap:6px;white-space:nowrap"><span class="pill on" style="font-size:13px;padding:4px 16px">특가 <b style="color:#fff">●</b></span><span class="pill" style="font-size:13px;padding:4px 16px">주사위</span><span class="pill" style="font-size:13px;padding:4px 16px">루비</span><span class="pill" style="font-size:13px;padding:4px 16px">팩</span></div>
+   <div class="b" style="left:12px;right:12px;top:96px;height:72px;justify-content:flex-start;gap:12px;padding:0 12px;border-width:2.5px">
+  <div class="pic" style="width:48px;height:48px;border-radius:8px">선물</div><div style="flex:1;text-align:left"><b style="font-size:14px">무료 선물 · 주사위 ×30</b><div class="sub" style="font-size:12px;margin-top:3px">6시간마다 · 안 받으면 쌓이지 않음</div></div>
+  <span class="pill on" style="font-size:13px;padding:3px 12px">받기</span></div>
+   <div class="b" style="left:12px;right:12px;top:182px;height:270px;display:block;border-width:2.5px">
+     <div class="pic a" style="left:12px;right:12px;top:12px;height:140px;border-radius:8px">주사위 더미 큰 그림</div>
+     <div class="a val" style="left:16px;top:166px;font-size:20px">주사위 585</div>
+     <div class="a sub" style="left:16px;top:196px;font-size:12px">보드 연료 · 오늘의 특가</div>
+     <div class="a" style="right:16px;top:206px"><span class="pill on" style="font-size:15px;padding:6px 20px">루비 5,850</span></div>
+   </div><span class="a" style="left:20px;top:174px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;z-index:1">추천</span>
+   <div class="b" style="left:12px;right:12px;top:466px;height:60px;justify-content:flex-start;gap:10px;padding:0 12px;text-align:left"><i class="ic" style="width:32px;height:32px"></i><div><b style="font-size:13px">오늘의 상점</b><div class="sub" style="font-size:12px;margin-top:2px">주사위는 루비로 · 루비는 루비 탭에서</div></div></div>
+   <div class="b off" style="left:12px;right:12px;top:540px;height:60px;flex-direction:column;gap:2px"><b style="font-size:13px">첫 구매 보너스 (한정)</b><span style="font-size:12px">루비 단계마다 첫 구매 두 배 · 지금은 꺼짐(보류)</span></div>
+   <div class="line" style="top:774px"></div><div class="tab" style="left:0.0px;width:64.3px"><i></i>포토카드</div><div class="tab" style="left:64.3px;width:64.3px"><i></i>스케줄</div><div class="tab" style="left:128.7px;width:64.3px"><i></i>건설</div><div class="tab" style="left:193.0px;width:64.3px"><i></i>미션</div><div class="tab on" style="left:257.3px;width:64.3px"><i></i>상점</div><div class="tab" style="left:321.7px;width:64.3px"><i></i>정보</div><span class="dot" style="left:288px;top:786px;width:10px;height:10px"></span><span class="n" style="left:270px;top:786px">6</span></div><span class="n" style="left: -26px; top: 64px;">1</span><span class="n" style="left: -26px; top: 112px;">2</span><span class="n" style="left: -26px; top: 198px;">3</span><span class="n" style="left: -26px; top: 482px;">4</span><span class="n" style="left: -26px; top: 556px;">5</span></div>
+      <ul class="notes"><li><b>1</b>탭 4개(특가 · 주사위 · 루비 · 팩) · 처음엔 특가 · 꺼진 탭(패스 · 꾸밈)은 안 보임 · 빨간 점 = 무료 선물 받을 수 있음</li><li><b>2</b>무료 선물 · 6시간마다 주사위 30 · 쌓이지 않음 · 받기 → 위 주사위로 날아감 · 받으면 「다음 남은 시간」</li><li><b>3</b>오늘의 특가 · 큰 카드 하나(주사위 585 · 루비 5,850) · 「추천」 표시 · 가격을 누르면 ⑤</li><li><b>4</b>오늘의 상점 배너 · 안내 한 줄</li><li><b>5</b>첫 구매 보너스 배너 · 첫 구매 두 배가 꺼져 있어 지금은 안 보임(점선 = 켜질 자리)</li><li><b>6</b>아래 「상점」 빨간 점 = 무료 선물이 찼을 때</li></ul></div><div><p class="cap">② 주사위 (6칸)</p><div class="pw" style="position:relative"><div class="phone"><div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div><div class="a val" style="left:52px;top:16px;font-size:16px">상점</div>
+  <span class="pill a" style="right:96px;top:13px;font-size:13px;padding:2px 10px">주사위 000</span><span class="pill a" style="right:12px;top:13px;font-size:13px;padding:2px 10px">루비 00</span><div class="line" style="top:50px"></div><div class="a" style="left:8px;right:0;top:58px;display:flex;gap:6px;white-space:nowrap"><span class="pill" style="font-size:13px;padding:4px 16px">특가 <b style="color:var(--red)">●</b></span><span class="pill on" style="font-size:13px;padding:4px 16px">주사위</span><span class="pill" style="font-size:13px;padding:4px 16px">루비</span><span class="pill" style="font-size:13px;padding:4px 16px">팩</span></div>
+   <div class="b" style="left:12px;right:12px;top:96px;height:72px;justify-content:flex-start;gap:12px;padding:0 12px;">
+  <div class="pic" style="width:48px;height:48px;border-radius:8px">선물</div><div style="flex:1;text-align:left"><b style="font-size:14px">무료 선물 · 주사위 ×30</b><div class="sub" style="font-size:12px;margin-top:3px">6시간마다 · 안 받으면 쌓이지 않음</div></div>
+  <span class="pill" style="font-size:12px;padding:3px 10px">다음 5:12:40</span></div>
+   <div class="b" style="left:12px;top:186px;width:177px;height:150px;flex-direction:column;gap:6px;">
+  <div class="pic" style="width:110px;height:56px;border-radius:6px">주사위 더미</div><b style="font-size:15px">주사위 15</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 150</span></div><div class="b" style="left:201px;top:186px;width:177px;height:150px;flex-direction:column;gap:6px;">
+  <div class="pic" style="width:110px;height:56px;border-radius:6px">주사위 더미</div><b style="font-size:15px">주사위 35</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 350</span></div>
+   <div class="b" style="left:12px;top:348px;width:177px;height:150px;flex-direction:column;gap:6px;">
+  <div class="pic" style="width:110px;height:56px;border-radius:6px">주사위 더미</div><b style="font-size:15px">주사위 75</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 750</span></div><div class="b" style="left:201px;top:348px;width:177px;height:150px;flex-direction:column;gap:6px;border-width:2.5px">
+  <div class="pic" style="width:110px;height:56px;border-radius:6px">주사위 더미</div><b style="font-size:15px">주사위 175</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 1,750</span></div><span class="a" style="left:209px;top:340px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;z-index:1">추천</span>
+   <div class="b" style="left:12px;top:510px;width:177px;height:150px;flex-direction:column;gap:6px;">
+  <div class="pic" style="width:110px;height:56px;border-radius:6px">주사위 더미</div><b style="font-size:15px">주사위 585</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 5,850</span></div><div class="b" style="left:201px;top:510px;width:177px;height:150px;flex-direction:column;gap:6px;">
+  <div class="pic" style="width:110px;height:56px;border-radius:6px">주사위 더미</div><b style="font-size:15px">주사위 1,335</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 13,350</span></div>
+   <div class="a sub" style="left:0;right:0;top:672px;text-align:center;font-size:12px">모두 주사위 1개 = 루비 10</div>
+   <div class="line" style="top:774px"></div><div class="tab" style="left:0.0px;width:64.3px"><i></i>포토카드</div><div class="tab" style="left:64.3px;width:64.3px"><i></i>스케줄</div><div class="tab" style="left:128.7px;width:64.3px"><i></i>건설</div><div class="tab" style="left:193.0px;width:64.3px"><i></i>미션</div><div class="tab on" style="left:257.3px;width:64.3px"><i></i>상점</div><div class="tab" style="left:321.7px;width:64.3px"><i></i>정보</div><span class="dot" style="left:288px;top:786px;width:10px;height:10px"></span><span class="n" style="left:350px;top:340px">3</span></div><span class="n" style="left: -26px; top: 112px;">1</span><span class="n" style="left: -26px; top: 202px;">2</span></div>
+      <ul class="notes"><li><b>1</b>무료 선물은 탭마다 맨 위 · 아직이면 남은 시간만</li><li><b>2</b>주사위 6단(15 · 35 · 75 · 175 · 585 · 1,335) · 2줄 3칸 · 가격 = 루비 · 누르면 ⑤</li><li><b>3</b>175에 「추천」(표의 best) · 진한 테두리</li></ul></div><div><p class="cap">③ 루비 (원화 4칸)</p><div class="pw" style="position:relative"><div class="phone"><div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div><div class="a val" style="left:52px;top:16px;font-size:16px">상점</div>
+  <span class="pill a" style="right:96px;top:13px;font-size:13px;padding:2px 10px">주사위 000</span><span class="pill a" style="right:12px;top:13px;font-size:13px;padding:2px 10px">루비 00</span><div class="line" style="top:50px"></div><div class="a" style="left:8px;right:0;top:58px;display:flex;gap:6px;white-space:nowrap"><span class="pill" style="font-size:13px;padding:4px 16px">특가 <b style="color:var(--red)">●</b></span><span class="pill" style="font-size:13px;padding:4px 16px">주사위</span><span class="pill on" style="font-size:13px;padding:4px 16px">루비</span><span class="pill" style="font-size:13px;padding:4px 16px">팩</span></div>
+   <div class="b" style="left:12px;right:12px;top:96px;height:72px;justify-content:flex-start;gap:12px;padding:0 12px;">
+  <div class="pic" style="width:48px;height:48px;border-radius:8px">선물</div><div style="flex:1;text-align:left"><b style="font-size:14px">무료 선물 · 주사위 ×30</b><div class="sub" style="font-size:12px;margin-top:3px">6시간마다 · 안 받으면 쌓이지 않음</div></div>
+  <span class="pill" style="font-size:12px;padding:3px 10px">다음 5:12:40</span></div>
+   <div class="sec" style="top:184px">루비 <span class="sub" style="font-weight:400;font-size:12px">원화로 사요</span></div>
+   <div class="b" style="left:12px;right:12px;top:210px;height:64px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <i class="ic" style="width:36px;height:36px"></i><div style="flex:1;text-align:left"><b style="font-size:14px">루비 100</b><div class="sub" style="font-size:12px;margin-top:2px"></div></div><span class="pill on" style="font-size:13px;padding:3px 12px">₩1,200</span></div>
+   <div class="b" style="left:12px;right:12px;top:284px;height:64px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <i class="ic" style="width:36px;height:36px"></i><div style="flex:1;text-align:left"><b style="font-size:14px">루비 550</b><div class="sub" style="font-size:12px;margin-top:2px"></div></div><span class="pill on" style="font-size:13px;padding:3px 12px">₩6,000</span></div>
+   <div class="b" style="left:12px;right:12px;top:358px;height:64px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <i class="ic" style="width:36px;height:36px"></i><div style="flex:1;text-align:left"><b style="font-size:14px">루비 1,200</b><div class="sub" style="font-size:12px;margin-top:2px"></div></div><span class="pill on" style="font-size:13px;padding:3px 12px">₩12,000</span></div>
+   <div class="b" style="left:12px;right:12px;top:432px;height:64px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <i class="ic" style="width:36px;height:36px"></i><div style="flex:1;text-align:left"><b style="font-size:14px">루비 3,000</b><div class="sub" style="font-size:12px;margin-top:2px"></div></div><span class="pill on" style="font-size:13px;padding:3px 12px">₩28,000</span></div>
+   <div class="b off" style="left:12px;right:12px;top:510px;height:52px;font-size:12px">「첫 구매 두 배」 표시 자리 · 지금은 꺼짐</div>
+   <div class="a sub" style="left:16px;top:578px;font-size:12px;line-height:1.6">루비는 주사위 · 팩을 살 때 써요<br>무료로는 일일 미션에서 받아요</div>
+   <div class="line" style="top:774px"></div><div class="tab" style="left:0.0px;width:64.3px"><i></i>포토카드</div><div class="tab" style="left:64.3px;width:64.3px"><i></i>스케줄</div><div class="tab" style="left:128.7px;width:64.3px"><i></i>건설</div><div class="tab" style="left:193.0px;width:64.3px"><i></i>미션</div><div class="tab on" style="left:257.3px;width:64.3px"><i></i>상점</div><div class="tab" style="left:321.7px;width:64.3px"><i></i>정보</div><span class="dot" style="left:288px;top:786px;width:10px;height:10px"></span><span class="n" style="left:300px;top:206px">2</span></div><span class="n" style="left: -26px; top: 226px;">1</span><span class="n" style="left: -26px; top: 524px;">3</span></div>
+      <ul class="notes"><li><b>1</b>루비 4단(100 · 550 · 1,200 · 3,000) · 원화 결제</li><li><b>2</b>가격을 누르면 바로 스토어 결제창(확인 창 없음) · 받으면 위 루비로 날아감</li><li><b>3</b>첫 구매 두 배 · 표에 칸은 있지만 꺼짐(보류)</li></ul></div><div><p class="cap">④ 팩 (묶음 · 몬스 · 아이돌)</p><div class="pw" style="position:relative"><div class="phone"><div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div><div class="a val" style="left:52px;top:16px;font-size:16px">상점</div>
+  <span class="pill a" style="right:96px;top:13px;font-size:13px;padding:2px 10px">주사위 000</span><span class="pill a" style="right:12px;top:13px;font-size:13px;padding:2px 10px">루비 00</span><div class="line" style="top:50px"></div><div class="a" style="left:8px;right:0;top:58px;display:flex;gap:6px;white-space:nowrap"><span class="pill" style="font-size:13px;padding:4px 16px">특가 <b style="color:var(--red)">●</b></span><span class="pill" style="font-size:13px;padding:4px 16px">주사위</span><span class="pill" style="font-size:13px;padding:4px 16px">루비</span><span class="pill on" style="font-size:13px;padding:4px 16px">팩</span></div>
+   <div class="sec" style="top:96px">주사위 + 팩</div>
+   <div class="b" style="left:12px;top:120px;width:177px;height:128px;flex-direction:column;gap:6px"><div class="pic" style="width:110px;height:44px;border-radius:6px">주사위 + 팩</div><b style="font-size:13px">주사위 75 + 팩 1장</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 750</span></div>
+   <div class="b" style="left:201px;top:120px;width:177px;height:128px;flex-direction:column;gap:6px"><div class="pic" style="width:110px;height:44px;border-radius:6px">주사위 + 팩</div><b style="font-size:13px">주사위 175 + 팩 2장</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 1,750</span></div>
+   <div class="sec" style="top:262px">몬스 팩</div>
+   <div class="b" style="left:12px;right:12px;top:286px;height:56px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <i class="ic" style="width:36px;height:36px"></i><div style="flex:1;text-align:left"><b style="font-size:14px">몬스 팩 1</b><div class="sub" style="font-size:12px;margin-top:2px">하루 3번까지</div></div><span class="pill" style="font-size:12px;padding:2px 8px">오늘 3 / 3</span><span class="pill on" style="font-size:13px;padding:3px 12px">루비 100</span></div>
+   <div class="sec" style="top:356px">아이돌 카드팩 <span class="sub" style="font-weight:400;font-size:12px">카드 3장 · 등급별</span></div>
+   <div class="b" style="left:12px;right:12px;top:380px;height:52px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <i class="ic" style="width:36px;height:36px"></i><div style="flex:1;text-align:left"><b style="font-size:14px">연습생 카드팩</b><div class="sub" style="font-size:12px;margin-top:2px">아이돌 카드 3장</div></div><span class="pill on" style="font-size:13px;padding:3px 12px">루비 260</span></div>
+   <div class="b" style="left:12px;right:12px;top:438px;height:52px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <i class="ic" style="width:36px;height:36px"></i><div style="flex:1;text-align:left"><b style="font-size:14px">데뷔조 카드팩</b><div class="sub" style="font-size:12px;margin-top:2px">아이돌 카드 3장</div></div><span class="pill on" style="font-size:13px;padding:3px 12px">루비 430</span></div>
+   <div class="b" style="left:12px;right:12px;top:496px;height:52px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <i class="ic" style="width:36px;height:36px"></i><div style="flex:1;text-align:left"><b style="font-size:14px">라이징 스타 카드팩</b><div class="sub" style="font-size:12px;margin-top:2px">아이돌 카드 3장</div></div><span class="pill on" style="font-size:13px;padding:3px 12px">루비 680</span></div>
+   <div class="b" style="left:12px;right:12px;top:554px;height:52px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <i class="ic" style="width:36px;height:36px"></i><div style="flex:1;text-align:left"><b style="font-size:14px">톱스타 카드팩</b><div class="sub" style="font-size:12px;margin-top:2px">아이돌 카드 3장</div></div><span class="pill on" style="font-size:13px;padding:3px 12px">루비 1,020</span></div>
+   <div class="b" style="left:12px;right:12px;top:612px;height:52px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <i class="ic" style="width:36px;height:36px"></i><div style="flex:1;text-align:left"><b style="font-size:14px">월드스타 카드팩</b><div class="sub" style="font-size:12px;margin-top:2px">아이돌 카드 3장</div></div><span class="pill on" style="font-size:13px;padding:3px 12px">루비 1,360</span></div>
+   <div class="a sub" style="left:0;right:0;top:676px;text-align:center;font-size:12px">팩 그림을 누르면 팩 안 카드(포토카드 ④-1)</div>
+   <div class="line" style="top:774px"></div><div class="tab" style="left:0.0px;width:64.3px"><i></i>포토카드</div><div class="tab" style="left:64.3px;width:64.3px"><i></i>스케줄</div><div class="tab" style="left:128.7px;width:64.3px"><i></i>건설</div><div class="tab" style="left:193.0px;width:64.3px"><i></i>미션</div><div class="tab on" style="left:257.3px;width:64.3px"><i></i>상점</div><div class="tab" style="left:321.7px;width:64.3px"><i></i>정보</div><span class="dot" style="left:288px;top:786px;width:10px;height:10px"></span><span class="n" style="left:272px;top:282px">3</span></div><span class="n" style="left: -26px; top: 136px;">1</span><span class="n" style="left: -26px; top: 300px;">2</span><span class="n" style="left: -26px; top: 394px;">4</span><span class="n" style="left: -26px; top: 682px;">5</span></div>
+      <ul class="notes"><li><b>1</b>주사위 + 팩 묶음 2개</li><li><b>2</b>몬스 팩 · 하루 3번까지(표의 하루 한도 3 · 시험 설정)</li><li><b>3</b>오늘 남은 횟수 · 0이면 가격 대신 「내일 다시」</li><li><b>4</b>아이돌 카드팩 5등급 · 가격은 임시값(현중 11/02)</li><li><b>5</b>팩 아이콘을 누르면 포토카드 「④-1 팩 안 카드」 창 그대로</li></ul></div></div><h2 class="grp">창</h2><div class="row"><div><p class="cap">⑤ 사기 확인 (루비로 살 때)</p><div class="pw" style="position:relative"><div class="phone"><div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div><div class="a val" style="left:52px;top:16px;font-size:16px">상점</div>
+  <span class="pill a" style="right:96px;top:13px;font-size:13px;padding:2px 10px">주사위 000</span><span class="pill a" style="right:12px;top:13px;font-size:13px;padding:2px 10px">루비 00</span><div class="line" style="top:50px"></div><div class="a" style="left:8px;right:0;top:58px;display:flex;gap:6px;white-space:nowrap"><span class="pill" style="font-size:13px;padding:4px 16px">특가 <b style="color:var(--red)">●</b></span><span class="pill on" style="font-size:13px;padding:4px 16px">주사위</span><span class="pill" style="font-size:13px;padding:4px 16px">루비</span><span class="pill" style="font-size:13px;padding:4px 16px">팩</span></div>
+   <div class="b" style="left:12px;right:12px;top:96px;height:72px;justify-content:flex-start;gap:12px;padding:0 12px;">
+  <div class="pic" style="width:48px;height:48px;border-radius:8px">선물</div><div style="flex:1;text-align:left"><b style="font-size:14px">무료 선물 · 주사위 ×30</b><div class="sub" style="font-size:12px;margin-top:3px">6시간마다 · 안 받으면 쌓이지 않음</div></div>
+  <span class="pill" style="font-size:12px;padding:3px 10px">다음 5:12:40</span></div><div class="b" style="left:12px;top:186px;width:177px;height:150px;flex-direction:column;gap:6px;">
+  <div class="pic" style="width:110px;height:56px;border-radius:6px">주사위 더미</div><b style="font-size:15px">주사위 15</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 150</span></div><div class="b" style="left:201px;top:186px;width:177px;height:150px;flex-direction:column;gap:6px;">
+  <div class="pic" style="width:110px;height:56px;border-radius:6px">주사위 더미</div><b style="font-size:15px">주사위 35</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 350</span></div><div class="b" style="left:12px;top:348px;width:177px;height:150px;flex-direction:column;gap:6px;">
+  <div class="pic" style="width:110px;height:56px;border-radius:6px">주사위 더미</div><b style="font-size:15px">주사위 75</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 750</span></div><div class="b" style="left:201px;top:348px;width:177px;height:150px;flex-direction:column;gap:6px;border-width:2.5px">
+  <div class="pic" style="width:110px;height:56px;border-radius:6px">주사위 더미</div><b style="font-size:15px">주사위 175</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 1,750</span></div><span class="a" style="left:209px;top:340px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;z-index:1">추천</span><div class="line" style="top:774px"></div><div class="tab" style="left:0.0px;width:64.3px"><i></i>포토카드</div><div class="tab" style="left:64.3px;width:64.3px"><i></i>스케줄</div><div class="tab" style="left:128.7px;width:64.3px"><i></i>건설</div><div class="tab" style="left:193.0px;width:64.3px"><i></i>미션</div><div class="tab on" style="left:257.3px;width:64.3px"><i></i>상점</div><div class="tab" style="left:321.7px;width:64.3px"><i></i>정보</div><span class="dot" style="left:288px;top:786px;width:10px;height:10px"></span><div class="dimbg"></div>
+   <div class="win" style="left:30px;right:30px;top:220px;height:330px">
+     <div class="a val" style="left:0;right:0;top:22px;text-align:center;font-size:18px">주사위 175</div>
+     <div class="pic a" style="left:90px;right:90px;top:60px;height:90px;border-radius:8px">주사위 더미</div>
+     <div class="a" style="left:20px;right:20px;top:168px;text-align:center;font-size:14px">루비 <b>1,750</b>을 써요</div>
+     <div class="a sub" style="left:20px;right:20px;top:194px;text-align:center;font-size:12px">남는 루비 0,000</div>
+     <div class="b" style="left:20px;width:130px;top:250px;height:52px;font-size:15px">취소</div>
+     <div class="b" style="right:20px;width:130px;top:250px;height:52px;font-size:15px;font-weight:700;border-width:2px;background:var(--ink);color:#fff">사기</div>
+   </div><span class="n" style="left:40px;top:236px">1</span><span class="n" style="left:40px;top:400px">2</span><span class="n" style="left:330px;top:464px">3</span></div></div>
+      <ul class="notes"><li><b>1</b>루비로 사는 상품(주사위 · 팩)만 확인 창 · 원화(루비 탭)는 스토어 결제창이 대신함</li><li><b>2</b>쓰는 루비 · 남는 루비</li><li><b>3</b>사기 → 보상이 위로 날아감 · 루비가 모자라면 이 창 대신 ⑥</li></ul></div><div><p class="cap">⑥ 루비가 모자라요</p><div class="pw" style="position:relative"><div class="phone"><div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div><div class="a val" style="left:52px;top:16px;font-size:16px">상점</div>
+  <span class="pill a" style="right:96px;top:13px;font-size:13px;padding:2px 10px">주사위 000</span><span class="pill a" style="right:12px;top:13px;font-size:13px;padding:2px 10px">루비 00</span><div class="line" style="top:50px"></div><div class="a" style="left:8px;right:0;top:58px;display:flex;gap:6px;white-space:nowrap"><span class="pill" style="font-size:13px;padding:4px 16px">특가 <b style="color:var(--red)">●</b></span><span class="pill" style="font-size:13px;padding:4px 16px">주사위</span><span class="pill" style="font-size:13px;padding:4px 16px">루비</span><span class="pill on" style="font-size:13px;padding:4px 16px">팩</span></div><div class="sec" style="top:96px">아이돌 카드팩</div><div class="b" style="left:12px;right:12px;top:120px;height:52px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <i class="ic" style="width:36px;height:36px"></i><div style="flex:1;text-align:left"><b style="font-size:14px">월드스타 카드팩</b><div class="sub" style="font-size:12px;margin-top:2px">아이돌 카드 3장</div></div><span class="pill on" style="font-size:13px;padding:3px 12px">루비 1,360</span></div><div class="line" style="top:774px"></div><div class="tab" style="left:0.0px;width:64.3px"><i></i>포토카드</div><div class="tab" style="left:64.3px;width:64.3px"><i></i>스케줄</div><div class="tab" style="left:128.7px;width:64.3px"><i></i>건설</div><div class="tab" style="left:193.0px;width:64.3px"><i></i>미션</div><div class="tab on" style="left:257.3px;width:64.3px"><i></i>상점</div><div class="tab" style="left:321.7px;width:64.3px"><i></i>정보</div><span class="dot" style="left:288px;top:786px;width:10px;height:10px"></span><div class="dimbg"></div>
+   <div class="win" style="left:30px;right:30px;top:250px;height:250px">
+     <div class="a val" style="left:0;right:0;top:24px;text-align:center;font-size:18px">루비가 모자라요</div>
+     <div class="a" style="left:20px;right:20px;top:70px;text-align:center;font-size:14px;line-height:1.7">필요 <b>1,360</b> · 지금 <b>00</b></div>
+     <div class="a sub" style="left:20px;right:20px;top:110px;text-align:center;font-size:12px">일일 미션에서도 루비를 받을 수 있어요</div>
+     <div class="b" style="left:20px;width:130px;top:170px;height:52px;font-size:15px">닫기</div>
+     <div class="b" style="right:20px;width:130px;top:170px;height:52px;font-size:15px;font-weight:700;border-width:2px;background:var(--ink);color:#fff">루비 탭으로 ›</div>
+   </div><span class="n" style="left:40px;top:270px">1</span><span class="n" style="left:300px;top:410px">2</span></div></div>
+      <ul class="notes"><li><b>1</b>필요한 루비 · 지금 루비</li><li><b>2</b>루비 탭으로 › → ③ 루비 탭(같은 상점 안에서 탭만 바뀜)</li></ul></div><div><p class="cap">⑦ 주사위 채움 (보드에서 주사위 0)</p><div class="pw" style="position:relative"><div class="phone"><div class="pic a" style="left:0;right:0;top:0;height:774px;font-size:13px">보드</div><div class="line" style="top:774px"></div><div class="tab" style="left:0.0px;width:64.3px"><i></i>포토카드</div><div class="tab" style="left:64.3px;width:64.3px"><i></i>스케줄</div><div class="tab" style="left:128.7px;width:64.3px"><i></i>건설</div><div class="tab" style="left:193.0px;width:64.3px"><i></i>미션</div><div class="tab on" style="left:257.3px;width:64.3px"><i></i>상점</div><div class="tab" style="left:321.7px;width:64.3px"><i></i>정보</div><div class="dimbg"></div>
+   <div class="win" style="left:20px;right:20px;top:150px;height:470px">
+     <div class="a val" style="left:0;right:0;top:20px;text-align:center;font-size:18px">주사위가 없어요</div>
+     <div class="b" style="left:14px;right:14px;top:60px;height:60px;justify-content:space-between;padding:0 12px"><span style="text-align:left"><b style="font-size:13px">무료 선물 · 주사위 ×30</b><br><span class="sub" style="font-size:12px">다음 선물까지</span></span><span class="pill" style="font-size:12px;padding:3px 10px">5:12:40</span></div>
+     <div class="b" style="left:14px;right:14px;top:136px;height:62px;justify-content:flex-start;gap:10px;padding:0 12px;"><i class="ic" style="width:34px;height:34px"></i><b style="flex:1;text-align:left;font-size:14px">주사위 15</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 150</span></div><div class="b" style="left:14px;right:14px;top:208px;height:62px;justify-content:flex-start;gap:10px;padding:0 12px;"><i class="ic" style="width:34px;height:34px"></i><b style="flex:1;text-align:left;font-size:14px">주사위 75</b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 750</span></div><div class="b" style="left:14px;right:14px;top:280px;height:62px;justify-content:flex-start;gap:10px;padding:0 12px;border-width:2.5px"><i class="ic" style="width:34px;height:34px"></i><b style="flex:1;text-align:left;font-size:14px">주사위 175 <span class="pill on" style="font-size:11px">추천</span></b><span class="pill on" style="font-size:13px;padding:3px 12px">루비 1,750</span></div>
+     <div class="a" style="left:0;right:0;top:362px;text-align:center"><span class="pill" style="font-size:13px;padding:4px 14px">상점 더 보기 ›</span></div>
+     <div class="b" style="left:14px;right:14px;top:402px;height:52px;font-size:15px">닫기</div>
+   </div><span class="n" style="left:26px;top:200px">1</span><span class="n" style="left:26px;top:276px">2</span><span class="n" style="left:290px;top:518px">3</span></div></div>
+      <ul class="notes"><li><b>1</b>주사위 0에서 굴리려고 하면 · 무료 선물 남은 시간(받을 수 있으면 「받기」)</li><li><b>2</b>주사위 탭과 같은 상품 3개만 · 가격 누름 → ⑤</li><li><b>3</b>상점 더 보기 › → ② 주사위 탭</li></ul></div></div></div>
+
+
+</body>
+</html>

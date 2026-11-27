@@ -1,0 +1,94 @@
+# 라이브 기준 정합 · 적용 명세 (2026-11-14 00:45)
+
+- 작성: 2026-11-14 00:48 KST · 비앙카
+- 기준: 현중 최종 승인(t1496s5485) 뒤 유르넷이 00:34~00:35에 반영한 라이브 `data/game/` · `data/master/` 가 최종 기준이다.
+- 전제: 이 폴더의 작업으로 라이브 `data/game/*` · `data/master/*` 를 직접 덮지 않는다. Graphify 지도 JSON은 읽기만 한다.
+
+## 0. 이미 라이브와 맞춰 둔 스테이징
+
+아래 두 표는 라이브와 값이 같다. 다시 적용할 필요 없다.
+
+- `board_tile_group.csv`: facility=1 · fan_react=1 · schedule=0. 곧 `schedule_roulette=1` · `concert_roulette=0`. 근거는 현중 11/12 13:02(이벤트용 concert_roulette 미사용 0, schedule_roulette은 Phase 1 엔진 전환 전까지 1 유지)와 이스라트 00:45 라이브 기준 정정.
+- `skill_effect_rule.csv`: 20열(`… link_deck_kind, apply_scope, set_total, global_cap, active, effect_amount`). 27행. 신규 16행 `applied=0` · `active=1`. `effect_amount`는 양수 크기, `set_total`은 부호를 유지(깎는 효과는 음수). 라포 3줄은 `staff_rapport_bonus.csv`에 분리(+5/+10/+15).
+- 일일 굴림 팩 3줄(`item_master_card_pack_idol` ×1) + 일일 그룹 4줄째 루비 10 + 주사위 보정 +255는 이미 라이브에 들어가 다 깸 하루 896.08이다.
+
+`session.ts`는 아직 `active`를 읽지 않는다. 시설·팬반응 대성공은 `show=schedule_roulette` 뒤 약 547행의 5.05% 문턱, 스케줄 칸은 `show=concert_roulette`. 엔진이 `active`를 읽기 시작하면 라이브 1/1/0이 그대로 동작한다(schedule_roulette 켜짐, concert_roulette 꺼짐). 지금은 런타임이 바뀌지 않는다.
+
+교차 검사: `python3 /tmp/bianca_0028/verify_aaron_schema.py` (라이브 대 스테이징, A11 1/1/0 · 스킬 20열). 최근 실행 109항 실패 0.
+
+## 1. 라이브 `data/game/` · `data/master/` 를 덮지 말 것
+
+승인 전에 아래 패치를 라이브에 넣지 않는다. 적용은 유르넷(또는 표 소유 승인) 뒤에, 아래 순서대로 한 번에 검증한다.
+
+## 2. 남은 패치 목록 · 적용 순서 (승인 후)
+
+백업은 적용 직전에 `.HHMMSS전_비앙카` 또는 유르넷 백업 폴더로 남긴다. 라이브 경로를 덮기 전에 `diff`로 이 폴더와 한 줄씩 대조한다.
+
+### 2-1. `data/game/adventure_route.csv` — 레슨 3행 `lesson_gain`
+
+- 스테이징: `adventure_route.csv`
+- 라이브 대상: `data/game/adventure_route.csv` (열 구성은 이미 라이브와 같다. 바꿀 칸은 3개뿐)
+- 차이: 아래 3행의 `lesson_gain`만 0 → 세팅값. 나머지 32행은 0 유지.
+
+| route_id | lesson | 라이브 | 적용값 |
+|---|---:|---:|---:|
+| adventure_route_dawn_recording | 1 | 0 | 0.5 |
+| adventure_route_dance_room_battle | 1 | 0 | 1.2 |
+| adventure_route_audition_judge_seat | 1 | 0 | 2.0 |
+
+- 적용 방법: 세 칸만 바꾼다. 다른 열·행은 라이브 값을 그대로 둔다.
+- 검증: `python3 -c` 로 세 칸이 0.5/1.2/2.0인지 확인하고, `node scripts/audit-game-tables.mjs` 를 돌린다.
+
+### 2-2. `data/idol_ability_sim/idol_team_grade.csv` — A12 문턱 · 출처
+
+- 스테이징: `idol_team_grade.csv`
+- 라이브 대상: `data/idol_ability_sim/idol_team_grade.csv` (이 표는 `data/game/` 가 아니다. 그래도 승인 전에는 덮지 않는다.)
+- 라이브 현재: `agency_source=agency_ability_buildings`, `need_value` 200 / 450 / 562 / 1090 / 1560, 등급 이름 루키·대세·톱티어·국민돌·글로벌 아이콘.
+- 적용값: `agency_source=agency_stat`, `need_value` 0 / 4000 / 10000 / 20000 / 32000. 등급 이름·ID·basis=composite·card_weight=1은 유지.
+- 검증: 5행의 `agency_source`와 `need_value`가 위와 같은지 확인.
+
+### 2-3. 성격 궁합 단계 · 전화위복 연결 (신규 표)
+
+라이브에는 아직 이 두 파일이 없다. 성격 유형·궁합 표가 있는 `data/rapport_sim/` 아래에 새 파일로 넣는 것을 권한다. `data/game/` 에는 넣지 않는다(소유권 충돌을 피한다). 라이브 `data/rapport_sim/rapport_event.csv` 와 `personality_compat.csv` 는 덮지 않는다(`personality_compat.csv` 544행은 이미 00:40 작업에서 라이브에 반영됨).
+
+| 스테이징 | 권장 라이브 경로 | 내용 |
+|---|---|---|
+| `chem_stage.csv` | `data/rapport_sim/chem_stage.csv` | 찰떡 20% · 보통 60% · 최악 20%. 문턱 시작값 ≥ 8.5 / < 1.5. 찰떡 라포 보너스 +10%. 최악 전화위복 +15%(1.5배). |
+| `rapport_event_turnaround_link.csv` | `data/rapport_sim/rapport_event_turnaround_link.csv` | 기존 `rapport_event_reconcile`(긴장 −0.44)을 최악 시작 쌍의 +15%와 잇는 연결안. 사건 값 자체는 바꾸지 않음. |
+
+- 검증: `node --test tests/current-team-rapport.test.mjs tests/adventure-rapport-gain-a.test.mjs`
+
+### 2-4. `data/master/item_master_dice_mult.csv` — 상태 문구만 (유르넷 승인 요청)
+
+- 스테이징: `item_master_dice_mult.csv`
+- 라이브 대상: `data/master/item_master_dice_mult.csv`
+- 바꾸는 것: `value_status` · `note` 의 예전 상태 문구만 「현재 세팅값」으로 정리. 숫자(`mult` · `min_dice` · `fan_min`)는 라이브와 같다.
+- **유르넷 승인 전에는 라이브 `data/master/` 를 절대 수정하지 않는다.** 이 항목은 승인 요청 대상이다.
+- 검증: 10행의 숫자 칸이 라이브와 같고, 상태 칸에 금지 문구가 0건인지 확인. 그 다음 `node --test tests/balance-tool-topic-values.test.mjs` 와 경제 감사.
+
+## 3. 적용 순서 요약 (승인된 항목만)
+
+1. 라이브·스테이징 백업
+2. (승인 시) `adventure_route.csv` 레슨 3칸
+3. (승인 시) `idol_team_grade.csv` 문턱·출처
+4. (승인 시) `chem_stage.csv` · `rapport_event_turnaround_link.csv` 신규 추가
+5. (유르넷 승인 시) `item_master_dice_mult.csv` 상태 문구
+6. 아래 검증 명령을 한 번에 실행
+
+## 4. 검증 명령 (저장소 뿌리에서)
+
+```bash
+python3 /tmp/bianca_0028/verify_aaron_schema.py
+node --test tests/balance-tool-season-dice-input.test.mjs tests/balance-tool-skill-supply.test.mjs tests/balance-tool-topic-values.test.mjs tests/music-career-balance-topic.test.mjs tests/fan-ladder-table.test.mjs
+node --test tests/current-team-rapport.test.mjs tests/adventure-rapport-gain-a.test.mjs
+node scripts/audit-game-tables.mjs
+node scripts/audit-game-economy.mjs
+```
+
+`tests/growth-relation*.test.mjs` 는 저장소에 파일이 없으면 건너뛴다.
+
+## 5. 이미 라이브에 있는 관련 정리 (이 명세의 적용 대상 아님)
+
+- `docs/planning/balance-tool.html` · `data/fan_tier/fan_tier.csv` · `data/rapport_sim/personality_compat.csv` : 00:40 작업에서 반영됨.
+- `data/balance_topic.csv` · `src/tools/balanceTool/main.ts` : 00:48 작업에서 반영됨(백업 `.004832전_비앙카`). 7007은 Vite가 소스 `main.ts`를 직접 서빙하므로 서버 재시작 없이 새로고침하면 문구가 바뀐다.
+- 다른 `data/fan_tier/*.csv` 정리본은 `fan_tier/` 폴더에만 있다. 라이브는 아직 `fan_tier.csv`만 바뀌었다.

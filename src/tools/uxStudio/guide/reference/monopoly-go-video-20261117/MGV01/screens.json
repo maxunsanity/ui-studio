@@ -1,0 +1,862 @@
+{
+  "format": "video-screen-inventory",
+  "version": 1,
+  "videoId": "MGV01",
+  "status": "source-video observed; review pending",
+  "source": {
+    "nameNFC": "감옥 탈출 _@.mov",
+    "actualPath": "/Users/max/projest_max/영상작업 모음/모노폴리 영상/감옥 탈출 _@.mov",
+    "SHA256": "dedadbf758f244556979356b122091090e6461c0d280d27e2d7ba0dfd9b51184",
+    "durationSeconds": 9.5,
+    "nativeSize": [
+      1920,
+      1080
+    ],
+    "orientation": "landscape",
+    "nominalFPS": 24,
+    "gameROI": {
+      "rectXYWH": [
+        650,
+        28,
+        592,
+        1052
+      ],
+      "basis": "Observed emulator game content excludes app title bar/right toolbar; unscaled ROI, not a claimed logical engine canvas."
+    },
+    "reviewWindowROI": [
+      650,
+      0,
+      620,
+      1080
+    ]
+  },
+  "method": {
+    "baseSeconds": 0.5,
+    "transitionSeconds": 0.1,
+    "allContactSheetsActuallyViewed": true,
+    "nativeFramesResized": false,
+    "decoder": "existing BlueStacks ffmpeg7.1.1 software; no install/app control",
+    "PNGQuality": "Direct decoded native PNG vs JPEG-derived crops distinguished per state."
+  },
+  "existingDesignComparison": {
+    "path": "samples/monopoly-go/ui-studio/designs/ux-gjs-0d80d7fe.json",
+    "revision": 277,
+    "SHA256": "c4e5a63c578986695d3eebaeda5bb987a27dea3c1b1d81a0b19fa6c888e9874c",
+    "writes": false
+  },
+  "counts": {
+    "screens": 3,
+    "states": 11,
+    "screenTransitions": 3,
+    "stateTransitions": 7,
+    "observedChanges": 10,
+    "initialContextRecords": 1,
+    "transitionRecordsIncludingInitialContext": 11,
+    "gridJPEG": 20,
+    "denseJPEG": 54,
+    "sceneJPEG": 0,
+    "nativePNGs": 5,
+    "stateGameCrops": 11,
+    "contactSheetsViewed": 6
+  },
+  "screens": [
+    {
+      "canonicalFamily": "main-board",
+      "observedTitle": "보드 메인",
+      "presentationObserved": "portrait game inside landscape emulator recording",
+      "nativeTexts": [
+        "발바닥 젤리 대회",
+        "27/65",
+        "2일 16시간",
+        "x10",
+        "50/60"
+      ],
+      "components": [
+        {
+          "kindObserved": "visible component/structure",
+          "description": "SNS/현금/방패/메뉴 HUD"
+        },
+        {
+          "kindObserved": "visible component/structure",
+          "description": "이벤트 진행 바"
+        },
+        {
+          "kindObserved": "visible component/structure",
+          "description": "입체 보드·토큰·주사위"
+        },
+        {
+          "kindObserved": "visible component/structure",
+          "description": "GO 위치의 초록 주사위 입력"
+        },
+        {
+          "kindObserved": "visible component/structure",
+          "description": "하단 승리/짓기/앨범/친구"
+        }
+      ],
+      "notes": [
+        "영상은 이미 주사위를 굴리는 중 시작합니다. 최초 GO 클릭은 미관찰입니다.",
+        "호루라기 +10/감옥 철창은 보드 효과·전환 상태이며 별도 UI 화면으로 세지 않습니다."
+      ],
+      "id": "MGV01-S01",
+      "states": [
+        {
+          "id": "MGV01-S01-A",
+          "label": "보드 주사위 굴림 진행",
+          "kindObserved": "animation",
+          "stableSampleRangesSeconds": [
+            [
+              0,
+              1
+            ]
+          ],
+          "observedTimeInterval": [
+            0,
+            1
+          ],
+          "representative": {
+            "requested": 0.5,
+            "actual": 0.5,
+            "file": "frames/frame_00002.jpg",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": null,
+          "gameCrop": {
+            "file": "frames/game-crops/MGV01-S01-A.png",
+            "rectXYWH": [
+              650,
+              28,
+              592,
+              1052
+            ],
+            "width": 592,
+            "height": 1052,
+            "resized": false,
+            "sourceFullFrameFile": "frames/frame_00002.jpg",
+            "sourceFrameFormat": "q:v3/q:v4 JPEG review frame",
+            "qualityNote": "Native unscaled ROI; PNG crop of JPEG retains JPEG artifacts."
+          },
+          "visibleNativeText": [],
+          "basis": "Observed source-video samples; animation may continue. Times bracket samples, not a proven mouse event or API.",
+          "notes": []
+        },
+        {
+          "id": "MGV01-S01-B",
+          "label": "호루라기 확대·+10",
+          "kindObserved": "effect",
+          "stableSampleRangesSeconds": [
+            [
+              1.125,
+              2
+            ]
+          ],
+          "observedTimeInterval": [
+            1.125,
+            2
+          ],
+          "representative": {
+            "requested": 1.5,
+            "actual": 1.5,
+            "file": "frames/frame_00004.jpg",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": null,
+          "gameCrop": {
+            "file": "frames/game-crops/MGV01-S01-B.png",
+            "rectXYWH": [
+              650,
+              28,
+              592,
+              1052
+            ],
+            "width": 592,
+            "height": 1052,
+            "resized": false,
+            "sourceFullFrameFile": "frames/frame_00004.jpg",
+            "sourceFrameFormat": "q:v3/q:v4 JPEG review frame",
+            "qualityNote": "Native unscaled ROI; PNG crop of JPEG retains JPEG artifacts."
+          },
+          "visibleNativeText": [
+            "+10"
+          ],
+          "basis": "Observed source-video samples; animation may continue. Times bracket samples, not a proven mouse event or API.",
+          "notes": []
+        },
+        {
+          "id": "MGV01-S01-C",
+          "label": "감옥 철창/토큰 진입",
+          "kindObserved": "animation",
+          "stableSampleRangesSeconds": [
+            [
+              2.125,
+              2.5
+            ]
+          ],
+          "observedTimeInterval": [
+            2.125,
+            2.5
+          ],
+          "representative": {
+            "requested": 2.3,
+            "actual": 2.333333,
+            "file": "frames/dense_014.jpg",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": null,
+          "gameCrop": {
+            "file": "frames/game-crops/MGV01-S01-C.png",
+            "rectXYWH": [
+              650,
+              28,
+              592,
+              1052
+            ],
+            "width": 592,
+            "height": 1052,
+            "resized": false,
+            "sourceFullFrameFile": "frames/dense_014.jpg",
+            "sourceFrameFormat": "q:v3/q:v4 JPEG review frame",
+            "qualityNote": "Native unscaled ROI; PNG crop of JPEG retains JPEG artifacts."
+          },
+          "visibleNativeText": [],
+          "basis": "Observed source-video samples; animation may continue. Times bracket samples, not a proven mouse event or API.",
+          "notes": []
+        },
+        {
+          "id": "MGV01-S01-D",
+          "label": "보드 복귀/현금 감소 표시",
+          "kindObserved": "animation",
+          "stableSampleRangesSeconds": [
+            [
+              9,
+              9.458333
+            ]
+          ],
+          "observedTimeInterval": [
+            9,
+            9.458333
+          ],
+          "representative": {
+            "requested": 9.2,
+            "actual": 9.208333,
+            "file": "frames/dense_052.jpg",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": null,
+          "gameCrop": {
+            "file": "frames/game-crops/MGV01-S01-D.png",
+            "rectXYWH": [
+              650,
+              28,
+              592,
+              1052
+            ],
+            "width": 592,
+            "height": 1052,
+            "resized": false,
+            "sourceFullFrameFile": "frames/dense_052.jpg",
+            "sourceFrameFormat": "q:v3/q:v4 JPEG review frame",
+            "qualityNote": "Native unscaled ROI; PNG crop of JPEG retains JPEG artifacts."
+          },
+          "visibleNativeText": [
+            "-41,550"
+          ],
+          "basis": "Observed source-video samples; animation may continue. Times bracket samples, not a proven mouse event or API.",
+          "notes": []
+        }
+      ],
+      "visibleStructure": [
+        "SNS/현금/방패/메뉴 HUD",
+        "이벤트 진행 바",
+        "입체 보드·토큰·주사위",
+        "GO 위치의 초록 주사위 입력",
+        "하단 승리/짓기/앨범/친구"
+      ],
+      "visibleControls": [
+        {
+          "label": "메뉴",
+          "targetScreenId": null,
+          "targetFamily": null,
+          "observation": "미관찰",
+          "activationProven": false,
+          "linkBasis": "Unobserved target kept null.",
+          "condition": null
+        },
+        {
+          "label": "승리",
+          "targetScreenId": null,
+          "targetFamily": null,
+          "observation": "미관찰",
+          "activationProven": false,
+          "linkBasis": "Unobserved target kept null.",
+          "condition": null
+        },
+        {
+          "label": "짓기",
+          "targetScreenId": null,
+          "targetFamily": null,
+          "observation": "미관찰",
+          "activationProven": false,
+          "linkBasis": "Unobserved target kept null.",
+          "condition": null
+        },
+        {
+          "label": "앨범",
+          "targetScreenId": null,
+          "targetFamily": null,
+          "observation": "미관찰",
+          "activationProven": false,
+          "linkBasis": "Unobserved target kept null.",
+          "condition": null
+        },
+        {
+          "label": "친구",
+          "targetScreenId": null,
+          "targetFamily": null,
+          "observation": "미관찰",
+          "activationProven": false,
+          "linkBasis": "Unobserved target kept null.",
+          "condition": null
+        }
+      ],
+      "uncertainties": [
+        "최초 GO 클릭/감옥 진입 조건",
+        "각 주사위의 정확한 mouse-down",
+        "더블 성공·탈출 성공/보상",
+        "보석금 산식·잔액 결산 규칙",
+        "Esc/닫기/스킵 링크",
+        "영상 끝 보드 복귀 애니메이션은 진행 중"
+      ],
+      "existingDesignScreenId": "main",
+      "existingDesignMatchStatus": "existing family; board/dice/jail animation missing",
+      "existingDesignMatch": {
+        "revision": 277,
+        "screenName": "Page_Board",
+        "screenId": "main",
+        "status": "existing family; board/dice/jail animation missing",
+        "note": "Role comparison only. Live video Korean values/content are not copied into saved screenshot-derived design."
+      },
+      "implementationStatus": "video-observed-only; UI/design/source untouched",
+      "entryBeforeClip": null,
+      "exitOutsideObservedWindow": null
+    },
+    {
+      "canonicalFamily": "jail-roll-doubles",
+      "observedTitle": "더블 굴리기",
+      "presentationObserved": "card overlay over board; gameplay roll input remains",
+      "nativeTexts": [
+        "더블 굴리기",
+        "승리",
+        "x10",
+        "굴리기 3회 남음",
+        "굴리기 2회 남음",
+        "굴리기 1회 남음",
+        "굴리기 0회 남음",
+        "탭하여 멈추기"
+      ],
+      "components": [
+        {
+          "kindObserved": "visible component/structure",
+          "description": "경찰+노인 그림"
+        },
+        {
+          "kindObserved": "visible component/structure",
+          "description": "크림 카드/장식 모서리"
+        },
+        {
+          "kindObserved": "visible component/structure",
+          "description": "native 제목/승리 문구/주사위 보상/x10"
+        },
+        {
+          "kindObserved": "visible component/structure",
+          "description": "초록 주사위 입력"
+        },
+        {
+          "kindObserved": "visible component/structure",
+          "description": "하단 남은 횟수,0은 빨강"
+        }
+      ],
+      "notes": [
+        "3→2→1→0을 관찰했고 성공한 더블 결과는 없습니다.",
+        "별도 닫기 X는 보이지 않습니다."
+      ],
+      "id": "MGV01-S02",
+      "states": [
+        {
+          "id": "MGV01-S02-A",
+          "label": "더블 카드 등장",
+          "kindObserved": "transition",
+          "stableSampleRangesSeconds": [
+            [
+              2.625,
+              2.916667
+            ]
+          ],
+          "observedTimeInterval": [
+            2.625,
+            2.916667
+          ],
+          "representative": {
+            "requested": 2.8,
+            "actual": 2.833333,
+            "file": "frames/dense_019.jpg",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": null,
+          "gameCrop": {
+            "file": "frames/game-crops/MGV01-S02-A.png",
+            "rectXYWH": [
+              650,
+              28,
+              592,
+              1052
+            ],
+            "width": 592,
+            "height": 1052,
+            "resized": false,
+            "sourceFullFrameFile": "frames/dense_019.jpg",
+            "sourceFrameFormat": "q:v3/q:v4 JPEG review frame",
+            "qualityNote": "Native unscaled ROI; PNG crop of JPEG retains JPEG artifacts."
+          },
+          "visibleNativeText": [
+            "더블 굴리기"
+          ],
+          "basis": "Observed source-video samples; animation may continue. Times bracket samples, not a proven mouse event or API.",
+          "notes": []
+        },
+        {
+          "id": "MGV01-S02-B",
+          "label": "남은 횟수3",
+          "kindObserved": "state",
+          "stableSampleRangesSeconds": [
+            [
+              3,
+              3.625
+            ]
+          ],
+          "observedTimeInterval": [
+            3,
+            3.625
+          ],
+          "representative": {
+            "requested": 3.5,
+            "actual": 3.5,
+            "file": "frames/representatives/MGV01_R01_t03.500.png",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "requested": 3.5,
+            "actual": 3.5,
+            "file": "frames/representatives/MGV01_R01_t03.500.png",
+            "width": 1920,
+            "height": 1080,
+            "format": "PNG direct FFmpeg software decode from MOV; no added JPEG conversion",
+            "sha256": "3ca5b1ecfad02b445a35d7ac4390902668f54c9683025c0f6318ed500da065b5"
+          },
+          "gameCrop": {
+            "file": "frames/game-crops/MGV01-S02-B.png",
+            "rectXYWH": [
+              650,
+              28,
+              592,
+              1052
+            ],
+            "width": 592,
+            "height": 1052,
+            "resized": false,
+            "sourceFullFrameFile": "frames/representatives/MGV01_R01_t03.500.png",
+            "sourceFrameFormat": "direct native PNG",
+            "qualityNote": "Unscaled lossless crop of native decoded PNG."
+          },
+          "visibleNativeText": [
+            "굴리기 3회 남음"
+          ],
+          "basis": "Observed source-video samples; animation may continue. Times bracket samples, not a proven mouse event or API.",
+          "notes": []
+        },
+        {
+          "id": "MGV01-S02-C",
+          "label": "남은 횟수2",
+          "kindObserved": "state",
+          "stableSampleRangesSeconds": [
+            [
+              3.708333,
+              4.916667
+            ]
+          ],
+          "observedTimeInterval": [
+            3.708333,
+            4.916667
+          ],
+          "representative": {
+            "requested": 4.0,
+            "actual": 4.0,
+            "file": "frames/representatives/MGV01_R02_t04.000.png",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "requested": 4.0,
+            "actual": 4.0,
+            "file": "frames/representatives/MGV01_R02_t04.000.png",
+            "width": 1920,
+            "height": 1080,
+            "format": "PNG direct FFmpeg software decode from MOV; no added JPEG conversion",
+            "sha256": "6ac4c03cef9890896b8412cf336ec78bf6ba0cc08aaf864382e23773c6e89e8a"
+          },
+          "gameCrop": {
+            "file": "frames/game-crops/MGV01-S02-C.png",
+            "rectXYWH": [
+              650,
+              28,
+              592,
+              1052
+            ],
+            "width": 592,
+            "height": 1052,
+            "resized": false,
+            "sourceFullFrameFile": "frames/representatives/MGV01_R02_t04.000.png",
+            "sourceFrameFormat": "direct native PNG",
+            "qualityNote": "Unscaled lossless crop of native decoded PNG."
+          },
+          "visibleNativeText": [
+            "굴리기 2회 남음"
+          ],
+          "basis": "Observed source-video samples; animation may continue. Times bracket samples, not a proven mouse event or API.",
+          "notes": []
+        },
+        {
+          "id": "MGV01-S02-D",
+          "label": "남은 횟수1",
+          "kindObserved": "state",
+          "stableSampleRangesSeconds": [
+            [
+              5,
+              6.125
+            ]
+          ],
+          "observedTimeInterval": [
+            5,
+            6.125
+          ],
+          "representative": {
+            "requested": 5.5,
+            "actual": 5.5,
+            "file": "frames/representatives/MGV01_R03_t05.500.png",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "requested": 5.5,
+            "actual": 5.5,
+            "file": "frames/representatives/MGV01_R03_t05.500.png",
+            "width": 1920,
+            "height": 1080,
+            "format": "PNG direct FFmpeg software decode from MOV; no added JPEG conversion",
+            "sha256": "1cd48419be4196232743b95a34c1fac0824c53e3311d129d45fb0d52176921e0"
+          },
+          "gameCrop": {
+            "file": "frames/game-crops/MGV01-S02-D.png",
+            "rectXYWH": [
+              650,
+              28,
+              592,
+              1052
+            ],
+            "width": 592,
+            "height": 1052,
+            "resized": false,
+            "sourceFullFrameFile": "frames/representatives/MGV01_R03_t05.500.png",
+            "sourceFrameFormat": "direct native PNG",
+            "qualityNote": "Unscaled lossless crop of native decoded PNG."
+          },
+          "visibleNativeText": [
+            "굴리기 1회 남음"
+          ],
+          "basis": "Observed source-video samples; animation may continue. Times bracket samples, not a proven mouse event or API.",
+          "notes": []
+        },
+        {
+          "id": "MGV01-S02-E",
+          "label": "남은 횟수0/빨강",
+          "kindObserved": "state",
+          "stableSampleRangesSeconds": [
+            [
+              6.208333,
+              7.333333
+            ]
+          ],
+          "observedTimeInterval": [
+            6.208333,
+            7.333333
+          ],
+          "representative": {
+            "requested": 6.5,
+            "actual": 6.5,
+            "file": "frames/representatives/MGV01_R04_t06.500.png",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "requested": 6.5,
+            "actual": 6.5,
+            "file": "frames/representatives/MGV01_R04_t06.500.png",
+            "width": 1920,
+            "height": 1080,
+            "format": "PNG direct FFmpeg software decode from MOV; no added JPEG conversion",
+            "sha256": "34dcda77e313d9524f55ab4dee9f2a19875c11fe3d2fb805bd705b3c2a8db7e5"
+          },
+          "gameCrop": {
+            "file": "frames/game-crops/MGV01-S02-E.png",
+            "rectXYWH": [
+              650,
+              28,
+              592,
+              1052
+            ],
+            "width": 592,
+            "height": 1052,
+            "resized": false,
+            "sourceFullFrameFile": "frames/representatives/MGV01_R04_t06.500.png",
+            "sourceFrameFormat": "direct native PNG",
+            "qualityNote": "Unscaled lossless crop of native decoded PNG."
+          },
+          "visibleNativeText": [
+            "굴리기 0회 남음"
+          ],
+          "basis": "Observed source-video samples; animation may continue. Times bracket samples, not a proven mouse event or API.",
+          "notes": []
+        }
+      ],
+      "visibleStructure": [
+        "경찰+노인 그림",
+        "크림 카드/장식 모서리",
+        "native 제목/승리 문구/주사위 보상/x10",
+        "초록 주사위 입력",
+        "하단 남은 횟수,0은 빨강"
+      ],
+      "visibleControls": [
+        {
+          "label": "초록 주사위 / 탭하여 멈추기",
+          "targetScreenId": null,
+          "targetFamily": null,
+          "observation": "입력 영역·주사위/카운터 변화 관찰; 정확한 mouse-down/인과 링크 미확인",
+          "activationProven": false,
+          "linkBasis": "Unobserved target kept null.",
+          "condition": null
+        }
+      ],
+      "uncertainties": [
+        "최초 GO 클릭/감옥 진입 조건",
+        "각 주사위의 정확한 mouse-down",
+        "더블 성공·탈출 성공/보상",
+        "보석금 산식·잔액 결산 규칙",
+        "Esc/닫기/스킵 링크",
+        "영상 끝 보드 복귀 애니메이션은 진행 중"
+      ],
+      "existingDesignScreenId": null,
+      "existingDesignMatchStatus": "missing UI/state",
+      "existingDesignMatch": {
+        "revision": 277,
+        "screenName": null,
+        "screenId": null,
+        "status": "missing UI/state",
+        "note": "Role comparison only. Live video Korean values/content are not copied into saved screenshot-derived design."
+      },
+      "implementationStatus": "video-observed-only; UI/design/source untouched",
+      "entryBeforeClip": null,
+      "exitOutsideObservedWindow": null
+    },
+    {
+      "canonicalFamily": "jail-bail-payment",
+      "observedTitle": "보석금 지불",
+      "presentationObserved": "card changes over same board/jail context",
+      "nativeTexts": [
+        "보석금 지불",
+        "-41,550",
+        "굴리기 0회 남음"
+      ],
+      "components": [
+        {
+          "kindObserved": "visible component/structure",
+          "description": "돈을 뿌리는 노인 그림"
+        },
+        {
+          "kindObserved": "visible component/structure",
+          "description": "크림 카드"
+        },
+        {
+          "kindObserved": "visible component/structure",
+          "description": "현금 그림/빨간 -41,550"
+        },
+        {
+          "kindObserved": "visible component/structure",
+          "description": "뒤 보드·감옥·주사위 입력"
+        }
+      ],
+      "notes": [
+        "별도 지불 버튼/닫기 X 없이 카드가 위로 퇴장한 뒤 보드 복귀가 보입니다.",
+        "자동 지불 정책·금액 산식·API는 추정하지 않습니다."
+      ],
+      "id": "MGV01-S03",
+      "states": [
+        {
+          "id": "MGV01-S03-A",
+          "label": "보석금 -41,550",
+          "kindObserved": "state",
+          "stableSampleRangesSeconds": [
+            [
+              7.5,
+              8.5
+            ]
+          ],
+          "observedTimeInterval": [
+            7.5,
+            8.5
+          ],
+          "representative": {
+            "requested": 8.0,
+            "actual": 8.0,
+            "file": "frames/representatives/MGV01_R05_t08.000.png",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "requested": 8.0,
+            "actual": 8.0,
+            "file": "frames/representatives/MGV01_R05_t08.000.png",
+            "width": 1920,
+            "height": 1080,
+            "format": "PNG direct FFmpeg software decode from MOV; no added JPEG conversion",
+            "sha256": "ac86b2b24e874473515327bc81d2ddeed9d93a5ed8d9ca8310c2deaf522d8ebe"
+          },
+          "gameCrop": {
+            "file": "frames/game-crops/MGV01-S03-A.png",
+            "rectXYWH": [
+              650,
+              28,
+              592,
+              1052
+            ],
+            "width": 592,
+            "height": 1052,
+            "resized": false,
+            "sourceFullFrameFile": "frames/representatives/MGV01_R05_t08.000.png",
+            "sourceFrameFormat": "direct native PNG",
+            "qualityNote": "Unscaled lossless crop of native decoded PNG."
+          },
+          "visibleNativeText": [
+            "보석금 지불",
+            "-41,550"
+          ],
+          "basis": "Observed source-video samples; animation may continue. Times bracket samples, not a proven mouse event or API.",
+          "notes": []
+        },
+        {
+          "id": "MGV01-S03-B",
+          "label": "지불 카드 위로 퇴장",
+          "kindObserved": "transition",
+          "stableSampleRangesSeconds": [
+            [
+              8.833333,
+              8.916667
+            ]
+          ],
+          "observedTimeInterval": [
+            8.833333,
+            8.916667
+          ],
+          "representative": {
+            "requested": 8.8,
+            "actual": 8.833333,
+            "file": "frames/dense_048.jpg",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": null,
+          "gameCrop": {
+            "file": "frames/game-crops/MGV01-S03-B.png",
+            "rectXYWH": [
+              650,
+              28,
+              592,
+              1052
+            ],
+            "width": 592,
+            "height": 1052,
+            "resized": false,
+            "sourceFullFrameFile": "frames/dense_048.jpg",
+            "sourceFrameFormat": "q:v3/q:v4 JPEG review frame",
+            "qualityNote": "Native unscaled ROI; PNG crop of JPEG retains JPEG artifacts."
+          },
+          "visibleNativeText": [],
+          "basis": "Observed source-video samples; animation may continue. Times bracket samples, not a proven mouse event or API.",
+          "notes": []
+        }
+      ],
+      "visibleStructure": [
+        "돈을 뿌리는 노인 그림",
+        "크림 카드",
+        "현금 그림/빨간 -41,550",
+        "뒤 보드·감옥·주사위 입력"
+      ],
+      "visibleControls": [
+        {
+          "label": "초록 주사위 입력",
+          "targetScreenId": null,
+          "targetFamily": null,
+          "observation": "보임; 이 카드 상태의 클릭 결과 미관찰",
+          "activationProven": false,
+          "linkBasis": "Unobserved target kept null.",
+          "condition": null
+        }
+      ],
+      "uncertainties": [
+        "최초 GO 클릭/감옥 진입 조건",
+        "각 주사위의 정확한 mouse-down",
+        "더블 성공·탈출 성공/보상",
+        "보석금 산식·잔액 결산 규칙",
+        "Esc/닫기/스킵 링크",
+        "영상 끝 보드 복귀 애니메이션은 진행 중"
+      ],
+      "existingDesignScreenId": null,
+      "existingDesignMatchStatus": "missing UI/state",
+      "existingDesignMatch": {
+        "revision": 277,
+        "screenName": null,
+        "screenId": null,
+        "status": "missing UI/state",
+        "note": "Role comparison only. Live video Korean values/content are not copied into saved screenshot-derived design."
+      },
+      "implementationStatus": "video-observed-only; UI/design/source untouched",
+      "entryBeforeClip": null,
+      "exitOutsideObservedWindow": null
+    }
+  ],
+  "excludedTransitionAnimations": [
+    "Whistle pickup/dice/cage/door/fade/scroll are states, not duplicate new UI surfaces."
+  ],
+  "missingFromExistingTenScreenCoverage": [
+    "감옥 더블 굴리기 UI와3/2/1/0 카운터",
+    "보석금 지불 카드",
+    "보드 호루라기/감옥 이동 효과"
+  ],
+  "unknowns": [
+    "최초 GO 클릭/감옥 진입 조건",
+    "각 주사위의 정확한 mouse-down",
+    "더블 성공·탈출 성공/보상",
+    "보석금 산식·잔액 결산 규칙",
+    "Esc/닫기/스킵 링크",
+    "영상 끝 보드 복귀 애니메이션은 진행 중"
+  ],
+  "limitations": [
+    "No game/balance/payment/API or unseen target link invented.",
+    "No UI/design/source/product-guide/shared HTML/inventory/STATUS/report writes.",
+    "Source native1920x1080 retained; review crop and game ROI are not resized source or a new logical UI declaration."
+  ]
+}

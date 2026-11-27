@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>크루 미션 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  .kv { display:flex; justify-content:space-between; align-items:center; font-size:12px; }
+</style>
+</head>
+<body>
+<h1>크루 미션 · 와이어프레임 1차 초안 (390×844)</h1>
+<p class="flow">크루 메인 메뉴 「미션」(⑦) → ⑦-1 크루 미션(나만 하는 일일 미션) · ⑦-2 다 받음 · 번호는 UI 기획서 크루 탭 ⑦과 같음</p>
+<p class="flow"><b>단순하게 진행 · 완료만</b>(11/24 현중 「ui는 단순하게 진행 완료만 넣는 ui로」) · <b>일일 미션만</b>(11/24 「크루에 들어가면 나만 적용되는 미션 · 일일 출석은 기본 · 일일로 돌아가는 일일 퀘스트」 · 공동 목표 뺌)</p>
+<div class="rules">
+  <b>규칙 근거</b> · 크루 미션 · 보상 기획 목록(11/24) · 크루 와이어(11/23) · 로열매치 팀(팀 화면 안 미션 · 일반 재화 보상)<br>
+  · <b>크루 미션</b>: 크루에 들어가면 나만 하는 일일 미션 · 출석이 기본 첫 줄 · 그 아래 일일 퀘스트 · 진행 n / m · 받기 / 완료만.<br>
+  · <b>초기화</b>: 매일(일일 미션과 같은 때) · 가입한 날부터 바로(제안) · 크루 공동 목표 · 크루 재화 · 레벨 없음 · 보상은 기존 재화.<br>
+  · <b>정할 것</b>: 보상 종류 · 값(비앙카) · 줄은 3줄 확정(11/24)</div>
+<div class="row" id="screens"></div>
+
+<script>
+
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (on = -1) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === on ? " on" : ""}" style="left:${i * 65}px"><i></i>${t}</div>`).join("");
+const bell = `<div class="b" style="left:330px;top:8px;width:52px;height:34px;font-size:11px;font-weight:700">알림 2</div>`;
+const head = (title, b = true) => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div>
+  <div class="a val" style="left:52px;top:16px;font-size:16px">${title}</div>${b ? bell : ""}<div class="line" style="top:50px"></div>`;
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const bigBtn = (x, w, label, sub = "", off = false) =>
+  `<div class="b${off ? " off" : ""}" style="left:${x}px;top:706px;width:${w}px;height:60px;flex-direction:column;gap:2px">
+    <span class="val" style="font-size:15px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const bottomBar = inner => `<div class="line" style="top:698px"></div>${inner}${tabs()}`;
+const actBtn = (label, sub, off = false) => bigBtn(8, 374, label, sub, off);
+const chips = (list, on) => list.map((c, i) => `<div class="bm${c === on ? " on" : ""}" style="left:${8 + i * (374 / list.length)}px;width:${374 / list.length - 4}px">${c}</div>`).join("") + `<div class="line" style="top:90px"></div>`;
+const IN = ["출품판", "크루원", "공지", "전체 크루"], OUT = ["전체 크루", "만들기"];
+const lobby = on => head("민트 웨이브") + chips(IN, on);
+const behind = on => lobby(on) + tabs() + `<div class="dimbg"></div>`;
+// 회차 줄 + 단계 4칸
+const STEPS = ["음악 공유", "뮤비 만들기", "투표", "대표작"];
+const round = (title, due, step) => `
+  <div class="b" style="left:8px;top:98px;width:374px;height:46px;justify-content:space-between;padding:0 12px 0 28px">
+    <span style="text-align:left"><span class="val">${title}</span><br><span class="sub">개인 출품과 따로 · 대표작 1편</span></span><span class="val">${due}</span></div>
+  <div class="a" style="left:8px;top:150px;width:374px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px">${STEPS.map((s, i) =>
+    `<div style="height:34px;border:${i === step ? 2.5 : 1.5}px solid var(--ln);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:${i < step ? "var(--fill)" : i === step ? "var(--box)" : "var(--dim)"};color:${i < step ? "#fff" : i === step ? "var(--ink)" : "var(--soft)"}">${i < step ? "✓ " : ""}${s}</div>`).join("")}</div>`;
+const sect = (y, t, r = "") => `<div class="a" style="left:8px;top:${y}px;width:374px;display:flex;justify-content:space-between;padding-left:28px"><span class="val">${t}</span><span class="sub" style="font-size:12px">${r}</span></div>`;
+const MV = [["아이돌 A 버전", "나", "여름 신호"], ["레터 버전", "리아", "여름 신호"], ["밤 산책 컷", "도윤", "밤 산책"], ["무대 컷", "하나", "여름 신호"], ["골목 컷", "준", "밤 산책"]];
+const mvCard = (m, x, y, w = 118, h = 112) => `<div class="m" style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px"><div class="pic">뮤비</div><div class="nm">${m[0]}</div><div class="ft"><span>${m[1]}</span><span>${m[2]}</span></div></div>`;
+const face = (x, y, s = 40) => `<div class="b off" style="left:${x}px;top:${y}px;width:${s}px;height:${s}px;font-size:11px;border-radius:50%">얼굴</div>`;
+const win = (top, h, title) => `<div class="win" style="left:20px;top:${top}px;width:350px;height:${h}px"></div><div class="a val" style="left:40px;top:${top + 16}px;font-size:16px">${title}</div><div class="b" style="left:322px;top:${top + 10}px;width:34px;height:34px;font-size:15px">✕</div>`;
+const winBtns = (top, a, b) => `<div class="b" style="left:36px;top:${top}px;width:150px;height:48px"><span class="val">${a}</span></div><div class="b" style="left:204px;top:${top}px;width:150px;height:48px;border-width:2.5px"><span class="val">${b}</span></div>`;
+
+// 메인 공용: 크루 줄 · 이번 회차 카드 · 지난 대표작 · 공지 · 메뉴
+const crewTop = role => `
+  <div class="b" style="left:8px;top:58px;width:374px;height:96px;justify-content:flex-start;gap:12px;padding:0 10px">
+    <span class="b off" style="position:static;width:76px;height:76px;font-size:11px;flex:none">크루 그림</span>
+    <span style="text-align:left"><span class="val" style="font-size:17px">민트 웨이브</span><br><span class="sub" style="font-size:12px">23 / 30명 · 나는 <b>${role}</b></span></span></div>`;
+const roundCard = (stepNow, line) => `
+  <div class="b" style="left:8px;top:164px;width:374px;height:178px;border-width:2.5px"></div>
+  <div class="a" style="left:32px;top:176px;width:338px;display:flex;justify-content:space-between"><span class="val" style="font-size:15px">주간 3주차 · 크루 출품</span><span class="val">마감 D-2</span></div>
+  <div class="a" style="left:20px;top:206px;width:350px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px">${STEPS.map((x, i) =>
+    `<div style="height:28px;border:${i === stepNow ? 2.5 : 1.5}px solid var(--ln);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:${i < stepNow ? "var(--fill)" : i === stepNow ? "var(--box)" : "var(--dim)"};color:${i < stepNow ? "#fff" : i === stepNow ? "var(--ink)" : "var(--soft)"}">${x}</div>`).join("")}</div>
+  <div class="a" style="left:20px;top:246px;width:350px;text-align:center"><span class="val" style="font-size:16px">${line}</span></div>
+  <div class="b" style="left:20px;top:282px;width:350px;height:46px"><span class="val" style="font-size:15px">출품판 보기 ›</span></div>`;
+const lastRow = (y = 0) => `
+  <div class="b" style="left:8px;top:${y}px;width:374px;height:52px;justify-content:space-between;padding:0 14px 0 28px">
+    <span class="sub" style="font-size:12px">지난 대표작</span><span class="val">주간 2주차 · 구역 4위</span></div>`;
+const noticeRow = y => `
+  <div class="b" style="left:8px;top:${y}px;width:374px;height:52px;justify-content:space-between;padding:0 14px 0 28px">
+    <span class="sub" style="font-size:12px">공지</span><span class="val" style="font-size:13px">음악 공유는 수요일까지예요</span></div>`;
+const menu = (y, items) => `<div class="a" style="left:8px;top:${y}px;width:374px;display:grid;grid-template-columns:repeat(${items.length},1fr);gap:6px">${items.map(k =>
+  `<div style="height:56px;border:1.5px solid var(--ln);border-radius:8px;background:var(--box);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">${k}</div>`).join("")}</div>`;
+const todo = (y, title, rows) => `
+  <div class="b" style="left:8px;top:${y}px;width:374px;height:${30 + rows.length * 44}px"></div>
+  <div class="a val" style="left:28px;top:${y + 9}px">${title}</div>
+  ${rows.map((r, i) => `<div class="a" style="left:20px;top:${y + 34 + i * 44}px;width:350px;height:38px;border-top:1px solid #c9ccd1;display:flex;justify-content:space-between;align-items:center;padding:0 0 0 8px"><span style="font-size:13px">${r[0]}</span><span class="val">${r[1]} ›</span></div>`).join("")}`;
+const sub = (title, b = true) => head(title, b);
+
+
+const bar = (x, y, w, pct, h = 12) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border:1.5px solid var(--ln);border-radius:999px;background:var(--dim);overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--fill)"></div></div>`;
+// 크루 목표 카드: 게이지 + 단계 3칸(받음 / 받기 / 잠김)
+const goal = (y, pct, val, st) => `
+  <div class="b" style="left:8px;top:${y}px;width:374px;height:178px;border-width:2.5px"></div>
+  <div class="a" style="left:32px;top:${y + 12}px;width:338px;display:flex;justify-content:space-between"><span class="val" style="font-size:15px">크루 목표</span><span class="sub" style="font-size:12px">크루원 모두 같이 채움</span></div>
+  ${bar(20, y + 46, 350, pct, 16)}
+  <div class="a" style="left:20px;top:${y + 68}px;width:350px;text-align:right"><span class="val">${val}</span></div>
+  <div class="a" style="left:20px;top:${y + 96}px;width:350px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px">${["1단계", "2단계", "3단계"].map((s, i) => {
+    const k = st[i]; // d=받음 c=받기 l=잠김
+    return `<div style="height:68px;border:${k === "c" ? 2.5 : 1.5}px ${k === "l" ? "dashed" : "solid"} var(--ln);border-radius:8px;background:${k === "d" ? "var(--dim)" : k === "c" ? "var(--box)" : "transparent"};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+      <span class="b off" style="position:static;width:26px;height:22px;font-size:11px">상자</span>
+      <span class="val" style="font-size:12px;color:${k === "l" ? "var(--soft)" : "var(--ink)"}">${s} · ${k === "d" ? "완료 ✓" : k === "c" ? "받기" : "잠김"}</span></div>`; }).join("")}</div>`;
+// 내 크루 미션 줄: 이름 · 진행 · 받기/완료
+const mrow = (y, name, cur, max, st) => `
+  <div class="b" style="left:8px;top:${y}px;width:374px;height:64px;${st === "d" ? "background:var(--dim);" : ""}"></div>
+  <div class="a val" style="left:22px;top:${y + 10}px;font-size:13px">${name}</div>
+  ${bar(22, y + 36, 206, Math.min(100, cur / max * 100), 10)}
+  <div class="a" style="left:236px;top:${y + 32}px;font-size:12px;font-weight:700">${cur} / ${max}</div>
+  <div class="b${st === "p" ? " off" : ""}" style="left:296px;top:${y + 12}px;width:76px;height:40px;${st === "c" ? "border-width:2.5px;" : ""}"><span class="val" style="font-size:13px">${st === "c" ? "받기" : st === "d" ? "완료 ✓" : "진행 중"}</span></div>`;
+const roundLine = (y, t, d) => `<div class="b" style="left:8px;top:${y}px;width:374px;height:40px;justify-content:space-between;padding:0 14px 0 28px"><span class="val">${t}</span><span class="val">${d}</span></div>`;
+const menuB = (y, items, badge) => `<div class="a" style="left:8px;top:${y}px;width:374px;display:grid;grid-template-columns:repeat(${items.length},1fr);gap:6px">${items.map(k =>
+  `<div style="height:56px;border:${k === "미션" ? 2.5 : 1.5}px solid var(--ln);border-radius:8px;background:var(--box);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:700;font-size:13px">${k}${k === "미션" ? `<span class="pill">받기 ${badge}</span>` : ""}</div>`).join("")}</div>`;
+
+const SCREENS = [
+  { cap: "⑦ 크루 메인 · 메뉴 「미션」 (크루장 ①-L도 같은 자리)", html: head("크루") + crewTop("크루원") + roundCard(1, "지금: 뮤비 만들기 · 크루원 뮤비 5편") +
+      todo(352, "내 할 일", [["이 회차 투표가 아직이에요", "투표하러"]]) + lastRow(436) + noticeRow(496) + menuB(560, ["크루원", "미션", "공지", "전체 크루"], 2) +
+      `${n(1, 98, 564)}` + tabs(),
+    notes: ["메뉴에 「미션」 한 칸만 더함 · 받을 것이 있으면 「받기 n」 · 없으면 표시 없음 · 누르면 ⑦-1 · 메인에 미션 카드를 따로 두지 않음 · 크루장 메인(①-L)도 같은 자리"] },
+
+  { cap: "⑦-1 크루 미션 (메뉴 「미션」 · 일일)", html: sub("크루 미션") + roundLine(58, "오늘의 크루 미션", "초기화까지 06:42") +
+      sect(118, "나만 하는 일일 미션") +
+      mrow(144, "크루 출석 1번", 1, 1, "d") + mrow(216, "미니게임 1판", 1, 1, "c") + mrow(288, "보드 굴림 30번", 18, 30, "p") +
+      `${n(1, 2, 62)}${n(2, 2, 120)}${n(3, 200, 152)}${n(4, 300, 220)}` + tabs(),
+    notes: ["오늘의 크루 미션 · 초기화까지 남은 시간 · 매일 0시에 처음부터(일일 미션과 같은 때)", "크루에 들어가면 나만 하는 미션 · 크루 공동 목표 없음(현중 11/24 「빼고 일일 퀘스트만」)", "출석은 기본 첫 줄 · 그 아래 일일 퀘스트 줄(3줄 확정 · 현중 11/24: 크루 출석 1번 · 미니게임 1판 · 보드 굴림 30번)", "다 차면 「받기」 → 받으면 「완료 ✓」(줄이 흐려짐) · 안 찼으면 「진행 중」(꺼짐) · 보상은 기존 받기 연출 그대로 · 크루장 · 크루원 같은 화면"] },
+
+  { cap: "⑦-2 크루 미션 · 다 받음", html: sub("크루 미션") + roundLine(58, "오늘의 크루 미션", "초기화까지 01:05") +
+      sect(118, "나만 하는 일일 미션") +
+      mrow(144, "크루 출석 1번", 1, 1, "d") + mrow(216, "미니게임 1판", 1, 1, "d") + mrow(288, "보드 굴림 30번", 30, 30, "d") +
+      `<div class="a" style="left:8px;top:370px;width:374px;text-align:center"><span class="sub" style="font-size:12px">내일 다시 열려요</span></div>` +
+      `${n(1, 200, 152)}${n(2, 2, 366)}` + tabs(),
+    notes: ["모두 받으면 전부 「완료 ✓」 · 메뉴 「미션」 표시 사라짐", "내일 안내 한 줄 · 그날 안 받은 보상은 초기화 때 사라짐(일일 미션과 같음 · 제안)"] },
+];
+
+const SHOT = new URLSearchParams(location.search).get("shot");
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+</script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>찬스 칸 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+</style>
+
+</head>
+<body>
+<h1>찬스 칸(스케줄 찬스 · 팬 반응) 도착 카드 뽑기 · 와이어프레임 1차 초안 (390×844 · 세로)</h1>
+<p class="flow">보드 찬스 칸 도착 → ① 딤 · 칸 배너 → ② 카드 뭉치 등장 · 섞기 → ③ 한 장 앞으로 · 뒤집기 → ④ 앞면 공개(스케줄 찬스 ④-1 / 팬 반응 ④-2) → ⑤ 효과 연출(능력 상승 · 이동 · 다음 도착 배수 · 겹침 고르기 / 판정 · 팬 층 이동 · 루머 게이지) → 받기 → 보드 복귀(올킬이면 2차 보상 5% 거쳐 복귀) · 자동 굴리기 중에는 ⑦ 한 줄 · 카드 목록 ⑧</p>
+<div class="rules"><b>규칙 근거</b> · 보드 칸 <code>data/game/board_tile.csv</code>(팬 반응 3 · 18 · 34 · 찬스 8 · 23 · 38) · 스케줄 덱 <code>data/idol_ability_sim/chance_card.csv</code>(chance_schedule 켜진 20장) · 팬 반응 카드 <code>data/fan_tier/fan_event_card.csv</code> 9장(현중 11/25 「9장 기준으로」) · 성장 <code>data/game/growth_source.csv</code>(출처 찬스 · 세부 +0.18) · 다음 도착 배수 <code>growth_modifier.csv</code>(콜 · 응원 ×1.1) · 겹침 <code>chance_overlap_pick.csv</code>(레슨 칸 2곳 중 고르기 · 현중 11/04) · 판정 <code>economy_config.csv</code>(올킬 15 · 차트인 50 · 광탈 35 · 2차 필러 5%) · 루머 <code>bad_energy_economy_rule.csv</code>(+15 · 하루 45) · P145 찬스카드 기획서 · 발란스 시뮬 v02 필러 카드 장면 · 게임 시뮬 <code>chance_event</code> 전용 페이지<br>· <b>연출 기준</b>: 현중 11/25 「모노폴리 고 연출 · 도착 후 딤 → 카드가 나와서 움직이고 → 한 장 오픈 → 효과」.<br>· <b>꺼진 것</b>: 팬 반응 「스케줄 돌림판」 · 찬스 「콘서트 룰렛」은 <code>board_tile_group.csv</code> active=0 → 화면 없음.<br>· <b>아직 값 없음</b>: 카드별 effect_amount 모두 「제안 1」 · 두 칸 돈 0(60일 기준).<br>· <b>제안</b>: 시간(딤 0.2초 · 섞기 0.8초 · 뒤집기 0.4초 · 효과 1초) · 화면 탭 = 빨리 넘기기.</div>
+<div class="row" id="screens"></div>
+<script>
+// 공용 와이어 도구 (390×844)
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (on = -1) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === on ? " on" : ""}" style="left:${i * 65}px"><i></i>${t}</div>`).join("");
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const head = (title, right = "") => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div>
+  <div class="a val" style="left:52px;top:16px;font-size:16px">${title}</div>${right}<div class="line" style="top:50px"></div>`;
+const headR = (t, w = 80) => `<div class="b" style="left:${382 - w}px;top:8px;width:${w}px;height:34px;font-size:12px;font-weight:700">${t}</div>`;
+const btn = (x, y, w, h, label, strong = false, off = false, sub = "") => `<div class="b${off ? " off" : ""}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;flex-direction:column;gap:2px;${strong ? "border-width:2.5px;" : ""}"><span class="val" style="font-size:${h < 40 ? 13 : 15}px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const box = (x, y, w, h, inner = "", extra = "") => `<div class="b" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;${extra}">${inner}</div>`;
+const offbox = (x, y, w, h, t, extra = "") => `<div class="b off" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;font-size:11px;${extra}">${t}</div>`;
+const txt = (x, y, w, t, cls = "", style = "") => `<div class="a ${cls}" style="left:${x}px;top:${y}px;width:${w}px;${style}">${t}</div>`;
+const line = (x, y, w, t, r = "", bold = false) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;display:flex;justify-content:space-between;font-size:13px"><span${bold ? ' class="val"' : ""}>${t}</span><span class="val">${r}</span></div>`;
+const hr = (y, l = 8, r = 8) => `<div class="line" style="left:${l}px;right:${r}px;top:${y}px"></div>`;
+const gbar = (x, y, w, pct, h = 10) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border:1.5px solid var(--ln);border-radius:999px;background:var(--dim);overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--fill)"></div></div>`;
+const face = (x, y, s = 40, t = "얼굴") => `<div class="b off" style="left:${x}px;top:${y}px;width:${s}px;height:${s}px;font-size:11px;border-radius:50%">${t}</div>`;
+const pills = (x, y, list) => `<div class="a" style="left:${x}px;top:${y}px;display:flex;gap:4px;flex-wrap:wrap;max-width:${382 - x}px">${list.map(p => `<span class="pill">${p}</span>`).join("")}</div>`;
+const dimAll = `<div class="dimbg"></div>`;
+const win = (top, h, title, close = true) => `<div class="win" style="left:20px;top:${top}px;width:350px;height:${h}px"></div><div class="a val" style="left:40px;top:${top + 16}px;font-size:16px">${title}</div>${close ? `<div class="b" style="left:322px;top:${top + 10}px;width:34px;height:34px;font-size:15px">✕</div>` : ""}`;
+const winBtns = (top, a, b) => `<div class="b" style="left:36px;top:${top}px;width:150px;height:48px"><span class="val">${a}</span></div><div class="b" style="left:204px;top:${top}px;width:150px;height:48px;border-width:2.5px"><span class="val">${b}</span></div>`;
+const hudTop = `<div class="b off" style="left:8px;top:8px;width:374px;height:40px">HUD 위 줄 (팀 · 등급 · 돈 · 보석 · 주사위)</div>`;
+const board = (h = 620, t = "보드 (HUD 그대로)") => hudTop + `<div class="b off" style="left:8px;top:56px;width:374px;height:${h}px">${t}</div>`;
+const hudBehind = board() + tabs();
+const sheet = (top, h = 774 - top - 8) => `<div class="win" style="left:0;top:${top}px;width:390px;height:${h + 8}px;border-radius:16px 16px 0 0"></div><div class="a" style="left:175px;top:${top + 6}px;width:40px;height:4px;border-radius:2px;background:var(--fill)"></div>`;
+const kvs = (x, y, w, rows, gap = 22) => rows.map((r, i) => line(x, y + i * gap, w, r[0], r[1])).join("");
+const grid = (x, y, w, cols, items, h, gap = 6, fn = k => k) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;display:grid;grid-template-columns:repeat(${cols},1fr);gap:${gap}px">${items.map(k => `<div style="height:${h}px;border:1.5px solid var(--ln);border-radius:8px;background:var(--box);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:700;text-align:center;overflow:hidden">${fn(k)}</div>`).join("")}</div>`;
+const steps = (x, y, w, list, now) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;display:grid;grid-template-columns:repeat(${list.length},1fr);gap:4px">${list.map((s, i) =>
+  `<div style="height:28px;border:${i === now ? 2.5 : 1.5}px solid var(--ln);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:${i < now ? "var(--fill)" : i === now ? "var(--box)" : "var(--dim)"};color:${i < now ? "#fff" : i === now ? "var(--ink)" : "var(--soft)"}">${i < now ? "✓ " : ""}${s}</div>`).join("")}</div>`;
+const render = () => {
+  const SHOT = new URLSearchParams(location.search).get("shot");
+  if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+  else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+};
+
+
+const cb = (x, y, w = 120, h = 170, rot = 0, t = "뒷면") => `<div class="b" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;transform:rotate(${rot}deg);border-width:2.5px;flex-direction:column;gap:4px;background:repeating-linear-gradient(45deg,#fff 0 8px,var(--dim) 8px 16px)"><span class="pill">${t}</span></div>`;
+const cf = (x, y, w, h, o) => `<div class="b" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border-width:3px;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:12px;gap:8px">
+  <span style="display:flex;justify-content:space-between"><span class="pill">${o.deck}</span>${o.kind ? `<span class="pill">${o.kind}</span>` : ""}</span>
+  <span class="b off" style="position:static;height:${o.art || 150}px">카드 그림</span>
+  <span class="val" style="font-size:20px;text-align:center">${o.name}</span>
+  <span style="font-size:13px;text-align:center">${o.eff}</span>${o.extra || ""}</div>`;
+const stamp = (x, y, t) => `<div class="b" style="left:${x}px;top:${y}px;width:96px;height:44px;border-width:3px;border-radius:999px;transform:rotate(-12deg)"><span class="val" style="font-size:18px">${t}</span></div>`;
+const banner = (t, s) => `<div class="b" style="left:40px;top:120px;width:310px;height:64px;border-width:3px;flex-direction:column;gap:2px"><span class="val" style="font-size:22px">${t}</span><span class="sub">${s}</span></div>`;
+const tileHi = (x, y, k, t) => `<div class="b" style="left:${x}px;top:${y}px;width:80px;height:56px;border-width:3px;flex-direction:column"><span class="val">${k}</span><span class="sub">${t}</span></div>`;
+const take = (y = 700, t = "받기") => btn(95, y, 200, 56, t, true);
+const tapHint = (y = 640) => txt(0, y, 390, `<span class="sub" style="display:block;text-align:center">화면을 누르면 빨리 넘어가요</span>`);
+const chip = (x, y, w, t) => `<div class="b" style="left:${x}px;top:${y}px;width:${w}px;height:36px;border-width:2px;border-radius:999px"><span class="val" style="font-size:13px">${t}</span></div>`;
+const tierRow = (y, nm, pct, d) => `<div class="a" style="left:48px;top:${y}px;width:294px;display:flex;align-items:center;gap:8px;font-size:12px"><b style="width:56px;white-space:nowrap">${nm}</b><span style="flex:1;height:12px;border:1.5px solid var(--ln);border-radius:999px;background:var(--dim);overflow:hidden"><span style="display:block;width:${pct}%;height:100%;background:var(--fill)"></span></span><b style="width:84px;text-align:right;white-space:nowrap">${d}</b></div>`;
+
+const SCREENS = [
+  { cap: "① 찬스 칸 도착 · 딤 · 칸 배너", html: board() + tabs() + dimAll + tileHi(155, 420, "8", "찬스") + banner("찬스!", "스케줄이 바뀌었어요") +
+      `${n(1, 135, 422)}${n(2, 20, 122)}`,
+    notes: ["말이 찬스 칸(8 · 23 · 38) / 팬 반응 칸(3 · 18 · 34)에 멈추면 보드 전체 딤(0.2초) · 도착 칸만 밝게 남김", "칸 배너: 찬스 = 「찬스!」 · 「스케줄이 바뀌었어요」 / 팬 반응 = 「팬 반응!」 · 「팬들 사이에서 무슨 일이 생겼어요」(필러 대사 그대로) · 0.6초 뒤 ②로 자동"] },
+
+  { cap: "② 카드 뭉치 등장 · 섞기", html: board() + tabs() + dimAll + banner("찬스!", "스케줄 변경 카드") +
+      cb(60, 300, 120, 170, -14) + cb(135, 290, 120, 170, 0) + cb(210, 300, 120, 170, 14) +
+      txt(0, 490, 390, `<span class="val" style="display:block;text-align:center;font-size:20px;color:#fff">⟲ ⟳</span>`) + cb(100, 520, 80, 112, -6, "덱") + cb(210, 520, 80, 112, 6, "덱") + tapHint(660) +
+      `${n(1, 40, 302)}${n(2, 80, 522)}`,
+    notes: ["카드 뭉치가 아래에서 올라와 부채꼴로 펼쳐졌다가 좌우로 섞임(0.8초) · 뒷면은 덱마다 다름(스케줄 찬스 = 일정표 무늬 / 팬 반응 = 응원봉 무늬)", "섞는 동안 카드가 서로 자리 바꿈 · 화면을 누르면 바로 ③ · 사람이 고르지 않음(무작위 1장 · 아래 ⑤ 확률)"] },
+
+  { cap: "③ 한 장 앞으로 · 뒤집기", html: board() + tabs() + dimAll +
+      cb(30, 560, 70, 100, -10) + cb(290, 560, 70, 100, 10) +
+      `<div class="b" style="left:115px;top:200px;width:80px;height:380px;border-width:3px;background:repeating-linear-gradient(45deg,#fff 0 8px,var(--dim) 8px 16px)"></div><div class="b" style="left:195px;top:200px;width:80px;height:380px;border-width:3px;border-left-style:dashed"><span class="sub">앞면</span></div>` +
+      txt(0, 600, 390, `<span class="val" style="display:block;text-align:center;color:#fff">↻ 뒤집는 중</span>`) +
+      `${n(1, 95, 202)}${n(2, 10, 562)}`,
+    notes: ["뭉치에서 한 장이 튀어나와 가운데로 커지며(0.3초) 세로축으로 뒤집힘(0.4초) · 뒤집힐 때 반짝임", "나머지 카드는 아래로 빠지며 사라짐"] },
+
+  { cap: "④-1 스케줄 찬스 · 카드 공개", html: board() + tabs() + dimAll +
+      cf(55, 130, 280, 440, { deck: "스케줄 변경", kind: "콜", name: "보컬 디렉팅 특강", eff: "보컬 세부 1개 경험치 +<br>보컬 녹음실 단계 보너스 ×" }) +
+      `<div class="b" style="left:20px;top:590px;width:350px;height:36px;justify-content:space-between;padding:0 12px 0 28px"><span style="font-size:12px">카드 목록</span><span class="sub">스케줄 변경 20장 ›</span></div>` + take(650) +
+      `${n(1, 35, 132)}${n(2, 35, 360)}${n(3, 2, 596)}${n(4, 75, 666)}`,
+    notes: ["머리: 덱 이름(「스케줄 변경」) · 종류 칩(콜 / 끼움 / 비움 / 겹침) · 카드 그림(icon_key 비어 있음 → 그림 발주 CH-G2)", "카드 이름 · 효과 문장(<code>effect_text</code> 그대로) · 값 없는 효과는 「추가 보상 없음」", "카드 목록 → ⑧(이 덱 탭으로 열림)", "받기 → ⑤ 효과 연출 · 효과 없는 카드는 바로 보드로 · 자동 굴리기 중이면 ⑦"] },
+
+  { cap: "⑤-1 효과 · 능력 상승", html: board() + tabs() + dimAll +
+      cf(115, 150, 160, 250, { deck: "스케줄 변경", name: "보컬 디렉팅 특강", eff: "", art: 90 }) +
+      chip(60, 440, 130, "음정 +0.18") + chip(200, 440, 130, "× 주사위 2") +
+      txt(0, 500, 390, `<span class="val" style="display:block;text-align:center;color:#fff;font-size:18px">↑ 아이돌 능력으로</span>`) +
+      `<div class="b" style="left:8px;top:8px;width:374px;height:40px;border-width:3px">HUD 위 줄 · 아이돌 얼굴이 반짝임</div>` +
+      `${n(1, 40, 442)}${n(2, 2, 10)}`,
+    notes: ["카드가 작아지며 위로 올라가고 세부 능력 칩이 튀어나옴 · 「세부 이름 +양」(<code>growth_source</code> 출처 찬스 · 기본 +0.18) · 주사위 배수가 켜진 줄이면 「× 주사위 n」 칩", "칩이 HUD 아이돌 얼굴로 날아가 들어감(1초) · 끝나면 딤이 걷히고 보드 복귀 · 해당 카드: S01 · S04 · S08 · S03 · S07 · 화제 · 끼움(가장 약한 세부) · 비움(세부 18개 전부 → 칩 대신 「세부 18개 모두 +」 한 줄)"] },
+
+  { cap: "⑤-2 효과 · 칸 이동", html: board() + tabs() + dimAll +
+      tileHi(60, 560, "8", "찬스") + `<div class="a" style="left:150px;top:578px;width:100px;border-top:3px dashed #fff"></div><div class="a val" style="left:236px;top:566px;color:#fff;font-size:20px">▶</div>` + tileHi(260, 560, "19", "뮤비 촬영") +
+      `<div class="b" style="left:40px;top:150px;width:310px;height:90px;border-width:2.5px;flex-direction:column;gap:4px"><span class="val">뮤비 촬영 앞당김</span><span class="sub">19번 칸으로 이동해요</span></div>` +
+      `${n(1, 20, 152)}${n(2, 40, 562)}`,
+    notes: ["카드가 위 띠로 줄어들어 「카드 이름 · n번 칸으로 이동해요」", "딤이 걷히고 말이 이동 칸까지 앞으로 걸어감(주사위 이동과 같은 걸음) · 도착한 칸의 도착 화면이 이어서 나옴(출발 통과면 출발 보상) · 이동 카드: S02 예능 방송국 · S03 뮤비 촬영(19) · S05 숙소(11 · 21 중 가까운 곳) · S10 쟁탈전(가장 가까운 6 · 16 · 26 · 36) · S14 출발(1)"] },
+
+  { cap: "⑤-3 효과 · 겹침 · 두 일정 중 고르기", html: board() + tabs() + dimAll + win(170, 470, "스케줄이 겹쳤어요", false) +
+      txt(40, 216, 310, `<span class="sub">둘 중 하나를 골라 이동해요</span>`) +
+      `<div class="b" style="left:40px;top:250px;width:150px;height:250px;flex-direction:column;gap:6px;border-width:2.5px"><span class="b off" style="position:static;width:120px;height:110px">칸 그림</span><span class="val">보컬 녹음실</span><span class="pill">시설 3단계</span><span class="sub">보컬 세부</span></div>` +
+      `<div class="b" style="left:200px;top:250px;width:150px;height:250px;flex-direction:column;gap:6px"><span class="b off" style="position:static;width:120px;height:110px">칸 그림</span><span class="val">댄스 연습실</span><span class="pill">시설 1단계</span><span class="sub">댄스 세부</span></div>` +
+      txt(46, 512, 304, `<span class="sub">고르지 않으면 5초 뒤 단계 높은 쪽으로 가요</span>`) + btn(95, 560, 200, 52, "여기로 이동", true) +
+      `${n(1, 20, 252)}${n(2, 20, 512)}${n(3, 75, 576)}`,
+    notes: ["레슨 칸(시설 있는 칸) 중 2곳 무작위 · 칸 그림 · 칸 번호 · 이름 · 시설 단계 · 오르는 세부 · 누르면 선택 테두리(높은 쪽이 미리 선택됨)", "남은 시간(제안 5초) · 자동 굴리기 중이면 창 없이 단계 높은 쪽(같으면 앞쪽)으로 자동", "여기로 이동 → ⑤-2처럼 말 이동 → 그 칸 도착 · 도착 배수 1 · 카드: S06 · 겹침 · 스케줄 겹침 · 충돌"] },
+
+  { cap: "⑤-4 효과 · 다음 도착 배수 예약", html: board() + tabs() + dimAll +
+      cf(115, 200, 160, 250, { deck: "스케줄 변경", kind: "콜", name: "콜", eff: "", art: 90 }) +
+      chip(95, 480, 200, "다음 연습 칸 × 1.1") +
+      `<div class="b" style="left:8px;top:8px;width:374px;height:40px;justify-content:flex-end;padding-right:12px"><span class="pill">다음 × 1.1</span></div>` +
+      `${n(1, 75, 482)}${n(2, 262, 18)}`,
+    notes: ["「다음 연습 칸 × 1.1」(콜) / 「다음 도착 × 1.1」(응원) 칩", "칩이 HUD로 날아가 작은 배지로 남음 · 다음 도착에서 쓰이면 사라짐 · 한 번에 하나만(쌓이지 않음)"] },
+
+  { cap: "④-2 팬 반응 · 카드 공개 · 판정", html: board() + tabs() + dimAll +
+      cf(55, 130, 280, 440, { deck: "팬 반응", name: "직캠 역주행", eff: "라이트 +5% · 휴덕 −5%" }) + stamp(250, 120, "올킬") +
+      `<div class="b" style="left:20px;top:590px;width:350px;height:36px;justify-content:space-between;padding:0 12px 0 28px"><span style="font-size:12px">카드 목록</span><span class="sub">팬 반응 9장 ›</span></div>` + take(650) +
+      `${n(1, 230, 122)}${n(2, 35, 360)}${n(3, 75, 666)}`,
+    notes: ["판정 도장이 카드 위에 찍힘(올킬 / 차트인 / 광탈 · 판정과 같은 굴림으로 카드가 정해짐 → 올킬엔 좋은 카드가 잘 나옴)", "카드 이름 · 팬 층 이동 요약(「층 +5% · 층 −5%」 · 이동 없으면 「층 이동 없음」) · 9장: 직캠 역주행 · 예능 화제 · 팬서비스 미담 · 컴백 티저 공개 · 오해 해명 · 공백기 장기화 · 열애 · 논란 기사 · 태도 논란 · 루머", "받기 → ⑥-1 팬 층 이동 → (루머면 ⑥-2) → (올킬이면 ⑥-3 확률) → 보드"] },
+
+  { cap: "⑥-1 팬 반응 · 팬 층 이동", html: board() + tabs() + dimAll + win(180, 400, "팬 층이 움직였어요", false) +
+      tierRow(240, "라이트", 60, "+5% · +120") + tierRow(274, "코어", 35, "—") + tierRow(308, "콘크리트", 20, "—") + tierRow(342, "안티", 8, "—") + tierRow(376, "휴덕", 15, "−5% · −120") + tierRow(410, "머글", 80, "—") +
+      txt(48, 450, 294, `<span class="sub">한 층 이동은 최대 150명</span>`) + btn(95, 500, 200, 52, "확인", true) +
+      `${n(1, 24, 240)}${n(2, 24, 448)}`,
+    notes: ["6층 막대(라이트 · 코어 · 콘크리트 · 안티 · 휴덕 · 머글) · 바뀐 층만 막대가 움직이고 「±% · ±명」 · 그대로인 층은 「—」 · 머글은 나머지 다섯 층 합의 반대", "한 층 이동 상한 150명 · 확인 → 다음(루머면 ⑥-2 · 아니면 보드) · 이 창 뒤 건물 팬 재배치는 보드에서 조용히"] },
+
+  { cap: "⑥-2 루머 카드 · 나쁜 기운 게이지", html: board() + tabs() + dimAll +
+      cf(115, 140, 160, 250, { deck: "팬 반응", name: "루머", eff: "", art: 90 }) +
+      `<div class="b" style="left:40px;top:430px;width:310px;height:110px;border-width:2.5px;flex-direction:column;align-items:stretch;padding:10px 14px;gap:8px"><span style="display:flex;justify-content:space-between"><b>나쁜 기운</b><b>+15</b></span>${gbar(0, 0, 280, 70, 14).replace('class="a" style="left:0px;top:0px;', 'class="a" style="position:static;')}<span class="sub">게이지가 차면 습격이 와요 · 오늘 15 / 45</span></div>` +
+      `${n(1, 20, 432)}`,
+    notes: ["루머 카드(가중 1.75 · 9장 중 가장 잦음 · 안티 +5% · 라이트 −5%) 뒤 카드에서 검은 기운이 나와 게이지로 들어감(+15) · 하루 상한 45(넘으면 「오늘은 더 차지 않아요」) · 게이지 가득 → 디펜스 탭 습격 흐름(<a href=\"#defense\">디펜스 탭</a>)"] },
+
+  { cap: "⑥-3 올킬 · 2차 보상 (5%)", html: board() + tabs() + dimAll + banner("추가 보상!", "팬 반응 두 번째 보상") +
+      `<div class="b off" style="left:40px;top:230px;width:310px;height:300px">2차 필러 룰렛(HUD 탭 필러 룰렛과 같은 화면)<br>대박 50 · 중박 30 · 운망 20</div>` +
+      `${n(1, 20, 122)}${n(2, 20, 232)}`,
+    notes: ["올킬일 때만 5% 확률로 · 「추가 보상!」 배너", "HUD 탭 2차 필러 룰렛 화면을 그대로 씀 · 대박이면 보너스 상자(카드 · 덱 · 주사위 8 · 돈 · 콘서트 잭팟 · 없음) · 끝나면 보드"] },
+
+  { cap: "⑦ 자동 굴리기 중 · 한 줄", html: board() + tabs() +
+      `<div class="b" style="left:20px;top:64px;width:350px;height:64px;justify-content:flex-start;gap:10px;padding:0 12px 0 28px;border-width:2.5px"><span class="b" style="position:static;width:40px;height:52px;font-size:11px">카드</span><span style="text-align:left"><span class="val">찬스 · 보컬 디렉팅 특강</span><br><span class="sub">음정 +0.18</span></span></div>` +
+      `<div class="b" style="left:20px;top:136px;width:350px;height:64px;justify-content:flex-start;gap:10px;padding:0 12px 0 28px"><span class="b" style="position:static;width:40px;height:52px;font-size:11px">카드</span><span style="text-align:left"><span class="val">팬 반응 · 차트인 · 예능 화제</span><br><span class="sub">라이트 +5% · 코어 +5%</span></span></div>` +
+      `${n(1, 2, 66)}${n(2, 2, 138)}`,
+    notes: ["자동 굴리기 중에는 딤 · 섞기 없이 위에 카드 한 줄(1.2초) · 이동 카드는 말이 바로 이동 · 겹침은 높은 쪽 자동", "팬 반응은 판정 · 카드 · 층 이동 요약 · 루머면 「나쁜 기운 +15」 덧붙임 · 2차 보상(5%)은 자동이어도 멈추고 보여 줌(제안)"] },
+
+  { cap: "⑧ 카드 목록", html: head("카드 목록") +
+      `<div class="bm on" style="left:8px;width:183px">스케줄 변경 20</div><div class="bm" style="left:199px;width:183px">팬 반응 9</div><div class="line" style="top:90px"></div>` +
+      grid(8, 100, 374, 3, ["보컬 디렉팅 특강", "예능 고정 섭외", "뮤비 촬영 앞당김", "녹음 세션 추가", "하루 비움", "스케줄 겹침", "해외 일정 콜", "랩 배틀 게스트", "?", "?", "?", "?"], 150, 6,
+        k => k === "?" ? `<span class="b off" style="position:static;width:90%;height:100px">?</span><span class="sub">아직 못 봄</span>` : `<span class="b off" style="position:static;width:90%;height:90px">그림</span><b>${k}</b><span class="sub">약 x%</span>`) +
+      `${n(1, 2, 64)}${n(2, 2, 104)}`,
+    notes: ["덱 탭 2개(스케줄 변경 20장 · 팬 반응 9장) · ④ 카드 목록에서 들어오면 그 덱 탭", "카드: 그림 · 이름 · 뽑힐 확률(약 x%) · 아직 못 본 카드는 「?」 · 누르면 효과 문장 창 · 들어오는 곳: ④ 아래 줄 · 정보 탭(제안)"] },
+];
+
+render();
+</script>
+<aside><h2>현재 동작</h2><p>이 14컷은 원본 검수 그림입니다. 카드 공개 뒤 자동 획득·효과 반영이 이어집니다. 카드 목록은 칸 정보에서 엽니다. 일정 겹침에서만 수동 선택합니다.</p><p class="meta"><a href="산출_기획서_20261120_UI기획.html#chance">P265 찬스 탭</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;view=detailed-wireframe&amp;screen=chance-board-08">7018 자동 연출</a></p></aside></body>
+</html>

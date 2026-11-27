@@ -1,0 +1,403 @@
+# P232 · 시티 투어 · 상세 기획서
+
+**앨범 재화로 급유하는5팀·5바퀴 레이싱 이벤트의 계산·입출력·표시·보상·복구 계약입니다.**
+
+**현재 상태:** 기존 로컬 레이싱은 연결되어 있습니다. 속도 50%는 설정에 반영했습니다. 실제 실행 목표는 10바퀴이며, 기획의 5바퀴 전환은 별도 후속입니다. 기존 경기는 원래 동결 속도로 복원하며, 보드 획득부터 급유까지의 전체 검증은 남아 있습니다. 보상·경제 후속은 그룩 담당입니다.
+
+## 1. 개요
+
+재화→연료 거리, 참여 아이돌 능력→구간별 속도, 유효 최종 결과→주사위/아이돌 카드 보상으로 연결합니다. 솔로·유닛·팀의 참여 인원 합계를 속도 배수로 쓰지 않습니다. 지역 방문/해금과는 별도 선택 활동입니다.
+
+![쉬운 전체 흐름](/event/cityTour/design/racing3d-flow.svg)
+
+## 2. 필요 관련 시스템 기획서
+
+| 원본 | 역할 |
+|---|---|
+| [P231 · 쉬운 UI/흐름](../개발진행기획_v01/콘텐츠별_v03/시티투어_핵심제안서.html) | 같은 규칙의 UI 설명과 개발 계약 |
+| [앨범 발매](../개발진행기획_v01/콘텐츠별_v03/앨범발매_기획서.html) · [음악 차트](../개발진행기획_v01/콘텐츠별_v03/음악방송차트_기획서.html) | 재화 획득·동일 리그·실적 연결 |
+| [팬과 수익](../개발진행기획_v01/콘텐츠별_v03/팬과수익_기획서.html) | 재화·능력의 인원 공평성과 정산 경계 |
+| [모험 보상 UI](/src/simulator/adventure/exploration-reward-view.mjs) | rewardIcons 표시 재사용 |
+| [모험 카드 추첨/획득](/src/simulator/adventure/exploration-cards.mjs) | 현재 단계 아이돌 카드·고정 추첨 명세 |
+| [공통 성장 연결](/src/simulator/shared/adventure-growth-bridge.mjs) | 실제 지급 single writer/영수증 계약 조사 원본 |
+
+모노카피바라와 기존 하늘길은 패키지·봇·수명 관리 구조의 읽기 대조 원본입니다. 모노의 수치·봇수·코인지갑을 복사하지 않습니다. 기존 성실성·태도·성향 원본은6장에 연결합니다.
+
+## 3. 구동 방법·시뮬레이션
+
+**[게임 시뮬레이터 앨범](/docs/planning/game-simulator.html?module=simulator_module_album_release) → 발매한 앨범 선택 → 시티 투어 참가 → 차고에서 준비하기**로 들어갑니다. 진행 중이면 같은 경기 이어하기입니다. 같은 음악 인스턴스/현재 저장 범위와 albumId를 유지하고 새 팀을 만들지 않습니다.
+
+앨범 경로는 현재 보유 재화·앨범 참여 멤버·차트 리그를 사용합니다. 추가 입장비는 없고 급유할 때만 재화를 차감합니다. 자료가 없으면 대기 사유, 재화가0이면 보드에서 모으기를 표시합니다. 보상을 수령하면 유효한 현재 성장/카드 원장으로 연결합니다.
+
+[직접 독립3D](/event/cityTour/racing3d.html)와 미니게임 목록은 비교용 명시 로컬 봇 시험입니다. 그 경로의80재화/24시간/시험 수령은 앨범 지갑으로 옮기지 않습니다. 레이싱2d는 기존 비교 실행으로 보존합니다. 실제 브라우저/플레이 검수는 사용자가 진행합니다.
+
+## 4. 상세 기획
+
+### 앨범 버프·보드·급유 연결
+
+```mermaid
+flowchart LR
+ A["앨범 발매"] --> B["앨범 이벤트 버프 1일"]
+ B --> C["보드 활동 실적 적립"]
+ C --> D["출발점 통과 정산"]
+ D --> E["앨범 이벤트 재화"]
+ E --> F["내 차 급유 · 1개당 ¼바퀴"]
+ F --> G["5팀 · 5바퀴 레이스"]
+ G --> H["최종 순위 · 주사위/카드"]
+```
+
+| 항목 | 현재 기획 |
+|---|---|
+| 획득 기간 | 선택 앨범의 원본 차트 이벤트 시작부터 1일. 참가나 메뉴 이동으로 연장하지 않음 |
+| 적립/지급 | 기간 내 유효 보드 활동분을 적립하고 기존 출발점 통과 정산에서 전용 재화 지급 |
+| 재화 | 기존 albumEventWallet를 급유와 함께 사용. 현금 수익에 더하지 않고 두 번째 연료 재화를 만들지 않음 |
+| 거리 | 재화 1개=¼바퀴, 4개=1바퀴, 20개=5바퀴. 속도와 멤버 수로 단위 거리를 바꾸지 않음 |
+| 속도 | 같은 능력 입력 기준 기존 주행 속도의 50%. 기본 한 바퀴 시간 6초→12초, 초·중·후반 능력 배율은 유지 |
+| 종료 | 버프 마감 후 새 활동 적립·새 급유·새 참가를 중단. 만료 전에 생긴 미정산분은 기존 START 계약을 따름. 잔여 재화를 임의 삭제하지 않음 |
+| 담당 | 보상 수량·획득량·경제 균형·보드 연계 후속은 그룩 담당. 발란스 시뮬과 현황판 복구 소스는 별도 담당 보호 |
+
+**구현 구분:** 앨범 재화 급유와 보드 START 적립/정산 경로는 소스에 있습니다. 속도 50%는 기본 랩 시간 12000ms로 설정에 반영했습니다. 새 설정을 불러와 만든 경기부터 적용하고 기존 경기는 저장된 원래 속도를 유지합니다. 실제 목표는 10바퀴이며 기획의 5바퀴 전환은 별도 후속입니다. 보드 획득→급유 전체 검증은 남아 있습니다. 저장된 기존 경기는 원래 목표·속도·영수증으로 복원하고, 새 경기에서 최신 규칙을 채택합니다. 검증을 끄거나 기존 저장을 새 규칙으로 덮어쓰지 않습니다.
+
+
+### 앨범에서 참가하는 게임 시뮬레이터 연결
+
+**앨범 발매 → 선택 앨범의 시티 투어 참가 → 같은 앨범의 차고 → 급유 →5바퀴 경기 → 시상/보상 수령**입니다. 앨범 하위 시티 메뉴도 같은3D panel을 사용합니다. 기존2D는 미니게임 비교 실행으로 유지합니다.
+
+| 상태 | 보이는 정보/동작 |
+|---|---|
+| 발매 앨범 | 곡/고정 참여자·보유 앨범 재화·원본 이벤트 남은 시간·주사위/카드 보상 요약·참가 버튼 |
+| 아직 미발매 | 앨범 발매 안내, 임의 발매/참가 기록을 만들지 않음 |
+| 재화 부족 | 보유/급유 단위와 부족 사유, 보드에서 재화 모으기 |
+| 진행 중/미수령 | 같은 albumId/runId의 경기 이어하기. 새 입장/추첨/보충 없음 |
+| 만료 | 새 경기 불가, 남은 미수령 결과는 수령 조건에 따라 확인 |
+| 자료/멤버 원천 누락 | 구체적 연결 대기와 다시 연결. 부족한 원천을 실제 값0으로 꾸미지 않음 |
+| 앨범으로 돌아감 | 경기/영수증 보존. 다시 참가하면 같은 경기 복원 |
+
+추가 입장비는0이고, **급유 때만 기존 albumEventWallet를 차감**합니다. 메뉴 이동/차고 보기로 재화를 차감하지 않습니다. 이벤트 시작/마감은 선택 앨범의 원본 차트 리그24시간을 사용하며 참가할 때부터24시간으로 늘리지 않습니다. 같은 source.now와 시험 시각 보정을 사용합니다.
+
+내 차는 해당 앨범의 고정 참여 멤버만 현재 raw18/보유 성향에서 읽습니다. 멤버 합계로 인원 보너스를 주지 않습니다. 보유 성향이 미연결이면 비율은null로 표시하고 관측 태도×0.7의 기본 기여만 사용하며 성향 가산은 적용하지 않습니다. 상대4팀은 같은 앨범 리그의 simulated ID/seed를 고정해 기존 시험 프로필로 움직입니다. 실제 유저 능력/실시간 서버 동기화로 표현하지 않습니다.
+
+앨범 경로에서 유효한 full checkpoint·현재 세션/팀·카드 보유 원천을 확인하면 **기존 held 주사위와 아이돌 카드 효과/보유 원장**에 수령을 반영합니다. 수령 영수증이 확정되기 전 실제 지급 완료를 표시하지 않습니다. 메타데이터/보유 원천 미확인은 경기 참가와 수령 가용성을 구분해 안내합니다. 직접 독립URL은 기존 로컬 시험 수령으로 남아 본편 보유량을 바꾸지 않습니다.
+
+### 앨범 연결 입력·writer·복구 계약
+
+| 입구/저장 | 역할 |
+|---|---|
+| source.readRacing3D({albumId}) | 쓰기 없는 참가 projection. album/eventId/leagueId/currentRun/active.latest/entry/rewardSummary |
+| entry | canEnter/canResume/currencyBalance/remainingMs/reason/reasonLabel. balance0을 자동 보충하지 않음 |
+| source.startRacing3D({commandId,albumId,eventId}) | 같은 세션·팀·발매곡·리그를 검증, fuel_only 입장amount0, 기존 진행이 있으면 재사용 |
+| source.createRacing3DAdapter({runId,packageData}) | 고정run/participants·관측 은행·본인 능력·동일리그 시험상대·같은시계 공급 |
+| source.racing3DSceneOptions() | 현재 dataSource.map과 같은 scope의 facility storage. URL 팀 payload 복사 없음 |
+| state.racing3dEvents | 현재 career JSON의 event.identity/albumId/leagueId/원본 openedAt·endsAt/launch/receipts/races/rewardClaims |
+| 급유 transaction | 기존 spendAlbumEventTokens의 사건 영수증+은행 연료/경기 상태를 같은 career JSON에 저장 |
+| 보상 roster | 현재 full snapshot 전체 슬롯 순서/단계와 앨범 memberIds를 함께 고정. ownerIds로 참여 아이돌만 추첨 |
+| 실제 수령 | 신규 city-tour-racing-reward-bridge가 기존 prepareCardAcquisition·commitGrowthPersistence를 사용 |
+| 실제 지급 원장 | 기존 성장 state.live.cityTourRacingRewards와 canonical cardEffectLedger/held. 새 레이싱 메인 지갑 없음 |
+| 복구 | 성장 checkpoint→snapshot→career3기록의 고정 journal, 모두 성공/복구 확인 후 actualInventoryLinked=true |
+
+실제 수령의 락 순서는 기존 economy-menu 성장 락 → career 락 → 최신 원본/영수증 재검증 →메모리 staging→3기록 커밋입니다. 같은 획득 ID와 receipt를 재사용하고 다른 payload는 충돌입니다. 중간 실패는 같은 journal에서 원상복구하거나 모두after이면 확정합니다. journal은 같은 세션 고정키이며 경기마다 큰 복제 키를 누적하지 않습니다. 실제 저장 실패를 독립 시험 메모리 성공으로 우회하지 않습니다.
+
+수령 가용성 availability()는 쓰기 없이 full checkpoint/held/카드 보유 원천을 확인합니다. 카드 ledger·유효 소유 mirror가 있으면 그 원본을 우선합니다. 외부 진행을 빈 카드함으로 초기화하지 않습니다. 예외적인 최초 빈 baseline은 명시 generated/sample 음악 fixture의 초기 marker/run/session/signature와 카드 획득 흔적 부재가 함께 확인될 때 기존 최초 획득 계약을 사용합니다. 나머지는 수령 원천 연결 대기입니다.
+
+scene/package는 시티 화면에서 필요한 때만 읽습니다. 같은 run/scope에서는 DOM/핸들을 재사용하고 sourceRevision이 바뀌었다는 이유로 경기를 새로 만들지 않습니다. 실제 claim 후 새 멤버 능력은 다음 경기에서 다시 고정합니다. 닫기/메뉴 숨김/복귀/dispose와 늦은 callback은 분리합니다. 렌더러의 급유/수령 DOM을 공통 하단 actions에 옮기며 중복 버튼을 만들지 않습니다.
+
+### 공통 경기 규칙
+
+| 항목 | 처리 |
+|---|---|
+| 이벤트 | 24시간 동안 재화가 있으면 반복 참가. 한 경기 시간과 별도 |
+| 참가자 | 본인 포함5팀. 운영은 같은 앨범 차트 리그 상대, 현재는 명시 로컬 봇4팀 |
+| 목표 | 5바퀴를 먼저 완주한 차가 우승. 그 정확한 시각에 전원을 멈추고 나머지는 실제 거리로 순위 결정 |
+| 연료 | 재화1개=연료1단위=¼바퀴. 4개=1바퀴,20개=5바퀴 |
+| 주행 | 연료가 있으면 자동 주행. 0이면 정지하고 추가 급유하면 재개 |
+| 속도 | 참여 멤버의 기존 능력을 평균으로 환산. 초반·중반·후반에 기여 항목이 다름 |
+| 공평성 | 같은 평균 능력의 솔로·유닛·팀은 같은 속도. 인원수로 속도나 재화를 곱하거나 나누지 않음 |
+| 거리와 시간 | 속도가 빨라도 연료1개당 거리는¼바퀴. 빨라지는 것은 완주에 필요한 시간 |
+| 미완주 | 가득 급유했어도 다른 차가 먼저 완주하면 남은 연료가 있고 미완주일 수 있음 |
+| 잔여 연료 | 끝난 경기 기록에 보존. 다음 경기 이월·환급은 미구현 |
+| 보상 | 유효 참가자의 기본 보상 + 최종 순위 추가 보상. 주사위·아이돌 카드 |
+| 선택 활동 | 월드페스티벌 필수 과정이나 실제 지역 방문 완료 조건으로 만들지 않음 |
+
+### 패키지와 writer 소유
+
+코드·차량/지도 연출·리소스·설정은 event/cityTour/에 둡니다. 본체 모듈은 데이터/거래/결과 어댑터만 연결합니다. 원본 도시 로더는 지도 자원을 소유하고 렌더러는 자신이 만든 차·고가·카메라/관측자를 해제합니다. WebGLRenderer는 한 개이고 차고/지도 scene·camera를 전환합니다. 차고 정지 상태에서 상시 WebGL 렌더링을 하지 않습니다.
+
+| 소유 | 역할 |
+|---|---|
+| 앨범/리그 | eventId·leagueId·albumId·참여 멤버·재화/상대 원본 |
+| 레이싱 session | 순수 거리/연료/구간 적분·순위·도착 계산, DOM/저장/타이머 없음 |
+| 레이싱 host | 시계·소유 검증·급유 transaction·선택·결과/수령 연결 |
+| 기존 성장/카드 writer | 실제 주사위와 카드 획득 원자 저장, 별도 레이싱 메인 지갑을 만들지 않음 |
+| 명시 trial bank | 격리된 시험 잔액·경기·급유/보상 영수증, 실제 인벤 변경 없음 |
+
+### 기존 데이터→레이싱 분석/속도
+
+| 지표 j | 멤버별 원천 값 x | 그룹 결합 |
+|---|---|---|
+| base | 기존 세부 능력18개의 산술평균 | 멤버별 정규화 후 참여 멤버 평균 |
+| acceleration | 리듬감 | 동일 |
+| stability | 칼군무 | 동일 |
+| stamina | CSV enabled ACADEMY_DILIGENCE9개 평균 | 동일 |
+| contest | ACADEMY_ATTITUDE9개 정규화 평균과 보유 성향 비율 | 태도0.7+성향0.3의 시안 가중합 |
+
+멤버 m의 지표는 먼저 원천 항목 평균 x_m을 계산하고 N(x_m)=x_m/(x_m+P)로 정규화한 다음, A_j=ΣN(x_m)/참여멤버수로 계산합니다. 항목별 정규화 후 평균으로 순서를 바꾸지 않습니다. P=100은 시험 환산 pivot이며 실제 스탯 상한이 아닙니다. 수치·가중치는 racing3d-driving.json의 조절용 임시값입니다.
+
+성실성/태도는 공통 academy-bundle reader의 CSV 분류9+9를 사용합니다. 숨김 성격 수치를 별도 체력 스탯처럼 저장하지 않습니다. traitIds는 실제 보유 ID만 받으며 competition/risk_taking/achievement 중 하나 이상을 가진 멤버의 비율을 contest에 사용합니다. 없는 입력은0이 아니라 연결 대기입니다. 화면은 환산 게이지와 성향 이름으로 표시하며 숨김 원천 수치를 공개하지 않습니다.
+
+라포/단합/특수스킬은 별도 중복 가산하지 않습니다. t2/t3 예시 스킬을 보유한 것으로 단정하지 않습니다. 일반 관측과 시험 프로필을 같은 항목 구조로 보여주되 sourceLabel/status를 구분합니다.
+
+### 초반·중반·후반 속도 식
+
+각 phase p의 배수 M_p=clamp(baseMultiplier_p+Σ(A_j×weight_pj),0.65,1.7)입니다. 기본 한 바퀴 시간 T=12000ms, 구간 속도는4연료단위×M_p/T입니다. 모든 값은 JSON에서 읽고 경기 생성 시 ruleId·분류·식 입력/가중치·구간 배수를 고정합니다.
+
+| 구간 | 거리 범위 | 주로 기여하는 능력 |
+|---|---|---|
+| 초반 | 0~30%,5랩 중0~1.5랩 | 가속/리듬감 |
+| 중반 | 30~70%,1.5~3.5랩 | 기본/안정·균형 |
+| 후반 | 70~100%,3.5~5랩 | 뒷심/성실성·승부 |
+
+남은 시간 Δt에서 현재 구간 경계까지의 거리와 시간을 계산하고 경계를 넘으면 다음 구간 배수로 나머지를 적분합니다. 한 프레임의 최종 배수로 전체 경과 시간을 곱하지 않습니다. 각 차의 연료/목표까지 도착 시간을 같은 식으로 계산해 가장 빠른5랩 도착 시각에서 전체 결과를 동결합니다.
+
+이동량=min(사용 가능한 연료,목표 잔여거리,구간 적분 거리). distanceUnits+fuelUnits=initialFuelUnits+purchasedFuelUnits를 보존합니다. 같은 평균이면1명과5명의 속도는 같고, 빠른 차도 연료1개당¼랩입니다. 분석 UI의 phaseMultipliers와 session.speed.segments는 같은 고정 profile이며 일치하지 않는 복원 데이터는 거부합니다. 예전 segments 없는 저장 경기는 원래의 고정 속도로 복원합니다.
+
+### 입력·식별·재시도
+
+| 계약 | 필드/검증 |
+|---|---|
+| 식별 | identity={eventId,actorId,scope}; scope에는run/session/season. sourceRunId·raceId·resultId 분리 |
+| 참가자 | id·teamId·kind(user/bot)·isLocal·name 고정5명. 관계등록/크루가입/보유원본을 매칭 때문에 변경하지 않음 |
+| 실제 능력 관측 | status=ready,mode=observed,eventId/actorId/scope/sourceRef 일치, rows5, 각 participantId/teamId/members[memberId,statScores,traitIds] |
+| 원천 보관 | raw18개를 별도 로깅/새 스탯으로 복제하지 않고 파생 profile·sourceRef와 규칙 snapshot 보관 |
+| 차량 | vehicleId는 catalog 존재 검증. 급유 단계에서만 선택, 선택 외형이 차고와 실제 경주에 같이 적용 |
+| 급유 | requestId/raceId/actorId/scope/currencyId/units/amount 동일이면 같은 영수증, 변경된 payload는 충돌 |
+| 차감 전 | 시각 갱신→이미 종료됐으면 결과 저장. 허용단위/잔액/목표잔여량 확인 후 차감 |
+| 순위 | 실제 거리 내림차순. 로컬 정확 동점은 stable participantId, 운영 동점 규칙은 별도 확정 필요 |
+| 결과 통지 | resultId/resultDelivered로 한 번만 통지. 통지 완료는 지급 증명이 아님 |
+| 동시 쓰기 | Web Locks 우선, 미지원은 호스트 직렬화+revision/writeId 확인. 서버 CAS와 같다고 주장하지 않음 |
+
+### 차량 교체 확장
+
+racing3d-vehicles.json의 defaultVehicleId·vehicles[id,name,color,rendererId,appearanceRef,modelResourceRef,visualBounds]로 조회합니다. createRacingVehicleVisual은 {group,metadata,dispose}를 반환하며 차고와 경주가 같은 factory를 호출합니다. 생성 인스턴스별 geometry/material을 한 번 해제하고 교체할 때 이전 차량만 해제합니다. 차량 크기와 여유를 합쳐 차고 카메라를 맞춥니다.
+
+현재 코랄·골드·민트 밴은 trialOnly/cosmeticOnly 외형입니다. modelResourceRef와 renderer registry는 향후 차량 모델 교체 입구이며 실제 glTF 다운로드·차량 구매/보유·부품/차량 성능 경제를 구현한 것은 아닙니다.
+
+### 화면 상태와 수명
+
+| 상태 | 화면/허용 조작 |
+|---|---|
+| connection_pending | 내 차고/연결 대기. 실제 능력·지갑 누락은 급유/출발 비활성 사유 표시 |
+| fueling | 큰 내 차·5분석 게이지·성향·구간 배수·차량 목록·남은시간·급유/출발 고정 버튼 |
+| countdown | 선택 잠금, 시동700ms→지도/고가 생성→3·2·1 GO. 완료 한 시각에5차 출발 |
+| racing | 실시간 순위·바퀴/5·연료·구간 배수, 내 차 말풍선. 추가 급유 가능 |
+| finished | FINISH→상위3시상대→전체5명 순위·내 거리/시간·보상/수령 |
+| reward ready/claiming/claimed | 총 보상/카드·기본/순위 내역·받기/진행/완료. 같은 finished 상태의 수령 변화도 다시 표시 |
+| return | 지도 복귀/다음 경기. 숨김/복귀 중 늦은 상태 발행이 차고 전환을 되살리지 않도록 가드 |
+| dispose | 타이머/DOM/리스너/차량/GPU 해제. 원본 도시 자원은 로더가 페이지 해제에서 정리 |
+
+숨김은 CPU 타이머를 멈추고 복귀 시 경과한 시각으로 따라잡습니다. 선택/급유/완주 후 복원하며 run 포인터도 다음 경기에서 running으로 갱신합니다. 반환/해제 중 늦은 콜백은 폐기합니다.
+
+### 참가 보상과 순위 추가 보상
+
+**정상 경기에서5바퀴 선완주자가 발생하고, 본인이1바퀴 이상 주행하며 연료4단위 이상을 실제 사용하면 참가 보상 대상**입니다. 입장·급유만 하고 움직이지 않은 경우, 취소·기권·이벤트 만료로 끝난 경우에는 보상을 만들지 않습니다. 미완주라도 유효 참가 조건을 채웠으면 최종 순위에 따라 받습니다.
+
+| 최종 순위 | 참가 기본 | 순위 추가 | 총 주사위 | 총 아이돌 카드 |
+|---|---|---|---:|---:|
+| 1위 | 주사위10·카드1 | 주사위40·카드2 | 50 | 3 |
+| 2위 | 주사위10·카드1 | 주사위25·카드1 | 35 | 2 |
+| 3위 | 주사위10·카드1 | 주사위15·카드1 | 25 | 2 |
+| 4위 | 주사위10·카드1 | 주사위5 | 15 | 1 |
+| 5위 | 주사위10·카드1 | 없음 | 10 | 1 |
+
+수량과 최소 참여 조건은 실행자 조절용 **조절용 임시값**이며 racing3d-rewards.json에서 바꿉니다. 아이돌 인원수로 보상을 배수 지급하지 않습니다. 카드 수는 낱장 수이며 팩 수와 다릅니다.
+
+모험의 주사위·카드 아이콘, 큰 아이콘+수량, 실제 카드 이름·그림·별 표시를 재사용합니다. 내 총 보상 → 참가 기본/순위 추가 → 받은 카드 순서로 보여주며, 수령 전/수령 중/실패/수령 완료를 구분합니다. 내 보상만 수령하고 상대4팀의 보상은 결과 명세로 봅니다.
+
+현재 독립3D는 시험 체크포인트에 주사위 수량·추첨된 카드 ID/이름/아트·수령 영수증을 기록합니다. **본편 보유 주사위와 카드함에 실제 지급한 상태가 아닙니다.** 앨범 경로는 기존 성장/카드 획득 단일 writer와 검증 영수증에 연결하며 이 독립 시험 기록을 실제 지급 증거로 사용하지 않습니다. 유효 미수령 보상이 있으면 다음 경기 전에 수령하도록 안내하여 보상을 덮어쓰지 않습니다.
+
+### 카드 추첨·실제 지급 경계
+
+기존 모험 loadExplorationCards/drawExplorationCards를 재사용합니다. 현재 참여 roster의 slot·stage에 맞춰 idol_{slot}_{stage}_{pocket} 카드를 만들고 ownerIds로 아이돌 후보를 제한합니다. 추첨은 한 경기 결과의 첫 명세 작성 때만 하고 seed/고정 추첨 결과 cardId/ownerId/name/art/star/source를 receipt에 저장합니다. 새로 표시/재수령/복원 때 다시 뽑지 않습니다. 단독 fixture의 stage0과 카드 아트는 명시 시험 자료이며 실제 보유 스탯으로 가장하지 않습니다.
+
+실제 카드 지급은 prepareExplorationCardRewards→공통 card-effect-engine의 acquisitionId 멱등 계약을 재사용할 수 있지만 모험 전용 growth bridge에 레이싱 영수증을 그대로 넣지 않습니다. 그 bridge는 adventure의 session/run/claiming store 일치를 검사합니다. 앨범 연결은 city-tour-racing-reward-bridge에서 현재 성장 snapshot의 주사위·카드 effect/ledger·검증 영수증을 같은 기존 writer에 원자 적용합니다. 서버 운영 연결은 이 소유/영수증 검증 계약을 유지해야 합니다. 부분 실패/재시도는 기존 영수증을 확인하며 paid:true 같은 화면 플래그만 지급 증거로 쓰지 않습니다.
+
+### 보상 명세·수령 필드와 실패 처리
+
+| 데이터/함수 | 실제 로컬 계약 |
+|---|---|
+| rewardRulesSnapshot | 경기 생성 때 제안 규칙/유효 문턱/기본·순위 수량 고정 |
+| ensureRacingRewardOffer | first_finish·실제 거리/소모 연료 확인→5명 각각 base/rankBonus/total 생성→내 카드 추첨 동결 |
+| result.rewards | version/ruleId/raceId/resultId/eventId/actorId/scope/participants/local/trial/actualInventoryLinked |
+| local | participantId/eligible/eligibilityReason/base/rankBonus/total/receiptId/cardDrawSeed/drawStatus/claimStatus/cards |
+| cards | cardId/ownerId/name/art/star/source/rewardPart. 확정된 행은 새로 열어도 재추첨하지 않음 |
+| 추첨 seed | identity+raceId+ruleId를 고정하고 기존 seededRandom을 주입. 저장 실패 재처리도 같은 추첨 |
+| claimTrialRacingReward | 내 actor/scope/result/receipt/카드행 검증→event.rewardClaims에1회 기록→claimed |
+| rewardClaims | id/eventId/raceId/resultId/actorId/scope/dice/cards/claimedAt/authority=local_trial/actualInventoryLinked=false |
+| available | 카드 준비 완료, 보상 받기 가능. 수령 중 working 잠금 |
+| inventory_pending | 소유 보상 원천/연결 미확인 또는 카드 준비 실패. drawStatus/안내로 원인을 구분 |
+| claimed/unavailable | 시험 수령 완료 또는 유효 참가 조건 미충족. 미유효는 수령/새 지급 없음 |
+
+카드 추첨 준비가 실패하면 고정 receipt/seed와 pending 명세를 저장하고 다음 경기를 잠급니다. 다시 열면 같은 기록에서 카드 준비를 재시도하며 일부 주사위만 먼저 수령하지 않습니다. 수령 저장 실패는 기존 available/고정 카드 상태를 유지하고 보상 패널에 실패 한 줄과 재시도를 제공합니다. 이를 레이스 시작 실패나 화면 전체 pause로 바꾸지 않습니다.
+
+bank는 claimed offer와 rewardClaims의 dice/cards/result/scope 일치를 양방향 확인합니다. 같은 ID의 다른 payload는 충돌이며 성공으로 감추지 않습니다. 미수령 available/inventory_pending 상태에서는 bootstrap run 포인터를 running으로 유지하여 재접속이 새 run을 만들지 않도록 합니다. claimed 후에도 같은 이벤트 bank의 영수증은 보존합니다.
+
+### 시험 리셋·저장 공간 부족·다음 경기
+
+
+**리셋**은 명시 단독3D 시험을 새 경기·시험 재화80개·새24시간으로 준비합니다. **다음 경기**는 같은 이벤트의 남은 재화와 마감 시각을 이어갑니다. 일반 재접속은 현재 시험을 이어가며 시험 재화를 반복 지급하지 않습니다.
+
+시험 저장은 해당 범위의 **고정 체크포인트 한 개**에 현재 시험만 보관합니다. 리셋은 이 체크포인트의 현재 시험을 교체하며, 고유 저장 키를 계속 추가하지 않습니다. 이전 방식으로 남은 legacy 범위·메인 진행·다른 게임 기록을 자동으로 삭제하지 않습니다.
+
+공용 시뮬레이터의 현재 페이지 초기화는 새 `testSession.id`를 만듭니다. 미니게임 주소의 `simulatorEventScope`는 고정하고, 현재 세션은 별도 `simulatorEventSession`으로 전달합니다. 체크포인트 내부의 `ownerSessionId`가 바뀌면 같은 저장 키에서 새 시험을 준비하므로 페이지 초기화마다 저장 범위가 누적되지 않습니다.
+
+브라우저 저장 한도를 넘으면 **이 단독 시험만 탭 메모리에서 계속 진행**합니다. 경기·재화·급유 영수증은 같은 메모리 어댑터를 읽고 쓰며, 실제 저장에 성공했다고 표시하지 않습니다. 작은 상태 줄에 저장 공간 부족과 임시 진행을 알립니다. **새로고침하면 저장하지 못한 임시 진행은 복원되지 않습니다.** 저장된 체크포인트가 있으면 그 마지막 기록을 다시 읽습니다.
+
+실제 앨범 지갑·본편/소유 호스트 경기는 메모리 시험으로 우회하지 않습니다. 저장 한도 초과만 임시 진행으로 전환하고, 손상 기록·다른 저장 권한 오류는 그대로 실패를 알립니다. 시작 오류와 리셋 오류를 구분하고 실제 원인을 표시합니다.
+
+리셋은 이전 runtime을 해제한 뒤 새 시험을 마운트합니다. 이전 mount의 늦은 진행/완주/오류 콜백은 무효화하고 원본 지도 자원은 재사용합니다. 이전 owner/generation 어댑터의 쓰기도 거부합니다. 메모리 전환 후 다른 탭까지 영속 잠금한 것은 아니며 강한 서버 CAS를 주장하지 않습니다.
+
+가득 찬 기존 저장소 자체를 자동으로 비우지는 않습니다. 이 수정은 단독 시험 실행을 막지 않고 향후 시험 저장의 증가를 제한하는 범위입니다. 전체 브라우저 초기화는 메인 기록까지 잃을 수 있으므로 해결 절차로 사용하지 않습니다.
+
+
+### 운영 연결에 남은 항목
+
+같은 앨범 리그의 simulated 상대4명·기존 재화 급유·참여 멤버 raw18/성향·주사위/카드 writer를 소스로 연결합니다. 실제 서버 유저 매칭·진행 동기화·서버 최종 검증은 남습니다. 외부 서버는 이번에 만들지 않습니다.
+
+차트 반영은 검증 resultId별 실적을 한 번 채택하고 기여량/반복 상한을 정해야 합니다. 경주1등을 차트1등으로 바꾸거나 record_album_league_board에 가짜 보드 사건을 넣지 않습니다. 차트재화→급유→경기실적→차트재화의 순환을 발란스 시뮬에서 검토해야 합니다. 이벤트 마감/남은연료 이월·환급/오프라인 상대·동점·토너먼트 운영 정책은 연결 대기입니다.
+
+
+### 공용 시뮬레이터 단독 데이터 준비 계약
+
+진입 주소는 [명시 시티 단독](/docs/planning/game-simulator.html?module=simulator_module_music_city&testPage=simulator_module_music_city)입니다. 독립3D URL의 별도 은행과 달리, 이 경로는 격리된 현재 시뮬레이터 저장 안에서 실제 앨범/리그/지갑 어댑터를 시험합니다.
+
+1. 기존 host가 제공한 generated/sample 세션·현재 pageScope·full checkpoint·fixture marker·소유자/멤버를 확인합니다. 메뉴를 통해 들어온 testPage=simulator_module_audition도 실제 source가 generated라면 같은 격리 저장을 유지합니다. scope 이름만 보고 실제 오디션 전달 자료로 판정하지 않습니다. 연계·오디션·balance_import·remote city 공급이 있으면 시험 지원 경로를 적용하지 않습니다.
+2. [음악 시험 설정](/data/simulator/music-career-test-scenario.json)의 scopePolicy=owned_generated_music_fixture와 city.autoPrepare를 읽습니다. 명시된 유효 module scope·소유 generated/sample 세션·전체 checkpoint 검증을 모두 통과해야 합니다. unscoped 메인에는 자동 시험 자료를 넣지 않습니다. 첫 활성화 때 한번 준비하며 취소된 예약은 재시도할 수 있습니다. 실패 사유와 재시도는 기존 하단 버튼 영역에 표시합니다.
+3. 현재 멤버 ID를 그대로 사용합니다. 확인된 음성 프로필은 knownVoiceRole=vocal, 미확인은 unknownVoiceRole=producer를 사용해 성별을 꾸미지 않습니다. create_album_draft의 선택 lineup 입력도 기존 buildAlbumLineup/validateFrozenAlbumLineup을 통과합니다.
+4. 유효한 참여자 있는 발매곡을 우선 재사용합니다. 없다면 음원 미연결 시험 초안→기존 제작/발매 명령→같은 원장 차트 등록·리그 개설을 순서대로 수행합니다. 사용자 초안·수정곡·발매 기록을 덮어쓰거나 지우지 않습니다. 옛 시험곡에 참여자가 없으면 기존 기록을 보존하고 최대8곡 안의 새 시험곡을 준비합니다.
+5. 급유 지원은 기존 seed_city_tour_trial의 소유 검증과 단일 요청/credit 영수증을 사용합니다. 금액은 racing3D.scene.fuel.trialCurrency에서 읽고 새 시험은80개입니다. 과거50개 지원 영수증은 그대로 유효하며, 소모 후 잔액을 목표80까지 재충전하지 않습니다.
+6. 기존 경기/미수령 보상이 canResume이면 재사용합니다. 새 경기는 원본 league.endsAtMs 이전만 허용합니다. 재접속으로 마감을 연장하지 않습니다.
+
+앨범·차트 시험 시작도 같은 고정 참여자 경로를 사용합니다. 이 준비는 실제 노래 생성·샘플 결제·가짜 회원 관계 등록을 수행하지 않습니다.
+
+### 연계 데이터 수신과 현재 누락의 구분
+
+앨범 전체의 [연계 수신 모듈](/src/simulator/music-career/linked-observation.mjs)은 현재 세션/진행/성장 원본을 보존합니다. 같은 창에서 공통 성장 SNAPSHOT_EVENT가 오면 돈·능력·팬 연결을 다시 읽고, 구독 해제 때 리스너도 정리합니다.
+
+우측 「앨범 데이터 연결」에서 멤버·전체 성장·제작 지갑·원시 팬 계층·엔터파워·18개 능력·시즌/일차를 확인합니다. 기본은 접힌 요약이고 다시 읽기 버튼은 현재 source만 재조회합니다. 모바일 본문에 기술 진단/지원금 박스를 추가하지 않습니다. source 읽기가 실패해도 우측에는 알려진 실패 사유를 표시합니다.
+
+연계 팬은 원본 hub의 light/core/concrete 숫자를 검증합니다. 손상 JSON·누락 계층·반올림한 화면 팬0을 원시 계층0으로 만들지 않습니다. 명시 단독 fixture의 확인된0팬만 별도 시험0 입력을 허용합니다. 팬층 없는 연계는 연결 대기입니다.
+
+선택 공급자의 상세 계약은 [앨범 P228](../개발진행기획_v01/콘텐츠별_v03/앨범발매_기획서.html)의 연계 자료 계약과 같습니다. 실제 공급자가 없는 현재 상태와 수신 코드가 준비된 상태는 구분합니다. 기간/문턱 미정, 최초 데뷔 기준일/미션 완료일 부재는 입력을 받은 척해서 해제하지 않습니다.
+
+### 단독 시험 진행의 멤버 상태 보존
+
+standalone-test-environment.seedPerson은 기존 copyIdolConditionFields(member)로 idol_condition·assigned_mons_id·assignment_revision을 현재 snapshot에서 보존합니다. commitGrowthPersistence가 두 기록의 sameIdolConditionFields를 확인하므로 요약과 전체 진행의 선택 상태도 같아야 합니다. 실제 컨디션/배정 값을 새로 초기화하지 않습니다. 이 전체 시험 진행이 준비된 뒤에만 앨범/리그/급유 준비를 진행합니다.
+
+
+### 모바일은 게임 화면을 먼저 보여줍니다
+
+![차량·급유·레이스·시상 한눈에 보기](/event/cityTour/design/mobile-event-flow.svg)
+
+**차량 선택 → 급유 → 레이스 → 내 순위·보상**의 작은 진행 표시를 씁니다. 앨범의 큰 마일스톤은 시티 투어 안에서 반복하지 않습니다. 자동차나 주행 장면과 필수 버튼을 한 화면에 먼저 보여 주고, 능력의 계산 근거·받은 카드·전체 순위는 아래 상세에서 봅니다.
+
+| 화면 | 먼저 보이는 것 | 추가로 보는 것 |
+|---|---|---|
+| 차량 | 큰 내 차와 외형 3종, 선택 후 급유하기 | 컬렉션·상점 시안. 현재는 외형만 선택하며 가격·구매·소유 경제는 연결 전 |
+| 급유 | 선택한 내 차, 연료·남은 재화·출발 버튼 | 참여 멤버의 기본실력·가속·안정·뒷심·승부 상세 |
+| 주행 | 확대된 내 차 추적, 순위·바퀴·연료·시계, 시점 버튼 | 전체 지도·차안 시점, 작은 보조 화면(PIP), 위치·순위·바퀴 미니맵 |
+| 시상 | 내 최종 순위, 큰 주사위·카드 수량, 하단 수령 버튼 | 기본/순위 추가 구분·카드 정보·5팀 전체 순위는 기본 접힘 |
+
+시점은 **전체 / 추적 / 차안**이며 처음에는 내 차를 크게 따라갑니다. 모든 차량에 순위와 바퀴를 표시하고 내 차를 강조합니다. 차안 시점은 현재 모델을 활용한 운전석 표시 시안입니다. 시점을 바꾸어도 경기·속도·연료·순위·보상은 바뀌지 않습니다. 보조 화면은 끌 수 있습니다.
+
+### 시점·라벨·보조 화면 계약
+
+camera.views가 기본 follow, overview/follow/cockpit 선택, 거리·높이·FOV·스무딩·PIP 크기·보조 시점 매핑·미니맵/라벨 크기를 소유합니다. 모델 좌표는 기존 model.scale로 한 번 변환합니다. 설정은 경기 규칙이나 지갑 값으로 쓰지 않습니다.
+
+renderer의 표시 상태만 시점을 바꿉니다. 추적은 선택한 내 차를 따라가며, 차안은 전방 시점과 앞유리/대시보드 프레임을 표시하는 시안입니다. 실제 내부 모델을 생성하지 않습니다. 라벨은 각 참가자의 현재 순위와 바퀴를 현재 주 카메라에 투영하고, 화면 밖·카메라 뒤의 차를 억지로 화면 중앙에 표시하지 않습니다. 내 차 강조와 겹침 완화를 사용합니다.
+
+WebGLRenderer 한 개에서 주 화면을 그린 뒤 viewport/scissor로 PIP를 그리며 viewport/scissor/clear 상태를 복구합니다. 차안 패스에서 가린 내 차는 보조 패스에 다시 보이도록 복원합니다. 차고·시상·숨김·dispose에는 보조 화면을 숨기고 관측자·DOM·GPU 수명을 기존 소유 규칙으로 정리합니다. 미니맵은 기존 트랙/5팀의 현재 위치·순위·랩만 단순 표시하며 실제 순위 판정을 다시 계산하지 않습니다.
+
+검수 기준은 전원 순위/랩 일치·세 시점의 차량/길 가시성·PIP ON/OFF·폰 버튼 비가림·시점 전환 후 동일 주행/연료·차고/시상 복귀·숨김/복원·렌더러 추가 생성 없음입니다.
+
+### 추가 기획 체크 · 차량 고유 능력
+
+**제안(검수 대기): 차량의 성능·보유·장착과 아이돌의 주행 능력을 연결하는 기획이 필요합니다.** 현재 코랄·골드·민트는 동등 성능의 시험 외형입니다.
+
+- 차량 정의의 performanceProfileId와 별도 버전 있는 성능 정의를 연결합니다. 최고속도·가속·주행 안정·지속 주행은 후보이며 채택 항목·수치·결합 가중치·상한은 발란스 대기입니다.
+- 구매 거래, 보유 차량 인스턴스, 장착은 각각 구분합니다. 보유 대수·외형·가격을 곧바로 속도에 더하지 않습니다.
+- 현재 아이돌 평균 능력과 차량 성능을 구분한 뒤 공통 구간 속도 규칙에서 결합합니다. 같은 아이돌 평균·같은 차량이면 솔로·유닛·팀의 속도가 같습니다.
+- 재화1개=¼바퀴는 유지합니다. 연비·할인·추가 보상은 별도 경제 기획으로 검토합니다.
+- 경기 생성 때 소유·장착·성능 버전과 계산 결과를 고정하고, 경기 중 교체·재접속으로 재계산 이득을 얻지 못하게 합니다.
+
+
+### 공용 단독 저장의 용량과 복원
+
+공통 test-storage는 현재 명시 scope의 음악 career/journal 문자열만 기존 checkpoint codec으로 압축하고, getItem에서는 공백·유니코드를 포함한 원래 문자열을 정확히 복원합니다. 실제 물리 문자열이 달라지면 캐시를 무효화하므로 CAS/저널 비교의 의미를 바꾸지 않습니다. 손상 codec은 빈 값으로 간주하지 않습니다.
+
+quota가 남으면 소유가 검증된 generated/sample 시험에 한해 해당 scope 기록 전체와 pending 쓰기를 이 탭의 sessionStorage로 옮겨 저장합니다. 모든 쓰기와 마지막 session-v1 marker가 성공한 뒤 backend를 tab_session으로 바꿉니다. 중간 실패는 원복하고 원래 origin 저장은 자동으로 지우지 않습니다. 새로고침은 같은 시험을 이어가며 다른 탭과는 독립이라는 상태를 오른쪽 연결 정보에 표시합니다.
+
+fresh 최초 초기화는 facility→snapshot→session 순서입니다. 첫 시설 쓰기에서 quota가 나면 검증된 초기 시설 형식으로만 메모리 stage를 시작하고, 마지막 generated 세션과 snapshot의 source/run/test_session_id/map 소유가 일치해야 탭에 원자 반영합니다. 기존 orphan 기록·실제 audition/import/balance·메인 무범위 저장·불일치 소유에는 이 예외를 적용하지 않습니다. tab 저장도 실패하면 성공으로 표시하지 않습니다. 실제 기록의 초기화나 삭제는 해결 절차로 삼지 않습니다.
+
+## 5. 필요 리소스·이미지 설명
+
+![앨범→시티 투어 참가→현재 멤버 차고 UI 기획 시안](/event/cityTour/design/album-entry-layout.svg)
+
+기획 배치도이며 실제 실행 캡처가 아닙니다. 참가 정보·보유 재화·시간·보상만 먼저 보여주고 상세 규칙은 접습니다. 급유·출발·수령은 기존 폰 하단 버튼 구역을 사용합니다.
+
+![차고 UI 시안](/event/cityTour/design/garage-layout.svg)
+
+![주사위와 아이돌 카드 결과 UI 시안](/event/cityTour/design/rewards-layout.svg)
+
+위 그림은 기획 배치 시안입니다. 실행 캡처가 아닙니다. 중앙 도시/기존9시설은 원본 보드맵 로더, 외곽 데크/교각/난간은 track/renderer, 차량은 공용 factory, 보상은 모험 아이콘/presenter와 카드 descriptor로 구성합니다. 받은 카드1장마다 name/art/star를 보여주며 가려지는 tooltip이나 전체화면 중복 모달로 보상을 숨기지 않습니다.
+
+## 6. 관련 CSV·테이블 데이터
+
+[음악 단독 시나리오 설정](/data/simulator/music-career-test-scenario.json) · [현재 연계 수신](/src/simulator/music-career/linked-observation.mjs) · [공통 앨범 source](/src/simulator/music-career/source.mjs)
+
+
+| 자료 | 소유/역할 |
+|---|---|
+| [패키지 설명](/event/cityTour/PACKAGE.md) | 이벤트 독립 소유·호스트 계약·구현 범위 |
+| [경기/연출](/event/cityTour/data/racing3d.json) | 목표5랩·¼랩 연료·24시간·지도·카메라·시동/문구 |
+| [능력 환산](/event/cityTour/data/racing3d-driving.json) | 원천·정규화·5지표·초중후반 가중치·상한·명시 시험 프로필 |
+| [차량 catalog](/event/cityTour/data/racing3d-vehicles.json) | 차량 ID·이름·색·rendererId·modelResourceRef·크기/파트 |
+| [참가/순위 보상](/event/cityTour/data/racing3d-rewards.json) | 유효 참가 조건·주사위/카드 기본/추가 수량·아이콘/문구 |
+| [아이돌 능력18개](/data/idol_ability_sim/idol_growth_stat.csv) | 현재 canonical 세부 능력 |
+| [성실성·태도 분류](/data/idol_ability_sim/idol_growth_growth_factor.csv) | enabled 분류9+9, 공통 academy-bundle reader 사용 |
+| [실제 성향 목록](/data/rapport_sim/rapport_trait.csv) | 소유한 trait ID의 이름과 의미 |
+| [원본 모험 보상 아이콘](/data/simulator/exploration.json) | 주사위·카드 아이콘 경로 |
+| [차량 factory](/event/cityTour/src/racing3d-vehicles.mjs) | 차고/경주가 같은 외형을 생성·개별 자원 해제 |
+| [능력 profile](/event/cityTour/src/driving-profile.mjs) | 실제 관측 또는 명시 시험→같은 분석/속도 프로필 |
+| [연속 주행](/event/cityTour/src/racing3d-session.mjs) | 거리/연료·구간 적분·정확한 선완주 시각 |
+| [앨범 진입 panel](/event/cityTour/src/racing3d-panel.mjs) | 참가/이어하기·씬 수명·고정 버튼 이동 |
+| [앨범 원장 어댑터](/event/cityTour/src/racing3d-career-adapter.mjs) | 원본 리그/이벤트·급유 단일 차감·소유 범위 |
+| [실제 보상 bridge](/src/simulator/shared/city-tour-racing-reward-bridge.mjs) | 기존 카드/성장 writer·3기록 복구 |
+| [참가 UI 데이터](/event/cityTour/data/racing3d-entry-ui.json) | 버튼·상태/누락 사유 |
+| [호스트](/event/cityTour/src/racing3d-host.mjs) | 입출력·시계·소유·선택·급유·수령 연결 |
+| [보상 명세/수령](/event/cityTour/src/racing3d-rewards.mjs) | 유효 참가·순위 총합·seed 추첨 고정·수령 영수증 |
+| [시험 원장](/event/cityTour/src/racing3d-fuel-host.mjs) | 같은 이벤트의 잔액·경기·급유/보상 영수증 |
+| [제한된 시험 저장](/event/cityTour/src/racing3d-trial-storage.mjs) | 고정 체크포인트·owner/generation·quota 대체 |
+
+수치·문구·리소스는 데이터로 분리하며 본문 예시는 해당 데이터의 설명입니다. 공용 CSV/스키마 원표는 이번 작업에서 수정하지 않습니다.
+
+## 7. 개발 진행·검수
+
+| 구분 | 현재 상태 |
+|---|---|
+| 차고·차량 선택·능력 패널 | 소스 반영. 선택 외형은 시험용, 구매/차량 소유 경제 미추가 |
+| 기존 도시·외곽 고가·시동/카운트·5랩·시상 | 기존 연결을 재사용합니다. 속도 50% 설정과 기존 속도 저장의 메모리 복원을 확인했습니다. 목표 5랩 전환은 별도 후속입니다. |
+| 구간별 속도·능력 표시 | 앨범 고정 참여 멤버의 현재 raw18/보유 성향 공급. 독립은 명시 시험값, 상대는 같은 리그 simulated 프로필 |
+| 참가/순위 주사위·카드 | 로컬 시험 명세·추첨·수령 원장·모험식 표시 연결 |
+| 실제 주사위/카드함 지급 | 앨범 경로의 소유 checkpoint/카드 writer·복구 bridge 소스 연결. 원천 가용성 조건/실제 플레이 확인 필요. 독립URL은 시험 영수증만 |
+| 동앨범 리그 상대/실유저 동기화 | 같은 앨범 리그의 simulated4명 연결. 실제 유저 매칭/진행 동기화는 미구현 |
+| 레이싱 실적→차트 | 기획 연결. 결과 채택 식·상한·경제 순환 검토와 구현 필요 |
+| 시험 저장 | 고정 체크포인트·동일 영수증 재사용·quota시 탭 메모리. 실제 사용자 저장 조회/삭제0 |
+| 검증 | 기존 규칙의 차량·급유·시상·수령 시험은 로그에 보존합니다. 속도 50%와 기존 속도 저장 복원은 순수 계산 7/7 확인했습니다. 5랩 전환 및 보드→재화→급유·실제 재접속 검증은 남아 있습니다. |
+| 미수행/연결 전 | 실제 서버/회원·차트 기여·차량 성능/구매. 메인 저장 초기화·삭제·빌드·서버 재시작 미수행 |
+
+수락 확인은 차고 진입→원천 구분→차량 선택→급유→출발/지도 전환→초중후반 속도/역전→5랩 결과→참가·순위 보상→수령→다음 경기→같은 경기 복원·중복 차단 순서입니다. 단독과 실제 연계의 지급 상태를 각각 확인해야 합니다. 본체의 직접 시험은 격리 단독 자료에서 수행했으며 실제 메인 저장/운영 회원 시험과 구분합니다. 발란스 시뮬/자동 현황판은 같은 원본 규칙·주행/급유/보상 원장을 읽는 후속 연결 대상이며 수동 급유/보상 UI를 현황판에 추가하지 않습니다.
+
+<details><summary>작업 기록</summary>
+
+관련 원본은 2장과 6장에 연결합니다. [로그·변경 이력과 지난 기록](./%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%8B%9C%ED%8B%B0%ED%88%AC%EC%96%B4_%EC%83%81%EC%84%B8_v1.log.md)
+
+</details>

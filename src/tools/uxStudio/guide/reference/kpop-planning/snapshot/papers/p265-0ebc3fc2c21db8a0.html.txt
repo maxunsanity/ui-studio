@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오디션 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+</style>
+
+</head>
+<body>
+<h1>오디션 · 와이어프레임 1차 초안 (390×844 · 세로)</h1>
+<p class="flow">보드에서 대지 칸 도착 → ① 만남(캐스팅 · 명함 주기 · 찜 · 패스) → (찜 모음 ② · 빈 자리 있을 때 「오디션 열기」 · 멤버 0명으로 첫 바퀴가 끝나면 자동) → ③ 참가자 4명 → ④ 첫인상 → ⑤ 대진 3번(12초) → ⑥ 최종 확인 → ⑦ 영입 연출 → 인트로 ⑥ 예명 → ⑧ 영입 결과 → 보드 · 「캐스팅」을 바로 누르면 ⑦로 바로</p>
+<div class="rules"><b>규칙 근거</b> · 게임 시뮬레이터 오디션(<code>src/audition/board-app.mjs</code> · <code>app.mjs</code> · <code>board-engine.mjs</code> · <code>data/audition_sim/*</code>) · P100 오디션 기획서(11/16) · 발란스 시뮬 v02 캐스팅 · UI 기획서 인트로 탭(11/24 · 첫 캐스팅 · 예명 · 팀 이름) · 엔터파워 문턱 <code>data/game/enter_power_level.csv</code>(11/18)<br>· <b>시뮬 그대로</b>: 대지 24칸 도착 때 후보 · 찜 5명 · 명함 1번 = 이야기 1토막(최대 5) · 참가자 4명(찜 먼저 · 빈칸은 무작위) · 대진 3번 · 한 번 12초(3초부터 강조 · 시간이 끝나면 남아 있던 친구 승) · 첫인상 원픽 = 호감도 +1 · 스킬 3칸(승리 수) · 영입 연출 4.2초 · 멤버 자리 = 엔터파워 문턱 12개.<br>· <b>기획서 따름(시뮬과 다름)</b>: 캐스팅 전에는 큰 능력 6개의 <b>등급만</b>(P100 R-05-4 · 시뮬은 숫자) · 오디션에서 <b>몬스 안 줌</b>(현중 11/02 · 시뮬 「짝 몬스」 문구 남음) · 예명은 영입 뒤 인트로 ⑥ 창.<br>· <b>제안(이 초안에서 고른 것)</b>: 찜 모음 ②를 게임 화면으로(시뮬은 검토창에만) · 오디션은 빈 자리가 있을 때 플레이어가 엶 · 대진 도중 「나중에 이어하기」 · 화면 아래 탭은 대진 동안 숨김.</div>
+<div class="row" id="screens"></div>
+<script>
+// 공용 와이어 도구 (390×844)
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (on = -1) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === on ? " on" : ""}" style="left:${i * 65}px"><i></i>${t}</div>`).join("");
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const head = (title, right = "") => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div>
+  <div class="a val" style="left:52px;top:16px;font-size:16px">${title}</div>${right}<div class="line" style="top:50px"></div>`;
+const headR = (t, w = 80) => `<div class="b" style="left:${382 - w}px;top:8px;width:${w}px;height:34px;font-size:12px;font-weight:700">${t}</div>`;
+const btn = (x, y, w, h, label, strong = false, off = false, sub = "") => `<div class="b${off ? " off" : ""}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;flex-direction:column;gap:2px;${strong ? "border-width:2.5px;" : ""}"><span class="val" style="font-size:${h < 40 ? 13 : 15}px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const box = (x, y, w, h, inner = "", extra = "") => `<div class="b" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;${extra}">${inner}</div>`;
+const offbox = (x, y, w, h, t, extra = "") => `<div class="b off" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;font-size:11px;${extra}">${t}</div>`;
+const txt = (x, y, w, t, cls = "", style = "") => `<div class="a ${cls}" style="left:${x}px;top:${y}px;width:${w}px;${style}">${t}</div>`;
+const line = (x, y, w, t, r = "", bold = false) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;display:flex;justify-content:space-between;font-size:13px"><span${bold ? ' class="val"' : ""}>${t}</span><span class="val">${r}</span></div>`;
+const hr = (y, l = 8, r = 8) => `<div class="line" style="left:${l}px;right:${r}px;top:${y}px"></div>`;
+const gbar = (x, y, w, pct, h = 10) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border:1.5px solid var(--ln);border-radius:999px;background:var(--dim);overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--fill)"></div></div>`;
+const face = (x, y, s = 40, t = "얼굴") => `<div class="b off" style="left:${x}px;top:${y}px;width:${s}px;height:${s}px;font-size:11px;border-radius:50%">${t}</div>`;
+const pills = (x, y, list) => `<div class="a" style="left:${x}px;top:${y}px;display:flex;gap:4px;flex-wrap:wrap;max-width:${382 - x}px">${list.map(p => `<span class="pill">${p}</span>`).join("")}</div>`;
+const dimAll = `<div class="dimbg"></div>`;
+const win = (top, h, title, close = true) => `<div class="win" style="left:20px;top:${top}px;width:350px;height:${h}px"></div><div class="a val" style="left:40px;top:${top + 16}px;font-size:16px">${title}</div>${close ? `<div class="b" style="left:322px;top:${top + 10}px;width:34px;height:34px;font-size:15px">✕</div>` : ""}`;
+const winBtns = (top, a, b) => `<div class="b" style="left:36px;top:${top}px;width:150px;height:48px"><span class="val">${a}</span></div><div class="b" style="left:204px;top:${top}px;width:150px;height:48px;border-width:2.5px"><span class="val">${b}</span></div>`;
+const hudTop = `<div class="b off" style="left:8px;top:8px;width:374px;height:40px">HUD 위 줄 (팀 · 등급 · 돈 · 보석 · 주사위)</div>`;
+const board = (h = 620, t = "보드 (HUD 그대로)") => hudTop + `<div class="b off" style="left:8px;top:56px;width:374px;height:${h}px">${t}</div>`;
+const hudBehind = board() + tabs();
+const sheet = (top, h = 774 - top - 8) => `<div class="win" style="left:0;top:${top}px;width:390px;height:${h + 8}px;border-radius:16px 16px 0 0"></div><div class="a" style="left:175px;top:${top + 6}px;width:40px;height:4px;border-radius:2px;background:var(--fill)"></div>`;
+const kvs = (x, y, w, rows, gap = 22) => rows.map((r, i) => line(x, y + i * gap, w, r[0], r[1])).join("");
+const grid = (x, y, w, cols, items, h, gap = 6, fn = k => k) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;display:grid;grid-template-columns:repeat(${cols},1fr);gap:${gap}px">${items.map(k => `<div style="height:${h}px;border:1.5px solid var(--ln);border-radius:8px;background:var(--box);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:700;text-align:center;overflow:hidden">${fn(k)}</div>`).join("")}</div>`;
+const steps = (x, y, w, list, now) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;display:grid;grid-template-columns:repeat(${list.length},1fr);gap:4px">${list.map((s, i) =>
+  `<div style="height:28px;border:${i === now ? 2.5 : 1.5}px solid var(--ln);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:${i < now ? "var(--fill)" : i === now ? "var(--box)" : "var(--dim)"};color:${i < now ? "#fff" : i === now ? "var(--ink)" : "var(--soft)"}">${i < now ? "✓ " : ""}${s}</div>`).join("")}</div>`;
+const render = () => {
+  const SHOT = new URLSearchParams(location.search).get("shot");
+  if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+  else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+};
+
+
+const GR = [["보컬", "A"], ["댄스", "B"], ["랩", "C"], ["비주얼", "S"], ["끼", "B"], ["프로듀싱", "C"]];
+const grades = (x, y, w, list = GR, h = 40) => grid(x, y, w, 6, list, h, 4, g => `<span class="sub">${g[0]}</span><span class="val" style="font-size:15px">${g[1]}</span>`);
+const cand = (y, name = "한서윤", tag = "") => `
+  ${face(16, y, 64)}
+  ${txt(92, y, 280, `<span class="val" style="font-size:17px">${name}</span> ${tag}`)}
+  ${pills(92, y + 26, ["특기 보컬", "● 분위기 메이커", "사연: 지방 상경"])}
+  ${txt(92, y + 50, 280, `<span class="sub" style="font-size:12px">「무대 위에서는 하나도 안 떨려요」</span>`)}`;
+const meetHead = (y, right = "찜 3 / 5 ›") => `
+  ${txt(16, y, 250, `<span class="pill">24 / 40</span> <span class="val">댄스 연습실</span>`)}
+  <div class="b" style="left:290px;top:${y - 4}px;width:84px;height:28px;font-size:12px;font-weight:700">${right}</div>
+  ${txt(16, y + 30, 360, `<span class="val" style="font-size:15px">새로운 친구를 만났어요</span>`)}`;
+const meetBtns = (y, casting = true) => casting
+  ? `${btn(16, y, 100, 52, "패스")}${btn(124, y, 120, 52, "명함 주기", false, false, "찜")}${btn(252, y, 122, 52, "캐스팅", true)}`
+  : `${btn(16, y, 170, 52, "패스")}${btn(196, y, 178, 52, "명함 주기", true, false, "찜")}`;
+const story = (y, open = 1) => `
+  <div class="b" style="left:16px;top:${y}px;width:358px;height:38px;justify-content:space-between;padding:0 12px"><span class="val">한서윤의 이야기 ${open} / 5</span><span class="sub" style="font-size:12px">자세히 ▾</span></div>`;
+// 대진 공통
+const duelTop = (r, left, t = 12.0, pct = 100, urgent = false) => `
+  <div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:13px;font-weight:700">Ⅱ</div>
+  ${txt(52, 10, 250, `<span class="val" style="font-size:16px">서바이벌 대결</span><br><span class="sub">함께 키우고 싶은 한 명은?</span>`)}
+  <div class="b" style="left:312px;top:8px;width:70px;height:34px"><span class="val">${r} / 3</span></div>
+  ${txt(16, 56, 200, `<span class="sub" style="font-size:12px">남은 선택 ${left}</span>`)}${gbar(110, 60, 264, (3 - left) / 3 * 100, 8)}
+  <div class="b" style="left:8px;top:78px;width:374px;height:44px;justify-content:space-between;padding:0 12px 0 28px;${urgent ? "border-width:2.5px;" : ""}"><span class="val">제한 시간 ${t.toFixed(1)}초</span>${gbar(170, 18, 150, pct, 8).replace('class="a"', 'class="a" ').replace("left:170px;top:18px", "position:static;display:inline-block")}</div>
+  ${txt(16, 128, 360, `<span class="sub">12초가 끝나면 남아 있는 친구가 자동 승리</span>`)}`;
+const dcard = (x, label, name, opt = {}) => `
+  ${txt(x, 152, 180, `<span class="pill">${label}</span>`)}
+  <div class="b" style="left:${x}px;top:178px;width:178px;height:430px;flex-direction:column;justify-content:flex-start;padding:8px;gap:6px;${opt.strong ? "border-width:2.5px;" : ""}${opt.dim ? "background:var(--dim);" : ""}">
+    <span class="b off" style="position:static;width:160px;height:150px">아이돌 그림</span>
+    <span class="val" style="font-size:16px">${name}</span>
+    <span class="pill">● ${opt.p || "분위기 메이커"}</span>
+    ${opt.back ? opt.back : `<span class="b off" style="position:static;width:150px;height:118px;border-radius:50%">재능 6각 (등급)</span>
+    <span class="sub">같은 출발 · 다른 재능</span>`}
+  </div>
+  ${opt.stamp ? `<div class="b" style="left:${x + 24}px;top:330px;width:130px;height:46px;border-width:3px;transform:rotate(-8deg)"><span class="val" style="font-size:15px">${opt.stamp}</span></div>` : ""}
+  ${opt.btns === false ? "" : `${btn(x, 616, 86, 36, "↻ 뒤집기")}${btn(x + 92, 616, 86, 36, "✎ 이야기")}${btn(x, 658, 178, 52, "이 친구 선택", true)}`}`;
+const VS = `<div class="b" style="left:175px;top:360px;width:40px;height:40px;border-radius:50%;z-index:3"><span class="val">VS</span></div>`;
+
+const SCREENS = [
+  { cap: "① 만남 (대지 칸 도착 · 아래 판)", html: board(380) + tabs() + sheet(400) + meetHead(420) + cand(474) + grades(16, 560, 358) + story(612) + meetBtns(660) +
+      `${n(1, 2, 418)}${n(2, 2, 474)}${n(3, 2, 568)}${n(4, 2, 618)}${n(5, 2, 674)}`,
+    notes: ["도착 칸 번호 · 시설 · 「찜 n / 5 ›」(누르면 ② 찜 모음) · 보드를 가리지 않는 아래 판", "후보: 얼굴 · 이름 · 특기 · 성격(색 점 + 묶음) · 사연 한 칩 · 대사 한 줄 · 이미 찜한 친구면 「명함을 준 친구」 칩", "큰 능력 6개 <b>등급만</b>(보컬 · 댄스 · 랩 · 비주얼 · 끼 · 프로듀싱 · P100 R-05-4) · 숫자는 영입 뒤", "이야기 n / 5 · 명함을 줄 때마다 한 토막 열림 · 누르면 ①-1", "패스 = 그냥 보냄 · 명함 주기 = 찜(5명 차면 ①-2) · 캐스팅 = 바로 영입 → ⑦ (빈 자리가 있을 때만 · 없으면 ①-3)"] },
+
+  { cap: "①-1 이야기 펼침", html: board(180) + tabs() + sheet(200) + meetHead(220) + cand(274) +
+      `<div class="b" style="left:16px;top:356px;width:358px;height:290px;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:10px 12px;gap:6px">
+        <span style="display:flex;justify-content:space-between"><span class="val">한서윤의 이야기 2 / 5</span><span class="sub">접기 ▴</span></span>
+        <span class="sub" style="font-size:12px">소개 · 지방에서 혼자 올라와 연습생 생활 3년째. 오디션은 이번이 다섯 번째예요.</span>
+        <span style="border-top:1px solid #c9ccd1;padding-top:6px"><b>1. 첫 버스</b><br><span style="font-size:12px">새벽 첫 버스를 타고 연습실에 가던 날 …</span></span>
+        <span style="border-top:1px solid #c9ccd1;padding-top:6px"><b>2. 다섯 번째 오디션</b><br><span style="font-size:12px">「이번엔 꼭 붙고 싶어요」</span></span>
+        <span class="b off" style="position:static;height:40px">3 ~ 5 · 명함을 건네면 다음 이야기가 열려요</span></div>` + meetBtns(660) +
+      `${n(1, 2, 356)}${n(2, 2, 470)}`,
+    notes: ["소개 2 · 3줄 + 열린 이야기 토막(제목 · 글 · 대사) · 접기", "안 열린 토막은 잠김 한 줄 · 열린 이야기는 찜을 바꿔도 남음"] },
+
+  { cap: "①-2 찜 바꾸기 (5명이 찼을 때)", html: board(380) + tabs() + sheet(400) + meetHead(420) + cand(474) + dimAll + win(220, 420, "찜 친구 바꾸기") +
+      txt(40, 262, 310, `<span class="sub" style="font-size:12px">새로 찜할 친구와 자리를 바꿀 친구를 골라 주세요</span>`) +
+      ["이도윤", "박하나", "정리아", "김준", "윤채아"].map((k, i) => `${face(40, 292 + i * 52, 40)}${txt(92, 302 + i * 52, 180, `<span class="val">${k}</span> <span class="sub">이야기 ${[3, 1, 5, 2, 1][i]} / 5</span>`)}<div class="b" style="left:282px;top:${296 + i * 52}px;width:72px;height:32px;font-size:12px;font-weight:700">바꾸기</div>`).join("") +
+      btn(36, 572, 318, 48, "돌아가기") + `${n(1, 16, 290)}${n(2, 16, 574)}`,
+    notes: ["찜 5명 중 하나를 골라 바꿈 · 바뀐 친구의 열린 이야기는 남음 · 오디션 진행 중에는 찜을 바꿀 수 없음", "돌아가기 = 명함 안 줌 · ① 그대로"] },
+
+  { cap: "①-3 빈 자리 없음 (캐스팅 버튼 숨김)", html: board(380) + tabs() + sheet(400) + meetHead(420) + cand(474) + grades(16, 560, 358) +
+      `<div class="b off" style="left:16px;top:612px;width:358px;height:40px;justify-content:space-between;padding:0 12px"><span>🔒 다음 멤버 자리</span><span class="val">엔터파워 1,033</span></div>` + meetBtns(660, false) +
+      `${n(1, 2, 618)}${n(2, 2, 674)}`,
+    notes: ["멤버 자리가 다 찼을 때: 「다음 멤버 자리 · 엔터파워 n」 · 자리는 시작 1 + 문턱 12개(538 ~ 9,000) · 최대 30", "캐스팅 대신 명함 주기만 · 찜해 두면 자리가 열릴 때 오디션으로"] },
+
+  { cap: "② 찜 모음 (제안 · 시뮬은 검토창에만)", html: hudBehind + dimAll + win(110, 610, "명함을 준 친구들") +
+      `<div class="a" style="left:236px;top:128px"><span class="pill">찜 4 / 5</span></div>` +
+      ["한서윤", "이도윤", "박하나", "정리아"].map((k, i) => `${face(40, 168 + i * 64, 48)}${txt(100, 172 + i * 64, 170, `<span class="val">${k}</span><br><span class="sub">이야기 ${[2, 3, 1, 5][i]} / 5 · ${["보컬", "댄스", "랩", "비주얼"][i]}</span>`)}<div class="b" style="left:282px;top:${178 + i * 64}px;width:72px;height:30px;font-size:12px;font-weight:700">찜 해제</div>`).join("") +
+      `<div class="b off" style="left:40px;top:424px;width:310px;height:48px">+ 빈 찜 칸 · 보드에서 만난 친구에게 명함을 건네 보세요</div>` +
+      txt(40, 484, 310, `<span class="sub" style="font-size:12px">찜 친구가 바뀌어도 만났던 이야기는 남아요</span>`) + hr(512, 36, 36) +
+      line(40, 526, 310, "멤버 자리", "3 / 4 · 1자리 비어 있음") +
+      txt(40, 552, 310, `<span class="sub" style="font-size:12px">찜한 친구부터 4명이 참가 · 모자라면 다른 후보로 채워요</span>`) +
+      btn(36, 640, 318, 60, "오디션 열기", true, false, "대진 3번 · 한 명 영입") +
+      `${n(1, 16, 170)}${n(2, 16, 426)}${n(3, 16, 524)}${n(4, 16, 650)}`,
+    notes: ["찜 n / 5 · 얼굴 · 이름 · 이야기 n / 5 · 특기 · 누르면 능력 등급 창(①과 같은 칸) · 찜 해제(오디션 중에는 꺼짐)", "빈 찜 칸", "멤버 자리 n / n · 빈 자리 수", "오디션 열기 → ③ · 빈 자리 없으면 꺼짐(「다음 멤버 자리 · 엔터파워 n」) · 진행 중이면 「오디션 이어하기」 · 들어오는 곳 = ①의 「찜 n / 5」 · 정보 탭 아이돌 목록 빈 자리"] },
+
+  { cap: "③ 오디션 준비 · 참가자 4명", html: head("아이돌 오디션") +
+      txt(16, 64, 360, `<span class="val" style="font-size:17px">함께할 친구를 초대했어요</span><br><span class="sub" style="font-size:12px">명함을 준 친구를 먼저 초대해요. 빈자리는 다른 후보 중에서 같은 확률로 채워요.</span>`) +
+      grid(16, 130, 358, 2, [["한서윤", "명함을 준 친구"], ["이도윤", "명함을 준 친구"], ["박하나", "명함을 준 친구"], ["최유진", "추가 초대"]], 230, 10, c => `<span class="b off" style="position:static;width:130px;height:120px">얼굴</span><span class="val" style="font-size:14px">${c[0]}</span><span class="pill">${c[1]}</span><span class="sub">보컬 A · 댄스 B …</span>`) +
+      line(28, 620, 346, "진행", "4명 · 대진 3번 · 한 번 12초") +
+      btn(16, 660, 140, 60, "보드로") + btn(164, 660, 210, 60, "오디션 시작", true) +
+      `${n(1, 2, 132)}${n(2, 2, 618)}${n(3, 2, 676)}`,
+    notes: ["참가자 4명 · 출처 「명함을 준 친구」 / 「추가 초대」 · 누르면 등급 창 · 다른 후보가 4명보다 적으면 열리지 않음(「초대할 후보가 부족해요」)", "진행 요약(시뮬 하단 「비어 있음」 문구는 뺌)", "보드로 = 오디션 안 열고 돌아감(찜 그대로) · 오디션 시작 → ④"] },
+
+  { cap: "③-1 찜 5명 → 참가할 4명 고르기", html: head("아이돌 오디션") +
+      txt(16, 64, 360, `<span class="val" style="font-size:17px">참가할 4명을 골라 주세요</span><br><span class="sub" style="font-size:12px">명함을 준 친구가 5명이에요</span>`) +
+      grid(16, 120, 358, 2, ["한서윤 ✓", "이도윤 ✓", "박하나 ✓", "정리아 ✓", "윤채아 +"], 150, 10, c => `<span class="b off" style="position:static;width:100px;height:80px">얼굴</span><span class="val" style="font-size:14px">${c}</span>`) +
+      btn(16, 680, 358, 60, "고른 친구 4명으로 참가", true) + `${n(1, 2, 122)}${n(2, 2, 696)}`,
+    notes: ["누를 때마다 ✓ / + · 고른 칸은 굵은 테", "정확히 4명일 때만 켜짐"] },
+
+  { cap: "④ 첫인상 (원픽 고르기)", html: `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:15px">✕</div>` +
+      txt(52, 10, 300, `<span class="val" style="font-size:16px">첫인상 선택</span><br><span class="sub">첫인상과 사연으로 원픽을 고르세요</span>`) + hr(50) +
+      offbox(16, 62, 358, 220, "아이돌 그림 · 영상 자리") +
+      txt(28, 292, 346, `<span class="val" style="font-size:18px">한서윤</span> <span class="pill">특기 보컬</span> <span class="pill">♥ 첫인상 호감도 +1</span>`) +
+      pills(16, 324, ["집안 · 평범", "사는 곳 · 지방", "동기 · 무대", "약점 · 긴장", "경력 · 연습생 3년", "🌿 숨은 특기"]) +
+      txt(16, 384, 358, `<span class="pill">EN 2</span> <span class="pill">中 1</span> <span class="pill">日 0</span>`) +
+      `${btn(16, 414, 175, 40, "♥ 첫인상 스킬 ?")}${btn(199, 414, 175, 40, "⚡ 스카우트 스킬 ?")}` +
+      txt(16, 466, 358, `<span style="font-size:12px">지방에서 혼자 올라와 연습생 생활 3년째. 오디션은 이번이 다섯 번째예요.</span><br><span class="sub">💬 「이번엔 꼭 붙고 싶어요」</span>`) +
+      grid(16, 540, 358, 5, ["한서윤", "이도윤", "박하나", "최유진", "? 무작위"], 70, 6, k => `<span class="b off" style="position:static;width:40px;height:40px;border-radius:50%">얼굴</span>${k}`) +
+      btn(16, 680, 358, 60, "♥ 한서윤 첫인상 선택 · 오디션 시작", true) +
+      `${n(1, 2, 64)}${n(2, 2, 296)}${n(3, 2, 416)}${n(4, 2, 560)}${n(5, 2, 696)}`,
+    notes: ["✕ = 첫인상 건너뛰기(원픽 없이 대진)", "이름 · 특기 · 호감도 표시 · 배경 칩 6개 · 어학 도장(EN · 中 · 日 · 5면 ★5)", "스킬 2개 미리보기(첫인상 · 스카우트 · 누르면 설명) · 소개 3줄 · 대사", "참가자 4명 썸네일 · 눌러서 바꿔 봄 · 「? 무작위」", "고른 친구가 첫 판의 「남아 있는 친구」가 됨 · 3판 모두 12초"] },
+
+  { cap: "⑤ 대진 (카드 앞면 · 재능 등급)", html: duelTop(1, 3, 8.4, 70) +
+      dcard(8, "♥ 첫인상 원픽 · 남아 있는 친구", "한서윤", { strong: true }) + dcard(204, "새 도전자", "이도윤", { p: "노력파" }) + VS +
+      txt(16, 724, 358, `<span class="sub">진출 자리 · 한서윤</span>`) +
+      `${n(1, 290, 12)}${n(2, 2, 80)}${n(3, 2, 154)}${n(4, 2, 300)}${n(5, 2, 670)}`,
+    notes: ["Ⅱ = 멈춤(⑤ 안 「나중에 이어하기」 · 남은 대진 저장) · 라운드 n / 3 · 남은 선택", "제한 시간 12초 막대 · 3초부터 굵게 · 첫 판에 남아 있는 친구가 없으면 「첫 대결은 직접 선택」(시간 없음)", "카드 라벨: 남아 있는 친구 / 새 도전자 / 첫 후보 · 첫인상 원픽 표시", "앞면 = 그림 · 이름 · 성격 · 재능 6각(<b>등급 글자</b> · 숫자 없음)", "뒤집기 → ⑤-1 · 이야기 → ⑤-3 · 이 친구 선택 → ⑤-2"] },
+
+  { cap: "⑤-1 카드 뒷면 (배경 · 스킬)", html: duelTop(1, 3, 5.2, 43) +
+      dcard(8, "♥ 첫인상 원픽 · 남아 있는 친구", "한서윤", { strong: true, back: `<span style="text-align:left;font-size:11px;width:160px">집안 평범 · 지방 · 무대<br>약점 긴장 · 연습생 3년</span><span class="sub" style="width:160px;text-align:left">숨은 특기 🌿 피아노</span><span style="display:flex;gap:4px"><span class="pill">★ 첫인상</span><span class="pill">◇</span><span class="pill">◇</span></span><span class="sub">스킬 1 / 3 · 상세 ▾</span><span class="sub" style="width:160px">재능은 성장 속도 · 능력은 훈련으로</span>` }) +
+      dcard(204, "새 도전자", "이도윤", { p: "노력파" }) + VS + `${n(1, 2, 300)}${n(2, 2, 450)}`,
+    notes: ["뒷면 = 배경 · 숨은 특기 · 스킬 3칸(★ 열림 / ◇ 잠김) · 상세 펼침 · 능력 숫자는 넣지 않음(시뮬 뒷면 6축 막대 · 총합은 영입 뒤 프로필로)", "뒤집어도 시간은 계속 흐름"] },
+
+  { cap: "⑤-2 선택 뒤 (승리 · 탈락)", html: duelTop(2, 2, 12.0, 100) +
+      dcard(8, "남아 있는 친구", "한서윤", { strong: true, stamp: "승리 · 계속 도전", btns: false }) + dcard(204, "새 도전자", "이도윤", { p: "노력파", dim: true, stamp: "이번 대결 탈락", btns: false }) + VS +
+      `<div class="b" style="left:8px;top:620px;width:374px;height:92px;flex-direction:column;align-items:flex-start;padding:8px 12px 8px 28px;gap:4px"><span class="val">✦ 진출 다짐 · 스킬 2 / 3</span><span style="font-size:12px">💬 「다음 무대도 제가 갈게요」</span><span class="sub">🎁 스킬 획득 · 고음 유지</span></div>` +
+      txt(16, 724, 358, `<span class="sub">다음 도전자가 곧 나와요</span>`) + `${n(1, 2, 330)}${n(2, 2, 624)}`,
+    notes: ["승자 도장 「승리 · 계속 도전」(시간 종료면 「시간 종료 · 자동 승리」) · 패자 「이번 대결 탈락」 · 승패 연출 1.15초", "승자 말풍선 · 스킬 칸 n / 3 · 스킬 획득 · 시간 종료면 「시간 종료! ○○ 친구가 남고 새 도전자가 등장합니다」"] },
+
+  { cap: "⑤-3 이야기 창 (대진 위 · 시간 흐름)", html: duelTop(1, 3, 6.0, 50) + dcard(8, "남아 있는 친구", "한서윤", { btns: false }) + dcard(204, "새 도전자", "이도윤", { btns: false }) + dimAll + win(150, 560, "이야기 · 한서윤") +
+      pills(40, 196, ["집안 평범", "지방", "동기 무대", "약점 긴장 ○", "연습생 3년", "🌿 피아노"]) +
+      `<div class="a" style="left:40px;top:258px;width:310px;display:flex;gap:4px">${["📜 합격 서사", "캐스팅", "🔒 데뷔", "🔒 …", "👑"].map((k, i) => `<span class="pill" style="${i === 0 ? "border-width:2.5px" : ""}">${k}</span>`).join("")}</div>` +
+      `<div class="b" style="left:40px;top:296px;width:310px;height:300px;align-items:flex-start;justify-content:flex-start;padding:12px;text-align:left;font-size:12px">다섯 번째 오디션 날, 서윤은 첫 버스를 타고 …<br><br>💬 「이번엔 꼭 붙고 싶어요」</div>` +
+      `${btn(40, 620, 90, 40, "← 이전")}${txt(150, 632, 90, `<span class="val">1 / 3</span>`, "", "text-align:center")}${btn(260, 620, 90, 40, "다음 →")}` +
+      `${n(1, 20, 196)}${n(2, 20, 258)}${n(3, 20, 622)}`,
+    notes: ["배경 칩(약점 극복 점)", "장 탭: 합격 서사 · 캐스팅 · 성장 단계 장(잠김 = 「○○ 단계에 열립니다」) · 에필로그", "넘기기 · 창을 열어도 대진 시간은 계속(✕로 닫음)"] },
+
+  { cap: "⑥ 최종 확인", html: txt(16, 14, 358, `<span class="val" style="font-size:16px">최종 선택</span><br><span class="sub">새 멤버 (첫 멤버면 「함께할 첫 멤버」)</span>`) + hr(56) +
+      `<div class="b" style="left:95px;top:76px;width:200px;height:440px;flex-direction:column;justify-content:flex-start;padding:10px;gap:8px;border-width:2.5px"><span class="b off" style="position:static;width:178px;height:220px">아이돌 그림</span><span class="val" style="font-size:18px">한서윤</span><span class="pill">● 분위기 메이커</span><span class="b off" style="position:static;width:150px;height:110px;border-radius:50%">재능 6각 (등급)</span></div>` +
+      txt(16, 536, 358, `<span style="font-size:13px">한서윤을 우리 팀으로 데려올까요?<br><span class="sub">영입하면 예명을 정하고 자세한 능력이 열려요</span></span>`, "", "text-align:center") +
+      btn(16, 660, 140, 60, "← 다시 비교") + btn(164, 660, 210, 60, "이 멤버와 시작 ✦", true) + `${n(1, 75, 78)}${n(2, 2, 540)}${n(3, 2, 676)}`,
+    notes: ["고른 카드 한 장(버튼 없음)", "몬스 배정 문구 뺌(현중 11/02 「오디션 때 몬스 지급은 다 빼라」) · 영입 뒤 예명 · 능력 공개 안내", "다시 비교 = 마지막 비교만 되돌림 · 이 멤버와 시작 → ⑦"] },
+
+  { cap: "⑦ 영입 연출 (4.2초 · 탭하면 건너뜀)", html: offbox(0, 0, 390, 844, "무대 커튼 · 렌즈 연출", "border:none;border-radius:0") +
+      offbox(70, 170, 250, 360, "멤버 그림") + txt(16, 560, 358, `<span class="val" style="font-size:26px">영입 완료</span><br><span class="val" style="font-size:18px">한서윤</span>`, "", "text-align:center") +
+      btn(250, 780, 124, 40, "건너뛰기 ›") + `${n(1, 50, 172)}${n(2, 2, 566)}${n(3, 230, 786)}`,
+    notes: ["커튼이 열리며 멤버 등장(시뮬 <code>presentation.mjs</code> 단계: 모음 0.65 → 펼침 1.55 → 지움 2.25 → 공개 2.7 → 이름 3.45초)", "「영입 완료」 · 이름 · 몬스 칸 없음", "건너뛰기 → 바로 인트로 ⑥ 예명 창 → ⑧"] },
+
+  { cap: "⑧ 영입 결과 (스킬 · 합격 서사)", html: head("영입 완료") +
+      `${face(16, 64, 72)}${txt(100, 70, 270, `<span class="val" style="font-size:18px">서윤 <span class="sub">(한서윤)</span></span><br><span class="sub" style="font-size:12px">둘이 함께, 첫 무대로 · 멤버 3 / 4</span>`)}` +
+      `<div class="b" style="left:16px;top:150px;width:358px;height:40px;justify-content:space-between;padding:0 12px"><span class="val">최종 스킬 · 합격 서사</span><span class="sub" style="font-size:12px">상세 펼치기 ▾</span></div>` +
+      [["슬롯 1 / 3 · 첫인상", "♥ 첫인상 원픽 유지 보상", "✓ 획득"], ["슬롯 2 / 3 · 고음 유지", "대진 2승", "✓ 획득"], ["슬롯 3 / 3", "⚡ 본선 다크호스 스카우트 보상", "🔒 미달성"]].map((s, i) => `<div class="b${i === 2 ? " off" : ""}" style="left:16px;top:${200 + i * 58}px;width:358px;height:50px;justify-content:space-between;padding:0 12px"><span style="text-align:left"><span class="val">${s[0]}</span><br><span class="sub">${s[1]}</span></span><span class="val">${s[2]}</span></div>`).join("") +
+      `<div class="b" style="left:16px;top:382px;width:358px;height:150px;align-items:flex-start;justify-content:flex-start;padding:10px 12px;text-align:left;font-size:12px;flex-direction:column;gap:6px"><span class="val">📜 합격 서사</span><span>다섯 번째 오디션 끝에 서윤은 …</span><span class="sub">합격 다짐 · 「무대에서 갚을게요」</span></div>` +
+      `${btn(16, 542, 175, 40, "✎ 이야기 2 / 4")}${btn(199, 542, 175, 40, "능력 자세히 ›")}` +
+      btn(16, 690, 140, 60, "연출 다시 보기") + btn(164, 690, 210, 60, "보드 계속하기", true) +
+      `${n(1, 2, 66)}${n(2, 2, 206)}${n(3, 2, 386)}${n(4, 2, 548)}${n(5, 2, 706)}`,
+    notes: ["예명(본명) · 멤버 n / n · 두 번째 멤버면 이 뒤에 인트로 ⑦ 팀 이름 창", "스킬 3칸: 획득 / 미달성 · 얻은 길(첫인상 원픽 유지 · 대진 승리 · 스카우트)", "합격 서사 · 합격 다짐", "이야기(n / 4 · 끝이면 👑 에필로그) · 능력 자세히 → 프로필 탭 아이돌 정보(18세부 · 재능선이 여기서 처음 열림)", "보드 계속하기 → 보드(HUD) · 짝 몬스 칸 없음"] },
+];
+
+render();
+</script>
+</body>
+</html>

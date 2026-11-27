@@ -1,0 +1,115 @@
+# 악귀 디펜스 · 표와 자동 전투 검수
+상태: 제안(검수 대기) · 2단계 · 모든 수치는 시안 예시입니다.
+
+드론의 위협 판단과 방공포의 조준·충전을 실제 피해·퇴치 계산에 연결했습니다. 이 문서는 계산 결과를 확인합니다. 세밀한 3D 비행·광선·타격·승패 화면은 후속 연출 단계에서 연결합니다.
+
+## 자동 시뮬 결과
+승리 5건은 4분 51.70초~5분 12.50초이며, 각 판에서 악귀 231마리를 실제 퇴치하고 유출 없이 보스를 처치했습니다. 별도의 약한 방어 시안은 실제 유출로 무대 HP가 0이 됩니다.
+
+| 시드·선택 | 결과 | 총 시간 | 등장 | 퇴치 | 유출 | 무대 HP |
+|---|---|---:|---:|---:|---:|---:|
+| [17 · hint](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_win_17.json) | 승리 | 291.70초 | 231 | 231 | 0 | 800 |
+| [31 · hint](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_win_31.json) | 승리 | 293.80초 | 231 | 231 | 0 | 800 |
+| [47 · random](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_win_47.json) | 승리 | 312.50초 | 231 | 231 | 0 | 800 |
+| [71 · random](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_win_71.json) | 승리 | 295.80초 | 231 | 231 | 0 | 800 |
+| [97 · first](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_win_97.json) | 승리 | 297.05초 | 231 | 231 | 0 | 800 |
+| [17 · hint](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_failure.json) | 패배 검수 | 155.65초 | 50 | 11 | 1 | 0 |
+
+총 시간은 준비·실제 전투·자동 선택 대기·웨이브 간격·승패 안내·리포트 미리보기를 합합니다. 사람이 카드 선택에 오래 머물면 전체 시간은 더 길어집니다. 자동 계산에서 검수한 게임 시간이며 사람이 화면을 플레이한 영상은 아직 아닙니다.
+
+## 웨이브 압박과 역전
+5개 차도 입구에 악귀가 모인 뒤 몬스·드론·방공포가 등장합니다. 출격 전 각 입구에 4마리가 남아 있습니다. 이후 웨이브마다 일반 떼의 수·전체 체력·속도를 높입니다.
+
+![자동 계산의 살아 있는 악귀 수](pressure.svg)
+
+| 웨이브 | 일반 떼 수 | 일반 떼 총 HP | HP 배수 | 속도 배수 | 최대 동시 생존 | 전투 시간 |
+|---|---:|---:|---:|---:|---:|---:|
+| dp_wave_01 | 50 | 2250 | 1 | 1 | 21 | 43.35초 |
+| dp_wave_02 | 80 | 6682.5 | 1.35 | 1.05 | 14 | 49.95초 |
+| dp_wave_03 | 100 | 11092.5 | 1.7 | 1.1 | 42 | 123.40초 |
+
+3웨이브 전투 시간에는 별도 보스 1마리와의 전투를 포함합니다. 일반 떼 수와 총 HP에는 보스를 합하지 않습니다. 모든 값은 시안 예시입니다.
+
+## 드론 · 판단과 비행
+**순찰 → 위협 판단 → 접근 → 공격 → 표적 전환 → 복귀**
+
+- 건물별 넓은 방어 범위에서 밀집도·공연장 접근도·큰 악귀·보스 위협을 비교합니다. 외부 AI 호출 없이 재현 가능한 규칙으로 판단합니다.
+- 녹음실 3곳과 댄스 건물 4곳의 지붕 소켓을 사용합니다. 건물 위치·소켓 회전과 스케일은 v06 원본에서 가져옵니다.
+- 0.25초마다 상황을 살피고, 살아 있는 표적을 바꿀 때는 0.8초 유지·1.6초 전환 간격·1.3배 위협 차이를 확인합니다. 표적이 죽거나 범위를 벗어나면 다시 선택합니다.
+- 접근 중 가속·좌우 비행·높이 변화를 적용합니다. 210m 복귀 한계를 넘지 않으며, 표적에 가까워진 뒤 사격합니다. 탄환이 도착하면 실제 피해를 적용합니다.
+- 비행 속도·위치·표적·쿨타임을 저장하므로 새로고침 후 같은 공격이 이어질 수 있습니다. 값은 building_defense.csv·target_rule.csv·attack_profile.csv에서 읽습니다.
+
+| 실제 계산 사건 | 횟수 · 시안 예시 |
+|---|---:|
+| drone_approach | 212 |
+| drone_engage | 157 |
+| drone_retarget | 302 |
+| drone_return | 226 |
+| drone_patrol | 102 |
+
+## 방공포 · 조준과 충전
+**추적 → 포신 조준 → 충전 → 광선 명중 → 재사용 대기**
+
+방송국 city_27·city_28·city_30의 지붕 소켓에 연결합니다. 회전 속도와 허용 오차로 조준하고 1.2초 충전 후 실제 피해를 줍니다. 충전 중 표적이 죽거나 바뀌면 취소하고 새 표적을 조준합니다.
+
+첫 계산에서 보스 퇴치가 늦어져 사거리·피해·보스 HP를 시안 CSV에서 조정했습니다. 시간이 지나면 적을 지우는 처리는 넣지 않습니다. 건물 마크 변신·충전 빛·포신 반동·타격 그림은 연출 단계에서 연결합니다.
+
+| 건물·유닛 | 발사 | 명중 | 피해 |
+|---|---:|---:|---:|
+| dp_binding_city_27 · anti_air | 41 | 41 | 3748.24 |
+| dp_binding_city_28 · anti_air | 22 | 22 | 1398.6 |
+| dp_binding_city_30 · anti_air | 18 | 18 | 997.7 |
+| dp_binding_city_07 · drone | 76 | 66 | 505.5 |
+| dp_binding_city_09 · drone | 139 | 124 | 922.25 |
+| dp_binding_city_10 · drone | 10 | 8 | 47 |
+| dp_binding_city_22 · drone | 72 | 58 | 536.8 |
+| dp_binding_city_24 · drone | 62 | 52 | 475.7 |
+| dp_binding_city_02 · drone | 79 | 63 | 454.75 |
+| dp_binding_city_04 · drone | 83 | 66 | 491 |
+
+## CSV와 연결 검사
+23개 CSV·266행과 schema.json을 구성했습니다. ID 중복·없는 연결·필수 값 공란·잘못된 숫자·차도 이탈·끊긴 길·건물 소켓 중복·드론 높이와 범위·스킬 트리·웨이브 약화·원본 리소스를 검사합니다.
+
+[표 안내](http://127.0.0.1:7007/data/defense_proto/v01/README.md) · [스키마](http://127.0.0.1:7007/data/defense_proto/v01/schema.json) · [검수 24개](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/test_validation.json)
+
+| 표 | 행 |
+|---|---:|
+| [profile.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_profile.csv) | 2 |
+| [enemy_type.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_enemy_type.csv) | 3 |
+| [wave.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_wave.csv) | 3 |
+| [wave_spawn.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_wave_spawn.csv) | 26 |
+| [road_node.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_road_node.csv) | 18 |
+| [road_edge.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_road_edge.csv) | 18 |
+| [route.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_route.csv) | 5 |
+| [route_step.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_route_step.csv) | 20 |
+| [defense_slot.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_defense_slot.csv) | 15 |
+| [attack_profile.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_attack_profile.csv) | 8 |
+| [target_rule.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_target_rule.csv) | 4 |
+| [mons_combat.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_mons_combat.csv) | 5 |
+| [building_defense.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_building_defense.csv) | 10 |
+| [skill.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_skill.csv) | 15 |
+| [skill_effect.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_skill_effect.csv) | 30 |
+| [skill_offer.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_skill_offer.csv) | 4 |
+| [gauge.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_gauge.csv) | 1 |
+| [reward_rule.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_reward_rule.csv) | 1 |
+| [asset.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_asset.csv) | 12 |
+| [fx.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_fx.csv) | 14 |
+| [ui_text.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_ui_text.csv) | 39 |
+| [report_field.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_report_field.csv) | 7 |
+| [simulation_case.csv](http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_simulation_case.csv) | 6 |
+
+## 저장과 재현 검수
+동일 시드가 같은 결과를 만듭니다. 탄환 비행 중·카드 선택 중·보스 전투 중에 복구해도 최종 상태 전체가 같습니다. 선택 중에는 적·탄환·공격 시간과 위치를 멈춥니다. 새 판마다 스킬을 초기화하며 만렙 후보는 제외합니다.
+
+저장 실패·데이터 변경·다른 판 소유·버전 충돌을 검사했습니다. 동시 쓰기는 잠금 어댑터 검수이며, 실제 브라우저 두 탭·화면 새로고침은 통합 단계에서 확인합니다.
+
+## 원본과 기준 그림
+모노카피바라의 CSV·ID·연결 검사 방식과 현재 도시맵 v06 도로·소켓을 사용합니다. 모노의 전투 수치는 복사하지 않습니다. 밝은 파스텔 기준 그림 A·B를 유지합니다. 아래는 새 결과 그림이 아닌 현중의 기준 그림입니다.
+
+![현중 기준 그림 A](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EB%8F%84%EC%8B%9C%EB%A7%B5_%EC%8B%9C%EC%95%88/%EA%B8%B0%EC%A4%80%EA%B7%B8%EB%A6%BC/20261006_1005_%ED%98%84%EC%A4%91_%EB%8F%84%EC%8B%9C%EB%A7%B5_%EA%B8%B0%EC%A4%80%EA%B7%B8%EB%A6%BC_A_%ED%8C%8C%EC%8A%A4%ED%85%94.png)
+![현중 기준 그림 B](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EB%8F%84%EC%8B%9C%EB%A7%B5_%EC%8B%9C%EC%95%88/%EA%B8%B0%EC%A4%80%EA%B7%B8%EB%A6%BC/20261006_1005_%ED%98%84%EC%A4%91_%EB%8F%84%EC%8B%9C%EB%A7%B5_%EA%B8%B0%EC%A4%80%EA%B7%B8%EB%A6%BC_B_%ED%8C%8C%EC%8A%A4%ED%85%94.png)
+
+## 뺀 것 · 다음 단계
+원본 파일을 삭제하거나 옮기지 않습니다. 이번 실행에서 함정을 제외하고, 옛 정속 궤도 순찰안을 위협 판단·추적 비행으로 대체합니다. 옛 설계서와 기획서는 보존합니다.
+
+다음 3단계는 여러 차도 위 악귀 구름 떼·몬스 공격·피격·하늘로 사라짐을 화면에 연결합니다. 드론 비행 방향·기울기·가감속·탄환 궤적을 그 연출에 반영합니다. 방공포 변신·충전·보스·승패 화면은 4단계에 연결합니다. 지시서에 따라 2단계 보고 후 다음 확인을 기다립니다.

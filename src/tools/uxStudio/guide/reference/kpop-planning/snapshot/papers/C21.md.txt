@@ -1,0 +1,7 @@
+# AI 컷씬 마스터 · 콘티 작성 입력
+
+플로우 두 명이 서서 대화한다. A가 반갑게 인사하고 B는 조금 망설이다 답한다. 작은 손짓만 쓰고 마지막은 B 얼굴 클로즈.
+
+## 작성 절차
+
+knowledge.md를 읽고 이번 장면의 적용 절과 이유를 knowledgeReview에 기록한다. context.json의 자산 ID만 사용한다. 모션은 reviewStatus=approved이고 해당 배우의 캐릭터 자산이 reviewedCharacterIds에 있을 때만 배치한다. 없으면 unresolved에 남긴다. 기본 대기도 검수 여부를 확인한다. 콘티는 storyboard.template.json에서 시작하고 추정값은 assumptions에 적는다. 카메라와 대사는 분리하고 행동 시간은 컷을 넘어 유지한다. 작성 후 validate와 render를 실행한다. 에디터 연결 전이므로 재생 완료를 주장하지 않는다.

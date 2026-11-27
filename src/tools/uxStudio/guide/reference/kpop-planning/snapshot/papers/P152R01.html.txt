@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#f9f5ef"><title>도시 여정 · 몬스 출동 | 콘티 미리보기</title><link rel="stylesheet" href="./style.css"></head>
+<body>
+<main id="app" aria-busy="true">
+  <section class="list-view" id="list-view" aria-labelledby="list-title">
+    <header class="list-header"><a class="planning-return" id="planning-link"></a><span class="eyebrow" id="page-eyebrow"></span><h1 id="list-title"></h1><p id="list-subtitle"></p></header>
+    <nav class="mode-tabs" id="mode-tabs" aria-label="이야기 선택"></nav>
+    <div class="list-heading"><strong id="list-section-title"></strong><span id="list-count"></span></div>
+    <div class="story-list" id="story-list"></div>
+    <footer class="list-footer"><p><span id="review-status"></span><span class="footer-dot">·</span><span id="connection-note"></span></p><details class="review-notes"><summary id="list-notes-title"></summary><p id="entry-policy"></p><p id="review-note"></p></details></footer>
+  </section>
+  <section class="detail-view" id="detail-view" hidden inert aria-label="이야기 큰 화면 연출">
+    <div class="scene-host" id="scene-host"></div>
+    <div class="scene-loading" id="scene-loading"><span class="loading-orbit" aria-hidden="true">✦</span><strong id="loading-title"></strong><small id="loading-copy"></small><button type="button" id="scene-retry" hidden></button></div>
+    <header class="detail-header"><button type="button" class="back-button" id="back-button"><span aria-hidden="true">‹</span><span id="back-label"></span></button><div class="detail-heading"><strong id="detail-story-title" tabindex="-1"></strong><span><span id="scene-location"></span><span class="heading-dot">·</span><span id="scene-cut-count"></span></span></div><span class="preview-chip" id="stage-preview-label"></span></header>
+    <div class="scene-title-block" id="scene-title-block"><span id="scene-stage-label"></span><h1 id="scene-title" aria-live="polite" aria-atomic="true"></h1></div>
+    <div class="news-broadcast" id="news-broadcast" hidden><div class="news-top"><span class="live-badge"><i></i> LIVE</span><span class="news-channel">GAME CITY CHANNEL<small id="news-channel-copy"></small></span></div><div class="news-scene-label"><span id="news-tag"></span><b id="news-location"></b></div><div class="news-lower"><span class="news-strap" id="news-strap"></span><h2 id="news-headline"></h2><div class="news-ticker"><span>NEWS</span><p id="news-ticker"></p></div><button type="button" class="news-action" id="news-action"></button></div></div>
+    <div class="result-card" id="result-card" hidden><span aria-hidden="true">✧</span><h2 id="result-title"></h2><p id="result-body"></p><button type="button" id="result-detail"></button></div>
+    <p class="scene-caption" id="scene-caption"></p>
+    <section class="detail-hud" id="detail-hud" aria-label="장면 재생 제어"><div class="hud-content"><div class="milestone-row" id="milestones"></div><div class="hud-bottom"><div class="party-section"><div class="party-portraits" id="party"></div><span class="hud-status"><strong id="progress-title"></strong><small><span id="playback-state"></span><span class="heading-dot">·</span><span id="playback-time"></span></small></span></div><div class="playback-controls"><button type="button" class="play-button" id="play-button"><span class="play-icon" aria-hidden="true">▶</span><span id="play-button-label"></span></button><button type="button" id="next-button"></button><button type="button" id="skip-button"></button><button type="button" id="board-button"></button></div></div><div class="playback-track" aria-hidden="true"><i id="playback-fill"></i></div></div></section>
+    <div class="shot-flash" id="shot-flash" aria-hidden="true"></div><p class="scene-error" id="scene-error" role="status" hidden></p>
+  </section>
+  <dialog class="storyboard-dialog" id="storyboard-dialog" aria-labelledby="board-title"><header class="dialog-header"><div><span class="eyebrow" id="board-eyebrow"></span><h2 id="board-title"></h2></div><button type="button" class="dialog-close" id="board-close" autofocus><span id="board-close-label"></span><span aria-hidden="true">×</span></button></header><div class="dialog-body"><p class="dialog-summary" id="mode-summary"></p><p class="review-notice" id="board-preview-note"></p><div class="cut-list-heading"><strong id="cut-list-title"></strong><span id="cut-list-count"></span><button type="button" id="first-button"></button></div><ol class="cut-list" id="cut-list"></ol><article class="shot-detail"><div class="shot-detail-heading"><span id="detail-cut-number"></span><h3 id="detail-title"></h3></div><p id="detail-caption"></p><dl id="shot-info"></dl></article><p class="duration-note" id="duration-note"></p><details class="concept-drawer"><summary id="concept-summary"></summary><div class="concept-grid"><figure><img src="./concept-journey.png" id="journey-concept" alt="도시 여정 콘티 그림 시안"><figcaption id="journey-concept-title"></figcaption></figure><figure><img src="./concept-dispatch.png" id="dispatch-concept" alt="몬스 출동 콘티 그림 시안"><figcaption id="dispatch-concept-title"></figcaption></figure></div></details></div></dialog>
+  <dialog class="result-dialog" id="result-dialog" aria-labelledby="result-dialog-title"><button type="button" class="dialog-close" id="result-close"><span id="result-close-label"></span><span aria-hidden="true">×</span></button><span class="eyebrow" id="result-dialog-eyebrow"></span><h2 id="result-dialog-title"></h2><p id="result-dialog-body"></p><small id="result-dialog-note"></small></dialog>
+  <div class="app-error" id="app-error" role="alert" hidden></div>
+</main>
+<script type="module" src="./preview.mjs"></script>
+</body></html>

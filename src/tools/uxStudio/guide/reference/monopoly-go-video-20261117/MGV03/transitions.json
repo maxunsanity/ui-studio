@@ -1,0 +1,399 @@
+{
+  "format": "video-transition-inventory",
+  "version": 1,
+  "videoId": "MGV03",
+  "basis": "Actual source frames. Null trigger does not invent event causality.",
+  "count": 11,
+  "screenTransitionRecords": 2,
+  "stateTransitionRecords": 8,
+  "initialContextRecords": 1,
+  "transitions": [
+    {
+      "id": "MGV03-T00",
+      "scope": "initial-context",
+      "fromScreenId": null,
+      "toScreenId": "MGV03-S01",
+      "fromStateId": null,
+      "toStateId": "MGV03-S01-A",
+      "observedWindowSeconds": [
+        0,
+        0
+      ],
+      "evidence": [
+        {
+          "requested": 0.0,
+          "actual": 0.0,
+          "file": "frames/frame_00001.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "observedOutcome": "Clip begins on this visible UI; previous screen/entry activation is unobserved.",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false
+    },
+    {
+      "id": "MGV03-T01",
+      "scope": "screen",
+      "fromScreenId": "MGV03-S01",
+      "toScreenId": "MGV03-S02",
+      "fromStateId": "MGV03-S01-A",
+      "toStateId": "MGV03-S02-A",
+      "observedWindowSeconds": [
+        0,
+        0.125
+      ],
+      "evidence": [
+        {
+          "requested": 0.0,
+          "actual": 0.0,
+          "file": "frames/frame_00001.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "requested": 0.1,
+          "actual": 0.125,
+          "file": "frames/dense_002.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "trigger": null,
+      "visibleControlCandidate": "menu row: 재산",
+      "observedOutcome": "재산 행 위 커서/초기 메뉴 -> 재산 문 닫힘",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "basis": "Visual sequence proven by source frames; click/hold/automatic cause and gameplay condition unconfirmed.",
+      "condition": null,
+      "API": null
+    },
+    {
+      "id": "MGV03-T02",
+      "scope": "state",
+      "fromScreenId": "MGV03-S02",
+      "toScreenId": "MGV03-S02",
+      "fromStateId": "MGV03-S02-A",
+      "toStateId": "MGV03-S02-B",
+      "observedWindowSeconds": [
+        0.625,
+        0.708333
+      ],
+      "evidence": [
+        {
+          "requested": 0.6,
+          "actual": 0.625,
+          "file": "frames/dense_007.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "requested": 0.7,
+          "actual": 0.708333,
+          "file": "frames/dense_008.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "observedOutcome": "재산 문 닫힘 -> 닫힌 문/갤러리 제목",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "basis": "Visual sequence proven by source frames; click/hold/automatic cause and gameplay condition unconfirmed.",
+      "condition": null,
+      "API": null
+    },
+    {
+      "id": "MGV03-T03",
+      "scope": "state",
+      "fromScreenId": "MGV03-S02",
+      "toScreenId": "MGV03-S02",
+      "fromStateId": "MGV03-S02-B",
+      "toStateId": "MGV03-S02-C",
+      "observedWindowSeconds": [
+        1,
+        1.125
+      ],
+      "evidence": [
+        {
+          "requested": 1.0,
+          "actual": 1.0,
+          "file": "frames/frame_00003.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "requested": 1.1,
+          "actual": 1.125,
+          "file": "frames/dense_012.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "observedOutcome": "닫힌 문/갤러리 제목 -> 문 열리고 목록 진입",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "basis": "Visual sequence proven by source frames; click/hold/automatic cause and gameplay condition unconfirmed.",
+      "condition": null,
+      "API": null
+    },
+    {
+      "id": "MGV03-T04",
+      "scope": "state",
+      "fromScreenId": "MGV03-S02",
+      "toScreenId": "MGV03-S02",
+      "fromStateId": "MGV03-S02-C",
+      "toStateId": "MGV03-S02-D",
+      "observedWindowSeconds": [
+        1.208333,
+        1.208333
+      ],
+      "evidence": [
+        {
+          "requested": 1.2,
+          "actual": 1.208333,
+          "file": "frames/dense_013.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "requested": 1.2,
+          "actual": 1.208333,
+          "file": "frames/dense_013.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "observedOutcome": "문 열리고 목록 진입 -> 538 부근/550 다음 순서",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "basis": "Visual sequence proven by source frames; click/hold/automatic cause and gameplay condition unconfirmed.",
+      "condition": null,
+      "API": null
+    },
+    {
+      "id": "MGV03-T05",
+      "scope": "state",
+      "fromScreenId": "MGV03-S02",
+      "toScreenId": "MGV03-S02",
+      "fromStateId": "MGV03-S02-D",
+      "toStateId": "MGV03-S02-E",
+      "observedWindowSeconds": [
+        2.5,
+        3
+      ],
+      "evidence": [
+        {
+          "requested": 2.5,
+          "actual": 2.5,
+          "file": "frames/frame_00006.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "requested": 3.0,
+          "actual": 3.0,
+          "file": "frames/frame_00007.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "observedOutcome": "538 부근/550 다음 순서 -> 중간 단계400/350/325",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "basis": "Visual sequence proven by source frames; click/hold/automatic cause and gameplay condition unconfirmed.",
+      "condition": null,
+      "API": null
+    },
+    {
+      "id": "MGV03-T06",
+      "scope": "state",
+      "fromScreenId": "MGV03-S02",
+      "toScreenId": "MGV03-S02",
+      "fromStateId": "MGV03-S02-E",
+      "toStateId": "MGV03-S02-F",
+      "observedWindowSeconds": [
+        3.5,
+        4
+      ],
+      "evidence": [
+        {
+          "requested": 3.5,
+          "actual": 3.5,
+          "file": "frames/frame_00008.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "requested": 4.0,
+          "actual": 4.0,
+          "file": "frames/frame_00009.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "observedOutcome": "중간 단계400/350/325 -> 낮은 단계300~140 스크롤",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "basis": "Visual sequence proven by source frames; click/hold/automatic cause and gameplay condition unconfirmed.",
+      "condition": null,
+      "API": null
+    },
+    {
+      "id": "MGV03-T07",
+      "scope": "state",
+      "fromScreenId": "MGV03-S02",
+      "toScreenId": "MGV03-S02",
+      "fromStateId": "MGV03-S02-F",
+      "toStateId": "MGV03-S02-G",
+      "observedWindowSeconds": [
+        6.333333,
+        6.416667
+      ],
+      "evidence": [
+        {
+          "requested": 6.3,
+          "actual": 6.333333,
+          "file": "frames/dense_017.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "requested": 6.4,
+          "actual": 6.416667,
+          "file": "frames/dense_018.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "observedOutcome": "낮은 단계300~140 스크롤 -> X 뒤 딤/문 닫힘",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "basis": "Visual sequence proven by source frames; click/hold/automatic cause and gameplay condition unconfirmed.",
+      "condition": null,
+      "API": null
+    },
+    {
+      "id": "MGV03-T08",
+      "scope": "state",
+      "fromScreenId": "MGV03-S02",
+      "toScreenId": "MGV03-S02",
+      "fromStateId": "MGV03-S02-G",
+      "toStateId": "MGV03-S02-H",
+      "observedWindowSeconds": [
+        6.625,
+        6.708333
+      ],
+      "evidence": [
+        {
+          "requested": 6.6,
+          "actual": 6.625,
+          "file": "frames/dense_020.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "requested": 6.7,
+          "actual": 6.708333,
+          "file": "frames/dense_021.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "observedOutcome": "X 뒤 딤/문 닫힘 -> 닫힌 문으로 퇴장",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "basis": "Visual sequence proven by source frames; click/hold/automatic cause and gameplay condition unconfirmed.",
+      "condition": null,
+      "API": null
+    },
+    {
+      "id": "MGV03-T09",
+      "scope": "screen",
+      "fromScreenId": "MGV03-S02",
+      "toScreenId": "MGV03-S03",
+      "fromStateId": "MGV03-S02-H",
+      "toStateId": "MGV03-S03-A",
+      "observedWindowSeconds": [
+        7.208333,
+        7.333333
+      ],
+      "evidence": [
+        {
+          "requested": 7.2,
+          "actual": 7.208333,
+          "file": "frames/dense_026.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "requested": 7.3,
+          "actual": 7.333333,
+          "file": "frames/dense_027.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "trigger": null,
+      "visibleControlCandidate": "bottom native X",
+      "observedOutcome": "닫힌 문으로 퇴장 -> 문 열리며 Main 노출",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "basis": "Visual sequence proven by source frames; click/hold/automatic cause and gameplay condition unconfirmed.",
+      "condition": null,
+      "API": null
+    },
+    {
+      "id": "MGV03-T10",
+      "scope": "state",
+      "fromScreenId": "MGV03-S03",
+      "toScreenId": "MGV03-S03",
+      "fromStateId": "MGV03-S03-A",
+      "toStateId": "MGV03-S03-B",
+      "observedWindowSeconds": [
+        7.416667,
+        7.5
+      ],
+      "evidence": [
+        {
+          "requested": 7.4,
+          "actual": 7.416667,
+          "file": "frames/dense_028.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "requested": 7.5,
+          "actual": 7.5,
+          "file": "frames/frame_00016.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "trigger": null,
+      "visibleControlCandidate": null,
+      "observedOutcome": "문 열리며 Main 노출 -> 메인 안정 복귀",
+      "inputActivationProven": false,
+      "implementationLinkVerified": false,
+      "basis": "Visual sequence proven by source frames; click/hold/automatic cause and gameplay condition unconfirmed.",
+      "condition": null,
+      "API": null
+    }
+  ],
+  "unobservedTargetContract": "Visible unactivated controls retain targetScreenId=null. Existing design demo links are not claimed as video evidence."
+}

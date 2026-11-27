@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P216 · 친구 매칭 · 대표 개발 기획서</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"><link rel="stylesheet" href="./리소스/핵심제안_시뮬_20261102/sim.css"><style>.sample-document :target{scroll-margin-top:132px}.sample-document header .actions{flex-wrap:wrap}.sample-document header p{font-size:14px}.doc-ui-section{margin-top:42px;padding-top:24px;border-top:2px solid #c8dcd5}.doc-ui-section>h3{margin:0 0 10px;font-size:23px;color:#2c5659}.doc-ui-section>p{font-size:14px}.doc-ui-section details{padding:0;margin:16px 0;border:1px solid #c9dcd4;border-radius:16px;overflow:hidden;background:#f4f8f2}.doc-ui-section summary{cursor:pointer;min-height:58px;padding:16px 18px;font-weight:700;color:#315e5c;list-style:none}.doc-ui-section summary:after{content:"+";float:right;font-size:20px}.doc-ui-section details[open]>summary:after{content:"−"}.doc-ui-section summary::-webkit-details-marker{display:none}.doc-ui-section [data-sim-host]{padding:0 18px 18px;min-width:0}.doc-key{margin:18px 0;padding:16px 20px;border-left:6px solid #2f7f86;background:#eef6f5;border-radius:12px;font-size:16px;line-height:1.8}.doc-key b{color:#1f4f55}@media(max-width:680px){.sample-document :target{scroll-margin-top:18px}}</style><script type="module" src="./리소스/핵심제안_시뮬_20261102/friend.mjs"></script></head><body class="sample-document"><main><header><div class="eyebrow">P216 · 핵심제안 개발 · 대표 개발 기획서</div><h1>친구 매칭 · 대표 개발 기획서</h1><p>친구끼리는 같이 채우고, 순위에 닿는 것은 주고받지 않습니다. <a href="#sim-preview">하단 시뮬레이터</a>에서 파트너 이벤트를 굴려 봅니다.</p><div class="actions"><a href="./친구매칭_핵심제안서.md">짝 MD로 읽기</a><a href="../../기획서/산출_기획서_친구매칭_제안_v1_클로드.html">상세 정본 · 책갈피 P205</a><a href="#sim-preview">파트너 이벤트 시뮬레이터</a></div></header><nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+<p><b>이 문서는</b> 친구를 맺고 함께 노는 방법, 그리고 친구 관계가 순위에 닿지 않게 하는 선을 정리한 대표 개발 기획서입니다. P205의 FM1~FM9는 클로드의 제안(검수 대기)이며 사용자 승인으로 읽지 않습니다.</p>
+
+<p><b>보는 법</b> 1장 그림 → 4장 「한 판 순서」 → 하단 「파트너 이벤트 시뮬레이터」 순서로 읽습니다. 세부 제안과 근거는 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%B9%9C%EA%B5%AC%EB%A7%A4%EC%B9%AD_%EC%A0%9C%EC%95%88_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%B9%9C%EA%B5%AC%EB%A7%A4%EC%B9%AD_%EC%A0%9C%EC%95%88_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P205 친구 매칭 제안</a>에 있습니다.</p>
+
+<p><b>지금 상태</b> 친구 매칭 기획은 진행 중입니다. 독립 메모리 시안과 LOCAL 부분 함수는 있으나 실제 호출자(caller)·서버·운영 저장 연결과 실구동 검수는 미확인입니다.</p>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (합침) 이전 작성 당시 기획원문 미확인(핵심제안 목록 한 줄 · 옛 모노 262의 ‘이식 안 됨’은 당시 기록) · 현재 상세 제안: 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%B9%9C%EA%B5%AC%EB%A7%A4%EC%B9%AD_%EC%A0%9C%EC%95%88_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%B9%9C%EA%B5%AC%EB%A7%A4%EC%B9%AD_%EC%A0%9C%EC%95%88_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P205 친구 매칭 제안</a> · 현중 11/01~11/02 지시</p>
+
+<div class="doc-key"><b>핵심</b> 관계는 <b>세 겹</b>(친구 1:1 · 크루 여럿 · 무작위 상대)입니다. 친구끼리는 소식을 보고, 작은 응원 선물을 주고받고, <b>파트너 이벤트</b>로 같은 목표를 함께 채웁니다. 투표권 · 순위 점수는 주고받지 않습니다.</div>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 364" width="750" height="364" role="img" aria-labelledby="title-P216-0"><title id="title-P216-0">설명 흐름도 P216-0</title><defs><marker id="arrow-P216-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,182 L220.5,182 L243,182" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P216-0)"/><path d="M370.45454545454544,150 L487.5,50 L552,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P216-0)"/><path d="M423,156.36893203883494 L487.5,138 L552,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P216-0)"/><path d="M423,207.63106796116506 L487.5,226 L552,226" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P216-0)"/><path d="M370.45454545454544,214 L487.5,314 L552,314" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P216-0)"/><rect x="441.5" y="321" width="92" height="25" rx="7" fill="#f3f8f7"/><text x="487.5" y="339" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">주고받지 않음</text><rect x="18" y="150" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="187" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">나</tspan></text><rect x="243" y="150" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="187" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">친구 · 서로 수락</tspan></text><rect x="552" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="642" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="642" dy="0">소식 피드</tspan></text><rect x="552" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="642" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="642" dy="0">작은 응원 선물</tspan></text><rect x="552" y="194" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="642" y="231" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="642" dy="0">파트너 이벤트</tspan></text><rect x="552" y="282" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="642" y="319" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="642" dy="0">투표권 · 순위</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">나 → 친구 · 서로 수락 / 친구 · 서로 수락 → 소식 피드 / 친구 · 서로 수락 → 작은 응원 선물 / 친구 · 서로 수락 → 파트너 이벤트 / 친구 · 서로 수락 → [주고받지 않음] 투표권 · 순위</p></figure>
+
+
+
+<h3 id="콘텐츠-경계">콘텐츠 경계</h3>
+
+<ul>
+<li>맡는 것: 친구 맺기 · 소식 · 선물 · 카드 트레이드 상대 · 파트너 이벤트 · 친구 추천.</li>
+<li>다른 문서에 맡기는 것: 크루 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P221 응원 크루</a> · 게릴라 상대 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B2%8C%EB%A6%B4%EB%9D%BC%EA%B3%B5%EC%97%B0_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B2%8C%EB%A6%B4%EB%9D%BC%EA%B3%B5%EC%97%B0_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P220 게릴라 공연</a>.</li>
+</ul>
+
+<h3 id="현재-기준과-목표">현재 기준과 목표</h3>
+
+<div class="table-scroll"><table><thead><tr><th>관계</th><th>무엇</th></tr></thead><tbody><tr><td>친구 1:1</td><td>서로 수락 · 친구 코드 · 초대 링크</td></tr><tr><td>크루 여럿</td><td>응원 크루(P221)</td></tr><tr><td>무작위 상대</td><td>게릴라 · 무대 대결(서버 매칭)</td></tr></tbody></table></div>
+
+<ul>
+<li>친구에게 투표 부탁은 알림으로만 보내고 하루 횟수를 제한합니다. 친구 수는 순위에 직접 들어가지 않습니다.</li>
+<li>친구 추천 = 같은 언어권 · 비슷한 단계 · 비슷한 활동 시간대. 연락처 불러오기는 별도 동의일 때만.</li>
+</ul>
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>이 콘텐츠에서의 역할</th><th>의존 방향</th></tr></thead><tbody><tr><td>이전 작성의 출발 자료: 핵심제안 목록 「친구와 매칭해 함께 노는 기능」(당시 기획원문 미확인 · 현재 상세 제안은 P205)</td><td>기준</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%B9%9C%EA%B5%AC%EB%A7%A4%EC%B9%AD_%EC%A0%9C%EC%95%88_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%B9%9C%EA%B5%AC%EB%A7%A4%EC%B9%AD_%EC%A0%9C%EC%95%88_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P205 친구 매칭 제안</a></td><td>상세 정본(결정 · 근거 · 조사)</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P221 응원 크루</a></td><td>관계 두 번째 겹</td><td>양방향</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P207 월드 페스티벌</a></td><td>친구 곡은 채점단 배정 제외</td><td>제약</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: 친구 탭 → 친구 맺기 · 소식 → 파트너 이벤트 · 스샷 미완 · 이식 비교 해당 없음</p>
+
+<ul>
+<li>실행: 하단 friend.mjs는 메모리·DOM에서 움직이는 독립 시안입니다. 실제 파트너 기여·보상·선물 API·저장은 이 시안에 연결되지 않습니다.</li>
+<li>이 문서 하단 <b>파트너 이벤트 시뮬레이터</b>는 한 번 굴리면 표시된 인원 모두에게 임시 난수를 더해 목표 막대를 채웁니다. 숫자는 모두 임시 시안이며 실제 각자의 기여 수신을 검수한 결과가 아닙니다.</li>
+</ul>
+
+<p>별도의 socialFriend/localMatch.ts에는 친구 코드·요청·수락/거절·제거·초대 stub의 LOCAL 상태 함수가 있습니다. 이 부분 함수의 존재와 현재 본게임의 실제 호출자·서버·운영 저장 연결은 구분하며, 후자는 이번 읽기 감사에서 확인하지 않았습니다.</p>
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서-임시-시안">한 판 순서 (임시 시안)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>이벤트 기간에 친구와 짝</td></tr><tr><td>입력·출력</td><td>입력 = 각자 굴림 / 출력 = 함께 채운 목표 · 보상</td></tr><tr><td>상태와 전이</td><td>짝 → 각자 굴림 → 목표 채움 → 보상</td></tr><tr><td>판정</td><td>각자 몫을 더함</td></tr><tr><td>오류·예외</td><td>친구가 쉬어도 내 몫은 쌓임</td></tr><tr><td>저장·복원</td><td>친구 목록은 계정 · 이벤트 진행은 시즌</td></tr><tr><td>다른 모듈 연결</td><td>크루 · 게릴라 · 페스티벌</td></tr></tbody></table></div>
+
+<h3 id="선물-카드-트레이드-임시-시안-현중-1102-카드는-트레이드">선물 · 카드 트레이드 (임시 시안 · 현중 11/02 「카드는 트레이드」)</h3>
+
+<p>작은 응원 선물만 주고받습니다(횟수는 발란스 대기). 투표권 · 지분 · 입장권은 선물할 수 없습니다. 아이돌 카드는 <b>중복분만</b> 다른 유저와 <b>같은 단계 카드 1장 ↔ 1장</b>으로 바꿀 수 있습니다(현중 11/02 · 돈 · 코인 · 유료 재화 없음 · 누구와 · 하루 몇 번은 이 친구 기획이 끝난 뒤 정함). 능력에 쓴 1장은 그 아이돌 전용이라 옮기지 않습니다. 규칙은 <a href="/docs/planning/_%EC%9D%B4%EC%A0%84%EA%B8%B0%ED%9A%8D_%EB%B3%B4%EA%B4%80/20261116_%EC%B9%B4%EB%93%9C%EC%98%9B%EA%B5%AC%EC%A1%B0/_%EC%9D%B4%EC%A0%84%EA%B8%B0%ED%9A%8D_%EB%B3%B4%EA%B4%80/20261116_%EC%B9%B4%EB%93%9C%EC%98%9B%EA%B5%AC%EC%A1%B0/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%B9%B4%EB%93%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/_%EC%9D%B4%EC%A0%84%EA%B8%B0%ED%9A%8D_%EB%B3%B4%EA%B4%80/20261116_%EC%B9%B4%EB%93%9C%EC%98%9B%EA%B5%AC%EC%A1%B0/_%EC%9D%B4%EC%A0%84%EA%B8%B0%ED%9A%8D_%EB%B3%B4%EA%B4%80/20261116_%EC%B9%B4%EB%93%9C%EC%98%9B%EA%B5%AC%EC%A1%B0/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%B9%B4%EB%93%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P225 카드</a>.</p>
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>친구 목록 · 수락 · 소식 피드 · 선물 · 파트너 이벤트 · 추천.</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<p>친구 탭 · 소식 · 파트너 이벤트 화면.</p>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<ul>
+<li>친구 수 상한 · 이벤트 인원 · 보상 — 발란스 대기</li>
+<li>옛 262 친구 매칭 원문을 찾으면 다시 맞춤</li>
+</ul>
+
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<div class="table-scroll"><table><thead><tr><th>미리보기</th><th>이름·사용 위치</th><th>동작·상태</th><th>파일·테이블 키</th><th>출처·준비 상태</th></tr></thead><tbody><tr><td>미제작</td><td>친구 탭 · 파트너 이벤트 · 카드 바꾸기</td><td>짝 · 막대 · 1:1 교환</td><td>—</td><td>미제작</td></tr><tr><td><a href="#sim-preview">하단 시뮬레이터</a></td><td>파트너 이벤트 시뮬레이터</td><td>친구 수 · 굴리기</td><td>핵심제안_시뮬_20261102/friend.mjs</td><td>시안 있음</td></tr></tbody></table></div>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<p>해당 없음.</p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일·보기</th><th>역할</th><th>주키·참조</th><th>값</th><th>담당</th></tr></thead><tbody><tr><td>friend_partner_event (후보)</td><td>파트너 이벤트 목표 · 보상</td><td>이벤트 id</td><td>(신규) 결정 대기</td><td>표 담당</td></tr></tbody></table></div>
+
+<p>friend_partner_event는 기존 후보명과 결정 대기를 유지합니다. 이 이름만으로 실존 CSV 공급·로더 연결을 확인한 것은 아니며, friend.mjs의 임시 목표·난수는 운영 표값이 아닙니다.</p>
+
+<p>주사위 환산: 해당 없음.</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>상태</th><th>확인 방법·증거</th><th>다음 작업</th></tr></thead><tbody><tr><td>기획(이 문서 · 책갈피 상세)</td><td>기획 중</td><td>P205 · 이 문서</td><td>현중 확인</td></tr><tr><td>파트너 이벤트 시뮬레이터</td><td>개발 끝(시안)</td><td>이 문서 하단</td><td>실제 표 연결</td></tr><tr><td>게임 시뮬레이터 모듈 · 본게임</td><td>기획 중 · 작업전</td><td>—</td><td>표 확정 뒤</td></tr></tbody></table></div>
+
+<p>위 ‘개발 끝(시안)’은 독립 화면 시안의 상태입니다. 시안의 ‘완성·모두 보상’과 ‘보냈어요’는 화면 문구이며 실제 보상 지급·선물 전송의 증거가 아닙니다. P205 FM1~FM9의 제안 상태와 기존 날짜 있는 정책·발란스 대기를 유지하며, 현재 운영 API·저장 writer 연결과 실제 구동·저장 검수는 미확인으로 남깁니다.</p>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<p>친구끼리 투표권 · 순위 점수를 주고받을 수 없고, 친구 곡이 채점단에 배정되지 않아야 합니다.</p>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p>세부 결정과 근거는 책갈피 P205에 둡니다. 원문이 없어 새로 씁니다.</p>
+
+<details><summary>작업 기록</summary>
+
+<p>대표 개발 기획서(신규 · 핵심제안서). 상세 정본 P205. 변경 이력은 친구매칭_핵심제안서.log.md.</p>
+
+<p>2026-11-04 · codex · 관련 원문과 허용 코드의 정적 읽기를 바탕으로 제안·LOCAL 부분 함수·독립 시안·운영 미확인 범위를 구분했습니다. 정책·수치·표·도식과 시안 코드는 유지했습니다. 실제 게임·지급·저장 검수는 하지 않았으며 직전 MD·HTML 전문은 짝 로그에 보존합니다.</p>
+
+</details>
+</section><section class="doc-ui-section" aria-label="하단 시뮬레이터"><h3>파트너 이벤트 시뮬레이터 · 임시 시안</h3><p>친구 수를 고르고 굴리면 각자 얻은 몫이 합동 무대 준비 막대를 함께 채웁니다.</p><details id="sim-preview"><summary>시뮬레이터 펼치기 · 친구 수 · 굴리기</summary><div data-sim-host="friend"></div></details></section><details class="history"><summary>로그 · 변경 이력과 이전 기록</summary><p><a href="./친구매칭_핵심제안서.log.md" target="_blank" rel="noopener">이 문서의 로그 열기</a></p></details></main></body></html>

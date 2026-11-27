@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>인게임 HUD 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 12px; }
+  .phone { position:relative; width:390px; height:844px; margin:0 24px 32px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .ico { display:inline-block; width:14px; height:14px; border:1.5px solid var(--ln); border-radius:3px; vertical-align:-2px; margin-right:4px; background:var(--box); }
+  .ico.r { border-radius:50%; }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); }
+  .arrow { position:absolute; width:14px; height:14px; border:1.5px solid var(--ln); border-radius:50%; background:var(--box); font-size:8px; line-height:11px; text-align:center; }
+  .ev { position:absolute; width:64px; height:74px; background:rgba(255,255,255,.85); border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; font-size:11px; text-align:center; }
+  .ev i { width:28px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .badge { position:absolute; top:8px; right:12px; width:16px; height:16px; border-radius:50%; border:1.5px solid var(--ln); background:var(--box); font-size:11px; line-height:13px; text-align:center; }
+  .bar { height:10px; border:1.5px solid var(--ln); border-radius:5px; background:linear-gradient(90deg,var(--fill) 66%,var(--box) 66%); }
+</style>
+</head>
+<body>
+<h1>인게임 HUD · 와이어프레임 1차 (390×844)</h1>
+
+<div class="phone">
+  <!-- 위쪽 줄 0~50 -->
+  <div class="b" style="left:8px;top:6px;width:38px;height:38px;border-radius:50%;border-width:3px">얼굴</div>
+  <div class="a" style="left:52px;top:9px"><span class="val">팀 이름</span><br><span class="sub">등급</span></div>
+  <div class="a val" style="left:118px;top:17px" title="엔터파워"><span class="ico"></span>0/360</div>
+  <div class="a val" style="left:190px;top:17px" title="루비"><span class="ico" style="transform:rotate(45deg) scale(.85)"></span>00,000</div>
+  <div class="a val" style="left:262px;top:17px" title="팬"><span class="ico r"></span>000,000</div>
+  <div class="b" style="left:348px;top:8px;width:34px;height:34px">☰</div>
+  <div class="arrow" style="left:372px;top:32px">▼</div>
+  <div class="line" style="top:50px"></div>
+
+  <!-- 보드: 위쪽 줄과 띠 사이 전체. 이벤트 칸 · 앨범 상자는 그 위에 겹쳐 놓임 -->
+  <div class="a" style="left:0;top:51px;width:100%;height:426px;background:repeating-linear-gradient(45deg,#eceef0 0 10px,#e3e5e8 10px 20px)"></div>
+  <div class="a sub" style="left:0;width:100%;top:300px;text-align:center;font-size:13px">보드 (전체 배경)</div>
+
+  <!-- 좌우 이벤트 칸 61~472 -->
+  <div id="events"></div>
+
+  <!-- 앨범·페스티벌 상자 61~132 -->
+  <div class="b" style="left:78px;top:61px;width:234px;height:71px;border-radius:12px;flex-direction:column;align-items:stretch;padding:0">
+    <div style="flex:1;display:flex;align-items:center;gap:6px;padding:0 8px;border-bottom:1px solid #c9ccd1">
+      <span class="ico" style="width:24px;height:24px;margin:0"></span>
+      <span style="text-align:left"><span class="val">내 앨범</span> <span class="sub">0/8</span><br><span class="sub">000위</span></span>
+      <span style="margin-left:auto;text-align:right"><span class="sub">한 바퀴 보상</span><br><span class="ico r" style="width:10px;height:10px"></span><span class="ico" style="width:10px;height:10px"></span><span class="ico" style="width:10px;height:10px"></span></span>
+    </div>
+    <div style="flex:1;display:flex;align-items:center;gap:6px;padding:0 8px">
+      <span style="text-align:left"><span class="val">주간 페스티벌</span><br><span class="sub">시작까지 0일 00:00:00</span></span>
+      <span class="val" style="margin-left:auto">💧00</span>
+      <span class="pill" style="font-size:12px;padding:2px 8px">레이스</span>
+    </div>
+  </div>
+
+
+  <!-- 띠 477~527 -->
+  <div class="line" style="top:477px"></div>
+  <div class="a val" style="left:12px;top:493px;font-size:16px"><span class="ico r"></span>000,000,000</div>
+  <div class="a val" style="left:168px;top:493px;font-size:16px"><span class="ico"></span>00/00</div>
+  <div class="b" style="left:252px;top:484px;width:130px;height:36px;justify-content:flex-start;gap:6px;padding:0 8px">
+    <div class="bar" style="flex:1"></div>
+    <span style="border-left:1px solid #c9ccd1;height:20px"></span>
+    <span class="ico r" style="margin:0"></span><span class="val">00</span>
+  </div>
+  <div class="arrow" style="left:372px;top:478px">▲</div>
+  <div class="line" style="top:527px"></div>
+
+  <!-- 필러 527~697 -->
+  <div class="b soft" style="left:8px;top:535px;width:374px;height:154px;border-style:dashed;border-color:var(--soft);color:var(--soft);background:transparent">필러 박스 (칸 도착 때)</div>
+
+  <!-- 가운데 줄 697~774 -->
+  <div class="line" style="top:697px"></div>
+  <div class="b" style="left:8px;top:705px;width:72px;height:60px;font-size:16px;font-weight:700">×5</div>
+  <div class="b" style="left:86px;top:705px;width:296px;height:60px;flex-direction:column;gap:2px">
+    <span class="val" style="font-size:17px">굴리기</span>
+    <span class="sub">주사위 00 · 다음 충전 00:00</span>
+  </div>
+
+  <!-- 아래 메뉴 774~844 -->
+  <div class="line" style="top:774px"></div>
+  <div id="tabs"></div>
+</div>
+
+<script>
+// 좌우 이벤트 칸(기획서 4-8절): 아이콘 · 이름 · 남은 시간. 세로 61~472
+const LEFT = ["사다리 특가", "황금 바자", "세일·행운 상자", "골라담기", "오늘의 3종"];
+const RIGHT = ["시즌 순위", "미니게임", "미니게임", "미니게임", "3일 마일스톤"];
+const gap = (472 - 61 - 74 * 5) / 4;
+document.getElementById("events").innerHTML = [[LEFT, 6], [RIGHT, 320]].map(([names, x]) =>
+  names.map((n, i) => `<div class="ev" style="left:${x}px;top:${61 + i * (74 + gap)}px"><i></i>${n}<span class="pill">0d</span></div>`).join("")).join("");
+
+// 아래 메뉴 6칸(4-7절): 미션은 알림 예시, 정보는 펼침 화살표
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+document.getElementById("tabs").innerHTML = TABS.map((t, i) =>
+  `<div class="tab" style="left:${i * 65}px"><i></i>${t}` +
+  (t === "미션" ? '<span class="badge">0</span>' : "") +
+  (t === "정보" ? '<span class="arrow" style="top:4px;left:26px">▲</span>' : "") + `</div>`).join("");
+</script>
+</body>
+</html>

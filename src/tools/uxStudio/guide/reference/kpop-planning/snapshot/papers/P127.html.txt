@@ -1,0 +1,166 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P127 · 오디션 히스토리 · 10/14 정리 · 보류 처리 때 옮긴 이전 내용</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../콘텐츠별_v03/content.css"></head><body><main><header><div class="eyebrow">P127 · 히스토리 · P100 10/14</div><h1>오디션 히스토리 · 10/14 정리 · 보류 처리 때 옮긴 이전 내용</h1><span class="pill">히스토리</span><p>지우지 않고 옮긴 이전 내용입니다. 지금 기준은 <a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P100&amp;plan=planning_development_plan_audition">P100 대표 기획서</a>입니다.</p></header><section class="part hist"><p>상태: 기록 · 지우지 않음(작성규칙 P86)</p>
+<p>P100 오디션 대표 기획서를 10/14에 지금 시뮬 기준으로 정리하면서 바꾼 옛 줄을 <strong>원문 그대로</strong> 옮겼습니다. 지금 기준은 <a href="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/오디션_기획서.md">P100 대표 기획서</a>입니다. 수정 전 파일 전체 백업: <code>docs/planning/_backup/20261014_클로드/1130_P100오디션정리/</code>.</p>
+</section>
+<section class="part hist"><h2>A. 3장 화면 흐름 줄 · 시뮬 스샷 (10/12 · 스샷은 10/01 화면)</h2>
+<p>화면 흐름: 게임 첫 실행 → [이 화면] 첫 입장 오디션(16명 서바이벌) → <a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P96&amp;plan=planning_development_plan_audition#mons-cutscene">P96 몬스 획득 컷씬</a> → 사옥 · 스샷 <a href="/docs/planning/삼중AI_공용_20260929/산출/시뮬레이터/스샷/05_오디션.png">시뮬 오디션</a> · 이식 비교 해당 없음(모노에 없는 신규)</p>
+<p><img alt="시뮬 오디션" src="/docs/planning/삼중AI_공용_20260929/산출/시뮬레이터/스샷/05_오디션.png" /></p>
+</section>
+<section class="part hist"><h2>B. 1장 「현재 기준과 목표」 옛 줄 (10/12)</h2>
+<div class="table-wrap"><table><tbody><tr><td>카드 정보</td><td>앞면 = 최종 재능 4축 다이아몬드(위 보컬 · 오른쪽 춤 · 아래 랩 · 왼쪽 비주얼) · 뒤집으면 현재 능력</td><td>확정(시뮬 v01)</td></tr><tr><td>한 명 시작 · 사옥 짧은 오디션</td><td>사옥이 커질 때 둘 중 하나로 멤버 추가</td><td>임시 시안(시뮬 없음)</td></tr></tbody></table></div>
+
+</section>
+<section class="part hist"><h2>C. 영상 콘티 · 연출 목록의 「판 다시」 관련 옛 줄 (10/07)</h2>
+<p>A1~A5가 오디션 본편, A6~A12가 확정 연출(약 4초)입니다.</p>
+<div class="table-wrap"><table><tbody><tr><td>A4 둘 중 하나(반복)</td><td>이용자 시간</td><td>바스트 · 정면(위 · 아래 카드)</td><td>고정 · 숨 쉬듯 1.00↔1.02 줌</td><td>카드 속 아이돌 card_idle · 탭하면 card_greet(특기별 손짓) · 특기 라벨</td><td>첫 대진에서만 나 (속마음) 「목소리는 이쪽, 눈빛은 저쪽… 그래도 이 사람이다.」(1-2) · 자막 〔 남은 판 {값}/3 〕</td><td>BGM 루프 · 선택 「탁」</td><td>고른 카드 통 튐 · 진 카드는 회전하며 날아감(0.4초) · 다음 대진이 아래에서 올라옴</td></tr><tr><td>A5 판 다시(골랐을 때)</td><td>1.2초</td><td>풀샷 · 정면</td><td>짧은 흔들림</td><td>모든 카드가 한꺼번에 뒤집혀 섞임 · 남은 판 램프 하나 꺼짐</td><td>마지막 판이 되면 자막 〔 다시 돌리기를 모두 썼습니다 〕 → 나 (속마음) 「마지막까지 남은 사람을 믿자.」(1-3)</td><td>카드 섞기 · 램프 「툭」</td><td>A3으로 돌아감</td></tr><tr><td>A11 확정 질문</td><td>3초~</td><td>바스트 · 정면</td><td>고정</td><td>카드 속 아이돌이 대표를 보며 고개 끄덕(card_greet) · 확정 / 판 다시 버튼이 아래에서 올라옴</td><td>자막 「이 아이로 할까요?」(시안) · 확정 누르면 확인창 「계약하면 바꿀 수 없어요」(시안)</td><td>버튼 등장 「뿅」</td><td>확정 탭</td></tr></tbody></table></div>
+
+<p>연출 목록: | 판 다시 | 카드가 한꺼번에 뒤집혀 섞임 · 램프 하나 꺼짐 | UI 애니 |</p>
+</section>
+<section class="part hist"><h2>D. 10/14 보류 처리 때 바꾼 옛 줄 (옛 안 → 10/14 12:4x)</h2>
+<p>시뮬 문구 옛 값: <code>ui_text.csv</code> equal_start 「재능 총합 200 · 시작 능력 총합 40」 · stats_note 「재능은 성장 상한 · 현재 능력은 훈련으로 성장」.</p>
+<p><strong>D1 맨 위 한 줄 요약</strong></p>
+<p>→ 멤버는 오디션으로 늘어남(시점 · 방식 「미완」).</p>
+<p><strong>D2 1장 「카드 정보」 줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>카드 정보</td><td>앞면 = 최종 재능 4축 다이아몬드(위 보컬 · 오른쪽 춤 · 아래 랩 · 왼쪽 비주얼) · 공통 눈금 0~100 · 꼭짓점마다 재능 숫자 · 칸 제목 「최종 재능 · 총합 200 · 0—100」 · 뒤집으면 현재 능력 막대(「9 / 85」) · 「이야기」 버튼</td><td>확정(시뮬 v01 · 10/14 앞면 수정 · 오디션-시뮬레이터재능표시수정)</td></tr></tbody></table></div>
+
+<p><strong>D3 1장 「재능의 뜻」 줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>재능의 뜻</td><td>재능 = 성장 속도 · 적성(흡수율 · 세부 비중에만 씀 · 상한 아님) · 시뮬 대결 화면 문구 「재능은 성장 상한」은 옛 뜻이라 고칠 대상 「미완」</td></tr></tbody></table></div>
+
+<p><strong>D4 1장 「성장 단계」 줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>성장 단계</td><td>영입 뒤 0~4단계 · 단계마다 이야기 1토막 · 검토용 「성장 단계 +1」 단추(검토 도구 · 현중 10/14 09:30 「남겨 둠」)</td><td>임시 시안(시뮬 v01 · 10/13 · <code>growth_step.csv</code> · 1~4단계 값 「미완」 비앙카)</td></tr></tbody></table></div>
+
+<p><strong>D5 1장 「연습 미니게임 후보」 줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>연습 미니게임 후보</td><td>7개 후보 · 대표 4축 보상 몫 · 재능 : 조작 비율 · 결과 화면 패널 · 게임 화면 없음</td><td>임시 시안(시뮬 v01 · 10/13 · <code>minigame.csv</code> · 개수 · 규칙 「미완」 · 현중 「최소 4개 · 전부 기획」)</td></tr></tbody></table></div>
+
+<p><strong>D6 1장 「멤버 추가」 줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>멤버 추가</td><td><strong>오디션으로 추가</strong>(현중 10/14). 처음에는 혼자 시작하고, 멤버가 늘 때마다 결성 연출 · 오디션이 열리는 시점 · 방식 · 유저가 고르는 것은 「미완」(새로 기획). 옛 안 「사옥이 커질 때 둘 중 하나」는 임시 시안으로 남김</td><td>(신규) 결정(현중 10/14) · 시점 · 방식 「미완」 · 시뮬 없음</td></tr></tbody></table></div>
+
+<p><strong>D7 1장 순서 8 · 9</strong></p>
+<ol>
+<li>영입 뒤 성장 단계 · 이야기 · 미니게임 후보(시뮬 검토용) → 능력 성장은 P107</li>
+<li>멤버 추가 = 오디션(시점 · 방식 「미완」)</li>
+</ol>
+<p><strong>D8 3장 조작 6c</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>6c</td><td>결과 화면 「검토 도구」 → 「검토용 · 성장 단계 +1」</td><td>성장 단계 +1 · 새 이야기 토막 열림 · 「새 이야기」 표시 · 그래프 현재 값 반영</td></tr></tbody></table></div>
+
+<p><strong>D9 3장 조작 6b</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>6b</td><td>결과 화면 「연습 미니게임 · 후보」 카드 누르기</td><td>보상 창(올라가는 능력 · 재능 : 조작 · 입력 · 원본 장면) · 게임 화면은 없음</td></tr></tbody></table></div>
+
+<p><strong>D10 3장 「멤버 추가 시뮬 없음」 줄</strong></p>
+<ul>
+<li>멤버 추가 오디션(사옥 짧은 오디션 옛 안 포함)은 시뮬에 없습니다(미구현).</li>
+</ul>
+<p><strong>D11 4장 한 판 순서 7a</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>7a 영입 뒤 · 검토용</td><td>성장 단계 0~4 · 이야기 열림 · 미니게임 후보 보기</td><td>시뮬 검토용 · 본게임 성장은 P107</td><td><code>growth_step.csv</code> · <code>minigame.csv</code> · <code>kpopmonsters.audition.growth.v01</code></td></tr></tbody></table></div>
+
+<p><strong>D12 4장 「카드 맨 아래 띠」 줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>카드 맨 아래 띠</td><td>「재능 총합 200 · 시작 능력 총합 40」(<code>ui_text.csv</code> equal_start)</td><td>고정 문구</td><td>확정(시뮬 v01) · 그래프 값으로 오해 → 바꿀지 「미완」</td></tr></tbody></table></div>
+
+<p><strong>D13 4장 앞면 두 겹 · 축 아이콘 줄</strong></p>
+<ul>
+<li>옛 안 → 10/13: 앞면 두 겹(재능 선 · 현재 채움)은 10/14 지시에 따라 앞면에서 뺐습니다(현재 능력은 뒷면 막대). 앞면 두 겹 폐기 확정 · 축 아이콘 다시 넣기 · 현재 능력을 그래프에 어떻게 보일지(현중 09:22 「현재는 진하게 · 가능성은 점선」 · 09:33 「능력별 개별 성장」)는 「미완」.</li>
+</ul>
+<p><strong>D14 4장 이야기 · 성장 단계 표</strong></p>
+<h3>이야기 · 성장 단계 (신규) · 임시 시안(시뮬 v01 · 10/13)</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>여는 이야기</th>
+<th>성장 값(주사위 · 성장량)</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>소개(영입 직후)</td>
+<td>0 · 0</td>
+<td>시작값 예시</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1토막</td>
+<td>「미완」(비앙카 시뮬)</td>
+<td>값 미정</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2토막</td>
+<td>「미완」</td>
+<td>값 미정</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3토막</td>
+<td>「미완」</td>
+<td>값 미정</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4토막(마지막)</td>
+<td>「미완」</td>
+<td>값 미정</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>D15 4장 「P107 단계와 잇기 미완」 줄</strong></p>
+<ul>
+<li>본게임 성장 단계는 P107 「멤버 단계」(연습생 → 데뷔 → 라이징 스타 → 톱스타 → 월드스타) · 「능력 등급」과 맞춰야 합니다. 이 5단계(0~4)와 P107 단계를 어떻게 잇는지는 「미완」.</li>
+</ul>
+<p><strong>D16 4장 미니게임 소제목 · 첫 문단</strong></p>
+<h3>연습 미니게임 후보 7 (신규) · 임시 시안(시뮬 v01 · 10/13)</h3>
+<p>영입한 멤버를 키우는 연습 미니게임 후보입니다. 오디션 승패와는 따로입니다. 결과 화면 아래 패널과 보상 창만 있고 게임 화면은 없습니다.</p>
+<p><strong>D17 4장 「합치지 않음」 줄</strong></p>
+<ul>
+<li>P107의 미니게임 4종(음 맞추기 · 박자 스텝 · 플로우 타기 · 엔딩 포즈 · 세부 12 기준)과 이 후보 7개는 아직 하나로 합치지 않았습니다. 몇 개를 넣을지 · 어느 것으로 · 규칙 · 화면은 「미완」(현중 10/14 「최소 4개 · 전부 기획」).</li>
+</ul>
+<p><strong>D18 4장 멤버 추가 오디션 머리</strong></p>
+<h3>멤버 추가 오디션 (신규) · 결정(현중 10/14) · 시점 · 방식 「미완」</h3>
+<p>멤버는 오디션으로 추가합니다(현중 10/14). 처음에는 혼자 시작하고, 멤버가 늘 때마다 결성 연출이 나옵니다. 오디션이 열리는 시점 · 방식과 유저가 고르는 것은 「미완」(새로 기획). 아래 「사옥 짧은 오디션」은 10/07 옛 안(임시 시안)으로 남깁니다. 결성 연출 · 팀 능력 표시는 P107(멤버 결성)과 맞춥니다.</p>
+<p><strong>D19 4장 필요 시스템 2줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>이야기 · 성장 단계(검토용)</td><td>단계 0~4 · 이야기 토막 열림 · 새 이야기 표시</td><td><code>growth_step.csv</code> · <code>story.csv</code> · <code>growth.mjs</code></td><td>임시 시안(시뮬 v01 · 10/13)</td></tr><tr><td>미니게임 후보 패널</td><td>후보 7 · 보상 창</td><td><code>minigame.csv</code></td><td>임시 시안(시뮬 v01 · 10/13) · 게임 화면 미구현</td></tr></tbody></table></div>
+
+<p><strong>D20 4장 트리거 줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>멤버 추가 오디션 트리거</td><td>멤버 추가 오디션을 여는 때(옛 안: 사옥 증축)</td><td>—</td><td>결정(현중 10/14 · 오디션으로 추가) · 시점 「미완」</td></tr></tbody></table></div>
+
+<p><strong>D21 4장 남은 결정 7줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>멤버 추가 오디션 시점 · 방식 · 유저가 고르는 것</td><td>「미완」(현중 10/14 · 새로 기획)</td></tr><tr><td>연습 미니게임 개수 · 고르기 · 규칙 · 화면</td><td>「미완」(현중 10/14 「최소 4개 · 전부 기획」) · P107 미니게임 4종과 합치기</td></tr><tr><td>성장 단계 1~4 값 · P107 멤버 단계와 잇기</td><td>「미완」(비앙카 시뮬)</td></tr><tr><td>시뮬 문구 「재능은 성장 상한」</td><td>「미완」 · 10/14 재능 = 성장 속도 · 적성과 다름</td></tr><tr><td>카드 맨 아래 「재능 총합 200 · 시작 능력 총합 40」 문구</td><td>그대로 / 바꿈(「미완」)</td></tr><tr><td>그래프 축 아이콘</td><td>다시 넣음 / 뺌(「미완」)</td></tr><tr><td>앞면 두 겹(재능 선 · 현재 채움) 폐기 확정 · 현재 능력 표기</td><td>「미완」(현중 09:22 · 09:33 · P107 능력 등급과 함께)</td></tr></tbody></table></div>
+
+<p><strong>D22 5장 미니게임 화면 줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>미니게임 화면</td><td>후보 7개(개수 「미완」)</td><td>미제작입니다.</td></tr></tbody></table></div>
+
+<p><strong>D23 6장 CSV 3줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td><code>data/audition_sim/v01/growth_step.csv</code></td><td>성장 단계 0~4 · 이야기 열림</td><td><code>audition_growth_step_id</code></td><td>(신규) 임시 시안(10/13) · 1~4단계 값 「미완」</td><td>시뮬</td></tr><tr><td><code>data/audition_sim/v01/minigame.csv</code></td><td>연습 미니게임 후보 7 · 보상 몫 · 재능 : 조작</td><td><code>audition_minigame_id</code></td><td>(신규) 임시 시안(10/13) · 개수 · <code>growth_point</code> 「미완」</td><td>시뮬</td></tr><tr><td><code>data/audition_sim/v01/ui_text.csv</code></td><td>화면 문구 60줄</td><td><code>key</code></td><td>(신규) 확정(시뮬 v01)</td><td>시뮬</td></tr></tbody></table></div>
+
+<p><strong>D24 7장 상태 3줄</strong></p>
+<div class="table-wrap"><table><tbody><tr><td>이야기 · 성장 단계(검토용)</td><td>개발 중(시뮬 v01 · 10/13)</td><td>3장 스샷 6a · 6c · 이스라트 10/13 통과</td><td>값 · P107 단계와 잇기</td></tr><tr><td>연습 미니게임 후보 7</td><td>기획 중(후보 패널만 시뮬)</td><td>3장 스샷 6b · 이스라트 10/13 통과</td><td>개수 · 규칙 · 화면 기획</td></tr><tr><td>멤버 추가 오디션</td><td>기획 중(결정: 오디션으로 추가)</td><td>—</td><td>시점 · 방식 기획</td></tr></tbody></table></div>
+
+<p><strong>D25 7장 수락 기준 4번째 줄</strong></p>
+<ul>
+<li>결과 화면에서 이야기 · 미니게임 후보 · 검토용 성장 단계 +1이 돌고, 성장 단계가 오르면 새 이야기가 열립니다.</li>
+</ul>
+<p><strong>D26 1장 개요 문단 끝 문장 (12:5x 링크 점검 때 발견)</strong></p>
+<p>한 명으로 사옥에서 시작하고, 사옥이 커질 때 짧은 오디션으로 멤버를 늘립니다.</p>
+</section>
+<section class="part hist"><h2>E. 10/14 13:4x 「04-1 멤버 추가」 탭 만들 때 바꾼 옛 줄 (옛 안 → 10/14 13:4x)</h2>
+<p><strong>E1 4장 멤버 추가 절 제목(13:2x 판)</strong></p>
+<h3>멤버 추가 오디션 · 사옥 단계로 칸 열림 (신규) · 결정(현중 10/14 · 이스라트 13:24) · 방식 (신규) 임시 시안(10/14 클로드)</h3>
+<p><strong>E0 참고 · 12:4x 「멤버 단계마다 1번」 판</strong></p>
+<p>멤버 단계 기준 판의 옛 줄은 이올카 13:3x 수정 때 바뀌었습니다. 원문은 백업 <code>docs/planning/_backup/20261014_클로드/1255_md링크/오디션_기획서.md</code>에 그대로 있습니다.</p>
+</section>
+<section class="part hist"><h2>F. 10/14 14:5x 「04-2 진화」 때 바꾼 옛 줄 (옛 안 → 10/14 14:5x)</h2>
+<p><strong>F1 4장 멤버 추가 A절 끝 줄</strong></p>
+<ul>
+<li>3명(그룹 능력 120)이면 데뷔 기준 <code>group_ability_min</code> 100을 넘습니다. 데뷔는 데뷔곡도 있어야 하므로(P107) 멤버 수만으로 데뷔하지는 않습니다.</li>
+</ul>
+</section>
+<section class="part hist"><h2>문서 정보·변경 이력</h2>
+<ul>
+<li>P100 히스토리 10/14 · 짝 대표 문서 <code>콘텐츠별_v03/오디션_기획서.md</code> · 이전 히스토리는 P118</li>
+<li>10/14 11:4x · 클로드 · 정리 때 옮긴 원문 A~C</li>
+<li>10/14 12:4x · 클로드 · 보류 처리 때 바꾼 옛 줄 D(25건) · 도구 문서 번호 P127로 등록</li>
+<li>10/14 12:5x · 클로드 · 개요 문단 옛 문장 D26 추가</li>
+<li>10/14 13:4x · 클로드 · 「04-1 멤버 추가」 탭 만들 때 옮긴 옛 줄 E</li>
+<li>10/14 14:5x · 클로드 · 옛 줄 F1</li>
+</ul></section>
+</main><script src="../작성기준_v02/document.js"></script><script src="../콘텐츠별_v03/development-links.js"></script></body></html>

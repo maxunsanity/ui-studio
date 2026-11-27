@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P174 · 뉴런</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"></head><body class="sample-document"><main><header><div class="eyebrow">P174 · 개발 기획</div><h1>뉴런</h1><div class="actions"><a href="./뉴런_기획서.md">짝 MD를 봅니다</a><a href="/docs/planning/game-simulator.html?module=simulator_module_neuron_info" target="_blank" rel="noopener">눌러서 실행 화면 확인</a><a href="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/작성기준_v02/작성규칙.html">공통 작성 기준 보기</a><a href="#document-history" data-open-history>로그 보기</a></div></header>
+<p><b>이 문서는</b> 현재 팀의 성장·라포·시설 기반을 같은 기록으로 읽고, 아이돌과 관계가 어떻게 연결되는지 보여 주는 공통 정보 화면 뉴런을 설명합니다.</p>
+<p><b>보는 법</b> 1장 기록 조회의 범위 → 3장 현재 팀과 독립 시험 → 4장 4단계·관계·표시 → 6장 원표 → 7장 개발·검수 순서로 읽습니다. <a href="#part-7">개발·검수 범위</a></p>
+<p><b>지금 상태</b> 현재 팀 관찰·4단계 탐색·독립 표시 시험·공통 정보창의 코드 경로가 있습니다. 공용 관계 계산과 현재 뉴런 직접 조회의 차이는 4장에서 구분합니다. 팀 복합 등급·아카데미 개별 상세·전체 경제 기여 분해는 작업전 또는 연결 확인이 남아 있으며, 이번 실제 게임·카메라·저장 검수는 하지 않았습니다.</p>
+<nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (합침) <a href="/docs/planning/proposal-concept/idol.html" data-paper-path="docs/planning/proposal-concept/idol.html">아이돌 성장 제안서</a>, 현재 뉴런 공통 패널·팀 관찰기와 성장 테스트 도구.</p>
+
+<p>뉴런은 <b>기록을 보여 주는 화면</b>입니다. 보드에서 얻은 변화가 건물·엔터파워와 아이돌 능력으로 이어지는 모습을 살펴보고, 멤버별 현재 능력·재능·세부·아카데미와 실제 관계를 읽습니다. 뉴런이 성장량이나 보상을 새로 계산해 지급하지는 않습니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 891 276" width="891" height="276" role="img" aria-labelledby="title-P174-0"><title id="title-P174-0">설명 흐름도 P174-0</title><defs><marker id="arrow-P174-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,94 L220.5,94 L251.1818181818182,106" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-0)"/><path d="M198,182 L220.5,182 L251.1818181818182,170" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-0)"/><path d="M423,138 L445.5,138 L468,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-0)"/><path d="M598.9090909090909,106 L670.5,50 L693,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-0)"/><path d="M648,138 L670.5,138 L693,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-0)"/><path d="M598.9090909090909,170 L670.5,226 L693,226" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-0)"/><rect x="18" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">현재 팀과 성장 기록</tspan></text><rect x="243" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">세션과 멤버 확인</tspan></text><rect x="18" y="150" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="187" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">시설과 관계 기록</tspan></text><rect x="468" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">뉴런 표시 모델</tspan></text><rect x="693" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">팀과 관계</tspan></text><rect x="693" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">개인 능력과 아카데미</tspan></text><rect x="693" y="194" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="231" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">실제 변화의 가벼운 연출</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">현재 팀과 성장 기록 → 세션과 멤버 확인 / 시설과 관계 기록 → 세션과 멤버 확인 / 세션과 멤버 확인 → 뉴런 표시 모델 / 뉴런 표시 모델 → 팀과 관계 / 뉴런 표시 모델 → 개인 능력과 아카데미 / 뉴런 표시 모델 → 실제 변화의 가벼운 연출</p></figure>
+
+
+
+<p>실제 기록을 보는 경로와 독립 임시 시험은 출처를 구분합니다. 표시 수치·비율과 원본의 미정 수치는 <b>발란스 대기</b>이며 실제 게임 값으로 확정하지 않습니다.</p>
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>뉴런에 들어오거나 나가는 정보</th></tr></thead><tbody><tr><td><a href="/docs/planning/proposal-concept/idol.html" data-paper-path="docs/planning/proposal-concept/idol.html">아이돌 성장 제안서</a></td><td>같은 아이돌의 능력과 성장 경험</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%95%84%EC%9D%B4%EB%8F%8C%EB%8A%A5%EB%A0%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%95%84%EC%9D%B4%EB%8F%8C%EB%8A%A5%EB%A0%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P107 아이돌 성장</a></td><td>현재 6축·18세부·재능·학습과 성장 단계</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%84%B1%EC%9E%A5%EA%B4%80%EA%B3%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%84%B1%EC%9E%A5%EA%B4%80%EA%B3%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P169 성장 관계</a></td><td>개인 성장·팀 평균·관계의 연결</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%9D%BC%ED%8F%ACAI%ED%83%90%ED%97%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%9D%BC%ED%8F%ACAI%ED%83%90%ED%97%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P152 라포와 모험</a></td><td>멤버 쌍의 관계 기록과 네 축</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P106 건물 성장</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%97%94%ED%84%B0%ED%8C%8C%EC%9B%8C_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%97%94%ED%84%B0%ED%8C%8C%EC%9B%8C_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P172 엔터파워</a></td><td>시설 단계와 기반 표시의 원본</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9C%A0%EC%A0%80%EC%A0%80%EC%9E%A5%EC%A0%95%EB%B3%B4_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9C%A0%EC%A0%80%EC%A0%80%EC%9E%A5%EC%A0%95%EB%B3%B4_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P173 유저 저장 정보</a></td><td>세션·run·성장 저장과 복원의 경계</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P171 발란스 시뮬레이터</a></td><td>발란스 화면의 별도 관측과 공통 패널 재사용</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%ED%88%B4%EA%B8%B0%ED%9A%8D/T03_%EC%84%B1%EC%9E%A5%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8F%84%EA%B5%AC_%ED%86%B5%ED%95%A9%EA%B8%B0%ED%9A%8D_v01.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%ED%88%B4%EA%B8%B0%ED%9A%8D/T03_%EC%84%B1%EC%9E%A5%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8F%84%EA%B5%AC_%ED%86%B5%ED%95%A9%EA%B8%B0%ED%9A%8D_v01.html">T03 성장 테스트 도구</a></td><td>능력·관계 시험 사본을 뉴런에 표시하는 공통 조작</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: 공용 시뮬레이터 뉴런 또는 팀·멤버 정보창 → 전체·관계·개인 능력 → 세부 확인 → 기존 화면 복귀. 무거운 3D 화면은 링크를 눌러 열고 이 문서는 자동 실행하지 않습니다.</p>
+
+<h3 id="뉴런-시뮬레이터-열기"><a href="/docs/planning/game-simulator.html?module=simulator_module_neuron_info" data-paper-path="docs/planning/game-simulator.html">▶ 뉴런 시뮬레이터 열기</a></h3>
+
+<ol>
+<li>현재 연결이면 같은 세션·run의 실제 팀과 성장 기록을 읽습니다. 자료가 없으면 연결 대기로 표시합니다.</li>
+<li>팀 또는 멤버를 고르고 전체 → 관계 → 개인 6축 → 소속 세부 단계로 살펴봅니다. 선택한 멤버와 축은 공통 정보창에서도 이어집니다.</li>
+<li>독립 생성 시험 문맥에서는 「임시 시험」을 명시해 인원과 상황을 바꿔 표시를 재생할 수 있습니다. 시험 결과는 실제 저장에 쓰지 않습니다.</li>
+<li>화면에서 나가면 재생과 관찰을 정리합니다. 이번 문서 작업에서 새 실행·화면 캡처는 하지 않았습니다.</li>
+</ol>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 891 188" width="891" height="188" role="img" aria-labelledby="title-P174-1"><title id="title-P174-1">설명 흐름도 P174-1</title><defs><marker id="arrow-P174-1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L251.1818181818182,62" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-1)"/><path d="M198,138 L220.5,138 L251.1818181818182,126" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-1)"/><path d="M414.8181818181818,62 L445.5,50 L468,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-1)"/><path d="M414.8181818181818,126 L445.5,138 L468,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-1)"/><path d="M648,50 L670.5,50 L701.1818181818182,62" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-1)"/><path d="M648,138 L670.5,138 L701.1818181818182,126" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-1)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">뉴런 등록 콘텐츠</tspan></text><rect x="243" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">공통 뉴런 패널</tspan></text><rect x="18" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">팀 또는 멤버 정보창</tspan></text><rect x="468" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">현재 팀 기록</tspan></text><rect x="468" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">독립 문맥의 임시 시험</tspan></text><rect x="693" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">선택과 확대</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">뉴런 등록 콘텐츠 → 공통 뉴런 패널 / 팀 또는 멤버 정보창 → 공통 뉴런 패널 / 공통 뉴런 패널 → 현재 팀 기록 / 공통 뉴런 패널 → 독립 문맥의 임시 시험 / 현재 팀 기록 → 선택과 확대 / 독립 문맥의 임시 시험 → 선택과 확대</p></figure>
+
+
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서">한 판 순서</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>현재 팀으로 뉴런을 열고 정보를 살펴본 뒤 기존 화면으로 돌아갑니다.</td></tr><tr><td>입력·출력</td><td>유효한 팀·성장·시설·관계 기록을 받아 3D 표시 모델과 선택 상태를 만듭니다.</td></tr><tr><td>상태와 전이</td><td>연결 대기 → 현재 기록 표시 또는 명시적 임시 시험 → 선택·확대 → 정리입니다.</td></tr><tr><td>판정</td><td>세션·run·멤버와 기록의 유효성을 대조하고 현재값·재능·관계의 출처를 확인합니다.</td></tr><tr><td>오류·예외</td><td>값 0과 미공급을 구분합니다. 기록이 없거나 다른 팀이면 가상 멤버·관계를 대신 넣지 않습니다.</td></tr><tr><td>저장·복원</td><td>뉴런은 실제 기록을 읽기만 합니다. 시험 재생은 표시용 메모리에 두고 실제 게임을 되쓰지 않습니다.</td></tr><tr><td>다른 모듈</td><td>공통 정보창·성장 테스트·보드 변화 표시와 연결하되 계산·지급은 원래 모듈이 맡습니다.</td></tr></tbody></table></div>
+
+<h3 id="네-단계로-확대하기">네 단계로 확대하기</h3>
+
+<div class="table-scroll"><table><thead><tr><th>단계</th><th>보여 주는 범위</th></tr></thead><tbody><tr><td>0 전체</td><td>보드·시설 기반과 바깥 엔터파워</td></tr><tr><td>1 팀</td><td>멤버와 확인된 관계</td></tr><tr><td>2 개인</td><td>선택한 아이돌의 6축과 아카데미</td></tr><tr><td>3 세부</td><td>소속 18세부와 아카데미를 함께 확인</td></tr></tbody></table></div>
+
+<p>고정 보기는 전체·이전·다음으로 단계별 이동하고 세밀 모드는 자유롭게 확대합니다. 멤버나 능력 축을 고르면 그 대상과 소속 세부를 맞춰 보여 줍니다. 모바일 정보창 안에서 같은 패널을 사용하며, 창의 기존 닫기와 복귀 동선을 따릅니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 891 100" width="891" height="100" role="img" aria-labelledby="title-P174-2"><title id="title-P174-2">설명 흐름도 P174-2</title><defs><marker id="arrow-P174-2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,42 L220.5,40 L243,42" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-2)"/><path d="M423,42 L445.5,40 L468,42" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-2)"/><path d="M648,42 L670.5,40 L693,42" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-2)"/><path d="M693,58 L670.5,60 L648,58" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-2)"/><path d="M468,58 L445.5,60 L423,58" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-2)"/><path d="M243,58 L220.5,60 L198,58" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-2)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">전체 기반</tspan></text><rect x="243" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">팀과 관계</tspan></text><rect x="468" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">선택 멤버 6축</tspan></text><rect x="693" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">18세부와 아카데미</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">전체 기반 → 팀과 관계 / 팀과 관계 → 선택 멤버 6축 / 선택 멤버 6축 → 18세부와 아카데미 / 18세부와 아카데미 → 선택 멤버 6축 / 선택 멤버 6축 → 팀과 관계 / 팀과 관계 → 전체 기반</p></figure>
+
+
+
+<h3 id="능력재능아카데미">능력·재능·아카데미</h3>
+
+<p>개인 6축은 보컬·댄스·랩·비주얼·끼와 예능감·프로듀싱입니다. 각 축은 자기 세부 세 개를 가집니다. 현재 능력 띠와 재능 띠는 서로 다른 원본이므로 합쳐 표시하지 않습니다. 아카데미의 태도·성실성·영어·중국어·일본어는 별도 항목이며 기본 6축이나 18세부에 새 능력으로 더하지 않습니다.</p>
+
+<p>값이 0이면 실제 0으로, 필드가 없거나 연결되지 않으면 대기로 표시합니다. 화면 점수의 단위가 바뀌면 공통 변환 설정을 한 번 적용합니다. 척도가 유효하지 않으면 임의의 기본값으로 채우지 않습니다.</p>
+
+<h3 id="라포는-실제-두-사람의-관계">라포는 실제 두 사람의 관계</h3>
+
+<p>한 쌍은 현재 팀의 서로 다른 멤버 두 명을 기준으로 표시합니다. 기획은 관계 허브·모험과 같은 현재 팀 라포 조회로 이어 읽고 저장된 관계를 우선하며, 원본 시작 규칙이 있을 때 없는 쌍만 같은 범위·성격 궁합으로 계산하는 방향입니다.</p>
+<p>공용 <code>resolveCurrentTeamRapport</code> 계산은 존재하지만, 이번에 확인한 뉴런의 직접 경로는 <code>panel</code> → <code>rapport-source</code>에서 관계 원표와 검증된 체크포인트를 조회하는 경로입니다. 원표의 <code>*</code> 행에서 범위 시작값을 읽는 부분과 기록 충돌 시 대기 표시는 확인했으며, 이 직접 경로가 공용 성격 궁합 초기계산을 호출하는 연결은 확인하지 못했습니다. 상위 writer가 만든 궁합 결과의 전체 전달은 별도 확인 대상이며, 공용 계산 자체가 전역 미구현이라는 뜻은 아닙니다.</p>
+<p>1명에게 가상 상대를 넣지 않고, 원본 규칙이 없는 쌍은 기록 대기입니다. 기존0·명시된 빈 값·변화 기록을 새 시작값으로 덮지 않으며 중복·충돌·다른 세션 기록을 임의로 합치지 않습니다. 뉴런의 표시 조회와 실제 관계 저장을 쓰는 주체를 구분합니다.</p>
+
+<p>공통 뉴런 패널은 전달받은 유효한 관계만 표시하고 자체로 상대나 수치를 생성하지 않습니다. 관계 허브의 시험 중에는 같은 누적 사본의 관계선·네 축을 표시하며 실제 저장 변경과 구분합니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>관계 축</th><th>읽는 시각 표현</th></tr></thead><tbody><tr><td>상호 신뢰</td><td>색의 가까워짐</td></tr><tr><td>이해</td><td>관계선의 두께</td></tr><tr><td>협력</td><td>상대의 거리·배치</td></tr><tr><td>긴장</td><td>상대의 높이·분리</td></tr></tbody></table></div>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 891 190" width="891" height="190" role="img" aria-labelledby="title-P174-3"><title id="title-P174-3">설명 흐름도 P174-3</title><defs><marker id="arrow-P174-3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,51.5 L220.5,51.5 L251.1818181818182,63.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-3)"/><path d="M198,139.5 L220.5,139.5 L251.1818181818182,127.5" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-3)"/><path d="M413.8988764044944,63.5 L445.5,51 L468,51" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-3)"/><path d="M413.8988764044944,127.5 L445.5,140 L468,140" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-3)"/><path d="M648,140 L670.5,140 L693,140" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-3)"/><rect x="18" y="19.5" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="56.5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">현재 멤버 두 명</tspan></text><rect x="243" y="63.5" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="100.5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">쌍과 원본 확인</tspan></text><rect x="18" y="107.5" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="144.5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">라포 기록과 축 정의</tspan></text><rect x="468" y="18" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">유효한 축을 관계선과 배치</tspan><tspan x="558" dy="20">로 표시</tspan></text><rect x="468" y="108" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="145" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">원본 없음 또는 불일치</tspan></text><rect x="693" y="108" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="145" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">관계 기록 대기</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">현재 멤버 두 명 → 쌍과 원본 확인 / 라포 기록과 축 정의 → 쌍과 원본 확인 / 쌍과 원본 확인 → 유효한 축을 관계선과 배치로 표시 / 쌍과 원본 확인 → 원본 없음 또는 불일치 / 원본 없음 또는 불일치 → 관계 기록 대기</p></figure>
+
+
+
+<h3 id="실제-변화와-임시-시험">실제 변화와 임시 시험</h3>
+
+<p>같은 진행에서 새 기록의 실제 전후 차이가 있을 때 표시 신호를 만들 수 있습니다. 보드에서 받은 변화 → 건물 → 엔터파워 → 아이돌 능력의 흐름을 가볍게 보여 주며, 재진입이나 같은 기록의 중복 수신만으로 지급을 다시 실행하지 않습니다. 화면이 가려지거나 정보창이 열리면 경량 표시를 정리합니다.</p>
+
+<p>P171 발란스 굴림에서 뉴런 보기가 켜져 있을 때는 뉴런 안의 확인된 변화선·빛을 유지하고, 돈·팬·엔터파워·나쁜 기운·콘텐츠·몬스가 다른 창으로 이동하는 표시는 목적 창의 빛과 기존 수신 배지로 바꿉니다. 뉴런으로 전환할 때 남은 비행과 필러는 표시 완료로 정리하며 같은 영수증을 나중에 다시 재생하지 않습니다. 숨겨진 필러를 출발점으로 기다려 굴림이 멈추지 않게 합니다.</p>
+
+<p>이 규칙은 발란스 굴림의 뉴런 보기 ON에만 적용합니다. 계산·저장·보상 지급은 그대로이며, 뉴런을 끈 일반 모드의 비행과 03 개인 단계·08 팀 등급 상승의 기존 2초 강조를 유지합니다. 별도 게임 뉴런·공통 정보창의 동작은 바꾸지 않습니다.</p>
+
+<p>독립 시험은 1·2·5·10명과 능력·라포·아카데미·건설·단계·0·누락 상황을 표시용으로 재생합니다. 10명은 배치 시험이며 실제 게임 팀 인원을 바꾸지 않습니다. 1명 관계 시험에서 가상 상대를 넣지 않습니다. 성장 테스트 도구의 메모리 사본도 명시적으로 표시하며 실제 저장과 다릅니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 891 188" width="891" height="188" role="img" aria-labelledby="title-P174-4"><title id="title-P174-4">설명 흐름도 P174-4</title><defs><marker id="arrow-P174-4" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L243,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-4)"/><path d="M198,138 L220.5,138 L243,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-4)"/><path d="M423,50 L445.5,50 L476.1818181818182,62" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-4)"/><path d="M423,138 L445.5,138 L476.1818181818182,126" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-4)"/><path d="M648,94 L670.5,94 L693,94" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P174-4)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">검증된 실제 전후 기록</tspan></text><rect x="243" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">변화 표시</tspan></text><rect x="18" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">독립 시험의 임시 데이터</tspan></text><rect x="243" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">시험 재생</tspan></text><rect x="468" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">같은 공통 패널</tspan></text><rect x="693" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">선택과 화면 표시</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">검증된 실제 전후 기록 → 변화 표시 / 독립 시험의 임시 데이터 → 시험 재생 / 변화 표시 → 같은 공통 패널 / 시험 재생 → 같은 공통 패널 / 같은 공통 패널 → 선택과 화면 표시</p></figure>
+
+
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>현재 팀 관찰기, 성장·시설·관계 저장 검증, 능력·재능·아카데미 정의, 공통 모바일 정보창, 3D 패널과 표시 자원 정리가 필요합니다. 팀 전용 6축·복합 등급의 뉴런 표현, 아카데미 개별 상세 진입과 모든 플레이 경로의 연출 검수는 작업전 또는 연결 확인이 남아 있습니다.</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<div class="table-scroll"><table><thead><tr><th>화면·연출</th><th>역할</th></tr></thead><tbody><tr><td>공통 뉴런 패널</td><td>팀·개인 능력·관계·시설을 4단계로 탐색</td></tr><tr><td>공통 캐릭터 정보창</td><td>팀·멤버·선택 축을 같은 창에서 이어 봄</td></tr><tr><td>플레이 경량 연출</td><td>실제 기록 변화만 간단한 선·빛으로 표시. P171 발란스 뉴런 ON은 내부 변화선을 유지하고 외부 전달은 목적 창 빛·수신 배지로 표시</td></tr><tr><td>독립 임시 시험</td><td>표시 대상·상황을 바꾸어 배치·동작 확인</td></tr></tbody></table></div>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<p>미공급 학습·관계 값과 능력·시설의 수치·척도는 <b>발란스 대기</b> 또는 연결 대기로 유지합니다. 팀 복합 등급 표현과 실제 전체 경제의 기여 분해는 작업전입니다.</p>
+
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<div class="table-scroll"><table><thead><tr><th>리소스</th><th>사용 위치와 역할</th><th>상태</th></tr></thead><tbody><tr><td>뉴런 3D 노드·관계선·카메라</td><td>팀과 개인 능력의 계층 탐색</td><td>공통 패널에서 사용</td></tr><tr><td>성장 단계 색과 현재·재능 띠</td><td>단계 및 서로 다른 값의 표시</td><td>원본 연결 범위에서 사용</td></tr><tr><td>임시 시험 프레임</td><td>인원·관계·능력 상황의 표시 검수</td><td>실제 게임 저장과 분리</td></tr><tr><td>팀 복합 등급 표현</td><td>팀 전용 등급의 별도 표시</td><td>작업전</td></tr></tbody></table></div>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<p>팀 전용 정보와 전체 플레이 경로의 연출은 실제 기록·수락 기준을 확인한 뒤 작업합니다. 시험 프레임을 실제 성장 연출 완료로 확대하지 않습니다.</p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일</th><th>역할</th><th>연결과 주의</th></tr></thead><tbody><tr><td><code>data/idol_ability_sim/idol_growth_stat.csv</code></td><td>6축·18세부의 이름과 부모 관계</td><td><code>stat_id</code>, <code>parent_id</code></td></tr><tr><td><code>data/idol_ability_sim/idol_growth_stage_gate.csv</code></td><td>성장 단계·표시 상한</td><td>단계 ID와 원본 척도</td></tr><tr><td><code>data/idol_ability_sim/idol_growth_study_grade.csv</code> · <code>idol_growth_growth_factor.csv</code></td><td>학습 등급과 성장 기반 정보</td><td>미공급 값은 연결 대기</td></tr><tr><td><code>data/core_proposal/idol_ability_step_common.csv</code> · <code>idol_ability_talent.csv</code></td><td>재능·단계 척도와 점수 변환 관련 원본</td><td>임시 수치 발란스 대기</td></tr><tr><td><code>data/rapport_sim/rapport_axis.csv</code> · <code>rapport_stage.csv</code></td><td>관계 축과 단계 정의</td><td>실제 멤버 쌍 기록이 있어야 현재 관계 표시</td></tr><tr><td><code>data/game/rapport_pair.csv</code></td><td>등록된 관계 쌍 자료</td><td>저장된 쌍과 현재 멤버를 검증하고 혼합하지 않음</td></tr><tr><td><code>data/game/board_tile.csv</code> · <code>growth_source.csv</code></td><td>보드 칸과 성장 출처의 기반 표시</td><td>현재 진행의 기록과 결합해 읽음</td></tr><tr><td><code>data/board_map/map.json</code></td><td>시설과 보드 지도 정의</td><td>실제 저장 단계가 아님</td></tr><tr><td><code>data/simulator/simulator_module.csv</code> · <code>menu.json</code></td><td>뉴런 콘텐츠와 메뉴 진입</td><td><code>simulator_module_neuron_info</code></td></tr><tr><td><code>src/simulator/idol-neuron/test-fixtures.json</code></td><td>독립 시험 인원·상황·표시값</td><td>표시 전용 · 실제 발란스 아님</td></tr></tbody></table></div>
+
+<p>주사위 환산: 해당 없음 · 뉴런 표시는 주사위를 지급하거나 소비하지 않습니다.</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>상태</th><th>확인 범위·다음 작업</th></tr></thead><tbody><tr><td>등록 콘텐츠·공통 정보창</td><td>개발 중</td><td>현재 팀 관찰과 같은 정보창 진입 경로 존재. 전체 진입 경로 검수는 별도</td></tr><tr><td>관계·능력·아카데미 4뷰</td><td>개발 중</td><td>실제 원본과 명시적 임시 시험을 구분해 표시</td></tr><tr><td>실제 변화의 경량 표시</td><td>개발 중</td><td>기록 전후 변화의 표시 경로 존재. 전체 플레이 구간 검수는 남음</td></tr><tr><td>팀 전용 6축·복합 등급 확장</td><td>기획 중</td><td>작업전 · 별도 원본과 표현 필요</td></tr><tr><td>전체 경제·실제 기여 분해</td><td>기획 중</td><td>작업전 · 시험 사본과 실제 정산을 구분</td></tr></tbody></table></div>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<ul>
+<li>현재 세션·run과 멤버가 맞는 기록만 읽고, 실제 0과 미공급·라포 쌍 없음이 구분되는지 확인합니다.</li>
+<li>4뷰의 선택·확대와 정보창 복귀가 유지되고 시험 10명이 실제 팀을 바꾸지 않는지 확인합니다.</li>
+<li>같은 기록을 다시 읽을 때 보상·성장을 재지급하지 않으며, 숨김·이탈 시 관찰과 표시 자원이 정리되는지 확인합니다.</li>
+<li>실제 화면 검수와 자동 시험, 임시 시험과 실제 플레이를 별도로 기록합니다.</li>
+</ul>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p>직전 상세 본문과 당시 검수 기록은 짝 로그에 원문 그대로 보존합니다. 독립 시험의 수치와 이전 화면 관측을 현재 게임의 확정 발란스로 옮기지 않았습니다.</p>
+
+<details>
+<summary>작업 기록</summary>
+
+<ul>
+<li>기존 MD·HTML, 공통 뉴런·관찰기·정보창·시험 및 저장 코드와 관련 표를 대조했습니다. 이번 문서 작업에서 새 실행·화면 캡처·빌드는 하지 않았습니다.</li>
+<li>변경 전 원문과 근거 경로는 짝 로그와 작업 백업에 보존합니다.</li>
+</ul>
+
+</details>
+<details><summary>2026-11-03 발란스 뉴런 표시 정리 · 검수 대기</summary>
+<p>사용자 직접 요청의 발란스 뉴런 ON 범위만 4장과 화면·연출 표 한 행에 반영했습니다. 남은 비행·필러의 표시 완료, 같은 영수증 재생 방지, 숨겨진 필러 출발 대기 제거를 설명하며 계산·저장·실제 지급과 일반 모드·03/08의 기존 2초 강조는 구분합니다.</p>
+<p>근거 원본: src/tools/idleSim/v02/app.js의 settleNeuronView·presentNeuronScene·rewardFlights·monsReceived, reward-journey.mjs, content-flight.mjs, gauge-feedback.mjs, filler-stage.mjs, mons-acquisition-flow.mjs. 이번 문서 편집에서 제품 코드·운영 CSV·관계 정보·공용 보고·STATUS는 수정하지 않았습니다.</p>
+<p>관련 자동시험과 실제 화면의 최종 확인 범위는 대표 본체의 공용 보고를 따릅니다. 실제 화면 검수는 본체에서 진행 중이며 이번 문서 편집을 새 화면 검수 또는 검수 완료로 표현하지 않습니다.</p>
+<p>수정 전 네 원본은 _작업/codex/20261103_발란스뉴런_비행정리/backup/의 원래이름.163203전_codex로 보존했습니다. 별도 짝 로그 파일은 수정하지 않고 변경한 표 행의 이전 원문을 아래 내부 로그에 보존합니다. 작성자: codex.</p>
+<p>변경 전 표 원문:</p>
+<pre><code>&lt;tr&gt;&lt;td&gt;플레이 경량 연출&lt;/td&gt;&lt;td&gt;실제 기록 변화만 간단한 선·빛으로 표시&lt;/td&gt;&lt;/tr&gt;</code></pre>
+</details>
+<details><summary>이번 원문·소스 대조 기록 · 실구동 미검수</summary><p>codex · 2026-11-03 22:43:39 KST · 제안(검수 대기). 대표 MD·HTML·관련 로그와 원표·로더·계산/조회·writer를 정적으로 대조했습니다. 보호 play는 읽기·검색·해시·실행을 포함해 접근하지 않았습니다. 실제 게임·브라우저·저장·서버·빌드 검수는 하지 않았으며 코드·표·메타·공용 기록도 바꾸지 않았습니다. 새 수치·정책·승인은 없습니다. 직전 전문은 <a href="./뉴런_기획서.log.md">짝 로그</a>에 보존합니다.</p></details></section><details class="history" id="document-history" data-log-src="./뉴런_기획서.log.md"><summary>이전 로그와 변경 기록 펼치기</summary><div class="log-body"></div></details></main><script src="../작성기준_v02/sample-document.js" defer></script><script src="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/development-links.js" defer></script></body></html>

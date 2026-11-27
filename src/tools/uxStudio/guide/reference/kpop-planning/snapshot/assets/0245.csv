@@ -1,0 +1,35 @@
+id,ugui_capability,current_state,gap_or_acceptance
+UG01,부모 자식 계층,구현,ID/parentId가 있음. 순서·상속 규칙은 별도 보완
+UG02,RectTransform 위치·크기,부분,부모 기준 %와 일부 px inset. uGUI 좌표 전체는 아님
+UG03,Anchor Min/Max,없음,고정·늘림 앵커를 명시적으로 저장·계산해야 함
+UG04,Pivot·회전·배율,없음,기준점과 resize/scale을 구별해야 함
+UG05,Canvas Scaler,없음,편집기 확대와 게임 화면 배율을 분리해야 함
+UG06,Safe Area,없음,화면 기준과 안전영역 기준을 요소별로 선택
+UG07,형제 그리기 순서·Canvas 정렬,부분,자식 배열/DOM 기반. 명시 순서·겹침 검증 필요
+UG08,Image Simple·색·비율,부분,이미지 넣기·contain/cover/fill·sourceSize/region 원본영역 일부실증·89회귀. 색곱셈/피벗·430·자원공유/그림오류검수후속
+UG09,Image Sliced,부분,3/9슬라이스 있음. Sprite border·기준 PPU·배율 대응 검증 필요
+UG10,Image Tiled,부분,border-image 반복 있음. uGUI 타일 동등성은 미검수
+UG11,Image Filled,없음,가로/세로/방사형 채움·방향·양·시작점 필요
+UG12,Mask / RectMask2D,없음,부모 단위 클리핑과 입력 영역 동시 제한 필요
+UG13,RawImage·렌더 텍스처,없음,영상/렌더 결과 슬롯은 별도 요구와 호스트 계약으로 정의
+UG14,텍스트 배치·넘침,부분,fontSize/typography 굵기·줄높이·자간·정렬·줄바꿈·넘침·기본복원/92독립·20실제렌더검사. 네이티브양식/430·자동크기·원본폰트미검수
+UG15,TextMeshPro 폰트·SDF·fallback,없음,웹 폰트와 TMP의 동일 출력은 보장 못함. 별도 상세 조사 필요
+UG16,Button 클릭·활성 여부,부분,클릭과 enabled 있음. 누름→이탈→해제·취소 검증 필요
+UG17,Selectable 상태·Target Graphic,부분,기본/눌림/선택/비활성 이미지 있음. Highlighted와 타깃 분리 부족
+UG18,방향키·패드 Navigation,없음,편집 단축키와 게임 포커스 이동은 다른 기능
+UG19,GraphicRaycaster·hit padding,부분,부모 입력·사각/타원 있음. 독립 터치 여백·겹침 판정 보완
+UG20,CanvasGroup,없음,그룹 alpha/interactable/blocksRaycasts/부모 무시를 분리
+UG21,Pointer·Drag·Submit·Cancel 이벤트,부분,실행기는 주로 클릭. 편집 드래그를 게임 드래그로 세지 않음
+UG22,Toggle,없음,토글 모양 유닛은 있으나 값·이벤트·표시 연동 부족
+UG23,ToggleGroup·탭 상호 선택,없음,하나 선택 시 다른 항목 해제하는 공통 값 모델 필요
+UG24,Slider·Scrollbar,없음,모양 유닛과 실제 min/max/value·드래그·이벤트 구별
+UG25,Dropdown,없음,모양 유닛과 옵션·선택값·펼침·취소 동작 구별
+UG26,InputField,없음,입력창 모양과 실제 입력·검증·확정·키보드 동작 구별
+UG27,ScrollRect·Viewport·Content,부분,상점/일부 스크롤 상태 있음. 범용 중첩 구조·관성·경계 부족
+UG28,Horizontal/Vertical/Grid LayoutGroup,부분,수동 같은 간격 정렬 있음. 자동 재배치·Grid·크기 할당 부족
+UG29,LayoutElement·ContentSizeFitter,없음,최소·선호·가변 크기와 내용 크기 계산 필요
+UG30,AspectRatioFitter,없음,비율 유지와 부모 안 맞춤·넘침 배치 필요
+UG31,Animator·상태 전환,부분,출현 효과 프리셋 있음. 임의 키프레임·중단/재개 규칙 부족
+UG32,모달·시트·토스트 조합,부분,오버레이 상태 있음. 시각/차단/중첩/포커스 일치 보강
+UG33,변경된 부분만 재계산,부분,DOM 재사용·이력 제한 있음. 전체 렌더·부하 재측정 필요
+UG34,Unity Prefab 입출력·실제 엔진 동등 시험,없음,현재 JSON은 자체 형식. 변환기·Unity 비교 시험 별도

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 보드</title>
+<style>
+  body{margin:0;background:#f6f0e4;color:#2a241c;font-family:Georgia,"Iowan Old Style","Apple SD Gothic Neo",serif}
+  main{max-width:920px;margin:0 auto;padding:22px 18px 32px}
+  .kicker{font-size:11px;letter-spacing:.06em;color:#7a6e60;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  h1{font-size:28px;margin:4px 0 2px}
+  .hook{color:#9a3d4e;font-weight:700;margin:0 0 8px}
+  .sum{background:rgba(255,252,246,.8);border:1px solid #e4d3b4;border-radius:8px;padding:8px 12px;font-size:14px;line-height:1.45}
+  .mid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;margin:14px 0;align-items:center}
+  .flow,.chips,.boards{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+  .n{background:#fffaf2;border:1px solid #c4a46a;border-radius:8px;padding:7px 9px;font-size:13px;font-weight:700;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  .chip{background:#efeaff;border-radius:8px;padding:5px 8px;font-size:12px;font-weight:700;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  .arr{color:#c4a46a;font-weight:700}
+  .bd{background:#fffaf2;border:1px solid #e4d3b4;border-radius:10px;padding:8px;min-width:120px;font-size:12px;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  .slots{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;margin-top:6px}
+  .slots i{height:8px;border-radius:2px;background:#e7e0d2;display:block}
+  .on i{background:linear-gradient(90deg,#8a5a32,#3aa0d8,#e56aa8,#3aaa55)}
+  ol{margin:0;padding-left:1.1em;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  li{margin:8px 0}
+  li b{display:block}
+  li span{color:#7a6e60;font-size:13px;font-weight:400}
+  .foot{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;border-top:1px solid #c4a46a;padding-top:8px;font-size:12px;line-height:1.4;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  .foot b{display:block;color:#7a6e60;font-size:11px;margin-bottom:2px}
+  .more{font-size:11px;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  a{color:#7a4b22}
+  @media(max-width:800px){.mid,.foot{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">전체기획서 · 02 · 케이팝몬스터즈 · 제안(검수 대기) · R52 재생성 09-30</div>
+  <h1>보드 40칸·찬스·칸연출</h1>
+  <p class="hook">주사위는 아이돌의 스케줄 엔진</p>
+  <div class="sum">칸에 떨어질 때마다 그날의 무대·연습·콜이 정해진다.<br>방송·공연만 대박·중박·운망. 시작 판만 색이 있고, 다음 판은 비어 있다.</div>
+  <div class="mid">
+    <div>
+      <div class="flow">
+        <div class="n">주사위</div><span class="arr">→</span><div class="n">칸</div><span class="arr">→</span><div class="n">중박 · 대박 · 운망</div><span class="arr">→</span><div class="n">위쪽 장면</div>
+      </div>
+      <div class="chips">
+        <span class="chip">연습</span><span class="chip">방송</span><span class="chip">공연</span><span class="chip">생활</span>
+        <span class="chip">팬</span><span class="chip">찬스</span><span class="chip">코너</span><span class="chip">창구</span>
+      </div>
+      <div class="boards">
+        <div class="bd"><b>시작 판</b><div class="slots on"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <span class="arr">→</span>
+        <div class="bd"><b>다음 판</b><div class="slots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <span class="arr">→</span>
+        <div class="bd"><b>그다음 판</b><div class="slots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      </div>
+    </div>
+    <ol>
+      <li><b>굴린다</b><span>투자한 만큼 주사위가 나간다</span></li>
+      <li><b>떨어진다</b><span>일정·창구·회사·코너</span></li>
+      <li><b>판정한다</b><span>대박·중박·운망, 또는 스케줄 변경</span></li>
+      <li><b>보여 준다</b><span>위는 장면, 가운데는 한 줄 말</span></li>
+    </ol>
+  </div>
+  <div class="foot">
+    <div><b>왜 지금</b>보드 한 턴이 게임의 한 박자다.</div>
+    <div><b>이게 핵심</b>대박은 그날만 한 급 위. 칸이 영원히 커지진 않는다.</div>
+    <div><b>이게 아닌 것</b>복권식 찬스. 칸마다 집을 쌓는 방식. 숫자만 뜨는 착지.</div>
+  </div>
+  <p class="more"><a href="../디자인컨셉/산출_디자인컨셉_보드40칸_타입아이콘_v0_단서.html">타입 칩</a> · 막대 수는 그림용</p>
+</main>
+</body>
+</html>

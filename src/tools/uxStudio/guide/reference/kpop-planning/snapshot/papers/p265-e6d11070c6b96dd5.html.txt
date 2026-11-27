@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로필 · 의상 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  .kv { display:flex; justify-content:space-between; align-items:center; font-size:12px; }
+  .slot { position:absolute; height:52px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:11px; font-weight:700; gap:2px; }
+  .slot.on { border-width:3px; }
+  .chg { position:absolute; z-index:4; font-size:11px; font-weight:700; background:#2b2f35; color:#fff; border-radius:4px; padding:0 4px; }
+</style>
+</head>
+<body>
+<h1>프로필 정보창 · 의상 갈아입기 · 와이어프레임 1차 초안 (390×844)</h1>
+<p class="flow">⓪ HUD 왼쪽 위 프로필 누르기 → ① 팀 정보(솔로면 ② 바로) → 멤버 누르기 → ② 아이돌 정보 → 「의상 갈아입기」 → ③ 옷장(세트 / 부분) → 입어 보기 → 「적용」 → 적용 확인 창 → ② 로 돌아옴 · 팀 쪽: ① → ④ 팀 단체 의상 · ⑤ 팀 꾸미기(이름 · 마크 · 소개 · 대표 멤버)</p>
+<p class="flow"><b>메인은 단순하게</b>: 정보창 = 모습 · 이름 · 등급 · 중요 능력 한 줄 · 의상 스킬 요약. 자세한 능력은 「능력 자세히」(포토카드 기존 화면)로 넘김. 꾸미기 · 의상은 하위 화면.</p>
+<div class="rules">
+  <b>규칙 근거</b> · 프로필 정보창 기획 목록(11/23) · 7018 포토카드 r30 팀 보기 · 인물 보기 틀 · 단이 「의상 갈아입기 UI 제안」(적용 전 저장 안 함) · 11/23 현중 「성능은 있어 · 스킬이 붙어 있으면 좋아」 · <code>skill_effect_rule</code> · 판정 합 상한 15(<code>stack_group_judge</code> · 비앙카 D44)<br>
+  · <b>의상 = 모습 + 스킬.</b> 부분 조각 = 작은 스킬 1개(축 하나) · 세트 = 세트 스킬 1개 + 같은 세트 조각을 다 입으면 세트 보너스. 효과 종류는 기존 멤버 스킬 표를 그대로 씀. 내 보드에만 · 대전 영향 없음(10/28).<br>
+  · <b>적용 과정</b>: 고르면 바로 입어 보기(전신이 바뀜 · 저장 안 됨) → 바뀌는 스킬을 아래 줄에 미리 보여 줌 → 「적용」 → 확인 창(바뀌는 스킬 · 판정 상한) → 저장 · 정보창과 HUD 얼굴이 바뀜. 적용 안 하고 나가면 확인 창.<br>
+  · <b>적용 방법 4가지</b>: ① 아이돌 정보 → 의상 갈아입기 · ② 팀 단체 의상(세트를 여러 멤버에게 한 번에) · ③ 의상을 얻었을 때 「바로 입기」 · ④ 코디 저장 칸 불러오기.<br>
+  · <b>갈아입는 때(현중 11/23 확정)</b>: 판 밖에서만. 판 진행 중에는 보기 · 입어 보기만 되고 「적용」은 꺼짐 · 바뀐 스킬은 적용 즉시 효과.<br>
+  · <b>부분 칸 5칸(현중 11/23 확정)</b>: 머리 · 상의 · 하의 · 신발 · 소품. 세트를 입으면 5칸이 다 그 세트 조각으로 바뀌고, 한 칸만 바꾸면 세트 보너스가 꺼짐.<br>
+  · <b>정할 것</b>: 별마다 스킬 값(비앙카 장부 · 별 ★1~5는 현중 11/23 확정) · 팀 이름 대기 시간(바꾸기 비용 없음 · 현중 11/24)</div>
+<div class="row" id="screens"></div>
+
+<script>
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (on = -1) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === on ? " on" : ""}" style="left:${i * 65}px"><i></i>${t}</div>`).join("");
+const head = title => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div>
+  <div class="a val" style="left:52px;top:16px;font-size:16px">${title}</div><div class="line" style="top:50px"></div>`;
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const bigBtn = (x, w, label, sub = "", off = false, top = 706) =>
+  `<div class="b${off ? " off" : ""}" style="left:${x}px;top:${top}px;width:${w}px;height:60px;flex-direction:column;gap:2px">
+    <span class="val" style="font-size:15px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const bottomBar = inner => `<div class="line" style="top:698px"></div>${inner}${tabs()}`;
+const chips = (list, on, top = 58) => list.map((c, i) => `<div class="bm${c === on ? " on" : ""}" style="top:${top}px;left:${8 + i * (374 / list.length)}px;width:${374 / list.length - 4}px">${c}</div>`).join("") + `<div class="line" style="top:${top + 32}px"></div>`;
+const win = (top, h, title) => `<div class="win" style="left:20px;top:${top}px;width:350px;height:${h}px"></div><div class="a val" style="left:40px;top:${top + 16}px;font-size:16px">${title}</div><div class="b" style="left:322px;top:${top + 10}px;width:34px;height:34px;font-size:15px">✕</div>`;
+const winBtns = (top, a, b) => `<div class="b" style="left:36px;top:${top}px;width:150px;height:48px"><span class="val">${a}</span></div><div class="b" style="left:204px;top:${top}px;width:150px;height:48px;border-width:2.5px"><span class="val">${b}</span></div>`;
+const kv = (x, y, w, k, v) => `<div class="a kv" style="left:${x}px;top:${y}px;width:${w}px"><span class="sub" style="font-size:12px">${k}</span><span class="val">${v}</span></div>`;
+const hr = (x, y, w) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;border-top:1px solid #c9ccd1"></div>`;
+// HUD 윗줄(⓪ · 뒤 배경용)
+const hudTop = (hl = false) => `
+  <div class="b" style="left:6px;top:8px;width:124px;height:50px;justify-content:flex-start;gap:6px;padding:0 6px;${hl ? "border-width:3px" : ""}">
+    <span class="b off" style="position:static;width:36px;height:36px;border-radius:50%;font-size:11px;flex:none">얼굴</span>
+    <span style="text-align:left"><span class="val">루미나</span><br><span class="sub">등급 B</span></span></div>
+  ${["엔터파워", "루비", "팬"].map((k, i) => `<div class="b" style="left:${136 + i * 72}px;top:8px;width:68px;height:50px;flex-direction:column"><span class="sub">${k}</span><span class="val">—</span></div>`).join("")}
+  <div class="b" style="left:352px;top:8px;width:32px;height:50px;font-size:11px">설정</div>`;
+const hudBack = () => hudTop() + `<div class="b off" style="left:8px;top:70px;width:374px;height:600px">보드</div>` + tabs() + `<div class="dimbg"></div>`;
+// 전신
+const body = (x, y, w, h, label = "전신 · 지금 의상") => `<div class="b off" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;font-size:12px">${label}</div>`;
+// 스킬 줄
+const skillRow = (x, y, w, name, kind, note = "") => `<div class="b" style="left:${x}px;top:${y}px;width:${w}px;height:40px;justify-content:space-between;padding:0 10px 0 8px">
+  <span style="display:flex;align-items:center;gap:6px"><span class="b off" style="position:static;width:24px;height:24px;font-size:11px">◆</span><span style="text-align:left"><span class="val" style="font-size:12px">${name}</span><br><span class="sub">${kind}</span></span></span><span class="sub">${note}</span></div>`;
+// 옷 칸(그리드)
+const item = (x, y, nm, tag = "", st = "") => `<div class="m${st === "no" ? " no" : ""}" style="position:absolute;left:${x}px;top:${y}px;width:86px;height:104px${st === "on" ? ";border-width:3px" : ""}"><div class="pic">${st === "no" ? "?" : "옷"}</div><div class="nm">${nm}</div><div class="ft"><span>${tag}</span><span>${st === "wear" ? "입는 중" : st === "on" ? "입어 봄" : ""}</span></div></div>`;
+const SLOTS = ["머리", "상의", "하의", "신발", "소품"];
+const slots = (y, on = -1, mark = []) => SLOTS.map((s, i) => `<div class="slot${i === on ? " on" : ""}" style="left:${8 + i * 75}px;top:${y}px;width:70px"><span class="b off" style="position:static;width:22px;height:22px;font-size:11px">${mark.includes(i) ? "●" : "·"}</span>${s}</div>`).join("");
+// 옷장 공용 윗부분
+const ov = "background:rgba(255,255,255,.92)";
+const closetTop = (mode, preview = "전신 · 지금 의상", dirty = false) => head("의상 갈아입기 · 오시온") + `
+  ${body(8, 58, 374, 300, preview)}
+  <div class="b" style="left:36px;top:66px;width:168px;height:44px;flex-direction:column;align-items:flex-start;padding:0 10px;${ov}"><span class="val" style="font-size:12px">의상 스킬 · 조각 ×5</span><span class="sub">세트 보너스 ${dirty ? "꺼짐" : "켜짐"}</span></div>
+  <div class="b" style="left:252px;top:66px;width:122px;height:44px;flex-direction:column;align-items:flex-start;padding:0 10px;gap:4px;${ov}"><span class="val" style="font-size:12px">판정 합 n / 15</span><span style="width:100px;height:8px;border:1.5px solid var(--ln);border-radius:4px;overflow:hidden;display:block"><span style="display:block;width:62%;height:100%;background:var(--fill)"></span></span></div>
+  ${[1, 2, 3].map(k => `<div class="b" style="left:334px;top:${150 + (k - 1) * 48}px;width:40px;height:40px;border-radius:50%;font-weight:700;${ov}">${k}</div>`).join("")}
+  <div class="a sub" style="left:318px;top:124px;width:64px;text-align:center">코디</div>
+  <div class="b" style="left:36px;top:312px;width:110px;height:36px;font-size:12px;font-weight:700;${ov}">스킬 자세히</div>
+  ${chips(["세트", "부분"], mode, 366)}`;
+const closetBottom = (dirty) => bottomBar(`<div class="b${dirty ? "" : " off"}" style="left:8px;top:706px;width:120px;height:60px"><span class="val">되돌리기</span></div>` + bigBtn(136, 246, "적용", dirty ? "바뀐 것 1개" : "바뀐 것 없음", !dirty));
+
+const SCREENS = [
+  { cap: "⓪ HUD · 왼쪽 위 프로필 누르기", html: hudTop(true) + `
+      <div class="b off" style="left:8px;top:70px;width:374px;height:600px">보드 · 다른 HUD는 그대로</div>
+      ${n(1, 56, 62)}` + tabs(),
+    notes: ["팀 얼굴(대표 멤버 · 지금 의상) · 팀 이름 · 등급. 누르면 ① 팀 정보(솔로 1명이면 ② 아이돌 정보로 바로)"] },
+
+  { cap: "① 팀 정보", html: head("팀 정보") + `
+      <div class="b off" style="left:8px;top:58px;width:374px;height:250px">공연 무대 · 멤버 전신(지금 의상) · 포토카드 팀 보기와 같은 그림</div>
+      <div class="b off" style="left:16px;top:318px;width:56px;height:56px;font-size:11px">팀 마크</div>
+      <div class="a" style="left:82px;top:322px"><span class="val" style="font-size:18px">루미나</span> <span class="pill">등급 B</span></div>
+      <div class="a sub" style="left:82px;top:352px;font-size:12px">팀 소개 한 줄</div>
+      <div class="b" style="left:8px;top:388px;width:183px;height:56px;flex-direction:column"><span class="sub">대표 능력</span><span class="val">—</span></div>
+      <div class="b" style="left:199px;top:388px;width:183px;height:56px;flex-direction:column"><span class="sub">대표 팀 스탯</span><span class="val">—</span></div>
+      <div class="a val" style="left:36px;top:458px">멤버 5명</div>
+      ${[0, 1, 2, 3, 4].map(i => `<div class="b" style="left:${8 + i * 75}px;top:484px;width:70px;height:92px;flex-direction:column;gap:4px"><span class="b off" style="position:static;width:44px;height:44px;border-radius:50%;font-size:11px">얼굴</span><span class="val" style="font-size:12px">멤버 ${i + 1}</span></div>`).join("")}
+      <div class="b" style="left:8px;top:588px;width:183px;height:52px"><span class="val">팀 단체 의상</span></div>
+      <div class="b" style="left:199px;top:588px;width:183px;height:52px"><span class="val">팀 꾸미기</span></div>
+      <div class="b" style="left:8px;top:648px;width:374px;height:42px;font-weight:700">팀 능력 자세히 ›</div>
+      ${n(1, 12, 62)}${n(2, 12, 380)}${n(3, 12, 460)}${n(4, 12, 592)}${n(5, 12, 652)}` + tabs(),
+    notes: ["무대 = 멤버가 지금 입은 의상 그대로(5명 V자 · 10명 앞뒤 · r30 공연 배치)", "팀 마크 · 이름 · 등급 · 소개 · 대표 능력 · 대표 팀 스탯 두 개만", "멤버 누르면 ② 그 아이돌 정보 · 뒤로 가면 여기로", "팀 단체 의상 → ④ · 팀 꾸미기 → ⑤", "자세한 능력은 포토카드 기존 화면(팀 능력 상세)으로"] },
+
+  { cap: "② 아이돌 정보", html: head("오시온") + `
+      ${body(8, 58, 374, 330)}
+      <div class="a" style="left:16px;top:66px"><span class="pill">스테이지 2 · 루키</span></div>
+      <div class="b" style="left:8px;top:396px;width:183px;height:56px;flex-direction:column"><span class="sub">대표 능력</span><span class="val">—</span></div>
+      <div class="b" style="left:199px;top:396px;width:183px;height:56px;flex-direction:column"><span class="sub">컨디션</span><span class="val">—</span></div>
+      <div class="a" style="left:36px;top:466px;width:346px;display:flex;justify-content:space-between"><span class="val">입은 의상 · 스킬</span><span class="sub" style="font-size:12px">판정 합 n / 15</span></div>
+      ${skillRow(8, 492, 374, "세트 · 무대 의상 A (5/5)", "세트 보너스 · 켜짐", "")}
+      ${skillRow(8, 538, 374, "조각 스킬 5개", "댄스 칸 운망 − 외", "자세히 ›")}
+      <div class="b" style="left:8px;top:588px;width:374px;height:44px;font-weight:700">능력 자세히 ›</div>
+      ${bottomBar(bigBtn(8, 374, "의상 갈아입기", "옷장 열기"))}
+      ${n(1, 12, 92)}${n(2, 12, 400)}${n(3, 12, 468)}${n(4, 12, 592)}${n(5, 12, 710)}`.replace(tabs(), "") + tabs(),
+    notes: ["전신 = 지금 의상 · 단계 표시(포토카드 인물 보기 틀)", "중요한 것 두 개만(대표 능력 · 컨디션)", "입은 의상 = 세트 · 조각 스킬 요약 · 판정 합 상한 15 중 지금 몫", "능력 자세히 = 포토카드 기존 6축 상세", "의상 갈아입기 → ③ 옷장"] },
+
+  { cap: "③ 옷장 · 세트", html: closetTop("세트") + `
+      ${[["무대 의상 A", "5/5", "wear"], ["교복 B", "3/5", ""], ["여름 C", "5/5", ""], ["겨울 D", "0/5", "no"]].map((c, i) => item(8 + i * 94, 406, c[0], c[1], c[2])).join("")}
+      ${[["파티 E", "2/5", ""], ["연습복", "5/5", ""], ["사복 F", "1/5", ""], ["축제 G", "0/5", "no"]].map((c, i) => item(8 + i * 94, 516, c[0], c[1], c[2])).join("")}
+      <div class="a sub" style="left:8px;top:628px;width:374px;font-size:12px;line-height:1.5;padding-left:28px">세트를 누르면 가진 조각을 한 번에 입어 봐요.<br>길게 누르면 의상 설명.</div>
+      ${n(1, 12, 62)}${n(2, 12, 320)}${n(3, 310, 160)}${n(4, 12, 410)}${n(5, 12, 632)}` + closetBottom(false),
+    notes: ["전신 미리보기(화면 폭 전체) · 고르면 바로 바뀜(입어 보기 · 저장 안 됨)", "전신 위에 겹쳐 보임: 의상 스킬 요약 · 판정 합 n / 15 게이지 · 「스킬 자세히」", "코디 저장 칸 1~3(전신 오른쪽 위에 겹침) · 누르면 그 코디를 입어 봄 · 길게 누르면 지금 모습 저장", "세트 목록 · 가진 조각 n/5 · 입는 중 표시 · 없는 세트는 점선 「?」", "누르기 = 입어 보기 · 길게 = 의상 설명 창"] },
+
+  { cap: "③-1 옷장 · 부분 (신발 칸)", html: closetTop("부분") + `
+      ${slots(406, 3, [0, 1, 2, 3, 4])}
+      ${[["무대 신발 A", "★3", "wear"], ["운동화", "★1", ""], ["부츠 C", "★2", ""], ["구두 D", "★4", "no"]].map((c, i) => item(8 + i * 94, 466, c[0], c[1], c[2])).join("")}
+      ${[["샌들", "★1", ""], ["하이탑", "★2", ""]].map((c, i) => item(8 + i * 94, 576, c[0], c[1], c[2])).join("")}
+      ${n(1, 2, 410)}${n(2, 12, 470)}` + closetBottom(false),
+    notes: ["부위 칸 5개(확정) · 누른 칸만 아래 목록에 보임 · ● = 입는 중", "그 부위 옷 · 별 등급 · 없는 옷은 점선(누르면 얻는 곳)"] },
+
+  { cap: "③-2 입어 보는 중 (적용 전)", html: closetTop("부분", "전신 · 입어 보는 중", true) + `
+      <span class="chg" style="left:200px;top:324px">신발 바뀜</span>
+      ${slots(406, 3, [0, 1, 2, 3, 4])}
+      <span class="chg" style="left:236px;top:402px">바뀜</span>
+      ${[["무대 신발 A", "★3", "wear"], ["운동화", "★1", ""], ["부츠 C", "★2", "on"], ["구두 D", "★4", "no"]].map((c, i) => item(8 + i * 94, 466, c[0], c[1], c[2])).join("")}
+      <div class="b" style="left:8px;top:578px;width:374px;height:110px;border-width:2.5px"></div>
+      <div class="a val" style="left:36px;top:588px">스킬 바뀜 미리보기</div>
+      ${kv(36, 614, 334, "빠짐", "댄스 칸 운망 −n%p")}
+      ${kv(36, 638, 334, "생김", "보컬 칸 대박 +n%p")}
+      ${kv(36, 662, 334, "세트 보너스", "켜짐 → 꺼짐")}
+      ${n(1, 176, 322)}${n(2, 12, 590)}${n(3, 12, 710)}` + closetBottom(true),
+    notes: ["고른 옷이 전신에 바로 입혀짐 · 바뀐 부위 표시 · 아직 저장 안 됨", "바뀌는 스킬: 빠짐 · 생김 · 세트 보너스 켜짐 / 꺼짐 · 판정 합이 15를 넘으면 넘는 몫 표시", "되돌리기 = 열었을 때 모습 · 적용 → 적용 확인 창"] },
+
+  { cap: "창 · 의상 설명 (가진 옷)", html: closetTop("부분") + slots(406, 3, [0, 1, 2, 3, 4]) + closetBottom(false) + `<div class="dimbg"></div>` + win(150, 560, "부츠 C") + `
+      ${body(40, 202, 130, 170, "옷 그림")}
+      <div class="a" style="left:184px;top:206px"><span class="pill">★2</span> <span class="pill">신발</span></div>
+      <div class="a sub" style="left:184px;top:236px;width:170px;font-size:12px;line-height:1.5">옷 소개 한두 줄<br>(콘셉트 · 분위기)</div>
+      <div class="a sub" style="left:184px;top:300px;width:170px;font-size:12px">세트 · 겨울 D (1/5)</div>
+      <div class="a val" style="left:48px;top:388px">스킬</div>
+      ${skillRow(40, 412, 310, "보컬 칸 대박 +n%p", "판정 · 입은 아이돌만", "")}
+      <div class="a val" style="left:48px;top:466px">세트 보너스 (5/5 입으면)</div>
+      ${skillRow(40, 490, 310, "팬 획득 +n%", "팬 · 입은 아이돌만", "")}
+      <div class="a sub" style="left:40px;top:544px;width:310px;font-size:12px;line-height:1.5;padding-left:20px">내 보드에만 적용 · 대전에는 영향 없어요.<br>입는 사람: 오시온 · 다른 멤버도 입을 수 있어요(정할 것).</div>
+      ${winBtns(636, "닫기", "입어 보기")}
+      ${n(1, 12, 206)}${n(2, 12, 414)}${n(3, 12, 492)}${n(4, 12, 548)}`,
+    notes: ["그림 · 별 등급 · 부위 · 소개 · 속한 세트와 가진 조각 수", "조각 스킬 · 효과 종류는 기존 멤버 스킬 표 · 값은 비앙카 장부", "세트 보너스 · 같은 세트 조각을 다 입으면 켜짐", "적용 범위 · 대전 영향 없음 · 여러 멤버가 같은 옷을 입을 수 있는지는 정할 것"] },
+
+  { cap: "창 · 의상 설명 (없는 옷)", html: closetTop("부분") + slots(406, 3, [0, 1, 2, 3, 4]) + closetBottom(false) + `<div class="dimbg"></div>` + win(190, 470, "구두 D") + `
+      ${body(40, 242, 130, 170, "옷 그림 · 흐리게")}
+      <div class="a" style="left:184px;top:246px"><span class="pill">★4</span> <span class="pill">신발</span> <span class="pill">없음</span></div>
+      <div class="a sub" style="left:184px;top:276px;width:170px;font-size:12px;line-height:1.5">옷 소개 한두 줄</div>
+      ${skillRow(40, 428, 310, "댄스 칸 대박 +n%p", "판정 · 입은 아이돌만", "")}
+      <div class="a val" style="left:48px;top:482px">얻는 곳</div>
+      ${["상점 · 꾸밈", "시즌 패스"].map((t, i) => `<div class="b" style="left:40px;top:${506 + i * 46}px;width:310px;height:40px;justify-content:space-between;padding:0 12px"><span>${t}</span><span class="val">가기 ›</span></div>`).join("")}
+      ${winBtns(602, "닫기", "미리 입어 보기")}
+      ${n(1, 12, 430)}${n(2, 12, 508)}${n(3, 12, 606)}`,
+    notes: ["없는 옷도 스킬은 보여 줌", "얻는 곳 바로 가기(상점 · 패스 · 이벤트 중 · 정할 것)", "없는 옷도 미리 입어 보기는 됨 · 적용은 안 됨"] },
+
+  { cap: "창 · 적용 확인", html: closetTop("부분", "전신 · 입어 보는 중", true) + slots(406, 3, [0, 1, 2, 3, 4]) + closetBottom(true) + `<div class="dimbg"></div>` + win(200, 430, "이렇게 입힐까요?") + `
+      ${body(40, 252, 110, 150, "바뀐 모습")}
+      <div class="a" style="left:164px;top:256px;width:186px;font-size:12px;line-height:1.7"><span class="val">오시온</span><br><span class="sub">바뀐 부위 · 신발</span><br><span class="sub">세트 보너스 · 꺼짐</span></div>
+      ${kv(48, 418, 294, "빠지는 스킬", "댄스 칸 운망 −n%p")}
+      ${kv(48, 444, 294, "생기는 스킬", "보컬 칸 대박 +n%p")}
+      ${hr(48, 472, 294)}
+      ${kv(48, 482, 294, "판정 합", "n → n / 15")}
+      <div class="a sub" style="left:48px;top:510px;width:294px;font-size:12px;line-height:1.5">15를 넘는 몫은 효과가 없어요.<br>적용하면 바뀐 스킬이 바로 적용돼요.</div>
+      ${winBtns(566, "더 고르기", "적용")}
+      ${n(1, 12, 256)}${n(2, 12, 420)}${n(3, 12, 484)}${n(4, 12, 570)}`,
+    notes: ["바뀐 모습 · 부위 · 세트 보너스 켜짐 / 꺼짐", "빠지는 · 생기는 스킬", "판정 합 바뀜 · 상한 15를 넘으면 넘는 몫은 효과 없음(멤버 스킬과 같이 셈 · 현중 11/23 확정)", "적용 → 저장 · ② 아이돌 정보 · 팀 무대 · HUD 얼굴이 바뀜 · 바뀐 스킬은 바로 적용(현중 11/23 확정)"] },
+
+  { cap: "창 · 적용 안 하고 나가기", html: closetTop("부분", "전신 · 입어 보는 중", true) + slots(406, 3, [0, 1, 2, 3, 4]) + closetBottom(true) + `<div class="dimbg"></div>` + win(300, 230, "적용하지 않았어요") + `
+      <div class="a sub" style="left:40px;top:354px;width:310px;font-size:13px;line-height:1.6">입어 본 옷이 있어요.<br>나가면 원래 모습으로 돌아가요.</div>
+      ${winBtns(452, "버리고 나가기", "적용하고 나가기")}
+      ${n(1, 12, 456)}`,
+    notes: ["← 를 눌렀을 때 바뀐 것이 있으면만 뜸 · 바뀐 것 없으면 바로 나감"] },
+
+  { cap: "④ 팀 단체 의상", html: head("팀 단체 의상") + `
+      <div class="b off" style="left:8px;top:58px;width:374px;height:200px">공연 무대 · 고른 세트를 입은 모습 미리보기</div>
+      <div class="a val" style="left:36px;top:270px">세트 고르기</div>
+      ${[["무대 의상 A", ""], ["여름 C", "on"], ["연습복", ""], ["축제 G", "no"]].map((c, i) => item(8 + i * 94, 294, c[0], "", c[1])).join("")}
+      <div class="a" style="left:36px;top:410px;width:346px;display:flex;justify-content:space-between"><span class="val">입힐 멤버</span><span class="sub" style="font-size:12px">4 / 5명</span></div>
+      ${["멤버 1", "멤버 2", "멤버 3", "멤버 4", "멤버 5"].map((m, i) => `<div class="b${i === 4 ? " off" : ""}" style="left:8px;top:${436 + i * 50}px;width:374px;height:44px;justify-content:space-between;padding:0 12px"><span style="display:flex;align-items:center;gap:8px"><span class="b" style="position:static;width:22px;height:22px;font-size:12px">${i === 4 ? "" : "✓"}</span><span class="val">${m}</span></span><span class="sub" style="font-size:12px">${i === 4 ? "체크 안 함 · 지금 옷 그대로" : "세트 보너스 켜짐"}</span></div>`).join("")}
+      ${n(1, 12, 62)}${n(2, 12, 298)}${n(3, 10, 410)}${n(4, 12, 710)}` + bottomBar(bigBtn(8, 374, "4명에게 적용", "확인 창에서 멤버별 스킬 바뀜")),
+    notes: ["팀 무대에서 고른 세트를 다 같이 입은 모습", "세트 하나 고르기", "멤버별 체크 · 한 벌로 전원이 입을 수 있음(현중 11/23 확정) · 체크를 빼면 그 멤버는 지금 옷 그대로", "적용 → 확인 창(멤버별 빠지는 · 생기는 스킬) → 저장"] },
+
+  { cap: "⑤ 팀 꾸미기", html: head("팀 꾸미기") + `
+      <div class="b off" style="left:8px;top:58px;width:374px;height:150px">팀 카드 미리보기 · 마크 · 이름 · 소개 · 대표 멤버 얼굴</div>
+      ${[["팀 이름", "루미나", "바꾸기"], ["팀 마크", "모양 · 색", "만들기"], ["팀 소개", "한 줄 소개", "쓰기"], ["대표 멤버", "멤버 1 · HUD 얼굴", "고르기"], ["팀 색", "응원 색", "고르기"]].map((r, i) => `
+        <div class="b" style="left:8px;top:${220 + i * 66}px;width:374px;height:58px;justify-content:space-between;padding:0 12px 0 32px">
+          <span style="text-align:left"><span class="sub" style="font-size:12px">${r[0]}</span><br><span class="val">${r[1]}</span></span><span class="val">${r[2]} ›</span></div>`).join("")}
+      ${n(1, 12, 62)}${n(2, 10, 236)}${n(3, 10, 302)}${n(4, 10, 368)}${n(5, 10, 434)}${n(6, 10, 500)}` + tabs(),
+    notes: ["바꾸면 이 카드가 바로 바뀜(크루 · 월드에서 보이는 모습)", "팀 이름 → 이름 바꾸기 창", "팀 마크 → ⑤-1", "팀 소개 한 줄(글자 수 정할 것)", "대표 멤버 = HUD 왼쪽 위 얼굴", "팀 색 · 넣을지 정할 것"] },
+
+  { cap: "⑤-1 팀 마크 만들기", html: head("팀 마크") + `
+      <div class="b off" style="left:115px;top:66px;width:160px;height:160px">마크 미리보기</div>
+      ${chips(["모양", "무늬", "색"], "모양", 240)}
+      <div class="a" style="left:8px;top:286px;width:374px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px">${Array.from({ length: 12 }, (_, i) => `<div style="height:82px;border:${i === 2 ? 3 : 1.5}px solid var(--ln);border-radius:8px;background:${i > 9 ? "transparent" : "var(--box)"};${i > 9 ? "border-style:dashed;" : ""}display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--soft)">${i > 9 ? "잠김" : "모양 " + (i + 1)}</div>`).join("")}</div>
+      ${n(1, 92, 70)}${n(2, 12, 290)}${n(3, 12, 710)}` + bottomBar(bigBtn(8, 374, "저장", "")),
+    notes: ["모양 + 무늬 + 색을 겹쳐 만든 마크", "기본 모양 고르기 · 잠긴 모양은 얻는 곳(정할 것) · 그림 올리기는 하지 않음(제안)", "저장 → ⑤ 카드 · ① 팀 정보에 반영"] },
+
+  { cap: "창 · 팀 이름 바꾸기", html: head("팀 꾸미기") + tabs() + `<div class="dimbg"></div>` + win(240, 340, "팀 이름 바꾸기") + `
+      <div class="b" style="left:40px;top:296px;width:310px;height:48px;justify-content:flex-start;padding:0 12px"><span class="val">루미나</span></div>
+      <div class="a sub" style="left:40px;top:352px;width:310px;font-size:12px;display:flex;justify-content:space-between"><span>글자 수 n / n</span><span>쓸 수 있는 이름</span></div>
+      <div class="a sub" style="left:40px;top:384px;width:310px;font-size:12px;line-height:1.6;padding-left:20px">바꾸기 비용 없음<br>다음 변경까지 · 정할 것<br>예전 기록(앨범 · 순위)도 새 이름으로 보여요(제안)</div>
+      ${winBtns(510, "취소", "바꾸기")}
+      ${n(1, 12, 300)}${n(2, 12, 388)}`,
+    notes: ["팀 이름 입력 · 글자 수 · 금칙어 · 같은 이름 확인", "바꾸기 비용 없음(현중 11/24 「팀 이름도 무료」 · 11/23 「유료」를 바꿈) · 대기 시간 · 예전 기록 표시 방식은 정할 것 · 처음 이름은 오디션 2번째 멤버 때 정함"] },
+
+  { cap: "창 · 새 의상 얻음 → 바로 입기", html: hudBack() + win(170, 470, "새 의상을 얻었어요") + `
+      ${body(115, 222, 160, 190, "옷 그림")}
+      <div class="a" style="left:40px;top:424px;width:310px;text-align:center"><span class="val" style="font-size:15px">부츠 C</span> <span class="pill">★2</span> <span class="pill">신발</span></div>
+      ${skillRow(40, 456, 310, "보컬 칸 대박 +n%p", "판정 · 입은 아이돌만", "")}
+      <div class="a sub" style="left:40px;top:506px;width:310px;font-size:12px;text-align:center">누구에게 입힐까요? · 멤버 고르기</div>
+      ${[0, 1, 2, 3, 4].map(i => `<span class="b off" style="left:${70 + i * 54}px;top:530px;width:44px;height:44px;border-radius:50%;font-size:11px${i === 0 ? ";border-width:3px;border-style:solid" : ""}">얼굴</span>`).join("")}
+      ${winBtns(582, "나중에", "바로 입기")}
+      ${n(1, 12, 226)}${n(2, 12, 458)}${n(3, 12, 534)}${n(4, 12, 586)}`,
+    notes: ["상점 · 패스 · 이벤트에서 얻었을 때(적용 방법 ③)", "스킬 한 줄", "멤버 고르기", "바로 입기 → 그 멤버 ③ 옷장 · 입어 본 상태로 열림(적용 확인은 같은 과정) · 나중에 → 옷장에 보관"] },
+];
+
+const SHOT = new URLSearchParams(location.search).get("shot");
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+</script>
+</body>
+</html>

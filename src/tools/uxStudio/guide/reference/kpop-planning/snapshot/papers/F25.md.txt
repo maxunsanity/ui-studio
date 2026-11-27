@@ -1,0 +1,500 @@
+> 원문 docx (구글 드라이브): https://docs.google.com/document/d/1NyInqa4P0nce8ZS8Ac6EpBp8NZM4eB4B/edit?usp=drive_link
+
+# 2D 방치형 아이돌 기획사 경영 시뮬레이션 재미 고도화 심층 리서치 보고서
+
+## Executive Summary
+
+첨부 기획서는 **60일 시즌제·40칸 도시 보드·8개 핵심 랜드마크·180장 카드북·20종 수호정령·명성과 그림자 리스크**가 결합된 독특한 구조를 이미 갖추고 있지만, 정작 플레이어가 매 순간 체감해야 할 “아이돌에게 돈을 쓰고 → 팬덤이 성장하고 → 팬덤이 행동해 → 더 큰 돈과 명성을 만드는” 경영 인과관계가 화면과 경제 시스템에서 아직 충분히 드러나지 않는다. 특히 문서 스스로도 랜드마크 비용·수익 곡선, 60일 전체 리셋의 장기 리텐션, 다른 도시의 8개 랜드마크 확장, 수치 밸런스를 미해결 항목으로 남겨 두고 있으므로, 이 네 영역이 실제 재미를 결정할 가능성이 가장 높다. fileciteturn0file0  
+핵심 권고는 **상단 약 1/3을 “살아 움직이는 기획사+팬덤 디오라마”로 고정하고, 하단 2/3을 경영 의사결정 UI로 사용하며, 팬을 단순 숫자가 아니라 스트리밍·구매·응원·확산·방어를 하는 ‘경제 에이전트’로 시각화**하는 것이다. K-pop 팬덤 연구에서도 팬은 수동 소비자에 머무르지 않고 정보를 획득·확산·생산하고 스스로 콘텐츠 문화를 만들어 내는 프로슈머로 설명되므로, 이 게임만의 차별점은 “아이돌 육성”보다 한 단계 더 나아간 **“팬덤을 관찰하고 키우는 경영 시뮬레이션”**이 되어야 한다. [\[1\]](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003009962&utm_source=chatgpt.com)  
+경제적으로는 연습실·녹음실·안무실·MV 세트장을 **비용/투자 시설**, 방송국을 **노출+혼합 수익 시설**, 팬샵·콘서트홀·아레나를 **직접 수익 시설**로 명확하게 분리하고, 모든 경영 시퀀스에서 비용이 먼저 빠지고 팬 행동을 거쳐 수익이 되돌아오는 모습을 보여 주는 것이 좋다. 장기적으로는 현재의 “시즌 종료 시 사실상 전부 초기화”를 그대로 유지하기보다, 순수 리셋과 소규모 영구 레거시 보너스를 A/B 테스트하는 편이 바람직하다. 첨부 문서도 이 리스크를 명시하고 있으며, 대표적인 idle 게임인 *AdVenture Capitalist* 역시 리셋 이후의 다음 진행을 가속하는 Angel Investor 구조를 핵심 메타 성장으로 사용한다. fileciteturn0file0 [\[2\]](https://hyperhippo.com/games/adventure-capitalist/?utm_source=chatgpt.com)
+
+## 기획서 진단과 재미 구조 재정의
+
+첨부 문서의 가장 큰 장점은 시스템 수가 부족하지 않다는 점이다. 현재 설계에는 서울부터 도쿄까지 이어지는 6개 도시 보드, 도시마다 반복되는 40칸 구조, 8개 랜드마크와 5레벨 업그레이드, 명성 0~100, 명성에 따른 그림자 잠식, 봉합전, 수호정령의 공명·연결, 20덱×9장 카드북, 60일 시즌 및 12화 이벤트 리듬이 이미 들어 있다. 문제는 **이 시스템들이 각각 재미있을 가능성은 높지만, 플레이어의 머릿속에서 하나의 경제적 이야기로 연결되는 접착제가 부족하다**는 것이다. fileciteturn0file0
+
+따라서 코어 루프를 다음과 같이 다시 정의하는 것을 권한다.
+
+> **투자 → 아이돌 활동 → 콘텐츠 발생 → 팬덤 반응 → 팬 행동 → 수익/명성 → 더 큰 투자 → 리스크 발생 → 팬덤과 정령로 방어**
+
+현재 문서의 “주사위를 굴리고 칸에 도착하면 보상을 받는다”는 루프는 보드게임 문법으로는 명확하지만, 아이돌 기획사 판타지에서는 다소 추상적이다. 주사위는 제거할 필요가 없지만 **주사위를 ‘게임의 목적’이 아니라 ‘기획사 시뮬레이션을 움직이는 스케줄 엔진’으로 보이게 해야 한다.** 예를 들어 플레이어가 방송 출연 칸을 밟으면 단순히 명성 +7, 현금 +N이 뜨는 것이 아니라, 상단 디오라마에서 아이돌이 방송국으로 이동하고 팬들이 휴대폰을 꺼내고 SNS 버블이 번지며, 팬샵과 음원 수익이 뒤따라 뛰어오르게 만드는 식이다.
+
+Idle 장르 연구에서는 플레이어가 단순 반복 조작에서 점차 **계획과 최적화의 단계**로 이동한다는 점이 중요한 특징으로 제시된다. 66개 idle 게임을 분석한 연구는 이 장르가 “playing”에서 “planning”으로 플레이 행태를 이동시키는 구조를 지적했고, Neko Atsume 이용자 연구 역시 idle 게임의 참여가 짧은 확인 행동, 사회적 행동, 반복적인 체크 습관 등으로 나타날 수 있음을 보였다. [\[3\]](https://research.monash.edu/en/publications/playing-to-wait-a-taxonomy-of-idle-games/?utm_source=chatgpt.com) 따라서 이 게임도 만렙에서 클릭 횟수가 늘어나는 것이 아니라 **“CEO처럼 정책을 결정하면 기획사가 자동으로 살아 움직이는 것”**이 성장의 최종 판타지가 되어야 한다.
+
+또한 2025년 한국콘텐츠진흥원의 해외 한국 게임 이용자 조사에서는 그래픽·캐릭터·서사 같은 감성 요소가 게임 선택에 중요하지만, 한국 게임에 대한 개선 요구에서는 성장·강화 구조가 핵심 영역으로 나타났다. [\[4\]](https://welcon.kocca.kr/ko/info/business/1956821?utm_source=chatgpt.com) 이 게임은 K-pop 비주얼과 세계관만 강하게 만드는 것보다 **성장 구조가 이해 가능하고, 비용 지출의 이유와 그 결과가 눈으로 보이는 것**이 더 중요하다.
+
+현재 문서 및 요청에서 확정되지 않은 사항과 본 보고서의 가정은 다음과 같다.
+
+| 항목                        | 현재 상태                       | 본 보고서의 작업 가정                                |
+|-----------------------------|---------------------------------|------------------------------------------------------|
+| 타깃 플랫폼                 | **미지정**                      | 모바일 세로형 우선, 태블릿 확장                      |
+| 기준 해상도/비율            | **미지정**                      | 1080×1920 상당의 세로 UI 기준                        |
+| 게임 엔진                   | **미지정**                      | 엔진 독립 설계, 기술 예시는 Unity 6 기준             |
+| 경영 정산 주기              | **미지정**                      | 60초 = 경제 정산 1시퀀스                             |
+| 화면 애니메이션 주기        | **미지정**                      | 약 12초 마이크로 루프 × 5회 = 60초 정산              |
+| 랜드마크 정확한 비용·수익   | 문서에서 후속 밸런스 항목       | 아래 수치는 **설계 예시값**                          |
+| 서울 외 도시의 8개 랜드마크 | 5개 이름만 일부 정의, 확장 필요 | 서울 8기능을 유지하고 도시별 스킨·명칭·보너스만 교체 |
+| 타깃 유저 연령/성별/KPI     | **미지정**                      | K-pop 관심층 + 캐주얼 경영/idle 유저 혼합으로 가정   |
+| 유료화 방식                 | **미지정**                      | F2P + 선택형 광고 + 시즌패스 + 코스메틱을 권장       |
+| 유료 랜덤 카드팩            | **미지정**                      | 기본 권고안에서는 핵심 매출원에서 제외               |
+| 시즌 간 영구 성장           | 현 설계는 기록·칭호만 유지      | “순수 리셋”과 “소프트 레거시” A/B 테스트 권장        |
+
+특히 마지막 항목이 중요하다. 첨부 문서는 시즌 종료 후 카드북·정령·랜드마크·현금·주사위·명성 등을 모두 리셋하고 명예의 전당·칭호·친구목록 정도만 남긴다고 명시하며, 후속 항목에서 장기 리텐션이 기록·랭킹·칭호에만 의존한다고 스스로 문제를 제기한다. fileciteturn0file0 이 부분은 런칭 전 검증 대상이 아니라 **프로토타입 단계부터 검증해야 하는 최우선 가설**이다.
+
+## 화면 구성·팬덤 표현·UI/UX
+
+사용자가 지정한 **“게임 화면은 상단 약 1/3”** 규칙은 오히려 이 장르에 유리하다. 방치형 경영 게임의 핵심은 모든 개체를 직접 조작하는 것이 아니라 “내가 만든 시스템이 알아서 돌아가는 모습을 관찰하는 만족감”이므로, 상단 33%를 **기획사 생태계의 CCTV/디오라마**처럼 만들고 하단을 의사결정 공간으로 쓰는 것이 좋다.
+
+권장 기본 화면은 다음과 같다.
+
+┌──────────────────────────────────┐  
+│ 상단 약 33% │  
+│ LIVE AGENCY / FANDOM DIORAMA │  
+│ │  
+│ 연습실 → 녹음실 → 방송국 → 팬샵 │  
+│ 아이돌 이동 팬 이동 응원봉 │  
+│ -320C +팬 1.2K +780C │  
+│ │  
+│ \[컴백!\] \[SNS 급상승\] \[팬덤쉴드\] │  
+├──────────────────────────────────┤  
+│ 현금 125K +4.3K/분 │  
+│ 팬 3.42M 명성 78 순익 +34% │  
+├──────────────────────────────────┤  
+│ │  
+│ 오늘의 스케줄 / 자동 운영 정책 │  
+│ │  
+│ 성장 제작 홍보 팬덤 투어 │  
+│ ▣ ▣ ▣ ▣ ▣ │  
+│ │  
+│ 이번 정산 │  
+│ 수익 +18.6K / 지출 -12.4K │  
+│ 순이익 +6.2K │  
+│ │  
+├──────────────────────────────────┤  
+│ \[회사\] \[아이돌\] \[보드\] \[카드\] \[투어\]│  
+└──────────────────────────────────┘
+
+**상단 1/3에서는 숫자 자체보다 원인과 결과가 보여야 한다.** 예를 들어 녹음실 위에 -180, 방송국 앞에 팬들이 몰리며 팬 +240, 팬샵 계산대에서 +350, 콘서트홀 종료 후 +명성 12가 순차적으로 팝업된다. 그러면 플레이어는 엑셀을 읽지 않고도 “이번 사이클에 왜 돈을 벌었는지” 이해할 수 있다.
+
+권장 UI 대안은 다음과 같다.
+
+| 안                     | 상단 1/3                              | 하단 2/3                           | 장점                                  | 단점                                 | 권고             |
+|------------------------|---------------------------------------|------------------------------------|---------------------------------------|--------------------------------------|------------------|
+| **A. 라이브 기획사형** | 건물을 좌→우 생산 파이프라인으로 배치 | 스케줄·재무·업그레이드             | 비용→활동→팬→수익 인과가 가장 잘 보임 | 도시 풍경 표현 면적이 작음           | **최우선 권장**  |
+| B. 도시 보드형         | 현재 도시의 40칸 보드를 축약해 표시   | 카드·팬덤·정령 운영                | 기존 기획서 보드 정체성이 강함        | 팬과 아이돌이 작아져 감정성이 약해짐 | 보드 탭에서 사용 |
+| C. 무대 중심형         | 무대/콘서트·팬 군중을 크게 표시       | 회사 내부를 카드형 대시보드로 처리 | K-pop 판타지가 가장 강함              | 경영 인과관계가 추상화될 위험        | 이벤트·피날레용  |
+
+실제 메인 화면은 **A**, 보드 진행 화면은 **B**, 컴백/콘서트/시즌 피날레에서는 **C로 자동 전환**시키는 하이브리드 구조가 가장 적합하다.
+
+### 만렙 팬덤을 “숫자”가 아니라 “군집 행동”으로 보여주는 방법
+
+팬덤 연구에서는 팬의 활동이 단순 구매만으로 설명되지 않고 정보 획득·확산·생산, 팬 자체 콘텐츠 제작, 커뮤니티 활동 등으로 확장된다. K-pop 팬덤을 다룬 국내 연구도 팬이 일상적으로 문화를 소비하면서 동시에 생산하는 능동적 주체임을 강조한다. [\[1\]](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003009962&utm_source=chatgpt.com) 따라서 만렙 팬덤은 단순히 화면 아래에 FANS 9,999,999라고 표시하는 방식보다, 서로 다른 팬 행동이 동시에 벌어지는 것으로 표현해야 한다.
+
+추천 팬 행동 상태는 네 단계다.
+
+**유입 팬**은 전광판을 쳐다보고, 버스킹 주변에 멈추고, 휴대폰으로 촬영한다. **활동 팬**은 영상을 공유하고 스트리밍하고 방송국 앞에 모인다. **코어 팬**은 팬샵 구매, 팬미팅 대기, 투표, 응원봉 동기화에 참여한다. **핵심 팬덤**은 콘서트 티켓 구매 참여, 대규모 단체 응원, 팬 프로젝트, 글로벌 번역·확산, 악플/스캔들 발생 시 팬덤 쉴드에 참여한다. 이는 첨부 문서의 팬레터·팬샵·팬미팅·팬덤쉴드·안티팬·팬덤 전쟁 구조와도 자연스럽게 연결된다. fileciteturn0file0
+
+만렙에서 수만 명을 개별 스프라이트로 그리려고 하면 오히려 화면이 난잡해진다. **데이터상의 팬 수와 화면상의 팬 개체 수를 분리**해야 한다.
+
+권장 렌더링은 세 층이다.
+
+- 가까운 거리에는 **Hero Fans 20~30명**을 두고 의상·응원봉·행동을 개별적으로 표현한다.
+
+- 중간 거리에는 **Crowd Cluster 40~80개**를 배치한다. 한 군집 스프라이트는 논리적으로 수십~수천 명의 팬을 대표한다.
+
+- 먼 거리와 콘서트 객석은 개별 인물 대신 **응원봉 웨이브·실루엣·파티클·깃발·휴대폰 플래시**로 군중 규모를 표현한다.
+
+따라서 팬 수가 3천 명에서 300만 명으로 증가해도 캐릭터가 1,000배 늘어나는 것이 아니라, **군집 밀도·행동 종류·응원봉 면적·파티클 밀도·줄 길이·팬샵 회전율**이 증가한다.
+
+만렙 팬덤을 강하게 보이게 하는 구체적인 연출은 다음과 같다.
+
+**팬샵**에서는 여러 줄의 대기열, 쇼핑백을 든 팬, 품절 팻말, 재입고 트럭이 보인다. **방송국**에는 출근길 촬영 팬, 플래카드, 휴대폰 카메라가 생긴다. **콘서트홀**에서는 응원봉 색이 멤버별 감정색으로 나뉘었다가 후렴에서 하나의 웨이브로 합쳐진다. **SNS 이벤트**가 일어나면 팬 머리 위의 작은 말풍선이 다른 군집으로 빠르게 전염되고, 화면 한쪽의 글로벌 지도에 서울→오사카→파리→뉴욕 방향의 확산선이 잠깐 나타난다. **스캔들**이 발생하면 일부 팬이 회색으로 이탈하고 코어 팬들이 하트/쉴드 아이콘을 만들어 방어한다.
+
+K-Pop Academy의 공식 소개는 아이돌의 일상 관리·훈련·상호작용·콘서트·공간 꾸미기를 핵심으로 전면에 내세운다. 이 게임이 그대로 따라갈 필요는 없지만, 아이돌이 실제 공간에서 생활하는 모습을 항상 보여 주는 방식은 참고 가치가 높다. [\[5\]](https://hyperbeard.com/game/k-pop-academy/?utm_source=chatgpt.com) Monthly Entertainment 역시 플레이어에게 아이돌 데뷔, 수익 계획, 팬 획득, 월드 투어, 앨범 제작을 직접 연결한다. [\[6\]](https://play.google.com/store/apps/details?hl=th&id=com.factory608.ME&utm_source=chatgpt.com) **본 게임의 차별점은 그 모든 행위를 “팬덤의 집단 반응까지 동시에 볼 수 있는 화면”으로 발전시키는 것**이다.
+
+추천 12초 마이크로 시퀀스는 아래와 같다.
+
+![Rendered Mermaid diagram 1](data:image/png;base64,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)
+
+이 연출의 핵심은 **팬이 돈을 생성하는 장식물이 아니라, 아이돌 콘텐츠를 경제 가치로 바꾸는 중간 단계**로 보이게 만드는 것이다.
+
+정보 밀도는 과감히 제한해야 한다. 메인 화면에서 항상 보여 줄 핵심 지표는 **현금, 순이익/분, 활성 팬, 명성**의 네 가지면 충분하다. 카드 진행도·정령·쉴드·주사위·토큰·콘텐츠 품질 등은 이벤트가 발생할 때만 확장 표시하는 편이 낫다. 2025년 국내 게임이용자 조사에서 게임 미이용·이탈 이유 가운데 “시간 부족”이 가장 크게 나타난 점을 감안하면, 모바일 메인 화면은 2~3분만 열어도 상태를 이해하고 의사결정을 할 수 있어야 한다. [\[7\]](https://welcon.kocca.kr/ko/info/business/1956858?utm_source=chatgpt.com)
+
+## 경제 모델·건물·반복 시퀀스·밸런싱
+
+현재 문서에서 가장 큰 경제적 문제는 **모든 랜드마크가 방치 수익의 합산 대상처럼 서술되어 있다는 점**이다. fileciteturn0file0 아이돌 기획사라는 판타지에서는 연습실·안무실·MV 세트장이 돈을 직접 찍어 내는 건물처럼 보이면 경영 감각이 약해진다. 따라서 “비용을 먹는 시설”과 “돈을 버는 시설”을 명시적으로 구분할 필요가 있다.
+
+아래 수치는 **밸런스 시제품용 가정값**이며 실제 매출 예측이 아니다. 단위 C는 임의의 게임 현금이며, 정산 1회는 60초로 가정한다.
+
+| 건물      | 경제 역할       | Lv1 기준 예시    | 시퀀스 효과   | 성장 목적                          |
+|-----------|-----------------|------------------|---------------|------------------------------------|
+| 연습실    | **비용 센터**   | -120C            | 아이돌 훈련   | 능력치·공연 품질 상승              |
+| 녹음실    | 투자+후속 수익  | 제작 시 -180C    | 곡 제작       | 완성곡이 이후 정산에서 로열티 생성 |
+| 안무실    | **비용 센터**   | -140C            | 퍼포먼스 훈련 | 다음 무대 효율 +6% 가안            |
+| MV 세트장 | **고비용 투자** | -320C            | MV 공개       | 팬 유입·컴백 버프                  |
+| 방송국    | 혼합 시설       | +260 / -90C      | 방송 출연     | 순 +170C + 명성·신규 팬            |
+| 팬샵      | **직접 수익**   | +360 / -90C      | 굿즈 구매     | 활성 팬 수에 비례                  |
+| 콘서트홀  | 이벤트 수익     | +900 / -420C     | 콘서트        | 티켓·MD·명성 + 던전 슬롯           |
+| 아레나    | 고위험 고수익   | +2,200 / -1,300C | 대형 공연     | 만렙 현금 싱크+폭발적 팬 성장      |
+
+이렇게 하면 플레이어에게 흥미로운 선택이 생긴다.
+
+연습실을 업그레이드하면 **당장은 돈이 줄지만 공연 수익이 좋아지고**, MV 세트장에 돈을 태우면 **몇 사이클 동안 현금 흐름이 나빠지지만 팬 증가율이 뛰며**, 팬샵은 안전한 현금 흐름을 만들고, 아레나는 명성과 팬덤이 충분할 때만 큰 이득이 나는 구조가 된다.
+
+비건물 경제 항목도 분리하는 것이 좋다.
+
+| 분류      | 주요 수익             | 주요 지출                    |
+|-----------|-----------------------|------------------------------|
+| 음악      | 음원/앨범 로열티      | 작곡·녹음·믹싱·마스터링      |
+| 방송/홍보 | 출연료·광고·스폰서    | 스타일링·PR·교통·홍보비      |
+| 팬덤      | 굿즈·팬미팅           | MD 생산·팬 이벤트 운영       |
+| 공연      | 티켓·현장 MD·투어     | 대관·세션·무대·운송          |
+| 아이돌    | 광고 계약·브랜드 협업 | 숙소·식비·트레이닝·회복      |
+| 회사      | 투자·파트너 보너스    | 직원 급여·사옥 유지          |
+| 리스크    | 보험/쉴드 효과        | 스캔들·악플·일정 취소·역공명 |
+| 시즌      | 패스/이벤트 보상      | 시즌 이벤트 운영비·보스 대응 |
+
+권장 정산식은 복잡하게 만들 필요가 없다.
+
+$수익_{t} = \left( \sum 건물수익_{i} \right) \times (1 + \frac{명성}{100}) \times 정령배율 \times 팬수요배율 + 이벤트수익$
+
+첨부 기획서의 기존 식인 Σ 랜드마크 레벨 수익 × (1 + 명성/100) × 마스코트 배율은 유지할 수 있지만, 랜드마크 전체가 아니라 **수익 시설에만 직접 수익을 주고 비용 시설은 다른 수익 시설의 계수를 강화하도록 변경**하는 것이 핵심이다. fileciteturn0file0
+
+팬 수요는 팬 수 자체와 동일하게 두지 않는 것이 좋다. 팬이 10배 증가할 때 굿즈 매출도 영원히 정확히 10배가 되면 곧 숫자가 폭발한다. 예를 들어 다음처럼 완만하게 줄어드는 효율을 적용할 수 있다.
+
+$팬수요배율 = min(2.2,\mspace{6mu} 1 + 0.12ln(1 + \frac{활성팬}{1000}))$
+
+이 수식은 **설계 제안**으로, 실제 계수는 플레이테스트에서 조정해야 한다.
+
+지출은 다음처럼 구성한다.
+
+$지출_{t} = 고정운영비 + 아이돌/스태프비 + 콘텐츠제작비 + 마케팅비 + 이벤트비 + 기대리스크비$
+
+$현금_{t + 1} = 현금_{t} + 수익_{t} - 지출_{t}$
+
+가장 중요한 UI는 이 공식을 숨기는 것이 아니라 다음처럼 매 시퀀스 요약하는 것이다.
+
+> **이번 정산: 방송 +3.8K / 팬샵 +4.2K / 공연 +6.5K / 기타 +4.1K = +18.6K**  
+> **훈련 -2.1K / 제작 -3.6K / 운영 -2.5K / 홍보·리스크 -4.2K = -12.4K**  
+> **순이익 +6.2K**
+
+최소 3단계 경제 예시는 다음과 같다.
+
+| 단계     | 가정 상태                     | 정산당 총수익 | 정산당 총지출 | 순이익   | ROI\*     | 설계 의도                             |
+|----------|-------------------------------|---------------|---------------|----------|-----------|---------------------------------------|
+| **초기** | 1인, 명성 20~30, 서울 초반    | 1,450C        | 1,100C        | +350C    | **31.8%** | 돈이 빠듯하고 선택의 의미가 큼        |
+| **중기** | 3~4인, 명성 60~80, 3~4도시    | 18,600C       | 12,400C       | +6,200C  | **50.0%** | 자동화와 팬덤 시너지가 체감됨         |
+| **만렙** | 5인, 명성 90+, 6도시·Lv5 중심 | 235,000C      | 155,000C      | +80,000C | **51.6%** | 화면과 숫자 모두 폭발적이나 비용도 큼 |
+
+\* ROI = (수익-지출) / 지출. 전부 본 보고서의 가안이다.
+
+초기를 1로 정규화하면 수익은 약 12.8배→162.1배, 지출은 11.3배→140.9배, 순이익은 17.7배→228.6배로 증가하는 예시가 된다.
+
+![Rendered Mermaid diagram 2](data:image/png;base64,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)
+
+위 세 선은 각각 **총수익 / 총지출 / 순이익** 순서다.
+
+중요한 점은 만렙에서 수익만 커지는 것이 아니라 **지출 애니메이션 역시 훨씬 화려하고 빈번하게 보여야 한다**는 것이다. 아이돌 다섯 명이 서로 다른 스케줄을 뛰고, MV 촬영·월드투어·대형 콘서트·마케팅팀·스타일리스트·경호·운송이 동시에 돈을 소모해야 “대형 기획사를 운영한다”는 느낌이 난다.
+
+업그레이드 곡선은 다음처럼 시작하는 것을 권한다.
+
+$업그레이드비용(L) = BaseCost \times {2.1}^{L - 1}$
+
+$시설효과(L) = BaseOutput \times {1.65}^{L - 1}$
+
+단, 비용 시설의 ROI는 시설 자체가 아니라 연결된 매출 시설을 통해 발생하도록 한다. 예를 들어 안무실 레벨이 오르면 콘서트홀과 아레나의 공연 품질 계수가 증가한다. 그러면 플레이어는 단순히 “가장 비싼 시설 하나만 올리는 것”이 아니라 **생산 체인의 병목을 찾게 된다.**
+
+보드의 주사위 확률은 현재 구조대로 유지하되, “도착 운”이 너무 강한 성장 병목이 되지 않도록 권한다. 카드 게임에서 입력 단계의 무작위성이 만족도를 떨어뜨릴 수 있음을 보고한 실험 연구도 있으므로, 핵심 경영 성장까지 랜덤에 묶기보다는 랜덤은 **속도를 흔드는 요소**로 두고, 필수 진행은 누적 보장 장치를 갖추는 편이 안전하다. [\[8\]](https://arxiv.org/abs/2107.08437?utm_source=chatgpt.com)
+
+예를 들어 “방송국을 8회 지나쳤다면 다음 2회 안에 방송 출연 이벤트를 보장”, “★5 카드 미획득 누적 시즌 포인트로 선택권 구매” 같은 **천장형 누적 보상**이 적합하다.
+
+## 성장·보상·리텐션·자동화·콘텐츠 이벤트
+
+이 게임의 성장 구조는 세 층으로 분리하는 것이 좋다.
+
+**마이크로 성장**은 12초 시퀀스에서 숫자가 오르고 팬이 움직이는 즉시 보상이다. **메조 성장**은 몇 분~하루 단위로 랜드마크 업그레이드, 아이돌 스케줄, 카드 세트, 정령 연결을 최적화하는 단계다. **매크로 성장**은 도시 해금, 멤버 5인 완성, 60일 시즌 피날레, 명예의 전당으로 이어지는 장기 목표다.
+
+이 구조는 현재 기획서와 잘 맞는다. 첨부 문서는 5일마다 원작 1화에 대응하는 이벤트를 두고, 20일 봉합전, 25일 데뷔, 30~50일 사이 멤버 합류, 55일 도쿄, 56~60일 피날레를 배치한다. fileciteturn0file0 다만 현 상태에서는 이것이 “해금 일정”에 가깝기 때문에, 각 구간마다 **경영 문제의 성격 자체를 바꾸는 것**이 좋다.
+
+추천 시즌 리듬은 다음과 같다.
+
+| 시즌 구간 | 경영 질문                                     | 대표 이벤트                |
+|-----------|-----------------------------------------------|----------------------------|
+| 1~10일    | “돈이 부족한데 무엇부터 투자할까?”            | 첫 오디션·버스킹·첫 팬레터 |
+| 11~20일   | “훈련과 데뷔 중 무엇을 우선할까?”             | 데뷔 준비·첫 그림자        |
+| 21~30일   | “명성을 올리면 위험도 올라가는데 밀어붙일까?” | 방송·봉합전·첫 컴백        |
+| 31~40일   | “여러 멤버와 건물을 어떻게 자동화할까?”       | 부산·투어·팬덤 세분화      |
+| 41~50일   | “글로벌 확장에 얼마나 재투자할까?”            | 파리·뉴욕·대형 팬 프로젝트 |
+| 51~60일   | “최대한 벌 것인가, 시즌 순위를 노릴 것인가?”  | 도쿄·돔·전 서버 피날레     |
+
+자동화는 단순히 자동 클릭을 판매하는 기능보다 **회사가 성장하며 조직이 만들어지는 과정**으로 설계해야 한다.
+
+초기에는 플레이어가 스케줄 버튼을 직접 누르고, 중기에는 매니저가 반복 스케줄을 대신하며, 후반에는 다음과 같은 정책 프리셋을 선택한다.
+
+**성장 우선**은 연습·녹음·안무 비중을 높인다. **컴백 우선**은 MV·방송·팬덤 마케팅을 집중한다. **현금 우선**은 팬샵·방송·소규모 공연을 반복한다. **월드투어**는 콘서트·아레나와 공항 수익을 우선한다. **회복 우선**은 숙소·컨디션 스태프를 적극 사용한다.
+
+Idle 장르의 재미가 단순 무조작이 아니라 **최적화와 자율성**에서도 발생할 수 있다는 최근 연구와, idle 게임을 플레이에서 계획으로 이동하는 장르로 분석한 연구를 고려하면 자동화는 의사결정을 제거하기보다 반복 노동만 제거해야 한다. [\[9\]](https://dspace.rpi.edu/items/64643720-6def-468e-a497-754e607c4941?utm_source=chatgpt.com)
+
+장기 플레이를 위한 콘텐츠는 **보상량만 다른 이벤트**가 아니라 경제 규칙을 잠시 뒤틀어야 한다.
+
+예를 들어 **컴백 주간**에는 제작비가 50% 늘지만 팬 유입이 크게 상승한다. **팬 프로젝트**에서는 팬들이 광고판·생일카페·응원 이벤트를 자발적으로 열어 명성은 올라가지만 관리하지 않으면 팬덤 파벌 갈등이 생긴다. **월드투어**에서는 티켓 수익이 커지는 대신 항공·운송·컨디션 비용이 급증한다. **스캔들 위기**에서는 광고와 방송 수익이 떨어지고 PR 인력·팬덤 쉴드가 중요해진다. **수호정령 공명 이벤트**에서는 돈을 포기하고 특정 멤버를 던전에 배치하면 장기 전투 효율을 얻는다.
+
+K-pop 팬덤의 실제 문화가 상향식 팬 콘텐츠와 적극적 생산·확산 활동을 포함한다는 연구 결과를 게임적으로 번역하면, 팬덤 이벤트는 개발사가 팬에게 “보상을 지급하는 이벤트”가 아니라 **팬들이 스스로 무언가를 시작하고 플레이어가 대응하는 이벤트**가 될 수 있다. [\[10\]](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001838606&utm_source=chatgpt.com) 이것이 일반 타이쿤과 가장 뚜렷한 차별점이다.
+
+### 시즌 전체 리셋은 “소프트 레거시”를 반드시 테스트할 것
+
+현재 문서의 전부 리셋 방식은 서사적으로는 500년 환생과 매우 잘 맞지만, 플레이어가 60일간 만든 경제 시스템의 대부분을 잃는다는 위험이 있다. 첨부 문서도 이를 명시적인 후속 검증 항목으로 둔다. fileciteturn0file0
+
+추천하는 방식은 **강력한 영구 스탯 이월이 아니라 선택형 미세 레거시**다.
+
+시즌 종료 시 아래에서 하나만 선택하게 한다.
+
+- 전 시즌의 스태프 1명을 **레거시 고문**으로 보존: 해당 분야 +3%
+
+- 졸업 아이돌의 **팬클럽 유산**: 첫 5일 팬 유입 +5%
+
+- 도시별 **기념 랜드마크 스킨**: 시각 보상 + 미세 편의
+
+- 특정 카드의 **기억 조각**: 다음 시즌 같은 덱 ★1 1장 보장
+
+보너스는 매 시즌 무한 누적하지 말고 다음시즌에만 영향을 준다.핵심은 숫자가 아니라 **“지난 시즌이 완전히 사라지지 않았다”**는 감정적 연결이다.
+
+*AdVenture Capitalist*는 성장 후 Angel Investor를 통해 다음 진행을 강화하는 리셋 메타를 대표적으로 사용하며, 공식 설명에서도 직원 고용·업그레이드·Angel Investor를 수익 성장 요소로 내세운다. [\[11\]](https://hyperhippo.com/games/adventure-capitalist/?utm_source=chatgpt.com) 본 게임은 이를 그대로 복제하지 말고 **환생/명예의 전당 세계관에 맞는 레거시 시스템**으로 번역하는 것이 좋다.
+
+소프트런치에서는 최소 두 군을 비교해야 한다.
+
+**A군:** 현재 문서 그대로 기록만 유지  
+**B군:** 기록 + 레거시 1슬롯
+
+평가 KPI는 시즌 재참여율, 시즌 종료 후 72시간 내 복귀율, 다음 시즌 첫 7일 플레이 일수, 결제 전환이 아니라 **“다시 새 아이돌을 키울 의향”**을 가장 먼저 보는 것이 적절하다.
+
+## 경쟁작 분석과 수익화 전략
+
+유사 장르를 보면 크게 세 종류가 존재한다. K-pop 캐릭터 생활형, 아이돌 기획사 경영형, 순수 idle 경제형이다. 본 프로젝트는 셋을 결합할 수 있지만, 어느 하나를 어설프게 따라가기보다 **“팬덤 시뮬레이션”이라는 네 번째 축**을 명확히 해야 한다.
+
+| 경쟁작                    | 핵심 메커니즘                                              | 강점                                              | 본 게임이 배울 점                       | 본 게임의 차별점                                                                                                                                  |
+|---------------------------|------------------------------------------------------------|---------------------------------------------------|-----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| **K-Pop Academy**         | 아이돌 생성·커스터마이즈·훈련·식사·휴식·콘서트·공간 꾸미기 | 아이돌이 살아 있는 캐릭터처럼 보임                | 상시 애니메이션과 친밀한 생활 연출      | 팬덤 집단 행동·경제·리스크까지 시각화 [\[5\]](https://hyperbeard.com/game/k-pop-academy/?utm_source=chatgpt.com)                                  |
+| **Monthly Entertainment** | 기획사 운영·팬 확보·앨범 제작·월드투어·수익 계획           | K-pop 산업을 직접적인 경영 행동으로 표현          | 제작→팬→투어의 명확한 판타지            | 정령·그림자·보드 + 군집 팬덤의 실시간 행동 [\[12\]](https://play.google.com/store/apps/details?hl=th&id=com.factory608.ME&utm_source=chatgpt.com) |
+| **Idol Manager**          | 사무실·사업 운영·예산·미디어·스캔들·인간관계               | “돈을 잘못 쓰면 회사가 흔들린다”는 강한 경영 긴장 | 비용 센터와 위기 이벤트                 | 더 접근성 높은 idle 구조 + K-pop 팬덤 시각화 [\[13\]](https://www.playstation.com/en-gb/games/idol-manager/?utm_source=chatgpt.com)               |
+| **March to a Million**    | 스카우트→훈련→오디션→데뷔→앨범·행사·콘서트·팬 증가·굿즈    | 연예 기획사 성장 흐름이 직관적                    | 성장 단계마다 활동 종류가 늘어나는 구조 | 시즌/도시/팬덤/정령으로 더 강한 메타 레이어 [\[14\]](https://store.playstation.com/en-us/concept/10001147/?utm_source=chatgpt.com)                |
+| **AdVenture Capitalist**  | 생산시설 투자·직원 자동화·업그레이드·리셋 보너스           | 숫자 성장과 자동화의 명료함                       | 반복 노동→자동 운영→메타 리셋의 페이스  | 단순 생산 시설 대신 아이돌·팬덤이라는 감정적 원인·결과 [\[2\]](https://hyperhippo.com/games/adventure-capitalist/?utm_source=chatgpt.com)         |
+
+특히 *Idol Manager* 공식 설명은 자금이 제한되어 있으며 카페·극장·프로그램 제작 등 여러 사업을 운영하고, 감정 붕괴나 PR 악재가 재정 문제로 이어질 수 있다고 명시한다. [\[15\]](https://www.playstation.com/en-gb/games/idol-manager/?utm_source=chatgpt.com) 이 게임이 그 정도로 복잡한 재무 시뮬레이션을 만들 필요는 없지만 **“좋은 일만 생기고 숫자만 오른다”는 느낌은 피해야 한다.**
+
+반대로 *K-Pop Academy*는 아이돌의 일상적 움직임과 커스터마이징을 전면에 둔다. [\[16\]](https://hyperbeard.com/game/k-pop-academy/?utm_source=chatgpt.com) 본 프로젝트는 **K-Pop Academy의 ‘살아 있는 캐릭터’ + Idol Manager의 ‘경제 리스크’ + AdVenture Capitalist의 ‘자동화 성장’**을 가져오되, 그 사이를 팬덤으로 연결하는 방향이 적합하다.
+
+### 권장 수익화 구조
+
+가장 안전한 순서는 다음이다.
+
+**코스메틱 \> 시즌패스 \> 편의성 \> 선택형 광고 \> 랜덤 상품** 순으로 매출 의존도를 구성하는 것을 권한다.
+
+**코스메틱**은 아이돌 의상, 사옥 외관, 도시 스킨, 응원봉, 팬샵 인테리어, 콘서트 무대, 정령 스킨이 적합하다. 만렙 유저일수록 상단 1/3의 디오라마를 오래 바라보게 만들 것이므로, 외형 상품이 플레이 공간에서 반복 노출되는 장점이 있다.
+
+**시즌패스**는 60일 시즌과 매우 잘 맞는다. 단순 현금·주사위보다 시즌 한정 무대 스킨, 아이돌 의상, 팬덤 응원 패턴, 명예의 전당 장식과 같이 “이번 시즌을 기억하게 만드는 것”에 비중을 둬야 한다.
+
+**편의성 상품**은 광고 제거, 자동 정산, 프리셋 슬롯, 추가 스케줄 저장 슬롯 등이 적합하다. Monthly Entertainment의 현재 App Store 등록 정보에도 광고 제거, Auto Click, Speed Buff, Income Buff 등의 인앱 구매가 존재하므로, 시장에서 이 유형이 실제 사용되는 사례는 확인할 수 있다. [\[17\]](https://apps.apple.com/nl/app/monthly-entertainment/id1601164404?utm_source=chatgpt.com) 다만 본 프로젝트에서는 “자동 클릭”보다는 세계관에 맞게 **매니저 계약, 자동 스케줄러, CEO 플래너**로 포장하는 편이 자연스럽다.
+
+**광고**는 강제 전면 광고보다 보상형을 권한다.
+
+예를 들어 광고 시청 → 최근 30분 오프라인 수익 ×2, 던전 공명 15분 단축, 스케줄 결과 재선택 1회, 콘서트 앙코르 수익 +20% 정도가 적합하다. 그러나 광고를 보지 않으면 정상적인 성장 속도가 지나치게 느려지는 구조는 피해야 한다.
+
+**유료 랜덤 카드팩은 핵심 매출원으로 삼지 않는 편을 권한다.** 카드북 수집은 현재 기획서의 중요한 재미이지만, 시즌 종료 시 초기화되는 카드에 고액의 랜덤 결제를 붙이면 리셋과 유료화가 서로 충돌한다. 또한 국내에서는 확률형 아이템의 공급 확률 정보 등에 대한 표시 의무가 법령에 규정되어 있고, 2026년 3월 시행 중인 시행령에도 관련 세부 표시 규정이 존재한다. [\[18\]](https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=0&chrClsCd=010202&efYd=20260324&lsiSeq=284663&urlMode=lsInfoP&utm_source=chatgpt.com) 실제 유료 랜덤 보상을 도입한다면 출시 대상 국가별 법률·스토어 정책을 별도로 검토해야 한다.
+
+추천 가격대는 **시장 평균을 주장하는 수치가 아니라 초기 상품 설계 가정**으로 다음 정도에서 테스트할 수 있다.
+
+| 상품                    | 테스트 가안   |
+|-------------------------|---------------|
+| 광고 제거               | ₩8,800~12,000 |
+| 60일 시즌패스           | ₩9,900~14,900 |
+| 사옥/콘서트 코스메틱 팩 | ₩3,900~8,900  |
+| 응원봉·팬덤 효과 스킨   | ₩2,500~5,900  |
+| 스타터 편의 패키지      | ₩4,900~7,900  |
+
+중요한 것은 **팬 수·명성·순위의 직접 판매를 최소화하는 것**이다. 팬덤을 돈으로 바로 사는 순간 게임의 가장 독특한 핵심 루프인 “좋은 경영 → 좋은 활동 → 팬덤 성장”의 의미가 약해진다.
+
+## 기술·아트 구현과 퍼포먼스 전략
+
+엔진은 기획서에서 **미지정**이다. 따라서 아래는 구현 원칙은 엔진 독립적으로 제안하고, 구체적인 기술 참고는 Unity 6를 기준으로 한다.
+
+가장 중요한 원칙은 **팬 100만 명을 100만 객체로 표현하지 않는 것**이다.
+
+논리 데이터는 다음 정도만 유지하면 된다.
+
+FandomGroup  
+- idolAffinity  
+- lifecycleTier  
+- activeFans  
+- purchasingPower  
+- viralPower  
+- shieldPower  
+- currentActivity  
+- city
+
+렌더링 객체는 별도의 VisualProxy로 두어 activeFans=500,000이라도 화면에는 60개 Crowd Cluster만 보일 수 있다. 팬 수가 늘면 객체 수 대신 클러스터의 밀도·스케일·행동 빈도·파티클 양이 증가한다.
+
+Unity의 ObjectPool은 반복적인 객체 생성과 제거로 인한 CPU 부담을 줄이기 위한 재사용 패턴으로 공식 문서에서 권장되고 있으므로, 팬 팝업·하트·응원봉 파티클·SNS 버블·관객 클러스터처럼 짧게 생성되고 사라지는 요소에 특히 적합하다. [\[19\]](https://docs.unity3d.com/ja/6000.0/ScriptReference/Pool.ObjectPool_1.html?utm_source=chatgpt.com)
+
+**권장 화면 목표치 가안**은 다음 정도다.
+
+- Hero Fan: 20~30
+
+- Crowd Cluster: 40~80
+
+- 아이돌·스태프: 10~25
+
+- 단순 FX/응원봉 파티클: 풀링 기반 수백 개
+
+- 실제 길찾기 적용 개체: 20~40 이하
+
+- 나머지 팬 이동: 실제 NavMesh 대신 애니메이션 스플라인/웨이포인트
+
+- 화면 밖 경제 계산: 개체 시뮬레이션이 아닌 집계 계산
+
+이는 하드웨어 표준이 아니라 **프로파일링 시작점**이다.
+
+2D 자산은 세 가지 축으로 재사용해야 한다.
+
+**캐릭터 모듈화:** 몸통·얼굴·머리·의상·소품·응원봉을 분리해 조합한다.  
+**도시 키트화:** 건물 기능과 애니메이션은 동일하게 두고 간판·외벽·배경·소품만 도시별 교체한다.  
+**팬 모듈화:** 8~12개의 기본 체형에 헤어·상의·하의·응원 아이템·컬러를 조합해 수백 종류처럼 보이게 한다.
+
+첨부 기획서도 시즌2 이후 멤버 덱 45장만 신규 아트로 제작하고 나머지 135장을 공용 또는 리컬러하는 방향을 이미 제시한다. fileciteturn0file0 이 원칙을 카드에만 적용하지 말고 **월드 스프라이트에도 확장**하는 것이 좋다.
+
+Unity의 Sprite Atlas는 여러 스프라이트 텍스처를 하나의 아틀라스로 패킹해 텍스처 접근과 드로우콜 부담을 줄이는 용도로 제공된다. [\[20\]](https://docs.unity3d.com/kr/current/Manual/sprite/atlas/workflow/sprite-atlas-workflow.html?utm_source=chatgpt.com) 따라서 팬_서울, 팬_글로벌, 아이돌_공통바디, 건물_서울, 건물_도쿄, FX_응원봉처럼 아틀라스를 기능/도시 단위로 나누는 편이 좋다.
+
+한 캐릭터를 머리·몸·팔·응원봉 등 여러 SpriteRenderer로 구성한다면 SortingGroup을 사용해 다른 캐릭터와 겹칠 때 신체 파츠가 서로 뒤섞이는 문제를 줄일 수 있다. Unity 공식 문서도 복수 SpriteRenderer로 구성된 2D 캐릭터가 겹칠 때 SortingGroup으로 캐릭터 단위 정렬을 유지하는 사례를 설명한다. [\[21\]](https://docs.unity3d.com/jp/current/Manual/2d-renderer-sorting.html?utm_source=chatgpt.com)
+
+시즌과 도시가 늘어날수록 모든 스킨을 앱 시작 시 메모리에 올리는 것은 비효율적이다. Unity Addressables는 로컬·원격 위치의 에셋과 종속성을 주소 기반으로 비동기 로드할 수 있으므로, 도시·시즌·이벤트 단위 콘텐츠 다운로드 구조에 적합하다. [\[22\]](https://docs.unity3d.com/kr/6000.0/Manual/com.unity.addressables.html?utm_source=chatgpt.com)
+
+아트 생산 파이프라인은 다음 구조가 효율적이다.
+
+기본 팬 바디 10종  
+× 헤어 8종  
+× 상의 12종  
+× 소품 8종  
+× 5 계보 컬러  
+→ 실제 신규 프레임 제작량은 제한  
+→ 조합상 수백~수천 변형처럼 보이게 함
+
+애니메이션 역시 모든 팬에게 완전한 새 모션을 주기보다 기본적으로 아래 8개 정도면 충분하다.
+
+걷기 / 대기 / 휴대폰 촬영 / 응원봉 / 구매 / 점프응원 / SNS 타이핑 / 실망·이탈
+
+여기에 각 애니메이션의 시작 프레임, 재생 속도, 좌우 반전, 손 소품을 랜덤화하면 군중이 동시에 똑같이 움직이는 현상을 크게 줄일 수 있다.
+
+팬덤 컬러도 중요하다. 첨부 기획서의 사랑·용기·희망·공감·자유 계보 색을 응원봉·플래카드·옷 포인트에 배치하고, 만렙 공연에서 다섯 색이 객석 전체를 나눠 점유한 뒤 “천음” 순간 하나의 파동으로 합쳐지게 하면 **시스템 성장과 세계관의 클라이맥스를 동일한 시각 언어로 표현**할 수 있다. fileciteturn0file0
+
+## 실행 우선순위·개발 리소스·최종 권고
+
+가장 중요한 것은 지금 단계에서 카드 180장이나 도시 6개를 더 만드는 것이 아니라 **“1개 도시만으로도 돈을 쓰고 팬이 반응하는 과정이 재미있는가?”**를 먼저 검증하는 것이다. 콘텐츠 양으로 코어 루프 문제를 해결하면 이후 밸런스 비용이 기하급수적으로 커진다.
+
+권장 개발 순서는 다음과 같다.
+
+| 우선순위 | 범위            | 핵심 산출물                                                    | 권장 인력                                       | 기간         | 대략 비용\*      |
+|----------|-----------------|----------------------------------------------------------------|-------------------------------------------------|--------------|------------------|
+| **단기** | Vertical Slice  | 상단 1/3 디오라마, 팬 군집, 8건물 경제, 60초 정산              | GD/경제 1, 클라 1~2, UI·2D 1, TA 0.5, QA·PM 0.5 | **6~8주**    | **0.5~1.0억 원** |
+| **중기** | Core Production | 자동화, 3도시, 시즌 이벤트, 레거시 A/B, 광고/IAP 골격          | GD 1, 클라 2, 아트 2, TA 1, QA/PM 1             | **3~5개월**  | **1.8~3.5억 원** |
+| **장기** | Launch Scope    | 6도시, 카드북·정령, 60일 시즌, LiveOps, 백엔드, 최적화, 현지화 | 7~10 FTE                                        | **6~10개월** | **4.5~9.0억 원** |
+
+\* 내부 인건비, 외주 아트, QA, 기본 서버/LiveOps를 포함한 **거친 기획 추정치**이며 실제 견적이 아니다. 음악 저작권, 실존 K-pop IP·연예인 라이선스, 대규모 UA 마케팅, 풀보이스는 제외했다. 참고로 KOCCA의 2024년 다년도 게임 제작지원은 당시 PC·콘솔 개발형 과제당 최대 4억 원, 크로스플랫폼 최대 8억 원 규모였지만, 이는 제작비 시장 평균이 아니라 정부 지원 한도라는 점에 유의해야 한다. [\[23\]](https://welcon.kocca.kr/ko/info/business/1953703?utm_source=chatgpt.com)
+
+**단기에서 반드시 검증할 것은 다섯 가지다.**
+
+첫째, 플레이어가 설명 없이 **“왜 이번 사이클에 돈을 벌었는지”** 이해하는가.  
+둘째, 팬 수가 100배 늘었을 때 단순 숫자가 아니라 **화면이 실제로 더 번성해 보이는가.**  
+셋째, 연습실·MV처럼 돈을 쓰는 시설의 업그레이드를 플레이어가 손해가 아니라 투자로 받아들이는가.  
+넷째, 직접 조작에서 자동화로 넘어갈 때 플레이가 없어지는 것이 아니라 **CEO 의사결정으로 상승하는가.**  
+다섯째, 시즌 리셋 직전에 “다음 시즌도 하고 싶다”는 감정이 드는가.
+
+Vertical Slice에서는 서울 한 도시, 아이돌 2명, 팬덤 3단계, 건물 8개, 그림자 1종만 구현하면 충분하다. 대신 팬샵에서 물건을 사는 팬, 방송을 본 팬이 확산하는 모습, 콘서트에서 응원봉이 파도치는 모습, MV 제작비가 빠져나가는 모습, 팬덤 쉴드가 스캔들을 막는 모습은 반드시 넣어야 한다.
+
+중기에는 도시를 늘리기보다 **상황의 종류**를 늘린다. “콘텐츠 부족”, “팬샵 재고 부족”, “아이돌 과로”, “바이럴 성공”, “팬덤 갈등”, “방송 섭외”, “스캔들”, “정령 공명”처럼 동일한 경제 시스템을 다른 문제로 읽게 만드는 이벤트가 필요하다.
+
+장기에는 6개 도시·20덱·20정령을 채우면서 LiveOps가 데이터를 바꿀 수 있도록 수치와 이벤트를 데이터 테이블화한다. 카드·건물·팬 행동·시즌 이벤트의 수치가 코드에 박혀 있으면 60일 시즌 밸런스를 반복 조정하기 어렵다.
+
+소프트런치 KPI는 시장 평균을 목표로 잡기보다 **내부 성공 조건**을 먼저 둬야 한다. 예를 들어 첫 세션에서 플레이어 80% 이상이 수익 → 비용 → 순익 화면을 한 번 이상 확인하는지, 첫날 안에 팬덤 활동 4종 이상을 관찰하는지, 첫 시즌 종료자의 다음 시즌 진입률이 순수 리셋군과 레거시군에서 얼마나 다른지를 본다. 이는 절대 산업 벤치마크가 아니라 제품 가설을 검증하기 위한 내부 기준으로 활용해야 한다.
+
+최종적으로 이 프로젝트가 가장 피해야 할 모습은 **“아이돌 그림이 붙은 숫자 방치게임”**이다. 반대로 **<u>가장 강력한 형태는 플레이어가 앱을 열자마자 상단 1/3 화면에서 “연습실에서는 돈이 빠지고, 아이돌은 방송으로 뛰어가고, 팬들은 영상을 퍼뜨리고, 팬샵 줄이 길어지고, 응원봉이 차오르며, 회사 통장에 수익이 돌아오는” 모습을 한눈에 이해하는 것이다. 팬덤이 성장하면 팬 숫자뿐 아니라 도시의 밀도·움직임·색·대기열·SNS 전파·공연 함성·수익 구조가 모두 달라져야 한다.</u>**
+
+그렇게 설계하면 첨부 기획서의 보드·카드·정령·명성·시즌은 서로 경쟁하는 시스템이 아니라 하나의 문장으로 묶인다.
+
+> **“좋은 기획사가 아이돌을 성장시키고, 좋은 아이돌이 팬을 움직이며, 움직이는 팬덤이 다시 기획사를 성장시킨다.”**
+
+이 순환이 매 12초 화면에서 보이고, 매 60초 숫자로 정산되며, 60일 동안 세계 규모로 확장되는 것이 본 프로젝트의 가장 강한 핵심 재미가 될 수 있다.
+
+[\[1\]](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003009962&utm_source=chatgpt.com) 배움여가로서의 K-POP 팬덤 활동 연구
+
+<https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003009962&utm_source=chatgpt.com>
+
+[\[2\]](https://hyperhippo.com/games/adventure-capitalist/?utm_source=chatgpt.com) [\[11\]](https://hyperhippo.com/games/adventure-capitalist/?utm_source=chatgpt.com) AdVenture Capitalist - Hyper Hippo Games
+
+<https://hyperhippo.com/games/adventure-capitalist/?utm_source=chatgpt.com>
+
+[\[3\]](https://research.monash.edu/en/publications/playing-to-wait-a-taxonomy-of-idle-games/?utm_source=chatgpt.com) Playing to wait: A taxonomy of idle games - Monash University
+
+<https://research.monash.edu/en/publications/playing-to-wait-a-taxonomy-of-idle-games/?utm_source=chatgpt.com>
+
+[\[4\]](https://welcon.kocca.kr/ko/info/business/1956821?utm_source=chatgpt.com) \[보도자료\] ‘한국산에 호감인 K-게임 인지자 61.2%, 선택에 긍정적’ 콘진원, 2025 해외 시장의 한국 게임 이용자 조사 발간
+
+<https://welcon.kocca.kr/ko/info/business/1956821?utm_source=chatgpt.com>
+
+[\[5\]](https://hyperbeard.com/game/k-pop-academy/?utm_source=chatgpt.com) [\[16\]](https://hyperbeard.com/game/k-pop-academy/?utm_source=chatgpt.com) K-Pop Academy – HyperBeard
+
+<https://hyperbeard.com/game/k-pop-academy/?utm_source=chatgpt.com>
+
+[\[6\]](https://play.google.com/store/apps/details?hl=th&id=com.factory608.ME&utm_source=chatgpt.com) [\[12\]](https://play.google.com/store/apps/details?hl=th&id=com.factory608.ME&utm_source=chatgpt.com) Monthly Entertainment - แอปพลิเคชันใน Google Play
+
+<https://play.google.com/store/apps/details?hl=th&id=com.factory608.ME&utm_source=chatgpt.com>
+
+[\[7\]](https://welcon.kocca.kr/ko/info/business/1956858?utm_source=chatgpt.com) \[보도자료\] ‘게임 이용률 감소, 핵심 이용자 중심으로 시장 재편’ 콘진원, 2025 게임이용자 실태조사 발간
+
+<https://welcon.kocca.kr/ko/info/business/1956858?utm_source=chatgpt.com>
+
+[\[8\]](https://arxiv.org/abs/2107.08437?utm_source=chatgpt.com) Effect of Input-output Randomness on Gameplay Satisfaction in Collectable Card Games
+
+<https://arxiv.org/abs/2107.08437?utm_source=chatgpt.com>
+
+[\[9\]](https://dspace.rpi.edu/items/64643720-6def-468e-a497-754e607c4941?utm_source=chatgpt.com) Idle yet engaged: how idle games satisfy our needs for competence and autonomy
+
+<https://dspace.rpi.edu/items/64643720-6def-468e-a497-754e607c4941?utm_source=chatgpt.com>
+
+[\[10\]](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001838606&utm_source=chatgpt.com) 프로슈머로서의 팬덤: 팬덤의 정보행동에 관한 연구
+
+<https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001838606&utm_source=chatgpt.com>
+
+[\[13\]](https://www.playstation.com/en-gb/games/idol-manager/?utm_source=chatgpt.com) [\[15\]](https://www.playstation.com/en-gb/games/idol-manager/?utm_source=chatgpt.com) Idol Manager
+
+<https://www.playstation.com/en-gb/games/idol-manager/?utm_source=chatgpt.com>
+
+[\[14\]](https://store.playstation.com/en-us/concept/10001147/?utm_source=chatgpt.com) March to a Million
+
+<https://store.playstation.com/en-us/concept/10001147/?utm_source=chatgpt.com>
+
+[\[17\]](https://apps.apple.com/nl/app/monthly-entertainment/id1601164404?utm_source=chatgpt.com) ‎Monthly Entertainment-app - App Store
+
+<https://apps.apple.com/nl/app/monthly-entertainment/id1601164404?utm_source=chatgpt.com>
+
+[\[18\]](https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=0&chrClsCd=010202&efYd=20260324&lsiSeq=284663&urlMode=lsInfoP&utm_source=chatgpt.com) 법령 \> 본문 \> 게임산업진흥에 관한 법률 시행령 \| 국가법령정보센터
+
+<https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=0&chrClsCd=010202&efYd=20260324&lsiSeq=284663&urlMode=lsInfoP&utm_source=chatgpt.com>
+
+[\[19\]](https://docs.unity3d.com/ja/6000.0/ScriptReference/Pool.ObjectPool_1.html?utm_source=chatgpt.com) Unity - Scripting API: ObjectPool
+
+<https://docs.unity3d.com/ja/6000.0/ScriptReference/Pool.ObjectPool_1.html?utm_source=chatgpt.com>
+
+[\[20\]](https://docs.unity3d.com/kr/current/Manual/sprite/atlas/workflow/sprite-atlas-workflow.html?utm_source=chatgpt.com) Unity - 매뉴얼: 스프라이트 아틀라스 워크플로 만들기
+
+<https://docs.unity3d.com/kr/current/Manual/sprite/atlas/workflow/sprite-atlas-workflow.html?utm_source=chatgpt.com>
+
+[\[21\]](https://docs.unity3d.com/jp/current/Manual/2d-renderer-sorting.html?utm_source=chatgpt.com) Unity - マニュアル: 2D レンダラーのソート
+
+<https://docs.unity3d.com/jp/current/Manual/2d-renderer-sorting.html?utm_source=chatgpt.com>
+
+[\[22\]](https://docs.unity3d.com/kr/6000.0/Manual/com.unity.addressables.html?utm_source=chatgpt.com) Unity - 매뉴얼: Addressables
+
+<https://docs.unity3d.com/kr/6000.0/Manual/com.unity.addressables.html?utm_source=chatgpt.com>
+
+[\[23\]](https://welcon.kocca.kr/ko/info/business/1953703?utm_source=chatgpt.com) 2024년 게임콘텐츠 제작지원 사업 공고\[다년도\]
+
+<https://welcon.kocca.kr/ko/info/business/1953703?utm_source=chatgpt.com>

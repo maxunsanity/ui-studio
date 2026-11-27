@@ -1,0 +1,35 @@
+# P101 · 오디션 · 사용 CSV
+
+**이 문서는** [오디션](../콘텐츠별_v03/오디션_기획서.html)·아이돌 캐스팅이 **실제로 읽는 표(CSV)** 를 한눈에 보는 목록이에요. 표마다 무엇을 정하는지 한 줄씩 적었어요.
+
+**보는 법** 아래 표에서 궁금한 줄을 찾고, 규칙 설명은 [P100 오디션](../콘텐츠별_v03/오디션_기획서.md)과 [P170 랜덤 멤버 생성](../콘텐츠별_v03/랜덤멤버생성_기획서.md)을 보세요. 같이 여는 시뮬레이터: [오디션 시뮬레이터](/docs/planning/game-simulator.html?module=simulator_module_audition).
+
+**지금 상태** 아래 표는 모두 게임 코드가 읽어요(개발됨). 「참고만」 표시한 표는 지금 게임이 읽지 않는 옛 표예요. 값은 대부분 임시라 값 미정이에요.
+
+## 오디션이 읽는 표
+
+| 표 | 무엇을 정하나 | 쓰임 |
+|---|---|---|
+| 오디션 진행 규칙(member_add) | 대진 후보 수 · 찜 정원 · 고르는 시간 · 첫 바퀴 규칙 · 처음 무료 [주사위](../콘텐츠별_v03/P74_설명.html) · 합류 보정 | 게임이 읽음 · 합류 보정은 아직 안 읽음 |
+| 오디션 설정(profile) | 새 판 후보 생성 수 · 능력 범위 · 저장 이름 | 게임이 읽음 |
+| [엔터 파워](../콘텐츠별_v03/엔터파워_기획서.html) 단계(enter_power_level) | 추가 캐스팅권이 열리는 엔터 파워 | 게임이 읽음 |
+| 배경 조각(audition_background_piece) | 집안·사는 곳·지원 이유·약점·경력·숨은 특기 조각 | 게임이 읽음 |
+| [이야기](../../서사_조합형/서사100선_전문.md) 조각(story) | 단계별 이야기 · 열리는 단계 | 게임이 읽음 |
+| [짝 몬스](../콘텐츠별_v03/몬스_기획서.html) 후보(mons_pool) | 색·원소별 몬스와 가중치 | 게임이 읽음 |
+| 연습 미니게임(minigame) | 미니게임 후보와 설명 | 게임이 읽음 · 플레이는 현재 개발되지 않음, 진행 중 |
+| 화면 문구(ui_text) | 오디션 화면 글자 | 게임이 읽음 |
+| 이름 조각 · 예명 조각(member_name_piece · member_stage_name_piece) | 실명 · 예명 추천 | 게임이 읽음 |
+| 프로필 목록(member_profile_option) | 취미 · 특기 · 언어 · 기수 · 성별 · 멤버 색 | 게임이 읽음 |
+| 처음 값 규칙(member_init_rule) | 능력·나이·기분·팬 처음 값 범위 | 게임이 읽음 |
+| 성격 이어받기(worldcup_carry_rule) | 대진에서 고른 성격 경향을 얼마나 남길지 | 게임이 읽음 |
+| 이야기 틀(member_story_template) | 단계별 틀 문장 | 게임이 읽음 |
+| 옛 오디션 설정(audition_config) | 최대 캐스팅 판 수 · 시작 멤버 · 사옥 | 참고만(지금 게임이 읽지 않음) |
+| 옛 고정 후보(candidates · candidate_background) | 예전 고정 16명 | 참고만(옛 저장 이어 보기에만) |
+
+<details>
+<summary>작업 기록</summary>
+
+- 파일 위치: data/audition_sim/(member_add.csv · profile.json · audition_background_piece.csv · story.csv · mons_pool.csv · minigame.csv · ui_text.csv · candidates.csv · candidate_background.csv), data/rapport_sim/(member_*.csv · worldcup_carry_rule.csv), data/game/(enter_power_level.csv · audition_config.csv)
+- 표 보기: /docs/planning/game-table-tool.html?plan=planning_development_plan_audition
+
+</details>

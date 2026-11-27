@@ -1,0 +1,64 @@
+# 악귀 디펜스 통합v02 · 제안(검수 대기)
+작성: 단이(codex) · 2026-10-06 18:00 KST
+
+[실행 화면](http://127.0.0.1:7007/docs/planning/p58-defense-proto-v01.html)에서 「약5분 한 판 시작」을 누릅니다. 대지22곳은 방공포15·드론7입니다. 기존 도시·중앙 숲·도로·공연장을 사용합니다.
+
+| 사례 | 결과 | 전체 시간(초) | 스폰 | 처치 | 도달 | 무대 HP |
+|---|---|---:|---:|---:|---:|---:|
+| dp_case_failure | defeat | 157.15 | 50 | 13 | 1 | 0 |
+| dp_case_win_17 | victory | 307.00 | 231 | 231 | 0 | 800 |
+| dp_case_win_31 | victory | 308.30 | 231 | 231 | 0 | 800 |
+| dp_case_win_47 | victory | 310.90 | 231 | 231 | 0 | 800 |
+| dp_case_win_71 | victory | 306.55 | 231 | 231 | 0 | 800 |
+| dp_case_win_97 | victory | 308.90 | 231 | 231 | 0 | 800 |
+
+검사32개·브라우저8개·메인 툴 연결·실제 공격3장 확인을 통과합니다. 아래 연속 캡처는 동일한 계산 상태를 가속 진행한 증거이며 기기5분 실시간 성능 측정을 의미하지 않습니다.
+
+## 보고
+- [단계3](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261006_1800_%EB%8B%A8%EC%9D%B4_%EB%8F%84%EC%8B%9C%EB%A7%B5-%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4%EC%97%B0%EC%B6%9C_%EB%8B%A8%EA%B3%843.md)
+- [단계4](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261006_1800_%EB%8B%A8%EC%9D%B4_%EB%8F%84%EC%8B%9C%EB%A7%B5-%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4%EC%97%B0%EC%B6%9C_%EB%8B%A8%EA%B3%844.md)
+- [단계5](http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261006_1800_%EB%8B%A8%EC%9D%B4_%EB%8F%84%EC%8B%9C%EB%A7%B5-%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4%EC%97%B0%EC%B6%9C_%EB%8B%A8%EA%B3%845.md)
+
+## 연결 표
+| 도시 ID | 건물 | 방어 장치 |
+|---|---|---|
+| city_02 | 연습 | 드론 |
+| city_04 | 연습 | 드론 |
+| city_07 | 녹음 | 드론 |
+| city_09 | 녹음 | 드론 |
+| city_10 | 녹음 | 방공포 |
+| city_12 | 팬샵 | 방공포 |
+| city_14 | 팬샵 | 방공포 |
+| city_15 | 팬샵 | 방공포 |
+| city_17 | 기획사 | 방공포 |
+| city_19 | 기획사 | 방공포 |
+| city_20 | 기획사 | 방공포 |
+| city_22 | 연습 | 드론 |
+| city_24 | 연습 | 드론 |
+| city_25 | 연습 | 방공포 |
+| city_27 | 방송 | 방공포 |
+| city_28 | 팬플 라이브 | 방공포 |
+| city_30 | 방송 | 방공포 |
+| city_32 | 공연 | 방공포 |
+| city_33 | 대학 축제 | 방공포 |
+| city_35 | 공연 | 방공포 |
+| city_37 | 숙소 | 방공포 |
+| city_39 | 숙소 | 드론 |
+
+## 연속 캡처
+- [00_전체도시_1440.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/00_%EC%A0%84%EC%B2%B4%EB%8F%84%EC%8B%9C_1440.jpg) · 144,998바이트
+- [01_다섯루트_압박_1440.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/01_%EB%8B%A4%EC%84%AF%EB%A3%A8%ED%8A%B8_%EC%95%95%EB%B0%95_1440.jpg) · 146,552바이트
+- [02_몬스드론_공격_1440.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/02_%EB%AA%AC%EC%8A%A4%EB%93%9C%EB%A1%A0_%EA%B3%B5%EA%B2%A9_1440.jpg) · 147,962바이트
+- [03_드론_가까이_1440.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/03_%EB%93%9C%EB%A1%A0_%EA%B0%80%EA%B9%8C%EC%9D%B4_1440.jpg) · 132,394바이트
+- [03b_드론_교전표적전환_1440.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/03b_%EB%93%9C%EB%A1%A0_%EA%B5%90%EC%A0%84%ED%91%9C%EC%A0%81%EC%A0%84%ED%99%98_1440.jpg) · 124,786바이트
+- [04_방공포_가까이_1440.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/04_%EB%B0%A9%EA%B3%B5%ED%8F%AC_%EA%B0%80%EA%B9%8C%EC%9D%B4_1440.jpg) · 156,190바이트
+- [04b_방공포_조준충전발사_1440.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/04b_%EB%B0%A9%EA%B3%B5%ED%8F%AC_%EC%A1%B0%EC%A4%80%EC%B6%A9%EC%A0%84%EB%B0%9C%EC%82%AC_1440.jpg) · 142,197바이트
+- [05_보스_등장_1440.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/05_%EB%B3%B4%EC%8A%A4_%EB%93%B1%EC%9E%A5_1440.jpg) · 147,466바이트
+- [06_클리어승리_1440.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/06_%ED%81%B4%EB%A6%AC%EC%96%B4%EC%8A%B9%EB%A6%AC_1440.jpg) · 115,829바이트
+- [07_승리_430.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/07_%EC%8A%B9%EB%A6%AC_430.jpg) · 40,648바이트
+- [08_공격_430.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/08_%EA%B3%B5%EA%B2%A9_430.jpg) · 52,702바이트
+- [09_패배_430.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/09_%ED%8C%A8%EB%B0%B0_430.jpg) · 42,997바이트
+- [10_패배_1440.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/10_%ED%8C%A8%EB%B0%B0_1440.jpg) · 116,978바이트
+- [11_실제방공포_충전.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/11_%EC%8B%A4%EC%A0%9C%EB%B0%A9%EA%B3%B5%ED%8F%AC_%EC%B6%A9%EC%A0%84.jpg) · 165,379바이트
+- [12_실제방공포_발사.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/12_%EC%8B%A4%EC%A0%9C%EB%B0%A9%EA%B3%B5%ED%8F%AC_%EB%B0%9C%EC%82%AC.jpg) · 166,134바이트
+- [13_실제드론_공격.jpg](http://127.0.0.1:7007/docs/planning/_%EA%B2%80%EC%88%98%EC%BA%A1%EC%B3%90/20261006_1728_%EB%8B%A8%EC%9D%B4_%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4_v05/13_%EC%8B%A4%EC%A0%9C%EB%93%9C%EB%A1%A0_%EA%B3%B5%EA%B2%A9.jpg) · 145,532바이트

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>06 음원·정령·음방</title>
+<style>
+  body{margin:0;background:#f6f0e4;color:#2a241c;font-family:Georgia,"Iowan Old Style","Apple SD Gothic Neo",serif}
+  main{max-width:1180px;margin:0 auto;padding:22px 18px 32px}
+  .kicker{font-size:11px;letter-spacing:.06em;color:#7a6e60;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  h1{font-size:28px;margin:4px 0 2px}
+  .hook{color:#9a3d4e;font-weight:700;margin:0 0 8px}
+  .sum{background:rgba(255,252,246,.8);border:1px solid #e4d3b4;border-radius:8px;padding:8px 12px;font-size:14px;line-height:1.45}
+  .mid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:center;margin:14px 0}
+  .flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+  .n{background:#fffaf2;border:1px solid #c4a46a;border-radius:8px;padding:7px 9px;font-size:13px;font-weight:700;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  .open{background:#fff4d6}
+  .arr{color:#c4a46a;font-weight:700}
+  ol{margin:0;padding-left:1.1em;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  li{margin:7px 0}
+  li b{display:block}
+  li span{color:#7a6e60;font-size:13px;font-weight:400}
+  .foot{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;border-top:1px solid #c4a46a;padding-top:8px;font-size:12px;line-height:1.4;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  .foot b{display:block;color:#7a6e60;font-size:11px;margin-bottom:2px}
+  .more{font-size:11px;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  a{color:#7a4b22}
+  .fig{margin-top:10px;background:#fffaf2;border:1px solid #e4d3b4;border-radius:10px;padding:6px;overflow:auto}
+  .cap{font-size:11px;color:#7a6e60;margin:0 0 4px;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  pre.mermaid{margin:0}
+  pre.mermaid svg{display:block;max-width:100%;height:auto;margin:0 auto}
+  .fig.wide{margin:0 0 14px;overflow-x:auto}
+  .fig.wide pre.mermaid svg{max-width:100%;margin:0 auto}
+  .dh{font-size:11px;color:#9a3d4e;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}
+  @media(max-width:800px){.mid,.foot{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">전체기획서 · 06 · 케이팝몬스터즈 · 제안(검수 대기) · R52 재생성 09-30 · <span class="dh">(대행) 23:52 mermaid 2개 이식 · (대행) 23:58 R39 그림 1 칸 확대 · (대행) 00:00 그림 순서 1·2 정정 · (대행) 00:04 그림 1 세로(TB)·그림 2 전체 폭 · 검수 대기</span></div>
+  <h1>음원·정령탐험·음방</h1>
+  <p class="hook">악당은 정화되고, 곡은 발매된다</p>
+  <div class="sum">정령은 빨간 악당으로 와서 탐험에서 수호가 된다.<br>곡은 카드로 만들어 녹음실에서 나온다. 현실 유통과 음방 깊이는 아직이다.</div>
+  <div class="fig wide" style="margin:14px 0 0"><p class="cap">그림 1 · 정령 탐험 (플로우차트) — 회의 35:07~37:10 · 정령탐험 B.1 · 클로드판에서 옮김</p><pre class="mermaid" data-native="1">flowchart TB
+  E[빨간 악당 정령&lt;br/&gt;보드·봉합전 등에서 등장] --&gt; R[도감 등록]
+  R --&gt; DG[탐험 던전 파견&lt;br/&gt;아이돌 + 정령 덱]
+  DG --&gt; W{정화 방식 · 미잠금}
+  W --&gt;|안A 공연 공명| A1[공연을 들으며 게이지]
+  W --&gt;|안B 전투 정화| B1[탐험 전투&lt;br/&gt;푸더덕 보드전투와 다름]
+  W --&gt;|안C WF 사건층만| C1[시즌 탐험 없음]
+  A1 &amp; B1 --&gt; G[수호정령으로 전환]
+  G --&gt; L[멤버 1명과 연결&lt;br/&gt;정령 카드]</pre></div>
+  <div class="fig wide" style="margin:14px 0 0"><p class="cap">그림 2 · 곡이 돈이 되기까지 (시퀀스) — 음원판매 경로 · 회의 43:41~45:38 · 클로드판에서 옮김</p><pre class="mermaid" data-native="1">sequenceDiagram
+  participant P as 플레이어
+  participant X as 탐험(앨범)
+  participant R as 녹음실
+  participant B as 방송국
+  participant F as 팬샵
+  P-&gt;&gt;X: 멤버 + 작곡·작사·프로듀서·세션 카드
+  X--&gt;&gt;P: 곡 1곡
+  P-&gt;&gt;R: 발매(녹음실 급 = 싱글→미니→정규)
+  B-&gt;&gt;R: 방송 칸 착지 = 화제성 ↑
+  R--&gt;&gt;P: 녹음실 칸 착지 = 음원 수입
+  R-&gt;&gt;F: 팬샵 앨범 1종 추가
+  Note over P,F: 음방 1위 · 실제 유통은 깊이 미잠금</pre></div>
+  <div class="mid">
+    <div>
+      <div class="flow">
+        <div class="n">악당</div><span class="arr">→</span><div class="n">도감</div><span class="arr">→</span><div class="n">탐험</div><span class="arr">→</span>
+        <div class="n open">공연</div><div class="n open">전투</div><div class="n open">축제만</div><span class="arr">→</span><div class="n">수호</div>
+      </div>
+      <div class="flow">
+        <div class="n">카드</div><span class="arr">→</span><div class="n">곡</div><span class="arr">→</span><div class="n">녹음실</div><span class="arr">→</span><div class="n">방송</div><span class="arr">→</span><div class="n">팬샵</div>
+      </div>
+    </div>
+    <ol>
+      <li><b>만난다</b><span>악당 정령을 도감에 올린다</span></li>
+      <li><b>정화한다</b><span>공연, 전투, 축제만 — 아직 고르지 않음</span></li>
+      <li><b>만든다</b><span>카드로 곡 하나</span></li>
+      <li><b>판다</b><span>녹음실 발매, 방송 화제, 팬샵 굿즈</span></li>
+    </ol>
+  </div>
+  <div class="foot">
+    <div><b>왜 지금</b>정령 두 방식과 음원 이야기가 비어 있었다.</div>
+    <div><b>이게 핵심</b>탐험은 보드와 다른 층. 음원 돈은 녹음실에 도착할 때.</div>
+    <div><b>이게 아닌 것</b>실존 가수 곡. 곡 뽑기. 뮤직비디오 풀 제작.</div>
+  </div>
+  <p class="more"><a href="./06_음원정령음방_클로드.html">클로드 그림</a> · 그림 2개는 <a href="./06_음원정령음방_클로드.md">클로드판</a>에서 옮김(새로 그리지 않음 · 라벨 그대로) · (대행) 23:52 유르넷 대행 · 제안(검수 대기) · (대행) 23:58 R39: 그림 1을 전폭 칸·원래 크기(가로 스크롤)로 넓힘 · 라벨 그대로(「아이돌 + 정령 덱」 OR-2 결정 대기) · (대행) 00:00 R39b: 그림 1(전폭)을 위로, 그림 2를 아래로 — md 순서 1·2 · (대행) 00:04 R39c: 그림 1 방향 세로(TB)·그림 2 전체 폭 칸(라벨 그대로·가로 스크롤 없음)</p>
+</main>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: false, theme: "neutral", securityLevel: "loose" });
+  const els = [...document.querySelectorAll("pre.mermaid")];
+  for (const [i, el] of els.entries()) {
+    try { const { svg } = await mermaid.render("mfig06_" + i, el.textContent); el.innerHTML = svg; el.dataset.processed = "true"; if (el.dataset.native) { const g = el.querySelector("svg"); const w = g.viewBox.baseVal.width; if (w) { g.style.maxWidth = "100%"; g.style.width = w + "px"; g.style.height = "auto"; } } }
+    catch (e) { el.dataset.error = "1"; console.error(i, e); }
+  }
+</script>
+</body>
+</html>

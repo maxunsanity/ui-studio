@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>시즌 · 60일과 카드 보관함 | K-POP MONSTERS</title>
+<style>
+
+:root{--bg:#090d18;--panel:#151d30;--line:#34425d;--ink:#f7f8ff;--muted:#c1cbe0;--soft:#95a6c3;--pink:#ff85bf;--cyan:#68e5e9;--gold:#ffd77c}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Inter,Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}button{font:inherit}
+body{display:grid;place-content:center;gap:12px;padding:14px}.deck,.controls{width:min(96vw,calc((100vh - 84px)*16/9))}
+.slide{display:none;width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;border:1px solid #43516c;border-radius:16px;background:radial-gradient(circle at 86% 7%,#283659 0,transparent 33%),linear-gradient(135deg,#121b2e,#090e1b 75%);container-type:inline-size}
+.slide.active{display:flex;flex-direction:column;padding:3.1cqw 3.7cqw 2.4cqw}
+.slide::before{content:"";position:absolute;inset:0 auto 0 0;width:.56cqw;background:linear-gradient(var(--pink),var(--cyan))}
+.meta{display:flex;gap:.8cqw;align-items:center;color:var(--cyan);font-weight:900;font-size:.95cqw;letter-spacing:.1em}
+.meta .tag{margin-left:auto;letter-spacing:0;color:#f7cee2;border:1px solid #945e7a;border-radius:100px;padding:.35cqw .8cqw;font-size:.84cqw}
+h1,h2,h3,p{margin:0}h1,h2{font-size:3.2cqw;letter-spacing:-.05em;line-height:1.13;margin:1.1cqw 0 .4cqw}h1{font-size:3.9cqw}
+.lead{font-size:1.34cqw;line-height:1.42;color:var(--muted);max-width:89cqw;font-weight:650}
+.footer{border-top:1px solid #35415c;margin-top:1.1cqw;padding-top:.6cqw;display:flex;align-items:center;gap:1cqw;font-size:.91cqw;color:var(--soft);font-weight:700}
+.footer a{color:#a9f0f2;text-decoration:none;border-bottom:1px solid #6aa9ae;white-space:nowrap}.footer a:hover{color:#fff}.footer .page{margin-left:auto;white-space:nowrap}
+.wait{color:var(--gold);font-weight:900}
+
+.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:1.4cqw;flex:1;min-height:0;margin-top:1.3cqw}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1.2cqw;flex:1;min-height:0;margin-top:1.3cqw}
+.panel{min-height:0;border:1px solid var(--line);border-radius:1cqw;background:rgba(20,29,48,.93);padding:1.3cqw 1.5cqw;display:flex;flex-direction:column}
+.panel h3{font-size:1.15cqw;letter-spacing:.06em;color:var(--cyan);margin-bottom:.9cqw}
+.panel p{font-size:1.15cqw;line-height:1.42;color:var(--muted)}.panel p b{color:var(--ink)}
+.steps3{display:flex;flex-direction:column;gap:.8cqw;min-height:0}
+.st{flex:1;border:1px solid #52617c;border-left:.42cqw solid var(--cyan);border-radius:1cqw;background:#19253c;padding:1cqw 1.2cqw;display:flex;flex-direction:column;justify-content:center}
+.st:nth-child(2){border-left-color:var(--gold)}.st:nth-child(3){border-left-color:var(--pink)}
+.st small{font-size:.86cqw;color:var(--cyan);font-weight:900;letter-spacing:.08em}
+.st b{font-size:1.7cqw;line-height:1.22;margin:.25cqw 0}.st p{font-size:1.1cqw;line-height:1.38;color:var(--muted)}
+.pic{position:relative;border:1px solid var(--line);border-radius:1cqw;overflow:hidden;min-height:0;background:#0d1322}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pic.contain img{object-fit:contain}
+.pic .ex{position:absolute;left:.8cqw;top:.8cqw;background:#151c2be6;border:1px solid #8b7090;border-radius:99px;padding:.25cqw .8cqw;font-size:.85cqw;font-weight:900;color:#ffe4f1;z-index:2}
+.pic .cap{position:absolute;left:.8cqw;right:.8cqw;bottom:.8cqw;background:#151c2bee;border:1px solid #52617b;border-radius:.6cqw;padding:.45cqw .8cqw;font-size:1.02cqw;font-weight:800;z-index:2}
+.note{margin-top:.9cqw;border:1px solid #8d6381;background:#39273d;border-radius:.75cqw;padding:.7cqw 1cqw;color:#ffe4f1;font-size:1.06cqw;line-height:1.34;font-weight:780}
+.point{display:flex;gap:.9cqw;padding:.8cqw 0;border-bottom:1px solid #35425c;align-items:flex-start}.point:last-child{border-bottom:0}
+.point em{font-style:normal;color:var(--pink);font-weight:900;font-size:1.3cqw;min-width:2cqw}.point div{font-size:1.13cqw;line-height:1.38;color:var(--muted)}.point b{display:block;color:var(--ink);font-size:1.35cqw;margin-bottom:.2cqw}
+.ph-box{flex:1;min-height:0;border:.18cqw dashed #7b89a5;border-radius:.9cqw;background:#0f1628;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6cqw;color:var(--soft);font-size:1cqw;font-weight:800;text-align:center;padding:1cqw}
+
+.tl{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:1.4cqw;padding:1.6cqw 2cqw}
+.tl-bar{position:relative;height:1.3cqw;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--gold) 50%,var(--pink));margin:3.2cqw 1cqw 3.6cqw}
+.tl-tick{position:absolute;top:50%;transform:translate(-50%,-50%);width:2.2cqw;height:2.2cqw;border-radius:50%;background:#0d1322;border:.3cqw solid #fff}
+.tl-lab{position:absolute;transform:translateX(-50%);text-align:center;white-space:nowrap}
+.tl-lab.up{bottom:2cqw}.tl-lab.down{top:2cqw}
+.tl-lab b{display:block;font-size:1.9cqw}.tl-lab span{font-size:1cqw;color:var(--muted);font-weight:700}
+.tl-join{display:flex;align-items:center;gap:1cqw;border:1px dashed #7b89a5;border-radius:.8cqw;padding:.8cqw 1.1cqw;font-size:1.12cqw;color:var(--muted);line-height:1.35}
+.tl-join b{color:var(--gold)}
+.rk{display:grid;grid-template-columns:1.25fr .75fr;gap:1.2cqw;flex:1;min-height:0;margin-top:1.3cqw}
+.col{border-radius:1cqw;padding:1.3cqw 1.5cqw;display:flex;flex-direction:column;min-height:0}
+.col.reset{border:1px solid #6a5a78;background:linear-gradient(160deg,#2a2236,#171c30)}
+.col.keep{border:.15cqw solid var(--gold);background:linear-gradient(160deg,#3a3220,#1b2033)}
+.col h3{font-size:1.9cqw;margin-bottom:.4cqw}.col .sub{font-size:1.05cqw;color:var(--muted);margin-bottom:1cqw}
+.items{display:grid;grid-template-columns:repeat(3,1fr);gap:.8cqw;flex:1;min-height:0}
+.it{border:1px solid #52617b;border-radius:.8cqw;background:#19253c;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1cqw;gap:.5cqw}
+.it i{font-style:normal;font-size:3.4cqw;line-height:1;opacity:.85}.it b{font-size:1.45cqw}.it span{font-size:1cqw;color:var(--muted);line-height:1.3}
+.it .x{font-size:.95cqw;font-weight:900;color:#ff9db0}
+.keep .it{border-color:#a8904f;background:#2c2a26}.keep .it .x{color:#9ff3c3}
+.vault{display:grid;grid-template-columns:.9fr 1.1fr;gap:1.4cqw;flex:1;min-height:0;margin-top:1.3cqw}
+.vault .ph-box{flex-direction:row;gap:1.2cqw}.vault .panel{justify-content:center}
+.vault .ph-box img{height:20cqw;border-radius:.7cqw;border:.25cqw solid var(--gold);filter:drop-shadow(0 0 1.2cqw #ffd77c55)}
+.vault .ph-box .lbl{display:flex;flex-direction:column;gap:.5cqw;max-width:12cqw}
+
+.controls{display:flex;align-items:center;gap:8px}.controls button{border:1px solid #485875;background:#1b2940;color:var(--ink);border-radius:99px;padding:7px 16px;font-size:13px;font-weight:800;cursor:pointer}.controls button:hover{border-color:var(--cyan)}.controls .count{font-size:13px;color:var(--muted);min-width:68px;text-align:center;font-variant-numeric:tabular-nums}.controls .bar{flex:1;height:4px;border-radius:99px;background:#34425a;overflow:hidden}.controls .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--cyan));width:33%;transition:width .2s}
+.toc{position:fixed;inset:0;background:#080c17f5;display:none;z-index:5;padding:7vh 10vw}.toc.open{display:block}.toc h3{font-size:24px;margin-bottom:24px}.toc button{display:block;width:100%;text-align:left;margin:8px 0;border:1px solid #4b5b75;background:#1a2840;color:#fff;border-radius:10px;padding:14px;cursor:pointer}.toc button:hover{border-color:var(--cyan)}
+@media(max-width:800px){body{display:block;padding:8px}.deck,.controls{width:100%}.slide{border-radius:7px}}
+@media print{body{display:block;padding:0;background:white}.deck{width:100%}.slide{display:flex!important;border:0;border-radius:0;page-break-after:always;break-after:page}.controls,.toc{display:none!important}}
+</style>
+<link href="../proposal-layout.css?v=20261003-2" rel="stylesheet"/><link href="season-layout.css?v=20261003-2" rel="stylesheet"/><style id="deck-copy-css">.deck-copy{margin:.55em 0 0;font-size:clamp(15px,1.45vw,21px);font-weight:700;line-height:1.45;color:inherit;opacity:.92;letter-spacing:-.01em;max-width:62em}.deck-copy-sub{margin:.35em 0 0;font-size:clamp(13px,1.1vw,16px);font-weight:600;line-height:1.45;color:inherit;opacity:.78}</style></head>
+<body data-proposal-kind="season" data-proposal-layout="20261003">
+<main aria-label="시즌 제안 덱" class="deck">
+<section class="slide active" data-layout-page="1" data-title="시즌은 최대 60일">
+<div class="meta">01 / 시즌 <span class="tag">제안 · 검수 대기</span></div>
+<h1>시즌은 <span style="color:var(--pink)">최대 60일</span>,<br/>끝나면 리셋하고 다시 시작합니다<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h1><p class="deck-copy">한 시즌은 최대 60일, 그동안 내 아이돌을 키웁니다</p>
+<p class="lead">시즌은 최대 60일이고, 늦게 들어와도 참여할 수 있습니다. 끝나면 리셋되고, 남기고 싶은 카드만 보관함에 넣습니다.</p>
+<div class="grid2">
+<div class="panel tl"><h3>한 시즌 · 최대 60일<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h3>
+<div class="tl-bar">
+<span class="tl-tick" style="left:0%"></span><span class="tl-lab up" style="left:0%"><b>1일</b><span>시즌 시작</span></span>
+<span class="tl-tick" style="left:50%;border-color:var(--gold)"></span><span class="tl-lab down" style="left:50%"><b style="color:var(--gold)">30일째</b><span>이때 들어와도 참여할 수 있다</span></span>
+<span class="tl-tick" style="left:100%;border-color:var(--pink)"></span><span class="tl-lab up" style="left:100%"><b style="color:var(--pink)">60일</b><span>시즌 끝</span></span>
+</div><div aria-label="모든 유저가 함께 쓰는 60일 일정" class="season-days"><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark midpoint"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark"></i><i aria-hidden="true" class="day-mark last-day"></i></div>
+<div class="tl-join">⏱ <span>30일째 들어온 유저도 참여할 수 있고, 남은 <b>30일</b> 동안 플레이합니다.</span></div>
+</div>
+<div class="steps3">
+<div class="st"><small>01</small><b>최대 60일</b><p>늦게 들어와도 남은 기간 동안 참여합니다.</p></div>
+<div class="st"><small>02</small><b>끝나면 리셋</b><p>도시·아이돌·일반 카드는 처음으로 돌아갑니다.</p></div>
+<div class="st"><small>03</small><b>남길 카드는 보관함</b><p>보관함에 넣은 카드만 다음 시즌에도 남습니다.</p></div>
+</div>
+</div>
+<div class="footer"><span>10/02 회의 현중 18:38 「60일, 30일째 들어오면 30일밖에 안 남았겠죠…정해진 날짜」 · 20:16 카드 보관함</span><a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=PCSEASONMD&amp;content=whole" target="_top">짝 기획 ↗</a><span class="page">01 / 03</span></div>
+</section>
+<section class="slide" data-layout-page="2" data-title="리셋되는 것과 남는 것">
+<div class="meta">02 / 리셋과 보존 <span class="tag">제안 · 검수 대기</span></div>
+<h2>도시·아이돌·카드는 리셋,<br/>보관함에 넣은 카드만 남습니다<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p class="lead">시즌이 끝나면 무엇이 사라지고 무엇이 남는지 한눈에 보이게 합니다.</p>
+<div class="rk">
+<div class="col reset"><h3>리셋 · 처음부터<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h3><p class="sub">다음 시즌은 새 캐스팅(시작 1명)으로 시작합니다.</p>
+<div class="items">
+<div class="it"><i>🏙️</i><b>도시 · 건물</b><span>키운 건물 단계</span><span class="x">초기화</span></div>
+<div class="it"><i>🎤</i><b>아이돌 · 팬</b><span>멤버와 모은 팬</span><span class="x">초기화</span></div>
+<div class="it"><i>🃏</i><b>일반 카드</b><span>시즌에 쓴 카드</span><span class="x">초기화</span></div>
+</div></div>
+<div class="col keep"><h3 style="color:var(--gold)">남는 것<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h3><p class="sub">내가 골라 보관한 카드</p>
+<div class="items" style="grid-template-columns:1fr">
+<div class="it"><i>🔒</i><b>보관함 카드</b><span>영구 보존 카드</span><span class="x">다음 시즌에도 유지</span></div>
+</div></div>
+</div>
+<div class="note">재화를 넘겨 가는지는 <span class="wait">결정 대기</span>.</div>
+<div class="footer"><span>현중 19:45 「서류를 좀 애매하게 썼네」 → 리셋·보존 문구 정리 · 10/02 현중 「일반 카드 리셋」</span><a href="/docs/planning/proposal-concept/audition.html" target="_top">오디션 ↗</a><span class="page">02 / 03</span></div>
+</section>
+<section class="slide" data-layout-page="3" data-title="보관함 · 돈을 내고 보관">
+<div class="meta">03 / 카드 보관함 <span class="tag">제안 · 검수 대기</span></div>
+<h2>남기고 싶은 카드는 보관함에,<br/>보관은 돈을 더 내고<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p class="lead">아끼는 카드는 보관함에 넣어 다음 시즌에도 갖고 갑니다. 보관하려면 돈을 더 냅니다.</p>
+<div class="vault">
+<div class="ph-box"><img alt="보관 카드 예시로 쓴 신사임당 대표 카드" decoding="async" src="../삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/04_신사임당.png"/><div class="lbl"><b style="color:var(--ink);font-size:1.3cqw">카드 보관함 화면</b>유르넷 작업 예정<br/>(카드는 대표 카드 시안)</div></div>
+<div class="panel">
+<div class="point"><em>보존</em><div><b>보관함에 넣은 카드는 남습니다</b>시즌이 리셋돼도 보관함 카드는 그대로입니다.</div></div>
+<div class="point"><em>과금</em><div><b>보관은 과금</b>보관하고 싶으면 돈을 더 냅니다.</div></div>
+<div class="point"><em>미정</em><div><b>가격·장수·규칙</b><span class="wait">결정 대기</span></div></div>
+</div>
+</div>
+<div class="footer"><span>현중 20:16 영구 보존 카드는 카드 보관함 · 「보관하고 싶으면 돈을 더 내면」</span><a href="/docs/planning/_이전기획_보관/20261116_카드옛구조/proposal-concept/cards.html" target="_top">카드 ↗</a><a href="/docs/planning/proposal-concept/pay.html" target="_top">유료화 ↗</a><span class="page">03 / 03</span></div>
+</section>
+</main>
+<nav aria-label="슬라이드 이동" class="controls"><button id="tocBtn" type="button">목차</button><button id="prev" type="button">← 이전</button><span class="count" id="count">01 / 03</span><button id="next" type="button">다음 →</button><span class="bar"><i id="progress"></i></span></nav>
+<div aria-label="목차" aria-modal="true" class="toc" id="toc" role="dialog"><h3>시즌 · 60일과 보관함<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h3><div id="tocItems"></div></div>
+<script>
+(()=>{const slides=[...document.querySelectorAll('.slide')],count=document.getElementById('count'),progress=document.getElementById('progress'),toc=document.getElementById('toc');let index=0;function show(n){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===index));count.textContent=String(index+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');progress.style.width=(100*(index+1)/slides.length)+'%';toc.classList.remove('open');location.hash='slide-'+(index+1)}slides.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.textContent=String(i+1).padStart(2,'0')+' · '+s.dataset.title;b.onclick=()=>show(i);document.getElementById('tocItems').appendChild(b)});document.getElementById('prev').onclick=()=>show(index-1);document.getElementById('next').onclick=()=>show(index+1);document.getElementById('tocBtn').onclick=()=>toc.classList.toggle('open');toc.onclick=e=>{if(e.target===toc)toc.classList.remove('open')};document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown'){show(index+1);e.preventDefault()}if(e.key==='ArrowLeft'||e.key==='PageUp'){show(index-1);e.preventDefault()}if(e.key==='Escape')toc.classList.remove('open')});const m=location.hash.match(/slide-(\d+)/);if(m)show(Number(m[1])-1);})();
+</script>
+<script src="../proposal-navigation.js?v=20261003-2"></script></body>
+</html>

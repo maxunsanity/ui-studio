@@ -1,0 +1,49 @@
+<!doctype html><meta charset="utf-8"><title>Grapes 부품 드래그 자동 검증</title><link rel="stylesheet" href="/src/tools/uxStudio/vendor/grapesjs-0.23.9/grapes.min.css"><style>body{font:20px system-ui;background:#17212b;color:white}#gjs{height:600px}li{padding:4px}</style><h1>GrapesJS Dragger · 자동 브라우저 검증</h1><p>합성 마우스 사건 시험입니다. 실제 손 조작 검수와 구분합니다. 제품 저장 데이터는 읽거나 쓰지 않습니다.</p><ol id="results"></ol><div id="gjs"></div><script src="/src/tools/uxStudio/vendor/grapesjs-0.23.9/grapes.min.js"></script><script type="module">
+import {startCanvasPan,startBoardDrag,startPartDrag} from '/src/tools/uxStudio/grapes-drag.mjs';
+const results=document.querySelector('#results'),check=(ok,name)=>{const li=document.createElement('li');li.textContent=(ok?'PASS':'FAIL')+' · '+name;results.append(li);if(!ok)throw Error(name);};
+const editor=grapesjs.init({container:'#gjs',height:'600px',storageManager:false,telemetry:false,panels:{defaults:[]},undoManager:{trackSelection:false}});
+const original={x:5,y:10,w:40,h:20};
+editor.DomComponents.addType('test-part',{model:{init(){for(const [k,s]of Object.entries({X:'left',Y:'top'}))this.on('change:ux'+k,()=>this.addStyle({[s]:this.get('ux'+k)+'%'}));}},view:{events:{mousedown:'dragPart'},dragPart(e){startPartDrag(editor,this.model,original,e);}}});
+editor.DomComponents.addType('test-board',{model:{init(){this.on('change:boardX change:boardY',()=>this.addStyle({left:this.get('boardX')+'px',top:this.get('boardY')+'px'}));}},view:{events:{mousedown:'dragBoard'},dragBoard(e){startBoardDrag(editor,this.model,e);}}});
+editor.setComponents([{type:'test-board',boardX:24,boardY:40,tagName:'div',style:{position:'absolute',left:'24px',top:'40px',width:'300px',height:'200px',background:'#adcce0'},components:[{tagName:'div',attributes:{'data-board-handle':'true'},content:'화면 제목 끌기',style:{position:'absolute',top:'-25px',height:'24px',width:'100%',cursor:'move'}},{type:'test-part',name:'시험 부품',uxX:5,uxY:10,uxW:40,uxH:20,attributes:{'data-element':'test'},style:{position:'absolute',left:'5%',top:'10%',width:'40%',height:'20%',background:'#f5cf67'},content:'끌기 시험',draggable:false,droppable:false,editable:false}]}]);
+const tick=()=>new Promise(r=>setTimeout(r,30));
+editor.on('load',async()=>{try{
+ const c=editor.getWrapper().components().at(0).components().at(1),el=c.getEl(),doc=el.ownerDocument,win=doc.defaultView;
+ const mouse=(target,type,x,y)=>target.dispatchEvent(new win.MouseEvent(type,{bubbles:true,cancelable:true,clientX:x,clientY:y,button:0,buttons:type==='mouseup'?0:1,view:win}));
+ for(const zoom of [100,50]){
+ editor.Canvas.setZoom(zoom);c.set({uxX:5,uxY:10});await tick();editor.UndoManager.clear();
+ mouse(el,'mousedown',30,30);mouse(doc,'mousemove',60,50);
+ check(c.get('uxX')===5,zoom+'% 이동 중 모델 미변경');
+ mouse(doc,'mouseup',60,50);await tick();check(c.get('uxX')===15&&c.get('uxY')===20,zoom+'% 부모 300×200 좌표 변환');
+ editor.UndoManager.undo();await tick();check(c.get('uxX')===5&&c.get('uxY')===10,zoom+'% Undo 한 번');
+ editor.UndoManager.redo();await tick();check(c.get('uxX')===15&&c.get('uxY')===20,zoom+'% Redo 한 번');
+ mouse(el,'mousedown',30,30);mouse(doc,'mousemove',80,80);doc.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Escape',keyCode:27,bubbles:true}));await tick();check(c.get('uxX')===15&&Math.abs(parseFloat(win.getComputedStyle(el).left)-45)<0.1,zoom+'% Escape 원복');
+ }
+ const before=editor.getProjectData();editor.loadProjectData(JSON.parse(JSON.stringify(before)));const loaded=editor.getWrapper().components().at(0).components().at(1);check(loaded.get('uxX')===15&&loaded.get('uxY')===20,'ProjectData 왕복 좌표 보존');
+
+ const board=editor.getWrapper().components().at(0),boardEl=board.getEl(),handle=boardEl.querySelector('[data-board-handle]'),children=JSON.stringify(board.components().toJSON()),boardDoc=boardEl.ownerDocument;
+ for(const zoom of [100,50]){
+ editor.Canvas.setZoom(zoom);board.set({boardX:24,boardY:40});await tick();editor.UndoManager.clear();
+ mouse(handle,'mousedown',30,30);mouse(boardDoc,'mousemove',130,80);check(board.get('boardX')===24,zoom+'% 화면 이동중 모델 보존');mouse(boardDoc,'mouseup',130,80);await tick();
+ check(board.get('boardX')===124&&board.get('boardY')===90,zoom+'% 화면 제목 이동');
+ editor.UndoManager.undo();await tick();check(board.get('boardX')===24&&board.get('boardY')===40,zoom+'% 화면 Undo');
+ editor.UndoManager.redo();await tick();check(board.get('boardX')===124&&board.get('boardY')===90,zoom+'% 화면 Redo');
+ mouse(handle,'mousedown',30,30);mouse(boardDoc,'mousemove',80,80);boardDoc.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Escape',keyCode:27,bubbles:true}));await tick();check(board.get('boardX')===124&&Math.abs(parseFloat(boardDoc.defaultView.getComputedStyle(boardEl).left)-124)<0.1,zoom+'% 화면 Escape');
+ }
+ check(JSON.stringify(board.components().toJSON())===children,'화면 이동 후 자식 부품 전체 불변');
+ const data=editor.getProjectData();editor.loadProjectData(JSON.parse(JSON.stringify(data)));check(editor.getWrapper().components().at(0).get('boardX')===124,'화면 위치 저장 왕복');
+ const shield=document.createElement('div');editor.Canvas.getElement().append(shield);shield.addEventListener('mousedown',e=>startCanvasPan(editor,e));
+ const send=(target,type,x,y)=>target.dispatchEvent(new MouseEvent(type,{bubbles:true,cancelable:true,clientX:x,clientY:y,button:0,buttons:type==='mouseup'?0:1,view:window}));
+ const content=JSON.stringify(editor.getProjectData());editor.UndoManager.clear();
+ for(const z of [100,50]){
+  editor.Canvas.setZoom(z);editor.Canvas.setCoords(10,20);
+  send(shield,'mousedown',30,30);send(document,'mousemove',130,80);send(document,'mouseup',130,80);
+  check(editor.Canvas.getCoords().x===110&&editor.Canvas.getCoords().y===70,z+'% 작업판 화면픽셀 이동');
+  send(shield,'mousedown',30,30);send(document,'mousemove',90,90);document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',keyCode:27,bubbles:true}));
+  check(editor.Canvas.getCoords().x===110&&editor.Canvas.getCoords().y===70,z+'% 작업판 Esc 취소');
+ }
+ check(JSON.stringify(editor.getProjectData())===content,'작업판 이동 후 설계 데이터 불변');
+ check(!editor.UndoManager.hasUndo(),'작업판 이동은 설계 Undo를 만들지 않음');
+ document.title='PASS 29 · Grapes 드래그 자동검증';
+}catch(e){document.title='FAIL · '+e.message;}});
+</script>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>실측 플레이 로그 분석</title>
+</head>
+<body>
+  <div class="top">
+    <div>
+      <h1>📈 실측 플레이 로그 분석</h1>
+      <div class="sub">저장한 판 추가 · 슬롯 3개 비교 · <b>시즌 일차 정렬</b> · <b>기준(시즌 자동 플레이)</b> · 발란스 대조 · 읽기 목록 <code>tool_playlog_source</code></div>
+      <div data-planning-rooms hidden></div>
+    </div>
+    <div class="pill" id="loadPill">읽는 중…</div>
+  </div>
+  <div class="controls">
+    <label>기록 파일 추가(JSON)
+      <input id="fileIn" type="file" accept=".json,application/json" multiple />
+    </label>
+    <button type="button" id="btnLive">지금 게임 저장본 넣기</button>
+    <button type="button" id="btnClear">라이브러리 비우기</button>
+  </div>
+  <div class="pl-bar">
+    <label>슬롯 1<select id="slot0"></select></label>
+    <label>슬롯 2<select id="slot1"></select></label>
+    <label>슬롯 3<select id="slot2"></select></label>
+  </div>
+  <div class="status" id="status">준비 중…</div>
+  <div class="pl-main">
+    <div class="slots" id="slots"></div>
+    <div class="tabs">
+      <button class="active" data-tab="plan">① 경고 · 하루 플랜</button>
+      <button data-tab="compare">② 비교 · 그래프</button>
+      <button data-tab="balance">③ 발란스 · 의견</button>
+      <button data-tab="law">④ 규칙 · 상세</button>
+      <button data-tab="log">⑤ 로그</button>
+    </div>
+    <section id="tab-plan"></section>
+    <section id="tab-compare" class="hidden"></section>
+    <section id="tab-balance" class="hidden"></section>
+    <section id="tab-law" class="hidden"></section>
+    <section id="tab-log" class="hidden"></section>
+  </div>
+<script type="module" src="/src/tools/playlog/analysis.ts"></script>
+</body>
+</html>

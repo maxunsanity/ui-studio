@@ -1,0 +1,68 @@
+<!doctype html><html><head><meta charset="utf-8"><title>악귀전 시안용 3D 렌더 (도시숲 툴 모델)</title>
+<style>html,body{margin:0;overflow:hidden;background:#0b0d22}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.165.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.165.0/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+const q=new URLSearchParams(location.search), MODE=q.get('mode')||'field', STYLE=q.get('style')||'cute';
+const W=innerWidth,H=innerHeight;
+const R=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true,alpha:MODE==='lineup'});R.setSize(W,H);R.setPixelRatio(1);R.outputColorSpace=THREE.SRGBColorSpace;document.body.appendChild(R.domElement);
+const scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(40,W/H,.1,900);
+const bl=(x,y,z)=>new THREE.Vector3(x,z,-y);
+const CP='/CodexPack_20260927/';
+// 캐릭터(wanderer 계열·Ruon) 모델은 절대 불러오지 않는다
+const MONS=[['unit_lab/monsters_anim/mushnub.glb','#ff8fc4'],['unit_lab/monsters_anim/pink_slime.glb','#8fd0ff'],['unit_lab/monsters_anim/green_blob.glb','#7ff0c8'],['unit_lab/monsters_anim/cactoro.glb','#c7a6ff'],['unit_lab/units_free/q_glub.glb','#ffc07a']];
+const L=new GLTFLoader();
+function face(){const c=document.createElement('canvas');c.width=256;c.height=160;const g=c.getContext('2d');
+  for(const x of [78,178]){g.fillStyle='#1b1030';g.beginPath();g.ellipse(x,70,30,36,0,0,7);g.fill();g.fillStyle='#fff';g.beginPath();g.arc(x-9,56,11,0,7);g.fill();g.beginPath();g.arc(x+10,84,5,0,7);g.fill();}
+  g.fillStyle='rgba(255,110,160,.75)';for(const x of [40,216]){g.beginPath();g.ellipse(x,118,24,13,0,0,7);g.fill();}
+  g.strokeStyle='#1b1030';g.lineWidth=6;g.lineCap='round';g.beginPath();g.arc(128,108,12,0.2,Math.PI-0.2);g.stroke();
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return new THREE.SpriteMaterial({map:t,depthTest:false,transparent:true});}
+function glow(color){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');const gr=g.createRadialGradient(64,64,4,64,64,64);gr.addColorStop(0,color);gr.addColorStop(.45,color+'99');gr.addColorStop(1,color+'00');g.fillStyle=gr;g.fillRect(0,0,128,128);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return new THREE.SpriteMaterial({map:t,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});}
+async function monster(i,size){
+  const [url,col]=MONS[i];const g=await L.loadAsync(CP+url);const o=g.scene;
+  const box=new THREE.Box3().setFromObject(o);const h=box.max.y-box.min.y;o.scale.setScalar(size/h);
+  const grp=new THREE.Group();const c=new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3());o.position.x-=c.x;o.position.z-=c.z;o.position.y-=new THREE.Box3().setFromObject(o).min.y;grp.add(o);
+  if(STYLE==='cute'){
+    const color=new THREE.Color(col);
+    o.traverse(m=>{if(m.isMesh){const base=(m.material&&m.material.color)?m.material.color.clone():new THREE.Color('#fff');const mix=color.clone().lerp(new THREE.Color('#ffffff'),.35).lerp(base,.18);
+      m.material=new THREE.MeshPhysicalMaterial({color:mix,emissive:color,emissiveIntensity:.42,roughness:.18,metalness:0,clearcoat:1,clearcoatRoughness:.1,transparent:true,opacity:.92});}});
+    grp.scale.set(1.08,.9,1.08); // 착지 순간 살짝 납작(스쿼시)
+    const f=new THREE.Sprite(face());f.scale.set(size*.62,size*.39,1);f.position.set(0,size*.52,size*.36);f.renderOrder=10;grp.add(f);
+    const gl=new THREE.Sprite(glow(col));gl.scale.set(size*2.4,size*2.4,1);gl.position.y=size*.5;gl.renderOrder=-1;grp.add(gl);
+    const ring=new THREE.Mesh(new THREE.RingGeometry(size*.62,size*.78,40),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.85,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=.05;grp.add(ring);
+  }
+  return grp;
+}
+function lights(k=1){scene.add(new THREE.HemisphereLight('#ffffff','#b9a6d8',1.6*k));const d=new THREE.DirectionalLight('#fff4e0',2.2*k);d.position.set(-40,90,40);scene.add(d);scene.add(new THREE.AmbientLight('#ffffff',.5*k));}
+const out={};
+async function run(){
+ if(MODE==='lineup'){
+   if(STYLE==='orig'){scene.add(new THREE.HemisphereLight('#C7DBEE','#263C25',.65));const d=new THREE.DirectionalLight('#FFF0C4',2.3);d.position.set(-4,9,3.5);scene.add(d);} else lights(1.1);
+   for(let i=0;i<5;i++){const m=await monster(i,1);m.position.x=(i-2)*1.45;scene.add(m);}
+   cam.position.set(0,1.5,5.6);cam.lookAt(0,.45,0);
+ } else {
+   lights(.95);scene.background=new THREE.Color('#1a1638');scene.fog=new THREE.Fog('#2a2050',160,420);
+   const map=await L.loadAsync(CP+'data/maps/forest150/releases/v7/forest_'+(q.get('state')||'purified')+'.glb');
+   map.scene.traverse(m=>{if(m.isMesh){const hasCol=!!m.geometry.getAttribute('color');const n=m.name.toLowerCase();if(n.startsWith('sea')||n.startsWith('pond'))m.material=new THREE.MeshStandardMaterial({color:'#7fd6ff',roughness:.2,emissive:'#2a7aa6',emissiveIntensity:.4});else if(hasCol)m.material=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.9});}});
+   scene.add(map.scene);
+   const tower=(await L.loadAsync(CP+'data/maps/forest150/releases/v7/catalog/tower_purified.glb')).scene;
+   const unit=(await L.loadAsync(CP+'data/maps/forest150/releases/v7/catalog/unit_purified.glb')).scene;
+   const T=[['aa1',tower,56.5,53],['dr1',unit,56.5,39],['aa2',tower,76.5,105],['dr2',unit,76.5,91],['aa3',tower,73,157],['dr3',unit,73,143]];
+   for(const [id,src,x,y] of T){const o=src.clone(true);o.position.copy(bl(x,y,0));scene.add(o);out[id]=[x,y,0];}
+   const MP=[[66,64],[82,84],[64,112],[86,136],[66,170]];
+   const NM=+(q.get('mons')??5);for(let i=0;i<NM;i++){const m=await monster(i,5);m.position.copy(bl(MP[i][0],MP[i][1],0));m.rotation.y=Math.PI*0.95;scene.add(m);out['mon'+i]=[MP[i][0],MP[i][1],1.6];}
+   const cp=q.get('cam')||'a';
+   if(cp==='a'){cam.position.copy(bl(66,-18,52));cam.lookAt(bl(70,95,0));}
+   if(cp==='b'){cam.fov=46;cam.updateProjectionMatrix();cam.position.copy(bl(36,-22,40));cam.lookAt(bl(82,105,0));}
+   out.path=[[84,260],[84,230],[84,203],[80,178],[73,150],[74,124],[76.5,98],[66,72],[62,50],[68,30]];out.stage=[68,18,0];
+ }
+ R.render(scene,cam);
+ const proj=(p)=>{const v=bl(p[0],p[1],p[2]||0).project(cam);return [Math.round((v.x+1)/2*W),Math.round((1-v.y)/2*H)]};
+ const P={};for(const k in out){if(k==='path')P.path=out.path.map(proj);else P[k]=proj(out[k]);}
+ window.__proj=P;window.__done=true;
+}
+run().catch(e=>{document.title='ERR '+e.message;window.__err=String(e);window.__done=true;});
+</script></body></html>

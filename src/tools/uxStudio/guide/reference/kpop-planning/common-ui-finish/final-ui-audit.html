@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>케이팝몬스터즈 전체 UI 마무리 검수</title>
+<style>
+body{margin:0;background:#eef1f5;color:#253241;font:16px/1.6 system-ui,sans-serif}
+main{max-width:900px;margin:auto;padding:clamp(16px,4vw,44px);background:white}
+h1{line-height:1.2}h2{margin-top:1.5em}a{color:#215589;text-underline-offset:.16em}
+section{border-top:1px solid #d6dde6}th,td{vertical-align:top;text-align:left;border-bottom:1px solid #d6dde6;padding:.6rem}
+table{border-collapse:collapse;width:100%}thead{background:#f0f3f7}.sub{color:#4e5c6c}
+</style></head><body><main>
+<nav><a href="index.html#documents">‹ UI 스튜디오 마무리 가이드</a> · <a href="all-previews.html#all">전체 미리보기</a></nav>
+<h1>케이팝몬스터즈 전체 UI 마무리 검수</h1>
+<p class="sub">2026-11-27 12:45 KST · codex(단이) · 제안(검수 대기)</p>
+<p>현행 22개 설계에 814개 화면이 있습니다. 이전 771개 전수 표시 검수 뒤 이번에 변경한 4개 설계의 207개 화면을 430px·1440px에서 각각 다시 열었습니다. 414회에서 대상 화면 불일치, 빈 화면, 이미지 실패와 로딩 대기, 페이지 전체 가로 넘침은 0건입니다.</p>
+<section><h2>홈에서 찾는 위치</h2>
+<table><thead><tr><th scope="col">내 작업 카드</th><th scope="col">담은 화면</th></tr></thead><tbody>
+<tr><th scope="row">HUD · 26개</th><td>로비·아이돌, 출석·복귀, 광장 선물</td></tr>
+<tr><th scope="row">HUD 연출 · 31개</th><td>주사위·이동·도착·보상, 찬스, 공연 송출, 새 도시 50바퀴</td></tr>
+<tr><th scope="row">HUD 상세 · 15개</th><td>공통·로비, 출석·광장, 필러·조작 부품표 3종, 보드 칸·찬스 정보, 대표 팬과 방송·공연 타일 시안</td></tr>
+<tr><th scope="row">기능별 카드</th><td>인트로의 리더 선택, 정보의 리더 변경, 크루 개인 일일 미션, 스케줄의 스태프 부족과 친구 고르기</td></tr>
+</tbody></table>
+<p>공통 버튼·모달·바텀시트·아이콘 규격과 9슬라이스 기준을 부품서에 정리했습니다. 컬러 3D와 흑백 2D의 적용, 본문 스크롤, 키보드와 닫기 복귀의 대표 검수 결과는 기존 기록에서 찾을 수 있습니다. <a href="ui-components.md">공통 규격과 부품서</a> · <a href="verification.md">실화면 검수 기록</a></p></section>
+<section><h2>이번에 마친 작업</h2>
+<ul><li>황금 바자·세일 상자·골라담기·오늘의 3종을 로비에 연결했습니다. 무료 받기, 루비 사용 확인, 수령 이후 잠김, 부족 경로를 확인했습니다.</li>
+<li>구매 확인·의상 나가기 네 종·리더 변경 확인에서 바깥 클릭을 막았습니다. 의상 닫기는 44×44px이며 Escape 동작과 취소 초점 복귀를 실제 미리보기에서 확인했습니다.</li></ul>
+<p><a href="../../kpop-shop/index.html#lobby-sale-events">특가별 세부 와이어프레임</a> · <a href="common-audit.csv">최신 공통화 검수표</a></p></section>
+<section><h2>실게임 연동에서 남은 것</h2>
+<ul><li>시설별 실제 팬 수의 저장과 기존 성장 보드 표시는 확인했습니다. 대표 인물 ×100과 시설별 선물 수령 상태의 연결이 남아 있습니다.</li>
+<li>첫 앨범 발매 상태와 방송·공연 칸의 활동 기록은 확인했습니다. 발매 상태로 실제 타일 모양을 변경하는 연결이 남아 있습니다.</li>
+<li>새 도시 엔진은 지역별 20·22·25회 굴림 후 자동 정산합니다. 50바퀴 시안과 게임의 방문 제한·입장 조건·정산을 맞춰야 합니다.</li></ul>
+<p>월드 페스티벌, 시즌 마감, 독립 음악 앱, 미니게임은 보류 범위입니다.</p></section>
+<section><h2>검수 증거</h2>
+<p>전체 회귀 시험 741개 중 730개 통과. 실패 11개의 이름은 작업 전 백업 실행에서 재현한 실패와 일치합니다. 등록 이미지 참조 421종의 저장 파일을 확인했습니다.</p>
+<p><a href="screen-audit.csv">최신 화면 장부</a> · <a href="image-register.csv">최신 이미지 목록</a></p>
+</section></main></body></html>

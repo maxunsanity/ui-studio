@@ -1,0 +1,270 @@
+# S00 · 기획서 툴 정리 기획
+
+**이 문서는** 기획서 툴(7007 `/docs/planning/planning-docs-tool.html`)을 케이팝 몬스터즈 전용이 아니라 **다른 게임에도 쓸 수 있는 「게임 기획·개발 툴」**로 정리하기 위한 기획입니다. 메뉴 구조, 기능 목록, 데이터 구조, 범용화 방법, 플로우차트 내비 설계를 담습니다.
+
+**보는 법**
+- 0~1장: 툴의 원칙과 메뉴 전체 그림
+- 2~4장: 기능 목록·데이터 구조·하위 툴([시뮬레이터](../../../game-simulator.html) 등) 연결
+- 5~6장: AI 협업 방식, 케이팝 전용으로 박힌 부분을 떼는 방법
+- 7~9장: 10/22에 찾은 정리할 것, 추가 기능 후보, 현중 결정 필요
+- 10장: 왼쪽 플로우차트 내비 설계
+- 시뮬레이터 없음 (툴 자체 기획). 툴 열기: [기획서 툴](/docs/planning/planning-docs-tool.html)
+
+**지금 상태 (10/30 코드 기준)**
+- **개발됨**: 2장 기능 목록의 현행 기능, 상단 face 8개(제안서 카드·리스트·[핵심제안](../개발진행기획_v01/목차.html) 개발·책갈피·지도·공백·게임·[발란스 툴](S02_발란스툴.md)), 왼쪽 플로우차트 내비(`src/tools/planningDocs/flow.ts`·`flow-panel.ts`)와 그 표 `data/simulator/flow_node.csv`(29행)·`flow_edge.csv`(28행), 출발 경로 저장(`flow_trail`)·시뮬레이터 이동 알림(`flowVisit`), 문서별 「로그」 버튼(10/30).
+- **바뀐 점**: 시뮬레이터 모듈은 10/22의 17개에서 지금 **22개**입니다(`data/simulator/simulator_module.csv`). 메뉴(`menu.json`)는 기본 메뉴 10개 · 성장 도구 6개 · 보조 묶음으로 나뉘고, 능력 허브·관계 허브·여정도 메뉴에 들어 있습니다(10-2 1번 해결).
+- **현재 개발되지 않음, 진행 중**: 흐름도 표에 새 모듈 5개([뉴런](../개발진행기획_v01/콘텐츠별_v03/뉴런_기획서.html)·상점·미션·찬스 이벤트·[팬 증가](S05_팬덤.md))가 아직 없음, 프로젝트 설정 파일로 범용화(6장), 상단 face 버튼 숨김(10-6 2·3단계), 8장 추가 기능 후보.
+- 7장 숫자와 3장 개수는 10/22 점검 값이라 지금과 다를 수 있습니다.
+
+## 0. 목적 · 원칙
+툴 = 틀, 게임 내용 = 데이터. 케이팝 몬스터즈는 이 틀에 들어간 첫 데이터 묶음이다. 다른 게임은 데이터 폴더만 바꿔 같은 틀을 쓴다.
+
+지금 쓰는 규칙을 툴 규칙으로 옮김:
+| 툴 규칙 | 지금 근거 |
+|---|---|
+| R1 7007 원본이 기준. 생각대로 새 페이지 만들지 않음 | [헌법](../전체기획서/00_헌법_기획서기조.md) 기조 띠 `planning-docs-tool.html` |
+| R2 목록에서 열어 확인해야 완료(카드 주소 직접 열기는 미완료) + 캡처 | 작업방식_v2 「확인」 |
+| R3 문서 1개 = 카탈로그 1줄(카드 중복 금지) | `planning_doc_catalog.csv` path 유일 |
+| R4 숫자는 「발란스 대기」(value_status: temp/fixed) | 카탈로그 value_status 칸 |
+| R5 새 안은 「제안」 | 시스템기획 S 문서 머리, 스키마 registry_note |
+| R6 고치기 전 `파일.HHMMSS전_작성자` 백업 | 작업방식_v2 「백업과 표」 |
+| R7 생성 파일은 손으로 안 고침, 원본 표 → 생성기 | `schema-generate.mjs` |
+| R8 이전 리소스 백업 폴더는 서빙·감시 안 함 | `vite.config.ts` |
+
+## 1. 메뉴 구조 전체 트리
+```mermaid
+flowchart TD
+  T[기획서 툴 7007] --> H[머리: 헌법 기조 띠 · 검색 · 뒤로/앞으로 · 위치 표시]
+  T --> F{face 탭}
+  F --> F1[제안서 카드 tiles/card → concept-flow.html iframe]
+  F --> F2[리스트 tiles/list]
+  F --> F3[핵심제안 개발 development → 개발 계획 41줄]
+  F3 --> F3a[대표 기획서 · 자료 선택 · 사용 CSV · 전체 테이블 P73]
+  F3 --> F3b[시뮬레이터 P94 도크 → game-simulator.html]
+  F3b --> SIM[모듈 22(10/30 기준): 오디션 · 메인 · 아이돌 성장 · 카드 · 클릭 성장 · 쟁탈전 · 출연권 대전 · 건물 · 나쁜 기운 · 이벤트 · 보조: 보드 · 필러 · 그림 · 몬스 · 능력 허브 · 관계 허브 · 여정]
+  F --> F4[책갈피 shelf → 정렬: 시스템/콘텐츠/칸 → 문서 읽기]
+  F --> F5[지도 map]
+  F --> F6[공백 gap: 화면은 있는데 글 없음]
+  F --> F7[게임 → game-prototype.html iframe]
+  F --> F8[발란스 툴 → balance-tool.html iframe]
+```
+| 항목 | 종류 | 파일:줄 | 읽는 데이터 |
+|---|---|---|---|
+| 헌법 기조 띠 | 머리 | html main.ts paintLaw | planning_constitution |
+| 검색 | 머리 | html main.ts match | 카탈로그 title·aliases |
+| face 탭 8개 | 탭 | html | — |
+| 정렬 3개(시스템·콘텐츠·칸) | 탭 | html main.ts | system_group·content·shelf |
+| 뒤로/앞으로·위치 | 머리 | html main.ts | 방문 기록 |
+| 제안서 카드/리스트 | face | main.ts renderTiles | concept-flow.html |
+| 핵심제안 개발 | face | main.ts development.ts | planning_development* · csv_usage · simulator_module |
+| 시뮬레이터 도크 | 하위 | main.ts | simulator_module · menu.json |
+| 책갈피 | face | main.ts shelvesHtml · 칸 SHELVES main.ts | 카탈로그 |
+| 지도 | face | main.ts renderMap | content · family |
+| 공백 | face | main.ts renderGap | planning_surface |
+| 게임·발란스 툴 | face(iframe) | main.ts TOOL_FACES | 각 툴 |
+| 주소 파라미터 | — | main.ts syncUrl, 1355 applyQuery | face·view·sort·paper·content·plan·simulation·testPage·hubSource·doc·deck |
+
+## 2. 기능 목록 (24개)
+| # | 기능 | 어디 | 읽기/쓰기 | 범용/전용 | 상태 |
+|---|---|---|---|---|---|
+| 1 | 헌법 기조 띠·핀 | main.ts | 읽기 constitution | 범용(내용은 전용) | 현행 |
+| 2 | 통합 검색 | main.ts | 읽기 | 범용 | 현행 |
+| 3 | face 전환 | main.ts | — | 범용 | 현행 |
+| 4 | 주소로 상태 복원/공유 | main.ts | URL | 범용 | 현행 |
+| 5 | 뒤로/앞으로·위치 표시 | main.ts | 기록 | 범용 | 현행 |
+| 6 | 제안서 카드/리스트 | main.ts | concept-flow.html | 범용 틀·전용 덱 | 현행 |
+| 7 | 핵심제안 개발 목록·자료 선택 | development.ts | development* | 범용 | 현행 |
+| 8 | 사용 CSV 개수·열기 | development.ts | csv_usage | 범용 | 현행 |
+| 9 | 전체 테이블([P73](../../../game-table-tool.html)) | development.ts | csv_table | 범용 | 현행 |
+| 10 | 시뮬레이터 도크·연출 확대 | main.ts | simulator_module | 범용 틀·전용 모듈 | 현행 |
+| 11 | 책갈피(칸/시스템/콘텐츠 정렬) | main.ts systemList.ts | catalog·system_group | 범용 | 현행 |
+| 12 | 충돌 ⚠ 표시 | systemList.ts | conflict | 범용 | 현행 |
+| 13 | 지도 | main.ts | content·family | 범용 | 현행 |
+| 14 | 공백(화면은 있고 글 없음) | main.ts | surface | 범용 | 현행 |
+| 15 | md 렌더·mermaid | md.ts | 문서 | 범용 | 현행 |
+| 16 | html 사본 인라인 보기 | main.ts | pair_html | 범용 | 현행 |
+| 17 | 그림·폴더·느슨한 md 열기 | main.ts | 파일 | 범용 | 현행 |
+| 18 | 링크 파일 저장 | main.ts | fetch | 범용 | 현행 |
+| 19 | 하위 툴 iframe(게임·발란스) | main.ts | — | 범용 틀 | 현행 |
+| 20 | 콘텐츠별 내비 스크립트 | main.ts | 산출/개발진행기획_v01 content.js | 전용 경로 | 현행 |
+| 21 | 스키마 생성기 | scripts/schema-generate.mjs | master → 4개 파일 | 범용 | 현행 |
+| 22 | 생성 검사 `--check` | 같은 파일 | 비교 | 범용 | 현행 |
+| 23 | 문서 상태 칸(status·work_status·value_status) | 카탈로그 | — | 범용 | 현행 |
+| 24 | AI 협업 폴더 체계 | 작업방식_v2 | 입력/보고/질의응답 | 범용 | 운영(코드 밖) |
+
+## 3. 데이터 구조
+### 3-1 카탈로그 칸 (`planning_doc_catalog.csv`, 19칸)
+path(원본 위치·유일) · no(문서 ID) · title_ko · aliases(검색어) · content(→planning_content) · shelf(concept/screen/history/updates…) · status(draft/locked/live/backup/deprecated/history/backlog) · pair_html · pair_tool · pair_ops · parent_constitution · one_liner · origin(new/merged/port) · work_status(review/done_plan/planning…) · evidence · value_status(temp/fixed) · system_group(→planning_system_group) · dev_doc(→개발 대표 P번호) · added_on.
+지금 값 분포: status draft 467 · locked 24 · backup 5 · deprecated 5 · history 4 · live 3 · backlog 1.
+
+### 3-2 문서 ID 체계 (지금 실제)
+| 접두 | 개수 | 뜻(현재 쓰임) |
+|---|---|---|
+| 숫자(001~) | 104 | 초기 기획 원본 |
+| P | 170 | 산출 기획서 · 개발 대표 |
+| S | 25 | 시스템 기획(모노 이식) |
+| W | 34 | 전체기획서 장 |
+| F/FS | 40/11 | 세부 |
+| C · D · R · E · G | 25 · 21 · 10 · 7 · 7 | 기타 묶음 |
+| PC…MD 등 단발 | 약 50종 1개씩 | 제안서 카드 원문 |
+※ 요청서의 「M번호」는 카탈로그에 없음. 단발 접두가 많아 규칙 정리 필요(7장).
+
+### 3-3 계층 표
+family(8) → content(64) → doc. 시스템 정렬은 system_group(21). 개발 face는 development_plan(41, category: content 20·todo 11·guide 4·common 3·alias 2·etc 1) → reference(문서 역할 root/system/resource/tool/table/csv/history/sample) → csv_usage → csv_table(210).
+
+### 3-4 스키마 생성기 흐름 / 표 등록 절차
+표 등록은 schema_table → schema_column → 생성기(`node scripts/schema-generate.mjs`) 순서입니다. 표 구조는 [P148](../개발진행기획_v01/콘텐츠별_v03/테이블데이터_조합구조_기획서.html)를 봅니다.
+
+## 4. 하위 툴 연결 방식
+- 7007 개발 face → 시뮬레이터 도크(`game-simulator.html?module=&testPage=&hubSource=main`, main.ts).
+- host.mjs가 simulator_module(17)을 menu.json 묶음(primary/auxiliary)으로 띄움. 상세 보기 요청은 view·member·axis·returnModuleId만 통과(host.mjs). 하위 화면은 끝나면 `ctx.navigate(returnModuleId)`로 돌아감(bad_energy_views.mjs).
+- 허브(능력·관계)는 `hubSource=main`일 때만 메인 데이터를 읽음(main.ts isMainGrowthInspector).
+- 오디션 → 메인 허브 → 메뉴 데이터 흐름은 [S16](S16_오디션허브메뉴_데이터흐름.md)에서 다룹니다.
+
+## 5. AI 협업 체계 (툴 기능으로)
+| 기능 | 지금 | 툴화 제안 |
+|---|---|---|
+| 지시 | `입력/` · 커서 고정 `입력/개발-커서_현재지시.md` 맨 위만 | 툴에 「지시함」 보기 |
+| 질의응답 | `질의응답/`, 답은 같은 파일 아래 `## 이스라트 답` | 대기 질문 수 배지 |
+| 보고 | `보고/` 시작·중간·완료, `YYYYMMDD_HHMMSS_작성자_주제.md`+캡처 | 최근 보고 타임라인 |
+| 총괄 검수 | 모든 보고 → 총괄(이스라트), 현중에겐 필요한 것만 | 검수 상태 칸 |
+| 백업 | `.HHMMSS전_작성자` | 백업 목록·되돌리기 보기(읽기만) |
+| 완료 판정 | 7007 목록 → 카드 → 버튼 → 캡처 | 체크리스트 |
+세 폴더 파일 합계 1408개(10/22 기준).
+
+## 6. 범용화 분리안 — 케이팝 전용으로 박힌 것
+| # | 박힌 곳 | 내용 | 분리 방법 |
+|---|---|---|---|
+| 1 | html | 제목·브랜드 「케이팝 몬스터즈 기획」 | project.json(name) |
+| 2 | main.ts | 책갈피 칸·필요 역할 고정 | planning_shelf.csv |
+| 3 | main.ts | 게임/발란스 iframe 주소·「모노카피바라 이식 게임」 | planning_surface(kind=face_tool)로 |
+| 4 | main.ts | 허브 모듈 ID 2개 고정 | simulator_module에 is_hub 칸 |
+| 5 | main.ts | 콘텐츠별 내비 스크립트 경로(삼중AI 폴더) | project.json |
+| 6 | main.ts | 기본 문서 [W00](../전체기획서/00_전체기획서_목차.md)/083 | project.json(default_doc) |
+| 7 | main.ts | 저장 키 `kpopmonsters:` | 프로젝트 ID 접두 |
+| 8 | main.ts vite publicDir=data | 데이터 뿌리 위치 | project.json(data_root) |
+| 9 | 헌법 띠 문구 html | 문구 고정 | constitution 표로 |
+| 10 | 시뮬 모듈 이름·용어(오디션·[라포](../개발진행기획_v01/콘텐츠별_v03/라포AI탐험_기획서.html) 등) | 데이터 | 이미 CSV — 유지 |
+핵심: 「프로젝트 설정 1파일 + 칸/face/허브 정의를 표로」. 툴 코드는 `src/tools/planningDocs`만, 게임 데이터는 `data/` 아래 프로젝트 폴더로.
+
+## 7. 정리할 것 — 10/22 점검 결과 (그 뒤 다시 세지 않음)
+1. 문서 ID 중복 3건: 031·032·033이 md와 화면 html에 같은 번호(카탈로그 31-32, 41-42, 43-44줄). R3 위반 후보.
+2. 공백 화면 링크 끊김 1건: planning_surface `chance_state_sim`의 doc_path `docs/planning/033_스케줄변경_상태연동.md` 없음(실제는 `_이전기획_보관/20261016/`).
+3. 개발 계획 툴 링크 끊김 1건: `planning_development_plan_board` tool_href `/docs/planning/proposal-concept/board.html#slide-2` 파일 없음.
+4. system_group 비어 있는 현행 문서 280건 → 시스템 정렬에서 빠짐.
+5. 카탈로그에 보관·히스토리 성격 경로 7건(`_backup_proposal-deck_설명형.html`, 캐스팅권대전 보관/히스토리 html 등) — status 확인 필요.
+6. work_status 빈칸 11건, value_status 빈칸 481건(숫자 문서인지 구분 안 됨).
+7. data/·data/master/ 에 `전_` 백업 파일 88개가 원본 옆에 섞임(백업이 `.csv` 확장자로 끝나는 형식과 `.csv.HHMMSS전_` 형식 두 가지 혼용).
+8. 코드 옆 백업: `main.1023전_커서.ts`, `main.ts.100845전_커서` 등 src 안에 남음.
+9. ID 접두 단발 약 50종(PC…MD) — 체계 정리 필요.
+10. alias 계획 2건(todo_cards→card, idol_ability_sim_v02→idol_ability) — 목록 중복 표시 여부 확인.
+11. 공용 메뉴 설명이 한 칸에 길게 들어 있음(development_plan_simulator summary).
+
+## 8. 추가 기능 후보 — 현재 개발되지 않음, 진행 중
+| 우선 | 후보 |
+|---|---|
+| 1 | 무결성 검사 버튼/스크립트(ID 중복·끊긴 링크·빈 칸 — 7장 1~6을 자동으로) |
+| 1 | 프로젝트 설정 파일(6장)로 새 게임 열기 |
+| 2 | AI 협업 보기(지시·질의응답·보고 타임라인, 대기 질문 수) |
+| 2 | 백업 목록 보기·백업 폴더 분리 |
+| 2 | 「목록에서 열어 확인」 체크리스트+캡처 자리 |
+| 3 | 발란스 대기 숫자 모아 보기 |
+| 3 | 문서 ID 발급기(접두 규칙대로 다음 번호) |
+| 3 | 새 게임 템플릿 데이터(빈 표 묶음) |
+
+## 9. 현중 결정 필요
+1. 문서 ID 체계: 지금 접두(숫자·P·S·W·F·PC…)를 유지할지, 범용 규칙으로 새로 정할지.
+2. 범용화 방식: 같은 저장소에서 프로젝트 폴더로 나눌지, 툴만 따로 떼어 낼지.
+
+## 10. 플로우차트 내비 (상단 버튼 줄 대체) — 1단계 개발됨, 나머지 진행 중
+현중 승인 시안(10/22 22:4x): 상단 버튼 줄을 없애고, 왼쪽 탭으로 여닫는 플로우차트로 이동한다. 박스+화살표, 위→아래 갈라짐. 분홍=지금 페이지, 노란 굵은 화살표=출발한 곳→지금까지 온 길, 박스 클릭=그 페이지로 이동, 위쪽에 지나온 경로 한 줄.
+
+### 10-1 실제 노드 트리 (노드 29)
+```mermaid
+flowchart TD
+  T[기획서 툴 7007]
+  T --> CARD[제안서 카드] & LIST[리스트] & DEV[핵심제안 개발] & SHELF[책갈피] & MAP[지도] & GAP[공백] & GAME[게임 iframe] & BAL[발란스 툴 iframe]
+  DEV --> SIM[시뮬레이터 도크 P94]
+  SIM --> AUD[오디션 P100]
+  AUD -->|onEnterMain · 영입 팀| MAIN[메인 dice P74 · 허브]
+  MAIN -->|routes| BLD[건물 성장 P106] & EVT[이벤트 P58] & BAD[나쁜 기운 디펜스 P125] & CLK[클릭 성장 P169] & ABL[능력 허브 P169] & RAP[관계 허브 P169]
+  MAIN -->|open 허용| GRW[아이돌 성장 P107] & STB[쟁탈전 칸 P98] & CB[카드 P168] & JRN[여정 P152]
+  STB -->|대기 도착| CBT[출연권 대전 P98]
+  GRW --> CBT
+  CBT -.->|returnModuleId| MAIN
+  EVT --> ROU[콘서트 룰렛 schedule]
+  SIM --> AUX[보조]
+  AUX --> BRD[보드 P87] & FIL[필러 P72] & RES[그림·설정 P82] & MON[몬스 P96]
+  ABL -.->|hubSource=main 읽기| MAIN
+  RAP -.->|hubSource=main 읽기| MAIN
+```
+개수 29: 루트 1 + face 8 + 도크·보조 묶음 2 + 시뮬 모듈 17 + 하위(콘서트 룰렛) 1. (실선=이동, 점선=복귀/읽기)
+
+### 10-2 끊긴·느슨한 연결 (점검 결과)
+1. 메뉴에 없는 모듈 3개: `growth_ability`·`growth_rapport`·`journey`는 menu.json 어느 묶음에도 없음 → 메인 경유로만 도달. 흐름도에선 메인 아래 노드로 그리되 「메뉴 미등록」 배지.
+2. `planning_development_plan_board` tool_href `/docs/planning/proposal-concept/board.html#slide-2` 파일 없음(7장 3).
+3. planning_surface `chance_state_sim` doc_path 없음(7장 2).
+4. 모듈 entry_path·source_path 17개는 모두 실제 파일 있음(10/22 22:4x 확인).
+5. returnModuleId는 dice·idol_growth·stage_battle 3개만 허용, 그 외는 idol_growth로 떨어짐(casting-flow.mjs) — 오디션·여정에서 온 경우 출발 경로가 끊길 수 있음.
+
+### 10-2a 끊긴 링크 처리 규칙
+- 노드 대상이 없으면(파일 없음·모듈 ID 없음) 박스를 회색 + 「연결 끊김」 배지로 그리고, 눌러도 이동하지 않고 툴팁에 원인(target_ref·확인 시각)만 보인다.
+- 메뉴 미등록 모듈은 이동은 되지만 「메뉴 미등록」 배지.
+- 출발 경로(trail)에 없어진 노드가 있으면 그 조각만 회색으로 남기고 경로는 끊지 않는다.
+- returnModuleId가 허용 목록 밖이라 idol_growth로 떨어진 경우, 노란 화살표 대신 주황 점선 「복귀 대체」로 그려 문제를 눈에 보이게 한다([S16](S16_오디션허브메뉴_데이터흐름.md) 3장 8번과 같은 원인).
+- 검사: 생성기 `--check`에서 flow_node의 target_ref가 실제 있는지 확인, 끊긴 수를 보고(숫자는 검사 결과로만 적는다).
+
+### 10-2b S16 데이터흐름과 대조
+- 복귀 허용 목록이 4곳에 흩어진 문제와 카드북↔상세 미연결은 [S16](S16_오디션허브메뉴_데이터흐름.md) 3장 8·11에 있습니다. 흐름도는 목록이 하나로 모인 뒤에만 복귀선을 실선으로 그리고, 미연결은 「미연결」 배지로 표시합니다.
+
+### 10-2c 범용화(다른 게임)
+- 노드·엣지 목록은 코드가 아니라 `flow_node`/`flow_edge` 표에서 읽는다. 표 추가·칸 추가는 schema_table/schema_column 행 + 생성기로만 한다(이번 문서는 제안만, 실제 변경 없음).
+- 툴 쪽 코드는 project_id·루트 라벨·face 목록을 프로젝트 설정에서 받는다. 케이팝 전용 이름(오디션·쟁탈전 등)은 표 값으로만 존재.
+- 새 게임: 빈 flow_node에 루트 1행 → 흐름도가 루트만 보여야 정상.
+
+### 10-3 표 설계 제안 (스키마 변경은 schema_table/schema_column + 생성기로만)
+`flow_node`: flow_node_id(PK), project_id, label_ko, kind(face|module|group|sub), target_type(face|simulator_module|url|doc), target_ref(예 simulator_module_dice), parent_node_id, sort_order, doc_no, badge(메뉴 미등록 등), status.
+`flow_edge`: flow_edge_id(PK), project_id, from_node_id, to_node_id, edge_kind(navigate|return|read|data), label_ko, source_ref(코드 file:line 또는 표 칸), sort_order.
+- 초기값은 simulator_module·menu.json·hub.json에서 생성(손으로 숫자 넣지 않음). 다른 게임은 project_id만 바꿔 같은 표 사용.
+
+### 10-4 지금 위치·출발 경로 기록 규칙
+- 지금 위치: URL의 face·simulation·testPage로 노드 1개 결정 → 분홍.
+- 출발 경로: 세션 저장소 `<project_id>:flow_trail`에 이동마다 node_id push(최대 10, 같은 노드 연속 중복 제거, 뒤로가기 시 pop). 노란 굵은 화살표 = trail 연속 쌍 중 flow_edge에 있는 것. 엣지가 없으면 회색 점선 「직접 이동」.
+- 시뮬 내부 이동(ctx.navigate)은 iframe→부모 postMessage `{flowVisit:moduleId}`로 알림.
+- 상단 한 줄: trail을 「오디션 › 메인 › 쟁탈전 칸」 형식, 각 조각 클릭 이동.
+
+### 10-5 탭 여닫기
+- 왼쪽 끝 세로 탭 「흐름도」. 열림 폭 약 300px, 닫힘 시 탭만. 상태는 `<project_id>:flow_open` 저장. 키보드 단축 제안 `[`.
+- 닫힌 상태에서도 위쪽 경로 한 줄은 보임.
+
+### 10-6 상단 버튼에서 넘어가는 방식
+1단계: 흐름도 추가, 상단 face 버튼 유지(병행). 2단계: 목록에서 열어 8 face·17 모듈 전부 흐름도로 도달 확인 후 상단 버튼 숨김. 3단계: 시뮬 도크 모듈 버튼도 흐름도로 대체. 주소 파라미터(main.ts syncUrl)는 그대로 유지해 기존 링크 보존.
+
+### 10-7 완료 기준
+- flow_node/flow_edge가 생성기 `--check` 통과, 코드에 노드 ID 하드코딩 0.
+- 7007 목록에서 열어 face 8·모듈 17 각각 박스 클릭으로 이동 확인(캡처).
+- 오디션→메인→쟁탈전→출연권 대전→복귀 경로가 노란 화살표로 표시.
+- 10-2의 끊긴 연결이 배지로 보임.
+- project_id 바꾼 빈 표로 열었을 때 오류 없이 빈 흐름도.
+
+### 10-8 현중 결정 필요
+- 메뉴 미등록 3모듈(능력·관계 허브·여정)을 menu.json primary에 넣을지, 메인 하위로만 둘지.
+
+<details><summary>작업 기록</summary>
+
+작성: 총괄(이스라트) · 2026-10-22 22:36(KST) · 현중 10/22 22:32~22:33 요청
+범위: 기획서 툴(7007 `/docs/planning/planning-docs-tool.html`) 자체를 범용 「게임 기획·개발 툴」로 정리. 코드·표 수정 없음(목록 등록 1줄만). 숫자는 지어내지 않음. 전체 제안.
+
+
+## 읽은 원본
+- `docs/planning/planning-docs-tool.html`(57줄), `src/tools/planningDocs/main.ts`(1464줄)·`catalog.ts`·`development.ts`·`systemList.ts`·`md.ts`·`styles.css`, `src/tools/shared/toolChrome.ts`
+- `data/planning_doc_catalog.csv`(509줄) · `planning_development.csv`·`_plan.csv`(41줄)·`_reference.csv` · `planning_csv_table.csv`(210줄) · `planning_csv_usage.csv` · `planning_surface.csv` · `planning_system_group.csv` · `planning_family.csv` · `planning_content.csv` · `planning_constitution.csv` · `planning_open.csv` · `planning_conflict.csv`
+- `data/master/schema_table.csv`(578줄)·`schema_column.csv`·`schema_config_key.csv`·`schema_change_log.csv`, `scripts/schema-generate.mjs`
+- `data/simulator/simulator_module.csv`(17모듈)·`menu.json`·`hub.json`, `src/simulator/host.mjs`
+- `vite.config.ts`, `package.json`(dev:planning)
+- `삼중AI_공용_20260929/작업방식_v2.md`, 산출/시스템기획 S02~S15, 보고 `20261007_0928_단서_기획서툴개발확인.md` 외 기획서툴 이름 문서
+
+읽은 원본: `src/tools/planningDocs/main.ts`(face 8개, 도크 48-118, hubSource 38), `data/simulator/simulator_module.csv`(17), `menu.json`(primary 10·auxiliary 4), `hub.json`(mainModule·routes 6), `src/simulator/audition.mjs:4`(onEnterMain→dice), `idol_growth.mjs:15-98`(returnModuleId·open 허용 목록), `shared/casting-flow.mjs:21`. 상단 버튼 줄 원본: `docs/planning/planning-docs-tool.html:28-36`(face 8 버튼), 클릭 처리 `main.ts:541`, 주소 `main.ts:266 syncUrl`, 도크 주소 `main.ts:62 simulatorHref`(hubSource=main). 데이터흐름 문서는 S11이 아니라 `S16_오디션허브메뉴_데이터흐름.md`로 나옴(22:4x) — 3장 13건과 엣지 대조함(10-2b).
+
+(본문 표의 줄 번호는 읽기 쉽게 하려고 뺐습니다. 줄 번호가 있는 원문은 로그 파일과 백업에 있습니다.)
+</details>

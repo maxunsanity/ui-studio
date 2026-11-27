@@ -1,0 +1,379 @@
+/* v06 responsive adapter: the existing web battlefield keeps its own styles. */
+body[data-sim-layout="bad_energy"] [data-sim-view-picker] {
+ display:flex; align-items:center; gap:4px; flex-wrap:wrap;
+ padding:6px 0; font-size:12px;
+}
+body[data-sim-layout="bad_energy"] [data-sim-view-picker] button {
+ min-width:var(--sim-touch-min,44px); min-height:var(--sim-touch-min,44px);
+ padding:6px 10px; touch-action:manipulation;
+}
+body[data-sim-layout="bad_energy"] [data-sim-view-picker] button[aria-pressed="true"] {
+ border-color:#365d51; background:#365d51; color:#fff; font-weight:700;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="web"] #be-responsive-actions {display:none;}
+
+/* Phone previews use the measured visible viewport and the shared profile values. */
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) {
+ --be-footer-height:154px;
+ overflow-x:hidden;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-header {
+ min-height:var(--sim-touch-min,44px); padding:0 max(8px,env(safe-area-inset-right)) 0 max(8px,env(safe-area-inset-left));
+ gap:6px; align-items:center;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-header h1 {
+ margin:0; font-size:14px; line-height:1.3;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-header small {display:none;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-header a {
+ display:flex; align-items:center; min-height:var(--sim-touch-min,44px);
+ max-width:32%; font-size:11px; line-height:1.25;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #module-tabs {
+ position:static; flex-wrap:nowrap; gap:4px; padding:0 8px;
+ overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:none;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #module-tabs button {
+ flex-shrink:0; min-height:var(--sim-touch-min,44px); padding:6px 9px; font-size:11px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-shell {
+ width:100%; max-width:none; margin:0;
+ padding:4px max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .module-heading {
+ display:flex; gap:4px; margin:0 0 4px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .module-heading h2 {
+ font-size:12px; line-height:16px; margin:0;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .module-heading p,
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #sim-note {display:none;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) [data-sim-view-picker] {
+ flex-wrap:nowrap; gap:4px; padding:0; margin-bottom:4px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) [data-sim-view-picker] button {
+ flex:1; padding:4px 6px; font-size:11px; white-space:nowrap;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-layout {
+ display:flex; flex-direction:column; gap:6px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-world {order:0; min-width:0; width:100%;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-controls {order:1; width:100%;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) :is([data-sim-arena],.be-arena-layout) {
+ position:relative; display:block!important; width:100%; min-width:0;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #viewport[data-sim-slot="stage"] {
+ width:100%!important; height:var(--sim-stage-height,60dvh)!important;
+ min-height:0!important; max-height:none; border-radius:12px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #viewport>canvas {
+ display:block; width:100%; height:100%;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-actions {
+ display:flex; align-items:center; gap:5px; margin:4px 0; flex-wrap:wrap;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-actions button {
+ flex:1; min-height:var(--sim-touch-min,44px); min-width:var(--sim-touch-min,44px);
+ padding:6px 9px; font-size:12px; touch-action:manipulation;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-settings {
+ border:1px solid #d6e2d6; border-radius:10px; background:#fffefa; padding:0 8px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-settings>summary {
+ display:flex; align-items:center; min-height:var(--sim-touch-min,44px);
+ cursor:pointer; font-size:12px; font-weight:700;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-settings :is(button,select,input) {
+ min-height:var(--sim-touch-min,44px); min-width:0;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-settings :is(button,summary) {touch-action:manipulation;}
+
+/* Battle HUD remains thin; profile positions are percentages of the stage. */
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-hud[data-sim-slot="hud"] {
+ left:var(--sim-slot-hud-x,2%); right:auto;
+ top:var(--sim-slot-hud-y,2%); width:var(--sim-slot-hud-width,96%);
+ max-width:none; transform:none; gap:3px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-target-name {
+ padding:3px 5px; font-size:10px; line-height:14px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-target-row .be-chip {
+ font-size:10px; padding:3px 5px; line-height:14px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-dura {
+ padding:3px 5px; gap:4px; font-size:10px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-banner {
+ top:60px; padding:6px; gap:2px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-banner strong {font-size:14px; line-height:18px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-banner small {font-size:10px; line-height:13px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-wallet {left:8px; right:auto; top:8px; bottom:auto; width:auto; height:auto; font-size:10px; padding:4px 6px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-gauge {right:6px; top:6px; width:var(--be-gauge-mobile-width-px,156px);}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-speech {bottom:56px; font-size:10px; padding:5px 7px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-target-marker {min-width:var(--sim-touch-min,44px); min-height:var(--sim-touch-min,44px);}
+
+/* Selection panels stay inside the live stage; their background leaves combat visible. */
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-modal:not(#be-cards) {
+ width:min(440px,calc(100% - 16px)); max-height:calc(100% - 16px);
+ padding:12px; overflow:auto; overscroll-behavior:contain; font-size:12px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-modal:not(#be-cards) h2 {font-size:16px; margin:3px 0 6px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-loss {font-size:11px; line-height:1.5; padding:8px 8px 8px 24px; margin:7px 0;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-choice-actions button,
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-result-ok,
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-skill-detail-close {
+ min-width:var(--sim-touch-min,44px); min-height:var(--sim-touch-min,44px); padding:6px 9px; font-size:12px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-skill-detail {
+ max-height:min(calc(100dvh - 24px),calc(var(--sim-preview-height,100dvh) - 24px)); max-width:calc(100% - 24px);
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-cards[data-sim-slot="cardPick"] {
+ left:calc(var(--sim-slot-cardPick-x,2%) + var(--sim-slot-cardPick-width,96%)/2);
+ right:auto; top:auto;
+ bottom:max(6px,min(2%,calc(100% - var(--sim-slot-cardPick-y,58%) - var(--sim-slot-cardPick-height,40%))));
+ width:var(--sim-slot-cardPick-width,96%); max-width:none;
+ padding:6px 6px 10px; transform:translateX(-50%);
+ border-radius:12px; background:rgba(236,247,255,.72); border-color:#c3e1ec88;
+ box-shadow:0 4px 16px #142d4333; animation:none;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-cards h2 {font-size:12px; line-height:15px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-cards-hint {font-size:10px; line-height:12px; margin:0;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-card-list {gap:4px; margin-top:4px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-card-list .be-card {
+ height:110px; min-width:0; min-height:var(--sim-touch-min,44px); padding:4px;
+ gap:2px; border-radius:9px; background:rgba(250,253,255,.82); touch-action:manipulation;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-card-list .be-card-images {min-height:30px; gap:2px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-card-list .be-card-owner-portrait {width:24px; height:24px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-card-list .be-card-images .be-card-icon {width:32px; height:30px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-card-list .be-card strong {font-size:11px; line-height:13px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-card-list .be-card em,
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-card-list .be-card .be-card-stat {font-size:10px; line-height:12px; max-height:none;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay.be-offer-active .be-speech {display:none;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-camera-toolbar {
+ left:6px; right:6px; bottom:6px; max-width:none;
+ display:flex; align-items:center; gap:4px; overflow-x:auto; overflow-y:hidden;
+ scrollbar-width:none; overscroll-behavior-x:contain;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-camera-regions {flex-wrap:nowrap; flex-shrink:0;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-camera-toolbar button {
+ flex-shrink:0; min-width:var(--sim-touch-min,44px); min-height:var(--sim-touch-min,44px);
+ padding:4px 6px; font-size:10px; touch-action:manipulation;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay.be-offer-active .be-camera-toolbar {bottom:calc(var(--be-footer-height) + 8px);}
+
+/* Both phone views show the five learned slots without scrolling them. */
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail[data-sim-slot="skillBar"] {
+ height:auto!important; min-height:0; padding:5px; gap:3px; border-radius:10px;
+ background:#eef8fff0; overflow:visible;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail :is(.be-rail-heading,.be-hud-mini,.be-rail-stats,.be-toasts) {display:none;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail .be-owned-group {margin:0; padding:0;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail #be-active-skills {
+ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px; margin:0;
+ max-width:none; width:100%; overflow:visible;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail #be-active-skills :is(.be-skill-count,.be-skill-empty) {display:none;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail :is(.be-skill-chip,.be-skill-slot-empty) {
+ display:flex; flex-direction:column; align-items:center; justify-content:start;
+ width:100%; height:64px; min-height:var(--sim-touch-min,44px); min-width:var(--sim-touch-min,44px);
+ padding:3px 2px 12px; gap:1px; border-radius:8px; overflow:hidden; touch-action:manipulation;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail .be-skill-slot-empty {justify-content:center; padding:3px; font-size:10px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail .be-skill-chip>.be-skill-icon {width:24px; height:24px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail .be-skill-chip>.be-skill-owner {left:auto; right:1px; top:1px; bottom:auto; width:11px; height:11px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail .be-skill-chip>span {padding:0; width:100%; text-align:center; flex:0 1 auto;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail .be-skill-chip strong {
+ display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2;
+ font-size:9px; line-height:10px; white-space:normal; padding:0; overflow:hidden;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail .be-skill-chip small {display:none;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-right-rail .be-skill-chip .be-skill-cooldown {
+ left:0; right:0; top:auto; bottom:3px; font-size:9px; line-height:10px;
+ text-align:center; color:#ddf8ff; background:none;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="portrait"] #be-right-rail[data-sim-slot="skillBar"] {
+ position:relative; left:var(--sim-slot-skillBar-x,0%); top:auto;
+ width:var(--sim-slot-skillBar-width,100%); margin-top:5px;
+ min-height:var(--sim-mobile-rail-height,118px);
+}
+body[data-sim-layout="bad_energy"][data-sim-view="portrait"] #be-right-rail .be-mons-row {
+ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px; margin:0 0 4px;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="portrait"] #be-right-rail .be-mons-tile {
+ min-height:var(--sim-touch-min,44px); min-width:0; padding:2px; border-radius:7px;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="portrait"] #be-right-rail .be-mons-tile img {width:21px; height:21px;}
+body[data-sim-layout="bad_energy"][data-sim-view="portrait"] #be-right-rail .be-mons-tile small {font-size:9px; line-height:11px;}
+
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] {--be-footer-height:148px;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] .sim-header {min-height:0;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] .sim-header h1 {font-size:12px;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] .module-heading {display:none;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-hud[data-sim-slot="hud"] {max-width:390px;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #be-right-rail[data-sim-slot="skillBar"] {
+ position:absolute; z-index:10;
+ left:auto; top:auto; right:max(6px,calc(100% - var(--sim-slot-skillBar-x,69%) - var(--sim-slot-skillBar-width,30%)));
+ bottom:max(6px,min(2%,calc(100% - var(--sim-slot-skillBar-y,76%) - var(--sim-slot-skillBar-height,22%))));
+ width:max(var(--sim-mobile-rail-width,240px),var(--sim-slot-skillBar-width,30%));
+ min-width:var(--sim-mobile-rail-width,240px); max-width:calc(100% - 12px); padding:4px;
+ min-height:0; background:#dff2ffe6; box-shadow:0 3px 12px #122b4044;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #be-right-rail .be-mons-row {display:none;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-cards[data-sim-slot="cardPick"] {
+ width:min(var(--sim-slot-cardPick-width,62%),calc(100% - var(--sim-mobile-rail-width,240px) - 20px));
+ left:min(calc(var(--sim-slot-cardPick-x,2%) + var(--sim-slot-cardPick-width,62%)/2),calc((100% - var(--sim-mobile-rail-width,240px) - 20px)/2 + 6px));
+ padding:5px 5px 9px;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-card-list .be-card {height:104px;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay .be-camera-toolbar {
+ right:calc(var(--sim-mobile-rail-width,240px) + 14px);
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay.be-offer-active .be-camera-toolbar {
+ top:6px; bottom:auto; left:calc(var(--sim-slot-hud-x,1%) + var(--sim-slot-hud-width,30%) + 6px); right:6px;
+}
+
+/* Presentation flags never change simulation time or combat state. */
+body[data-sim-layout="bad_energy"][data-be-cinematic="true"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) :is(#be-camera-toolbar,#be-right-rail,#be-cards,#be-responsive-actions,#be-responsive-settings,#be-target-marker) {
+ opacity:0; visibility:hidden; pointer-events:none!important;
+}
+body[data-sim-layout="bad_energy"][data-be-card-picking="true"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-cards {
+ background:rgba(226,243,255,.64); border-color:#b7dff099;
+}
+
+/* Preview framing is limited to this module and follows the shared dimensions. */
+body[data-sim-layout="bad_energy"][data-sim-preview="1"] {
+ width:min(100%,var(--sim-preview-width,100%));
+ min-height:0; height:min(100dvh,var(--sim-preview-height,100dvh));
+ margin-inline:auto; position:relative;
+}
+body[data-sim-layout="bad_energy"][data-sim-preview="0"] {width:100%;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-header {
+ flex-wrap:wrap; padding-top:env(safe-area-inset-top);
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-header [data-sim-view-picker] {
+ flex-basis:100%; margin:0; min-width:0;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-footer {
+ position:relative; width:100%; margin-top:4px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-settings {position:static;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-settings[open] .sim-controls {
+ position:absolute; z-index:30; bottom:var(--sim-touch-min,44px); left:0; right:0;
+ max-height:min(60dvh,var(--sim-stage-height,400px)); margin:0;
+ padding:8px; overflow-y:auto; overscroll-behavior:contain;
+ background:#f4f9f4f5; border:1px solid #bdd5c4; border-radius:12px;
+ box-shadow:0 -6px 24px #153d3444;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #be-right-rail #be-active-skills {gap:2px;}
+
+/* One compact chrome row keeps the mobile battlefield close to the viewport top. */
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-header {
+ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:6px;
+ min-height:52px; padding-block:4px; padding-top:max(4px,env(safe-area-inset-top));
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-header>div:not([data-sim-view-picker]) {min-width:0;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-header h1 {font-size:12px; line-height:15px;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-header>a {display:none;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) .sim-header [data-sim-view-picker] {
+ width:auto; margin:0; flex-basis:auto;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay:has(#be-hud:not([hidden])) #be-wallet {
+ top:56px; bottom:auto; width:auto; height:auto;
+}
+
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-settings summary {
+ display:flex; align-items:center; min-height:var(--sim-touch-min,44px);
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-settings button {
+ min-width:var(--sim-touch-min,44px);
+}
+
+/* Landscape shares one 44px footer row so the battlefield can keep more height. */
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #be-responsive-footer {
+ display:grid; grid-template-columns:minmax(0,1fr) minmax(140px,24%);
+ align-items:start; gap:6px;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #be-responsive-actions {
+ margin:0; flex-wrap:nowrap;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #be-responsive-settings {min-width:0;}
+body[data-sim-layout="bad_energy"][data-be-card-picking="true"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-target-marker {
+ visibility:hidden; pointer-events:none;
+}
+
+/* Choice/result actions must receive input above the camera strip and target marker. */
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-modal:not(#be-cards) {
+ z-index:30;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay:has(#be-choice:not([hidden]),#be-result:not([hidden])) #be-target-marker {
+ visibility:hidden; pointer-events:none;
+}
+
+/* Finisher uses the footer in both phone views; board controls share the same row. */
+body[data-sim-layout="bad_energy"] #be-shared-special[hidden] {display:none!important;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-actions #be-shared-special {
+ position:static; inset:auto; flex:1 1 0; width:auto; max-width:none; min-width:0; margin:0;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-actions #be-shared-special button {
+ width:100%; min-width:var(--sim-touch-min,44px); min-height:var(--sim-touch-min,44px);
+ height:var(--be-finisher-height-px,48px); padding:4px 6px; font-size:11px;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-footer.be-battle-footer #be-responsive-actions {
+ flex-wrap:nowrap; margin:0; align-items:stretch;
+}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-footer.be-battle-footer #be-responsive-actions>button:not(#be-pause) {display:none;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #be-responsive-footer.be-battle-footer #be-pause {
+ flex:0 0 auto; min-width:var(--sim-touch-min,44px); padding:4px 7px; font-size:11px;
+}
+body[data-sim-layout="bad_energy"][data-be-cinematic="true"] #be-shared-special {visibility:hidden;pointer-events:none;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay:has(#be-hud:not([hidden])) #be-wallet {display:none;}
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay #be-gauge {
+ top:auto; bottom:8px; right:8px;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="portrait"] #bad_energy-overlay .be-camera-toolbar,
+body[data-sim-layout="bad_energy"][data-sim-view="portrait"] #bad_energy-overlay.be-offer-active .be-camera-toolbar {
+ left:6px; right:6px; top:var(--be-finisher-camera-top-px,60px); bottom:auto; max-width:none;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-hud[data-sim-slot="hud"] {
+ width:var(--sim-slot-hud-width,30%); max-width:390px;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay .be-camera-toolbar,
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay.be-offer-active .be-camera-toolbar {
+ left:calc(var(--sim-slot-hud-x,1%) + var(--sim-slot-hud-width,30%) + 8px); right:6px;
+ top:6px; bottom:auto; max-width:none;
+}
+/* One heading row and compact stat rows keep the whole landscape picker near 110px. */
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-cards[data-sim-slot="cardPick"] {
+ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:2px; padding:4px 4px 8px;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-cards h2,
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-cards-hint {
+ font-size:9px; line-height:11px; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-card-list {grid-column:1/-1; margin:0; gap:3px;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-card-list .be-card {
+ height:80px; padding:3px; gap:1px; justify-content:center;
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-card-list .be-card-images {min-height:24px; height:24px; gap:2px;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-card-list .be-card-owner-portrait {width:20px;height:20px;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-card-list .be-card-images .be-card-icon {width:25px;height:24px;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-card-list .be-card em {font-size:9px;line-height:10px;max-height:10px;overflow:hidden;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-card-list .be-card strong {font-size:10px;line-height:11px;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay #be-card-list .be-card .be-card-stat {font-size:9px;line-height:10px;}
+
+/* Both short views keep camera buttons on one 44px row; landscape shares it with HUD. */
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-camera-toolbar button {height:var(--be-overlay-camera-button-height-px,44px);min-height:var(--be-overlay-camera-button-height-px,44px);line-height:14px;white-space:nowrap;}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay .be-camera-toolbar,
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay.be-offer-active .be-camera-toolbar {top:6px;bottom:auto;left:calc(var(--sim-slot-hud-x,1%) + var(--sim-slot-hud-width,30%) + 8px);right:6px;}
+
+/* Speech stays left of the landscape thumb rail without adding a stage row. */
+body[data-sim-layout="bad_energy"]:is([data-sim-view="portrait"],[data-sim-view="landscape"]) #bad_energy-overlay .be-speech {
+ height:var(--be-overlay-speech-height-px,28px); max-height:var(--be-overlay-speech-height-px,28px);
+ padding:var(--be-overlay-speech-padding-y-px,4px) var(--be-overlay-speech-padding-x-px,8px);
+ font-size:var(--be-overlay-speech-mobile-font-px,10px);
+}
+body[data-sim-layout="bad_energy"][data-sim-view="landscape"] #bad_energy-overlay .be-speech {
+ width:min(var(--be-overlay-speech-max-width-px,520px),calc(100% - max(var(--sim-mobile-rail-width,240px),var(--sim-slot-skillBar-width,30%)) - var(--be-overlay-speech-edge-gap-px,8px)*3));
+}

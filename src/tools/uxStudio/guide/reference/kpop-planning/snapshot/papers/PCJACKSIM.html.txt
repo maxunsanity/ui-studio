@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>잭팟 시뮬 | K-POP MONSTERS</title>
+<style>
+:root{--bg:#07070d;--ink:#f6f4ff;--dim:#a29ec0;--faint:#6a6688;--pur:#a855f7;--pnk:#f472b6;--blu:#60a5fa;--gold:#fbbf24;--cy:#67e8f9;--line:rgba(255,255,255,.12);--panel:rgba(255,255,255,.055)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;word-break:keep-all}
+body{min-height:100vh;display:flex;gap:24px;padding:18px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+.wrap{width:min(900px,100%)}
+.cap{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:10px;font-size:15px;font-weight:800;min-height:46px}
+.cap .no{background:linear-gradient(90deg,var(--pur),var(--pnk));border-radius:99px;padding:2px 10px;font-size:12px;white-space:nowrap}
+.stage{position:relative;width:100%;aspect-ratio:1200/701;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#5b6b86}
+.stage img{position:absolute;inset:0;width:100%;height:100%;transition:filter .8s}
+.stage.dark img{filter:brightness(.55) saturate(.9)}
+.lay{position:absolute;inset:0}
+.bld{position:absolute;transform:translate(-50%,-100%);font-size:11px;font-weight:900;background:rgba(11,11,20,.85);border:1px solid var(--line);border-radius:99px;padding:2px 8px;white-space:nowrap;color:var(--dim);z-index:3}
+.bld b{color:var(--pnk);margin-left:4px}
+.bld.hall{background:linear-gradient(90deg,var(--pur),var(--pnk));color:#fff;border-color:transparent;font-size:12px}
+.bld.hall b{color:#fff}
+.u{position:absolute;border-radius:50%;transform:translate(-50%,-50%);z-index:2;transition:left 1.6s cubic-bezier(.55,0,.35,1),top 1.6s cubic-bezier(.55,0,.35,1),opacity .4s}
+.u1{width:5px;height:5px;background:#fff;box-shadow:0 0 3px #fff}
+.u10{width:7px;height:7px;background:var(--cy);box-shadow:0 0 5px var(--cy)}
+.u100{width:10px;height:10px;background:var(--pnk);box-shadow:0 0 7px var(--pnk)}
+.u1000{width:14px;height:14px;background:var(--pur);box-shadow:0 0 10px var(--pur);border:2px solid #e9d5ff}
+.u10000{width:20px;height:20px;background:var(--gold);box-shadow:0 0 16px var(--gold);border:2px solid #fff7d6}
+.van{position:absolute;width:26px;height:15px;transform:translate(-50%,-50%);border-radius:4px;background:#15111f;border:1px solid var(--pnk);box-shadow:0 0 8px var(--pnk);z-index:4;transition:left 1.2s ease-in-out,top 1.2s ease-in-out;font-size:10px;color:var(--pnk);display:flex;align-items:center;justify-content:center}
+.ring{position:absolute;transform:translate(-50%,-50%);border-radius:50%;border:3px solid var(--gold);z-index:1;opacity:0;pointer-events:none}
+.ring.go{animation:ring 1.4s ease-out infinite}
+@keyframes ring{0%{width:20px;height:20px;opacity:1}100%{width:260px;height:260px;opacity:0}}
+.stamp{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%) rotate(-7deg);font-size:64px;font-weight:900;color:var(--gold);border:6px solid var(--gold);border-radius:18px;padding:4px 26px;background:rgba(11,11,20,.6);z-index:6;opacity:0;pointer-events:none}
+.stamp.show{animation:st 2.2s ease-out forwards}
+.stamp.normal{color:var(--blu);border-color:var(--blu);font-size:40px}
+@keyframes st{0%{opacity:0;transform:translate(-50%,-50%) rotate(-7deg) scale(2)}15%{opacity:1;transform:translate(-50%,-50%) rotate(-7deg) scale(1)}80%{opacity:1}100%{opacity:0}}
+.pop{position:absolute;transform:translate(-50%,-50%);font-weight:900;font-size:22px;color:var(--gold);text-shadow:0 2px 6px #000;z-index:6;animation:up 2.4s ease-out forwards;white-space:nowrap}
+@keyframes up{0%{opacity:0;transform:translate(-50%,-10%)}15%{opacity:1;transform:translate(-50%,-50%)}100%{opacity:0;transform:translate(-50%,-220%)}}
+.count{position:absolute;z-index:5;transform:translate(-50%,0);background:rgba(11,11,20,.88);border:1px solid var(--gold);border-radius:10px;padding:4px 10px;font-size:13px;font-weight:900;color:var(--gold);white-space:nowrap;opacity:0;transition:opacity .4s}
+.count.on{opacity:1}
+.legend{position:absolute;left:10px;bottom:10px;z-index:5;background:rgba(11,11,20,.85);border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:11px;font-weight:800;display:flex;gap:10px;align-items:center;color:var(--dim)}
+.legend i{display:inline-block;border-radius:50%;vertical-align:middle;margin-right:3px}
+.ctl{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.ctl button{font-family:inherit;font-weight:900;font-size:15px;border-radius:12px;padding:12px 16px;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.ctl button.mult{border-color:rgba(96,165,250,.6);color:var(--blu);min-width:120px}
+.ctl button.main{flex:1;background:linear-gradient(95deg,var(--pur),var(--pnk));border:0}
+.ctl button.jp{flex:1;background:linear-gradient(95deg,#f59e0b,var(--gold));color:#1a1203;border:0}
+.ctl button:disabled{opacity:.4;cursor:default}
+.res{display:flex;gap:10px;margin-top:10px;font-size:13px;font-weight:800;color:var(--dim);flex-wrap:wrap}
+.res span{background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:5px 12px}
+.res b{color:var(--ink)}
+.side{max-width:330px;color:var(--faint);font-size:13px;line-height:1.7}
+.side .ban{display:inline-block;border:1px solid rgba(251,191,36,.5);color:var(--gold);border-radius:6px;padding:3px 8px;font-weight:900;font-size:12px;margin-bottom:10px}
+.side h1{font-size:17px;color:var(--ink);margin:0 0 6px}
+.side h2{font-size:13px;color:var(--dim);margin:14px 0 4px}
+.side ul{margin:0;padding-left:16px}.side b{color:var(--dim)}
+</style></head>
+<body><section class="part current-note" id="part-board1021"><h2>10/21 보드 개편 · 「제안(검수 대기)」</h2><h3>「제안(검수 대기)」 (현중 10:09 배치 · 10:25 확정 · 09:41 안은 히스토리)</h3>
+<p>&gt; 현중 원문 10:09: 「모노폴리고는 30번이고..10번과 20번이 모서리잖아.. 우리 기분이면 31번이 감옥이고 11번과 21번은 숙소가 되어야지..1번은 사옥이고 / 감옥으로 가기 없어 / 그냥 감옥 도착이야」</p>
+<table><tr><th>칸</th><th>전</th><th>후</th><th>왜 (현중 시각)</th><th>막는 문제</th></tr><tr><td>1</td><td>출발</td><td><b>사옥</b>(출발). 지나면 돈 · 사옥 건설 기회 유지</td><td>모노폴리GO 0번 출발 자리 (10:09 · 09:45)</td><td>—</td></tr><tr><td>11</td><td>스탠바이(감옥 규칙)</td><td>숙소 · <b>기숙사</b> · 짓기 없음 · 회복 · 팀 단합</td><td>모노폴리GO 10번 모서리 자리 (10:09 · 10:25 기숙사 확정)</td><td>모서리 배치가 모노폴리GO와 어긋나는 것</td></tr><tr><td>21</td><td>코너 온에어(효과 없음)</td><td>숙소 · <b>본가</b> · 짓기 없음 · 회복 · 태도 회복</td><td>모노폴리GO 20번 모서리 자리 (10:09 · 10:25 본가 확정)</td><td>효과 없는 코너</td></tr><tr><td>31</td><td>코너 병가(11로 보냄)</td><td><b>감옥 도착</b> 칸 = 도착하면 바로 갇힘, 더블 굴리기 3번으로 탈출(못 나오면 벌금 내고 나옴). 옛 11번 스탠바이 규칙(탈출 돈 · 주사위 · 벌금) 옮김. 「감옥으로 가기」 칸 없음</td><td>모노폴리GO 30번 자리 (10:09)</td><td>감옥 가는 길이 없던 문제 · 벌칙 칸이 둘로 갈리는 것</td></tr><tr><td>2·37·39</td><td>숙소 건물(휴식·태도·외국어)</td><td><b>아카데미</b> 건물(외국어·교양·태도·성실성 공부, 30단계)</td><td>늘어난 공부 스탯을 키울 건물 (09:41)</td><td>공부 스탯이 '본가' 칸에 억지로 붙던 것</td></tr><tr><td>건물 없는 칸</td><td>섞여 있음</td><td>짓기 없는 일반 칸. 건물 칸은 <b>24칸</b></td><td>(09:41)</td><td>코너·이벤트 칸에 건설 표가 생기는 것</td></tr><tr><td>8·23·38</td><td>스케줄</td><td><b>찬스</b></td><td>같은 역할이 두 이름 (09:41)</td><td>카드 표 중복</td></tr><tr><td>수익 짝</td><td>비어 있음</td><td>음반 = 보컬 녹음실 + 프로듀싱 · 공연 = 랩 · 굿즈 = 팬샵 · 영상·광고 = 예능 방송국 + 뷰티 · 팬클럽 = 사옥 · 성장만 = 댄스 + 아카데미</td><td>(09:42)</td><td>어느 칸에서 돈이 나오는지 비던 것</td></tr><tr><td>칸 수익</td><td>—</td><td>그 칸 건물 단계를 따라 오름 (모노폴리GO 보드 단계 역할)</td><td>(09:44)</td><td>수익이 건물과 따로 노는 것</td></tr><tr><td>엔터 파워</td><td>통합 레벨</td><td>건물 단계 1당 +1, 최대 270. 기획사 능력 레벨 합과 같은 값(한 번만 셈). 주사위 배수 상한을 풂</td><td>(09:45)</td><td>두 번 세기 · 팬 수 잠금 고리</td></tr><tr><td>규칙</td><td>—</td><td>보드·수익 규칙은 모노폴리GO를 따름. 모노폴리GO 0·10·20·30번 = 우리 1·11·21·31번 (1번부터 세서 하나씩 밀림)</td><td>(09:45 · 10:09)</td><td>기준이 갈리는 것</td></tr></table>
+<ul><li>모노폴리GO 대응: 팬 반응 = 공동기금 · 정산 = 세금 · 쟁탈 = 철도 · 31 = 감옥(도착).</li><li>숫자는 모두 발란스 대기. 결정(현중 10:25): 11 기숙사 · 21 본가 · 31 도착하면 바로 갇히고 더블 3번으로 탈출(현중 10:09 「그냥 감옥 도착」 · 영상 기준). 정산은 받는 칸(10:13).</li></ul></section><h2 class="part" id="part-history-board1021" style="margin-top:28px">히스토리 · 10/21 보드 개편 이전 본문 (그대로 보존)</h2><div class="old-plan"><h4>옛 안 · 10/21 09:41 보드 개편 (현중 10:09에 11·21·31 배치가 바뀜)</h4>
+<table><tr><th>칸</th><th>전</th><th>후</th><th>왜 (현중 시각)</th><th>막는 문제</th></tr><tr><td>21</td><td>코너 온에어(효과 없음)</td><td>숙소 · <b>기숙사</b> (짓기 없음, 회복 · 팀 단합)</td><td>쉬는 곳을 코너로 모음 (09:41)</td><td>효과 없는 코너가 남는 것</td></tr><tr><td>31</td><td>코너 병가(11로 보냄)</td><td>숙소 · <b>본가</b> (짓기 없음, 회복 · 태도 회복)</td><td>같은 이유 (09:41)</td><td>벌칙 코너와 휴식이 섞이는 것</td></tr><tr><td>2·37·39</td><td>숙소 건물(휴식·태도·외국어)</td><td><b>아카데미</b> 건물(외국어·교양·태도·성실성 공부, 30단계)</td><td>늘어난 공부 스탯을 키울 건물 (09:41)</td><td>공부 스탯이 '본가' 칸에 억지로 붙던 것</td></tr><tr><td>건물 없는 칸</td><td>섞여 있음</td><td>짓기 없는 일반 칸. 건물 칸은 <b>24칸</b></td><td>(09:41)</td><td>코너·이벤트 칸에 건설 표가 생기는 것</td></tr><tr><td>8·23·38</td><td>스케줄</td><td><b>찬스</b></td><td>같은 역할이 두 이름 (09:41)</td><td>카드 표 중복</td></tr><tr><td>수익 짝</td><td>비어 있음</td><td>음반 = 보컬 녹음실 + 프로듀싱 · 공연 = 랩 · 굿즈 = 팬샵 · 영상·광고 = 예능 방송국 + 뷰티 · 팬클럽 = 사옥 · 성장만 = 댄스 + 아카데미</td><td>(09:42)</td><td>어느 칸에서 돈이 나오는지 비던 것</td></tr><tr><td>칸 수익</td><td>—</td><td>그 칸 건물 단계를 따라 오름 (모노폴리GO 보드 단계 역할)</td><td>(09:44)</td><td>수익이 건물과 따로 노는 것</td></tr><tr><td>엔터 파워</td><td>통합 레벨</td><td>건물 단계 1당 +1, 최대 270. 기획사 능력 레벨 합과 같은 값(한 번만 셈). 주사위 배수 상한을 풂</td><td>(09:45)</td><td>두 번 세기 · 팬 수 잠금 고리</td></tr><tr><td>규칙</td><td>—</td><td>보드·수익 규칙은 모노폴리GO를 따름. 출발 칸 지나면 돈 · 사옥 건설 기회 유지</td><td>(09:45)</td><td>기준이 갈리는 것</td></tr></table>
+<ul><li>모노폴리GO 대응: 팬 반응 = 공동기금 · 정산 = 세금 · 캐스팅 = 철도 · 11 = 감옥.</li><li>숫자는 모두 발란스 대기. 남은 질문: 31이 본가가 되면 11로 가는 길(찬스 카드로만?) · 세금은 내는데 정산은 받음.</li></ul></div>
+<div class="wrap">
+ <div class="cap"><span class="no" id="capNo">준비</span><span id="capTx">배수를 고르고 랩 스튜디오로 굴려 봅니다. 도시 건물마다 팬이 모여 있습니다.</span></div>
+ <div class="stage" id="stage">
+  <img src="img/jackpot_city.jpg" alt="블록 도시">
+  <div class="lay" id="lay"><div class="ring" id="ring"></div><div class="count" id="count"></div></div>
+  <div class="stamp" id="stamp">잭팟!</div>
+  <div class="legend"><span><i style="width:5px;height:5px;background:#fff"></i>1명</span><span><i style="width:7px;height:7px;background:#67e8f9"></i>10명</span><span><i style="width:10px;height:10px;background:#f472b6"></i>100명</span><span><i style="width:13px;height:13px;background:#a855f7"></i>1000명</span><span><i style="width:17px;height:17px;background:#fbbf24"></i>1만 명</span></div>
+ </div>
+ <div class="ctl"><button class="mult" id="mult">배수 ×1</button><button class="main" id="goN">랩 스튜디오 도착 · 보통 공연</button><button class="jp" id="goJ">랩 스튜디오 도착 · 잭팟 터짐</button><button id="reset">처음으로</button></div>
+ <div class="res"><span>주사위 <b id="dice">50</b></span><span>코인 <b id="coin">0</b></span><span>도시 전체 팬 <b id="allFans">0</b></span><span id="last">지난 공연: 없음</span></div>
+</div>
+<div class="side">
+ <div class="ban">상태: 제안(검수 대기). 승인 아님</div>
+ <h1>잭팟 시뮬 (랩 스튜디오 예시)<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h1>
+ <div>도시 그림은 <b>08_인게임UI_타이쿤시안</b>을 그대로 썼습니다.</div>
+ <h2>보는 법<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+ <ul>
+  <li><b>보통 공연</b>: 랩 스튜디오에 모인 팬만큼 수익을 받습니다.</li>
+  <li><b>잭팟</b>: 랩 스튜디오·방송출연 칸에 도착했을 때 드물게 나오는 대박입니다(10/01 16:35·16:37). 팬이 많을수록 큰 수익을 받습니다(10/04). 팬이 랩 스튜디오로 모이는 것은 연출이고, 잭팟으로 팬이 늘지는 않습니다.</li>
+  <li>공연이 끝나면 팬들은 자기 건물로 돌아갑니다.</li>
+ </ul>
+ <h2>정한 것 (현중)<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+ <ul>
+  <li>주사위로 배수를 겁니다. 도착한 칸의 팬만큼 수익을 받고, 랩 스튜디오의 수익이 가장 큽니다(10/01 11:19).</li>
+  <li>팬은 건물마다 모여 있습니다(9/30 13:15).</li>
+  <li>잭팟은 랩 스튜디오·방송출연 칸에서만 낮은 확률로 나오는 대박이고, 팬덤이 클수록 커집니다(10/01 16:35·16:37). 이 시뮬은 랩 스튜디오만 그렸습니다.</li>
+ </ul>
+ <h2>예시 값 (정해지면 교체)<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+ <ul>
+  <li>건물 이름과 위치, 팬 수, 보통 공연의 계산은 화면용 예시입니다. 잭팟은 팬이 모이는 연출과, 모인 팬 수에 비례한 수익(예시 계산)을 시연합니다. 실제 금액과 확률은 결정 대기입니다(058 #18).</li>
+  <li>잭팟 확률, 랩 스튜디오와 방송출연의 차이, 팬덤에 따라 얼마나 커지는지는 결정 대기입니다. 여기서는 버튼으로 골라서 봅니다.</li>
+  <li>점은 건물당 12개까지만 보여 줍니다(9/30 R58 가안).</li>
+ </ul>
+</div>
+<script>
+const HALL={name:'랩 스튜디오',at:[77,31],plaza:[79,45],fans:3200};
+const B=[
+ {name:'예능 방송국',at:[23,21],fans:12400},{name:'사옥',at:[40,12],fans:870},{name:'학교',at:[50,22],fans:1120},
+ {name:'레코드샵',at:[69,24],fans:760},{name:'팬샵',at:[12,54],fans:5600},{name:'카페',at:[21,80],fans:340},
+ {name:'연습실',at:[52,72],fans:1450},{name:'녹음실',at:[58,85],fans:2300},{name:'숙소',at:[74,62],fans:230},{name:'안무실',at:[84,68],fans:980}];
+const lay=document.getElementById('lay'),stage=document.getElementById('stage');
+const fmt=n=>n.toLocaleString('ko-KR');
+let mult=1,dice=50,coin=0,busy=false,units=[];
+function el(c,x,y,t){const d=document.createElement('div');d.className=c;d.style.left=x+'%';d.style.top=y+'%';if(t!=null)d.innerHTML=t;lay.appendChild(d);return d}
+function split(n){const out=[];for(const u of [10000,1000,100,10,1]){let k=Math.floor(n/u);n-=k*u;while(k-->0)out.push(u)}return out.slice(0,12)}
+function home(b,i,k){const a=i/k*Math.PI*2+0.6,r=2.2+(i%3)*0.9;return[b.at[0]+Math.cos(a)*r,b.at[1]+3+Math.sin(a)*r*1.5]}
+function build(){
+ lay.querySelectorAll('.u,.bld,.van').forEach(e=>e.remove());units=[];
+ [HALL,...B].forEach(b=>{
+  el('bld'+(b===HALL?' hall':''),b.at[0],b.at[1],b.name+'<b>'+fmt(b.fans)+'</b>');
+  const s=split(b.fans);s.forEach((u,i)=>{const p=home(b,i,s.length);const d=el('u u'+u,p[0],p[1]);units.push({d,b,u,home:p})});
+ });
+ window.van=el('van',40,16,'♥');
+ document.getElementById('allFans').textContent=fmt([HALL,...B].reduce((s,b)=>s+b.fans,0));
+}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+function cap(no,tx){document.getElementById('capNo').textContent=no;document.getElementById('capTx').textContent=tx}
+function stamp(t,normal){const s=document.getElementById('stamp');s.textContent=t;s.classList.toggle('normal',!!normal);s.classList.remove('show');void s.offsetWidth;s.classList.add('show')}
+function pop(x,y,t){const p=el('pop',x,y,t);setTimeout(()=>p.remove(),2500)}
+function lock(v){busy=v;['goN','goJ','mult','reset'].forEach(id=>document.getElementById(id).disabled=v)}
+document.getElementById('mult').onclick=()=>{mult=mult===1?2:mult===2?5:mult===5?10:1;document.getElementById('mult').textContent='배수 ×'+mult};
+async function arrive(){
+ dice-=mult;document.getElementById('dice').textContent=dice;
+ cap('1 · 굴림','주사위 '+mult+'개를 써서 배수 ×'+mult+'를 걸었습니다. 밴이 랩 스튜디오로 갑니다.');
+ van.style.left=HALL.plaza[0]+'%';van.style.top=(HALL.plaza[1]-4)+'%';await wait(1300);
+}
+document.getElementById('goN').onclick=async()=>{
+ if(busy)return;lock(true);await arrive();
+ cap('2 · 보통 공연','랩 스튜디오에 모인 팬 '+fmt(HALL.fans)+'명만큼 수익을 받습니다.');
+ stamp('보통 공연',true);
+ units.filter(o=>o.b===HALL).forEach(o=>{o.d.style.transform='translate(-50%,-50%) scale(1.6)';setTimeout(()=>o.d.style.transform='',900)});
+ await wait(700);const g=HALL.fans*mult;coin+=g;pop(HALL.plaza[0],HALL.plaza[1]-8,'+'+fmt(g)+' 코인');
+ document.getElementById('coin').textContent=fmt(coin);
+ document.getElementById('last').textContent='지난 공연: 보통 · 팬 '+fmt(HALL.fans)+' × '+mult;
+ await wait(1600);cap('끝','보통 공연은 랩 스튜디오 팬만큼 수익을 받습니다. 다음은 잭팟도 눌러 봅니다.');lock(false);
+};
+document.getElementById('goJ').onclick=async()=>{
+ if(busy)return;lock(true);await arrive();
+ cap('2 · 잭팟!','낮은 확률의 대박, 잭팟이 터졌습니다. 팬들이 랩 스튜디오로 몰려옵니다.');
+ stage.classList.add('dark');stamp('잭팟!');
+ const ring=document.getElementById('ring');ring.style.left=HALL.plaza[0]+'%';ring.style.top=HALL.plaza[1]+'%';ring.classList.add('go');
+ const cnt=document.getElementById('count');cnt.style.left=HALL.plaza[0]+'%';cnt.style.top=(HALL.plaza[1]+9)+'%';cnt.classList.add('on');
+ let gathered=HALL.fans;cnt.textContent='모인 팬 '+fmt(gathered)+'명';
+ const order=[...B].sort((a,b)=>Math.hypot(a.at[0]-HALL.at[0],a.at[1]-HALL.at[1])-Math.hypot(b.at[0]-HALL.at[0],b.at[1]-HALL.at[1]));
+ let slot=0;
+ for(const b of order){
+  units.filter(o=>o.b===b).forEach((o,i)=>{const a=slot*0.55,r=1.5+Math.sqrt(slot)*0.75;slot++;
+   setTimeout(()=>{o.d.style.left=(HALL.plaza[0]+Math.cos(a)*r)+'%';o.d.style.top=(HALL.plaza[1]+Math.sin(a)*r*1.4)+'%'},i*60)});
+  await wait(380);gathered+=b.fans;cnt.textContent='모인 팬 '+fmt(gathered)+'명';
+ }
+ await wait(1500);
+ cap('3 · 잭팟 수익','모인 팬이 많을수록 잭팟 수익이 커집니다. 팬 수는 늘지 않고, 계산은 시연 값입니다.');
+ const jg=gathered*mult;coin+=jg;document.getElementById('coin').textContent=fmt(coin);
+ pop(HALL.plaza[0],HALL.plaza[1]-10,'+'+fmt(jg)+' 코인 · 잭팟');
+ document.getElementById('last').textContent='지난 공연: 잭팟 · 팬 '+fmt(gathered)+' × '+mult+' (예시)';
+ await wait(2600);
+ cap('4 · 귀가','공연이 끝나면 팬들은 자기 건물로 돌아갑니다.');
+ ring.classList.remove('go');cnt.classList.remove('on');stage.classList.remove('dark');
+ units.forEach(o=>{o.d.style.left=o.home[0]+'%';o.d.style.top=o.home[1]+'%'});
+ await wait(1800);cap('끝','보통 공연은 도착한 칸의 수익입니다. 잭팟은 팬이 많을수록 큰 수익이고, 팬 수는 늘지 않습니다. 배수·계산은 시연 값입니다.');lock(false);
+};
+document.getElementById('reset').onclick=()=>{if(busy)return;dice=50;coin=0;mult=1;document.getElementById('mult').textContent='배수 ×1';document.getElementById('dice').textContent=dice;document.getElementById('coin').textContent=0;document.getElementById('last').textContent='지난 공연: 없음';build();cap('준비','배수를 고르고 랩 스튜디오로 굴려 봅니다. 도시 건물마다 팬이 모여 있습니다.')};
+build();
+const q=new URLSearchParams(location.search).get("auto");if(q==="j")setTimeout(()=>document.getElementById("goJ").click(),300);if(q==="n")setTimeout(()=>document.getElementById("goN").click(),300);
+</script>
+</body></html>

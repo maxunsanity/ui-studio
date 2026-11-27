@@ -1,0 +1,499 @@
+# S19 · 캐릭터 조합 생성 구조 v01
+
+**이 문서는** 월드컵 성향·성격·배경·서사·능력·재능·스킬·그림을 한 후보로 조합하는 현재 생성 경로와 표 구조안을 설명합니다.
+**보는 법** 현재 구현 흐름 → 생성 원칙·단계 → 표 구조·등록 초안 → 실제 차이와 저장 연결 순서로 읽습니다. 함께 보기: [오디션](../../../game-simulator.html?module=simulator_module_audition) · [성장·관계](../../../game-simulator.html?module=simulator_module_growth_rapport).
+**지금 상태** 개발됨(공통 생성기와 새 오디션 판의 생성 후보 경로). 기록 표는 일부만 등록됐고 구조안의 실제 저장·전체 화면·분포 검수는 아래 확인 범위에서 구분합니다.
+
+## 목차
+
+- [현재 구현 흐름](#현재-구현-흐름)
+  - [실행 값과 발란스 경계](#실행-값과-발란스-경계)
+  - [표 관계 구조안](#표-관계-구조안)
+- [0. 생성 원칙](#0-생성-원칙)
+- [1. 생성 단계와 조합 설계](#1-생성-단계와-조합-설계)
+- [2. 재사용하는 표·칸 (기존)](#2-재사용하는-표칸-기존)
+- [3. 표·칸 구조안 (9표 · 112칸)](#3-표칸-구조안-9표-112칸)
+  - [`casting_batch` — 오디션 한 판(생성 묶음) 기록](#casting_batch-오디션-한-판생성-묶음-기록)
+  - [`candidate_member` — 조합 생성 결과 본체(한 사람)](#candidate_member-조합-생성-결과-본체한-사람)
+  - [`candidate_worldcup_pick` — 월드컵 라운드별 고른 후보 기록(성향 입력)](#candidate_worldcup_pick-월드컵-라운드별-고른-후보-기록성향-입력)
+  - [`candidate_ability` — 후보 세부 능력 처음 값(18세부)](#candidate_ability-후보-세부-능력-처음-값18세부)
+  - [`candidate_skill` — 후보가 처음 가진 스킬(배경·재능에서 나옴)](#candidate_skill-후보가-처음-가진-스킬배경재능에서-나옴)
+  - [`candidate_story_line` — 후보 서사 줄(틀+조각 결과)](#candidate_story_line-후보-서사-줄틀조각-결과)
+  - [`casting_generation_step` — 조합 생성 단계 순서(1~10)](#casting_generation_step-조합-생성-단계-순서110)
+  - [`casting_combo_rule` — 단계끼리 조합 규칙(A값 → B 뽑기 쏠림)](#casting_combo_rule-단계끼리-조합-규칙a값-b-뽑기-쏠림)
+  - [`data_convert_link` — 모든 데이터 → 아이템(지속)/스킬(즉시) 연결](#data_convert_link-모든-데이터-아이템지속스킬즉시-연결)
+- [4. schema_column 등록용 초안](#4-schema_column-등록용-초안)
+- [5. 실제 소스와 설계의 차이](#5-실제-소스와-설계의-차이)
+- [6. 오디션 후보 연결과 저장](#6-오디션-후보-연결과-저장)
+- [7. 남은 확인과 발란스](#7-남은-확인과-발란스)
+
+## 현재 구현 흐름
+
+```mermaid
+flowchart TD
+  W[월드컵 선택 유형과 라운드 무게] --> T[유형 축별 글자와 type_code]
+  T --> A[유형 범위 안 4축 속값]
+  O[유형 밖 overall 균등] --> M[메모리 멤버]
+  T --> B[배경 조각 · 고향 기울기 제외]
+  B --> M
+  A --> M
+  R[특기 층화 · 같은 합계 배분] --> N[능력·재능]
+  N --> S[처음 스킬 · 특기 축 안의 가중]
+  M --> ST[선택된 배경으로 서사 틀 치환]
+  C[이름 조각·프로필과 그림 자원] --> M
+  S --> M
+  ST --> OUT[generateMembers 결과]
+  OUT --> AU[새 오디션 판 어댑터]
+  OUT --> GR[성장·관계 생성 미리보기]
+```
+
+`generateMembers`는 `createIdolGenerator`의 결과와 이름·서사·노출·라포 계산을 합칩니다. 오디션의 기본 설정 로더는 후보 고정 목록을 먼저 읽지 않으며, 생성 어댑터가 새 판 후보·배경·이야기를 만듭니다. 옛 저장 판으로 식별된 경우만 레거시 후보를 따로 읽습니다.
+
+| 범위 | 현재 확인 |
+|---|---|
+| 유형·배경·능력·스킬·그림 | 생성기 함수와 메모리 결과 경로가 있습니다. 실제 값의 상태는 표와 임시 설정의 출처를 따릅니다 |
+| 서사 | 이미 선택된 배경과 `member_story_template`에서 단계별 문장을 만듭니다. 기존 서사는 다시 뽑지 않고, 원본이나 치환값이 없으면 null·진단을 남깁니다 |
+| 오디션·보드 대결 | 현재 보드 앱과 오디션 앱 모두 생성 후보 준비 경로가 있고, 보드 대결은 선택한 참가자 ID·세션을 자식 오디션에 넘깁니다 |
+| 표 등록 | 이 문서의 9개 설계 표 중 현재 등록된 것은 `casting_combo_rule`입니다. 나머지 8개를 이미 저장하는 구조로 보지 않습니다 |
+| 분포·실제 플레이 | 이전 분포 보고 기록은 로그에 보존합니다. 이번 문서 정비에서 다시 실행하거나 전체 검수를 통과했다고 표시하지 않습니다 |
+
+### 실행 값과 발란스 경계
+
+- 성격 축·범위, 월드컵 반영 몫·무게, member_init_rule에는 임시로 채운 숫자가 있습니다. 「전부 빈칸」으로 설명하지 않습니다.
+- 유형 확률·축 범위는 표 값을 읽고 빈값이면 임시 설정을 사용하는 경로가 있습니다. 능력·재능 합계·범위와 시작 스킬 수는 현재 생성기 설정을 직접 사용하는 부분이 남아 있습니다. 모든 항목이 자동으로 표 값에 전환된다고 보지 않습니다.
+- 유형→배경 기울기는 현재 설정값을 사용하며, 특기 축 안의 스킬 기울기는 등록된 `casting_combo_rule`을 읽습니다. 고향은 성격 입력과 배경 가중에서 제외합니다.
+- 어느 코드나 표에 들어 있다는 이유만으로 승인·발란스 확정으로 판정하지 않습니다. 값의 현재 상태와 연결 근거를 함께 봅니다.
+
+### 표 관계 구조안
+
+아래 ER 구조와 뒤의 칸·등록용 CSV는 구조 설계입니다. 현재 메모리 멤버 객체나 localStorage 저장과 같은 형식으로 이미 연결됐다는 뜻은 아닙니다.
+
+```mermaid
+erDiagram
+  casting_batch ||--o{ candidate_member : "casting_batch_id"
+  casting_batch ||--o{ candidate_worldcup_pick : "casting_batch_id"
+  candidate_member ||--o{ candidate_ability : "candidate_member_id"
+  candidate_member ||--o{ candidate_skill : "candidate_member_id"
+  candidate_member ||--o{ candidate_story_line : "candidate_member_id"
+  personality_type ||--o{ candidate_member : "personality_type_id"
+  resource ||--o{ candidate_member : "card_art_theme_id (card_theme)"
+  idol_growth_member_skill_effect ||--o{ candidate_skill : "skill_ref_id"
+  member_init_rule ||--o{ candidate_ability : "범위·합계 규칙"
+  personality_type ||--o{ personality_slider_map : "유형별 축 범위"
+  worldcup_carry_rule ||--o{ candidate_worldcup_pick : "반영 몫"
+  casting_combo_rule ||--o{ candidate_member : "쏠림 규칙(from→to)"
+  casting_batch {
+    string casting_batch_id PK
+    string seed
+    int candidate_count
+    string worldcup_pick_ids
+    string generator_version
+  }
+  candidate_member {
+    string candidate_member_id PK
+    string casting_batch_id FK
+    string personality_type_id FK
+    string specialty_axis_id
+    string card_art_theme_id
+    string member_source
+  }
+  candidate_worldcup_pick {
+    string candidate_worldcup_pick_id PK
+    int round
+    string picked_candidate_member_id
+  }
+  candidate_ability {
+    string candidate_ability_id PK
+    string stat_id
+    int current_value
+    int talent_cap
+  }
+  candidate_skill {
+    string candidate_skill_id PK
+    string skill_ref_id
+    string gain_kind
+  }
+  candidate_story_line {
+    string candidate_story_line_id PK
+    string member_story_template_id
+  }
+  casting_combo_rule {
+    string casting_combo_rule_id PK
+    string from_kind
+    string to_kind
+    string tilt
+    string blocked
+  }
+  personality_type { string type_code }
+  personality_slider_map { string range_min }
+  worldcup_carry_rule { string carry_share }
+  member_init_rule { string range_min }
+  resource { string resource_id }
+  idol_growth_member_skill_effect { string axis }
+```
+- 있는 표: personality_type · personality_slider_map · worldcup_carry_rule · member_init_rule · resource · idol_growth_member_skill_effect
+- 구조안 중 미등록: casting_batch · candidate_member · candidate_worldcup_pick · candidate_ability · candidate_skill · candidate_story_line · casting_generation_step · data_convert_link. `casting_combo_rule`은 등록되어 생성기에서 읽습니다.
+
+## 0. 생성 원칙
+
+- 고정된 인물 목록 대신 새 판마다 조합 후보를 만듭니다. 옛 저장 판을 읽기 위한 레거시 자료는 보존합니다.
+- 고향은 성격에 영향이 없고 라포 등 별도 연결과 구분합니다.
+- 성격은 네 자리 유형을 먼저 정한 뒤 축 속값을 뽑습니다. 유형 축과 overall의 구분은 [S18](S18_멤버성격생성_MBTI방식_v01.md)을 따릅니다.
+- 그림 자원 재사용은 게임 카드의 소유·승급 규칙과 별개입니다. 현재 생성기는 카드 그림 묶음을 순환 사용합니다.
+- 아이템의 지속 효과·스킬의 즉시 효과를 위한 연결 자리와 데이터별 보임·숨김·간접 구조를 설계합니다. 해당 연결 표가 전부 등록·구현됐다고 보지 않습니다.
+
+## 1. 생성 단계와 조합 설계
+
+| # | 단계 | 입력 | 결과 | 영향 주는 곳 | 규칙 표(기존/새) |
+|---|---|---|---|---|---|
+| 1 | 월드컵 성향 | 라운드별 고른 후보 | 고른 쪽 유형·축 경향 | 2 유형 쏠림, 4 overall | `worldcup_carry_rule`(기존) · `candidate_worldcup_pick`(새) |
+| 2 | 성격 유형(4글자) | 1 + 무작위(공정) | `personality_type_id`·`type_code` | 3, 5(배경 쏠림), 6 서사 말투, 7 재능 쏠림, 8 스킬 | `personality_type`·`personality_slider`(기존, A안 칸) · `casting_combo_rule`(새) |
+| 3 | 4축 속값 | 2의 극(low/high) | move·speech·face·attitude 값 | 라포 요인, 서사 말투 | `personality_slider_map`(기존, 범위 발란스 대기) |
+| 4 | overall(겉 성향) | 현재 생성기는 유형 밖 균등 · 이월 연결 설계는 별도 | overall 값 | 표정·연출 | `personality_slider`(axis_role=surface) |
+| 5 | 배경 조각 | 2(쏠림만) + 무작위. **고향은 2·3에 안 씀** | 집안·고향·동기·약점·경력·특기 조각 | 6 서사, 7 재능, 8 스킬, 라포 | `audition_background_piece`(기존) · `candidate_background`(기존) |
+| 6 | 서사 | 5 조각 + 2 유형 말투 | 서사 줄 | 화면 문장 | `member_story_template`(기존) · `candidate_story_line`(새) |
+| 7 | 능력·재능 | 5 특기 조각 + 2 쏠림 + 무작위 | 18세부 처음 값·재능 상한 | 특기 축, 8 스킬 | `member_init_rule`·`idol_growth_stat`(기존) · `candidate_ability`(새) |
+| 8 | 스킬 | 5 조각·7 재능 1위·2 유형 | 처음 스킬 | 카드 뒷면 | `candidate_skill`(새) · `data_convert_link`(새) |
+| 9 | 카드 그림 | 무작위(덱 5장, 겹침 허용) | `card_art_theme_id` | 카드 앞면 | `card_theme`(기존) |
+| 10 | 이름 | 성·이름 조각 무작위 / 오디션에서 정한 이름 | `name_ko`·예명 | 모든 화면 | `member_name_piece`·`member_stage_name_piece`(기존) |
+
+조합 규칙 표 `casting_combo_rule` 예시 줄(값은 발란스 대기):
+| from_kind | from_ref_id | to_kind | to_ref_id | tilt | 뜻 |
+|---|---|---|---|---|---|
+| personality_type | personality_type_easygoing_01 | background_piece | narrative_piece_motive_* | 발란스 대기 | 분위기 메이커는 사람 관련 동기 쪽으로 조금 쏠림 |
+| background_piece | narrative_piece_career_* (작곡) | skill | 멜로디 스케치 | 발란스 대기 | 작곡 조각 → 스킬 (지금 세아 카드에서 보인 연결을 규칙으로 옮김) |
+| background_piece | narrative_piece_home_* | personality_type | (전부) | **금지(blocked=1)** | 고향은 성격에 영향 없음 |
+| talent(1위) | stat 축 | specialty | 같은 축 | 고정 | 재능 1위 = 특기 |
+- tilt 빈칸 = 쏠림 없음(균등). 0이나 가운데 값으로 읽지 않음.
+
+## 2. 재사용하는 표·칸 (기존)
+- `data/rapport_sim/`: `personality_type`(type_code), `personality_slider`(axis_role·letter_low·letter_high·axis_order·pole_cut), `personality_slider_map`, `personality_group`, `personality_type_trait`, `personality_source_map`, `worldcup_carry_rule`, `candidate_personality`, `candidate_personality_slider`, `candidate_trait`, `member_init_rule`(범위·상태는 실제 표 확인), `member_profile_option`, `member_name_piece`, `member_stage_name_piece`, `member_story_template`, `member_position_title`, `data_visibility`, `hidden_text_rule`, `rapport_*`.
+- `data/audition_sim/`: `audition_background_piece`, `candidate_background`, `candidates.csv`(옛 저장 판 호환용), `profile.json`.
+- `data/game/card_theme.csv`(덱 5장), `data/idol_ability_sim/idol_growth_stat.csv`, `idol_growth_member_skill_effect.csv`.
+- 주의: `candidate_personality` 등 rapport_sim의 candidate_* 표는 `candidate_id`를 씀. 새 `candidate_member_id`와 같은 값을 쓰도록 맞춤(칸 이름 바꾸기는 현중 확인).
+
+
+## 3. 표·칸 구조안 (9표 · 112칸)
+
+현재 등록은 `casting_combo_rule` 한 표입니다. 나머지는 미등록 구조안이며 아래 경로는 배치할 자리입니다. 각 칸의 아이템·스킬 연결과 노출 설계는 보존합니다.
+
+### `casting_batch` — 오디션 한 판(생성 묶음) 기록
+- 경로: `data/audition_sim/casting_batch.csv` · 현재: 구조안 · 미등록
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| casting_batch_id | string | casting_batch_{yyyymmdd}_{hhmmss}_{seed앞8} 긴 ID | 숨김 |  |
+| seed | string | 생성 시드(재현용) | 숨김 |  |
+| candidate_count | int | 판 후보 수 · 발란스 대기 | 숨김 |  |
+| worldcup_pick_ids | string | 월드컵 고른 기록 ID 목록(;) | 숨김 | candidate_worldcup_pick |
+| generator_version | string | 조합 생성기 판 번호(저장 호환) | 숨김 |  |
+| created_at | string | 만든 시각 KST | 숨김 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `candidate_member` — 조합 생성 결과 본체(한 사람)
+- 경로: `data/audition_sim/candidate_member.csv` · 현재: 구조안 · 미등록
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| candidate_member_id | string | candidate_member_{batch}_{nn}_{name_key} 긴 ID | 숨김 |  |
+| casting_batch_id | string | 속한 판 | 숨김 | casting_batch |
+| member_source | string | casting/legacy_sample(옛 고정 16명) | 숨김 |  |
+| name_ko | string | 오디션에서 정한 이름 | 보임 | member_name_piece |
+| stage_name_ko | string | 예명(정하면) | 보임 | member_stage_name_piece |
+| gender_option_id | string | 성별 옵션 | 보임 | member_profile_option |
+| member_color_option_id | string | 멤버 색 | 보임 | member_profile_option |
+| specialty_axis_id | string | 특기 축(재능 1위와 일치 규칙) | 보임 | idol_growth_stat |
+| age | int | 나이 · 범위 발란스 대기 | 보임 | member_init_rule |
+| personality_type_id | string | 성격 유형(4글자) | 보임 | personality_type |
+| card_art_theme_id | string | 카드북 아이돌 덱 5장 중 1(겹쳐도 됨) | 보임 | card_theme |
+| story_status | string | 서사 완성 여부 | 숨김 |  |
+| joined | int | 합류 여부 0/1 | 숨김 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `candidate_worldcup_pick` — 월드컵 라운드별 고른 후보 기록(성향 입력)
+- 경로: `data/audition_sim/candidate_worldcup_pick.csv` · 현재: 구조안 · 미등록
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| candidate_worldcup_pick_id | string | candidate_worldcup_pick_{batch}_r{n} | 숨김 |  |
+| casting_batch_id | string | 판 | 숨김 | casting_batch |
+| round | int | 라운드 | 숨김 |  |
+| picked_candidate_member_id | string | 고른 후보 | 숨김 | candidate_member |
+| dropped_candidate_member_id | string | 안 고른 후보 | 숨김 | candidate_member |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `candidate_ability` — 후보 세부 능력 처음 값(18세부)
+- 경로: `data/audition_sim/candidate_ability.csv` · 현재: 구조안 · 미등록
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| candidate_ability_id | string | candidate_ability_{member}_{stat} | 숨김 |  |
+| candidate_member_id | string | 후보 | 숨김 | candidate_member |
+| stat_id | string | 세부 능력 | 숨김 | idol_growth_stat |
+| current_value | number | 처음 값 · 발란스 대기 | 보임 |  |
+| talent_cap | number | 재능 상한 · 발란스 대기 | 간접 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `candidate_skill` — 후보가 처음 가진 스킬(배경·재능에서 나옴)
+- 경로: `data/audition_sim/candidate_skill.csv` · 현재: 구조안 · 미등록
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| candidate_skill_id | string | candidate_skill_{member}_{nn} | 숨김 |  |
+| candidate_member_id | string | 후보 | 숨김 | candidate_member |
+| skill_ref_id | string | 스킬 ID | 보임 | idol_growth_member_skill_effect |
+| gain_kind | string | background/talent/personality | 숨김 |  |
+| gain_ref_id | string | 나오게 한 조각·재능·유형 ID | 간접 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `candidate_story_line` — 후보 서사 줄(틀+조각 결과)
+- 경로: `data/audition_sim/candidate_story_line.csv` · 현재: 구조안 · 미등록
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| candidate_story_line_id | string | candidate_story_line_{member}_{stage}_{n} | 숨김 |  |
+| candidate_member_id | string | 후보 | 숨김 | candidate_member |
+| member_story_template_id | string | 서사 틀 | 숨김 | member_story_template |
+| text_ko | string | 완성 문장 | 보임 |  |
+| unlock_step | int | 열리는 단계 | 숨김 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `casting_generation_step` — 조합 생성 단계 순서(1~10)
+- 경로: `data/audition_sim/casting_generation_step.csv` · 현재: 구조안 · 미등록
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| casting_generation_step_id | string | casting_generation_step_{nn}_{key} | 숨김 |  |
+| step_order | int | 순서 | 숨김 |  |
+| step_key | string | worldcup/type/axis/overall/background/story/ability/skill/card_art/name | 숨김 |  |
+| input_keys | string | 입력 단계 키(;) | 숨김 |  |
+| output_table | string | 결과 저장 표 | 숨김 |  |
+| rule_table | string | 규칙 표 | 숨김 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `casting_combo_rule` — 단계끼리 조합 규칙(A값 → B 뽑기 쏠림)
+- 경로: `data/audition_sim/casting_combo_rule.csv` · 현재: 등록됨 · 생성기 읽기 경로 있음 · 효과 값의 확정·플레이 검수는 별도
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| casting_combo_rule_id | string | casting_combo_rule_{from}_{to}_{nn} | 숨김 |  |
+| from_kind | string | personality_type/slider/background_piece/talent/... | 숨김 |  |
+| from_ref_id | string | 조건 값 ID | 숨김 |  |
+| to_kind | string | 영향 받는 단계 | 숨김 |  |
+| to_ref_id | string | 쏠리는 대상 ID | 숨김 |  |
+| tilt | number | 쏠림 정도 · 발란스 대기(빈칸=쏠림 없음, 0으로 읽지 않음) | 숨김 |  |
+| blocked | int | 금지 조합 0/1 | 숨김 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `data_convert_link` — 모든 데이터 → 아이템(지속)/스킬(즉시) 연결
+- 경로: `data/master/data_convert_link.csv` · 현재: 구조안 · 미등록
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| data_convert_link_id | string | data_convert_link_{table}_{ref}_{kind} | 숨김 |  |
+| source_table | string | 원 데이터 표 | 숨김 |  |
+| source_ref_id | string | 원 행 ID | 숨김 |  |
+| convert_kind | string | item(들고 있는 동안 지속)/skill(쓰는 순간 즉시) | 숨김 |  |
+| target_ref_id | string | 아이템·스킬 ID | 숨김 |  |
+| effect_value | number | 효과량 · 발란스 대기 | 숨김 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+## 4. schema_column 등록용 초안
+
+아래는 보존한 열 설계 원문입니다. 실제 schema 등록과 일치하거나 실제 저장에 연결됐다는 뜻은 아닙니다. `casting_combo_rule`은 현재 등록본을 우선하고 나머지는 표 담당의 등록 절차가 필요합니다.
+머리줄: `schema_column_id,table_key,column_name,column_order,column_kind,column_source,value_type,numeric_order,optional_order,deferred_order,deferred_check_id,fk_target,bundle_ref,min_value,max_value,default_value,live_override,note`
+```csv
+schema_column_casting_batch__casting_batch_id,casting_batch,casting_batch_id,1,column,proposal_S19,string,,,,,,,,,,,"casting_batch_{yyyymmdd}_{hhmmss}_{seed앞8} 긴 ID · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_batch__seed,casting_batch,seed,2,column,proposal_S19,string,,,,,,,,,,,"생성 시드(재현용) · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_batch__candidate_count,casting_batch,candidate_count,3,column,proposal_S19,int,,,,,,,,,,,"판 후보 수 · 발란스 대기 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_batch__worldcup_pick_ids,casting_batch,worldcup_pick_ids,4,column,proposal_S19,string,,,,,candidate_worldcup_pick,,,,,,"월드컵 고른 기록 ID 목록(;) · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_batch__generator_version,casting_batch,generator_version,5,column,proposal_S19,string,,,,,,,,,,,"조합 생성기 판 번호(저장 호환) · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_batch__created_at,casting_batch,created_at,6,column,proposal_S19,string,,,,,,,,,,,"만든 시각 KST · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_batch__convert_item_ref_id,casting_batch,convert_item_ref_id,7,column,proposal_S19,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_batch__convert_skill_ref_id,casting_batch,convert_skill_ref_id,8,column,proposal_S19,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_batch__visibility,casting_batch,visibility,9,column,proposal_S19,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_batch__value_status,casting_batch,value_status,10,column,proposal_S19,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_batch__src_doc_id,casting_batch,src_doc_id,11,column,proposal_S19,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_batch__note,casting_batch,note,12,column,proposal_S19,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_member__candidate_member_id,candidate_member,candidate_member_id,1,column,proposal_S19,string,,,,,,,,,,,"candidate_member_{batch}_{nn}_{name_key} 긴 ID · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_member__casting_batch_id,candidate_member,casting_batch_id,2,column,proposal_S19,string,,,,,casting_batch,,,,,,"속한 판 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_member__member_source,candidate_member,member_source,3,column,proposal_S19,string,,,,,,,,,,,"casting/legacy_sample(옛 고정 16명) · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_member__name_ko,candidate_member,name_ko,4,column,proposal_S19,string,,,,,member_name_piece,,,,,,"오디션에서 정한 이름 · 노출 보임 · 제안(검수 대기)"
+schema_column_candidate_member__stage_name_ko,candidate_member,stage_name_ko,5,column,proposal_S19,string,,,,,member_stage_name_piece,,,,,,"예명(정하면) · 노출 보임 · 제안(검수 대기)"
+schema_column_candidate_member__gender_option_id,candidate_member,gender_option_id,6,column,proposal_S19,string,,,,,member_profile_option,,,,,,"성별 옵션 · 노출 보임 · 제안(검수 대기)"
+schema_column_candidate_member__member_color_option_id,candidate_member,member_color_option_id,7,column,proposal_S19,string,,,,,member_profile_option,,,,,,"멤버 색 · 노출 보임 · 제안(검수 대기)"
+schema_column_candidate_member__specialty_axis_id,candidate_member,specialty_axis_id,8,column,proposal_S19,string,,,,,idol_growth_stat,,,,,,"특기 축(재능 1위와 일치 규칙) · 노출 보임 · 제안(검수 대기)"
+schema_column_candidate_member__age,candidate_member,age,9,column,proposal_S19,int,,,,,member_init_rule,,,,,,"나이 · 범위 발란스 대기 · 노출 보임 · 제안(검수 대기)"
+schema_column_candidate_member__personality_type_id,candidate_member,personality_type_id,10,column,proposal_S19,string,,,,,personality_type,,,,,,"성격 유형(4글자) · 노출 보임 · 제안(검수 대기)"
+schema_column_candidate_member__card_art_theme_id,candidate_member,card_art_theme_id,11,column,proposal_S19,string,,,,,card_theme,,,,,,"카드북 아이돌 덱 5장 중 1(겹쳐도 됨) · 노출 보임 · 제안(검수 대기)"
+schema_column_candidate_member__story_status,candidate_member,story_status,12,column,proposal_S19,string,,,,,,,,,,,"서사 완성 여부 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_member__joined,candidate_member,joined,13,column,proposal_S19,int,,,,,,,,,,,"합류 여부 0/1 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_member__convert_item_ref_id,candidate_member,convert_item_ref_id,14,column,proposal_S19,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_member__convert_skill_ref_id,candidate_member,convert_skill_ref_id,15,column,proposal_S19,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_member__visibility,candidate_member,visibility,16,column,proposal_S19,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_member__value_status,candidate_member,value_status,17,column,proposal_S19,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_member__src_doc_id,candidate_member,src_doc_id,18,column,proposal_S19,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_member__note,candidate_member,note,19,column,proposal_S19,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_worldcup_pick__candidate_worldcup_pick_id,candidate_worldcup_pick,candidate_worldcup_pick_id,1,column,proposal_S19,string,,,,,,,,,,,"candidate_worldcup_pick_{batch}_r{n} · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_worldcup_pick__casting_batch_id,candidate_worldcup_pick,casting_batch_id,2,column,proposal_S19,string,,,,,casting_batch,,,,,,"판 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_worldcup_pick__round,candidate_worldcup_pick,round,3,column,proposal_S19,int,,,,,,,,,,,"라운드 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_worldcup_pick__picked_candidate_member_id,candidate_worldcup_pick,picked_candidate_member_id,4,column,proposal_S19,string,,,,,candidate_member,,,,,,"고른 후보 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_worldcup_pick__dropped_candidate_member_id,candidate_worldcup_pick,dropped_candidate_member_id,5,column,proposal_S19,string,,,,,candidate_member,,,,,,"안 고른 후보 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_worldcup_pick__convert_item_ref_id,candidate_worldcup_pick,convert_item_ref_id,6,column,proposal_S19,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_worldcup_pick__convert_skill_ref_id,candidate_worldcup_pick,convert_skill_ref_id,7,column,proposal_S19,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_worldcup_pick__visibility,candidate_worldcup_pick,visibility,8,column,proposal_S19,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_worldcup_pick__value_status,candidate_worldcup_pick,value_status,9,column,proposal_S19,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_worldcup_pick__src_doc_id,candidate_worldcup_pick,src_doc_id,10,column,proposal_S19,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_worldcup_pick__note,candidate_worldcup_pick,note,11,column,proposal_S19,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_ability__candidate_ability_id,candidate_ability,candidate_ability_id,1,column,proposal_S19,string,,,,,,,,,,,"candidate_ability_{member}_{stat} · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_ability__candidate_member_id,candidate_ability,candidate_member_id,2,column,proposal_S19,string,,,,,candidate_member,,,,,,"후보 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_ability__stat_id,candidate_ability,stat_id,3,column,proposal_S19,string,,,,,idol_growth_stat,,,,,,"세부 능력 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_ability__current_value,candidate_ability,current_value,4,column,proposal_S19,number,,,,,,,,,,,"처음 값 · 발란스 대기 · 노출 보임 · 제안(검수 대기)"
+schema_column_candidate_ability__talent_cap,candidate_ability,talent_cap,5,column,proposal_S19,number,,,,,,,,,,,"재능 상한 · 발란스 대기 · 노출 간접 · 제안(검수 대기)"
+schema_column_candidate_ability__convert_item_ref_id,candidate_ability,convert_item_ref_id,6,column,proposal_S19,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_ability__convert_skill_ref_id,candidate_ability,convert_skill_ref_id,7,column,proposal_S19,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_ability__visibility,candidate_ability,visibility,8,column,proposal_S19,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_ability__value_status,candidate_ability,value_status,9,column,proposal_S19,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_ability__src_doc_id,candidate_ability,src_doc_id,10,column,proposal_S19,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_ability__note,candidate_ability,note,11,column,proposal_S19,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_skill__candidate_skill_id,candidate_skill,candidate_skill_id,1,column,proposal_S19,string,,,,,,,,,,,"candidate_skill_{member}_{nn} · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_skill__candidate_member_id,candidate_skill,candidate_member_id,2,column,proposal_S19,string,,,,,candidate_member,,,,,,"후보 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_skill__skill_ref_id,candidate_skill,skill_ref_id,3,column,proposal_S19,string,,,,,idol_growth_member_skill_effect,,,,,,"스킬 ID · 노출 보임 · 제안(검수 대기)"
+schema_column_candidate_skill__gain_kind,candidate_skill,gain_kind,4,column,proposal_S19,string,,,,,,,,,,,"background/talent/personality · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_skill__gain_ref_id,candidate_skill,gain_ref_id,5,column,proposal_S19,string,,,,,,,,,,,"나오게 한 조각·재능·유형 ID · 노출 간접 · 제안(검수 대기)"
+schema_column_candidate_skill__convert_item_ref_id,candidate_skill,convert_item_ref_id,6,column,proposal_S19,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_skill__convert_skill_ref_id,candidate_skill,convert_skill_ref_id,7,column,proposal_S19,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_skill__visibility,candidate_skill,visibility,8,column,proposal_S19,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_skill__value_status,candidate_skill,value_status,9,column,proposal_S19,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_skill__src_doc_id,candidate_skill,src_doc_id,10,column,proposal_S19,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_skill__note,candidate_skill,note,11,column,proposal_S19,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_story_line__candidate_story_line_id,candidate_story_line,candidate_story_line_id,1,column,proposal_S19,string,,,,,,,,,,,"candidate_story_line_{member}_{stage}_{n} · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_story_line__candidate_member_id,candidate_story_line,candidate_member_id,2,column,proposal_S19,string,,,,,candidate_member,,,,,,"후보 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_story_line__member_story_template_id,candidate_story_line,member_story_template_id,3,column,proposal_S19,string,,,,,member_story_template,,,,,,"서사 틀 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_story_line__text_ko,candidate_story_line,text_ko,4,column,proposal_S19,string,,,,,,,,,,,"완성 문장 · 노출 보임 · 제안(검수 대기)"
+schema_column_candidate_story_line__unlock_step,candidate_story_line,unlock_step,5,column,proposal_S19,int,,,,,,,,,,,"열리는 단계 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_story_line__convert_item_ref_id,candidate_story_line,convert_item_ref_id,6,column,proposal_S19,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_story_line__convert_skill_ref_id,candidate_story_line,convert_skill_ref_id,7,column,proposal_S19,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_story_line__visibility,candidate_story_line,visibility,8,column,proposal_S19,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_story_line__value_status,candidate_story_line,value_status,9,column,proposal_S19,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_story_line__src_doc_id,candidate_story_line,src_doc_id,10,column,proposal_S19,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_candidate_story_line__note,candidate_story_line,note,11,column,proposal_S19,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__casting_generation_step_id,casting_generation_step,casting_generation_step_id,1,column,proposal_S19,string,,,,,,,,,,,"casting_generation_step_{nn}_{key} · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__step_order,casting_generation_step,step_order,2,column,proposal_S19,int,,,,,,,,,,,"순서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__step_key,casting_generation_step,step_key,3,column,proposal_S19,string,,,,,,,,,,,"worldcup/type/axis/overall/background/story/ability/skill/card_art/name · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__input_keys,casting_generation_step,input_keys,4,column,proposal_S19,string,,,,,,,,,,,"입력 단계 키(;) · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__output_table,casting_generation_step,output_table,5,column,proposal_S19,string,,,,,,,,,,,"결과 저장 표 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__rule_table,casting_generation_step,rule_table,6,column,proposal_S19,string,,,,,,,,,,,"규칙 표 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__convert_item_ref_id,casting_generation_step,convert_item_ref_id,7,column,proposal_S19,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__convert_skill_ref_id,casting_generation_step,convert_skill_ref_id,8,column,proposal_S19,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__visibility,casting_generation_step,visibility,9,column,proposal_S19,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__value_status,casting_generation_step,value_status,10,column,proposal_S19,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__src_doc_id,casting_generation_step,src_doc_id,11,column,proposal_S19,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_generation_step__note,casting_generation_step,note,12,column,proposal_S19,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__casting_combo_rule_id,casting_combo_rule,casting_combo_rule_id,1,column,proposal_S19,string,,,,,,,,,,,"casting_combo_rule_{from}_{to}_{nn} · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__from_kind,casting_combo_rule,from_kind,2,column,proposal_S19,string,,,,,,,,,,,"personality_type/slider/background_piece/talent/... · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__from_ref_id,casting_combo_rule,from_ref_id,3,column,proposal_S19,string,,,,,,,,,,,"조건 값 ID · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__to_kind,casting_combo_rule,to_kind,4,column,proposal_S19,string,,,,,,,,,,,"영향 받는 단계 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__to_ref_id,casting_combo_rule,to_ref_id,5,column,proposal_S19,string,,,,,,,,,,,"쏠리는 대상 ID · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__tilt,casting_combo_rule,tilt,6,column,proposal_S19,number,,,,,,,,,,,"쏠림 정도 · 발란스 대기(빈칸=쏠림 없음, 0으로 읽지 않음) · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__blocked,casting_combo_rule,blocked,7,column,proposal_S19,int,,,,,,,,,,,"금지 조합 0/1 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__convert_item_ref_id,casting_combo_rule,convert_item_ref_id,8,column,proposal_S19,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__convert_skill_ref_id,casting_combo_rule,convert_skill_ref_id,9,column,proposal_S19,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__visibility,casting_combo_rule,visibility,10,column,proposal_S19,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__value_status,casting_combo_rule,value_status,11,column,proposal_S19,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__src_doc_id,casting_combo_rule,src_doc_id,12,column,proposal_S19,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_casting_combo_rule__note,casting_combo_rule,note,13,column,proposal_S19,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__data_convert_link_id,data_convert_link,data_convert_link_id,1,column,proposal_S19,string,,,,,,,,,,,"data_convert_link_{table}_{ref}_{kind} · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__source_table,data_convert_link,source_table,2,column,proposal_S19,string,,,,,,,,,,,"원 데이터 표 · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__source_ref_id,data_convert_link,source_ref_id,3,column,proposal_S19,string,,,,,,,,,,,"원 행 ID · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__convert_kind,data_convert_link,convert_kind,4,column,proposal_S19,string,,,,,,,,,,,"item(들고 있는 동안 지속)/skill(쓰는 순간 즉시) · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__target_ref_id,data_convert_link,target_ref_id,5,column,proposal_S19,string,,,,,,,,,,,"아이템·스킬 ID · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__effect_value,data_convert_link,effect_value,6,column,proposal_S19,number,,,,,,,,,,,"효과량 · 발란스 대기 · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__convert_item_ref_id,data_convert_link,convert_item_ref_id,7,column,proposal_S19,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__convert_skill_ref_id,data_convert_link,convert_skill_ref_id,8,column,proposal_S19,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__visibility,data_convert_link,visibility,9,column,proposal_S19,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__value_status,data_convert_link,value_status,10,column,proposal_S19,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__src_doc_id,data_convert_link,src_doc_id,11,column,proposal_S19,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_data_convert_link__note,data_convert_link,note,12,column,proposal_S19,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+```
+미등록 설계의 schema_table·schema_column 적용은 같은 생성 절차로 대조해야 합니다. 이번 문서 정비에서는 표를 수정·생성하지 않습니다.
+
+## 5. 실제 소스와 설계의 차이
+
+| 항목 | 현재 소스 | 남은 경계 |
+|---|---|---|
+| 유형 판정 | 현재 `casting.mjs`는 생성기 유형 결과를 사용합니다. `worldcup-carry.mjs`의 속값→유형 계산은 남아 있지만 현재 호출 결과로 덮어쓰지 않습니다 | 이전 경로와 현행 경로를 혼동하지 않음 |
+| 처음 값 | 일부 표 범위가 채워졌어도 능력·재능 합계 배분은 임시 설정을 직접 읽습니다 | 표의 모든 값이 이미 계산에 반영되는 것으로 쓰지 않음 |
+| 서사·배경 | 생성된 배경과 서사를 오디션 배경·이야기 모양으로 바꾸는 어댑터가 있습니다 | 모든 단계·문장·저장의 실제 화면 검수는 별도 |
+| 후보 ID | 생성기 메모리는 casting 형식, 오디션 어댑터는 candidate_member 접두로 바꿉니다 | 저장 표의 ID·열 이름 통합 설계와 구분 |
+| 스킬 가중 | 등록된 combo_rule을 특기 축 스킬 후보 안에서 사용합니다 | 해당 행의 값 상태·기획 근거와 실제 적용을 별도 확인 |
+| 제안 표·효과 연결 | 현재 기록·변환용 설계 표는 대부분 미등록입니다 | 메모리 생성 결과, 현재행 변환, 실제 영속 저장을 나누어 확인 |
+
+## 6. 오디션 후보 연결과 저장
+
+1. 새 판은 생성기와 현재 표에서 후보를 준비합니다. 같은 생성 기록의 seed를 재사용하고, 새 판은 새 생성 기록을 준비합니다.
+2. 어댑터가 후보 ID·이름·성별·색·특기·능력·재능·유형·그림을 오디션 모양으로 전달합니다. 생성된 배경과 서사도 같은 후보 ID로 맞춥니다.
+3. 생성기 기록이 없는 옛 저장 판만 레거시 후보를 별도로 읽습니다. 새 판을 실패한 채 옛 고정 후보로 조용히 대체하지 않고 준비 오류를 구분하는 경로가 있습니다.
+4. 저장 전에는 현재 run·generator 원문이 바뀌지 않았는지 대조하고, 교체 실패 시 이전 값을 되돌리거나 보존본을 남깁니다.
+5. 보드 대결은 해당 판의 참가자·세션을 넘깁니다. 별도 옛 고정 후보 목록이 현재 경로라고 쓰지 않습니다.
+6. 합류 인계는 같은 멤버의 생성 자료를 포함하며, 새 몬스를 함께 지급하지 않습니다. 현재 저장 키와 writer 경계는 [S20](S20_유저스테이터스_저장구조_v01.md)과 [P173](../개발진행기획_v01/콘텐츠별_v03/유저저장정보_기획서.html)을 함께 봅니다.
+
+## 7. 남은 확인과 발란스
+
+- 구조안의 기록 표 등록·ID 연결·실제 저장, 아이템·스킬 변환 연결과 슬롯별 전체 동작을 확인해야 합니다.
+- 범위·분포·가중·초기 스킬 등 임시 값과 기존 결정의 상태는 연결 표·기획 근거를 따릅니다. 코드 존재로 확정을 대신하지 않습니다.
+- 소스의 생성·어댑터·서사·저장 준비 경로를 대조했으며, 실제 화면·분포 시험·새 후보 합류 저장·성장 전체 플레이는 이번에 실행하지 않았습니다. 보호 성장 원본은 열지 않았습니다.
+
+<details><summary>작업 기록</summary>
+
+- 정비 전 전체 원문·과거 구현표·분담·질문·분포 보고 인용: [S19_캐릭터조합생성_구조_v01.log.md](S19_캐릭터조합생성_구조_v01.log.md). 구현 흐름과 ER·칸·등록 초안은 본문에 보존했습니다.
+- 대조: `casting.mjs:1~271`, `worldcup-carry.mjs:1~174`, `idol-generator.mjs:1~240`, `idol-generator-config.mjs:1~51`, `member-story.mjs:1~161`, `data.mjs:1~147`, `src/audition/generated-candidates.mjs:1~110`, `session-replacement.mjs:1~71`, `board-app.mjs:1~76,239~251`, `app.mjs` 생성·저장 접점.
+- 실제 표: 성격·생성 초기값·서사 틀의 현재 행과 기록3표 머리줄, `casting_combo_rule`의 schema 등록·머리줄·행 수. `schema_table.csv`에서 이 문서9개 표의 등록 여부를 대조했습니다.
+- 관련 기획: S18·S20 전체, P173·P222 전체. source 확인은 실제 화면·플레이·저장 검수와 구분합니다.
+
+</details>

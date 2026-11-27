@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>팬 선물 오브젝트 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  .kv { display:flex; justify-content:space-between; align-items:center; font-size:12px; }
+</style>
+<style>
+  .ob { position:absolute; border:1.5px dashed var(--ln); border-radius:8px; background:var(--dim); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:var(--soft); }
+  .ob.on { border:2.5px solid var(--ln); background:var(--box); color:var(--ink); box-shadow:0 0 0 4px #c9ccd1; }
+  .bub { position:absolute; border:1.5px solid var(--ln); border-radius:999px; background:var(--box); font-size:11px; font-weight:700; padding:1px 7px; white-space:nowrap; }
+</style>
+</head>
+<body>
+<h1>팬 선물 오브젝트 와이어프레임 · 1차</h1>
+<p class="flow">로비 광장 오브젝트 6종 · 빈 모습 ↔ 선물 도착 · 도착한 것을 누르면 ①-1 받기 창 → 받으면 빈 모습(②)</p>
+<div class="rules">
+  <b>확정(현중 11/24)</b>: 6종 = 7018 HUD r37 그대로 · 받는 조건 = 시간 두 타입(연속 접속: 우편함 10분 · 음료 카트 20분 · 꽃바구니 40분 · 응원봉 60분 / 오프라인: 간식 4시간 · 포토 이젤 8시간 · 최대 12시간까지만 셈 · 한계는 두 타입 모두 · 선물 크기 = 엔터파워 × 아이돌 등급 · 값은 제안) · 받으면 빈 모습 · 보내는 팬 = 지정한 팀 팬덤 · 팀 바꿔도 도착한 선물은 남음 · 보상은 오브젝트마다 다르게(값은 비앙카)<br>
+  · <b>제안(이 초안)</b>: 도착 표시 = 굵은 테 + 반짝임 + 작은 말풍선 「팬 선물」 · 받기 창 한 장 · HUD 숫자 배지 없음 · 로비에서만 받음<br>
+  · 로비 HUD(위 줄 · 앨범 카드 · 양옆 칸 · 아래 줄)는 7018 r37 그대로라 회색 칸으로만 둠
+</div>
+<div class="row" id="screens"></div>
+<script>
+const n = (k, x, y) => `<div class="n" style="left:${x}px;top:${y}px">${k}</div>`;
+// 로비 틀: 위 줄 · 앨범 카드 · 양옆 칸 · 사옥 · 아이돌 · 아래 줄 · 메뉴
+const lobby = () => `
+  <div class="b" style="left:6px;top:6px;width:378px;height:36px;justify-content:space-between;padding:0 12px"><span class="val">이름</span><span class="sub">재화 · 재화 · 설정</span></div>
+  <div class="b" style="left:6px;top:48px;width:378px;height:66px"><span class="sub">앨범 카드</span></div>
+  ${[0,1,2,3,4].map(i => `<div class="b" style="left:6px;top:${122 + i * 58}px;width:56px;height:50px"><span class="sub">왼쪽 ${i + 1}</span></div>`).join("")}
+  ${[0,1,2,3].map(i => `<div class="b" style="left:322px;top:${122 + i * 64}px;width:62px;height:56px"><span class="sub">오른쪽 ${i + 1}</span></div>`).join("")}
+  <div class="b off" style="left:80px;top:122px;width:230px;height:200px"><span class="sub">사옥</span></div>
+  <div class="b" style="left:165px;top:440px;width:60px;height:150px"><span class="sub">아이돌</span></div>
+  <div class="b" style="left:6px;top:748px;width:378px;height:24px"><span class="sub">돈 · 주사위 · 몬스</span></div>
+  <div class="b" style="left:6px;top:776px;width:378px;height:62px"><span class="sub">아래 메뉴 · 게임 시작</span></div>`;
+// 오브젝트 6종: 이름 · 자리(7018 r37 화면에서 옮김) · 크기(390 기준)
+const OB = [
+  ["꽃바구니", 24, 528, 60, 63],
+  ["우편함", 309, 413, 55, 85],
+  ["이젤", 248, 451, 43, 60],
+  ["응원봉", 320, 548, 48, 53],
+  ["음료 카트", 12, 632, 100, 101],
+  ["간식", 296, 640, 75, 62],
+];
+const obs = on => OB.map(([t, x, y, w, h], i) => `<div class="ob${on[i] ? " on" : ""}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px">${t}${on[i] ? "" : `<br>빈`}</div>` +
+  (on[i] ? `<div class="bub" style="left:${x + w / 2 - 30}px;top:${y - 22}px">팬 선물</div>` : "")).join("");
+
+const SCREENS = [
+  { cap: "① 로비 광장 · 선물 도착 3곳", html: lobby() + obs([0, 1, 0, 0, 1, 1]) +
+      `${n(1, 286, 395)}${n(2, 64, 640)}${n(3, 2, 528)}`,
+    notes: ["도착 = 굵은 테 · 반짝임 · 위에 작은 말풍선 「팬 선물」 · 누르면 ①-1", "우편함 · 음료 카트 · 꽃바구니 · 응원봉 = 켜 둔 채 이어진 시간 · 간식 · 포토 이젤 = 꺼 둔 시간(최대 12시간)", "빈 모습 = 받은 뒤이자 평소 모습(점선 · 「빈」) · 사라지지 않음 · HUD 숫자 배지는 두지 않고 광장에서 발견"] },
+
+  { cap: "①-1 받기 창 (우편함을 누름)", html: lobby() + obs([0, 1, 0, 0, 1, 1]) + `<div class="dimbg"></div>
+      <div class="win" style="left:30px;top:230px;width:330px;height:360px"></div>
+      <div class="a val" style="left:30px;top:248px;width:330px;text-align:center;font-size:16px">팬 선물</div>
+      <div class="b off" style="left:155px;top:282px;width:80px;height:80px"><span class="sub">우편함<br>그림</span></div>
+      <div class="a" style="left:30px;top:376px;width:330px;text-align:center"><span class="val">오로라 팬클럽</span><span class="sub"> 이 보냈어요</span></div>
+      <div class="b" style="left:54px;top:404px;width:282px;height:40px"><span class="val" style="font-size:12px">오늘도 함께해 줘서 고마워요</span></div>
+      <div class="b" style="left:110px;top:456px;width:170px;height:56px;justify-content:space-between;padding:0 14px"><span class="b off" style="position:static;width:32px;height:32px;font-size:11px">팬</span><span class="val">+ 값</span></div>
+      <div class="b" style="left:110px;top:526px;width:170px;height:48px;border-width:2.5px"><span class="val" style="font-size:15px">받기</span></div>
+      ${n(1, 36, 280)}${n(2, 36, 378)}${n(3, 36, 414)}${n(4, 86, 472)}${n(5, 86, 540)}`,
+    notes: ["오브젝트 그림(도착 모습)", "보낸 팬 = 지정한 팀의 팬덤 이름 · 솔로 로비면 그 아이돌 팬", "팬 한마디 · 오브젝트마다 다름(예: 간식 = 「쉬는 동안 챙겨 왔어요」)", "보상 = 오브젝트마다 종류가 다름(우편함 = 팬 · 꽃 = 돈 · 카트 = 주사위 · 응원봉 = 인기 재화 · 이젤 = 카드팩 · 간식 = 몬스 기분) · 크기 = 기본 × 엔터파워 × 아이돌 등급 배율 · 값은 비앙카", "「받기」 → 기존 받기 연출 → ② · 창 밖을 눌러도 닫힘(선물은 그대로 남음)"] },
+
+  { cap: "② 받은 뒤 · 우편함이 빈 모습", html: lobby() + obs([0, 0, 0, 0, 1, 1]) +
+      `${n(1, 286, 395)}${n(2, 64, 640)}`,
+    notes: ["받은 오브젝트는 바로 빈 모습(빈 우편함 · 깃발 내려감) · 누르면 남은 시간 한 줄 · 시간이 차면 다시 도착 모습", "아직 안 받은 선물은 그대로 · 팀을 바꿔도 남음 · 그 뒤 선물부터 새 팀 팬덤이 보냄"] },
+];
+
+const SHOT = new URLSearchParams(location.search).get("shot");
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+</script>
+</body>
+</html>

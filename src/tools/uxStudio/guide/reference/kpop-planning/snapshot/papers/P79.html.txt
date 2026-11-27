@@ -1,0 +1,342 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>악귀 디펜스 · 2단계 계산 검수</title><style>*{box-sizing:border-box}body{margin:0;background:#f4f1eb;color:#393447;font-family:system-ui,-apple-system,sans-serif;line-height:1.75}header{position:sticky;top:0;background:#f4f1eb;border-bottom:1px solid #ded7d0;z-index:3;padding:12px 22px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}header strong{font-size:15px}nav{display:flex;gap:14px;flex-wrap:wrap;font-size:13px}a{color:#634182;text-underline-offset:3px}main{max-width:1110px;margin:auto;background:#fffdf9;padding:32px 42px;box-shadow:0 4px 30px #695c5510}h1{font-size:32px;line-height:1.3;letter-spacing:-1px}h2{font-size:23px;line-height:1.4;margin:38px 0 16px;padding-top:14px;border-top:2px solid #e9ddd4;scroll-margin-top:90px}p,li{overflow-wrap:anywhere}table{border-collapse:collapse;width:100%;min-width:0;font-size:14px}.table-scroll:has(th:nth-child(5)) table{min-width:650px}th{background:#eee7f2;color:#4e365e;text-align:left}th,td{padding:10px 12px;border:1px solid #e6e0d8;overflow-wrap:anywhere}td:first-child{max-width:320px}.table-scroll{overflow:auto;border-radius:8px;max-width:100%;margin:16px 0}img{display:block;max-width:100%;height:auto;border-radius:12px;margin:20px auto}strong{color:#5f4375}li{margin:7px 0}pre{overflow:auto;background:#efeaf2;padding:16px;border-radius:10px;font-size:13px}code{overflow-wrap:anywhere}footer{padding:24px;text-align:center;color:#6a6270;font-size:13px}@media(max-width:600px){header{padding:10px 15px;gap:5px}nav{gap:12px}main{padding:20px 18px}h1{font-size:26px}h2{font-size:21px;scroll-margin-top:108px}body{font-size:14px;line-height:1.8}table{font-size:12px}th,td{padding:8px}}</style><header><strong>악귀 디펜스 · 2단계</strong><nav><a href="#section-1">한 판 결과</a><a href="#section-2">압박 곡선</a><a href="#section-3">드론 판단</a><a href="#section-4">방공포 공격</a><a href="#section-5">CSV</a></nav></header><main><h1>악귀 디펜스 · 표와 자동 전투 검수<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h1>
+<p>상태: 제안(검수 대기) · 2단계 · 모든 수치는 시안 예시입니다.</p>
+<p>드론의 위협 판단과 방공포의 조준·충전을 실제 피해·퇴치 계산에 연결했습니다. 이 문서는 계산 결과를 확인합니다. 세밀한 3D 비행·광선·타격·승패 화면은 후속 연출 단계에서 연결합니다.</p>
+<h2 id="section-1">자동 시뮬 결과<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p>승리 5건은 4분 51.70초~5분 12.50초이며, 각 판에서 악귀 231마리를 실제 퇴치하고 유출 없이 보스를 처치했습니다. 별도의 약한 방어 시안은 실제 유출로 무대 HP가 0이 됩니다.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>시드·선택</th>
+<th>결과</th>
+<th align="right">총 시간</th>
+<th align="right">등장</th>
+<th align="right">퇴치</th>
+<th align="right">유출</th>
+<th align="right">무대 HP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_win_17.json">17 · hint</a></td>
+<td>승리</td>
+<td align="right">291.70초</td>
+<td align="right">231</td>
+<td align="right">231</td>
+<td align="right">0</td>
+<td align="right">800</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_win_31.json">31 · hint</a></td>
+<td>승리</td>
+<td align="right">293.80초</td>
+<td align="right">231</td>
+<td align="right">231</td>
+<td align="right">0</td>
+<td align="right">800</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_win_47.json">47 · random</a></td>
+<td>승리</td>
+<td align="right">312.50초</td>
+<td align="right">231</td>
+<td align="right">231</td>
+<td align="right">0</td>
+<td align="right">800</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_win_71.json">71 · random</a></td>
+<td>승리</td>
+<td align="right">295.80초</td>
+<td align="right">231</td>
+<td align="right">231</td>
+<td align="right">0</td>
+<td align="right">800</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_win_97.json">97 · first</a></td>
+<td>승리</td>
+<td align="right">297.05초</td>
+<td align="right">231</td>
+<td align="right">231</td>
+<td align="right">0</td>
+<td align="right">800</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/dp_case_failure.json">17 · hint</a></td>
+<td>패배 검수</td>
+<td align="right">155.65초</td>
+<td align="right">50</td>
+<td align="right">11</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+</tbody></table></div>
+<p>총 시간은 준비·실제 전투·자동 선택 대기·웨이브 간격·승패 안내·리포트 미리보기를 합합니다. 사람이 카드 선택에 오래 머물면 전체 시간은 더 길어집니다. 자동 계산에서 검수한 게임 시간이며 사람이 화면을 플레이한 영상은 아직 아닙니다.</p>
+<h2 id="section-2">웨이브 압박과 역전<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p>5개 차도 입구에 악귀가 모인 뒤 몬스·드론·방공포가 등장합니다. 출격 전 각 입구에 4마리가 남아 있습니다. 이후 웨이브마다 일반 떼의 수·전체 체력·속도를 높입니다.</p>
+<p><img src="pressure.svg" alt="자동 계산의 살아 있는 악귀 수"></p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>웨이브</th>
+<th align="right">일반 떼 수</th>
+<th align="right">일반 떼 총 HP</th>
+<th align="right">HP 배수</th>
+<th align="right">속도 배수</th>
+<th align="right">최대 동시 생존</th>
+<th align="right">전투 시간</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dp_wave_01</td>
+<td align="right">50</td>
+<td align="right">2250</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">21</td>
+<td align="right">43.35초</td>
+</tr>
+<tr>
+<td>dp_wave_02</td>
+<td align="right">80</td>
+<td align="right">6682.5</td>
+<td align="right">1.35</td>
+<td align="right">1.05</td>
+<td align="right">14</td>
+<td align="right">49.95초</td>
+</tr>
+<tr>
+<td>dp_wave_03</td>
+<td align="right">100</td>
+<td align="right">11092.5</td>
+<td align="right">1.7</td>
+<td align="right">1.1</td>
+<td align="right">42</td>
+<td align="right">123.40초</td>
+</tr>
+</tbody></table></div>
+<p>3웨이브 전투 시간에는 별도 보스 1마리와의 전투를 포함합니다. 일반 떼 수와 총 HP에는 보스를 합하지 않습니다. 모든 값은 시안 예시입니다.</p>
+<h2 id="section-3">드론 · 판단과 비행<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p><strong>순찰 → 위협 판단 → 접근 → 공격 → 표적 전환 → 복귀</strong></p>
+<ul>
+<li>건물별 넓은 방어 범위에서 밀집도·공연장 접근도·큰 악귀·보스 위협을 비교합니다. 외부 AI 호출 없이 재현 가능한 규칙으로 판단합니다.</li>
+<li>녹음실 3곳과 댄스 건물 4곳의 지붕 소켓을 사용합니다. 건물 위치·소켓 회전과 스케일은 v06 원본에서 가져옵니다.</li>
+<li>0.25초마다 상황을 살피고, 살아 있는 표적을 바꿀 때는 0.8초 유지·1.6초 전환 간격·1.3배 위협 차이를 확인합니다. 표적이 죽거나 범위를 벗어나면 다시 선택합니다.</li>
+<li>접근 중 가속·좌우 비행·높이 변화를 적용합니다. 210m 복귀 한계를 넘지 않으며, 표적에 가까워진 뒤 사격합니다. 탄환이 도착하면 실제 피해를 적용합니다.</li>
+<li>비행 속도·위치·표적·쿨타임을 저장하므로 새로고침 후 같은 공격이 이어질 수 있습니다. 값은 building_defense.csv·target_rule.csv·attack_profile.csv에서 읽습니다.</li>
+</ul>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>실제 계산 사건</th>
+<th align="right">횟수 · 시안 예시</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>drone_approach</td>
+<td align="right">212</td>
+</tr>
+<tr>
+<td>drone_engage</td>
+<td align="right">157</td>
+</tr>
+<tr>
+<td>drone_retarget</td>
+<td align="right">302</td>
+</tr>
+<tr>
+<td>drone_return</td>
+<td align="right">226</td>
+</tr>
+<tr>
+<td>drone_patrol</td>
+<td align="right">102</td>
+</tr>
+</tbody></table></div>
+<h2 id="section-4">방공포 · 조준과 충전<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p><strong>추적 → 포신 조준 → 충전 → 광선 명중 → 재사용 대기</strong></p>
+<p>방송국 city_27·city_28·city_30의 지붕 소켓에 연결합니다. 회전 속도와 허용 오차로 조준하고 1.2초 충전 후 실제 피해를 줍니다. 충전 중 표적이 죽거나 바뀌면 취소하고 새 표적을 조준합니다.</p>
+<p>첫 계산에서 보스 퇴치가 늦어져 사거리·피해·보스 HP를 시안 CSV에서 조정했습니다. 시간이 지나면 적을 지우는 처리는 넣지 않습니다. 건물 마크 변신·충전 빛·포신 반동·타격 그림은 연출 단계에서 연결합니다.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>건물·유닛</th>
+<th align="right">발사</th>
+<th align="right">명중</th>
+<th align="right">피해</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dp_binding_city_27 · anti_air</td>
+<td align="right">41</td>
+<td align="right">41</td>
+<td align="right">3748.24</td>
+</tr>
+<tr>
+<td>dp_binding_city_28 · anti_air</td>
+<td align="right">22</td>
+<td align="right">22</td>
+<td align="right">1398.6</td>
+</tr>
+<tr>
+<td>dp_binding_city_30 · anti_air</td>
+<td align="right">18</td>
+<td align="right">18</td>
+<td align="right">997.7</td>
+</tr>
+<tr>
+<td>dp_binding_city_07 · drone</td>
+<td align="right">76</td>
+<td align="right">66</td>
+<td align="right">505.5</td>
+</tr>
+<tr>
+<td>dp_binding_city_09 · drone</td>
+<td align="right">139</td>
+<td align="right">124</td>
+<td align="right">922.25</td>
+</tr>
+<tr>
+<td>dp_binding_city_10 · drone</td>
+<td align="right">10</td>
+<td align="right">8</td>
+<td align="right">47</td>
+</tr>
+<tr>
+<td>dp_binding_city_22 · drone</td>
+<td align="right">72</td>
+<td align="right">58</td>
+<td align="right">536.8</td>
+</tr>
+<tr>
+<td>dp_binding_city_24 · drone</td>
+<td align="right">62</td>
+<td align="right">52</td>
+<td align="right">475.7</td>
+</tr>
+<tr>
+<td>dp_binding_city_02 · drone</td>
+<td align="right">79</td>
+<td align="right">63</td>
+<td align="right">454.75</td>
+</tr>
+<tr>
+<td>dp_binding_city_04 · drone</td>
+<td align="right">83</td>
+<td align="right">66</td>
+<td align="right">491</td>
+</tr>
+</tbody></table></div>
+<h2 id="section-5">CSV와 연결 검사<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p>23개 CSV·266행과 schema.json을 구성했습니다. ID 중복·없는 연결·필수 값 공란·잘못된 숫자·차도 이탈·끊긴 길·건물 소켓 중복·드론 높이와 범위·스킬 트리·웨이브 약화·원본 리소스를 검사합니다.</p>
+<p><a href="http://127.0.0.1:7007/data/defense_proto/v01/README.md">표 안내</a> · <a href="http://127.0.0.1:7007/data/defense_proto/v01/schema.json">스키마</a> · <a href="http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%95%85%EA%B7%80%EB%94%94%ED%8E%9C%EC%8A%A4/%EB%8B%A8%EA%B3%842_v01/logs/test_validation.json">검수 24개</a></p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>표</th>
+<th align="right">행</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_profile.csv">profile.csv</a></td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_enemy_type.csv">enemy_type.csv</a></td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_wave.csv">wave.csv</a></td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_wave_spawn.csv">wave_spawn.csv</a></td>
+<td align="right">26</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_road_node.csv">road_node.csv</a></td>
+<td align="right">18</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_road_edge.csv">road_edge.csv</a></td>
+<td align="right">18</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_route.csv">route.csv</a></td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_route_step.csv">route_step.csv</a></td>
+<td align="right">20</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_defense_slot.csv">defense_slot.csv</a></td>
+<td align="right">15</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_attack_profile.csv">attack_profile.csv</a></td>
+<td align="right">8</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_target_rule.csv">target_rule.csv</a></td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_mons_combat.csv">mons_combat.csv</a></td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_building_defense.csv">building_defense.csv</a></td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_skill.csv">skill.csv</a></td>
+<td align="right">15</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_skill_effect.csv">skill_effect.csv</a></td>
+<td align="right">30</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_skill_offer.csv">skill_offer.csv</a></td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_gauge.csv">gauge.csv</a></td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_reward_rule.csv">reward_rule.csv</a></td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_asset.csv">asset.csv</a></td>
+<td align="right">12</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_fx.csv">fx.csv</a></td>
+<td align="right">14</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_ui_text.csv">ui_text.csv</a></td>
+<td align="right">39</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_report_field.csv">report_field.csv</a></td>
+<td align="right">7</td>
+</tr>
+<tr>
+<td><a href="http://127.0.0.1:7007/data/defense_proto/v01/defense_proto_v01_simulation_case.csv">simulation_case.csv</a></td>
+<td align="right">6</td>
+</tr>
+</tbody></table></div>
+<h2 id="section-6">저장과 재현 검수<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p>동일 시드가 같은 결과를 만듭니다. 탄환 비행 중·카드 선택 중·보스 전투 중에 복구해도 최종 상태 전체가 같습니다. 선택 중에는 적·탄환·공격 시간과 위치를 멈춥니다. 새 판마다 스킬을 초기화하며 만렙 후보는 제외합니다.</p>
+<p>저장 실패·데이터 변경·다른 판 소유·버전 충돌을 검사했습니다. 동시 쓰기는 잠금 어댑터 검수이며, 실제 브라우저 두 탭·화면 새로고침은 통합 단계에서 확인합니다.</p>
+<h2 id="section-7">원본과 기준 그림<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p>모노카피바라의 CSV·ID·연결 검사 방식과 현재 도시맵 v06 도로·소켓을 사용합니다. 모노의 전투 수치는 복사하지 않습니다. 밝은 파스텔 기준 그림 A·B를 유지합니다. 아래는 새 결과 그림이 아닌 현중의 기준 그림입니다.</p>
+<p><img src="http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EB%8F%84%EC%8B%9C%EB%A7%B5_%EC%8B%9C%EC%95%88/%EA%B8%B0%EC%A4%80%EA%B7%B8%EB%A6%BC/20261006_1005_%ED%98%84%EC%A4%91_%EB%8F%84%EC%8B%9C%EB%A7%B5_%EA%B8%B0%EC%A4%80%EA%B7%B8%EB%A6%BC_A_%ED%8C%8C%EC%8A%A4%ED%85%94.png" alt="현중 기준 그림 A">
+<img src="http://127.0.0.1:7007/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EB%8F%84%EC%8B%9C%EB%A7%B5_%EC%8B%9C%EC%95%88/%EA%B8%B0%EC%A4%80%EA%B7%B8%EB%A6%BC/20261006_1005_%ED%98%84%EC%A4%91_%EB%8F%84%EC%8B%9C%EB%A7%B5_%EA%B8%B0%EC%A4%80%EA%B7%B8%EB%A6%BC_B_%ED%8C%8C%EC%8A%A4%ED%85%94.png" alt="현중 기준 그림 B"></p>
+<h2 id="section-8">뺀 것 · 다음 단계<span class="origin-tag" style="font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle">(신규)</span></h2>
+<p>원본 파일을 삭제하거나 옮기지 않습니다. 이번 실행에서 함정을 제외하고, 옛 정속 궤도 순찰안을 위협 판단·추적 비행으로 대체합니다. 옛 설계서와 기획서는 보존합니다.</p>
+<p>다음 3단계는 여러 차도 위 악귀 구름 떼·몬스 공격·피격·하늘로 사라짐을 화면에 연결합니다. 드론 비행 방향·기울기·가감속·탄환 궤적을 그 연출에 반영합니다. 방공포 변신·충전·보스·승패 화면은 4단계에 연결합니다. 지시서에 따라 2단계 보고 후 다음 확인을 기다립니다.</p>
+</main><footer>제안(검수 대기) · 계산 검수 문서 · 세밀한 3D 연출은 후속 단계에 연결합니다.</footer></html>

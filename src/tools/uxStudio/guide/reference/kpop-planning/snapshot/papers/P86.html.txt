@@ -1,0 +1,113 @@
+<!doctype html><html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P86 · 핵심제안 개발 기획서 작성 규칙</title><link rel="stylesheet" href="./format.css"></head><body><main><header><div class="eyebrow">P86 · 공통 작성 기준</div><h1>핵심제안 개발 기획서 작성 규칙</h1><span class="pill">개발됨</span><p>모든 기획서의 공통 독서 틀과 대표 개발 기획서의 7장 순서를 설명합니다. 맨 위 세 단락과 하단 작업 기록, 짝 로그의 역할을 구분합니다.</p><div class="actions"><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P88&amp;plan=planning_development_plan_defense">대표 샘플 · 악귀 디펜스</a><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P87&amp;plan=planning_development_plan_board">보드 작성 예시</a><a href="./작성규칙.md">작성 규칙 MD</a><a href="./기획서_빈양식.md">빈 양식 MD</a><a href="./작성AI_프롬프트.md">AI 작성 지시</a><a href="./작성규칙.log.md">로그</a></div></header><nav class="local-nav" aria-label="작성 규칙 세부 내용"><a href="#guide-part-1">00 모든 기획서의 틀</a><a href="#guide-part-2">01 개요</a><a href="#guide-part-3">02 관련 시스템</a><a href="#guide-part-4">03 구동</a><a href="#guide-part-5">04 상세 기획</a><a href="#guide-part-6">05 리소스</a><a href="#guide-part-7">06 CSV·등록</a><a href="#guide-part-8">07 진행·검수</a></nav><div id="guide-body"></div><details><summary>공통 빈 양식을 펼쳐 복사합니다</summary><p><button type="button" data-copy-target="template">내용을 복사합니다</button><span class="copy-state" role="status"></span></p><pre id="template"># P번호 · 콘텐츠 이름 · 대표 개발 기획서
+
+**이 문서는** (무슨 기획서인지 한 줄)
+
+**보는 법** (읽는 순서 · 같이 열 시뮬레이터 링크 | 시뮬레이터 없음)
+
+**지금 상태** 개발됨 | 현재 개발되지 않음, 진행 중 · 부분 구현·실제 사용·화면 연결·제작전·미검수 범위: [근거]
+
+## 1. 개요
+
+출처: (신규 | 이식 | 합침) 제안서 [카드 이름](/docs/planning/proposal-concept/○○.html) · 책갈피 [S○○](링크)
+
+한 줄 설명.
+
+### 콘텐츠 경계
+
+- 맡는 것 / 다른 문서에 맡기는 것(문서 번호)
+
+### 현재 기준과 목표
+
+- 지금 제안서 기준 · 흐름 그림 1개(헌법 제17조) · 이번에 뺀 것
+
+## 2. 필요 관련 시스템 기획서
+
+| 문서 번호·제목 | 이 콘텐츠에서의 역할 | 의존 방향 | 읽을 장 | 상태 |
+|---|---|---|---|---|
+| 제안서 원문 [카드](링크) | 기준 | 입력 | — | — |
+| [책갈피 S○○](링크) | 이식 결과(링크만) | 입력 | — | (이식) |
+
+## 3. 구동 방법·시뮬레이션
+
+화면 흐름: [들어오는 화면] → [이 화면] → [나가는 화면] · 스샷 [있는 증거 | 미완] · 이식 비교 [책갈피 S○○ | 해당 없음]
+
+- 실행: P94 모듈 링크 · 새 창 링크
+- 조작 순서 · 결과 · 저장 · 복원 (구현된 것만, 없으면 미구현)
+
+- 실제 실행 입구·모드·query/hash: [등록 주소]
+- 실제 원표·로더·공유 계산·저장 writer/조회: [경로 · scope]
+
+## 4. 상세 기획
+
+### 한 판 순서 (확정 근거 | 임시 시안 | 결정 대기)
+
+| 점검 | 내용 |
+|---|---|
+| 시작·종료 | |
+| 입력·출력 | |
+| 상태와 전이 | |
+| 판정 | |
+| 오류·예외 | |
+| 저장·복원 | |
+| 다른 모듈 연결 | |
+
+### (콘텐츠별 세부 소제목) (확정 | 임시 시안 | 결정 대기)
+
+### 필요 시스템
+
+### 화면·연출 목록
+
+### 남은 결정
+
+- 원문 라벨 그대로 선택지만(헌법 제13조)
+
+## 5. 필요 리소스·이미지 설명
+
+| 미리보기 | 이름·사용 위치 | 동작·상태 | 파일·테이블 키 | 출처·준비 상태 |
+|---|---|---|---|---|
+| 그림 | | | | 있음 · 미제작 |
+
+### 추가 제작·연출 리소스
+
+## 6. 관련 CSV·테이블 데이터
+
+| 파일·보기 | 역할 | 주키·참조 | 값 (출처 꼬리표 · 결정 표시) | 담당 |
+|---|---|---|---|---|
+| | | | (이식) 확정(시뮬) | |
+
+주사위 환산: 하루 사용 ○개 · 이 콘텐츠 지급 ○개 (60일 시뮬 링크) | 해당 없음
+
+## 7. 개발 진행·검수
+
+첫 상태 줄과 7장에는 부분 구현·실제 사용·화면 연결·제작전·미검수 범위를 근거와 함께 설명합니다. 이 설명은 새 상태 코드나 운영 정책을 추가하는 규칙이 아닙니다.
+
+| 요소 | 상태 | 확인 방법·증거 | 다음 작업 |
+|---|---|---|---|
+| | 개발 끝 · 개발 중 · 기획 중 · 제외 | | |
+
+### 수락 기준
+
+### 뺀 것·옮긴 것·보존한 것
+
+&lt;details&gt;&lt;summary&gt;작업 기록&lt;/summary&gt;
+
+- 읽은 원본 · 문서 정보 · 경로 · 근거 · 미확인 범위 등 짧은 작업 메모
+
+&lt;/details&gt;
+
+(변경 이력·이전 원문은 같은 폴더 `문서이름.log.md`의 「## 변경 이력」·「## 지난 기록」에 보존합니다.)
+</pre></details><details><summary>이전 HTML 복사란의 이벤트 규칙 · 원문 보존/운영 연결 검증 대기</summary><p>이 복사란에 있었던 이벤트 구안은 짝 로그에 원문 그대로 보존했습니다. 현재 원표 ID와 보관 표 상태를 별도로 확인해야 하므로 공통 빈 양식이나 새 필수 지침으로 복사하지 않습니다.</p><p><a href="./작성규칙.log.md">이전 원문 · 짝 로그</a></p></details><details><summary>다른 AI에게 전달할 작성 지시를 펼쳐 복사합니다</summary><p><button type="button" data-copy-target="author-prompt">내용을 복사합니다</button><span class="copy-state" role="status"></span></p><pre id="author-prompt">[콘텐츠 이름]의 대표 개발 기획서를 작성합니다.
+
+1. 먼저 정본을 직접 읽습니다: W00c `산출/전체기획서/00_헌법_기획서기조.md` · P86 `작성기준_v02/작성규칙.md` · S17 `산출/시스템기획/S17_기획서툴_제작기본양식_v02.md`. 현재 요청·허용 파일과 관련 카드→원문→실제 원표·로더·계산·저장/조회 계약을 확인합니다. 기억·요약만으로 진행하지 않습니다.
+2. 도구별 자세한 역할은 S17 현재 프로젝트 예를 따릅니다. 같은 계산 함수를 쓰더라도 저장을 공유한다고 가정하지 않습니다. HTML 독서와 등록 core 조작을 나누고, 자체 툴 주소의 query/hash를 보존합니다.
+3. 빈 양식의 1~7장 이름·순서로 MD와 HTML을 맞춥니다. 맨 위는 「이 문서는·보는 법·지금 상태」 세 단락, 짧은 작업 기록은 맨 아래 접기, 변경·이전 원문은 짝 `문서이름.log.md`에 보존합니다. 첫 상태 줄과 7장에는 부분 구현·실사용·연결·제작전·미검수 범위를 함께 설명합니다.
+4. 구현 확인에는 원표·코드 근거를 붙이고 숫자·운영 정책의 새 승인으로 쓰지 않습니다. 미정값·임시 수치는 W00c·S17 정본을 따릅니다. 보관표나 추정 경로를 현재 필수 원본으로 만들지 않습니다.
+5. 백업 후 허용 범위만 수정합니다. 본문·HTML 복사란·짝 빈 양식/작성 지시·실제 DECKS 짧은 설명을 함께 대조합니다. 표 구조 변경을 맡았을 때만 schema 원본→지정 생성기→`--check`를 확인하며 생성물을 손으로 고치지 않습니다.
+6. 원표·키/미정값→계산·상태·중복 정산·저장 범위→7007 목록→관련 카드→기존 버튼→실제 화면→복귀·캡처 순서로 검수합니다. 하지 않은 검수는 미확인으로 적고 지정 보고 범위를 따릅니다. 포장·업로드가 맡겨지면 실제 포장 규칙/필터를 다시 읽으며 빌드·서버·업로드를 이 작성 지시만으로 실행하지 않습니다.
+
+지정 범위: [이번에 쓸 기능]
+문서 번호 · 저장 위치: [쓰지 않은 번호 · 경로]
+관련 원문: [카드 · 제안서 · 실행 · 원표 · 로더 · 계산 · writer/조회 경로]
+이번 수락 기준 · 금지: [현재 직접 지시 그대로]
+</pre></details><script type="module">import {renderMarkdown} from "/src/tools/planningDocs/md.ts";const r=await fetch("./작성규칙.md");if(!r.ok)throw Error("작성 규칙을 읽지 못했습니다");document.getElementById("guide-body").innerHTML=renderMarkdown(await r.text(),location.pathname.slice(1).replace(".html",".md"));document.querySelectorAll("#guide-body h2").forEach((h,i)=>{h.id="guide-part-"+(i+1);h.style.scrollMarginTop="70px";});document.querySelectorAll("#guide-body table").forEach(table=>{const wrap=document.createElement("div");wrap.className="table-scroll";table.replaceWith(wrap);wrap.append(table);});</script></main><script src="./document.js"></script><script src="../콘텐츠별_v03/development-links.js"></script><section id="table-master-rule"><h2>테이블 데이터 규칙 · 마스터 표</h2><ul><li>데이터 종류마다 **마스터 표**를 하나 둡니다. 모든 콘텐츠가 같은 마스터를 같이 씁니다.</li><li>아이템(카드팩·상점 상품·보상·티켓·주사위·미션 보상 등) → `data/master/item_master.csv` · 종류 칸 `item_type`</li><li>스킬(몬스 스킬·디펜스 스킬·아이돌 스킬) → `data/master/skill_master.csv` · `skill_type`</li><li>캐릭터·NPC(후보·몬스·나쁜 기운 적 등) → `data/master/character_master.csv` · `character_type`</li><li>건물 → `data/master/building_master.csv` · `building_type`</li><li>콘텐츠 표는 마스터 ID만 가리킵니다. 같은 것을 콘텐츠 표에 새로 정의하지 않습니다.</li><li>열쇠칸 값(ID)은 표 파일의 영문 이름 전체를 접두어로 씁니다(풀네임 규칙). 열 이름은 그대로 둡니다.</li><li>발란스 값은 코드에 쓰지 않고 CSV에 둡니다. 값이 없으면 칸을 비우고 「비어 있음(0으로 동작)」으로 적습니다(분업표 절대 원칙 ①).</li><li>아직 원본 표에서 마스터로 옮기지 않은 줄은 `migration_status = 마스터 이전 대기`로 표시합니다.</li><li>종류: item_master(item_type) · skill_master(skill_type) · character_master(character_type) · building_master(building_type)</li></ul></section>
+</body></html>

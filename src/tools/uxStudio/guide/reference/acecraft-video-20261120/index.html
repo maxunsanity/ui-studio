@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACECRAFT · 영상 UI 분석 갤러리</title>
+<style>
+:root{color-scheme:light;--ink:#25313b;--muted:#63717a;--paper:#f6f5ef;--line:#d9dedb;--warm:#fff2ca}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}a{color:#3e6280;text-underline-offset:3px}a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #b5781b;outline-offset:3px}input,select{font:inherit}select,summary{cursor:pointer}header{background:#202f39;color:#fff8e4;padding:40px max(24px,calc((100vw - 1360px)/2));border-bottom:5px solid #c9a654}header p{max-width:930px;margin:10px 0;color:#d6e0e3}.eyebrow{font-size:12px;letter-spacing:.13em;color:#eed397}h1{font-size:clamp(27px,4vw,43px);line-height:1.2;margin:8px 0 14px}h2{font-size:25px;margin:0 0 12px}h3{font-size:17px;line-height:1.45;margin:8px 0}h4{font-size:13px;margin:16px 0 5px}p{margin:7px 0}main{max-width:1410px;margin:auto;padding:24px}section{margin-bottom:32px}.top-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.top-links a{display:inline-block;background:#f0d995;color:#25313b;padding:9px 15px;border-radius:7px;font-weight:700;text-decoration:none}.top-links a.secondary{background:transparent;border:1px solid #92a5ac;color:#f7eed7}.status,.tag,.reference-label{display:inline-block;padding:3px 9px;border-radius:5px;font-size:11px;font-weight:750}.status{background:var(--warm);color:#76501f;border:1px solid #ead59d}.tag{background:#eaf0f2;color:#426274;margin-right:5px}.reference-label{background:#614833;color:#fff6db}.intro{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px}.intro ul{margin:12px 0 0;padding-left:22px}.intro li{margin:6px 0}.summary{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}.summary span{border:1px solid var(--line);background:#fff;padding:9px 14px;border-radius:7px}.summary strong{font-size:21px;margin-right:5px}.toolbar{display:flex;align-items:end;flex-wrap:wrap;gap:14px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:10px;margin:18px 0}.field{display:grid;gap:5px}.field.search{flex:1 1 280px}label{font-size:12px;font-weight:700}input,select{width:100%;min-height:43px;border:1px solid #b6c1c5;border-radius:6px;background:#fff;padding:9px 11px;color:var(--ink)}input{min-width:0}#resultCount{font-size:13px;color:var(--muted);margin:0 0 15px}.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{min-width:0;background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden;display:grid;grid-template-columns:140px minmax(0,1fr);align-content:start}.card figure{margin:0;padding:12px;background:#e9edeb}.card figure a{display:block;margin-top:7px}.card img{display:block;width:100%;height:auto;border:1px solid #b4bfc2;border-radius:4px}.card figcaption{font-size:10px;line-height:1.6;margin-top:7px;color:#566772;overflow-wrap:anywhere;white-space:pre-line}.card-body{padding:14px 12px;min-width:0}.role{font-size:13px;color:#53636e}.board-name{font-size:10px;line-height:1.5;overflow-wrap:anywhere;color:#73828a;margin:14px 0 8px}.meta-note{font-size:11px;color:#63717a}.card details{grid-column:1/-1;border-top:1px solid var(--line);padding:11px 14px 14px;font-size:12px;overflow-wrap:anywhere}.card summary{font-weight:700;color:#456378}.card ul{padding-left:18px;margin:5px 0}.card li{margin:6px 0}.card .evidence-title{color:#496a54}.card .unverified-title{color:#8b6125}.empty{padding:32px;border:1px dashed #b7c3c6;border-radius:10px;background:#fff;color:#576b76}.asset-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.asset{margin:0;min-width:0;border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden}.art-image{display:block;height:230px;padding:15px;background-color:#e4e9e9;background-image:linear-gradient(45deg,#d3dcdc 25%,transparent 25%),linear-gradient(-45deg,#d3dcdc 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#d3dcdc 75%),linear-gradient(-45deg,transparent 75%,#d3dcdc 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}.art-image img{width:100%;height:100%;object-fit:contain}.asset figcaption{padding:14px;font-size:12px}.asset strong{display:block;font-size:14px;margin:6px 0}.asset p{overflow-wrap:anywhere}.asset .dimensions{font-size:11px;color:#6b7981}.footnote{background:#e9efef;border:1px solid #d1dbdb;border-radius:10px;padding:18px;font-size:13px}.footnote ul{padding-left:20px}footer{max-width:1410px;margin:auto;padding:0 24px 30px;color:#64717a;font-size:12px}#loadError{color:#8a3f2d}
+@media (max-width:1150px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.asset-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:720px){.gallery{grid-template-columns:minmax(0,1fr)}.asset-grid{grid-template-columns:repeat(2,minmax(0,1fr))}main{padding:16px}header{padding:28px 18px}.toolbar{padding:13px}}
+@media (max-width:430px){.card{grid-template-columns:118px minmax(0,1fr)}.card figure{padding:10px}.card-body{padding:12px 10px}.asset-grid{grid-template-columns:minmax(0,1fr)}.art-image{height:260px}.top-links a{width:100%;text-align:center}.field{width:100%}.summary{gap:7px}.summary span{padding:7px 10px}h2{font-size:22px}footer{padding:0 16px 24px}}
+.native-label{display:inline-block;padding:3px 9px;border-radius:5px;font-size:11px;font-weight:750;background:#245e63;color:#f3ffff}.board-shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;min-width:0}.board-shots.single-shot{grid-template-columns:minmax(0,1fr)}.card{grid-template-columns:minmax(0,1fr)}.board-shots figure{min-width:0}.board-shots .native-capture{background:#e4eeee}@media(max-width:430px){.card{grid-template-columns:minmax(0,1fr)}.board-shots figure{padding:8px}.reference-label,.native-label{padding:3px 5px;font-size:10px}}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">VIDEO REFERENCE · PROPOSED UI BOARDS</div>
+<h1>ACECRAFT 영상 UI 갤러리</h1>
+<p>두 영상에서 확인한 화면을 20개 대표 보드 계획으로 정리했습니다. 원본 참조와 새 그림을 구분하고, 관찰·추정·미확인·재제작 차이를 함께 남깁니다.</p>
+<p><span id="productionStatus" class="status">제작 상태를 읽고 있습니다.</span> <small id="mappingStatus">저장·입력·실제 화면 검수 기록을 구분해 표시합니다.</small></p>
+<div class="top-links"><a id="canvasLink" href="/ui-studio/canvas.html?workspace=workspace-457652ed-0c01-4aec-bd2d-060a999c1178&amp;project=ux-96eff1ad&amp;view=ui" target="_blank" rel="noopener">샘플 전체 캔버스 열기</a><a class="secondary" href="#artwork">새 원화 보기</a><a class="secondary" href="data.json">분석 데이터 JSON</a></div>
+</header>
+<main>
+<section class="intro" aria-labelledby="aboutTitle">
+<h2 id="aboutTitle">읽기 전에</h2>
+<p>원본 영상 참조와 실제 툴 조립 캡처를 나란히 비교합니다. 두 캡처는 문서·검수 증거이며 제품 원화로 사용하지 않습니다. 새 제작 자산은 아래 별도 목록입니다.</p>
+<div class="summary" id="boardSummary" aria-live="polite"></div>
+<p>영상 A 113.08초 · 영상 B 33.505초 · 공통 논리 화면 420×924</p>
+<details><summary>분석 범위와 시점 주의</summary><ul id="guideNotes"></ul></details>
+</section>
+<section aria-labelledby="galleryTitle">
+<h2 id="galleryTitle">원본 화면 · 보드 계획</h2>
+<form class="toolbar" id="filterForm" role="search">
+<div class="field search"><label for="searchInput">이름·문구·관찰 내용 검색</label><input id="searchInput" type="search" placeholder="예: Scott, 모집, Claim, 상점" autocomplete="off"></div>
+<div class="field"><label for="kindFilter">화면 종류</label><select id="kindFilter"><option value="all">전체 종류</option><option value="page">페이지</option><option value="modal">팝업</option></select></div>
+</form>
+<p id="resultCount" aria-live="polite">분석 데이터를 읽고 있습니다.</p>
+<p id="loadError" hidden></p>
+<div class="gallery" id="gallery"></div>
+<noscript><p>검색 갤러리는 JavaScript가 필요합니다. <a href="data.json">분석 JSON</a>에서 전체 근거를 확인할 수 있습니다.</p></noscript>
+</section>
+<section id="artwork" aria-labelledby="artTitle">
+<h2 id="artTitle">새 원화 · 새 공통 자산</h2>
+<p>참조 화면의 픽셀을 잘라 쓰지 않은 제작 제안입니다. 투명 그림은 체크무늬 위에 표시합니다. 원본과의 외모·포즈·배경·품목 차이를 각 항목에 적었습니다.</p>
+<div class="asset-grid" id="assetGrid"></div>
+</section>
+<section class="footnote" aria-labelledby="limitTitle">
+<h2 id="limitTitle">묶은 변형과 남은 확인</h2>
+<ul id="excludedNotes"></ul>
+<p id="verificationScope"><strong>검증 범위:</strong> 정적 검사와 실제 표시·입력·재열기 검수는 각 기록을 구분해 확인합니다.</p>
+<p>게임 식별 근거: <a href="https://apps.apple.com/es/app/acecraft/id6499112583?eventid=6827963235" target="_blank" rel="noopener">공식 App Store · SP Explorer Joey 이벤트</a>.</p>
+</section>
+</main>
+<footer><p>작성: codex(단이) · 분석 문서 · 제안(검수 대기). 게임 구현·설계 모델·완료 승인 문서가 아닙니다.</p><p id="preparedAt"></p></footer>
+<script>
+const state = { data: null };
+const $ = id => document.getElementById(id);
+function normalize(value) { return String(value ?? '').normalize('NFKC').trim().toLocaleLowerCase('ko-KR'); }
+function matches(entry, query, kind) {
+  return (kind === 'all' || entry.kind === kind) && normalize(JSON.stringify(entry)).includes(normalize(query));
+}
+function node(tag, className, text) {
+  const item = document.createElement(tag);
+  if (className) item.className = className;
+  if (text !== undefined) item.textContent = text;
+  return item;
+}
+function listSection(parent, heading, items, className) {
+  const values = Array.isArray(items) ? items : [items];
+  parent.append(node('h4', className, heading));
+  const list = node('ul');
+  values.filter(Boolean).forEach(value => list.append(node('li', '', value)));
+  if (!list.children.length) list.append(node('li', '', '추가 기록 없음'));
+  parent.append(list);
+}
+function nativeUrl(entry) {
+  if (!entry.nativeBoardId) return null;
+  const url = new URL('/ui-studio/', location.origin);
+  const project = state.data.sampleProject;
+  if (!project?.designId || !project?.workspaceId) return null;
+  url.searchParams.set('project', project.designId);
+  url.searchParams.set('workspace', project.workspaceId);
+  url.searchParams.set('screen', entry.nativeBoardId);
+  url.searchParams.set('editor', 'detail');
+  url.searchParams.set('view', 'ui');
+  return url.pathname + url.search;
+}
+function verificationText(entry) {
+  const value = entry.actualVerification || {};
+  return '저장·재열기: ' + (value.savedAndReopened ?? '미기록') + ' / 실제 표시: ' + (value.visual ?? '미기록') + ' / 실제 입력: ' + (value.input ?? '미기록');
+}
+function renderSummary() {
+  const entries = state.data.entries;
+  const summary = $('boardSummary');
+  const metrics = [[entries.length, '대표 보드'], [entries.filter(e => e.kind === 'page').length, '페이지'], [entries.filter(e => e.kind === 'modal').length, '팝업'], [entries.filter(e => e.nativeBoardId).length, '저장 보드 매핑']];
+  if (Number.isInteger(state.data.summary?.nativeElements)) metrics.push([state.data.summary.nativeElements, '저장 부품']);
+  if (Number.isInteger(state.data.summary?.nativeLinks)) metrics.push([state.data.summary.nativeLinks, '저장 연결']);
+  summary.replaceChildren(...metrics.map(([count, label]) => { const span = node('span'); span.append(node('strong', '', count.toLocaleString()), document.createTextNode(label)); return span; }));
+  $('productionStatus').textContent = '제작 상태 · ' + (state.data.status || '미기록');
+  $('mappingStatus').textContent = state.data.sampleProject.boardMapping || '개별 보드 매핑 미기록';
+  $('verificationScope').textContent = '검증 범위: ' + (state.data.verification.nativeSnapshot?.scope || '문서 정적 검사는 verification 기록, 실제 표시·입력·재열기는 각 보드의 검수 기록을 확인합니다.');
+}
+function nativeFigure(entry) {
+  const figure = node('figure', 'native-capture'); figure.append(node('span', 'native-label', '툴 조립 화면'));
+  const link = node('a'); link.href = entry.nativeImage; link.target = '_blank'; link.rel = 'noopener';
+  const image = node('img'); image.src = entry.nativeImage; image.alt = entry.title + ' 실제 툴 조립 화면 캡처'; image.loading = 'lazy'; image.decoding = 'async'; image.width = entry.nativeImageSize?.[0] || 420; image.height = entry.nativeImageSize?.[1] || 924; link.append(image); figure.append(link);
+  figure.append(node('figcaption', '', '저장본 r' + entry.nativeRevision + ' 대응 · ' + image.width + '×' + image.height + '\n검수 증거 · 제품 원화/런타임 자산 아님'));
+  return figure;
+}
+function card(entry) {
+  const article = node('article', 'card'); article.id = 'board-' + entry.id;
+  const figure = node('figure'); figure.append(node('span', 'reference-label', '원본 · 참조 전용'));
+  const link = node('a'); link.href = entry.source.image; link.target = '_blank'; link.rel = 'noopener';
+  const image = node('img'); image.src = entry.source.image; image.alt = entry.title + ' 원본 영상 참조'; image.loading = 'lazy'; image.decoding = 'async'; image.width = entry.source.imageSize[0]; image.height = entry.source.imageSize[1]; link.append(image); figure.append(link);
+  figure.append(node('figcaption', '', '영상 ' + entry.source.video + ' · 실제 ' + entry.source.actualSeconds.toFixed(3) + '초\n요청 ' + entry.source.requestedSeconds.toFixed(3) + '초 · ' + entry.source.imageBytes.toLocaleString() + 'B'));
+  const body = node('div', 'card-body'); body.append(node('span', 'tag', entry.kind === 'page' ? '페이지' : '팝업'), node('h3', '', entry.title), node('p', 'role', entry.role), node('p', 'board-name', entry.boardNameProposal), node('span', 'status', entry.status), node('p', 'meta-note', entry.nativeBoardId ? '저장 보드 ID: ' + entry.nativeBoardId : '개별 보드 매핑 미기록'));
+  const boardUrl = nativeUrl(entry);
+  if (boardUrl) { const nativeLink = node('a', 'native-board-link', '이 보드 정상 편집 화면 열기'); nativeLink.href = boardUrl; nativeLink.target = '_blank'; nativeLink.rel = 'noopener'; body.append(nativeLink); }
+  if (entry.componentCounts) body.append(node('p', 'meta-note', '저장 부품 ' + entry.componentCounts.total + '개 · 입력 대상 ' + entry.componentCounts.inputRoots + '개 · 출발 연결 ' + entry.componentCounts.outgoingLinks + '개'));
+  const details = node('details'); details.append(node('summary', '', '관찰 · 추정 · 미확인 · 재제작 차이'));
+  listSection(details, '관찰한 구성', entry.observed.hierarchy, 'evidence-title');
+  listSection(details, '읽힌 문구', entry.observed.text, 'evidence-title');
+  listSection(details, '추정 · 해석', entry.inference);
+  listSection(details, '미확인', entry.unverified, 'unverified-title');
+  listSection(details, '새 원화·기호·반복행의 차이', entry.differences, 'unverified-title');
+  listSection(details, '같은 화면으로 묶은 상태', entry.repetition);
+  listSection(details, '제작 레시피의 상세 제한', entry.recipeNotes);
+  if (entry.nativeAssemblyNotes?.length) listSection(details, '실제 저장본 구성', entry.nativeAssemblyNotes, 'evidence-title');
+  details.append(node('p', 'meta-note', verificationText(entry)));
+  const shots = node('div', 'board-shots'); shots.append(figure); if (entry.nativeImage) shots.append(nativeFigure(entry)); else shots.classList.add('single-shot');
+  article.append(shots, body, details); return article;
+}
+function renderGallery() {
+  const filtered = state.data.entries.filter(entry => matches(entry, $('searchInput').value, $('kindFilter').value));
+  const gallery = $('gallery'); gallery.replaceChildren(...filtered.map(card));
+  if (!filtered.length) gallery.append(node('p', 'empty', '일치하는 화면이 없습니다. 검색어를 줄이거나 전체 종류를 선택해 주세요.'));
+  $('resultCount').textContent = filtered.length + ' / ' + state.data.entries.length + '개 표시 · ' + (state.data.status || '상태 미기록');
+}
+function renderAsset(asset) {
+  const figure = node('figure', 'asset'); const link = node('a', 'art-image'); link.href = asset.image; link.target = '_blank'; link.rel = 'noopener';
+  const image = node('img'); image.src = asset.image; image.alt = asset.name; image.loading = 'lazy'; image.decoding = 'async'; image.width = asset.size[0]; image.height = asset.size[1]; link.append(image);
+  const caption = node('figcaption'); caption.append(node('span', 'tag', asset.category), node('strong', '', asset.name), node('p', '', asset.note), node('p', 'dimensions', asset.size[0] + '×' + asset.size[1] + ' · ' + asset.bytes.toLocaleString() + 'B'), node('span', 'status', asset.status)); figure.append(link, caption); return figure;
+}
+async function init() {
+  try {
+    const response = await fetch('data.json'); if (!response.ok) throw new Error('분석 JSON 읽기 실패');
+    state.data = await response.json(); if (!Array.isArray(state.data.entries)) throw new Error('분석 목록 형식 오류');
+    $('canvasLink').href = state.data.sampleProject.canvasUrl; renderSummary();
+    state.data.guideNotes.forEach(text => $('guideNotes').append(node('li', '', text)));
+    state.data.excluded.notes.forEach(text => $('excludedNotes').append(node('li', '', text)));
+    $('excludedNotes').append(node('li', '', '제품 화면에서 제외: ' + state.data.excluded.items.join(' / ')));
+    $('assetGrid').replaceChildren(...state.data.assets.map(renderAsset));
+    $('preparedAt').textContent = '문서 데이터 작성: ' + state.data.preparedAtKst + ' · 정적 검사와 실화면 검수를 구분합니다.';
+    $('filterForm').addEventListener('submit', event => event.preventDefault()); $('searchInput').addEventListener('input', renderGallery); $('kindFilter').addEventListener('change', renderGallery); renderGallery();
+  } catch (error) {
+    $('resultCount').textContent = '목록을 표시하지 못했습니다.'; $('loadError').hidden = false;
+    $('loadError').textContent = '분석 JSON을 읽지 못했습니다. 이 폴더를 제공하는 로컬 서버에서 열거나 위의 데이터 JSON 링크를 확인해 주세요.';
+  }
+}
+init();
+</script>
+</body>
+</html>

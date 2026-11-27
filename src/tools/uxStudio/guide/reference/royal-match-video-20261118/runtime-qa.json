@@ -1,0 +1,215 @@
+{
+  "updatedAt": "2026-11-18T17:07+09:00",
+  "revision": 194,
+  "stage": "제안(검수 대기) / 단계 기준판 미보존",
+  "desktopMobile": {
+    "CSS1440x900": "5페이지+7팝업 연결/화면 확인, 이미지누락0·가로넘침0",
+    "CSS430x843": "5페이지+7팝업 및 퍼즐 확인, 이미지누락0·가로넘침0",
+    "device390x844": "native 선택 미리보기 14화면; 설계 폭504 유지→논리504×1091; 깨진이미지0·텍스트가로넘침0",
+    "pixelImages": "브라우저 확대/DPR 때문에 JPG픽셀은 CSS크기와 다름. 개별 파일 크기 정보는 evidence-manifest.json."
+  },
+  "finalRuntimeSmoke": {
+    "revision": 194,
+    "results": [
+      {
+        "test": "navigate Areas",
+        "pass": true
+      },
+      {
+        "test": "navigate Rankings",
+        "pass": true
+      },
+      {
+        "test": "navigate Team",
+        "pass": true
+      },
+      {
+        "test": "navigate Collection",
+        "pass": true
+      },
+      {
+        "test": "navigate Lobby",
+        "pass": true
+      },
+      {
+        "test": "open/close Shop",
+        "pass": true
+      },
+      {
+        "test": "open/close Lives",
+        "pass": true
+      },
+      {
+        "test": "open/close Stars",
+        "pass": true
+      },
+      {
+        "test": "open/close Settings",
+        "pass": true
+      },
+      {
+        "test": "open/close Profile",
+        "pass": true
+      },
+      {
+        "test": "open/close KingsCup",
+        "pass": true
+      },
+      {
+        "test": "open/close Level",
+        "pass": true
+      },
+      {
+        "test": "Level play to Puzzle",
+        "pass": true
+      }
+    ],
+    "selectedWelcomeRuntime": "not reached from entry Lobby; only selected-screen preview checked",
+    "text": "These are 13 smoke scenarios, not an exhaustive test of all42edges."
+  },
+  "commonHoverFix": {
+    "revision": 194,
+    "commonFixBy": "first chat; button-state.mjs:87",
+    "off": {
+      "selected": "false",
+      "src": "/api/ux-studio/asset?ref=sha256-2805c9aec03a9f470217970ba025f3683c368bd6e386f53b259d240a2b4b861f.webp&workspace=workspace-fd5ecb11-2d17-4d9f-b610-f8989abc9fd4",
+      "visual": "hover"
+    },
+    "on": {
+      "selected": "true",
+      "src": "/api/ux-studio/asset?ref=sha256-602f6e6cd3d8fc70c7d2fa6b625de4cecd135528e4165426c573b478ef0cdb8f.webp&workspace=workspace-fd5ecb11-2d17-4d9f-b610-f8989abc9fd4",
+      "visual": "hover"
+    },
+    "pass": true
+  },
+  "finalLogical": {
+    "revision": 194,
+    "device": [
+      390,
+      844
+    ],
+    "logical": [
+      504,
+      1091
+    ],
+    "results": [
+      {
+        "screen": "Page_RoyalMatch_Lobby",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Popup_RoyalMatch_Level",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Page_RoyalMatch_Puzzle",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Popup_RoyalMatch_Stars",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Popup_RoyalMatch_KingsCup",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Popup_RoyalMatch_Profile",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Popup_RoyalMatch_Lives",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Page_RoyalMatch_Rankings",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Page_RoyalMatch_Areas",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Page_RoyalMatch_Team",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Page_RoyalMatch_Collection",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Popup_RoyalMatch_Settings",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Popup_RoyalMatch_Shop",
+        "broken": 0,
+        "overflow": []
+      },
+      {
+        "screen": "Popup_RoyalMatch_Welcome",
+        "broken": 0,
+        "overflow": []
+      }
+    ]
+  },
+  "toggle": {
+    "musicOff": {
+      "pressed": "false",
+      "src": "/api/ux-studio/asset?ref=sha256-2805c9aec03a9f470217970ba025f3683c368bd6e386f53b259d240a2b4b861f.webp&workspace=workspace-fd5ecb11-2d17-4d9f-b610-f8989abc9fd4",
+      "state": "normal"
+    },
+    "musicOn": {
+      "pressed": "true",
+      "src": "/api/ux-studio/asset?ref=sha256-602f6e6cd3d8fc70c7d2fa6b625de4cecd135528e4165426c573b478ef0cdb8f.webp&workspace=workspace-fd5ecb11-2d17-4d9f-b610-f8989abc9fd4",
+      "state": "selected"
+    },
+    "historicalHoverLimitation": "Hover image fallback temporarily uses normal-off while pointer is over selected-on button. Shared engine issue sent to first chat; no shared source edit."
+  },
+  "scroll": {
+    "method": "Native browser target reveal when clicking an existing sample button; not wheel/keyboard scroll.",
+    "scrollBefore": {
+      "height": 590,
+      "top": 0,
+      "total": 616
+    },
+    "scrollAfter": {
+      "height": 590,
+      "top": 26.25,
+      "total": 616
+    },
+    "areasBefore": {
+      "height": 710,
+      "top": 0,
+      "total": 1680
+    },
+    "areasAfter": {
+      "height": 710,
+      "top": 812.5,
+      "total": 1680
+    }
+  },
+  "keyboard": {
+    "Escape": "설정 팝업 닫기 통과",
+    "Enter": "별 계속 닫기 통과",
+    "PageDown": "스크롤 컨테이너 tabIndex=-1에서 이동 안 함; 키보드 스크롤 통과 아님"
+  },
+  "limitations": [
+    "Welcome 자동 진입 미연결. 14번째 화면은 native 선택 미리보기로 검수; Collect→Lobby 실행 왕복 미검수",
+    "글꼴은 도구 대체 글꼴이며 원본 폰트 확정/픽셀 동일 판정 아님",
+    "실제 게임·보상·구매·계정·팀전송 제외",
+    "이번 UI 작업의 앱 공통소스/빌드/서버/7007 변경0; 1차의 홈 진입 개선과 구분"
+  ]
+}

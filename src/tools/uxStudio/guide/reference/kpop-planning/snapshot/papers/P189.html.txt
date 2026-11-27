@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>컨셉 기획 제안서 · 카드로 보기 (시안 v0.4)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<!--
+  제안서 카드 로비 시안 v0.4.1(별 확대 · 카드 주인공 · 풀아트 카드 안 타이포) · 2026-10-03 07:37/07:38 현중 피드백 반영 · 상태: 제안(검수 대기)
+  기획서: docs/planning/삼중AI_공용_20260929/산출/제안서카드로비_기획서_v0.md (v0.4)
+  10/05 13:17 현중: 16 팬의 모습(look)을 15 팬덤(gauge)에 합치고 로비에서 뺌, 악귀와 몬스(baddata)를 전투 세계관(world) 앞으로 옮김 → 총 28장. 내부 ID는 그대로.
+  타일 허브(concept-flow.html)에 「타일로 보기 / 카드로 보기」가 있습니다. ?hub=1 이면 제안서 열기는 부모 창으로 넘깁니다.
+  통과/대기 상태 키: localStorage "kpm.proposalReview.v1" (타일 허브와 같이 씁니다)
+-->
+<style>
+:root{
+  --bg:#06080f; --ink:#f4f1ea; --dim:rgba(255,255,255,.56); --line:rgba(255,255,255,.16);
+  --cyan:#5ce1e6; --hc:#f3cf6b;
+  --ch:min(70vh, calc(100vh - 262px)); --cw:calc(var(--ch) * 2 / 3);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:15px/1.5 Pretendard,"Apple SD Gothic Neo",system-ui,sans-serif;overflow:hidden}
+
+/* 배경: 현재 카드 그림을 흐리게 번지게 */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:#0b0f1d}
+.bg .layer{position:absolute;inset:-12%;background-size:cover;background-position:center;opacity:0;filter:blur(46px) saturate(1.25) brightness(.55);transition:opacity 1s ease}
+.bg .layer.on{opacity:1}
+.bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 45%,rgba(6,8,15,.15),rgba(6,8,15,.75) 70%,rgba(6,8,15,.95))}
+
+header.bar{position:relative;z-index:10;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 28px 0}
+header.bar b{font-size:14px;letter-spacing:-.02em;opacity:.9}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:rgba(10,14,26,.5)}
+.seg a,.seg span{font-size:12px;font-weight:700;padding:6px 12px;color:var(--ink);text-decoration:none}
+.seg .on{background:rgba(255,255,255,.92);color:#0a0d18}
+.seg a:hover{background:rgba(255,255,255,.12)}
+.tally{margin-left:auto;display:flex;gap:6px;font-size:12px;color:var(--dim)}
+.tally i{font-style:normal;border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:rgba(10,14,26,.4)}
+.tally i b{color:var(--ink)} .tally .p b{color:#ffd76a}
+.keys{font-size:11px;color:rgba(255,255,255,.45)}
+.keys kbd{font:inherit;font-weight:700;border:1px solid var(--line);border-radius:4px;padding:0 4px;color:rgba(255,255,255,.75)}
+
+/* 무대 */
+.stage{position:absolute;z-index:5;left:0;right:0;top:56px;height:calc(var(--ch) + 24px);perspective:1800px;touch-action:pan-y;user-select:none}
+.slot{position:absolute;left:50%;top:10px;width:var(--cw);height:var(--ch);margin-left:calc(var(--cw) / -2);transform-style:preserve-3d;
+  transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .5s;will-change:transform}
+.slot.far{pointer-events:none}
+.tilt{width:100%;height:100%;transform-style:preserve-3d;transition:transform .25s ease-out;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.flip{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.3,.7,.2,1)}
+.slot.flipped .flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:18px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;cursor:pointer;filter:brightness(var(--lv,1))}
+.back{transform:rotateY(180deg)}
+.slot.locked .front{display:none}
+.slot.locked .back{transform:none;position:absolute;inset:0}
+.slot.locked .flip{transform:none}
+
+/* 카드 테두리(묶음 색 + 복셀) */
+.face{--b1:#f3cf6b;--b2:#a8741c;--b3:#fff1c2;padding:calc(var(--cw) * .022);
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.45) 0 22%,transparent 22% 50%,rgba(0,0,0,.28) 50% 72%,transparent 72%) 0 0/9px 9px,
+    linear-gradient(160deg,var(--b3),var(--b1) 30%,var(--b2) 70%,var(--b1));
+  box-shadow:0 0 0 1px rgba(255,255,255,.4) inset,0 30px 70px rgba(0,0,0,.65)}
+.b-city .face{--b1:#55dfe3;--b2:#14757d;--b3:#d6fbff}
+.b-grw .face{--b1:#b48cff;--b2:#5a2fb0;--b3:#efe4ff}
+.b-evt .face{--b1:#ff7ab4;--b2:#b02a68;--b3:#ffe1ef}
+.b-doc .face{--b1:#cfd6e4;--b2:#6c7487;--b3:#ffffff}
+.slot.center .face.front{box-shadow:0 0 0 1px rgba(255,255,255,.5) inset,0 36px 80px rgba(0,0,0,.7),0 0 70px color-mix(in srgb,var(--b1) 40%,transparent)}
+
+/* 앞면: 풀아트 */
+.art{position:relative;width:100%;height:100%;border-radius:11px;overflow:hidden;background:#141a2e}
+.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.art img.framed{transform:scale(1.2)}
+.art img.framed.deep{transform:scale(1.5);transform-origin:50% 18%}
+.art::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(180deg,rgba(6,8,15,.82) 0%,rgba(6,8,15,.25) 15%,rgba(6,8,15,0) 28%,rgba(6,8,15,0) 38%,rgba(6,8,15,.6) 52%,rgba(6,8,15,.9) 66%,rgba(6,8,15,.97) 78%,rgba(6,8,15,.99) 100%)}
+.art::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:screen;background:
+  linear-gradient(115deg,transparent 30%,rgba(255,255,255,.26) 40%,transparent 47%,rgba(255,255,255,.1) 58%,transparent 64%),
+  linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px) 0 0/14px 14px,linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px) 0 0/14px 14px;
+  background-position:var(--gx,0%) 0,0 0,0 0}
+.top{position:absolute;z-index:3;left:0;right:0;top:0;padding:calc(var(--cw) * .045) calc(var(--cw) * .05) 0;display:flex;align-items:flex-start;gap:10px}
+.top .tl{flex:1;min-width:0}
+.chip{display:inline-block;font-size:calc(var(--cw) * .026);font-weight:900;letter-spacing:.06em;padding:2px 8px;border-radius:5px;color:#111;background:var(--b1)}
+.chip + .no{margin-left:6px;font-size:calc(var(--cw) * .028);font-weight:800;color:rgba(255,255,255,.7);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.nm{margin:5px 0 0;font-size:calc(var(--cw) * .07);font-weight:900;letter-spacing:-.04em;line-height:1.1;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.hp{text-align:right;line-height:1;flex:none}
+.hp small{display:block;font-size:calc(var(--cw) * .026);color:rgba(255,236,180,.85);font-weight:800;letter-spacing:.08em;margin-bottom:2px;text-shadow:0 1px 4px rgba(0,0,0,.7)}
+.hp b{display:inline-block;font-size:calc(var(--cw) * .104);line-height:1;letter-spacing:-.06em;
+  background:linear-gradient(175deg,#fffbe6 0%,#ffe48a 28%,#f5b82e 55%,#b9770e 80%,#ffe9a3 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  -webkit-text-stroke:calc(var(--cw) * .0035) #6b3f00;
+  filter:drop-shadow(0 0 calc(var(--cw) * .014) rgba(255,205,90,.85)) drop-shadow(0 2px 2px rgba(0,0,0,.7))}
+.hp b i{font-style:normal;-webkit-text-fill-color:rgba(255,255,255,.16);-webkit-text-stroke:calc(var(--cw) * .0025) rgba(255,255,255,.45)}
+.hp b.ov{font-size:calc(var(--cw) * .036);-webkit-text-fill-color:#fff;background:none;-webkit-text-stroke:0;letter-spacing:.06em}
+.bottom{position:absolute;z-index:3;left:0;right:0;bottom:0;padding:0 calc(var(--cw) * .06) calc(var(--cw) * .04)}
+.cp{margin:0;font-size:calc(var(--cw) * .074);line-height:1.2;font-weight:800;white-space:pre-line;letter-spacing:-.04em;color:#fff;word-break:keep-all;text-wrap:balance;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.sb{margin:calc(var(--cw) * .03) 0 0;font-size:calc(var(--cw) * .033);line-height:1.55;color:rgba(255,255,255,.58);word-break:keep-all;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.foot{margin-top:calc(var(--cw) * .035);padding-top:calc(var(--cw) * .025);border-top:1px solid rgba(255,255,255,.16);display:flex;align-items:center;gap:12px;font-size:calc(var(--cw) * .028);color:rgba(255,255,255,.6);font-weight:700}
+.foot b{color:#fff}
+.gem{display:inline-block;width:calc(var(--cw) * .03);height:calc(var(--cw) * .03);transform:rotate(45deg);margin-right:6px;border-radius:2px;vertical-align:0}
+.g-S{background:linear-gradient(135deg,#ffd0d9,#ff4d6d 45%,#8a0f2a);box-shadow:0 0 6px #ff4d6d}
+.g-A{background:linear-gradient(135deg,#d6e4ff,#4f8bff 45%,#1b3a8a);box-shadow:0 0 6px #4f8bff}
+.g-B{background:linear-gradient(135deg,#d3ffe9,#2fd18a 45%,#0c6a42);box-shadow:0 0 6px #2fd18a}
+.g-C{background:linear-gradient(135deg,#f3f5f8,#9aa3b5 45%,#4b5263)}
+.foot .rar{margin-left:auto;color:#fff;font-size:calc(var(--cw) * .034)}
+.holo{position:absolute;inset:0;z-index:6;border-radius:18px;pointer-events:none;opacity:0;mix-blend-mode:color-dodge;transition:opacity .4s;
+  background:repeating-linear-gradient(115deg,#ff6b9a 0%,#ffd76a 6%,#6bffb8 12%,#6bc8ff 18%,#c46bff 24%,#ff6b9a 30%);background-size:300% 300%;background-position:var(--hx,50%) var(--hy,50%)}
+.st-pass .holo{opacity:.4}
+.stamp{position:absolute;z-index:7;right:calc(var(--cw) * .06);top:38%;transform:rotate(-14deg);border:3px solid;border-radius:8px;padding:2px 14px;font-size:calc(var(--cw) * .07);font-weight:900;letter-spacing:.14em;opacity:0;background:rgba(0,0,0,.4);pointer-events:none}
+.st-pass .stamp.pass{opacity:1;color:#ffd76a;border-color:#ffd76a;text-shadow:0 0 8px rgba(255,215,106,.7)}
+.st-hold .stamp.hold{opacity:1;color:#d5d9e2;border-color:#d5d9e2}
+.st-hold .face.front{filter:saturate(.3) brightness(calc(var(--lv,1) * .82))}
+.spark{position:absolute;z-index:7;color:#fff3c4;font-size:16px;opacity:0;text-shadow:0 0 8px #ffd76a;pointer-events:none}
+.st-pass .spark{animation:tw 2.4s infinite} .spark.s2{animation-delay:1.2s!important}
+@keyframes tw{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.1) rotate(45deg)}}
+
+/* 뒷면(자세히) · 1329: 앞면 그림을 흐리게 깔고, 묶음 테두리 · 복셀 무늬 유지 */
+.back .bk{position:relative;isolation:isolate;height:100%;border-radius:11px;background:#0b0f1d;padding:calc(var(--cw) * .06);display:flex;flex-direction:column;gap:calc(var(--cw) * .025);overflow:hidden}
+.back .bk-bg{position:absolute;inset:-14%;z-index:-2;background-size:cover;background-position:center;filter:blur(calc(var(--cw) * .012)) saturate(1.2) brightness(.66)}
+.back .bk::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+  linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px) 0 0/14px 14px,linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px) 0 0/14px 14px,
+  linear-gradient(180deg,rgba(6,8,15,.55),rgba(6,8,15,.3) 40%,rgba(6,8,15,.45) 70%,rgba(6,8,15,.7))}
+.back .kick{font-size:calc(var(--cw) * .026);font-weight:900;letter-spacing:.14em;color:var(--b1);text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.back h4{margin:0;font-size:calc(var(--cw) * .072);line-height:1.12;font-weight:900;letter-spacing:-.04em;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6);word-break:keep-all}
+.back .facts{font-size:calc(var(--cw) * .028);color:rgba(255,255,255,.55)} .back .facts b{color:rgba(255,255,255,.9)}
+.back ol{margin:0;padding-left:1.2em;font-size:calc(var(--cw) * .032);line-height:1.5;color:rgba(255,255,255,.62)}
+.back ul{flex:1;min-height:0;overflow:auto;list-style:none;margin:0;padding:calc(var(--cw) * .02) 0 0;border-top:1px solid rgba(255,255,255,.16);font-size:calc(var(--cw) * .036);display:flex;flex-direction:column;gap:4px}
+.back li a{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;color:rgba(255,255,255,.88);text-decoration:none;padding:calc(var(--cw) * .018) calc(var(--cw) * .025);border-radius:8px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .18s,border-color .18s,transform .18s}
+.back li a span{color:var(--b1);font-size:calc(var(--cw) * .024);font-weight:900;letter-spacing:.08em}
+.back li a i{font-style:normal;opacity:0;color:var(--b1);font-weight:900;transition:opacity .18s,transform .18s;transform:translateX(-4px)}
+.back li a:hover,.back li a:focus-visible{color:#fff;background:color-mix(in srgb,var(--b1) 26%,rgba(10,14,26,.5));border-color:color-mix(in srgb,var(--b1) 70%,transparent);transform:translateX(3px);outline:none}
+.back li a:hover i,.back li a:focus-visible i{opacity:1;transform:none}
+/* 1229: 준비 중 카드 = 회색 잠금 */
+.b-prep .face{--b1:#9aa3b5;--b2:#4b5263;--b3:#e3e6ec;filter:saturate(.4) brightness(calc(var(--lv,1) * .8))}
+.back .lockb{align-self:flex-start;font-size:calc(var(--cw) * .028);font-weight:900;letter-spacing:.08em;color:#1b1f29;background:#c3c9d6;border-radius:999px;padding:3px 12px}
+html.in-hub header.bar .seg,html.in-hub header.bar .to-tool{display:none}
+.to-tool{font-size:13px;font-weight:800;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:rgba(10,14,26,.5);white-space:nowrap}
+.to-tool:hover{background:rgba(255,255,255,.12)}
+.acts.prep .chk{display:none}
+
+/* 카드 아래 버튼 */
+.acts{position:absolute;z-index:8;left:0;right:0;top:calc(56px + var(--ch) + 36px);display:flex;justify-content:center;gap:10px}
+.btn{font:inherit;font-size:14px;font-weight:700;border-radius:999px;padding:10px 20px;cursor:pointer;border:1px solid var(--line);background:rgba(10,14,26,.55);color:var(--ink)}
+.btn.primary{background:#fff;color:#0a0d18;border-color:transparent}
+.btn.primary:hover{background:var(--hc)}
+.btn:hover{border-color:rgba(255,255,255,.55)}
+.btn.chk.on.pass{background:linear-gradient(135deg,#fff1b8,#e0b44f);color:#2a1d00;border-color:transparent}
+.btn.chk.on.hold{background:#5d6577;color:#fff;border-color:transparent}
+
+/* 하단 바 */
+.dock{position:absolute;z-index:7;left:0;right:0;bottom:0;height:54px;display:flex;align-items:center;gap:14px;padding:0 28px}
+.pos{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.04em;white-space:nowrap}
+.pos small{color:var(--dim);font-weight:600}
+.nav{font:inherit;font-weight:800;cursor:pointer;background:rgba(10,14,26,.5);color:var(--ink);border:1px solid var(--line);border-radius:999px;width:34px;height:34px}
+.nav:hover{border-color:#fff}
+.progress{flex:1;display:flex;gap:3px;align-items:flex-end;height:28px;min-width:0}
+.pip{flex:1;min-width:6px;height:var(--h,10px);border:0;padding:0;border-radius:2px;background:rgba(255,255,255,.18);cursor:pointer;transition:background .2s}
+.pip:hover{background:rgba(255,255,255,.45)}
+.pip.cur{background:var(--pc,#fff);box-shadow:0 0 10px var(--pc,#fff)}
+.pip.st-pass{background:rgba(255,215,106,.6)} .pip.st-hold{background:rgba(255,255,255,.07)}
+.amount{font-size:12px;color:var(--dim);white-space:nowrap} .amount b{color:var(--ink)}
+@media (max-width:760px){
+  header.bar{position:relative;z-index:20;padding:8px 10px 6px;flex-wrap:nowrap}
+  .keys{display:none}
+  .tally{display:none}
+  :root{--ch:min(52vh, calc(100dvh - 250px));--cw:min(calc(var(--ch) * 2 / 3), 68vw)}
+  .stage{top:52px}
+  .acts{top:calc(52px + var(--ch) + 18px);gap:6px}
+  .btn{padding:8px 12px;font-size:13px}
+  .dock{height:auto;min-height:54px;padding:6px 10px;flex-wrap:wrap;gap:8px}
+  .amount{white-space:normal;flex-basis:100%}
+}
+@media (prefers-reduced-motion:reduce){.bg .layer,.slot,.flip,.tilt{transition:none}.st-pass .spark{animation:none}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg" aria-hidden="true"><div class="layer"></div><div class="layer"></div></div>
+<header class="bar">
+  <a class="to-tool" href="/docs/planning/planning-docs-tool.html?face=tiles&amp;view=card" title="기획서 툴로 돌아가기">← 기획서 툴</a>
+  <b>컨셉 기획 제안서</b>
+  <nav class="seg" aria-label="보기 전환"><a id="toTiles" href="/docs/planning/concept-flow.html">타일로 보기</a><span class="on" aria-current="page">카드로 보기</span></nav>
+  <span class="keys"><kbd>←</kbd><kbd>→</kbd> 휠 · 스와이프 · <kbd>Enter</kbd> 열기 · <kbd>F</kbd> 뒤집기 · <kbd>P</kbd> 통과 · <kbd>H</kbd> 대기</span>
+  <div class="tally" id="tally"></div>
+</header>
+<main class="stage" id="stage" aria-roledescription="carousel" aria-label="제안서 카드"></main>
+<div class="acts">
+  <button class="btn primary" type="button" id="bOpen">제안서 열기 →</button>
+  <button class="btn chk pass" type="button" id="dPass">통과</button>
+  <button class="btn chk hold" type="button" id="dHold">대기</button>
+  <button class="btn" type="button" id="bFlip">뒤집기 (F)</button>
+</div>
+<footer class="dock">
+  <button class="nav" id="prev" type="button" aria-label="이전">←</button>
+  <div class="pos" id="pos">01 <small>/ 27</small></div>
+  <button class="nav" id="next" type="button" aria-label="다음">→</button>
+  <div class="progress" id="rail" role="tablist" aria-label="제안서 목록(막대 높이는 장 수)"></div>
+  <div class="amount" id="amount"></div>
+</footer>
+<script>
+"use strict";
+const DECKS = [{"id": "brief", "title": "간략판 제안서", "bundle": "doc", "group": "간략판", "stars": 0, "diff": "C", "copy": "주사위로 아이돌 기획사의 한 시즌을 움직입니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/00_스무장_한눈.png", "pos": "50% 30%", "framed": false, "core": ["핵심 제안의 의미만 짧게 전합니다", "모노폴리 GO와 같은 것과 다른 것을 나눕니다", "한 시즌의 흐름과 돈의 자리를 보여 줍니다"], "n": 7, "mtime": "10/03 07:03", "wait": 2, "tracks": ["한 줄", "같은 것 · 다른 것", "한 시즌", "다른 점 1~4", "다른 점 5~7", "돈", "정리"], "skills": [{"name": "한 줄 제안", "slide": 1, "desc": "핵심 제안의 의미만 짧게 전합니다"}, {"name": "한 시즌", "slide": 3, "desc": "모노폴리 GO와 같은 것과 다른 것을 나눕니다"}], "href": "/docs/planning/proposal-brief.html", "sub": "한 시즌의 흐름과 돈의 자리를 7장으로 전한 이전 요약입니다. 현재 주제 기획과 구분해 읽습니다.", "imgNote": "그림: 00_스무장_한눈.png"}, {"id": "deck0930", "title": "종합 제안서", "bundle": "doc", "group": "종합", "stars": 0, "diff": "C", "copy": "핵심과 다른 점, 결정 대기까지 한 흐름으로 봅니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/월드페스티벌대회/08a_앨범재킷.png", "pos": "50% 40%", "framed": false, "core": ["핵심 한 줄과 모노와 다른 점을 먼저 봅니다", "벌기 · 키우기 · 시즌의 끝 순서로 요약합니다", "확정과 결정 대기, 주제별 원본으로 이어집니다"], "n": 31, "mtime": "10/06 11:40", "wait": 25, "tracks": ["표지", "목차", "핵심 한 줄", "모노와 다른 점", "한 시즌 흐름", "첫 한 바퀴 오디션", "능력치", "구분: 벌기", "게임 경제", "주사위", "보드 9건물과 도시", "잭팟", "게릴라 공연", "구분: 키우기", "건물", "아이돌", "팬덤", "카드", "카드덱 구조", "다른 도시 진출", "구분: 시즌의 끝", "월드 페스티벌", "출전권과 순위", "응원 크루", "음원과 영상", "리셋과 보관함", "구분: 돈 · 그 밖", "유료화", "몬스 전투 · 리드젠", "확정과 결정 대기", "주제별 원본"], "skills": [{"name": "모노와 다른 점", "slide": 4, "desc": "핵심 한 줄과 모노와 다른 점을 먼저 봅니다"}, {"name": "확정과 결정 대기", "slide": 30, "desc": "벌기 · 키우기 · 시즌의 끝 순서로 요약합니다"}], "href": "/docs/planning/proposal-total.html", "sub": "핵심과 차이, 주제별 요약과 원본을 31장으로 봅니다. 이전 제안의 정책과 현재 대표 기획을 구분합니다.", "imgNote": "그림: 08a_앨범재킷.png"}, {"id": "balancesim", "title": "발란스 시뮬레이터", "bundle": "doc", "group": "발란스 시뮬레이터", "stars": 0, "diff": "C", "copy": "60일 시즌을 굴려 보며 발란스를 눈으로 확인합니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/00_스무장_한눈.png", "pos": "50% 30%", "framed": true, "core": ["아이돌 1명 · 주사위 굴림 → 칸 보상이 날아가는 방치형 화면", "계산은 기존 경제 · 재능 · 팬 · 엔터파워를 그대로 읽습니다", "샌드박스 사이트 kpop-balance-sim에서 바로 써 볼 수 있습니다"], "n": 6, "mtime": "10/28 12:20", "wait": 0, "tracks": ["무엇인가", "어디서 여나", "화면 구성", "사용법 · 처음 한 번 따라 하기", "탭 읽는 법", "알아둘 점"], "skills": [{"name": "사용법", "slide": 4, "desc": "무료/헤비 · 배수 · 시작 · 탭 확인 · 오프라인 보상"}, {"name": "어디서 여나", "slide": 2, "desc": "kpop-balance-sim 사이트와 기획서 툴 버튼"}], "href": "/docs/planning/proposal-concept/balance-sim.html", "sub": "60일 성장·경제 발란스를 굴려 보며 확인하는 방치형 화면입니다. 무엇인지, 어디서 여는지, 처음 한 번 따라 하는 사용법을 6장으로 설명합니다.", "imgNote": "그림: 00_스무장_한눈.png (임시)"}, {"id":"yoon","title":"윤대표님 제안","bundle":"doc","group":"윤대표님 제안","stars":0,"diff":"C","copy":"전달된 제안과 관련 논의를 원본 서류·작성자 표시와 함께 봅니다","img":"/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/00_스무장_한눈.png","pos":"50% 30%","framed":true,"core":["10/19~10/28 수록 자료 7건","항목별 작성자·원본·인용 구분","제안·검토자료와 현재 정책 구분"],"n":1,"mtime":"11/04 04:21","wait":0,"tracks":["윤대표님 제안 목록"],"skills":[{"name":"제안 목록","slide":1,"desc":"10/19부터 받은 순서로 한 줄씩"}],"href":"/docs/planning/삼중AI_공용_20260929/입력/윤대표의견/윤대표님_의견서류_모음.html","sub":"P156의 「윤대표님 제안만」 표를 먼저 읽습니다. 수록 자료는 7건이며 각 작성자·원문과 아래 봇팀 의견을 구분합니다.","imgNote":"그림: 00_스무장_한눈.png (임시)"}, {"id": "audition", "title": "오디션", "bundle": "grw", "group": "오디션", "stars": 2, "diff": "A", "copy": "명함으로 찜하고, 아이돌 캐스팅으로 뽑습니다", "img": "/docs/planning/삼중AI_공용_20260929/카드지시_오디션16/산출/오디션_웹툰복셀_카드그림_v02.png", "pos": "left center", "framed": false, "core": ["보드에서 만난 후보에게 캐스팅·명함·패스를 고릅니다.", "아이돌 캐스팅으로 고른 후보가 같은 팀에 합류합니다.", "엔터 파워로 추가 캐스팅권이 열리며, 오디션은 몬스를 지급하지 않습니다."], "n": 4, "mtime": "11/03", "wait": 1, "tracks": ["첫 바퀴에는 칸마다 연습생이 나옵니다", "명함으로 찜합니다 · 최대 5명", "아이돌 캐스팅 · 1:1로 골라 1명", "엔터파워 권한으로 추가 영입 · 팀 이름"], "skills": [{"name": "후보 만남", "slide": 1, "desc": "만난 후보에게 캐스팅·명함·패스를 고릅니다."}, {"name": "아이돌 캐스팅", "slide": 3, "desc": "같은 후보 기록으로 한 명을 고릅니다."}], "href": "/docs/planning/proposal-concept/audition.html", "sub": "보드에서 후보 만남 → 명함·직접 캐스팅·아이돌 캐스팅 → 엔터 파워로 추가 캐스팅권", "imgNote": "그림: 오디션_웹툰복셀_카드그림_v02.png (기존 배경 복원)"}, {"id": "season", "title": "시즌", "bundle": "grw", "group": "시즌", "stars": 3, "diff": "A", "copy": "한 시즌은 최대 60일, 그동안 내 아이돌을 키웁니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/04_신사임당.png", "pos": "50% 34%", "framed": true, "core": ["시즌은 최대 60일입니다", "일반 카드와 도시는 리셋됩니다", "조건을 채운 일부 카드만 보관함에 남습니다"], "n": 3, "mtime": "10/03 07:01", "wait": 3, "tracks": ["시즌은 최대 60일", "리셋되는 것과 남는 것", "보관함 · 돈을 내고 보관"], "skills": [{"name": "60일 시즌", "slide": 1, "desc": "시즌은 최대 60일입니다"}, {"name": "리셋과 보관", "slide": 2, "desc": "일반 카드와 도시는 리셋됩니다"}], "href": "/docs/planning/proposal-concept/season.html", "sub": "시즌은 최대 60일이고, 늦게 들어와도 참여할 수 있습니다. 끝나면 리셋되고, 남기고 싶은 카드만 보관함에 넣습니다.", "imgNote": "그림: 04_신사임당.png"}, {"id": "cards", "title": "카드", "bundle": "grw", "group": "시즌", "stars": 3, "diff": "A", "copy": "단계 카드와 사업 덱을 모아 아이돌을 키웁니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/07_작곡.png", "pos": "50% 40%", "framed": true, "core": ["아이돌마다 단계별 12칸의 전용 카드와 사업 15덱을 구분합니다.", "처음 얻은 카드의 효과를 대상 멤버의 능력으로 연결합니다.", "중복분 트레이드와 시즌·보관함은 기획과 실행 범위를 구분합니다."], "n": 17, "mtime": "11/03", "wait": 10, "tracks": ["아이돌과 함께 여는 단계 카드", "단계마다 같은 12속성", "실제 합류한 아이돌의 전용 카드", "개인 단계 카드와 사업 15덱", "카드 표에는 단계와 속성", "사업 덱은 최초 획득 때의 팀에", "아이돌 팩과 사업 카드 팩", "처음 한 장만 능력", "받을 때 붙는 카드 ID", "카드는 승급 한도가 아닌 능력", "다른 콘텐츠 효과를 새로 만들지 않기", "수집 완성과 진행률", "시즌과 보관함은 별도 정책", "소유 기록과 실제 성장 기록", "중복분 트레이드는 기획과 실행을 구분", "같은 표를 읽는 실행인지 확인", "남은 것은 새 장수 선택이 아닙니다"], "skills": [{"name": "개인 단계와 사업 덱", "slide": 4, "desc": "개인 카드와 사업 카드의 소유·효과 대상을 구분합니다."}, {"name": "카드 ID와 소유 기록", "slide": 9, "desc": "실제 멤버와 단계에 맞는 카드 기록을 읽습니다."}], "href": "/docs/planning/_이전기획_보관/20261116_카드옛구조/proposal-concept/cards.html", "sub": "아이돌 전용 단계 카드와 사업 15덱의 소유·효과 대상을 구분합니다. 처음 한 장의 능력과 중복분, 시즌·보관함의 정책을 따로 읽습니다.", "imgNote": "그림: 07_작곡.png"}, {"id": "fest", "title": "월드 페스티벌", "bundle": "evt", "group": "시즌", "stars": 3, "diff": "S", "copy": "앨범·공연·대회를 각각 시험하고, 같은 곡으로 음악 앱에 연결합니다", "img": "/assets/music-career/video-preview/pink-vocal-v1.png", "pos": "50% 42%", "framed": false, "core": ["주간 개인 앨범 신청·상단 버프, 월드 개인·크루 활동 로비", "곡에 인정된 인기 기여 중심, 추천·찜 보조", "개별 UI 시험부터 실제 공급·왕복 검수까지"], "n": 10, "mtime": "11/10", "wait": 5, "tracks": ["앨범 발매부터 월드 순위 경쟁까지", "활동한 앨범 한 곡으로 월드를 준비합니다", "개인도 팀·유닛곡으로 출전할 수 있습니다", "팬 투표는 간단하게, 들어오는 길은 다양하게", "게임으로 인기를 모아 응원할 곡에 씁니다", "곡을 고르는 대결과 직접 하는 경기를 구분합니다", "인기 기여를 중심으로 같은 곡의 순위를 봅니다", "시상하고 남기고, 다음 시즌을 준비합니다", "주간·월드는 나누고 같은 곡으로 이어집니다", "개별 화면부터 만들고 연동을 검수합니다"], "skills": [{"name": "앨범부터 월드까지 전체 흐름", "slide": 1, "desc": "앨범 판매·선택 투어·신청·투표/게임·실시간 순위·시상까지 봅니다"}, {"name": "개인 콘텐츠·게임 인기", "slide": 5, "desc": "개인 특화6종과 게임 인기 재화의 획득→지정곡 사용을 구분합니다"}, {"name": "전체·개인·크루 차트", "slide": 7, "desc": "원본 점수가 최종에 한 번 반영되는 구조를 봅니다"}], "href": "/docs/planning/proposal-concept/fest.html", "sub": "앨범·보드 공연·대회 신청을 나누고 같은 음악 앱으로 연결합니다. 인기 중심 우승의 운영 수치와 실제 공연·공식 집계는 후속입니다.", "imgNote": "복셀 공연 정지 이미지 · 2차 기획"}, {"id": "cheerGuild", "title": "응원 크루(길드)", "bundle": "evt", "group": "시즌", "stars": 3, "diff": "S", "copy": "못 만드는 사람도 크루로 응원하고 홍보해, 팀이 이기면 함께 보상받습니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/월드페스티벌대회/05_리그무대.png", "pos": "50% 48%", "framed": false, "core": ["50명 상시 크루로 페스티벌을 함께 겨룹니다", "크루 순위는 감상 70% + 기여 30%", "게임 밖 조회수는 구간 보상에만 씁니다"], "n": 7, "mtime": "10/16 09:28", "wait": 2, "tracks": ["응원 크루(길드)란", "두 겹 순위와 2차 창작", "보상: 순위·조회수 구간", "바이럴과 유통", "주간 → 월드 페스티벌 · 정할 것", "세부 시안: 소속·기여도·순위·리그", "히스토리: 10/05 원안"], "skills": [{"name": "두 겹 순위", "slide": 2, "desc": "크루끼리 · 크루 안 순위"}, {"name": "세부 시안", "slide": 6, "desc": "소속·기여도·리그 시안"}], "href": "/docs/planning/proposal-concept/cheer-guild.html", "sub": "상시 50명 크루가 업로드·응원·홍보로 함께 겨룹니다. 주간 → 월드 페스티벌, 조회수 구간 보상, 상위 크루 곡 약 50곡 유통.", "imgNote": "그림: 05_리그무대.png (임시)"}, {"id":"economy","title":"게임 경제","bundle":"eco","group":"게임 경제","stars":3,"diff":"A","copy":"경제, 아이돌이 크면 기획사가 크고, 기획사가 크면 도시가 발전합니다","img":"/docs/케이팝몬스터즈 추가 자료/컨셉 이미지 자료/08072315-b55c-4cf4-9e68-67347652cf89.png","pos":"50% 55%","framed":false,"core":["주사위에 배수를 걸어 도착한 칸의 수익을 얻습니다","수익으로 건물을 업그레이드합니다","시설이 커지면 도시가 발전합니다"],"n":4,"mtime":"11/03 19:30","wait":2,"tracks":["경제 한 바퀴","보드 시뮬","무대 칸","한 지갑"],"skills":[{"name":"경제 한 바퀴","slide":1,"desc":"주사위에 배수를 걸어 도착한 칸의 수익을 얻습니다"},{"name":"한 지갑","slide":4,"desc":"수익으로 건물을 업그레이드합니다"}],"href":"/docs/planning/proposal-concept/economy.html","sub":"주사위로 수익을 받고 시설·아이돌·팬 성장으로 다시 투자하는 기본 순환입니다. 경제·건설 시험 경로가 있으며 수리는 표·계산만 있고 실제 건설 수리 UI 연결은 대기입니다.","imgNote":"그림: 08072315-b55c-4cf4-9e68-67347652cf89.png"}, {"id":"dice","title":"주사위","bundle":"eco","group":"게임 경제","stars":3,"diff":"A","copy":"주사위, 배수를 크게 걸수록 도착한 칸의 수익이 커집니다","img":"/docs/planning/삼중AI_공용_20260929/산출/예상이미지/오디션추가/E_주사위.png","pos":"50% 50%","framed":false,"core":["주사위는 기획사의 재력입니다","도착한 칸은 운, 수익은 칸 수익 × 배수입니다","임시 배수 10단계 표가 있으며 최종 수치는 발란스 대기입니다"],"n":3,"mtime":"11/03 19:30","wait":6,"tracks":["배수 걸기 한눈에","배수와 도착한 칸 시연","용어와 결정 대기"],"skills":[{"name":"배수 걸기","slide":1,"desc":"주사위는 기획사의 재력입니다"},{"name":"도착한 칸 시연","slide":2,"desc":"도착한 칸은 운, 수익은 칸 수익 × 배수입니다"}],"href":"/docs/planning/proposal-concept/dice.html","sub":"배수를 먼저 고르고 도착한 칸의 수익을 받는 투자 판단입니다. 임시 배수 표와 엔터파워 해금 문턱을 따르며, 검사 범위와 공급은 실행 경로별로 구분합니다.","imgNote":"그림: E_주사위.png"}, {"id": "jackpot", "title": "잭팟", "bundle": "evt", "group": "게임 경제", "stars": 1, "diff": "A", "copy": "잭팟 통의 지급 추첨과 올킬 후속 룰렛을 따로 봅니다", "img": "/docs/planning/proposal-concept/_assets/casting-guerrilla-v2.png", "pos": "50% 45%", "framed": false, "core": ["콘서트장·방송국 대박 뒤 통 지급을 추첨합니다", "올킬 후속 룰렛은 통 추첨과 별도입니다", "팬 항은 대기이며 실제 운영 전체는 미검수입니다"], "n": 4, "mtime": "11/03 20:03", "wait": 16, "tracks": ["드문 팬 대박", "도착하면 도는 룰렛", "이전 팬 집결 컨셉 시연", "현재 연결과 남은 검수"], "skills": [{"name": "통 지급과 팬 연출", "slide": 1, "desc": "통 지급 방향과 팬 집결 연출을 구분합니다"}, {"name": "통 추첨과 후속 룰렛", "slide": 2, "desc": "통 추첨과 올킬 후속 룰렛을 별도 경로로 읽습니다"}], "href": "/docs/planning/proposal-concept/jackpot.html", "sub": "통은 굴림마다 배수 없이 쌓이고 지급 때 표 조건의 배수를 적용합니다. 팬 항은 대기이며, 독립 통 시안·이전 팬 집결 시연과 실제 운영의 미검수 범위를 구분합니다.", "imgNote": "그림: casting-guerrilla-v2.png"}, {"id":"board","title":"보드","bundle":"eco","group":"보드","stars":3,"diff":"S","copy":"주사위로 도착한 지역 칸이 그 턴의 수익과 기회를 정합니다","img":"/docs/planning/proposal-concept/img/econ_stage_practice07.jpg","pos":"50% 50%","framed":false,"core":["40칸은 사옥을 포함한 25개 시설 연결과 아홉 시설을 공유합니다","일반 건물 24칸의 도착과 별도 시설 건설을 구분합니다","성장 배정과 수치는 임시이며 전체 운영 검수는 남아 있습니다"],"n":2,"mtime":"11/03 19:30","wait":8,"tracks":["주사위로 기회를 열고, 받은 수익으로 기획사를 키웁니다","40칸과 9시설의 현재 연결"],"skills":[{"name":"보드의 가치","slide":1,"desc":"주사위로 기회를 열고 받은 수익으로 기획사를 키웁니다"},{"name":"40칸과 9시설","slide":2,"desc":"현재 시설 연결과 도착·건설의 경계를 설명합니다"}],"href":"/docs/planning/proposal-concept/board.html","sub":"40칸과 9시설의 현재 연결을 설명합니다. 사옥 포함 시설 연결 25곳과 일반 건물 24칸을 구분하며, 성장 배정은 임시입니다.","imgNote":"그림: econ_stage_practice07.jpg"}, {"id": "city", "title": "도시", "bundle": "city", "group": "도시 · 다른 도시 활동", "stars": 3, "diff": "A", "copy": "도시의 건물은 기획사의 재산, 아이돌의 수익을 키우는 기반입니다", "img": "/docs/planning/proposal-concept/_assets/city-forest-concept-v1.png", "pos": "50% 50%", "framed": false, "core": ["건물에 도착하면 팬 수만큼 수익이 납니다", "아이돌 능력이 자라고 업그레이드를 묻습니다", "키운 건물과 팬이 악귀를 막습니다"], "n": 3, "mtime": "10/03 07:02", "wait": 0, "tracks": ["도시는 무엇이고 어떻게 돌아가나", "건물에 도착하면 세 가지가 일어납니다", "건물과 팬이 도시를 지키는 힘, 팬심"], "skills": [{"name": "도착의 세 가지", "slide": 2, "desc": "건물에 도착하면 팬 수만큼 수익이 납니다"}, {"name": "팬심 방어", "slide": 3, "desc": "아이돌 능력이 자라고 업그레이드를 묻습니다"}], "href": "/docs/planning/proposal-concept/city.html", "sub": "아이돌을 키우는 기획사의 본거지입니다. 도착할 때마다 아이돌 능력이 자라고, 업그레이드한 건물과 팬은 악귀를 막는 힘이 됩니다.", "imgNote": "그림: city-forest-concept-v1.png"}, {"id": "cityx", "title": "다른 도시 진출", "bundle": "city", "group": "도시 · 다른 도시 활동", "stars": 2, "diff": "A", "copy": "조건을 채우면 다른 도시 보드가 열리고, 그곳 수익으로 아이돌과 기획사가 함께 강해집니다", "img": "/docs/planning/proposal-concept/_assets/overseas-activity-map-v1.png", "pos": "50% 50%", "framed": false, "core": ["아이돌이 크면 다른 도시 보드가 열립니다", "완전히 옮기지 않고 갔다가 돌아옵니다", "그곳에서 번 수익은 돌아와 도시 업그레이드에 씁니다"], "n": 4, "mtime": "10/06 11:40", "wait": 0, "tracks": ["아이돌이 크면, 다른 도시 보드가 열립니다", "완전히 옮기는 게 아니라, 갔다가 돌아옵니다", "다른 도시 수익으로 아이돌과 기획사가 함께 강해집니다", "모노폴리 고와 다른 점"], "skills": [{"name": "다른 도시 보드", "slide": 1, "desc": "아이돌이 크면 다른 도시 보드가 열립니다"}, {"name": "갔다가 귀환", "slide": 2, "desc": "완전히 옮기지 않고 갔다가 돌아옵니다"}], "href": "/docs/planning/proposal-concept/city-expand.html", "sub": "내 도시에서 아이돌을 키우다 보면 다른 도시(예: 워싱턴) 보드가 열립니다. 열리는 조건은 결정 대기입니다. 이벤트 보드에 다녀온 뒤 다시 내 도시로 돌아옵니다.", "imgNote": "그림: overseas-activity-map-v1.png"}, {"id":"p00","title":"건물 성장","bundle":"city","group":"건물 · 팬","stars":3,"diff":"A","copy":"키운 시설이, 붙어 있는 세 동의 방어진지가 됩니다","img":"/docs/planning/proposal-concept/_assets/building-dance-growth-v1.png","pos":"50% 50%","framed":false,"core":["본관 1동과 부속 2동이 차례로 자랍니다. 전체 2·3단계에 부속이 생기고 전체 상한은 30, 각 동은 10단계입니다.","복셀 박스가 전체 층에 쌓입니다 · 여러 박스가 바닥부터 동시에 쌓이고 완성 모델로 자연스럽게 바뀝니다.","건물마다 내구도와 마법구 · 본관 파괴는 패배, 부속 파괴는 지원 손실입니다. 각 옥상 마법구가 방어를 돕습니다."],"n":8,"mtime":"11/03 19:30","wait":5,"tracks":["받은 수익을 시설에, 더 큰 가능성을 아이돌에게","도시에서 시설을 골라 업그레이드합니다","어디에 업그레이드하느냐가, 다음 성장을 바꿉니다","건물이 커지는 모습에, 업그레이드한 이유가 보입니다","시설의 성장은, 활동 성과를 거쳐 수익으로 돌아옵니다","연습실 업그레이드 효과를, 공간에서 무대까지 확인합니다","성장한 도시와 아이돌로, 더 큰 활동을 준비합니다","키운 시설이, 붙어 있는 세 동의 방어진지가 됩니다"],"skills":[{"name":"시설 선택·업그레이드","slide":2,"desc":"도시에서 시설을 골라 업그레이드합니다"},{"name":"현재 구현과 실행","slide":8,"desc":"키운 시설이, 붙어 있는 세 동의 방어진지가 됩니다"}],"href":"/docs/planning/proposal-concept/growth.html","sub":"도시에서 시설을 골라 키웁니다. 본관 1+부속 2의 순환 성장과 전체 30단계·각 동 10단계를 구분합니다. 비용·효과와 실제 레슨 원천 정합은 확인 대기입니다.","imgNote":"그림: building-dance-growth-v1.png"}, {"id":"fandom","title":"팬과 수익","bundle":"grw","group":"건물 · 팬","stars":2,"diff":"A","copy":"팬이 모일수록 같은 활동의 수익이 커집니다","img":"/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/20_팬샵.png","pos":"50% 40%","framed":true,"core":["업그레이드한 시설이 활동 수익으로 돌아옵니다","무엇을 키웠는지에 따라 수익이 달라집니다","팬 시험·수익 모델 계산과 실제 운영 지급을 구분합니다"],"n":6,"mtime":"11/03 19:30","wait":6,"tracks":["팬과 수익의 핵심","시설에 쓴 돈이 더 큰 활동 수익으로 돌아옵니다","도착한 칸의 수익과 성장의 효과를 함께 읽습니다","무엇을 키웠을 때 수익이 달라지는가","연습실 업그레이드 한 번이 다음 공연에 미치는 영향","성장한 만큼 수익을 기대할 수 있게 설계합니다"],"skills":[{"name":"업그레이드 효과","slide":2,"desc":"업그레이드한 시설이 활동 수익으로 돌아옵니다"},{"name":"수익의 차이","slide":4,"desc":"무엇을 키웠는지에 따라 수익이 달라집니다"}],"href":"/docs/planning/proposal-concept/fandom.html","sub":"시설·아이돌·팬 성장의 수익 효과를 설명합니다. 팬 시험과 임시 모델 계산은 있으며 실제 운영 지급·통합 연결은 대기입니다.","imgNote":"그림: 20_팬샵.png"}, {"id": "gauge", "title": "팬덤", "bundle": "grw", "group": "팬덤", "stars": 2, "diff": "A", "copy": "아이돌이 클수록 거리에 팬이 늘고 도시 수익이 커집니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/19_팬덤.png", "pos": "50% 40%", "framed": true, "core": ["시설 규모나 아이돌 능력이 오르면 팬이 늘고, 거리에 사람이 늡니다", "보드 위 칸마다 모인 팬이 점으로 보이고, 무대 앞 응원이 커집니다", "사람 무리는 인기를, 숫자는 정확한 팬 규모를 보여 줍니다"], "n": 6, "mtime": "10/05 13:30", "wait": 0, "tracks": ["팬덤 게이지가 도시를 키웁니다", "팬덤 게이지가 오르면, 거리에 사람이 늘고 수익이 커집니다", "보드 위에 모이는 팬", "아이돌이 성장한 만큼, 무대 앞의 풍경도 달라집니다", "멀리서는 팬의 규모, 가까이서는 응원의 모습을 읽습니다", "사람 무리는 인기를, 숫자는 정확한 팬 규모를 보여 줍니다"], "skills": [{"name": "팬덤 게이지", "slide": 2, "desc": "시설 규모나 아이돌 능력이 오르면 팬이 늘고, 거리에 사람이 늡니다"}, {"name": "보드 위 팬", "slide": 3, "desc": "칸마다 모인 팬이 점으로 보이고, 팬이 많은 칸일수록 점이 크고 진해집니다"}, {"name": "무대 앞 응원", "slide": 4, "desc": "아이돌이 성장한 만큼 무대 앞의 응원이 커집니다"}], "href": "/docs/planning/proposal-concept/gauge.html", "sub": "시설 규모가 커지거나 아이돌 능력이 오르면 팬이 늘고, 늘어난 팬은 거리의 사람과 보드 위 칸마다 모인 팬 점으로 보입니다. 팬이 많은 칸일수록 점이 크고 진해지고, 가까이 보면 무대 앞 응원이 커집니다.", "imgNote": "그림: 19_팬덤.png"}, {"id": "casting", "title": "캐스팅 · 현재 대전과 이전 제안", "bundle": "eco", "group": "쟁탈", "stars": 2, "diff": "S", "copy": "현재 대전과 이전 권리·게릴라 시안을 나눠 봅니다", "img": "/docs/planning/proposal-concept/_assets/casting-rights-v2.png", "pos": "50% 50%", "framed": false, "core": ["현재 P98의 도착·시설 선택·전투·영수증 경로는 코드 기준의 부분 구현입니다.", "권리 보유 수익·게릴라 공연과 10/16 기록은 이전 제안으로 보존합니다.", "이전 시연의 금액·보호·동일 금액 이전을 현재 지급 규칙으로 확정하지 않습니다."], "n": 10, "mtime": "10/03 06:57", "wait": 5, "tracks": ["두 가지 수익", "없앤 쟁탈 칸(10/16)", "꾸준한 수입과 큰 수익", "권리 쟁탈의 결과", "보유하고 지킬 이유", "게릴라 공연 체험", "큰 수익의 체감", "양쪽의 수익 변화", "수익을 성장으로", "기획과 남은 결정"], "skills": [{"name": "권리 쟁탈", "slide": 4, "desc": "10/16에 없앤 권리 쟁탈(기록)"}, {"name": "게릴라 공연", "slide": 6, "desc": "보유한 권리는 꾸준한 수입이 됩니다"}], "href": "/docs/planning/proposal-fansim-casting.html", "sub": "현행 P98의 쟁탈·전투·영수증과 이전 제안 10장을 비교합니다. 최종 보상·게릴라 연결과 운영 검수는 남아 있습니다.", "imgNote": "그림: casting-rights-v2.png"}, {"id": "idol", "title": "아이돌 성장", "bundle": "grw", "group": "아이돌 능력", "stars": 2, "diff": "A", "copy": "오디션에서 고른 팀을, 같은 기록으로 키웁니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드성장전후/01_어우동_성장후.png", "pos": "50% 32%", "framed": true, "core": ["6축 18세부 능력과 영어·중국어·일본어의 학습을 나눠 읽습니다.", "개인 전용 카드는 해당 아이돌에게, 사업 카드는 최초 획득 당시 합류한 팀원에게 적용합니다.", "승급은 능력·학습 조건을 읽으며 카드 장수를 한도로 두지 않습니다."], "n": 11, "mtime": "11/03", "wait": 6, "tracks": ["키운 아이돌만큼, 펼칠 수 있는 무대가 넓어집니다", "6축 18세부", "시설과 원정, 두 경로가 아이돌을 키웁니다", "업그레이드 전후, 능력과 수익은 어떻게 달라지나", "멤버 단계와 능력 등급으로 성장을 보여 줍니다", "다른 도시 활동과 마지막 무대에서 성장의 의미를 보여 줍니다", "아이돌 능력과 성장", "카드덱 성장", "오디션과 멤버 결성", "육성의 연결은 유지하고 효과를 구체화합니다", "오디션에서 고른 팀을, 같은 기록으로 키웁니다"], "skills": [{"name": "6축 18세부", "slide": 2, "desc": "능력과 학습·재능의 구분을 읽습니다."}, {"name": "같은 팀의 성장", "slide": 11, "desc": "같은 멤버와 기록을 이어 읽는 범위를 확인합니다."}], "href": "/docs/planning/proposal-concept/idol.html", "sub": "오디션에서 만난 같은 아이돌의 능력·재능·학습과 단계, 성장 기록을 연결합니다. 시험 사본의 계산과 실제 진행·이야기 공개를 구분합니다.", "imgNote": "그림: 01_어우동_성장후.png"}, {"id": "baddata", "title": "악귀와 몬스", "bundle": "grw", "group": "몬스 · 전투 · 원정", "stars": 2, "diff": "S", "copy": "기획사에서 모은 몬스로 건물을 지킵니다", "img": "/docs/planning/proposal-concept/_assets/mons-td-defense-v1.png", "pos": "55% 20%", "framed": false, "core": ["기획사가 보유한 몬스에서 출전 대상을 고릅니다. 오디션 합류와 몬스 획득은 다른 흐름입니다.", "자동 기술과 공용 피니시의 습득·강화·발동을 나눕니다.", "편성 정원과 기술을 받는 대상의 범위가 같은지는 현재 기준을 확인합니다."], "n": 6, "mtime": "11/03", "wait": 0, "tracks": ["몬스는 기획사가 모으는 수호신", "실제 보유한 몬스로 자동 디펜스", "첫 몬스와 오디션은 다른 흐름", "몬스와 건물이 함께 방어합니다", "편성 정원과 스킬 대상 상한은 다릅니다", "현재 실행과 후속 범위를 나눕니다"], "skills": [{"name": "기획사 몬스 보유", "slide": 1, "desc": "오디션 멤버 합류와 몬스 보유를 구분합니다."}, {"name": "현재 실행과 후속 범위", "slide": 6, "desc": "기획·연결·남은 확인을 나눠 읽습니다."}], "href": "/docs/planning/proposal-concept/bad-data.html", "sub": "실제 보유한 몬스의 편성과 건물 방어, 자동 기술과 함께 쓰는 피니시를 설명합니다. 편성 정원과 기술을 받는 대상의 범위를 나눠 읽습니다.", "imgNote": "그림: mons-td-defense-v1.png"}, {"id": "world", "title": "전투 세계관", "bundle": "grw", "group": "몬스 · 전투 · 원정", "stars": 2, "diff": "B", "copy": "아이돌 노래의 힘으로 아군 몬스가 악귀를 막는 세계관입니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/12_세션.png", "pos": "50% 38%", "framed": true, "core": ["몬스는 기획사 소속 아군, 악귀는 적입니다", "노래·팬의 설정과 실제 방어 계산을 나눕니다", "일반 방어·이벤트·원정은 서로 다른 범위입니다"], "n": 4, "mtime": "11/03 21:04", "wait": 0, "tracks": ["목차", "참고 구조", "노래가 울리면 몬스가 깨어납니다", "악귀·방어·원정의 경계"], "skills": [{"name": "노래와 몬스", "slide": 3, "desc": "노래와 팬의 연출을 실제 전투 계산과 구분합니다"}, {"name": "악귀·방어·원정의 경계", "slide": 4, "desc": "일반 방어·도시 변형 이벤트·원정의 범위를 나눕니다"}], "href": "/docs/planning/proposal-fansim-world.html", "sub": "몬스와 악귀의 역할, 노래·팬의 설정과 실제 방어 계산을 나눕니다. 일반 방어·이벤트·원정의 연결 범위는 서로 구분합니다.", "imgNote": "그림: 12_세션.png"}, {"id": "battle", "title": "악귀 공성전", "bundle": "grw", "group": "몬스 · 전투 · 원정", "stars": 2, "diff": "S", "copy": "공성전의 이전 장면과 현재 일반 방어 시험의 차이를 봅니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/악귀전_시안/20261003_2303_악귀전v013_06_보스_근원구름에서차도로.png", "pos": "74% 45%", "framed": false, "core": ["이전 공성전 시안과 현재 P104 시험을 비교합니다", "선택 시각·수동 팀 피니시·무리와 보스의 경계를 나눕니다", "로컬 시험 정산과 운영 보상·저장 완료는 구분합니다"], "n": 10, "mtime": "11/03 21:04", "wait": 1, "tracks": ["공성전 기획과 현재 시험", "이전 고정 무대", "준비·편성의 경계", "이전 건물 도움 3종", "자동 전투와 무리", "스킬 선택의 경계", "이전 후렴과 팀 피니시", "무리·보스의 경계", "승패·정산의 경계", "보드 복귀와 원정 기획"], "skills": [{"name": "준비·편성의 경계", "slide": 3, "desc": "이전 준비주사위 구안과 현재 시험 입력을 구분합니다"}, {"name": "이전 건물 도움 3종", "slide": 4, "desc": "기존 드론·함정·방공포 시안을 현재 보석 지원과 구분합니다"}, {"name": "스킬 선택의 경계", "slide": 6, "desc": "점수 예시와 현재 시각 기반 후보 제시를 구분합니다"}, {"name": "이전 후렴과 팀 피니시", "slide": 7, "desc": "자동 후렴 구안과 습득 후 버튼형 피니시를 구분합니다"}], "href": "/docs/planning/proposal-fansim-battle.html", "sub": "이전 3웨이브·점수 기회·자동 후렴·고정 무대 시안을 보존합니다. 현재 P104의 선택·피니시·승패와 운영 연결 범위를 비교합니다.", "imgNote": "그림: 20261003_2303_악귀전v013_06_보스_근원구름에서차도로.png"}, {"id": "monskill", "title": "몬스 스킬", "bundle": "grw", "group": "몬스 · 전투 · 원정", "stars": 2, "diff": "S", "copy": "한 가지를 배우고 강화하고, 피니시는 함께 씁니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/악귀전_시안/assets/3d_lineup_cute.png", "pos": "40% 50%", "framed": false, "core": ["자동 기술은 배분 대상 명단에 하나씩 돌아갑니다. 출전 정원과 대상 상한을 구분합니다.", "받은 기술만 강화하며 위력·발사 수·크기 등의 변화는 원본 표를 읽습니다.", "초기 기술 선택과 피니시 습득·발동·재사용을 구분합니다."], "n": 9, "mtime": "11/03", "wait": 0, "tracks": ["한 판 안에서 배우고 강화합니다", "고정 다섯 파트너가 아닌 출전 명단", "스킬 종류 상한과 명단 제한", "받은 기술을 강화합니다", "후보 풀에서 최대 세 장", "초기 배분의 시간 만료", "피니시는 팀이 함께 씁니다", "한 판 뒤 전투 습득은 초기화", "기획·코드·미확인을 나눕니다"], "skills": [{"name": "스킬 후보 고르기", "slide": 5, "desc": "후보 풀에서 나온 카드 중 한 장을 고릅니다."}, {"name": "기획·현재 실행 확인", "slide": 9, "desc": "기획과 현재 코드, 확인하지 않은 범위를 나눕니다."}], "href": "/docs/planning/proposal-concept/mons-skill.html", "sub": "배분 대상 명단에 기술을 하나씩 주고 받은 기술을 강화합니다. 스킬 종류·대상 상한과 시간 만료, 팀 피니시의 경계를 함께 읽습니다.", "imgNote": "그림: 3d_lineup_cute.png"}, {"id": "expedition", "title": "원정", "bundle": "grw", "group": "몬스 · 전투 · 원정", "stars": 2, "diff": "S", "copy": "아이돌이 몬스와 함께 악귀들을 소탕하고, 성장해서 돌아옵니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/02_논개.png", "pos": "50% 34%", "framed": true, "core": ["아이돌이 몬스와 함께 콘셉트 세계로 떠납니다", "디펜스와 원정의 역할을 나눕니다", "아이돌은 성장해서 귀환합니다"], "n": 4, "mtime": "10/03 06:57", "wait": 10, "tracks": ["목차", "디펜스와 원정", "원정 흐름", "결정 대기"], "skills": [{"name": "콘셉트 세계", "slide": 3, "desc": "아이돌이 몬스와 함께 콘셉트 세계로 떠납니다"}, {"name": "디펜스와 원정", "slide": 2, "desc": "디펜스와 원정의 역할을 나눕니다"}], "href": "/docs/planning/proposal-fansim-expedition.html", "sub": "원정은 아이돌을 보내 악귀들을 소탕하는 콘텐츠입니다. 아이돌은 성장해서 돌아옵니다.", "imgNote": "그림: 02_논개.png"}, {"id": "pay", "title": "유료화", "bundle": "eco", "group": "유료화", "stars": 2, "diff": "A", "copy": "게임 안 수익과 유료 상품 구조를 구분합니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/18_레이블.png", "pos": "50% 40%", "framed": true, "core": ["속도·꾸밈·소장 판매 방향을 다룹니다", "공통 상점과 독립 판매 분류 시안을 나눕니다", "순위 금지선과 운영 결제·패스·꾸밈 준비를 구분합니다"], "n": 10, "mtime": "11/03 20:03", "wait": 17, "tracks": ["유료화 한 줄", "돈이 들어가는 자리", "유료 상품 구조 여섯", "주사위", "카드 팩", "시즌 패스와 꾸밈", "게임 밖 매출", "지갑이 열리는 순간", "팔지 않는 것", "현재 부분 연결과 이전 질문"], "skills": [{"name": "유료 상품 구조", "slide": 3, "desc": "여섯 갈래 상품 컨셉과 현재 공통 상점의 범위를 구분합니다"}, {"name": "팔지 않는 것", "slide": 9, "desc": "투표·채점·순위에 닿는 판매를 금지하는 방향입니다"}], "href": "/docs/planning/proposal-concept/pay.html", "sub": "공통 상점의 거래·팩 보관·저장 코드 경로가 있습니다. 보석 구매는 프로토 결제이며 운영 결제는 대기, 패스·꾸밈은 준비 중입니다.", "imgNote": "그림: 18_레이블.png"}, {"id": "song", "title": "음원", "bundle": "eco", "group": "음원", "stars": 2, "diff": "A", "copy": "만든 곡을 발매하고, 공연과 음악 앱으로 이어갑니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/07_작곡.png", "pos": "50% 40%", "framed": true, "core": ["앨범 제작·발매와 보드 장소의 공연을 나눕니다", "감상·공연 관람은 같은 음악 앱으로 연결합니다", "각각 시험하고 같은 곡·진행을 공유합니다"], "n": 3, "mtime": "11/10", "wait": 2, "tracks": ["두 가지 돈", "골라서 유통", "UI·개별 시험·연동"], "skills": [], "href": "/docs/planning/proposal-concept/song.html", "sub": "앨범을 만들고 발매한 곡으로 보드 공연·음악 앱 감상·페스티벌을 연결합니다. 기능별 시험과 연동 제작 계획을 함께 봅니다.", "imgNote": "그림: 07_작곡.png", "deep": true}, {"id": "promo", "title": "리드 제너레이션", "bundle": "evt", "group": "Lead generation", "stars": 1, "diff": "B", "copy": "게임 안의 곡 홍보와 게임 밖의 혜택·연락처를 나눕니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/16_홍보.png", "pos": "50% 40%", "framed": true, "core": ["게임 안 홍보와 게임 밖 리드젠은 별도입니다", "현행 참조는 블록 캐릭터·피드 클립 방향입니다", "이전 사진 뮤비·9장 가안과 운영 미검수를 구분합니다"], "n": 2, "mtime": "11/03 20:03", "wait": 0, "tracks": ["홍보의 두 갈래", "현행 참조와 이전 미션 가안"], "skills": [{"name": "홍보의 두 갈래", "slide": 1, "desc": "곡 홍보와 혜택·연락처·복귀 마케팅을 나눕니다"}, {"name": "현행 참조와 이전 가안", "slide": 2, "desc": "7번 클립·8번 유통곡 방향과 이전 사진 뮤비·번호 차이를 구분합니다"}], "href": "/docs/planning/proposal-concept/promo.html", "sub": "현행 블록 캐릭터·피드 클립 방향과 이전 사진 뮤비·9장 미션 가안을 구분합니다. 외부 연락처·동의·보상 운영과 순위·팬 통합은 미검수입니다.", "imgNote": "그림: 16_홍보.png"}, {"id": "mono", "title": "빌려 쓰는 것", "bundle": "doc", "group": "빌려 쓰는 것", "stars": 0, "diff": "C", "copy": "모노폴리의 판 구조를 빌리고, 이름과 그림은 케이팝으로 바꿉니다", "img": "/docs/케이팝몬스터즈 추가 자료/컨셉 이미지 자료/ChatGPT 이미지 2026년 9월 29일 오전 08_58_15-1.png", "pos": "50% 40%", "framed": false, "core": ["모노카피바라가 기본입니다", "판의 구조를 그대로 빌립니다", "원문은 대조 장에 있습니다"], "n": 2, "mtime": "10/02 23:47", "wait": 0, "tracks": ["기본", "판"], "skills": [{"name": "기본 구조", "slide": 1, "desc": "모노카피바라가 기본입니다"}, {"name": "판", "slide": 2, "desc": "판의 구조를 그대로 빌립니다"}], "href": "/docs/planning/proposal-concept/mono.html", "sub": "주사위·도착한 칸·건물 성장·정거장의 역할을, 기획사와 아이돌의 활동으로 연결합니다. 기능과 수치는 현재 기획에 맞춰 따로 설계합니다.", "imgNote": "그림: ChatGPT 이미지 2026년 9월 29일 오전 08_58_15-1.png"}, {"id": "wait", "title": "결정 대기", "bundle": "doc", "group": "정리", "stars": 0, "diff": "C", "copy": "현중 결정이 필요한 질문만 모아 둡니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/08_작사.png", "pos": "50% 40%", "framed": true, "core": ["현중 결정이 필요한 질문 목록입니다", "답이 아닌 질문만 둡니다", "주제별 덱의 결정 대기와 이어집니다"], "n": 1, "mtime": "10/02 23:47", "wait": 4, "tracks": ["질문"], "skills": [{"name": "남은 질문", "slide": 1, "desc": "현중 결정이 필요한 질문 목록입니다"}, {"name": "주제별 대기", "slide": 1, "desc": "답이 아닌 질문만 둡니다"}], "href": "/docs/planning/proposal-concept/wait.html", "sub": "현중 결정이 필요한 질문을 한곳에 모읍니다. 답이 아닌 질문만 두고, 주제별 덱의 결정 대기와 이어집니다.", "imgNote": "그림: 08_작사.png"}, {"id": "plan", "title": "개발 일정", "bundle": "doc", "group": "정리", "stars": 0, "diff": "C", "copy": "개발 일정, 이번 주는 큰 그림을 잡고 다음은 짧은 실플레이로 확인합니다", "img": "/docs/planning/삼중AI_공용_20260929/산출/예상이미지/카드구성20_대표카드/11_트레이너.png", "pos": "50% 40%", "framed": true, "core": ["만드는 순서를 한 장에 정리합니다", "답이 아닌 순서입니다", "결정 대기와 함께 봅니다"], "n": 1, "mtime": "10/02 23:47", "wait": 0, "tracks": ["순서"], "skills": [{"name": "만드는 순서", "slide": 1, "desc": "만드는 순서를 한 장에 정리합니다"}, {"name": "결정과 함께", "slide": 1, "desc": "답이 아닌 순서입니다"}], "href": "/docs/planning/proposal-concept/plan.html", "sub": "9/28 회의에서 제안한 제작 순서입니다. 단계마다 확인할 결과를 정하고, 실제 제작 확인 뒤 일정을 다시 잡습니다.", "imgNote": "그림: 11_트레이너.png"}];
+const STORE_KEY = "kpm.proposalReview.v1";
+const BUNDLE = { eco:["경제","#f3cf6b"], city:["도시","#55dfe3"], grw:["성장","#b48cff"], evt:["이벤트","#ff7ab4"], doc:["개요·정리","#cfd6e4"], prep:["준비 중","#9aa3b5"] };
+const DIFF = { S:"높음", A:"보통", B:"낮음", C:"문서" };
+const RAR = { 3:"★", 2:"◆", 1:"●", 0:"◇" };
+const $ = (id) => document.getElementById(id);
+const stage = $("stage"), rail = $("rail");
+let cur = 0;
+const N = () => DECKS.length;
+const pad = (n) => String(n).padStart(2, "0");
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+const url = (p) => encodeURI(p);
+
+function readStore(){ try{ const o = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); return o && o.items ? o : { v:1, items:{} }; }catch(e){ return { v:1, items:{} }; } }
+const getState = (id) => readStore().items[id]?.s || "";
+function setState(id, s){
+  const o = readStore();
+  if (!s || (o.items[id] && o.items[id].s === s)) delete o.items[id]; else o.items[id] = { s, at:new Date().toISOString(), by:"card" };
+  o.v = 1; o.updated = new Date().toISOString();
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(o)); }catch(e){}
+  paintStates();
+}
+window.addEventListener("storage", (e) => { if (e.key === STORE_KEY) paintStates(); });
+
+function tracksHTML(d){ return d.tracks.map((t, k) => `<li><a href="${esc(String(d.href).split("#")[0])}#slide-${k + 1}" data-slide="${k + 1}" title="${pad(k + 1)}장 바로 열기"><span>TRACK ${pad(k + 1)}</span>${esc(t || "(제목 없음)")}<i>→</i></a></li>`).join(""); }
+function cardHTML(d, i){
+  if (d.folder || d.pending) {
+    const label = d.folder ? `준비 중 ${d.n}개 · 펼치기` : "준비 중";
+    return `<div class="tilt"><div class="flip"><article class="face back" aria-label="${esc(d.title)}"><div class="bk"><span class="lockb">🔒 준비 중</span><h4>${esc(d.title)}</h4><div class="facts">${label} · ${esc(d.group || "")}</div><p style="color:rgba(255,255,255,.6)">${esc(d.sub || "")}</p></div></article></div></div>`;
+  }
+  const stars = d.stars ? `<b>${"★".repeat(d.stars)}<i>${"★".repeat(3 - d.stars)}</i></b>` : `<b class="ov">개요</b>`;
+  const readyN = DECKS.filter((x) => !x.pending && !x.folder).length;
+  return `<div class="tilt"><div class="flip">
+    <article class="face front" aria-label="${esc(d.title)}">
+      <div class="art">
+        <img data-src="${url(d.img)}" alt="" loading="lazy" class="${d.framed ? "framed" : ""}${d.deep ? " deep" : ""}" style="object-position:${d.pos}">
+        <div class="top"><div class="tl"><span class="chip">${esc(BUNDLE[d.bundle][0])}</span><span class="no">${pad(i + 1)} / ${pad(readyN)}</span><h3 class="nm">${esc(d.title)}</h3></div>
+          <div class="hp"><small>중요도</small>${stars}</div></div>
+        <div class="bottom">
+          <p class="cp">${esc(d.copy)}</p>
+          <p class="sb">${esc(d.sub)}</p>
+          <div class="foot">${d.diff==="C" ? `<span>문서</span>` : `<span><i class="gem g-${d.diff}"></i>난이도 <b>${d.diff}</b></span>`}<span>장 수 <b data-n>${d.n}</b></span>${d.wait > 0 ? `<span>결정 대기 <b>${d.wait}</b></span>` : ""}</div>
+        </div>
+      </div>
+      <div class="holo"></div><span class="stamp pass">통과</span><span class="stamp hold">대기</span>
+      <span class="spark" style="left:14%;top:22%">✦</span><span class="spark s2" style="right:14%;top:50%">✦</span>
+    </article>
+    <article class="face back" aria-label="${esc(d.title)} 뒷면">
+      <div class="bk"><div class="bk-bg" data-bg="${url(d.img)}"></div><span class="kick">${esc(BUNDLE[d.bundle][0])} · ${pad(i + 1)} / ${pad(readyN)}</span><h4>${esc(d.title)} · 장 목록</h4>
+        <div class="facts">장 수 <b data-n>${d.n}</b>${d.wait > 0 ? ` · 결정 대기 <b>${d.wait}</b>` : ""} · 수정 <b>${esc(d.mtime)}</b> · ${esc(d.group)}</div>
+        <ol>${d.core.map((c) => `<li>${esc(c)}</li>`).join("")}</ol>
+        <ul data-tracks>${tracksHTML(d)}</ul></div>
+    </article></div></div>`;
+}
+function build(){
+  stage.innerHTML = DECKS.map((d, i) => `<div class="slot b-${d.bundle}${d.pending || d.folder ? " locked" : ""}" data-i="${i}">${cardHTML(d, i)}</div>`).join("");
+  const maxN = Math.max(...DECKS.map((d) => d.n));
+  rail.innerHTML = DECKS.map((d, i) => `<button class="pip" type="button" role="tab" data-i="${i}" style="--pc:${BUNDLE[d.bundle][1]};--h:${Math.round(8 + 20 * d.n / maxN)}px" title="${pad(i + 1)} ${esc(d.title)} · ${d.n}장"></button>`).join("");
+  layout(); paintStates();
+}
+let bgFlip = 0, curBg = "";
+function paintBg(d){
+  if (!d || !d.img) { curBg = ""; $("bg").querySelectorAll(".layer").forEach((el) => el.classList.remove("on")); return; }
+  if (d.img === curBg) return; curBg = d.img;
+  const im = new Image(); let done = false;
+  const swap = () => { if (done || curBg !== d.img) return; done = true;
+    const L = $("bg").querySelectorAll(".layer"); const nx = L[bgFlip ^ 1], pv = L[bgFlip];
+    nx.style.backgroundImage = `url("${url(d.img)}")`; void nx.offsetWidth; nx.classList.add("on"); pv.classList.remove("on"); bgFlip ^= 1; };
+  im.onload = swap; im.onerror = swap; im.src = url(d.img); if (im.complete) swap();
+}
+function hydrateSlot(el){
+  el.querySelectorAll("img[data-src]").forEach((im) => { im.src = im.dataset.src; im.removeAttribute("data-src"); });
+  el.querySelectorAll(".bk-bg[data-bg]").forEach((b) => { b.style.backgroundImage = `url("${b.dataset.bg}")`; b.removeAttribute("data-bg"); });
+}
+function layout(){
+  const cw = stage.querySelector(".slot")?.offsetWidth || 400;
+  stage.querySelectorAll(".slot").forEach((el) => {
+    const i = +el.dataset.i; const d = i - cur; const a = Math.abs(d);
+    const narrow = window.innerWidth <= 760;
+    const base = narrow ? cw * 0.72 : cw * 0.84;
+    const extra = narrow ? cw * 0.55 : cw * 0.38;
+    const x = Math.sign(d) * (a === 0 ? 0 : base + (a - 1) * extra);
+    const ry = Math.max(-48, Math.min(48, -d * 30)); const s = a === 0 ? 1 : 0.8 - (a - 1) * 0.08;
+    el.style.transform = `translate3d(${x}px,0,${-a * 160}px) rotateY(${ry}deg) scale(${s})`;
+    el.style.opacity = a > 2 ? 0 : a === 2 ? .4 : 1;
+    el.style.zIndex = 100 - a;
+    el.style.setProperty("--lv", a === 0 ? 1 : a === 1 ? .55 : .4);
+    el.classList.toggle("center", a === 0); el.classList.toggle("far", a > 2);
+    if (a <= 2) hydrateSlot(el);
+    if (a) { el.classList.remove("flipped"); const t = el.querySelector(".tilt"); t.style.setProperty("--rx","0deg"); t.style.setProperty("--ry","0deg"); }
+  });
+  rail.querySelectorAll(".pip").forEach((p) => p.classList.toggle("cur", +p.dataset.i === cur));
+  const d = DECKS[cur]; const ready = DECKS.filter((x) => !x.pending && !x.folder); const isPrep = !!(d.pending || d.folder);
+  const total = ready.reduce((s, x) => s + x.n, 0), before = DECKS.slice(0, cur).filter((x) => !x.pending && !x.folder).reduce((s, x) => s + x.n, 0);
+  document.documentElement.style.setProperty("--hc", BUNDLE[d.bundle][1]);
+  $("pos").innerHTML = isPrep ? `준비 중 <small>/ 진행 ${pad(ready.length)}</small>` : `${pad(cur + 1)} <small>/ ${pad(ready.length)}</small>`;
+  $("amount").innerHTML = isPrep ? `<b>${esc(d.title)}</b> · 준비 중(전체 수에서 뺌) · 진행 덱 ${ready.length}개 · 전체 ${total}장` : `<b>${esc(d.title)}</b> · 이 덱 <b>${d.n}장</b> · 전체 ${total}장 중 ${before + 1}~${before + d.n}장`;
+  document.querySelector(".acts").classList.toggle("prep", isPrep);
+  history.replaceState(null, "", "#" + d.id);
+  paintBg(d); paintDock();
+}
+function go(i){ cur = (i + N()) % N(); layout(); }
+function paintDock(){ const s = getState(DECKS[cur].id); $("dPass").classList.toggle("on", s === "pass"); $("dHold").classList.toggle("on", s === "hold"); }
+function paintStates(){
+  const items = readStore().items; let p = 0, h = 0;
+  stage.querySelectorAll(".slot").forEach((el) => { const s = items[DECKS[+el.dataset.i].id]?.s || ""; el.classList.toggle("st-pass", s === "pass"); el.classList.toggle("st-hold", s === "hold"); });
+  rail.querySelectorAll(".pip").forEach((el) => { const s = items[DECKS[+el.dataset.i].id]?.s || ""; el.classList.toggle("st-pass", s === "pass"); el.classList.toggle("st-hold", s === "hold"); });
+  DECKS.forEach((d) => { if (d.folder) return; const s = items[d.id]?.s; if (s === "pass") p++; else if (s === "hold") h++; });
+  $("tally").innerHTML = `<i class="p">통과 <b>${p}</b></i><i>대기 <b>${h}</b></i><i>미확인 <b>${DECKS.filter((d) => !d.folder).length - p - h}</b></i>`;
+  paintDock();
+}
+const inHub = new URLSearchParams(location.search).has("hub");
+if (inHub) document.documentElement.classList.add("in-hub");
+const openDeck = (i) => {
+  const d = DECKS[i];
+  if (!d) return;
+  if (d.folder) { prepOn = true; applyPrep(); const j = DECKS.findIndex((x) => x.pending); if (j >= 0) go(j); if (parent !== window) parent.postMessage({ pdCard: "prep-open" }, location.origin); return; }
+  if (inHub && parent !== window) { parent.postMessage({ pdCard: "open", id: d.id }, location.origin); return; }
+  if (d.href) location.href = d.href;
+};
+const flipCur = () => stage.querySelector(".slot.center")?.classList.toggle("flipped");
+
+let sx = null, moved = false;
+stage.addEventListener("click", (e) => {
+  if (moved) return; const slot = e.target.closest(".slot"); if (!slot) return;
+  const ta = e.target.closest(".back a[data-slide]");
+  if (ta) { const i = +slot.dataset.i; if (i !== cur) { e.preventDefault(); go(i); return; }
+    if (inHub && parent !== window) { e.preventDefault(); parent.postMessage({ pdCard: "open", id: DECKS[i].id, slide: +ta.dataset.slide }, location.origin); }
+    return; }
+  if (e.target.closest(".back a")) return;
+  const i = +slot.dataset.i; if (i !== cur) { go(i); return; }
+  if (slot.classList.contains("flipped")) { slot.classList.remove("flipped"); return; }
+  openDeck(i);
+});
+rail.addEventListener("click", (e) => { const p = e.target.closest(".pip"); if (p) go(+p.dataset.i); });
+$("prev").onclick = () => go(cur - 1); $("next").onclick = () => go(cur + 1);
+$("bOpen").onclick = () => openDeck(cur); $("bFlip").onclick = flipCur;
+$("dPass").onclick = () => setState(DECKS[cur].id, "pass"); $("dHold").onclick = () => setState(DECKS[cur].id, "hold");
+window.addEventListener("keydown", (e) => {
+  if (e.target.closest("input,textarea")) return; const k = e.key;
+  if (k === "ArrowRight" || k === "PageDown") { go(cur + 1); e.preventDefault(); }
+  else if (k === "ArrowLeft" || k === "PageUp") { go(cur - 1); e.preventDefault(); }
+  else if (k === "Home") go(0); else if (k === "End") go(N() - 1);
+  else if (k === "Enter" && !e.target.closest("button,a")) openDeck(cur);
+  else if (k === "f" || k === "F") flipCur();
+  else if (k === "p" || k === "P") setState(DECKS[cur].id, "pass");
+  else if (k === "h" || k === "H") setState(DECKS[cur].id, "hold");
+  else if (k === "0") setState(DECKS[cur].id, "");
+});
+let wheelLock = 0;
+window.addEventListener("wheel", (e) => {
+  if (e.target.closest(".back ul")) return; e.preventDefault();
+  const now = Date.now(); if (now < wheelLock) return;
+  const v = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY; if (Math.abs(v) < 8) return;
+  wheelLock = now + 420; go(cur + (v > 0 ? 1 : -1));
+}, { passive:false });
+stage.addEventListener("pointerdown", (e) => { sx = e.clientX; moved = false; });
+stage.addEventListener("pointerup", (e) => { if (sx == null) return; const dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 50) { moved = true; go(cur + (dx < 0 ? 1 : -1)); setTimeout(() => (moved = false), 60); } });
+stage.addEventListener("pointermove", (e) => {
+  const slot = e.target.closest(".slot.center"); if (!slot || sx != null) return;
+  const r = slot.getBoundingClientRect(); const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+  const t = slot.querySelector(".tilt"); t.style.setProperty("--ry", ((px - .5) * 14) + "deg"); t.style.setProperty("--rx", ((.5 - py) * 10) + "deg");
+  slot.querySelectorAll(".holo").forEach((h) => { h.style.setProperty("--hx", px * 100 + "%"); h.style.setProperty("--hy", py * 100 + "%"); });
+  slot.querySelectorAll(".art").forEach((w) => w.style.setProperty("--gx", ((px - .5) * 120) + "%"));
+});
+stage.addEventListener("pointerleave", () => { const t = stage.querySelector(".slot.center .tilt"); if (t) { t.style.setProperty("--rx","0deg"); t.style.setProperty("--ry","0deg"); } });
+window.addEventListener("resize", layout);
+
+async function refreshFromHub(){
+  try{
+    let links = null;
+    try { if (inHub && parent !== window && parent.__deckOpen) links = parent.__deckOpen; } catch (e) {}
+    if (!links) { const s = await (await fetch("/docs/planning/concept-flow.html", { cache:"no-store" })).text();
+      const i0 = s.indexOf("const deckOpen = "); if (i0 >= 0) { const a = s.indexOf("{", i0), b = s.indexOf("};", a); links = (new Function("return " + s.slice(a, b + 1)))(); } }
+    if (links) DECKS.forEach((d) => { if (links[d.id]) d.href = links[d.id]; });
+  }catch(e){}
+  await new Promise((ok) => { const go = () => (window.requestIdleCallback ? requestIdleCallback(() => ok(), { timeout: 3000 }) : setTimeout(ok, 300)); if (document.readyState === "complete") go(); else addEventListener("load", go, { once: true }); });
+  await Promise.all(DECKS.map(async (d, i) => {
+    if (!d.href || d.folder || d.pending) return;
+    try{
+      const doc = new DOMParser().parseFromString(await (await fetch(d.href, { cache:"no-store" })).text(), "text/html");
+      const sl = [...doc.querySelectorAll(".slide")].filter((x) => !x.parentElement.closest(".slide")); if (!sl.length) return;
+      d.n = sl.length; d.tracks = sl.map((x) => x.dataset.title || x.dataset.t || x.getAttribute("aria-label") || (x.querySelector("h1,h2")?.textContent || "").trim());
+      const slot = stage.querySelector(`.slot[data-i="${i}"]`); if (!slot) return;
+      slot.querySelectorAll("[data-n]").forEach((el) => (el.textContent = d.n)); slot.querySelector("[data-tracks]").innerHTML = tracksHTML(d);
+    }catch(e){}
+  }));
+  const maxN = Math.max(...DECKS.map((d) => d.n));
+  rail.querySelectorAll(".pip").forEach((p) => { const d = DECKS[+p.dataset.i]; p.style.setProperty("--h", Math.round(8 + 20 * d.n / maxN) + "px"); p.title = `${pad(+p.dataset.i + 1)} ${d.title} · ${d.n}장`; });
+  layout();
+}
+let prepHidden = false, prepOn = false, prepList = [];
+function stripPrep(){ while (DECKS.length && (DECKS[DECKS.length - 1].pending || DECKS[DECKS.length - 1].folder)) DECKS.pop(); }
+function applyPrep(){
+  const keep = DECKS[cur] && DECKS[cur].id;
+  stripPrep();
+  if (!prepHidden && prepList.length) {
+    if (prepOn) DECKS.push(...prepList);
+    else DECKS.push({ id:"__prep__", folder:true, title:"준비 중", bundle:"prep", group:"준비 중", sub: prepList.length + "개. 펼치면 뒤에 이어집니다.", copy:"", n: prepList.length, stars:0, diff:"C", wait:0, mtime:"", core:[], tracks:[], img:"", href:"" });
+  }
+  if (cur >= DECKS.length) cur = Math.max(0, DECKS.length - 1);
+  build();
+  if (keep && keep !== "__prep__") { const i = DECKS.findIndex((d) => d.id === keep); if (i >= 0) { cur = i; layout(); } }
+}
+window.addEventListener("message", (e) => {
+  if (!e.data) return;
+  if (e.data.pdCard === "focus") {
+    let i = DECKS.findIndex((d) => d.id === e.data.id);
+    if (i < 0 && prepList.some((d) => d.id === e.data.id)) { prepOn = true; applyPrep(); i = DECKS.findIndex((d) => d.id === e.data.id); }
+    if (i >= 0) go(i);
+  }
+  if (e.data.pdCard === "pending" && Array.isArray(e.data.items)) {
+    prepHidden = !!e.data.hide; prepOn = !!e.data.open;
+    prepList = e.data.items.map((it) => ({ id: it.id, title: it.title, sub: it.sub, copy: it.sub, bundle: "prep", group: it.group, stars: 0, diff: "C", n: 1, wait: 0, mtime: "", core: ["준비 중"], tracks: [], img: "", pending: true, href: it.href || "" }));
+    applyPrep();
+  }
+});
+// 10/05 현중 지시: 카드 로비는 열 때마다(새로고침 포함) 03 오디션부터 시작합니다. 주소의 #카드 위치는 쓰지 않습니다. 보기 방식(타일/카드/목록) 기억은 그대로입니다.
+{ const ai = DECKS.findIndex((d) => d.id === "audition"); cur = ai >= 0 ? ai : 0; }
+build(); refreshFromHub();
+if (inHub && parent !== window) parent.postMessage({ pdCard: "meta", decks: JSON.parse(JSON.stringify(DECKS.filter((d) => !d.pending && !d.folder))) }, location.origin);
+
+if (inHub) {
+  const a = document.getElementById("toTiles");
+  a.addEventListener("click", (e) => { e.preventDefault(); parent.postMessage({ pdCard: "tiles" }, location.origin); });
+}
+</script>
+</body>
+</html>

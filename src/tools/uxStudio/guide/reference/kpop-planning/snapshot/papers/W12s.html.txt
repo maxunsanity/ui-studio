@@ -1,0 +1,95 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>12 · 개발 일정</title>
+<style>
+body{margin:0;background:#f6f1e7;color:#2b2621;font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 34px 60px}
+.tag{font-size:12px;color:#9a7b3f;letter-spacing:.08em}
+h1{font-family:"Nanum Myeongjo",serif;font-size:32px;margin:6px 0 4px}
+.hook{color:#b4541f;font-weight:700;font-size:17px;margin:0 0 12px}
+.sum{background:#fffaf0;border:1px solid #e6dcc6;border-radius:10px;padding:10px 14px;font-size:14px;line-height:1.6}
+hr{border:0;border-top:1px solid #d9c49a;margin:22px 0}
+h2{font-size:18px;margin:0 0 10px}
+.fig{background:#fff;border:1px solid #e6dcc6;border-radius:12px;padding:14px}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:14px}
+.st{background:#fff;border:1px solid #e6dcc6;border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.5}
+.st b{display:block;font-size:14px;margin-bottom:4px}.st .when{color:#9a7b3f;font-size:12px}
+.st .done{color:#6b645c;font-size:12px;margin-top:6px;border-top:1px dashed #e6dcc6;padding-top:6px}
+table{width:100%;border-collapse:collapse;font-size:13px;background:#fff}
+th,td{border:1px solid #e6dcc6;padding:7px 9px;text-align:left;vertical-align:top}th{background:#f3ead8}
+.two{display:grid;grid-template-columns:1.1fr 1fr;gap:18px}
+.foot{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+.foot div{background:#fffaf0;border:1px solid #e6dcc6;border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.55}
+.foot b{display:block;color:#9a7b3f;margin-bottom:4px}
+.note{font-size:12px;color:#8a8076;margin-top:8px}
+</style></head><body><div class="wrap">
+<div class="tag">전체기획서 · 12 · 케이팝몬스터즈</div>
+<h1>개발 일정 — 큰 그림에서 상용까지</h1>
+<p class="hook">이번 주 큰 그림 → 재밌는 5분 → 11월 그래픽 기초 → 12월 바로 코딩 → 3월 안 상용화</p>
+<div class="sum">5분 실플레이는 <b>재밌을 때까지</b> 만들어서 기간이 정해져 있지 않다. 12월 초에 들어오는 사람이 바로 코딩하려면 11월까지 기획 압축과 그래픽 기초가 끝나 있어야 한다.<br><b>날짜는 회의(09-28) 발언이고 잠금 아님</b></div>
+<hr>
+<h2>그림 1 · 일정 흐름</h2>
+<div class="fig"><pre class="mermaid">
+flowchart LR
+  A["① 이번 주<br/>큰 그림 확정"] --> B["② 다음 주부터<br/>5분 실플레이<br/>기간 정하지 않음"]
+  B --> G1{"재밌나?"}
+  G1 -- 아니 --> B
+  G1 -- 응 --> C["③ 10~11월<br/>기획 압축<br/>그래픽 기초"]
+  C --> G2{"12월 초<br/>바로 코딩 가능?"}
+  G2 -- 아니 --> C
+  G2 -- 응 --> D["④ 12월~<br/>개발 착수<br/>버티컬 슬라이스"]
+  D --> E["⑤ 2월쯤<br/>상용 빌드"]
+  E --> F["⑥ 3월 안<br/>상용화 목표"]
+  T["툴 먼저<br/>기획서 툴 · 제작 툴"] -.-> B
+  T -.-> C
+  T -.-> D
+</pre></div>
+<div class="steps">
+ <div class="st"><span class="when">이번 주</span><b>① 큰 그림</b>현중·윤 대표 서류를 함축해서 한 눈에 들어오는 서류로<div class="done">끝: 모두 방향 100% 이해</div></div>
+ <div class="st"><span class="when">다음 주부터 · 기간 정하지 않음</span><b>② 5분 실플레이</b>5분을 실제로 구현, 5분에서 끝을 본다<div class="done">끝: 해 보니 재밌다</div></div>
+ <div class="st"><span class="when">10~11월</span><b>③ 압축 · 그래픽</b>기획 컴팩트하게 · 이미지 기초 초안 · 그래픽 컨셉 확정<div class="done">끝: 11월 말 초안·컨셉</div></div>
+ <div class="st"><span class="when">12월 초~</span><b>④ 개발 착수</b>대표 개발 합류 · 버티컬 슬라이스로 확인<div class="done">끝: 슬라이스 확인 → 일정 다시 잡기</div></div>
+ <div class="st"><span class="when">2월쯤</span><b>⑤ 상용 빌드</b>AI 도움 · 툴을 만들면서 간다<div class="done">끝: 빌드 완성</div></div>
+ <div class="st"><span class="when">3월 안</span><b>⑥ 상용화</b>목표 · 잠금 아님<div class="done">회의 52:23</div></div>
+</div>
+<hr>
+<div class="two">
+ <div><h2>그림 2 · 넘어가는 조건(관문)</h2><div class="fig"><pre class="mermaid">
+flowchart TB
+  S1["① 큰 그림"] --> Q1{"다 같이 100% 이해?"}
+  Q1 -- 아니 --> S1
+  Q1 -- 응 --> S2["② 5분 실플레이"]
+  S2 --> Q2{"5분이 재밌나?"}
+  Q2 -- 아니 --> S2
+  Q2 -- 응 --> S3["③ 압축 · 그래픽 기초"]
+  S3 --> Q3{"11월까지 그래픽 컨셉<br/>이미지 기초 끝?"}
+  Q3 -- 아니 --> R["12월 합류 후<br/>같이 기획 (늦어짐)"]
+  Q3 -- 응 --> S4["④ 12월 바로 코딩"]
+  S4 --> Q4{"버티컬 슬라이스 확인"}
+  Q4 --> P["목표 일정 다시 잡기"]
+</pre></div></div>
+ <div><h2>관문을 못 넘으면</h2>
+ <table><tr><th>관문</th><th>못 넘으면</th><th>회의</th></tr>
+ <tr><td>방향 100% 이해</td><td>작업 중에 「방향이 틀리다」가 나온다</td><td>50:27</td></tr>
+ <tr><td>5분이 재밌다</td><td>계속 고친다 — 그래서 기간을 정하지 않음</td><td>51:11 · 51:35</td></tr>
+ <tr><td>11월 그래픽·이미지</td><td>12월에 들어와서 같이 기획해야 한다 · 그래픽이 혹하지 않으면 개발을 잘해도 어렵다</td><td>48:26 · 51:44</td></tr>
+ <tr><td>버티컬 슬라이스</td><td>목표 일정을 그때 잡는다</td><td>52:43</td></tr></table>
+ <h2 style="margin-top:16px">현중이 정할 항목</h2>
+ <table><tr><th>무엇</th><th>선택지</th></tr>
+ <tr><td>5분 실플레이 범위</td><td>정해지지 않음</td></tr>
+ <tr><td>버티컬 슬라이스가 무엇까지인지</td><td>정해지지 않음</td></tr>
+ <tr><td>11월 그래픽 컨셉 확정 방식</td><td>정해지지 않음</td></tr>
+ <tr><td>3월 상용화를 잠글지</td><td>회의 발언 그대로 · 버티컬 슬라이스 때 다시 잡기</td></tr></table>
+ </div>
+</div>
+<hr>
+<div class="foot">
+ <div><b>왜 지금</b>12월 초 합류 때 바로 코딩하려면 지금부터 큰 그림과 5분 재미를 잡아야 한다(48:26)</div>
+ <div><b>이게 핵심</b>툴을 먼저 만든다 — 기획서만 보고 바로 작업하면 AI가 헛짓을 많이 한다(53:06~53:18)</div>
+ <div><b>이게 아닌 것</b>날짜 잠금이 아니다 · 5분 실플레이를 한 주 안에 끝내자는 게 아니다(51:11)</div>
+</div>
+<p class="note">세부: <a href="12_개발일정.md">12_개발일정.md</a> · 근거: 회의록 음성 260928_171138 48:26~53:32 · 2026-11-14 검색어 정리(클로드)</p>
+</div>
+<script type="module">
+import mermaid from '/node_modules/mermaid/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{primaryColor:'#fffaf0',primaryBorderColor:'#c9a861',lineColor:'#9a7b3f',fontFamily:'Apple SD Gothic Neo, Noto Sans KR, sans-serif'}});
+</script>
+</body></html>

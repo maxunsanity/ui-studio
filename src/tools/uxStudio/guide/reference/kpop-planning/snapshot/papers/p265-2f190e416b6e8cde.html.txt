@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>앨범 제작 발매 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+</style>
+
+</head>
+<body>
+<h1>앨범 제작 · 발매 · 와이어프레임 1차 초안 (390×844 · 세로)</h1>
+<p class="flow">HUD 내 앨범 줄 「첫 앨범 만들기」 · 앨범 이벤트 끝 「새 앨범 만들기」 · 주간 페스티벌 「앨범 만들기」 → ① 음악 고르기(①-1 옵션 · ①-2 막힘) → 재킷 준비(제작비 결제) → ② 샘플 연결(②-1 실패 · 환불) → ③ 재킷 · 앨범 정보 → ④ 앨범 상세 · 조건(④-1 미충족) → 앨범 제작 완료 → ④-2 발매 준비 → 앨범 발매 → ⑤ 발매 연출 2.8초 → 앨범 이벤트(HUD 탭) · ⑥ 발매 뒤 상세</p>
+<div class="rules"><b>규칙 근거</b> · 게임 시뮬레이터 앨범 커리어(<code>src/simulator/music-career/view.mjs</code> · <code>release-transition.mjs</code> · <code>src/game/music-career/albums.mjs</code> · <code>music-creation.mjs</code> · <code>data/music_career/*</code>) · P228 앨범 발매 기획서(11/18) · P208 음원 · 영상 핵심 제안서(11/16) · 음악앱 규칙 R-06-1 ~ 12 · 발란스 시뮬 v02 앨범 탭 · UI 기획서 HUD 탭 「내 앨범 줄」(11/24)<br>· <b>시뮬 그대로</b>: 한 시즌 최대 8곡 · 앨범 = 싱글 1곡 · 차수 순서대로 · 초안은 하나만 · 제작비(게임 돈) 차수별 5,000 ~ 22,500 · 다시 만들기 × 0.5 · 실패면 한 번 환불 · 제작 완료 · 발매는 무료 · 조건 = 기간 · 성장 · 시설 · 미션 · 엔터파워(50 ~ 280) · 발매하면 첫 곡 자동 대표곡 · 앨범 이벤트(100명 · 24시간) 시작 · 발매 연출 2.8초.<br>· <b>기획서 따름(시뮬과 다름)</b>: 앨범은 <b>팀 전원 참여 고정</b> · 멤버 고르기 숨김(R-06-7 · P208 · 솔로 · 유닛은 뮤비 때) · 시뮬 진행 4단계 줄 · 「전체 메뉴」는 게임 화면에 없음(HUD에서 바로).<br>· <b>제안</b>: 첫 앨범도 바로 ① (HUD ③ 빈 상태 「싱글 초안 만들기」 한 단계 뺌) · 곡 고르기에 「발주곡 / 창작곡」 두 탭(R-06-1 ~ 3 · 창작곡은 검수 통과만).</div>
+<div class="row" id="screens"></div>
+<script>
+// 공용 와이어 도구 (390×844)
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (on = -1) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === on ? " on" : ""}" style="left:${i * 65}px"><i></i>${t}</div>`).join("");
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const head = (title, right = "") => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div>
+  <div class="a val" style="left:52px;top:16px;font-size:16px">${title}</div>${right}<div class="line" style="top:50px"></div>`;
+const headR = (t, w = 80) => `<div class="b" style="left:${382 - w}px;top:8px;width:${w}px;height:34px;font-size:12px;font-weight:700">${t}</div>`;
+const btn = (x, y, w, h, label, strong = false, off = false, sub = "") => `<div class="b${off ? " off" : ""}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;flex-direction:column;gap:2px;${strong ? "border-width:2.5px;" : ""}"><span class="val" style="font-size:${h < 40 ? 13 : 15}px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const box = (x, y, w, h, inner = "", extra = "") => `<div class="b" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;${extra}">${inner}</div>`;
+const offbox = (x, y, w, h, t, extra = "") => `<div class="b off" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;font-size:11px;${extra}">${t}</div>`;
+const txt = (x, y, w, t, cls = "", style = "") => `<div class="a ${cls}" style="left:${x}px;top:${y}px;width:${w}px;${style}">${t}</div>`;
+const line = (x, y, w, t, r = "", bold = false) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;display:flex;justify-content:space-between;font-size:13px"><span${bold ? ' class="val"' : ""}>${t}</span><span class="val">${r}</span></div>`;
+const hr = (y, l = 8, r = 8) => `<div class="line" style="left:${l}px;right:${r}px;top:${y}px"></div>`;
+const gbar = (x, y, w, pct, h = 10) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border:1.5px solid var(--ln);border-radius:999px;background:var(--dim);overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--fill)"></div></div>`;
+const face = (x, y, s = 40, t = "얼굴") => `<div class="b off" style="left:${x}px;top:${y}px;width:${s}px;height:${s}px;font-size:11px;border-radius:50%">${t}</div>`;
+const pills = (x, y, list) => `<div class="a" style="left:${x}px;top:${y}px;display:flex;gap:4px;flex-wrap:wrap;max-width:${382 - x}px">${list.map(p => `<span class="pill">${p}</span>`).join("")}</div>`;
+const dimAll = `<div class="dimbg"></div>`;
+const win = (top, h, title, close = true) => `<div class="win" style="left:20px;top:${top}px;width:350px;height:${h}px"></div><div class="a val" style="left:40px;top:${top + 16}px;font-size:16px">${title}</div>${close ? `<div class="b" style="left:322px;top:${top + 10}px;width:34px;height:34px;font-size:15px">✕</div>` : ""}`;
+const winBtns = (top, a, b) => `<div class="b" style="left:36px;top:${top}px;width:150px;height:48px"><span class="val">${a}</span></div><div class="b" style="left:204px;top:${top}px;width:150px;height:48px;border-width:2.5px"><span class="val">${b}</span></div>`;
+const hudTop = `<div class="b off" style="left:8px;top:8px;width:374px;height:40px">HUD 위 줄 (팀 · 등급 · 돈 · 보석 · 주사위)</div>`;
+const board = (h = 620, t = "보드 (HUD 그대로)") => hudTop + `<div class="b off" style="left:8px;top:56px;width:374px;height:${h}px">${t}</div>`;
+const hudBehind = board() + tabs();
+const sheet = (top, h = 774 - top - 8) => `<div class="win" style="left:0;top:${top}px;width:390px;height:${h + 8}px;border-radius:16px 16px 0 0"></div><div class="a" style="left:175px;top:${top + 6}px;width:40px;height:4px;border-radius:2px;background:var(--fill)"></div>`;
+const kvs = (x, y, w, rows, gap = 22) => rows.map((r, i) => line(x, y + i * gap, w, r[0], r[1])).join("");
+const grid = (x, y, w, cols, items, h, gap = 6, fn = k => k) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;display:grid;grid-template-columns:repeat(${cols},1fr);gap:${gap}px">${items.map(k => `<div style="height:${h}px;border:1.5px solid var(--ln);border-radius:8px;background:var(--box);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:700;text-align:center;overflow:hidden">${fn(k)}</div>`).join("")}</div>`;
+const steps = (x, y, w, list, now) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;display:grid;grid-template-columns:repeat(${list.length},1fr);gap:4px">${list.map((s, i) =>
+  `<div style="height:28px;border:${i === now ? 2.5 : 1.5}px solid var(--ln);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:${i < now ? "var(--fill)" : i === now ? "var(--box)" : "var(--dim)"};color:${i < now ? "#fff" : i === now ? "var(--ink)" : "var(--soft)"}">${i < now ? "✓ " : ""}${s}</div>`).join("")}</div>`;
+const render = () => {
+  const SHOT = new URLSearchParams(location.search).get("shot");
+  if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+  else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+};
+
+
+const dots = (now) => steps(16, 60, 358, ["음악", "재킷", "제작 · 발매"], now);
+const goal = (y, t, s) => `<div class="b" style="left:8px;top:${y}px;width:374px;height:64px;flex-direction:column;align-items:flex-start;padding:6px 12px 6px 28px;gap:2px"><span class="sub">다음 목표</span><span class="val">${t}</span><span class="sub">${s}</span></div>`;
+const dock = (cost, state, label, off = false, side = "") => `<div class="line" style="top:676px"></div>
+  ${txt(28, 684, 346, `<span style="display:flex;justify-content:space-between;font-size:12px"><span>${cost}</span><span class="sub">${state}</span></span>`)}
+  ${side ? btn(8, 708, 130, 60, side) + btn(146, 708, 236, 60, label, true, off) : btn(8, 708, 374, 60, label, true, off)}`;
+const jacket = (x, y, s, t = "재킷") => `<div class="b off" style="left:${x}px;top:${y}px;width:${s}px;height:${s}px;flex-direction:column;gap:4px"><span>${t}</span></div>`;
+const albumCard = (y, badge) => `<div class="b" style="left:8px;top:${y}px;width:374px;height:86px;justify-content:flex-start;gap:10px;padding:0 10px 0 28px">${jacket(0, 0, 66).replace('class="b off" style="left:0px;top:0px;', 'class="b off" style="position:static;flex:none;')}<span style="text-align:left;flex:1"><span class="val">여름 신호</span><br><span class="sub">민트 웨이브 · 싱글 1 · 첫 싱글</span><br><span class="pill">${badge}</span></span></div>`;
+const cond = (y, rows) => `<div class="b" style="left:8px;top:${y}px;width:374px;height:${36 + rows.length * 24}px;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:8px 12px 8px 28px;gap:4px"><span class="val">제작 · 발매 조건</span>${rows.map(r => `<span style="display:flex;justify-content:space-between;font-size:12px"><span>${r[0]}</span><span>${r[1]}</span><b>${r[2]}</b></span>`).join("")}</div>`;
+
+const SCREENS = [
+  { cap: "① 음악 고르기 (첫 싱글)", html: head("앨범 만들기 · 싱글 1", headR("1 / 8곡", 64)) + dots(0) +
+      txt(16, 100, 358, `<span class="val" style="font-size:16px">어떤 음악으로 만들까요?</span><br><span class="sub">장르를 골라 음악을 들어 보세요 · 팀 전원이 참여해요</span>`) +
+      `${btn(16, 146, 175, 34, "발주곡", true)}${btn(199, 146, 175, 34, "창작곡 · 검수 통과 2")}` +
+      grid(16, 188, 358, 4, ["댄스 팝 ✓", "힙합", "R&B", "발라드"], 64, 6, k => `<span class="b off" style="position:static;width:34px;height:28px">곡</span>${k}`) +
+      `<div class="b" style="left:16px;top:262px;width:358px;height:150px;justify-content:flex-start;gap:12px;padding:0 12px;border-width:2.5px">${jacket(0, 0, 110, "샘플 재킷").replace('class="b off" style="left:0px;top:0px;', 'class="b off" style="position:static;flex:none;')}<span style="text-align:left"><span class="sub">민트 웨이브의 새 싱글</span><br><span class="val" style="font-size:15px">Summer Signal</span><br><span class="sub">댄스 팝 · 청량</span><br><span class="pill">▶ 미리듣기 다시 재생</span><br><span class="sub">샘플 원곡 크레딧 ▾</span></span></div>` +
+      line(28, 424, 346, "참여", "민트 웨이브 · 4명 전원") +
+      `<div class="b" style="left:16px;top:452px;width:358px;height:40px;justify-content:space-between;padding:0 12px"><span class="val">추가 옵션</span><span class="sub">간편 · 프로 생성 ▾</span></div>` +
+      `<div class="b" style="left:16px;top:500px;width:358px;height:40px;justify-content:space-between;padding:0 12px"><span class="val">예상 시작 순위</span><span>대략 40 ~ 53위 ▾</span></div>` +
+      `<div class="b" style="left:16px;top:548px;width:358px;height:40px;justify-content:space-between;padding:0 12px"><span class="val">제작 조건</span><span>4 / 5 충족 ▾</span></div>` +
+      dock("필요 5,000원 · 보유 12,300원", "재킷 준비를 누르면 한 번 결제해요", "이 음악으로 재킷 준비") +
+      `${n(1, 2, 62)}${n(2, 2, 152)}${n(3, 2, 200)}${n(4, 2, 300)}${n(5, 2, 426)}${n(6, 2, 462)}${n(7, 2, 690)}`,
+    notes: ["← = HUD · 「싱글 n · n / 8곡」 · 진행 점 3(음악 · 재킷 · 제작 · 발매) · 두 번째부터 위에 「다음 싱글 준비 · 원할 때 새 곡을 준비해요. 기존 곡으로 활동을 계속해도 좋아요」", "곡 길 두 개(R-06-1 ~ 3 · 제안): 발주곡(4장르) / 창작곡(검수 통과한 것만 · 검수 중 · 반려는 회색)", "장르 카드 4(댄스 팝 120 · 힙합 94 · R&B 92 · 발라드 76 bpm) · 누르면 자동 미리듣기", "고른 곡: 샘플 재킷 · 곡 이름 · 장르 · 분위기 · 미리듣기 · 원곡 크레딧(작가 · 표기 · 라이선스) · 「무료 시험 음원이에요」는 시뮬 전용", "참여 = 팀 전원 고정(멤버 고르기 숨김 · R-06-7) · 노래 파트가 없으면 연주곡", "접기 3개: 추가 옵션 → ①-1 · 예상 시작 순위(「현재 팀과 팬 기준 · 대략 a ~ b위 · 발매 전 참고용」) · 제작 조건 r / t", "아래 고정: 「필요 n원 · 보유 n원」 · 상태 글 · 「이 음악으로 재킷 준비」(누르면 제작비 결제 → ②)"] },
+
+  { cap: "①-1 추가 옵션 (간편 · 프로 생성)", html: head("앨범 만들기 · 싱글 1", headR("1 / 8곡", 64)) + dots(0) +
+      `<div class="b" style="left:16px;top:100px;width:358px;height:40px;justify-content:space-between;padding:0 12px"><span class="val">추가 옵션</span><span class="sub">접기 ▴</span></div>` +
+      `${btn(16, 150, 175, 36, "간편 생성", true)}${btn(199, 150, 175, 36, "프로 생성")}` +
+      grid(16, 196, 358, 2, [["청량한 데뷔", "댄스 팝 · 청량"], ["강렬한 퍼포먼스", "힙합 · 파워풀"], ["마음을 전하는 팬송", "발라드 · 감성"], ["몽환적인 밤", "R&B · 몽환"]], 60, 6, k => `<span class="val">${k[0]}</span><span class="sub">${k[1]}</span>`) +
+      txt(16, 332, 358, `<span class="val">프로 생성을 고르면</span>`) +
+      ["스타일", "분위기", "언어", "빠르기", "길이"].map((k, i) => `<div class="b" style="left:16px;top:${356 + i * 42}px;width:358px;height:36px;justify-content:space-between;padding:0 12px"><span>${k}</span><span class="val">${["댄스 팝", "청량", "한국어", "스타일에 맞게", "3분"][i]} ▾</span></div>`).join("") +
+      `<div class="b" style="left:16px;top:568px;width:358px;height:90px;align-items:flex-start;justify-content:flex-start;padding:8px 12px;flex-direction:column;gap:4px"><span class="val">가사 직접 쓰기 · 선택</span><span class="sub">0 / 4,095자</span></div>` +
+      dock("필요 5,000원 · 보유 12,300원", "", "이 음악으로 재킷 준비") +
+      `${n(1, 2, 156)}${n(2, 2, 200)}${n(3, 2, 360)}${n(4, 2, 572)}`,
+    notes: ["간편 / 프로 두 가지", "간편 = 프리셋 4(장르 · 분위기 묶음)", "프로 = 스타일 4 · 분위기 4(청량 · 파워풀 · 몽환 · 감성) · 언어 3 · 빠르기 4(스타일에 맞게 · 80 · 110 · 140) · 길이 3(30초 · 1분 · 3분)", "가사 직접 쓰기(4,095자 · 선택) · 연주곡이면 언어 · 가사 잠김(「발성 파트가 없어 연주곡으로 준비해요」)"] },
+
+  { cap: "①-2 막힘 (돈 부족 · 조건)", html: head("앨범 만들기 · 싱글 2", headR("2 / 8곡", 64)) + dots(0) +
+      offbox(16, 100, 358, 440, "① 본문 그대로") +
+      `<div class="b" style="left:16px;top:548px;width:358px;height:110px;flex-direction:column;align-items:stretch;padding:8px 12px;gap:4px;border-style:dashed"><span class="val">막히는 이유 (하나만 보임)</span><span style="font-size:12px">· 「2,300원이 부족해요」</span><span style="font-size:12px">· 「참여 멤버의 파트와 목소리를 확인해 주세요」</span><span style="font-size:12px">· 「샘플 파일을 불러오지 못했어요」</span></div>` +
+      dock("필요 7,500원 · 보유 5,200원", "2,300원이 부족해요", "이 음악으로 재킷 준비", true, "돈 모으러 가기") +
+      `${n(1, 2, 554)}${n(2, 2, 690)}`,
+    notes: ["버튼이 꺼지는 이유 한 줄(제작비 부족 · 목소리 확인 · 샘플 없음 · 내 팀 아님) · 시즌 마감 · 9번째 · 초안이 이미 있으면 ①에 들어오지 않고 ④로", "돈 모으러 가기 → HUD(보드) · 목소리 확인이 막히면 「멤버 · 목소리 확인」 → ①-1"] },
+
+  { cap: "② 샘플 연결 중 (1.8초)", html: head("앨범 만들기 · 싱글 1", headR("1 / 8곡", 64)) + dots(0) +
+      `<div class="b" style="left:16px;top:200px;width:358px;height:240px;flex-direction:column;gap:12px"><span class="val" style="font-size:16px">샘플 연결 중이에요</span>${gbar(40, 0, 278, 60, 12).replace('class="a" style="left:40px;top:0px;', 'style="position:static;')}<span class="sub" style="width:300px">준비한 음원을 연결하는 짧은 연출이에요</span></div>` +
+      dock("실제 제작비 결제 5,000원", "처리 중", "샘플 연결 중", true) + `${n(1, 2, 206)}${n(2, 2, 690)}`,
+    notes: ["진행 막대 · 실제 시간 1.8초(<code>music_creation.json</code>) · 끝나면 ③ 자동", "결제한 제작비 한 줄 · 완료 확인이 막히면 「연결 · 환불 다시 확인」"] },
+
+  { cap: "②-1 샘플 실패 · 환불", html: head("앨범 만들기 · 싱글 1", headR("1 / 8곡", 64)) + dots(0) +
+      `<div class="b" style="left:16px;top:200px;width:358px;height:200px;flex-direction:column;gap:8px;border-style:dashed"><span class="val" style="font-size:16px">샘플 연결 실패</span><span class="sub" style="width:300px">샘플 파일을 불러오지 못했어요</span><span class="val">제작비 5,000원을 돌려드렸어요</span></div>` +
+      dock("보유 12,300원", "같은 작업은 한 번만 환불", "다시 고르기", false) + `${n(1, 2, 206)}${n(2, 2, 690)}`,
+    notes: ["실패 문구 · 환불한 돈 · 자동 재시도 없음", "다시 고르기 → ①"] },
+
+  { cap: "③ 재킷 · 앨범 정보", html: head("재킷 · 앨범 정보") + dots(1) +
+      jacket(95, 100, 200, "이번 싱글의 재킷<br>아티스트 · 곡명") +
+      `<div class="a" style="left:16px;top:312px;width:358px;display:grid;grid-template-columns:1fr 1fr;gap:6px">${["재킷 구성 · 빛의 궤도 ▾", "재킷 색상 · 민트 ▾"].map(k => `<div style="height:36px;border:1.5px solid var(--ln);border-radius:8px;background:var(--box);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">${k}</div>`).join("")}</div>` +
+      [["앨범명", "SUMMER SIGNAL"], ["곡명", "여름 신호"], ["아티스트 🔒", "민트 웨이브"], ["앨범 소개", "첫 여름의 신호를 … (0 / 500)"]].map((r, i) => `<div class="b${i === 2 ? " off" : ""}" style="left:16px;top:${358 + i * 44}px;width:358px;height:38px;justify-content:space-between;padding:0 12px"><span class="sub">${r[0]}</span><span class="val">${r[1]}</span></div>`).join("") +
+      `<div class="b" style="left:16px;top:536px;width:358px;height:40px;justify-content:space-between;padding:0 12px"><span class="val">장르 · 언어 · 크레딧</span><span class="sub">작사 · 작곡 · 편곡 · 프로듀싱 ▾</span></div>` +
+      dock("비용 없음", "", "이 재킷으로 다음", false, "앨범으로") + `${n(1, 75, 102)}${n(2, 2, 318)}${n(3, 2, 364)}${n(4, 2, 542)}${n(5, 2, 724)}`,
+    notes: ["큰 재킷 미리보기(아티스트 · 도형 · 곡명 · 앨범명) · 샘플이 준비되면 자동으로 열림", "재킷 구성 3(빛의 궤도 · 우리의 창 · 파동) · 색상 3(민트 · 로즈 · 나이트)", "앨범명 · 곡명 80자 · 아티스트 잠김(「앨범 주인공은 제작 당시 참여 명단으로 고정돼요」) · 소개 500자", "접기: 장르 3 · 언어 3 · 크레딧 입력", "앨범으로 = 바꾼 것 버리고 ④ · 이 재킷으로 다음 = 저장하고 ④(비용 다시 안 받음)"] },
+
+  { cap: "④ 앨범 상세 · 초안 (조건 충족)", html: head("싱글 1 · 초안", headR("1 / 8곡", 64)) + dots(2) +
+      goal(96, "싱글 제작 준비를 마쳐요", "정보를 다듬고 준비 조건을 확인해 주세요") + albumCard(168, "초안") +
+      `<div class="b" style="left:8px;top:262px;width:374px;height:72px;justify-content:flex-start;gap:10px;padding:0 10px 0 28px"><span class="b" style="position:static;width:48px;height:48px;border-radius:50%;font-size:16px">▶</span><span style="text-align:left"><span class="val">샘플 제작 완료</span><br><span class="sub">공연 이미지와 곡을 함께 미리 봐요 · 영상으로 미리보기</span></span></div>` +
+      line(28, 344, 354, "참여 멤버", "4명 · 보컬 2 · 랩 1 · 제작 1 ▾") + line(28, 368, 354, "예상 시작 순위", "대략 40 ~ 53위") +
+      cond(396, [["기간", "시즌 시작부터", "충족"], ["팀 성장", "현재 — / 필요 —", "관측 대기"], ["준비 미션", "1 / 1", "충족"], ["엔터파워", "현재 86 / 필요 50", "충족"]]) +
+      dock("비용 없음", "제작 조건 4 / 4 충족", "앨범 제작 완료", false, "재킷 · 정보") +
+      `${n(1, 2, 100)}${n(2, 2, 172)}${n(3, 2, 280)}${n(4, 2, 346)}${n(5, 2, 404)}${n(6, 2, 724)}`,
+    notes: ["목표: 초안 「싱글 제작 준비를 마쳐요」 / 제작 완료 「준비한 싱글을 발매해요」", "앨범 카드: 재킷 · 곡명 · 아티스트 · 싱글 n · 배지(초안 / 제작 완료 / 발매 · 대표곡)", "샘플 칸: ▶ 영상으로 미리보기 · 샘플 다시 만들기(제작비 × 0.5 · 「새 샘플이 준비되기 전까지 이전 샘플을 들을 수 있어요」)", "참여 멤버 접기(이름 · 파트 · 참여도 % · 보컬 100 · 랩 60 · 코러스 40 · 제작 70) · 예상 시작 순위", "조건 줄: 이름 · 「현재 n / 필요 n」 · 충족 / 준비 중 / 관측 대기 · 값이 없는 조건은 비워 둠 · 엔터파워 문턱 50 · 100 · 130 · 160 · 190 · 220 · 250 · 280(차수별)", "재킷 · 정보 → ③ · 앨범 제작 완료(무료) → ④-2"] },
+
+  { cap: "④-1 조건 미충족", html: head("싱글 2 · 초안", headR("2 / 8곡", 64)) + dots(2) +
+      goal(96, "싱글 제작 준비를 마쳐요", "남은 준비 조건을 확인하고 이어가 주세요") + albumCard(168, "초안") +
+      cond(266, [["기간", "첫 컴백 · 이전 발매 뒤 7일", "준비 중"], ["팀 성장", "현재 210 / 필요 250", "부족 40"], ["시설 레벨", "보컬 녹음실 3 / 4", "부족 1"], ["준비 미션", "0 / 1", "준비 중"], ["엔터파워", "현재 86 / 필요 100", "부족 14"]]) +
+      txt(16, 446, 358, `<span class="sub" style="font-size:12px">앨범 제작과 발매에는 엔터파워도 필요해요</span>`) +
+      dock("비용 없음", "제작 조건 1 / 5 충족", "앨범 제작 완료", true, "준비 조건 확인") + `${n(1, 2, 272)}${n(2, 2, 724)}`,
+    notes: ["부족한 줄은 「부족 n」 굵게 · 줄을 누르면 그 조건을 채우는 곳으로(성장 → 프로필 · 시설 → 건설 · 미션 → 미션 · 엔터파워 → HUD 엔터파워 상세 · 제안)", "준비 조건 확인 = 조건 접기 펼침 · 앨범 제작 완료는 꺼짐"] },
+
+  { cap: "④-2 제작 완료 → 앨범 발매", html: head("싱글 1 · 제작 완료", headR("1 / 8곡", 64)) + dots(2) +
+      goal(96, "준비한 싱글을 발매해요", "발매하면 앨범 이벤트가 시작돼요") + albumCard(168, "제작 완료") +
+      cond(266, [["발매 간격", "시즌 시작부터", "충족"], ["엔터파워", "현재 86 / 필요 50", "충족"]]) +
+      `<div class="b" style="left:8px;top:360px;width:374px;height:130px;flex-direction:column;align-items:flex-start;padding:8px 12px 8px 28px;gap:4px"><span class="val">발매하면</span><span style="font-size:12px">· 앨범 이벤트 시작 · 100명 · 24시간</span><span style="font-size:12px">· 첫 곡이면 대표곡으로</span><span style="font-size:12px">· 크루에 자동 공유</span><span style="font-size:12px">· 보드 방송 · 공연 칸 6곳 이름이 바뀜</span></div>` +
+      dock("비용 없음", "발매 조건 2 / 2 충족", "앨범 발매", false, "재킷 · 정보") + `${n(1, 2, 272)}${n(2, 2, 366)}${n(3, 2, 724)}`,
+    notes: ["발매 조건: 간격(1차 시즌 시작 · 2차부터 이전 발매 뒤) · 엔터파워", "발매하면 생기는 일 4줄(제안 안내) · 발매 자체는 즉시 보상 없음 · 칸 이름 바뀜(거리 인터뷰 → 예능 방송국 등 · P228 · 아직 코드 없음)", "앨범 발매 → ⑤ · 시즌 마감이 지나면 꺼짐(「이번 시즌 발매가 끝났어요」 · 시뮬 문구 없음)"] },
+
+  { cap: "⑤ 발매 연출 (2.8초)", html: `<div class="b off" style="left:0;top:0;width:390px;height:844px;border:none;border-radius:0"></div>` +
+      txt(16, 90, 358, `<span class="val" style="font-size:18px">우리의 새 싱글</span>`, "", "text-align:center") + jacket(95, 130, 200) +
+      txt(16, 344, 358, `<span class="val" style="font-size:18px">여름 신호</span><br><span class="sub">민트 웨이브</span><br>${["서윤", "도윤", "하나", "리아"].map(k => `<span class="pill">${k}</span>`).join(" ")}`, "", "text-align:center") +
+      `<div class="b" style="left:95px;top:440px;width:200px;height:50px;border-width:3px"><span class="val" style="font-size:18px">발매 완료</span></div>` +
+      `<div class="b" style="left:16px;top:520px;width:358px;height:64px;justify-content:space-between;padding:0 12px"><span class="val">이 곡의 차트</span><span><b>현재 47위</b> · 남은 시간 23시간 58분</span></div>` +
+      txt(16, 596, 358, `<span class="sub" style="font-size:12px">소속 크루에 앨범을 공유했어요</span>`, "", "text-align:center") +
+      btn(16, 760, 358, 52, "차트 보기 ›") + `${n(1, 75, 132)}${n(2, 75, 444)}${n(3, 2, 526)}${n(4, 2, 772)}`,
+    notes: ["재킷 → 곡명 · 아티스트 · 참여 멤버 칩", "「발매 완료」 도장(재킷 0.65 → 발매 0.5 → 이동 0.35 → 차트 1.3초 · 움직임 줄이기면 0.12초)", "재킷이 차트 줄로 날아감 · 「현재 n위」(없으면 「차트 등록됨」) · 남은 시간 · 크루 공유는 실제 공유됐을 때만", "차트 보기 = 건너뛰기 · 끝나면 그 곡 앨범 이벤트(HUD 탭 ①) · 연출이 실패해도 발매는 유지 「앨범을 발매했어요. 차트에서 확인해 보세요」"] },
+
+  { cap: "⑥ 발매 뒤 앨범 상세", html: head("싱글 1 · 발매", headR("1 / 8곡", 64)) +
+      goal(58, "이 곡으로 활동을 이어가요", "방송 · 공연으로 대표곡과 기존 곡의 성적을 함께 쌓아요") + albumCard(130, "발매 · 대표곡") +
+      `<div class="b" style="left:8px;top:224px;width:374px;height:72px;flex-direction:column;align-items:stretch;padding:8px 12px 8px 28px;gap:4px"><span class="val">발매 후 자동 처리</span><span style="display:flex;justify-content:space-between;font-size:12px"><span>크루 공유</span><b>크루 내부 공유됨</b></span><span style="display:flex;justify-content:space-between;font-size:12px"><span>앨범 차트</span><b>차트 등록됨</b></span></div>` +
+      `<div class="b" style="left:8px;top:304px;width:374px;height:150px;flex-direction:column;align-items:stretch;padding:8px 12px 8px 28px;gap:4px"><span class="val">시티 투어</span><span class="sub">이 앨범의 리그 상대와 10바퀴를 경쟁해요</span><span style="display:flex;justify-content:space-between;font-size:12px"><span>앨범 재화</span><b>6개</b></span><span style="display:flex;justify-content:space-between;font-size:12px"><span>남은 이벤트 시간</span><b>21:14</b></span><span style="display:flex;justify-content:space-between;font-size:12px"><span>보상</span><b>주사위 · 아이돌 카드</b></span><span class="sub">참가비 없이, 급유할 때만 재화를 써요 · 재화 1개 = ¼바퀴</span></div>` +
+      `${btn(8, 462, 183, 44, "시티 투어 참가")}${btn(199, 462, 183, 44, "대표곡으로 선택", false, true)}` +
+      `<div class="b" style="left:8px;top:516px;width:374px;height:44px;justify-content:space-between;padding:0 12px 0 28px"><span>발매 1곡 · 이번 시즌 최대 8곡</span><span class="sub">모두 채울 필요는 없어요</span></div>` +
+      `<div class="b" style="left:8px;top:568px;width:374px;height:44px;justify-content:space-between;padding:0 12px 0 28px"><span class="val">다음 싱글 준비</span><span class="sub">싱글 2 · 첫 컴백 ›</span></div>` +
+      dock("", "", "앨범 이벤트 보러 가기", false, "샘플 듣기") +
+      `${n(1, 2, 62)}${n(2, 2, 228)}${n(3, 2, 308)}${n(4, 2, 468)}${n(5, 2, 520)}${n(6, 2, 572)}${n(7, 2, 724)}`,
+    notes: ["목표 「이 곡으로 활동을 이어가요」 · 앨범 카드(발매 · 대표곡)", "자동 처리 2줄: 크루 공유(공유됨 / 생략 / 대기) · 앨범 차트(등록됨 / 비교 그룹 구성 대기)", "시티 투어 칸(주간 페스티벌 탭 ④와 같은 입구) · 재화 · 남은 시간 · 보상 · 「참가비 없이 급유할 때만 재화를 써요」", "시티 투어 참가 / 경기 이어하기 / 「보드에서 재화 모으기」 · 대표곡이 아니면 「대표곡으로 선택」", "발매 n곡 · 시즌 최대 8곡 안내", "다음 싱글 준비 → ①(싱글 n+1 · 차수 이름: 데뷔 준비 · 첫 컴백 · 퍼포먼스 확장 · 프로듀싱 확장 · 팀 활동 확장 · 콘셉트 확장 · 활동 성과 확장 · 마지막 제작 기회) · 8곡이면 없음", "앨범 이벤트 보러 가기 → HUD 탭 앨범 이벤트(리그가 꺼져 있으면 「방송 · 공연 이어가기」)"] },
+];
+
+render();
+</script>
+</body>
+</html>

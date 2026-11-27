@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나쁜 기운 디펜스 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  .kv { display:flex; justify-content:space-between; align-items:center; font-size:12px; }
+</style>
+</head>
+<body>
+<h1>나쁜 기운 디펜스 · 와이어프레임 1차 초안 (390×844 · 세로)</h1>
+<p class="flow">HUD 왼쪽 1번 나쁜 기운 칸 가득 → 눌러서 ① 경고 · 선택 (①-1 편성) → 방어하기 → ② 전투 · ②-1 스킬 카드 · ③ 보스 · ④ 멈춤 → ⑤ 성공 / ⑤-1 실패 · 그냥 두기 · 안 누르고 굴림 → ⑤-2 파손</p>
+<div class="rules">
+  <b>규칙 근거</b> · P104 나쁜 기운 디펜스 · 통합 v07(스킬 · 피니시) · 디펜스 UI 기획 목록(11/23) · HUD 게이지 칸 와이어(11/23) · 표 <code>data/bad_energy/*</code> · 문구 <code>ui.json</code><br>
+  · <b>확정(현중 11/23)</b>: 게이지는 HUD 왼쪽 1번 칸 · 가득 차면 그 칸을 눌러야 시작 · 가운데 「디펜스」 버튼 없음 · 안 누르면 연습실 파손 + 게이지 0.<br>
+  · <b>끝</b>: 새 악귀 출현은 4:00에 끝나고 남은 악귀를 모두 잡으면 성공 · 본관이 부서지면 실패(동시면 실패) · 전체 최대 5분.<br>
+  · <b>방패 · 지킴이와 관계없음</b>(출연권 대전 전용) · 몬스 스킬 · 공용 피니시로 막음 · 기분을 깎지 않음.<br>
+  · <b>제안(이 초안에서 고른 것)</b>: 세로 화면 · 출격 자동 편성 + 바꾸기 · 난이도는 정해져 나옴 · 카메라 · 배속 버튼 없음 · 스킬 정보 창은 안 멈춤 · 가득 찬 뒤 5분 제한 없음(안 누르고 굴리면 파손)</div>
+<div class="row" id="screens"></div>
+
+<script>
+
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (on = -1) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === on ? " on" : ""}" style="left:${i * 65}px"><i></i>${t}</div>`).join("");
+const bell = `<div class="b" style="left:330px;top:8px;width:52px;height:34px;font-size:11px;font-weight:700">알림 2</div>`;
+const head = (title, b = true) => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div>
+  <div class="a val" style="left:52px;top:16px;font-size:16px">${title}</div>${b ? bell : ""}<div class="line" style="top:50px"></div>`;
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const bigBtn = (x, w, label, sub = "", off = false) =>
+  `<div class="b${off ? " off" : ""}" style="left:${x}px;top:706px;width:${w}px;height:60px;flex-direction:column;gap:2px">
+    <span class="val" style="font-size:15px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const bottomBar = inner => `<div class="line" style="top:698px"></div>${inner}${tabs()}`;
+const actBtn = (label, sub, off = false) => bigBtn(8, 374, label, sub, off);
+const chips = (list, on) => list.map((c, i) => `<div class="bm${c === on ? " on" : ""}" style="left:${8 + i * (374 / list.length)}px;width:${374 / list.length - 4}px">${c}</div>`).join("") + `<div class="line" style="top:90px"></div>`;
+const IN = ["출품판", "크루원", "공지", "전체 크루"], OUT = ["전체 크루", "만들기"];
+const lobby = on => head("민트 웨이브") + chips(IN, on);
+const behind = on => lobby(on) + tabs() + `<div class="dimbg"></div>`;
+// 회차 줄 + 단계 4칸
+const STEPS = ["음악 공유", "뮤비 만들기", "투표", "대표작"];
+const round = (title, due, step) => `
+  <div class="b" style="left:8px;top:98px;width:374px;height:46px;justify-content:space-between;padding:0 12px 0 28px">
+    <span style="text-align:left"><span class="val">${title}</span><br><span class="sub">개인 출품과 따로 · 대표작 1편</span></span><span class="val">${due}</span></div>
+  <div class="a" style="left:8px;top:150px;width:374px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px">${STEPS.map((s, i) =>
+    `<div style="height:34px;border:${i === step ? 2.5 : 1.5}px solid var(--ln);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:${i < step ? "var(--fill)" : i === step ? "var(--box)" : "var(--dim)"};color:${i < step ? "#fff" : i === step ? "var(--ink)" : "var(--soft)"}">${i < step ? "✓ " : ""}${s}</div>`).join("")}</div>`;
+const sect = (y, t, r = "") => `<div class="a" style="left:8px;top:${y}px;width:374px;display:flex;justify-content:space-between;padding-left:28px"><span class="val">${t}</span><span class="sub" style="font-size:12px">${r}</span></div>`;
+const MV = [["아이돌 A 버전", "나", "여름 신호"], ["레터 버전", "리아", "여름 신호"], ["밤 산책 컷", "도윤", "밤 산책"], ["무대 컷", "하나", "여름 신호"], ["골목 컷", "준", "밤 산책"]];
+const mvCard = (m, x, y, w = 118, h = 112) => `<div class="m" style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px"><div class="pic">뮤비</div><div class="nm">${m[0]}</div><div class="ft"><span>${m[1]}</span><span>${m[2]}</span></div></div>`;
+const face = (x, y, s = 40) => `<div class="b off" style="left:${x}px;top:${y}px;width:${s}px;height:${s}px;font-size:11px;border-radius:50%">얼굴</div>`;
+const win = (top, h, title) => `<div class="win" style="left:20px;top:${top}px;width:350px;height:${h}px"></div><div class="a val" style="left:40px;top:${top + 16}px;font-size:16px">${title}</div><div class="b" style="left:322px;top:${top + 10}px;width:34px;height:34px;font-size:15px">✕</div>`;
+const winBtns = (top, a, b) => `<div class="b" style="left:36px;top:${top}px;width:150px;height:48px"><span class="val">${a}</span></div><div class="b" style="left:204px;top:${top}px;width:150px;height:48px;border-width:2.5px"><span class="val">${b}</span></div>`;
+
+// 메인 공용: 크루 줄 · 이번 회차 카드 · 지난 대표작 · 공지 · 메뉴
+const crewTop = role => `
+  <div class="b" style="left:8px;top:58px;width:374px;height:96px;justify-content:flex-start;gap:12px;padding:0 10px">
+    <span class="b off" style="position:static;width:76px;height:76px;font-size:11px;flex:none">크루 그림</span>
+    <span style="text-align:left"><span class="val" style="font-size:17px">민트 웨이브</span><br><span class="sub" style="font-size:12px">23 / 30명 · 나는 <b>${role}</b></span></span></div>`;
+const roundCard = (stepNow, line) => `
+  <div class="b" style="left:8px;top:164px;width:374px;height:178px;border-width:2.5px"></div>
+  <div class="a" style="left:32px;top:176px;width:338px;display:flex;justify-content:space-between"><span class="val" style="font-size:15px">주간 3주차 · 크루 출품</span><span class="val">마감 D-2</span></div>
+  <div class="a" style="left:20px;top:206px;width:350px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px">${STEPS.map((x, i) =>
+    `<div style="height:28px;border:${i === stepNow ? 2.5 : 1.5}px solid var(--ln);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:${i < stepNow ? "var(--fill)" : i === stepNow ? "var(--box)" : "var(--dim)"};color:${i < stepNow ? "#fff" : i === stepNow ? "var(--ink)" : "var(--soft)"}">${x}</div>`).join("")}</div>
+  <div class="a" style="left:20px;top:246px;width:350px;text-align:center"><span class="val" style="font-size:16px">${line}</span></div>
+  <div class="b" style="left:20px;top:282px;width:350px;height:46px"><span class="val" style="font-size:15px">출품판 보기 ›</span></div>`;
+const lastRow = (y = 0) => `
+  <div class="b" style="left:8px;top:${y}px;width:374px;height:52px;justify-content:space-between;padding:0 14px 0 28px">
+    <span class="sub" style="font-size:12px">지난 대표작</span><span class="val">주간 2주차 · 구역 4위</span></div>`;
+const noticeRow = y => `
+  <div class="b" style="left:8px;top:${y}px;width:374px;height:52px;justify-content:space-between;padding:0 14px 0 28px">
+    <span class="sub" style="font-size:12px">공지</span><span class="val" style="font-size:13px">음악 공유는 수요일까지예요</span></div>`;
+const menu = (y, items) => `<div class="a" style="left:8px;top:${y}px;width:374px;display:grid;grid-template-columns:repeat(${items.length},1fr);gap:6px">${items.map(k =>
+  `<div style="height:56px;border:1.5px solid var(--ln);border-radius:8px;background:var(--box);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">${k}</div>`).join("")}</div>`;
+const todo = (y, title, rows) => `
+  <div class="b" style="left:8px;top:${y}px;width:374px;height:${30 + rows.length * 44}px"></div>
+  <div class="a val" style="left:28px;top:${y + 9}px">${title}</div>
+  ${rows.map((r, i) => `<div class="a" style="left:20px;top:${y + 34 + i * 44}px;width:350px;height:38px;border-top:1px solid #c9ccd1;display:flex;justify-content:space-between;align-items:center;padding:0 0 0 8px"><span style="font-size:13px">${r[0]}</span><span class="val">${r[1]} ›</span></div>`).join("")}`;
+const sub = (title, b = true) => head(title, b);
+
+
+const dimAll = `<div class="dimbg"></div>`;
+const hudBehind = `<div class="b off" style="left:8px;top:8px;width:374px;height:34px">HUD 위 줄</div>
+  <div class="b off" style="left:8px;top:60px;width:374px;height:620px">보드 (HUD 그대로)</div>` + tabs();
+const btn = (x, y, w, h, label, strong = false, off = false, sub = "") => `<div class="b${off ? " off" : ""}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;flex-direction:column;gap:2px;${strong ? "border-width:2.5px;" : ""}"><span class="val" style="font-size:15px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const line = (x, y, w, t, r = "", bold = false) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;display:flex;justify-content:space-between;font-size:13px"><span${bold ? ' class="val"' : ""}>${t}</span><span class="val">${r}</span></div>`;
+const gbar = (x, y, w, pct, h = 10) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border:1.5px solid var(--ln);border-radius:999px;background:var(--dim);overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--fill)"></div></div>`;
+// 전투 공통
+const topBar = (wave, time, left) => `<div class="b" style="left:8px;top:8px;width:300px;height:40px;justify-content:space-between;padding:0 12px 0 28px"><span class="val">${wave}</span><span class="val">${time}</span><span class="val">남은 악귀 ${left}</span></div>
+  <div class="b" style="left:316px;top:8px;width:66px;height:40px"><span class="val">멈춤</span></div>`;
+const bld = (y, a = 80, b = 64, c = 100) => `<div class="a" style="left:8px;top:${y}px;width:374px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:6px">${[["본관", a], ["부속 A", b], ["부속 B", c]].map(([k, v], i) =>
+  `<div style="border:${i === 0 ? 2.5 : 1.5}px solid var(--ln);border-radius:8px;background:var(--box);padding:4px 8px"><div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700"><span>${k}</span><span>${v}%</span></div><div style="height:8px;margin-top:3px;border:1.5px solid var(--ln);border-radius:999px;background:var(--dim);overflow:hidden"><div style="width:${v}%;height:100%;background:var(--fill)"></div></div></div>`).join("")}</div>`;
+const field = (y, h, inner = "") => `<div class="b off" style="left:8px;top:${y}px;width:374px;height:${h}px;flex-direction:column;gap:6px">전투 장면(3D · 카메라 자동)${inner}</div>`;
+const skills = (y, n = 3) => `<div class="a" style="left:8px;top:${y}px;width:260px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px">${[0, 1, 2, 3, 4].map(i =>
+  `<div style="height:48px;border:1.5px ${i < n ? "solid" : "dashed"} var(--ln);border-radius:8px;background:${i < n ? "var(--box)" : "transparent"};display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:${i < n ? "var(--ink)" : "var(--soft)"}">${i < n ? `스킬<span class="sub">${i + 1}단계</span>` : "빈칸"}</div>`).join("")}</div>`;
+const finisher = (y, state = "준비 완료") => `<div class="b" style="left:276px;top:${y - 8}px;width:106px;height:64px;flex-direction:column;gap:2px;border-width:2.5px"><span class="val" style="font-size:14px">함께 발동</span><span class="sub">${state}</span></div>`;
+const battleBase = (o = {}) => topBar(o.wave ?? "웨이브 2", o.time ?? "2:41", o.left ?? 18) + bld(56, o.a, o.b, o.c) + (o.boss ?? "") + field(o.fy ?? 112, o.fh ?? 580, o.fin ?? "") + skills(708, o.n ?? 3) + finisher(708, o.fs);
+const banner = (y, t, d) => `<div class="b" style="left:30px;top:${y}px;width:330px;height:52px;flex-direction:column;gap:2px;border-width:2.5px;z-index:4"><span class="val">⚠ ${t}</span><span class="sub">${d}</span></div>`;
+const card = (x, y, t, s) => `<div class="b" style="left:${x}px;top:${y}px;width:116px;height:150px;flex-direction:column;gap:6px;padding:6px"><span class="b off" style="position:static;width:48px;height:48px;font-size:11px">아이콘</span><span class="val" style="font-size:13px">${t}</span><span class="sub">${s}</span></div>`;
+const bossBar = `<div class="b" style="left:8px;top:112px;width:374px;height:62px;border-width:2.5px"></div>
+  <div class="a val" style="left:34px;top:118px">BOSS · 공중 용</div><div class="a sub" style="left:250px;top:120px;font-size:12px">2구간 · 시간차 연발</div>
+  <div class="a" style="left:20px;top:140px;width:350px;display:grid;grid-template-columns:repeat(3,1fr);gap:3px">${[100, 55, 0].map(v => `<div style="height:10px;border:1.5px solid var(--ln);border-radius:4px;background:var(--dim);overflow:hidden"><div style="width:${v}%;height:100%;background:var(--fill)"></div></div>`).join("")}</div>
+  <div class="a" style="left:34px;top:156px;width:336px;display:flex;justify-content:space-between;font-size:11px;font-weight:700"><span>부속 A 공격 예고 · 4초</span><span>공격으로 제압 40%</span></div>`;
+
+const SCREENS = [
+  { cap: "① 습격 경고 · 선택 (가득 찬 왼쪽 1번 칸을 누름)", html: hudBehind + dimAll + win(130, 560, "") + `
+      <div class="a val" style="left:40px;top:146px;font-size:12px">⚠ 경고</div>
+      <div class="a val" style="left:40px;top:166px;font-size:17px">연습실에 악귀들이 몰려오고 있습니다</div>
+      <div class="b" style="left:36px;top:202px;width:318px;height:68px;justify-content:flex-start;gap:10px;padding:0 10px">${'<span class="b off" style="position:static;width:48px;height:48px;font-size:11px;border-radius:50%">얼굴</span>'}<span style="text-align:left"><span class="val">댄스 연습실 · 본관 · 부속 2동</span><br><span class="sub" style="font-size:12px">지금 연습 중인 아이돌이 있어요</span></span></div>
+      <div class="a val" style="left:40px;top:284px">지면 잃는 것</div>
+      ${line(40, 306, 310, "· 연습실이 부서짐", "")}${line(40, 328, 310, "· 이 칸 도착 보상", "× 0.5")}${line(40, 350, 310, "· 이 연습실 아이돌 연습", "멈춤")}${line(40, 372, 310, "· 고치는 비용", "마지막 건설비 × 0.5")}
+      <div class="line" style="left:36px;right:36px;top:402px"></div>
+      <div class="b" style="left:36px;top:414px;width:318px;height:60px;justify-content:space-between;padding:0 12px"><span style="text-align:left"><span class="val">출격 몬스 8마리</span><br><span class="sub" style="font-size:12px">건물 보석 3개가 함께 방어해요</span></span><span class="val">바꾸기 ›</span></div>
+      <div class="b" style="left:36px;top:486px;width:318px;height:44px;justify-content:space-between;padding:0 12px"><span class="sub" style="font-size:12px">난이도</span><span class="val">일반 (정해져 나옴)</span></div>
+      ${winBtns(620, "그냥 두기", "방어하기")}
+      ${n(1, 12, 200)}${n(2, 12, 282)}${n(3, 12, 412)}${n(4, 12, 484)}${n(5, 12, 618)}`,
+    notes: ["습격 대상 연습실(본관 · 부속) · 연습 중 아이돌 얼굴 · 대상 = 부서지지 않은 연습실 중 단계가 가장 높은 곳 · 같은 단계가 여럿이면 무작위(현중 11/24 확정)", "지면 잃는 것 4줄 · 수리비는 무조건 마지막 건설비 × 0.5(현중 · 11/24 표 정리)", "출격 몬스 자동 편성(제안) · 「바꾸기 ›」 → ①-1 · 몬스 0마리면 「몬스가 모두 쉬는 중」 · 그래도 건물 보석으로 방어 가능(제안)", "난이도는 고르지 않고 정해져 나옴(제안 · 게이지 회차 · 시즌 일차)", "그냥 두기 → ⑤-2(파손 · 게이지 0) · 방어하기 → ② 전투(장면 바뀜) · 창을 ✕로 닫으면 칸은 「눌러서 방어」 그대로 · 누르지 않고 굴리면 그냥 두기와 같음"] },
+
+  { cap: "①-1 출격 편성 (경고 창 「바꾸기」 · 제안)", html: head("출격 편성", false) + `
+      <div class="b" style="left:8px;top:58px;width:374px;height:44px;justify-content:space-between;padding:0 14px 0 28px"><span class="val">출격 8 / 10</span><span class="sub" style="font-size:12px">기분 좋을수록 세요 · 쉬는 몬스도 출격</span></div>
+      <div class="a val" style="left:36px;top:114px">출격 칸</div>
+      <div class="a" style="left:8px;top:136px;width:374px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px">${Array.from({length: 10}, (_, i) => { const m = [90, 80, 72, 60, 50, 40, 30, 20][i]; return `<div style="height:84px;border:1.5px ${i < 8 ? "solid" : "dashed"} var(--ln);border-radius:8px;background:${i < 8 ? "var(--box)" : "transparent"};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:700;color:${i < 8 ? "var(--ink)" : "var(--soft)"}">${i < 8 ? `몬스 ${["3단", "2단", "2단", "1단"][i % 4]}<div style="width:50px;height:6px;border:1px solid var(--ln);border-radius:3px"><div style="width:${m}%;height:100%;background:var(--ink);opacity:.55"></div></div><span class="sub" style="font-size:11px">${m >= 70 ? "120%" : m >= 35 ? "100%" : "70%"}</span>` : "빈칸"}</div>`; }).join("")}</div>
+      <div class="a val" style="left:36px;top:324px">보관함</div>
+      <div class="a" style="left:8px;top:346px;width:374px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px">${Array.from({length: 15}, (_, i) => `<div style="height:72px;border:1.5px solid var(--ln);border-radius:8px;background:${i < 8 ? "var(--dim)" : "var(--box)"};display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;font-weight:700">${i < 8 ? "출격 ✓" : `몬스<span class="sub" style="font-size:11px">기분 ${[75, 55, 30, 88, 64, 42, 25][i - 8]}</span>`}</div>`).join("")}</div>
+      ${btn(8, 706, 180, 60, "자동 편성")}${btn(202, 706, 180, 60, "확인", true)}
+      ${n(1, 2, 62)}${n(2, 2, 140)}${n(3, 2, 350)}${n(4, 2, 708)}`,
+    notes: ["출격 수 / 정원 10 · 쉬는 몬스(24시간)도 디펜스에는 나감(지킴이 규칙과 같음 · 제안)", "출격 칸 10 · 누르면 빠짐 · 단 표시(단이 오르면 디펜스 스킬 단계 ↑) · 기분 막대 + 능력 %(현중 11/24 컨폼: 기분 70 이상 120% · 35~69 100% · 35 미만 70% · 현중 11/24 「기분에 따라 능력도 달라지게」) · 칸을 누르면(또는 칸 안에) 이동속도 · 실제 공격력 · 공속 · 스킬 공격력 배율(mons_defense_stat.csv × mons_star_growth.csv. 지금 공용값 이동 46 · 공격 34 · 공격 간격 650ms · 스킬 배율 1, 성 배율은 모두 1)", "보관함(몬스 탭 보관함과 같은 칸) · 기분 숫자 · 누르면 출격 칸에 들어감", "자동 편성 = 단 × 기분 능력 높은 순 · 바꾼 편성은 이번 습격만, 다음 습격은 다시 자동(현중 11/24 확정) · 확인 → ① 경고 창으로 돌아감 · 지킴이 · 스케줄 배정과 겹쳐도 디펜스는 따로 셈(제안)"] },
+
+  { cap: "② 전투 · 기본 (세로 · 제안)", html: battleBase() + banner(126, "새로운 길목이 열립니다", "3초 뒤 새 길목에서 악귀가 와요") +
+      `${n(1, 2, 12)}${n(2, 2, 92)}${n(3, 12, 122)}${n(4, 2, 682)}${n(5, 270, 682)}`,
+    notes: ["웨이브 · 남은 시간(새 악귀 출현 마감 4:00까지) · 남은 악귀 · 「멈춤」 → ④", "건물 3동 내구도 · 본관이 0이면 실패(본관 굵은 테)", "경고 배너 한 줄 · 7종(무리 접근 · 새 길목 · 보스 접근 · 보스 단계 · 건물 포격 · 내구도 50% · 출현 끝) · 한 번에 하나 · 우선순위는 표 priority", "보유 스킬 5칸 · 몬스 자동으로 씀 · 누르면 정보 창(전투는 안 멈춤 · 제안)", "피니시 「함께 발동」 · 준비 완료일 때만 켜짐 · 재사용 n초 · 미습득이면 꺼짐 · 카메라 · 배속 버튼 없음(자동 · 제안)"] },
+
+  { cap: "②-1 스킬 카드 (10초마다 · 전투 안 멈춤)", html: battleBase({time: "3:20", left: 9, n: 2}) + `
+      <div class="b" style="left:8px;top:430px;width:374px;height:262px;border-width:2.5px;z-index:4"></div>
+      <div class="a" style="left:34px;top:442px;width:332px;display:flex;justify-content:space-between;z-index:5"><span class="val">스킬 3장 중 1장</span><span class="val">6초</span></div>
+      <div class="a" style="left:24px;top:466px;width:342px;z-index:5">${gbar(0, 0, 342, 75, 8)}</div>
+      <div style="position:absolute;inset:0;z-index:5">${card(16, 486, "유도 미사일", "새로 배움")}${card(137, 486, "빙결탄", "2 → 3단계")}${card(258, 486, "연쇄 번개", "새로 배움")}</div>
+      <div class="a" style="left:24px;top:648px;width:342px;text-align:center;z-index:5"><span class="sub" style="font-size:12px">8초가 지나면 첫 장을 자동으로 골라요</span></div>
+      ${n(1, 2, 438)}${n(2, 2, 490)}${n(3, 2, 646)}`,
+    notes: ["10초부터 10초마다 · 3장 중 1장 · 남은 초 막대 · 전투는 계속 돎", "카드 = 아이콘 · 이름 · 새로 배움 / n → n+1단계 · 설명(bad_energy_skill.csv / bad_energy_special.csv의 description) · 계산된 피해(주인 몬스 공격력 × 스킬 배율 × 성 배율 × 기분 배율) · 피니시 카드도 같은 틀(「피니시 5개 중 하나 배우기」 · 「피니시 강화」)", "8초 미선택 → 첫 후보 자동 · 보유 스킬 5칸이 차면 강화 카드만"] },
+
+  { cap: "③ 보스 (보스 위 줄 · 공격 예고)", html: battleBase({wave: "보스", time: "4:00", left: 6, a: 72, b: 38, c: 90, boss: bossBar, fy: 182, fh: 510, fin: `<span class="b" style="position:static;width:150px;height:34px;border-width:2.5px;font-size:12px;font-weight:700">부속 A · 공격 예고</span>`}) +
+      `${n(1, 2, 116)}${n(2, 2, 152)}${n(3, 290, 452)}`,
+    notes: ["보스 이름 · 체력 3구간(집중 포격 · 시간차 연발 · 공명 강타) · 지금 구간 · 패턴 이름", "공격 예고 건물 · 남은 초 · 「공격으로 제압 n%」(제압하면 포격 취소) · 몬스 약화 효과는 한 줄로(이름 · n명 · 초)", "예고된 건물 위 표시 · 보스 위 줄이 생기면 전투 장면이 그만큼 내려감 · 대응 힌트는 배너로"] },
+
+  { cap: "④ 멈춤 창 (「멈춤」 · 전투 멈춤)", html: battleBase({time: "1:58", left: 22}) + dimAll + win(250, 330, "멈춤") + `
+      ${line(40, 304, 310, "남은 시간", "1:58")}${line(40, 328, 310, "본관 내구도", "80%")}${line(40, 352, 310, "처치", "31 / 49")}
+      <div class="a" style="left:40px;top:384px;width:310px"><span class="sub" style="font-size:12px">포기하면 방어 실패로 끝나고 연습실이 부서져요</span></div>
+      ${winBtns(500, "포기", "계속")}${n(1, 12, 300)}${n(2, 12, 498)}`,
+    notes: ["지금 상황 3줄", "포기 = 방어 실패와 같음(⑤-1) · 확인 창 한 번 더 없이 이 창이 확인 · 계속 → 전투 · 도중 ← 없음(HUD 규칙)"] },
+
+  { cap: "⑤ 결과 · 방어 성공", html: `<div class="b off" style="left:8px;top:8px;width:374px;height:820px">전투 장면 (멈춤)</div>` + dimAll + win(70, 700, "") + `
+      <div class="a val" style="left:40px;top:92px;font-size:22px">방어 성공</div>
+      <div class="a" style="left:40px;top:126px;width:310px"><span class="sub" style="font-size:12px">연습실이 그대로라 도착 보상과 연습이 계속돼요</span></div>
+      ${line(40, 160, 310, "처치", "49 / 49")}${line(40, 184, 310, "본관 내구도", "72%")}${line(40, 208, 310, "걸린 시간", "4:31")}
+      <div class="line" style="left:36px;right:36px;top:238px"></div>
+      <div class="a val" style="left:40px;top:250px">보상</div>
+      <div class="a" style="left:36px;top:274px;width:318px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px">${["돈", "주사위", "몬스 팩", "지킴 덤"].map(k => `<div style="height:70px;border:1.5px solid var(--ln);border-radius:8px;background:var(--box);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px;font-weight:700"><span class="b off" style="position:static;width:30px;height:26px;font-size:11px">그림</span>${k}</div>`).join("")}</div>
+      <div class="b" style="left:36px;top:358px;width:318px;height:96px;justify-content:flex-start;gap:12px;padding:0 12px;border-width:2.5px"><span class="b off" style="position:static;width:70px;height:70px;font-size:11px">몬스</span><span style="text-align:left"><span class="val">희귀 몬스 합류</span><br><span class="sub" style="font-size:12px">디펜스 승리에서만 · 보관함에 들어감</span></span></div>
+      <div class="line" style="left:36px;right:36px;top:470px"></div>
+      ${line(40, 482, 310, "고른 스킬", "4개")}${line(40, 506, 310, "공용 피니시", "보호막 2단계 · 3회")}
+      ${btn(36, 680, 318, 60, "보드로 돌아가기", true)}
+      ${n(1, 12, 90)}${n(2, 12, 248)}${n(3, 12, 362)}${n(4, 12, 480)}${n(5, 12, 682)}`,
+    notes: ["성공 · 한 줄 · 처치 / 출현 · 본관 내구도 · 시간", "보상 칸(퇴치 보상 · 지킴 덤 · 종류와 값은 표 · 비앙카)", "희귀 · 12지신 몬스 합류(나왔을 때만 · 확률은 비앙카) · 누르면 몬스 보관함", "고른 스킬 · 피니시 요약 2줄 · 자세히는 없음", "보드로 → HUD · 게이지 0부터 다시"] },
+
+  { cap: "⑤-1 결과 · 방어 실패 (본관 파괴 · 포기)", html: `<div class="b off" style="left:8px;top:8px;width:374px;height:820px">전투 장면 (멈춤)</div>` + dimAll + win(110, 560, "") + `
+      <div class="a val" style="left:40px;top:132px;font-size:22px">방어 실패</div>
+      <div class="a" style="left:40px;top:166px;width:310px"><span class="sub" style="font-size:12px">부서진 연습실은 고칠 때까지 보상이 줄고 연습이 멈춰요</span></div>
+      ${line(40, 200, 310, "처치", "31 / 49")}${line(40, 224, 310, "끝난 이유", "본관 파괴")}
+      <div class="line" style="left:36px;right:36px;top:254px"></div>
+      <div class="b" style="left:36px;top:268px;width:318px;height:120px;flex-direction:column;align-items:stretch;gap:6px;padding:10px 12px;border-style:dashed">
+        <span class="val" style="text-align:left">댄스 연습실 · 부서짐</span>
+        <span style="display:flex;justify-content:space-between;font-size:12px"><span>도착 보상</span><b>× 0.5</b></span>
+        <span style="display:flex;justify-content:space-between;font-size:12px"><span>연습</span><b>멈춤</b></span>
+        <span style="display:flex;justify-content:space-between;font-size:12px"><span>수리비</span><b>12,400</b></span></div>
+      ${line(40, 404, 310, "받은 보상", "처치 보상만")}
+      ${winBtns(590, "보드로", "수리하러 가기")}
+      ${n(1, 12, 130)}${n(2, 12, 266)}${n(3, 12, 402)}${n(4, 12, 588)}`,
+    notes: ["실패 · 끝난 이유(본관 파괴 / 포기 / 앱 종료 · 앱이 꺼지면 실패 · 현중 11/24)", "부서진 연습실 · 잃는 것 3줄 · 수리비 = 마지막 건설비 × 0.5", "실패해도 처치한 만큼 보상은 받음(현중 11/24 확정 · 지킴 덤은 성공 때만)", "수리하러 가기 → 건설 ①-4(그 연습실 골라 둠) · 보드로 → HUD · 게이지 0"] },
+
+  { cap: "⑤-2 그냥 두기 · 안 누르고 굴림", html: hudBehind + dimAll + win(250, 320, "연습실이 부서졌어요") + `
+      <div class="b" style="left:36px;top:304px;width:318px;height:110px;flex-direction:column;align-items:stretch;gap:6px;padding:10px 12px;border-style:dashed">
+        <span class="val" style="text-align:left">댄스 연습실</span>
+        <span style="display:flex;justify-content:space-between;font-size:12px"><span>도착 보상</span><b>× 0.5</b></span>
+        <span style="display:flex;justify-content:space-between;font-size:12px"><span>연습</span><b>멈춤</b></span>
+        <span style="display:flex;justify-content:space-between;font-size:12px"><span>수리비</span><b>12,400</b></span></div>
+      <div class="a" style="left:40px;top:428px;width:310px"><span class="sub" style="font-size:12px">나쁜 기운 게이지는 0부터 다시 차요</span></div>
+      ${winBtns(490, "확인", "수리하러 가기")}${n(1, 12, 302)}${n(2, 12, 426)}`,
+    notes: ["「그냥 두기」 또는 가득 찬 채로 굴림 → 전투 없이 바로 파손(같은 결과) · 잃는 것 3줄 · 수리비", "게이지 0 안내 · 확인 → 보드(굴림은 그대로 진행) · 수리하러 가기 → 건설 ①-4 · 시간 제한(5분)은 두지 않음(제안)"] },
+];
+
+const SHOT = new URLSearchParams(location.search).get("shot");
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P209 · 배수 걸기 · 대표 개발 기획서</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"><link rel="stylesheet" href="./리소스/핵심제안_시뮬_20261102/sim.css"><style>.sample-document :target{scroll-margin-top:132px}.sample-document header .actions{flex-wrap:wrap}.sample-document header p{font-size:14px}.doc-ui-section{margin-top:42px;padding-top:24px;border-top:2px solid #c8dcd5}.doc-ui-section>h3{margin:0 0 10px;font-size:23px;color:#2c5659}.doc-ui-section>p{font-size:14px}.doc-ui-section details{padding:0;margin:16px 0;border:1px solid #c9dcd4;border-radius:16px;overflow:hidden;background:#f4f8f2}.doc-ui-section summary{cursor:pointer;min-height:58px;padding:16px 18px;font-weight:700;color:#315e5c;list-style:none}.doc-ui-section summary:after{content:"+";float:right;font-size:20px}.doc-ui-section details[open]>summary:after{content:"−"}.doc-ui-section summary::-webkit-details-marker{display:none}.doc-ui-section [data-sim-host]{padding:0 18px 18px;min-width:0}.doc-key{margin:18px 0;padding:16px 20px;border-left:6px solid #2f7f86;background:#eef6f5;border-radius:12px;font-size:16px;line-height:1.8}.doc-key b{color:#1f4f55}@media(max-width:680px){.sample-document :target{scroll-margin-top:18px}}</style><script type="module" src="./리소스/핵심제안_시뮬_20261102/dice.mjs"></script></head><body class="sample-document"><main><header><div class="eyebrow">P209 · 핵심제안 개발 · 대표 개발 기획서</div><h1>배수 걸기 · 대표 개발 기획서</h1><p>배수는 「빨리 키우기」이지 「순위 사기」가 아닙니다. <a href="#sim-preview">하단 시뮬레이터</a>에서 배수를 바꿔 직접 확인합니다.</p><div class="actions"><a href="./배수걸기_핵심제안서.md">짝 MD로 읽기</a><a href="../../기획서/산출_기획서_배수걸기_보완판_v1_클로드.html">상세 정본 · 책갈피 P198</a><a href="/docs/planning/proposal-concept/dice.html" target="_blank" rel="noopener">제안서 원문</a><a href="#sim-preview">배수 비교 시뮬레이터</a></div></header><nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+<p><b>이 문서는</b> 주사위를 여러 개 걸어 한 번에 크게 받는 「배수 걸기」가 무엇을 키우고 무엇은 건드리지 않는지 정리한 대표 개발 기획서입니다.</p>
+
+<p><b>보는 법</b> 1장 그림 → 4장 「한 판 순서」 → 하단 「배수 비교 시뮬레이터」 순서로 읽습니다. 세부 결정과 근거는 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EB%B0%B0%EC%88%98%EA%B1%B8%EA%B8%B0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EB%B0%B0%EC%88%98%EA%B1%B8%EA%B8%B0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P198 배수 걸기 보완판</a>에 있습니다.</p>
+
+<p><b>지금 상태</b> 현재 개발되지 않음, 진행 중.</p>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (합침) 제안서 <a href="/docs/planning/proposal-concept/dice.html" data-paper-path="docs/planning/proposal-concept/dice.html">주사위 투자</a> · 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EB%B0%B0%EC%88%98%EA%B1%B8%EA%B8%B0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EB%B0%B0%EC%88%98%EA%B1%B8%EA%B8%B0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P198 배수 걸기 보완판</a> · 현중 11/01~11/02 지시</p>
+
+<div class="doc-key"><b>핵심</b> 배수는 <b>돈과 성장에만</b> 붙습니다. 피드 · 팬 · 투표 · 순위 · 증축 비용에는 붙지 않습니다. 그래서 주사위를 많이 걸수록 빨리 크지만, 순위를 돈으로 살 수는 없습니다.</div>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714 278" width="714" height="278" role="img" aria-labelledby="title-P209-0"><title id="title-P209-0">설명 흐름도 P209-0</title><defs><marker id="arrow-P209-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M157.63636363636363,106 L244.5,50 L291,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P209-0)"/><path d="M198,138 L244.5,138 L291,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P209-0)"/><path d="M471,138 L493.5,138 L516,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P209-0)"/><path d="M157.07865168539325,170 L244.5,227 L291,227" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P209-0)"/><rect x="216.5" y="234" width="56" height="25" rx="7" fill="#f3f8f7"/><text x="244.5" y="252" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">안 붙음</text><rect x="18" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">주사위 배수 걸기</tspan></text><rect x="291" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="381" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="381" dy="0">코인 × 배수</tspan></text><rect x="291" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="381" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="381" dy="0">성장 × 배수</tspan></text><rect x="516" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="606" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="606" dy="0">무대 편성 점수에 간접</tspan></text><rect x="291" y="194" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="381" y="222" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="381" dy="0">피드 · 팬 · 투표 · 순</tspan><tspan x="381" dy="20">위</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">주사위 배수 걸기 → 코인 × 배수 / 주사위 배수 걸기 → 성장 × 배수 / 성장 × 배수 → 무대 편성 점수에 간접 / 주사위 배수 걸기 → [안 붙음] 피드 · 팬 · 투표 · 순위</p></figure>
+
+
+
+<h3 id="콘텐츠-경계">콘텐츠 경계</h3>
+
+<ul>
+<li>맡는 것: 배수 사다리 · 배수가 붙는 곳과 안 붙는 곳 · 남는 굴림 수 표시.</li>
+<li>다른 문서에 맡기는 것: 주사위 공급 · 가격 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9C%A0%EB%A3%8C%ED%99%94_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9C%A0%EB%A3%8C%ED%99%94_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P217 유료화</a> · 칸 수익 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%8F%84%EC%8B%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%8F%84%EC%8B%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P213 도시</a>.</li>
+</ul>
+
+<h3 id="현재-기준과-목표">현재 기준과 목표</h3>
+
+<div class="table-scroll"><table><thead><tr><th>어디</th><th>배수</th></tr></thead><tbody><tr><td>칸 코인 · 사옥 · 잭팟 · 게릴라 돈</td><td>붙음</td></tr><tr><td>아이돌 성장(능력)</td><td>붙음</td></tr><tr><td>팬 이동 · 피드 강도 · 투표권 · 페스티벌 점수</td><td>안 붙음</td></tr><tr><td>건물 증축 비용</td><td>안 붙음(받는 쪽에만)</td></tr></tbody></table></div>
+
+<ul>
+<li>배수 사다리와 해금은 엔터파워에 따라 열리는 기존 시안을 그대로 씁니다.</li>
+<li>화면에 「이 배수로 남는 굴림 수」를 함께 보여 줍니다.</li>
+</ul>
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>이 콘텐츠에서의 역할</th><th>의존 방향</th></tr></thead><tbody><tr><td>제안서 원문 <a href="/docs/planning/proposal-concept/dice.html" data-paper-path="docs/planning/proposal-concept/dice.html">주사위 투자</a></td><td>기준</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EB%B0%B0%EC%88%98%EA%B1%B8%EA%B8%B0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EB%B0%B0%EC%88%98%EA%B1%B8%EA%B8%B0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P198 배수 걸기 보완판</a></td><td>상세 정본(결정 · 근거 · 조사)</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9E%AD%ED%8C%9F_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9E%AD%ED%8C%9F_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P210 잭팟</a></td><td>배수가 붙는 보상</td><td>양방향</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B2%8C%EC%9E%84%EA%B2%BD%EC%A0%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B2%8C%EC%9E%84%EA%B2%BD%EC%A0%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P212 게임 경제</a></td><td>자원 장부의 배수 칸</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P207 월드 페스티벌</a></td><td>배수가 닿지 않는 곳</td><td>제약</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: 보드 → 배수 선택 → 굴림 → 도착 보상 · 스샷 미완 · 이식 비교 해당 없음</p>
+
+<ul>
+<li>실행: 게임 시뮬레이터 모듈은 아직 없습니다(미구현).</li>
+<li>이 문서 하단 <b>배수 비교 시뮬레이터</b>에서 배수를 바꾸면 코인 · 성장은 커지고 피드 · 팬 · 투표는 그대로인 것을 봅니다. 숫자는 모두 임시 시안입니다.</li>
+</ul>
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서-임시-시안">한 판 순서 (임시 시안)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>배수를 고르고 굴립니다. 주사위가 배수만큼 줄어듭니다</td></tr><tr><td>입력·출력</td><td>입력 = 배수 · 주사위 / 출력 = 코인 · 성장</td></tr><tr><td>상태와 전이</td><td>배수 해금은 엔터파워 단계로 열림</td></tr><tr><td>판정</td><td>받는 쪽 보상에만 곱합니다</td></tr><tr><td>오류·예외</td><td>주사위가 배수보다 적으면 그 배수는 고를 수 없음</td></tr><tr><td>저장·복원</td><td>배수 선택은 다음 접속에 유지(시안)</td></tr><tr><td>다른 모듈 연결</td><td>도착 보상 · 잭팟 · 게릴라 · 성장</td></tr></tbody></table></div>
+
+<h3 id="배수가-닿지-않는-곳-확정-근거-현중-1001-1633-p198">배수가 닿지 않는 곳 (확정 근거: 현중 10/01 16:33 · P198)</h3>
+
+<p>증축 비용 · 팬 이동 · 피드 강도 · 투표권 · 페스티벌 점수. 적게 나온 굴림 뒤 보정(확률 바꾸기)은 하지 않습니다.</p>
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>배수 사다리 · 해금 · 남는 굴림 수 표시 · 보상별 배수 적용 칸.</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<p>배수 버튼(굴림 버튼 옆) · 남는 굴림 수 표시.</p>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<ul>
+<li>배수 사다리 값 · 해금 문턱 — 기존 시안 · 발란스 대기</li>
+<li>주사위 자동 충전량 — 엔터 파워 단계별 하루 60 · 90 · 120(임시값)</li>
+</ul>
+
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<div class="table-scroll"><table><thead><tr><th>미리보기</th><th>이름·사용 위치</th><th>동작·상태</th><th>파일·테이블 키</th><th>출처·준비 상태</th></tr></thead><tbody><tr><td>미제작</td><td>배수 버튼</td><td>배수 선택 · 잠김</td><td>—</td><td>기존 화면 있음(dice.html 시안)</td></tr><tr><td><a href="#sim-preview">하단 시뮬레이터</a></td><td>배수 비교 시뮬레이터</td><td>배수 바꾸기 · 붙는 곳/안 붙는 곳</td><td>핵심제안_시뮬_20261102/dice.mjs</td><td>시안 있음</td></tr></tbody></table></div>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<p>배수 큰 굴림 연출은 미제작입니다.</p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일·보기</th><th>역할</th><th>주키·참조</th><th>값</th><th>담당</th></tr></thead><tbody><tr><td>economy_config (기존)</td><td>남는 굴림 수 규칙</td><td>gate_min_rolls</td><td>(이식) 기존 값</td><td>발란스</td></tr><tr><td>growth_source (기존)</td><td>성장 출처 배수 적용</td><td>dice_mult_apply</td><td>(이식) 모든 줄 1</td><td>발란스</td></tr></tbody></table></div>
+
+<p>주사위 환산: 해당 없음(배수 규칙 문서 · 환산은 발란스 툴).</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>상태</th><th>확인 방법·증거</th><th>다음 작업</th></tr></thead><tbody><tr><td>기획(이 문서 · 책갈피 상세)</td><td>기획 중</td><td>P198 · 이 문서</td><td>현중 확인</td></tr><tr><td>배수 비교 시뮬레이터</td><td>개발 끝(시안)</td><td>이 문서 하단</td><td>실제 표 연결</td></tr><tr><td>게임 시뮬레이터 모듈 · 본게임</td><td>기획 중 · 작업전</td><td>—</td><td>표 확정 뒤</td></tr></tbody></table></div>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<p>배수가 돈 · 성장에만 붙고, 피드 · 팬 · 투표 · 순위 · 증축 비용에는 붙지 않아야 합니다.</p>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p>세부 결정과 근거는 책갈피 P198에 둡니다. 제안서 원문 dice.md는 그대로 보존합니다.</p>
+
+<details><summary>작업 기록</summary>
+
+<p>대표 개발 기획서(신규 · 핵심제안서). 상세 정본 P198. 변경 이력은 배수걸기_핵심제안서.log.md.</p>
+
+</details>
+</section><section class="doc-ui-section" aria-label="하단 시뮬레이터"><h3>배수 비교 시뮬레이터 · 임시 시안</h3><p>같은 굴림을 배수 1 · 2 · 3 · 5 · 10으로 비교합니다. 남는 굴림 수도 함께 줄어듭니다.</p><details id="sim-preview"><summary>시뮬레이터 펼치기 · 배수 바꾸기 · 붙는 곳/안 붙는 곳</summary><div data-sim-host="dice"></div></details></section><details class="history"><summary>로그 · 변경 이력과 이전 기록</summary><p><a href="./배수걸기_핵심제안서.log.md" target="_blank" rel="noopener">이 문서의 로그 열기</a></p></details></main></body></html>

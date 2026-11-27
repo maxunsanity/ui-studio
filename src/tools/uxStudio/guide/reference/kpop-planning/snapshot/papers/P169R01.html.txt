@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>성장 흐름표 · 주사위로 오르는 것 (2026-10-26)</title>
+<style>
+:root{--ok:#2e9e5b;--okbg:#e8f6ee;--tbl:#d9a400;--tblbg:#fff7d6;--none:#d63a3a;--nonebg:#fdeaea;--wait:#8a8f98;--waitbg:#eceef1;--cand:#8e4fd6;--candbg:#f1e8fb;--ink:#1d2430;--mute:#5f6b7a;--line:#d5dae1}
+*{box-sizing:border-box}
+body{margin:0;font:13px/1.45 -apple-system,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;color:var(--ink);background:#f5f6f8}
+header{padding:14px 18px 8px;background:#fff;border-bottom:1px solid var(--line)}
+h1{margin:0 0 4px;font-size:18px}
+.sub{color:var(--mute);margin:0 0 8px}
+.base{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.base span{background:#eef2f7;border:1px solid #d3dbe6;border-radius:12px;padding:2px 9px;font-size:12px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.fbtn{border:1px solid var(--line);background:#fff;border-radius:16px;padding:4px 11px;cursor:pointer;font-size:12.5px;display:inline-flex;gap:6px;align-items:center}
+.fbtn:hover{background:#f0f3f7}
+.fbtn.on{outline:2px solid #1d2430;background:#fff}
+.fbtn b{font-weight:700}
+.dot{width:11px;height:11px;border-radius:3px;display:inline-block;border:2px solid}
+.dot.ok{background:var(--okbg);border-color:var(--ok)}
+.dot.tbl{background:var(--tblbg);border-color:var(--tbl)}
+.dot.none{background:var(--nonebg);border-color:var(--none);border-style:dashed}
+.dot.wait{background:var(--waitbg);border-color:var(--wait)}
+.dot.cand{background:var(--candbg);border-color:var(--cand)}
+.legend2{color:var(--mute);font-size:12px}
+.wrap{display:flex;align-items:flex-start}
+#scroll{flex:1;overflow:auto;padding:14px 18px 40px;min-height:600px}
+#flow{position:relative;display:flex;gap:36px;min-width:max-content}
+#svg{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+.col{width:152px;display:flex;flex-direction:column;gap:9px;position:relative;z-index:2}
+.col[data-col="0"]{width:190px}
+.sec{font-size:11px;font-weight:700;margin:2px 2px 0;line-height:1.35}
+.tree{border:1px solid #d9e0e8;background:#f7f9fb;border-radius:8px;padding:6px;display:flex;flex-direction:column;gap:7px}
+.kids{display:flex;flex-direction:column;gap:6px;margin-left:2px;padding-left:11px;border-left:3px solid #9aafc4}
+.kid{position:relative}
+.kid:before{content:"";position:absolute;left:-11px;top:16px;width:11px;height:3px;background:#9aafc4}
+.box .crow{display:block;margin-top:3px}
+.box.slim .sc{margin-top:0;margin-right:3px}
+.gchip{display:inline-block;margin:2px 3px 0 0;font-size:10px;font-weight:700;padding:0 5px;border-radius:8px;background:var(--waitbg);color:var(--wait);border:1px solid var(--wait)}
+.col h3{margin:0 0 2px;font-size:12.5px;padding:5px 6px;background:#1d2430;color:#fff;border-radius:6px;text-align:center}
+.col h3 small{display:block;font-weight:400;font-size:10.5px;opacity:.8}
+.box{position:relative;border:2px solid;border-radius:7px;padding:5px 6px 5px 10px;cursor:pointer;background:#fff;font-size:11.5px;line-height:1.35;transition:opacity .15s,box-shadow .15s}
+.box:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;border-radius:5px 0 0 5px;background:var(--gc)}
+.box .nm{font-weight:700;display:block;word-break:keep-all}
+.box .kk{color:var(--mute);display:block;font-size:10.5px;margin-top:1px;word-break:keep-all}
+.box .sc{display:inline-block;margin-top:3px;font-size:10px;font-weight:700;padding:0 5px;border-radius:8px;color:#fff}
+.box .gl{font-size:10px;color:var(--mute);margin-left:4px}
+.box.ok{border-color:var(--ok);background:var(--okbg)} .box.ok .sc{background:var(--ok)}
+.box.tbl{border-color:var(--tbl);background:var(--tblbg)} .box.tbl .sc{background:var(--tbl)}
+.box.none{border-color:var(--none);background:var(--nonebg);border-style:dashed} .box.none .sc{background:var(--none)}
+.box.wait{border-color:var(--wait);background:var(--waitbg)} .box.wait .sc{background:var(--wait)}
+.box.cand{border-color:var(--cand);background:var(--candbg)} .box.cand .sc{background:var(--cand)}
+.box.sel{box-shadow:0 0 0 3px #1d2430}
+.box.dim{opacity:.18}
+.box.rel{box-shadow:0 0 0 2px #7aa7ff}
+.warn{color:#b45309;font-weight:700}
+#panel{width:390px;flex:none;position:sticky;top:0;align-self:flex-start;max-height:100vh;overflow:auto;background:#fff;border-left:1px solid var(--line);padding:14px 16px 30px}
+#panel h2{margin:0 0 6px;font-size:15px;line-height:1.35}
+#panel .chip{display:inline-block;color:#fff;font-weight:700;font-size:11.5px;padding:1px 8px;border-radius:9px;margin-right:6px}
+#panel dl{margin:10px 0 0}
+#panel dt{font-weight:700;margin-top:9px;color:#2b3645;font-size:12px}
+#panel dd{margin:2px 0 0;color:#222;word-break:keep-all}
+#panel code{background:#f0f2f5;border-radius:4px;padding:0 4px;font-size:11px;word-break:break-all}
+#panel .lk{cursor:pointer;color:#1a56c4;text-decoration:underline;margin-right:8px;display:inline-block}
+#panel .hint{color:var(--mute)}
+.lvbadge{font-size:11px;padding:0 6px;border-radius:8px;border:1px solid #bbb;margin-left:4px}
+section.low{padding:6px 18px 40px}
+section.low h2{font-size:15px;margin:18px 0 6px}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:12px}
+th,td{border:1px solid var(--line);padding:5px 7px;text-align:left;vertical-align:top}
+th{background:#eef1f5}
+tr.rw{cursor:pointer} tr.rw:hover{background:#f6f9ff}
+.ex li{margin:2px 0}
+.foot{color:var(--mute);font-size:12px}
+@media (max-width:1100px){.wrap{flex-direction:column}#panel{width:auto;position:static;border-left:0;border-top:1px solid var(--line);max-height:none}}
+.col[data-col="2"]{width:268px}
+.box .tl{display:block;font-size:10.5px;line-height:1.4;margin-top:3px;word-break:keep-all;color:#2b3645}
+.box .tl b{display:inline-block;min-width:16px;text-align:center;color:#fff;background:#6b7a8c;border-radius:6px;padding:0 4px;margin-right:3px;font-size:10px}
+.box .tl i{font-style:normal;text-decoration:underline dotted}
+table.tt{font-size:11px;margin-top:2px}table.tt th,table.tt td{padding:3px 5px}
+#panel i,#d18 i{font-style:italic;color:#1a56c4}
+#d18{max-width:980px}
+.tgl{display:flex;gap:6px;margin:4px 0}
+.tbtn{border:1px solid var(--line);background:#fff;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:12px}
+.tbtn[aria-expanded="true"]{background:#1d2430;color:#fff}
+.xp{display:none}.xp.open{display:block}
+.fbtn{user-select:none}.fbtn[aria-pressed="true"]{background:#1d2430;color:#fff;outline:0}.fbtn[aria-pressed="true"] .legend2{color:#cfd6df}
+.box.hid{display:none}.tree.hid,.sec.hid{display:none}
+</style>
+</head>
+<body><!-- 이스라트 10/28 표기 변경: 개별 아이돌 능력 단계 이름 「데뷔」→「데뷔조」(현중 10/28 15:33 요청, 이전 결정 기록 없음, 재결정 재료). 「데뷔 무대·데뷔 쇼케이스」 같은 사건·행사 뜻, 팀(그룹) 단계 표, 단계 키(debut 등)는 그대로. -->
+<header>
+<h1>성장 흐름표 · 주사위로 오르는 것 <span style="font-weight:400;font-size:13px">(2026-10-26 · 이스라트 · 10/29 유르넷 갱신 · 제안(검수 대기))</span></h1>
+
+<div class="tgl"><button class="tbtn" data-t="xp1" aria-expanded="false">설명 보기</button><button class="tbtn" data-t="xp2" aria-expanded="false">결정 근거 보기</button></div>
+<div class="xp" id="xp1"><p class="sub">왼쪽에서 오른쪽으로 읽어요. 주사위(공급) → 굴림 → 칸 도착 → 돈·건물 → 보정(건물 배수·재능 1차/2차·10단계) → 바로 오르는 것 → 이어서 오르는 것. <b>박스를 누르면</b> 오른쪽에 내용이 열려요. 숫자는 표·코드·서류에서 읽은 값만 적었고, 모르면 「발란스 대기」예요. 근거: <code>보고/20261026_0940_이스라트_성장데이터리스트.md</code>와 그 안에 적힌 표·코드. (10/28: 7열 분류는 위 「열 분류 규칙」 · 제안(검수 대기))</p><div class="legend2">박스 왼쪽 굵은 띠 = 묶음 색(박스 안 작은 글씨가 묶음 이름). 테두리·꼬리표 색 = 상태. 선: 실선 = 계산이 이어짐 · 파선 = 표만 있거나 연결이 불분명 · 빨간 파선 = 연결·구조가 없음. ⚠ = 값이 비었거나 자리값(0). 회색 칩 「발란스 대기 · 비율 미정」 = 구조는 있는데 비율이 아직 미정 / 무료 800 관련 세팅은 모두 보류 상태.</div></div>
+<div class="xp" id="xp2"><div class="base" id="base"></div></div>
+<div class="bar" id="legend"></div>
+</header>
+<div class="wrap">
+<div id="scroll"><div id="flow"><svg id="svg"></svg></div></div>
+<aside id="panel"><h2>박스를 눌러 보세요</h2><p class="hint">상태, 무엇이 오르는지, 오르는 단위, 천장/최대, 주사위 연결, 근거 파일, 확정된 결정 번호가 여기 열려요. 맨 위 버튼으로 「작업 안 된 것」만 모아 볼 수 있어요.</p></aside>
+</div>
+<section class="low">
+<h2>세부 능력 18개 · 어느 건물 어느 칸에서 오르나 <span class="foot">(③ 칸 도착 열의 건물 박스에서 모은 표 · 6축은 직접 오르지 않고 묶음 이름은 표시용 · 헌법 77)</span></h2>
+<table id="d18"></table>
+<h2>작업 안 된 것 모아 보기 <span class="foot">(구조 없음 + 발란스 대기 · 줄을 누르면 위 상세가 열려요)</span></h2>
+<table id="todo"></table>
+<h2>이 표에서 뺀 것 · 합친 것 <span class="foot">(주사위 굴림으로 오르지 않거나 다른 박스에 합침)</span></h2>
+<ul class="ex" id="excl"></ul>
+<p class="foot">이 문서는 읽기 전용 조사 결과예요. 프로젝트 소스·표는 건드리지 않았어요. 값이 「임시(나중에 결정)」인 것은 모두 재결정 재료예요.</p>
+<p class="foot">10/26 갱신(이스라트): 보드 칸 도착 보상 기준표 설계안(산출/게임프로토타입/보드칸_도착보상_기준표_설계_1026.md)을 반영해 박스 3개(보드 도착 주사위 지급 · 한 바퀴 돈 · 보드 칸 도착 보상 기준표)와 연결선 10개를 더하고 라포 연결선 1개를 뺐어요. 새 숫자 없음 · 제안(검수 대기).</p>
+<p class="foot">10/26 갱신(이스라트): ① 주사위 공급 열을 계층으로 재배치 — 최상위 무료 800(헌법·세팅 보류) → 하위 획득 길 6개 → 별도 2개 → 맨 아래 구매. 박스 3개 삭제·3개 신설(77→77), 연결선 96→90. 새 숫자 없음 · 제안(검수 대기).</p>
+<p class="foot">10/26 갱신(이스라트): ③ 칸 도착 열을 현중 지시 구조로 다시 그림 — 건물 있는 칸 9박스(녹음실·연습실·프로듀싱·뷰티·방송국·콘서트장·아카데미·팬샵·사옥) · 건물 없는 칸 6박스(휴식·찬스·팬 반응·쟁탈·정산·감옥) · 한 바퀴 돈 · 맨 아래 보드 칸 도착 보상 기준표. 건물 박스마다 칸별 세부 능력 이름을 적음(방송국·콘서트장·아카데미는 예상 배정 · 제안(검수 대기)). 박스 표시는 「구조 있음 / 미정 / 데이터 미정」만. 새 숫자 없음.</p>
+<p class="foot">10/28 갱신(이스라트 · 제안(검수 대기)): 현재 코드 · 표에 맞춰 박스 12개의 글을 고치고(바뀌기 전 설명은 박스 이력에 보존), 열 이동 7개 · 새 박스 1개(JP1) · 연결선 정리. 박스 id는 하나도 안 바꿈. 새 숫자 없음. 굴림 배수의 능력 반영(M8)은 현중 확인 필요 그대로.</p>
+<p class="foot">10/29 갱신(유르넷 · 제안(검수 대기)): 현중 10/29 결정 반영 — 박스 13개 글 고침(R2 · C6 · M8 · D11 · H3 · F4 · F2 · B1 · A5 · M0 · T2 · I7 · C2) · 상태 바뀜 3개(M8 후보 → 표만 · H3 후보 → 계산 있음 · F4 구조 없음 → 계산 있음) · 새 박스 1개(나쁜 기운 BAD1). 위쪽 설명·결정 근거는 접어 두고 버튼으로 펼침 · 상태 버튼은 여러 개 고르는 토글. 값은 모두 임시(나중에 결정).</p>
+<h2>변경 내역 · 옛 정정 (10/29 맨 아래로 이동 · 내용 그대로)</h2>
+<aside data-flow-1028="1" role="note" style="margin:8px 0;padding:8px 10px;border:1px solid #d8b86b;border-radius:6px;background:#fffaf0;color:#1d2430;font-size:12px;line-height:1.55"><strong>10/28 바뀐 점 · 현재 상태로 정리 (이스라트 · 현중 10/28 12:07 지시 · 제안(검수 대기) · 새 숫자 없음)</strong>
+<p style="margin:4px 0"><b>흐름 4단(10/28 결정 · 구현은 시뮬 v8):</b> ① 보드에서 받은 보상 → ② 하단 탭(능력 칩은 능력 탭, 엔터 파워 칩·돈은 건물 탭) → ③ 탭 데이터가 영향받는 곳(돈 → 건물 탭, 능력 → 단계 탭) → ④ 상단 성장(엔터 파워 칸 · 아이돌 정보창). 근거 <code>보고/20261028_0720_아론_보상연출3단_뉴런왕복_건물반짝_v8.md</code> 2장.</p>
+<p style="margin:4px 0"><b>열 분류 규칙(제안(검수 대기) · 현중 재결정 재료):</b> 글로 적힌 기준이 없어 위 구현 순서를 기준으로 삼음. <b>⑥ 바로 오르는 것</b> = 보드 도착(또는 카드를 받는 순간)의 보상이 하단 탭에 곧바로 들어가 오르는 것(능력 · 엔터 파워 · 건물 완공 능력 · 카드). <b>⑦ 이어서 오르는 것</b> = 그 탭 값이 영향을 줘서 따로 오르는 것(단계 · 팬 · 도시 · 해금 · 등급 · 라포 …). 건물 단계(D1)는 ④ 열이 하단 건물 탭 자리라 그대로 둠.</p>
+<p style="margin:4px 0"><b>옮긴 박스(id 그대로):</b> 팬 수(C1) · 도시 진출(B5) · 라포 4축(F1) ⑥→⑦ / 엔터 파워(D11) · 건물 완공 능력(D5) · 카드 별 등급(E1) · 카드 효과(E2) ⑦→⑥. 박스를 누르면 「바뀌기 전 설명」이 아래 이력으로 남아 있어요.</p>
+<p style="margin:4px 0"><b>고친 것:</b> 대지 22 → 24(건물 8종 × 3칸 · 대지 표 land_lot.csv는 22줄이라 13·29번이 빠짐 · 표는 안 고침) · 엔터 파워 계산 있음(합 9~270 → 눈금 1~1000 · 문턱 66·166·261·361·460) · 배수 해금은 엔터 파워 · 능력 점수 표 값 × 1000 · 건물 팬 계수·엔터 파워 계수·연습생 팬 계수 연결 · 헤비 = 월 1,000만 원 → 하루 333,333원 · 7,467개, 평균 유저 2,800개 · 건설비 · 성장 원천 234줄 · 「6축에 직접 더함」 문구 정정 · 카드 능력 받는 순간 한 번(코드 연결) · 잭팟 박스 신설(지급 때 한 번 곱).</p>
+<p style="margin:4px 0"><b>그대로 둔 것:</b> 굴림 배수의 능력 반영(M8)은 「현중 확인 필요」. 박스 id는 하나도 안 바꿈(새 박스 JP1 하나 추가).</p></aside>
+<aside data-ep-current-correction="20261026" role="note" style="margin:8px 0;padding:8px 10px;border:1px solid #b6c8df;border-radius:6px;background:#f7faff;color:#1d2430;font-size:12px;line-height:1.5"><strong>현재 엔터파워 정정 · 2026-10-26</strong><p>이 조사·시안의 D1/D11 「계산 없음·문서만」은 작성 당시 기록입니다. 현재 제품은 건설 8개 + 사옥 1개, 실제 9건물의 정본 단계 합을 계산합니다. 각 건물 1~30단계이며 전부 1이면 9, 전부 30이면 270입니다. 칸 단계 합산이나 강제 9를 쓰지 않고 실제 0을 보존하며 상태·기록이 없으면 값 없음으로 표시합니다.</p><p>현재 근거: <a href="../개발진행기획_v01/콘텐츠별_v03/엔터파워_기획서.html">P172 엔터파워 기획서</a> · <a href="../../../idle-sim.html">현재 발란스 시뮬레이터</a> · <code>enterPower.mjs</code> · <code>session.ts:canonicalFacilityLevels</code> · <code>commonWindow/replay.ts</code>. 배수 해금·혜택은 기존 등록 표/규칙을 따르고 미정 문턱·팬 보정 값은 발란스 대기로 둡니다. 원문의 제안(검수 대기)와 당시 그림·값은 보존합니다.</p></aside>
+</section>
+<script>
+const ST={ok:{t:"계산 있음",c:"var(--ok)"},tbl:{t:"표만 있음",c:"var(--tbl)"},none:{t:"구조 없음",c:"var(--none)"},wait:{t:"발란스 대기",c:"var(--wait)"},cand:{t:"후보 확인 필요",c:"var(--cand)"}};
+const LV={c:"주사위 연결: 코드로 확인",t:"주사위 연결: 표·서류 근거",u:"주사위 연결: 불분명"};
+const GR={
+IN:{n:"주사위 공급",c:"#4f7cac"},RL:{n:"굴림·배수",c:"#5c5fc7"},TL:{n:"칸 도착",c:"#a1773a"},EC:{n:"돈",c:"#2f7f6f"},
+MD:{n:"보정·변환",c:"#17a0a0"},A:{n:"아이돌",c:"#e0558f"},B:{n:"그룹·팀",c:"#f08a2b"},C:{n:"팬",c:"#2aa7d6"},D:{n:"건물·시설",c:"#8d6e63"},
+E:{n:"카드",c:"#6d7a1f"},F:{n:"라포",c:"#c26a8a"},G:{n:"몬스",c:"#4b8f3d"},H:{n:"오디션·모험",c:"#b5651d"},I:{n:"아이템·찬스",c:"#7a5c99"},X:{n:"후보(확인 필요)",c:"#555"}};
+const COLS=[
+{t:"① 주사위 공급",s:"800 헌법 → 획득 길 6개 · 구매는 별도"},{t:"② 굴림",s:"주사위 1개 = 굴림 1"},{t:"③ 칸 도착",s:"보드 40칸 · 건물 9 + 건물 없는 칸 6 + 한 바퀴 + 기준표"},{t:"④ 돈 · 건물",s:"수익 → 증설"},
+{t:"⑤ 보정 · 변환",s:"배수 · 재능 · 10단계"},{t:"⑥ 바로 오르는 것",s:"보드 보상이 하단 탭에 바로 · 능력 · 엔터 파워 · 카드 (제안)"},{t:"⑦ 이어서 오르는 것",s:"영향받는 곳 · 단계 · 팬 · 도시 · 해금 · 라포 (제안)"}];
+const T1_OLD={id:"T1",g:"TL",col:2,n:"능력 시설 칸(녹음실·연습실·뷰티·프로듀싱·방송국·콘서트장)",k:"시설 칸 약 18칸",st:"ok",
+ rise:"도착하면 그 칸의 세부 능력(18개 중)이 오름. 6축은 직접 오르지 않고 세부 평균으로 자동 표시(헌법 77)(+ 칸 수익 · 팬).",unit:"능력점(기본 0.22 × 칸 ability_weight × 건물 레슨 배수)(옛 코드는 6축에 직접 더함 → 세부 단위로 옮겨야 함 · 양은 발란스 대기)",cap:"—",
+ link:"굴림 → 시설 칸 도착 → lessonArrival → 멤버 전원 능력. 방송국·콘서트장은 kind=무대(stage). 복합 건물: 녹음실(보컬2+랩3) · 방송국(칸마다 8개 · 합집합 16개) · 콘서트장(칸마다 10개 · 합집합 18개)은 칸마다 세부 여러 개를 나눠 올림(현중 10/26 11:44 「나」 · 칸별 배정은 이스라트 제안(검수 대기) · 기준 data/game/growth_source.csv).",lv:"c",dec:["결정 4(성장치는 각자 전량)","결정 70"],
+ src:["src/game/core-proposal/systems.ts(lessonArrival)","data/core_proposal/facility_growth.csv","data/core_proposal/fan_income_tile.csv(ability_weight)","data/game/board_tile.csv"],
+ note:"칸 수 = board_tile.csv의 fac_id별 3칸씩(프로듀싱은 group이 facility 1·company 2로 갈림). 한 축 건물은 연습실·뷰티·프로듀싱 3개뿐. 복합 3곳(녹음실·방송국·콘서트장)은 growth_source에 칸별 세부로 반영됨(양은 발란스 대기). 아직 안 바꾼 곳: idol_growth_source(한 축)·facility_ability_share/facility_growth의 방송국 줄(몫 숫자가 필요해 안 고침)·build_axis의 axis 칸(건물당 1개). 방송국 합집합은 16개(작곡·편곡은 콘서트장 35번) → 방송국 하나로 18개를 채울지는 현중 확인 필요. 참고: 보고/20261026_*_이스라트_방송국콘서트장표수정.md. 같은 칸 돈 규칙도 63일 계산(10단계 표 · 시설 공통 %)과 핵심 제안(30단계 표 · 시설별)이 다름(설계안 어긋남 1). 능력 단위는 헌법 77로 정해짐: 세부 18개만 올림(설계안 질문 1 답남). 기준표(보드 칸 도착 보상 기준표 박스)가 한 곳으로 모으는 안은 제안(검수 대기). 참고: 보드칸_도착보상_기준표_설계_1026.md."};
+/* 10/26 ③ 칸 도착 열 재배치용 자료 — 칸별 세부는 data/game/growth_source.csv(칸 줄)에서 옮김(11:5x 기준). 새 숫자 없음 */
+const DET18=["음정","발성","곡해석","칼군무","리듬감","표현력","플로우","딕션","무대 장악력","표정연기","카메라 시선","스타일","스타성","예능감","화술·소통","작사","작곡","편곡"];
+const FAM={"음정":"보컬","발성":"보컬","곡해석":"보컬","칼군무":"댄스","리듬감":"댄스","표현력":"댄스","플로우":"랩","딕션":"랩","무대 장악력":"랩","표정연기":"비주얼","카메라 시선":"비주얼","스타일":"비주얼","스타성":"끼·예능감","예능감":"끼·예능감","화술·소통":"끼·예능감","작사":"프로듀싱","작곡":"프로듀싱","편곡":"프로듀싱"};
+const STUDY=["영어","중국어","일본어"];
+const TN={"2": "아카데미", "4": "댄스 연습실", "7": "보컬 녹음실", "9": "보컬 녹음실", "10": "프로듀싱 스튜디오", "13": "프로듀싱 스튜디오", "17": "뷰티 스튜디오", "19": "뷰티 스튜디오", "20": "뷰티 스튜디오", "22": "보컬 녹음실", "24": "댄스 연습실", "25": "댄스 연습실", "27": "예능 방송국", "28": "예능 방송국", "29": "프로듀싱 스튜디오", "30": "예능 방송국", "32": "콘서트장", "33": "콘서트장", "35": "콘서트장", "37": "아카데미", "39": "아카데미"};
+const GT={"2": ["영어", "중국어", "곡해석", "화술·소통"], "4": ["칼군무", "리듬감"], "7": ["음정", "발성", "플로우", "딕션", "무대 장악력"], "9": ["발성", "곡해석", "플로우", "딕션", "무대 장악력"], "10": ["작사", "작곡"], "13": ["작곡", "편곡"], "17": ["표정연기", "스타일"], "19": ["표정연기", "카메라 시선"], "20": ["카메라 시선", "스타일"], "22": ["음정", "곡해석", "플로우", "딕션", "무대 장악력"], "24": ["칼군무", "표현력"], "25": ["리듬감", "표현력"], "27": ["예능감", "화술·소통", "스타성", "표정연기", "카메라 시선", "발성", "딕션", "스타일"], "28": ["화술·소통", "스타성", "음정", "발성", "곡해석", "표정연기", "작사", "무대 장악력"], "29": ["작사", "편곡"], "30": ["칼군무", "리듬감", "표현력", "스타일", "카메라 시선", "표정연기", "예능감", "플로우"], "32": ["음정", "발성", "곡해석", "리듬감", "표현력", "플로우", "무대 장악력", "표정연기", "스타성", "화술·소통"], "33": ["칼군무", "리듬감", "표현력", "발성", "딕션", "무대 장악력", "카메라 시선", "스타일", "예능감", "화술·소통"], "35": ["음정", "곡해석", "플로우", "딕션", "칼군무", "스타일", "스타성", "작사", "작곡", "편곡"], "37": ["중국어", "일본어", "표정연기", "표현력"], "39": ["일본어", "영어", "작사", "딕션"]};
+const TAG_OWN="growth_source.csv 그대로";
+const TAG_PROP="예상 배정 · 제안(검수 대기)";
+const mk=(nos,tag)=>nos.map(no=>({no,nm:TN[no],ups:GT[no],tag:tag||TAG_OWN}));
+const tileTxt=t=>{if(t.txt)return t.txt;const st=t.ups.filter(x=>STUDY.includes(x)),ot=t.ups.filter(x=>!STUDY.includes(x));return " "+(st.length?st.join("·")+(ot.length?" + ":""):"")+ot.join("·");};
+const SRC_B=["data/game/growth_source.csv(칸 줄 · 칸마다 오르는 세부)","data/game/board_tile.csv(칸 번호·이름)","data/core_proposal/facility_growth.csv","산출/게임프로토타입/보드칸_도착보상_기준표_설계_1026.md(3장)"];
+const DEC_B=["결정 4(성장치는 각자 전량)","결정 70","결정 77(세부 18개만 올림 · 6축 직접 금지)"];
+const LINK_B="굴림 → 이 건물 칸 도착 → 칸에 적힌 세부 능력 → (건물 배수 · 재능 1차/2차 · 칸 가중치) → 멤버 전원. 칸 돈은 「돈」 박스로 이어져 건물 증설에 쓰임.";
+const NODE0="63일 계산은 아직 이 칸 돈이 0이고 건물 단계 표가 없어 증설도 안 됨(기준표 설계안 4장 · 클로드 검수). 합친 30단계 표를 읽게 하면 달라질 수 있음(현중 10/26 10:40).";
+const N=[
+/* ① 공급 */
+{id:"IN1",g:"IN",col:0,n:"무료 일일 800개",k:"800/일 · 자동 충전 120 · 선물 30 · 나머지 650 = 미션 30% · 출석 5% · 이벤트 65%",st:"ok",slim:1,sec:"무료 일일 800개 밑 = 어떻게 획득하나",ch:[{t:"배분 정함"}],
+ rise:"800은 최상위 헌법 총량. 배분: 자동 충전 최대 120 · 8시간 선물 30 · 나머지 650 중 미션 30%(195) · 출석 5%(32.5) · 이벤트 65%(422.5). 지금 게임 표의 출석 값은 40.75. 쓸 수 있는 주사위 개수. 성장 자체가 아니라 모든 성장의 연료.",unit:"개/일",cap:"무료 하루 800개 = 카드팩·아이템 몫까지 전부 포함한 총량(확정). 보관 상한은 「주사위 보관 상한」 박스.",
+ link:"63일 계산 입력으로 매일 받음(1일차도 받음 = first_day_grant 1, 임시). 주사위 1개 = 굴림 1회(배수 기본 1).",lv:"c",
+ dec:["결정 16(하루 기준)","결정 17(기존 지급을 합친 총량)","결정 18(카드팩·아이템 일부 포함)","결정 55(주사위 개수 기준)","결정 56(무료 800)","결정 62(카드팩·아이템 포함 총량)"],
+ src:["data/core_proposal/dice_input_scenario.csv","data/game/dice_grant_config.csv","src/tools/balanceTool/seasonSim.ts(dicePerDay)"],
+ note:"카드팩·아이템이 800 중 몇 개인지는 발란스 대기(결정 18). 옛 「새 지급 경로(무료 800 부족분)」 박스는 아래 하위 6개로 대체함. 성장데이터리스트 13장의 「800 − 251.3 = 548.7」은 보고서 인용일 뿐 표·코드에서 못 찾음. 모험 파견 보상 주사위: dice_per_success 4(임시 시안)·채움 목표 100·20분 +10·45분 +20(adventure_config.csv, adventure_dispatch_*.csv). 파견은 시간으로 진행. 무료 800과의 관계는 기록 못 찾음 — 800 계층 밖으로 둠."},
+{id:"IN13",g:"IN",col:0,n:"자동 충전",k:"임시 시안 · 비율 미정",st:"tbl",slim:1,p:"IN1",pend:1,
+ rise:"자동으로 충전되는 주사위",unit:"개",cap:"auto_charge_minutes 12 · charge_amount 1 · reserve_cap 30(모두 임시 시안, 시간당 5개).",
+ link:"src/game/economy/charge.ts(chargeRule·syncCharge 순수 함수, 값이 비면 충전 안 함).",lv:"t",dec:[],
+ src:["data/game/economy_config.csv","src/game/economy/charge.ts"],note:"63일 계산이 이 충전을 쓰는지는 확인 못 함."},
+{id:"IN7",g:"IN",col:0,n:"출석·복귀·무료 선물",k:"출석 7일 21~42 · 복귀 · 선물",st:"ok",slim:1,p:"IN1",pend:1,
+ rise:"무료로 받는 주사위(무료 800의 일부).",unit:"개",cap:"출석 7일 21·23·27·31·35·40·42 · 복귀 24h 62 / 72h 208 / 168h 833 · 선물 10개/8시간.",
+ link:"이식 경제의 지급 코드. 무료 800 총량에 합쳐진 것으로 읽음(결정 17).",lv:"t",dec:["결정 17"],src:["data/game/dice_grant_config.csv","src/game/economy/attendance.ts · charge.ts(파일 이름·grep만 확인)"],note:"코드는 줄 단위로 못 열어봄(보고서 15장)."},
+{id:"IN8",g:"IN",col:0,n:"미션 보상",k:"미션 12 · 일일 굴림 8 …",st:"tbl",slim:1,p:"IN1",pend:1,
+ rise:"미션 진행으로 받는 주사위.",unit:"개",cap:"일일 굴림 8 · 증설 4 · 주간 굴림 146 · 증설 13 …(표 값).",link:"굴림·증설을 하면 진행이 오르고 보상으로 주사위가 나옴(표 근거). 이식 경제 missions.ts는 있으나 이번엔 안 열어봄.",lv:"t",dec:[],src:["data/game/mission_config.csv"],note:"무료 800 총량에 어떻게 들어가는지 정해진 기록은 못 찾음."},
+{id:"IN10",g:"IN",col:0,n:"보드 도착 지급",k:"",sub:"보드 기준표에서 확인",st:"tbl",slim:1,p:"IN1",pend:1,
+ rise:"보드 칸에 도착하거나 시설을 완공할 때 받는 주사위(무료 800 총량의 일부가 될 후보).",unit:"개",cap:"감옥 더블 탈출 2개 · 돌림판 풀 주사위 10·22·44·75 · 시설 완공 덤 주사위 8. 하루 몇 번 나오는지는 발란스 대기. 횟수·칸 연결은 보드 칸 도착 보상 기준표에서 확인.",
+ link:"감옥 탈출 2개는 63일 계산 코드에서 읽은 값. 돌림판 풀이 어느 칸·어느 때 나오는지, 완공 덤이 몇 번 지급되는지는 코드에서 못 찾음(미확인). 무료 800 총량과의 관계는 정해진 기록을 못 찾음. 횟수·칸 연결은 보드 칸 도착 보상 기준표에서 확인.",lv:"u",dec:[],
+ src:["산출/게임프로토타입/보드칸_도착보상_기준표_설계_1026.md(3장 주사위 · 4장 어긋남 11·13·17)","data/game/bonus_reward_pool.csv","src/game/economy/session.ts"],
+ note:"기준표(보드 칸 도착 보상 기준표 박스)에서 칸 줄이 아니라 「보드 밖 보상」 줄로 따로 둘지는 현중님 질문 9. 제안(검수 대기). 횟수·칸 연결은 보드 칸 도착 보상 기준표에서 확인."},
+{id:"IN11",g:"IN",col:0,n:"이벤트 게임 1~4 보상",k:"빈 칸 · 근거 없음(신설)",st:"none",slim:1,p:"IN1",pend:1,
+ rise:"이벤트 게임 1~4가 주는 주사위 몫(빈 칸, 신설).",unit:"개",cap:"—",link:"근거 없음.",lv:"u",dec:[],
+ src:["(없음 · 신설 빈 칸)"],note:"근거 없음. 빈 칸(신설)."},
+{id:"IN12",g:"IN",col:0,n:"카드팩·아이템 몫",k:"몇 개인지는 발란스 대기(빈 칸, 신설)",st:"none",slim:1,p:"IN1",pend:1,
+ rise:"무료 800 총량이 카드팩·아이템 몫까지 포함한다는 결정(결정 18·62)만 근거. 몇 개인지는 발란스 대기(빈 칸, 신설).",unit:"개",cap:"발란스 대기",
+ link:"결정 18·62. 개수는 발란스 대기.",lv:"t",
+ dec:["결정 18(카드팩·아이템 일부 포함)","결정 62(카드팩·아이템 포함 총량)"],
+ src:["결정 18","결정 62"],note:"몇 개인지는 발란스 대기. 빈 칸(신설)."},
+{id:"IN4",g:"IN",col:0,n:"무료/구매 구분 칸",k:"지갑 칸 하나뿐",st:"none",slim:1,sec:"별도 (800 계층 밖)",
+ rise:"무료 주사위와 구매 주사위를 나눠 적는 칸.",unit:"개",cap:"—",link:"지금 지갑은 한 칸이라 둘을 못 나눔(장부 kind로도 못 나눔).",lv:"c",
+ dec:["결정 57(나눠 적는 칸을 만든다 · 구현 대기)"],src:["src/tools/balanceTool/commonWindow/adapter.ts(dice.free · bought)","발란스_시각화_전수대조표_20261025.md 3장"],note:"만들기로 정했지만 아직 안 만든 것."},
+{id:"IN6",g:"IN",col:0,n:"주사위 보관 상한",k:"13단 · 팬 문턱 13칸 = 0",st:"wait",warn:1,slim:1,
+ rise:"쌓아 둘 수 있는 주사위 수.",unit:"개",cap:"30 → 35 → 40 → 50 → 60 → 70 → 80 → 90 → 100 → 120 → 140 → 170 → 200(13단). 올라가는 팬 문턱 13칸이 전부 0 = 발란스 대기.",
+ link:"팬 수로 단계가 오르면 보관 상한이 늘어남(표 근거). 계산 연결은 확인 못 함.",lv:"t",dec:[],src:["data/game/dice_cap_level.csv"],note:"63일 계산은 보관 상한을 쓰지 않음(막힘 = 주사위가 다 떨어졌을 때 · 결정 58)."},
+{id:"IN3",g:"IN",col:0,n:"구매(예상 안 함)",k:"예상 안 함",st:"ok",slim:1,sec:"구매 (800과 무관)",ch:[{t:"예상 안 함"}],
+ rise:"구매로 늘어나는 주사위 개수(연료). 무료 800과 무관하고, 예상하지 않음.",unit:"개/일 · 원",cap:"헤비 9주(63일) 2,000만 원 · 주사위 400,000개(50원) · 하루 약 6,349개. 50원/개, 보석 5원. 결제액 ↔ 게임 돈 환산은 발란스 대기.",
+ link:"63일 계산 입력(표 값 / 무료 800 / 헤비 중 선택). 굴림 하나 = 주사위 1개. 무료 800과 무관, 예상하지 않음.",lv:"c",
+ dec:["결정 14","결정 55","결정 56","결정 60(만렙 기준 = 헤비)","결정 62","결정 22·25(결제액↔게임 돈 환산 = 발란스 대기)"],
+ src:["data/core_proposal/dice_input_scenario.csv","data/game/tool_economy_season_budget_config.csv","data/master/item_master_shop_sku.csv","data/master/item_master_shop_gem_ladder.csv","data/master/item_master_sale_offer.csv"],
+ note:"「쓴 돈(원 환산)」은 이 박스에 합쳤어요. 무료 800과 무관, 예상하지 않음. 상점: SKU 9 · 보석 사다리 4단 · 세일 오퍼 22(표 줄 수). 구매 주사위의 가격표. 63일 계산은 표가 아니라 50원/개 입력을 씀(표가 계산에 이어지는지는 줄 단위로 안 열어봄)."},
+/* ② 굴림 */
+{id:"R1",g:"RL",col:1,n:"굴림(주사위 2개 합 · 이동)",k:"1개 = 1회 · 보드 40칸",st:"ok",
+ rise:"말이 움직일 칸 수. 능력이 직접 오르는 게 아니라 어느 칸에 도착할지를 정함.",unit:"굴림 1회 = 주사위 1개(배수 기본 1)",cap:"—",
+ link:"핵심 제안 시뮬: 1~6 두 번 합(2~12). 이식 경제: board.roll → peekMove → 칸 처리. 출발 칸 통과는 돈 보너스(0.217%S · 성장 아님). 주사위가 다 떨어지면 막힘.",lv:"c",
+ dec:["결정 55(주사위 개수 기준)","결정 58(막힘 = 주사위가 다 떨어졌을 때)","결정 70(능력 증가는 주사위 개수에 비례)"],
+ src:["src/game/core-proposal/sim.ts","src/game/economy/session.ts(rollEconomy)","data/game/board_tile.csv"],
+ note:"확인 필요: sim.ts는 병가 칸 11·31을 숫자로 박아 둠(보드 표는 11=기숙사, 31=감옥). 이번에 실행해 확인하진 않음."},
+{id:"R2",g:"RL",col:1,n:"굴림 배수(굴림 배수 ×1~×1000)",k:"10단 ×1 ~ ×1000",st:"ok",
+ rise:"한 번에 거는 주사위 수. 돈 수익에 곱해짐.",unit:"배",cap:"×1·2·5·10·20·50·100·200·500·1000. 해금 팬 문턱 0×5 · 5,500 · 8,010 · 9,370 · 10,610 · 11,210. 63일 계산은 sim_mult 기본 1.",
+ link:"돈 수익에는 곱해짐(코드 확인). 능력에 곱하는지는 「굴림 배수의 능력 반영」 박스.",lv:"c",dec:["결정 55"],
+ src:["data/master/item_master_dice_mult.csv","src/game/economy/session.ts(multOptions)","data/core_proposal/dice_input_scenario.csv(roll_mult_rule)"],note:"해금은 팬 수(문턱은 평균 변환 안 함)."},
+/* ③ 칸 도착 */
+{id:"BREC",g:"TL",col:2,bn:"녹음실",n:"녹음실 7·9·22",k:"보컬 + 랩 세부 5개씩",sub:"보컬 + 랩 세부",st:"ok",chip:["구조 있음","데이터 미정"],sec:"건물 있는 칸 · 9박스(건물마다 따로) — 칸 번호 + 칸마다 오르는 세부 능력",showUnion:1,tiles:mk([7,9,22]),
+ rise:"녹음실 칸에 도착하면 그 칸에 적힌 세부 능력 5개가 오름(보컬 계열 2 + 랩 계열 3). 6축은 직접 오르지 않고 세부 조합으로만 표시(헌법 77).",unit:"세부 능력점(양은 발란스 대기 · 새 숫자 없음)",cap:"—",link:LINK_B,lv:"c",dec:DEC_B.concat(["현중 10/22 09:01(랩은 녹음실에서 보컬과 함께)"]),src:SRC_B,old:T1_OLD,
+ note:"칸마다 어느 세부가 오르는지는 growth_source.csv의 칸 줄을 그대로 옮김. "+NODE0},
+{id:"BDAN",g:"TL",col:2,bn:"연습실",n:"연습실 4·24·25",k:"댄스 세부 2개씩",sub:"댄스 세부",st:"ok",chip:["구조 있음","데이터 미정"],tiles:mk([4,24,25]),
+ rise:"연습실 칸에 도착하면 그 칸에 적힌 댄스 세부 능력 2개가 오름. 6축은 직접 오르지 않음(헌법 77).",unit:"세부 능력점(양은 발란스 대기 · 새 숫자 없음)",cap:"—",link:LINK_B,lv:"c",dec:DEC_B,src:SRC_B,old:T1_OLD,note:"한 축(댄스)만 맡는 건물. "+NODE0},
+{id:"BPRO",g:"TL",col:2,bn:"프로듀싱",n:"프로듀싱 10·13·29",k:"작사·작곡·편곡 2개씩",sub:"프로듀싱 세부",st:"ok",chip:["구조 있음","데이터 미정"],tiles:mk([10,13,29]),
+ rise:"프로듀싱 칸에 도착하면 그 칸에 적힌 프로듀싱 세부 능력 2개가 오름. 6축은 직접 오르지 않음(헌법 77).",unit:"세부 능력점(양은 발란스 대기 · 새 숫자 없음)",cap:"—",link:LINK_B,lv:"c",dec:DEC_B,src:SRC_B,old:T1_OLD,note:"작사는 표 이름이 rap_lyrics지만 프로듀싱 소속(ability_master). 10번은 시설 칸, 13·29번은 회사 칸(board_tile group)으로 갈림. 10번은 63일 계산에서 건물 단계 표가 없어 돈 0·증설 불가(기준표 설계안 4장)."},
+{id:"BBEA",g:"TL",col:2,bn:"뷰티",n:"뷰티 17·19·20",k:"비주얼 세부 2개씩",sub:"비주얼 세부",st:"ok",chip:["구조 있음","데이터 미정"],tiles:mk([17,19,20]),
+ rise:"뷰티 칸에 도착하면 그 칸에 적힌 비주얼 세부 능력 2개가 오름. 6축은 직접 오르지 않음(헌법 77).",unit:"세부 능력점(양은 발란스 대기 · 새 숫자 없음)",cap:"—",link:LINK_B,lv:"c",dec:DEC_B,src:SRC_B,old:T1_OLD,note:"한 축(비주얼)만 맡는 건물. "+NODE0},
+{id:"BBRD",g:"TL",col:2,bn:"방송국",n:"방송국 27·28·30",k:"끼·예능감 + 섞인 세부 8개씩",sub:"끼·예능감 + 섞인 세부 · 제안(검수 대기)",st:"tbl",chip:["구조 있음","데이터 미정"],showUnion:1,tiles:mk([27,28,30],TAG_PROP),
+ rise:"방송국 칸에 도착하면 칸마다 세부 능력 8개가 오름(끼·예능감 중심 + 화면에서 쓰는 능력이 섞임). 6축은 직접 오르지 않음(헌법 77).",unit:"세부 능력점(양은 발란스 대기 · 새 숫자 없음)",cap:"—",link:LINK_B,lv:"c",dec:DEC_B.concat(["현중 10/26 11:44(나) 칸마다 나눠 올리고 건물 전체로 18개를 채움"]),src:SRC_B.concat(["보고/20261026_1141_이스라트_방송국콘서트장복합검토.md(⑤ 칸별 제안표)"]),old:T1_OLD,
+ note:"칸별 배정은 이스라트가 실제 아이돌 활동을 상상해 나눈 제안이고 문서에 있던 결정은 아님(제안(검수 대기)). 방송국 3칸을 합쳐도 18개 중 빠지는 세부가 있고(작곡·편곡), 그 둘은 콘서트장 35번이 맡음. 건물↔6축 표·시설 성장 표·시설 능력 몫 표·아직 안 바꾼 성장 원본(idol_growth_source.csv)에는 방송국이 끼·예능감 한 축으로 남아 있음. "+NODE0},
+{id:"BCON",g:"TL",col:2,bn:"콘서트장",n:"콘서트장 32·33·35",k:"세부 10개씩 · 건물 전체 18개",sub:"18개를 칸마다 나눠서 · 제안(검수 대기)",st:"tbl",chip:["구조 있음","데이터 미정"],showUnion:1,tiles:mk([32,33,35],TAG_PROP),
+ rise:"콘서트장 칸에 도착하면 칸마다 세부 능력 10개가 오르고, 세 칸을 합치면 세부 18개가 전부 채워짐. 6축은 직접 오르지 않음(헌법 77).",unit:"세부 능력점(양은 발란스 대기 · 새 숫자 없음)",cap:"—",link:LINK_B,lv:"c",dec:DEC_B.concat(["현중 10/22 09:40(모든 게 전부 올라야지)","현중 10/26 11:44(나) 칸마다 나눠 올리고 건물 전체로 18개를 채움"]),src:SRC_B.concat(["보고/20261026_1141_이스라트_방송국콘서트장복합검토.md(⑤ 칸별 제안표)"]),old:T1_OLD,
+ note:"칸별 배정은 이스라트의 제안(제안(검수 대기)). 10/22 「모든 능력」은 건물 합집합으로 채움. 건물↔6축 표(building_master_build_axis.csv)에는 아직 안 바꾼 「랩 하나」가 남아 있음. "+NODE0},
+{id:"T2",g:"TL",col:2,bn:"아카데미",n:"아카데미 2·37·39",k:"외국어 + 같이 쓰는 세부",sub:"외국어 + 세부 · 제안(검수 대기)",st:"tbl",chip:["구조 있음","데이터 미정"],tiles:mk([2,37,39],TAG_PROP),
+ rise:"아카데미 칸에 도착하면 외국어(영어·중국어·일본어 중 2개)와 같이 쓰이는 세부 능력 2개가 오름. 외국어는 세부 18개 밖의 학습 점수이고, 6축은 직접 오르지 않음(헌법 77).",unit:"학습 점수 + 세부 능력점(양은 발란스 대기 · 새 숫자 없음)",cap:"—",
+ link:"growth_source.csv에 칸 2·37·39 줄이 들어갔음(10/26 11:45). 이 줄을 읽는 계산 코드가 있는지는 확인 못 함(이전 설명: facility_growth.lesson_stat_id 빈칸이라 능력이 안 올랐음). 아직 안 바꾼 성장 원본 표에는 영어·중국어·일본어만 있음.",lv:"t",dec:["현중 10/26 11:45(아카데미는 외국어와 함께 오르는 세부도 같이 올림)"],
+ src:["data/game/growth_source.csv(칸 2·37·39 줄)","data/core_proposal/facility_growth.csv(facility_dorm)","data/game/board_tile.csv"],note:"칸별 배정은 이스라트의 제안(제안(검수 대기)). 학습(영어·중국어·일본어)은 세부 18개 밖(stat_role=study). 63일 계산에서는 이 칸 돈 0·증설 불가(기준표 설계안 4장)."},
+{id:"BFAN",g:"TL",col:2,bn:"팬샵",n:"팬샵 12·14·15",k:"능력 없음 · 팬 · 돈",sub:"능력 없음 · 팬 · 돈",st:"ok",chip:["구조 있음","데이터 미정"],tiles:[{no:"12·14·15",nm:"팬샵",ups:[],txt:" 능력 안 오름 · 팬 · 돈",tag:"없음(능력 가중치 빈칸)"}],
+ rise:"팬샵 칸에 도착하면 능력(세부·6축)은 오르지 않고 돈이 생기며 팬 쪽으로 이어짐.",unit:"돈(S 대비 %) · 팬",cap:"능력 가중치 빈칸(임시).",
+ link:"돈은 건물 단계 % × 판정으로 생기고 건물 증설이 됨(63일 계산). 팬 쪽 fan_gain은 자리값이라 아직 안 오름(「팬 수」 박스 메모 참고).",lv:"t",dec:[],src:["data/core_proposal/facility_growth.csv(facility_growth_fanshop)","data/master/building_master_build_axis.csv(fanshop · none)","산출/게임프로토타입/보드칸_도착보상_기준표_설계_1026.md(3장 12·14·15번 줄)"],note:"팬·수익 건물이라 6축·세부를 올리지 않음."},
+{id:"T3",g:"TL",col:2,n:"사옥 칸 · 출발 칸(1번)",k:"1번 칸 · 사옥 증설 · 도착 돈 두 규칙",st:"ok",
+ rise:"사옥 칸(출발)에 서 있을 때 사옥 증설 가능. 출발 칸을 지나서 받는 돈은 「한 바퀴 돈」 박스로 따로 봄.",unit:"돈(S 대비 %)",cap:"—",
+ link:"사옥 증설 → 캐스팅권 → 멤버 수. 출발 칸 통과 돈은 한 바퀴 돈 박스.",lv:"c",dec:["결정 38(옛 기획사 증설비는 사옥에 붙임)"],src:["data/core_proposal/core_proposal_config.csv(pass_start_pct)","data/core_proposal/facility_growth.csv(facility_company)"],note:"1번 칸에 도착해서 받는 돈: 63일 계산은 0 · 핵심 제안은 시설 규칙으로 돈이 있음(설계안 어긋남 20). 사옥 멤버 자리 단계가 핵심 제안 2·3·4·5와 합친 표 7·13·19·25로 불일치(어긋남 10 · 질문 7). 제안(검수 대기)."},
+{id:"T4",g:"TL",col:2,n:"휴식 칸(기숙사 11 · 본가 21)",k:"다음 레슨 +50%(연결 확인)",st:"cand",warn:1,
+ rise:"다음 레슨 도착 능력 +50%(휴식 보너스 50).",unit:"%",cap:"50(임시)",
+ link:"sim.ts는 group==='life' 칸에서 휴식 대기를 켜는데, 보드 표의 휴식 칸 group은 corner_rest라 값이 맞는지 확인 필요(코드·표를 읽어서 본 것이고, 실행해 확인하진 않음).",lv:"u",dec:[],
+ src:["src/game/core-proposal/sim.ts:26","data/game/board_tile.csv(corner_rest)","data/core_proposal/idol_ability_source.csv(rest_bonus)"],note:"확인되면 상태가 「계산 있음」으로 바뀔 수 있어요. 설계안 어긋남 8 · 질문 5: 값(50)은 그대로 두고 실제로 걸리게 하는 코드 수정을 넘길지는 현중 확인 대기."},
+{id:"T5",g:"TL",col:2,n:"찬스 칸(스케줄 칸 8·23·38)",k:"카드 풀·효과 비어 있음",st:"none",warn:1,
+ rise:"찬스 카드·스케줄 효과로 세부 능력·돈·팬이 바뀌는 칸.",unit:"사건",cap:"효과 크기 1은 자리값(임시).",
+ link:"핵심 제안 시뮬은 「비움」 한 가지(25% 확률 · 모든 능력 +0.3)만 임시 정책값으로 계산(옛 코드: 6축 전체에 직접 더함 · 헌법 77 위반 · 고칠 대상 · 세부로 옮기는 값은 발란스 대기). 스케줄 카드 풀·효과는 비어 있음. 63일 공통 창에는 없음.",lv:"c",dec:["결정 39(찬스 효과는 팀 전원 각자 전량)"],
+ src:["data/game/board_tile.csv(group=schedule)","data/game/table_link_exception.csv:25","src/game/core-proposal/sim.ts(scheduleEmptyPct)"],
+ note:"현중 10/26: 찬스·스케줄은 아직 안 만든 것으로 봄. 풀·효과는 check_list_17·23 답 전까지 비워 둠."},
+{id:"T6",g:"TL",col:2,n:"팬 반응 칸(3·18·34)",k:"팬 이벤트 행 비면 효과 0",st:"none",
+ rise:"팬이 반응하는 이벤트로 팬·카드가 바뀌는 칸.",unit:"사건",cap:"—",
+ link:"이식 경제 handler는 있으나 팬 이벤트 행이 비어 있으면 수익 0·효과 0으로 끝남. 핵심 제안 시뮬엔 없음.",lv:"c",dec:[],src:["src/game/economy/session.ts:168","data/game/board_tile.csv(fan_react)","data/game/table_link_exception.csv:25"],note:"현중 10/26: 팬 반응은 아직 안 만든 것으로 봄."},
+{id:"T7",g:"TL",col:2,n:"쟁탈 칸(쟁탈전 6·16·26·36)",k:"36번만 입장권 연결",st:"ok",
+ rise:"36번 칸 도착 시 다른 도시 입장권을 얻음(열린 도시가 있을 때 확률). 기준표(board_tile_reward.csv)에는 안 했다(36번 next_effect_kind=none).",unit:"장",cap:"입장권 확률: 보고서 B5에 「쟁탈 보드 도착 30%」로 적혀 있음. 기준표 board_tile_reward.csv에는 안 했다(36번 next_effect_kind=none).",
+ link:"굴림 → 36번 도착 → 입장권 → 도시 방문. 다른 쟁탈 칸은 성장 연결 제외.",lv:"c",dec:["결정 44(도시 문턱 평균 기준 임시값)"],src:["src/game/core-proposal/sim.ts(CASTING_OTHER_CITY)","data/core_proposal/city_visit_region.csv","data/core_proposal/fan_income_tile.csv(쟁탈 보드 note)"],note:""},
+{id:"BSET",g:"TL",col:2,n:"정산 5·40",k:"돈만 · 능력 없음",sub:"돈만 · 능력 없음",st:"ok",chip:["구조 있음","데이터 미정"],
+ rise:"정산 칸에 도착하면 돈만 생기고 능력·팬은 오르지 않음(고정 % 칸).",unit:"돈(S 대비 %) × 굴림 배수",cap:"settle_pct 0.6(임시 · 설계안에서 읽은 값).",
+ link:"굴림 → 5·40번 도착 → 돈 → 증설. 63일 계산·핵심 제안 모두 돈이 있음.",lv:"t",dec:[],src:["산출/게임프로토타입/보드칸_도착보상_기준표_설계_1026.md(3장 5·40번 줄)","data/game/board_tile.csv(group=settle · 40번은 large_settlement)"],note:"기준표에서는 40칸 줄의 하나로 모음."},
+{id:"BJAIL",g:"TL",col:2,n:"감옥 31",k:"도착 보상 없음 · 탈출 때 효과",sub:"도착 보상 없음 · 탈출 때 효과",st:"ok",chip:["구조 있음"],
+ rise:"감옥 칸에 도착하면 갇힘(능력·돈·팬 없음). 더블로 탈출할 때 주사위 2개와 돈을 받는 효과는 도착 보상이 아니라 「다음 효과」로 따로 둠.",unit:"주사위 · 돈(탈출 때)",cap:"탈출 주사위 2개(설계안에서 읽은 값).",
+ link:"굴림 → 31번 도착 → 갇힘 → 더블로 탈출. 31번 → 11번 이동 + 한 턴 쉼은 번호 고정(sim.ts 설계안 4장 13번). 탈출 주사위는 「보드 도착 지급」으로 이어짐.",lv:"t",dec:[],src:["산출/게임프로토타입/보드칸_도착보상_기준표_설계_1026.md(3장 31번 줄 · 4장 13번)","src/game/economy/session.ts(213줄 · 설계안이 읽은 곳)"],note:"도착 보상이 아니라 탈출 때 받는 것이라 기준표의 「다음 효과」 열로 옮겨 둔 항목."},
+{id:"T8",g:"TL",col:2,n:"한 바퀴 돈(출발 칸 지날 때)",k:"0.217%S · 두 표에 따로(임시)",st:"ok",warn:1,
+ rise:"출발(사옥) 칸을 지날 때마다 받는 돈. 칸에 도착해서 받는 돈과 별개.",unit:"돈(S 대비 %) × 굴림 배수 × 바퀴 수",cap:"0.217(S 대비 %) · 임시(나중에 결정). 같은 값이 economy_config.csv와 core_proposal_config.csv의 pass_start_pct에 따로 있음.",
+ link:"굴림이 한 바퀴 돌아 출발 칸을 지나면 돈이 됨(돈 박스로 이어짐). 설계안은 코드를 읽어 적은 것이고 이번에 실행해서 확인하진 않음. 기준표에는 「한 바퀴」 한 줄로 모으는 안(제안(검수 대기) · 질문 10).",lv:"t",dec:[],
+ src:["data/game/economy_config.csv(pass_start_pct)","data/core_proposal/core_proposal_config.csv(pass_start_pct)","src/game/economy/session.ts","산출/게임프로토타입/보드칸_도착보상_기준표_설계_1026.md(3장 한 바퀴 줄 · 4장 어긋남 16)"],
+ note:"0.217을 한 곳에만 두고 두 곳이 읽게 할지는 현중 확인 대기."},
+{id:"T9",g:"TL",col:2,n:"보드 칸 도착 보상 기준표(40칸 + 한 바퀴 41줄)",k:"기준표 설계 중 · 한 장 표 없음",st:"none",warn:1,
+ rise:"칸에 도착하면 돈·팬·능력(세부 18개만 · 6축은 표시 전용)·주사위·다음 효과를 얼마나 주는지, 건물 단계 표의 어느 열을 읽는지를 한 장으로 적은 표(성장 관련만 · 라포 제외).",
+ unit:"줄 = 칸 40 + 한 바퀴 1 · 열 = 돈·팬·능력(세부 18개만 · 6축은 표시 전용)·주사위·다음 효과·건물 연결(돈·레슨 배수·완공 능력·완공 팬)",
+ cap:"발란스 대기 — 값은 지금 있는 값을 옮기기만 하고 새 숫자는 없음. 값 상태는 임시(나중에 결정) · 제안(검수 대기).",
+ link:"이런 한 장 표가 아직 없음. 도착 보상이 4군데(63일 계산 · 핵심 제안 · idol_growth_source 칸 40줄 · growth_source 칸 93줄)에 따로 있어 값이 서로 다름. 지금은 설계안과 초안 CSV(41줄)를 만든 단계이고 표·코드는 안 바꿈. 만든 뒤 63일 계산·핵심 제안·시뮬레이터가 이 표 하나를 읽게 하는 일은 현중 승인 뒤 커서 CLI로 함.",lv:"t",
+ dec:["결정 5 ↔ 결정 13 충돌(옛 성장표 치움/되돌림 · 현중 재결정 필요)","결정 76(건물 레슨 배수는 합친 표 사용)"],
+ src:["산출/게임프로토타입/보드칸_도착보상_기준표_설계_1026.md","산출/게임프로토타입/보드칸_도착보상_기준표_초안_1026.csv","입력/알림-클로드_보드칸도착보상기준표_1026.md","입력/알림-코덱스_보드칸도착보상기준표_1026.md"],
+ note:"설계안 4장: 어긋난 곳 25개 · 현중님께 물을 질문 13개(2개 답남 · 1개 보류). 클로드·코덱스 검수 대기. 상태: 구조 없음 → 기준표 설계 중(제안(검수 대기)). 헌법 77: 칸 도착으로 오르는 능력은 세부 18개만 · 6축은 직접 올리지 않고 세부의 조합(평균 등)으로만 표시. 참고: 보드칸_도착보상_기준표_설계_1026.md."},
+/* ④ 돈·건물 */
+{id:"M0",g:"EC",col:3,n:"돈(도착 수익 · 증설 자금)",k:"S 대비 % · 상한 발란스 대기",st:"ok",
+ rise:"도착 수익이 쌓이는 돈. 건물 증설에 쓰임(성장의 중간 다리).",unit:"S 대비 %",cap:"돈 상한 발란스 대기.",
+ link:"도착 수익 = (시설 기본 % + 팬 곡선 %) × 칸 가중치 × 굴림 배수 × 판정. 이 돈으로 증설.",lv:"c",dec:["결정 25(결제액 ↔ 게임 돈 환산 · 나중에 정함)"],src:["src/game/core-proposal/systems.ts(tileIncome)","data/core_proposal/core_proposal_config.csv","data/game/income.csv"],note:"돈 수입 자체는 성장이 아니라서 다리 역할로만 넣음."},
+{id:"D1",g:"D",col:3,n:"건물 단계(9건물 × 30단계)",k:"30단계 · 비용 100 → 263,373,318",st:"ok",
+ rise:"건물별 단계(칸에 서 있을 때 돈으로 증설). 증설 비용도 이 박스에 합침.",unit:"단계",cap:"건물당 30(1~10 본관 · 11~20 부속1 · 21~30 부속2, 임시). 비용 1단계 100 → 30단계 263,373,318(S 대비), core는 ×cost_scale 40. 건물당 누적 592,592,300. 건물비 ×1/20은 미결(Q03).",
+ link:"굴림 → 시설 칸 도착 → 돈이 되면 증설(정책 always). 단계가 오르면 레슨 배수 · 완공 능력 · 멤버 자리가 같이 오름.",lv:"c",dec:["결정 28(건물 표 3개를 합침)","결정 29(남은 표 삭제 대기)"],
+ src:["data/master/building_master_level.csv","data/core_proposal/facility_growth_level.csv","src/game/core-proposal/systems.ts(upgrade)","src/game/economy/session.ts(upgradeFacility)"],note:"엔터 파워 최대 270은 문서 정의일 뿐 계산 없음(「엔터 파워」 박스). 63일 계산은 따로 facility_level.csv(6시설 × 10단계)를 읽어 합친 표(9시설 × 30단계)와 단계 수·시설 종류가 다름(설계안 2-4 · 어긋남 2). 기준표가 건물 연결 열로 합친 표를 읽는 안은 제안(검수 대기)."},
+{id:"D9",g:"D",col:3,n:"대지 건설(대지 22칸)",k:"22칸 · 이식 경제만",st:"cand",
+ rise:"시설을 지을 대지 칸.",unit:"개",cap:"22",link:"돈으로 짓는 이식 경제 기능. 굴림 도착과 어떻게 이어지는지 이번에 못 봄(시설 단계와 따로 셈).",lv:"u",dec:[],src:["data/game/land_lot.csv","src/game/economy/session.ts(buildLot · 이름만 확인)"],note:""},
+/* ⑤ 보정·변환 */
+{id:"M6",g:"MD",col:4,n:"칸 가중치 · 짝 포지션 보정",k:"짝 포지션 +25% · 가중치 1.0/1.5",st:"ok",
+ rise:"같은 도착이라도 칸·포지션에 따라 오르는 양이 달라지는 보정.",unit:"배율",cap:"짝 포지션 +25%(임시). 칸 ability_weight는 칸 표 값(예: 1.0 · 1.5).",
+ link:"굴림 도착 → 기본 0.22에 칸 가중치를 곱하고, 멤버의 포지션 능력이면 +25%(옛 코드: 기본 0.22는 6축 값에 직접 더함 · 헌법 77 위반 · 고칠 대상 · 세부로 옮기는 양은 발란스 대기).",lv:"c",dec:[],src:["data/core_proposal/idol_ability_source.csv(position_bonus)","data/core_proposal/fan_income_tile.csv(ability_weight)","src/game/core-proposal/systems.ts(addAbility)"],note:""},
+{id:"M1",g:"MD",col:4,n:"건물 레슨 배수(건물 레슨 배수)",k:"1.0 → 5.35(30단계 · 합친 표)",st:"ok",
+ rise:"같은 주사위로 능력이 오르는 정도(건물이 높을수록 더 오름).",unit:"배수",cap:"1.0 → 5.35(30단계 · 합친 표 · 임시). 옛 표 최대 60은 참고로 남김.",
+ link:"레슨 도착 증가량에 곱함(현재 코드). 결정 75 방향(필요 누적 = 기본 ÷ 배수)과 같은 방향. 10단계 표(필요 누적) 쪽은 아직 구현 안 함.",lv:"c",
+ dec:["결정 74(곱하고 필요 누적에 반영)","결정 75(건물 높을수록 같은 주사위로 더 오름)","결정 76(합친 표 building_master_level 값 사용)","결정 28"],
+ src:["data/master/building_master_level.csv(effect_lesson_mult)","src/game/core-proposal/model.ts · data.ts(lessonSource=merged)","보고/20261025_1947_이스라트_합친표전환60일_보고.md"],
+ note:"곡선은 임시(재결정 재료). 옛 단독 시뮬 scripts/core-proposal-sim.mjs는 그룹 능력 척도가 달라져 단계 문턱 검사가 깨짐(보고서 후보 9)."},
+{id:"M2",g:"MD",col:4,n:"재능 흡수율(재능 흡수율 5구간)",k:"×0.50 · 0.75 · 1.00 · 1.35 · 1.75",st:"ok",
+ rise:"능력이 재능(1차/2차 경계)까지 오르는 속도 배율. 재능 값 자체는 안 오름(생성기가 한 번 뽑음).",unit:"배율",cap:"재능 0~29 · 30~49 · 50~69 · 70~84 · 85~100 구간에 ×0.50 · 0.75 · 1.00 · 1.35 · 1.75. 재능 생성: 특기 축 70~90 · 나머지 20~60 · 5단위 · 합 840.",
+ link:"레슨 도착 증가량이 능력 점수가 재능 이하일 때(일반 성장 1차) 이 배율로 바뀜.",lv:"c",dec:["결정 64","결정 65(재능 = 1차/2차 경계)","결정 66(단계 최대치가 먼저 막음)","결정 68(능력 10 · 재능 20 · 표 값 100 예시(옛 안의 「천장 100」 — 지금 천장 정의는 M3 메모))"],
+ src:["data/idol_ability_sim/absorb_decay_table.csv(TALENT_ABSORB_TIER)","src/game/core-proposal/talent.ts(talentGain)","data/core_proposal/idol_ability_talent.csv"],note:"모두 임시(나중에 결정)."},
+{id:"M3",g:"MD",col:4,n:"2차 성장 감속(2차 성장)",k:"×0.5 → … → ×0.0002 · 끝 100",st:"ok",
+ rise:"능력이 재능을 넘은 뒤(2차 성장) 오르는 속도.",unit:"배율(6구간)",cap:"×0.5 → 0.18 → 0.04 → 0.008 → 0.0015 → 0.0002, 끝 = 표 값 100(ability_ceiling · ×1000 환산 전 척도 · 옛 안의 「천장 100」). 감속 종류 E · 강도 「중」(임시). 만렙 판정 = 2차 폭 98% · 6축 전부(6축은 세부 조합 표시값)(임시).",
+ link:"능력 > 재능이면 자동 적용. 같은 주사위라도 더 많이 쌓아야 오르는 구간.",lv:"c",dec:["결정 64(재능 이상 체감 감속)","결정 67(2차 구간 끝까지 올라야 만렙)","결정 68","결정 72(2차는 더 많이 누적 · 초반은 빠르게)"],
+ src:["data/idol_ability_sim/absorb_decay_table.csv(FILL_DECAY_STEP)","data/core_proposal/idol_ability_talent.csv(over_talent_*)","src/game/core-proposal/talent.ts"],note:"천장 정의: 천장 = 능력(멤버 6축 점수 평균) > 재능(멤버 6축 재능 평균)(출처 슈덴 보고 1210 · 임시 · 현중 원문 확인 필요). 옛 안 「천장 100」(표 값 100은 ×1000 환산 전 척도로만 남음)은 임시(나중에 결정)였음."},
+{id:"M4",g:"MD",col:4,n:"단계 최대치(단계 최대치 detail_max)",k:"38 · 63 · 100 · 150 · 200",st:"tbl",warn:1,
+ rise:"멤버 단계마다 능력이 오를 수 있는 위쪽 한도(재능보다 먼저 막음).",unit:"점수",cap:"detail_max 38 · 63 · 100 · 150 · 200(월드스타 값은 임시). 능력 문턱 ability_min 0 · 300 · 500 · 800 · 1200.",
+ link:"talent.ts가 읽어서 화면의 구역(1차/2차/단계 초과)을 가르지만, 멤버 단계를 올리는 일차별 계산은 공통 창에 없음.",lv:"c",dec:["결정 66(단계 최대치가 먼저 막음 · 단계가 오르면 재능까지)","결정 59(하루 단위 계산 신설 · 구현 대기)"],
+ src:["data/idol_ability_sim/idol_growth_stage_gate.csv","src/game/core-proposal/talent.ts(zoneOf)"],note:"확인 필요: 단계 최대치 150·200(표 값)이 표 값 ability_ceiling 100(옛 안의 「천장 100」)보다 큼 — 표 값 그대로 적음. 새 천장 정의(천장 = 능력(멤버 6축 점수 평균) > 재능(멤버 6축 재능 평균) · 출처 슈덴 보고 1210 · 임시 · 현중 원문 확인 필요)와 단계 최대치가 어떻게 맞물리는지는 정해진 기록 못 찾음."},
+{id:"M5",g:"MD",col:4,n:"10단계 구간 · 필요 누적(능력 × 10단계 표)",k:"결정 71~75 · 구현 안 함",st:"none",
+ rise:"능력 하나의 범위를 10단계로 나누고, 단계마다 필요한 주사위 누적을 정하는 표.",unit:"누적 주사위 개수",cap:"표 값 100(ability_ceiling · 옛 안의 「천장 100」)을 10등분(재능이 1차/2차를 가름 · 천장 정의는 「천장 = 능력(멤버 6축 점수 평균) > 재능(멤버 6축 재능 평균)」, 출처 슈덴 보고 1210 · 임시 · 현중 원문 확인 필요). 단계별 값은 발란스 대기(비앙카 안 A·B·C는 제안(검수 대기)).",
+ link:"주사위 개수에 비례(결정 70)해 오르되 구간을 둠. 제안식(검수 대기): 필요 누적 = 기본 × 단계 계수 × 2차 가중 ÷ 건물 배수.",lv:"c",
+ dec:["결정 70","결정 71(10단계)","결정 72(필요 누적)","결정 73(표 구조 · 읽기 쉬운 한 장 표)","결정 74","결정 75","결정 76"],
+ src:["비앙카_발란스작업서류.md ⑪(652~883줄)","발란스_종합체크문서.md 결정 70~76"],note:"구조는 정했지만 구현을 시작하지 않음. 지금 63일 계산은 이 표 없이 돌아감."},
+{id:"M8",g:"MD",col:4,n:"굴림 배수의 능력 반영(배수 → 능력)",k:"결정 70과 어긋날 수 있음",st:"cand",warn:1,
+ rise:"굴림 배수를 올리면 능력도 더 오르는지.",unit:"—",cap:"—",
+ link:"dice_input_scenario의 roll_mult_rule 설명: core 레슨 도착은 배수를 안 곱해서 배수를 올려도 능력은 안 늘고 주사위만 더 씀. 반면 growth_source.csv에는 dice_mult_apply 1이 있고, 결정 70은 능력이 주사위 개수에 비례해야 한다고 함.",lv:"u",
+ dec:["결정 70","결정 55"],src:["data/core_proposal/dice_input_scenario.csv(roll_mult_rule)","data/game/growth_source.csv(dice_mult_apply)","src/game/core-proposal/systems.ts(lessonArrival)"],note:"현중 확인이 필요한 항목. 이 문서에서는 판단하지 않음."},
+{id:"M9",g:"I",col:4,n:"성장 원천 표(성장 원천 167줄)",k:"칸 93 · 카드 21 · 찬스 21 · 잭팟 21 · 미니게임 11",st:"tbl",
+ rise:"능력이 오르는 모든 원천의 기본 증가량 표(옛 성장 모듈 기준 표).",unit:"기본 증가량(예: 칸 0.058)",cap:"묶음 상한: 재능 흡수율 1.75 · 스킬 가산 10 · 버프 10 · 다음 도착 5.35 · 판정 10(표).",
+ link:"core 시뮬은 이 표 대신 idol_ability_source 7줄을 씀. 이 표는 이식 쪽 기준 표.",lv:"t",dec:["결정 5(옛 성장표는 치우고 기준 = growth_source.csv)"],src:["data/game/growth_source.csv","data/game/growth_modifier.csv(82)","data/game/stack_group.csv"],note:"대표 줄만 읽고 개수를 적음. 칸 40줄 옛 성장표 idol_growth_source(data/idol_ability_sim)도 계산이 읽지 않음(설계안 어긋남 3·4)."},
+{id:"M10",g:"I",col:4,n:"아이템·스킬로 바뀌는 성장(아이템 성장 효과)",k:"표 0줄 · 최우선 원칙 G31",st:"none",
+ rise:"모든 성장 데이터를 아이템(가진 동안)·스킬(즉시)로 바꿀 수 있어야 한다는 원칙의 효과 표.",unit:"—",cap:"—",link:"도착 시 증가량을 아이템·스킬이 바꾸는 자리. 표가 비어 있음.",lv:"t",dec:["종합체크문서 최우선 원칙 G31"],src:["data/game/item_growth_effect.csv(머리줄만)"],note:""},
+{id:"M11",g:"MD",col:4,n:"척도 환산(그룹 점수 ↔ 100 척도)",k:"임시 이음 · 척도 다름",st:"ok",warn:1,
+ rise:"능력점을 그룹 문턱(140~15000)과 멤버 표 값 상한(100 · ability_ceiling · 옛 안의 「천장」)이 같이 읽도록 잇는 환산.",unit:"비율",cap:"정상 단계 문턱 ÷ 능력 행 수 = 표 값 상한(top_stage_ratio, 임시 · 옛 안에서 「천장」이라 부름).",
+ link:"그룹 단계·도시 문턱 판정에 쓰임.",lv:"c",dec:["결정 41·43·44(평균 기준 문턱)"],src:["data/core_proposal/idol_ability_talent.csv(unit_bridge_kind)","src/game/core-proposal/talent.ts(scale)"],note:"그룹 문턱과 멤버 표 값 상한(옛 안의 「천장」)은 서로 다른 척도라 표 값을 그대로 비교하면 안 됨."},
+/* ⑥ 바로 오르는 것 */
+{id:"A1",g:"A",col:5,n:"아이돌 능력(능력: 세부 18개가 원본 · 6축은 세부 3개 조합(평균 등)으로 계산해 표시)",k:"천장 = 능력(멤버 6축 점수 평균) > 재능(멤버 6축 재능 평균) · 임시 (옛 안: 만렙 = 100)",st:"ok",
+ rise:"멤버별 세부 능력 점수 18개(원본) · 6축은 세부의 조합으로 자동 계산(직접 올리지 않음).",unit:"점수(core 능력점 → 0~표 값 100 척도(옛 안의 「천장」)로 환산)",cap:"천장 = 능력(멤버 6축 점수 평균) > 재능(멤버 6축 재능 평균)(출처 슈덴 보고 1210 · 임시 · 현중 원문 확인 필요). 옛 안: 천장 = 만렙 = 100(표 값 100은 ×1000 환산 전 척도로만 남음). 만렙 = 2차 구간 끝까지, 능력 전부(결정 63·67).",
+ link:"굴림 → 시설 칸 도착 → (건물 배수 · 재능 1차/2차 · 칸 가중치) → 멤버 전원 각자 전량. 시설 완공 때 한 번, 스케줄 「비움」 0.3(자리값), 다른 도시 무대 칸 0.5도 더해짐. 옛 코드는 6축에 직접 더함(헌법 77 위반 표시 · 완공·도시 무대·스케줄이 헌법 적용 범위인지는 현중 확인 필요).",lv:"c",
+ dec:["결정 55","결정 60·63(만렙 = 헤비 기준 · 능력 전부)","결정 64~68(재능 · 천장)","결정 69(용어 통일)","결정 70~76(임시)","결정 77(세부 18개만 올림 · 6축 직접 금지)"],
+ src:["src/game/core-proposal/systems.ts(addAbility · lessonArrival)","data/core_proposal/idol_ability_source.csv","data/core_proposal/idol_ability_stat.csv","data/core_proposal/idol_ability_talent.csv"],
+ note:"노력의 기회(만렙 기준 약 10%)는 아직 정한 게 없음(현중 10/26)."},
+{id:"A2",g:"A",col:5,n:"숨은 태도(태도·성실성)",k:"아카데미 연결 없음 · 천장 안 정함",st:"tbl",warn:1,
+ rise:"6각형 밖 숨김 값.",unit:"점수",cap:"발란스 대기(재능 없음 · 천장 안 정함).",
+ link:"아카데미 칸은 lesson_stat_id가 비어 능력에 안 이어짐. 도시 방문 17번 현지 무대 칸이 이 값을 +0.5 주도록 표에 적혀 있음.",lv:"t",dec:[],src:["data/core_proposal/idol_ability_stat.csv(hidden_attitude)","data/core_proposal/city_visit_tile.csv(17번)","data/core_proposal/facility_growth.csv(facility_dorm)"],note:"아카데미 → 태도 길이 「작업 안 된 연결」."},
+{id:"A7",g:"A",col:5,n:"학습(영어·중국어·일본어 등급)",k:"등급 1~5 · 표만",st:"cand",
+ rise:"언어 학습 점수·등급.",unit:"등급",cap:"등급 문턱 100 · 250 · 450 · 700 · 1000(시작값은 집안/사는 곳 표).",link:"학습 칸·학습 미니게임 자리. core 시뮬엔 없고 프로토 쪽 사용은 확인 못 함.",lv:"u",dec:[],src:["data/idol_ability_sim/idol_growth_study_grade.csv","idol_growth_study_start.csv","idol_growth_sim_config.csv(STUDY_MAX)"],note:""},
+{id:"C1",g:"C",col:5,n:"팬 수(칸별 팬 수)",k:"팬 곡선 cap 0.55 · half 800",st:"ok",warn:1,
+ rise:"칸별 팬 · 팬덤 합 · 팬 수익 곡선.",unit:"명(능력 오른 양의 멤버 평균 × fan_gain_per_point · 완공 fan_gain)",cap:"곡선 상한 cap 0.55(S 대비 %) · 절반 지점 half 800. 팬 수 상한은 발란스 대기.",
+ link:"능력이 오른 양(멤버 평균)만큼 팬이 늘고, 완공 때 fan_gain이 더해짐. 그 팬이 칸 수익 곡선에 들어감.",lv:"c",
+ dec:["결정 9(팬은 평균에서만 계산)","결정 24(건물 → 팬 연결이 1순위)","결정 30(그룹 팬 문턱은 평균)","결정 37·54(건물 팬 계수)"],
+ src:["data/core_proposal/fan_income_config.csv","data/core_proposal/idol_ability_stat.csv(fan_gain_per_point)","data/core_proposal/facility_growth_level.csv(fan_gain)","src/game/core-proposal/systems.ts(addAbilityFans)"],
+ note:"⚠ fan_gain_per_point와 시뮬이 읽는 fan_gain이 전부 0(자리값)이라, 지금 표 값으로는 팬이 오르지 않음. 63일 계산 쪽은 따로 방송국·콘서트장 6칸에서 도착 팬 100(판정 곱)과 단계마다 fan_gain 100을 줌(설계안 어긋남 12). 이 박스는 핵심 제안 쪽 기준."},
+{id:"B5",g:"B",col:5,n:"도시 진출(새 도시 2지역)",k:"문턱 6000 · 15000 · 방문 굴림 20",st:"ok",
+ rise:"해금 · 방문 굴림 · 수입 배율 · 현지 팬. 방문 중 현지 무대 칸이 능력을 올림(옛 코드: 6축 직접 · 헌법 77 범위 확인 필요).",unit:"지역 단계",cap:"문턱 6000(완성체) · 15000(정상) · 방문 굴림 20 · 수입 ×1.5 / ×2.0 · 현지 팬 600 / 1200(임시). 현지 무대 칸 도착 능력 +0.5(옛 코드: 6축 직접 상승 · 헌법 77 범위 확인 필요).",
+ link:"그룹 능력 문턱 + 입장권(쟁탈 36번) → 방문 20칸 보드를 굴림으로 돎 → 무대 칸에서 능력.",lv:"c",dec:["결정 41·44(도시 문턱 평균 기준 임시값)"],src:["data/core_proposal/city_visit_region.csv","data/core_proposal/city_visit_tile.csv","src/game/core-proposal/systems.ts(startVisit · visitStep)"],note:"표의 문턱 값은 10/25 목표표에 맞춰 고쳐져 결정 44의 140·300과 다름."},
+{id:"E4",g:"E",col:5,n:"카드팩(카드팩 4종)",k:"팩당 3장 · 보장 별 1~4",st:"tbl",
+ rise:"카드를 얻는 팩(별 등급 확률).",unit:"장",cap:"팩당 3장 · 보장 별 1~4 · 확률 20줄(예: 그린 40/30/18/9). 무료 800 중 팩 비율은 발란스 대기.",
+ link:"주사위로 굴려 얻는 칸 연결은 못 찾음. 카드팩은 무료 800 총량의 일부로 정해짐(결정 18·62).",lv:"t",dec:["결정 18","결정 62"],src:["data/master/item_master_card_pack.csv","data/game/card_pack_odds.csv","src/game/economy/packs.ts(이름만 확인)"],note:""},
+{id:"F1",g:"F",col:5,n:"라포 4축(라포: 신뢰·이해·협력·긴장)",k:"이벤트 47개 · 0~100",st:"tbl",
+ rise:"멤버 쌍의 라포 점수.",unit:"점수",cap:"0~100 · 단계 5(처음 봄 → 단짝) + 긴장 3(평온 · 긴장 중 · 갈림). 라포 평균 기준은 발란스 대기.",
+ link:"칸 도착 시 관계 사건(표: source_kind=칸, 예: 4번 칸 협력 +0.22). (보드 칸 연결은 현중 지시로 뺌) 프로토 board-rapport.mjs는 칸 도착에서 부르지만 핵심 제안 시뮬·공통 창엔 연결 없음.",lv:"t",dec:["결정 48(쿨다운도 임시값으로 채움)"],src:["data/rapport_sim/rapport_event.csv","data/rapport_sim/rapport_axis.csv","src/simulator/shared/board-rapport.mjs(머리말)"],note:"쿨다운 0은 임시. 현중 10/26: 라포는 보드와 무관(모험 쪽에서 풀 것) — 보드 칸 도착 보상 기준표에 넣지 않음. 그래서 칸 도착(능력 시설 칸) → 라포 연결선을 뺌."},
+{id:"I7",g:"I",col:5,n:"찬스 카드 효과(찬스 카드 68장 · 효과 27)",k:"효과 크기 1 = 자리값",st:"none",
+ rise:"찬스 사건으로 능력·돈·팬이 바뀜.",unit:"사건",cap:"effect_amount 1은 자리값(임시).",link:"찬스 칸 도착에서 발동. 63일 계산엔 안 들어감.",lv:"c",dec:["결정 39(팀 전원 각자 전량)"],src:["data/idol_ability_sim/chance_card.csv","data/idol_ability_sim/chance_effect.csv"],note:"현중 10/25·10/26: 아직 안 만든 것."},
+{id:"H2",g:"H",col:5,n:"오디션 미니게임 성장(미니게임 7종)",k:"후보 · growth_point 0",st:"cand",
+ rise:"세부 능력 성장 점수(6축 직접 아님 · 미니게임이 헌법 범위인지는 현중 확인 필요).",unit:"점수",cap:"growth_point 칸 값(예: 0) · 등급 배율 보통/좋음/훌륭. 표 상태 candidate(넣을지·몇 개인지 보류).",
+ link:"미니게임 결과로 오름. 주사위 굴림과의 연결은 불분명.",lv:"u",dec:[],src:["data/audition_sim/minigame.csv","data/idol_ability_sim/idol_growth_board_minigame.csv"],note:""},
+{id:"X1",g:"X",col:5,n:"클릭 성장(클릭으로 오르는 성장)",k:"click-growth.mjs",st:"cand",
+ rise:"클릭으로 오르는 성장(라포 ×1 연결).",unit:"?",cap:"발란스 대기",link:"주사위 굴림과의 관계 불분명. 어떤 능력을 얼마나 올리는지 이번에 못 열어봄.",lv:"u",dec:[],src:["src/simulator/click-growth.mjs(629줄 · 머리말만)"],note:"성장데이터리스트 후보 2."},
+{id:"X2",g:"X",col:5,n:"원정 완료(원정)",k:"원정 25 · pending",st:"cand",
+ rise:"원정 완료 시 능력(옛 표는 6축 대상(pending) · 헌법 77 범위 확인 필요).",unit:"점수",cap:"25(pending, 확정 아님). 옛 표는 6축 대상(pending)이라 헌법 77 범위 확인 필요.",link:"원정 기획에서 정함(범위 밖). 주사위와의 연결 불분명.",lv:"u",dec:[],src:["data/core_proposal/idol_ability_source.csv(expedition)"],note:"성장데이터리스트 후보 3."},
+{id:"X3",g:"X",col:5,n:"유저(대표) 레벨",k:"표·코드에 없음",st:"cand",
+ rise:"계정(대표) 레벨.",unit:"?",cap:"발란스 대기",link:"표·코드에 없음. 만들지, 주사위와 어떻게 이을지 현중 결정 필요.",lv:"u",dec:[],src:["보고/20261026_0940_이스라트_성장데이터리스트.md 14장 5번"],note:""},
+{id:"X4",g:"X",col:5,n:"방치 시뮬레이터 오프라인 진행",k:"이번에 안 읽음",st:"cand",
+ rise:"오프라인에서 진행되는 새 성장일 수 있음.",unit:"?",cap:"발란스 대기",link:"클로드 기획서에 있을 수 있으나 이번에 안 읽음.",lv:"u",dec:[],src:["보고/20261025_2135_클로드_방치시뮬레이터_기획제작보고.md(안 읽음)"],note:"성장데이터리스트 후보 7."},
+/* ⑦ 이어서 오르는 것 */
+{id:"A5",g:"A",col:6,n:"멤버 단계(아이돌 단계 5단)",k:"연습생 → 데뷔조 → 라이징 스타 → 톱스타 → 월드스타",st:"tbl",
+ rise:"멤버 단계 · 단계 최대치(아이돌 등급 큰 지표와 같은 줄기).",unit:"단계 0~4 · 능력 문턱",cap:"ability_min 0 · 300 · 500 · 800 · 1200 · 목표 일차 7 · 7 · 18 · 30 · 42(월드스타 값은 임시).",
+ link:"능력이 문턱을 넘으면 오름(단계 최대치가 먼저 막고 단계가 오르면 재능까지). 올림 계산은 공통 창에 구조 없음.",lv:"t",dec:["결정 59(하루 단위 계산 신설 · 구현 대기)","결정 66"],src:["data/idol_ability_sim/idol_growth_stage_gate.csv","src/tools/balanceTool/commonWindow/adapter.ts(emptyIndicators idolGrade)"],note:"아이돌 등급은 전수대조표에 「성장 지표 카드」로 있으나 값 연결은 이 한 곳뿐."},
+{id:"A6",g:"A",col:6,n:"꽃 단계(새싹·봉오리·개화)",k:"표시 이름만",st:"tbl",
+ rise:"능력 값에 따라 바뀌는 표시 이름.",unit:"단계 3",cap:"능력 0 · 30 · 80에서 바뀜. 계산엔 안 씀.",link:"능력 값을 읽어 이름만 바꿈(표시 전용).",lv:"t",dec:[],src:["data/core_proposal/idol_flower_stage.csv"],note:""},
+{id:"B1",g:"B",col:6,n:"그룹 단계(그룹 단계 5단)",k:"문턱 0 · 140 · 1100 · 6000 · 15000",st:"ok",
+ rise:"그룹 단계 · 출전권 등급(festival_grade 0~4).",unit:"단계 + 그룹 능력(멤버 평균) 문턱",cap:"연습생 · 데뷔 · 솔로 · 완성체 · 정상, 문턱 0 · 140 · 1100 · 6000 · 15000(임시 · 10/25 목표표에 맞춤). 데뷔는 곡(녹음실 2단계) 필요.",
+ link:"멤버 평균 능력이 문턱을 넘으면 오름(checkStage). 굴림 → 능력 → 그룹 단계.",lv:"c",dec:["결정 1(그룹 능력은 평균)","결정 41·43·46(평균 기준 문턱)"],src:["data/core_proposal/idol_growth_stage.csv","src/game/core-proposal/systems.ts(checkStage)","data/core_proposal/core_proposal_config.csv(sim_debut_song_rule)"],note:"결정 43의 20·60·140·300과 표 값이 다름(표는 10/25 클로드가 목표표에 맞춰 고침). 그룹 단계와 멤버 단계는 서로 다른 목록."},
+{id:"B2",g:"B",col:6,n:"팀 등급(팀 등급 5단)",k:"루키 · 대세 · 톱티어 · 국민돌 · 글로벌 아이콘(4·5단계 이름 현중 10/28 15:42 결정 · 재결정 재료 · 옛 솔로 · 완성체 · 정상)",st:"tbl",
+ rise:"팀 등급.",unit:"단계(합성 점수)",cap:"need_value 800 · 1220 · 1820(임시 · 합 기준이라 평균 기준과 어긋남).",link:"멤버 합 + 기획사 + 카드 + 팀 스탯 무게. 프로토 team-grade.mjs엔 계산이 있으나 핵심 제안·63일엔 일차별 계산 없음.",lv:"t",dec:["결정 59(하루 단위 계산 신설)"],src:["data/idol_ability_sim/idol_team_grade.csv","src/game/fan-tier/team-grade.mjs"],note:"문턱 평균 기준 재정리는 발란스 대기(Q05·Q24)."},
+{id:"B3",g:"B",col:6,n:"팀 스탯(호흡·포메이션·화음·콘셉트 조화·케미·단합도)",k:"6개 · 최대 발란스 대기",st:"tbl",
+ rise:"팀 공통 스탯.",unit:"점수",cap:"시작 0 · 최대 발란스 대기.",link:"멤버 합류·팀 결성 뒤 열림(출처·연결 표 별도). 주사위와의 연결은 간접.",lv:"t",dec:[],src:["data/idol_ability_sim/idol_growth_team_stat.csv","idol_growth_team_axis_influence.csv","idol_growth_team_form_step.csv"],note:""},
+{id:"B4",g:"B",col:6,n:"멤버 수(멤버 수 1 → 5명)",k:"사옥 2·3·4·5단계에서 +1",st:"ok",
+ rise:"그룹 인원. 사옥 캐스팅권 +1(단계 2·3·4·5)을 이 박스에 합침.",unit:"명",cap:"5(임시). 새 멤버는 팀 평균의 80%로 합류(pending).",link:"사옥 증설 → 캐스팅권 → 멤버 추가(upgrade hq). 굴림 → 출발 칸/사옥 칸 → 돈 → 증설.",lv:"c",dec:["결정 38(사옥에 붙임)"],src:["data/core_proposal/core_proposal_config.csv(max_members · member_join_ability_pct)","data/core_proposal/facility_growth.csv(facility_company)"],note:"사옥 멤버 자리 단계: 핵심 제안 2·3·4·5 vs 합친 표 casting_ticket 7·13·19·25 불일치(설계안 어긋남 10 · 질문 7). 이 박스의 값은 핵심 제안 기준(2·3·4·5). 제안(검수 대기)."},
+{id:"B6",g:"B",col:6,n:"출전권(출전권 4등급)",k:"표 4줄이 비어 있음",st:"none",warn:1,
+ rise:"대회 출전 자격 등급.",unit:"등급",cap:"발란스 대기(level_min 전부 0 · 이름·ID 빈칸).",link:"그룹 단계의 festival_grade에서 정해질 자리. 읽는 코드 없음.",lv:"t",dec:[],src:["data/game/festival_ticket.csv","data/core_proposal/idol_growth_stage.csv(festival_grade)"],note:""},
+{id:"C2",g:"C",col:6,n:"팬 7층(콘크리트·코어·라이트·머글·휴덕·악개·안티)",k:"층 이동 비율 대부분 임시",st:"cand",
+ rise:"층별 인원 이동(라이트 → 코어 → 콘크리트 · 이탈 · 안티).",unit:"비율",cap:"예: 라이트→팬 0.02 · 팬→코어 0.005 · 라이트 이탈 0.01(임시). 합 0 해석은 발란스 대기.",
+ link:"활동한 날·큰 이벤트·이탈로 움직임. 굴림과 어떻게 이어지는지 불분명. 공통 창엔 층 비율 구조 없음.",lv:"u",dec:["결정 9(악개는 총량 불증가)"],src:["data/fan_tier/fan_tier.csv","fan_tier_transition.csv","src/game/fan-tier/crowd.mjs"],note:""},
+{id:"C3",g:"C",col:6,n:"팬 마일스톤(팬 마일스톤 8단)",k:"1·3·7·15·30·50·75·100%",st:"tbl",
+ rise:"시즌 팬 상한 대비 달성 단계.",unit:"%",cap:"1 · 3 · 7 · 15 · 30 · 50 · 75 · 100%(임시).",link:"팬 수가 오르면 단계 달성. 읽는 코드는 mount.ts 쪽으로 보이나 확인 못 함.",lv:"t",dec:[],src:["data/game/fan_milestone_reward.csv"],note:"보상 연결은 발란스 대기."},
+{id:"C4",g:"C",col:6,n:"판정 팬 배율(올킬·차트인·광탈)",k:"1.5 · 1 · 0.5",st:"tbl",warn:1,
+ rise:"도착 판정에 따른 팬 반응 배율.",unit:"배율",cap:"1.5 · 1 · 0.5(임시).",link:"판정은 도착 때 돈 수익 배율(대박 ×2 · 중박 ×1 · 운망 ×0.5)로는 계산됨. 팬 배율 표(fan_hit_rate)는 balanceTool 화면 쪽에서만 읽히고 계산에 쓰는 곳은 못 찾음.",lv:"c",dec:[],src:["data/core_proposal/fan_hit_rate.csv","src/game/core-proposal/systems.ts(judgeRoll)","src/tools/balanceTool/data.ts"],note:"성장데이터리스트에는 「계산 있음」으로 적혔으나 이번에 코드를 다시 보고 「표만 있음」으로 바꿈."},
+{id:"C5",g:"C",col:6,n:"악개 발생(악개)",k:"1.176(임시) · 총량 불변",st:"tbl",
+ rise:"특출난 팀에서 악개 비율.",unit:"배율",cap:"1.176(임시) · 총량 불변.",link:"팬이 늘 때 적용되는 config 값. 화면 팬 수에서 악개 제외.",lv:"t",dec:["결정 9","결정 26·51(특출 기준 = 팀 평균의 몇 배)","결정 42(화면 팬 수에서 제외)"],src:["data/core_proposal/fan_income_config.csv(toxic_standout_ratio)"],note:""},
+{id:"C6",g:"C",col:6,n:"주사위 배수 해금(주사위 배수 10단)",k:"팬 수로 ×1 ~ ×1000 열림",st:"ok",
+ rise:"쓸 수 있는 굴림 배수.",unit:"단계",cap:"×1 · 2 · 5 · 10 · 20 · 50 · 100 · 200 · 500 · 1000.",link:"팬 수가 문턱을 넘으면 더 큰 배수를 쓸 수 있음(이식 경제 multOptions). 굴림 배수 박스로 되돌아감.",lv:"c",dec:[],src:["data/master/item_master_dice_mult.csv","src/game/economy/session.ts"],note:"문턱은 평균 변환 안 함."},
+{id:"C8",g:"C",col:6,n:"팬 기준 해금(모험 길 해금 팬 %)",k:"공통 창 쪽 구조 없음",st:"none",
+ rise:"팬 수로 열리는 모험 길.",unit:"%",cap:"길별 unlock_fan_pct(표).",link:"팬이 쓰는 코드를 못 찾음(이식 경제엔 있음 확인 못 함).",lv:"t",dec:[],src:["data/game/adventure_route.csv(unlock_fan_pct)"],note:""},
+{id:"D5",g:"D",col:6,n:"건물 완공 능력(완공 능력)",k:"단계당 0 또는 1 · 합 29",st:"ok",
+ rise:"건물 단계가 오를 때 한 번 능력이 오름. 옛 코드는 6축(lesson_stat)에 직접 더함(addAbility complete) → 헌법 77 위반 표시 · 세부로 옮기는 값은 발란스 대기.",unit:"점수",cap:"단계당 0 또는 1 · 능력 시설 합 29.",link:"굴림 → 도착 → 증설 → 단계 올림 → 능력(addAbility complete). 옛 코드는 6축(lesson_stat)에 직접 더함(addAbility complete) → 헌법 77 위반 표시 · 세부로 옮기는 값은 발란스 대기.",lv:"c",dec:[],src:["data/core_proposal/facility_growth_level.csv(stat_gain)","src/game/core-proposal/systems.ts(upgrade)"],note:""},
+{id:"D6",g:"D",col:6,n:"건물 팬 계수(건물 팬 계수)",k:"1 → 2.125 · 시뮬은 0",st:"tbl",warn:1,
+ rise:"건물 단계별 팬 이득 계수.",unit:"계수",cap:"1 → 2.125(10단계 이후 같음 · 재결정 재료). 시뮬이 읽는 fan_gain은 전부 0.",link:"합친 표엔 값이 있으나 core는 0 자리값, fan-gain.mjs의 buildingFactor는 null.",lv:"t",dec:["결정 37(건물 표 값을 팬 공식 건물 계수 칸에 연결)","결정 54(9건물 계수는 합)"],src:["data/master/building_master_level.csv(effect_fan_gain)","src/game/fan-tier/fan-gain.mjs"],note:""},
+{id:"D10",g:"D",col:6,n:"기획사 능력(건물 단계 합 × 무게)",k:"최대 발란스 대기",st:"wait",
+ rise:"건물 단계 합에 무게를 곱한 점수(팀 등급 계산에 씀).",unit:"점수",cap:"발란스 대기(최대) · 비용 묶음 무게 0(결정).",link:"건물 단계 합이 올라가면 오름.",lv:"t",dec:["결정 45(빈칸 없이 임시값으로 채움)"],src:["data/idol_ability_sim/agency_ability_link.csv"],note:""},
+{id:"D11",g:"D",col:6,n:"엔터 파워(건물 단계 합 · 통합 레벨)",k:"최대 270(문서만)",st:"none",
+ rise:"그룹 전체 레벨(건물 단계 합).",unit:"단계",cap:"270(문서 정의) · 문턱·효과 발란스 대기.",link:"건물 단계 합. 표 행·계산 코드 없음(fan-gain.mjs enterFactor = null).",lv:"t",dec:[],src:["발란스_시각화_전수대조표_20261025.md 2장","data/idol_ability_sim/idol_growth_growth_factor.csv(줄 없음)"],note:""},
+{id:"D12",g:"D",col:6,n:"기획사 등급/레벨(기획사 등급)",k:"이름·단계 표 없음",st:"none",
+ rise:"소속사 이름·단계.",unit:"단계",cap:"발란스 대기.",link:"엔터 파워(미정)로 정해질 자리. 현중 확인 대기.",lv:"t",dec:[],src:["발란스_시각화_전수대조표_20261025.md #2","건물성장_기획서(16줄)"],note:""},
+{id:"E1",g:"E",col:6,n:"카드 별 등급(카드 성장 · 별 1~4)",k:"240장 · growth_level 전부 0",st:"tbl",
+ rise:"카드 별(1~4성) · 중복 카드 → 별 변환.",unit:"별 · 개수",cap:"4성(최대). 중복 1/2/3/5장 → card_amount 4/7/11/16. 240장(별1 80 · 별2 80 · 별3 60 · 별4 20).",link:"카드팩에서 나온 카드. growth_level 240줄이 전부 0이고 올리는 계산은 프로토 쪽 확인 못 함.",lv:"t",dec:[],src:["data/game/card.csv","data/idol_ability_sim/idol_growth_star_convert.csv","idol_growth_card_owned.csv"],note:""},
+{id:"E2",g:"E",col:6,n:"카드 효과 양(카드 효과)",k:"effect_amount 읽는 코드 없음",st:"none",
+ rise:"카드 보유에 따른 능력 효과.",unit:"배율",cap:"effect_amount 0.18 · 0.36 · 0.54 …(표시용 · 계산엔 안 씀). 240장 값은 발란스 대기(Q21).",link:"effect_amount를 읽는 코드가 없어 카드가 능력에 영향을 못 줌.",lv:"t",dec:[],src:["data/game/card.csv(effect_amount)","발란스_종합체크문서.md 4-A Q21"],note:""},
+{id:"E3",g:"E",col:6,n:"카드 수집 보상(카드 수집)",k:"테마 20 · 수집 25/50/75/100%",st:"cand",
+ rise:"테마 완성 수 · 수집 %.",unit:"개 · %",cap:"테마 20(테마당 12장) · 테마 완성 1~9 · 수집 25 / 50 / 75 / 100%.",link:"카드 모음에서 오름. 주사위 굴림과의 연결은 불분명.",lv:"u",dec:[],src:["data/game/card_theme.csv","card_collection_reward.csv","card_book_config.csv"],note:""},
+{id:"E5",g:"E",col:6,n:"카드 덱 · 카드 부스트(카드덱)",k:"덱 13~20 · 최대 20",st:"cand",
+ rise:"덱에 모인 카드 수로 성장 보정.",unit:"장",cap:"덱 13~20 단계 값 · 최대 20(항상 20개 고정 · 결정 52).",link:"옛 성장 모듈 표. 현재 흐름과 어떻게 이어지는지 불분명.",lv:"u",dec:["결정 52(덱은 항상 20개 고정)"],src:["data/idol_ability_sim/idol_growth_growth_factor.csv(FAN_DECK)","idol_growth_stage_gate.csv(deck_need)"],note:""},
+{id:"F2",g:"F",col:6,n:"라포 효과 계수(라포 효과)",k:"0.001/점 · 상한 0.1 · 지금 0",st:"tbl",
+ rise:"모험 성공 · 기분 · 단계 문턱 · 클릭 성장 보정.",unit:"계수",cap:"0.001/점 · 상한 0.1(임시). 지금 효과 0(연결만 · Q10).",link:"라포 점수가 오르면 계수만큼 보정(연결만 있고 효과 0).",lv:"t",dec:[],src:["data/rapport_sim/rapport_effect_map.csv"],note:""},
+{id:"F3",g:"F",col:6,n:"성격 변화(성격 특성 6규칙)",k:"period 7(임시)",st:"tbl",
+ rise:"성격 특성이 더해지거나 빠짐.",unit:"규칙",cap:"period 7(임시).",link:"긴장이 오래 높음 등으로 바뀜. 아이템·스킬 자리.",lv:"t",dec:[],src:["data/rapport_sim/trait_change_rule.csv"],note:""},
+{id:"F4",g:"F",col:6,n:"라포 쌍(멤버 짝 점수 기록)",k:"표 0줄",st:"none",
+ rise:"멤버 짝별 점수 기록.",unit:"점수",cap:"—",link:"런타임에 채워질 자리. 표 0줄.",lv:"t",dec:[],src:["data/game/rapport_pair.csv"],note:"결정 59: 라포 쌍 하루 단위 계산 신설(구현 대기)."},
+{id:"G1",g:"G",col:6,n:"몬스 기분(몬스 기분 0~100)",k:"시간·돌봄·쇼로 오르내림",st:"cand",
+ rise:"기분 게이지(다마고치식).",unit:"점수 0~100",cap:"100 · 시작 100 · 팀 총량 500 ÷ 출전 수 · 시간당 −2(35에서 멈춤) · 쓰다듬기 +5 · 간식 +25 · 쇼 +10.",link:"시간과 돌봄으로 움직이고 주사위 굴림에서 직접 오르는 길은 못 찾음.",lv:"u",dec:["결정 3(기분 = 팀 총량 ÷ 출전 몬스 수)","결정 53(한 마리 최대의 %)"],src:["data/stage_battle/stage_battle_mood_rule.csv","stage-battle/resolve.ts(moodFor)"],note:""},
+{id:"G6",g:"G",col:6,n:"몬스 자체 성장(몬스 레벨)",k:"표에 레벨·등급 열 없음",st:"cand",warn:1,
+ rise:"몬스 자체 레벨·등급.",unit:"—",cap:"—",link:"몬스 표에 레벨·등급 열이 없어 구조도 없음. 주사위와의 연결도 불분명.",lv:"u",dec:[],src:["data/game/mons.csv","data/mons_proto/mons_catalog.csv"],note:"구조 없음 + 연결 불분명 → 후보로 둠."},
+{id:"H1",g:"H",col:6,n:"오디션 성장 단계(오디션 단계 0~4)",k:"주사위 사용량 값 비어 있음",st:"wait",warn:1,
+ rise:"연습생 → … → 월드스타 단계 · 스토리 해금(멤버 단계와 같은 줄기).",unit:"단계 0~4",cap:"4. dice_cost_total · growth_gain_total 전부 0 = 발란스 대기.",link:"주사위 사용(값 미정). 표에 주사위 비용 칸은 있으나 값이 비어 있음.",lv:"t",dec:[],src:["data/audition_sim/growth_step.csv"],note:"표 note: 단계 판정은 덱·무대 합으로 대체."},
+{id:"H3",g:"H",col:6,n:"모험 길 해금(모험 번영도)",k:"길 35 · 티켓 일 3",st:"cand",
+ rise:"번영도 → 길 해금.",unit:"길 · 번영도 구간 5",cap:"길 35 · 티켓 일 3(최대 10).",link:"모노 이식 코드로 있음. 본 게임 굴림과의 연결은 확인 못 함(팬 % 해금은 구조 없음).",lv:"u",dec:[],src:["data/game/adventure_route.csv","adventure_config.csv","data/mono_raw/adventure/adventure_difficulty_badge_config.csv"],note:""},
+{id:"H6",g:"H",col:6,n:"서사 해금(스토리 해금)",k:"해금만 · 발란스 값 없음",st:"none",
+ rise:"멤버 단계로 열리는 서사.",unit:"단계 0~4(후보)",cap:"—",link:"멤버 단계가 오르면 해금. 발란스 값 없음.",lv:"t",dec:[],src:["data/audition_sim/story.csv(unlock_step)","data/rapport_sim/member_story_template.csv"],note:""},
+];
+/* 10/26 ③ 칸 도착 열: 이미 있던 박스에는 글을 고치지 않고 표시 칸(칩·머리말·칸 줄)만 덧붙임 */
+(function(){const P={
+ T3:{bn:"사옥",n:"사옥 1(출발 칸)",sub:"능력 없음 · 증설 · 한 바퀴 돈은 아래 박스",chip:["구조 있음","데이터 미정"],tiles:[{no:1,nm:"출발 · 사옥",ups:[],txt:" 능력 안 오름 · 사옥 증설",tag:"없음"}]},
+ T4:{chip:["미정"],sec:"건물 없는 칸 · 6박스(칸 종류마다 따로)",sub:"다음 레슨 효과 · 연결 확인 필요"},
+ T5:{chip:["미정"],sub:"카드 풀·효과 비어 있음"},
+ T6:{chip:["미정"],sub:"팬 이벤트 행 비면 효과 0"},
+ T7:{chip:["구조 있음"],sub:"36번만 입장권 연결"},
+ T8:{chip:["구조 있음","데이터 미정"],sec:"한 바퀴 돈",sub:"출발 칸을 지날 때 · 칸 도착과 별개"},
+ T9:{chip:["미정"],sec:"보드 칸 도착 보상 기준표 (40칸 + 한 바퀴 한 표)",sub:"기준표 설계 중 · 한 장 표 없음"}};
+ N.forEach(n=>{if(P[n.id])Object.assign(n,P[n.id]);});})();
+const E=[
+["IN1","R1","s"],["IN3","R1","s"],["IN6","R1","d"],["IN1","IN4","b"],["IN3","IN4","b"],["IN12","E4","d"],
+["R1","T2","d"],["R1","T3","s"],["R1","T4","d"],["R1","T5","b"],["R1","T6","b"],["R1","T7","s"],["R2","M0","s"],["R2","M8","d"],["C6","R2","d"],
+["T3","M0","s"],["T4","M6","d"],["M6","M1","s"],["M1","M2","s"],["M1","M3","s"],["M2","A1","s"],["M3","A1","s"],["M4","A1","d"],["M5","A1","b"],["M8","A1","d"],["M9","A1","d"],["M10","A1","b"],
+["M0","D1","s"],["T3","D1","s"],["D1","M1","s"],["D1","D5","s"],["D5","A1","s"],["D1","B4","s"],["D1","D6","d"],["D6","C1","d"],["D1","D10","d"],["D10","B2","d"],["D1","D11","b"],["D11","D12","b"],["M0","D9","d"],
+["T5","A1","d"],["T5","I7","b"],["I7","A1","b"],["T6","C1","b"],["T2","A2","b"],["T2","A7","d"],["T7","B5","s"],["B5","A1","s"],["B5","A2","d"],
+["A1","C1","s"],["A1","B1","s"],["M11","B1","s"],["B1","B5","s"],["B1","B6","b"],["A1","A5","d"],["A5","M4","d"],["A1","A6","d"],["A1","B2","d"],["B4","B3","d"],["B3","B2","d"],
+["A5","H6","b"],["A5","H1","d"],["C1","C2","d"],["C1","C3","d"],["C1","C5","d"],["C1","C6","s"],["C1","C8","b"],["C8","H3","b"],
+["E4","E1","d"],["E1","E2","b"],["E1","E3","d"],["E3","E5","d"],["E2","A1","b"],["F1","F2","d"],["F1","F3","d"],["F1","F4","b"],["F2","A1","b"],["H2","A1","d"],
+["R1","T8","s"],["T8","M0","s"],["R1","IN10","d"],["T9","T2","b"],["T9","T8","b"],["T9","M0","b"],["T9","IN10","b"],["D1","T9","b"],
+/* 10/26 ③ 칸 도착 열 재배치 — 건물 박스 연결선 */
+["R1","BREC","s"],["BREC","M0","s"],["BREC","M6","s"],["T9","BREC","b"],["R1","BDAN","s"],["BDAN","M0","s"],["BDAN","M6","s"],["T9","BDAN","b"],["R1","BPRO","s"],["BPRO","M0","s"],["BPRO","M6","s"],["T9","BPRO","b"],["R1","BBEA","s"],["BBEA","M0","s"],["BBEA","M6","s"],["T9","BBEA","b"],["R1","BBRD","s"],["BBRD","M0","s"],["BBRD","M6","s"],["T9","BBRD","b"],["R1","BCON","s"],["BCON","M0","s"],["BCON","M6","s"],["T9","BCON","b"],["R1","BFAN","s"],["BFAN","M0","s"],["BFAN","C1","d"],["T9","BFAN","b"],["R1","BSET","s"],["BSET","M0","s"],["T9","BSET","b"],["R1","BJAIL","d"],["BJAIL","IN10","d"],["T9","BJAIL","b"]
+];
+const EXCL=[
+"시즌 목표 일차(7·7·18·30·42일) — 성장이 아니라 비교선",
+"건물 수입 %(D4) · 건물 보너스 돈 %(D7) — 돈 수입만(주사위 보너스 bonus_dice는 270줄 전부 0)",
+"개인 정산 장부(J6) — 돈 기록(표 0줄). 시즌(J5) — 60일 기간·리셋(위 제목 설명으로 대신함)",
+"디펜스 몬스 스킬 레벨(G2) · 방어 건물 레벨(G3) · 디펜스 난이도(G5) — 방어전 진행·시간 기반, 굴림과 연결 없음",
+"무대 대결 건물 단계(G4) — 쟁탈전 결과 기반. 모험 결과 등급(H4) — 파견 결과 배율. 멤버 스킬(I2) — 판정 확률 보정(성장 아님). 이벤트 마일스톤(I4) — 이벤트 포인트 기반(굴림 연결 불분명, 후보로도 안 올림)",
+"후보 4 모험 시즌 랭크 · 후보 6 보관함(금고) · 후보 8 월드컵 이월(시작값) · 후보 9 옛 단독 시뮬 — 주사위로 오르는 성장이 아니거나 성장이 아님(후보 9는 M1 메모에 적음)",
+"합친 것: 증설 비용(D2)→건물 단계 / 사옥 캐스팅권(D8)→멤버 수 / 건물 레슨 배수(D3)→M1 / 재능 흡수율(A3)→M2 / 2차 감속(A4)→M3 / 척도 연결(A8)→M11 / 보관 상한(C7)→IN6 / 성장 원천(I1)→M9 / 아이템 성장 효과(I3)→M10 / 미션(I5)→IN8 / 무료 지급(I6)→IN7 / 상점(I8)→IN3 / 돈(J1)→M0 / 주사위·쓴 돈(J2·J3)→IN1·IN3 / 굴림 배수(J4)→R2 / 무료·구매 구분(J7)→IN4 / 10단계 표(후보 1)→M5 / 아이돌 등급(후보 10)→A5",
+"라포의 보드 칸 연결(F1 ← 칸 도착) — 현중 10/26: 라포는 보드와 무관하고 모험 쪽에서 풀 것이라 연결선만 뺐음(박스 F1은 그대로)",
+"새 지급 경로(IN2) → 삭제, 「무료 800 하위 획득 길 6개」로 대체",
+"상점(IN5) → 구매(IN3) 패널로 합침",
+"모험 파견 보상(IN9) → 무료 800(IN1) 패널로 합침(800 계층 밖, 관계 기록 못 찾음)",
+"하위→무료 800 선(IN7·IN8·IN10 → IN1)은 박스 중첩 계층으로 대체, 카드팩 연결은 IN1→E4에서 IN12→E4로 이동",
+"능력 시설 칸(T1) → 녹음실·연습실·프로듀싱·뷰티·방송국·콘서트장 6개 박스로 나눔(T1 문구는 6개 박스 패널의 「이전 설명」에 그대로 옮김) / 아카데미(T2)·사옥(T3)은 같은 박스를 건물 박스로 고침 / 팬샵·정산·감옥 박스 신설"
+];
+
+/* 10/28 12시대 현재 상태 정리(이스라트 · 제안(검수 대기)) — 박스 id는 안 바꿈. 바꾼 칸의 이전 값은 n.prev에 보존(패널 「바뀌기 전 설명」). 새 숫자 없음 */
+(function(){
+ const NEWS="현중 10/28 12:07 지시 · 이스라트 10/28 정리";
+ const FIX={
+  D9:{n:"대지 건설(건물 대지 24칸)",k:"24칸 · 건물 8종×3 · 대지 표는 22줄",
+   rise:"시설을 지을 대지 칸. 건물과 이어진 칸 24개(건물 8종 × 3칸). 출발·사옥 1번은 대지가 아님.",cap:"24",
+   note:"표 안 어긋남(이번에 안 고침 · 표는 커서 몫): data/game/land_lot.csv는 22줄이라 프로듀싱 13·29번(group=company)이 빠져 있음. 기준은 data/game/board_tile.csv에서 fac_id가 facility_*이고 group이 facility·company인 칸 24개(아론 v7 보고 6장도 24칸). 능력 건물 6종 × 3 = 18칸은 이 24칸 안에 들어 있음.",
+   srcAdd:["data/game/board_tile.csv(건물 대지 24칸 기준)"]},
+  IN3:{k:"헤비 하루 7,149개(구매 6,349 + 무료 800) · 63일",
+   cap:"단가 50원/개 · 보석 5원. 헤비 9주(63일) 2,000만 원 · 주사위 400,000개(50원) · 하루 6,349개 + 무료 800 = 하루 7,149개 · 시뮬 63일. 평균 유저 = 하루 100,000원 → 구매 2,000개 + 무료 800 = 2,800개(발란스 대기). 결제액 ↔ 게임 돈 환산(결정 22·25)은 발란스 대기.",
+   srcAdd:["data/core_proposal/dice_input_scenario.csv(heavy_won_per_day · heavy_dice_per_day · avg_user_won_per_day)"]},
+  R2:{cap:"×1·2·5·10·20·50·100·200·500·1000. ×50~×1000 해금은 엔터 파워 눈금(1~1000) 문턱: ×50 66 · ×100 166 · ×200 261 · ×500 361 · ×1000 460(data/game/enter_power_level.csv · 임시). 옛 팬 문턱(5,500 · 8,010 · 9,370 · 10,610 · 11,210)은 엔터 파워 줄이 없을 때만 씀(item_master_dice_mult.csv fan_min). 63일 계산은 sim_mult 기본 1.",
+   link:"돈 수익에는 곱해짐(코드 확인). 배수 잠금 = session.ts:149 multOptions: 엔터 파워 줄이 있으면 엔터 파워 눈금, 없으면 옛 팬 문턱, 그다음 보유 주사위 문턱. 능력에 곱하는지는 「굴림 배수의 능력 반영」 박스.",
+   srcAdd:["data/game/enter_power_level.csv","src/game/economy/session.ts:149(multOptions)"]},
+  C6:{n:"주사위 배수 해금(엔터 파워로 열림)",k:"엔터 파워 66~460 문턱으로 ×50~×1000 열림",
+   link:"엔터 파워(D11)가 문턱을 넘으면 더 큰 배수를 쓸 수 있음(session.ts:149 multOptions). 굴림 배수 박스로 되돌아감.",
+   note:"옛 「팬 수로 열림 · 문턱은 평균 변환 안 함」은 엔터 파워 줄이 없을 때의 보조 경로. 엔터 파워 문턱 값은 임시(나중에 결정) · 발란스 대기.",
+   srcAdd:["data/game/enter_power_level.csv"]},
+  D11:{col:5,st:"ok",n:"엔터 파워(건물 단계 합 · 문턱 눈금 1~1000)",k:"합 9~270 → 눈금 1~1000 · 문턱 66·166·261·361·460",
+   rise:"기획사 전체 레벨 = 9개 건물 단계의 합(시작 9 · 최대 270). 배수 해금 · 주사위 보관 상한 단계 · 팬 계수가 읽는 값은 합을 1~1000 눈금으로 바꾼 값.",unit:"합 9~270 · 눈금 1~1000",
+   cap:"눈금 = 반올림(1 + 999 × (합 − 9) ÷ 261): 합 9 → 1, 합 270 → 1000(enterPower.mjs:38~42). 문턱(눈금 기준) 66 · 166 · 261 · 361 · 460 = 건물 합 26 · 52 · 77 · 103 · 129에 해당(data/game/enter_power_level.csv · 임시 · 발란스 대기). 혜택 칸은 비어 있음.",
+   link:"건물 단계(D1)가 오름 → 합 → 눈금 → ① 배수 해금(R2 · C6) ② 보관 상한 단계(IN6 · session.ts chargeCapOf) ③ 팬 증가에 곱하는 엔터 파워 계수(growth_factor 표 enter_power 줄 · 값 1 · 발란스 대기). 시뮬 v8 연출: 엔터 파워 칩이 건물 탭으로 들어가 엔터 파워 칸이 오름.",lv:"c",
+   note:"옛 박스는 「표 행 · 계산 코드 없음 · 문서만」이었음(10/26 전 조사 기록 → 아래 이력). 보관 상한 문턱 값은 확인 필요. 열 이동: 건물 단계가 오르는 즉시 하단 건물 탭에 들어가는 값이라 ⑦→⑥(제안(검수 대기)).",
+   decAdd:["현중 10/27 ②A(문턱 눈금 1~1000)","현중 10/26 17:39(배수 잠금을 엔터 파워로)"],
+   srcAdd:["src/game/enter-power/enterPower.mjs:38~42(enterPowerScale)","src/game/economy/session.ts:128~133(enterPowerOf)","data/game/enter_power_level.csv","data/idol_ability_sim/idol_growth_growth_factor.csv(44줄 enter_power)","엔터파워_기획서.md(11줄)"]},
+  D6:{st:"ok",warn:0,k:"1 → 2.125 · 팬 증가에 곱해짐",
+   cap:"1 → 2.125(effect_fan_gain · 임시 · 재결정 재료). 식 = 1 + Σ(지은 건물의 effect_fan_gain − 1)(fan-gain.mjs:69~81).",
+   link:"합친 표 값을 session.ts:263이 건물 계수로 넘겨 팬 증가에 곱함: 팬 기본 × 판정 × 주사위 배수 × 칸 배수 × 건물 계수 × 엔터 파워 계수 × 성장 계수(fan-gain.mjs:127~130).",
+   note:"연결은 10/27 20:25(유르넷 20:11 정정 ③). 20:10 「곱하지 않는다」는 20:11 정정으로 대체됨 · 두 결정 모두 재결정 재료. 표 값은 임시이고 같은 줄 비고의 「fan_gain 빈칸 자리값 0」은 낡음. 끄는 법 · 기준선은 결정 필요(아론 10/28 10:01 보고). core-proposal 시뮬 쪽 fan_gain은 확인 필요.",
+   srcAdd:["src/game/economy/session.ts:263(buildingFactor)","보고/20261028_1001_아론_건물팬계수근거.md"]},
+  C1:{col:6,k:"팬 곡선 cap 0.55 · half 800 · 능력에서 파생",
+   cap:"곡선 상한 cap 0.55(S 대비 %) · 절반 지점 half 800. 팬 수 상한은 발란스 대기. 곱 계수: 6축 fan_gain_per_point 10(idol_ability_stat.csv) · 단계 계수 stage_0 0.00015(상한 100) · 1~4단계 1(idol_growth_stage_gate.csv fan_factor · fan_cap) · 건물 계수(D6) · 엔터 파워 계수 1(D11).",
+   link:"능력이 오른 양(그룹 평균 세부 합을 배율 전 단위로 되돌려)에 per point와 단계 계수를 곱해 팬이 늘고(session.ts:190~196), 칸 도착 팬은 건물 · 엔터 파워 계수도 곱해짐(session.ts:263~264). 그 팬이 칸 수익 곡선에 들어감.",
+   note:"옛 「fan_gain_per_point와 fan_gain이 전부 0이라 팬이 안 오름」은 낡음(아래 이력). 열 이동: 팬은 능력 · 건물에서 파생되므로 ⑥→⑦(제안(검수 대기)).",
+   srcAdd:["data/idol_ability_sim/idol_growth_stage_gate.csv(fan_factor · fan_cap)","src/game/economy/session.ts:190~196 · 254~270"]},
+  D5:{col:5,st:"wait",warn:1,k:"완공 능력 계산 0 · 발란스 대기",
+   rise:"건물 단계가 오를 때 한 번 능력이 오르게 할 자리. 현재 코드는 6축 직접 상승이 아니라 계산 0(세부로 옮길 값 없음)이고 「발란스 대기」 기록만 남김(systems.ts:165).",
+   link:"굴림 → 도착 → 증설 → 단계 올림 → 완공 능력(계산 0 · 로그 「발란스 대기:complete」). 표 stat_gain 값은 그대로 있음.",
+   note:"10/26의 「헌법 77 위반」 표시는 해소: 6축에 직접 더하는 코드는 없어짐. 열 이동: 건물 단계가 오르는 즉시 값이 하단 건물 탭에 들어가는 쪽이라 ⑦→⑥(제안(검수 대기)).",
+   srcAdd:["src/game/core-proposal/systems.ts:165"]},
+  A1:{cap:"천장 = 능력(멤버 6축 점수 평균) > 재능(멤버 6축 재능 평균)(출처 슈덴 보고 1210 · 임시 · 현중 원문 확인 필요). 옛 안: 천장 = 만렙 = 100(표 값 100은 ×1000 환산 전 척도로만 남음). 화면 점수는 읽을 때 표 값 × ability_score_mult 1000배(idol_ability_talent.csv 23줄 · 현중 10/27 17:20~17:22 · 제안(검수 대기)). 만렙 = 2차 구간 끝까지, 능력 전부(결정 63·67).",
+   link:"굴림 → 시설 칸 도착 → (건물 배수 · 재능 1차/2차 · 칸 가중치) → 멤버 전원 각자 전량. 세부 id마다 더함(systems.ts:172~190) · 6축에 직접 더하지 않음. 카드를 받는 순간 한 번 오르는 길이 더해짐(E2). 시설 완공 능력과 도시 방문 능력은 계산 0(systems.ts:165 · 방문 줄). 스케줄 「비움」 능력은 확인 필요.",
+   srcAdd:["data/core_proposal/idol_ability_talent.csv(ability_score_mult)","src/tools/shared/score-scale.mjs"]},
+  T3:{noteAdd:" 10/28 재결정 재료 · 제안(검수 대기): 캐스팅 권한은 사옥 단계가 아니라 엔터 파워 레벨 제한으로 풀림(현중 14:14) — 몇 레벨은 발란스 대기(비앙카 문턱 대기). 지금 표·코드는 아직 사옥 단계(2·3·4·5)로 동작."},
+  B4:{k:"캐스팅 권한 = 엔터 파워 레벨 제한(10/28 · 몇 레벨은 발란스 대기) · 옛 안: 사옥 2·3·4·5단계에서 +1",rise:"그룹 인원. 캐스팅 권한 +1(10/28: 엔터 파워 레벨 제한 · 옛 안: 사옥 단계 2·3·4·5)을 이 박스에 합침.",noteAdd:" 10/28 재결정 재료 · 제안(검수 대기): 캐스팅 권한은 사옥 단계가 아니라 엔터 파워 레벨 제한으로 풀림(현중 14:14) — 몇 레벨은 발란스 대기(비앙카 문턱 대기). 지금 표·코드는 아직 사옥 단계(2·3·4·5)로 동작."},
+  M6:{link:"굴림 도착 → 기본 0.22에 칸 가중치를 곱하고, 멤버의 포지션 능력이면 +25%. 현재 코드는 세부 id마다 더함(systems.ts:172~190 addAbility) · 6축에 직접 더하지 않음. 세부로 옮기는 양은 발란스 대기."},
+  B5:{col:6,
+   rise:"해금 · 방문 굴림 · 수입 배율 · 현지 팬. 방문 중 현지 무대 칸의 능력 +0.5는 현재 계산 0(세부로 옮길 값 없음 · 「발란스 대기」 기록).",
+   cap:"문턱 6000(완성체) · 15000(정상) · 방문 굴림 20 · 수입 ×1.5 / ×2.0 · 현지 팬 600 / 1200(임시). 현지 무대 칸 능력 +0.5는 표에 있으나 계산 0.",
+   note:"표의 문턱 값은 10/25 목표표에 맞춰 고쳐져 결정 44의 140·300과 다름. 열 이동: 도시는 그룹 단계(B1) 다음에 열려 ⑥→⑦(제안(검수 대기)).",
+   srcAdd:["src/game/core-proposal/systems.ts(visitStep · 방문 능력 계산 0)"]},
+  A2:{k:"아카데미 칸 연결 있음(상한 10%) · 천장 안 정함",
+   link:"아카데미 칸 2·37·39의 growth_source 줄(칸마다 20줄)이 태도·성실성 분류 세부 18칸에 더해지고, 합이 능력 총량의 10%에서 잘림(academy-bundle.mjs · idol_growth_growth_factor.csv academy_bundle_cap 10). 기획서 공식(정도 g · 몫 w)과 다른 점은 현중 결정 대기(P169 md 「10/26 반영」 9장 1번).",
+   srcAdd:["src/simulator/shared/academy-bundle.mjs","data/idol_ability_sim/idol_growth_growth_factor.csv(academy_bundle_cap)"]},
+  E1:{col:5,note:"카드 별 · 성장 계산은 이 문서에서 확인 못 함(이전 기록: growth_level 240줄 전부 0). 열 이동: 카드는 받는 순간 오르므로 ⑦→⑥(제안(검수 대기))."},
+  E2:{col:5,st:"ok",warn:1,n:"카드 효과 양(카드 → 능력 · 받는 순간 한 번)",k:"연결됨 · 보정형 4덱 제외 · 두 줄 덱 비율 발란스 대기",
+   rise:"카드를 받는 순간 그 덱의 growth_source 카드 줄이 가리키는 세부 능력이 한 번 오름(팀 전원 · 각자 재능 흡수율 · 굴림 배수 안 곱함). 같은 카드를 또 받아도 능력은 안 오르고(중복은 별 교환 재료), 올라간 능력은 그대로 남음.",unit:"능력점(장당 양 = card.csv effect_amount)",
+   cap:"effect_amount 0.18 · 0.36 · 0.54 …(별 등급 · 임시). 240장 값은 발란스 대기(Q21). 두 줄 덱 10개는 card_line_split.csv 비율이 비어 있어 능력에 안 더하고 「발란스 대기」 기록(card_split_blank_rule=wait). 보정형 4덱(13·17·18·20)은 능력 연결 없음. 멤버 덱 5개는 card_slot_link.csv 자리별 줄.",
+   link:"카드팩(E4)에서 카드를 받음 → 능력 세부(A1). 스위치·규칙: data/core_proposal/card_ability_link.csv(card_link_on · card_apply_timing=on_acquire_once · card_dup_rule=first_only). 코드: src/game/core-proposal/model.ts:15~17 · 97~140.",lv:"c",
+   note:"옛 「effect_amount를 읽는 코드가 없어 카드가 능력에 영향을 못 줌」은 낡음(아래 이력). 중복 → 별 교환은 현중 답(Q5) 전 구현 없음. 열 이동: 받는 순간 한 번이라 ⑦→⑥(제안(검수 대기)).",
+   decAdd:["현중 10/28 11:3x 연결표 C1~C11(재결정 재료)"],
+   srcAdd:["data/core_proposal/card_ability_link.csv","data/core_proposal/card_line_split.csv","data/core_proposal/card_slot_link.csv","src/game/core-proposal/model.ts:15~140","발란스_종합체크문서.md 881~882줄","보고/20261028_이올카_카드능력연결표_확정본.md"]},
+  F1:{col:6,note:"쿨다운 0은 임시. 현중 10/26: 라포는 보드와 무관(모험 쪽에서 풀 것) — 보드 칸 도착 보상 기준표에 넣지 않음. 열 이동: 보드 보상이 아니라 모험 쪽에서 쌓이는 값이라 ⑥→⑦(제안(검수 대기))."},
+  M9:{n:"성장 원천 표(성장 원천 234줄)",k:"칸 147 · 찬스 34 · 카드 21 · 잭팟 21 · 미니게임 11"},
+  D1:{cap:"건물당 30(1~10 본관 · 11~20 부속1 · 21~30 부속2, 임시). 보컬 녹음실 줄 기준 비용(저장값): 1단 100 · 2단 3,000 · 3단 5,850 · 4단 10,140 · 5단 26,364 … 29단 100,074,106 · 30단 120,088,927 · 누적 706,831,900(building_master_level.csv · 10/27 13:03 안1). 9건물이 같은 값인지는 줄마다 확인 못 함(엔터파워 기획서는 「같은 정수」라고 적음). 건물비 ×1/20 여부는 확인 필요(Q03).",
+   noteReplace:["엔터 파워 최대 270은 문서 정의일 뿐 계산 없음(「엔터 파워」 박스). ","엔터 파워(합 9~270 → 눈금 1~1000)는 계산 있음(「엔터 파워」 박스). "]},
+  M2:{noteAdd:" 10/28: 재능 구간 문턱 값은 표 값(0~100)이고 읽을 때 ×ability_score_mult 1000(score-scale.mjs scaleAbsorbRows)."},
+  M3:{noteAdd:" 10/28: 천장 100은 표 값이고 읽을 때 ×1000(scaleTalentRows)."},
+  M4:{noteAdd:" 10/28: ability_min · detail_max는 표 값이고 읽을 때 ×1000(score-scale.mjs scaleStageGateRows). 팀 단계 문턱도 같은 배율(scaleTeamGradeRows)."},
+  A5:{noteAdd:" 10/28: 능력 문턱 값은 표 값이고 읽을 때 ×1000."},
+  B1:{noteAdd:" 10/28: 그룹 능력 문턱(표 값)과 비교하는 팬 문도 같은 배율 ×1000을 곱해 넘김(shell.ts:261 주석)."},
+  T2:{noteAdd:" 10/28: 표(growth_source.csv)는 칸 2·37·39마다 20줄(외국어 2 + 세부 18)인데 위 칸 표시는 11:45 결정(외국어 2 + 세부 2) 기준임 → 두 결정을 한 줄로 합칠지 현중 확인 필요(P169 md 「10/26 반영」 9장 3번)."},
+  T3:{noteAdd:" 10/28: 출발·사옥 1번은 건물 대지 24칸에 포함되지 않음(board_tile.csv group=corner_start)."},
+  T5:{noteAdd:" 10/28: 확인 필요 — growth_source에는 찬스 줄 34(스케줄 카드 성장 줄 5장 13줄)가 세팅돼 있으나 카드가 이 줄을 읽는 코드 연결은 안 함(P169 md 「10/26 반영」 9장 7번)."},
+  IN6:{noteAdd:" 10/28: 단계를 읽는 값은 엔터 파워 눈금(session.ts chargeCapOf · enterPowerOf). 이 표의 문턱 값이 눈금 기준인지는 확인 필요."}
+ };
+ N.forEach(n=>{const f=FIX[n.id];if(!f)return;
+  const prev={};let any=false;
+  ["n","k","rise","unit","cap","link","note","st"].forEach(k=>{if(f[k]!==undefined&&f[k]!==n[k]){prev[k]=n[k];any=true;}});
+  if(f.noteReplace){if(n.note.indexOf(f.noteReplace[0])<0)throw Error("noteReplace "+n.id);prev.note=n.note;any=true;}
+  if(f.noteAdd){prev.note=n.note;any=true;}
+  if(f.col!==undefined&&f.col!==n.col){prev.col=n.col;any=true;}
+  if(any)n.prev=prev;
+  ["n","k","rise","unit","cap","link","note","st","col","warn","lv"].forEach(k=>{if(f[k]!==undefined)n[k]=f[k];});
+  if(f.noteReplace)n.note=n.note.replace(f.noteReplace[0],f.noteReplace[1]);
+  if(f.noteAdd)n.note=(n.note||"")+f.noteAdd;
+  if(f.decAdd)n.dec=(n.dec||[]).concat(f.decAdd);
+  if(f.srcAdd)n.src=(n.src||[]).concat(f.srcAdd);
+ });
+ const OLD1028={"M2": {"dec": ["결정 64", "결정 65(재능 = 1차/2차 경계)", "결정 66(단계 최대치가 먼저 막음)", "결정 68(능력 10 · 재능 20 · 천장 100 예시)"]}, "M3": {"cap": "×0.5 → 0.18 → 0.04 → 0.008 → 0.0015 → 0.0002, 끝 = 천장 100(임시). 감속 종류 E · 강도 「중」(임시). 만렙 판정 = 2차 폭 98% · 6축 전부(6축은 세부 조합 표시값)(임시).", "note": "천장 100은 임시(나중에 결정)."}, "M4": {"note": "확인 필요: 단계 최대치 150·200이 천장 100보다 큼(표 값 그대로 적음). 천장 100과 어떻게 맞출지는 정해진 기록 못 찾음."}, "M5": {"cap": "천장 100(임시)을 10등분(재능이 1차/2차를 가름). 단계별 값은 발란스 대기(비앙카 안 A·B·C는 제안(검수 대기))."}, "M11": {"rise": "능력점을 그룹 문턱(140~15000)과 멤버 천장(100)이 같이 읽도록 잇는 환산.", "cap": "정상 단계 문턱 ÷ 능력 행 수 = 천장(top_stage_ratio, 임시).", "note": "그룹 문턱과 멤버 천장은 서로 다른 척도라 표 값을 그대로 비교하면 안 됨."}, "A1": {"k": "천장 = 만렙 = 100(임시)", "unit": "점수(core 능력점 → 0~천장 척도로 환산)", "cap": "천장 = 만렙 = 100(임시). 만렙 = 2차 구간 끝까지, 능력 전부(결정 63·67)."}};
+ N.forEach(n=>{const o=OLD1028[n.id];if(o)n.prev=Object.assign(n.prev||{},o);});
+ N.push({id:"JP1",g:"EC",col:3,n:"잭팟(통 쌓기 · 지급 때 배수 한 번 곱)",k:"지급 = (통 + 팬 합 보상) × 굴림 배수 · 곱 한 번",st:"ok",warn:1,
+  rise:"예능 방송국 · 콘서트장 칸에서 대박이 터지면 쌓인 통(국고) 전부를 받음(최대치 없음). 통에는 굴림 한 번마다 표의 양이 쌓이고, 굴림 배수는 지급 때만 곱함.",unit:"돈(S 대비 %로 쌓음)",
+  cap:"쌓는 양 · 시작값 · 확률은 표 그대로(jackpot.csv · economy_config의 jackpot_pot_*). 새 상한 없음. 지급 = 내림((통 + 팬 합 보상) × 배수(jackpot.csv dice_mult_apply=1일 때) × 이벤트 돈 버프) — 곱셈 한 번 · 내림 한 번.",
+  link:"굴림 → 방송국 · 콘서트장 도착 → 대박 판정 → 확률 → 지급(session.ts:452~455). 통에 쌓을 때는 배수를 안 곱함(session.ts:421). 지급 뒤 통은 시작값으로. 팬 합 보상 = 팬 층 합(라이트 · 코어 · 콘크리트 · 안티) × 계수이며 계수가 비면 0(session.ts:348~355).",lv:"c",
+  dec:["현중 10/27 21:42(곱은 지급 때 한 번 · 20:35 「두 번 곱 유지」를 대체 · 재결정 재료)","현중 10/27 20:07(잭팟 지급도 배수 곱하기)"],
+  src:["src/game/economy/session.ts:348~355 · 421 · 452~456","data/game/jackpot.csv(dice_mult_apply)","입력/개발-잭팟지급배수곱하기_1027.md"],
+  note:"참고(아론 v4 보고 요약 · 원문은 이번에 다시 확인 못 함): ×1000 지급 92,767,000 → 한 번 곱 4,505,000. 이전 저장의 통은 크게 남아 있을 수 있음. 보드 쪽: 방송국 · 콘서트장 칸 박스(BBRD · BCON) 뒤."});
+
+ N.push({id:"JP2",g:"EC",col:3,n:"2번째 룰렛 잭팟 칸",k:"5.05%(모노 돌림판 비율)",st:"tbl",
+  rise:"2번째 룰렛에 있는 잭팟 칸.",unit:"확률",cap:"5.05%(모노 원본 color_wheel_reward_config.csv:8 가중치 5/99와 같음).",
+  link:"콘서트장 잭팟 → 2번째 룰렛 → 잭팟 칸 → 보드 전체 팬(JP3).",lv:"t",dec:[],src:["data/second_roulette/second_roulette_reward.csv(second_roulette_reward_jackpot)","/Users/max/1_작업 폴더/모노카피바라 프로젝트/monocapibara/data/color_wheel_reward_config.csv:8"],note:""});
+ N.push({id:"JP3",g:"EC",col:3,n:"보드 전체 팬(콘서트장만)",k:"콘서트 잭팟 → 2번째 룰렛 잭팟일 때만",st:"wait",
+  rise:"다른 건물의 라이트·코어·콘크리트 팬을 pull_pct % × pull_mult 배만큼 콘서트장으로 가져옴.",unit:"명 → 돈",cap:"잭팟 한 번에 가져오는 팬 = board_fan_cap까지. pull_pct·pull_mult 빈칸 = 0 · board_fan_cap 빈칸 = 상한 없음 · 화면 발란스 대기.",
+  link:"콘서트장에서만 터짐. 다른 건물·1번 잭팟 단독에는 없음.",lv:"t",dec:[],src:["data/second_roulette/board_all_fan_pull.csv(pull_pct · pull_layers · pull_mult · board_fan_cap)"],note:""});
+ N.push({id:"FCAP",g:"C",col:6,n:"건물 팬 상한",k:"발란스 대기",st:"wait",
+  rise:"건물 하나에 쌓이는 팬 수의 상한.",unit:"명",cap:"building_fan_cap 빈칸 = 상한 없음 · 화면 발란스 대기. 상한을 넘은 팬은 건물 밖 팬으로 남음. 팬 돈 보너스 상한(건물당 10만 명에서 +10% · fan_income_step.csv:102)과는 다른 값.",
+  link:"건물 팬 기록(fansByBuilding)이 이 상한에서 멈춤. 트롤 팬은 건물 팬에서 뺌. 칸 도착 팬은 arrivalFansByTile · arrivalFansByBuilding에 기록만 하고 전체 팬에 더하지 않음.",lv:"t",dec:[],src:["data/fan_tier/building_fan_assign.csv(building_fan_cap)","data/fan_tier/fan_income_step.csv:102"],note:""});
+ N.push({id:"WINC",g:"D",col:3,n:"직장 수입 ×0.975",k:"effect_income_pct ×0.975",st:"tbl",
+  rise:"건물 단계 수입 비율.",unit:"%",cap:"effect_income_pct에 ×0.975를 곱한 값.",
+  link:"건물 칸 도착 → 수입 비율 → 돈.",lv:"t",dec:[],src:["data/master/building_master_level.csv(effect_income_pct)"],note:""});
+ [["BCON","JP2","s"],["JP2","JP3","s"],["JP3","M0","s"],["FCAP","C1","s"],["WINC","M0","s"]].forEach(e=>E.push(e));
+ [["BBRD","JP1","s"],["BCON","JP1","s"],["R2","JP1","s"],["JP1","M0","s"],["D11","C6","s"],["D11","C1","s"]].forEach(e=>E.push(e));
+ const setT=(a,b,t)=>{const e=E.find(x=>x[0]===a&&x[1]===b);if(!e)throw Error("edge "+a+b);e[2]=t;};
+ setT("D1","D11","s");setT("D1","D6","s");setT("D6","C1","s");setT("E1","E2","s");setT("E2","A1","s");setT("C1","C6","d");
+ EXCL.push("10/28 열 이동(id 그대로): 팬 수(C1) · 도시(B5) · 라포(F1) ⑥→⑦ / 엔터 파워(D11) · 건물 완공 능력(D5) · 카드 별 등급(E1) · 카드 효과(E2) ⑦→⑥ — 규칙은 위 「열 분류 규칙」(제안(검수 대기)) · 바뀌기 전 설명은 각 박스 이력에 보존","10/28 새 박스: 잭팟(JP1) 하나. 건물 대지 24칸은 D9에 합쳐 적음(박스 추가 없음)");
+})();
+/* 10/29 현재 상태 정리(유르넷 · 현중 10/29 결정 반영 · 모두 재결정 재료 · 값은 임시(나중에 결정) · 봇 정리는 제안(검수 대기)). 박스 id는 안 바꿈. 바뀌기 전 값은 n.prev29에 보존 */
+(function(){
+ const D="현중 10/29";const R="보고/20261029_";
+ const keep=(n,keys)=>{n.prev29=n.prev29||{};keys.forEach(k=>{if(n[k]!==undefined&&n.prev29[k]===undefined)n.prev29[k]=Array.isArray(n[k])?n[k].slice():n[k];});};
+ const F={
+  R2:{k:"10단 ×1 ~ ×1000 · 기본 ×5 · 모든 콘텐츠 성장에 곱함",st:"ok",
+   cap:"×1·2·5·10·20·50·100·200·500·1000. 문턱 = dice_mult_unlock_rule.need_enter_power_min: ×1·×2·×5 0(기본 ×5) · ×10 50 · ×20 100 · ×50 180 · ×100 260 · ×200 340 · ×500 420 · ×1000 500. 날 상한(dice_mult_day_cap) 1일차 ×10 · 2일차 ×20 · 3일차부터 없음. 임시(나중에 결정).",
+   link:"배수 ×N은 돈만이 아니라 모든 콘텐츠 성장에 곱함(현중 10/29 12:47). 배수 잠금은 엔터 파워 문턱 표 하나만 읽음(config.ts · session.ts). 사옥 조건 열과 enter_power_level의 dice_mult 줄은 지워짐(현중 16:38·16:40). 배수 시험 31/31 통과(아론 17:05).",
+   decAdd:[D+" 16:34(×5 기본 · ×20은 1~2일 안)",D+" 16:38(조건 = 엔터 파워 · 사옥 아님)",D+" 16:40(엔터 파워 100 = ×20 · 500 = ×1000)",D+" 16:45(무료가 ×200 이상 못 열어도 괜찮음)",D+" 12:47(배수는 모든 콘텐츠 성장에 곱함)"],
+   srcAdd:["data/game/dice_mult_unlock_rule.csv(need_enter_power_min)","data/game/dice_mult_day_cap.csv","src/game/economy/config.ts","src/game/economy/session.ts",R+"1648_비앙카_배수엔터파워문턱100에서500.md",R+"1650_비앙카_엔터파워표배수줄삭제.md"]},
+  C6:{n:"주사위 배수 해금(엔터 파워로 열림)",k:"엔터 파워 0·50·100 … 500 · 1일 ×10 · 2일 ×20",st:"ok",
+   cap:"×5까지 처음부터(기본 ×5) · ×10 50 · ×20 100 · 이후 80씩 · ×1000 500(임시(나중에 결정) · 제안(검수 대기)). 10/27 무료 시뮬 기준 60일 끝 엔터 파워 약 326(63일 측정 발란스 대기) → 무료는 ×200(340) 이상 못 열 수 있음(현중 16:45 괜찮음).",
+   link:"엔터 파워가 문턱을 넘으면 더 큰 배수가 열리고, 날 상한이 1·2일차를 막음. 팬 수·사옥 단계 문턱은 쓰지 않음(사옥 열 삭제).",
+   decAdd:[D+" 16:38 · 16:40 · 16:45"],srcAdd:["data/game/dice_mult_unlock_rule.csv","data/game/dice_mult_day_cap.csv",R+"1648_비앙카_배수엔터파워문턱100에서500.md"]},
+  M8:{n:"굴림 배수의 능력 반영(배수 → 모든 성장)",k:"배수 ×N은 모든 콘텐츠 성장에 곱함(결정)",st:"tbl",warn:0,
+   link:"현중 10/29 12:47: 배수 ×N은 모든 콘텐츠 성장에 곱함. 표 쪽 dice_mult_apply는 켜짐(비앙카 14:14 「주사위 배수 전체 켬」). 콘텐츠마다 코드가 곱하는지는 이번에 하나씩 확인하지 못함.",lv:"t",
+   decAdd:[D+" 12:47(배수는 모든 콘텐츠 성장에 곱함)"],srcAdd:[R+"1414_비앙카_주사위배수전체켬.md"],noteAdd:" · 10/29: 후보 → 표만 있음(결정은 났고 표는 켜짐, 콘텐츠별 코드 확인 남음)."},
+  D11:{k:"건물 단계 합 → 눈금 · 배수 문턱 0~500",st:"ok",
+   noteAdd:" · 10/29: 주사위 배수 문턱을 이 값으로 읽음(dice_mult_unlock_rule). 무료 1일차 끝 131~150(비앙카 16:48)."},
+  H3:{n:"모험 · 출동(티켓 · 단계 배율 · 카드팩)",k:"하루 3장 · 보유 10 · 모험 먼저 · 출동은 쌓인 티켓",st:"ok",
+   rise:"모험(라포 보상 중심 · 돈 적음이 의도)과 출동(돈 · 카드팩).",unit:"티켓 · 단계 배율 % · 팩",
+   cap:"티켓 하루 3장(expedition_per_day 3) · 보유 상한 10 · 못 들어온 날도 10장까지 충전. 단계 배율 100/125/150/200/250%(팀 평균 단계 · 출동도 같음). 카드팩 20%(모험 adventure_clear_pack_id green · qty 1 / 출동 clear_pack_id green · qty 1). 모두 임시(나중에 결정).",
+   link:"티켓은 모험 먼저 쓰고 남으면 출동(adventure_config ticket_use_order = adventure|dispatch). 매일 접속하면 출동 0회 · 출동은 못 들어온 날 쌓인 티켓으로만(현중 17:08). idle-sim이 매일 모험·출동을 돌림(adventure-daily.mjs). 모험 카드팩 코드 연결은 아론 진행 중(adventure.ts는 아직 clear_pack_tier를 읽음).",lv:"c",
+   decAdd:[D+" 16:04(하루 3 · 보유 10 · 몰아 충전)",D+" 16:09·16:12·16:17(단계 배율 · 출동 같음 · 카드팩 20%)",D+" 17:04(모험 먼저)",D+" 17:08(출동은 쌓인 티켓만)",D+" 17:09(모험은 라포 중심 · 돈 적음 의도)"],
+   srcAdd:["data/game/adventure_config.csv(ticket_use_order · adventure_clear_pack_*)","data/game/adventure_stage_scale.csv","data/game/adventure_dispatch_config.csv","src/tools/idleSim/v02/adventure-daily.mjs",R+"1710_비앙카_티켓쓰는순서.md",R+"1714_비앙카_모험카드팩키연결.md"],
+   noteAdd:" · 10/29 60일(아론 17:15 · 63일 측정 발란스 대기): 모험 180회 · 출동 0회 · 모험·출동 돈 비중 0.16/0.06/0.02%(무료/평균/헤비) — 모험 돈 적음은 의도."},
+  F4:{k:"쌍마다 0~10 균등 랜덤 + 성격 궁합 ± · 최소 0",st:"ok",
+   cap:"시작값 0~10 균등 랜덤(range_min 0 · range_max 10 · dist_kind uniform) + personality_compat 궁합 차이(±) · 최소 0(result_min). personality_compat 544줄은 아직 전부 0. 임시(나중에 결정).",
+   link:"시작 때 쌍마다 값을 뽑음(rapport-start.mjs · idle-sim 공용). 모험·화해 사건으로 바뀜(reconcile.mjs · 모험 경로만 연결).",lv:"c",
+   decAdd:[D+" 16:13~16:14(0~10 균등 · 궁합 ± · 최소 0)"],srcAdd:["data/game/rapport_pair.csv(range_min · range_max · dist_kind · compat_add · result_min)","rapport-start.mjs · reconcile.mjs",R+"1618_비앙카_라포시작값랜덤과궁합.md",R+"1648_아론_라포idle·화해A·audit표기준·스키마.md"],
+   noteAdd:" · 10/29: 화해 사건은 모험 경로만 연결(칸·카드·휴식 경로 없음 · 쿨다운 값 표에 없음)."},
+  F2:{k:"라포는 성장을 늘리지 않음 · 나쁜 관계일 때만 깎음",
+   link:"현중 10/29 12:42: 라포는 성장을 더하지 않고, 나쁜 관계일 때만 깎음. 깎는 양 · 기준은 표 값(임시).",decAdd:[D+" 12:42(라포 = 깎기만)"]},
+  B1:{noteAdd:" · 10/29 데뷔 판정 = 팀 평균 단계 · 평균이 떨어지면 다시 내려갈 수 있음(현중 16:18 · 재결정 재료). 60일 첫 데뷔 9일/3일/2일(아론 17:15 · 63일 측정 발란스 대기).",decAdd:[D+" 16:18(데뷔 = 팀 평균 · 내려갈 수 있음)"]},
+  A5:{noteAdd:" · 10/29 팀 데뷔는 팀 평균 단계로 판정(B1 참고)."},
+  M0:{noteAdd:" · 10/29 큰 숫자는 K·M·B로 표시(현중 16:19 · idle-sim · 발란스 툴 · 게임 시뮬 지갑).",decAdd:[D+" 16:19(K·M·B 표시)"]},
+  T2:{noteAdd:" · 10/29: 아카데미 칸은 외국어 2개 + 세부 2개, 4개 능력만 오름. 매니지먼트 · 컨디션 · 레이블 · 팬샵 덱은 능력이 오르지 않음(현중 10/29 · 재결정 재료)."},
+  I7:{noteAdd:" · 10/29 루머 카드 +15(찬스 카드 · 팬 이벤트 카드 둘 다 · 나쁜 기운 박스 참고)."},
+  C2:{noteAdd:" · 10/29 톱스타 문 stage_3 door_min 520 · core_to_concrete_rate 0.045(현중 10/29 · 임시). 이번에 data/game 표에서 두 값의 위치를 찾지 못해 상태는 「후보 확인 필요」 그대로.",decAdd:[D+"(톱스타 문 520 · 콘크리트 전환 0.045)"]}
+ };
+ Object.keys(F).forEach(id=>{const n=N.find(x=>x.id===id);if(!n)return;const f=F[id];
+  keep(n,Object.keys(f).filter(k=>!/Add$/.test(k)));
+  Object.keys(f).forEach(k=>{if(k==="decAdd")n.dec=(n.dec||[]).concat(f.decAdd);else if(k==="srcAdd")n.src=(n.src||[]).concat(f.srcAdd);else if(k==="noteAdd")n.note=(n.note||"")+f.noteAdd;else n[k]=f[k];});});
+ N.push({id:"BAD1",g:"I",col:5,n:"나쁜 기운(디펜스 · 루머 · 부서진 건물)",k:"하루 최대 2번 · 루머 +15 · 부서지면 혜택 ×0.5",st:"tbl",
+  rise:"나쁜 기운이 오면 디펜스. 지면 건물이 부서지고, 루머 카드가 붙음.",unit:"회 · 점 · 배율",
+  cap:"하루 최대 2번 · 루머 카드 +15(찬스 카드와 팬 이벤트 카드 둘 다) · 부서진 건물은 연결 보드 혜택 ×0.5. 임시(나중에 결정).",
+  link:"굴림 → 나쁜 기운 발생 → 디펜스 → 결과가 건물 혜택 · 카드에 반영. 표는 data/game/defense.csv. 성장 코드에 ×0.5가 곱해지는지는 이번에 확인 못 함.",lv:"t",
+  dec:[D+"(하루 2번 · 루머 +15 · 부서진 건물 ×0.5 · 재결정 재료)"],src:["data/game/defense.csv",R+"1142_비앙카_나쁜기운디펜스_임시값과60일횟수.md","보고/20261029_1152_유르넷_나쁜기운디펜스_기획서작성.md"],note:"10/29 새 박스(유르넷 · 제안(검수 대기))."});
+ [["R1","BAD1","d"],["BAD1","D1","d"],["BAD1","I7","d"]].forEach(e=>{if(byIdTmp(e[0])&&byIdTmp(e[1]))E.push(e);});
+ function byIdTmp(id){return N.some(x=>x.id===id);}
+ EXCL.push("10/29(유르넷 · 제안(검수 대기)): 박스 13개 글 고침 · 상태 바뀜 3개(M8 후보→표만 · H3 후보→계산 있음 · F4 구조 없음→계산 있음) · 새 박스 1개(나쁜 기운 BAD1). 바뀌기 전 값은 박스 이력(10/29 바뀌기 전)에 보존.");
+})();
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const byId=Object.fromEntries(N.map(n=>[n.id,n]));
+let filter=new Set(),sel=null,thick=false;
+const isTodo=n=>n.st==="none"||n.st==="wait";
+const match=n=>!filter.size||[...filter].some(f=>f==="todo"?isTodo(n):n.st===f);
+function counts(){const c={ok:0,tbl:0,none:0,wait:0,cand:0};N.forEach(n=>c[n.st]++);return c;}
+function renderBase(){
+ const items=["무료 800 = 자동 충전 최대 120 · 8시간 선물 30 · 나머지 650 중 미션 30% · 출석 5% · 이벤트 65%(게임 표 출석 40.75) · 그 밑이 획득 길, 구매는 800과 무관(예상 안 함)","주사위 개수 기준(결정 55)","무료 800/일 = 카드팩·아이템 포함 총량(결정 56·62)","헤비 = 9주(63일) 2,000만 원 → 주사위 400,000개 · 하루 구매 6,349개 + 무료 800 = 하루 7,149개 · 시뮬 63일 · 평균 유저 하루 100,000원 → 2,800개(발란스 대기) · 옛: 하루 약 333만 원 ≈ 66,667개(결정 56)","주사위 50원/개 · 보석 5원","천장 = 능력(멤버 6축 점수 평균) > 재능(멤버 6축 재능 평균)(출처 슈덴 보고 1210 · 임시 · 현중 원문 확인 필요) · 옛 안: 천장 = 만렙 = 100(표 값 100은 ×1000 환산 전 척도로만 남음) · 화면 점수는 읽을 때 × ability_score_mult 1000(현중 10/27)","재능 = 1차/2차 경계(결정 65~68)","능력은 10단계 구간(결정 71~76 · 임시)","건물 레슨 배수 = 합친 표 building_master_level(결정 76)","막힘 = 주사위가 다 떨어졌을 때(결정 58)","시즌 63일 · 계산 단위 1일(결정 61)","보드 칸 도착 보상 = 한 장 기준표로 모으는 중(설계 단계 · 제안(검수 대기))","보드에는 성장 데이터만 · 라포는 모험 쪽(현중 10/26)","헌법 77(현중 10/26 10:58): 보드 칸 도착으로 오르는 것은 세부 18개만 · 6축은 직접 올리지 않고 세부의 조합(평균 등)으로만 표시"];
+ items.unshift("10/29 현중 결정(재결정 재료 · 임시(나중에 결정)): 배수 조건 = 엔터 파워(0 · 50 · 100 … 500) · ×5 기본 · 1일 ×10 · 2일 ×20 · 배수 ×N은 모든 콘텐츠 성장에 곱함 · 모험 하루 3 · 보유 10 · 모험 먼저 · 출동은 쌓인 티켓 · 단계 배율 100~250% · 카드팩 20% · 라포 시작 0~10 랜덤 + 궁합 ± · 최소 0 · 라포는 깎기만 · 데뷔 = 팀 평균 · K·M·B 표시 · 나쁜 기운 하루 2번 · 루머 +15 · 부서진 건물 ×0.5 · 아카데미 4능력 · 톱스타 문 520 · 콘크리트 0.045");
+ $("#base").innerHTML=items.map(t=>"<span>"+esc(t)+"</span>").join("");
+}
+function renderLegend(){
+ const c=counts(),tot=N.length,todo=c.none+c.wait;
+ let h='<button class="fbtn" data-f="all" aria-pressed="false"><b>전체 '+tot+'개</b></button>';
+ h+='<button class="fbtn" data-f="todo" aria-pressed="false"><span class="dot none"></span><b>작업 안 된 것 '+todo+'개</b> <span class="legend2">(구조 없음 + 발란스 대기)</span></button>';
+ ["ok","tbl","none","wait","cand"].forEach(k=>{h+='<button class="fbtn" data-f="'+k+'" aria-pressed="false"><span class="dot '+k+'"></span>'+ST[k].t+' <b>'+c[k]+'</b></button>';});
+ h+='<button class="fbtn" data-f="thick" aria-pressed="false">연결선 진하게</button>';
+ $("#legend").innerHTML=h;
+ $("#legend").querySelectorAll(".fbtn").forEach(b=>b.onclick=()=>{const f=b.dataset.f;
+  if(f==="thick"){thick=!thick;applyFilter();return;}
+  if(f==="all")filter.clear();else if(filter.has(f))filter.delete(f);else filter.add(f);applyFilter();});
+}
+function applyFilter(){
+ document.querySelectorAll(".fbtn").forEach(b=>{const f=b.dataset.f;b.setAttribute("aria-pressed",String(f==="thick"?thick:(f==="all"?!filter.size:filter.has(f))));});
+ N.forEach(n=>{const el=document.getElementById("b_"+n.id);if(el)el.classList.toggle("hid",!match(n));});
+ document.querySelectorAll(".tree").forEach(t=>t.classList.toggle("hid",!t.querySelector(".box:not(.hid)")));
+ document.querySelectorAll(".kid").forEach(k=>k.style.display=k.querySelector(".box.hid")?"none":"");
+ document.querySelectorAll(".sec").forEach(sc=>{let x=sc.nextElementSibling,vis=false;while(x&&!x.classList.contains("sec")){if(x.matches(".box:not(.hid),.tree:not(.hid)"))vis=true;x=x.nextElementSibling;}sc.classList.toggle("hid",!vis);});
+ if(sel&&byId[sel]&&!match(byId[sel]))sel=null;
+ try{if(filter.size)history.replaceState(null,"","#f="+[...filter].join(","));}catch(e){}
+ drawEdges();
+}
+function unionOf(n){return DET18.filter(d=>(n.tiles||[]).some(t=>t.ups.includes(d)));}
+function tilesHtml(n){
+ if(!n.tiles)return "";
+ let h='<dt>칸별로 오르는 세부 능력 <span class="hint">(세부 이름만 · 6축은 직접 안 오름 · 양은 발란스 대기)</span></dt><dd><table class="tt"><tr><th>칸</th><th>칸 이름</th><th>오르는 세부</th></tr>';
+ n.tiles.forEach(t=>{
+  const names=t.ups.length?t.ups.map(x=>STUDY.includes(x)?'<i title="학습 · 세부 18개 밖">'+esc(x)+'</i>':esc(x)).join(" · "):esc((t.txt||"").trim());
+  h+='<tr><td><b>'+esc(t.no)+'</b></td><td>'+esc(t.nm)+(t.ups.length?'<br><span class="hint">'+t.ups.filter(x=>!STUDY.includes(x)).length+(t.ups.some(x=>STUDY.includes(x))?'개 + 학습 '+t.ups.filter(x=>STUDY.includes(x)).length+'개':'개')+'</span>':'')+'</td><td>'+names+'<br><span class="hint">'+esc(t.tag||"")+'</span></td></tr>';
+ });
+ h+='</table>';
+ if(n.showUnion){const u=unionOf(n),miss=DET18.filter(d=>!u.includes(d));h+='<div class="hint" style="margin-top:4px">건물 전체 합집합: 세부 18개 중 '+u.length+'개'+(miss.length?' (빠진 것: '+miss.map(esc).join(" · ")+')':' — 18개 전부')+'</div>';}
+ if(n.tiles.some(t=>t.ups.some(x=>STUDY.includes(x))))h+='<div class="hint" style="margin-top:4px">기울임 글씨 = 학습(영어·중국어·일본어 · 세부 18개 밖)</div>';
+ return h+'</dd>';}
+function prevHtml(n){
+ const o=n.prev;if(!o)return "";
+ const L=[["rise","무엇이 오르나"],["unit","오르는 단위"],["cap","천장 / 최대"],["link","주사위 연결"],["note","메모"],["dec","결정"],["k","한 줄"],["n","이름"],["st","상태"]];
+ let h='<dt>10/28 바뀌기 전 설명 <span class="hint">(이력 · 글을 지우지 않고 그대로 옮김 · 지금 값은 위)</span></dt><dd>';
+ L.forEach(x=>{if(o[x[0]]!==undefined)h+='<div><b>'+x[1]+'</b> '+esc(x[0]==="st"?ST[o.st].t:(Array.isArray(o[x[0]])?o[x[0]].join(" · "):o[x[0]]))+'</div>';});
+ if(o.col!==undefined)h+='<div><b>열</b> '+esc(COLS[o.col].t)+' → '+esc(COLS[n.col].t)+'</div>';
+ return h+'</dd>';}
+function prev29Html(n){const o=n.prev29;if(!o)return "";
+ let h='<dt>10/29 바뀌기 전 설명 <span class="hint">(이력 · 지금 값은 위)</span></dt><dd>';
+ Object.keys(o).forEach(k=>{h+='<div><b>'+esc(k)+'</b> '+esc(k==="st"?ST[o.st].t:(Array.isArray(o[k])?o[k].join(" · "):o[k]))+'</div>';});return h+'</dd>';}
+function oldHtml(n){
+ const o=n.old;if(!o)return "";
+ return '<dt>이전 「능력 시설 칸」 박스에 적혀 있던 설명 <span class="hint">(글을 고치지 않고 그대로 옮김 · 헌법 77 표시 포함)</span></dt><dd><div><b>무엇이 오르나</b> '+esc(o.rise)+'</div><div><b>오르는 단위</b> '+esc(o.unit)+'</div><div><b>주사위 연결</b> '+esc(o.link)+'</div><div><b>메모</b> '+esc(o.note)+'</div></dd>';}
+function renderD18(){
+ const B=N.filter(n=>n.tiles&&n.tiles.some(t=>t.ups.length));
+ const where=d=>B.map(n=>{const ts=n.tiles.filter(t=>t.ups.includes(d)).map(t=>t.no);return ts.length?n.bn+" "+ts.join("·"):"";}).filter(Boolean).join(" · ");
+ let h='<tr><th>묶음 이름(표시용)</th><th>세부 능력</th><th>오르는 건물 · 칸 번호</th></tr>';
+ DET18.forEach(d=>{const w=where(d);h+='<tr><td>'+esc(FAM[d])+'</td><td><b>'+esc(d)+'</b></td><td>'+(w?esc(w):'<span class="warn">어느 칸에서도 안 오름</span>')+'</td></tr>';});
+ STUDY.forEach(d=>{const w=where(d);h+='<tr><td>학습(18개 밖)</td><td><i>'+esc(d)+'</i></td><td>'+(w?esc(w):"—")+'</td></tr>';});
+ const all=DET18.every(d=>where(d));
+ h+='<tr><td colspan="3" class="foot">세부 18개가 모두 한 칸 이상에서 오름: <b>'+(all?"예":"아니오")+'</b> · 칸마다 오르는 양은 전부 발란스 대기(새 숫자 없음).</td></tr>';
+ $("#d18").innerHTML=h;}
+function boxEl(n){
+ const b=document.createElement("div");b.className="box "+n.st+((n.slim||n.chip)?" slim":"");b.id="b_"+n.id;b.tabIndex=0;b.setAttribute("role","button");
+ b.style.setProperty("--gc",GR[n.g].c);
+ if(n.slim||n.chip){
+  const chip=n.chip?n.chip[0]:((n.st==="ok"||n.st==="tbl")?"구조 있음":(n.st==="none"?"구조 없음":(n.st==="wait"?"발란스 대기":ST[n.st].t)));
+  let chips='<span class="sc">'+chip+'</span>';
+  (n.chip||[]).slice(1).forEach(t=>{chips+='<span class="gchip">'+esc(t)+'</span>';});
+  if(n.pend)chips+='<span class="gchip">발란스 대기 · 비율 미정</span>';
+  (n.ch||[]).forEach(c=>{chips+='<span class="gchip">'+esc(c.t)+'</span>';});
+  const tl=(n.tiles||[]).map(t=>'<span class="tl"><b>'+esc(t.no)+'</b>'+esc(tileTxt(t))+'</span>').join("");
+  b.innerHTML='<span class="nm">'+esc(n.n)+'</span>'+(n.sub?'<span class="kk">'+esc(n.sub)+'</span>':'')+tl+'<span class="crow">'+chips+'</span>';
+ }else{
+  b.innerHTML='<span class="nm">'+esc(n.n)+'</span><span class="kk">'+esc(n.k)+'</span><span class="sc">'+ST[n.st].t+'</span>'+(n.warn?'<span class="warn"> ⚠</span>':'')+'<span class="gl">'+esc(GR[n.g].n)+'</span>';
+ }
+ b.onclick=()=>select(n.id);b.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(n.id);}};
+ return b;
+}
+function build(){
+ const flow=$("#flow");
+ COLS.forEach((c,i)=>{
+  const col=document.createElement("div");col.className="col";col.dataset.col=i;
+  col.innerHTML='<h3>'+esc(c.t)+'<small>'+esc(c.s)+'</small></h3>';
+  const nodes=N.filter(n=>n.col===i);
+  if(i===0){
+   nodes.filter(n=>!n.p).forEach(n=>{
+    if(n.sec){const s=document.createElement("div");s.className="sec";s.textContent=n.sec;col.appendChild(s);}
+    const kids=nodes.filter(ch=>ch.p===n.id);
+    if(kids.length){
+     const tree=document.createElement("div");tree.className="tree";
+     tree.appendChild(boxEl(n));
+     const kd=document.createElement("div");kd.className="kids";
+     kids.forEach(ch=>{const w=document.createElement("div");w.className="kid";w.appendChild(boxEl(ch));kd.appendChild(w);});
+     tree.appendChild(kd);col.appendChild(tree);
+    }else col.appendChild(boxEl(n));
+   });
+  }else nodes.forEach(n=>{if(n.sec){const sc=document.createElement("div");sc.className="sec";sc.textContent=n.sec;col.appendChild(sc);}col.appendChild(boxEl(n));});
+  flow.appendChild(col);
+ });
+}
+function lines(id){return {to:E.filter(e=>e[0]===id).map(e=>e[1]),from:E.filter(e=>e[1]===id).map(e=>e[0])};}
+function select(id){
+ if(filter.size&&byId[id]&&!match(byId[id])){filter.clear();applyFilter();}
+ sel=id;const n=byId[id],L=lines(id);
+ document.querySelectorAll(".box").forEach(b=>{b.classList.remove("sel","rel");});
+ document.getElementById("b_"+id).classList.add("sel");
+ const kids=N.filter(x=>x.p===id).map(x=>x.id);
+ L.to.concat(L.from).concat(n.p?[n.p]:[]).concat(kids).forEach(x=>{const el=document.getElementById("b_"+x);if(el)el.classList.add("rel");});
+ const lk=a=>a.length?a.map(x=>'<span class="lk" data-id="'+x+'">'+esc(byId[x].n)+'</span>').join(""):'<span class="hint">없음</span>';
+ const li=a=>a&&a.length?a.map(x=>esc(x)).join("<br>"):'<span class="hint">정해진 결정 기록을 못 찾음</span>';
+ const ratio=n.id==="IN1"?"하위 6개 합계 = 총량 800(세팅 보류). 각 비율은 미정":(n.pend?"미정(발란스 대기) — 새 숫자를 만들지 않음":"");
+ $("#panel").innerHTML=
+  '<h2>'+esc(n.n)+'</h2><span class="chip" style="background:'+ST[n.st].c+'">'+ST[n.st].t+'</span><span class="hint">묶음: '+esc(GR[n.g].n)+' · '+esc(COLS[n.col].t)+'</span>'+
+  '<dl><dt>무엇이 오르나</dt><dd>'+esc(n.rise)+'</dd>'+tilesHtml(n)+
+  '<dt>오르는 단위</dt><dd>'+esc(n.unit)+'</dd>'+
+  '<dt>천장 / 최대</dt><dd>'+esc(n.cap)+'</dd>'+
+  '<dt>주사위가 어떻게 연결되나<span class="lvbadge">'+LV[n.lv]+'</span></dt><dd>'+esc(n.link)+'</dd>'+
+  '<dt>앞에서 들어오는 박스</dt><dd>'+lk(L.from)+'</dd>'+
+  '<dt>뒤로 이어지는 박스</dt><dd>'+lk(L.to)+'</dd>'+
+  (n.p?'<dt>상위 박스</dt><dd>'+lk([n.p])+'</dd>':'')+
+  (kids.length?'<dt>하위 박스</dt><dd>'+lk(kids)+'</dd>':'')+
+  (ratio?'<dt>하위 비율(무료 800 중)</dt><dd>'+esc(ratio)+'</dd>':'')+
+  '<dt>이미 확정된 결정(재결정 재료)</dt><dd>'+li(n.dec)+'</dd>'+
+  '<dt>근거 파일 <span class="hint">(data/·src/는 프로젝트 루트 기준)</span></dt><dd>'+n.src.map(s=>'<code>'+esc(s)+'</code>').join("<br>")+'</dd>'+
+  (n.note?'<dt>메모 · 확인할 것</dt><dd>'+esc(n.note)+'</dd>':'')+oldHtml(n)+prev29Html(n)+prevHtml(n)+'</dl>';
+ $("#panel").querySelectorAll(".lk").forEach(s=>s.onclick=()=>select(s.dataset.id));
+ $("#panel").scrollTop=0;
+ try{history.replaceState(null,"","#"+id);}catch(e){}
+ drawEdges();
+}
+function drawEdges(){
+ const svg=$("#svg"),flow=$("#flow"),fr=flow.getBoundingClientRect();
+ svg.setAttribute("width",flow.scrollWidth);svg.setAttribute("height",flow.scrollHeight);
+ const colr={s:"#5a6b80",d:"#8a93a0",b:"#d63a3a"};
+ let h='<defs>'+Object.keys(colr).map(k=>'<marker id="ar_'+k+'" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="'+colr[k]+'"/></marker>').join("")+'</defs>';
+ const rect=id=>{const el=document.getElementById("b_"+id),r=el.getBoundingClientRect();return {l:r.left-fr.left,r:r.right-fr.left,y:r.top-fr.top+r.height/2,c:+el.closest(".col").dataset.col};};
+ const showAll=thick;
+ const shown=id=>{const el=document.getElementById("b_"+id);return el&&el.offsetParent!==null;};
+ E.forEach(e=>{
+  if(!shown(e[0])||!shown(e[1]))return;
+  const a=rect(e[0]),b=rect(e[1]),ty=e[2];
+  const hit=sel&&(e[0]===sel||e[1]===sel);
+  const vis=match(byId[e[0]])||match(byId[e[1]]);
+  let op=sel?(hit?1:0.07):(showAll?0.75:0.3);
+  let d;
+  if(b.c>a.c){const x1=a.r,x2=b.l,dx=Math.max(40,(x2-x1)/2);d='M'+x1+','+a.y+' C'+(x1+dx)+','+a.y+' '+(x2-dx)+','+b.y+' '+x2+','+b.y;}
+  else if(b.c<a.c){const x1=a.l,x2=b.r;d='M'+x1+','+a.y+' C'+(x1-60)+','+a.y+' '+(x2+60)+','+b.y+' '+x2+','+b.y;}
+  else{const x1=a.r,x2=b.r;d='M'+x1+','+a.y+' C'+(x1+34)+','+a.y+' '+(x2+34)+','+b.y+' '+x2+','+b.y;}
+  h+='<path d="'+d+'" fill="none" stroke="'+colr[ty]+'" stroke-width="'+(hit?2.4:1.3)+'" '+(ty==="s"?"":'stroke-dasharray="5 4"')+' opacity="'+op+'" marker-end="url(#ar_'+ty+')"/>';
+ });
+ svg.innerHTML=h;
+}
+function renderTodo(){
+ const rows=N.filter(isTodo).sort((a,b)=>(a.st===b.st?a.col-b.col:(a.st==="none"?-1:1)));
+ $("#todo").innerHTML='<tr><th>상태</th><th>박스</th><th>무엇이 비었나(짧게)</th><th>묶음</th></tr>'+rows.map(n=>'<tr class="rw" data-id="'+n.id+'"><td><span class="chip" style="background:'+ST[n.st].c+';color:#fff;padding:0 7px;border-radius:9px;font-weight:700">'+ST[n.st].t+'</span></td><td>'+esc(n.n)+'</td><td>'+esc(n.k)+'</td><td>'+esc(GR[n.g].n)+'</td></tr>').join("");
+ $("#todo").querySelectorAll(".rw").forEach(r=>r.onclick=()=>{select(r.dataset.id);window.scrollTo({top:0,behavior:"smooth"});});
+ $("#excl").innerHTML=EXCL.map(t=>"<li>"+esc(t)+"</li>").join("");
+}
+function init(){
+ renderBase();renderLegend();build();renderTodo();renderD18();
+ document.querySelectorAll(".tbtn").forEach(b=>b.onclick=()=>{const x=document.getElementById(b.dataset.t),o=!x.classList.contains("open");x.classList.toggle("open",o);b.setAttribute("aria-expanded",String(o));b.textContent=(b.dataset.t==="xp1"?"설명 ":"결정 근거 ")+(o?"접기":"보기");drawEdges();});
+ applyFilter();
+ const h=(location.hash||"").slice(1);if(h.indexOf("f=")===0){h.slice(2).split(",").forEach(f=>{if(f&&f!=="all")filter.add(f);});applyFilter();}else if(h&&byId[h])select(h);
+ window.addEventListener("resize",drawEdges);
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(drawEdges);
+}
+init();
+window.__growthFlow={N,E,select,counts};
+</script>
+<details><summary>성장 연관관계 추가 연결 반영 기록</summary><p>2026-11-04 17:45 유르넷 · 새 박스 JP2(2번째 룰렛 잭팟 5.05%) · JP3(보드 전체 팬 · 콘서트장만) · FCAP(건물 팬 상한 · 발란스 대기) · WINC(직장 ×0.975) · IN1 무료 800 배분 · IN3와 기준 줄 헤비 7,467 → 7,149(9주 2,000만 원 · 6,349 + 800) · 60일 → 63일(NODE0 · IN1) · 백업 _작업/yurnet/backup_20261104_174442_growthlinks/</p><p>2026-11-04 17:58 유르넷 · JP2 · JP3 · FCAP 실제 파일 이름(board_all_fan_pull.csv · building_fan_cap · second_roulette_reward_jackpot · 모노 원본 경로) · 빈칸 규칙 · 넘친 팬 · 도착 팬 기록만 · 박스의 시뮬 기간 「60일 계산」 → 63일 · 60일 실측 값(엔터 파워 326 · 모험 180회 · 첫 데뷔)은 값 그대로 두고 63일 측정 발란스 대기 표시 · 백업 step2_1758/</p></details>
+</body>
+</html>

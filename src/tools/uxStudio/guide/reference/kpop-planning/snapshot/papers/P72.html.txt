@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P72 · 필러 룰렛 · 대표 개발 기획서</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"></head><body class="sample-document"><main><header><div class="eyebrow">P72 · 개발 기획</div><h1>필러 룰렛 · 대표 개발 기획서</h1><div class="actions"><a href="./필러룰렛_기획서.md">짝 MD를 봅니다</a><a href="/docs/planning/game-simulator.html?module=simulator_module_filler" target="_blank" rel="noopener">눌러서 실행 화면 확인</a><a href="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/작성기준_v02/작성규칙.html">공통 작성 기준 보기</a><a href="#document-history" data-open-history>로그 보기</a></div></header>
+<p><strong>이 문서는</strong> 보드의 건물 칸에 도착했을 때 판정과 표시용 보상을 보여 주는 필러 룰렛을 설명합니다. 결과는 한 번 정하고 3D 휠에서 보여 준 뒤 현재 건물 단계의 연출로 이어집니다.</p>
+<p><strong>보는 법</strong> 1장 개요 → 4장 도착 흐름 → 7장 확률 출처 확인 항목 순서로 읽습니다. 실행은 3장의 공용 시뮬레이터 연결에서 확인합니다.</p>
+<p><strong>지금 상태</strong> 판정·표시 보상·3D 휠·건설 연출 연결 코드가 있습니다. 실제 돈 지급과 칸별 대사·잭팟/전투 연계·효과음은 작업전이며 실제 플레이 검수는 남아 있습니다.</p>
+<nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+
+
+<p><a href="/docs/planning/proposal-concept/jackpot.html" data-paper-path="docs/planning/proposal-concept/jackpot.html">눌러서 잭팟과 필러 제안서 확인</a></p>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (합침) 제안서 <a href="/docs/planning/proposal-concept/jackpot.html" data-paper-path="docs/planning/proposal-concept/jackpot.html">잭팟 · 필러 룰렛</a> · (이식) 모노카피바라 필러 스튜디오 등급 카드 · 책갈피 <a href="/src/simulator/shared/building-arrival.mjs" data-paper-path="src/simulator/shared/building-arrival.mjs">P180 도착 판정 계산 모듈</a> · <a href="/src/ui/board-map/arrival-roulette.mjs" data-paper-path="src/ui/board-map/arrival-roulette.mjs">P181 도착 3D 휠 화면</a> · <a href="/data/simulator/building-arrival.json" data-paper-path="data/simulator/building-arrival.json">P182 도착 판정 설정 표</a></p>
+
+<p>보드 말이 건물 칸에 멈추면, 그 도착이 얼마나 잘 됐는지를 <b>올킬 · 차트인 · 광탈</b> 세 가지 중 하나로 한 번 정하고, 3D 복셀 휠이 그 결과에서 멈추며 결과 이름과 표시 보상을 보여 줍니다. 그 다음 그 칸 건물의 현재 단계 건설 연출로 이어집니다.</p>
+
+<h3 id="왜-있는가">왜 있는가</h3>
+
+<ul>
+<li>주사위를 굴려 칸에 도착하는 순간이 매번 같은 숫자로만 끝나면 도착의 긴장감이 없습니다. 모노폴리GO가 칸 도착마다 작은 연출과 보상을 붙이는 것처럼, 우리 보드도 건물 칸 도착마다 「이번 도착은 어땠는지」를 짧은 룰렛 한 번으로 보여 줍니다.</li>
+<li>결과가 세 단계로 나뉘어 있어야, 같은 칸에 같은 배수로 도착해도 체감이 달라집니다. 올킬은 크게, 차트인은 보통, 광탈은 작게 보이지만 광탈의 판정 계수도 0은 아닙니다(50%, 「완전 꽝 금지」 원칙). 다만 기준값이 0이면 표시 코인은 0입니다.</li>
+<li>판정은 도착할 때 딱 한 번만 정합니다. 휠은 그 결과를 보여 주는 연출일 뿐 다시 뽑지 않으므로, 화면을 닫거나 다시 열어도 결과가 바뀌지 않습니다.</li>
+</ul>
+
+<h3 id="콘텐츠-경계">콘텐츠 경계</h3>
+
+<ul>
+<li>맡는 것: 건물 칸 도착 판정(올킬·차트인·광탈), 판정 확률, 표시 보상 계산식, 도착 3D 휠 화면, 결과 문구, 건설 연출로 넘기는 순서, 칸 도착 필러(독백·조우·사건·등급·리액션·보상 칩·챕터)의 구조와 도착 화면 세 칸(연출·필러·버튼) 배치.</li>
+<li>다른 문서에 맡기는 것: 건물 단계와 건설·증설 비용(<a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P106 건물 성장</a>), 도착 때 팀 능력이 오르는 성장식(P107 아이돌 성장), 주사위 배수와 이동(P94 공용 시뮬레이터), 잭팟의 확률과 큰 수익(<a href="/docs/planning/proposal-concept/jackpot.html" data-paper-path="docs/planning/proposal-concept/jackpot.html">잭팟 제안</a>), 판정 대사 문장 자체(<a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4/%EB%B3%B4%EB%93%9C%ED%8C%90%EC%A0%95%EB%8C%80%EC%82%AC_%EB%8C%80%EC%82%AC%EC%B4%88%EC%95%88_v0.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4/%EB%B3%B4%EB%93%9C%ED%8C%90%EC%A0%95%EB%8C%80%EC%82%AC_%EB%8C%80%EC%82%AC%EC%B4%88%EC%95%88_v0.html">P63 보드 판정 대사</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4/%ED%95%84%EB%9F%AC%EB%8C%80%EC%82%AC_%EB%8C%80%EC%82%AC%EC%B4%88%EC%95%88_v0.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4/%ED%95%84%EB%9F%AC%EB%8C%80%EC%82%AC_%EB%8C%80%EC%82%AC%EC%B4%88%EC%95%88_v0.html">P62 필러 대사</a>), 사용 CSV 목록(<a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/CSV%EB%B3%84_v03/filler-csv.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/CSV%EB%B3%84_v03/filler-csv.html">P92 필러 사용 CSV</a>).</li>
+</ul>
+
+<h3 id="현재-기준과-목표">현재 기준과 목표</h3>
+
+<ul>
+<li>대상 칸: 정식 보드 표 <code>board_tile.csv</code>에서 <code>tile_kind</code>가 <code>building</code>인 칸 <b>24칸</b>입니다. 8가지 시설이 3칸씩 있고, 출발 칸 사옥(1번)은 건물 칸이 아니므로 대상이 아닙니다.</li>
+<li>판정 확률의 기획 기준: <b>올킬 30% · 차트인 30% · 광탈 40%</b>입니다. 칸 단계·스킬·찬스 카드로 바꾸지 않는 계획을 보존합니다. 현재 표시 전용 설정의 <code>outcomes[].weight</code>는 15/50/35이고 policy 라벨은 30/30/40이므로, 아래 「기획·실행 설정·policy 라벨의 세 갈래 출처」와 7장의 확인 항목을 함께 읽습니다.</li>
+<li>판정 계수: 올킬 <b>200%</b> · 차트인 <b>100%</b> · 광탈 <b>50%</b>입니다.</li>
+<li>표시 보상: 기준값 × 주사위 배수 × 판정 계수를 계산해 소수점을 버린 코인 수입니다. 이 값은 <b>표시만</b> 하고 실제 보유 돈·주사위·카드에 더하지 않습니다.</li>
+<li>흐름 그림:</li>
+</ul>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1827 192" width="1827" height="192" role="img" aria-labelledby="title-P72-0"><title id="title-P72-0">설명 흐름도 P72-0</title><defs><marker id="arrow-P72-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,96 L220.5,96 L243,96" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-0)"/><path d="M423,96 L445.5,96 L468,96" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-0)"/><path d="M648,64.9655172413793 L688.5,51 L729,51" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-0)"/><rect x="666.5" y="58" width="44" height="25" rx="7" fill="#f3f8f7"/><text x="688.5" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">아니오</text><path d="M648,127.0344827586207 L688.5,141 L729,141" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-0)"/><rect x="678.5" y="148" width="20" height="25" rx="7" fill="#f3f8f7"/><text x="688.5" y="166" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">예</text><path d="M909,141 L931.5,141 L954,141" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-0)"/><path d="M1134,141 L1156.5,141 L1179,141" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-0)"/><path d="M1359,141 L1381.5,141 L1404,141" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-0)"/><path d="M1584,141 L1606.5,141 L1629,141" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-0)"/><rect x="18" y="64" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="101" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">주사위 굴림 · 배수</tspan></text><rect x="243" y="64" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="101" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">말 이동</tspan></text><rect x="468" y="64" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="101" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">도착 칸이 building?</tspan></text><rect x="729" y="18" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="819" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="819" dy="0">그 칸 기능: 찬스·팬 반응</tspan><tspan x="819" dy="20">·쟁탈전·정산·코너</tspan></text><rect x="729" y="108" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="819" y="136" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="819" dy="0">판정 한 번: </tspan><tspan x="819" dy="20">설정 weight</tspan></text><rect x="954" y="108" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1044" y="136" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1044" dy="0">3D 복셀 휠이 그 결과에서</tspan><tspan x="1044" dy="20"> 멈춤</tspan></text><rect x="1179" y="108" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1269" y="136" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1269" dy="0">결과 이름 · ×계수 · 표</tspan><tspan x="1269" dy="20">시 보상 · 성장 요약</tspan></text><rect x="1404" y="108" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1494" y="136" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1494" dy="0">건물 연출 보기: 현재 저장</tspan><tspan x="1494" dy="20"> 단계 건설 연출</tspan></text><rect x="1629" y="108" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1719" y="136" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1719" dy="0">메인으로 돌아가기 → 다음</tspan><tspan x="1719" dy="20"> 굴림</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">주사위 굴림 · 배수 → 말 이동 / 말 이동 → 도착 칸이 building? / 도착 칸이 building? → [아니오] 그 칸 기능: 찬스·팬 반응·쟁탈전·정산·코너 / 도착 칸이 building? → [예] 판정 한 번: 설정 weight / 판정 한 번: 설정 weight → 3D 복셀 휠이 그 결과에서 멈춤 / 3D 복셀 휠이 그 결과에서 멈춤 → 결과 이름 · ×계수 · 표시 보상 · 성장 요약 / 결과 이름 · ×계수 · 표시 보상 · 성장 요약 → 건물 연출 보기: 현재 저장 단계 건설 연출 / 건물 연출 보기: 현재 저장 단계 건설 연출 → 메인으로 돌아가기 → 다음 굴림</p></figure>
+
+
+
+<ul>
+<li>목표: 도착 한 번에 판정 한 번, 결과는 바뀌지 않고, 화면은 짧게, 이어서 건물 연출. 실제 돈: 건물 칸 25칸(출발 1 사옥 포함) 모두 도착 돈 × 판정 배율(올킬 2 · 차트인 1 · 광탈 0.5) × 주사위 배수, 칸 차등 기타 0.470 &lt; 방송국 0.988 &lt; 콘서트홀 1.034(총량 유지 · 임시(나중에 결정)).</li>
+</ul>
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>이 콘텐츠에서의 역할</th><th>의존 방향</th><th>읽을 곳</th><th>상태</th></tr></thead><tbody><tr><td>제안서 <a href="/docs/planning/proposal-concept/jackpot.html" data-paper-path="docs/planning/proposal-concept/jackpot.html">잭팟 · 필러 룰렛</a></td><td>「보드 도착 때 세 판정이 돈다」는 처음 제안. 평소 대지 수익과 드문 잭팟을 나눠 보여 줌</td><td>입력</td><td>전체</td><td>기준</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/%EC%9E%91%EC%84%B1%EA%B7%9C%EC%B9%99.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/%EC%9E%91%EC%84%B1%EA%B7%9C%EC%B9%99.html">P86 작성 규칙</a></td><td>이 문서의 장 순서와 표시 말</td><td>입력</td><td>0~7장</td><td>기준</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B1%B4%EB%AC%BC%EC%84%B1%EC%9E%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">P106 건물 성장</a></td><td>건물 단계(본관 1 + 부속 2, 30단계)와 건설 연출. 룰렛 뒤 「건물 연출 보기」가 이 단계를 그대로 보여 줌</td><td>출력 → 건설 연출</td><td>건설·단계</td><td>연결됨</td></tr><tr><td>P107 아이돌 성장</td><td>도착 때 팀 능력 상승량을 계산. 룰렛은 그 결과 숫자(성장 요약)만 받아 「이번 도착 팀 능력 +○」로 보여 줌</td><td>입력</td><td>도착 성장</td><td>연결됨</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/CSV%EB%B3%84_v03/filler-csv.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/CSV%EB%B3%84_v03/filler-csv.html">P92 필러 사용 CSV</a></td><td>필러와 도착 기반이 쓰는 CSV 목록·원본 경로·내용</td><td>참조</td><td>전체</td><td>참고</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4/%EB%B3%B4%EB%93%9C%ED%8C%90%EC%A0%95%EB%8C%80%EC%82%AC_%EB%8C%80%EC%82%AC%EC%B4%88%EC%95%88_v0.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4/%EB%B3%B4%EB%93%9C%ED%8C%90%EC%A0%95%EB%8C%80%EC%82%AC_%EB%8C%80%EC%82%AC%EC%B4%88%EC%95%88_v0.html">P63 보드 판정 대사</a></td><td>방송국·콘서트장 6칸의 판정별 배지·리액션 문장 초안</td><td>입력(후속)</td><td>2절·3-B</td><td>슬롯 연결 작업전</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4/%ED%95%84%EB%9F%AC%EB%8C%80%EC%82%AC_%EB%8C%80%EC%82%AC%EC%B4%88%EC%95%88_v0.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EC%8B%9C%EB%82%98%EB%A6%AC%EC%98%A4/%ED%95%84%EB%9F%AC%EB%8C%80%EC%82%AC_%EB%8C%80%EC%82%AC%EC%B4%88%EC%95%88_v0.html">P62 필러 대사</a></td><td>판정 없는 칸의 도착 한 줄과 몬스 한마디</td><td>입력(후속)</td><td>칸 도착</td><td>슬롯 연결 작업전</td></tr><tr><td><a href="/docs/planning/game-simulator.html?module=simulator_module_filler" data-paper-path="docs/planning/game-simulator.html">P94 공용 시뮬레이터</a></td><td>주사위·이동·도착을 실제로 돌려 보는 곳. 건물 도착이 생기면 「건설」 모듈의 도착 화면으로 넘김</td><td>입력</td><td>도착 · 필러, 건설</td><td>연결됨</td></tr><tr><td><a href="/docs/planning/game-table-tool.html" data-paper-path="docs/planning/game-table-tool.html">P73 전체 테이블</a></td><td><code>board_tile</code>·<code>economy_config</code> 표를 열어 보는 곳</td><td>참조</td><td>board_tile, economy_config</td><td>참고</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: [보드 주사위 굴림 · 이동] → [이 화면: 도착 필러 룰렛] → [건물 연출 보기 · 메인으로 돌아가기] · 스샷 미완 · 이식 비교 [모노카피바라 필러 스튜디오 등급 카드]</p>
+
+<p><a href="/docs/planning/game-simulator.html?module=simulator_module_filler" data-paper-path="docs/planning/game-simulator.html">눌러서 도착 필러 시뮬레이터 실행</a> · <a href="/docs/planning/game-simulator.html?module=simulator_module_building" data-paper-path="docs/planning/game-simulator.html">눌러서 건설 모듈의 도착 테스트 실행</a></p>
+
+<p>건물 칸 직접 테스트는 「건설」 모듈의 도착 요청·검사 미리보기 경로에서 합니다. 모바일 공용 화면에서 도착 요청이나 검사 조건 없이 여는 기본 건설 화면은 자유건설로 갈 수 있으므로, 아래의 칸 선택 테스트와 구분합니다. 문서를 열 때 시뮬레이터나 3D 화면을 자동 실행하지 않습니다.</p>
+
+<h3 id="시뮬레이터-모듈">시뮬레이터 모듈</h3>
+
+<div class="table-scroll"><table><thead><tr><th>모듈 ID</th><th>화면 이름</th><th>진입 파일</th><th>문서</th><th>하는 일</th></tr></thead><tbody><tr><td>simulator_module_filler</td><td>도착 · 필러</td><td><code>docs/planning/_runtime/simulator/idol_growth.js</code> (소스 <code>src/simulator/idol_growth.mjs</code>)</td><td>P72</td><td>주사위·이동·도착을 돌려 건물 칸 도착을 만듦</td></tr><tr><td>simulator_module_building</td><td>건설</td><td><code>docs/planning/_runtime/simulator/defense.js</code> (소스 <code>src/simulator/defense.mjs</code>)</td><td>P106</td><td>3D 도시에서 건물을 고르고 건설·증설. 건물 도착이 오면 도착 필러 룰렛을 띄움</td></tr></tbody></table></div>
+
+<ul>
+<li>공용 호스트에는 모듈·도시를 재사용하고 화면 전환 때 중단·가시성을 알리는 경로가 있습니다. 다만 「도착 · 필러」는 별도 iframe 연결이고 「건설」은 호스트의 도시를 받으므로, 두 경로의 도시 공유·문서 왕복 복구는 상위 연결과 실제 구동을 따로 확인해야 합니다.</li>
+</ul>
+
+<h3 id="도착-요청부터-복귀까지">도착 요청부터 복귀까지</h3>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1566 127" width="1566" height="127" role="img" aria-labelledby="title-P72-1"><title id="title-P72-1">설명 흐름도 P72-1</title><defs><marker id="arrow-P72-1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L243,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-1)"/><path d="M423,50 L445.5,50 L468,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-1)"/><path d="M648,28.4 L670.5,23 L783,23 L895.5,23 L918,28.4" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-1)"/><path d="M1098,50 L1120.5,50 L1143,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-1)"/><path d="M1323,50 L1345.5,50 L1368,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-1)"/><path d="M648,71.6 L670.5,77 L693,77" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-1)"/><path d="M873,77 L895.5,77 L918,71.6" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-1)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">메인에서 건물 칸 도착</tspan></text><rect x="243" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">칸 번호와 배수 전달</tspan></text><rect x="468" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">한 번 판정한 영수증</tspan></text><rect x="918" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1008" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1008" dy="0">휠 회전과 결과 공개</tspan></text><rect x="1143" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1233" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1233" dy="0">현재 단계 건물 연출</tspan></text><rect x="1368" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1458" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1458" dy="0">메인으로 돌아가기</tspan></text><rect x="693" y="45" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="783" y="82" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="783" dy="0">같은 결과 다시 보기</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">메인에서 건물 칸 도착 → 칸 번호와 배수 전달 / 칸 번호와 배수 전달 → 한 번 판정한 영수증 / 한 번 판정한 영수증 → 휠 회전과 결과 공개 / 휠 회전과 결과 공개 → 현재 단계 건물 연출 / 현재 단계 건물 연출 → 메인으로 돌아가기 / 한 번 판정한 영수증 → 같은 결과 다시 보기 / 같은 결과 다시 보기 → 휠 회전과 결과 공개</p></figure>
+
+
+
+<h3 id="메인에서-도착이-들어올-때">메인에서 도착이 들어올 때</h3>
+
+<ol>
+<li>공용 시뮬레이터에서 주사위를 굴립니다. 굴린 주사위 배수(×1 이상)가 도착 요청에 함께 실립니다.</li>
+<li>말이 building 칸에 멈추면 메인이 도착 요청(칸 번호 <code>boardIndex</code>, 배수 <code>multiplier</code>, 요청 ID <code>requestId</code>)을 만듭니다.</li>
+<li>건설 모듈이 도착 요청을 받으면 그 칸의 시설을 고르고, <code>resolve()</code>로 판정을 <b>한 번</b> 만듭니다. 요청 ID가 판정 씨앗(seed)입니다. 이미 만든 판정이 함께 넘어오면(<code>environment.buildingArrival</code>) 새로 뽑지 않고 <code>accept()</code>로 그대로 받습니다.</li>
+<li>화면이 켜지는 것은 휠이나 사람의 확인을 기다리지 않습니다. 휠은 따로 돌기 시작합니다.</li>
+<li>휠이 결과 칸에서 멈추면 결과 이름·계수·표시 보상·성장 요약이 나타나고 「건물 연출 보기」 버튼이 보입니다.</li>
+<li>「건물 연출 보기」를 누르면 그 칸 건물의 <b>현재 저장 단계</b> 건설 연출을 봅니다. 건물 단계는 바꾸지 않습니다. 0단계면 빈땅 그대로입니다.</li>
+<li>「메인으로 돌아가기」(또는 상단 메인 이동)를 누르면 같은 건물 도착 기록을 닫고 다음 굴림을 허용합니다. 중간에 나가면 취소(<code>cancelled</code>)로 한 번 기록하고 대기 중인 도착을 풉니다.</li>
+</ol>
+
+<h3 id="건물-칸을-골라-직접-테스트할-때">건물 칸을 골라 직접 테스트할 때</h3>
+
+<ol>
+<li>건설 모듈에서 24칸 중 한 칸을 고릅니다. 화면 제목은 「24개 대지 도착 테스트」, 안내는 「오디션 없이 선택한 칸의 필러·보상·건물 연출을 확인합니다.」입니다.</li>
+<li>「선택한 칸 도착 테스트」를 누르면 메인 도착과 같은 <code>resolve()</code> 경로에서 설정의 <code>outcomes[].weight</code>로 판정하고 같은 화면을 보여 줍니다. 기획 기준 30/30/40과 현재 설정의 차이는 4장 출처 대조에서 구분합니다.</li>
+<li>「같은 결과 다시 보기」는 같은 판정을 다시 재생합니다. 새로 뽑지 않습니다.</li>
+</ol>
+
+<h3 id="저장복원중단">저장·복원·중단</h3>
+
+<ul>
+<li>판정 결과(영수증)는 도착 기록에 한 번 남습니다. 같은 도착으로 돌아오거나 다시 보여 줄 때는 <code>accept()</code>가 영수증을 검사해 그대로 씁니다. 재추첨·재지급은 없습니다. 이는 모듈의 영수증 수용·직렬화와 허브 반환 경로 설명이며, 상위에서의 보관·새로고침 복원과 실제 저장 검수는 별도입니다.</li>
+<li>휠이 도는 중에 메인으로 돌아가면 「룰렛을 확인하는 중이에요. 메인으로 돌아가면 연출을 건너뜁니다.」 안내 뒤 연출을 건너뜁니다.</li>
+<li>실제 계정 저장, 서버 저장은 작업전입니다.</li>
+</ul>
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서-확정-코드-building-arrivalmjs-arrival-roulettemjs-defensemjs">한 판 순서 (확정 · 코드 <code>building-arrival.mjs</code> · <code>arrival-roulette.mjs</code> · <code>defense.mjs</code>)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>시작: 메인 도착 요청이 building 칸으로 들어오거나, 건설 모듈에서 「선택한 칸 도착 테스트」를 누름. 종료: 「건물 연출 보기」 뒤 연출이 끝나거나 「메인으로 돌아가기」를 누름</td></tr><tr><td>입력·출력</td><td>입력: 칸 번호(<code>boardIndex</code>), 주사위 배수(<code>multiplier</code>, 1 이상), 씨앗(<code>seed</code> = 요청 ID), 성장 요약(<code>growthTotal</code>, 없으면 비움). 출력: 영수증(아래 「영수증 필드」)</td></tr><tr><td>상태와 전이</td><td>대기 → 도는 중(휠 회전, 결과·금액 숨김) → 결과 공개(이름·계수·표시 보상·성장 요약, 「건물 연출 보기」 보임) → 건물 연출 → 닫힘. 어느 단계에서든 취소 시 닫힘(<code>cancelled</code>)</td></tr><tr><td>판정</td><td>씨앗을 해시해 0 이상 1 미만 값을 만들고 × 설정 확률 합(100)을 한 뒤, <code>outcomes</code> 순서로 각 <code>weight</code>를 빼서 처음 0 아래로 내려간 결과를 고름. 현재 표시 전용 설정은 15/50/35이며, 기획 기준 30/30/40과의 차이는 아래에서 대조. 한 도착에 한 번</td></tr><tr><td>오류·예외</td><td>설정 버전이 1이 아니거나 <code>presentationOnly</code>가 true가 아니면 「도착 필러 설정을 확인해 주세요.」 · building 칸 수가 24가 아니거나 칸 ID가 겹치면 「정식 24개 대지 연결을 확인해 주세요.」 · 결과가 3개가 아니거나 이름이 겹치거나 확률 합이 100이 아니면 「도착 룰렛 확률 합을 확인해 주세요.」 · 값이 비었거나 숫자가 아니거나 음수면 「도착 룰렛 ○○ 값을 확인해 주세요.」 · 칸이 building이 아니거나 씨앗이 없거나 배수가 1 미만이면 「건물 도착 정보를 확인해 주세요.」</td></tr><tr><td>저장·복원</td><td>영수증을 도착 기록에 보존. 다시 받을 때 버전 1, 표시 전용, 칸 ID·칸 번호 짝, 결과 이름, 코인이 0 이상의 안전한 정수인지 검사 후 복사본 사용</td></tr><tr><td>다른 모듈 연결</td><td>건설 모듈(P106)의 3D 도시·건물 연출, 도착 성장(P107)의 성장 요약, 공용 시뮬레이터(P94)의 주사위 배수·도착 요청</td></tr></tbody></table></div>
+
+<h3 id="대상-칸-24칸-확정-board_tilecsv-tile_kindbuilding">대상 칸 24칸 (확정 · <code>board_tile.csv</code> <code>tile_kind=building</code>)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>시설 (<code>fac_id</code>)</th><th>화면 이름</th><th>칸 번호</th><th>잭팟 칸(<code>hit_roulette</code>)</th></tr></thead><tbody><tr><td>facility_dorm</td><td>아카데미</td><td>2 · 37 · 39</td><td>0</td></tr><tr><td>facility_dance</td><td>댄스 연습실</td><td>4 · 24 · 25</td><td>0</td></tr><tr><td>facility_recording</td><td>보컬 녹음실</td><td>7 · 9 · 22</td><td>0</td></tr><tr><td>facility_producing</td><td>프로듀싱 스튜디오</td><td>10 · 13 · 29</td><td>0</td></tr><tr><td>facility_fanshop</td><td>팬샵</td><td>12 · 14 · 15</td><td>0</td></tr><tr><td>facility_agency</td><td>뷰티 스튜디오</td><td>17 · 19 · 20</td><td>0</td></tr><tr><td>facility_broadcast</td><td>예능 방송국</td><td>27 · 28 · 30</td><td>1</td></tr><tr><td>facility_concert</td><td>콘서트장</td><td>32 · 33 · 35</td><td>1</td></tr></tbody></table></div>
+
+<p>대상이 아닌 16칸과 그 칸에서 하는 일:</p>
+
+<div class="table-scroll"><table><thead><tr><th>칸 번호</th><th>종류 (<code>tile_kind</code>)</th><th>화면 이름</th><th>도착하면</th></tr></thead><tbody><tr><td>1</td><td>start_settlement</td><td>출발 · 사옥</td><td>지나면 돈, 사옥 건설 기회. 룰렛 없음</td></tr><tr><td>3 · 18 · 34</td><td>fan_chance</td><td>팬 반응</td><td>팬 반응 카드(모노폴리GO 공동기금 자리)</td></tr><tr><td>5 · 40</td><td>settlement · large_settlement</td><td>정산</td><td>정산을 받음(모노폴리GO 세금 자리)</td></tr><tr><td>6 · 16 · 26 · 36</td><td>fan_gate_provisional · overseas_study_provisional</td><td>쟁탈전</td><td>쟁탈전(모노폴리GO 철도 자리)</td></tr><tr><td>8 · 23 · 38</td><td>schedule_chance</td><td>찬스</td><td>찬스 카드</td></tr><tr><td>11</td><td>on_air</td><td>기숙사</td><td>짓기 없음 · 회복 · 팀 단합</td></tr><tr><td>21</td><td>on_air</td><td>본가</td><td>짓기 없음 · 회복 · 태도 회복</td></tr><tr><td>31</td><td>standby</td><td>감옥</td><td>도착하면 바로 갇힘. 더블 굴리기 3번으로 탈출, 못 나오면 벌금 내고 나옴</td></tr></tbody></table></div>
+
+<ul>
+<li>보드 번호는 1부터 셉니다. 모노폴리GO 0·10·20·30번 자리가 우리 1·11·21·31번입니다.</li>
+<li>방송국 27·28·30과 콘서트장 32·33·35는 <code>hit_roulette=1</code>인 잭팟 칸입니다. 필러 룰렛은 이 6칸도 다른 18칸과 같은 <code>outcomes</code> 설정으로 판정합니다. 기획 기준 30/30/40과 현재 설정 15/50/35의 차이는 아래 출처 대조에 남깁니다. 잭팟 추첨은 작업전입니다.</li>
+</ul>
+
+
+<h3 id="칸별-상세-40칸-확정-board_tilecsv-그대로">칸별 상세 40칸 (확정 · <code>board_tile.csv</code> 그대로)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>칸</th><th>칸 ID</th><th>종류 (<code>tile_kind</code>)</th><th>묶음 (<code>group</code>)</th><th>시설 (<code>fac_id</code>)</th><th>화면 이름</th><th><code>base_income</code></th><th><code>hit_roulette</code></th><th>필러 룰렛</th><th>지금 표시 코인 기준값</th></tr></thead><tbody><tr><td>1</td><td>board_tile_01</td><td>start_settlement</td><td>corner_start</td><td>facility_company</td><td>출발 · 사옥</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>2</td><td>board_tile_02</td><td>building</td><td>facility</td><td>facility_dorm</td><td>아카데미</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>3</td><td>board_tile_03</td><td>fan_chance</td><td>fan_react</td><td>—</td><td>팬 반응</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>4</td><td>board_tile_04</td><td>building</td><td>facility</td><td>facility_dance</td><td>댄스 연습실</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>5</td><td>board_tile_05</td><td>settlement</td><td>settle</td><td>—</td><td>정산</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>6</td><td>board_tile_06</td><td>fan_gate_provisional</td><td>casting</td><td>—</td><td>쟁탈전</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>7</td><td>board_tile_07</td><td>building</td><td>facility</td><td>facility_recording</td><td>보컬 녹음실</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>8</td><td>board_tile_08</td><td>schedule_chance</td><td>schedule</td><td>—</td><td>찬스</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>9</td><td>board_tile_09</td><td>building</td><td>facility</td><td>facility_recording</td><td>보컬 녹음실</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>10</td><td>board_tile_10</td><td>building</td><td>facility</td><td>facility_producing</td><td>프로듀싱 스튜디오</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>11</td><td>board_tile_11</td><td>on_air</td><td>corner_rest</td><td>—</td><td>기숙사</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>12</td><td>board_tile_12</td><td>building</td><td>facility</td><td>facility_fanshop</td><td>팬샵</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>13</td><td>board_tile_13</td><td>building</td><td>facility</td><td>facility_producing</td><td>프로듀싱 스튜디오</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>14</td><td>board_tile_14</td><td>building</td><td>facility</td><td>facility_fanshop</td><td>팬샵</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>15</td><td>board_tile_15</td><td>building</td><td>facility</td><td>facility_fanshop</td><td>팬샵</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>16</td><td>board_tile_16</td><td>fan_gate_provisional</td><td>casting</td><td>—</td><td>쟁탈전</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>17</td><td>board_tile_17</td><td>building</td><td>facility</td><td>facility_agency</td><td>뷰티 스튜디오</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>18</td><td>board_tile_18</td><td>fan_chance</td><td>fan_react</td><td>—</td><td>팬 반응</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>19</td><td>board_tile_19</td><td>building</td><td>facility</td><td>facility_agency</td><td>뷰티 스튜디오</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>20</td><td>board_tile_20</td><td>building</td><td>facility</td><td>facility_agency</td><td>뷰티 스튜디오</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>21</td><td>board_tile_21</td><td>on_air</td><td>corner_rest</td><td>—</td><td>본가</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>22</td><td>board_tile_22</td><td>building</td><td>facility</td><td>facility_recording</td><td>보컬 녹음실</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>23</td><td>board_tile_23</td><td>schedule_chance</td><td>schedule</td><td>—</td><td>찬스</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>24</td><td>board_tile_24</td><td>building</td><td>facility</td><td>facility_dance</td><td>댄스 연습실</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>25</td><td>board_tile_25</td><td>building</td><td>facility</td><td>facility_dance</td><td>댄스 연습실</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>26</td><td>board_tile_26</td><td>fan_gate_provisional</td><td>casting</td><td>—</td><td>쟁탈전</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>27</td><td>board_tile_27</td><td>building</td><td>facility</td><td>facility_broadcast</td><td>예능 방송국</td><td>0</td><td>1</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>28</td><td>board_tile_28</td><td>building</td><td>facility</td><td>facility_broadcast</td><td>예능 방송국</td><td>0</td><td>1</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>29</td><td>board_tile_29</td><td>building</td><td>facility</td><td>facility_producing</td><td>프로듀싱 스튜디오</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>30</td><td>board_tile_30</td><td>building</td><td>facility</td><td>facility_broadcast</td><td>예능 방송국</td><td>0</td><td>1</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>31</td><td>board_tile_31</td><td>standby</td><td>corner_jail</td><td>—</td><td>감옥</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>32</td><td>board_tile_32</td><td>building</td><td>facility</td><td>facility_concert</td><td>콘서트장</td><td>0</td><td>1</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>33</td><td>board_tile_33</td><td>building</td><td>facility</td><td>facility_concert</td><td>콘서트장</td><td>0</td><td>1</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>34</td><td>board_tile_34</td><td>fan_chance</td><td>fan_react</td><td>—</td><td>팬 반응</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>35</td><td>board_tile_35</td><td>building</td><td>facility</td><td>facility_concert</td><td>콘서트장</td><td>0</td><td>1</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>36</td><td>board_tile_36</td><td>overseas_study_provisional</td><td>casting</td><td>—</td><td>쟁탈전</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>37</td><td>board_tile_37</td><td>building</td><td>facility</td><td>facility_dorm</td><td>아카데미</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>38</td><td>board_tile_38</td><td>schedule_chance</td><td>schedule</td><td>—</td><td>찬스</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr><tr><td>39</td><td>board_tile_39</td><td>building</td><td>facility</td><td>facility_dorm</td><td>아카데미</td><td>0</td><td>0</td><td>열림</td><td>0 (보드 값)</td></tr><tr><td>40</td><td>board_tile_40</td><td>large_settlement</td><td>settle</td><td>—</td><td>정산</td><td>0</td><td>0</td><td>없음</td><td>—</td></tr></tbody></table></div>
+
+<ul>
+<li>위 표의 <code>base_income</code>은 모두 <code>0</code>입니다. 그래서 지금 시뮬레이터의 표시 코인은 배수·판정과 상관없이 0이고, 출처는 「보드 기본 수익 사용」입니다. 빈칸으로 바꾸면 임시 기준값 1000이 쓰입니다.</li>
+</ul>
+
+<h3 id="영수증-예시-계산-예-기준값-1000-배수-2-판정-올킬일-때의-모양">영수증 예시 (계산 예 · 기준값 1000, 배수 ×2, 판정 올킬일 때의 모양)</h3>
+
+<pre class="src">
+{
+ &quot;version&quot;: 1,
+ &quot;tileId&quot;: &quot;(27번 칸의 tile_id)&quot;,
+ &quot;boardIndex&quot;: 27,
+ &quot;facilityRef&quot;: &quot;facility_broadcast&quot;,
+ &quot;tileName&quot;: &quot;예능 방송국&quot;,
+ &quot;multiplier&quot;: 2,
+ &quot;seed&quot;: &quot;(메인 도착 요청 ID)&quot;,
+ &quot;outcomeKey&quot;: &quot;great&quot;,
+ &quot;outcomeLabel&quot;: &quot;올킬&quot;,
+ &quot;factor&quot;: 2,
+ &quot;displayedReward&quot;: { &quot;coins&quot;: 4000, &quot;dice&quot;: 0, &quot;cards&quot;: 0 },
+ &quot;baseSource&quot;: &quot;temporary&quot;,
+ &quot;baseValue&quot;: 1000,
+ &quot;ruleSource&quot;: &quot;/data/game/economy_config.csv&quot;,
+ &quot;probabilitySource&quot;: &quot;/data/simulator/building-arrival.json#outcomes&quot;,
+ &quot;growthTotal&quot;: null,
+ &quot;presentationOnly&quot;: true
+}
+</pre>
+
+<ul>
+<li>이 예는 계산 모양을 보여 주기 위한 것입니다. 지금 표 값(<code>base_income</code> 0)으로는 <code>baseSource</code>가 <code>board</code>, <code>baseValue</code>가 0, <code>coins</code>가 0입니다.</li>
+</ul>
+<p><a id="probability-sources"></a></p>
+<h3>기획·실행 설정·policy 라벨의 세 갈래 출처</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>역할</th>
+<th>기록된 내용</th>
+<th>읽는 방법과 확인 경계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이 문서의 기획 기준</td>
+<td>올킬 30% · 차트인 30% · 광탈 40%</td>
+<td>기존 계획으로 보존합니다. 현재 설정과 차이가 있어 실제 실행값·최종 결정으로 단정하지 않습니다.</td>
+</tr>
+<tr>
+<td>표시 전용 실행 설정</td>
+<td><code>building-arrival.json</code>의 <code>outcomes[].weight</code> = 15/50/35, <code>presentationOnly=true</code></td>
+<td><code>loadBuildingArrival()</code>은 이 weight를 읽고 <code>resolve()</code>가 판정에 사용합니다. 표시 영수증이며 실제 지갑 지급 확률을 뜻하지 않습니다.</td>
+</tr>
+<tr>
+<td>같은 설정의 policy 라벨</td>
+<td><code>probabilityPolicy=fixed_user_20261021_30_30_40</code></td>
+<td>정책 이름 문자열입니다. 로더가 문자열의 숫자를 해석하거나 weight 대신 쓰지 않습니다.</td>
+</tr>
+</tbody>
+</table></div>
+<p>기획 기준과 실행 설정·라벨은 역할을 구분해 함께 보존합니다. 어느 값이 의도된 최종 기준인지 직접 결정 근거는 아직 대조하지 못했습니다. 표시 전용 설정의 차이를 실제 운영 지급 확률의 오류로 확대하거나, 숫자가 같은 보드 경제 설정과 자동으로 합치지 않습니다.</p>
+
+<h3 id="판정-확률과-계수-확정-building-arrivaljson-outcomes-economy_configcsv">판정 확률과 계수 (기획 기준과 실행 설정 대조 · <code>building-arrival.json</code> <code>outcomes</code> · <code>economy_config.csv</code>)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>판정 키</th><th>화면 이름</th><th>아이콘</th><th>색</th><th>기획 기준 (30/30/40)</th><th>계수 열 (<code>economy_config</code>)</th><th>계수</th></tr></thead><tbody><tr><td>great (economyKey big)</td><td>올킬</td><td>✦</td><td>#efbf51 (금색)</td><td>30</td><td>hit_big_factor_pct</td><td>200% (×2)</td></tr><tr><td>mid</td><td>차트인</td><td>♪</td><td>#b7a1ec (보라)</td><td>30</td><td>hit_mid_factor_pct</td><td>100% (×1)</td></tr><tr><td>miss</td><td>광탈</td><td>☁</td><td>#8dc7dc (하늘)</td><td>40</td><td>hit_miss_factor_pct</td><td>50% (×0.5)</td></tr></tbody></table></div>
+
+<ul>
+<li><code>probabilityPolicy</code> 라벨은 <code>fixed_user_20261021_30_30_40</code>입니다. 로더는 이 문자열을 확률 수치로 해석하지 않고 <code>outcomes[].weight</code>를 읽습니다. 세 weight의 합이 100이 아니면 화면이 열리지 않고 오류를 냅니다. 기획 기준·현재 설정·라벨의 정합과 직접 결정 근거는 7장의 확인 항목입니다.</li>
+<li><code>economy_config.csv</code>에는 <code>hit_big_weight</code> 15 · <code>hit_mid_weight</code> 50 · <code>hit_miss_weight</code> 35 줄도 남아 있습니다. 이 세 줄은 필러 룰렛이 읽지 않습니다. 필러 룰렛은 같은 표에서 <b>계수 세 줄만</b> 읽습니다.</li>
+<li>확률 보정: 없음. 건물 단계, 스킬, 찬스 카드, 연속 광탈 보상 같은 보정은 넣지 않습니다.</li>
+<li>기획 기준 30/30/40의 계산 예: 0.30×2 + 0.30×1 + 0.40×0.5 = 1.10. 기획상 평균 표시 보상은 기준값×배수×1.1입니다(위 기획 표만으로 계산한 값). 현재 JSON 설정의 기대값으로 읽지 않습니다.</li>
+</ul>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 624 536" width="624" height="536" role="img" aria-labelledby="title-P72-2"><title id="title-P72-2">설명 흐름도 P72-2</title><defs><marker id="arrow-P72-2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M108,82 L108,104.5 L222,134.9558823529412" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-2)"/><path d="M312,82 L312,104.5 L312,127" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-2)"/><path d="M516,82 L516,104.5 L402,134.9558823529412" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-2)"/><path d="M312,191 L312,213.5 L312,236" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-2)"/><path d="M312,300 L312,322.5 L312,345" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-2)"/><path d="M312,409 L312,431.5 L312,454" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P72-2)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">보드 칸과 기본 수익</tspan></text><rect x="222" y="127" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="312" y="164" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="312" dy="0">표시 코인 계산</tspan></text><rect x="222" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="312" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="312" dy="0">이번 굴림의 배수</tspan></text><rect x="426" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="516" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="516" dy="0">판정별 계수</tspan></text><rect x="222" y="236" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="312" y="273" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="312" dy="0">내림한 표시 코인</tspan></text><rect x="222" y="345" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="312" y="382" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="312" dy="0">화면에만 표시</tspan></text><rect x="222" y="454" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="312" y="491" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="312" dy="0">실제 지갑은 변경하지 않음</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">보드 칸과 기본 수익 → 표시 코인 계산 / 이번 굴림의 배수 → 표시 코인 계산 / 판정별 계수 → 표시 코인 계산 / 표시 코인 계산 → 내림한 표시 코인 / 내림한 표시 코인 → 화면에만 표시 / 화면에만 표시 → 실제 지갑은 변경하지 않음</p></figure>
+
+
+
+<h3 id="표시-보상-계산-확정-building-arrivalmjs-resolve">표시 보상 계산 (확정 · <code>building-arrival.mjs</code> <code>resolve</code>)</h3>
+
+<p>계산식: <b>표시 코인 = 내림(기준값 × 주사위 배수 × 판정 계수)</b></p>
+
+<ul>
+<li>기준값: 그 칸 <code>board_tile.base_income</code> 칸이 비어 있지 않으면 그 값을 쓰고, 출처 문구 「보드 기본 수익 사용」을 보여 줍니다. 비어 있으면 설정의 임시 기준값 <code>temporaryBaseMoney</code> <b>1000</b>을 쓰고 「기본 수익 미정 · 임시값 사용」을 보여 줍니다.</li>
+<li>주사위 배수: 메인에서 굴린 배수. 1보다 작으면 오류입니다. 직접 테스트에서는 1입니다.</li>
+<li>판정 계수: 위 표의 2 · 1 · 0.5.</li>
+<li>결과가 안전한 정수가 아니면 오류로 멈춥니다.</li>
+</ul>
+
+<p>계산 예(임시 기준값 1000일 때):</p>
+
+<div class="table-scroll"><table><thead><tr><th>경우</th><th>배수</th><th>판정</th><th>계산</th><th>표시 코인</th></tr></thead><tbody><tr><td>1</td><td>×1</td><td>올킬</td><td>1000 × 1 × 2</td><td>2,000</td></tr><tr><td>2</td><td>×1</td><td>차트인</td><td>1000 × 1 × 1</td><td>1,000</td></tr><tr><td>3</td><td>×1</td><td>광탈</td><td>1000 × 1 × 0.5</td><td>500</td></tr><tr><td>4</td><td>×2</td><td>올킬</td><td>1000 × 2 × 2</td><td>4,000</td></tr><tr><td>5</td><td>×2</td><td>차트인</td><td>1000 × 2 × 1</td><td>2,000</td></tr><tr><td>6</td><td>×2</td><td>광탈</td><td>1000 × 2 × 0.5</td><td>1,000</td></tr></tbody></table></div>
+
+<ul>
+<li>지금 표의 실제 값: 24칸 모두 <code>base_income</code>이 <code>0</code>으로 들어 있습니다. 코드는 「빈칸」만 임시값으로 바꾸므로, 지금 시뮬레이터에서는 기준값 0 → 표시 코인 <b>0</b>, 출처 「보드 기본 수익 사용」이 나옵니다. 칸 수익 값은 발란스 대기입니다(남은 결정 참고).</li>
+<li>표시 보상은 <code>displayedReward</code>에 코인만 담고 주사위 0, 카드 0입니다. 화면 아래에 「임시 표시 보상입니다. 실제 보유량에 더하지 않습니다.」가 항상 붙습니다.</li>
+<li>실제 돈 지급은 작업전입니다. 칸 수익은 그 칸 건물 단계를 따라 오르도록(모노폴리GO 보드 단계 역할) 설계되어 있고, 숫자는 발란스 대기입니다.</li>
+</ul>
+
+<h3 id="도착-성장-요약-확정-기존-성장식-사용">도착 성장 요약 (확정 · 기존 성장식 사용)</h3>
+
+<ul>
+<li>도착 때 팀 능력이 오르는 양은 P107의 기존 도착 성장식이 계산합니다. 필러 룰렛은 그 결과 숫자(<code>growthTotal</code>)만 받아 「이번 도착 팀 능력 +○」로 보여 줍니다.</li>
+<li>성장 숫자가 없으면 「도착 성장 수치는 기존 성장 계산을 사용합니다.」를 보여 줍니다. 현재 건설 모듈의 기본 판정 호출은 성장 요약을 넘기지 않으며, 전달된 영수증에 <code>growthTotal</code>이 있을 때만 숫자를 표시합니다. 상위에서 이 값을 공급하는 연결은 미확인입니다.</li>
+<li>룰렛은 성장을 다시 뽑거나, 다시 계산하거나, 판정 계수를 성장에 곱하지 않습니다. 같은 판정을 기존 판정 칸에 한 번 넘기는 것까지가 이 문서의 몫입니다.</li>
+<li>도착만으로 건물 단계를 1 올리지 않습니다.</li>
+</ul>
+
+<h3 id="영수증-필드-확정-resolve-반환값">영수증 필드 (확정 · <code>resolve</code> 반환값)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>필드</th><th>뜻</th></tr></thead><tbody><tr><td>version</td><td>1</td></tr><tr><td>tileId · boardIndex</td><td>칸 ID와 칸 번호(짝이 맞아야 다시 받을 수 있음)</td></tr><tr><td>facilityRef · tileName</td><td>시설 ID(<code>fac_id</code>)와 화면 이름(<code>name_ko</code>)</td></tr><tr><td>multiplier</td><td>주사위 배수</td></tr><tr><td>seed</td><td>판정 씨앗(요청 ID)</td></tr><tr><td>outcomeKey · outcomeLabel · factor</td><td>판정 키, 화면 이름, 계수</td></tr><tr><td>displayedReward</td><td>코인(표시), 주사위 0, 카드 0</td></tr><tr><td>baseSource · baseValue</td><td>기준값 출처(board 또는 temporary)와 값</td></tr><tr><td>ruleSource · probabilitySource</td><td><code>/data/game/economy_config.csv</code>, <code>/data/simulator/building-arrival.json#outcomes</code></td></tr><tr><td>growthTotal</td><td>성장 요약 숫자 또는 비움</td></tr><tr><td>presentationOnly</td><td>true(표시 전용)</td></tr></tbody></table></div>
+
+<h3 id="칸-도착-필러-종류-구조-확정-문장-연결-일부-작업전">칸 도착 필러 종류 (구조 확정 · 문장 연결 일부 작업전)</h3>
+
+<p>등급 룰렛은 필러의 한 종류입니다. 모노카피바라 필러 스튜디오에는 도착·독백·조우·등급·리액션·보상·챕터 전환이 있고, 착지할 때 여러 종류가 이어집니다(원본 <code>src/ui/logbox/LogBox.ts</code>, <code>src/tools/fillerStudioTool/main.ts</code>). 원본 이야기·초상·숫자는 가져오지 않습니다. 우리 문장은 P62·P63과 기존 칸 기능을 씁니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>원본 종류</th><th>하는 일</th><th>우리 상황</th><th>상태</th></tr></thead><tbody><tr><td>F-A 도착</td><td>장소 이름과 한 줄</td><td>모든 칸의 도착 카드. 지금 룰렛 화면 맨 위 「{칸 번호}번 · {칸 이름}」</td><td>연결됨</td></tr><tr><td>F-C 독백</td><td>이름 배지 옆에서 대사가 나타남</td><td>건물 칸·코너·사옥. P62 한 줄</td><td>구조만. 초상 그림 없음</td></tr><tr><td>F-B 조우</td><td>리본 카드. 선택·장소</td><td>팬 반응 3·18·34, 쟁탈전 6·16·26·36</td><td>구조만</td></tr><tr><td>F-B 이어지는 사건</td><td>같은 사건이 이어질 수 있음</td><td>찬스 8·23·38</td><td>구조만. 단계 수 비움</td></tr><tr><td>F-D 리액션</td><td>이긴 뒤·진 뒤 말풍선</td><td>판정 뒤 몬스 한마디. 쟁탈전 승패는 후속</td><td>작업전</td></tr><tr><td>F-E 등급</td><td>결과에서 멈추는 연출, 배지는 등급</td><td>건물 24칸. 지금은 3D 복셀 휠</td><td>연결됨</td></tr><tr><td>F-F 보상</td><td>받은 것을 칩으로 보여 줌</td><td>표시 코인 한 줄</td><td>연결됨(표시만)</td></tr><tr><td>F-G 챕터</td><td>한 구간이 바뀔 때 큰 한 줄</td><td>사옥 1에 다시 도착. 페스티벌·시즌 종료는 후속</td><td>작업전</td></tr><tr><td>전투 결과</td><td>승패 한 줄과 칩. 지면 등급 없음</td><td>쟁탈전 결과</td><td>작업전</td></tr><tr><td>잭팟 턴</td><td>그 턴은 등급 룰렛을 건너뜀</td><td>방송국·콘서트장에서 잭팟이 날 때</td><td>작업전</td></tr></tbody></table></div>
+
+<p>칸이 쓰는 껍질:</p>
+
+<div class="table-scroll"><table><thead><tr><th>타입</th><th>칸</th><th>보이는 것</th></tr></thead><tbody><tr><td>도착</td><td>모든 칸</td><td>장소 이름과 그 칸의 활동</td></tr><tr><td>독백</td><td>건물 24칸 · 기숙사 11 · 본가 21 · 감옥 31 · 사옥 1</td><td>말하는 사람 배지와 말풍선 한 줄</td></tr><tr><td>조우</td><td>팬 반응 3·18·34, 쟁탈전 6·16·26·36</td><td>리본 카드 한 장</td></tr><tr><td>사건</td><td>찬스 8·23·38</td><td>리본 카드 한 장. 단계 숫자 없음</td></tr><tr><td>결과</td><td>정산 5·40</td><td>리본 카드 한 장</td></tr><tr><td>등급</td><td>건물 24칸</td><td>3D 휠. 결과는 올킬·차트인·광탈</td></tr><tr><td>리액션</td><td>건물 칸 판정이 멈춘 뒤</td><td>몬스 한마디(작업전)</td></tr><tr><td>보상</td><td>건물 24칸</td><td>표시 코인</td></tr><tr><td>챕터</td><td>사옥 1에 다시 도착</td><td>「한 바퀴」 큰 글자, 이어서 독백(작업전)</td></tr></tbody></table></div>
+
+<p>원본의 세금·영지·마법탑·던전은 우리 보드 칸이 아닙니다. 그 자리의 그릇(강제 사건, 장소 소개, 층마다 반복)만 적어 두고 칸을 새로 만들지 않습니다.</p>
+
+<h3 id="판정-대사-초안-임시-시안-슬롯-연결-작업전">판정 대사 초안 (임시 시안 · 슬롯 연결 작업전)</h3>
+
+<p>P63·P62에 있는 초안 문장입니다. 초안은 판정 이름을 대박·중박·운망으로 적었으므로, 화면에 넣을 때는 올킬·차트인·광탈로 바꿔 씁니다(대박 → 올킬, 중박 → 차트인, 운망 → 광탈). 실행 표 <code>board_runtime_filler_dialogue.csv</code>는 이 문서의 기존 본문에는 「머리줄만」, 6장 표에는 「파일 없음」으로 다르게 기록되어 있어 현재 파일·소비 확인 대기입니다. 아래 문장은 실행 표 반영을 확인한 현재 문구가 아니라 대사 초안으로 읽습니다. 칸 이름은 초안이 인용한 이름이며 지금 보드 이름(예능 방송국·콘서트장)과 다를 수 있습니다.</p>
+
+<p>판정 배지와 리액션은 예능 방송국 27·28·30, 콘서트장 32·33·35 여섯 칸에만 있습니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>칸</th><th>판정</th><th>배지</th><th>리액션</th></tr></thead><tbody><tr><td>27 유튜브 라이브</td><td>올킬</td><td>〔 대박 · 이번엔 음악방송 무대에 섭니다 〕</td><td>아이돌: 「대표님, 방송국에서 연락이 왔어요!」</td></tr><tr><td>27 유튜브 라이브</td><td>차트인</td><td>〔 중박 · 라이브 채팅이 쉬지 않고 올라갑니다 〕</td><td>아이돌: 「댓글 다 읽고 싶어요.」</td></tr><tr><td>27 유튜브 라이브</td><td>광탈</td><td>〔 운망 · 시청자가 적습니다 · 하이라이트만 남았습니다 〕</td><td>아이돌: 「다음 라이브는 더 재밌게 준비할게요.」</td></tr><tr><td>28 팬플 라이브</td><td>올킬</td><td>〔 대박 · 이번엔 예능에 출연합니다 〕</td><td>매니저: 「대표님, 큰 방송에서 출연 문의가 들어왔습니다.」</td></tr><tr><td>28 팬플 라이브</td><td>차트인</td><td>〔 중박 · 팬들이 라이브에 끝까지 남았습니다 〕</td><td>아이돌: 「끝까지 봐 줘서 고마워요!」</td></tr><tr><td>28 팬플 라이브</td><td>광탈</td><td>〔 운망 · 접속이 금방 줄었습니다 · 다시보기만 남았습니다 〕</td><td>아이돌: 「다음엔 공지 먼저 올릴게요.」</td></tr><tr><td>30 숏폼 라이브</td><td>올킬</td><td>〔 대박 · 이번엔 시상식 무대에 섭니다 〕</td><td>아이돌: 「챌린지 영상이 여기저기 올라와요!」</td></tr><tr><td>30 숏폼 라이브</td><td>차트인</td><td>〔 중박 · 짧은 영상 반응이 좋습니다 〕</td><td>아이돌: 「한 번 더 찍어 볼까요?」</td></tr><tr><td>30 숏폼 라이브</td><td>광탈</td><td>〔 운망 · 짧은 조각만 돌았습니다 〕</td><td>아이돌: 「안무 포인트를 다시 잡아 볼게요.」</td></tr><tr><td>32 거리 버스킹</td><td>올킬</td><td>〔 대박 · 이번엔 소극장 무대에 섭니다 〕</td><td>아이돌: 「대표님, 실내 무대에서 불러 주신대요!」</td></tr><tr><td>32 거리 버스킹</td><td>차트인</td><td>〔 중박 · 지나가던 사람들이 걸음을 멈췄습니다 〕</td><td>팬: 「이 노래 뭐야? 처음 듣는데 좋다.」</td></tr><tr><td>32 거리 버스킹</td><td>광탈</td><td>〔 운망 · 거리가 한산합니다 〕</td><td>아이돌: 「한 곡만 더 불러 볼게요.」</td></tr><tr><td>33 대학 축제</td><td>올킬</td><td>〔 대박 · 이번엔 공연장 무대에 섭니다 〕</td><td>아이돌: 「앵콜이 멈추지 않아요!」</td></tr><tr><td>33 대학 축제</td><td>차트인</td><td>〔 중박 · 축제 무대 반응이 좋습니다 〕</td><td>팬: 「다음 곡도 불러 주세요!」</td></tr><tr><td>33 대학 축제</td><td>광탈</td><td>〔 운망 · 앞 순서 무대에 관객이 몰렸습니다 〕</td><td>아이돌: 「다음엔 우리가 먼저 불러 주시게 할게요.」</td></tr><tr><td>35 거리공연</td><td>올킬</td><td>〔 대박 · 이번엔 아레나 무대에 섭니다 〕</td><td>매니저: 「대표님, 큰 무대에서 초청이 왔습니다.」</td></tr><tr><td>35 거리공연</td><td>차트인</td><td>〔 중박 · 공연장 앞에 사람이 모였습니다 〕</td><td>팬: 「여기 자리 맡아 둘게!」</td></tr><tr><td>35 거리공연</td><td>광탈</td><td>〔 운망 · 비어 있는 자리가 많습니다 〕</td><td>아이돌: 「온 사람한테는 최고의 무대를 보여 줄래요.」</td></tr></tbody></table></div>
+
+<p>판정에 붙는 몬스 한마디(초안):</p>
+
+<div class="table-scroll"><table><thead><tr><th>판정</th><th>몬스</th><th>한마디</th></tr></thead><tbody><tr><td>올킬</td><td>옐로</td><td>「우와, 우리 저기 서는 거야? 최고!」</td></tr><tr><td>올킬 안의 잭팟</td><td>핑크</td><td>「터졌다 터졌다! 진짜 터졌어!」</td></tr><tr><td>차트인</td><td>그린</td><td>「좋았어어… 다음엔 더 크게 하자.」</td></tr><tr><td>광탈</td><td>블루</td><td>「괜찮아. 다음.」</td></tr><tr><td>광탈</td><td>퍼플</td><td>「…또 하면 돼.」</td></tr></tbody></table></div>
+
+<p>잭팟 문구(초안). 잭팟은 올킬 안에서 드물게 한 번 더 터지는 큰 수익이며 지금은 작업전입니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>자리</th><th>배지</th><th>리액션</th></tr></thead><tbody><tr><td>방송국</td><td>〔 잭팟 · 방송 수익이 크게 들어옵니다 〕</td><td>매니저: 「대표님, 방송 반응이 대단합니다.」</td></tr><tr><td>공연장</td><td>〔 잭팟 · 공연장 수익이 크게 들어옵니다 〕</td><td>팬: 「여기서 공연한대! 빨리 와!」</td></tr></tbody></table></div>
+
+<p>나머지 건물 칸의 도착 한 줄(P62 초안). 칸 번호는 지금 보드 기준으로 적었습니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>시설 · 칸</th><th>도착 알림</th><th>독백 · 대사</th><th>몬스 한마디</th></tr></thead><tbody><tr><td>댄스 연습실 4·24·25</td><td>〔 연습실 도착 · {칸 이름} 〕</td><td>나: 「흘린 땀은 무대에서 보인다.」 · 아이돌: 「한 번만 더 맞춰 볼게요!」</td><td>핑크: 「한 번 더, 한 번 더! 이번엔 박자 맞았어!」</td></tr><tr><td>보컬 녹음실 7·9·22</td><td>〔 녹음실 도착 · {칸 이름} 〕</td><td>나: 「목소리가 전보다 단단해졌다.」 · 아이돌: 「이번 테이크, 느낌 좋아요.」</td><td>블루: 「숨 고르고. 다시.」</td></tr><tr><td>팬샵 12·14·15</td><td>〔 팬샵 도착 · {칸 이름} 〕</td><td>나: 「응원봉을 든 팬들이 줄을 섰다.」 · 팬: 「사인 받으려고 일찍 왔어요!」</td><td>옐로: 「우와, 응원봉 바다다!」</td></tr><tr><td>뷰티 스튜디오 17·19·20</td><td>〔 기획사 도착 · {칸 이름} 〕</td><td>나: 「콘셉트가 서면 다음 무대가 보인다.」 · 아이돌: 「이번 콘셉트, 저 마음에 들어요.」</td><td>그린: 「이번 콘셉트… 우리 색이랑 잘 어울려어.」</td></tr><tr><td>예능 방송국 27·28·30</td><td>〔 방송국 도착 · {칸 이름} 〕</td><td>나: 「카메라 앞에서 떨지만 않으면 된다.」</td><td>퍼플: 「…떨지 마.」</td></tr><tr><td>콘서트장 32·33·35</td><td>〔 공연장 도착 · {칸 이름} 〕</td><td>나: 「조명이 켜졌다. 이제 아이들 차례다.」</td><td>퍼플: 「…떨지 마.」</td></tr><tr><td>본가 21</td><td>〔 본가 〕</td><td>아이돌: 「오랜만에 가족 얼굴 보고 왔어요.」</td><td>초안에 본가 한마디는 없음</td></tr><tr><td>기숙사 11</td><td>〔 숙소 〕</td><td>아이돌: 「멤버들이랑 야식 먹으면서 쉬었어요.」</td><td>퍼플: 「…잘 자.」</td></tr></tbody></table></div>
+
+<ul>
+<li>프로듀싱 스튜디오 10·13·29와 아카데미 2·37·39는 초안에 도착 한 줄이 없습니다(작업전).</li>
+<li><code>{칸 이름}</code>은 초안이 비워 둔 자리입니다.</li>
+</ul>
+
+<h3 id="도착-화면-세-칸-확정-arrival-roulettemjs-나눔-배치">도착 화면 세 칸 (확정 · <code>arrival-roulette.mjs</code> 나눔 배치)</h3>
+
+<p>칸에 도착하면 화면을 세 칸으로 나눕니다. 기준은 모노카피바라입니다(무대, 필러 창 <code>filler-pane</code>, 아래 버튼 줄 <code>dock</code>의 <code>cta-row</code>가 따로).</p>
+
+<div class="table-scroll"><table><thead><tr><th>칸</th><th>하는 일</th><th>넣는 것</th><th>넣지 않는 것</th></tr></thead><tbody><tr><td>연출</td><td>도착을 보여 주기</td><td>3D 복셀 휠(나눔 배치에서는 휠만 화면 가득)</td><td>버튼, 금액</td></tr><tr><td>필러</td><td>그 칸의 이야기와 결과</td><td>「{번호}번 · {이름}」, 제목 「도착 필러 룰렛」, 도는 중 안내, 확률 범례(<code>data.outcomes</code>의 이름·weight; 기획안은 올킬 30% · 차트인 30% · 광탈 40%), 결과 「{이름} · ×{계수}」, 「표시 보상 · {코인} 코인」, 성장 요약, 기준값 출처, 표시 전용 안내</td><td>누르는 버튼</td></tr><tr><td>버튼</td><td>손이 고르는 것</td><td>「건물 연출 보기」, 「메인으로 돌아가기」</td><td>대사, 휠</td></tr></tbody></table></div>
+
+<ul>
+<li>시뮬레이터가 필러 칸과 버튼 칸 자리를 주면 위처럼 나눠 그립니다. 자리를 주지 않으면 한 장짜리 카드(가로 최대 420px, 휠 310×250px) 안에 위 순서대로 모두 넣습니다.</li>
+<li>「건물 연출 보기」는 휠이 멈추고 결과가 공개된 뒤에만 보입니다. 도는 동안에는 결과 이름·금액·성장 요약·출처가 비어 있습니다.</li>
+<li>「메인으로 돌아가기」는 처음부터 보입니다.</li>
+</ul>
+
+<h3 id="화면-문구-확정-building-arrivaljson-copy">화면 문구 (확정 · <code>building-arrival.json</code> <code>copy</code>)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>키</th><th>문구</th></tr></thead><tbody><tr><td>title</td><td>도착 필러 룰렛</td></tr><tr><td>arrival</td><td>{pos}번 · {name}</td></tr><tr><td>spinning</td><td>올킬 · 차트인 · 광탈을 확인하고 있어요.</td></tr><tr><td>result</td><td>{label} · ×{factor}</td></tr><tr><td>reward</td><td>표시 보상 · {coins} 코인</td></tr><tr><td>rewardNote</td><td>임시 표시 보상입니다. 실제 보유량에 더하지 않습니다.</td></tr><tr><td>sourceBoard</td><td>보드 기본 수익 사용</td></tr><tr><td>sourceTemporary</td><td>기본 수익 미정 · 임시값 사용</td></tr><tr><td>growth</td><td>이번 도착 팀 능력 +{gain}</td></tr><tr><td>noGrowth</td><td>도착 성장 수치는 기존 성장 계산을 사용합니다.</td></tr><tr><td>ready</td><td>도착 룰렛 대기</td></tr><tr><td>play</td><td>선택한 칸 도착 테스트</td></tr><tr><td>finish</td><td>메인으로 돌아가기</td></tr><tr><td>continue</td><td>건물 연출 보기</td></tr><tr><td>standaloneTitle</td><td>24개 대지 도착 테스트</td></tr><tr><td>standaloneNote</td><td>오디션 없이 선택한 칸의 필러·보상·건물 연출을 확인합니다.</td></tr><tr><td>incoming</td><td>메인에서 전달된 도착</td></tr><tr><td>empty</td><td>아직 빈 대지입니다. 필러 결과를 확인한 뒤 메인으로 돌아갈 수 있어요.</td></tr><tr><td>playingBuilding</td><td>현재 저장 단계의 건설 연출입니다. 실제 건물 단계는 바꾸지 않습니다.</td></tr><tr><td>busy</td><td>룰렛을 확인하는 중이에요. 메인으로 돌아가면 연출을 건너뜁니다.</td></tr><tr><td>skipped</td><td>도착 연출을 건너뛰고 메인으로 돌아갑니다.</td></tr><tr><td>replay</td><td>같은 결과 다시 보기</td></tr><tr><td>invalid</td><td>건물 도착 정보를 확인해 주세요.</td></tr><tr><td>loading</td><td>도착 정보를 준비하고 있어요.</td></tr></tbody></table></div>
+
+<h3 id="중복예외복원-확정">중복·예외·복원 (확정)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>상황</th><th>처리</th></tr></thead><tbody><tr><td>휠이 도는 중 다른 도착이 들어옴</td><td>앞 연출을 취소(<code>cancelled</code>)하고 새 도착을 보여 줌</td></tr><tr><td>같은 도착을 다시 보여 줌</td><td>영수증을 그대로 받아 같은 결과로 재생. 재추첨 없음</td></tr><tr><td>영수증 형식이 틀림(버전·칸 짝·결과 이름·코인)</td><td>「건물 도착 정보를 확인해 주세요.」 · 새 결과로 바꾸지 않음</td></tr><tr><td>3D 휠을 만들 수 없음</td><td>휠 자리를 비우고 결과를 바로 공개</td></tr><tr><td>휠 도중 메인으로 돌아감</td><td>연출 건너뜀, 도착 기록 닫힘, 다음 굴림 허용</td></tr><tr><td>building이 아닌 칸</td><td>룰렛 없음. 그 칸 기능으로 진행</td></tr><tr><td>표 값이 비었거나 음수·숫자 아님</td><td>오류 표시. 0이나 임의 값으로 채우지 않음(기준값 빈칸만 임시값 1000)</td></tr><tr><td>나쁜 기운·쟁탈전</td><td>룰렛이 대신 완료 처리하지 않음</td></tr></tbody></table></div>
+
+<h3 id="올킬-뒤-2차-스케줄-룰렛-확정-코드-srcgameeconomysessionts-srcsimulatorsharedhub-clientmjs-표-second_roulette_rewardcsv">올킬 뒤 2차 스케줄 룰렛 (확정 · 코드 <code>src/game/economy/session.ts</code> · <code>src/simulator/shared/hub-client.mjs</code> · 표 <code>second_roulette_reward.csv</code>)</h3>
+
+<p>보드 경제(돈을 실제로 계산하는 쪽)는 건물 칸 도착 돈을 계산할 때 판정이 <b>올킬(big)일 때만</b> 보상 꾸러미에 <code>show = schedule_roulette</code>를 붙입니다. 차트인·광탈이면 <code>show</code>가 비어 있어 연출 없이 바로 받습니다. 올킬은 최초 표시 후보이며, 뒤에서 별도 2차 룰렛 노출 확률로 다시 걸러질 수 있습니다. 이동은 최종 보상 꾸러미의 <code>show</code>를 기준으로 하므로 올킬마다 항상 2차 룰렛이 열리는 것은 아닙니다.</p>
+
+<ul>
+<li>판정이 붙는 조건: 그 칸 보상 기준표 줄에 판정 사용(<code>moneyJudge60</code>)이 켜져 있고, 그 칸 건물 단계가 1 이상일 때. 건물 단계가 0이면 돈 0, 판정 없음.</li>
+<li>보드 경제의 판정 확률: <code>economy_config</code>의 <code>hit_big_weight</code> 15 · <code>hit_mid_weight</code> 50 · <code>hit_miss_weight</code> 35를 읽습니다. 계수는 같은 표의 200/100/50%입니다. 표시 전용 필러는 별도로 <code>building-arrival.json#outcomes</code>를 읽습니다. 현재 숫자가 같더라도 같은 지급 경로나 정책 확정을 뜻하지 않으며, 기획 기준·실행 설정·policy 라벨은 출처 대조에서 구분합니다.</li>
+<li>건물 칸 도착 돈 = 내림(S 대비 단계별 % × 판정 계수 × 주사위 배수 × 이벤트 돈 버프) + 그 건물 팬 보너스.</li>
+<li>화면 길: 보상 꾸러미에 <code>show = schedule_roulette</code>가 있고 칸이 찬스·팬 반응 칸이 아니면, 허브가 건물 화면보다 먼저 이벤트 룰렛 <code>wheel_schedule</code>(스케줄 룰렛, 바늘형 8칸)로 보냅니다. 찬스 칸 8·23·38은 콘서트 룰렛으로 갑니다. 팬 반응 칸 3·18·34는 룰렛 없이 받습니다.</li>
+<li>2차 룰렛 칸(<code>second_roulette_reward.csv</code>, <code>minigame_id = schedule_roulette</code>, 각 weight 1): 돈 행의 받는 양·등급 추가량은 S 대비 퍼센트를 돈으로 환산하는 입력이고, 주사위·카드·덱 행은 개수·장수 입력입니다. 아래 값 자체를 현재 운영 승인값으로 정하는 설명은 아닙니다.</li>
+</ul>
+
+<div class="table-scroll"><table><thead><tr><th>칸 ID</th><th>이름</th><th>색</th><th>덱(<code>effect_id</code>)</th><th>받는 양(<code>amount</code>)</th><th>역주행(<code>reverse_run_amount</code>)</th><th>앵콜(<code>encore_amount</code>)</th></tr></thead><tbody><tr><td>second_roulette_reward_money</td><td>돈</td><td>#F4D477</td><td>—</td><td>0.000012 (S 대비)</td><td>0.000012</td><td>0.000006</td></tr><tr><td>second_roulette_reward_dice</td><td>주사위</td><td>#7EB9F6</td><td>—</td><td>8</td><td>0</td><td>0</td></tr><tr><td>second_roulette_reward_card</td><td>카드</td><td>#F19ACD</td><td>—</td><td>1</td><td>1</td><td>0</td></tr><tr><td>second_roulette_reward_pink</td><td>분홍 덱</td><td>#F19ACD</td><td>deck_eowudong</td><td>1</td><td>1</td><td>0</td></tr><tr><td>second_roulette_reward_blue</td><td>파랑 덱</td><td>#7EB9F6</td><td>deck_nongae</td><td>1</td><td>1</td><td>0</td></tr><tr><td>second_roulette_reward_mint</td><td>민트 덱</td><td>#8FE0BD</td><td>deck_leenalchi</td><td>1</td><td>1</td><td>0</td></tr><tr><td>second_roulette_reward_yellow</td><td>노랑 덱</td><td>#F4D477</td><td>deck_sinsaimdang</td><td>1</td><td>1</td><td>0</td></tr><tr><td>second_roulette_reward_purple</td><td>보라 덱</td><td>#B5A0EA</td><td>deck_hwangjini</td><td>1</td><td>1</td><td>0</td></tr></tbody></table></div>
+
+<ul>
+<li>기존 준비 기준은 표의 weight나 amount가 비면 그 칸을 뽑지 않고, 모든 칸의 weight가 0보다 클 때만 준비하는 것으로 기록되어 있습니다. 현재 계산의 줄 선택은 최종 <code>show</code>와 <code>secondRouletteReady</code>를 함께 확인합니다. 준비 플래그의 생성 기준과 실제 화면·수령 검수는 별도입니다.</li>
+<li>2차 등급은 룰렛과 따로 뽑고, weight가 비면 뽑지 않습니다.</li>
+<li>지급이 끝난(<code>paid</code>) 2차 룰렛 꾸러미만 성장 기록에 「2차 룰렛」 줄로 남습니다.</li>
+<li>도착 필러 룰렛 화면(이 문서의 3D 휠)과 2차 스케줄 룰렛을 한 도착에서 어떤 순서로 보여 줄지는 작업전입니다.</li>
+</ul>
+
+<h3 id="게임-화면-구조에서의-자리-확정-simulator-system-flowjson-툴-p190-게임-화면-구조">게임 화면 구조에서의 자리 (확정 · <code>simulator-system-flow.json</code> · 툴 <a href="/docs/planning/flow-page.html?page=arrival" data-paper-path="docs/planning/flow-page.html">P190 게임 화면 구조</a>)</h3>
+
+<p>게임 화면 구조 툴은 시뮬레이터 화면 계획(화면 116개)을 한 화면씩 엽니다. 주소의 <code>page</code>에 화면 키를 넣으면, 위에 「로비 허브(인게임) › 도착·필러」 같은 경로가 나오고, 아래에 요약·상태·근거 문서가 나옵니다. 근거가 md 문서면 버튼을 눌러 기획서툴에서 엽니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>화면 키</th><th>이름</th><th>부모</th><th>요약</th><th>상태</th></tr></thead><tbody><tr><td>main_board</td><td>로비 허브(인게임)</td><td>audition</td><td>게임을 진행하는 화면. 보드 기본·도착 필러·몬스 애니를 포함하고, 하단 메뉴와 연결 콘텐츠로 이동한 뒤 같은 진행으로 돌아옴</td><td>실행 입구 있음(mode dice)</td></tr><tr><td>arrival</td><td>도착·필러</td><td>main_board</td><td>도착한 칸의 대사·판정·영수증을 보고 다음 콘텐츠와 수령으로 이어감</td><td>실행 입구 있음(mode filler · 허브 안에 들어간 요소)</td></tr><tr><td>reward_claim</td><td>결과·보상 확인</td><td>common_ui</td><td>도착 영수증·미니게임·이벤트에서 확정된 보상을 확인하는 공통 팝업. 출처별 수령 규칙을 새 지갑이나 새 추첨으로 바꾸지 않음</td><td>기획</td></tr></tbody></table></div>
+
+<ul>
+<li>「실행 입구 있음」은 등록된 실행 입구가 있다는 뜻이며, 전체 기능을 다 만들었다는 뜻은 아닙니다.</li>
+</ul>
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<ul>
+<li>보드 표 <code>board_tile</code>(대상 칸·시설·이름·기준값), 경제 설정 <code>economy_config</code>(판정 계수), 도착 설정 <code>building-arrival.json</code>(확률·문구·임시 기준값).</li>
+<li>공용 시뮬레이터의 주사위 배수와 도착 요청(P94).</li>
+<li>3D 복셀 머신 <code>src/simulator/roulette_voxel.mjs</code>의 휠(<code>play: &#39;wheel&#39;</code>, 칸 색 = 세 판정 색, 멈출 칸 = 판정 순번, 같은 씨앗).</li>
+<li>건설 모듈의 3D 도시와 건물 단계 연출(P106).</li>
+<li>도착 성장 계산(P107).</li>
+</ul>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<div class="table-scroll"><table><thead><tr><th>화면</th><th>움직임</th><th>언제</th></tr></thead><tbody><tr><td>도착 카드</td><td>「{번호}번 · {이름}」이 맨 위에 나타남</td><td>도착 직후</td></tr><tr><td>3D 복셀 휠</td><td>세 색 칸 휠이 돌다가 정해진 판정 칸에서 멈춤</td><td>도착 직후 바로 시작</td></tr><tr><td>확률 범례</td><td><code>data.outcomes</code>의 이름·weight를 표시하는 칩(기획안 30/30/40은 출처 대조 참조), 칩 밑줄 색 = 판정 색</td><td>처음부터</td></tr><tr><td>결과</td><td>판정 색 큰 글자 「올킬 · ×2」 등</td><td>휠이 멈춘 뒤</td></tr><tr><td>표시 보상</td><td>「표시 보상 · 2,000 코인」처럼 천 단위 쉼표</td><td>휠이 멈춘 뒤</td></tr><tr><td>성장 요약</td><td>「이번 도착 팀 능력 +○」</td><td>휠이 멈춘 뒤</td></tr><tr><td>건물 연출</td><td>현재 저장 단계 건설 연출. 0단계는 빈땅</td><td>「건물 연출 보기」를 누른 뒤</td></tr><tr><td>알림</td><td>오류 문구, 건너뜀 문구</td><td>오류가 나거나 도중에 나갈 때</td></tr></tbody></table></div>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<ul>
+<li>칸 기본 수익 <code>base_income</code>: 24칸 모두 <code>0</code> · 빈칸으로 두고 임시값 1000 사용 · 건물 단계별 수익 표 연결 (발란스 대기)</li>
+<li>표시 보상을 실제 돈으로 줄지: 표시만 · 실제 지급</li>
+<li>잭팟 칸(<code>hit_roulette=1</code> 6칸)의 잭팟 턴: 등급 룰렛 건너뜀 · 등급 뒤 추가 추첨</li>
+<li>판정 대사 슬롯: 공통 문구만 · P63·P62 칸별 문장 연결</li>
+<li>판정 확률: 기존 기획의 도착 필러 30/30/40 · 보드 경제 15/50/35 중 하나로 맞추는 검토 계획을 보존합니다. 다만 현재 표시 전용 JSON은 15/50/35이고 policy 라벨만 30/30/40입니다. 이 차이의 의도와 직접 결정, 두 경로를 통일할 필요는 미확인입니다</li>
+<li>한 도착에서 도착 필러 룰렛과 2차 스케줄 룰렛의 순서: 필러 먼저 · 스케줄 룰렛 먼저</li>
+</ul>
+
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<div class="table-scroll"><table><thead><tr><th>미리보기</th><th>이름·사용 위치</th><th>동작·상태</th><th>파일·테이블 키</th><th>출처·준비 상태</th></tr></thead><tbody><tr><td>3D 휠</td><td>도착 필러 룰렛 휠</td><td>세 판정 색 칸, 정해진 칸에서 멈춤</td><td><code>src/simulator/roulette_voxel.mjs</code> <code>createVoxelMachine({id:&#39;building-arrival&#39;, play:&#39;wheel&#39;})</code></td><td>있음</td></tr><tr><td>카드</td><td>도착 카드·결과·버튼</td><td>반투명 배경(블러 3px) 위 둥근 카드(모서리 24px), 결과 글자 32px</td><td><code>src/ui/board-map/arrival-roulette.mjs</code> 스타일</td><td>있음</td></tr><tr><td>색</td><td>판정 색</td><td>올킬 #efbf51 · 차트인 #b7a1ec · 광탈 #8dc7dc</td><td><code>building-arrival.json</code> <code>outcomes.color</code></td><td>있음</td></tr><tr><td>3D 도시·건물</td><td>건설 연출</td><td>현재 저장 단계 조립 연출</td><td>건설 모듈(P106) 도시·시설 자산</td><td>있음</td></tr><tr><td>시설 그림</td><td>9종 × 30단계 시설 PNG</td><td>건물 단계별 외형</td><td>건설 모듈 시설 그림(9종 × 30단계, 투명 PNG)</td><td>있음</td></tr><tr><td>초상</td><td>독백·리액션 말하는 사람</td><td>—</td><td>—</td><td>미제작</td></tr><tr><td>효과음</td><td>휠 회전·멈춤·결과</td><td>—</td><td>—</td><td>미제작</td></tr></tbody></table></div>
+
+<h3 id="모노-원본-연출-소스">모노 원본 연출 소스</h3>
+
+<p>원본 루트는 <code>/Users/max/1_작업 폴더/모노카피바라 프로젝트/monocapibara</code>입니다. <code>filler-studio-tool.html</code>과 <code>src/tools/fillerStudioTool/main.ts</code>는 필러 종류별 참고 툴이며, <code>src/ui/logbox/LogBox.ts</code>가 등급 카드·문장 슬롯을 그립니다. 원본의 1.6초·1.1초는 기본값이고 <code>fillerPace.ts</code>의 0.55 배율이 적용됩니다. 이 시간은 우리 확정 연출 시간이 아닙니다. 원본 코드·그림·캐릭터 파일은 수정하거나 복사하지 않습니다.</p>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<ul>
+<li>판정별 효과음과 결과 순간 화면 효과(올킬 금빛, 광탈 흔들림): 미제작.</li>
+<li>독백·리액션용 아이돌·매니저·몬스 초상: 미제작.</li>
+<li>잭팟 턴 전용 연출(팬이 공연장으로 모이는 장면): 미제작. 설명용 시안은 <a href="/docs/planning/proposal-concept/jackpot-sim.html" data-paper-path="docs/planning/proposal-concept/jackpot-sim.html">잭팟 시뮬</a>에 있습니다.</li>
+</ul>
+
+<h3>이전 필러 문안 참고</h3>
+<details><summary>이전 필러 문안 15개 · 별도 대조 대기</summary>
+<p><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/P72_%EC%84%A4%EB%AA%85.md" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/P72_%EC%84%A4%EB%AA%85.md">이전 P72 설명 원문</a>의 4-1에는 연습실·녹음실·팬샵·그 밖 대지의 배지 12문구와 리액션 3문구가 남아 있습니다. 원문의 칸 번호·판정 이름·효과가 현재 원칙과 맞는지는 별도 대조 대상입니다. 현재 활성 문구나 새 슬롯으로 편입하지 않고 참고 원문으로 보존합니다.</p>
+</details>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일·보기</th><th>역할</th><th>주키·참조</th><th>값 (출처 꼬리표 · 결정 표시)</th><th>담당</th></tr></thead><tbody><tr><td><a href="/data/simulator/building-arrival.json" data-paper-path="data/simulator/building-arrival.json">P182 <code>data/simulator/building-arrival.json</code></a></td><td>대상 조건·판정 3종·확률·임시 기준값·화면 문구</td><td><code>eligibility</code>(table <code>/data/game/board_tile.csv</code>, column <code>tile_kind</code>, value <code>building</code>, expectedCount 24) · <code>outcomes[].key</code> · <code>economyPath</code></td><td>(신규) 현재 읽은 설정: <code>outcomes[].weight</code> 15/50/35 · <code>presentationOnly</code> true · policy 라벨 30/30/40. 기획 기준 30/30/40과 정합 확인 필요 · 임시 시안: <code>temporaryBaseMoney</code> 1000</td><td>구현</td></tr><tr><td><a href="/docs/planning/game-table-tool.html?plan=planning_development_plan_filler#board_tile" data-paper-path="docs/planning/game-table-tool.html"><code>data/game/board_tile.csv</code></a></td><td>대상 칸 24칸, 시설, 칸 이름, 기준값</td><td><code>tile_id</code> · <code>pos</code> · <code>fac_id</code> · <code>tile_kind</code> · <code>name_ko</code> · <code>base_income</code> · <code>hit_roulette</code></td><td>(합침) 확정: 24칸 배치 · 발란스 대기: <code>base_income</code>(지금 0)</td><td>시스템</td></tr><tr><td><a href="/docs/planning/game-table-tool.html?plan=planning_development_plan_filler#economy_config" data-paper-path="docs/planning/game-table-tool.html"><code>data/game/economy_config.csv</code></a></td><td>판정 계수</td><td><code>key</code>: <code>hit_big_factor_pct</code> 200 · <code>hit_mid_factor_pct</code> 100 · <code>hit_miss_factor_pct</code> 50</td><td>(이식) 임시 시안(표 note) · 같은 표 <code>hit_*_weight</code> 15/50/35는 필러가 읽지 않음</td><td>발란스</td></tr><tr><td><code>data/board_runtime/board_runtime_filler_dialogue.csv</code></td><td>칸별 판정 대사 실행 표 후보</td><td>파일 없음</td><td>작업전 · 대사 초안은 4장</td><td>콘텐츠</td></tr><tr><td><code>data/simulator/simulator_module.csv</code></td><td>시뮬 모듈 등록</td><td><code>simulator_module_filler</code>(도착 · 필러, P72) · <code>simulator_module_building</code>(건설, P106, 진입 <code>defense.js</code>)</td><td>확정(시뮬)</td><td>구현</td></tr></tbody></table></div>
+
+<h3 id="코드-책갈피-등록">코드 (책갈피 등록)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>코드</th><th>하는 일</th><th>쓰는 법</th></tr></thead><tbody><tr><td><a href="/src/simulator/shared/building-arrival.mjs" data-paper-path="src/simulator/shared/building-arrival.mjs">P180 <code>src/simulator/shared/building-arrival.mjs</code></a></td><td><code>loadBuildingArrival()</code>이 설정·보드·경제 표를 읽고 검사한 뒤 <code>resolve()</code>(판정 한 번 + 표시 코인 계산)와 <code>accept()</code>(영수증 검사)를 돌려줌. 지갑과 건물 단계는 바꾸지 않음</td><td><code>const data=await loadBuildingArrival(); const r=data.resolve({boardIndex:27,multiplier:2,seed:&#39;요청ID&#39;});</code></td></tr><tr><td><a href="/src/ui/board-map/arrival-roulette.mjs" data-paper-path="src/ui/board-map/arrival-roulette.mjs">P181 <code>src/ui/board-map/arrival-roulette.mjs</code></a></td><td><code>createBuildingArrivalView()</code>가 카드·휠·버튼을 만들고 <code>show(영수증)</code>으로 휠을 돌려 결과에서 멈춤. <code>cancel()</code> · <code>dispose()</code> · <code>active</code></td><td>건설 모듈이 도착 때 <code>view.show(value,{onReturn})</code> 호출</td></tr><tr><td><code>src/simulator/defense.mjs</code></td><td>건설 모듈. 도착 요청을 받아 시설을 고르고 <code>resolve</code> 또는 <code>accept</code> 후 화면을 띄움. 화면 켜기는 휠을 기다리지 않음</td><td>공용 시뮬레이터 「건설」 모듈</td></tr></tbody></table></div>
+
+<p>주사위 환산: 해당 없음 · 표시 보상은 실제 주사위·돈으로 지급하지 않음(주사위 0, 카드 0).</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>상태</th><th>확인 방법·증거</th><th>다음 작업</th></tr></thead><tbody><tr><td>building 24칸 대상 · 칸 수 검사</td><td>개발 끝</td><td><code>building-arrival.mjs</code> 검사 · <code>board_tile.csv</code></td><td>—</td></tr><tr><td>기획·실행 설정·policy 확률 대조 · 합 100 검사</td><td>개발 중</td><td>기획 30/30/40 · JSON weight 15/50/35 · policy 라벨 30/30/40 · 로더 weight 읽기</td><td>직접 결정·정합·실제 화면 확인</td></tr><tr><td>표시 보상 계산(기준값 × 배수 × 계수)</td><td>개발 끝</td><td><code>resolve</code> · 화면 「표시 보상 · ○ 코인」</td><td>칸 기준값 결정</td></tr><tr><td>3D 복셀 휠 · 결과 공개 · 버튼</td><td>개발 끝</td><td><code>arrival-roulette.mjs</code> · 시뮬 화면</td><td>—</td></tr><tr><td>메인 도착 → 건설 모듈 연결 · 취소 처리</td><td>개발 중</td><td><code>defense.mjs</code></td><td>실제 플레이 확인</td></tr><tr><td>성장 요약 표시</td><td>개발 끝</td><td>「이번 도착 팀 능력 +○」</td><td>—</td></tr><tr><td>실제 돈 지급</td><td>작업전</td><td>—</td><td>경제 표 결정 뒤</td></tr><tr><td>칸별 판정 대사 · 몬스 한마디</td><td>작업전</td><td>초안만(P63·P62)</td><td>실행 표 채우기</td></tr><tr><td>잭팟 턴 · 쟁탈전 결과 · 챕터</td><td>작업전</td><td>—</td><td>각 기획 뒤</td></tr><tr><td>효과음 · 초상</td><td>작업전</td><td>—</td><td>제작</td></tr></tbody></table></div>
+
+<h3>확률 출처 확인 항목</h3>
+<ul>
+<li>표시 전용 경계: <code>presentationOnly=true</code>와 표시 영수증을 유지하며, 실제 지갑·건물 단계 지급 정책과 구분합니다.</li>
+<li>실제 읽기: 로더가 <code>outcomes[].weight</code>를 읽고 합 100을 검사하며, UI 범례도 <code>data.outcomes</code>의 이름·weight를 사용하는지 확인합니다. 현재 소스 대조값은 15/50/35입니다.</li>
+<li>직접 결정 미확인: 기획 기준 30/30/40, 실행 설정 15/50/35, policy 라벨 30/30/40의 차이가 의도된 것인지 최신 직접 결정 원문과 대조해야 합니다. 새 확률 확정이나 코드·표 수정은 이 문서 정리에서 하지 않습니다.</li>
+<li>실제 화면 미검수: 이번에는 원문·설정·로더·UI 코드를 대조했습니다. 책갈피 진입·독서·하단 접기와 실행 화면의 실제 표시는 별도 검수입니다.</li>
+</ul>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<ul>
+<li>building 24칸에 도착할 때만 룰렛이 열리고, 나머지 16칸은 그 칸 기능으로 갑니다.</li>
+<li>한 도착에 판정은 한 번이며, 다시 보기·복귀·새로고침으로 결과가 바뀌지 않습니다.</li>
+<li>표시 전용 판정은 설정의 <code>outcomes[].weight</code>를 읽고, 합이 100이 아니면 화면을 열지 않습니다. 기획 기준 30/30/40과 policy 라벨의 정합·직접 결정 근거는 7장의 확인 항목으로 남깁니다.</li>
+<li>표시 코인은 내림(기준값 × 배수 × 계수)이며 실제 보유량에 더하지 않습니다.</li>
+<li>휠이 멈추기 전에는 결과 이름·금액을 보여 주지 않습니다.</li>
+<li>「건물 연출 보기」는 현재 저장 단계만 보여 주고 건물 단계를 올리지 않습니다.</li>
+<li>표 값이 비었거나 틀리면 오류를 보여 주고 임의 값을 만들지 않습니다.</li>
+</ul>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<ul>
+<li>옮긴 것: 옛 기준(대지 22칸, 6판정 칸, 대박·중박·운망 이름, 15/50/35 가중치, sample_coin 300/100/20, <code>data/filler_proto/v01</code> 표·저장 키), 10/21 보드 개편 표, 날짜·작성자·상태 줄, 오른쪽 정보창 검수 항목 → <code>필러룰렛_기획서.log.md</code>의 「지난 기록」.</li>
+<li>보존한 것: 옛 본문 전체(로그), 백업 폴더의 이전 판, 모노 원본, 기존 CSV와 도시 자산.</li>
+</ul>
+
+<details><summary>작업 기록</summary>
+
+<ul>
+<li>현재 구현 범위: 판정·표시 보상·휠·건설 연출 연결은 코드와 표에 있으며, 실제 돈 지급·칸별 대사·잭팟 턴·전투 결과 연결·효과음은 작업전입니다. 이번 문서 작업에서 실제 화면 재검수는 하지 않았습니다.</li>
+</ul>
+
+<ul>
+<li>읽은 원본: <code>작성기준_v02/작성규칙.md</code> · <code>기획서_빈양식.md</code> · <code>data/simulator/building-arrival.json</code> · <code>src/simulator/shared/building-arrival.mjs</code> · <code>src/ui/board-map/arrival-roulette.mjs</code> · <code>src/simulator/defense.mjs</code>(도착 부분) · <code>data/game/board_tile.csv</code> · <code>data/game/economy_config.csv</code> 26~31줄 · <code>data/simulator/simulator_module.csv</code> · 이 문서 12:52 복구본 전체.</li>
+<li>계기: 현중 10/30 「본문 줄이지 말고 지금 시점 기준으로 자세히, P86 양식대로」.</li>
+<li>경로: md <code>docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/필러룰렛_v01/필러룰렛_기획서.md</code> · html 같은 이름 · 로그 <code>필러룰렛_기획서.log.md</code>.</li>
+<li>백업: <code>docs/planning/삼중AI_공용_20260929/_backup/20261030_제나/필러룰렛_기획서.md.125110전_제나</code> · <code>필러룰렛_기획서.html.130500전_제나</code>.</li>
+<li>확인한 점: 24칸 <code>base_income</code>이 0이라 지금 표시 코인은 0.</li>
+</ul>
+
+<ul>
+<li>2026-11-03 · codex · 기획 기준·실행 설정·policy 라벨을 역할별로 대조하고, 실제 <code>outcomes[].weight</code> 읽기와 직접 결정 미확인을 7장에 남겼습니다. 기존 UI 기획·7장 나머지 항목·원문 계획은 보존했습니다. 이전 필러 문안 15개는 참고 원문 링크로만 연결했습니다. 코드·표·운영 지급 확률은 변경하지 않았고 실제 뷰어·플레이는 미검수입니다.</li>
+<li>2026-11-04 · codex · P72 도착 판정 문서의 기준값 예외·진입 조건·성장 요약·호스트/저장 경계와 2차 룰렛 조건·단위를 대조했습니다. 짝 MD의 두 넓은 표는 원문 필드·값·행 순서를 보존해 묶고, 이 HTML의 표 형태·값은 보존했습니다. 게임·지급·저장 실구동과 운영값 승인은 확인하지 않았습니다.</li>
+</ul>
+
+</details>
+</section><details class="history" id="document-history" data-log-src="./필러룰렛_기획서.log.md"><summary>이전 로그와 변경 기록 펼치기</summary><div class="log-body"></div><p>2026-11-04 13:35 유르넷 · 현중 13:30 현황판 칸 안 데이터 흐름(멈춤·굴림 같은 방식) · 25칸 목록(비앙카 1324 대조) · NPC 아이돌별+건물 합계 확정 · npc_per_fan 5,000 · npc_cap 100 임시(보고/20261104_1330_비앙카_아이돌NPC_값.md) · 백업 `_작업/yurnet/backup_20261104_133525`</p></details></main><script src="../작성기준_v02/sample-document.js" defer></script><script src="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/development-links.js" defer></script></body></html>

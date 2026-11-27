@@ -1,0 +1,134 @@
+# 표 데이터 구조 · AI 공용 안내 (2026-10-19 기준)
+
+클로드 · 봇팀 · 단서 · 단이 등 이 저장소에서 표(CSV)를 읽거나 만드는 모든 AI가 먼저 읽는 문서입니다.
+옛 안내(`산출/기획서/기획서_테이블데이터기초_v0.1_이스라트.md` · `산출/시스템기획/S08_표구조_연결지도.md` · `data/game/README.md`)보다 이 문서가 앞섭니다. 옛 문서의 짧은 접두어(`fac_` · `tile_01` 등) 규칙은 지금 쓰지 않습니다.
+
+근거 결정: `입력/검토-테이블구조_현중결정_1017.md`(12개 결정) · 현중 10/19 09:31 「버전 표시 빼기」 · 10/19 10:57 정리 원칙 1~6 · 보드 단일화.
+
+---
+
+## 0. 한눈에
+
+| 하고 싶은 일 | 먼저 볼 곳 |
+|---|---|
+| 어떤 표가 있는지 · 어디 있는지 | `data/master/schema_table.csv` (표 한 줄 = 표 하나) |
+| 표의 칸 · 타입 · 연결 | `data/master/schema_column.csv` (칸 한 줄 = 칸 하나) |
+| 표를 코드에서 읽기 | `src/data/commonLoader.ts`(표 키로) · `src/data/loader.ts`(게임 표 묶음) · `src/data/tableFile.mjs`(폴더 + 짧은 이름) |
+| 보드 칸 | `data/game/board_tile.csv` 하나뿐 (아래 6절) |
+| 표를 바꾼 기록 | `data/master/schema_change_log.csv` · 옛 ID → 새 ID `data/master/id_rename_map.csv`(생성물) |
+| 화면에서 표 보기 | `docs/planning/game-table-tool.html` (전체 테이블) |
+
+## 1. 원칙 (지키지 않으면 검사에서 멈춤)
+
+1. **표의 원본은 스키마 원본 표 두 개**입니다: `schema_table.csv`(표) · `schema_column.csv`(칸). 아래 생성물은 손으로 고치지 않습니다.
+   - `src/data/schema.ts` · `data/game/table_registry.csv` · `data/planning_csv_table.csv` ← `node scripts/schema-generate.mjs` (두 번 돌린 뒤 `--check`가 조용하면 끝)
+2. **표 키 = 파일 이름(확장자 빼고)**, 풀네임입니다. 예: `board_tile` → `data/game/board_tile.csv`, `bad_energy_wave_flow` → `data/bad_energy/bad_energy_wave_flow.csv`.
+3. **행 ID는 표 키로 시작하는 풀네임**입니다. 예: `schema_table_board_tile`, `building_master_facility_dance`, `cost_group_entry_…`. 한 번 정한 ID는 바꾸지 않습니다(ID 고정). 하위 표가 마스터 ID를 그대로 쓰는 것은 허용된 예외입니다.
+4. **버전 표시 금지**: 폴더 · 파일 · 표 키 · 행 ID에 `v01` · `v05` · `-v06` 같은 표시를 붙이지 않습니다. 새 판을 만들면 옛 판은 보관 폴더로 보내고 이름은 그대로 씁니다(10/19).
+5. **값은 짓지 않습니다.** 정해지지 않은 숫자 · 이름은 빈칸으로 두고 `value_status` 등에 「발란스 대기」라고 적습니다. 빈칸을 0이나 기본값으로 바꾸는 코드도 금지(검사가 막음). 다른 표에 있던 값을 옮기는 것은 짓는 것이 아니며, 옮긴 곳을 메모에 적습니다.
+6. **칸 이름 규칙**: 다른 것을 가리키는 칸은 `…_kind` + `…_ref_id` 한 쌍. 값 칸에 파일 경로를 넣지 않습니다(경로는 `resource_master`).
+7. **같은 내용을 두 곳에 두지 않습니다.** 칸 위치 · 시설 · 이름처럼 이미 원본 표가 있는 정보는 그 표 ID로 연결만 합니다(6절 보드 참고).
+8. 금지 낱말: 「아이돌 캐스팅」, 「해외」는 새로 쓰는 글 · 이름에 쓰지 않습니다.
+
+## 2. 폴더
+
+| 폴더 | 담는 것 |
+|---|---|
+| `data/master/` | 마스터 표 · 공통 틀 표 · 스키마 원본 표(3 · 4절) |
+| `data/game/` | 본게임 표(보드 · 경제 · 상점 · 미션 · 카드 · 이벤트 …) |
+| `data/<콘텐츠>/` | 콘텐츠별 표: `bad_energy` · `idol_ability_sim` · `audition_sim` · `core_proposal` · `board_runtime` · `board_map` · `simulator` · `mons_proto` · `mons_zodiac_extra` · `game_prototype` 등. 버전 단계 폴더 없음 |
+| `data/res/` | 그림 · 모델 · 소리 리소스 (경로는 `resource_master`로만 가리킴) |
+| `event/<모듈>/` | 이벤트 모듈(각자 `*_module_game.csv` 등), 공용은 `event/shared` |
+| `_이전기획_보관/<날짜>/…` | 바꾸기 **전** 파일 백업(되돌리기용). 게임 · 툴이 읽지 않음 |
+| `_이전리소스_백업/구맵/` · `_이전리소스_백업/이전판/` | 쓰지 않는 옛 판 · 구맵 자료(참고용). 개발 서버가 내주지 않음(`vite.config.ts` fs.deny) · 빌드 · import 금지 |
+
+`data/`는 개발 서버의 공개 폴더라 `/data/x.csv`와 `/x.csv` 둘 다로 열립니다. 새 코드는 `/data/…`로 씁니다.
+
+## 3. 스키마 원본 표의 칸
+
+### schema_table (표 한 줄)
+- `table_key` 표 키 · `rel_path` 파일 경로 · `layer` 묶음(game · master · bad_energy …)
+- `status`: `registered`(등록 · 검사 대상) · `unregistered`(있지만 미등록) · `archived`(보관됨, `rel_path`가 보관 폴더를 가리킴)
+- `pk` 첫 칸(주키) · `game_schema_order`(게임 스키마에 들어가는 순서) · `registry_order` · `planning_order`(기획 CSV 목록 순서)
+- `read_game` · `read_tool` · `read_script` … 읽는 곳 표시 · `planning_id` · `label_ko` · `group_ko`(표 툴 묶음 이름)
+- `create_mode`: `header_only`(새 빈 표 → 머리줄만 만들어 줌) · `has_rows`(이미 줄이 있는 표)
+- 보관할 때는 줄을 지우지 않고 `status=archived` + `rel_path`를 보관 위치로 바꿉니다.
+
+### schema_column (칸 한 줄)
+- `table_key` · `column_name` · `column_order`(CSV 머리줄 순서와 같아야 함) · `value_type`(string · number)
+- `fk_target`(다른 표 칸을 가리킴) · `min_value` · `max_value`(지금은 경고만, 숫자가 정해지면 저장 차단) · `optional_order` · `deferred_*`(발란스 대기 허용 칸)
+- 칸을 더하면: CSV 머리줄 + 이 표 한 줄을 **같이** 고치고 `schema-generate`를 돌립니다.
+
+### schema_change_log (바꾼 기록)
+- 표 · 칸을 더하거나 이름을 바꾸거나 보관하면 한 줄 남깁니다. `change_type` 예: `add_table` · `archive_version` · `rename_table_key`(old_value · new_value에 표 키를 띄어쓰기로 나란히 · id_rename_map이 이것을 읽음) · `rename_folder` · `rename_code_path`.
+
+## 4. 마스터 + 하위 표, 공통 틀
+
+**마스터 표**(공통 칸만) + **하위 표**(그 종류에만 있는 칸, 마스터 ID를 씀):
+- `building_master` (+ `building_master_build_axis` · `building_master_building_level_30`) — 9개 건물: 사옥 · 보컬 녹음실 · 댄스 연습실 · 랩 스튜디오 · 뷰티 스튜디오 · 예능 방송국 · 프로듀싱 스튜디오 · 팬샵 · 숙소. `source_id`가 시설 ID(`facility_company` · `facility_recording` · `facility_dance` · `facility_concert` · `facility_agency` · `facility_broadcast` · `facility_producing` · `facility_fanshop` · `facility_dorm`)
+- `item_master` (+ `item_master_dice_mult` · `item_master_card_pack` · `item_master_casting` · `item_master_shop_sku` · `item_master_shop_gem_ladder` · `item_master_sale_offer`)
+- `character_master` · `skill_master` · `ability_master`(+ `ability_detail`) · `currency_master` · `missile`(+ option) · `aura`(+ option)
+
+**공통 틀**(여러 기능이 같은 모양으로 씀):
+| 틀 | 표 | 쓰는 법 |
+|---|---|---|
+| 보상 | `reward_group` · `reward_group_entry` | 주인(source_table · source_id)마다 묶음 하나, 줄마다 `reward_kind` + `reward_ref_id` + `amount`(+ 확률 `weight`) |
+| 비용 | `cost_group` · `cost_group_entry` | 주인(source_kind · source_ref_id)마다 묶음 하나, 빈 묶음 = 무료. 코드: `src/game/economy/costGroup.ts` |
+| 조건 | `condition_group` · `condition` | 주인 줄의 `condition_group_id`로 연결, `match_mode`(지금 all만), 중첩 1단계. 코드: `conditionGroup.ts` |
+| 효과 | `effect` · `effect_link` · `effect_modifier` | 주인(owner_kind · owner_ref_id) → 효과, 조건 묶음 연결 가능. 겹침 순서는 발란스 대기 |
+| 운영 덮어쓰기 | `live_config` | 표 · 키 · 값 · 기간 · 우선순위 · segment. 충돌 규칙은 코드(`resolveLiveOverrides`) |
+| 시안 | `design_profile` · `design_profile_value` | 원본 표는 한 벌, 시안 값만 따로(운영 · 경제와 섞지 않음) |
+| 리소스 | `resource_master` · `resource_link` · `resource_variant` | 그림 · 모델 경로는 여기만. 다른 표는 `resource_master_id`로 가리킴 |
+| 이름 목록 | `enum_value` | 칸에 들어갈 수 있는 값 목록 |
+
+## 5. 코드에서 읽는 법
+
+- **표 키로 읽기**: `readTables(['board_tile','building_master'])` (`src/data/commonLoader.ts`) — `schema_table.rel_path`를 따라감. 직접 경로를 코드에 적지 않습니다.
+- **게임 표 묶음**: `loadGameTables()` (`src/data/loader.ts`) — `game_schema_order`가 있는 표 + 마스터 참조(`@이름`).
+- **콘텐츠 폴더 + 짧은 이름**: `tableFileOf('/data/bad_energy/','wave')` → `bad_energy_wave.csv` (`src/data/tableFile.mjs`). 규칙이 있는 폴더: `board_runtime` · `mons_proto` · `bad_energy`. 새 폴더는 규칙을 더하지 말고 풀네임 파일 이름을 그대로 쓰세요.
+- 화면에서 쓰는 CSV 읽기: `src/data/csv.ts`(게임) · `src/simulator/csv.mjs`(시뮬레이터 · 보드 맵) — 엄격 모드(칸 수가 다르면 멈춤).
+
+## 6. 보드 (정식 보드 표 하나)
+
+- **원본: `data/game/board_tile.csv` 하나.** 40칸 · `pos` · `group`(경제 처리 종류) · `fac_id`(그 칸의 시설, 신맵 9건물 연결 · 10/19) · `tile_kind`(신맵 칸 종류) · `map_node_id`(도시 칸 `city_01`~`city_40`) · `name_ko`(check_list_12 답 전까지 빈칸)
+- 칸 이름을 보여 줄 때: `name_ko` → 그 칸 시설 이름(`building_master`) → 칸 종류 문구(`data/board_map/inspection.json` kinds) 순서. 이름을 새로 짓지 않습니다.
+- **`data/board_map/map.json`은 그림 배치만**(칸 좌표 · 건물 모양 · 건물마다 `facility_id`). 칸 → 건물 연결과 칸 종류는 들고 있지 않습니다. 읽을 때는 반드시 `loadBoardMap()`(정식 보드 표를 붙여 줌) 또는 `attachBoardTiles(map, boardTileRows)`를 씁니다 (`src/game/board-map/model.mjs`).
+- 게임 경제 화면 · 본게임 코드: `loadCanonicalBoard()` (`src/game/board/canonical.ts`) · `loadBoardData()` (`src/game/board/data.ts`, 실행 설정 `data/board_runtime/`).
+- 경제 계산(`buildEconomy`)은 `board_tile.fac_id`만 씁니다. 시설 단계표(`facility_level`)에 없는 시설의 칸은 「발란스 대기」 칸(pending)으로 수익 · 증설에서 빠집니다.
+- 칸에 붙는 **내용** 표는 칸 ID(`board_tile_NN`)로만 연결합니다(칸 위치 · 시설 · 이름을 다시 적지 않음): `core_proposal/fan_income_tile`(수익 가중치) · `idol_ability_sim/idol_growth_source`(칸 성장) 등. (옛 도착 처리 표 `board_runtime_tile_binding` 과 빈 도착 풀 · 필러 · 효과 표는 10/19 보관)
+- 금지: 칸 이름 · 시설 연결을 코드나 다른 표에 직접 적기(옛 `PLAN_CELL` · `board-data.js` · `board_proto_tile` · v02 장소 이름은 보관됨).
+
+## 7. 표를 더하거나 바꾸는 순서
+
+1. `schema_table.csv`에 표 한 줄(표 키 · `rel_path` · `pk` · `status` · 필요하면 `create_mode=header_only`)
+2. `schema_column.csv`에 칸 줄들(머리줄 순서대로 `column_order`)
+3. CSV 파일(머리줄이 2와 같게) · 값은 짓지 않음
+4. `node scripts/schema-generate.mjs` 두 번 → `node scripts/schema-generate.mjs --check` 조용함
+5. `schema_change_log.csv`에 한 줄
+6. 검사(8절)를 돌리고 결과를 보고에 붙임
+7. 같은 단계에서 **표와 읽는 코드를 함께** 바꿉니다. 바꾸기 전 파일은 `_이전기획_보관/<날짜>/…/수정전/`에 복사.
+
+보관할 때: 파일은 `_이전리소스_백업/…`(쓰지 않는 자료) 또는 `_이전기획_보관/…`(백업)로 같은 상대 경로로 옮기고, `schema_table` 줄은 `archived`로. `planning_csv_usage` · `resource_master` · `resource_link`에서 그 표 · 파일을 가리키던 줄도 보관 폴더로 옮깁니다(끊긴 줄 0).
+
+## 8. 검사 명령 (Mac 저장소 루트에서)
+
+| 명령 | 보는 것 |
+|---|---|
+| `node scripts/schema-generate.mjs --check` | 생성물이 원본과 같은지 |
+| `node scripts/audit-data-master.mjs` | 등록 · 첫 칸 중복 · ENUM · REF(마스터 참조) · 리소스 파일 · 읽는 코드 없는 표 |
+| `node scripts/audit-game-tables.mjs` · `audit-game-links.mjs` | 게임 표 등록 · 머리줄 · 연결(CRIT 0이어야 함) |
+| `node scripts/audit-game-economy.mjs` | 경제 계산 · 시즌 모의(CRIT 0) |
+| `node --test scripts/test-game-audits.mjs` · `node scripts/test-game-economy.mjs` · `node scripts/test-board-runtime.mjs` · `node --test tests/*.test.mjs` | 시험 |
+| `node src/simulator/build.mjs` | 시뮬레이터 다시 빌드(`docs/planning/_runtime/simulator/`) |
+
+`data/game/` 같은 표 폴더 안에 `*.1416전_커서.csv` 같은 작업 백업을 두면 「unregistered CSV」로 검사가 멈춥니다. 작업 백업은 `_이전기획_보관/` 아래에 두세요.
+
+## 9. 자주 하는 실수
+
+- 생성물(`schema.ts` · `table_registry.csv` · `planning_csv_table.csv`)을 손으로 고침 → 다음 생성 때 사라짐
+- 코드에 `/data/xxx/v01/…` 같은 옛 경로 · 버전 폴더를 적음
+- 빈칸을 0으로 채움 · 예시 숫자를 「확정」으로 적음
+- 보드 칸 이름 · 시설을 화면 코드에 배열로 적음
+- 보관 폴더(`_이전리소스_백업`) 파일을 import · fetch · 링크함 → 개발 서버가 403으로 막음
+
+- **빈 표는 두지 않습니다**: 다른 표로 통일했거나 쓰지 않게 된 표(예: 10/19 `mons_skill` → `skill_master`)는 읽는 곳과 함께 `_이전리소스_백업/이전판/` 으로 옮깁니다. 그 표만 가리키던 빈 열도 같이 지웁니다.

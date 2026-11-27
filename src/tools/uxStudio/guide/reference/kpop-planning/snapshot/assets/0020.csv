@@ -1,0 +1,51 @@
+param_id,rule_kind,value_a,value_b,enabled,value_status,src_doc_id,note
+dist_floor,DISTANCE_FLOOR,0.1,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,남은 거리 몫의 바닥. max(이 값 · (최대−값)÷최대)
+bal_70,BALANCE_BONUS,0.7,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,세부 3개 최소÷최대가 이 값 이상이면 보너스 value_b
+bal_80,BALANCE_BONUS,0.8,0.06,1,확정(근거: P107 · 보고/20261014_1408),P107,0.8 이상이면 +6%
+bal_90,BALANCE_BONUS,0.9,0.10,1,확정(근거: P107 · 보고/20261014_1408),P107,0.9 이상이면 +10%
+page_step,PAGE_STEP,400,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,월드스타 뒤 무대 합이 이 값만큼 늘 때마다 페이지
+page_max,PAGE_MAX,50,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,그 페이지마다 세부 최대에 더하는 값
+pair_pos,PAIR_POS,0,0.03,0,보류,P107,짝 포지션 퍼센트는 {값}. 0으로 두고 끔
+facility_flat,FACILITY_FLAT,0.3,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,레슨 시설 완공 때 그 축 세부 3개에 각각 이 값. 팀 전원. 배수 안 곱함
+fan_point,FAN_POINT,10,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,세부 1점 = 팬 이 값
+fan_shop,FAN_SHOP,2,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,팬샵 보정 덱 장마다 그 칸 팬 증가 +이 퍼센트. 12장이면 24
+mons_share,MONS_SHARE,10,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,짝 멤버 세부 증가의 이 퍼센트가 몬스 공통 능력
+judge_step,JUDGE_GRADE,2,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,무대 칸에 맞는 대표 등급 한 단계마다 대박 +이 %p
+judge_cap,JUDGE_GRADE_CAP,10,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,대박 추가의 상한 %p. 15에서 최대 25
+fan_deck_13,FAN_DECK,13,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,매니지먼트. 장마다 팬 증가 보정
+fan_deck_14,FAN_DECK,14,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,방송
+fan_deck_15,FAN_DECK,15,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,콘서트/투어
+fan_deck_16,FAN_DECK,16,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,홍보
+fan_deck_17,FAN_DECK,17,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,컨디션
+fan_deck_18,FAN_DECK,18,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,레이블
+fan_deck_20,FAN_DECK,20,0.03,1,확정(근거: P107 · 보고/20261014_1408),P107,팬샵
+rumor_gauge,RUMOR_GAUGE,15,0.03,1,확정(근거: 입력/개발-비건물칸성장과보드미니게임구조.md 0단계),지시서,루머는 성장 0. 나쁜 기운 게이지에 이 값을 더함
+card_boost,CARD_BOOST,3,0.03,1,확정(근거: 현중 10/15 14:26),현중,카드 능력 배율. 완공 보너스 몫을 카드로 옮김. 팀 전원 × 흡수율
+mg_reserve,MINIGAME_RESERVE,0,0.03,0,보류,현중,강제 상한 잠금(90% 락) 대신 성장 10단계 필요량 표으로 전환(현중 10/16 14:18 지시)
+academy_bundle_cap,ACADEMY_BUNDLE_CAP,10,,1,제안,P107,태도 9와 성실성 9을 합쳐 능력 총량에 더하는 상한 10%
+idol_growth_stat_vocal_pitch,ACADEMY_DILIGENCE,1,,1,제안,P107,성실성
+idol_growth_stat_vocal_voice,ACADEMY_DILIGENCE,1,,1,제안,P107,성실성
+idol_growth_stat_dance_accuracy,ACADEMY_DILIGENCE,1,,1,제안,P107,성실성
+idol_growth_stat_dance_rhythm,ACADEMY_DILIGENCE,1,,1,제안,P107,성실성
+idol_growth_stat_rap_diction,ACADEMY_DILIGENCE,1,,1,제안,P107,성실성
+idol_growth_stat_visual_style,ACADEMY_DILIGENCE,1,,1,제안,P107,성실성
+idol_growth_stat_rap_lyrics,ACADEMY_DILIGENCE,1,,1,제안,P107,성실성
+idol_growth_stat_producing_compose,ACADEMY_DILIGENCE,1,,1,제안,P107,성실성
+idol_growth_stat_producing_arrange,ACADEMY_DILIGENCE,1,,1,제안,P107,성실성
+idol_growth_stat_vocal_interpret,ACADEMY_ATTITUDE,1,,1,제안,P107,태도
+idol_growth_stat_dance_expression,ACADEMY_ATTITUDE,1,,1,제안,P107,태도
+idol_growth_stat_rap_flow,ACADEMY_ATTITUDE,1,,1,제안,P107,태도
+idol_growth_stat_rap_presence,ACADEMY_ATTITUDE,1,,1,제안,P107,태도
+idol_growth_stat_visual_face,ACADEMY_ATTITUDE,1,,1,제안,P107,태도
+idol_growth_stat_visual_camera,ACADEMY_ATTITUDE,1,,1,제안,P107,태도
+idol_growth_stat_charm_star,ACADEMY_ATTITUDE,1,,1,제안,P107,태도
+idol_growth_stat_charm_variety,ACADEMY_ATTITUDE,1,,1,제안,P107,태도
+idol_growth_stat_charm_talk,ACADEMY_ATTITUDE,1,,1,제안,P107,태도
+enter_power,FAN_ENTER_POWER,1,,1,값 없음,P107,팬 증가에 곱하는 엔터 파워 계수(10/27 유르넷 Q4 · 1 = 곱해도 값 안 바뀜 · 실제 값은 값 없음)
+diligence_speed,DILIGENCE_SPEED,,,1,제안,P240,성실성 → 성장 속도(현중 11/16 유르넷 안 「보드·훈련 성장량에 곱함」) · 성장량 × (1 + min(value_b · value_a × 성실성)/100) · value_a = 성실성 1점당 % · value_b = 최대 % · 비면 ×1 · 값은 비앙카(11/17 클로드 구조 확인용 규칙)
+hidden_attitude_start,HIDDEN_ATTITUDE_START,,,1,제안,P240,태도 처음 값 범위 value_a = 최소 · value_b = 최대 · 비면 0 · 값은 비앙카(11/17 클로드 구조 · 현중 「따로 만들어」)
+hidden_diligence_start,HIDDEN_DILIGENCE_START,,,1,제안,P240,성실성 처음 값 범위 value_a = 최소 · value_b = 최대 · 비면 0 · 값은 비앙카(11/17 클로드 구조)
+hidden_attitude_random,HIDDEN_ATTITUDE_RANDOM,,,1,제안,P240,태도 처음 값 중 무작위 몫(0~1) · 나머지 몫은 처음 능력 반대(회의록 11/12 201줄) · 비면 1(전부 무작위) · 값은 비앙카
+hidden_diligence_random,HIDDEN_DILIGENCE_RANDOM,,,1,제안,P240,성실성 처음 값 중 무작위 몫(0~1) · 나머지 몫은 재능선 반대(회의록 11/12 201줄) · 비면 1(전부 무작위) · 값은 비앙카
+hidden_attitude_academy,HIDDEN_ATTITUDE_ACADEMY,,,1,제안,P240,아카데미 칸(2·37·39) 도착 한 번에 태도 + value_a · 비면 0 · 값은 비앙카
+hidden_diligence_academy,HIDDEN_DILIGENCE_ACADEMY,,,1,제안,P240,아카데미 칸(2·37·39) 도착 한 번에 성실성 + value_a · 비면 0 · 값은 비앙카

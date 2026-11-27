@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P206 · 모험·탐험·발견 도감 통합 기획서</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"><style>.sample-document :target{scroll-margin-top:132px}.sample-document header .actions{flex-wrap:wrap}.sample-document header p{font-size:14px}.doc-ui-section{margin-top:42px;padding-top:24px;border-top:2px solid #c8dcd5}.doc-ui-section>h3{margin:0 0 10px;font-size:23px;color:#2c5659}.doc-ui-section>p{font-size:14px}.doc-ui-section details{padding:0;margin:16px 0;border:1px solid #c9dcd4;border-radius:16px;overflow:hidden;background:#f4f8f2}.doc-ui-section #ui-preview,.doc-ui-section [data-inline-preview-host]{overflow-anchor:none}.doc-ui-section summary{cursor:pointer;min-height:58px;padding:16px 18px;font-weight:700;color:#315e5c;list-style:none}.doc-ui-section summary:after{content:"+";float:right;font-size:20px}.doc-ui-section details[open]>summary:after{content:"−"}.doc-ui-section summary::-webkit-details-marker{display:none}.doc-ui-section [data-inline-preview-host]{padding:0;min-width:0}.doc-ui-section [data-preview-loading]{padding:18px;margin:0}@media(max-width:680px){.sample-document :target{scroll-margin-top:18px}}</style><script type="module" src="./리소스/탐험_UI시안_20261030/inline-preview.mjs"></script></head><body class="sample-document"><main><header><div class="eyebrow">P206 · 책갈피 · 통합 상세 기획</div><h1>모험·탐험·발견 도감 통합 기획서</h1><p>공통 7장으로 읽고, 기존 실제 UI는 <a href="#ui-preview">문서 하단에서 펼쳐 봅니다.</a> 게임 조작·발란스 자동 계산·조건 계산·현황판 조회를 구분합니다. 실제 친구 서버는 후속, 신규 수치는 임시입니다.</p><div class="actions"><a href="./탐험_여정발견_통합기획_v01.md">짝 MD로 읽기</a><a href="/docs/planning/game-simulator.html?module=simulator_module_journey" target="_blank" rel="noopener">현재 게임 시뮬레이터</a></div></header><nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+<p><b>이 문서는</b> 한 화면의 탐험·출동, 조각 도감, 공동 참가·보상과 추가 소셜 기능을 설명하는 책갈피 상세 기획서입니다.</p>
+
+<p><b>보는 법</b> 1장 용어·개요 → 4장 플레이·UI → 6장 정산 → 7장 상태를 읽습니다. 발표용 요약은 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%9D%BC%ED%8F%ACAI%ED%83%90%ED%97%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%9D%BC%ED%8F%ACAI%ED%83%90%ED%97%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">핵심제안 개발 P152</a>, 실행은 <a href="/docs/planning/game-simulator.html?module=simulator_module_journey" data-paper-path="docs/planning/game-simulator.html">게임 시뮬레이터</a>, 시안은 <a href="#ui-preview">같은 문서 아래 UI</a>에서 확인합니다.</p>
+
+<p><b>지금 상태</b> 기본 탐험·조각 도감·모의 공동 참가·기존 출동은 개발됨. 친구 아이돌·우정 포인트·우리 사이 보기는 게임 시뮬레이터의 조작으로 제공하며, 발란스 두 도구는 자동 계산·성장 현황판은 읽기 전용 합계로 구분했습니다. 실제 외부 친구 서버는 후속입니다. 신규 수치는 모두 <b>임시(나중에 결정)</b>입니다.</p>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (합침) <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%9D%BC%ED%8F%ACAI%ED%83%90%ED%97%98_%EC%9B%90%EB%B3%B8/2%EA%B3%84%EC%B8%B5%EB%9D%BC%ED%8F%AC_AI%ED%83%90%ED%97%98%EC%84%9C%EC%82%AC_%ED%86%B5%ED%95%A9%EA%B8%B0%ED%9A%8D%EC%84%9C_v1.0_%EC%9B%90%EB%B3%B8.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%9D%BC%ED%8F%ACAI%ED%83%90%ED%97%98_%EC%9B%90%EB%B3%B8/2%EA%B3%84%EC%B8%B5%EB%9D%BC%ED%8F%AC_AI%ED%83%90%ED%97%98%EC%84%9C%EC%82%AC_%ED%86%B5%ED%95%A9%EA%B8%B0%ED%9A%8D%EC%84%9C_v1.0_%EC%9B%90%EB%B3%B8.html">제안서 원문 P153</a>, 현재 탐험 시뮬레이터와 사용자 제공 화면 자료.</p>
+
+<div class="table-scroll"><table><thead><tr><th>위치</th><th>이름과 역할</th></tr></thead><tbody><tr><td>상위 메뉴·모바일 하단</td><td>모험</td></tr><tr><td>메인 위쪽</td><td>탐험 목록. 아이돌 편성·몬스 분신의 도시 이동</td></tr><tr><td>모험 화면 상단 고정</td><td>모험 발견 도감. 탐험·출동에서 모은 조각으로 아이템 완성</td></tr><tr><td>같은 메인의 출동 영역</td><td>기존 출동 목록. 탐험과 전환하는 탭 없음</td></tr><tr><td>피그마의 ‘발견’</td><td>후속 출동 구조의 참고 원본. 조각 도감과 별도</td></tr></tbody></table></div>
+
+<p>탐험·출동을 같은 메인에 함께 배치합니다. 상위 이름은 모험이며 내부 journey ID·URL은 유지합니다. 탐험과 출동은 각각 3개 반이 보이는 가로 캐러셀입니다. 도감 상세는 모바일 프레임 안의 모달로 엽니다.</p>
+
+<p><b>피크민 공식 조사:</b> <a href="https://scopelyexplore.helpshift.com/hc/en/11-pikmin-bloom/faq/2146-expeditions/" target="_blank" rel="noopener">탐험</a>은 이미 발견된 과일·모종 등을 골라 피크민을 보내고 가져오는 활동입니다. 물건 선택 → 편성 → GO → 회수입니다. 분수는 선택한 힘과 물건 무게를 비교하는 최소 운반 조건입니다. <a href="https://scopelyexplore.helpshift.com/hc/ko/11-pikmin-bloom/faq/2142-mushrooms/" target="_blank" rel="noopener">버섯</a>은 여러 플레이어가 작업력을 모아 목표를 해결하고 시간·작업력 결과의 보상을 받는 공동 도전입니다.</p>
+
+<p><b>화면 대조 해석:</b> 첨부 원문의 ‘여정’(현재 게임 명칭: 탐험)의 공동 작업·전체 능력·참가자·시간·등급은 버섯형에 가까운 요소입니다. ‘발견’은 물건 목록과 회수 후 서사·카드 획득을 포함합니다. 피크민 용어와 피그마 용어가 일대일로 같다는 뜻은 아닙니다. 우리 쪽은 현중의 최신 이름·구조를 우선합니다.</p>
+
+<p>피그마 링크는 현재 로그인 요청 화면으로 원본 전체 재열람이 불가능했습니다. 현중이 올린 완료된 발견 설명·서사·참가 순위 보상 이미지와 이번 정정을 직접 근거로 삼습니다. 피크민의 최소 운반 조건을 우리 카드 자리 상한으로 오해하거나 운영 수치를 그대로 복사하지 않습니다.</p>
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>연결</th></tr></thead><tbody><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%9D%BC%ED%8F%ACAI%ED%83%90%ED%97%98_%EC%9B%90%EB%B3%B8/2%EA%B3%84%EC%B8%B5%EB%9D%BC%ED%8F%AC_AI%ED%83%90%ED%97%98%EC%84%9C%EC%82%AC_%ED%86%B5%ED%95%A9%EA%B8%B0%ED%9A%8D%EC%84%9C_v1.0_%EC%9B%90%EB%B3%B8.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%9D%BC%ED%8F%ACAI%ED%83%90%ED%97%98_%EC%9B%90%EB%B3%B8/2%EA%B3%84%EC%B8%B5%EB%9D%BC%ED%8F%AC_AI%ED%83%90%ED%97%98%EC%84%9C%EC%82%AC_%ED%86%B5%ED%95%A9%EA%B8%B0%ED%9A%8D%EC%84%9C_v1.0_%EC%9B%90%EB%B3%B8.html">제안서 원문 P153</a></td><td>기획 출발점. 최신 용어·기준은 이 상세본</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%9D%BC%ED%8F%ACAI%ED%83%90%ED%97%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%9D%BC%ED%8F%ACAI%ED%83%90%ED%97%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">핵심제안 개발 P152</a></td><td>같은 내용의 발표용 요약·실행·상태</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%B9%B4%EB%93%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%B9%B4%EB%93%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">카드 P168</a></td><td>실제 카드 ID·장수·확률·보장·소유 효과</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%95%84%EC%9D%B4%EB%8F%8C%EB%8A%A5%EB%A0%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%95%84%EC%9D%B4%EB%8F%8C%EB%8A%A5%EB%A0%A5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">성장 P107</a></td><td>현재 성장·지갑·공통 정산</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%80%EA%B2%B0%EC%84%B1_%ED%8C%80%EC%8A%A4%ED%83%AF_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%80%EA%B2%B0%EC%84%B1_%ED%8C%80%EC%8A%A4%ED%83%AF_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">팀 P147</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%98%A4%EB%94%94%EC%85%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%98%A4%EB%94%94%EC%85%98_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">오디션 P100</a></td><td>편성 대상·소유자 식별</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%84%B1%EC%9E%A5%EA%B4%80%EA%B3%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%84%B1%EC%9E%A5%EA%B4%80%EA%B3%84_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">관계 P169</a></td><td>함께 참가한 아이돌 쌍의 라포</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%AA%AC%EC%8A%A4_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%AA%AC%EC%8A%A4_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">몬스 P96</a></td><td>분신 외형·도시 연출</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B3%B5%ED%86%B5%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%97%B0%EA%B2%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B3%B5%ED%86%B5%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%97%B0%EA%B2%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">공통 데이터 P140</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%9C%EB%9E%80%EC%8A%A4%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">발란스 P171</a></td><td>인계·성장 단계·기존 보상 기준</td></tr></tbody></table></div>
+
+<p>단독 실행도 기존 공통 생성 팀으로 정상 플레이합니다. 전송된 ID·성장·지갑·소유를 우선하며 없는 탐험 프로필만 임시 설정으로 보완합니다.</p>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p><a href="/docs/planning/game-simulator.html?module=simulator_module_journey" data-paper-path="docs/planning/game-simulator.html">게임 시뮬레이터</a> · <a href="#ui-preview">본문 하단 UI</a></p>
+
+<ol>
+<li>모험 메인에서 탐험·출동을 함께 확인합니다.</li>
+<li>탐험 상세 → 보낼 아이돌 선택 → 자동/직접 편성 → GO로 시작합니다.</li>
+<li>도시 이동·마일스톤을 보고 모의 친구를 합류시킵니다.</li>
+<li>탐험 이야기 → 참가자 → 참가 순위와 보상 → 점수·결과 → 탐험 보상으로 진행합니다.</li>
+<li>‘추가로 발견하였습니다’와 조각 이름·수량을 확인합니다. 탐험 보상을 받으면 도감에도 함께 반영합니다.</li>
+<li>도감 그룹 → 아이템에서 현재/필요 조각을 확인하고 완성 보상과 이야기를 엽니다.</li>
+</ol>
+
+<p>오른쪽에는 탐험/공동 탐험 원버튼, 참가자 수·내 순위, 모의 친구 지금 합류, 다음 조각, 완성 조건, 속도·1회 진행·정지/계속, 자리·능력 변환을 둡니다. 원버튼은 탐험을 끝까지 진행하되 수령 확인은 게임 화면에서 합니다. 티켓·공통 정산을 우회하지 않습니다. 소식 봇도 오른쪽에서 설정합니다.</p>
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서-현재-실행">한 판 순서 · 현재 실행</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>탐험 상세·편성에서 시작하고 결과 수령 뒤 모험으로 복귀</td></tr><tr><td>입력·출력</td><td>내 아이돌·활동 조건 → 이야기·기여·순위·보상·조각</td></tr><tr><td>상태와 전이</td><td>준비 → 편성 → 진행 → 이야기·참가 결과 → 보상 수령</td></tr><tr><td>판정</td><td>자리·참가 조건·진행량·순위. 친구 동행 우정 포인트는 회차별 참여 구간으로 판정</td></tr><tr><td>오류·예외</td><td>중복 지급 방지·저장 실패 되돌림·같은 보상 재시도</td></tr><tr><td>저장·복원</td><td>회차·고정 보상·영수증·조각·완성 여부 분리</td></tr><tr><td>다른 모듈 연결</td><td>전송 팀·성장·지갑 우선. 기존 출동 진행 유지</td></tr></tbody></table></div>
+
+
+<h3 id="4-1-모험-메인-ui">4-1. 모험 메인 UI</h3>
+
+<p>티켓·필터 → 진행 요약(있을 때) → 탐험 캐러셀 → 축약 도감6분류 → 출동 세로 목록 → 최근 기록 링크 순서입니다. 탐험·출동 전환 탭은 없습니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>누르는 곳</th><th>다음</th></tr></thead><tbody><tr><td>탐험</td><td>상세·편성</td></tr><tr><td>도감 그룹</td><td>해당 분류의 모든 아이템·조각 진행도</td></tr><tr><td>도감 아이템</td><td>조각 조건·고유 서사·완성 보상</td></tr><tr><td>출동</td><td>기존 준비·뉴스·비행·대결</td></tr><tr><td>진행 중 활동</td><td>해당 회차 진행·결과</td></tr></tbody></table></div>
+
+<h3 id="4-2-탐험-편성연출">4-2. 탐험 편성·연출</h3>
+
+<p>내 아이돌 최대5명을 편성하고 대응 몬스로 표현합니다. 동일 아이돌의 다른 탐험 중복 참여를 유지합니다. 아이돌 수와 플레이어 수는 별개입니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>임시 항목</th><th>값</th></tr></thead><tbody><tr><td>아이돌 최대 / 자리 상한</td><td>5명 / 5자리</td></tr><tr><td>1·2·3성 / 4성 / 5성 자리</td><td>1 / 2 / 3</td></tr><tr><td>탐험 능력</td><td>현재6축 합 ÷100 + 등급×40, 최소80</td></tr><tr><td>추천 속성</td><td>해당 카드 능력×1.2</td></tr><tr><td>진행량</td><td>기존 시간(분)×기준 능력500</td></tr><tr><td>기본 속도 / 선택</td><td>×60 / ×1·10·30·60·120</td></tr><tr><td>1회 진행</td><td>시험 시간300초</td></tr></tbody></table></div>
+
+<p>기존 도시3D는 진행 화면의 사진238px 영역(낮은 화면205px) 안에 두고 아래에 출발·발견·동행·활동·도착의 좁은 마일스톤을 둡니다. 남은 진행량·전체 능력·제목·참가·도움·보상 UI를 유지합니다.</p>
+
+<h3 id="4-3-공동-탐험과-합류">4-3. 공동 탐험과 합류</h3>
+
+<p>한 탐험에 여러 플레이어가 각자 편성을 보냅니다. 현재 정원은 내 팀 포함 최대6팀이며, 공동 원버튼 시험은 엔터파워 해금 범위(최대6팀)에 맞춥니다. 내 순위1·2·3·마지막을 시험할 수 있습니다.</p>
+
+<p>기여도는 참가한 뒤 실제 처리한 진행량입니다. 늦게 합류한 친구에게 지난 진행을 소급하지 않습니다. 속도·정지·계속·1회 진행에서도 중복 계산하지 않습니다. 동률은 참가 순서이며 완료 때 결과를 고정합니다.</p>
+
+<p>실제 외부 초대·친구 계정 지급·여러 기기 동기화는 후속 서버 작업입니다. 현재 친구는 로컬 모의 참가자입니다.</p>
+
+<h3 id="4-4-플레이어-순위와-보상-ui">4-4. 플레이어 순위와 보상 UI</h3>
+
+<p>첨부 리스트는 <b>아이돌 순위가 아니라 플레이어별 참가 보상 목록</b>입니다. 행마다 순위·아바타·이름·기여도·추가 카드팩/상자를 표시합니다. 목록은 스크롤되고 내 행을 아래에서 다시 강조합니다. 내 순위가 마지막이어도 바로 찾을 수 있어야 합니다.</p>
+
+<p>기본 보상은 순위와 별개입니다. 참가자2명 이상일 때 상위3명에게 추가 보상을 보여줍니다. 친구 행은 모의 보상 목록이고 내 수령분만 공통 지갑·카드에 정산합니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>순위</th><th>임시 추가 팩</th><th>상자 묶음</th></tr></thead><tbody><tr><td>1</td><td>퍼플1개</td><td>금: 기존 기본 돈·주사위×3</td></tr><tr><td>2</td><td>블루1개</td><td>은: 기본 돈·주사위×2</td></tr><tr><td>3</td><td>핑크1개</td><td>나무: 기본 돈·주사위×1</td></tr><tr><td>그 외</td><td>추가 없음</td><td>기본 탐험 보상</td></tr></tbody></table></div>
+
+<p>실제 팩 장수·확률·보장은 기존 표를 읽습니다. 상자는 묶음 연출이며 전역 미등록 상자 아이템을 소유한 것으로 처리하지 않습니다. 내 내용물은 돈·주사위로 펼쳐 정산합니다. 모든 신규 값은 임시(나중에 결정)입니다.</p>
+
+<h3 id="4-5-탐험-보상과-추가-조각">4-5. 탐험 보상과 추가 조각</h3>
+
+<p>기본 카드팩1개, 단계별 돈·주사위, 명시한 추가 시험 보상과 내 순위 추가 보상을 지급합니다. 탐험에서 찾은 것은 <b>도감 아이템 조각</b>입니다.</p>
+
+<p>결과에 ‘추가로 발견하였습니다’ → 아이템 이름 → 조각×수량을 표시하고 탐험 지급에 포함합니다. 임시로 회당 조각1개, 진행55%에 발견 기록, 완료 때 확인 가능입니다. 도감 수량은 실제 탐험 보상 저장 뒤 증가합니다. 미리보기·재접속·재열람으로 더 주지 않습니다.</p>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 972" width="420" height="972" role="img" aria-labelledby="title-P206-0"><title id="title-P206-0">설명 흐름도 P206-0</title><defs><marker id="arrow-P206-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M150.11009174311926,82 L108,104.5 L108,127" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P206-0)"/><path d="M269.88990825688074,82 L312,104.5 L312,127" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P206-0)"/><path d="M108,191 L108,213.5 L108,236" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P206-0)"/><path d="M108,300 L108,322.5 L108,345" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P206-0)"/><path d="M108,409 L108,431.5 L108,454" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P206-0)"/><path d="M108,518 L108,540.5 L108,563" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P206-0)"/><path d="M108,627 L108,649.5 L108,672" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P206-0)"/><path d="M108,736 L108,758.5 L108,781" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P206-0)"/><path d="M108,845 L108,867.5 L108,890" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P206-0)"/><rect x="120" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="210" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="210" dy="0">모험 메인</tspan></text><rect x="18" y="127" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="164" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">탐험 상세와 편성</tspan></text><rect x="222" y="127" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="312" y="164" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="312" dy="0">기존 출동 목록</tspan></text><rect x="18" y="236" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="273" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">도시 이동과 공동 참여</tspan></text><rect x="18" y="345" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="382" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">탐험 이야기와 팀 라포</tspan></text><rect x="18" y="454" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="491" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">플레이어 순위</tspan></text><rect x="18" y="563" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="600" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">탐험 보상과 조각</tspan></text><rect x="18" y="672" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="709" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">공통 정산</tspan></text><rect x="18" y="781" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="818" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">도감 누적과 완성</tspan></text><rect x="18" y="890" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="927" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">아이템 이야기와 완성 보상</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">모험 메인 → 탐험 상세와 편성 / 모험 메인 → 기존 출동 목록 / 탐험 상세와 편성 → 도시 이동과 공동 참여 / 도시 이동과 공동 참여 → 탐험 이야기와 팀 라포 / 탐험 이야기와 팀 라포 → 플레이어 순위 / 플레이어 순위 → 탐험 보상과 조각 / 탐험 보상과 조각 → 공통 정산 / 공통 정산 → 도감 누적과 완성 / 도감 누적과 완성 → 아이템 이야기와 완성 보상</p></figure>
+
+
+
+<h3 id="4-6-6분류-조각-도감">4-6. 6분류 조각 도감</h3>
+
+<p>빈 상태에도 6개 그룹을 항상 보여줍니다. 그룹 숫자는 받은 누적 조각 수, 완성 수는 완성 아이템/등록 아이템입니다. 클릭하면 미수집 아이템도 0부터 표시합니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>그룹</th><th>등록</th><th>컨셉</th></tr></thead><tbody><tr><td>아이돌 이야기</td><td>12종</td><td>연습·무대·방송</td></tr><tr><td>팀의 추억</td><td>7종</td><td>응원·쉼·동행</td></tr><tr><td>수호신의 흔적</td><td>1종</td><td>도깨비 사연·정화</td></tr><tr><td>브랜드 연구</td><td>4종</td><td>제작·뷰티·F&amp;B·패션·MD</td></tr><tr><td>보물 상자</td><td>1종</td><td>탐험의 보물 기록</td></tr><tr><td>활동 재화</td><td>2종</td><td>활동비·행운 주사위의 기념</td></tr></tbody></table></div>
+
+<p>27종을 데이터로 등록했습니다. 기존24편과 상자·봉투·주사위 이야기3편을 연결합니다. 장소/테마를 고려해 조각을 고르고 반복 획득은 누적합니다. ‘활동비 봉투 조각’을 받았다고 봉투의 돈을 즉시 추가 지급하지 않습니다.</p>
+
+<h3 id="4-7-아이템-완성서사">4-7. 아이템 완성·서사</h3>
+
+<p>같은 아이템 조각3개가 임시 완성 기준입니다. 오른쪽에서1~99개로 시험합니다. 완성 지급을 준비한 항목은 그때 조건을 고정합니다.</p>
+
+<p>아이템 화면은 이름·현재/필요 조각·진행 막대·고유 이야기·완성 보상·버튼입니다. 부족하면 버튼을 막습니다. 조각은 소비하지 않습니다. 완성 보상은 항목별 현재 세션에서1회이며 임시로 기본 카드팩1개+기본 돈·주사위입니다.</p>
+
+<p>탐험 이야기는 이동·활동·팀 관계, 도감 이야기는 물건의 단서→인물의 사연→아이돌 행동→후일담입니다. 두 서사를 복제하지 않습니다. 도감 완성·이야기 재열람은 팀 라포를 다시 올리지 않습니다.</p>
+
+<p>&lt;a id=&quot;dispatch-mons&quot;&gt;&lt;/a&gt;</p>
+
+<h3 id="출동의-실제-보유-몬스-편성">출동의 실제 보유 몬스 편성</h3>
+
+<p><b>출동</b>은 기획사에서 실제 보유하고 선택한 몬스를 읽습니다. 공통 편성의 순서를 보존하되 이 활동은 기존 adventure.json의 maxParty=5와 시작 검증을 사용합니다. 디펜스·출연권 대전의 최대10을 출동에 그대로 늘리지 않습니다.</p>
+
+<p>명시적으로0마리를 선택했거나 보유 몬스가 없으면 출동을 시작하지 않습니다. 자동 계산도 출동 횟수·출동 보상·해당 소모를0으로 남기며 미보유 종이나 멤버의 짝 몬스로 채우지 않습니다. 뉴스→사옥 출발→비행→대결→보상 흐름과 기존 티켓·시간·기본 보상·속성 규칙은 유지하고, 신규 출동에 도감 조각을 추가합니다. 몬스 종을 재화처럼 소비하거나 합성·행복을 바꾸지 않습니다.</p>
+
+<p>독립된 모험 단독 테스트의 새 생성 팀은 보유 기록 자체가 없을 때 기존 게임의 첫 몬스 지급 설정으로 출동 편성을 준비합니다. 실제 전송 팀·본편·다른 테스트 저장은 바꾸지 않고, 이미 저장된 빈 보유나 수동으로 비운 편성도 유지합니다. 새로고침해도 추가 지급하지 않습니다.</p>
+<p>탐험의 내 아이돌 최대5명·친구 동행·몬스 분신의 도시 이동은 별도 흐름입니다. 이 출동 편성 보완으로 탐험·여정의 전투 참가 몬스까지 확대하지 않습니다. 라포·우정 포인트·탐험 조각·도감·퍼즐·기존 카드 보상도 그대로 유지합니다.</p>
+
+<h3 id="4-8-출동-유지와-후속-피그마-발견">4-8. 출동 유지와 후속 피그마 발견</h3>
+
+<p>현재 뉴스→1번 사옥 출발→탑뷰 비행→대결→보상을 유지합니다. 엔진·진행 시간·기존 보상 추첨을 도감과 섞지 않습니다.</p>
+
+<p>사용자 첨부에서 읽은 후속 완료 UI:</p>
+
+<ol>
+<li>완료된 발견은 완료 순서대로 목록 맨 앞에 정렬.</li>
+<li>‘발견 완료!’ 아이콘과 테두리 효과.</li>
+<li>클릭하면 관련 카드 캐릭터 이미지·관련 카드 이야기.</li>
+<li>이야기는 아래에서 위로 자동 스크롤.</li>
+<li>‘건너뛰기’는 이야기만 넘겨 카드 획득 화면으로 이동.</li>
+<li>획득 확인 후 모험 메인. 상자·재화는 해당 항목의 보상만 표시.</li>
+</ol>
+
+<p>이것은 현중이 ‘발견 즉 출동’으로 매핑한 후속 기준입니다. 이번에 출동 전체를 개조했다고 보고하지 않습니다. 발견 장소의 생성·입장 자리·다른 유저 초대 규칙은 후속 원본 대조 대상입니다.</p>
+
+<h3 id="4-9-1102-서비스-ui-개선">4-9. 11/02 서비스 UI 개선</h3>
+
+<p>중복된 모험 본문 제목과 공통 필러 제목을 제거합니다. 상단 공통 메뉴 제목은 모험으로 유지합니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>위치</th><th>화면 구성</th></tr></thead><tbody><tr><td>메인</td><td>티켓·필터 → 진행 요약 1개(있을 때) → 탐험 캐러셀 → 6분류 도감 한 줄 → 출동 세로3행 → 최근 탐험 링크</td></tr><tr><td>탐험</td><td>이미지·이름·시간·속성 카드, 가로로 넘기기</td></tr><tr><td>출동</td><td>장소 아이콘·제목·건물·화살표의 세로 목록. 모두 보기에서 전체13종 모달</td></tr><tr><td>도감 요약</td><td>그룹 아이콘·짧은 이름·조각 수, 전체 완성 수만 표시</td></tr><tr><td>도감 상세</td><td>같은 모바일 안의 모달. 그룹 아이템 목록→조각 진행도·고유 이야기·실제 완성 보상 아이콘/수량</td></tr><tr><td>준비</td><td>높이118px 사진·목적·시간/속성/자리·그래픽 보상. 진행량0·참가0 표시 없음</td></tr><tr><td>편성</td><td>짧은 탐험 제목·능력/예상 시간·자동/필터·기본5열 소형 카드. 선택 표시와 이름·별·능력·자리를 유지</td></tr><tr><td>진행</td><td>높이238px 도시3D(낮은 화면205px)·남은 진행량/전체 능력·5마일스톤·몬스. 활동·관계·보상 버튼으로 모달</td></tr><tr><td>진행 요약</td><td>메인 위쪽에 몬스·제목·남은 시간·진행 막대·보기. 여러 개는 모두 보기 모달</td></tr><tr><td>보상</td><td>주사위·돈·팩·상자 그래픽과 ×수량. 같은 재화는 표시 합산, 실제 영수증은 변경하지 않음. 실제 카드도 작게 표시</td></tr></tbody></table></div>
+
+<p>전체 버튼은 하단 공통 행동 영역에 둡니다. 긴 아이템·출동·기록 목록은 모달 본문만 스크롤합니다. 모달의 배경 입력을 막고, 처음 열 때 제목으로 초점을 옮기며 Tab 순환·Escape 닫기·열었던 버튼 복귀를 제공합니다. 모달은 웹뷰 전체가 아닌 모바일 프레임 안에 한정됩니다.</p>
+
+<p>보상 벡터10종은 별도 데이터 경로에서 연결합니다. 숫자와 지급은 기존 실제 계산을 그대로 읽으며 그래픽 변경으로 보상량을 변경하지 않습니다. 데이터가 더 많거나 작은 기기에서는 필요한 목록 스크롤을 허용합니다.</p>
+
+<h3 id="4-10-친구-아이돌우정-포인트우리-사이-보기-정정-기획">4-10. 친구 아이돌·우정 포인트·우리 사이 보기 — 정정 기획</h3>
+
+<p><b>게임 조작·자동 계산·현황판 조회로 역할 구분 · 신규 수치는 임시(나중에 결정).</b> 라포와 우정 포인트를 다음처럼 구분합니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>구분</th><th>기준</th></tr></thead><tbody><tr><td>라포</td><td>내 소유 아이돌끼리의 관계</td></tr><tr><td>우정 포인트</td><td>친구 소유 아이돌과 함께 탐험했을 때 받는 별도 재화</td></tr><tr><td>직접 능력 배움</td><td>보류. 동료에게서 세부 능력이 직접 오르는 기능을 이번 개발에서 제외</td></tr><tr><td>우정 포인트 사용처</td><td>나중에 결정. 현재는 적립·보유·획득 표시를 제공</td></tr><tr><td>표시</td><td>재화 아이콘+수량. 긴 텍스트 보상 상자로 표시하지 않음</td></tr></tbody></table></div>
+
+<p>직접 능력 배움은 보류하고 내 아이돌 관계와 친구 동행 재화를 분리합니다. 기존 카드 성장과 이미 구현한 보상은 유지합니다. 이전 안은 짝 로그에 보존합니다.</p>
+
+<p><b>A. 플레이 흐름</b></p>
+
+<p>내 아이돌 편성 → 친구 팀 선택(선택 사항) → 내 아이돌 관계 확인 → 탐험 → 기존 보상과 우정 포인트 확인·수령입니다.</p>
+
+<p>편성의 핵심 버튼은 「친구와 함께」와 「내 아이돌 관계 보기」입니다. 복잡한 목표·행동 선택은 자동 추천으로 줄이는 안을 유지합니다.</p>
+
+<aside class="peer-plan-ui" id="peer-plan-ui"><style>
+.peer-plan-ui{margin:24px 0;padding:20px;border:1px solid #decce4;border-radius:16px;background:#faf7fb;color:#55435f}.peer-plan-ui h3{margin:0 0 8px}.peer-plan-ui>p{font-size:13px}.peer-plan-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}.peer-plan-phone{min-width:0;border:1px solid #dfd2e5;border-radius:18px;background:#fffdf8;overflow:hidden;font:13px/1.6 system-ui,sans-serif}.peer-plan-bar{padding:12px;background:#f1e5f7;border-bottom:1px solid #dfd2e5;font-size:15px;font-weight:700}.peer-plan-content{padding:12px}.peer-plan-idols{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:10px 0}.peer-plan-idol{border:1px solid #dfcce7;border-radius:9px;padding:8px 3px;text-align:center;background:#f8f0f8;font-size:11px}.peer-plan-face{display:grid;place-items:center;width:34px;height:34px;margin:0 auto 5px;border-radius:50%;background:#ddc8e6;color:#78558b;font-size:15px;font-weight:700;font-style:normal}.peer-plan-phone small{font-size:10px;color:#947c9b}.peer-plan-tag{display:inline-block;font-size:10px;padding:2px 5px;border-radius:6px;background:#eee6f3;margin:2px}.peer-plan-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}.peer-plan-button{display:grid;place-items:center;min-height:38px;padding:6px;border:1px solid #dcc7e6;border-radius:9px;background:#f1e5f7;color:#7e5b91;font-size:11px;text-align:center}.peer-plan-button.primary{grid-column:1/-1;background:#d889b0;border-color:#d889b0;color:white;font-size:13px;font-weight:700}.peer-plan-note{padding:10px;border:1px solid #d4e1cb;border-radius:9px;background:#f0f5eb;margin:10px 0;font-size:12px}.peer-plan-note strong{color:#587e49}.peer-plan-friend{display:grid;grid-template-columns:34px 1fr;gap:8px;padding:10px 0;border-bottom:1px solid #e7dfeb}.peer-plan-friend .peer-plan-face{background:#c9e2df;color:#628e80}.peer-plan-friend strong{display:block;font-size:13px}.peer-plan-pair{border:1px solid #e1d1e7;border-radius:10px;padding:9px;margin:8px 0}.peer-plan-pair strong{display:block}.peer-plan-pair p{font-size:12px;margin:6px 0}.peer-plan-detail{font-size:10px;color:#967e9f;border-top:1px dashed #e1d6e6;padding-top:7px}.peer-plan-bottom{font-size:10px;color:#9b86a2;padding:10px;border-top:1px solid #e5dcea}@media(max-width:980px){.peer-plan-columns{grid-template-columns:1fr}.peer-plan-phone{max-width:430px}}
+.fp-chip{display:inline-flex;align-items:center;gap:4px;vertical-align:middle;background:#f5ebf8;border:1px solid #e1cee9;border-radius:10px;padding:3px 9px;color:#78558b;font-size:17px;font-weight:bold}.fp-chip img{display:block;width:38px;height:38px}.fp-balance{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.fp-reward-sample{margin-top:16px;padding:12px;border:1px solid #e3d4e9;border-radius:12px;background:#fffdf8}.fp-reward-strip{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.fp-reward-strip>span{display:flex;align-items:center;gap:4px;background:#f7f3e9;border:1px solid #e5decd;border-radius:10px;padding:5px 10px;font-size:16px;font-weight:700}.fp-reward-strip img{width:38px;height:38px}.fp-reward-strip>.fp-extra{background:#f6e9f6;border-color:#ddc2e6}.fp-rule{font-size:11px;color:#967b9f;line-height:1.7}</style><h3>정정 UI 기획 · 내 라포와 친구 동행 재화 분리</h3><p><b>정적 참고 시안입니다. 현재 실제 화면은 5장 캡처에서 확인합니다. 표시 수량은 임시(나중에 결정) 예시입니다.</b> 능력 직접 성장은 보류하고 우정 포인트를 재화 아이콘과 수량으로 표시합니다.</p><div class="peer-plan-columns">
+<div class="peer-plan-phone"><div class="peer-plan-bar">① 탐험 편성</div><div class="peer-plan-content"><div class="fp-balance"><span class="peer-plan-tag">내 아이돌</span><span class="fp-chip" aria-label="우정 포인트 0"><img src="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/리소스/우정포인트_20261102/friendship-point.svg" alt="우정 포인트"><b>0</b></span></div><div class="peer-plan-idols"><div class="peer-plan-idol"><i class="peer-plan-face">A</i>아이돌A<br><small>내 소속</small></div><div class="peer-plan-idol"><i class="peer-plan-face">B</i>아이돌B<br><small>내 소속</small></div><div class="peer-plan-idol"><i class="peer-plan-face">+</i>편성하기</div></div><div class="peer-plan-actions"><span class="peer-plan-button">친구와 함께</span><span class="peer-plan-button">우리 사이 보기</span></div><div class="peer-plan-note"><strong>친구 팀과 함께 완료하면</strong><div style="margin-top:6px"><span class="fp-chip" aria-label="우정 포인트 +10"><img src="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/리소스/우정포인트_20261102/friendship-point.svg" alt="우정 포인트"><b>+10</b></span></div><small>직접 능력 성장은 보류</small></div><div class="peer-plan-actions"><span class="peer-plan-button primary">탐험 출발</span></div></div><div class="peer-plan-bottom">라포는 내 아이돌끼리 · 친구 동행은 별도 재화</div></div>
+<div class="peer-plan-phone"><div class="peer-plan-bar">② 친구와 함께 · 모달</div><div class="peer-plan-content"><p>친구가 보내는 아이돌 팀을 골라요.</p><div class="peer-plan-friend"><i class="peer-plan-face">미</i><div><strong>미라 <span class="peer-plan-tag">친구 팀</span></strong><small>소유자를 구분한 아이돌 편성</small><div class="peer-plan-idols"><div class="peer-plan-idol">아이돌C</div><div class="peer-plan-idol">아이돌D</div><div class="peer-plan-idol">…</div></div></div></div><div class="peer-plan-friend"><i class="peer-plan-face">누</i><div><strong>누리 <span class="peer-plan-tag">친구 팀</span></strong><small>기존 봇 프로필에 아이돌 팀 연결</small></div></div><div class="peer-plan-note">친구 아이돌과 함께 탐험한 구간에 따라 적립해요.<div style="margin-top:6px"><span class="fp-chip" aria-label="우정 포인트 ×10"><img src="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/리소스/우정포인트_20261102/friendship-point.svg" alt="우정 포인트"><b>×10</b></span></div></div><span class="peer-plan-button">이 팀과 함께하기</span></div><div class="peer-plan-bottom">혼자 또는 내 아이돌끼리만 보내면 적립 없음</div></div>
+<div class="peer-plan-phone"><div class="peer-plan-bar">③ 우리 사이 보기 · 모달</div><div class="peer-plan-content"><small>선택한 내 아이돌끼리의 관계만 보여줘요.</small><div class="peer-plan-pair"><strong>아이돌A ↔ 아이돌B</strong><span class="peer-plan-tag">아는 사이</span><span class="peer-plan-tag">이번 이야기 대상</span><p>서로를 더 알아갈 기회예요.</p><div class="peer-plan-detail">관계 자세히 › 신뢰 · 이해 · 협력 · 긴장 / 최근 변화</div></div><div class="peer-plan-pair"><strong>친구 아이돌</strong><p>친구 팀 정보에서 확인해요.</p><small>내 라포 선·점수에는 포함하지 않아요.</small></div><span class="peer-plan-button">닫고 편성 계속하기</span></div><div class="peer-plan-bottom">현재 관계와 실제 변화 기록을 쉽게 표시</div></div>
+</div><div class="fp-reward-sample"><b>탐험 보상 표시 예시</b><div class="fp-reward-strip" style="margin-top:8px"><span aria-label="그린 카드팩 1개"><img src="/data/simulator/adventure-icons/pack_green.svg" alt="그린 카드팩">×1</span><span aria-label="주사위 4개"><img src="/data/simulator/adventure-icons/dice.svg" alt="주사위">×4</span><span aria-label="돈 400"><img src="/data/simulator/adventure-icons/money.svg" alt="돈">×400</span><span class="fp-extra" aria-label="우정 포인트 10"><img src="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/리소스/우정포인트_20261102/friendship-point.svg" alt="우정 포인트">×10</span></div><p class="fp-rule">우정 포인트는 라포와 다른 재화입니다. 사용처·교환·소모는 나중에 정하며, 현재는 보유량과 획득량만 기획합니다.</p></div></aside>
+
+<p><b>B. 기존 봇에 아이돌 편성 연결</b></p>
+
+<p>기존 미라·누리·하리·보라·다니·솔의 botId·소식·프로필을 사용하고 각 봇 아래 아이돌 팀을 연결합니다. 친구 프로필과 아이돌은 서로 다른 대상입니다.</p>
+
+<p>친구 아이돌에는 소유자 ID+아이돌 ID·이름·초상화·몬스 연결·현재 활동 능력을 둡니다. 능력은 기존 탐험 기여와 결과 계산에 쓰며, 내 아이돌에게 복사하거나 전수하지 않습니다.</p>
+
+<p>내 아이돌 최대5명과 참가 플레이어 정원은 별개입니다. 친구도 플레이어별 최대5명을 보내는 안이며 현재 공동 참가 정원은 내 팀 포함 최대6팀(친구 +5팀)이며 엔터파워로 친구 슬롯을 해금합니다. 전송 데이터가 있으면 우선 사용하고 단독 시험에서는 임시 편성을 준비합니다.</p>
+
+<p>기존 power만 있는 옛 봇 기록은 도움·기여도를 보존합니다. 개별 소유자·아이돌 참여가 확인되지 않은 옛 기록에 우정 포인트를 소급 지급하지 않습니다.</p>
+
+<p><b>C. 라포 정보창 — 내 아이돌끼리</b></p>
+
+<p>「내 아이돌 관계 보기」 모달은 선택한 내 아이돌끼리만 비교합니다. 친구 아이돌은 친구 팀 정보에서 따로 보며, 내 라포 선이나 점수에 섞지 않습니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>기본 화면</th><th>자세히 보기</th></tr></thead><tbody><tr><td>내 아이돌 얼굴·이름</td><td>같은 쌍의 원본 ID·최근 사건</td></tr><tr><td>현재 관계 단계</td><td>신뢰·이해·협력·긴장4축</td></tr><tr><td>이번 이야기 대상 두 사람·추천 이유</td><td>실제 최근 변화 전후·기록 시각</td></tr><tr><td>긴장이 있는 경우 별도 배지</td><td>원본 미연결·단계 판정 상태</td></tr></tbody></table></div>
+
+<p>단계는 기존 표의 처음 봄→아는 사이→동료→친한 동료→단짝입니다. 긴장을 임의로 좋은 관계 평균에 합치지 않습니다. 미확인 값은 미확인으로 표시합니다.</p>
+
+<p>자동 추천은 기존 쌍 선택 규칙과 회당1쌍을 유지합니다. 모든 내 아이돌 조합이 한 번에 상승한다고 안내하지 않습니다. 친구와의 라포 저장·새 교류 관계 체계는 이번 범위에서 만들지 않습니다.</p>
+
+<p><b>D. 우정 포인트 — 별도 재화</b></p>
+
+<div class="table-scroll"><table><thead><tr><th>항목</th><th>기획</th></tr></thead><tbody><tr><td>표시명</td><td>우정 포인트</td></tr><tr><td>정체</td><td>계정이 보유하는 재화. 아이돌 능력·라포 축·관계 단계가 아님</td></tr><tr><td>재화 ID</td><td>currency_master_currency_friendship_point — 공통 currency_master 등록</td></tr><tr><td>적립 조건</td><td>같은 탐험에 내 아이돌과 다른 소유자의 친구 아이돌이 함께 참가</td></tr><tr><td>인정 시점</td><td>탐험 완료 뒤 보상 수령 때</td></tr><tr><td>지급 대상</td><td>내 계정의 몫. 친구 계정은 각자 자기 정산에서 처리</td></tr><tr><td>사용/교환/소모/상품</td><td>미정. 버튼·가격·상점·능력 전환 효과를 추가하지 않음</td></tr><tr><td>이전 보상</td><td>카드·돈·주사위·조각 등과 별개로 합산 표시·정산</td></tr></tbody></table></div>
+
+<p>나 혼자 또는 내 소유 아이돌끼리만 보낸 경우 우정 포인트는 없습니다. 내 다른 팀을 다른 친구로 판정하지 않습니다. 친구 명단에만 있거나 참여 요청만 보낸 상태도 적립 조건이 아닙니다.</p>
+
+<p>함께 진행한 구간이 있어야 합니다. 이미 끝난 탐험에 이름만 추가해서 포인트를 받지 않습니다. 여러 친구가 함께해도 같은 내 회차의 포인트를 친구 수만큼 중복 지급하지 않습니다. 친구 능력이 높다는 이유로 포인트가 더 오른다는 규칙도 넣지 않습니다.</p>
+
+<p><b>시험 기본안 — 모두 임시(나중에 결정):</b></p>
+
+<div class="table-scroll"><table><thead><tr><th>값</th><th>임시 기본</th></tr></thead><tbody><tr><td>새 단독 시험의 시작 포인트</td><td>0. 전송받은 실제 보유량 우선</td></tr><tr><td>전 구간 친구 동행 완료</td><td>10포인트</td></tr><tr><td>늦은 합류</td><td>실제 함께한 비율로10포인트를 비례 계산·내림</td></tr><tr><td>함께 진행한 양이 있는 경우</td><td>최소1포인트, 회차 최대10포인트</td></tr><tr><td>함께 진행한 구간 없음 / 친구 아이돌 없음</td><td>지급 없음</td></tr><tr><td>순위·라포·능력에 따른 추가 배율</td><td>없음</td></tr><tr><td>별도의 새 일일 제한·유효기간·소모처</td><td>정하지 않음. 기존 탐험 출발/티켓 규칙 유지</td></tr></tbody></table></div>
+
+<p>시간은 시험 화면의 클릭 횟수나 배속이 아닌 실제 탐험 진행 기록으로 계산합니다. 봇 친구는 오른쪽의 시험 자료로 같은 조건을 검증합니다. 실제 친구 계정 간 초대·접속·정산 서버는 별도 개발 대상입니다.</p>
+
+<p><b>E. 아이콘과 수량 UI</b></p>
+
+<p>아이콘은 기존 재화와 어울리는 토큰 모양입니다. 두 하트를 겹친 보라·분홍 표식과 금색 테두리로 돈·주사위·라포 표식과 구별합니다.</p>
+
+<ul>
+<li>보상 칩: 우정 포인트 아이콘 + ×10처럼 수량을 나란히 표시합니다.</li>
+<li>보유 칩: 모험 안의 작은 재화 영역에 아이콘+현재 수량을 표시하는 안입니다.</li>
+<li>이름은 접근성 이름/설명에서 확인할 수 있게 하고, 긴 텍스트 상자를 기본 보상 표현으로 쓰지 않습니다.</li>
+<li>예상 보상과 실제 지급 완료를 구분합니다. 미수령 미리보기가 보유량을 올리지 않습니다.</li>
+<li>친구가 없는 탐험의 미리보기에서는 포인트 보상을 숨기거나 지급 없음 상태로 표시합니다.</li>
+<li>기존 상단 돈·주사위·보석3개 공통 영역을 무리하게4칸으로 바꾸지 않습니다.</li>
+</ul>
+
+<p>벡터 아이콘은 문서 리소스와 게임 데이터 경로에 보존하고 게임의 보유·보상 칩과 자동 계산 합계에 연결했습니다. 사용처가 정해지지 않았으므로 아이콘을 눌러 상점이나 소모 화면으로 이동시키지 않습니다.</p>
+
+<p><b>F. 저장·정산·인계</b></p>
+
+<p>우정 포인트는 공통 currency_master와 기존 지갑의 friendshipPoints 항목으로 연결합니다. 아이템 보상에서 재화를 참조할 필요가 있으면 같은 재화 ID로 연결하며 독립된 두 지갑을 만들지 않습니다. 도감 수집 기록이나 기존 라포 수치를 포인트 지갑으로 대용하지 않습니다.</p>
+
+<p>완료 시 참여 소유자·아이돌·합류 시점·함께한 구간·최종 포인트를 회차에 고정합니다. 수령 ID로 돈·주사위·카드·라포·조각과 우정 포인트를 함께 저장하고, 실패하면 함께 되돌립니다. 재수령·재접속·모달 열람으로 중복 적립하지 않습니다.</p>
+
+<p>전송 받은 포인트 잔액을 우선합니다. 미확인 전송을 임의의0으로 덮어쓰지 않습니다. 신규/이전 세션의 필드 추가는 버전과 기본값을 구분한 별도 이관으로 처리합니다. 정수·0이상·안전한 저장 범위로 검증합니다.</p>
+
+<p>친구 지갑·소유권은 내 수령 처리에서 수정하지 않습니다. 옛 기록과 이미 받은 보상에 포인트를 소급하지 않습니다. 직접 능력 성장/학습 사건은 추가하지 않습니다.</p>
+
+<p><b>G. 오른쪽 시험과 개발 순서</b></p>
+
+<p>오른쪽에는 친구 팀·참가/합류 시점·초기 보유 포인트·임시 적립량·예상/실제 적립 결과를 둡니다. 기존과 같은 원버튼 시험 UX를 사용하며 별도 저장·초기화 버튼은 추가하지 않습니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>순서</th><th>개발</th><th>확인</th></tr></thead><tbody><tr><td>1</td><td>내 라포 정보 모달</td><td>내 소유자만, 열람으로 값이 바뀌지 않음</td></tr><tr><td>2</td><td>기존 봇의 아이돌·친구 선택</td><td>소유자/아이돌/플레이어 구분</td></tr><tr><td>3</td><td>우정 포인트 규칙·아이콘·보유/보상 표시</td><td>혼자 없음·동행 적립·늦은 합류·복수 친구 중복 없음</td></tr><tr><td>4</td><td>신규 공통 재화·영수증·인계</td><td>실제 잔액 보존·한 번 수령·실패 되돌림·옛 기록 호환</td></tr><tr><td>5</td><td>원버튼 시험·버튼 규격·종류 필터·캡처</td><td>기존 출동/카드 성장/보상 보존</td></tr></tbody></table></div>
+
+<p>직접 능력 배움은 보류, 우정 포인트 사용처는 미정입니다. 친구 편성·재화 등록·보유·보상·정산·전송 연결을 적용했습니다. 기존44PASS는 이전 구현 기록이며 이번 시험 결과는 4-11절과 최신 보고에 구분합니다.</p>
+
+
+<h3 id="4-11-네-도구-구현계산조회-범위">4-11. 네 도구 구현·계산·조회 범위</h3>
+
+<div class="table-scroll"><table><thead><tr><th>도구</th><th>하는 일</th><th>모험에서 보여 주는 것</th></tr></thead><tbody><tr><td>게임 시뮬레이터</td><td>실제 게임 플레이와 오른쪽 시험 조작</td><td>편성·친구 동행·우리 사이 보기·수동 보상 수령·조각 퍼즐</td></tr><tr><td>발란스 시뮬레이터</td><td>기존 시작 버튼으로 일차를 자동 진행</td><td>탐험·출동 횟수와 돈·주사위·우정 포인트·카드팩 계산량·조각·자동 퍼즐 완성 합계</td></tr><tr><td>발란스 툴</td><td>복사한 팀·지갑으로 지정 일수 자동 계산</td><td>조건별 합계와 최근 일별 결과. 원본 게임 저장은 변경하지 않음</td></tr><tr><td>성장 현황판</td><td>발란스 실행 결과를 읽기만 함</td><td>중앙 모험 누적 횟수 → 기존 진행·경제 상세에서 보상 합계 확인</td></tr></tbody></table></div>
+
+<p>수동 플레이와 원버튼 재현은 게임 시뮬레이터에 둡니다. 발란스 시뮬레이터에는 별도의 편성·보상 받기·퍼즐 조작을 두지 않습니다. 카드팩은 ID·수량·계산 결과를 전달하며 실제 카드 지급·개봉 연결은 기획 정의(클로드)의 카드팩 작업과 연결합니다. 탐험의 아이돌 분신 연출과 몬스의 보유·합성 규칙은 유지하며, 출동 편성만 실제 기획사 보유·선택을 읽습니다.</p>
+
+<p>기본 봇 6명에 3명씩 임시 편성하며, 전송된 소유자·아이돌 편성이나 명시적인 빈 명단을 우선합니다. 잘못된 잔액·편성을 임시 팀이나 0으로 덮지 않습니다. 우정 포인트와 친구 팀 정책은 <code>data/simulator/adventure-social.json</code>을 공통으로 읽습니다.</p>
+
+<p><b>게임의 시험 순서:</b> 우정 동행 원버튼 시험 → 결과 → 보상 받기. 보상 받기 전에는 지갑을 올리지 않습니다. 절반 진행·도착까지 진행·늦은 합류도 오른쪽 시험 영역에서 재현합니다. 관계 모달에는 내 선택 아이돌의 얼굴·이름·관계 단계·이번 이야기 대상·4축 값과 확인 가능한 최근 변화량을 표시합니다. 친구 아이돌은 내 라포 쌍에 포함하지 않습니다.</p>
+
+<p><b>발란스의 자동 정산:</b> 기존 일차가 끝날 때 현재 성장 단계·티켓 규칙·최상 결과 보상 표를 계산합니다. 같은 실행의 같은 날은 한 번만 정산하며 온라인·오프라인·반복 시험이 같은 자동 계산을 사용합니다. 돈·주사위·우정 포인트·조각·카드팩 계산량과 퍼즐 완성 횟수를 보여 줍니다. 카드팩 ID·수량은 외부 연결용 결과로 남기고 카드 지급·개봉을 새로 구현하지 않습니다.</p>
+
+<p><b>발란스 툴:</b> 현재 게임 또는 전송 자료를 복사한 독립 계산입니다. 자료가 없을 때 공통 생성 5명을 사용합니다. 일수는 기본 3일·최대 60일이며 모두 임시(나중에 결정)입니다. 자동 계산 버튼 하나로 다음 구간을 계산하고 합계·최근 일별 결과를 비교합니다.</p>
+
+<p><b>성장 현황판:</b> 발란스 실행의 모험 누적 횟수를 중앙 상태에 연결하고 기존 진행·경제 패널 상세에서 탐험·출동·돈·주사위·우정 포인트·카드팩 계산량·조각·퍼즐 결과를 읽습니다. 현황판 자체는 보상을 지급하지 않습니다. 기존 몬스 관찰·규칙·패널은 수정하지 않습니다.</p>
+
+<p><b>조각 반복 퍼즐:</b> 기존 규칙(같은 아이템 9조각·3×3·주사위 27)을 게임 모험의 도감 아이템 상세 모달로 옮깁니다. 배치는 저장하지만 맞춘 미리보기만으로 조각이나 지갑을 바꾸지 않습니다. 보상 수령 시 실제 획득 조각·그림·회차·배치를 다시 검증하고 지갑·조각 사용·다음 회차를 함께 정산합니다. 실패하면 되돌리고 중복 수령은 지급하지 않습니다. 기존 12조각·24조각 회차 기록을 보존하며 기존 1회 도감 완성 보상과 반복 퍼즐 영수증을 구분합니다. 발란스에서는 같은 조각 누적과 반복 완성 결과만 자동 계산합니다.</p>
+
+<p>현재 게임 탐험은 진행량/능력 기반을 유지하고 발란스 자동 계산은 기존 일별 표·성장 단계·티켓 순서를 사용합니다. 모든 콘텐츠를 동일한 게임 진행 엔진으로 교체했다고 안내하지 않습니다. 신규 수치는 임시(나중에 결정)이며 우정 포인트 사용처·직접 능력 배움은 미정·보류입니다.</p>
+
+<p><a href="/docs/planning/game-simulator.html?module=simulator_module_journey&amp;testPage=simulator_module_journey" data-paper-path="docs/planning/game-simulator.html">게임 시뮬레이터</a> · <a href="/docs/planning/idle-sim.html" data-paper-path="docs/planning/idle-sim.html">발란스 시뮬레이터</a> · <a href="/docs/planning/balance-tool.html?topic=balance_topic_expedition&amp;view=expadv" data-paper-path="docs/planning/balance-tool.html">발란스 툴 모험</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261102_160444_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98_%EB%8F%84%EA%B5%AC%EC%97%AD%ED%95%A0%EC%A0%95%EC%A0%95.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261102_160444_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98_%EB%8F%84%EA%B5%AC%EC%97%AD%ED%95%A0%EC%A0%95%EC%A0%95.html">네 도구 역할 정정·검수 보고</a></p>
+
+<h3 id="4-12-도구-사이-모험-데이터-보존">4-12. 도구 사이 모험 데이터 보존</h3>
+
+<div class="table-scroll"><table><thead><tr><th>데이터</th><th>전송·복원 규칙</th></tr></thead><tbody><tr><td>아이돌·능력·성장 단계</td><td>기존 공통 팀 전송 사용. 이미 적용한 카드 능력을 다시 적용하지 않음</td></tr><tr><td>돈·주사위·우정 포인트</td><td>현재 지갑·0을 그대로 보존</td></tr><tr><td>발견 조각</td><td>자동 계산 원장의 실제 수령 누적을 게임의 모험 수집 데이터에 전달</td></tr><tr><td>퍼즐 사용 기록</td><td>같은 그림의 사용량·완성 횟수·회차·배치·수령 기록 보존. 이미 쓴 조각으로 다시 지급하지 않음</td></tr><tr><td>라포</td><td>현재 내 팀 관계 원본 보존. 친구 팀 라포를 합치지 않음</td></tr><tr><td>모험 티켓</td><td>전송 당시 날짜·남은 수량0도 보존. 다음 날부터 기존 일일 충전 규칙 적용</td></tr><tr><td>친구 팀</td><td>기존 소유자·인스턴스 ID와 빈 명단도 보존</td></tr><tr><td>자동 계산 요약</td><td>출처 합계로 보존. 게임에서 같은 보상을 다시 지급하는 영수증으로 사용하지 않음</td></tr><tr><td>카드팩</td><td>ID·수량·계산 결과 인계. 실제 지급·개봉 연결은 클로드 작업</td></tr><tr><td>몬스</td><td>이번 모험 전송 보완으로 소유·합성·규칙을 변경하지 않음</td></tr></tbody></table></div>
+
+<p>발란스에서 전송한 직후 아직 성장 화면을 열지 않았어도 검증된 초기 기준 데이터를 읽어 조각·퍼즐 소비·티켓을 확인합니다. 전체 성장 저장과 초기 기준 저장을 구분하고, 깨진 데이터는 초기값으로 덮지 않고 오류로 표시합니다. 발란스 툴에서 게임 자료를 복사할 때도 퍼즐 사용 기록을 함께 복사합니다.</p>
+
+<p>구현 연결은 <code>src/simulator/adventure/transfer.mjs</code> → 기존 balance-transfer → generated-source → 게임 모험입니다. 전달 정보와 기존 카드·경제 데이터는 각각의 기존 규격을 유지합니다. 자동 계산 합계는 현황판에서 읽기만 합니다.</p>
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>기존 편성·공동 참가·기여·도시 연출·서사·공통 정산·도감 시스템을 사용합니다. 친구 프로필 아래 다른 소유자의 아이돌 편성, 내 관계 정보창, 기존 지갑·수령 기록 확장을 연결했습니다.</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<p>기존 화면과 크기는 4-9절, 친구·관계·우정 포인트의 정적 시안은 4-10절을 기준으로 합니다. 추가 기능의 시안을 실제 구동 화면과 구분합니다.</p>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<p>우정 포인트 사용처·최종 적립량, 운영 입장 횟수·시간·보상 수치, 전용 도감 그림. 직접 능력 배움은 보류하며 실제 친구 서버는 별도 개발 대상입니다.</p>
+
+<h3 id="4-12-1103-편성-개선-내-아이돌과-친구-아이돌">4-12. 11/03 편성 개선 · 내 아이돌과 친구 아이돌</h3>
+
+<p>보낼 대상의 표기는 <b>보낼 아이돌 선택(0/5)</b>입니다. 내 아이돌은 최대 5명이며 등급에 따른 자리 사용량은 별도로 표시합니다. 내 아이돌 아래에는 같은 카드 형태의 <b>친구 동행 칸 5개</b>를 둡니다. 빈 칸에서 친구를 고르고, 그 친구가 가진 아이돌을 직접 골라 동행시킵니다. 친구 이름·선택 아이돌 수만 짧게 표시하고 누르면 편성을 바꿉니다.</p>
+
+<p>내 팀 포함 최대 6팀입니다. 친구는 최대 <b>+5팀</b>, 친구 팀마다 아이돌 1~5명을 보낼 수 있습니다. 실제 친구 서버 연결 전에는 기존 모의 친구 또는 전송된 친구 명단으로 시험합니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>화면</th><th>조작·효과</th></tr></thead><tbody><tr><td>내 아이돌</td><td>최대 5명 선택. 「내 아이돌 관계 보기」에서 현재 내 관계 확인</td></tr><tr><td>친구 동행</td><td>친구 선택 → 그 친구의 아이돌 선택 → 선택 완료</td></tr><tr><td>잠긴 친구 칸</td><td>필요한 엔터파워만 표시</td></tr><tr><td>탐험 중 합류</td><td>같은 친구·아이돌 선택 흐름. 이미 합류한 편성 보존</td></tr><tr><td>이야기 설정 · 선택</td><td>별도 이야기 탭에서 주제·행동·실제 대사·예상 관계 변화 확인</td></tr></tbody></table></div>
+
+<p><b>두 성장 축:</b> 내 아이돌끼리의 라포 관계 개선과 친구 아이돌 동행의 우정 포인트를 분리합니다. 친구 아이돌을 내 라포 쌍에 섞지 않습니다. 직접 능력 상승과 추가 혜택 확장은 다음 작업입니다. 우정 포인트는 기존 적립·수령 규칙을 유지하며 사용처는 미정입니다.</p>
+
+<p><b>엔터파워 문턱 — 임시(나중에 결정)</b></p>
+
+<div class="table-scroll"><table><thead><tr><th>화면 엔터파워</th><th>친구 팀 한도</th><th>나 포함 전체 팀</th></tr></thead><tbody><tr><td>1</td><td>+1팀</td><td>2팀</td></tr><tr><td>50</td><td>+2팀</td><td>3팀</td></tr><tr><td>100</td><td>+3팀</td><td>4팀</td></tr><tr><td>200</td><td>+4팀</td><td>5팀</td></tr><tr><td>400</td><td>+5팀</td><td>6팀</td></tr></tbody></table></div>
+
+<p>공통 HUD와 같은 시설 단계 원본과 엔터파워 표시 눈금(1~1000)을 읽습니다. 문턱은 adventure-social.json의 partyCapacity.gates에 둔 임시 설정입니다. 시설 원본에 쓰지 않습니다.</p>
+
+<p><b>데이터·검증:</b> 친구 소유자 ID 아래 선택한 아이돌 인스턴스 ID만 저장합니다. 출발할 때 선택 아이돌의 능력을 합산해 참가 기록에 고정합니다. 타 친구 아이돌·중복 ID·빈 편성·팀당 5명 초과·해금 팀 수 초과는 거부합니다. 전체 편성을 검증한 뒤 티켓을 소비합니다. 늦은 합류는 현재 해금 한도와 해당 탐험 출발 시 한도를 모두 지킵니다. 기존 진행 기록·수령 보상을 재작성하지 않습니다.</p>
+
+<p>오른쪽 공동 탐험 시험도 현재 해금 수와 전체 6팀을 넘기지 않습니다. 자동 발란스 계산은 기존 1친구 팀 정책을 유지합니다. 편성 UI는 게임 시뮬레이터에만 둡니다. 출동·몬스·카드팩 지급 및 추첨은 이번 변경의 수정 대상이 아닙니다.</p>
+
+<h3 id="4-14-1103-모험-ui-캐러셀과-출발-흐름">4-14. 11/03 모험 UI · 캐러셀과 출발 흐름</h3>
+
+<p>현재 게임 화면은 이 절을 기준으로 합니다. 이전 4-13 서비스 배치는 로그로 보존했습니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>영역</th><th>서비스 화면</th></tr></thead><tbody><tr><td>모험 발견 도감</td><td>메인 맨 위에 6개 분류·수량을 압축 표시. 메인 영역을 스크롤해도 위에 고정. 상세·완성 보상은 모달</td></tr><tr><td>티켓·재화</td><td>티켓 아이콘+수량, 탐험 종류, 우정 포인트를 한 줄에 표시</td></tr><tr><td>탐험 목록</td><td>한 화면에 3개 반이 보이는 캐러셀. 탐험 대표 8개·출동 대표 8개를 먼저 봅니다. 각 캐러셀은 따로 이동하며 탐험 전체는 종류별 6개 페이지, 출동 전체는 13개 목록으로 엽니다</td></tr><tr><td>대표 이미지</td><td>보컬·댄스·공연·뷰티·방송·팬·도시 여행·야간 8종 콘셉트 이미지. 탐험별 재지정 가능</td></tr><tr><td>탐험 준비</td><td>아이돌 편성→이야기 요약→보상을 하나의 스크롤 페이지에 배치. 상단 탭은 해당 위치로 이동</td></tr><tr><td>이야기 선택</td><td>메인에는 짧은 요약만. ‘탐험 보내기’→출발 전 이야기 모달→기본 설정 그대로 보내거나 주제·행동·관계 대상 변경</td></tr><tr><td>진행 중</td><td>친구 추가 칸을 숨김. 기존 도시 3D 위·아래의 진행 정보와 마일스톤은 유지하고 실제 내 아이돌·동행 친구 아이돌 전원이 이동하는 작은 카드 행렬을 표시</td></tr></tbody></table></div>
+
+<p>이야기 주제는 서사를 바꿉니다. 행동은 대사·장면을 바꾸고, 경로·성장 단계별 관계 사건이 없을 때 라포 사건의 대체값으로도 사용됩니다. 화면에 현재 적용 방식과 예상 변화를 설명합니다. 이야기 선택으로 카드팩·돈·주사위 보상량이 증가하지 않으며, 라포와 보상은 기존처럼 완료 후 수령 시 반영합니다.</p>
+
+<p>편성·친구·이야기·보상 선택은 탭 이동에도 보존됩니다. 출발 확인 전에 티켓을 사용하지 않습니다. 이동 카드는 출발 때 고정한 실제 참가자만 읽으며 친구의 아이돌과 내 아이돌을 구분합니다. 몬스 데이터·보유·능력과 출동의 뉴스·비행·대결은 변경하지 않습니다.</p>
+
+<p>대표 이미지는 UI 설정의 covers.images / covers.categories / covers.keywords / covers.routes로 관리합니다. 개별 탐험의 로컬 이미지 경로가 있으면 우선하며, 그렇지 않으면 제목·장소 키워드→분류→기본 그림 순으로 선택합니다. 외부 URL은 그림으로 삽입하지 않습니다. 8종은 정적 512px 썸네일이며 원본 생성 이미지도 별도로 보존합니다.</p>
+
+<p>편성 페이지에는 내 아이돌·친구 편성, 선택한 이야기 요약, 큰3칸 보상 카드·우정 포인트·추가 조각 안내가 이어집니다. 상단 탭을 누르면 같은 페이지의 목표 구간으로 이동하고 상단 탭은 고정됩니다. 실제 탭 패널 교체나 다른 페이지 전환을 하지 않습니다. ‘목록’은 모험 메인으로 돌아갑니다.</p>
+
+<p>보내기 모달은 주제·행동·관계 대상·현재 관계 예상·대사 미리보기를 보여 줍니다. 기본 선택을 그대로 보내는 버튼을 제공하며, 개별 선택을 수정한 뒤 다시 출발 확인으로 돌아옵니다. 닫기·Escape는 출발하지 않고 편성을 유지합니다. 정산·티켓 소모는 기존 start/claim 흐름만 사용합니다.</p>
+
+<p>마일스톤 구간은 기존 진행 참고값 0/25/55/80/100%를 표시합니다. 내 실제 편성 및 동행 친구 편성의 고정 기록을 합쳐 이동 카드를 만들며, social/helper의 동일 팀 표현은 한 번만 표시합니다. 10명은10명, 최대6팀30명은30명이며 작은 카드가 여러 줄로 이동합니다. 정보가 없는 과거 기록에 가짜 인원을 채우지 않습니다. 경로 이동 위치는 실제 진행률이며 짧은 걸음 움직임만 반복합니다. 정지는 걸음도 멈추고, 움직임 줄이기 설정에서는 반복 움직임을 끕니다.</p>
+
+<p>이 변경은 게임 시뮬레이터의 모바일 UI 작업입니다. 발란스 자동 계산·성장 현황판에는 플레이용 메뉴를 옮기지 않으며 기존 전송 계약·카드팩 지급 경계를 보존합니다.</p>
+
+<h3 id="4-15-내-아이돌-관계-관계-허브뉴런-공통-데이터">4-15. 내 아이돌 관계 · 관계 허브·뉴런 공통 데이터</h3>
+
+<p>‘내 아이돌 관계 보기’는 눈에 띄는 버튼으로 표시합니다. 현재 탐험의 편성 여부와 무관하게 내 아이돌 전체의 관계를 모달로 볼 수 있습니다. 5명 팀이면 10쌍이며 친구 아이돌은 내 라포에 섞지 않습니다.</p>
+
+<p>관계도에서 얼굴·관계선을 보고 두 아이돌을 고르면 가까움·상호 신뢰·이해·협력·긴장과 현재 단계를 숫자·막대로 확인합니다. 가까움은 현황판과 같은 기존 산식을 사용합니다. 미확인 값은 대시로, 실제0은0으로 구분합니다.</p>
+
+<p>게임 시뮬레이터의 모험·관계 허브·뉴런은 같은 팀 ID와 저장된 관계값을 우선합니다. 처음 함께하는 팀의 기록이 없으면 등록된 라포 시작 범위·성격 궁합 규칙으로 없는 쌍만 계산합니다. 새 성격·새 발란스 값을 만들어 넣지 않습니다. 기존0·빈 값·변화 기록을 초기화하지 않습니다. 시험에서 누적한 사본과 실제 저장은 구분합니다.</p>
+
+<p>라포 시작 계산과 저장 쌍 우선 처리를 current-team-rapport.mjs로 공통화했습니다. 관계 허브가 현재 후보의 정확한 쌍만 골라 읽더라도, 전원에 적용되는 */* 시작 규칙을 공통 계산기가 함께 읽습니다. 같은 후보 ID로 같은 규칙을 사용하므로 화면을 오가며 시작값을 다시 추첨하지 않습니다. 모험의 준비 화면은 선택한 아이돌의 사건 대상 쌍과 내 전체 관계 정보의 쌍을 구분합니다.</p>
+
+<p>개별 쌍 CSV의 직접값과 충돌은 원본대로 보존합니다. 중복·잘못된 저장 형식은 새 값으로 덮지 않고 확인 대상으로 남깁니다. 저장에 명시된 null을 새 시작값으로 채우지 않습니다. 공통 조회와 관계 모달 열기는 지갑·보상·라포 저장을 변경하지 않습니다.</p>
+
+<p>관계 허브의 1회/자동 시험은 같은 관계 계산기로 이전 결과를 누적하고, 뉴런은 같은 사본의 쌍·축을 읽습니다. 원래 팀의 저장 관계를 바꾸는 동작과 구분하며 모험의 실제 수령은 기존 정산 경로를 사용합니다.</p>
+
+<h3 id="dispatch-carousel-fragments">출동 캐러셀과 공통 도감 조각</h3><p>모험 메인의 탐험과 출동은 같은 크기의 가로 카드로 넘겨 봅니다. 두 캐러셀의 좌우 버튼·스크롤 위치는 각각 보존하고, 출동 전체 보기는 기존 목록 모달로 엽니다.</p><p>출동에서는 기존 돈·주사위·카드팩 규칙에 도감 조각을 추가합니다. 귀환 결과에 “추가로 발견하였습니다”와 조각 아이콘·이름·수량을 표시하고, 보상을 받으면 탐험과 같은 모험 발견 도감에 합산합니다.</p><p>출발할 때 조각의 아이템 ID·그룹·수량·서사를 고정하고 귀환 때 공개합니다. 조각 자체를 다시 편성하거나 별도 티켓으로 출동시키지 않습니다. 표시만 된 미수령 조각은 도감 완성 조건에 넣지 않습니다.</p><p>공통 정산이 실패하면 재화·조각 누적을 함께 되돌립니다. 재시도·중복 클릭·새로고침은 같은 영수증을 사용하므로 다시 지급하지 않습니다. 적용 전에 시작한 출동에는 조각을 소급 추가하지 않습니다.</p><p>발란스 시뮬레이터와 발란스 툴은 실제 자동 출동 횟수에 같은 조각 생성 규칙을 적용하고 기존 조각·퍼즐 합계에 포함합니다. 성장 현황판은 그 전달 합계를 조회하며 새 수동 보상 버튼을 두지 않습니다.</p><div class="table-scroll"><table><thead><tr><th>항목</th><th>현재 설정</th><th>근거·상태</th></tr></thead><tbody><tr><td>출동 조각</td><td>1회당 1개</td><td>임시(나중에 결정) · exploration.json의 dispatchFragments</td></tr><tr><td>수집 대상</td><td>기존 6분류·27종</td><td>기존 유형 가중치·장소/테마·아이템 순환 규칙 재사용</td></tr><tr><td>지급 시점</td><td>출동 보상 받기</td><td>같은 출동 지급 ID로 기본 보상과 함께 한 번 정산</td></tr></tbody></table></div></section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2><h3>출동 캐러셀과 조각 보상 실제 화면</h3><p>현재 게임의 출동 캐러셀입니다. 조각 수령은 실제 소스·공통 모바일 프레임을 사용한 독립 메모리 시험으로 확인했습니다. 현재 게임 보유 몬스를 새로 지급하거나 편성을 바꾸지 않았습니다.</p><details><summary>캐러셀·추가 발견·도감 누적 화면</summary><p><img src="../../../증거/20261104_150358_단이_출동캐러셀_도감조각/main.png" alt="현재 게임의 탐험·출동 캐러셀" loading="lazy"></p><p><img src="../../../증거/20261104_150358_단이_출동캐러셀_도감조각/ready.png" alt="출동 결과의 추가 발견 조각 · 독립 메모리 검수" loading="lazy"></p><p><img src="../../../증거/20261104_150358_단이_출동캐러셀_도감조각/codex.png" alt="출동 조각이 합산된 도감 · 독립 메모리 검수" loading="lazy"></p></details>
+
+<h3 id="현재-팀-라포-관계도-실제-화면">현재 팀 라포 · 관계도 실제 화면</h3>
+
+<p>모험에서 편성을 고르기 전에도 내 전체 관계를 확인하고, 같은 팀으로 관계 허브·뉴런에 이동합니다. 실제0과 미확인은 구분합니다. 부분 계산값에 미확인 기여가 남아 있으면 세 화면 모두 확인 대기로 표시합니다.</p>
+
+<details><summary>관계 보기 버튼·모달·관계 허브·뉴런</summary>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_134336_%EB%8B%A8%EC%9D%B4_%EB%9D%BC%ED%8F%AC%EA%B3%B5%ED%86%B5%EB%8D%B0%EC%9D%B4%ED%84%B0_%EA%B4%80%EA%B3%84%EB%B3%B4%EA%B8%B0/adventure-button.png" alt="관계 보기 버튼" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_134336_%EB%8B%A8%EC%9D%B4_%EB%9D%BC%ED%8F%AC%EA%B3%B5%ED%86%B5%EB%8D%B0%EC%9D%B4%ED%84%B0_%EA%B4%80%EA%B3%84%EB%B3%B4%EA%B8%B0/adventure-modal.png" alt="편성 전 전체 관계10쌍" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_134336_%EB%8B%A8%EC%9D%B4_%EB%9D%BC%ED%8F%AC%EA%B3%B5%ED%86%B5%EB%8D%B0%EC%9D%B4%ED%84%B0_%EA%B4%80%EA%B3%84%EB%B3%B4%EA%B8%B0/relationship-hub.png" alt="같은 팀 관계 허브" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_134336_%EB%8B%A8%EC%9D%B4_%EB%9D%BC%ED%8F%AC%EA%B3%B5%ED%86%B5%EB%8D%B0%EC%9D%B4%ED%84%B0_%EA%B4%80%EA%B3%84%EB%B3%B4%EA%B8%B0/neuron.png" alt="같은10쌍 뉴런 표시" loading="lazy"></p>
+
+</details>
+
+
+<h3 id="1103-최신-ui-캐러셀출발-확인이동-카드">11/03 최신 UI · 캐러셀·출발 확인·이동 카드</h3>
+
+<p>콘셉트별 대표 이미지8종과 티켓 아이콘을 추가했습니다. 경로별 교체는 UI 설정으로 관리합니다. 메인·편성·보상·출발 확인은 실제 게임 캡처입니다. 이동2장은 현재 단독 시험의 소진된 티켓 기록을 보존하기 위해 같은 실제 UI·3D·진행 계산기를 읽는 격리 메모리 시험에서 촬영했습니다. 내5명+친구5명이며 원래 게임 저장은 변경하지 않습니다.</p>
+
+<details open><summary>최신 게임 화면</summary>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_125252_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%BA%90%EB%9F%AC%EC%85%80%EB%8F%99%EC%84%A0%EA%B0%9C%EC%84%A0/main.png" alt="상단 도감·티켓·3개 반 캐러셀" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_125252_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%BA%90%EB%9F%AC%EC%85%80%EB%8F%99%EC%84%A0%EA%B0%9C%EC%84%A0/preparation.png" alt="하나의 편성 페이지" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_125252_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%BA%90%EB%9F%AC%EC%85%80%EB%8F%99%EC%84%A0%EA%B0%9C%EC%84%A0/rewards.png" alt="같은 페이지에서 이동한 보상 구간" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_125252_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%BA%90%EB%9F%AC%EC%85%80%EB%8F%99%EC%84%A0%EA%B0%9C%EC%84%A0/send-story.png" alt="보내기 전 이야기 확인" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_125252_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%BA%90%EB%9F%AC%EC%85%80%EB%8F%99%EC%84%A0%EA%B0%9C%EC%84%A0/travel-a.png" alt="실제 참가자 카드 이동" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_125252_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%BA%90%EB%9F%AC%EC%85%80%EB%8F%99%EC%84%A0%EA%B0%9C%EC%84%A0/travel-b.png" alt="진행률에 따라 전진한 카드 행렬" loading="lazy"></p>
+
+</details>
+
+
+<p>기존40보드·건물·몬스·뉴스·비행·대결을 재사용합니다. 정식 걷기 애니메이션이 없는 부분은 기존 이동 포즈 연출입니다.</p>
+
+<p>도감 그룹6개와 아이템/조각27종 그림, 수집·완성 표시가 필요합니다. 현재 기호와 기존 이미지는 임시입니다. 전용 그림 완성으로 보고하지 않습니다. <a href="#ui-preview">하단 UI</a>는 최신 실제 검수 화면을 같은 문서 안에서 보여줍니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>리소스</th><th>사용 위치</th><th>상태</th></tr></thead><tbody><tr><td>우정 포인트 토큰 SVG</td><td>보유 칩·보상 아이콘</td><td>게임 보유·보상, 자동 계산 합계 표시</td></tr><tr><td>기존 돈·주사위·팩 SVG</td><td>보상 아이콘</td><td>현재 탐험에서 사용</td></tr><tr><td>도감 그룹·27종 조각 그림</td><td>도감과 추가 발견</td><td>전용 그림 미제작·임시 표시</td></tr></tbody></table></div>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<p>우정 포인트 아이콘은 문서의 리소스 폴더에 보존합니다. 도감 전용 그림과 정식 걷기 애니메이션은 추가 제작 대상입니다.</p>
+
+
+<details><summary>11/02 친구·관계·우정 포인트 실제 화면</summary>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261102_145015_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98%EC%86%8C%EC%85%9C_%EC%9A%B0%EC%A0%95%EC%9E%AC%ED%99%94_3%ED%88%B4%EC%97%B0%EA%B2%B0/game-rapport.png" alt="내 아이돌 관계 모달" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261102_145015_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98%EC%86%8C%EC%85%9C_%EC%9A%B0%EC%A0%95%EC%9E%AC%ED%99%94_3%ED%88%B4%EC%97%B0%EA%B2%B0/game-reward.png" alt="탐험 그래픽 보상과 우정 포인트" loading="lazy"></p>
+
+<p><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261102_145015_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98%EC%86%8C%EC%85%9C_%EC%9A%B0%EC%A0%95%EC%9E%AC%ED%99%94_3%ED%88%B4%EC%97%B0%EA%B2%B0.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261102_145015_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98%EC%86%8C%EC%85%9C_%EC%9A%B0%EC%A0%95%EC%9E%AC%ED%99%94_3%ED%88%B4%EC%97%B0%EA%B2%B0.html">이전 3툴 수령 검수 기록</a></p>
+
+</details>
+
+
+<h3 id="최종-연결-점검-1102">최종 연결 점검 · 11/02</h3>
+
+<p>탐험 완료 → 탐험 서사 → 참가자 → 공동 순위 → 결과 → 탐험 보상·추가 조각 → 공통 수령을 실제 게임에서 확인했습니다. 기본 카드팩·돈·주사위·우정 포인트와 추가 발견 조각을 표시합니다. 친구 행은 모의 보상이며 내 몫만 정산합니다. 실제 시험은 주사위 316→320, 돈 표시 126.6K→127.0K(보상400), 우정 포인트 10→20입니다.</p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261102_160444_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98_%EB%8F%84%EA%B5%AC%EC%97%AD%ED%95%A0%EC%A0%95%EC%A0%95/game-main-reward.png" alt="실제 보상 화면" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261102_160444_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98_%EB%8F%84%EA%B5%AC%EC%97%AD%ED%95%A0%EC%A0%95%EC%A0%95/game-main-puzzle.png" alt="실제 획득 1조각·9조각 미달로 받기가 잠긴 반복 퍼즐" loading="lazy"></p>
+
+<p>자동 발란스 흐름과 입력 전송, 내 라포·우정 재화, 도감·퍼즐 공통 정산, 현황판 미션 요약의 관련 시험은 95 PASS입니다. 9조각 완성 지급·재시도·중복 방지는 전체 모험 view의 독립 메모리 시험과 자동 시험으로 검수했습니다. 실제 본편 저장에 조각 9개를 강제로 넣지 않았습니다.</p>
+
+<h3 id="1103-실제-편성-검수">11/03 실제 편성 검수</h3>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_093223_%EB%8B%A8%EC%9D%B4_%ED%83%90%ED%97%98%EC%B9%9C%EA%B5%AC5%ED%8C%80_%EC%95%84%EC%9D%B4%EB%8F%8C%ED%8E%B8%EC%84%B1UI/friend-party-selection.png" alt="내 아이돌과 친구 동행 칸" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_093223_%EB%8B%A8%EC%9D%B4_%ED%83%90%ED%97%98%EC%B9%9C%EA%B5%AC5%ED%8C%80_%EC%95%84%EC%9D%B4%EB%8F%8C%ED%8E%B8%EC%84%B1UI/friend-idol-selection.png" alt="친구의 아이돌 개별 선택" loading="lazy"></p>
+
+
+<h3 id="1103-서비스-ui-실제-화면">11/03 서비스 UI 실제 화면</h3>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_110408_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83/main.png" alt="모험 메인 · 4개 탐험과 출동" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_110408_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83/party.png" alt="탐험 준비 · 아이돌과 친구 편성" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_110408_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83/story.png" alt="함께할 이야기 · 선택 이유와 실제 예상 변화" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_110408_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83/rewards.png" alt="큰 3칸 보상 카드" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_110408_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83/catalog.png" alt="종류별 전체 탐험 목록" loading="lazy"></p>
+
+<p><img src="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%A6%9D%EA%B1%B0/20261103_110408_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83/synopsis.png" alt="탐험 시놉시스" loading="lazy"></p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>데이터</th><th>역할</th></tr></thead><tbody><tr><td>adventure_route·adventure_config·adventure_stage_scale</td><td>기존 탐험·티켓·단계별 보상</td></tr><tr><td>item_master_card_pack·card_pack_odds·card</td><td>실제 팩·카드</td></tr><tr><td>exploration.json / exploration-ui.json</td><td>시험 규칙·문구</td></tr><tr><td>exploration-discovery-groups.json</td><td>6분류·장소 연결</td></tr><tr><td>exploration-items.json / exploration-stories.json</td><td>27종 아이템·고유 서사</td></tr><tr><td>exploration-codex.json</td><td>조각·완성 조건·보상</td></tr><tr><td>exploration-coop.json</td><td>공동 참가·순위·모의 시나리오·보상</td></tr><tr><td>공통 currency_master·재화 지갑</td><td>우정 포인트 정체·기존 지갑 잔액·공통 수령 기록 연결</td></tr></tbody></table></div>
+
+<p>독립 JSON은 임시 시험용입니다. currency_master에 재화 정체 1행을 등록했으며 생성 스키마·기존 출동 수치는 변경하지 않습니다.</p>
+
+<p>탐험 시작에 실제 팀/아이돌ID·규칙·기본 카드 추첨·발견 조각을 고정합니다. 신규 출동도 실제 보유 몬스 편성과 함께 같은 카탈로그의 도감 조각을 고정합니다. 종료 때 공동 기여·순위·내 추가 보상을 고정합니다. 탐험 지급ID로 카드·지갑·라포·조각을 함께 저장합니다.</p>
+
+<p>조각은 공통 수집 기록 quantityTotal에 누적합니다. 재적용은 수량을 늘리지 않습니다. 저장 실패는 카드·지갑·라포·수집을 함께 되돌리고 같은 지급을 재시도합니다.</p>
+
+<p>도감 완성은 별도 지급ID·완료표식입니다. 모의 친구를 실제 카드 소유자로 넣지 않습니다. 이미 받은 항목은 다시 추첨/지급하지 않습니다.</p>
+
+<p>이전 독립 발견의 영수증은 보존합니다. 미수령은 호환 목록에서 받고, 이미 지급된 발견은 도감 표시에 연결합니다. 과거 지갑을 소급 변경하지 않습니다. 내부 journey ID·URL·저장 키를 유지합니다.</p>
+
+<p>주사위 환산: <b>미완</b> · 최종 일일 횟수와 60일 경제 환산은 아직 확정하지 않았습니다. 현재 단계별 보상은 시험값이며 임시(나중에 결정)입니다.</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>범위</th><th>상태</th></tr></thead><tbody><tr><td>모험 한 메인 탐험·도감·출동 / 오른쪽 소식 봇</td><td>실제 코드 연결</td></tr><tr><td>탐험 기본 카드·추가 조각·도감 완성 보상</td><td>공통 정산 연결</td></tr><tr><td>여러 모의 친구·늦은 합류·순위·내 보상</td><td>실제 코드 연결</td></tr><tr><td>출동의 피그마 발견식 전체 개조</td><td>후속</td></tr><tr><td>실제 계정 서버 공동 플레이·친구 지갑 지급</td><td>후속</td></tr><tr><td>전용 조각 그림·정식 걷기 애니메이션</td><td>추가 제작</td></tr><tr><td>친구 아이돌·우리 사이 보기·우정 포인트</td><td>게임 수령·발란스 자동 계산·현황판 조회로 역할 정정</td></tr><tr><td>직접 능력 배움 / 우정 포인트 사용처</td><td>보류 / 미정</td></tr><tr><td>기존 버튼 규격·탐험 종류 필터</td><td>공통 버튼 적용·기존 종류 필터 연결</td></tr></tbody></table></div>
+
+<p>11/02 당시 관련 자동 시험44개가 통과했습니다. 조각3개 누적, 내11위/1위 보상, 늦은 합류, 실패 되돌림, 재지급 방지, 기존 출동 비교를 포함합니다. 실제 화면에서 기본 탐험·도감 완성·공동 탐험과 기존 출동의 수령을 확인했습니다. 공동 탐험1위 시험은 기본/추가 합계 카드6장·돈1,600·주사위16이 공통 데이터에 반영됐고 재열람 시 중복 지급되지 않았습니다. 사진 영역238px·5마일스톤·페이지 전환 스크롤·저장된 속도 표시도 확인했습니다. 운영 발란스나 피그마 전체 열람 완료를 뜻하지 않습니다.</p>
+
+<p><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261102_102728_%EB%8B%A8%EC%9D%B4_%ED%83%90%ED%97%98%EB%B0%9C%EA%B2%AC_%EC%8B%A4%EC%A0%9C%EC%A0%81%EC%9A%A9_%EC%B6%9C%EB%8F%99%EB%B3%B4%EC%A1%B4.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261102_102728_%EB%8B%A8%EC%9D%B4_%ED%83%90%ED%97%98%EB%B0%9C%EA%B2%AC_%EC%8B%A4%EC%A0%9C%EC%A0%81%EC%9A%A9_%EC%B6%9C%EB%8F%99%EB%B3%B4%EC%A1%B4.html">최종 완료 보고·실제 검수 캡처</a></p>
+
+<p><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261102_132724_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%84%9C%EB%B9%84%EC%8A%A4%EA%B5%AC%EC%84%B1%EA%B0%9C%EC%84%A0.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261102_132724_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98UI_%EC%84%9C%EB%B9%84%EC%8A%A4%EA%B5%AC%EC%84%B1%EA%B0%9C%EC%84%A0.html">서비스 UI 개선 보고</a></p>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<ul>
+<li>상위 모험, 탐험·도감·출동 한 메인, 두 가지 서사와 보상을 구분합니다.</li>
+<li>기존 탐험·도감·공동 참가·출동은 실제 수령 기록으로 한 번 정산합니다.</li>
+<li>추가 우정 포인트는 다른 소유자의 아이돌과 동행한 내 몫에만 적용합니다. 현재 실제 친구 계정 대신 모의 팀 또는 전송 자료로 시험합니다.</li>
+<li>내 라포를 친구 아이돌에게 확장하지 않고 직접 능력 배움은 보류합니다.</li>
+<li>핵심제안 개발 P152는 같은 내용·같은 수치의 발표용 요약으로 유지합니다.</li>
+</ul>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p>기존 독립 발견과 동료 능력 배움 시안은 짝 로그·백업에 보존합니다. 내부 journey 키와 기존 출동을 유지합니다.</p>
+
+<details><summary>작업 기록</summary>
+
+<ul>
+<li>원본 조사·화면 대조·접근 제한은 로그의 지난 기록에 보존합니다.</li>
+<li>기존 44개 자동 시험은 이전 구현 결과입니다. 이전 3툴 소셜 연결 시험과 실제 수령은 최신 보고로 구분합니다. 빌드·서버 재시작은 하지 않았습니다.</li>
+<li>P86과 대표 샘플의 공통 7장·맨 위 세 줄·하단 작업 기록·로그 형식을 적용합니다.</li>
+</ul>
+
+</details>
+
+<p><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261102_160444_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98_%EB%8F%84%EA%B5%AC%EC%97%AD%ED%95%A0%EC%A0%95%EC%A0%95.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261102_160444_%EB%8B%A8%EC%9D%B4_%EB%AA%A8%ED%97%98_%EB%8F%84%EA%B5%AC%EC%97%AD%ED%95%A0%EC%A0%95%EC%A0%95.html">네 도구 역할 정정 보고</a></p>
+
+</section><section class="doc-ui-section" aria-label="하단 UI 시안"><h3>UI 시안 · 수치 포함</h3><p>같은 문서에서 기존 실제 검수 화면을 펼쳐 봅니다. 친구 아이돌·우정 포인트의 최신 실제 캡처는 5장에 함께 둡니다. 정적 참고 시안과 구분합니다.</p><details id="ui-preview"><summary>기존 UI 확인 · 실제 캡처</summary><div data-inline-preview-host></div></details></section><details class="history"><summary>로그 · 변경 이력과 이전 기록</summary><p><a href="./탐험_여정발견_통합기획_v01.log.md" target="_blank" rel="noopener">이 문서의 로그 열기</a></p></details></main></body></html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P218 · 길드 · 대표 개발 기획서</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"><link rel="stylesheet" href="./리소스/핵심제안_시뮬_20261102/sim.css"><style>.sample-document :target{scroll-margin-top:132px}.sample-document header .actions{flex-wrap:wrap}.sample-document header p{font-size:14px}.doc-ui-section{margin-top:42px;padding-top:24px;border-top:2px solid #c8dcd5}.doc-ui-section>h3{margin:0 0 10px;font-size:23px;color:#2c5659}.doc-ui-section>p{font-size:14px}.doc-ui-section details{padding:0;margin:16px 0;border:1px solid #c9dcd4;border-radius:16px;overflow:hidden;background:#f4f8f2}.doc-ui-section summary{cursor:pointer;min-height:58px;padding:16px 18px;font-weight:700;color:#315e5c;list-style:none}.doc-ui-section summary:after{content:"+";float:right;font-size:20px}.doc-ui-section details[open]>summary:after{content:"−"}.doc-ui-section summary::-webkit-details-marker{display:none}.doc-ui-section [data-sim-host]{padding:0 18px 18px;min-width:0}.doc-key{margin:18px 0;padding:16px 20px;border-left:6px solid #2f7f86;background:#eef6f5;border-radius:12px;font-size:16px;line-height:1.8}.doc-key b{color:#1f4f55}@media(max-width:680px){.sample-document :target{scroll-margin-top:18px}}</style><script type="module" src="./리소스/핵심제안_시뮬_20261102/crew.mjs"></script></head><body class="sample-document"><main><header><div class="eyebrow">P218 · 핵심제안 개발 · 대표 개발 기획서</div><h1>길드 · 대표 개발 기획서</h1><aside class="doc-current-source"><p><strong>현재 크루 기준</strong>: 최신 화면·신청 수락·권한·크루 레벨·활동 포인트·월드 출전은 <a href="%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">응원 크루 대표</a>와 <a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%EC%99%84%EB%A3%8C%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">상세 다이어그램</a>을 따릅니다. 이 문서의 기존 정원·리그명·가중치·시연 수치는 과거 제안/참고이며 현재 확정값으로 복사하지 않습니다. 길드와 크루는 같은 모임입니다.</p>
+</aside><p>길드 = 응원 크루입니다. 세부는 <a href="응원크루_핵심제안서.html">P221 응원 크루</a>에서 읽고, <a href="#sim-preview">하단 시뮬레이터</a>도 같은 것을 씁니다.</p><div class="actions"><a href="../../기획서/산출_기획서_응원크루_완료판_v1_클로드.html">상세 정본 · 책갈피 P192</a><a href="#sim-preview">크루 순위 시뮬레이터</a></div></header><nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+<p><b>이 문서는</b> 핵심제안 목록의 「길드」를 응원 크루와 어떻게 합치는지 정리한 대표 개발 기획서입니다.</p>
+
+<p><b>보는 법</b> 1장 그림 → 4장 「한 판 순서」 → 하단 「크루 순위 시뮬레이터」 순서로 읽습니다. 세부 결정과 근거는 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%EC%99%84%EB%A3%8C%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%EC%99%84%EB%A3%8C%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P192 응원 크루 완료판</a>에 있습니다.</p>
+
+<p><b>지금 상태</b> 현재 개발되지 않음, 진행 중.</p>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (합침) 원문 기획서 없음(핵심제안 목록 한 줄) · 제안서 <a href="/docs/planning/proposal-concept/fest.html" data-paper-path="docs/planning/proposal-concept/fest.html">월드 페스티벌</a>의 「응원 크루(길드)」 · 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%EC%99%84%EB%A3%8C%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%EC%99%84%EB%A3%8C%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P192 응원 크루 완료판</a> · 현중 11/01~11/02 지시</p>
+
+<div class="doc-key"><b>핵심</b> 게임 안 <b>길드는 응원 크루 하나</b>입니다. 길드를 따로 만들지 않고, 크루 결성 · 가입 · 총공 · 크루 순위를 그대로 씁니다.</div>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714 276" width="714" height="276" role="img" aria-labelledby="title-P218-0"><title id="title-P218-0">설명 흐름도 P218-0</title><defs><marker id="arrow-P218-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,138 L244.5,138 L291,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P218-0)"/><rect x="216.5" y="145" width="56" height="25" rx="7" fill="#f3f8f7"/><text x="244.5" y="163" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">같은 것</text><path d="M421.9090909090909,106 L493.5,50 L516,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P218-0)"/><path d="M471,138 L493.5,138 L516,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P218-0)"/><path d="M421.9090909090909,170 L493.5,226 L516,226" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P218-0)"/><rect x="18" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">길드</tspan></text><rect x="291" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="381" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="381" dy="0">응원 크루</tspan></text><rect x="516" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="606" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="606" dy="0">결성 · 데뷔곡 있는 유저</tspan></text><rect x="516" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="606" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="606" dy="0">가입 · 누구나</tspan></text><rect x="516" y="194" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="606" y="231" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="606" dy="0">총공 · 크루 순위</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">길드 → [같은 것] 응원 크루 / 응원 크루 → 결성 · 데뷔곡 있는 유저 / 응원 크루 → 가입 · 누구나 / 응원 크루 → 총공 · 크루 순위</p></figure>
+
+
+
+<h3 id="콘텐츠-경계">콘텐츠 경계</h3>
+
+<ul>
+<li>맡는 것: 「길드」 이름과 응원 크루의 관계.</li>
+<li>다른 문서에 맡기는 것: 크루의 모든 규칙 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P221 응원 크루</a>.</li>
+</ul>
+
+<h3 id="현재-기준과-목표">현재 기준과 목표</h3>
+
+<div class="table-scroll"><table><thead><tr><th>말</th><th>뜻</th></tr></thead><tbody><tr><td>길드</td><td>응원 크루와 같음(제안서 fest.md 「응원 크루(길드)」)</td></tr><tr><td>크루 리그</td><td>데뷔조 · 라이징 · 톱스타 · 월드스타</td></tr></tbody></table></div>
+
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>이 콘텐츠에서의 역할</th><th>의존 방향</th></tr></thead><tbody><tr><td>제안서 원문 없음(핵심제안 목록 「길드」 · fest.md의 「응원 크루(길드)」)</td><td>기준</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%EC%99%84%EB%A3%8C%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%EC%99%84%EB%A3%8C%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P192 응원 크루 완료판</a></td><td>상세 정본(결정 · 근거 · 조사)</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P221 응원 크루</a></td><td>같은 콘텐츠의 대표 기획서</td><td>같음</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: 크루 탭 → 크루 홈 · 스샷 미완 · 이식 비교 해당 없음</p>
+
+<ul>
+<li>실행: 게임 시뮬레이터 모듈은 아직 없습니다(미구현).</li>
+<li>이 문서 하단 <b>크루 순위 시뮬레이터</b>에서 크루원이 기여하면 크루 순위가 바뀌고, 자기 크루 표는 빠지는 것을 봅니다. 숫자는 모두 임시 시안입니다.</li>
+</ul>
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서-임시-시안">한 판 순서 (임시 시안)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>크루 규칙과 같음</td></tr><tr><td>입력·출력</td><td>크루 규칙과 같음</td></tr><tr><td>상태와 전이</td><td>크루 규칙과 같음</td></tr><tr><td>판정</td><td>크루 규칙과 같음</td></tr><tr><td>오류·예외</td><td>크루 규칙과 같음</td></tr><tr><td>저장·복원</td><td>크루 소속은 계정 범위</td></tr><tr><td>다른 모듈 연결</td><td>응원 크루</td></tr></tbody></table></div>
+
+<h3 id="합치는-이유-임시-시안">합치는 이유 (임시 시안)</h3>
+
+<p>같은 사람 모임을 두 이름으로 나누면 화면 · 보상 · 순위가 겹칩니다. 제안서 원문도 「응원 크루(길드)」로 같은 것을 가리킵니다.</p>
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>해당 없음(응원 크루를 씀).</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<p>해당 없음(크루 화면을 씀).</p>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<ul>
+<li>핵심제안 목록에서 길드 칸을 응원 크루로 합칠지 — 결정 대기</li>
+</ul>
+
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<div class="table-scroll"><table><thead><tr><th>미리보기</th><th>이름·사용 위치</th><th>동작·상태</th><th>파일·테이블 키</th><th>출처·준비 상태</th></tr></thead><tbody><tr><td><a href="#sim-preview">하단 시뮬레이터</a></td><td>크루 순위 시뮬레이터</td><td>기여 · 총공</td><td>핵심제안_시뮬_20261102/crew.mjs</td><td>시안 있음</td></tr></tbody></table></div>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<p>해당 없음.</p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일·보기</th><th>역할</th><th>주키·참조</th><th>값</th><th>담당</th></tr></thead><tbody><tr><td>해당 없음</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></tbody></table></div>
+
+<p>주사위 환산: 해당 없음.</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>상태</th><th>확인 방법·증거</th><th>다음 작업</th></tr></thead><tbody><tr><td>기획(이 문서 · 책갈피 상세)</td><td>기획 중</td><td>P192 · 이 문서</td><td>현중 확인</td></tr><tr><td>크루 순위 시뮬레이터</td><td>개발 끝(시안)</td><td>이 문서 하단</td><td>실제 표 연결</td></tr><tr><td>게임 시뮬레이터 모듈 · 본게임</td><td>기획 중 · 작업전</td><td>—</td><td>표 확정 뒤</td></tr></tbody></table></div>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<p>길드를 따로 만들지 않고 응원 크루 규칙을 그대로 써야 합니다.</p>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p>세부 결정과 근거는 책갈피 P192에 둡니다. 원문이 없어 새로 씁니다.</p>
+
+<details><summary>작업 기록</summary>
+
+<p>대표 개발 기획서(신규 · 핵심제안서). 상세 정본 P192. 변경 이력은 길드_핵심제안서.log.md.</p>
+
+</details>
+</section><section class="doc-ui-section" aria-label="하단 시뮬레이터"><h3>크루 순위 시뮬레이터 · 임시 시안</h3><p>P221 응원 크루와 같은 시뮬레이터입니다.</p><details id="sim-preview"><summary>시뮬레이터 펼치기 · 기여 · 총공</summary><div data-sim-host="crew"></div></details></section><details class="history"><summary>로그 · 변경 이력과 이전 기록</summary><p><a href="./길드_핵심제안서.log.md" target="_blank" rel="noopener">이 문서의 로그 열기</a></p></details></main></body></html>

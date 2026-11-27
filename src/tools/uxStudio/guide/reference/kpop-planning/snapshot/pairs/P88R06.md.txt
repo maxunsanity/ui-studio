@@ -1,0 +1,320 @@
+# P88 · 악귀 디펜스 개발 기획서
+
+상태: 제안(검수 대기)입니다. 현재 구현 v05이며 수치는 시안 예시입니다.
+
+
+
+01
+
+## 개요
+
+평소 도시의 모습을 유지하다가 악귀 행렬이 길을 채우면 대지 건물22곳이 방어 장치로 변형합니다. 드론과 쌍포 기관총이 대응하고, 출현이 멈춘 뒤에도 남은 악귀를 모두 처치하면 클리어·승리를 표시하고 도시를 복원합니다.
+
+### 콘텐츠 경계
+
+침입·도로 순환·건물 변형·장치 공격·스킬 선택·잔적 처치·결과·복원을 담당합니다. 보드 주사위와 증설은 연결 대상이며 별도 모듈입니다.
+
+### 현재 기준과 목표
+
+현재 구현은 v05입니다. 약5분의 시연을 목표로 하며 전투·선택·잔적 처리 시간은 플레이에 따라 달라집니다. 시간과 수치·분포는 모두 시안 예시입니다. 본게임 밸런스 확정을 뜻하지 않습니다.
+
+현재 제외합니다
+
+몬스 직접 방어, 함정, 하늘 구름, 평소 상시 헬기장은 사용하지 않습니다. 도로의 악귀 연무는 사용합니다. 기존 시안은 이전 기록으로 보존합니다.
+
+- 평소 도시
+- 악귀 침입
+- 건물22곳 변형
+- 드론·쌍포 방어
+- 출현 종료·잔적 처치
+- 클리어·승리
+- 도시 복원
+
+02
+
+## 필요 관련 시스템 기획서
+
+| 자료 | 이 콘텐츠에서 필요한 이유 | 연결 방향·기준 |
+| --- | --- | --- |
+| [P76 · 건물 변형3종](/docs/planning/planning-docs-tool.html?face=development&doc=P76&plan=planning_development_plan_defense) | 침입 이후 변형과 복원의 현재 설계입니다. | 현재 기준 → transformation / transform_pattern / transform_config |
+| [P77 · 악귀 행렬·장치 패턴](/docs/planning/planning-docs-tool.html?face=development&doc=P77&plan=planning_development_plan_defense) | 다섯 입구·표적 선택·장치 스킬의 근거입니다. | v03 근거 → 현재 v05 표와 대조합니다. |
+| [P82 · 도시 원본](/docs/planning/planning-docs-tool.html?face=development&doc=P82&plan=planning_development_plan_defense) | 건물40곳·길·숲·공연장 모델을 보존합니다. | 도시 모델 → 22대지/18특수 자리와 기하 연결 |
+| [P81 · 테스트 툴](/docs/planning/planning-docs-tool.html?face=development&doc=P81&plan=planning_development_plan_defense) | 보드·방어·변형·그림/설정을 같은 페이지에서 조작합니다. | 이 콘텐츠 → P58 툴의 방어 화면 |
+| [P58 · 테이블 데이터 기초](/docs/planning/planning-docs-tool.html?face=development&doc=P58&plan=planning_development_plan_defense) | 풀네임 키와 공용 시스템 연결의 기준입니다. | 공통 기준 → 전용26표와 공용 표 구분 |
+| [P79 · 단계2 계산·검수](/docs/planning/planning-docs-tool.html?face=development&doc=P79&plan=planning_development_plan_defense) | 표·압박 그래프·검수 기록을 보존합니다. | 이전 검수 자료입니다. 현재 v05 밸런스와 혼용하지 않습니다. |
+| [P86 · 작성 규칙](/docs/planning/planning-docs-tool.html?face=development&doc=P86&plan=planning_development_plan_defense) | 콘텐츠 문서의 고정7장과 등록 절차입니다. | 공통 양식 → P88 대표 샘플 |
+
+문서는 복제하지 않고 콘텐츠 관계 표로 연결합니다. 왼쪽의 악귀 디펜스를 유지하며 오른쪽 위의 이 콘텐츠의 자료에서 현재 근거·원본·이전 기록을 선택합니다.
+
+03
+
+## 구동 방법·시뮬레이션
+
+방어 테스트 시작을 누릅니다. 자동 스킬 선택을 켜면 연출 전체를 관찰합니다. 끄면 등장하는 장치 스킬 카드3개 중 하나를 선택합니다. 일시 정지·계속 진행·처음부터를 사용할 수 있습니다. 단순 변형 비교 버튼은 전투를 멈추고 모양을 확인합니다.
+
+현재 v05 실제 구동 · 시작 전에는 전투가 진행되지 않습니다.[문서 안의 실제 보기](/docs/planning/p58-defense-proto-v01.html?embed=p88)
+
+관찰 순서
+
+첫 악귀가 길에 들어오는지 → 공격 전 건물이 변하는지 → 드론이 건물에서 출발하는지 → 쌍포 양쪽 총열·피격 숫자가 보이는지 → 출현 종료 뒤 남은 악귀를 계속 공격하는지 → 살아 있는 악귀0에서 승리하는지 → 도시가 원상 복원되는지 확인합니다.
+
+‘도로 가까이’·‘드론 디자인’·‘쌍포 디자인’·건물 선택으로 자세히 봅니다. 마우스/터치로 회전·확대합니다. ‘순환 길 표시’는 검수용 경로입니다. 다른 화면에서 같은 시연이 실행 중이면 중복 조작을 제한합니다. 검수 저장은 본게임 계정 저장과 구분합니다.
+
+기존 통합 툴은 [P58 도시맵 툴](/docs/planning/p58-citymap-temp.html#board-turn)에서 봅니다. 이 문서의 시뮬레이션은 같은 v05 모듈과 표를 읽습니다.
+
+04
+
+## 상세 기획
+
+| 개발 요소 | 현재 동작·조건 | 입력/출력·모듈 |
+| --- | --- | --- |
+| 진입·준비 | 이용자가 시작합니다. prepare 뒤 combatMs를 기준으로 출현을 계산합니다. | profile / engine.mjs → prepare / defense / draining / victory |
+| 연속 행렬 | spawn과 wave의 간격으로 여러 입구에서 줄지어 등장합니다. 폐곡선 route를 따라 마을을 계속 순환합니다. 길 밖·건물 관통 경로는 스키마 검사에서 거부합니다. | enemy + road_node/edge + route/route_step + spawn/wave → 위치·HP·생존 수 |
+| 침입 후 변형 | 침입14초 뒤22대지에 순차 변형을 적용합니다. 전부 전개되고0.7초 대기 후 방어를 시작합니다. 공격은 전개 전 금지합니다. | transformation + transform_pattern + transform_config → 장치 소켓·진행률 |
+| 드론 PET | 건물 소켓에서 이륙합니다. 순찰·추적·공격·복귀를 전환하며 가속·기울기·높이 흔들림을 적용합니다. 개체별 위상·속도·반경·판단 간격을 다르게 합니다. | entity_config_pet_drone + movement_pattern_drone + entity_instance → 위치/표적/레이저 |
+| 쌍포 NPC | 자리를 유지하고 표적 방향으로 포탑을 회전합니다. 두 총열에서 한 쌍의 탄환을3회 연사하며 반동·총구 섬광·탄환 궤적·냉각 대기를 보여줍니다. | entity_config_npc_twin + attack_pattern_twin → 좌/우 탄환·조준/연사/과열 상태 |
+| 상황별 표적 판단 | 거리·주변 악귀 밀집도·보스·낮은 HP의 점수를 합산합니다. 유지 시간·재지정 간격·전환 우위를 확인해 표적을 바꿉니다. 외부 AI 모델 호출은 사용하지 않습니다. | tuning + movement_pattern → targetId / lockedAt / lastSwitch |
+| 피격·사망 | HP바·타격 숫자·레이저/탄환 색과 피격 효과를 표시합니다. 죽은 악귀는0.95초 동안 아래로 내려가며 축소합니다. 하늘로 올라가는 처치 연출은 사용하지 않습니다. | visual + ui_text + effects/labels → 표시 제한·효과 수명 |
+| 스킬 선택 | 드론3종·쌍포3종 강화에서 후보를 제공합니다. 선택 중 전투 진행을 멈추며 자동 선택 대기 뒤 자동 힌트로 선택합니다. 최댓값을 넘기지 않습니다. | skill + skill_offer + skill_effect → skillLevels |
+| 출현 종료·결과 | spawn_stop_ms 이후 예약 출현을 비우면 draining입니다. 살아 있는 악귀가0이 되기 전에는 승리하지 않습니다. 처치와 출현 총수를 표시합니다. | pending=0 AND spawnStopped AND alive=0 → victory / killed / elapsedMs |
+| 복원·저장 | 승리 뒤 드론 복귀와 건물 복원을 진행합니다. 데이터 지문이 다른 저장은 복원하지 않습니다. 세션 잠금과 revision으로 중복 실행/저장 충돌을 제한합니다. | snapshot/restore + fingerprint + session lease → 검수 저장 |
+
+### 시간 구성 · 시안 예시
+
+| 단계 | 현재 표 값 | 해석 |
+| --- | --- | --- |
+| 준비 | prepare_ms=4,000ms | 전투 시작 전 준비입니다. |
+| 침입 | intrusion_ms=14,000ms | 악귀가 먼저 길을 채우는 시간입니다. |
+| 변형 | 전개4,000 / 4,800 / 5,200ms + 개체별 지연 | 전체 전개는 약7.2초입니다. 전개 중 공격하지 않습니다. |
+| 방어 활성 | defense_hold_ms=700ms + 개체 이륙·활성 지연 | 건물에서 출발한 뒤 방어합니다. |
+| 웨이브 | 0~70 / 70~145 / 145~214초 | 전투 시간 기준입니다. 선택 대기 시간은 별도입니다. |
+| 잔적·승리 | 살아 있는 악귀0까지 | 종료를 시간으로 강제하지 않습니다. |
+| 복원 | 드론 복귀2,500ms + 최대5,200ms | 승리 후 도시 원상 복원입니다. |
+
+### 22대지 연결 · 시안 예시
+
+| 변형 | 대지 자리 | 방어 분포 |
+| --- | --- | --- |
+| 옥상 개방 | city_02, city_09, city_14, city_19, city_24, city_28, city_33, city_39 | 8곳 |
+| 지하 교체 | city_04, city_10, city_15, city_20, city_25, city_30, city_35 | 7곳 |
+| 건물 접힘 | city_07, city_12, city_17, city_22, city_27, city_32, city_37 | 7곳 |
+
+방공포15곳·드론7곳을 연결합니다. 40칸 전체가 방어 대지는 아닙니다. 일반 시설 CSV20곳을 임의로22곳으로 늘리지 않습니다. 대지 목록은 defense_land와 entity_instance의 현재22행을 따릅니다.
+
+### 다른 모듈과 남은 결정
+
+보드 증설 단계와 방어 변형 상태는 별도입니다. 영구 증설이 전투 복원으로 지워지지 않도록 본게임 연동 시 입력 계약을 확정해야 합니다. 보드의 도착 필러·비용·보상·계정 저장·패배 조건·유료 요소는 이번 정리로 새로 결정하지 않습니다.
+
+05
+
+## 필요 리소스·이미지 설명
+
+아래 장치·변형 이미지는 현재 구현을 직접 캡처한 미리보기입니다. 악귀 이미지는 기존 모델 렌더입니다. 실제 모델 파일과 런타임 변형을 구분합니다.
+
+![순찰 드론 · PET](./리소스/drone.jpg)
+기존 시안 · 현재 v05
+
+### 순찰 드론 · PET
+
+4개 덕트 로터·센서 짐벌·하부 레이저 발사부를 사용합니다. 출발→순찰→표적 추적→민트색 펄스 레이저→복귀를 표현합니다.
+
+`asset_drone_v04 / model_drone / entity_config_pet_drone`
+
+[실제 리소스 파일](/data/res/defense_v05/res_drone_patrol_v04.glb)
+
+![쌍포 기관총 · NPC](./리소스/turret.jpg)
+기존 시안 · 현재 v05
+
+### 쌍포 기관총 · NPC
+
+독립 총열2개·냉각 링·양측 탄창·회전 조준부를 사용합니다. 두 발 동시 출발과 금색 탄환·총구 섬광·반동을 표현합니다. 드론 레이저와 구분합니다.
+
+`asset_twin_v04 / model_twin / entity_config_npc_twin`
+
+[실제 리소스 파일](/data/res/defense_v05/res_twin_machinegun_v04.glb)
+
+![소형 악귀](/data/res/temp/akgwi/res_akgwi_small.png)
+기존 악귀 시안
+
+### 소형 악귀
+
+연속 행렬의 기본 악귀입니다. 도로 연무·HP바·피격 숫자·아래로 꺼지는 사망 상태를 붙입니다.
+
+`enemy_small / asset_enemy_small`
+
+[실제 리소스 파일](/data/res/temp/akgwi/res_akgwi_small.glb)
+
+![대형 악귀](/data/res/temp/akgwi/res_akgwi_large.png)
+기존 악귀 시안
+
+### 대형 악귀
+
+웨이브에 섞여 나오는 높은 HP의 악귀입니다. 덩치와 연무 반경을 다르게 표시합니다.
+
+`enemy_large / asset_enemy_large`
+
+[실제 리소스 파일](/data/res/temp/akgwi/res_akgwi_large.glb)
+
+![보스 악귀](/data/res/temp/akgwi/res_akgwi_boss.png)
+기존 악귀 시안
+
+### 보스 악귀
+
+후반 위협입니다. 우선 표적 점수와 큰 외형을 사용하고 잔적 처치 조건에 포함합니다.
+
+`enemy_boss / asset_enemy_boss`
+
+[실제 리소스 파일](/data/res/temp/akgwi/res_akgwi_boss.glb)
+
+![옥상 개방 · 8곳](./리소스/roof.jpg)
+현재 런타임 변형 시안
+
+### 옥상 개방 · 8곳
+
+옥상 패널을 분할해 밀고 기울인 뒤 숨겨진 장치를 올립니다. 원래 건물 외관은 아래에 유지합니다.
+
+`transform_pattern_roof`
+
+[실제 리소스 파일](/data/defense_proto/v05/defense_proto_v05_transform_pattern.csv)
+
+![지하 교체 · 7곳](./리소스/sink.jpg)
+현재 런타임 변형 시안
+
+### 지하 교체 · 7곳
+
+건물을 아래로 내리고 지면 해치를 열어 방어 받침과 장치를 올립니다.
+
+`transform_pattern_sink`
+
+[실제 리소스 파일](/data/defense_proto/v05/defense_proto_v05_transform_pattern.csv)
+
+![건물 접힘 · 7곳](./리소스/fold.jpg)
+현재 런타임 변형 시안
+
+### 건물 접힘 · 7곳
+
+벽과 지붕을 네 부분으로 접고 줄여 가운데 방어 장치를 드러냅니다.
+
+`transform_pattern_fold`
+
+[실제 리소스 파일](/data/defense_proto/v05/defense_proto_v05_transform_pattern.csv)
+
+![길·인도·중앙 숲](/docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/renders/차도인도_상세.png)
+도시 원본 v06
+
+### 길·인도·중앙 숲
+
+악귀와 낮은 연무가 길을 채우도록 배치합니다. 길·건물·숲의 원본을 보존하며 하늘 구름을 추가하지 않습니다.
+
+`road_node / road_edge / source_geometry.json`
+
+[실제 리소스 파일](/docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/models/roads_park.glb)
+
+### 추가 제작·연출 리소스
+
+| 리소스 | 필요 상태·사용 위치 | 현재 / 남은 제작 |
+| --- | --- | --- |
+| 전용 변형 모델·리깅 | 평소/전개/방어/복원 · 22대지 | 현재는 원본 GLB를 런타임에서 분할합니다. 본게임 전용 패널·힌지·내부 구조 모델은 제작 대기입니다. |
+| 공격·피격 효과 | 민트 펄스·금색 탄환·반동·숫자·HP바·도로 연무 | 현재 코드 기반 효과를 사용합니다. 전용 텍스처/파티클 에셋과 음향은 후속 제작·검수 대상입니다. |
+| 방어 UI·승리 UI | 스킬 카드·경과 시간·출현 종료·생존/처치·클리어 | 현재 ui_text/visual을 사용합니다. 본게임 HUD와 결과 화면 그래픽은 결정 대기입니다. |
+| 소리 | 침입 경보·변형·이륙·레이저·쌍포·피격·승리 | 현재 전용 음원 파일은 연결하지 않습니다. 필요 목록이며 제작/사운드 밸런스 대기입니다. |
+
+기존 GLB의 파일명 v04는 자산 버전입니다. v05 데이터와 변형 실행에서 사용하는 실제 파일이므로 파일명만 보고 이전 실행으로 분류하지 않습니다.
+
+06
+
+## 관련 CSV·테이블 데이터
+
+현재 전용 데이터는 `data/defense_proto/v05/`의26종·567행입니다. 아래는 실제 CSV 읽기 전용 보기입니다. 표를 고르고 검색하거나 참조 키를 눌러 연결된 행으로 이동합니다. 값과 파일은 수정하지 않습니다.
+
+전용26표 · 실제 머리줄·자료형·참조·원문[문서 안의 실제 보기](./테이블보기.html#entity_config)
+
+26표의 역할·주키·행 수·참조를 펼칩니다
+
+| CSV | 역할 | 주키 | 행 수 | 참조 |
+| --- | --- | --- | --- | --- |
+| [`profile.csv`](/data/defense_proto/v05/defense_proto_v05_profile.csv) | 시연 시간·상한·자동 선택 기준 | profile_id | 1 | boss_enemy_id → enemy.enemy_id / motion_tuning_id → tuning.tuning_id |
+| [`asset.csv`](/data/defense_proto/v05/defense_proto_v05_asset.csv) | 실제 모델 파일·배율 | asset_id | 5 | 독립 키 / 외부 기하 |
+| [`enemy.csv`](/data/defense_proto/v05/defense_proto_v05_enemy.csv) | 악귀 종류·HP·속도·반경 | enemy_id | 3 | asset_id → asset.asset_id |
+| [`model.csv`](/data/defense_proto/v05/defense_proto_v05_model.csv) | 드론·쌍포 외형 연결 | model_id | 2 | asset_id → asset.asset_id |
+| [`movement_pattern.csv`](/data/defense_proto/v05/defense_proto_v05_movement_pattern.csv) | 이륙·순찰·추적·판단·냉각 | pattern_id | 2 | 독립 키 / 외부 기하 |
+| [`attack_pattern.csv`](/data/defense_proto/v05/defense_proto_v05_attack_pattern.csv) | 레이저/쌍포·피해·연사·사거리 | attack_id | 2 | 독립 키 / 외부 기하 |
+| [`entity_config.csv`](/data/defense_proto/v05/defense_proto_v05_entity_config.csv) | PET/NPC 종류와 이동·공격 패턴 | entity_id | 2 | model_id → model.model_id / movement_id → movement_pattern.pattern_id / attack_id → attack_pattern.attack_id |
+| [`entity_instance.csv`](/data/defense_proto/v05/defense_proto_v05_entity_instance.csv) | 22대지 개체별 위상·속도·배치 | instance_id | 22 | entity_id → entity_config.entity_id |
+| [`defense_land.csv`](/data/defense_proto/v05/defense_proto_v05_defense_land.csv) | 40칸 중22대지 대상 | land_id | 22 | 독립 키 / 외부 기하 |
+| [`skill.csv`](/data/defense_proto/v05/defense_proto_v05_skill.csv) | 장치 스킬6종과 최대 레벨 | skill_id | 6 | entity_id → entity_config.entity_id |
+| [`skill_effect.csv`](/data/defense_proto/v05/defense_proto_v05_skill_effect.csv) | 스킬 수치 연산 | effect_id | 8 | skill_id → skill.skill_id |
+| [`skill_offer.csv`](/data/defense_proto/v05/defense_proto_v05_skill_offer.csv) | 스킬 선택 후보·제시 시각 | offer_id | 8 | recommended → skill.skill_id |
+| [`wave.csv`](/data/defense_proto/v05/defense_proto_v05_wave.csv) | 연속 웨이브 구간·악귀 비율 | wave_id | 3 | small_enemy_id → enemy.enemy_id / large_enemy_id → enemy.enemy_id |
+| [`road_node.csv`](/data/defense_proto/v05/defense_proto_v05_road_node.csv) | 도로 노드 좌표 | node_id | 16 | 독립 키 / 외부 기하 |
+| [`road_edge.csv`](/data/defense_proto/v05/defense_proto_v05_road_edge.csv) | 도로 간선 연결 | edge_id | 48 | from_id → road_node.node_id / to_id → road_node.node_id |
+| [`route.csv`](/data/defense_proto/v05/defense_proto_v05_route.csv) | 폐곡선 순환 경로 | route_id | 5 | start_id → road_node.node_id |
+| [`route_step.csv`](/data/defense_proto/v05/defense_proto_v05_route_step.csv) | 순서 있는 경로 간선 | step_id | 240 | route_id → route.route_id / edge_id → road_edge.edge_id |
+| [`spawn.csv`](/data/defense_proto/v05/defense_proto_v05_spawn.csv) | 입구별 행렬 출현 간격 | spawn_id | 15 | wave_id → wave.wave_id / route_id → route.route_id |
+| [`visual.csv`](/data/defense_proto/v05/defense_proto_v05_visual.csv) | 카메라·피격·연무·사망·표시 제한 | config_id | 23 | 독립 키 / 외부 기하 |
+| [`ui_text.csv`](/data/defense_proto/v05/defense_proto_v05_ui_text.csv) | 화면과 스킬 안내 문구 | text_id | 61 | 독립 키 / 외부 기하 |
+| [`tuning.csv`](/data/defense_proto/v05/defense_proto_v05_tuning.csv) | 밀집·거리·보스·부상 표적 판단 | tuning_id | 1 | 독립 키 / 외부 기하 |
+| [`pad_style.csv`](/data/defense_proto/v05/defense_proto_v05_pad_style.csv) | 이전 받침 형태 공용 기반 · 평소 미표시 | style_id | 6 | 독립 키 / 외부 기하 |
+| [`rooftop.csv`](/data/defense_proto/v05/defense_proto_v05_rooftop.csv) | 건물40곳 소켓·지지 기하 기반 | pad_id | 40 | style_id → pad_style.style_id |
+| [`transform_pattern.csv`](/data/defense_proto/v05/defense_proto_v05_transform_pattern.csv) | 변형3종 패널·시간·이동 패턴 | pattern_id | 3 | 독립 키 / 외부 기하 |
+| [`transformation.csv`](/data/defense_proto/v05/defense_proto_v05_transformation.csv) | 22대지 변형 종류·높이·지연 | transform_id | 22 | instance_id → entity_instance.instance_id / pattern_id → transform_pattern.pattern_id |
+| [`transform_config.csv`](/data/defense_proto/v05/defense_proto_v05_transform_config.csv) | 침입→변형→방어→복원 순서 | config_id | 1 | 독립 키 / 외부 기하 |
+
+풀네임 키·단위
+
+기본키 값은 파일명 전체를 접두어로 사용합니다. 예: `entity_config_pet_drone`, `attack_pattern_twin`, `transform_pattern_roof`입니다. 도시 자리 `city_01~city_40`와 실제 리소스 파일명은 유지합니다. schema.json의 type/ref/id_prefix와 외부 source_geometry.json을 함께 검증합니다. 시간 ms·거리 시안 좌표·색 hex·배율 ratio·HP/피해 시안값을 구분합니다.
+
+[실제 스키마](/data/defense_proto/v05/schema.json) · [키 규칙 README](/data/defense_proto/v05/README.md) · [원본 도로·건물 기하](/data/defense_proto/v05/source_geometry.json)
+
+공용 테이블 보기 · 실제32표 도구도 함께 봅니다
+
+전용26표와 공용32표는 지원 영역이 다릅니다. 아래 공용 보기는 보드/리소스 시스템을 확인할 때 사용합니다. festival_ticket은 현중 지정 참고 표이며 디펜스 필수 참조로 지정하지 않습니다.
+
+[보드40칸](/docs/planning/game-table-tool.html?table=board_tile#board_tile)[리소스](/docs/planning/game-table-tool.html?table=resource#resource)[festival_ticket 참고](/docs/planning/game-table-tool.html?table=festival_ticket#festival_ticket)
+
+[문서 안의 실제 보기](/docs/planning/game-table-tool.html?table=board_tile#board_tile)
+
+07
+
+## 개발 진행·검수
+
+| 요소 | 현재 상태 | 검수·후속 작업 |
+| --- | --- | --- |
+| 행렬·길 순환·피격·처치 | 시연 구현 v05 | 현재 CSV·기하 검증과 실제 구동을 확인합니다. 본게임 적 애니메이션·음향은 제작 대기입니다. |
+| 3종 건물 변형 | 시연 구현 · 8/7/7 | 전개 전 공격0·22곳 완료 뒤 방어·승리 뒤 복원을 확인합니다. 전용 리깅 모델은 대기입니다. |
+| PET 드론·NPC 쌍포 | 시연 구현 · 7/15 | 출발·표적 변경·넓은 드론 방어 범위·쌍포 양쪽 발사·스킬 강화를 확인합니다. |
+| 계산·압박·약5분 목표 | 시안 예시 | 출현 종료 뒤 잔적 처리까지 포함합니다. P79는 이전 계산 기록이며 현재 스키마와 혼용하지 않습니다. |
+| 주사위/증설/필러 연결 | 별도 모듈 · 후속 | 전투 전후 자원 계약·영구 증설·필러 문구·실패/패배 조건은 결정 대기입니다. |
+| 기획서·리소스·CSV 내장 보기 | 이번 정리 범위 | 좌측 콘텐츠 선택·우측 자료·7장 이동·이미지·실제 전용26표·현재 구동을 검수합니다. |
+
+### 수락 기준
+
+- 왼쪽은5개 콘텐츠를 보여주고 자료18건을 개별로 나열하지 않습니다.
+- 악귀 디펜스를 고르면 대표 P88이 자동으로 보입니다. 세부 자료는 오른쪽에서 바꿉니다.
+- 개요→관련 시스템→구동→상세→리소스→CSV→진행·검수 순서와 짝 MD를 제공합니다.
+- 현재 실제 시연·장치/악귀/변형/길 이미지9개·전용26표를 문서 안에서 봅니다.
+- P79 옛 검수 주소와 기존 작성 예시는 유지하고 현재/이전 상태를 구분합니다.
+- 게임 표·전투 코드·도시 원본을 변경하지 않습니다. 화면·링크·캡처와 공용 보고를 남깁니다.
+
+### 뺀 것·옮긴 것·보존한 것
+
+왼쪽의 개별 문서 나열을 콘텐츠별 선택으로 바꾸고 세부 자료 선택을 오른쪽으로 옮깁니다. 기존18문서·이전 시안·원본 그림·모델·CSV는 삭제하지 않습니다. P87은 보드 기본 구성 작성 예시로 유지하고 대표 샘플은 P88 악귀 디펜스로 지정합니다. 모든 산출은 제안(검수 대기)이며 최종 결정은 현중입니다.
+
+문서 정보·변경 이력
+
+P88 · 악귀 디펜스 · 콘텐츠 planning_development_plan_defense · 대표 표준 기획서 · 현재 v05 · 제안(검수 대기)입니다.
+
+2026-10-07 · 단이(codex) · 현중 직접 지시: 악귀 디펜스를 기본 기획서 양식으로 정리하고 왼쪽 콘텐츠 선택/오른쪽 세부 자료 구조로 구성합니다.
+
+근거: P76/P77/P79/P81/P82/P58/P86, 실제26CSV와 schema, 현재 engine/data/transformation/preview 모듈입니다. 이전 문서는 관계 표의 history 역할로 보존합니다.
+
+
+
+## 2026-10-07 12:39 KST · 보고와 증거
+
+[공용 완료 보고](/docs/planning/삼중AI_공용_20260929/보고/20261007_1239_단이_완료_직접지시_악귀디펜스기획서와콘텐츠목록.md)입니다. 기능48·화면13·등록/보존11·링크72주소·캡처10장을 확인합니다. 상태는 제안(검수 대기)입니다.
+
+
+## 2026-10-07 · 공용 CSV 보기 연결
+
+전체 테이블 P73은 콘텐츠에 독립된 공용 툴입니다. 이 기획의 사용 CSV 45개는 P93에서 목록·용도·원본 경로·실제 데이터를 확인합니다. 전용 표와 공용 표를 같은 등록 뷰어에서 보여줍니다. 이전 전용 뷰어와 기존 원본은 삭제하지 않고 보존합니다.

@@ -1,0 +1,55 @@
+# 04 · 잠금 SSoT 경로 (절대경로 · ls 검증)
+
+```
+상태: 제안(검수 대기) — 승인 아님
+검증: 2026-09-28 ~14:11 KST · machine 76e57e57-6384-4c63-889a-8ba85b8468f7 · 전부 OK
+```
+
+## A. 기획 잠금 (planning + DECISIONS)
+
+| 파일 | 절대경로 | 존재 |
+|------|----------|------|
+| DECISIONS.md (D-074) | `/Users/max/1_작업 폴더/kpopmonsters/DECISIONS.md` | OK ※ `docs/planning/` 아래가 아니라 **프로젝트 루트** |
+| 034_보드1_1차잠금.md | `/Users/max/1_작업 폴더/kpopmonsters/docs/planning/034_보드1_1차잠금.md` | OK |
+| 056_보드_컨셉.md | `/Users/max/1_작업 폴더/kpopmonsters/docs/planning/056_보드_컨셉.md` | OK |
+| 050_지역성장.md | `/Users/max/1_작업 폴더/kpopmonsters/docs/planning/050_지역성장.md` | OK |
+| 062_보드성장.md | `/Users/max/1_작업 폴더/kpopmonsters/docs/planning/062_보드성장.md` | OK |
+| 063_보드성장_연출.md | `/Users/max/1_작업 폴더/kpopmonsters/docs/planning/063_보드성장_연출.md` | OK |
+| green-growth-sim.html | `/Users/max/1_작업 폴더/kpopmonsters/docs/planning/green-growth-sim.html` | OK |
+
+## B. 클로드 팩 (참조 only · 제나 소유 아님 · 수정 금지)
+
+| 폴더 | 절대경로 | 존재 |
+|------|----------|------|
+| 클로드_파이널기획_성장형연출_20260928 | `/Users/max/1_작업 폴더/kpopmonsters/docs/planning/클로드_파이널기획_성장형연출_20260928/` | OK |
+| 클로드_기획정리_제나연동_20260928 | `/Users/max/1_작업 폴더/kpopmonsters/docs/planning/클로드_기획정리_제나연동_20260928/` | OK |
+
+## C. Codex 아트 산출 (읽기 only · 수정 금지)
+
+베이스: `/Users/max/Documents/Codex/2026-09-28/users-max-1-codexpack-20260927/outputs/블록컨셉아트_40칸_20260928/`
+
+| 항목 | 절대경로 | 존재 |
+|------|----------|------|
+| 최종최고상태_컨셉아트.png | `…/블록컨셉아트_40칸_20260928/최종최고상태_컨셉아트.png` | OK |
+| SSoT_건물최종_공연장퀄.png | `…/블록컨셉아트_40칸_20260928/SSoT_건물최종_공연장퀄.png` | OK |
+| roads/ | `…/블록컨셉아트_40칸_20260928/roads/` | OK |
+| concept_key_buildings/ (HOLD) | `…/블록컨셉아트_40칸_20260928/concept_key_buildings/` | OK · HOLD |
+| units_growth_max_r2/ | `…/블록컨셉아트_40칸_20260928/units_growth_max_r2/` | OK |
+
+## D. 지시_성장맥스_코덱스_유닛_20260928
+
+베이스: `/Users/max/Documents/Codex/2026-09-28/users-max-1-codexpack-20260927/outputs/지시_성장맥스_코덱스_유닛_20260928/`
+
+| 항목 | 절대경로 | 존재 |
+|------|----------|------|
+| 폴더 | `…/지시_성장맥스_코덱스_유닛_20260928/` | OK |
+| Q-001 A 잠금 | `…/질의응답/Q-001_답변.md` | OK |
+| 건물위치맵 | `…/보고/건물위치맵_40칸_20260928.md` | OK |
+| DualNavMesh 보고 | `…/보고/월드도로_DualNavMesh_교차확인_20260928.md` | OK |
+| 01사옥 보고 | `…/보고/보고_성장맥스_코덱스_유닛_20260928_01사옥.md` | OK |
+| STATUS | `…/진행/STATUS.md` | OK |
+
+### Q-001 A (좌표) 한 줄
+
+기존 `work/citypack/data/city/manifest.json` (`hongdae-city-v2`)의 **x/z = Board1 최종 위치**.  
+`roads_layers.json` ±40 = 개념도(재작성 금지). Dual NavMesh 규칙 유지. 단품 디자인 승인 ≠ 위치 잠금.

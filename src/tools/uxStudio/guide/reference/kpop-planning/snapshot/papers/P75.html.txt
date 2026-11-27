@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>P75 · 핵심제안 시스템 개발 전체 안내</title><style>*{box-sizing:border-box}body{margin:0;background:#f2f5f8;color:#243243;font:15px/1.65 system-ui,-apple-system,sans-serif}main{max-width:1080px;padding:30px 24px 60px;margin:auto}h1{font-size:32px;line-height:1.3}h2{font-size:23px;margin-top:32px}p{margin:8px 0}small{color:#42746e}nav,.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card,nav a{display:block;padding:18px;background:white;border:1px solid #d9e2eb;border-radius:14px;color:inherit;text-decoration:none}.card:hover,nav a:hover{border-color:#4e9b96}.card h3{font-size:17px;margin:5px 0}.card p{font-size:13px}.note{padding:16px;background:#fff6df;border-radius:12px}.steps{padding:18px 22px;background:white;border-radius:14px}.steps li{margin:7px 0}.pill{display:inline-block;background:#deefeb;padding:4px 12px;border-radius:999px}a{color:#237f87}@media(max-width:600px){main{padding:22px 16px}h1{font-size:27px}nav,.cards{grid-template-columns:1fr}}</style></head><style>main{max-width:1160px;margin:auto;padding:24px}table{width:100%;border-collapse:collapse}td,th{padding:9px;vertical-align:top}details.previous-spec{margin:28px 0;padding:16px;border:1px solid #d9e2eb;border-radius:12px;background:#f7f9fb}details.previous-spec>summary{font-weight:700;cursor:pointer}.current-note{padding:16px;background:#eef8f2;border-radius:12px}.part{scroll-margin-top:80px}pre{white-space:pre-wrap;overflow-wrap:anywhere}code{overflow-wrap:anywhere}img{max-width:100%}</style><body><main><header><h1>P75 · 핵심제안 시스템 개발 · 전체 안내</h1>
+<p>상태: 최신 아이돌 성장 v02 기준 전체 정리 · 2026년 10월 15일</p>
+<p><strong>오디션에서 영입한 팀을 성장시키고, 성장한 팀과 시설을 건설·방어 시험에서 확인합니다.</strong> 대표 기획서·제안 카드·시뮬레이터가 같은 현재 기준을 안내하도록 정리했습니다. 이벤트 게임은 이번 정리 대상에서 제외합니다.</p>
+</header><nav aria-label="기획서 세부 내용" class="local-nav"><a href="#part-1">1. 시작할 화면</a><a href="#part-2">2. 현재 대표 기획과 실행</a><a href="#part-3">3. 데이터 기준</a><a href="#part-4">4. 제안 카드 읽는 법</a><a href="#part-5">5. 전체 정리 원칙</a><a href="#part-6">6. 아직 별도인 영역</a><a href="#part-7">7. 확인 자료</a><a href="#part-8">8. 문서 정보와 변경 이력</a></nav><section class="part" id="part-1"><h2>1. 시작할 화면</h2>
+<p><a href="/docs/planning/game-simulator.html">게임 시뮬레이터</a>는 아이돌 성장으로 시작합니다. 주요 메뉴는 아이돌 성장 → 오디션 → 주사위 → 건설·증설 → 나쁜 기운 디펜스입니다. 옛 보드 설명·필러·몬스 애니메이션·리소스·기존 방어전은 <strong>보조 도구·기존 테스트</strong>에 접어서 둡니다. 기존 링크와 모듈 ID는 유지합니다.</p>
+</section><section class="part" id="part-2"><h2>2. 현재 대표 기획과 실행</h2>
+<table>
+<thead>
+<tr>
+<th>분야</th>
+<th>대표 기획</th>
+<th>현재 실행과 범위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>오디션</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P100">P100</a></td>
+<td>첫인상·16인 서바이벌·영입·몬스·128행 서사</td>
+</tr>
+<tr>
+<td>아이돌 성장</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P107">P107</a></td>
+<td>최신 통합 v02. 대표4·세부12·학습2+일본어 보존·카드·보드·시설</td>
+</tr>
+<tr>
+<td>공통 데이터</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P140">P140</a></td>
+<td>ID·합계 단위·소유권·로컬 상태 전달</td>
+</tr>
+<tr>
+<td>건물 성장</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P106">P106</a></td>
+<td>성장 v02의 시설 기능과 3D 시공 시험 경계</td>
+</tr>
+<tr>
+<td>건설·증설</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P81">P81</a></td>
+<td>9건물 30단계(본관 1 + 부속 2) 기준으로 재정비 · 밀착 3동·전체 복셀 연출</td>
+</tr>
+<tr>
+<td>나쁜 기운 디펜스</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P104">P104</a>, <a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P138">P138</a></td>
+<td>자동10종·피니시5종·독립3동·보스3구간</td>
+</tr>
+<tr>
+<td>팬과 수익</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P108">P108</a></td>
+<td>성장v02와 기존경제 계산을 구분, 운영경제 통합 후속</td>
+</tr>
+</tbody>
+</table>
+</section><section class="part" id="part-3"><h2>3. 데이터 기준</h2>
+<p>성장 규칙은 <code>data/idol_ability_sim/v02/</code>, 오디션 생성은 <code>data/audition_sim/v01/</code>, 방어 규칙은 <code>data/bad_energy/v06/</code>를 각 영역의 기준으로 사용합니다. 연결은 <code>data/simulator/shared/v01/</code> 계약을 거칩니다. 같은 이름이라는 이유로 서로 다른 단위의 숫자를 합치지 않습니다.</p>
+<p>성장이 쓰는 상태를 건설·방어는 복사해서 읽습니다. 3D 건설 시험값·전투 피해·전투 보상은 성장 경제에 되쓰지 않습니다. 기존 60일 경제 실험은 비교 자료이며 최신 성장의 대체 실행 경로가 아닙니다.</p>
+</section><section class="part" id="part-4"><h2>4. 제안 카드 읽는 법</h2>
+<p><a href="/docs/planning/proposal-concept/idol.html">아이돌</a>, <a href="/docs/planning/proposal-concept/audition.html">오디션</a>, <a href="/docs/planning/proposal-concept/growth.html">건물 성장</a>, <a href="/docs/planning/proposal-concept/bad-data.html">악귀와 몬스</a>, <a href="/docs/planning/proposal-concept/mons-skill.html">몬스 스킬</a> 카드에 현재 구현·실행 링크를 보완했습니다. 카드의 콘셉트 그림과 실제 플레이 화면은 구분하며, 구형 설명용 수치를 실행 데이터로 사용하지 않습니다.</p>
+</section><section class="part" id="part-5"><h2>5. 전체 정리 원칙</h2>
+<p>대표 기획서의 앞부분에는 현재 실행 기준을 둡니다. 이전 상세 설계·작업 로그는 접힌 기록으로 보존하고, 공용 보고와 증거는 삭제하지 않습니다. 중복되는 성장 메뉴와 오래된 「시뮬 없음」 설명을 최신 메뉴로 모읍니다.</p>
+</section><section class="part" id="part-6"><h2>6. 아직 별도인 영역</h2>
+<p>출연권 대전·게릴라 공연·새 도시 진출·시즌·운영 경제는 각 기획서의 개발 상태를 유지합니다. 이벤트 게임도 기존 항목·데이터·코드를 유지합니다. 이번 연결은 전체 게임 완성이나 계정 서버 연동을 뜻하지 않습니다.</p>
+</section><section class="part" id="part-7"><h2>7. 확인 자료</h2>
+<p><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P105">진행 점검 P105</a> · <a href="/docs/planning/game-table-tool.html">전체 테이블</a> · <a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P86">공통 작성 규칙 P86</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/%EB%B3%B4%EA%B3%A0-20261015-10.md">이번 보고</a></p>
+</section><section class="part" id="part-8"><h2>8. 문서 정보와 변경 이력</h2>
+<p>2026년 10월 15일 지시10. 이전 전체 안내는 아래에 보존합니다. 검수 기록과 남은 일은 공용 보고에서 확인합니다.</p>
+</section><details class="previous-spec"><summary>이전 상세 설계와 결정 기록 · 10월 15일 정리 전</summary>
+<p>이 아래는 당시 설계·검토 기록입니다. 현재 실행 기준과 데이터 연결은 위 본문을 따릅니다.</p>
+<h1>P75 · 핵심제안 시스템 개발 · 전체 안내</h1>
+<p>상태:10/15 방어·건설1차 마감 반영 · 기존10/12 작성 규격 유지
+히스토리: 이전 안내 1건 · <a href="%EB%AA%A9%EC%B0%A8_%ED%9E%88%EC%8A%A4%ED%86%A0%EB%A6%AC_1007.md">P124 전체 안내 10/07 판</a></p>
+<h2>간략</h2>
+<p>기획서 툴 「핵심제안 시스템 개발」 탭은 <strong>바뀌어 가는 제안서를 바탕으로 만든 개발 기획서</strong>를 담습니다. 모든 대표 기획서는 <a href="%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/%EC%9E%91%EC%84%B1%EA%B7%9C%EC%B9%99.html">P86 작성 규칙</a>의 같은 장 이름 · 같은 순서(1 개요 → 7 개발 진행·검수 → 문서 정보·변경 이력)를 씁니다. 첫 장은 언제나 지금 제안서와 시뮬 기준이고, 이전 기획은 「이 콘텐츠의 자료 › 히스토리 · 이전 기획」에 있습니다. 시뮬에 들어간 값은 확정이고, 모노 이식 결과는 책갈피 S 문서에만 두고 여기서는 링크만 겁니다.</p>
+<h2>10월15일 방어·건설1차 마감</h2>
+<p>이번 마감은 나쁜 기운 디펜스·방어진지·건설시험 범위입니다. 다른 아이돌/경제/미니게임의 진행 상태를 완료로 바꾸지 않습니다.</p>
+<table>
+<thead>
+<tr>
+<th>범위</th>
+<th>현재 실행</th>
+<th>남은 경계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>건물 외형/시공</td>
+<td>9건물 30단계(본관 1 + 부속 2) 기준으로 재정비 · 밀착3동·전체복셀4.2초. P81/P106</td>
+<td>기존 무료 보드3단계 유지, 일반 경제 자동 연결/나머지15부지 별도</td>
+</tr>
+<tr>
+<td>방어/보스</td>
+<td>건물별 독립HP/보석·담당 분산/외곽길, 보스3체력구간·패턴/약화. P104/P138</td>
+<td>사용자 플레이 검수, 전조합 승률/기기 성능 확정 별도</td>
+</tr>
+</tbody>
+</table>
+<p><a href="/docs/planning/game-simulator.html?module=simulator_module_building">건설시험</a> · <a href="/docs/planning/game-simulator.html?module=simulator_module_bad_energy">방어시험</a> · <a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P138&amp;plan=planning_development_plan_bad_energy">P138 최신 통합 명세</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/%EB%B3%B4%EA%B3%A0-20261015-09.md">09 마감 보고</a></p>
+<h2>개발 콘텐츠</h2>
+<table>
+<thead>
+<tr>
+<th>콘텐츠</th>
+<th>문서</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P100&amp;plan=planning_development_plan_audition">오디션</a></td>
+<td>P100</td>
+<td>대표 기획서 · 기획 단계</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P96&amp;plan=planning_development_plan_mons">몬스와 악귀</a></td>
+<td>P96</td>
+<td>기본10종 · v04 성장·몬스별 카메라 연동</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P87&amp;plan=planning_development_plan_board">보드 기본 구성</a></td>
+<td>P87</td>
+<td>제안서 기준</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P74&amp;plan=planning_development_plan_dice">보드 주사위 구동</a></td>
+<td>P74</td>
+<td>기존 구동 자료</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P72&amp;plan=planning_development_plan_filler">필러 룰렛</a></td>
+<td>P72</td>
+<td>시안 · 임시 보상</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P108&amp;plan=planning_development_plan_fan_income">팬과 수익</a></td>
+<td>P108</td>
+<td>대표 기획서 · 기획 단계</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P98&amp;plan=planning_development_plan_casting">출연권 대전</a></td>
+<td>P98</td>
+<td>대표 기획서 · 기획 단계</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P102&amp;plan=planning_development_plan_guerrilla">게릴라 공연</a></td>
+<td>P102</td>
+<td>대표 기획서 · 기획 단계</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P81&amp;plan=planning_development_plan_building">보드 건물 유닛</a></td>
+<td>P81</td>
+<td>건설시험10단계/전체복셀1차 마감 · 무료 보드3단계 유지</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P106&amp;plan=planning_development_plan_building_growth">건물 성장 · 기능과 수익</a></td>
+<td>P106</td>
+<td>시각/방어시험10단계 구현 · 일반 성장경제는 기존 개발 범위</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P107&amp;plan=planning_development_plan_idol_ability">아이돌 능력</a></td>
+<td>P107</td>
+<td>대표 기획서 · 기획 단계</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P109&amp;plan=planning_development_plan_city_visit">새 도시 진출</a></td>
+<td>P109</td>
+<td>대표 기획서 · 기획 단계</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P104&amp;plan=planning_development_plan_bad_energy">나쁜 기운 디펜스</a></td>
+<td>P104</td>
+<td>방어·건설1차 구현 마감 · 사용자 플레이 검수/최종균형 별도</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P88&amp;plan=planning_development_plan_defense">[이벤트] 월드 디펜스</a></td>
+<td>P88</td>
+<td>이벤트 · 현재 v05 · 발동 미정</td>
+</tr>
+</tbody>
+</table>
+<h2>공용 툴</h2>
+<table>
+<thead>
+<tr>
+<th>툴</th>
+<th>문서</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P94&amp;plan=planning_development_plan_simulator">게임 시뮬레이터</a></td>
+<td>P94</td>
+<td>공용 실행</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P73&amp;plan=planning_development_plan_tables">전체 테이블</a></td>
+<td>P73</td>
+<td>공용 툴</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P110&amp;plan=planning_development_plan_core_balance">핵심제안 발란스</a></td>
+<td>P110</td>
+<td>공용 · 발란스 v01</td>
+</tr>
+</tbody>
+</table>
+<h2>안내</h2>
+<table>
+<thead>
+<tr>
+<th>안내</th>
+<th>문서</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P105&amp;plan=planning_development_plan_review">핵심제안 진행 점검</a></td>
+<td>P105</td>
+<td>10/15 방어·건설 마감 반영 · 타담당10/12 기록 보존</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P86&amp;plan=planning_development_plan_guide">공통 작성 규칙</a></td>
+<td>P86</td>
+<td>작성 기준</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P75&amp;plan=planning_development_plan_overview">전체 안내·툴 연결</a></td>
+<td>P75</td>
+<td>공통 안내</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P95&amp;plan=planning_development_plan_reference_battle_ai">참고 자료 · 전투·AI</a></td>
+<td>P95</td>
+<td>외부 레퍼런스</td>
+</tr>
+</tbody>
+</table>
+<h2>개발 기획서가 필요한 제안</h2>
+<table>
+<thead>
+<tr>
+<th>제안</th>
+<th>문서</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=PCDICEMD&amp;plan=planning_development_plan_todo_dice">배수 걸기(주사위 투자)</a></td>
+<td>PCDICEMD</td>
+<td>개발 기획서 필요 · 일부 진행</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=PCJACKMD&amp;plan=planning_development_plan_todo_jackpot">잭팟</a></td>
+<td>PCJACKMD</td>
+<td>개발 기획서 필요 · 일부 진행</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=PCGAUGEMD&amp;plan=planning_development_plan_todo_gauge">팬덤 게이지</a></td>
+<td>PCGAUGEMD</td>
+<td>개발 기획서 필요</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=PCECONOMYMD&amp;plan=planning_development_plan_todo_economy">게임 경제</a></td>
+<td>PCECONOMYMD</td>
+<td>개발 기획서 필요</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=PCITYMD&amp;plan=planning_development_plan_todo_city">도시</a></td>
+<td>PCITYMD</td>
+<td>개발 기획서 필요 · 일부 진행</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=PCCARDMD&amp;plan=planning_development_plan_todo_cards">카드</a></td>
+<td>PCCARDMD</td>
+<td>개발 기획서 필요</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=PCSEASONMD&amp;plan=planning_development_plan_todo_season">시즌</a></td>
+<td>PCSEASONMD</td>
+<td>개발 기획서 필요</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=PCFESTMD&amp;plan=planning_development_plan_todo_fest">월드 페스티벌</a></td>
+<td>PCFESTMD</td>
+<td>개발 기획서 필요</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=PCSONG&amp;plan=planning_development_plan_todo_song">음원 · 영상</a></td>
+<td>PCSONG</td>
+<td>개발 기획서 필요</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P96&amp;plan=planning_development_plan_todo_mons_skill">몬스 스킬</a></td>
+<td>P96</td>
+<td>2번 「몬스와 악귀」로 합침</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=PCPAYMD&amp;plan=planning_development_plan_todo_pay">유료화</a></td>
+<td>PCPAYMD</td>
+<td>개발 기획서 필요</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=PCPROMO&amp;plan=planning_development_plan_todo_promo">홍보(리드 제너레이션)</a></td>
+<td>PCPROMO</td>
+<td>개발 기획서 필요</td>
+</tr>
+</tbody>
+</table>
+<h2>읽는 법</h2>
+<ol>
+<li>왼쪽에서 콘텐츠를 고르면 대표 기획서가 열립니다.</li>
+<li>위 카드의 단추: 시뮬레이터(P94) · 사용 CSV · 전체 테이블(P73) · 리소스 툴.</li>
+<li>「이 콘텐츠의 자료」 목록: 관련 시스템 · 리소스 · 툴 · 표 · 사용 CSV · <strong>히스토리 · 이전 기획</strong> · 작성 예시.</li>
+<li>숫자는 60일 시뮬(이식 경제 · <a href="/docs/planning/balance-tool.html">발란스 툴</a>)이 기준이고, 디펜스 · 오디션처럼 자기 시뮬이 있는 콘텐츠는 그 시뮬 값이 기준입니다.</li>
+</ol>
+<h2>문서 정보·변경 이력</h2>
+<ul>
+<li>
+<p>P75 · 전체 안내 · HTML <a href="%EB%AA%A9%EC%B0%A8.html">목차.html</a> · 짝 MD 이 문서.</p>
+</li>
+<li>
+<p>10/07 · 단이(codex) · 전체 안내 v01 · v02 → <a href="%EB%AA%A9%EC%B0%A8_%ED%9E%88%EC%8A%A4%ED%86%A0%EB%A6%AC_1007.md">P124 히스토리</a>.</p>
+</li>
+<li>
+<p>10/12 · 클로드 · 규격 정리 · 탭 목록을 <code>data/planning_development_plan.csv</code>에서 다시 만듦.</p>
+</li>
+<li>
+<p>10/15 · codex(단이) · 지시09: 방어·건설 범위1차 마감/실제 실행·후속 경계를 갱신. 다른 개발 콘텐츠 상태는 변경하지 않음.</p>
+</li>
+</ul>
+</details>
+</main></body></html>
+

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>카드 디자인 가이드</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8;
+          --g1:#a7adb5; --g2:#8ec5e8; --g3:#8fd19e; --g4:#b9a3e3; --g5:#e2c15a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.35 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .row { display:flex; flex-wrap:wrap; gap:28px; padding:16px 24px 8px; align-items:flex-start; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  /* 카드 한 장 260×364 (5:7) */
+  .card { position:relative; width:260px; height:364px; border-radius:14px; border:8px solid var(--g1); background:var(--box); overflow:hidden; }
+  .ov { background:rgba(255,255,255,.88); border-radius:6px; }
+  .card .a { position:absolute; }
+  .top { left:6px; right:6px; top:6px; height:30px; padding:0 8px; display:flex; justify-content:space-between; align-items:center; }
+  .top b { font-size:15px; white-space:nowrap; }
+  .art { left:0; right:0; top:0; bottom:0; padding-bottom:120px; background:repeating-linear-gradient(45deg,#e6e8eb 0 10px,#dcdfe3 10px 20px); display:flex; align-items:center; justify-content:center; color:var(--soft); text-align:center; }
+  .who { left:6px; top:196px; height:24px; padding:0 8px; display:flex; align-items:center; gap:6px; font-size:12px; font-weight:600; }
+  .who i { width:18px; height:18px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); flex:none; }
+  .eff { left:6px; right:6px; top:224px; height:82px; border:1.5px solid var(--ln); border-radius:6px; padding:4px 8px; display:flex; flex-direction:column; justify-content:space-around; }
+  .eff span { display:flex; justify-content:space-between; font-size:12px; }
+  .eff b { white-space:nowrap; }
+  .bot { left:6px; right:6px; top:312px; height:30px; padding:0 8px; display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--soft); gap:6px; }
+  .bot .pk { width:22px; height:16px; border:1.5px solid var(--ln); border-radius:3px; background:var(--box); flex:none; }
+  .bot .fl { flex:1; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .holo { background:linear-gradient(135deg,#fff 0%,#f6efd6 40%,#fff 60%,#efe6c8 100%); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:260px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:3px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  .sw { display:flex; gap:10px; padding:4px 24px 0; flex-wrap:wrap; }
+  .sw span { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:600; }
+  .sw i { width:28px; height:18px; border-radius:4px; border:4px solid; background:#fff; }
+  .rule { margin:8px 24px 32px; padding:12px 16px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; max-width:1160px; }
+  .rule ol { margin:4px 0 0; padding-left:20px; }
+  .rule li { padding:2px 0; }
+</style>
+</head>
+<body>
+<h1>카드 디자인 가이드 · 와이어프레임 1차</h1>
+<p class="flow">카드 한 장 = 꽉 찬 그림 한 장 + 그 위에 겹치는 이름 · 능력 판. 그림 안에 별 · 이름 · 번호 · 테두리를 넣지 않음(카드 기획서 5장) · 네 종류는 틀이 같고 ④ 효과 칸만 다름</p>
+
+<div class="sw">
+  <span><i style="border-color:var(--g1)"></i>★1 회색</span>
+  <span><i style="border-color:var(--g2)"></i>★2 하늘</span>
+  <span><i style="border-color:var(--g3)"></i>★3 초록</span>
+  <span><i style="border-color:var(--g4)"></i>★4 보라</span>
+  <span><i style="border-color:var(--g5)"></i>★5 금색 + 반짝 바탕</span>
+</div>
+
+<div class="row" id="cards"></div>
+
+<div class="rule">
+  <b>그림 가이드</b>
+  <ol>
+    <li><b>그림은 카드 전체</b> · 5:7 카드 한 면을 다 채워 그림. 이름 · ★ · 능력 칸은 화면이 그 위에 반투명 판으로 겹쳐 올림. 그림에 글자 · 별 · 테두리는 넣지 않음</li>
+    <li><b>얼굴 자리</b> · 위 판(이름)과 아래 판(능력) 사이, 카드 위쪽 ½ 안에 얼굴 · 주요 동작이 오게 구도를 잡음</li>
+    <li><b>아이돌</b> · 그 아이돌이 카드 이름의 장면을 하는 모습(보컬 기초 = 연습실에서 발성). 등급이 오를수록 무대가 커짐 · 연습실 → 쇼케이스 → 음방 → 콘서트 → 월드 투어</li>
+    <li><b>스태프 · 기획사</b> · 그 사람이 일하는 장면(코치가 레슨, 매니저가 일정 정리). 얼굴은 명함과 같은 사람</li>
+    <li><b>팬클럽 회장</b> · 회장과 팬들(손편지 · 응원봉 · 팬 콘서트). 등급이 오를수록 팬 수가 많아짐</li>
+    <li><b>같은 사람 12장은 한 벌</b> · 색감 · 배경 톤을 맞춰 12장을 모으면 한 세트로 보이게. ★5 한 장만 반짝 바탕</li>
+    <li><b>없는 카드</b> · 같은 틀에 그림만 흐리게(실루엣), 효과 칸은 그대로 보여 줌</li>
+  </ol>
+</div>
+
+<script>
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const card = c => `<div class="card${c.g === 5 ? " holo" : ""}" style="border-color:var(--g${c.g})">
+  <div class="a art">${c.art}</div>
+  <div class="a top ov"><b>${c.name}</b><span class="val" style="font-weight:700">${"★".repeat(c.g)}</span></div>
+  <div class="a who ov"><i></i>${c.who}</div>
+  <div class="a eff ov">${c.eff.map(([k, v]) => `<span><span>${k}</span><b>${v}</b></span>`).join("")}</div>
+  <div class="a bot ov"><span>${c.no}/12</span><span class="fl">${c.fl}</span><i class="pk" title="얻는 팩"></i></div>
+  ${c.marks || ""}</div>`;
+
+const CARDS = [
+  { cap: "아이돌 카드", g: 1, name: "보컬 기초", art: "연습실에서<br>발성하는 그 아이돌", who: "예명 · 아이돌",
+    eff: [["음정", "+1,000"], ["발성", "+1,000"]], no: "01", fl: "첫 음을 잡는 날",
+    marks: n(1, -26, 8) + n(2, -26, 100) + n(3, -26, 196) + n(4, -26, 250) + n(5, -26, 316),
+    notes: ["카드 이름 · ★ (테두리 색 = 등급)", "그림 = 카드 전체 바탕 · 글자 없이 그림만", "누구의 카드 · 종류 아이콘", "능력 칸 · 그림 위에 반투명으로 겹침 · 올리는 세부 능력 + 값", "번호 n/12 · 한 줄 글 · 얻는 팩 아이콘"] },
+  { cap: "스태프 카드 · 능력 6자리", g: 3, name: "카드 이름", art: "코치가<br>레슨하는 장면", who: "이름 · 보컬·랩 코치",
+    eff: [["딕션", "+00"], ["발성", "+00"], ["플로우", "+00"]], no: "08", fl: "한 줄 글",
+    notes: ["효과 칸 · 그 자리가 맡은 세부 능력 + 값", "세부 하나 900을 ★ 배수로 나눈 값"] },
+  { cap: "스태프 카드 · 기획사 3자리", g: 2, name: "컨디션 케어", art: "매니저가<br>컨디션 챙기는 장면", who: "이름 · 매니지먼트",
+    eff: [["컨디션 회복", "+2.00%"], ["라포 획득", "+2.82%"]], no: "05", fl: "한 줄 글",
+    notes: ["효과 칸 · 스케줄 · 컨디션 · 라포 · 팬 효과 %", "앞으로 얻는 양에만 붙음"] },
+  { cap: "팬클럽 회장 카드", g: 5, name: "레전드 팬덤", art: "회장과<br>가득 찬 팬들", who: "이름 · 팬클럽 회장",
+    eff: [["팬 증가", "+3.77%"], ["팬 돈", "+2.85%"], ["팬 상한", "+12.00%"]], no: "12", fl: "한 줄 글",
+    notes: ["효과 칸 · 팬 증가 · 팬 돈 · 악개 감소 · 팬 상한", "★5는 금색 테두리 + 반짝 바탕"] },
+];
+document.getElementById("cards").innerHTML = CARDS.map(c =>
+  `<div><p class="cap">${c.cap}</p>${card(c)}<ul class="notes">${c.notes.map((t, i) => `<li><b>${c.marks ? i + 1 : "·"}</b><span>${t}</span></li>`).join("")}</ul></div>`).join("");
+</script>
+</body>
+</html>

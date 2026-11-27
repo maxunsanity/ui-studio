@@ -1,0 +1,534 @@
+{
+  "checkedAt": "2026-11-18T16:57:03+09:00",
+  "method": "Read-only saved native JSON and asset integrity audit. This is not browser/runtime/visual verification.",
+  "revision": 194,
+  "screens": 14,
+  "parts": 573,
+  "transitions": 42,
+  "designBytes": 453798,
+  "designWithinLimit": true,
+  "assetLimitBytes": 300000,
+  "uniqueImportedAssets": 116,
+  "maxImportedAssetBytes": 284510,
+  "missingAssets": [],
+  "oversizeAssets": [],
+  "hashMismatches": [],
+  "invalidEdges": [],
+  "invalidParents": [],
+  "productionManifestRoles": 168,
+  "usedRoles": [
+    "area-card",
+    "area-card-locked",
+    "area-progress",
+    "area-progress-fill",
+    "avatar-mummy",
+    "avatar-panda",
+    "avatar-person",
+    "avatar-v003",
+    "bar-blue",
+    "booster-disco",
+    "booster-rocket",
+    "booster-tnt",
+    "button-blue-normal",
+    "button-blue-pressed",
+    "button-green-normal",
+    "button-green-pressed",
+    "button-purple-normal",
+    "button-purple-pressed",
+    "castle-area",
+    "chat-notice-v002",
+    "circle-green",
+    "close-red",
+    "coin-card",
+    "coin-pile",
+    "coin-v002",
+    "collection-card-v002",
+    "collection-trio",
+    "cream-card",
+    "garden-locked",
+    "gear-v002",
+    "goal-crate",
+    "goal-envelope",
+    "goal-plate",
+    "gold-disc",
+    "half-green-normal",
+    "half-green-pressed",
+    "half-orange-normal",
+    "half-orange-pressed",
+    "half-red-normal",
+    "half-red-pressed",
+    "heart-v002",
+    "king-cup",
+    "king-portrait",
+    "lock",
+    "main-green-normal",
+    "main-green-pressed",
+    "main-orange-normal",
+    "main-orange-pressed",
+    "message-icon",
+    "mini-puzzle",
+    "nav-active",
+    "nav-areas",
+    "nav-bar",
+    "nav-castle",
+    "nav-clear",
+    "nav-collection",
+    "nav-team",
+    "nav-trophy",
+    "page-header",
+    "panel",
+    "panel-tall",
+    "pill-cream",
+    "price-green-normal",
+    "price-green-pressed",
+    "price-purple-normal",
+    "profile-cream-v002",
+    "profile-info-v002",
+    "profile-records-v002",
+    "puzzle-still",
+    "rank-green-row",
+    "rank-tabs-v002",
+    "record-card",
+    "record-cards",
+    "record-target",
+    "request-card-v002",
+    "request-header",
+    "request-progress",
+    "request-progress-fill",
+    "reward-arrow",
+    "reward-cannon",
+    "reward-hammer",
+    "reward-jester",
+    "ribbon",
+    "room-v002",
+    "row-cream-v002",
+    "row-green-normal",
+    "row-green-pressed",
+    "row-slate-v002",
+    "settings-actions-v002",
+    "settings-toggles-v002",
+    "shop-special-v002",
+    "slate-bg",
+    "social-blue-normal",
+    "social-blue-pressed",
+    "square-green-normal",
+    "square-green-pressed",
+    "square-red-normal",
+    "square-red-pressed",
+    "star-v002",
+    "team-heart-shield",
+    "throne-room",
+    "toggle-off",
+    "toggle-on",
+    "tool-arrow",
+    "tool-cannon",
+    "tool-hammer",
+    "tool-jester",
+    "view-green-normal",
+    "view-green-pressed",
+    "view-orange-normal",
+    "view-orange-pressed",
+    "wide-blue-normal",
+    "wide-blue-pressed",
+    "wide-green-normal",
+    "wide-green-pressed",
+    "wide-red-normal"
+  ],
+  "unmappedNativeAssets": [],
+  "screenCounts": [
+    {
+      "name": "Page_RoyalMatch_Lobby",
+      "parts": 52
+    },
+    {
+      "name": "Popup_RoyalMatch_Level",
+      "parts": 30
+    },
+    {
+      "name": "Page_RoyalMatch_Puzzle",
+      "parts": 30
+    },
+    {
+      "name": "Popup_RoyalMatch_Stars",
+      "parts": 13
+    },
+    {
+      "name": "Popup_RoyalMatch_KingsCup",
+      "parts": 13
+    },
+    {
+      "name": "Popup_RoyalMatch_Profile",
+      "parts": 33
+    },
+    {
+      "name": "Popup_RoyalMatch_Lives",
+      "parts": 44
+    },
+    {
+      "name": "Page_RoyalMatch_Rankings",
+      "parts": 59
+    },
+    {
+      "name": "Page_RoyalMatch_Areas",
+      "parts": 61
+    },
+    {
+      "name": "Page_RoyalMatch_Team",
+      "parts": 69
+    },
+    {
+      "name": "Page_RoyalMatch_Collection",
+      "parts": 32
+    },
+    {
+      "name": "Popup_RoyalMatch_Settings",
+      "parts": 30
+    },
+    {
+      "name": "Popup_RoyalMatch_Shop",
+      "parts": 74
+    },
+    {
+      "name": "Popup_RoyalMatch_Welcome",
+      "parts": 33
+    }
+  ],
+  "actualConnections": [
+    {
+      "id": "edge-df95e641-7a54-4255-80d7-5f47d67bba20",
+      "source": "Popup_RoyalMatch_Level",
+      "input": "Btn_Royal_Level_Close",
+      "action": "close",
+      "target": null,
+      "label": "레벨 준비 닫기"
+    },
+    {
+      "id": "edge-0b5f0f7a-322c-46cc-ba98-fd26645bd3cc",
+      "source": "Popup_RoyalMatch_Level",
+      "input": "Btn_Royal_Level_Play",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Puzzle",
+      "label": "플레이 → 퍼즐 스틸"
+    },
+    {
+      "id": "edge-071ff319-f7c9-44d1-b242-dea542c6d4d4",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_Level",
+      "action": "open",
+      "target": "Popup_RoyalMatch_Level",
+      "label": "레벨25 준비 열기"
+    },
+    {
+      "id": "element-073a82bc-eb9b-4570-8e9c-836d472c4e1c",
+      "source": "Popup_RoyalMatch_Stars",
+      "input": "Btn_Royal_Stars_Continue",
+      "action": "close",
+      "target": null,
+      "label": "별 안내 닫기"
+    },
+    {
+      "id": "edge-b1f8d1a3-5d10-4b4a-976c-060c942d3b1f",
+      "source": "Popup_RoyalMatch_Stars",
+      "input": "Btn_Royal_Stars_Close",
+      "action": "close",
+      "target": null,
+      "label": "별 안내 닫기"
+    },
+    {
+      "id": "edge-e56dc5a4-ebaf-43b3-aa52-3529101571c9",
+      "source": "Popup_RoyalMatch_KingsCup",
+      "input": "Btn_Royal_KingsCup_Close",
+      "action": "close",
+      "target": null,
+      "label": "킹스컵 닫기"
+    },
+    {
+      "id": "element-3f6c23af-e445-47ab-8171-331843b2062d",
+      "source": "Popup_RoyalMatch_Profile",
+      "input": "Btn_Royal_Profile_Close",
+      "action": "close",
+      "target": null,
+      "label": "프로필 닫기"
+    },
+    {
+      "id": "element-76d04b26-afea-47f8-a4cc-c046d8bfd163",
+      "source": "Popup_RoyalMatch_Lives",
+      "input": "Btn_Royal_Lives_Close",
+      "action": "close",
+      "target": null,
+      "label": "무료 생명 닫기"
+    },
+    {
+      "id": "edge-875a74a0-9b8e-4bc7-8e41-57d9d85116bd",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_Nav_0",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Areas",
+      "label": "하단 Areas 이동"
+    },
+    {
+      "id": "edge-a2159bcd-741d-4cfb-a44a-0012c0e2f870",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_Nav_1",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Rankings",
+      "label": "하단 Rankings 이동"
+    },
+    {
+      "id": "edge-b2095410-dac2-4184-bf9a-0e3416adb440",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_Nav_2",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Lobby",
+      "label": "하단 Lobby 이동"
+    },
+    {
+      "id": "edge-7cf8403f-8490-47d0-a198-5ad68e0e4a7a",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_Nav_3",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Team",
+      "label": "하단 Team 이동"
+    },
+    {
+      "id": "edge-a5bfa36c-efec-408d-8780-63d2c09d6ba4",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_Nav_4",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Collection",
+      "label": "하단 Collection 이동"
+    },
+    {
+      "id": "edge-4cd40c9f-d58b-4edb-baa5-4f2a14003da3",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_Lives",
+      "action": "open",
+      "target": "Popup_RoyalMatch_Lives",
+      "label": "Lives 열기"
+    },
+    {
+      "id": "edge-99dbebf8-c997-4b8e-b1e6-62801e15b57b",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_Stars",
+      "action": "open",
+      "target": "Popup_RoyalMatch_Stars",
+      "label": "Stars 열기"
+    },
+    {
+      "id": "edge-f718b4d6-fa6c-45f6-bb07-92ebe1bad95a",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_Profile",
+      "action": "open",
+      "target": "Popup_RoyalMatch_Profile",
+      "label": "Profile 열기"
+    },
+    {
+      "id": "edge-64d6d919-97d7-4a12-95d3-5a6d9aa318e3",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_KingsCup",
+      "action": "open",
+      "target": "Popup_RoyalMatch_KingsCup",
+      "label": "KingsCup 열기"
+    },
+    {
+      "id": "element-2a3c3fd5-df32-44d9-8b58-84c18cc4a6cd",
+      "source": "Page_RoyalMatch_Rankings",
+      "input": "Btn_Royal_Nav_0",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Areas",
+      "label": "하단 Areas 이동"
+    },
+    {
+      "id": "element-ceaefde6-0b8a-4964-8250-37a8b3cd485c",
+      "source": "Page_RoyalMatch_Rankings",
+      "input": "Btn_Royal_Nav_1",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Rankings",
+      "label": "하단 Rankings 이동"
+    },
+    {
+      "id": "element-5e965dab-9f57-4cd4-a129-d00ed227a3ef",
+      "source": "Page_RoyalMatch_Rankings",
+      "input": "Btn_Royal_Nav_2",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Lobby",
+      "label": "하단 Lobby 이동"
+    },
+    {
+      "id": "element-115770a5-d623-43b9-aecd-bf1e6b339d21",
+      "source": "Page_RoyalMatch_Rankings",
+      "input": "Btn_Royal_Nav_3",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Team",
+      "label": "하단 Team 이동"
+    },
+    {
+      "id": "element-6ab784d4-3b94-4573-8696-3ebb6d4171d1",
+      "source": "Page_RoyalMatch_Rankings",
+      "input": "Btn_Royal_Nav_4",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Collection",
+      "label": "하단 Collection 이동"
+    },
+    {
+      "id": "element-6b27a378-f6ea-4875-9d32-36855474ff83",
+      "source": "Page_RoyalMatch_Areas",
+      "input": "Btn_Royal_Nav_0",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Areas",
+      "label": "하단 Areas 이동"
+    },
+    {
+      "id": "element-46e944c3-2d4e-4901-a7f1-7286b6ff67db",
+      "source": "Page_RoyalMatch_Areas",
+      "input": "Btn_Royal_Nav_1",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Rankings",
+      "label": "하단 Rankings 이동"
+    },
+    {
+      "id": "element-aac57d33-cb27-4472-af29-3b9cd629917c",
+      "source": "Page_RoyalMatch_Areas",
+      "input": "Btn_Royal_Nav_2",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Lobby",
+      "label": "하단 Lobby 이동"
+    },
+    {
+      "id": "element-2f910d0a-6100-461e-9220-be78a63e15c5",
+      "source": "Page_RoyalMatch_Areas",
+      "input": "Btn_Royal_Nav_3",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Team",
+      "label": "하단 Team 이동"
+    },
+    {
+      "id": "element-d7752a6a-633e-4b32-b3fc-f3d4eef7dc9d",
+      "source": "Page_RoyalMatch_Areas",
+      "input": "Btn_Royal_Nav_4",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Collection",
+      "label": "하단 Collection 이동"
+    },
+    {
+      "id": "element-b204532a-2364-4123-8e0e-21af8e46b2db",
+      "source": "Page_RoyalMatch_Team",
+      "input": "Btn_Royal_Nav_0",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Areas",
+      "label": "하단 Areas 이동"
+    },
+    {
+      "id": "element-f43a9de9-42d0-45e1-9cc7-6c9b434a3b82",
+      "source": "Page_RoyalMatch_Team",
+      "input": "Btn_Royal_Nav_1",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Rankings",
+      "label": "하단 Rankings 이동"
+    },
+    {
+      "id": "element-a924eb75-194d-42c9-ac44-19a391a99dc6",
+      "source": "Page_RoyalMatch_Team",
+      "input": "Btn_Royal_Nav_2",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Lobby",
+      "label": "하단 Lobby 이동"
+    },
+    {
+      "id": "element-acb6b0e5-9f25-4b18-94d7-cc28c3aa9fc6",
+      "source": "Page_RoyalMatch_Team",
+      "input": "Btn_Royal_Nav_3",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Team",
+      "label": "하단 Team 이동"
+    },
+    {
+      "id": "element-3626c68d-9bf0-4e93-b691-63cfbf250d77",
+      "source": "Page_RoyalMatch_Team",
+      "input": "Btn_Royal_Nav_4",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Collection",
+      "label": "하단 Collection 이동"
+    },
+    {
+      "id": "element-07f49c13-2e1e-4f3e-b8af-3c1dc4e42292",
+      "source": "Page_RoyalMatch_Collection",
+      "input": "Btn_Royal_Nav_0",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Areas",
+      "label": "하단 Areas 이동"
+    },
+    {
+      "id": "element-d0dec2d9-5d99-4d87-94e8-1d83e10cf110",
+      "source": "Page_RoyalMatch_Collection",
+      "input": "Btn_Royal_Nav_1",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Rankings",
+      "label": "하단 Rankings 이동"
+    },
+    {
+      "id": "element-aaf7695f-4738-48ec-80d3-60caca2fb1ad",
+      "source": "Page_RoyalMatch_Collection",
+      "input": "Btn_Royal_Nav_2",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Lobby",
+      "label": "하단 Lobby 이동"
+    },
+    {
+      "id": "element-cf51c9a6-0733-46da-9903-7d01247548dc",
+      "source": "Page_RoyalMatch_Collection",
+      "input": "Btn_Royal_Nav_3",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Team",
+      "label": "하단 Team 이동"
+    },
+    {
+      "id": "element-153965be-dc9f-44d9-b285-e9ae61383c3c",
+      "source": "Page_RoyalMatch_Collection",
+      "input": "Btn_Royal_Nav_4",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Collection",
+      "label": "하단 Collection 이동"
+    },
+    {
+      "id": "element-0b77dbc6-bdcd-42a7-9997-d56da7678da2",
+      "source": "Popup_RoyalMatch_Settings",
+      "input": "Btn_Royal_Settings_Close",
+      "action": "close",
+      "target": null,
+      "label": "설정 닫기"
+    },
+    {
+      "id": "element-ed3e0fcf-1536-4118-ab8f-45a053495c70",
+      "source": "Popup_RoyalMatch_Shop",
+      "input": "Btn_Royal_Shop_Close",
+      "action": "close",
+      "target": null,
+      "label": "상점 닫기"
+    },
+    {
+      "id": "element-3578fceb-52f2-45ca-b814-744719b53dc0",
+      "source": "Popup_RoyalMatch_Welcome",
+      "input": "Btn_Royal_Welcome_Collect",
+      "action": "navigate",
+      "target": "Page_RoyalMatch_Lobby",
+      "label": "복귀 선물 → 로비 · 실제 지급 없음"
+    },
+    {
+      "id": "edge-26ae89e6-9822-413c-8938-311ca8a3cdc7",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_Coins",
+      "action": "open",
+      "target": "Popup_RoyalMatch_Shop",
+      "label": "상점 열기"
+    },
+    {
+      "id": "edge-23b7098c-57da-4d77-befa-1ab0fdf13216",
+      "source": "Page_RoyalMatch_Lobby",
+      "input": "Btn_Royal_Settings",
+      "action": "open",
+      "target": "Popup_RoyalMatch_Settings",
+      "label": "설정 열기"
+    }
+  ]
+}

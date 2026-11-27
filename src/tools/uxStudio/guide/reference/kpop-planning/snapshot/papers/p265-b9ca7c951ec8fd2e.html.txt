@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>주간 페스티벌 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  .kv { display:flex; justify-content:space-between; align-items:center; font-size:12px; }
+</style>
+<style>
+  .paper { position:absolute; border:1.5px solid var(--ln); border-radius:6px; background:var(--box); }
+  .bar { position:absolute; height:8px; border-radius:4px; background:var(--dim); }
+  .inp { position:absolute; border:2px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; padding:0 10px; font-size:15px; font-weight:700; }
+  .kb { position:absolute; left:0; right:0; bottom:0; height:250px; background:var(--dim); border-top:1.5px solid var(--ln); display:flex; align-items:center; justify-content:center; color:var(--soft); }
+</style>
+<style>
+  .rk { position:absolute; left:16px; width:354px; height:40px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; gap:8px; padding:0 10px; font-size:12px; }
+  .rk.me { border-width:2.5px; }
+  .rk .no { width:22px; font-weight:700; font-size:14px; }
+  .rk .fc { width:26px; height:26px; border-radius:50%; background:var(--dim); border:1.5px solid var(--ln); flex:none; }
+  .rk .gr { flex:1; }
+  .lane { position:absolute; left:16px; width:354px; height:46px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); }
+</style>
+</head>
+<body>
+<h1>주간 페스티벌 와이어프레임 · 2차 (게임 시뮬레이터 흐름 기준 · 레이싱 = 시티 투어 3D)</h1>
+<p class="flow">⓪ HUD 페스티벌 줄 3상태 → ① 신청 · 앨범 고르기(①-1 앨범 없음) → ② 신청 완료 → 7일째 ③ 혜택 진행 중 → 「레이싱 입장」 ④ 시티 투어 입장 → ④-1 차량 → ④-2 급유(차고) → ④-3 3D 레이스 → ④-4 시상식 · 「기록 보기」 ⑤ 주간 진행 · 레이싱 기록</p>
+<div class="rules">
+  <b>기준 = 게임 시뮬레이터</b>(현중 11/24 「시뮬 기준 다시」): 주간 페스티벌 = 1~8주 · <b>주 시작부터 신청</b> · 내 발매 앨범 한 곡 골라 개인 출전 → 「주간 페스티벌 신청」 → 신청 완료(보드로 가도 유지) · <b>7일째 하루 혜택</b>(늦게 신청하면 마감까지) · <b>레이싱 = 시티 투어 3D 레이스</b>(차고 · 차량 선택 → 직접 급유 → 연료 있는 동안 자동 주행 · 10바퀴 · 5팀 → 시상식 · 받기) · START 혜택은 자동 · 앨범 없으면 「앨범 만들기」 (`festival_panel_ui.json` weekly* · `weekly-festival.mjs` · `balance-festival-view`)<br>
+  · <b>한 바퀴 보상과 연결</b>: 혜택 날 START 통과 1회당 = 앨범 차트 보상 + 모의 순위 혜택(1위 돈 500 · 팬 20 … 5위 돈 100 · 팬 4 · 시험값) · 굴림마다 연료(앨범 재화) 2개 → 시티 투어에서 급유 · 1개 = ¼바퀴 (`event/cityTour/data/racing3d*.json`)<br>
+  · <b>정할 것</b>: 무리 크기(밸런스 표 5명 vs 런타임 weeklyZoneSize 100) · 주간 끝 결과 창(시뮬에 없음) · 크루 출전은 크루 탭(크루장만 · 「크루 출전 앨범을 골라 주세요」)
+</div>
+<div class="row" id="screens"></div>
+<script>
+const n = (k, x, y) => `<div class="n" style="left:${x}px;top:${y}px">${k}</div>`;
+const board = (t = "보드 · HUD") => `<div class="b off" style="left:0;top:0;width:386px;height:840px;border:none;border-radius:0;align-items:flex-start;padding-top:330px"><span class="sub">${t}</span></div>`;
+const topBar = (title, time) => `
+  <div class="b" style="left:10px;top:10px;width:40px;height:40px;font-size:18px">‹</div>
+  <div class="a val" style="left:60px;top:20px;font-size:16px">${title}</div>
+  <div class="b" style="left:226px;top:14px;width:150px;height:32px"><span style="font-size:12px">◷ ${time}</span></div>
+  <div class="line" style="top:60px"></div>`;
+const album = (y, name, sub, sel, play = true) => `
+  <div class="b" style="left:16px;top:${y}px;width:354px;height:72px;justify-content:flex-start;gap:12px;padding:0 10px;${sel ? "border-width:2.5px" : ""}">
+    <i class="pill" style="width:20px;height:20px;padding:0;flex:none;${sel ? "background:var(--ln)" : ""}"></i>
+    <div class="b off" style="position:static;width:52px;height:52px;flex:none"><span class="sub">재킷</span></div>
+    <div style="text-align:left;flex:1"><div class="val" style="font-size:14px">${name}</div><div class="sub">${sub}</div></div>
+    ${play ? `<span class="pill" style="font-size:11px;padding:2px 6px">▶ 짧게 감상</span>` : ""}</div>`;
+const hudRow = (y, name, time, val, btn, off) => `
+  <div class="b" style="left:40px;top:${y}px;width:306px;height:44px;justify-content:flex-start;gap:8px;padding:0 8px">
+    <i class="pill" style="width:26px;height:26px;padding:0;border-radius:6px"></i>
+    <div style="text-align:left;flex:1"><div class="val" style="font-size:12px">${name}</div><div class="sub">◷ ${time}</div></div>
+    <span class="val" style="font-size:12px">${val}</span>
+    <span class="pill${off ? " off" : ""}" style="font-size:12px;padding:2px 8px">${btn}</span></div>`;
+const action = (items) => `<div class="line" style="top:700px"></div>` + items.map(([t, x, w, main]) => `<div class="b" style="left:${x}px;top:716px;width:${w}px;height:56px;${main ? "border-width:2.5px" : ""}"><span class="val" style="font-size:15px">${t}</span></div>`).join("");
+const info = (y, h, title, lines) => `<div class="b" style="left:16px;top:${y}px;width:354px;height:${h}px;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:6px;padding:12px 14px;text-align:left"><span class="val" style="font-size:13px">${title}</span>${lines.map(l => `<span style="font-size:12px">${l}</span>`).join("")}</div>`;
+
+const steps = (k) => `<div class="a" style="left:16px;top:70px;width:354px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px">${["차량", "급유", "레이스", "시상"].map((t, i) => `<div class="b" style="position:static;height:30px;${i === k ? "border-width:2.5px;font-weight:700" : i < k ? "" : "color:var(--soft)"}"><span style="font-size:12px">${i + 1} ${t}</span></div>`).join("")}</div>`;
+
+const SCREENS = [
+  { cap: "⓪ HUD 페스티벌 줄 · 3상태", html: board("보드 · HUD (앨범 · 페스티벌 상자의 아래 줄만 크게)") + `
+      <div class="a sub" style="left:40px;top:70px;font-size:12px">ⓐ 신청 전 (주 시작 ~ 마감)</div>
+      ${hudRow(90, "주간 페스티벌", "혜택까지 5일 03:10", "", "신청")}
+      <div class="a sub" style="left:40px;top:160px;font-size:12px">ⓑ 신청 완료 · 혜택 전</div>
+      ${hudRow(180, "주간 페스티벌 · 신청 완료", "혜택까지 2일 03:10", "⛽ 0", "레이스")}
+      <div class="a sub" style="left:40px;top:250px;font-size:12px">ⓒ 혜택 진행 중 (7일째)</div>
+      ${hudRow(270, "주간 페스티벌 · 2/5위", "남음 05:42:10", "⛽ 64", "레이스")}
+      ${n(1, 16, 100)}${n(2, 16, 190)}${n(3, 16, 280)}`,
+    notes: ["신청 전: 7일째 혜택까지 남은 시간 · 「신청」 = ① 앨범 고르기", "신청 완료: 줄 = ② 신청 완료 화면 · 「레이스」 = ④ 시티 투어 입장(혜택 전이면 연료 0)", "혜택 중: 모의 순위 · 연료 · 「레이스」 = ④ · 페스티벌 아닌 주(9주 월드 · 시즌 사이)는 기존 HUD 표 그대로"] },
+
+  { cap: "① 신청 · 앨범 고르기", html: topBar("주간 페스티벌", "혜택까지 5일 03:10") + `
+      <div class="a sub" style="left:16px;top:74px;font-size:12px">개인 출전 · 내 앨범 한 곡</div>
+      <div class="a val" style="left:16px;top:94px;font-size:15px">내 발매 앨범을 선택해 주세요</div>` +
+      album(128, "앨범 이름 A", "차트 12위 · 발매 3일째", true) + album(210, "앨범 이름 B", "차트 끝 · 최고 8위", false) + album(292, "앨범 이름 C", "차트 끝 · 최고 31위", false) +
+      info(390, 96, "신청하면", ["· 이번 주 7일째 하루 동안 혜택이 열려요", "· 그날 보드를 굴려 연료를 모으고 시티 투어에서 달려요"]) +
+      action([["주간 페스티벌 신청", 16, 354, true]]) + `
+      ${n(1, 340, 64)}${n(2, 6, 140)}${n(3, 300, 120)}${n(4, 6, 400)}${n(5, 6, 722)}`,
+    notes: ["남은 시간 = 7일째 혜택 시작까지 · 신청은 주 시작부터 마감까지", "내 발매 앨범 목록 · 하나만 고름(라디오) · 처음엔 차트 중인 앨범이 골라져 있음(제안)", "짧게 감상 · 음악 앱으로 더 듣기", "신청 안내 2줄", "신청 → ② 신청 완료 · 확인 창 없음"] },
+
+  { cap: "①-1 신청할 앨범 없음", html: topBar("주간 페스티벌", "혜택까지 5일 03:10") + `
+      <div class="a sub" style="left:16px;top:74px;font-size:12px">개인 출전 · 내 앨범 한 곡</div>
+      <div class="b off" style="left:16px;top:110px;width:354px;height:180px;flex-direction:column;gap:8px"><span class="sub">빈 재킷</span><span style="font-size:14px">신청할 내 발매 앨범이 없어요.</span></div>` +
+      action([["앨범 만들기", 16, 170, true], ["보드로 돌아가기", 200, 170]]) + `
+      ${n(1, 6, 120)}${n(2, 6, 722)}${n(3, 352, 722)}`,
+    notes: ["발매 앨범이 하나도 없을 때", "앨범 만들기(발매) 화면 · 발매하고 돌아오면 ①", "보드로 돌아가기 = HUD"] },
+
+  { cap: "② 신청 완료 (혜택 전)", html: topBar("주간 페스티벌", "혜택까지 2일 03:10") + `
+      <div class="a val" style="left:16px;top:76px;font-size:15px">주간 페스티벌 신청 완료</div>
+      <div class="a sub" style="left:16px;top:100px;font-size:12px">개인 출전 · 내 앨범 한 곡</div>` +
+      album(124, "앨범 이름 A", "차트 12위", false).replace('<i class="pill" style="width:20px;height:20px;padding:0;flex:none;"></i>', "") +
+      info(214, 96, "신청한 앨범으로 등록했어요", ["보드로 돌아가도 같은 신청 기록을 유지해요.", "이번 주 7일째에 버프가 시작돼요. 늦게 신청하면 주간 마감까지 적용돼요."]) + `
+      <div class="b" style="left:16px;top:326px;width:354px;height:48px"><span style="font-size:13px">주간 진행 · 레이싱 기록 보기 ›</span></div>` +
+      action([["레이싱 입장", 16, 170, true], ["보드로 돌아가기", 200, 170]]) + `
+      ${n(1, 6, 136)}${n(2, 6, 224)}${n(3, 6, 336)}${n(4, 6, 722)}${n(5, 352, 722)}`,
+    notes: ["신청한 앨범 · 이번 주는 바꾸기 없음(시뮬 기준)", "신청 기록 유지 · 혜택 시작 안내(혜택 중이면 「주간 페스티벌 버프 중」)", "⑤ 기록 화면", "레이싱 입장 = ④ 시티 투어 입장(3D)", "보드로 돌아가기 = HUD"] },
+
+  { cap: "③ 혜택 진행 중 (7일째)", html: topBar("주간 페스티벌", "남음 05:42:10") + `
+      <div class="a val" style="left:16px;top:76px;font-size:15px">주간 페스티벌 버프 중</div>` +
+      album(104, "앨범 이름 A", "차트 12위", false, false).replace('<i class="pill" style="width:20px;height:20px;padding:0;flex:none;"></i>', "") +
+      info(190, 84, "활동 · 순위", ["320활동 · 41굴림 · 모의 2 / 5위", "굴린 배수를 모은 만큼 순위가 올라요"]) + `
+      <div class="a val" style="left:32px;top:290px;font-size:13px">다음 START 예정 혜택 (1회당)</div>
+      <div class="a" style="left:16px;top:312px;width:354px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+        ${["돈 +n", "팬 +n", "능력 +n"].map(t => `<div class="b" style="position:static;height:56px;flex-direction:column;gap:4px"><i class="pill" style="width:20px;height:20px;padding:0"></i><span class="val" style="font-size:12px">${t}</span></div>`).join("")}</div>
+      <div class="a sub" style="left:16px;top:376px;width:354px;font-size:12px">앨범 차트 보상에 더해져요 · 받은 양은 기록에서 확인</div>` +
+      info(408, 84, "⛽ 연료 · 레이싱", ["연료 64 · 굴림마다 2개 쌓여요", "시티 투어에서 급유하면 자동으로 달려요"]) + `
+      <div class="b" style="left:16px;top:504px;width:354px;height:48px"><span style="font-size:13px">주간 진행 · 레이싱 기록 보기 ›</span></div>` +
+      action([["레이싱 입장", 16, 170, true], ["보드로 돌아가기", 200, 170]]) + `
+      ${n(1, 340, 64)}${n(2, 6, 200)}${n(3, 6, 288)}${n(4, 6, 418)}${n(5, 6, 514)}${n(6, 6, 722)}`,
+    notes: ["남은 시간 = 7일째 끝까지", "활동 · 굴림 · 모의 순위(5명 가상 무리 · 무리 크기는 정할 것)", "다음 START 통과 1회당 혜택 · 지금 순위 기준 · 차트 보상에 더함", "연료 = 굴림마다 2개 · 시티 투어에서 급유해 씀 · 한 주 상한(레이스 100번분)", "⑤ 기록", "레이싱 입장 → ④ · 보드로 → HUD"] },
+
+  { cap: "④ 시티 투어 입장", html: topBar("시티 투어", "남음 05:42:10") + `
+      <div class="a sub" style="left:16px;top:74px;font-size:12px">이 앨범의 리그 상대와 10바퀴를 경쟁해요.</div>` +
+      album(100, "앨범 이름 A", "참가 앨범 · 리그 상대 4팀", false, false).replace('<i class="pill" style="width:20px;height:20px;padding:0;flex:none;"></i>', "") + `
+      <div class="a" style="left:16px;top:186px;width:354px;display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <div class="b" style="position:static;height:56px;flex-direction:column;gap:2px"><span class="sub">앨범 재화(연료)</span><span class="val" style="font-size:15px">⛽ 64</span></div>
+        <div class="b" style="position:static;height:56px;flex-direction:column;gap:2px"><span class="sub">보상</span><span class="val" style="font-size:13px">주사위 · 아이돌 카드</span></div></div>` +
+      info(256, 76, "곡 · 규칙", ["참가비 없이, 급유할 때만 재화를 써요.", "재화 1개는 ¼바퀴분이에요."]) + `
+      <div class="b" style="left:16px;top:344px;width:354px;height:40px"><span style="font-size:12px">지난 경기 2위 · 주사위 35 / 카드 2</span></div>` +
+      action([["시티 투어 참가", 16, 354, true]]) + `
+      <div class="b" style="left:16px;top:782px;width:354px;height:40px"><span style="font-size:13px">보드에서 재화 모으기</span></div>
+      ${n(1, 340, 64)}${n(2, 6, 196)}${n(3, 6, 266)}${n(4, 6, 352)}${n(5, 6, 722)}${n(6, 6, 790)}`,
+    notes: ["남은 이벤트 시간(24시간 · 7일째 혜택과 같은 날)", "연료 = 앨범 재화(굴림마다 2개) · 보상 = 주사위 · 아이돌 카드", "급유할 때만 재화 사용 · 1개 = ¼바퀴 · 10바퀴 완주", "지난 경기 결과(없으면 줄 없음)", "참가 → ④-1 차량 · 경기 중이면 「경기 이어하기」 · 앨범 없으면 「발매한 앨범이 필요해요」 + 「앨범으로 가기」", "보드에서 재화 모으기 = HUD"] },
+
+  { cap: "④-1 차량 · 오늘의 투어 차량", html: topBar("오늘의 투어 차량", "남음 05:42:10") + steps(0) + `
+      <div class="b off" style="left:16px;top:112px;width:354px;height:250px;flex-direction:column;gap:6px"><span class="sub">3D 차량 미리 보기</span><span class="sub">고른 차량이 바로 바뀜</span></div>
+      <div class="a val" style="left:16px;top:376px;font-size:13px">차량 선택</div>
+      <div class="a sub" style="left:16px;top:396px;font-size:12px">시험 외형 3종 · 속도와 연료 효율은 같아요.</div>
+      <div class="a" style="left:16px;top:420px;width:354px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+        ${["코랄 투어 밴", "골드 투어 밴", "민트 투어 밴"].map((t, i) => `<div class="b" style="position:static;height:110px;flex-direction:column;gap:6px;${i === 0 ? "border-width:2.5px" : ""}"><div class="b off" style="position:static;width:80px;height:50px"><span class="sub">차</span></div><span style="font-size:12px">${t}</span>${i === 0 ? '<span class="pill" style="font-size:11px">선택</span>' : ""}</div>`).join("")}</div>
+      <div class="b" style="left:16px;top:544px;width:354px;height:44px"><span style="font-size:13px">컬렉션 · 상점 ›</span></div>
+      <div class="a sub" style="left:16px;top:666px;width:354px;text-align:center;font-size:12px">차량을 고른 뒤 급유하러 가요.</div>` +
+      action([["이 차량으로 급유하기", 16, 354, true]]) + `
+      ${n(1, 6, 70)}${n(2, 6, 122)}${n(3, 6, 430)}${n(4, 6, 554)}${n(5, 6, 722)}`,
+    notes: ["참가 순서 4단계(차량 · 급유 · 레이스 · 시상) · 지금 단계 굵게", "고른 차량 3D 미리 보기", "차량 카드 · 하나 고름 · 외형만 바뀜(속도 · 연료 효율 같음) · 지금 시험 3종", "컬렉션 · 상점 = 외형 둘러보기 · 구매 · 가격 · 보유는 연결 전(시안)", "이 차량으로 급유하기 → ④-2"] },
+
+  { cap: "④-2 급유 · 우리 팀 차고", html: topBar("연료를 채우고 출발해요", "남음 05:42:10") + steps(1) + `
+      <div class="b off" style="left:16px;top:112px;width:354px;height:170px;flex-direction:column;gap:4px"><span class="sub">출발 전, 우리 팀 차고 (3D)</span><span class="sub">받침대 위 고른 차량</span></div>
+      <div class="a val" style="left:16px;top:292px;font-size:13px">드라이빙 프로필</div>
+      ${["기본 실력", "가속", "안정", "뒷심", "승부 성향"].map((t, i) => `<div class="a" style="left:16px;top:${314 + i * 26}px;width:354px;display:flex;align-items:center;gap:10px"><span style="width:70px;font-size:12px">${t}</span><div style="flex:1;height:10px;border:1.5px solid var(--ln);border-radius:5px;background:var(--box);position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:${[62, 48, 70, 40, 55][i]}%;background:var(--fill);border-radius:4px"></div></div><span class="val" style="width:34px;text-align:right;font-size:12px">${["6.2", "4.8", "7.0", "4.0", "5.5"][i]}</span></div>`).join("")}
+      <div class="a" style="left:16px;top:450px;width:354px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px">${["1~3바퀴", "4~7바퀴", "8~10바퀴"].map((t, i) => `<div class="b" style="position:static;height:40px;flex-direction:column;${i === 2 ? "border-width:2.5px" : ""}"><span style="font-size:11px">${t} 구간</span><span class="val" style="font-size:12px">x1.${[0, 1, 2][i]}</span></div>`).join("")}</div>
+      <div class="a" style="left:16px;top:498px;display:flex;gap:4px"><span class="pill">성향 칩</span><span class="pill">성향 칩</span></div>
+      <div class="b" style="left:16px;top:530px;width:354px;height:56px;flex-direction:column;gap:2px"><span class="val" style="font-size:15px">⛽ 연료 8 · 2바퀴분</span><span class="sub">이벤트 재화 56개 · 1개 = ¼바퀴 · 달리는 중에도 급유 가능</span></div>
+      <div class="b" style="left:16px;top:596px;width:170px;height:46px"><span class="val">1개 급유</span></div>
+      <div class="b" style="left:200px;top:596px;width:170px;height:46px"><span class="val">+4개 급유</span></div>` +
+      action([["‹ 차량 변경", 16, 120], ["급유 완료 · 출발", 148, 222, true]]) + `
+      ${n(1, 6, 122)}${n(2, 352, 290)}${n(3, 6, 460)}${n(4, 6, 540)}${n(5, 6, 606)}${n(6, 6, 722)}${n(7, 352, 704)}`,
+    notes: ["3D 차고 · 고른 차량 · 출발하면 「시동 ON · 출발 준비」 연출", "드라이빙 프로필 5개 = 앨범 멤버 능력에서 계산(시험값 · 연결 전이면 「대기」)", "바퀴 구간별 배수 · 가장 센 구간 굵게 · 성향 칩(관계 성향에서)", "연료 · 몇 바퀴분 · 남은 재화", "1개(¼바퀴) · 4개(1바퀴) 급유 · 재화 없으면 「급유할 앨범 재화가 없어요. 보드 활동으로 모아 주세요.」", "차량 변경 = ④-1로", "급유 완료 · 출발 → 카운트다운 → ④-3 (연료 0이면 꺼짐)"] },
+
+  { cap: "④-3 3D 레이스 (자동 주행)", html: `<div class="b off" style="left:0;top:0;width:386px;height:840px;border:none;border-radius:0;align-items:center"><span class="sub">3D 도시 · 고가 순환도로 · 내 차 추적</span></div>
+      <div class="b" style="left:10px;top:10px;width:70px;height:36px"><span style="font-size:12px">나가기</span></div>
+      <div class="b" style="left:90px;top:10px;width:150px;height:36px;gap:10px"><span class="val" style="font-size:13px">2위</span><span style="font-size:13px">3/10바퀴</span></div><div class="a sub" style="left:12px;top:100px;font-size:12px">3 레이스 · 시티 투어 레이스</div>
+      <div class="b off" style="left:256px;top:56px;width:120px;height:84px"><span class="sub">작은 화면 · 전체 지도</span></div>
+      <div class="a" style="left:256px;top:148px;display:flex;gap:4px">${["전체", "추적", "차안"].map((t, i) => `<span class="pill" style="font-size:11px;padding:4px 6px;${i === 1 ? "border-width:2.5px" : ""}">${t}</span>`).join("")}</div>
+      <div class="b" style="left:140px;top:330px;width:64px;height:26px"><span style="font-size:11px">우리 팀</span></div>
+      <div class="b" style="left:226px;top:270px;width:64px;height:26px"><span style="font-size:11px">상대 A</span></div>
+      <div class="b off" style="left:10px;top:620px;width:134px;height:78px"><span class="sub">미니맵</span></div>
+      <div class="b" style="left:154px;top:620px;width:222px;height:78px;flex-direction:column;gap:2px"><span class="val" style="font-size:14px">⛽ 연료 6 · 1.5바퀴분</span><span class="sub">연료가 있는 동안 자동으로 달려요</span></div>
+      <div class="b" style="left:154px;top:710px;width:222px;height:56px;border-width:2.5px"><span class="val" style="font-size:15px">급유</span></div>
+      <div class="b" style="left:10px;top:710px;width:134px;height:56px"><span class="sub">x1.2 · 한 바퀴 약 10초</span></div>
+      ${n(1, 0, 52)}${n(2, 92, 52)}${n(3, 232, 152)}${n(4, 118, 334)}${n(5, 0, 640)}${n(6, 158, 600)}${n(7, 134, 724)}`,
+    notes: ["나가기 = ④ 입장 화면 · 경기는 이어짐(「경기 이어하기」)", "지금 순위 · 바퀴(10바퀴 완주가 목표)", "카메라 = 전체 · 추적 · 차안(시안) + 오른쪽 위 작은 화면", "차 위 이름표(우리 팀 · 상대 4팀 = 같은 차트 리그)", "미니맵 · 다섯 팀 점", "연료 · 몇 바퀴분 · 비면 멈추고 「연료가 비었어요. 급유하면 바로 다시 달려요」", "급유 = ④-2 창 · 속도(지금 순위 덤 · 능력)"] },
+
+  { cap: "④-4 결승 · 시상식 · 보상", html: `<div class="b off" style="left:0;top:0;width:386px;height:840px;border:none;border-radius:0;align-items:flex-start;padding-top:120px"><span class="sub">3D 앙코르 무대 · 시상대</span></div>
+      <div class="a val" style="left:0;top:60px;width:386px;text-align:center;font-size:20px">10바퀴 완주!</div>
+      <div class="a" style="left:83px;top:180px;display:flex;align-items:flex-end;gap:6px">${[[2, 70], [1, 96], [3, 56]].map(([r, h]) => `<div class="b" style="position:static;width:70px;height:${h}px;align-items:flex-start;padding-top:6px"><span class="val">${r}위</span></div>`).join("")}</div>
+      <div class="win" style="left:24px;top:400px;width:338px;height:330px"></div>
+      <div class="a val" style="left:24px;top:418px;width:338px;text-align:center;font-size:16px">시상식 · 2위</div>
+      <div class="a sub" style="left:24px;top:442px;width:338px;text-align:center;font-size:12px">유효 참가 · 기본 보상 + 순위 추가</div>
+      <div class="a" style="left:46px;top:470px;width:294px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="b" style="position:static;height:70px;flex-direction:column;gap:4px"><i class="pill" style="width:24px;height:24px;padding:0"></i><span class="val">주사위 +35</span></div>
+        <div class="b" style="position:static;height:70px;flex-direction:column;gap:4px"><i class="pill" style="width:24px;height:24px;padding:0"></i><span class="val">아이돌 카드 2</span></div></div>
+      <div class="b" style="left:46px;top:556px;width:294px;height:40px"><span style="font-size:12px">전체 순위 ›  ·  카드 = 앨범 참여 아이돌 카드</span></div>
+      <div class="b" style="left:46px;top:612px;width:140px;height:52px;border-width:2.5px"><span class="val">보상 받기</span></div>
+      <div class="b" style="left:200px;top:612px;width:140px;height:52px"><span class="val">다음 경기</span></div>
+      <div class="b" style="left:46px;top:676px;width:294px;height:40px"><span style="font-size:12px">나가기</span></div>
+      ${n(1, 60, 64)}${n(2, 60, 230)}${n(3, 30, 420)}${n(4, 30, 486)}${n(5, 30, 622)}`,
+    notes: ["10바퀴를 먼저 완주하면 FINISH(못 끝내면 「미완주」)", "시상대 1 · 2 · 3위 · 3D 앙코르 무대", "보상 조건: 1바퀴 이상 · 연료 4 이상 · 정상 완주 · 기본 + 순위 추가", "주사위 · 아이돌 카드(기본 10 · 1장 + 순위 덤 · 시험값)", "보상 받기 먼저(「받을 보상을 먼저 수령해 주세요」) · 전체 순위 · 내 보상 탭 → 다음 경기 = ④-1 차량 · 나가기 = ④ 입장"] },
+
+  { cap: "⑤ 주간 진행 · 레이싱 기록", html: topBar("주간 진행 · 레이싱 기록", "남음 05:42:10") + `
+      <div class="a" style="left:16px;top:72px;width:354px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px">
+        ${["현재 혜택", "진행 조건", "연료 · 수령", "대기 항목"].map((t, i) => `<div class="b" style="position:static;height:36px;${i === 2 ? "border-width:2.5px" : ""}"><span style="font-size:12px">${t}</span></div>`).join("")}</div>
+      ${[0, 1, 2, 3, 4].map(i => `<div class="b" style="left:16px;top:${124 + i * 60}px;width:354px;height:52px;justify-content:space-between;padding:0 12px"><div style="text-align:left"><div style="font-size:12px">${["레이싱 2위", "START 통과 · 혜택", "레이싱 4위", "START 통과 · 혜택", "연료 드롭"][i]}</div><div class="sub">14:${String(20 - i * 3).padStart(2, "0")}</div></div><span class="val" style="font-size:12px">${["돈 +n · 주사위 +n", "돈 +n · 팬 +n", "돈 +n · 팬 +n", "돈 +n · 팬 +n", "⛽ +2"][i]}</span></div>`).join("")}
+      <div class="a sub" style="left:16px;top:430px;width:354px;text-align:center;font-size:12px">최근 5건 / 전체 23건</div>
+      <div class="b" style="left:140px;top:456px;width:106px;height:36px"><span style="font-size:12px">‹ 1 / 5 ›</span></div>` + `
+      ${n(1, 6, 64)}${n(2, 6, 134)}${n(3, 116, 462)}`,
+    notes: ["탭 4개(시뮬 그대로 · 현재 혜택 · 진행 조건 · 연료 · 수령 · 대기 항목)", "받은 기록 · 시간순 · 시티 투어 결과 · START 혜택 · 연료", "쪽 넘기기 · ‹ = 온 곳으로"] },
+];
+
+const SHOT = new URLSearchParams(location.search).get("shot");
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+</script>
+</body>
+</html>

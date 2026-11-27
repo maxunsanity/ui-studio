@@ -1,0 +1,439 @@
+{
+  "format": "monopoly-video-ui-inventory",
+  "version": 1,
+  "videoId": "MGV04",
+  "status": "observed reference; implementation/approval pending",
+  "source": {
+    "name": "스테이지 이동.mov",
+    "durationSeconds": 34.625,
+    "sha256": "d74b905c786e1041107ab483d7279f5fa44cbf939af4891624b4e58b637179db",
+    "originalSize": [
+      1920,
+      1080
+    ],
+    "fps": 24
+  },
+  "method": {
+    "frameStepSeconds": 0.5,
+    "allContactSheetsDirectlyViewed": true,
+    "contactSheetCount": 2,
+    "samplingFrameCount": 70,
+    "samplingErrors": 0,
+    "originalSizeDirectPNGCount": 6,
+    "definitionOfStable": "Full layout/content/control composition is settled on sampled frames; looping fireworks, train motion or counters may continue. Entrance/exit/black/smoke/particle-only frames are not new complete UI.",
+    "inputEvidence": "Controls are visually observed. Exact click/tap causes remain null unless directly established; no app/native interaction was performed.",
+    "audio": "not inspected",
+    "continuousPlaybackClaim": false,
+    "gameCropMethod": "Unscaled original-PNG game ROI crop for reference thumbnails only; original frames/state records preserved.",
+    "gameCropCount": 6
+  },
+  "existingDesignComparison": {
+    "projectId": "ux-gjs-0d80d7fe",
+    "revision": 277,
+    "sha256": "c4e5a63c578986695d3eebaeda5bb987a27dea3c1b1d81a0b19fa6c888e9874c",
+    "path": "/Users/max/projest_max/ui-studio/samples/monopoly-go/ui-studio/designs/ux-gjs-0d80d7fe.json",
+    "scope": "Read-only screen-family/name comparison. No implementation, link, pixel equivalence or native UI test is claimed."
+  },
+  "counts": {
+    "screenRecords": 4,
+    "stableStateRecords": 5,
+    "existingFamilyCandidates": 1,
+    "newFamilyCandidates": 3,
+    "countBasis": "Different data values or animation frames do not create new screens. Same family may recur across videos; parent should deduplicate canonicalFamily."
+  },
+  "screens": [
+    {
+      "id": "MGV04-S01",
+      "canonicalFamily": "stage-map",
+      "observedTitle": "스테이지 지도",
+      "presentationObserved": "full-height vertical stage map",
+      "states": [
+        {
+          "id": "MGV04-S01-A",
+          "label": "17 잠김·16 도쿄 표시",
+          "stableSampleRangesSeconds": [
+            [
+              0,
+              0.5
+            ]
+          ],
+          "representative": {
+            "requested": 0,
+            "actual": 0,
+            "file": "frames/frame_00000.jpg",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "actual": 0,
+            "file": "frames/stable/frame_00000.png",
+            "height": 1080,
+            "index": 0,
+            "requested": 0,
+            "width": 1920,
+            "format": "PNG direct AVFoundation from original MOV; no JPEG conversion"
+          },
+          "basis": "Complete visible layout/control state on sampled frames. Decorative motion may continue; this is not a pixel-static or fully implemented screen claim.",
+          "notes": [],
+          "gameCrop": {
+            "file": "frames/game-crops/stable-frame_00000.png",
+            "sourcePNG": "frames/stable/frame_00000.png",
+            "rect": [
+              655,
+              0,
+              610,
+              1080
+            ],
+            "width": 610,
+            "height": 1080,
+            "method": "unscaled reference crop; not production art"
+          }
+        },
+        {
+          "id": "MGV04-S01-B",
+          "label": "17 리틀 M의 방 해제 표시",
+          "stableSampleRangesSeconds": [
+            [
+              2.5,
+              3.5
+            ]
+          ],
+          "representative": {
+            "requested": 3,
+            "actual": 3,
+            "file": "frames/frame_00006.jpg",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "actual": 3,
+            "file": "frames/stable/frame_00001.png",
+            "height": 1080,
+            "index": 1,
+            "requested": 3,
+            "width": 1920,
+            "format": "PNG direct AVFoundation from original MOV; no JPEG conversion"
+          },
+          "basis": "Complete visible layout/control state on sampled frames. Decorative motion may continue; this is not a pixel-static or fully implemented screen claim.",
+          "notes": [],
+          "gameCrop": {
+            "file": "frames/game-crops/stable-frame_00001.png",
+            "sourcePNG": "frames/stable/frame_00001.png",
+            "rect": [
+              655,
+              0,
+              610,
+              1080
+            ],
+            "width": 610,
+            "height": 1080,
+            "method": "unscaled reference crop; not production art"
+          }
+        }
+      ],
+      "visibleControls": [
+        {
+          "label": null,
+          "positionObserved": "stage card areas",
+          "kindObserved": "stage cards",
+          "activationProven": false
+        }
+      ],
+      "visibleStructure": [
+        "구름/그라데이션 배경",
+        "16 도쿄·17 리틀 M의 방·18 모나코의 섬/리본 이름",
+        "잠금 자물쇠와 말 이동"
+      ],
+      "existingDesignScreenId": null,
+      "existingDesignMatchStatus": "no corresponding screen family in the compared ten-screen design",
+      "implementationStatus": "video-observed-only; no design/UI/source changes",
+      "entryBeforeClip": null,
+      "exitOutsideObservedWindow": null,
+      "notes": [
+        "The clip starts with this map already open; the opening control/previous screen is unobserved.",
+        "Pawn/unlock movement is a transition state, not another UI screen."
+      ]
+    },
+    {
+      "id": "MGV04-S02",
+      "canonicalFamily": "main-board",
+      "observedTitle": "메인 보드",
+      "presentationObserved": "board page",
+      "states": [
+        {
+          "id": "MGV04-S02-A",
+          "label": "새 보드 정상 HUD",
+          "stableSampleRangesSeconds": [
+            [
+              34,
+              34.5
+            ]
+          ],
+          "representative": {
+            "requested": 34.5,
+            "actual": 34.5,
+            "file": "frames/frame_00069.jpg",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "actual": 34.5,
+            "file": "frames/stable/frame_00004.png",
+            "height": 1080,
+            "index": 4,
+            "requested": 34.5,
+            "width": 1920,
+            "format": "PNG direct AVFoundation from original MOV; no JPEG conversion"
+          },
+          "basis": "Complete visible layout/control state on sampled frames. Decorative motion may continue; this is not a pixel-static or fully implemented screen claim.",
+          "notes": [],
+          "gameCrop": {
+            "file": "frames/game-crops/stable-frame_00004.png",
+            "sourcePNG": "frames/stable/frame_00004.png",
+            "rect": [
+              655,
+              0,
+              610,
+              1080
+            ],
+            "width": 610,
+            "height": 1080,
+            "method": "unscaled reference crop; not production art"
+          }
+        }
+      ],
+      "visibleControls": [
+        {
+          "label": "GO",
+          "positionObserved": "lower center",
+          "kindObserved": "button",
+          "activationProven": false
+        },
+        {
+          "label": "짓기",
+          "positionObserved": "bottom navigation",
+          "kindObserved": "button",
+          "activationProven": false
+        },
+        {
+          "label": "승리",
+          "positionObserved": "bottom navigation",
+          "kindObserved": "button",
+          "activationProven": false
+        },
+        {
+          "label": "앨범",
+          "positionObserved": "bottom navigation",
+          "kindObserved": "button",
+          "activationProven": false
+        },
+        {
+          "label": "친구",
+          "positionObserved": "bottom navigation",
+          "kindObserved": "button",
+          "activationProven": false
+        }
+      ],
+      "visibleStructure": [
+        "상단 현금/쉴드/메뉴",
+        "이벤트 입구",
+        "보드/말",
+        "GO와주사위수·하단4메뉴"
+      ],
+      "existingDesignScreenId": "main",
+      "existingDesignMatchStatus": "candidate same UI family; theme/state differ",
+      "implementationStatus": "video-observed-only; no design/UI/source changes",
+      "entryBeforeClip": null,
+      "exitOutsideObservedWindow": null,
+      "notes": [
+        "5.0–7.0 and23.0–24.0 show board/camera/HUD arrival stages; these are not additional complete screens."
+      ]
+    },
+    {
+      "id": "MGV04-S03",
+      "canonicalFamily": "stage-welcome-reward",
+      "observedTitle": "웰컴 투 리틀 M의 방",
+      "presentationObserved": "reward overlay over dim board",
+      "states": [
+        {
+          "id": "MGV04-S03-A",
+          "label": "환영 보상+수집",
+          "stableSampleRangesSeconds": [
+            [
+              8.5,
+              19.5
+            ]
+          ],
+          "representative": {
+            "requested": 10,
+            "actual": 10,
+            "file": "frames/frame_00020.jpg",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "actual": 10,
+            "file": "frames/stable/frame_00002.png",
+            "height": 1080,
+            "index": 2,
+            "requested": 10,
+            "width": 1920,
+            "format": "PNG direct AVFoundation from original MOV; no JPEG conversion"
+          },
+          "basis": "Complete visible layout/control state on sampled frames. Decorative motion may continue; this is not a pixel-static or fully implemented screen claim.",
+          "notes": [],
+          "gameCrop": {
+            "file": "frames/game-crops/stable-frame_00002.png",
+            "sourcePNG": "frames/stable/frame_00002.png",
+            "rect": [
+              655,
+              0,
+              610,
+              1080
+            ],
+            "width": 610,
+            "height": 1080,
+            "method": "unscaled reference crop; not production art"
+          }
+        }
+      ],
+      "visibleControls": [
+        {
+          "label": "수집",
+          "positionObserved": "centered footer",
+          "kindObserved": "button",
+          "activationProven": false
+        }
+      ],
+      "visibleStructure": [
+        "환영 제목과 캐릭터",
+        "현금1,720,000 표시",
+        "주사위50 표시",
+        "하단 수집"
+      ],
+      "existingDesignScreenId": null,
+      "existingDesignMatchStatus": "no corresponding screen family in the compared ten-screen design",
+      "implementationStatus": "video-observed-only; no design/UI/source changes",
+      "entryBeforeClip": null,
+      "exitOutsideObservedWindow": null,
+      "notes": [
+        "Numbers are observed labels in this video, not approved balance values.",
+        "No separate × close control is visible."
+      ]
+    },
+    {
+      "id": "MGV04-S04",
+      "canonicalFamily": "board-rush-reward",
+      "observedTitle": "보드 러시",
+      "presentationObserved": "reward overlay over dim board",
+      "states": [
+        {
+          "id": "MGV04-S04-A",
+          "label": "보드러시 보상+수집",
+          "stableSampleRangesSeconds": [
+            [
+              25.5,
+              26
+            ]
+          ],
+          "representative": {
+            "requested": 25.5,
+            "actual": 25.5,
+            "file": "frames/frame_00051.jpg",
+            "width": 1920,
+            "height": 1080
+          },
+          "originalSizePNG": {
+            "actual": 25.5,
+            "file": "frames/stable/frame_00003.png",
+            "height": 1080,
+            "index": 3,
+            "requested": 25.5,
+            "width": 1920,
+            "format": "PNG direct AVFoundation from original MOV; no JPEG conversion"
+          },
+          "basis": "Complete visible layout/control state on sampled frames. Decorative motion may continue; this is not a pixel-static or fully implemented screen claim.",
+          "notes": [],
+          "gameCrop": {
+            "file": "frames/game-crops/stable-frame_00003.png",
+            "sourcePNG": "frames/stable/frame_00003.png",
+            "rect": [
+              655,
+              0,
+              610,
+              1080
+            ],
+            "width": 610,
+            "height": 1080,
+            "method": "unscaled reference crop; not production art"
+          }
+        }
+      ],
+      "visibleControls": [
+        {
+          "label": "수집",
+          "positionObserved": "centered footer",
+          "kindObserved": "button",
+          "activationProven": false
+        }
+      ],
+      "visibleStructure": [
+        "보드러시 로고",
+        "현금996,000 표시",
+        "주사위30 표시",
+        "하단 수집"
+      ],
+      "existingDesignScreenId": null,
+      "existingDesignMatchStatus": "no corresponding screen family in the compared ten-screen design",
+      "implementationStatus": "video-observed-only; no design/UI/source changes",
+      "entryBeforeClip": null,
+      "exitOutsideObservedWindow": null,
+      "notes": [
+        "The structural reward state is complete despite ongoing fireworks."
+      ]
+    }
+  ],
+  "excludedTransitionAnimations": [
+    {
+      "range": [
+        0.5,
+        2.5
+      ],
+      "kind": "pawn movement/unlock animation"
+    },
+    {
+      "range": [
+        4,
+        5
+      ],
+      "kind": "fade/near-black transition"
+    },
+    {
+      "range": [
+        19.5,
+        23
+      ],
+      "kind": "reward cash/dice collection particles"
+    },
+    {
+      "range": [
+        26.5,
+        29
+      ],
+      "kind": "reward cash/dice collection particles"
+    },
+    {
+      "range": [
+        29,
+        34
+      ],
+      "kind": "camera/HUD settling, not a new UI"
+    }
+  ],
+  "unknowns": [
+    "Entry before clip start is null.",
+    "Clicks/taps and exact causes of automatic/popup sequences are not proven by0.5s samples.",
+    "Purchase/free-claim outcomes, out-of-video info/trophy controls and unseen branches are not verified.",
+    "No implementation links were changed or tested."
+  ]
+}

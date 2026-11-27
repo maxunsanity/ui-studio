@@ -1,0 +1,20 @@
+/* Shared presentation frame. Each proposal keeps its own content layout. */
+body[data-proposal-layout]{-webkit-font-smoothing:antialiased;--proposal-focus:var(--cyan,#7de6ec)}
+body[data-proposal-layout] :is(.deck,.stage){container-type:inline-size}
+body[data-proposal-layout] :is(.slide,.inner,.body,.main,.col,.panel,.diagram,.narrative,.topic,.txt,.cover){min-width:0}
+body[data-proposal-layout] :is(h1,h2){word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance}
+body[data-proposal-layout] :is(.lead,.head p){word-break:keep-all;overflow-wrap:anywhere;text-wrap:pretty}
+body[data-proposal-layout] :is(.footer,.foot,.after){min-width:0;flex-shrink:0}
+body[data-proposal-layout] :is(.footer,.foot,.after)>:first-child{min-width:0}
+body[data-proposal-layout] :is(.footer,.foot,.after) a{transition:color .16s,border-color .16s}
+body[data-proposal-layout] :is(.footer,.foot,.after) a:hover{color:#fff;border-color:#fff}
+body[data-proposal-layout] :is(button,a,input,select):focus-visible{outline:2px solid var(--proposal-focus);outline-offset:3px}
+body[data-proposal-layout] :is(.controls,.toolbar,.deck-controls,.control) button:disabled{opacity:.32;cursor:default}
+body[data-proposal-layout] :is(.toc,.toc-overlay){backdrop-filter:blur(16px)}
+body[data-proposal-layout] :is(#tocItems,#tocGrid){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+body[data-proposal-layout] :is(#tocItems,#tocGrid) button{margin:0;min-height:56px;line-height:1.4;word-break:keep-all}
+body[data-proposal-layout] :is(.toc,.toc-overlay) .proposal-toc-close{position:fixed;right:6vw;top:5vh;width:auto;min-width:44px;margin:0;padding:10px 16px;border:1px solid #60708b;background:#172238;color:#fff;border-radius:99px;z-index:9;cursor:pointer}
+body[data-proposal-layout] .proposal-page-number{font-variant-numeric:tabular-nums;white-space:nowrap}
+@media(max-width:760px){body[data-proposal-layout] :is(#tocItems,#tocGrid){grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){body[data-proposal-layout] *{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media print{body[data-proposal-layout]{display:block;padding:0;background:white}body[data-proposal-layout] :is(.deck,.stage){width:100%}body[data-proposal-layout] .slide{display:block!important;break-after:page;page-break-after:always}body[data-proposal-layout] .slide.active{display:flex!important}body[data-proposal-layout] :is(.controls,.toolbar,.toc,.toc-overlay){display:none!important}}

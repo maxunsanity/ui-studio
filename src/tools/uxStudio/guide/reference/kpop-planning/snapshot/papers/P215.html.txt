@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P215 · 홍보(리드 제너레이션) · 대표 개발 기획서</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"><link rel="stylesheet" href="./리소스/핵심제안_시뮬_20261102/sim.css"><style>.sample-document :target{scroll-margin-top:132px}.sample-document header .actions{flex-wrap:wrap}.sample-document header p{font-size:14px}.doc-ui-section{margin-top:42px;padding-top:24px;border-top:2px solid #c8dcd5}.doc-ui-section>h3{margin:0 0 10px;font-size:23px;color:#2c5659}.doc-ui-section>p{font-size:14px}.doc-ui-section details{padding:0;margin:16px 0;border:1px solid #c9dcd4;border-radius:16px;overflow:hidden;background:#f4f8f2}.doc-ui-section summary{cursor:pointer;min-height:58px;padding:16px 18px;font-weight:700;color:#315e5c;list-style:none}.doc-ui-section summary:after{content:"+";float:right;font-size:20px}.doc-ui-section details[open]>summary:after{content:"−"}.doc-ui-section summary::-webkit-details-marker{display:none}.doc-ui-section [data-sim-host]{padding:0 18px 18px;min-width:0}.doc-key{margin:18px 0;padding:16px 20px;border-left:6px solid #2f7f86;background:#eef6f5;border-radius:12px;font-size:16px;line-height:1.8}.doc-key b{color:#1f4f55}@media(max-width:680px){.sample-document :target{scroll-margin-top:18px}}</style><script type="module" src="./리소스/핵심제안_시뮬_20261102/promo.mjs"></script></head><body class="sample-document"><main><header><div class="eyebrow">P215 · 핵심제안 개발 · 대표 개발 기획서</div><h1>홍보(리드 제너레이션) · 대표 개발 기획서</h1><p>홍보는 두 갈래입니다. <a href="#sim-preview">하단 시뮬레이터</a>에서 행동을 눌러 어느 갈래이고 순위에 들어가는지 봅니다.</p><div class="actions"><a href="./홍보_핵심제안서.md">짝 MD로 읽기</a><a href="../../기획서/산출_기획서_홍보리드젠_보완판_v1_클로드.html">상세 정본 · 책갈피 P202</a><a href="/docs/planning/proposal-concept/promo.html" target="_blank" rel="noopener">제안서 원문</a><a href="#sim-preview">홍보 갈래 시뮬레이터</a></div></header>
+<p><b>이 문서는</b> 「홍보」의 두 갈래, 게임 안에서 내 곡을 알리는 것과 게임 밖에서 연락처를 받아 다시 부르는 것을 정리한 대표 개발 기획서입니다.</p>
+
+<p><b>보는 법</b> 1장 그림 → 4장 「한 판 순서」 → 하단 「홍보 갈래 시뮬레이터」 순서로 읽습니다. 세부 결정과 근거는 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%99%8D%EB%B3%B4%EB%A6%AC%EB%93%9C%EC%A0%A0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%99%8D%EB%B3%B4%EB%A6%AC%EB%93%9C%EC%A0%A0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P202 홍보(리드젠) 보완판</a>에 있습니다.</p>
+
+<p><b>지금 상태</b> 두 갈래를 설명하는 독립 문서 시안과 음악 모듈의 홍보 기록 부분 코드가 있습니다. 연락처·외부 미션·보상·순위와 팬의 통합 연결 및 실제 화면은 검수 전입니다.</p>
+<nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (합침) 제안서 <a href="/docs/planning/proposal-concept/promo.html" data-paper-path="docs/planning/proposal-concept/promo.html">홍보</a> · 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%99%8D%EB%B3%B4%EB%A6%AC%EB%93%9C%EC%A0%A0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%99%8D%EB%B3%B4%EB%A6%AC%EB%93%9C%EC%A0%A0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P202 홍보(리드젠) 보완판</a> · 현중 11/01~11/02 지시</p>
+
+<div class="doc-key"><b>핵심</b> <b>게임 안 홍보</b>는 내 곡을 알려 순위와 팬을 움직이고, <b>게임 밖 리드젠</b>은 연락처를 받아 떠난 유저를 다시 부릅니다. 둘은 피드 클립 · 유통곡으로 이어지지만 <b>게임 밖 성과는 게임 순위에 넣지 않습니다.</b></div>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 726 226" width="726" height="226" role="img" aria-labelledby="title-P215-0"><title id="title-P215-0">설명 흐름도 P215-0</title><defs><marker id="arrow-P215-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M174.66666666666669,73 L220.5,51 L243,51" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P215-0)"/><path d="M188,137 L220.5,150 L243,150" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P215-0)"/><path d="M423,51 L475.5,51 L528,54.68421052631579" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P215-0)"/><path d="M423,166.42105263157896 L475.5,176 L528,176" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P215-0)"/><path d="M423,122.21052631578948 L475.5,106 L528,89.42105263157895" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P215-0)"/><rect x="441.5" y="113" width="68" height="25" rx="7" fill="#f3f8f7"/><text x="475.5" y="131" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">안 들어감</text><rect x="18" y="73" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">홍보</tspan></text><rect x="243" y="18" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">게임 안 · 피드 · 공유 </tspan><tspan x="333" dy="20">· 총공</tspan></text><rect x="243" y="117" width="180" height="66" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="145" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">게임 밖 · 혜택 미션 · </tspan><tspan x="333" dy="20">연락처</tspan></text><rect x="528" y="29" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="618" y="66" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="618" dy="0">순위 · 팬</tspan></text><rect x="528" y="144" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="618" y="181" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="618" dy="0">복귀 알림 · 마케팅</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">홍보 → 게임 안 · 피드 · 공유 · 총공 / 홍보 → 게임 밖 · 혜택 미션 · 연락처 / 게임 안 · 피드 · 공유 · 총공 → 순위 · 팬 / 게임 밖 · 혜택 미션 · 연락처 → 복귀 알림 · 마케팅 / 게임 밖 · 혜택 미션 · 연락처 → [안 들어감] 순위 · 팬</p></figure>
+
+
+
+<h3 id="콘텐츠-경계">콘텐츠 경계</h3>
+
+<ul>
+<li>맡는 것: 두 갈래 구분 · 혜택 · 미션 탭 · 홍보 덱 9장 · 보상 범위.</li>
+<li>다른 문서에 맡기는 것: 게임 안 홍보 세부 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%8C%EC%9B%90%EC%98%81%EC%83%81_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%8C%EC%9B%90%EC%98%81%EC%83%81_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P208 음원 · 영상</a> · 연락처 저장 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9C%A0%EC%A0%80%EC%A0%80%EC%9E%A5_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9C%A0%EC%A0%80%EC%A0%80%EC%9E%A5_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P222 유저 저장</a>.</li>
+</ul>
+
+<h3 id="현재-기준과-목표">현재 기준과 목표</h3>
+
+<div class="table-scroll"><table><thead><tr><th>갈래</th><th>무엇</th><th>순위에</th></tr></thead><tbody><tr><td>게임 안</td><td>피드 찜 · 게임 안 공유 · 커버 · 크루 총공</td><td>들어감(하루 한도)</td></tr><tr><td>게임 밖</td><td>혜택 · 미션(SNS 공유 · 사전 저장 · 연락처)</td><td>안 들어감</td></tr></tbody></table></div>
+
+<ul>
+<li>게임 밖 보상으로 투표권 · 공유권 · 입장권 같은 순위 자원은 주지 않습니다.</li>
+<li>리드젠은 마케팅 비용입니다(게임 매출 아님).</li>
+<li>동의 문구 · 절차는 법무 검토입니다.</li>
+</ul>
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>이 콘텐츠에서의 역할</th><th>의존 방향</th></tr></thead><tbody><tr><td>제안서 원문 <a href="/docs/planning/proposal-concept/promo.html" data-paper-path="docs/planning/proposal-concept/promo.html">홍보</a></td><td>기준</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%99%8D%EB%B3%B4%EB%A6%AC%EB%93%9C%EC%A0%A0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%99%8D%EB%B3%B4%EB%A6%AC%EB%93%9C%EC%A0%A0_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P202 홍보(리드젠) 보완판</a></td><td>상세 정본(결정 · 근거 · 조사)</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%8C%EC%9B%90%EC%98%81%EC%83%81_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%8C%EC%9B%90%EC%98%81%EC%83%81_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P208 음원 · 영상</a></td><td>게임 안 홍보 · 피드 클립</td><td>양방향</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9C%A0%EB%A3%8C%ED%99%94_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9C%A0%EB%A3%8C%ED%99%94_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P217 유료화</a></td><td>리드젠 = 마케팅 비용</td><td>제약</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: 혜택 · 미션 탭 → 미션 → 보상 / 피드 → 홍보 버튼 · 스샷 미완 · 이식 비교 해당 없음</p>
+
+<ul>
+<li>전용 외부 리드젠 통합 모듈은 별도 등록되어 있지 않습니다. 관련 음악 모듈에는 파이널 공유 행동을 기록하는 부분 경로가 있습니다. 연락처 수집이나 실제 순위·팬·보상의 전체 연동 완료를 뜻하지 않습니다.</li>
+<li>이 문서 하단 <b>홍보 갈래 시뮬레이터</b>에서 홍보 행동을 누르면 어느 갈래이고 순위에 들어가는지 봅니다. 숫자는 모두 임시 시안입니다.</li>
+</ul>
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서-임시-시안">한 판 순서 (임시 시안)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>혜택 · 미션 탭에서 시작</td></tr><tr><td>입력·출력</td><td>입력 = 홍보 행동 / 출력 = 홍보 점수(게임 안) · 연락처 · 보상(게임 밖)</td></tr><tr><td>상태와 전이</td><td>미션 → 완료 → 보상</td></tr><tr><td>판정</td><td>게임 밖 성과는 순위 · 팬 사다리에 안 들어감</td></tr><tr><td>오류·예외</td><td>연락처 동의 철회는 바로 반영</td></tr><tr><td>저장·복원</td><td>연락처는 게임 저장과 분리</td></tr><tr><td>다른 모듈 연결</td><td>피드 · 크루 · 유저 저장</td></tr></tbody></table></div>
+
+<h3 id="홍보-덱-9장-원본-가안-유지-임시-시안">홍보 덱 9장 (원본 가안 유지 · 임시 시안)</h3>
+
+<p>현행 기획 참조인 P202·LG02는 7번을 게임 안 피드 클립·커스텀 블록 캐릭터의 15초 짤, 8번을 회사가 고른 유통곡·공식 앨범의 사전 저장 방향으로 설명합니다. 사진 업로드로 뮤비를 만드는 구안과 구별합니다. 9번은 오프라인 팝업·실물 상품 응모 방향입니다. 이것은 새 9개 미션 전체 순서·보상·동의 정책을 확정하거나 사용자 승인을 새로 선언한 것이 아닙니다.</p>
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>혜택 · 미션 탭 · 미션 판정 · 연락처 동의 저장 · 피드 클립 내보내기.</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<p>혜택 · 미션 탭 · 미션 카드 · 동의 화면.</p>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<ul>
+<li>하단 메뉴 위치 — HUD 기획 확인</li>
+<li>보상 크기 — 라이브 QA</li>
+<li>동의 문구 — 법무 검토</li>
+</ul>
+
+<h3>현행 기획·이전 가안·실제 연결의 경계</h3><p>게임 안 피드·공유·커버·크루 홍보와 게임 밖 혜택 미션·연락처는 현재 대표 문서와 P202·LG02의 구분을 따릅니다. 기존 제안 카드의 사진 뮤비·번호가 다른 9장·카드16 역할은 이전 가안으로 보존하며 현재 정책으로 합치지 않습니다. 동의 문구와 절차는 법무 검토 대기입니다.</p><p>독립 홍보 갈래 시안은 버튼을 누른 횟수를 메모리 예시 점수·미션 수로 보여 줍니다. 문자열의 하루 한도는 실제 날짜·한도 검사나 연락처 동의 저장을 실행한 증거가 아닙니다. 게임 밖 성과를 순위에 넣지 않는 방향과 실제 외부 증명·연락처·보상 처리는 구분합니다.</p><p>음악 모듈에는 공유 버튼 → 홍보 명령 → 같은 범위 기록 경로가 있습니다. 집계와 팬 사다리·순위의 전체 동작은 해당 기획·담당 범위에서 확인하며 여기서 완료로 승격하지 않습니다. 외부 리드젠의 운영표·연락처 저장·미션 지급 역시 이번 문서 정정에서 실행 검수하지 않았습니다.</p>
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<div class="table-scroll"><table><thead><tr><th>미리보기</th><th>이름·사용 위치</th><th>동작·상태</th><th>파일·테이블 키</th><th>출처·준비 상태</th></tr></thead><tbody><tr><td>미제작</td><td>혜택 · 미션 탭</td><td>미션 카드</td><td>—</td><td>원본 시안 있음(promo.html)</td></tr><tr><td><a href="#sim-preview">하단 시뮬레이터</a></td><td>홍보 갈래 시뮬레이터</td><td>행동 눌러 보기</td><td>핵심제안_시뮬_20261102/promo.mjs</td><td>시안 있음</td></tr></tbody></table></div>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<p>15초 짤 틀은 미제작입니다.</p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일·보기</th><th>역할</th><th>주키·참조</th><th>값</th><th>담당</th></tr></thead><tbody><tr><td>promo_mission (후보)</td><td>홍보 덱 9장</td><td>미션 id</td><td>(신규) 결정 대기</td><td>표 담당</td></tr></tbody></table></div>
+
+<p>주사위 환산: 해당 없음(순위 자원 지급 없음).</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>상태</th><th>확인 방법·증거</th><th>다음 작업</th></tr></thead><tbody><tr><td>기획(이 문서 · 책갈피 상세)</td><td>기획 중</td><td>P202 · 이 문서</td><td>현중 확인</td></tr><tr><td>음악 모듈 홍보 기록</td><td>부분 코드 확인·검수 대기</td><td>원표·실제 읽기 경로 대조; 실제 UI·운영 전체 미검수</td><td>관련 화면·저장·통합 검수</td></tr><tr><td>홍보 갈래 시뮬레이터</td><td>개발 끝(시안)</td><td>이 문서 하단</td><td>실제 표 연결</td></tr><tr><td>외부 리드젠 · 본게임 통합</td><td>기획 중 · 작업전</td><td>—</td><td>표 확정 뒤</td></tr></tbody></table></div>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<p>게임 밖 성과가 순위 · 팬 사다리에 들어가지 않고, 게임 밖 보상에 순위 자원이 없어야 합니다.</p>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p>세부 결정과 근거는 책갈피 P202에 둡니다. 제안서 원문 promo.html · 리드젠 v1은 그대로 보존합니다.</p>
+
+<details><summary>작업 기록</summary>
+
+<p>대표 개발 기획서(신규 · 핵심제안서). 상세 정본 P202. 변경 이력은 홍보_핵심제안서.log.md.</p>
+
+</details>
+</section><section class="doc-ui-section" aria-label="하단 시뮬레이터"><h3>홍보 갈래 시뮬레이터 · 임시 시안</h3><p>행동을 누르면 게임 안 · 밖 갈래와 순위 반영 여부, 받는 보상이 나옵니다.</p><details id="sim-preview"><summary>시뮬레이터 펼치기 · 행동 눌러 보기</summary><div data-sim-host="promo"></div></details></section><details class="history"><summary>로그 · 변경 이력과 이전 기록</summary><p><a href="./홍보_핵심제안서.log.md" target="_blank" rel="noopener">이 문서의 로그 열기</a></p></details><details id="source-reading-history"><summary>정정 전 원문과 읽기 검수 기록</summary><p><a href="./홍보_핵심제안서.log.md">짝 로그에서 직전 MD·HTML 전체 원문 보기</a> · 문서·소스 정적 대조이며 새 실행·화면 검수·수치 결정이 아닙니다.</p></details>
+</main></body></html>

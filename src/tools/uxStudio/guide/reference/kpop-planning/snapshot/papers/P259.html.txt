@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>포토카드 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; }
+  .t { position:relative; height:150px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .t .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .t .nm { padding:3px 6px 0; font-weight:700; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .t .gr { padding:0 6px; font-size:11px; color:var(--soft); }
+  .pg { margin:3px 6px 6px; height:16px; border:1.5px solid var(--ln); border-radius:8px; position:relative; font-size:11px; font-weight:700; text-align:center; line-height:13px; overflow:hidden; background:var(--box); }
+  .pg s { position:absolute; left:0; top:0; bottom:0; background:var(--fill); }
+  .pg span { position:relative; }
+  .t .st { position:absolute; top:5px; right:5px; }
+  .t .ty { position:absolute; top:5px; left:5px; width:16px; height:16px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .t.lock { border-style:dashed; background:transparent; align-items:center; justify-content:center; gap:4px; text-align:center; }
+  .cards { position:absolute; left:8px; right:8px; top:436px; display:grid; grid-template-columns:repeat(6,1fr); gap:6px; }
+  .c { position:relative; height:76px; border:1.5px solid var(--ln); border-radius:6px; background:var(--box); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:4px; font-size:11px; font-weight:700; }
+  .c .x { position:absolute; top:3px; right:3px; font-size:11px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+</style>
+</head>
+<body>
+<h1>포토카드 · 와이어프레임 1차 (390×844)</h1>
+<p class="flow">아래 메뉴 포토카드 → ① 목록 → 아이돌 「팀 보기」 → ③-1 팀 보기 · 사람 누르면 ②③ 사람 보기(위쪽 책갈피 능력 / 카드 · 카드 누르면 ②-2) · 아래 「포토카드 팩」 → ④ 팩 보관함(팩 칸 누르면 ④-1 팩 안 카드) → ⑤ 팩 열기 결과 · 목록 아래 「명함집」 또는 스태프 상세 「교체」 → ⑥ 명함집 → 명함 누르면 ⑥-2 · 스카우트 팩 → ⑥-3 → ⑥-4 → ⑦ 교체 확인</p>
+<p class="flow">버튼 자리: 화면 동작은 아래 메뉴 바로 위 버튼 줄 · 창은 제목 왼쪽 위 · ✕ 오른쪽 위 · 동작 버튼은 창 맨 아래</p>
+<div class="row" id="screens"></div>
+
+<script>
+// ── 공용 조각 ──────────────────────────────────────────
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = () => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === 0 ? " on" : ""}" style="left:${i * 65}px"><i></i>${t}</div>`).join("");
+const head = title => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div>
+  <div class="a val" style="left:52px;top:16px;font-size:16px">${title}</div><div class="line" style="top:50px"></div>`;
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const bigBtn = (x, w, label, sub = "", off = false) =>
+  `<div class="b${off ? " off" : ""}" style="left:${x}px;top:706px;width:${w}px;height:60px;flex-direction:column;gap:2px">
+    <span class="val" style="font-size:16px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const bottomBar = inner => `<div class="line" style="top:698px"></div>${inner}${tabs()}`;
+const tile = t => t.g ? `<div class="grp" style="display:flex;justify-content:space-between">${t.g}${t.team ? `<span class="pill" style="font-size:12px;padding:1px 10px">팀 보기 ›</span>` : ""}</div>`
+  : t.lock ? `<div class="t lock"><span class="val">${t.lt || "잠김 00칸"}</span><span class="sub">${t.ls || "다음 자리<br>엔터파워 000"}</span></div>`
+  : `<div class="t"><div class="pic">얼굴</div><i class="ty"></i>${t.st ? `<span class="pill st">${t.st}</span>` : ""}
+     <div class="nm">${t.n}</div><div class="gr" style="display:flex;justify-content:space-between;padding-bottom:6px"><span>${t.gr}</span><span class="val" style="color:var(--ink)">${t.c}/12</span></div></div>`;
+// 12장: ★1×4 · ★2×3 · ★3×2 · ★4×2 · ★5×1
+const STARS = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 4, 5];
+const twelve = own => `<div class="cards">${STARS.map((s, i) =>
+  `<div class="c${own[i] ? "" : " off"}">${own[i] > 1 ? `<span class="x">×${own[i]}</span>` : ""}★${s}</div>`).join("")}</div>`;
+
+// 카드 앞면(카드 디자인 가이드와 같은 틀): 테두리 = ★색 · 이름 · ★ · 그림 · 누구 · 효과 칸 · 번호
+const GC = ["", "#a7adb5", "#8ec5e8", "#8fd19e", "#b9a3e3", "#e2c15a"];
+const face = (w, g, name, who, eff, no, tag = "") => { const big = w > 150, ov = "background:rgba(255,255,255,.88);border-radius:4px;";
+  return `<div style="position:relative;width:${w}px;height:${Math.round(w * 1.4)}px;border:${big ? 7 : 5}px solid ${GC[g]};border-radius:10px;overflow:hidden;background:repeating-linear-gradient(45deg,#e6e8eb 0 8px,#dcdfe3 8px 16px);display:flex;flex-direction:column;padding:4px;gap:3px;text-align:left">
+  <div style="${ov}display:flex;justify-content:space-between;align-items:center;padding:2px 5px;font-size:${big ? 14 : 11}px;font-weight:700;white-space:nowrap"><span>${name}</span><span>${big ? "★".repeat(g) : "★" + g}</span></div>
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--soft);font-size:11px">그림 (전체)</div>
+  <div style="${ov}align-self:flex-start;padding:1px 5px;font-size:11px;font-weight:600;white-space:nowrap;max-width:100%;overflow:hidden">${who}</div>
+  ${big ? `<div style="${ov}border:1.5px solid var(--ln);padding:3px 6px;font-size:12px">${eff.map(([k, v]) => `<div style="display:flex;justify-content:space-between"><span>${k}</span><b>${v}</b></div>`).join("")}</div>` : ""}
+  <div style="${ov}display:flex;justify-content:space-between;padding:1px 5px;font-size:11px;color:var(--soft)"><span>${no}/12</span>${tag ? `<span class="pill" style="color:var(--ink);font-weight:700">${tag}</span>` : ""}</div></div>`; };
+
+// 사람 보기 공용: 큰 캐릭터가 화면 배경 · 능력 줄은 왼쪽에 겹침 · 가운데 띠 = 대표 능력
+// 아래 버튼 줄 = 「능력」「카드」 바꿔 보기 + 그 사람 동작 하나. 획득 연출 ④ 공개도 이 화면을 씀
+const person = ({title, grade, state, lines, band, sub, tab, own, from, effect, act, axes, reward = "고급 포토카드 팩 ×1"}) => head(title) + `
+  <div class="a" style="left:0;top:51px;width:100%;height:647px;background:repeating-linear-gradient(45deg,#eceef0 0 10px,#e3e5e8 10px 20px)"></div>
+  <div class="a" style="left:0;top:51px;width:100%;height:40px;background:var(--pane)"></div>
+  <div class="bm${tab === "능력" ? " on" : ""}" style="left:8px;width:120px">능력</div>
+  <div class="bm${tab === "카드" ? " on" : ""}" style="left:132px;width:120px">카드 00/12</div>
+  <div class="line" style="top:90px"></div>
+  <div class="a" style="left:0;width:100%;top:98px;text-align:center"><span class="val">${grade}</span> ${state ? `<span class="pill">${state}</span>` : ""}</div>
+  <div class="b" style="left:8px;top:${tab === "능력" ? 330 : 170}px;width:32px;height:44px;font-size:16px">‹</div>
+  <div class="b" style="left:350px;top:${tab === "능력" ? 330 : 170}px;width:32px;height:44px;font-size:16px">›</div>` +
+  (tab === "능력" ? `
+  <div class="b off" style="left:110px;top:122px;width:170px;height:276px">큰 캐릭터<br>대표 동작</div>
+  <div class="a" style="left:30px;top:180px;display:flex;flex-direction:column;gap:10px">${lines.map(l =>
+    `<span style="background:rgba(255,255,255,.85);border-radius:4px;padding:2px 6px;font-size:13px">${l}</span>`).join("")}</div>
+  <div class="b" style="left:40px;top:410px;width:310px;height:44px;border-width:2px"><span class="val" style="font-size:17px">${band}</span></div>
+  ${axes ? `<div class="b" style="left:8px;top:464px;width:374px;height:226px;flex-direction:column;align-items:stretch;justify-content:space-around;padding:6px 12px 6px 22px">${axes.map(([k, now, tal], i) => `
+    <div style="display:flex;align-items:center;gap:8px;font-size:12px">
+      <span style="width:66px;font-weight:${i ? 400 : 700}">${i ? "" : "★"}${k}</span>
+      <span class="val" style="width:40px;text-align:right">${now}</span>
+      <span style="position:relative;flex:1;height:10px;border:1.5px solid var(--ln);border-radius:5px;background:linear-gradient(90deg,var(--fill) ${parseFloat(now) / 100 * 100}%,var(--box) 0)">
+        <i style="position:absolute;left:calc(${parseFloat(tal)}% - 6px);top:-4px;width:12px;height:12px;background:var(--ink);transform:rotate(45deg)"></i></span>
+      <span class="sub" style="width:40px;text-align:right;font-size:11px">${tal}</span></div>`).join("")}
+    <div class="sub" style="font-size:11px;text-align:right">막대 = 지금 · ◆ = 재능선(갈 수 있는 끝)</div></div>` : `
+  <div class="b" style="left:8px;top:470px;width:374px;height:36px;justify-content:space-between;padding:0 12px 0 22px">
+    <span class="sub" style="font-size:12px">카드 효과</span><span class="val">${effect}</span></div>
+  <div class="b" style="left:8px;top:514px;width:374px;height:30px;justify-content:space-between;padding:0 12px 0 22px;font-size:12px">
+    <span class="sub" style="font-size:12px">6축</span><span><span class="val">합 000</span> ▼</span></div>`}
+  ${sub ? `<div class="a sub" style="left:0;width:100%;top:560px;text-align:center;font-size:12px">${sub}</div>` : ""}` : `
+  <div class="b off" style="left:130px;top:122px;width:130px;height:128px">큰 캐릭터</div>
+  <div class="a" style="left:8px;top:262px;right:8px;display:flex;justify-content:space-between;align-items:center;background:var(--pane);padding:6px 8px 6px 28px">
+    <span class="val">카드 00/12</span><span class="sub" style="font-size:12px">${from}에서 나와요</span></div>
+  <div class="cards" style="top:300px;grid-template-columns:repeat(4,1fr);gap:8px">${STARS.map((st, i) =>
+    `<div class="c${own[i] ? "" : " off"}" style="height:110px">${own[i] > 1 ? `<span class="x">×${own[i]}</span>` : ""}★${st}</div>`).join("")}</div>
+  <div class="b" style="left:8px;top:654px;width:374px;height:36px;justify-content:space-between;padding:0 8px 0 22px">
+    <span class="sub" style="font-size:12px">12장 완성 보상</span><span style="display:flex;align-items:center;gap:8px"><span class="val">${reward}</span><span class="pill off" style="font-size:12px;padding:1px 10px">받기</span></span></div>`) +
+  bottomBar(`
+  ${act}`);
+const actBtn = (label, sub, off = false) =>
+  `<div class="b${off ? " off" : ""}" style="left:8px;top:706px;width:374px;height:60px;flex-direction:column;gap:2px"><span class="val" style="font-size:15px">${label}</span><span class="sub">${sub}</span></div>`;
+const STAFF = { title: "이름 (직업)", grade: "★★★", state: "배치 중", effect: "앞으로 얻는 양 +00%", from: "기획사 포토카드 팩",
+  lines: ["고정 능력 이름 +00", "맡는 세부 · 딕션 · 발성", "갈 수 있는 스케줄 0개"], band: "주요 능력 · 보컬 00",
+  own: [2, 1, 1, 0, 1, 3, 0, 1, 0, 0, 0, 0], act: actBtn("교체", "12/12 모으면 열려요 · 명함집에서 고르기", true) };
+const IDOL = { title: "예명", grade: "연습생", state: "", effect: "카드로 오른 능력 +000", from: "아이돌 포토카드 팩",
+  lines: ["특기 ★보컬", "재능선까지 00%", "다음 단계 데뷔조"], band: "연습생 · 6축 평균 0.0K",
+  axes: [["보컬", "5.7K", "80K"], ["댄스", "6.3K", "38K"], ["랩", "6.3K", "35K"], ["비주얼", "8.3K", "50K"], ["끼·예능감", "7.0K", "37K"], ["프로듀싱", "5.3K", "40K"]],
+  own: [1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0], act: actBtn("캐릭터 정보", "능력 세부 · 컨디션 · 라포") };
+
+// 목록 화면을 뒤에 깔고 창을 띄울 때 쓰는 흐린 배경
+const listBehind = () => head("포토카드") + tabs() + `<div class="dimbg"></div>`;
+
+// ── 화면 ──────────────────────────────────────────────
+const SCREENS = [
+  { cap: "① 목록", html: head("포토카드") + `
+      <div class="bm on" style="left:8px;width:88px">전체</div><div class="bm" style="left:100px;width:88px">아이돌</div>
+      <div class="bm" style="left:192px;width:88px">스태프</div><div class="bm" style="left:284px;width:98px">팬클럽</div>
+      <div class="line" style="top:90px"></div>
+      <div class="grid">${[
+        { g: "아이돌 00/30", team: true }, { n: "예명", gr: "데뷔조", c: 5 }, { n: "예명", gr: "연습생", c: 2 }, { lock: true },
+        { g: "스태프 9" }, { n: "이름 (직업)", gr: "★★★", c: 12, st: "배치 중" }, { n: "이름 (직업)", gr: "★", c: 4, st: "배치 중" },
+        { n: "이름 (직업)", gr: "★★", c: 0, st: "대기" },
+        { g: "팬클럽 1" }, { lock: true, lt: "회장 빈 자리", ls: "공식 데뷔 때 열림<br>팬 수 문턱마다 회장" },
+      ].map(tile).join("")}</div>
+      ${n(1, 2, 62)}${n(2, 2, 122)}${n(3, 268, 122)}${n(4, 2, 700)}${n(5, 193, 700)}` + bottomBar(bigBtn(8, 183, "포토카드 팩", "가진 팩 00") + bigBtn(199, 183, "명함집", "명함 00")),
+    notes: ["사람 종류로 거르기", "타일 1장 = 사람 1명 · 카드 n/12 · 누르면 사람 보기 · 「팀 보기」 → ③-1", "잠긴 아이돌 자리는 한 칸으로 접음 · 회장 자리는 처음엔 비어 있음", "포토카드 팩 보관함(창) · 열기는 그 안에서", "명함집 페이지"] },
+
+  { cap: "② 사람 보기 · 능력 (스태프 / 팬클럽 회장)", html: person({ ...STAFF, tab: "능력" }) +
+      `${n(1, 46, 336)}${n(2, 4, 180)}${n(3, 30, 404)}${n(4, 2, 474)}${n(5, 256, 62)}${n(6, 2, 700)}`,
+    notes: ["‹ › 같은 줄의 다음 사람", "능력 줄 · 캐릭터 위에 겹침 · 회장은 팬 효과 · 팬 수 문턱", "가운데 띠 = 가장 큰 능력", "카드 효과 · 6축은 접어 둠", "위쪽 책갈피 능력 / 카드 · 같은 화면에서 바꿔 봄", "아래 버튼 = 이 사람에게 하는 동작 하나 · 12장 다 모으면 교체 → ⑥ 명함집"] },
+
+  { cap: "②-1 사람 보기 · 카드 (위쪽 「카드」 책갈피)", html: person({ ...STAFF, tab: "카드" }) +
+      `${n(1, 4, 264)}${n(2, 4, 296)}${n(3, 2, 662)}${n(4, 256, 62)}`,
+    notes: ["카드 00/12 · 얻는 곳", "12장 · 없는 카드는 흐림 · 누르면 ②-2 카드 보기", "12장 완성 보상 · 고급 포토카드 팩(R-05-16) · 회장은 팬 상한 +10% · 다 모으면 「받기」 켜짐", "「카드」 책갈피 · 같은 화면이라 깊이 그대로 · 아래 버튼은 그대로 교체"] },
+
+  { cap: "③ 사람 보기 · 아이돌", html: person({ ...IDOL, tab: "능력" }) +
+      `${n(1, 4, 180)}${n(2, 30, 404)}${n(3, 2, 470)}${n(4, 2, 700)}`,
+    notes: ["특기 · 재능선까지 % · 다음 단계", "가운데 띠 = 지금 단계(연습생 · 데뷔조 · 라이징 스타 · 톱스타 · 월드스타) · 6축 평균", "6축마다 지금 값과 재능선 ◆ · 특기 축은 ★ · 세부는 현황판 · 캐릭터 정보", "아래 버튼 = 캐릭터 정보창 바로 가기 · 카드는 위쪽 「카드」 책갈피"] },
+
+  { cap: "③-1 팀 보기 (「팀 보기」를 누르면)", html: head("팀 이름") + `
+      <div class="a" style="left:0;top:51px;width:100%;height:647px;background:repeating-linear-gradient(45deg,#eceef0 0 10px,#e3e5e8 10px 20px)"></div>
+      <div class="b" style="left:8px;top:58px;width:32px;height:30px;font-size:16px">‹</div>
+      <div class="b" style="left:350px;top:58px;width:32px;height:30px;font-size:16px">›</div>
+      <div class="a" style="left:0;width:100%;top:64px;text-align:center"><span class="val">팀 1/3</span></div>
+      <div class="b off" style="left:60px;top:96px;width:270px;height:130px">멤버 단체 그림</div>
+      <div class="b" style="left:40px;top:236px;width:310px;height:44px;border-width:2px"><span class="val" style="font-size:17px">대세 · 팀 능력 합 0,000</span></div>
+      <div class="b" style="left:8px;top:290px;width:374px;height:40px;justify-content:flex-start;gap:10px;padding:0 12px 0 22px">
+        <span class="sub" style="font-size:12px;white-space:nowrap">다음 등급 톱티어</span>
+        <span style="flex:1;height:10px;border:1.5px solid var(--ln);border-radius:5px;background:linear-gradient(90deg,var(--fill) 45%,var(--box) 0)"></span>
+        <span class="val">0,000 / 2,400</span></div>
+      <div class="b" style="left:8px;top:340px;width:374px;height:206px;flex-direction:column;align-items:stretch;justify-content:space-around;padding:6px 12px 6px 22px">
+        ${[["보컬", 70, "예명"], ["댄스", 50, "예명"], ["랩", 40, "예명"], ["비주얼", 60, "예명"], ["끼·예능감", 45, "예명"], ["프로듀싱", 35, "예명"]].map(([k, v, w]) => `
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px">
+          <span style="width:66px">${k}</span><span class="val" style="width:40px;text-align:right">0.0K</span>
+          <span style="flex:1;height:10px;border:1.5px solid var(--ln);border-radius:5px;background:linear-gradient(90deg,var(--fill) ${v}%,var(--box) 0)"></span>
+          <span class="sub" style="width:58px;text-align:right;font-size:11px">최고 ${w}</span></div>`).join("")}
+        <div class="sub" style="font-size:11px;text-align:right">막대 = 팀 값 · 오른쪽 = 그 축이 가장 높은 멤버</div></div>
+      <div class="a" style="left:8px;right:8px;top:556px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+        ${["연습생", "데뷔조", "연습생", "데뷔조"].map(g => `<div class="b" style="position:relative;height:130px;flex-direction:column;gap:4px;padding:6px">
+          <span class="b off" style="position:static;width:56px;height:56px;font-size:11px">얼굴</span><span class="val" style="font-size:12px">예명</span><span class="sub">${g}</span><span class="sub">평균 0.0K</span></div>`).join("")}</div>` +
+      bottomBar(actBtn("캐릭터 정보", "팀 책갈피 · 팀 6축 · 팀 등급")) +
+      `${n(1, 46, 62)}${n(2, 30, 230)}${n(3, 2, 300)}${n(4, 2, 346)}${n(5, 2, 560)}${n(6, 2, 700)}`,
+    notes: ["‹ › 팀 바꾸기(계정당 3팀까지)", "가운데 띠 = 팀 등급(루키 · 대세 · 톱티어 · 국민돌 · 글로벌 아이콘) · 팀 능력 합", "다음 등급까지 팀 능력 합 · 팀 등급은 팀 아이돌 능력 합으로만 정함", "팀 6축 · 축마다 가장 높은 멤버", "멤버 · 누르면 그 아이돌 사람 보기(③)", "캐릭터 정보창 팀 책갈피 바로 가기"] },
+
+  { cap: "②-2 카드 보기 (창 · 12장 중 하나를 누르면)", html: head("이름 (직업)") + tabs() + `<div class="dimbg"></div>
+      <div class="win" style="left:16px;top:130px;width:358px;height:500px">
+        <div class="a val" style="left:16px;top:14px;font-size:16px">카드</div>
+        <div class="b" style="right:10px;top:8px;width:30px;height:30px">✕</div>
+        <div class="b" style="left:8px;top:200px;width:30px;height:40px;font-size:16px">‹</div>
+        <div class="b" style="left:316px;top:200px;width:30px;height:40px;font-size:16px">›</div>
+        <div class="a" style="left:54px;top:46px">${face(250, 3, "카드 이름", "이름 · 보컬·랩 코치", [["딕션", "+00"], ["발성", "+00"], ["플로우", "+00"]], "08")}</div>
+        <div class="a" style="left:16px;right:16px;top:408px;display:flex;justify-content:space-between;border-bottom:1px solid #d5d8dc;padding:0 0 6px 22px">
+          <span class="sub" style="font-size:12px">가진 수</span><span class="val">×2</span></div>
+        <div class="a" style="left:16px;right:16px;top:440px;display:flex;justify-content:space-between;padding-left:22px">
+          <span class="sub" style="font-size:12px">얻는 곳</span><span class="val">기획사 포토카드 팩</span></div>
+      </div>${n(1, 56, 178)}${n(2, 56, 400)}${n(3, 22, 540)}`,
+    notes: ["카드 앞면 그대로 크게 · 그림은 꽉 차고 이름 · 능력은 겹쳐 올림(카드 디자인 가이드)", "효과 칸 · 아이돌·스태프 능력 = 세부 +값 · 기획사·회장 = 효과 +%", "가진 수 · 얻는 곳 · ‹ › 로 12장 넘기기 · 없는 카드는 그림만 흐림"] },
+
+  { cap: "④ 팩 보관함 (창)", html: listBehind() + `
+      <div class="win" style="left:16px;top:150px;width:358px;height:470px">
+        <div class="a val" style="left:16px;top:14px;font-size:16px">포토카드 팩</div>
+        <div class="b" style="right:10px;top:8px;width:30px;height:30px">✕</div>
+        <div class="a sub" style="left:16px;top:44px;font-size:12px">한 팩에 카드 3장</div>
+        ${["아이돌", "기획사", "팬"].map((k, r) => `<div class="a val" style="left:16px;top:${70 + r * 130}px">${k} 포토카드 팩</div>` +
+          ["일반 ★1~3", "고급 ★2~4", "최고급 ★3~5"].map((g, c) => `
+          <div class="b" style="left:${16 + c * 112}px;top:${92 + r * 130}px;width:104px;height:100px;flex-direction:column;gap:5px">
+            <span class="sub" style="font-size:12px">${g}</span><span class="val">×00</span>
+            <span class="pill${r === 2 && c === 2 ? " off" : ""}" style="font-size:12px;padding:1px 10px">열기</span></div>`).join("")).join("")}
+      </div>${n(1, 22, 236)}${n(2, 114, 316)}`,
+    notes: ["팩 9종 = 아이돌 · 기획사 · 팬 × 일반 · 고급 · 최고급", "가진 팩만 「열기」가 켜짐 · 팩 칸을 누르면 ④-1 나올 수 있는 카드"] },
+
+  { cap: "④-1 팩 안 카드 (창 · 팩 칸을 누르면)", html: listBehind() + `
+      <div class="win" style="left:16px;top:110px;width:358px;height:600px">
+        <div class="b" style="left:10px;top:8px;width:30px;height:30px;font-size:16px">←</div>
+        <div class="a val" style="left:48px;top:14px;font-size:16px">기획사 포토카드 팩 · 고급</div>
+        <div class="b" style="right:10px;top:8px;width:30px;height:30px">✕</div>
+        <div class="a" style="left:36px;right:16px;top:50px;display:flex;justify-content:space-between;font-size:12px">
+          <span class="sub" style="font-size:12px">나올 수 있는 카드 · ★2~★4 · 앉은 사람 카드</span><span class="val">00장</span></div>
+        ${[["이름 (보컬·랩)", [2, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0]], ["이름 (댄스)", [1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0]], ["이름 (작곡)", [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]].map(([who, own], r) => `
+          <div class="a" style="left:36px;right:16px;top:${78 + r * 140}px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span class="b off" style="position:static;width:24px;height:24px;font-size:11px;border-radius:4px">얼</span><span class="val">${who}</span><span class="sub" style="margin-left:auto;font-size:12px">${own.filter(Boolean).length}/12</span></div>
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:5px">${STARS.map((st, i) => { const inR = st >= 2 && st <= 4;
+              return `<div class="c" style="position:relative;height:44px;${inR ? (own[i] ? "" : "background:var(--box)") : "opacity:.35;border-style:dashed"}">${own[i] ? "" : inR ? '<span class="x" style="font-size:11px">없음</span>' : ""}★${st}</div>`; }).join("")}</div></div>`).join("")}
+        <div class="a sub" style="left:0;width:100%;top:500px;text-align:center;font-size:12px">… 9명 · 흐린 칸 = 이 팩에서 안 나옴</div>
+        <div class="b" style="left:16px;top:530px;width:326px;height:52px;flex-direction:column;gap:1px"><span class="val" style="font-size:16px">열기</span><span class="sub">가진 팩 ×00</span></div>
+      </div>${n(1, 24, 160)}${n(2, 24, 192)}${n(3, 22, 646)}`,
+    notes: ["팩 이름 · 별 범위 · 누구의 카드가 나오는지 · ← 하면 ④ 보관함", "사람마다 12장 · 이 팩에서 나오는 칸만 진하게 · 아직 없는 칸에 「없음」", "여기서 바로 열기"] },
+
+  { cap: "⑤ 팩 열기 결과 (창)", html: listBehind() + `
+      <div class="win" style="left:16px;top:200px;width:358px;height:380px">
+        <div class="a val" style="left:0;width:100%;top:16px;text-align:center;font-size:16px">기획사 포토카드 팩 · 고급</div>
+        <div class="a" style="left:0;width:100%;top:56px;display:flex;justify-content:center;gap:10px">${[[2, "NEW", "03"], [3, "×2", "08"], [4, "NEW", "10"]].map(([g, t, no]) =>
+          face(104, g, "카드 이름", "이름 (직업)", [], no, t)).join("")}</div>
+        <div class="b" style="left:16px;top:300px;width:156px;height:56px;font-weight:700;font-size:15px">한 팩 더</div>
+        <div class="b" style="left:186px;top:300px;width:156px;height:56px;font-weight:700;font-size:15px">확인</div>
+      </div>${n(1, 4, 330)}${n(2, 22, 492)}`,
+    notes: ["카드 앞면 3장을 한 장씩 뒤집어 공개 · 처음 카드는 NEW, 중복은 ×n", "같은 팩이 남으면 「한 팩 더」 · 확인하면 보관함"] },
+
+  { cap: "⑥ 명함집 (페이지)", html: head("명함집") + `
+      <div class="a sub" style="right:12px;top:18px;font-size:12px">명함 00/00</div>
+      <div class="a" style="left:26px;top:60px;display:flex;gap:5px">${["전체", "보컬·랩", "댄스", "작곡", "연기", "팬클럽 회장", "…"].map((c, i) =>
+        `<span class="pill" style="font-size:12px;padding:2px 8px;${i ? "" : "background:var(--fill);color:#fff"}">${c}</span>`).join("")}</div>
+      <div class="a" style="left:8px;right:8px;top:94px;height:540px;border:1.5px solid var(--ln);border-radius:10px;background:#eceef0;padding:10px;display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:120px;gap:10px">
+        ${[["★★★", "보컬·랩", "배치 중", "보컬", 12], ["★★★★", "보컬·랩", "", "랩", 3], ["★★", "댄스", "배치 중", "댄스", 7], ["★", "댄스", "", "비주얼", 0],
+           ["★★★★★", "작곡", "", "프로듀싱", 1], ["★★", "연기", "배치 중", "끼·예능감", 12], null, null].map(m => m ? `
+          <div style="position:relative;border:1.5px solid var(--ln);border-radius:4px;background:var(--box);padding:8px 8px 6px;display:flex;flex-direction:column;box-shadow:0 1px 0 #c9ccd1">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span class="b off" style="position:static;width:36px;height:18px;font-size:11px;border-radius:3px">로고</span><span class="val" style="font-size:11px">${m[0]}</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+              <span class="b off" style="position:static;width:36px;height:42px;font-size:11px;border-radius:4px">얼굴</span>
+              <span style="text-align:left"><span class="val" style="font-size:15px">이름</span><br><span class="sub" style="font-size:11px">${m[1]}</span></span></div>
+            <span style="margin-top:auto;font-size:12px;display:flex;justify-content:space-between"><span><span class="sub" style="font-size:11px">주요 능력</span> <span class="val">${m[3]} 00</span></span><span class="val">${m[4]}/12</span></span>
+            ${m[2] ? `<span class="pill" style="position:absolute;right:6px;top:30px;transform:rotate(-8deg);border-width:2px;font-weight:700">${m[2]}</span>` : ""}
+          </div>` : `<div style="border:1.5px dashed var(--soft);border-radius:4px;display:flex;align-items:center;justify-content:center" class="sub">빈 칸</div>`).join("")}
+      </div>
+      <div class="b" style="left:8px;top:644px;width:40px;height:40px;font-size:16px">‹</div>
+      <div class="a val" style="left:0;width:100%;top:655px;text-align:center;letter-spacing:4px">● ○ ○</div>
+      <div class="b" style="left:342px;top:644px;width:40px;height:40px;font-size:16px">›</div>
+      ${n(1, 2, 60)}${n(2, 2, 100)}${n(3, 172, 100)}${n(4, 54, 648)}${n(5, 2, 700)}` + bottomBar(bigBtn(8, 374, "스카우트 팩", "가진 팩 00")),
+    notes: ["직업으로 거르기 · 스태프 · 팬클럽 회장만(아이돌은 캐스팅)", "명함 1장 = 사람 1명 · 로고 · ★ · 얼굴 · 이름 · 직업 · 주요 능력 · 카드 n/12(누구를 앉힐지 비교)", "앉아 있는 사람은 「배치 중」 도장", "명함첩처럼 한 장에 8칸 · 넘겨 보기", "스카우트 팩 보관함(창) · 새 명함(사람) 받기 → ⑥-3"] },
+
+  { cap: "⑥-2 명함 크게 보기 (명함을 누르면)", html: head("명함집") + tabs() + `<div class="dimbg"></div>
+      <div class="win" style="left:16px;top:96px;width:358px;height:600px">
+        <div class="b" style="right:10px;top:8px;width:30px;height:30px">✕</div>
+        <div class="a val" style="left:16px;top:14px;font-size:16px">명함</div>
+        <div class="a sub" style="left:16px;top:44px;font-size:12px">앞면</div>
+        <div class="a" style="left:16px;top:62px;width:326px;height:184px;border:2px solid var(--ln);border-radius:6px;background:var(--box);padding:14px 16px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span class="b off" style="position:static;width:64px;height:24px;font-size:11px;border-radius:3px">기획사 로고</span><span class="val" style="font-size:15px">★★★★</span></div>
+          <div style="display:flex;align-items:center;gap:16px;margin-top:20px">
+            <span class="b off" style="position:static;width:76px;height:92px;font-size:11px">얼굴</span>
+            <span><span class="val" style="font-size:22px">이름</span><br><span style="font-size:13px">직함 · 보컬·랩</span><br><span class="sub" style="font-size:12px">기획사 이름</span></span></div>
+        </div>
+        <div class="a sub" style="left:16px;top:254px;font-size:12px">뒷면</div>
+        <div class="a" style="left:16px;top:272px;width:326px;height:222px;border:2px solid var(--ln);border-radius:6px;background:var(--box);padding:10px 16px;display:flex;flex-direction:column;gap:7px">
+          <div style="display:flex;justify-content:space-between"><span class="sub" style="font-size:12px">카드</span><span class="val">3/12</span></div>
+          <div style="display:flex;justify-content:space-between"><span class="sub" style="font-size:12px">6축</span><span class="val">합 000</span></div>
+          <div style="display:flex;justify-content:space-between"><span class="sub" style="font-size:12px">고정 능력</span><span class="val">능력 이름 +00</span></div>
+          <div style="display:flex;justify-content:space-between"><span class="sub" style="font-size:12px">갈 수 있는 스케줄</span><span class="val">스케줄 이름 · 0개</span></div>
+          <div style="border-top:1px dashed var(--soft);padding-top:6px;font-size:12px;font-weight:700">앉히면 (지금 → 바꾼 뒤)</div>
+          <div style="display:flex;justify-content:space-between"><span class="sub" style="font-size:12px">앞으로 얻는 양</span><span class="val">+00% → +00%</span></div>
+          <div style="display:flex;justify-content:space-between"><span class="sub" style="font-size:12px">갈 수 있는 스케줄</span><span class="val">0 → 0 · 열림 0 · 닫힘 0</span></div>
+        </div>
+        <div class="b" style="left:16px;top:506px;width:110px;height:52px;font-weight:700;font-size:15px">내보내기</div>
+        <div class="b" style="left:134px;top:506px;width:208px;height:52px;font-weight:700;font-size:16px">이 자리에 앉히기</div>
+        <div class="a sub" style="left:0;width:100%;top:566px;text-align:center;font-size:12px">앉히기 = 지금 앉은 사람 12/12일 때 · 내보내기 = 대기 중만</div>
+      </div>${n(1, 22, 154)}${n(2, 22, 364)}${n(3, 22, 598)}`,
+    notes: ["앞면 = 진짜 명함처럼 · 로고 · ★ · 얼굴 · 이름 · 직함", "뒷면 = 카드 n/12 · 6축 · 고정 능력 · 스케줄 · 앉히면 지금 → 바꾼 뒤(얻는 양 · 스케줄 열림/닫힘)", "앉히기 → ⑦ 교체 확인 · 내보내기는 배치 중이 아닌 명함만"] },
+
+  { cap: "⑥-3 스카우트 팩 (창 · 명함집에서 엶)", html: head("명함집") + tabs() + `<div class="dimbg"></div>
+      <div class="win" style="left:16px;top:170px;width:358px;height:430px">
+        <div class="a val" style="left:16px;top:14px;font-size:16px">스카우트 팩</div>
+        <div class="b" style="right:10px;top:8px;width:30px;height:30px">✕</div>
+        <div class="a sub" style="left:16px;top:44px;font-size:12px">한 팩에 명함(사람) 1장 · <b style="color:var(--ink)">★5 확정까지 00번</b></div>
+        ${[["일반", "★1~3"], ["고급", "★2~4"], ["최고급", "★3~5"], ["★5 보장", "★5"]].map(([k, r], i) => `
+          <div class="b" style="left:${16 + (i % 2) * 167}px;top:${76 + Math.floor(i / 2) * 166}px;width:159px;height:150px;flex-direction:column;gap:8px">
+            <span class="b off" style="position:static;width:56px;height:56px;font-size:11px">팩</span>
+            <span class="val">${k} <span class="sub" style="font-size:12px">${r}</span></span><span class="val">×00</span>
+            <span class="pill" style="font-size:12px;padding:1px 12px">열기</span></div>`).join("")}
+      </div>${n(1, 22, 236)}${n(2, 300, 212)}`,
+    notes: ["스카우트 팩 4종 · 카드 없이 사람만 줌 · ★5 확정까지 남은 횟수(천장)", "팬클럽 회장은 여기서 안 나옴 · 팬 수 문턱마다 회장 팩"] },
+
+  { cap: "⑥-4 스카우트 결과 (창)", html: head("명함집") + tabs() + `<div class="dimbg"></div>
+      <div class="win" style="left:16px;top:170px;width:358px;height:430px">
+        <div class="a val" style="left:0;width:100%;top:16px;text-align:center;font-size:16px">새 명함을 받았어요</div>
+        <div class="a" style="left:16px;top:52px;width:326px;height:184px;border:2px solid var(--ln);border-radius:6px;background:var(--box);padding:14px 16px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span class="b off" style="position:static;width:64px;height:24px;font-size:11px;border-radius:3px">기획사 로고</span>
+            <span><span class="pill" style="border-width:2px;font-weight:700">NEW</span> <span class="val" style="font-size:15px">★★★</span></span></div>
+          <div style="display:flex;align-items:center;gap:16px;margin-top:20px">
+            <span class="b off" style="position:static;width:76px;height:92px;font-size:11px">얼굴</span>
+            <span><span class="val" style="font-size:22px">이름</span><br><span style="font-size:13px">직함 · 댄스</span><br><span class="sub" style="font-size:12px">기획사 이름</span></span></div>
+        </div>
+        <div class="a" style="left:16px;right:16px;top:242px;display:flex;justify-content:space-between;font-size:12px"><span class="sub" style="font-size:12px">케미 미리보기</span><span class="val">예명 · 예명과 잘 맞음</span></div>
+        <div class="a" style="left:16px;right:16px;top:266px;text-align:center;font-size:12px;color:var(--soft)">같은 직업 · 같거나 낮은 등급이면 놓아주기</div>
+        <div class="b" style="left:16px;top:290px;width:156px;height:56px;font-weight:700;font-size:15px">놓아주기</div>
+        <div class="b" style="left:186px;top:290px;width:156px;height:56px;font-weight:700;font-size:15px">명함집에 넣기</div>
+        <div class="b" style="left:16px;top:356px;width:326px;height:52px;font-weight:700;font-size:15px">바로 앉히기</div>
+      </div>${n(1, 22, 216)}${n(2, 22, 454)}${n(3, 22, 520)}`,
+    notes: ["열기 → 획득 연출(사람 보기로 능력 공개) 뒤 이 창 · 처음 사람은 NEW · 케미 미리보기", "명함집에 넣거나, 놓아주고 앉은 사람 카드 1장 받기", "그 자리 사람이 12/12면 바로 앉히기 → ⑦"] },
+
+  { cap: "⑦ 교체 확인 (창)", html: head("이름 (직업)") + tabs() + `<div class="dimbg"></div>
+      <div class="win" style="left:24px;top:290px;width:342px;height:230px">
+        <div class="a val" style="left:0;width:100%;top:18px;text-align:center;font-size:16px">교체할까요?</div>
+        <div class="a" style="left:20px;right:20px;top:54px;text-align:center;line-height:1.6">
+          ○○ 자리의 △△을(를) □□(으)로 바꿉니다.<br>△△ 명함은 명함집으로 돌아가요.<br>△△의 카드는 △△에게 남아요.</div>
+        <div class="b" style="left:20px;top:160px;width:142px;height:52px;font-weight:700;font-size:15px">취소</div>
+        <div class="b" style="left:180px;top:160px;width:142px;height:52px;font-weight:700;font-size:15px">교체</div>
+      </div>${n(1, 196, 446)}`,
+    notes: ["교체하면 ②가 새 사람으로 · 앉았던 사람은 명함집으로"] },
+];
+
+document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+</script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!doctype html><html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P231 · 시티 투어 · 대표 개발 기획서</title><link rel="stylesheet" href="../%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/format.css"><link rel="stylesheet" href="../%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/sample-document.css"><style>.table-scroll{overflow:auto}.mermaid svg{max-width:100%;height:auto}.doc-diagram{overflow:auto}</style><style data-music-diagram-fit>.sample-document .part img{max-width:100%;height:auto;display:block}</style></head><body class="sample-document"><main><header><div class="eyebrow">P231 · 기획서</div><h1>시티 투어 · 대표 개발 기획서</h1><p><strong>앨범 재화로 차에 급유하고, 참여 아이돌의 능력으로5팀이5바퀴를 경쟁하는 선택 이벤트입니다. 주사위와 아이돌 카드를 받습니다.</strong></p>
+<p><strong>현재 상태:</strong> 기존 로컬 레이싱은 연결되어 있습니다. 속도 50%는 설정에 반영했습니다. 실제 실행 목표는 10바퀴이며, 기획의 5바퀴 전환은 별도 후속입니다. 기존 경기는 원래 동결 속도로 복원하며, 보드 획득부터 급유까지의 전체 검증은 남아 있습니다. 보상·경제 후속은 그룩 담당입니다.</p>
+</header><nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav><section class="part" id="part-1"><h2>1. 개요</h2><p><img src="/event/cityTour/design/racing3d-flow.svg" alt="차고부터 시상·주사위카드 수령까지 쉬운 흐름"></p>
+<p><strong>재화는 달릴 거리, 아이돌 능력은 달리는 속도</strong>를 정합니다. 초반에 앞서도 뒷심 좋은 상대에게 추월당할 수 있습니다. 토너먼트는 후보이며 현재 경기 규칙에 포함하지 않습니다.</p>
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+<th>원본</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%8B%9C%ED%8B%B0%ED%88%AC%EC%96%B4_%EC%83%81%EC%84%B8_v1.html">P232 · 계산·저장 상세</a></td>
+<td>같은 규칙의 UI 설명과 개발 계약</td>
+</tr>
+<tr>
+<td><a href="%EC%95%A8%EB%B2%94%EB%B0%9C%EB%A7%A4_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">앨범 발매</a> · <a href="%EC%9D%8C%EC%95%85%EB%B0%A9%EC%86%A1%EC%B0%A8%ED%8A%B8_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">음악 차트</a></td>
+<td>재화 획득·동일 리그·실적 연결</td>
+</tr>
+<tr>
+<td><a href="%ED%8C%AC%EA%B3%BC%EC%88%98%EC%9D%B5_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">팬과 수익</a></td>
+<td>재화·능력의 인원 공평성과 정산 경계</td>
+</tr>
+<tr>
+<td><a href="/src/simulator/adventure/exploration-reward-view.mjs">모험 보상 UI</a></td>
+<td>rewardIcons 표시 재사용</td>
+</tr>
+<tr>
+<td><a href="/src/simulator/adventure/exploration-cards.mjs">모험 카드 추첨/획득</a></td>
+<td>현재 단계 아이돌 카드·고정 추첨 명세</td>
+</tr>
+<tr>
+<td><a href="/src/simulator/shared/adventure-growth-bridge.mjs">공통 성장 연결</a></td>
+<td>실제 지급 single writer/영수증 계약 조사 원본</td>
+</tr>
+</tbody></table></div>
+<p>모노카피바라와 기존 하늘길은 패키지·봇·수명 관리 구조의 읽기 대조 원본입니다. 모노의 수치·봇수·코인지갑을 복사하지 않습니다. 기존 성실성·태도·성향 원본은6장에 연결합니다.</p>
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2><p><strong><a href="/docs/planning/game-simulator.html?module=simulator_module_album_release">게임 시뮬레이터 앨범</a> → 발매한 앨범 선택 → 시티 투어 참가 → 차량 선택</strong>로 들어갑니다. 진행 중이면 같은 경기 이어하기입니다. 같은 음악 인스턴스/현재 저장 범위와 albumId를 유지하고 새 팀을 만들지 않습니다.</p>
+<p>앨범 경로는 현재 보유 재화·앨범 참여 멤버·차트 리그를 사용합니다. 추가 입장비는 없고 급유할 때만 재화를 차감합니다. 자료가 없으면 대기 사유, 재화가0이면 보드에서 모으기를 표시합니다. 보상을 수령하면 유효한 현재 성장/카드 원장으로 연결합니다.</p>
+<p><a href="/event/cityTour/racing3d.html">직접 독립3D</a>와 미니게임 목록은 비교용 명시 로컬 봇 시험입니다. 그 경로의80재화/24시간/시험 수령은 앨범 지갑으로 옮기지 않습니다. 레이싱2d는 기존 비교 실행으로 보존합니다. 명시 시티 단독 실행은 발매 시험곡·같은 로컬 리그·급유 재화80개를 처음 한 번 준비하여 앨범을 직접 만들기 전에도 시험할 수 있습니다. 기존 초안·발매곡·소모한 재화는 보존합니다.</p>
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2><h3>앨범 버프·보드·급유 연결</h3>
+<figure class="doc-diagram"><div class="mermaid">flowchart LR
+ A[&quot;앨범 발매&quot;] --&gt; B[&quot;앨범 이벤트 버프 1일&quot;]
+ B --&gt; C[&quot;보드 활동 실적 적립&quot;]
+ C --&gt; D[&quot;출발점 통과 정산&quot;]
+ D --&gt; E[&quot;앨범 이벤트 재화&quot;]
+ E --&gt; F[&quot;내 차 급유 · 1개당 ¼바퀴&quot;]
+ F --&gt; G[&quot;5팀 · 5바퀴 레이스&quot;]
+ G --&gt; H[&quot;최종 순위 · 주사위/카드&quot;]
+</div></figure>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>현재 기획</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>획득 기간</td>
+<td>선택 앨범의 원본 차트 이벤트 시작부터 1일. 참가나 메뉴 이동으로 연장하지 않음</td>
+</tr>
+<tr>
+<td>적립/지급</td>
+<td>기간 내 유효 보드 활동분을 적립하고 기존 출발점 통과 정산에서 전용 재화 지급</td>
+</tr>
+<tr>
+<td>재화</td>
+<td>기존 albumEventWallet를 급유와 함께 사용. 현금 수익에 더하지 않고 두 번째 연료 재화를 만들지 않음</td>
+</tr>
+<tr>
+<td>거리</td>
+<td>재화 1개=¼바퀴, 4개=1바퀴, 20개=5바퀴. 속도와 멤버 수로 단위 거리를 바꾸지 않음</td>
+</tr>
+<tr>
+<td>속도</td>
+<td>같은 능력 입력 기준 기존 주행 속도의 50%. 기본 한 바퀴 시간 6초→12초, 초·중·후반 능력 배율은 유지</td>
+</tr>
+<tr>
+<td>종료</td>
+<td>버프 마감 후 새 활동 적립·새 급유·새 참가를 중단. 만료 전에 생긴 미정산분은 기존 START 계약을 따름. 잔여 재화를 임의 삭제하지 않음</td>
+</tr>
+<tr>
+<td>담당</td>
+<td>보상 수량·획득량·경제 균형·보드 연계 후속은 그룩 담당. 발란스 시뮬과 현황판 복구 소스는 별도 담당 보호</td>
+</tr>
+</tbody></table></div>
+<p><strong>구현 구분:</strong> 앨범 재화 급유와 보드 START 적립/정산 경로는 소스에 있습니다. 속도 50%는 기본 랩 시간 12000ms로 설정에 반영했습니다. 새 설정을 불러와 만든 경기부터 적용하고 기존 경기는 저장된 원래 속도를 유지합니다. 실제 목표는 10바퀴이며 기획의 5바퀴 전환은 별도 후속입니다. 보드 획득→급유 전체 검증은 남아 있습니다. 저장된 기존 경기는 원래 목표·속도·영수증으로 복원하고, 새 경기에서 최신 규칙을 채택합니다. 검증을 끄거나 기존 저장을 새 규칙으로 덮어쓰지 않습니다.</p>
+<h3>모바일은 게임 화면을 먼저 보여줍니다</h3>
+<p><img src="/event/cityTour/design/mobile-event-flow.svg" alt="차량·급유·레이스·시상 한눈에 보기"></p>
+<p><strong>차량 선택 → 급유 → 레이스 → 내 순위·보상</strong>의 작은 진행 표시를 씁니다. 앨범의 큰 마일스톤은 시티 투어 안에서 반복하지 않습니다. 자동차나 주행 장면과 필수 버튼을 한 화면에 먼저 보여 주고, 능력의 계산 근거·받은 카드·전체 순위는 아래 상세에서 봅니다.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>화면</th>
+<th>먼저 보이는 것</th>
+<th>추가로 보는 것</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>차량</td>
+<td>큰 내 차와 외형 3종, 선택 후 급유하기</td>
+<td>컬렉션·상점 시안. 현재는 외형만 선택하며 가격·구매·소유 경제는 연결 전</td>
+</tr>
+<tr>
+<td>급유</td>
+<td>선택한 내 차, 연료·남은 재화·출발 버튼</td>
+<td>참여 멤버의 기본실력·가속·안정·뒷심·승부 상세</td>
+</tr>
+<tr>
+<td>주행</td>
+<td>확대된 내 차 추적, 순위·바퀴·연료·시계, 시점 버튼</td>
+<td>전체 지도·차안 시점, 작은 보조 화면(PIP), 위치·순위·바퀴 미니맵</td>
+</tr>
+<tr>
+<td>시상</td>
+<td>내 최종 순위, 큰 주사위·카드 수량, 하단 수령 버튼</td>
+<td>기본/순위 추가 구분·카드 정보·5팀 전체 순위는 기본 접힘</td>
+</tr>
+</tbody></table></div>
+<p>시점은 <strong>전체 / 추적 / 차안</strong>이며 처음에는 내 차를 크게 따라갑니다. 모든 차량에 순위와 바퀴를 표시하고 내 차를 강조합니다. 차안 시점은 현재 모델을 활용한 운전석 표시 시안입니다. 시점을 바꾸어도 경기·속도·연료·순위·보상은 바뀌지 않습니다. 보조 화면은 끌 수 있습니다.</p>
+<h3>앨범에서 참가하는 게임 시뮬레이터 연결</h3>
+<p><strong>앨범 발매 → 선택 앨범의 시티 투어 참가 → 같은 앨범의 차고 → 급유 →5바퀴 경기 → 시상/보상 수령</strong>입니다. 앨범 하위 시티 메뉴도 같은3D panel을 사용합니다. 기존2D는 미니게임 비교 실행으로 유지합니다.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>상태</th>
+<th>보이는 정보/동작</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>발매 앨범</td>
+<td>곡/고정 참여자·보유 앨범 재화·원본 이벤트 남은 시간·주사위/카드 보상 요약·참가 버튼</td>
+</tr>
+<tr>
+<td>아직 미발매</td>
+<td>앨범 발매 안내, 임의 발매/참가 기록을 만들지 않음</td>
+</tr>
+<tr>
+<td>재화 부족</td>
+<td>보유/급유 단위와 부족 사유, 보드에서 재화 모으기</td>
+</tr>
+<tr>
+<td>진행 중/미수령</td>
+<td>같은 albumId/runId의 경기 이어하기. 새 입장/추첨/보충 없음</td>
+</tr>
+<tr>
+<td>만료</td>
+<td>새 경기 불가, 남은 미수령 결과는 수령 조건에 따라 확인</td>
+</tr>
+<tr>
+<td>자료/멤버 원천 누락</td>
+<td>구체적 연결 대기와 다시 연결. 부족한 원천을 실제 값0으로 꾸미지 않음</td>
+</tr>
+<tr>
+<td>앨범으로 돌아감</td>
+<td>경기/영수증 보존. 다시 참가하면 같은 경기 복원</td>
+</tr>
+</tbody></table></div>
+<p>추가 입장비는0이고, <strong>급유 때만 기존 albumEventWallet를 차감</strong>합니다. 메뉴 이동/차고 보기로 재화를 차감하지 않습니다. 이벤트 시작/마감은 선택 앨범의 원본 차트 리그24시간을 사용하며 참가할 때부터24시간으로 늘리지 않습니다. 같은 source.now와 시험 시각 보정을 사용합니다.</p>
+<p>내 차는 해당 앨범의 고정 참여 멤버만 현재 raw18/보유 성향에서 읽습니다. 멤버 합계로 인원 보너스를 주지 않습니다. 보유 성향이 미연결이면 비율은null로 표시하고 관측 태도×0.7의 기본 기여만 사용하며 성향 가산은 적용하지 않습니다. 상대4팀은 같은 앨범 리그의 simulated ID/seed를 고정해 기존 시험 프로필로 움직입니다. 실제 유저 능력/실시간 서버 동기화로 표현하지 않습니다.</p>
+<p>앨범 경로에서 유효한 full checkpoint·현재 세션/팀·카드 보유 원천을 확인하면 <strong>기존 held 주사위와 아이돌 카드 효과/보유 원장</strong>에 수령을 반영합니다. 수령 영수증이 확정되기 전 실제 지급 완료를 표시하지 않습니다. 메타데이터/보유 원천 미확인은 경기 참가와 수령 가용성을 구분해 안내합니다. 직접 독립URL은 기존 로컬 시험 수령으로 남아 본편 보유량을 바꾸지 않습니다.</p>
+<h3>공통 경기 규칙</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>이벤트</td>
+<td>24시간 동안 재화가 있으면 반복 참가. 한 경기 시간과 별도</td>
+</tr>
+<tr>
+<td>참가자</td>
+<td>본인 포함5팀. 운영은 같은 앨범 차트 리그 상대, 현재는 명시 로컬 봇4팀</td>
+</tr>
+<tr>
+<td>목표</td>
+<td>5바퀴를 먼저 완주한 차가 우승. 그 정확한 시각에 전원을 멈추고 나머지는 실제 거리로 순위 결정</td>
+</tr>
+<tr>
+<td>연료</td>
+<td>재화1개=연료1단위=¼바퀴. 4개=1바퀴,20개=5바퀴</td>
+</tr>
+<tr>
+<td>주행</td>
+<td>연료가 있으면 자동 주행. 0이면 정지하고 추가 급유하면 재개</td>
+</tr>
+<tr>
+<td>속도</td>
+<td>참여 멤버의 기존 능력을 평균으로 환산. 초반·중반·후반에 기여 항목이 다름</td>
+</tr>
+<tr>
+<td>공평성</td>
+<td>같은 평균 능력의 솔로·유닛·팀은 같은 속도. 인원수로 속도나 재화를 곱하거나 나누지 않음</td>
+</tr>
+<tr>
+<td>거리와 시간</td>
+<td>속도가 빨라도 연료1개당 거리는¼바퀴. 빨라지는 것은 완주에 필요한 시간</td>
+</tr>
+<tr>
+<td>미완주</td>
+<td>가득 급유했어도 다른 차가 먼저 완주하면 남은 연료가 있고 미완주일 수 있음</td>
+</tr>
+<tr>
+<td>잔여 연료</td>
+<td>끝난 경기 기록에 보존. 다음 경기 이월·환급은 미구현</td>
+</tr>
+<tr>
+<td>보상</td>
+<td>유효 참가자의 기본 보상 + 최종 순위 추가 보상. 주사위·아이돌 카드</td>
+</tr>
+<tr>
+<td>선택 활동</td>
+<td>월드페스티벌 필수 과정이나 실제 지역 방문 완료 조건으로 만들지 않음</td>
+</tr>
+</tbody></table></div>
+<h3>차고에서 능력을 쉽게 읽는 법</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>보이는 지표</th>
+<th>기존 데이터</th>
+<th>경기에서 읽는 의미</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>기본 실력</td>
+<td>현재 세부 능력18개 평균</td>
+<td>전 구간의 기본 페이스</td>
+</tr>
+<tr>
+<td>가속</td>
+<td>리듬감</td>
+<td>초반 빠른 출발</td>
+</tr>
+<tr>
+<td>안정</td>
+<td>칼군무</td>
+<td>구간별 꾸준한 페이스</td>
+</tr>
+<tr>
+<td>뒷심</td>
+<td>기존 성실성 분류9개 평균</td>
+<td>후반 페이스와 추격</td>
+</tr>
+<tr>
+<td>승부·추월</td>
+<td>기존 태도 분류9개 + 실제 보유 승부/돌진/성취 성향</td>
+<td>구간별 승부 기여</td>
+</tr>
+</tbody></table></div>
+<p>실제 능력이 연결되면 현재 참여 멤버의 평균을 사용합니다. 단독 시안의 후반 추격형·초반 선두형 등은 명시 시험 프로필입니다. 라포·단합·특수스킬은 별도 가산을 구현하지 않았으며 보유하지 않은 특성을 자동으로 주지 않습니다.</p>
+<p>차량 외형은 코랄·골드·민트 투어 밴을 선택합니다. 같은 catalog/factory를 차고와 경기에서 쓰므로 선택한 차가 그대로 나옵니다. 현재 색/외형 변경만 제공하고 차량별 능력 보너스는 없습니다.</p>
+<h3>추가 기획 체크 · 차량 고유 능력</h3>
+<p><strong>제안(검수 대기): 차량의 성능·보유·장착과 아이돌의 주행 능력을 연결하는 기획이 필요합니다.</strong> 현재 코랄·골드·민트는 동등 성능의 시험 외형입니다.</p>
+<ul>
+<li>차량 정의의 performanceProfileId와 별도 버전 있는 성능 정의를 연결합니다. 최고속도·가속·주행 안정·지속 주행은 후보이며 채택 항목·수치·결합 가중치·상한은 발란스 대기입니다.</li>
+<li>구매 거래, 보유 차량 인스턴스, 장착은 각각 구분합니다. 보유 대수·외형·가격을 곧바로 속도에 더하지 않습니다.</li>
+<li>현재 아이돌 평균 능력과 차량 성능을 구분한 뒤 공통 구간 속도 규칙에서 결합합니다. 같은 아이돌 평균·같은 차량이면 솔로·유닛·팀의 속도가 같습니다.</li>
+<li>재화1개=¼바퀴는 유지합니다. 연비·할인·추가 보상은 별도 경제 기획으로 검토합니다.</li>
+<li>경기 생성 때 소유·장착·성능 버전과 계산 결과를 고정하고, 경기 중 교체·재접속으로 재계산 이득을 얻지 못하게 합니다.</li>
+</ul>
+<h3>참가 보상과 순위 추가 보상</h3>
+<p><strong>정상 경기에서5바퀴 선완주자가 발생하고, 본인이1바퀴 이상 주행하며 연료4단위 이상을 실제 사용하면 참가 보상 대상</strong>입니다. 입장·급유만 하고 움직이지 않은 경우, 취소·기권·이벤트 만료로 끝난 경우에는 보상을 만들지 않습니다. 미완주라도 유효 참가 조건을 채웠으면 최종 순위에 따라 받습니다.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>최종 순위</th>
+<th>참가 기본</th>
+<th>순위 추가</th>
+<th align="right">총 주사위</th>
+<th align="right">총 아이돌 카드</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1위</td>
+<td>주사위10·카드1</td>
+<td>주사위40·카드2</td>
+<td align="right">50</td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td>2위</td>
+<td>주사위10·카드1</td>
+<td>주사위25·카드1</td>
+<td align="right">35</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>3위</td>
+<td>주사위10·카드1</td>
+<td>주사위15·카드1</td>
+<td align="right">25</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>4위</td>
+<td>주사위10·카드1</td>
+<td>주사위5</td>
+<td align="right">15</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>5위</td>
+<td>주사위10·카드1</td>
+<td>없음</td>
+<td align="right">10</td>
+<td align="right">1</td>
+</tr>
+</tbody></table></div>
+<p>수량과 최소 참여 조건은 실행자 조절용 <strong>조절용 임시값</strong>이며 racing3d-rewards.json에서 바꿉니다. 아이돌 인원수로 보상을 배수 지급하지 않습니다. 카드 수는 낱장 수이며 팩 수와 다릅니다.</p>
+<p>모험의 주사위·카드 아이콘, 큰 아이콘+수량, 실제 카드 이름·그림·별 표시를 재사용합니다. 내 총 보상 → 참가 기본/순위 추가 → 받은 카드 순서로 보여주며, 수령 전/수령 중/실패/수령 완료를 구분합니다. 내 보상만 수령하고 상대4팀의 보상은 결과 명세로 봅니다.</p>
+<p>현재 독립3D는 시험 체크포인트에 주사위 수량·추첨된 카드 ID/이름/아트·수령 영수증을 기록합니다. <strong>본편 보유 주사위와 카드함에 실제 지급한 상태가 아닙니다.</strong> 앨범 경로는 기존 성장/카드 획득 단일 writer와 검증 영수증에 연결하며 이 독립 시험 기록을 실제 지급 증거로 사용하지 않습니다. 유효 미수령 보상이 있으면 다음 경기 전에 수령하도록 안내하여 보상을 덮어쓰지 않습니다.</p>
+<h3>이벤트 시간과 저장</h3>
+<p>24시간 마감과 한 경기 시계를 별도로 표시합니다. 차고는 남은 이벤트 시간, 주행은 내 순위·소수점 바퀴/5·남은 연료·현재 구간 속도를 보여줍니다. 작은 내 차 말풍선으로 내 위치를 구분합니다.</p>
+<p>리셋은 현재 독립 시험만 새로 준비하고, 다음 경기는 같은 이벤트를 이어갑니다. 시험 저장은 고정 체크포인트1개를 사용합니다. 저장 공간이 부족하면 해당 탭의 메모리 시험으로 이어가며 새로고침 후 미저장 진행이 복원되지 않음을 작은 상태 줄로 알립니다. 메인 기록이나 다른 게임을 자동 삭제하지 않습니다.</p>
+<h3>단독으로 바로 참가하기</h3>
+<p>**<a href="/docs/planning/game-simulator.html?module=simulator_module_music_city&testPage=simulator_module_music_city">게임 시뮬레이터 시티 투어 단독</a>**을 열면, 현재 시험 팀으로 <strong>참여 멤버 → 시험 싱글 발매 → 100명 차트 리그 → 급유 재화 → 차고</strong>를 한 번 준비합니다. 실제 음악을 생성하거나 제작비를 청구하는 과정은 생략합니다. 보컬 성별이 확인된 멤버는 보컬, 확인되지 않은 멤버는 제작 역할로 명시한 음원 미연결 시험곡입니다.</p>
+<p>새 시험의 급유 재화는 <a href="/event/cityTour/data/racing3d.json">3D 연료 설정</a>의 trialCurrency=80개입니다. 재화20개가5바퀴분이므로 네 경기 완주분을 시험할 수 있습니다. 재접속·메뉴 이동·다음 경기로 다시 지급하지 않습니다. 이전 시험 지원 영수증은 보존합니다.</p>
+<p>기존 발매곡에 유효한 참여자·리그가 있으면 재사용합니다. 사용자 초안과 편집 내용, 종료된 리그는 바꾸지 않습니다. 만료된 이벤트를 새24시간으로 연장하지 않으며, 남은 경기·미수령 보상은 기존 이어하기로 봅니다. 이 자동 준비는 명시 city 단독 범위만 대상으로 하며 오디션·발란스 전송·메인 연계 자료에 시험 앨범/지원금을 넣지 않습니다.</p>
+<h3>단독 시험 진행의 멤버 상태 보존</h3>
+<p>단독 시험 준비는 현재 멤버의 능력과 컨디션·배정 상태를 함께 보존한 전체 시험 진행을 먼저 만들고, 그다음 앨범·리그·급유 재화를 준비합니다. 멤버 요약만 있는 상태를 참가 준비 완료로 표시하지 않습니다.</p>
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2><p><img src="/event/cityTour/design/album-entry-layout.svg" alt="앨범→시티 투어 참가→현재 멤버 차고 UI 기획 시안"></p>
+<p>기획 배치도이며 실제 실행 캡처가 아닙니다. 참가 정보·보유 재화·시간·보상만 먼저 보여주고 상세 규칙은 접습니다. 급유·출발·수령은 기존 폰 하단 버튼 구역을 사용합니다.</p>
+<h3>차고 화면</h3>
+<p><img src="/event/cityTour/design/garage-layout.svg" alt="내 차량·능력 분석·차량 목록·고정 급유 버튼 기획 시안"></p>
+<p>기획 배치 시안이며 실제 실행 캡처가 아닙니다. 중앙에 큰 내 차, 옆에 분석 게이지/성향/초중후반 속도, 아래에 차량 목록, 고정 버튼 구역에급유·출발을 놓습니다. 좁은 화면은 분석을 차 아래에 쌓습니다.</p>
+<h3>경기와 시상</h3>
+<p>기존 도시·건물은 중앙에 유지하고 바깥에 둥근 고가도로·교각·난간·게이트를 만듭니다. 시동 후 도시/도로가 나타나고3·2·1 GO, 선두5랩에서 FINISH, 상위3대 시상과 전체5위 순위로 이어집니다.</p>
+<p><img src="/event/cityTour/design/rewards-layout.svg" alt="모험식 주사위·카드 보상 결과 배치 시안"></p>
+<p>총 보상을 큰 아이콘과 수량으로 보여주고 참가 기본/순위 추가는 아래에서 설명합니다. 수령하면 실제 추첨 카드의 그림·이름·별을 보여줍니다. 버튼은 고정 구역에 두고 미수령 보상은 다음 경기로 덮지 않습니다.</p>
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2><p><a href="/data/simulator/music-career-test-scenario.json">음악 단독 시나리오 설정</a> · <a href="/src/simulator/music-career/linked-observation.mjs">현재 연계 수신</a> · <a href="/src/simulator/music-career/source.mjs">공통 앨범 source</a></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>자료</th>
+<th>소유/역할</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/event/cityTour/PACKAGE.md">패키지 설명</a></td>
+<td>이벤트 독립 소유·호스트 계약·구현 범위</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/data/racing3d.json">경기/연출</a></td>
+<td>목표5랩·¼랩 연료·24시간·지도·카메라·시동/문구</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/data/racing3d-driving.json">능력 환산</a></td>
+<td>원천·정규화·5지표·초중후반 가중치·상한·명시 시험 프로필</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/data/racing3d-vehicles.json">차량 catalog</a></td>
+<td>차량 ID·이름·색·rendererId·modelResourceRef·크기/파트</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/data/racing3d-rewards.json">참가/순위 보상</a></td>
+<td>유효 참가 조건·주사위/카드 기본/추가 수량·아이콘/문구</td>
+</tr>
+<tr>
+<td><a href="/data/idol_ability_sim/idol_growth_stat.csv">아이돌 능력18개</a></td>
+<td>현재 canonical 세부 능력</td>
+</tr>
+<tr>
+<td><a href="/data/idol_ability_sim/idol_growth_growth_factor.csv">성실성·태도 분류</a></td>
+<td>enabled 분류9+9, 공통 academy-bundle reader 사용</td>
+</tr>
+<tr>
+<td><a href="/data/rapport_sim/rapport_trait.csv">실제 성향 목록</a></td>
+<td>소유한 trait ID의 이름과 의미</td>
+</tr>
+<tr>
+<td><a href="/data/simulator/exploration.json">원본 모험 보상 아이콘</a></td>
+<td>주사위·카드 아이콘 경로</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/src/racing3d-vehicles.mjs">차량 factory</a></td>
+<td>차고/경주가 같은 외형을 생성·개별 자원 해제</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/src/driving-profile.mjs">능력 profile</a></td>
+<td>실제 관측 또는 명시 시험→같은 분석/속도 프로필</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/src/racing3d-session.mjs">연속 주행</a></td>
+<td>거리/연료·구간 적분·정확한 선완주 시각</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/src/racing3d-panel.mjs">앨범 진입 panel</a></td>
+<td>참가/이어하기·씬 수명·고정 버튼 이동</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/src/racing3d-career-adapter.mjs">앨범 원장 어댑터</a></td>
+<td>원본 리그/이벤트·급유 단일 차감·소유 범위</td>
+</tr>
+<tr>
+<td><a href="/src/simulator/shared/city-tour-racing-reward-bridge.mjs">실제 보상 bridge</a></td>
+<td>기존 카드/성장 writer·3기록 복구</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/data/racing3d-entry-ui.json">참가 UI 데이터</a></td>
+<td>버튼·상태/누락 사유</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/src/racing3d-host.mjs">호스트</a></td>
+<td>입출력·시계·소유·선택·급유·수령 연결</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/src/racing3d-rewards.mjs">보상 명세/수령</a></td>
+<td>유효 참가·순위 총합·seed 추첨 고정·수령 영수증</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/src/racing3d-fuel-host.mjs">시험 원장</a></td>
+<td>같은 이벤트의 잔액·경기·급유/보상 영수증</td>
+</tr>
+<tr>
+<td><a href="/event/cityTour/src/racing3d-trial-storage.mjs">제한된 시험 저장</a></td>
+<td>고정 체크포인트·owner/generation·quota 대체</td>
+</tr>
+</tbody></table></div>
+<p>수치·문구·리소스는 데이터로 분리하며 본문 예시는 해당 데이터의 설명입니다. 공용 CSV/스키마 원표는 이번 작업에서 수정하지 않습니다.</p>
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th>현재 상태</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>차고·차량 선택·능력 패널</td>
+<td>소스 반영. 선택 외형은 시험용, 구매/차량 소유 경제 미추가</td>
+</tr>
+<tr>
+<td>기존 도시·외곽 고가·시동/카운트·5랩·시상</td>
+<td>기존 연결을 재사용합니다. 속도 50% 설정과 기존 속도 저장의 메모리 복원을 확인했습니다. 목표 5랩 전환은 별도 후속입니다.</td>
+</tr>
+<tr>
+<td>구간별 속도·능력 표시</td>
+<td>앨범 고정 참여 멤버의 현재 raw18/보유 성향 공급. 독립은 명시 시험값, 상대는 같은 리그 simulated 프로필</td>
+</tr>
+<tr>
+<td>참가/순위 주사위·카드</td>
+<td>로컬 시험 명세·추첨·수령 원장·모험식 표시 연결</td>
+</tr>
+<tr>
+<td>실제 주사위/카드함 지급</td>
+<td>앨범 경로의 소유 checkpoint/카드 writer·복구 bridge 소스 연결. 원천 가용성 조건/실제 플레이 확인 필요. 독립URL은 시험 영수증만</td>
+</tr>
+<tr>
+<td>동앨범 리그 상대/실유저 동기화</td>
+<td>같은 앨범 리그의 simulated4명 연결. 실제 유저 매칭/진행 동기화는 미구현</td>
+</tr>
+<tr>
+<td>레이싱 실적→차트</td>
+<td>기획 연결. 결과 채택 식·상한·경제 순환 검토와 구현 필요</td>
+</tr>
+<tr>
+<td>시험 저장</td>
+<td>고정 체크포인트·동일 영수증 재사용·quota시 탭 메모리. 실제 사용자 저장 조회/삭제0</td>
+</tr>
+<tr>
+<td>검증</td>
+<td>기존 규칙의 차량·급유·시상·수령 시험은 로그에 보존합니다. 속도 50%와 기존 속도 저장 복원은 순수 계산 7/7 확인했습니다. 5랩 전환 및 보드→재화→급유·실제 재접속 검증은 남아 있습니다.</td>
+</tr>
+<tr>
+<td>남은 검수/미수행</td>
+<td>운영 실유저/서버, 차트 기여, 차량 구매·고유 능력. 실제 사용자 메인 저장 초기화/삭제·빌드·서버 재시작은 수행하지 않음</td>
+</tr>
+</tbody></table></div>
+<p>기존2D의 참가10재화·1등 돈 상금·일차별 한도는 비교 시험의 별도 계약입니다. 최신3D의 주사위·카드 보상으로 자동 환산하지 않습니다. 직접 단독 확인 결과와 캡처는 공용 보고·증거에 기록하며 운영 검수와 구분합니다.</p>
+</section><details><summary>작업 기록</summary>
+
+<p>관련 원본은 2장과 6장에 연결합니다. <a href="./%EC%8B%9C%ED%8B%B0%ED%88%AC%EC%96%B4_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.log.md">로그·변경 이력과 지난 기록</a></p>
+</details>
+</main><script type="module">import mermaid from "/node_modules/mermaid/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:true,securityLevel:"strict",theme:"neutral",flowchart:{useMaxWidth:true,htmlLabels:true}});</script></body></html>

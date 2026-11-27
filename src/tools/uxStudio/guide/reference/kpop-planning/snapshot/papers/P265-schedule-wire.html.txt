@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스케줄 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --dim:#e3e5e8; --red:#d0453a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  h2.grp { font-size:15px; margin:8px 24px 0; padding-top:12px; border-top:2px solid #c9ccd1; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .row { display:flex; flex-wrap:wrap; gap:40px; padding:16px 24px 24px 50px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .st { position:static; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .pill.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .red { color:var(--red); font-weight:700; }
+  .dot { position:absolute; width:12px; height:12px; border-radius:50%; background:var(--red); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .face { display:inline-block; width:30px; height:30px; border-radius:50%; background:var(--dim); border:1.5px solid var(--ln); flex:none; }
+  .ic { display:inline-block; width:22px; height:22px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); flex:none; }
+  .pic { background:repeating-linear-gradient(45deg,#e6e8eb 0 8px,#dcdfe3 8px 16px); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; text-align:center; }
+  .bar { display:block; height:6px; border:1px solid var(--ln); border-radius:3px; background:var(--box); overflow:hidden; }
+  .bar i { display:block; height:100%; background:var(--ink); }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); overflow:hidden; }
+  .sec { position:absolute; left:12px; font-weight:700; font-size:13px; }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  /* 흐름도 */
+  .fl { display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:12px 24px 4px; }
+  .fb { border:1.5px solid var(--ln); border-radius:8px; background:var(--box); padding:8px 12px; min-width:110px; text-align:center; }
+  .fb b { display:block; font-size:14px; }
+  .fb small { color:var(--soft); font-size:12px; }
+  .fb.win2 { border-style:dashed; background:var(--pane); }
+  .ar { font-size:18px; color:var(--ln); }
+  .flnote { margin:2px 24px 0; font-size:13px; }
+  .flnote span { display:inline-block; margin-right:16px; }
+</style>
+</head>
+<body>
+<h1>스케줄 · 와이어프레임 3차 (단순화 · 390×844)</h1>
+<p class="flow">기준: 게임 시뮬레이터 스케줄 기능(탐험 · 출동 · 도감 · 기록) + P241 규칙(잠김 · 부족 · 스태프 1칸 · 처음 케미 · 해금) · 기능은 그대로, 화면은 4장 + 창 2개로 줄임</p>
+
+<h2 class="grp">흐름</h2>
+<div class="fl">
+  <div class="fb"><b>① 홈</b><small>탐험 · 출동 한 목록</small></div><span class="ar">→ 카드 →</span>
+  <div class="fb"><b>② 보내기</b><small>조건 줄에 얼굴 쌓기 · 넣을 수 있는 사람만 · 경우별 줄 ②-2</small></div><span class="ar">→ 보내기 →</span>
+  <div class="fb"><b>①</b><small>카드가 「진행 중」</small></div><span class="ar">→ 카드 →</span>
+  <div class="fb"><b>③ 진행 중</b><small>장면 · 남은 시간</small></div><span class="ar">→ 끝나면 →</span>
+  <div class="fb"><b>①</b><small>카드 「받기」 + 빨간 점</small></div><span class="ar">→ 카드 →</span>
+  <div class="fb"><b>④ 결과</b><small>이야기 → ★ · 받은 것 · 좋아진 것 → 받기 → 카드팩 열기 → (아이템 이야기)</small></div><span class="ar">→ 받기 →</span>
+  <div class="fb"><b>①</b><small>카드가 다시 「보내기」</small></div>
+</div>
+<div class="fl">
+  <div class="fb win2"><b>④-3 공동 순위</b><small>공동 결과 「공동 순위 보기」</small></div>
+  <div class="fb win2"><b>Ⓐ 도감 · 기념 → Ⓐ-1 항목 → Ⓐ-2 퍼즐</b><small>홈 제목 줄 📖 · 결과 「도감에 들어갔어요」</small></div>
+  <div class="fb win2"><b>Ⓒ 내 기록장 → Ⓒ-1 댓글</b><small>홈 아래 · 받은 스케줄이 엽서로</small></div>
+  <div class="fb win2"><b>Ⓓ 소식 → Ⓓ-1 편지</b><small>홈 아래 · 받은 편지 + 친구 엽서</small></div>
+  <div class="fb win2"><b>Ⓑ 이야기 바꾸기</b><small>② 「바꾸기」 · 안 열면 기본 이야기</small></div>
+  <div class="fb win2"><b>⑤ 해금</b><small>새 스케줄이 열리면 어디서든</small></div>
+</div>
+<p class="flnote"><span>□ 화면</span><span>⬚ 창(점선)</span><span>· 홈 카드가 상태를 들고 있어서 「진행 중 줄 · 모두 받기」가 따로 없음</span></p>
+<div id="screens"></div>
+
+<script>
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (dot = false) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === 1 ? " on" : ""}" style="left:${(i * 386 / 6).toFixed(1)}px;width:${(386 / 6).toFixed(1)}px"><i></i>${t}</div>`).join("") + (dot ? `<span class="dot" style="left:94px;top:786px;width:10px;height:10px"></span>` : "");
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const bigBtn = (x, w, label, sub = "", off = false) =>
+  `<div class="b${off ? " off" : ""}" style="left:${x}px;top:706px;width:${w}px;height:60px;flex-direction:column;gap:2px;${off ? "" : "border-width:2px"}">
+    <span class="val" style="font-size:16px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const bottomBar = inner => `<div class="line" style="top:698px"></div>${inner}${tabs()}`;
+const back = (title, right = "") => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div>
+  <div class="a val" style="left:52px;top:16px;font-size:16px">${title}</div>${right}<div class="line" style="top:50px"></div>`;
+const homeTop = `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div><div class="a val" style="left:52px;top:16px;font-size:16px">스케줄</div>
+  <span class="pill a" style="right:126px;top:13px;font-size:13px;padding:2px 10px">티켓 ◎ 3</span>
+  <span class="pill a" style="right:46px;top:13px;font-size:13px;padding:2px 10px">📖 00/27</span>
+  <div class="b" style="right:8px;top:10px;width:30px;height:30px;font-weight:700">?</div><div class="line" style="top:50px"></div>`;
+const sheet = (behind, title, top, body, tabsRow = "") => behind + tabs() + `<div class="dimbg"></div>
+  <div class="win" style="left:0;right:0;top:${top}px;bottom:-14px;border-radius:14px 14px 0 0">
+    <div class="a val" style="left:14px;top:14px;font-size:15px">${title}</div><div class="b" style="right:10px;top:8px;width:30px;height:30px">✕</div>
+    <div class="line" style="top:46px"></div>${tabsRow}${body}</div>`;
+
+// 3주체 배지 · 「!」 = 필수(진한 칩) · 없으면 선택(테두리 칩) · 미참여는 안 넣음
+const badge = t => `<span class="pill" style="font-size:11px;padding:0 6px;${t.endsWith("!") ? "background:var(--ink);color:#fff;border-color:var(--ink)" : ""}">${t.replace("!", "")}</span>`;
+// 홈 카드(2열) · s = done / run / ready / short / lock · b = 배지
+const card = (x, y, c) => `<div class="b" style="left:${x}px;top:${y}px;width:181px;height:196px;display:block;overflow:hidden;${c.s === "lock" ? "background:var(--dim);border-style:dashed;color:var(--soft)" : ""}">
+  <div class="pic" style="position:absolute;left:0;right:0;top:0;height:84px">${c.k === "아이돌" ? "장소 그림" : "장소 + 나쁜 기운"}</div>
+  <span class="pill a" style="left:6px;top:6px;font-weight:700${c.k === "몬스" ? ";background:var(--ink);color:#fff;border-color:var(--ink)" : c.k === "공동" ? ";border-style:dashed;border-width:2px" : ""}">${c.k}</span>
+  ${c.s === "done" ? `<span class="dot" style="right:6px;top:6px"></span>` : ""}
+  <div class="a val" style="left:8px;right:8px;top:90px;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.t}</div>
+  <div class="a sub" style="left:8px;top:108px;font-size:12px">${c.m}</div>
+  <div class="a" style="left:8px;top:127px;display:flex;gap:3px">${(c.b || []).map(badge).join("")}</div>
+  ${c.s === "done" ? `<div class="b" style="left:8px;right:8px;bottom:8px;height:40px;border-width:2px"><b>결과 받기</b></div>`
+  : c.s === "run" ? `<div class="a" style="left:8px;right:8px;bottom:12px"><span style="display:flex;justify-content:space-between;font-size:12px"><b>진행 중</b><span>12:30</span></span><span class="bar" style="margin-top:5px;height:8px"><i style="width:40%"></i></span></div>`
+  : c.s === "ready" ? `<div class="b" style="left:8px;right:8px;bottom:8px;height:40px"><b>보내기</b></div>`
+  : c.s === "short" ? `<div class="a red" style="left:8px;right:8px;bottom:8px;font-size:12px;line-height:1.4">✗ 보컬 C 이상 1명<br>✗ 스태프 필수</div>`
+  : `<div class="a" style="left:8px;right:8px;bottom:14px;font-size:12px;font-weight:700">🔒 엔터파워 000</div>`}</div>`;
+
+// 보내기 칸
+const slot = (w, inner, cls = "") => `<div class="b st ${cls}" style="width:${w}px;height:84px;flex-direction:column;gap:2px;font-size:11px">${inner}</div>`;
+const inSlot = (nm, s) => `<i class="face" style="width:34px;height:34px"></i><b style="font-size:12px">${nm}</b><span class="sub">${s}</span>`;
+const pickGrid = (rows) => rows.map(([nm, g, p, on, busy]) => `<div class="b st${busy ? " off" : ""}" style="height:84px;flex-direction:column;gap:2px;position:relative;${on ? "border-width:2.5px" : ""}"><i class="face" style="width:30px;height:30px"></i>${on ? `<b style="position:absolute;right:4px;top:2px">✓</b>` : ""}<b style="font-size:12px">${nm}</b><span class="sub">${busy ? "다른 일정 중" : g + " · " + p}</span></div>`).join("");
+
+
+
+// 보내기 · 조건 줄(맞는 아이콘이 그 줄에 들어감) / 보낼 팀(아이콘만 쌓임) / 갈 수 있는 사람 칸
+const ico = (sq, w = 26) => `<i class="face" style="width:${w}px;height:${w}px;${sq ? "border-radius:6px" : ""}"></i>`;
+const cond = (y, t, ok, n, sq) => `<div class="a" style="left:8px;right:8px;top:${y}px;height:34px;display:flex;align-items:center;gap:6px;border-top:1px solid #d9dce2;font-size:12px;text-align:left"><b style="width:16px">${ok ? "✓" : `<span class="red">✗</span>`}</b><span style="flex:1">${t}</span>${Array.from({length: n}, () => ico(sq)).join("")}</div>`;
+const stack = (k, sq = []) => `<div style="display:flex;align-items:center">${Array.from({length: k}, (_, i) => `<span style="margin-left:${i ? -10 : 0}px">${ico(sq.includes(i), 40)}</span>`).join("")}</div>`;
+const who = rows => rows.map(([nm, k, sub, on]) => `<div class="b st" style="height:84px;flex-direction:column;gap:2px;position:relative;${on ? "border-width:2.5px" : ""}"><i class="face" style="width:30px;height:30px;${k === "스태프" ? "border-radius:6px" : ""}${k === "십이지" ? ";border-width:3px" : k === "희귀" ? ";border-width:2.5px;border-style:double" : ""}"></i>${on ? `<b style="position:absolute;right:4px;top:2px">✓</b>` : ""}<b style="font-size:12px">${nm}</b><span class="sub">${k === "스태프" || k === "친구" ? k + " · " : ""}${["일반", "희귀", "십이지"].includes(k) ? `<b style="color:var(--ink)">${k}</b> · ` : ""}${sub}</span></div>`).join("");
+// 보낸 팀 줄(보내기 · 진행 중 · 결과 공통) · gain이 있으면 선 위에 오른 라포
+const teamRel = (y, gain) => `<div class="sec" style="top:${y + 10}px">보낸 팀</div>
+   ${[100, 160, 220].map(x => `<span class="a" style="left:${x}px;top:${y}px">${ico(0, 40)}</span>`).join("")}<span class="a" style="left:310px;top:${y}px">${ico(1, 40)}</span>
+   <div class="a" style="left:140px;top:${y + 19}px;width:20px;border-top:2px solid var(--ln)"></div><div class="a" style="left:200px;top:${y + 19}px;width:20px;border-top:2px dashed var(--soft)"></div>
+   <span class="a" style="left:140px;top:${y + 10}px;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center">♡</span>
+   <div class="a" style="left:118px;top:${y - 14}px;width:212px;height:14px;border:2px dashed var(--ink);border-bottom:none;border-radius:6px 6px 0 0"></div>
+   ${gain ? `<span class="pill on a" style="left:124px;top:${y + 46}px">♡ ${gain}</span><span class="pill on a" style="left:304px;top:${y + 46}px">짝 +1</span>` : ""}`;
+// 엽서 카드(기록장 · 소식 공통)
+const postcard = (y, c) => `<div class="b" style="left:12px;right:12px;top:${y}px;height:${c.quote ? 120 : 260}px;display:block">
+   <div class="a" style="left:10px;top:8px;display:flex;align-items:center;gap:8px;font-size:12px"><i class="face"></i><span><b>${c.name}</b>${c.me ? ` <span class="pill">${c.me}</span>` : ""}<br><span class="sub">${c.when}${c.lock ? " · 🔒 나만 보기" : ""}</span></span></div>
+   <span class="pill a" style="right:10px;top:12px">${c.badge}</span>
+   ${c.quote ? `<div class="a" style="left:10px;right:10px;top:50px;height:36px;border-left:3px solid var(--ln);padding-left:8px;font-size:12px;text-align:left"><b>${c.title}</b><br><span class="sub">${c.blurb}</span></div>`
+   : `<div class="pic a" style="left:10px;right:10px;top:50px;height:150px;border-radius:6px;flex-direction:column;gap:4px"><b style="color:var(--ink)">${c.title}</b><span>${c.blurb}</span></div>`}
+   <div class="a" style="left:10px;right:10px;bottom:8px;display:flex;gap:6px;align-items:center;font-size:12px">${c.foot}</div></div>`;
+// 조건 줄(= 보낼 팀) · k 얼굴 수 · sq 네모(스태프) · on 켜진 줄 · heart 두 얼굴 사이 ♡ · opt 빈 칸(선택)
+const crow = (y, t, k, sq, on, heart, opt) => `<div class="b" style="left:12px;right:12px;top:${y}px;height:42px;justify-content:flex-start;gap:8px;padding:0 10px;font-size:12px;${on ? "border-width:2.5px" : ""}"><b style="width:14px">${k || opt ? (k ? "✓" : "○") : ""}</b><span style="flex:1;text-align:left;${on ? "font-weight:700" : ""}">${t}</span>${Array.from({length: k}, (_, i) => (heart && i === 1 ? `<span style="margin:0 -6px;z-index:1;width:16px;height:16px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center">♡</span>` : "") + ico(sq)).join("")}${opt ? `<i class="face off" style="width:26px;height:26px;border-style:dashed"></i>` : ""}</div>`;
+// 예시 모음용 줄 · 이름표 · 안내
+const xrow = (y, mark, t, right = "", st = "") => `<div class="b" style="left:12px;right:12px;top:${y}px;height:42px;justify-content:flex-start;gap:8px;padding:0 10px;font-size:12px;${st}"><b style="width:14px">${mark}</b><span style="flex:1;text-align:left">${t}</span>${right}</div>`;
+const lab = (y, t) => `<div class="a sub" style="left:12px;top:${y}px;font-size:12px">${t}</div>`;
+const hint = (y, t) => `<div class="a" style="left:24px;right:12px;top:${y}px;font-size:12px;text-align:left">💡 ${t}</div>`;
+// 결과 · 받은 것 칸
+const gift = (t, tag = "") => `<div class="b st" style="height:58px;flex-direction:column;gap:3px;position:relative"><i class="ic" style="width:24px;height:24px"></i><span style="font-size:12px">${t}</span>${tag ? `<span class="pill on" style="position:absolute;right:3px;top:3px;font-size:11px;padding:0 5px">${tag}</span>` : ""}</div>`;
+const gifts = (y, list) => `<div class="a" style="left:12px;right:12px;top:${y}px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px">${list.map(g => gift(...g)).join("")}</div>`;
+const hero = (y, h, t, st, pill) => `<div class="pic a" style="left:0;right:0;top:${y}px;height:${h}px;border-bottom:1.5px solid var(--ln)"></div>
+   <div class="a val" style="left:0;right:0;top:${y + 15}px;text-align:center;font-size:16px">${t}</div>
+   <div class="a val" style="left:0;right:0;top:${y + 41}px;text-align:center;font-size:30px">${st}</div>
+   <div class="a" style="left:0;right:0;top:${y + 83}px;text-align:center;font-size:12px"><span class="pill">${pill}</span></div>`;
+const SCREENS = [
+ { grp: "화면 4장" },
+ { cap: "① 스케줄 홈 · 한 목록", html: homeTop + `
+   <div class="a" style="left:8px;right:0;top:58px;display:flex;gap:4px;overflow:hidden;white-space:nowrap">${["전체", "보낼 수 있음", "아이돌", "몬스", "스태프", "혼합", "레슨"].map((t, i) => `<span class="pill${i ? "" : " on"}" style="font-size:12px;padding:4px 8px">${t}</span>`).join("")}</div>
+   ${card(8, 98, { k: "아이돌", t: "새벽 녹음", m: "20분 · 보컬·랩", s: "run", b: ["아이돌!", "스태프", "레슨"] })}${card(201, 98, { k: "몬스", t: "안개 낀 숲길", m: "30분 · 숲길 공원", s: "done", b: ["몬스!"] })}
+   ${card(8, 302, { k: "아이돌", t: "서먹한 둘의 듀엣 연습", m: "20분 · 보컬", s: "ready", b: ["아이돌!", "스태프"] })}${card(201, 302, { k: "공동", t: "골목 시장 정화", m: "참가 3/6 · 오늘 2회", s: "ready", b: ["아이돌!"] })}
+   ${card(8, 506, { k: "아이돌", t: "방송국 미팅", m: "20분 · 연기", s: "short", b: ["아이돌!", "스태프!"] })}${card(201, 506, { k: "아이돌", t: "나쁜 기운 입구", m: "40분 · 극장 앞", s: "lock", b: ["아이돌!", "스태프", "몬스"] })}
+   <div class="line" style="top:706px"></div><div class="b" style="left:8px;top:714px;width:183px;height:52px;gap:8px;font-weight:700"><i class="ic"></i>기록장</div><div class="b" style="left:199px;top:714px;width:183px;height:52px;gap:8px;font-weight:700"><i class="ic"></i>소식</div><span class="dot" style="left:370px;top:708px"></span>` + tabs(true)
+   + n(1, 200, 36) + n(2, 290, 36) + n(3, 4, 62) + n(4, 4, 110) + n(5, 4, 228) + n(6, 196, 316) + n(7, 4, 520) + n(8, 4, 730),
+   notes: ["티켓 · 하루 3장 · 최대 10 · 아이돌 · 몬스 같은 티켓 · 0장이면 숫자가 빨간 글자, 보내기 버튼이 「스케줄 티켓이 없어요 · 내일 3장 충전」으로 꺼짐", "📖 도감 · 기념 창(Ⓐ) · 완성 00/27 · 새 조각이 들어오면 빨간 점", "거르기 칩(옆으로 밀기) · 전체 / 보낼 수 있음 / 아이돌 / 몬스 / 스태프(필수) / 혼합 / 레슨 · 몬스 로비에서 들어오면 「몬스」가 켜진 채", "카드 1장 = 스케줄 1개 · 순서는 열리는 엔터파워 순으로 고정(뒤로 갈수록 보상 큼 · 상태로 바꾸지 않음) · 카드가 상태를 들고 있음: 결과 받기(빨간 점) / 진행 중(남은 시간 · 막대) / 보내기 / 못 보냄 / 잠김 · 누르면 상태대로 ② / ③ / ④", "배지 · 아이돌 → 스태프 → 몬스 순 고정 · 진한 칩 = 꼭 필요 · 테두리 칩 = 넣으면 좋음 · 안 가는 것은 안 보임 · 레슨 3개에만 「레슨」", "공동 카드 · 친구들과 같이 하는 탐험 · 참가 n/6(내 팀 포함) · 오늘 남은 횟수 · 결과에 순위", "못 보냄 = 모자란 것을 전부 빨간 글자로 · 잠김 = 열리는 엔터파워 · 아래로 밀어 더 보기", "아래 고정 버튼 · 기록장 → Ⓒ · 소식 → Ⓓ(안 읽은 편지가 오면 빨간 점)"] },
+
+ { cap: "② 보내기 · 아이돌 (탐험)", html: back("서먹한 둘의 듀엣 연습", `<span class="pill a" style="right:12px;top:16px;font-size:12px;padding:2px 10px">줄거리</span>`) + `
+   <div class="pic a" style="left:0;right:0;top:51px;height:130px;border-bottom:1.5px solid var(--ln)">대표 이미지 · 장소</div>
+   <div class="a" style="left:12px;top:62px;font-size:12px"><span class="pill on">아이돌</span> <span class="pill">20분</span></div>
+   <span class="pill a" style="right:12px;top:62px">이야기 ✎</span>
+   <div class="a" style="left:12px;top:148px;display:flex;gap:4px">${["카드팩 ×1", "주사위 ×4", "돈 ×400", "조각"].map(t => `<span class="pill">${t}</span>`).join("")}</div>
+   ${crow(196, "아이돌 2~5명", 3, 0, 1, 1)}${crow(244, "보컬 C 이상 · 1명", 1, 0, 0)}${crow(292, "스태프 · 비워도 돼요", 1, 1, 0)}${crow(340, "친구 · 비워도 돼요", 0, 0, 0, 0, 1)}
+   <div class="a sub" style="left:12px;top:398px;font-size:12px">「아이돌 2~5명」에 넣을 수 있는 사람</div><span class="pill a" style="right:12px;top:395px">자동</span>
+   <div class="a" style="left:12px;right:12px;top:420px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px">${who([["서다온", "아이돌", "보컬 B", 1], ["정하람", "아이돌", "♡ 찰떡", 1], ["황소율", "아이돌", "보통", 1], ["김다빈", "아이돌", "⚡ 최악"]])}</div>
+   ` + bottomBar(bigBtn(8, 374, "보내기", "탐험 능력 240 · 18분 · 티켓 1")) +
+   n(1, 4, 100) + n(2, 4, 206) + n(3, 4, 430) + n(4, 362, 702),
+   notes: ["대표 이미지 · 위에 종류 · 시간 · 이야기 바꾸기 · 아래에 받을 보상", "조건 줄 = 보낼 팀 · 줄마다 들어간 얼굴이 보이고 다 차면 ✓ · 실력 조건은 팀 중 1명만 넘으면 됨 · 안 가는 칸(스태프 · 몬스)은 줄 자체가 없음 · 꼭 필요한 칸은 「필수」, 아니면 「비워도 돼요」 · 두 아이돌 사이 ♡ = 찰떡 · 줄을 누르면 그 줄이 진하게 켜짐 · 경우별 줄은 ②-2", "켜진 줄에 넣을 수 있는 사람만(다른 스케줄에 간 사람은 안 나옴) · 누르면 넣기 / 빼기 · 이름 아래 = 이미 넣은 사람과의 케미 ♡ 찰떡 / 보통 / ⚡ 최악(최악 짝은 갈등 이야기가 진행됨 · 화해하면 「전화위복」) · 자동 = 조건에 맞게 한 번에 채우기", "보내기 · 능력 · 시간 · 티켓은 버튼 안에"] },
+
+ { cap: "② 출동 · 몬스 · 같은 틀", html: back("안개 낀 숲길", `<span class="pill a" style="right:12px;top:16px;font-size:12px;padding:2px 10px">공격 연출 보기</span>`) + `
+   <div class="pic a" style="left:0;right:0;top:51px;height:130px;border-bottom:1.5px solid var(--ln)">대표 이미지 · 장소 + 나쁜 기운</div>
+   <div class="a" style="left:12px;top:62px;font-size:12px"><span class="pill on">몬스</span> <span class="pill">30분</span></div>
+   <div class="a" style="left:12px;top:148px;display:flex;gap:4px">${["그린 팩 ×1", "주사위 ×4", "조각", "기념 1"].map(t => `<span class="pill">${t}</span>`).join("")}</div>
+   ${crow(196, "몬스 1~8마리", 3, 0, 1)}${crow(244, "목 속성 · 1마리", 1, 0, 0)}${crow(292, "3단 이상 · 1마리", 1, 0, 0)}
+   <div class="a sub" style="left:12px;top:350px;font-size:12px">「몬스 1~8마리」에 넣을 수 있는 몬스</div><span class="pill a" style="right:12px;top:347px">자동</span>
+   <div class="a" style="left:12px;right:12px;top:372px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px">${who([["토끼", "몬스", "목 · 3단 ★4", 1], ["아홀로틀", "몬스", "수 · 2단 ★3", 1], ["하마", "몬스", "수 · 1단 ★2", 1], ["고슴도치", "몬스", "화 · 1단 ★2"], ["다람쥐", "몬스", "토 · 1단 ★1"]])}</div>
+   ` + bottomBar(bigBtn(8, 374, "출동하기", "출동 힘 180 · 30분 · 티켓 1")) +
+   n(1, 4, 100) + n(2, 4, 206) + n(3, 4, 388) + n(4, 362, 702),
+   notes: ["대표 이미지 · 위에 종류 · 시간 · 아래에 받을 보상 · 위 버튼 공격 연출 보기", "조건 줄 = 출동 몬스 · 몬스 수 · 필요 속성 1마리 · 단 조건(있는 스케줄만) · 처음엔 몬스 화면 출동 편성 그대로 들어옴 · ★는 표시만", "켜진 줄에 넣을 수 있는 몬스만 · 쉬는 중(24시간) · 지킴이 · 수호 몬스는 안 나옴 · 조건 맞는 순", "출동하기 · 힘 · 시간 · 티켓은 버튼 안에"] },
+
+ { cap: "②-2 경우별로 바뀌는 줄 (같은 틀 · 예시 모음)", html: back("경우별 줄 · 예시") + `
+   ${lab(60, "레슨 3개 (새벽 녹음 · 댄스 연습실 배틀 · 오디션 심사석)")}
+   ${xrow(80, "✓", "아이돌 1~5명", `<span class="pill on">레슨</span>` + ico(0))}${hint(128, "1명만 보내면 개인 레슨이 돼요")}
+   ${lab(160, "스태프 꼭 필요 (기획사 · 계약 · 컴백 …)")}
+   ${xrow(180, `<span class="red">✗</span>`, "스태프 · 무대 디렉터 ★4 이상", `<span class="pill on">필수</span><i class="face off" style="width:26px;height:26px;border-radius:6px;border-style:dashed"></i>`)}
+   ${lab(236, "혼합 · 나쁜 기운 입구 2개")}
+   ${xrow(256, "○", "몬스 · 비워도 돼요 (0~2마리)", `<i class="face off" style="width:26px;height:26px;border-style:dashed"></i><i class="face off" style="width:26px;height:26px;border-style:dashed"></i>`)}${hint(304, "몬스를 데려가면 나쁜 기운에 더 강해져요")}
+   ${lab(336, "팬 스케줄 3개 (팬 사인회 · 팬레터 보관함 · 문 닫은 팬샵 앞)")}
+   ${xrow(356, "✓", "팬클럽 회장 · 자동으로 함께 가요", ico(0))}
+   ${lab(412, "친구 칸")}
+   ${xrow(432, "○", "친구 · 비워도 돼요", `<span class="sub">엔터파워 3,000 · 친구 +1팀</span>`)}
+   ${xrow(480, "", "참가 정원이 찼어요", "", "background:var(--dim);border-style:dashed;color:var(--soft)")}
+   ${lab(536, "보낼 수 없을 때 · 모자란 것 전부")}
+   <div class="a red" style="left:12px;right:12px;top:558px;font-size:12px;line-height:1.7;text-align:left">✗ 보컬 실력이 C 이상인 아이돌이 1명 있어야 해요<br>✗ 무대 디렉터 ★4 이상 스태프가 필요해요</div>
+   ` + bottomBar(bigBtn(8, 374, "보낼 수 없어요", "티켓이 없으면 「스케줄 티켓이 없어요 · 내일 3장 충전」", true)) +
+   n(1, 4, 92) + n(2, 4, 192) + n(3, 4, 268) + n(4, 4, 368) + n(5, 4, 444) + n(6, 4, 566) + n(7, 362, 702),
+   notes: ["레슨 · 아이돌 1명만 보내면 개인 레슨 · 그 아이돌의 해당 세부 능력이 오름 · 2명 이상이면 보통 스케줄", "스태프 필수 · 직군 · ★ 조건 · 「스태프 없이」가 없음 · 빈칸이면 빨간 ✗ · 다른 스케줄에 간 스태프는 안 나옴", "혼합 · 몬스는 넣어도 되고 안 넣어도 됨 · 0~2마리 · 속성 상관없음 · 1단 이상", "팬 스케줄 · 팬클럽 회장은 고르는 칸 없이 자동으로 같이 감 · 줄은 보여 주기만", "친구 칸 · 엔터파워가 오르면 친구 팀이 늘어남 · 공동은 내 팀 포함 6팀까지 · 꽉 차면 「참가 정원이 찼어요」", "부족한 것 · 처음 걸린 하나가 아니라 전부 빨간 글자", "버튼이 꺼짐 · 티켓 0장이면 충전 안내"] },
+
+ { cap: "③ 진행 중 (진행 중 카드를 누르면)", html: back("새벽 녹음") + `
+   <div class="b pic" style="left:0;right:0;top:51px;height:330px;border-radius:0;border-left:none;border-right:none">도시 장면 · 보낸 아이돌(몬스)이 길을 걸음</div>
+   <div class="b" style="left:12px;right:12px;top:62px;height:58px;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 10px;gap:2px;font-size:12px;text-align:left"><span class="sub" style="font-size:12px">동행 · 호흡 맞추기 · 2 / 4</span><b>함께 겪는 작은 순간</b></div>
+   <div class="b" style="left:12px;top:330px;width:366px;height:34px;justify-content:flex-start;gap:6px;padding:0 10px;font-size:12px"><span class="pill on">속보</span>골목 시장에 노랫소리가 퍼졌어요</div>
+   <div class="a val" style="left:0;right:0;top:400px;text-align:center;font-size:13px;color:var(--soft)">돌아오기까지</div>
+   <div class="a val" style="left:0;right:0;top:420px;text-align:center;font-size:30px">12분 30초</div>
+   <div class="a" style="left:24px;right:24px;top:478px;height:60px;border-bottom:2px dashed var(--ln)"><div class="a" style="left:0;bottom:-2px;width:45%;border-top:3px solid var(--ink)"></div><div class="a" style="left:36%;bottom:4px;display:flex;gap:4px"><i class="face"></i><i class="face"></i></div><div class="a" style="right:0;bottom:4px"><i class="ic" style="width:30px;height:30px"></i></div></div>
+   <div class="a" style="left:24px;right:24px;top:546px;display:flex;justify-content:space-between;font-size:12px"><span>출발</span><span>발견</span><span>동행</span><b>활동</b><span class="sub" style="font-size:12px">도착</span></div>
+   <div class="a sub" style="left:0;right:0;top:580px;text-align:center;font-size:12px">나가도 계속 진행돼요</div>
+   <div class="b" style="left:12px;right:12px;top:612px;height:40px;justify-content:space-between;padding:0 12px"><b>▸ 같이 간 사람 · 받을 보상 · 친구 도움</b></div>
+   ` + bottomBar(bigBtn(8, 374, "목록으로")) +
+   n(1, 4, 200) + n(2, 4, 82) + n(3, 4, 336) + n(4, 4, 428) + n(5, 4, 500) + n(6, 4, 620),
+   notes: ["장면 · 보낸 팀이 걷는 모습(탐험은 아이돌 분신 몬스 · 출동은 몬스)", "장면 글 · 단계 이름 · 장면 제목 · n / 4 · 진행되는 만큼 넘어감(누르면 설명 한 줄 펼침)", "도시 속보 한 줄", "돌아오기까지 남은 시간 하나만 크게", "길 막대 · 지나온 길 진하게 · 5단계 이름은 아래 작게", "자세히(접기) · 같이 간 사람 · 받을 보상 · 이야기 · 친구 도움 요청"] },
+
+ { cap: "④-0 이야기 (「결과 받기」 카드를 누르면 먼저)", html: back("새벽 녹음") + `
+   <div class="pic a" style="left:0;right:0;top:51px;height:723px">이야기 배경 그림 · 장면마다 바뀜</div>
+   <span class="pill a" style="left:12px;top:62px">2 / 4</span>
+   <span class="pill a" style="right:12px;top:62px;font-weight:700">건너뛰기 ›</span>
+   <div class="b" style="left:12px;right:12px;top:540px;height:180px;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:14px;gap:8px;text-align:left">
+     <b style="font-size:15px">함께 겪는 작은 순간</b>
+     <span style="font-size:13px;line-height:1.6">서다온이 먼저 음을 잡자, 정하람이 조용히 화음을 얹었다. 처음으로 둘의 소리가 하나로 들렸다.</span>
+     <span class="sub" style="margin-top:auto;align-self:flex-end">화면을 누르면 다음 ›</span>
+   </div>` + tabs() +
+   n(1, 4, 300) + n(2, 50, 64) + n(3, 330, 92) + n(4, 4, 590),
+   notes: ["이야기 배경 · 장면마다 그림이 바뀜", "장면 번호 · 탐험 4장면 / 출동 3장면", "건너뛰기 → 바로 ④ 결과", "장면 제목 + 글 · 고른 이야기 주제·행동으로 만든 사건이 들어감 · 화면을 누르면 다음 장면 · 마지막 장면 다음은 ④ 결과"] },
+
+ { cap: "④ 결과 · 한 장 (이야기 다음)", html: back("새벽 녹음") + hero(51, 110, "잘 다녀왔어요!", "★ ★ ☆", "좋음 · 보상 100%") + `
+   <div class="a val" style="left:12px;top:172px;font-size:13px">받은 것</div>
+   ${gifts(194, [["카드팩 ×1"], ["주사위 ×10"], ["돈 ×1,000"], ["악보 조각 ×1", "완성!"], ["보물 상자", "열기"], ["우정 ×20"]])}
+   <div class="a val" style="left:12px;top:336px;font-size:13px">좋아진 것</div><div class="a" style="left:12px;right:12px;top:358px;height:30px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #d9dce2;font-size:12px"><span style="flex:1;text-align:left">♡ 서다온 · 정하람 관계</span><span class="sub" style="font-size:12px">999</span><b>→ 1,021</b><span class="pill on">▲ 22</span></div><div class="a" style="left:12px;right:12px;top:390px;height:30px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #d9dce2;font-size:12px"><span style="flex:1;text-align:left">짝 · 보컬 코치 · 서다온</span><span class="sub" style="font-size:12px">3</span><b>→ 4</b><span class="pill on">▲ 1</span></div>
+   <div class="b" style="left:12px;right:12px;top:436px;height:40px;justify-content:space-between;padding:0 12px;font-size:12px"><b>▸ 자세히</b><span class="sub" style="font-size:12px">이야기 · 참가자 · 점수</span></div>
+   <div class="a" style="left:0;right:0;top:490px;text-align:center"><span class="pill" style="font-size:12px;padding:3px 12px">공동 순위 보기 ›</span></div>
+   ` + bottomBar(bigBtn(8, 374, "받기", "카드팩은 받은 뒤에 열어요")) +
+   n(1, 4, 96) + n(2, 4, 214) + n(3, 4, 364) + n(4, 4, 446) + n(5, 118, 488) + n(6, 362, 702),
+   notes: ["대표 이미지 위에 도착 문구(탐험 「잘 다녀왔어요!」 · 출동 「씩씩하게 다녀왔어요!」) · ★ · 결과 등급 · 보상 % · 등급 4가지: 완벽 ★3 100% · 좋음 ★2 100% · 부분 ★1 50% · 실패 0%(④-1)", "받은 것 · 칸 하나 = 보상 하나 · 카드팩 · 주사위 · 돈 · 도감 조각(3/3이 되면 「완성!」 · 완성 보상은 같은 칸에 더해짐 · 누르면 Ⓐ) · 보물 상자 / 활동비 봉투(「열기」 · 안 열면 받기 때 자동) · 우정 포인트(친구가 같이 갔을 때만) · 없는 건 칸이 안 생김", "좋아진 것 · 이번에 오른 값만 줄마다 「전 → 후 ▲ 오른 만큼」 · 관계 · 짝 라포 · 레슨 능력 등 오른 항목만", "자세히(접기) · 서사 한 줄(기록장에도 남음) · 참가자 · 모두의 능력 · 내 능력 · 시간 보너스 · 점수 · 이야기 다시 보기", "공동일 때만 · 순위 창 ④-3", "받기 → 한 번에 다 받음 → 카드팩 열기(카드 획득 연출) → 이야기 카드를 발견했으면 ④-2 · 아니면 ① 카드가 다시 「보내기」"] },
+
+ { cap: "④-1 결과 · 아쉬울 때 (부분 ★1 / 실패)", html: back("새벽 녹음") + hero(51, 110, "조금 아쉬워요", "★ ☆ ☆", "부분 · 보상 50%") + `
+   ${gifts(172, [["카드팩 ×1"], ["주사위 ×5"], ["돈 ×500"]])}
+   <div class="line" style="top:262px"></div>` + hero(263, 110, "이번엔 어려웠어요", "☆ ☆ ☆", "실패 · 보상 0%") + `
+   <div class="b off" style="left:12px;right:12px;top:384px;height:58px">받은 것 없음</div>
+   ` + bottomBar(bigBtn(8, 374, "확인")) +
+   n(1, 4, 96) + n(2, 4, 192) + n(3, 4, 310) + n(4, 362, 702),
+   notes: ["부분 ★1 · 보상 절반", "받은 것 · 절반이 된 수만 · 같은 칸 모양", "실패 ☆ · 보상 0% · 받은 것 대신 빈 칸 한 줄", "아쉬울 때도 같은 한 장 · 좋아진 것은 오른 게 있을 때만"] },
+
+ { cap: "④-2 아이템 이야기 (이야기 카드를 발견했을 때만 · 받기 다음)", html: back("오래된 악보") + `
+   <div class="pic a" style="left:0;right:0;top:51px;height:647px"></div>
+   <span class="pill a" style="right:12px;top:62px;font-weight:700">건너뛰기 ›</span>
+   <div class="b" style="left:125px;top:100px;width:140px;height:200px;flex-direction:column;gap:6px"><span class="pic" style="width:110px;height:150px;border-radius:6px">카드 인물</span><b style="font-size:12px">서다온 ★2</b></div>
+   <div class="b" style="left:12px;right:12px;top:330px;height:250px;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:14px;gap:8px;text-align:left;font-size:13px;line-height:1.6">
+     <b style="font-size:15px">아이템 이야기 · 오래된 악보</b>
+     <span>연습실 구석에서 찾은 악보에는 지워진 가사가 남아 있었다.</span>
+     <span>서다온은 그 빈칸을 오늘 녹음한 소리로 채워 보기로 했다.</span>
+     <span class="sub" style="margin-top:auto">새벽 녹음에서 발견 · 관계는 다시 오르지 않아요</span>
+   </div>` + bottomBar(bigBtn(8, 374, "확인", "카드 NEW · 도감 조각 받음")) +
+   n(1, 100, 110) + n(2, 4, 340) + n(3, 362, 702),
+   notes: ["카드 인물 그림 · 발견한 이야기 카드의 아이돌", "아이템 이야기 · 물건의 단서 → 사연 → 아이돌 → 후일담 · 건너뛰기 가능 · 라포는 다시 안 오름", "확인 → ① 홈 · 상자 · 봉투 발견은 이 화면 없이 결과 안에서 바로 열림"] },
+
+ { grp: "창 · 해금" },
+ { cap: "④-3 공동 순위 (창 · 결과 「공동 순위 보기」)", html: sheet(back("골목 시장 정화"), "공동 순위 · 6팀", 150, `
+   ${[["1", "하늘기획", 92, "팩 +1"], ["2", "달빛기획", 80, "상자 +1"], ["3", "별빛기획", 71, "상자 +1"], ["4", "우리 기획사", 64, "", 1], ["5", "봄빛기획", 50, ""], ["6", "바다기획", 33, ""]].map(([r, nm, v, rw, me], i) => `<div class="b" style="left:12px;right:12px;top:${58 + i * 50}px;height:44px;justify-content:flex-start;gap:8px;padding:0 10px;font-size:12px;${me ? "border-width:2.5px" : ""}"><b style="width:14px">${r}</b><i class="face"></i><span style="width:80px;text-align:left;${me ? "font-weight:700" : ""}">${nm}</span><span class="bar" style="flex:1;height:8px"><i style="width:${v}%"></i></span><span style="width:24px">${v}</span>${rw ? `<span class="pill on" style="font-size:11px">${rw}</span>` : `<span style="width:52px"></span>`}</div>`).join("")}
+   <div class="line" style="top:368px"></div>
+   <div class="a sub" style="left:12px;top:378px;font-size:12px">내 순위</div>
+   <div class="b" style="left:12px;right:12px;top:398px;height:44px;justify-content:flex-start;gap:8px;padding:0 10px;font-size:12px;border-width:2.5px"><b style="width:14px">4</b><i class="face"></i><b style="flex:1;text-align:left">우리 기획사</b><span>기여 64</span></div>`)
+   + n(1, 4, 220) + n(2, 300, 186) + n(3, 4, 556),
+   notes: ["순위 줄 · 순위 · 얼굴 · 기획사 이름 · 기여도 막대 · 아래로 밀어 더 보기", "1~3위 추가 보상(참가 2팀 이상일 때만)", "내 줄은 아래에 한 번 더 고정"] },
+
+ { cap: "Ⓐ 도감 · 기념 (창 · 홈 📖)", html: sheet(homeTop, "📖 모험 발견 도감 00/27", 70, `
+   <div class="a" style="left:12px;right:12px;top:100px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${["아이돌 이야기", "팀의 추억", "수호신의 흔적", "브랜드 연구", "보물 상자", "활동 재화"].map((t, i) => `<div class="b st" style="height:56px;flex-direction:column;gap:2px;font-size:12px;${i ? "" : "border-width:2.5px"}">${t}<b>0</b></div>`).join("")}</div>
+   ${[["오래된 악보", 3, 3, 1], ["연습실 열쇠", 1, 3], ["첫 무대 티켓", 0, 3]].map(([nm, a, b, ok], i) => `<div class="b" style="left:12px;right:12px;top:${236 + i * 62}px;height:54px;justify-content:flex-start;gap:10px;padding:0 10px"><i class="ic" style="width:32px;height:32px"></i><span style="flex:1;text-align:left"><b>${nm}</b><br><span class="sub" style="font-size:12px">조각 ${a} / ${b}</span></span>${ok ? `<span class="pill on">완성 ✓</span>` : "<b>›</b>"}</div>`).join("")}
+   <div class="a sub" style="left:14px;right:14px;top:430px;font-size:12px">항목을 누르면 Ⓐ-1 상세(이야기 · 완성 보상 · 반복 퍼즐)</div>`,
+   `<div class="a" style="left:12px;right:12px;top:56px;display:flex;gap:6px">${["도감", "기념"].map((t, i) => `<span class="b st" style="flex:1;height:32px;font-weight:700;${i ? "background:var(--dim)" : ""}">${t}</span>`).join("")}</div>`)
+   + n(1, 4, 132) + n(2, 4, 162) + n(3, 4, 300),
+   notes: ["책갈피 · 도감(모험 발견) / 기념(우리의 기념)", "6갈래", "항목 · 조각 n/3 · 조각은 쌓이기만 함 · 완성 ✓ = 보상 받은 항목(보기 전용) · 📖 빨간 점 = 새로 들어온 조각"] },
+
+ { cap: "Ⓐ-1 도감 항목 상세 (항목을 누르면)", html: sheet(homeTop, "‹ 아이돌 이야기", 70, `
+   <div class="pic a" style="left:115px;top:62px;width:160px;height:160px;border-radius:10px;border:1.5px solid var(--ln)">아이템 그림</div>
+   <div class="a val" style="left:0;right:0;top:232px;text-align:center;font-size:16px">오래된 악보</div>
+   <div class="a" style="left:60px;right:60px;top:262px;display:flex;align-items:center;gap:8px;font-size:12px"><span style="flex:1"><span class="bar" style="height:10px"><i style="width:100%"></i></span></span><b>조각 3 / 3</b></div>
+   <div class="b" style="left:12px;right:12px;top:296px;height:120px;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:10px 12px;gap:4px;font-size:12px;text-align:left"><b>이야기</b><span>연습실 구석에서 찾은 악보. 첫 데뷔곡의 가사가 지워진 채 남아 있다…</span><span class="sub">완성하면 열려요 · 다시 봐도 라포는 안 올라요</span></div>
+   <div class="a" style="left:12px;right:12px;top:428px;display:flex;gap:6px;align-items:center;font-size:12px"><b>완성 보상</b>${["카드팩 ×1", "돈", "주사위"].map(t => `<span class="pill">${t}</span>`).join("")}<span class="pill on" style="margin-left:auto">받음 ✓</span></div>
+   <div class="b" style="left:12px;right:12px;top:470px;height:60px;justify-content:flex-start;gap:10px;padding:0 12px"><span style="display:grid;grid-template-columns:repeat(3,12px);gap:2px">${Array.from({length: 9}, (_, i) => `<i style="width:12px;height:12px;border:1px solid var(--ln);background:${i < 4 ? "var(--ink)" : "var(--box)"}"></i>`).join("")}</span><span style="flex:1;text-align:left;font-size:12px"><b>반복 퍼즐</b><br>같은 그림 조각 9개 · 지금 4 / 9</span><span class="pill">퍼즐 ›</span></div>`)
+   + n(1, 90, 132) + n(2, 4, 262) + n(3, 4, 366) + n(4, 4, 498) + n(5, 4, 540),
+   notes: ["아이템 그림 · 이름", "조각 n / 3 · 보상으로 받은 조각이 쌓임 · 조각은 줄지 않음", "이야기 · 3/3이 되면 열림(물건의 단서 → 사연 → 아이돌 → 후일담)", "완성 보상 · 카드팩 1 + 돈 · 주사위 · 항목마다 한 번 · 결과 화면 「받기」 때 이미 받음 → 「받음 ✓」", "반복 퍼즐 · 같은 그림 조각 9개가 모이면 열림 · 누르면 Ⓐ-2"] },
+
+ { cap: "Ⓐ-2 반복 퍼즐 (같은 그림 9조각 · 3×3)", html: sheet(homeTop, "‹ 오래된 악보 · 퍼즐 2회차", 70, `
+   <div class="a sub" style="left:14px;top:58px;font-size:12px">조각을 누르고 자리를 눌러요</div>
+   <div class="a" style="left:75px;top:84px;width:240px;height:240px;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;border:2px solid var(--ln);background:var(--ln)">${Array.from({length: 9}, (_, i) => `<span class="${i < 4 ? "pic" : ""}" style="background:${i < 4 ? "" : "var(--pane)"};display:flex;align-items:center;justify-content:center;color:var(--soft);font-size:12px">${i < 4 ? "" : i + 1}</span>`).join("")}</div>
+   <span class="pill a" style="right:12px;top:84px">완성 그림</span>
+   <div class="sec" style="top:340px">모은 조각 <span class="sub" style="font-size:12px">9 / 9 · 놓은 것 4</span></div>
+   <div class="a" style="left:12px;right:12px;top:364px;display:flex;gap:6px">${Array.from({length: 5}, (_, i) => `<span class="pic" style="width:56px;height:56px;border:${i === 0 ? "2.5px" : "1.5px"} solid var(--ln);border-radius:6px"></span>`).join("")}</div>
+   <div class="a" style="left:12px;right:12px;top:436px;font-size:12px">다 맞추면 <b>주사위 ×27</b> · 조각 9개를 쓰고 다음 회차로</div>
+   <div class="b off" style="left:12px;right:12px;top:470px;height:52px;flex-direction:column;gap:2px"><b>완성하고 주사위 받기</b><span class="sub">5칸 남음</span></div>`)
+   + n(1, 50, 190) + n(2, 4, 390) + n(3, 4, 436) + n(4, 4, 486),
+   notes: ["3×3 판 · 맞춘 칸은 그림이 보임 · 완성 그림은 위 버튼으로 미리 보기", "모은 조각 · 이 그림 조각만(다른 그림과 섞지 않음) · 하나 누르고 판의 자리를 누름 · 배치는 저장됨", "보상 · 주사위 27 · 완성할 때만 조각 9개를 씀", "다 맞추면 켜짐 → 주사위 받고 다음 회차(처음부터 다시)"] },
+
+ { cap: "Ⓑ 이야기 바꾸기 (창 · ② 「바꾸기」)", html: sheet(back("서먹한 둘의 듀엣 연습"), "이야기 바꾸기", 150, `
+   ${[["주제", "서로 알아가기"], ["행동", "서로의 소리 듣기"], ["관계 대상", "서다온 ↔ 정하람"]].map(([k, v], i) => `<div class="b" style="left:12px;right:12px;top:${58 + i * 58}px;height:50px;justify-content:space-between;padding:0 12px"><span class="sub" style="font-size:12px">${k}</span><b>${v} ›</b></div>`).join("")}
+   <div class="b" style="left:12px;right:12px;top:236px;height:90px;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:8px 12px;gap:4px;font-size:12px;text-align:left"><b>미리보기</b><span>둘이 서로의 소리를 처음 맞춰 본다.</span><span class="pill">라포 +0.22</span></div>
+   <div class="b" style="left:12px;right:12px;top:520px;height:52px;font-weight:700;border-width:2px">이대로</div>`)
+   + n(1, 4, 220) + n(2, 4, 400),
+   notes: ["주제 · 행동 · 관계 대상(두 아이돌일 때만) · 누르면 고르기", "미리보기 · 오를 라포 · 보상량은 같음"] },
+
+ { cap: "Ⓒ 내 기록장 (창 · 홈 아래) · 내 엽서 담벼락", html: sheet(homeTop, "내 기록장", 70, `
+   <div class="a sub" style="left:14px;top:56px;font-size:12px">다녀온 길이 엽서로 쌓여요 · 실패는 연 뒤에 건넬 수 있어요</div>
+   <div class="a" style="left:12px;right:12px;top:80px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--soft)"><span style="flex:1;border-top:1px solid #c9ccd1"></span>오늘<span style="flex:1;border-top:1px solid #c9ccd1"></span></div>
+   ${postcard(102, {name: "나", me: "내 엽서", when: "오후 3:20", lock: 1, badge: "탐험", title: "새벽 녹음", blurb: "마지막 테이크를 지켰다", foot: `<span class="pill">♡ 3</span><span class="pill">💬 1</span><span class="pill on" style="margin-left:auto">친구들에게 보여주기</span>`})}
+   ${postcard(372, {name: "나", me: "담아 온 엽서", when: "오전 11:05", badge: "출동", title: "○○님의 엽서", blurb: "원작 ○○님 · 골목 시장 정화", quote: 1, foot: `<span class="pill">♡ 12</span><span class="pill">💬 4</span>`})}`)
+   + n(1, 4, 86) + n(2, 4, 130) + n(3, 4, 210) + n(4, 4, 330) + n(5, 4, 400),
+   notes: ["날짜로 나뉨 · 오늘 / 어제 / n월 n일", "내 엽서 · 「받기」를 누른 스케줄이 엽서로 남음 · 처음엔 🔒 나만 보기", "엽서 그림 · 장소 장면 + 제목 · 한 줄", "♡ · 💬 댓글 · 「친구들에게 보여주기」(친구 n명의 소식에 올라감) / 「다시 나만 보기」 · 엽서를 누르면 Ⓒ-1", "담아 온 엽서 · 친구 소식에서 「담기」한 엽서 · 원작자 표시"] },
+
+ { cap: "Ⓒ-1 엽서 자세히 · 댓글 (엽서를 누르면)", html: sheet(homeTop, "‹ 댓글", 70, `
+   ${postcard(58, {name: "나", me: "내 엽서", when: "오후 3:20", badge: "탐험", title: "새벽 녹음", blurb: "서다온과 정하람이 마지막 테이크를 지켰다", foot: `<span class="pill">♡ 3</span><span class="pill">💬 1</span>`})}
+   ${[["○○", "둘이 드디어 맞췄네요!"], ["△△", "다음엔 같이 가요"]].map(([nm, t], i) => `<div class="a" style="left:12px;right:12px;top:${330 + i * 40}px;display:flex;align-items:center;gap:8px;font-size:12px"><i class="face" style="width:26px;height:26px"></i><b>${nm}</b>${t}</div>`).join("")}
+   <div class="b" style="left:12px;right:12px;top:430px;height:44px;justify-content:space-between;padding:0 6px 0 12px;font-size:12px"><span class="sub" style="font-size:12px">한 줄로 남겨 보세요</span><span class="pill on">남기기</span></div>`)
+   + n(1, 4, 140) + n(2, 4, 400) + n(3, 4, 444),
+   notes: ["엽서 크게 · 본문 전체", "댓글 목록 · 아직 없으면 「아직 댓글이 없어요」", "한 줄 댓글 남기기"] },
+
+ { cap: "Ⓓ 소식 (창 · 홈 아래) · 받은 편지 + 친구 엽서", html: sheet(homeTop, "소식", 70, `
+   <div class="a sub" style="left:14px;top:56px;font-size:12px">건네받은 편지는 맨 위 · 친구 글은 그 아래</div>
+   <div class="a val" style="left:14px;top:80px;font-size:13px">받은 편지 <span class="red" style="font-size:12px">안 읽은 편지 2통</span></div>
+   ${[["○○님이 엽서를 건넸어요", "원작 ○○님 · 10분 전"], ["△△님이 엽서를 건넸어요", "원작 □□님 · 1시간 전"]].map(([t, s2], i) => `<div class="b" style="left:12px;right:12px;top:${104 + i * 54}px;height:48px;justify-content:flex-start;gap:10px;padding:0 10px;font-size:12px"><i class="face" style="width:30px;height:30px"></i><span style="flex:1;text-align:left"><b>${t}</b><br><span class="sub">${s2}</span></span><b>›</b></div>`).join("")}
+   ${postcard(222, {name: "○○", when: "2시간 전", badge: "탐험", title: "골목 시장 노래", blurb: "시장 사람들이 따라 불렀다", foot: `<span class="pill">♡ 8</span><span class="pill">💬 2</span><span class="pill on" style="margin-left:auto">담기</span>`})}
+   <div class="a sub" style="left:14px;top:500px;font-size:12px">오늘 2/3장 담을 수 있어요 · 자정에 다시 채워져요</div>
+   <div class="a sub" style="left:0;right:0;top:530px;text-align:center;font-size:12px">↓ 친구 엽서 더 보기</div>`)
+   + n(1, 4, 112) + n(2, 4, 300) + n(3, 4, 456) + n(4, 4, 504),
+   notes: ["받은 편지 · 친구가 건넨 엽서 · 안 읽은 수 빨간 글자 · 누르면 Ⓓ-1", "친구 엽서 · 친구가 「보여주기」한 엽서가 시간 순으로", "♡ · 💬 · 「담기」 → 내 기록장에 「담아 온 엽서」로(원작은 그대로)", "담기는 하루 3장 · 다 쓰면 「오늘 담기를 다 썼어요」"] },
+
+ { cap: "Ⓓ-1 엽서가 도착했어요 (받은 편지를 누르면)", html: sheet(homeTop, "엽서가 도착했어요", 70, `
+   <div class="a" style="left:12px;top:58px;display:flex;gap:8px;align-items:center;font-size:12px"><i class="face"></i><span><b>○○</b><br><span class="sub">10분 전 · 원작 ○○님</span></span></div>
+   <div class="pic a" style="left:12px;right:12px;top:104px;height:200px;border-radius:8px;border:1.5px solid var(--ln)">엽서 그림</div>
+   <div class="a" style="left:14px;right:14px;top:314px;font-size:12px"><b style="font-size:14px">골목 시장 노래</b><br>시장 사람들이 우리 노래를 따라 불렀어요. 다음엔 같이 가요!</div>
+   <div class="b" style="left:12px;top:400px;width:177px;height:48px;font-weight:700">나중에</div>
+   <div class="b" style="left:201px;top:400px;width:177px;height:48px;font-weight:700;border-width:2px">기록장에 두기</div>`)
+   + n(1, 4, 190) + n(2, 4, 410),
+   notes: ["친구가 건넨 엽서 · 보낸 사람 · 원작자", "나중에 = 받은 편지에 남김 · 기록장에 두기 = 내 기록장에 「담아 온 엽서」로"] },
+
+ { cap: "⑤ 해금 연출 (규칙서 · 어디서든)", html: back("로비") + tabs(true) + `<div class="dimbg"></div>
+   <div class="a val" style="left:0;right:0;top:150px;text-align:center;color:#fff;font-size:18px">스케줄 2개가 열렸습니다</div>
+   ${card(8, 200, { k: "아이돌", t: "새벽 녹음", m: "20분 · 보컬·랩", s: "ready", b: ["아이돌!", "스태프", "레슨"] })}${card(201, 200, { k: "몬스", t: "녹음실 수호", m: "75초 · 목 속성", s: "ready", b: ["몬스!"] })}
+   <div class="a" style="left:0;right:0;top:420px;text-align:center;color:#fff;font-size:22px">↓</div>
+   <div class="a" style="left:0;right:0;top:456px;text-align:center;color:#fff;font-size:12px">카드가 아래 「스케줄」로 날아가고 빨간 점</div>
+   <div class="b" style="left:120px;top:500px;width:150px;height:44px;font-weight:700">확인</div>`
+   + n(1, 20, 150) + n(2, 80, 210) + n(3, 102, 790),
+   notes: ["「○○ 스케줄이 열렸습니다」 · 한 번에 여러 개 열리면 한 창에 묶어서 「n개가 열렸습니다」", "열린 카드 = 홈 카드와 같은 모양 · 카드가 아래 「스케줄」 버튼으로 빨려 들어감", "확인 → 아래 메뉴 스케줄에 빨간 점"] },
+];
+
+const SHOT = new URLSearchParams(location.search).get("shot");
+const PH = SCREENS.filter(s => !s.grp);
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${PH[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff";
+  // 한 장 찍기: 왼쪽 끝 번호는 글자를 가리지 않게 칸 윗선으로 올림
+  for (const m of document.querySelectorAll(".phone .n")) if (m.style.left === "4px") m.style.top = (parseFloat(m.style.top) - 16) + "px"; }
+else {
+  let out = "", buf = [];
+  const flush = () => { if (buf.length) out += `<div class="row">${buf.join("")}</div>`; buf = []; };
+  for (const s of SCREENS) {
+    if (s.grp) { flush(); out += `<h2 class="grp">${s.grp}</h2>`; continue; }
+    buf.push(`<div><p class="cap">${s.cap}</p><div class="pw" style="position:relative"><div class="phone">${s.html}</div></div>
+      <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`);
+  }
+  flush();
+  document.getElementById("screens").innerHTML = out;
+  // 왼쪽 끝 번호는 글자를 가리지 않게 화면 바깥 왼쪽으로
+  for (const ph of document.querySelectorAll(".phone")) for (const m of ph.querySelectorAll(".n"))
+    if (m.style.left === "4px") { m.style.left = "-26px"; m.style.top = (parseFloat(m.style.top) + 2) + "px"; ph.parentElement.append(m); }
+}
+</script>
+</body>
+</html>

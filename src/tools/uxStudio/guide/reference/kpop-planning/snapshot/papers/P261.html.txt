@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>획득 연출 구조</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.35 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .sub { color:var(--soft); font-size:12px; }
+  .flow { display:flex; align-items:flex-start; gap:6px; padding:16px 24px 8px; overflow-x:auto; }
+  .step { flex:none; width:180px; }
+  .step h2 { font-size:14px; margin:0 0 6px; }
+  .ph { position:relative; width:180px; height:340px; border:2px solid var(--ln); border-radius:10px; background:var(--pane); overflow:hidden; }
+  .arrow { flex:none; align-self:center; font-size:22px; color:var(--ln); padding-top:20px; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; font-size:12px; }
+  .off { background:var(--dim); border-style:dashed; color:var(--soft); }
+  .skip { position:absolute; right:6px; bottom:6px; border:1.5px solid var(--ln); border-radius:999px; background:var(--box); padding:1px 8px; font-size:11px; font-weight:700; }
+  .cap { margin:6px 0 0; font-size:12px; }
+  table { border-collapse:collapse; margin:12px 24px 32px; background:var(--box); font-size:13px; }
+  th, td { border:1.5px solid var(--ln); padding:8px 12px; text-align:left; white-space:nowrap; }
+  th { background:var(--dim); }
+</style>
+</head>
+<body>
+<h1>획득 연출 구조 · 아이돌 캐스팅 · 스태프 획득 · 팬클럽 회장 선출</h1>
+<p class="sub" style="margin:0 24px">세 가지 모두 같은 5단계 · 영상만 다름 · ④ 공개 = 포토카드 「사람 보기」 화면 · 스킵은 처음부터 끝까지 오른쪽 아래</p>
+
+<div class="flow">
+  <div class="step"><h2>① 시작</h2><div class="ph">
+    <div class="b off" style="left:10px;top:12px;width:156px;height:250px">장소 영상</div>
+    <div class="b" style="left:10px;top:272px;width:156px;height:34px;font-weight:700">열기</div>
+    <span class="skip">스킵 ›</span></div>
+    <p class="cap">누르면 그 종류의 장소로</p></div>
+  <span class="arrow">→</span>
+
+  <div class="step"><h2>② 기대</h2><div class="ph">
+    <div class="a" style="left:30px;top:50px;width:116px;height:200px;border:2px solid var(--ln);border-radius:6px;background:var(--box);box-shadow:0 0 0 8px #d7dbe0,0 0 0 16px #e6e8eb"></div>
+    <div class="a" style="left:0;width:100%;top:140px;text-align:center;font-weight:700">빛</div>
+    <div class="a" style="left:0;width:100%;top:280px;text-align:center;font-size:12px">★1 ★2 ★3 ★4 ★5<br><span class="sub">빛 색 = 등급</span></div>
+    <span class="skip">스킵 ›</span></div>
+    <p class="cap">문 · 무대가 빛남, 색으로 등급 힌트</p></div>
+  <span class="arrow">→</span>
+
+  <div class="step"><h2>③ 숨김</h2><div class="ph">
+    <div class="a" style="left:58px;top:70px;width:64px;height:180px;background:var(--ink);border-radius:32px 32px 8px 8px"></div>
+    <div class="a" style="left:66px;top:44px;width:48px;height:48px;background:var(--ink);border-radius:50%"></div>
+    <span class="skip">스킵 ›</span></div>
+    <p class="cap">흰 번쩍 → 실루엣</p></div>
+  <span class="arrow">→</span>
+
+  <div class="step"><h2>④ 공개</h2><div class="ph">
+    <div class="a" style="left:0;top:0;width:100%;height:100%;background:repeating-linear-gradient(45deg,#eceef0 0 8px,#e3e5e8 8px 16px)"></div>
+    <div class="a" style="left:0;width:100%;top:8px;text-align:center"><b style="font-size:14px">이름</b> <span style="font-size:11px">등급</span> <span style="font-size:11px;font-weight:700;border:1.5px solid var(--ln);border-radius:99px;padding:0 4px;background:#fff">NEW</span></div>
+    <div class="b off" style="left:60px;top:34px;width:80px;height:150px">큰 캐릭터</div>
+    <div class="a" style="left:6px;top:80px;display:flex;flex-direction:column;gap:6px;font-size:11px">
+      <span style="background:rgba(255,255,255,.9);padding:1px 4px;border-radius:3px">능력 줄</span><span style="background:rgba(255,255,255,.9);padding:1px 4px;border-radius:3px">능력 줄</span><span style="background:rgba(255,255,255,.9);padding:1px 4px;border-radius:3px">능력 줄</span></div>
+    <div class="b" style="left:14px;top:194px;width:152px;height:32px;border-width:2px;font-weight:700">대표 능력 00</div>
+    <div class="b" style="left:14px;top:234px;width:152px;height:26px;font-size:11px">카드 효과 +00%</div>
+    <div class="a sub" style="left:0;width:100%;top:290px;text-align:center;font-size:11px">화면을 누르면 계속</div>
+    <span class="skip">스킵 ›</span></div>
+    <p class="cap">포토카드 「사람 보기 · 능력」 그대로 · 책갈피와 아래 버튼만 숨김</p></div>
+  <span class="arrow">→</span>
+
+  <div class="step"><h2>⑤ 결과</h2><div class="ph">
+    <div class="a" style="left:10px;top:10px;font-size:11px">☐ 영상 스킵</div>
+    <div class="b" style="left:40px;top:40px;width:100px;height:150px;flex-direction:column;gap:6px">
+      <span class="b off" style="position:static;width:60px;height:70px;font-size:11px">얼굴</span><b>이름</b><span style="font-size:11px">NEW</span></div>
+    <div class="b" style="left:10px;top:272px;width:76px;height:40px;font-weight:700">한 번 더</div>
+    <div class="b" style="left:92px;top:272px;width:76px;height:40px;font-weight:700">확인</div></div>
+    <p class="cap">얻은 사람 + 한 번 더 · 확인</p></div>
+</div>
+
+<table>
+  <tr><th></th><th>① 장소 영상</th><th>② 빛나는 것</th><th>④ 능력 줄 · 가운데 띠</th><th>⑤ 결과 뒤 가는 곳</th></tr>
+  <tr><th>아이돌 캐스팅</th><td>오디션 무대</td><td>무대 조명</td><td>특기 · 재능선 % / 띠 단계 · 6축 평균 / 6축 지금 값 ━ ◆재능선</td><td>팀</td></tr>
+  <tr><th>스태프 획득</th><td>기획사 사무실</td><td>문</td><td>★ · 고정 능력 · 맡는 세부 · 스케줄 / 띠 주요 능력</td><td>명함집</td></tr>
+  <tr><th>팬클럽 회장 선출</th><td>팬 모임 · 응원봉</td><td>응원봉 물결</td><td>★ · 팬 수 문턱 / 띠 팬 효과 +%</td><td>명함집</td></tr>
+</table>
+</body>
+</html>

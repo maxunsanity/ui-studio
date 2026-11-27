@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>건설 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  .kv { display:flex; justify-content:space-between; align-items:center; font-size:12px; }
+  .slot { position:absolute; height:52px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:11px; font-weight:700; gap:2px; }
+  .slot.on { border-width:3px; }
+  .chg { position:absolute; z-index:4; font-size:11px; font-weight:700; background:#2b2f35; color:#fff; border-radius:4px; padding:0 4px; }
+
+  .cell { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; font-size:12px; }
+  .cell.sel { border-width:3px; }
+  .cell.broke { border-style:dashed; }
+  .cell .bd { width:70px; height:44px; display:flex; align-items:center; justify-content:center; font-size:11px; color:var(--soft); border:1.5px solid var(--ln); border-radius:4px; background:var(--dim); }
+  .cell.empty .bd { border-style:dashed; background:transparent; }
+  .tag { position:absolute; z-index:3; font-size:11px; font-weight:700; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); padding:0 4px; line-height:16px; }
+  .tag.dark { background:#2b2f35; color:#fff; border-color:#2b2f35; }
+</style>
+</head>
+<body>
+<h1>건설 · 와이어프레임 1차 초안 (390×844)</h1>
+<p class="flow">아래 메뉴 「건설」(또는 HUD 엔터파워 상세 → 건설 바로 가기) → ① 도시 지도(3×3) → 시설 누르기 → ①-1 시설 상세(아래 판) → 「한 단계 증설」 / 「최대 증설」(→ 확인 창) → 조립 장면 → ① 로 돌아옴 · 지도 ↔ ② 시설 목록</p>
+<p class="flow"><b>메인은 단순하게</b>: 지도 = 시설 이름 · 단계 · 「증설 가능」 · 「파손」 표시만. 세 동 · 좋아지는 것 · 비용은 시설을 눌렀을 때 아래 판에서.</p>
+<div class="rules">
+  <b>규칙 근거</b> · 건설 UI 기획 목록(11/23) · P81 건설 · 증설 · P106 건물 성장 · 게임 시뮬레이터 건설 화면(3×3 지도 · 한 단계 / 최대 증설) · 현중 11/23 「3×3 그대로」 · 「기존 건물을 줄여서 · 맵 전체가 아니라 건물만」 · 「쿼터뷰」<br>
+  · <b>지도 칸(현중 11/23 확정)</b>: 3×3 · 칸마다 기존 건물만 줄여서 · 쿼터뷰. 건물 3D 모델(9시설 × 3동 × 10단계 · <code>data/res/facility_growth_blender_v01</code>)을 쿼터뷰 카메라로 뽑아 씀. · 아론 11/14 보드 공방(방패 3 → 지킴이 → 파손 · 수리 = 마지막 건설비 × 0.5) · 비앙카 11/04(파손 건물 도착 돈 × 0.5 · 임시)<br>
+  · <b>로비 HUD 유지(현중 11/23)</b>: 아래 메뉴로 여는 전체 화면이라 위쪽 줄(팀 얼굴 · 엔터파워 · 루비 · 팬 · 설정)은 그대로 · 건설에만 필요한 돈 · 방패 · 목록 보기는 그 아래 한 줄 · 나가기는 아래 메뉴(따로 ← 없음).<br>
+  · <b>짓기 · 증설은 아래 「건설」에서만.</b> 시설을 고르는 것만으로는 돈이 들지 않음 · 칸 도착(레슨 · 수익)과 따로.<br>
+  · <b>시설 9곳 · 0~30단계 · 세 동</b>: 본관 → 부속 A → 부속 B 순서로 한 동씩 자람 · 30단계 = 세 동 10 / 10. 0단계 = 빈 부지(「짓기」).<br>
+  · <b>파손</b>: 수리 먼저(제안) · 고치기 전엔 그 건물 도착 돈 절반 · 수리비 = 마지막 건설비 × 0.5.<br>
+  · <b>엔터파워</b>: 시설 단계 합이 아님(11/18 바뀜) · 증설로 오를 때 엔터재화 2 × (단계 − 1)을 받아 쌓음(건물 레벨업 = 엔터재화 지급처 45%) · 문턱 50 · 100 · 200 · 400 · 700에서 몬스 팩.<br>
+  · <b>건설하는 때(현중 11/23 확정)</b>: 언제든 가능 · 판 진행 중에도 아래 메뉴 「건설」로 증설 · 수리(의상의 「판 밖에서만」과 다름).<br>
+  · <b>정할 것</b>: 시즌 끝 건물 단계 초기화 안내 자리 · 공격 받은 소식 자리 · 비용 · 효과 값(비앙카 장부) · 「최대 증설」 확인 창 문턱 · 방패 얻는 곳 · 시뮬의 아래 책갈피(기록장 · 건설 · 소식)를 남길지 · 완공 덤 내용 · 건물 NPC 보이기</div>
+<div class="row" id="screens"></div>
+<script>
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (on = 2) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === on ? " on" : ""}" style="left:${i * 65}px"><i></i>${t}</div>`).join("");
+const head = title => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div>
+  <div class="a val" style="left:52px;top:16px;font-size:16px">${title}</div><div class="line" style="top:50px"></div>`;
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const bigBtn = (x, w, label, sub = "", off = false, top = 700) =>
+  `<div class="b${off ? " off" : ""}" style="left:${x}px;top:${top}px;width:${w}px;height:62px;flex-direction:column;gap:2px">
+    <span class="val" style="font-size:15px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const win = (top, h, title) => `<div class="win" style="left:20px;top:${top}px;width:350px;height:${h}px"></div><div class="a val" style="left:40px;top:${top + 16}px;font-size:16px">${title}</div><div class="b" style="left:322px;top:${top + 10}px;width:34px;height:34px;font-size:15px">✕</div>`;
+const winBtns = (top, a, b) => `<div class="b" style="left:36px;top:${top}px;width:150px;height:48px"><span class="val">${a}</span></div><div class="b" style="left:204px;top:${top}px;width:150px;height:48px;border-width:2.5px"><span class="val">${b}</span></div>`;
+const kv = (x, y, w, k, v) => `<div class="a kv" style="left:${x}px;top:${y}px;width:${w}px"><span class="sub" style="font-size:12px">${k}</span><span class="val">${v}</span></div>`;
+const hr = (x, y, w) => `<div class="a" style="left:${x}px;top:${y}px;width:${w}px;border-top:1px solid #c9ccd1"></div>`;
+const dimbg = `<div class="dimbg"></div>`;
+
+// 로비 HUD 위쪽 줄 유지(현중 11/23) + 건설 줄(돈 · 방패 · 목록)
+const lobbyHud = () => `
+  <div class="b" style="left:6px;top:8px;width:124px;height:50px;justify-content:flex-start;gap:6px;padding:0 6px">
+    <span class="b off" style="position:static;width:36px;height:36px;border-radius:50%;font-size:11px;flex:none">얼굴</span>
+    <span style="text-align:left"><span class="val">루미나</span><br><span class="sub">등급 B</span></span></div>
+  ${["엔터파워", "루비", "팬"].map((k, i) => `<div class="b" style="left:${136 + i * 72}px;top:8px;width:68px;height:50px;flex-direction:column"><span class="sub">${k}</span><span class="val">n</span></div>`).join("")}
+  <div class="b" style="left:352px;top:8px;width:32px;height:50px;font-size:11px">설정</div>`;
+const info = (listOn = false) => lobbyHud()
+  + `<div class="b" style="left:8px;top:64px;width:130px;height:36px;justify-content:space-between;padding:0 10px"><span class="sub">돈</span><span class="val">n</span></div>`
+  + `<div class="b" style="left:144px;top:64px;width:130px;height:36px;justify-content:space-between;padding:0 10px"><span class="sub">방패</span><span class="val">n / 3</span></div>`
+  + `<div class="b" style="left:284px;top:64px;width:98px;height:36px${listOn ? ";border-width:3px" : ""}"><span class="val">${listOn ? "지도 보기" : "목록 보기"}</span></div>`;
+
+// 3×3 지도 · 시뮬 배치 순서
+const FAC = ["프로듀싱", "사옥", "아카데미", "보컬", "댄스", "콘서트장", "팬샵", "예능", "뷰티"];
+const map = (o = {}) => {
+  const top = 106, h = o.compact ? 70 : 104, gap = o.compact ? 6 : 10, w = 118;
+  return FAC.map((f, i) => {
+    const x = 8 + (i % 3) * (w + 10), y = top + Math.floor(i / 3) * (h + gap);
+    const st = (o.st || {})[f] || "";
+    const cls = ["cell", o.sel === f ? "sel" : "", st === "broke" ? "broke" : "", st === "empty" ? "empty" : ""].join(" ");
+    const lv = st === "empty" ? "빈 부지" : st === "max" ? "완공 30" : `Lv n / 30`;
+    const tag = st === "up" ? `<span class="tag" style="left:${x + 6}px;top:${y + 6}px">▲ 증설 가능</span>`
+      : st === "broke" ? `<span class="tag dark" style="left:${x + 6}px;top:${y + 6}px">파손</span>`
+      : st === "max" ? `<span class="tag" style="left:${x + 6}px;top:${y + 6}px">완공</span>` : "";
+    return `<div class="${cls}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px">${o.compact ? "" : `<span class="bd">쿼터뷰</span>`}<span class="val">${f}</span><span class="sub">${lv}</span></div>${o.compact ? "" : tag}`;
+  }).join("");
+};
+const mapTall = o => map(o);
+const mapBottomTop = 106 + 3 * 70 + 2 * 6; // 328
+const sheetLine = `<div class="line" style="top:${mapBottomTop + 10}px"></div>`;
+
+// 세 동
+const dong = (y, cur, next) => ["본관", "부속 A", "부속 B"].map((d, i) =>
+  `<div class="b" style="left:${36 + i * 116}px;top:${y}px;width:108px;height:52px;flex-direction:column;gap:2px${i === next ? ";border-width:3px" : ""}"><span class="val">${d}</span><span class="sub">${cur[i]} / 10${i === next ? " · 다음 자람" : ""}</span></div>`).join("");
+
+const SCREENS = [
+  { cap: "① 건설 · 도시 지도", html: info() + mapTall({ st: { "댄스": "up", "보컬": "up", "예능": "broke" } }) + `
+      <div class="b off" style="left:8px;top:460px;width:374px;height:48px">건물을 눌러 주세요 · 고르기만으로는 돈이 들지 않아요</div>
+      <div class="a" style="left:36px;top:524px;width:346px"><span class="val">지금 증설할 수 있는 건물 2곳</span></div>
+      ${["보컬 녹음실 · Lv n → n+1 · 비용 n", "댄스 연습실 · Lv n → n+1 · 비용 n"].map((t, i) => `<div class="b" style="left:8px;top:${552 + i * 52}px;width:374px;height:44px;justify-content:space-between;padding:0 12px 0 28px"><span class="val">${t}</span><span class="sub">›</span></div>`).join("")}
+      ${n(1, 186, 92)}${n(2, 12, 110)}${n(3, 12, 468)}${n(4, 12, 524)}` + tabs(),
+    notes: ["위는 로비 HUD 그대로(팀 얼굴 · 엔터파워 · 루비 · 팬 · 설정 · 현중 11/23) · 그 아래 건설 줄: 돈 · 방패 n / 3 · 「목록 보기」 → ② 시설 목록(제안)", "3×3 = 지도 전체가 아니라 기존 건물만 줄여서 칸에 보여 줌(길 · 부지 없음 · 현중 11/23) · 건물은 쿼터뷰(비스듬히 위에서 · 세 동 높이가 보임 · 현중 11/23 확정) · 배치 순서는 시뮬 그대로 · 시설마다 이름 · Lv n / 30 · 「▲ 증설 가능」(지금 돈으로 1단계 이상) · 「파손」 · 0단계는 「빈 부지」", "고르기 전 안내 한 줄", "지금 돈으로 증설할 수 있는 건물 바로 가기 · 누르면 그 시설 ①-1(HUD 「증설 가능」 알림과 같은 목록)"] },
+
+  { cap: "①-1 시설 고름 · 상세", html: info() + map({ compact: true, sel: "댄스", st: { "댄스": "up" } }) + sheetLine + `
+      <div class="a" style="left:36px;top:350px"><span class="val" style="font-size:16px">댄스 연습실</span> <span class="sub" style="font-size:12px">능력 시설 · 댄스 레슨</span></div>
+      <div class="a val" style="right:8px;top:352px;font-size:15px">Lv 12 → 13</div>
+      ${dong(380, [5, 4, 3], 1)}
+      <div class="a val" style="left:36px;top:444px">증설하면</div>
+      ${kv(36, 466, 346, "레슨 배수", "×n → ×n")}${kv(36, 490, 346, "도착 돈", "n% → n%")}${kv(36, 514, 346, "엔터재화 · 엔터파워", "+24 · n → n+24")}${kv(36, 538, 346, "다음 엔터파워 문턱", "n · 몬스 팩")}
+      ${hr(36, 566, 346)}
+      ${kv(36, 576, 346, "연결된 보드 칸", "4 · 24 · 25 ›")}
+      ${hr(36, 606, 346)}
+      ${kv(36, 616, 346, "지금 돈", "n")}${kv(36, 640, 346, "한 단계 증설 뒤", "n")}${kv(36, 664, 346, "최대 증설 뒤 · +n단계", "n")}
+      ${bigBtn(8, 183, "한 단계 증설", "비용 n")}${bigBtn(199, 183, "최대 증설", "+n단계 · 비용 n")}
+      ${n(1, 12, 112)}${n(2, 12, 352)}${n(3, 12, 396)}${n(4, 12, 466)}${n(5, 12, 578)}${n(6, 12, 642)}${n(7, 12, 706)}` + tabs(),
+    notes: ["지도는 작게 남기고 고른 시설만 굵게 · 다른 시설을 누르면 아래 판만 바뀜", "이름 · 역할 한 줄(능력 시설 = 레슨 · 일터 = 도착 돈) · 지금 → 다음 단계", "세 동 n / 10 · 다음에 자라는 동을 굵게(본관 → 부속 A → 부속 B 순서)", "증설하면 좋아지는 것: 레슨 배수 · 도착 돈(지금 → 다음 · 값은 장부) · 엔터재화 = 2 × (오를 단계 − 1)을 받아 엔터파워에 쌓임(13단계 = +24 · 엔터파워 기획서 · 현중 11/18) · 다음 엔터파워 문턱(50 · 100 · 200 · 400 · 700 = 몬스 팩 · 캐스팅권도 같은 규칙)", "연결된 보드 칸 · 누르면 보드에서 위치(제안)", "지금 돈 · 증설 뒤 남는 돈", "한 단계 / 최대 증설 · 최대는 확인 창(제안)"] },
+
+  { cap: "② 시설 목록 (지도 ↔ 목록)", html: info(true) + `
+      ${["전체", "증설 가능", "파손"].map((c, i) => `<div class="bm${i === 0 ? " on" : ""}" style="top:106px;left:${8 + i * 124.6}px;width:120.6px">${c}</div>`).join("")}<div class="line" style="top:138px"></div>
+      ${["사옥", "보컬 녹음실", "댄스 연습실", "콘서트장", "뷰티 스튜디오", "예능 방송국", "프로듀싱 스튜디오", "팬샵", "아카데미"].map((f, i) => {
+        const x = 8 + (i % 2) * 190, y = 150 + Math.floor(i / 2) * 116, tg = f === "예능 방송국" ? "파손" : (f === "보컬 녹음실" || f === "댄스 연습실") ? "▲ 증설 가능" : "";
+        return `<div class="b" style="left:${x}px;top:${y}px;width:184px;height:108px;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:30px 10px 0;gap:4px">
+          <span class="val">${f}</span><span class="sub" style="font-size:12px">Lv n / 30 · 세 동 n · n · n</span><span class="sub" style="font-size:12px">다음 비용 n</span></div>${tg ? `<span class="tag${tg === "파손" ? " dark" : ""}" style="left:${x + 8}px;top:${y + 8}px">${tg}</span>` : ""}`;
+      }).join("")}
+      ${n(1, 362, 44)}${n(2, 12, 112)}` + tabs(),
+    notes: ["「지도 보기」로 돌아감 · 지도와 목록은 같은 시설을 고름(시뮬 「시설 모두 보기」)", "전체 · 증설 가능 · 파손 · 칸 누르면 ①-1과 같은 상세(목록 위 아래 판)"] },
+
+  { cap: "①-2 빈 부지 · 짓기", html: info() + map({ compact: true, sel: "뷰티", st: { "뷰티": "empty" } }) + sheetLine + `
+      <div class="a" style="left:36px;top:350px"><span class="val" style="font-size:16px">뷰티 스튜디오</span> <span class="sub" style="font-size:12px">빈 부지</span></div>
+      <div class="b off" style="left:36px;top:384px;width:346px;height:120px">지으면 본관이 생김 · 미리보기</div>
+      ${kv(36, 520, 346, "짓기 비용", "n")}${kv(36, 544, 346, "엔터재화", "없음 · 2단계부터")}${kv(36, 568, 346, "지은 뒤 남는 돈", "n")}
+      ${bigBtn(8, 374, "짓기", "0 → 1단계 · 비용 n")}
+      ${n(1, 12, 352)}${n(2, 12, 390)}${n(3, 12, 706)}` + tabs(),
+    notes: ["0단계 = 빈 부지(지도에 점선)", "지으면 본관 등장 미리보기", "0단계는 「짓기」 버튼 하나 · 1단계부터 「한 단계 / 최대 증설」(제안)"] },
+
+  { cap: "①-3 돈이 모자람", html: info() + map({ compact: true, sel: "콘서트장" }) + sheetLine + `
+      <div class="a" style="left:36px;top:350px"><span class="val" style="font-size:16px">콘서트장</span> <span class="sub" style="font-size:12px">일터 · 도착 돈</span></div>
+      <div class="a val" style="right:8px;top:352px;font-size:15px">Lv 20 → 21</div>
+      ${dong(380, [7, 7, 6], 2)}
+      ${kv(36, 450, 346, "증설 비용", "n")}${kv(36, 474, 346, "지금 돈", "n")}
+      <div class="b" style="left:36px;top:506px;width:346px;height:44px;justify-content:space-between;padding:0 12px"><span class="val">n 모자라요</span><span class="sub" style="font-size:12px">돈 얻는 곳 ›</span></div>
+      ${bigBtn(8, 183, "한 단계 증설", "비용 n", true)}${bigBtn(199, 183, "최대 증설", "할 수 없음", true)}
+      ${n(1, 12, 512)}${n(2, 12, 706)}` + tabs(),
+    notes: ["모자란 돈 · 「돈 얻는 곳」(보드 굴리기 · 상점 등 · 연결 정할 것)", "두 버튼 꺼짐"] },
+
+  { cap: "창 · 최대 증설 확인", html: info() + map({ compact: true, sel: "댄스" }) + sheetLine + dimbg + win(190, 450, "최대로 증설할까요?") + `
+      <div class="a" style="left:40px;top:246px"><span class="val">댄스 연습실</span> <span class="sub" style="font-size:12px">Lv 12 → 18 · +6단계</span></div>
+      ${["본관", "부속 A", "부속 B"].map((d, i) => `<div class="b" style="left:${40 + i * 106}px;top:278px;width:98px;height:52px;flex-direction:column;gap:2px"><span class="val">${d}</span><span class="sub">n → n</span></div>`).join("")}
+      ${kv(40, 350, 310, "총비용", "n")}${kv(40, 374, 310, "남는 돈", "n")}${kv(40, 398, 310, "엔터재화 합", "+n · 엔터파워 n → n")}${kv(40, 422, 310, "레슨 배수", "×n → ×n")}
+      <div class="a sub" style="left:40px;top:456px;width:310px;font-size:12px;line-height:1.5">돈을 한 번에 많이 써요.<br>한 단계씩 증설하려면 「한 단계 증설」을 눌러 주세요.</div>
+      ${winBtns(560, "취소", "증설")}
+      ${n(1, 17, 248)}${n(2, 17, 294)}${n(3, 17, 352)}${n(4, 17, 574)}`,
+    notes: ["몇 단계 · 어디까지", "세 동이 각각 몇 단계가 되는지", "총비용 · 남는 돈 · 좋아지는 것", "증설 → 조립 장면 · 한 단계 증설은 확인 창 없이 바로(제안)"] },
+
+  { cap: "조립 장면 · 결과", html: lobbyHud() + `
+      <div class="b off" style="left:8px;top:66px;width:374px;height:412px">조립 장면 · 자란 동이 올라감</div>
+      <div class="b" style="left:304px;top:76px;width:70px;height:34px"><span class="val">건너뛰기</span></div>
+      <div class="a" style="left:36px;top:500px;width:346px;text-align:center"><span class="val" style="font-size:18px">댄스 연습실 Lv 13</span></div>
+      <div class="a sub" style="left:36px;top:530px;width:346px;text-align:center;font-size:13px">부속 A가 5단계가 됐어요</div>
+      ${kv(36, 570, 346, "엔터재화 · 엔터파워", "+24 · n → n+24")}${kv(36, 594, 346, "레슨 배수", "×n → ×n")}${kv(36, 618, 346, "엔터파워 문턱 넘음", "몬스 팩 1개")}
+      ${bigBtn(8, 374, "확인", "도시 지도로")}
+      ${n(1, 12, 72)}${n(2, 280, 80)}${n(3, 12, 572)}${n(4, 12, 706)}` + tabs(),
+    notes: ["저장이 된 뒤에 보여 줌(나가거나 건너뛰어도 다시 사지 않음 · P81)", "건너뛰기(제안)", "오른 것 · 엔터파워 오름 연출(제안) · 문턱을 넘었으면 받은 것 한 줄(몬스 팩 · 캐스팅권)", "확인 → ① 지도 · 고른 시설 그대로"] },
+
+  { cap: "①-4 파손 시설 · 수리", html: info() + map({ compact: true, sel: "예능", st: { "예능": "broke" } }) + sheetLine + `
+      <div class="a" style="left:36px;top:350px"><span class="val" style="font-size:16px">예능 방송국</span> <span class="tag dark" style="position:static">파손</span></div>
+      <div class="a val" style="right:8px;top:352px;font-size:15px">Lv 9</div>
+      <div class="b off" style="left:36px;top:384px;width:346px;height:96px">부서진 모습</div>
+      <div class="a sub" style="left:36px;top:492px;width:346px;font-size:12px;line-height:1.5">고치기 전엔 이 건물에 도착해도 돈이 절반이에요.<br>왜 부서졌는지 한 줄(대전 공격 · 나쁜 기운 방어 실패)</div>
+      ${kv(36, 544, 346, "수리비 · 마지막 건설비 × 0.5", "n")}${kv(36, 568, 346, "지금 돈", "n")}
+      <div class="b" style="left:36px;top:600px;width:346px;height:40px;justify-content:space-between;padding:0 12px"><span class="val">지킴이 보기</span><span class="sub">몬스 ›</span></div>
+      ${bigBtn(8, 183, "수리", "비용 n")}${bigBtn(199, 183, "한 단계 증설", "수리 먼저", true)}
+      ${n(1, 12, 352)}${n(2, 12, 494)}${n(3, 12, 546)}${n(4, 12, 606)}${n(5, 12, 706)}` + tabs(),
+    notes: ["지도에 점선 · 「파손」", "손해 안내 · 왜 부서졌는지 한 줄", "수리비 = 마지막 건설비 × 0.5(아론 11/14)", "지킴이 바로 가기(몬스 탭)", "수리 → 증설 켜짐 · 수리 먼저(제안)"] },
+
+  { cap: "①-5 30단계 · 완공", html: info() + map({ compact: true, sel: "사옥" }) + sheetLine + `
+      <div class="a" style="left:36px;top:350px"><span class="val" style="font-size:16px">사옥</span> <span class="tag" style="position:static">완공</span></div>
+      <div class="a val" style="right:8px;top:352px;font-size:15px">Lv 30</div>
+      ${dong(380, [10, 10, 10], -1)}
+      ${kv(36, 450, 346, "레슨 배수 · 도착 돈", "최대")}${kv(36, 474, 346, "이 건물로 받은 엔터재화", "n")}
+      <div class="b" style="left:36px;top:510px;width:346px;height:60px;flex-direction:column;gap:2px"><span class="val">완공 덤</span><span class="sub" style="font-size:12px">내용 정할 것 · 미션 「완공 덤 3번」과 같은 말인지 확인</span></div>
+      ${bigBtn(8, 374, "더 증설할 수 없어요", "", true)}
+      ${n(1, 12, 396)}${n(2, 12, 520)}` + tabs(),
+    notes: ["세 동 모두 10 / 10", "완공 덤(정할 것) · 증설 버튼 꺼짐"] },
+
+  { cap: "HUD에서 들어오기", html: lobbyHud() + `
+      <div class="b" style="left:136px;top:8px;width:68px;height:50px;flex-direction:column;border-width:3px"><span class="sub">엔터파워</span><span class="val">n</span></div>
+      <div class="b off" style="left:8px;top:70px;width:374px;height:600px">보드</div>
+      ${tabs(-1)}<span class="tag dark" style="left:160px;top:778px">2</span>
+      ${n(1, 140, 62)}${n(2, 200, 752)}`,
+    notes: ["엔터파워 → 건물 · 엔터파워 상세 → 「건설」 바로 가기 → ①(HUD 탭 깊이표 · ← 는 상세로)", "아래 메뉴 「건설」 배지 = 지금 증설할 수 있는 건물 수(HUD 알림과 같음 · 제안)"] },
+];
+
+const SHOT = new URLSearchParams(location.search).get("shot");
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+</script>
+</body>
+</html>

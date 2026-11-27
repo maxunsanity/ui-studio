@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>케이팝 몬스터즈 · 기획 제안서 (전체판)</title>
+<style>
+:root{
+  --bg:#07070d; --ink:#f6f4ff; --dim:#a29ec0; --faint:#6a6688;
+  --pur:#a855f7; --pnk:#f472b6; --blu:#60a5fa;
+  --line:rgba(255,255,255,.12); --panel:rgba(255,255,255,.045);
+}
+*{box-sizing:border-box}
+s{text-decoration:none}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased}
+body{display:flex;flex-direction:column;min-height:100vh;align-items:center;justify-content:center;gap:10px;padding:14px}
+
+.stage{width:min(97vw, calc((100vh - 96px) * 16 / 9));flex:0 0 auto}
+.slide{position:relative;aspect-ratio:16/9;width:100%;container-type:inline-size;
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0b0b14;display:none}
+.slide.on{display:block}
+.pad{position:absolute;inset:0;padding:6.2cqw 7cqw 4.6cqw;display:flex;flex-direction:column}
+
+/* 카피 */
+.kick{font-size:1.25cqw;font-weight:900;letter-spacing:.24em;color:var(--pur);margin:0}
+.kick s{color:var(--faint);letter-spacing:.08em;margin-left:.8cqw}
+h2{font-size:4.4cqw;font-weight:900;line-height:1.15;margin:1.5cqw 0 0;letter-spacing:-.035em}
+h2.sm{font-size:3.6cqw}
+h2 em{font-style:normal;color:var(--pnk)}
+.sub{font-size:1.8cqw;line-height:1.55;color:var(--dim);margin:1.7cqw 0 0;max-width:74cqw;font-weight:600}
+.sub b{color:var(--ink);font-weight:800}
+.num{position:absolute;right:5.5cqw;top:4.8cqw;font-size:7cqw;font-weight:900;
+  color:rgba(168,85,247,.13);letter-spacing:-.05em;line-height:1}
+
+/* 바닥 잔글씨 — 근거는 남기되 카피를 안 가린다 */
+.note{margin-top:auto;padding-top:.62cqw;border-top:1px solid var(--line);
+  font-size:1.02cqw;line-height:1.45;color:var(--faint);font-weight:600;
+  /* 바닥 줄(.foot)과 겹치지 않게 높이를 묶는다 */
+  flex:0 0 auto;overflow:hidden}
+.note b{color:var(--dim)}
+.note em{font-style:normal;color:var(--pnk);font-weight:800}
+
+/* 큰 칩 */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw;margin-top:2.6cqw}
+.trio.four{grid-template-columns:repeat(4,1fr);gap:1.3cqw}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:1.1cqw;
+  padding:2cqw 1.9cqw;display:flex;flex-direction:column;gap:.85cqw}
+.tile .cap{font-size:1.08cqw;font-weight:900;letter-spacing:.16em;color:var(--faint)}
+.tile .big{font-size:2.05cqw;font-weight:900;line-height:1.28;letter-spacing:-.02em}
+.tile .lil{font-size:1.24cqw;line-height:1.55;color:var(--dim);font-weight:600}
+.tile.hot{background:linear-gradient(160deg,rgba(168,85,247,.24),rgba(244,114,182,.1));border-color:rgba(168,85,247,.5)}
+.tile.hot .cap{color:#e9d5ff}
+.tile.ent{background:linear-gradient(160deg,rgba(96,165,250,.17),rgba(59,130,246,.04));border-color:rgba(96,165,250,.4)}
+.tile.ent .cap{color:#93c5fd}
+.tile.fan{background:linear-gradient(160deg,rgba(244,114,182,.18),rgba(168,85,247,.05));border-color:rgba(244,114,182,.45)}
+.tile.fan .cap{color:#f9a8d4}
+
+/* 번호 줄 */
+.list{display:flex;flex-direction:column;gap:2.4cqw;margin:auto 0;padding:2.4cqw 0}
+.li{display:flex;gap:2cqw;align-items:baseline}
+.li .n{font-size:2.5cqw;font-weight:900;color:rgba(168,85,247,.55);line-height:1;min-width:3.2cqw;letter-spacing:-.04em}
+.li .h{font-size:2.3cqw;font-weight:900;line-height:1.26;letter-spacing:-.02em}
+.li .p{font-size:1.3cqw;color:var(--dim);line-height:1.6;margin-top:.55cqw;font-weight:600}
+.li .p i{font-style:normal;color:var(--faint);font-weight:900;letter-spacing:.06em}
+.li .p em{font-style:normal;color:var(--pnk);font-weight:800}
+
+/* 사다리 */
+.ladder{display:flex;align-items:center;gap:.8cqw;flex-wrap:wrap;margin-top:2.2cqw}
+.ladder span{font-size:1.45cqw;font-weight:800;padding:.8cqw 1.4cqw;border-radius:99px;
+  background:rgba(255,255,255,.055);border:1px solid var(--line);color:var(--dim)}
+.ladder span.end{background:linear-gradient(90deg,var(--pur),var(--pnk));color:#fff;border-color:transparent}
+.ladder i{font-style:normal;color:var(--faint);font-size:1.25cqw}
+
+/* 갈래 둘 */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw;margin-top:2.2cqw}
+.arm{border-radius:1.1cqw;padding:1.9cqw;display:flex;flex-direction:column;gap:.65cqw;
+  background:var(--panel);border:1px solid var(--line)}
+.arm.new{background:linear-gradient(160deg,rgba(244,114,182,.17),rgba(168,85,247,.05));border-color:rgba(244,114,182,.45)}
+.arm .tag{font-size:1.06cqw;font-weight:900;letter-spacing:.1em;color:var(--pur)}
+.arm.new .tag{color:#f9a8d4}
+.arm .ttl{font-size:1.9cqw;font-weight:900;line-height:1.28}
+.arm .txt{font-size:1.24cqw;color:var(--dim);line-height:1.55;font-weight:600}
+.arm .to{font-size:1.08cqw;color:var(--faint);font-weight:900;margin-top:.15cqw}
+.arm .res{font-size:1.6cqw;font-weight:900;color:var(--pnk);line-height:1.3}
+
+/* 강조 띠 */
+.band{margin-top:2cqw;border:1px dashed rgba(168,85,247,.5);border-radius:1cqw;
+  padding:1.3cqw 1.7cqw;font-size:1.5cqw;font-weight:800;line-height:1.5;text-align:center}
+.band em{font-style:normal;color:var(--pnk)}
+
+/* 표 (부록) */
+table{width:100%;border-collapse:collapse;font-size:1.06cqw;margin-top:1.2cqw}
+th,td{padding:.42cqw .8cqw;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+th{font-size:.96cqw;font-weight:900;letter-spacing:.1em;color:var(--faint);border-bottom:1px solid rgba(168,85,247,.45)}
+td:first-child{font-weight:800;color:var(--dim)}
+td.us{color:var(--pnk);font-weight:800}
+tr.mark td{background:rgba(168,85,247,.09)}
+tr.grp td{background:rgba(168,85,247,.16);color:#e9d5ff;font-weight:900;font-size:.94cqw;letter-spacing:.06em;border-bottom:0}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:0 2.6cqw;margin-top:1.3cqw}
+.twocol table{margin-top:0}
+
+/* 숫자판 */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5cqw;margin-top:2.6cqw}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:1.1cqw;padding:2cqw 1.6cqw;text-align:center}
+.stat b{display:block;font-size:3.8cqw;font-weight:900;color:var(--pnk);line-height:1;letter-spacing:-.04em}
+.stat span{display:block;font-size:1.18cqw;color:var(--dim);margin-top:.9cqw;font-weight:800}
+
+/* 표지 · 간지 */
+.cover .bgimg,.chap .bgimg{position:absolute;inset:0;background-size:cover;background-position:50% 55%}
+.cover .veil{position:absolute;inset:0;background:linear-gradient(103deg,rgba(7,7,13,.95) 36%,rgba(7,7,13,.4))}
+.chap .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,7,13,.94) 44%,rgba(7,7,13,.3))}
+.cover .pad,.chap .pad{justify-content:center}
+.cover h1{font-size:7.4cqw;font-weight:900;margin:.6cqw 0 0;letter-spacing:-.04em;line-height:1.01}
+.cover h1 em{font-style:normal;background:linear-gradient(92deg,var(--pnk),var(--pur));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .tag{font-size:2.25cqw;color:var(--ink);margin-top:2.3cqw;font-weight:900}
+.cover .tag b{color:var(--pnk)}
+.cover .tag2{font-size:1.55cqw;color:var(--dim);margin:1cqw 0 0;font-weight:600}
+.cover .meta{position:absolute;left:7cqw;bottom:5.5cqw;font-size:1.22cqw;color:var(--faint);
+  display:flex;gap:1.4cqw;align-items:center;font-weight:700}
+.chap .kk{font-size:1.4cqw;font-weight:900;letter-spacing:.26em;color:var(--pnk)}
+.chap h2{font-size:5.4cqw;margin-top:1.4cqw}
+.chap .sub{font-size:1.85cqw;max-width:50cqw}
+
+/* 살아있는 일정 보드 */
+.live{position:absolute;inset:0;background:#eef1f6;overflow:hidden}
+.live .fit{position:absolute;left:0;top:0;transform-origin:0 0}
+.live iframe{border:0;display:block}
+.live.plain iframe{width:100%;height:100%}
+.live.plain .fit{position:absolute;inset:0;transform:none!important}
+.live .tip{position:absolute;left:0;right:0;bottom:0;z-index:4;pointer-events:none;
+  padding:2.6cqw 1.6cqw .9cqw;background:linear-gradient(transparent,rgba(7,7,13,.9));
+  font-size:1.12cqw;font-weight:800;color:#fff;text-align:center;opacity:1;transition:opacity .25s}
+.live:hover .tip{opacity:0}
+.live .tip em{font-style:normal;color:#f0abfc}
+.live .badge{position:absolute;right:1.4cqw;top:1.2cqw;z-index:5;display:flex;align-items:center;gap:.8cqw}
+.live .badge span{pointer-events:none;background:rgba(7,7,13,.78);color:#fff;font-size:1.03cqw;
+  font-weight:900;letter-spacing:.1em;padding:.5cqw 1.1cqw;border-radius:99px;backdrop-filter:blur(4px)}
+.live .badge a{color:#fff;text-decoration:none;background:rgba(168,85,247,.95);font-size:1.03cqw;
+  font-weight:900;padding:.5cqw 1.1cqw;border-radius:99px}
+.live .badge a:hover{background:#c026d3}
+
+.links{display:flex;gap:1.1cqw;margin-top:2.2cqw;flex-wrap:wrap}
+.links a{font-size:1.22cqw;font-weight:800;color:var(--dim);text-decoration:none;
+  border:1px solid var(--line);border-radius:99px;padding:.85cqw 1.6cqw;background:var(--panel)}
+.links a:hover{color:var(--ink);border-color:var(--pur)}
+.links a.main{background:linear-gradient(90deg,var(--pur),var(--pnk));color:#fff;border-color:transparent;
+  font-size:1.5cqw;font-weight:900;padding:1cqw 2.2cqw}
+
+.foot{position:absolute;left:7cqw;right:7cqw;bottom:1.7cqw;display:flex;justify-content:space-between;
+  font-size:1.03cqw;color:var(--faint);font-weight:700}
+.foot .src{color:rgba(255,255,255,.18)}
+
+/* 조작 */
+.bar{display:flex;align-items:center;gap:10px;padding:4px 0 14px;flex:0 0 auto}
+.bar button{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink);
+  border-radius:99px;padding:7px 15px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit}
+.bar button:hover{border-color:var(--pur)}
+.bar .count{font-size:13px;color:var(--faint);font-weight:800;min-width:56px;text-align:center;font-variant-numeric:tabular-nums}
+.dots{display:flex;gap:5px;max-width:52vw;flex-wrap:wrap;justify-content:center}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;display:block}
+.dots i.on{background:var(--pnk);transform:scale(1.35)}
+
+.toc{position:fixed;inset:0;background:rgba(5,5,10,.96);z-index:20;display:none;padding:46px 5vw;overflow:auto}
+.toc.on{display:block}
+.toc h3{font-size:16px;letter-spacing:.2em;color:var(--pur);margin:0 0 22px;font-weight:900}
+.toc .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:9px}
+.toc .grid button{text-align:left;background:var(--panel);border:1px solid var(--line);color:var(--ink);
+  border-radius:9px;padding:13px 15px;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:700;
+  display:flex;gap:11px;align-items:baseline}
+.toc .grid button:hover{border-color:var(--pur)}
+.toc .grid button s{color:var(--faint);font-weight:900;min-width:20px;font-variant-numeric:tabular-nums}
+.toc .grid button.sec{background:rgba(168,85,247,.14);border-color:rgba(168,85,247,.4)}
+
+@media print{
+  body{padding:0;background:#fff}
+  .bar,.toc{display:none}
+  .stage{width:100%}
+  .slide{display:block!important;page-break-after:always;border-radius:0;border:0;margin:0}
+}
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+
+<!-- 01 표지 -->
+<section class="slide cover on" data-t="표지">
+  <div class="bgimg" style="background-image:url('_img/image23213.png')"></div>
+  <div class="veil"></div>
+  <div class="pad">
+    <p class="kick">콜라보 시즌제 · 팬덤 보드게임</p>
+    <h1>케이팝<br><em>몬스터즈</em></h1>
+    <p class="tag"><b>빠순이 성장일기</b> — 덕통사고에서 엔터 사장까지</p>
+    <p class="tag2">최애를 키우다 보면, 어느새 내가 판을 열고 있다</p>
+    <div class="meta"><span>기획 제안서</span><s>|</s><span>2026.09</span><s>|</s><span>콘텐츠 12종</span></div>
+  </div>
+</section>
+
+<!-- 02 한 줄 -->
+<section class="slide" data-t="한 줄로">
+  <div class="pad">
+    <p class="kick">한 줄로</p>
+    <h2>모노폴리 GO는<br>같은 땅에 집을 쌓는다.<br><em>우리들은 그 무대에서 성장을 하게 된다.</em></h2>
+    <div class="trio">
+      <div class="tile"><span class="cap">빌린 것</span><span class="big">40칸 · 주사위 · 짓기</span>
+        <span class="lil">손에 익은 버릇은 안 건드린다</span></div>
+      <div class="tile hot"><span class="cap">바꾼 것</span><span class="big">일정이 곧 아이돌의 무대</span>
+        <span class="lil">홍대에서 놀던 애가 아레나에 선다</span></div>
+      <div class="tile"><span class="cap">얹은 것</span><span class="big">시즌마다 최애 교체</span>
+        <span class="lil">판은 그대로, 주인공만 갈아끼운다</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>케이팝 몬스터즈</span><span class="src">051</span></div>
+</section>
+
+<!-- 03 다른 것 셋 -->
+<section class="slide" data-t="★ 다른 것 셋">
+  <div class="pad">
+    <span class="num">01</span>
+    <p class="kick">이 셋만 꽂으면 된다</p>
+    <h2 class="sm">모노폴리 GO와 <em>다른 것 셋</em></h2>
+    <div class="list">
+      <div class="li"><span class="n">01</span><div>
+        <div class="h">칸이 자란다. 다 차면 동네까지 바뀐다</div>
+        <div class="p"><i>GO</i> 「지하철역」은 끝까지 지하철역이다 &nbsp;·&nbsp;
+          <i>우리</i> 버스킹 칸이 <em>아레나</em>가 되고, 여섯 칸이 다 차면 <em>22칸이 통째로</em> 다음 동네</div>
+      </div></div>
+      <div class="li"><span class="n">02</span><div>
+        <div class="h">플레이어가 자란다</div>
+        <div class="p"><i>GO</i> 끝까지 나는 그냥 「나」다. 말이 돌 뿐 <b>내 자리는 안 바뀐다</b> &nbsp;·&nbsp;
+          <i>우리</i> <em>줄 서던 빠순이가 나중에 그 무대를 연다.</em> 12단 직함이 그 사이를 채운다</div>
+      </div></div>
+      <div class="li"><span class="n">03</span><div>
+        <div class="h">정거장에서 아무것도 안 부순다</div>
+        <div class="p"><i>GO</i> 남의 랜드마크를 닫고 금고를 턴다 &nbsp;·&nbsp;
+          <i>우리</i> 밥차는 그대로 두고 <em>현수막 이름만 가져온다</em></div>
+      </div></div>
+    </div>
+    <div class="note">그 밖에 — <b>덕력이 주사위 통을 키운다</b>(판 안에서 복리가 돈다) · <b>지으면 건물이 아니라 이야기가 쌓인다</b> · <b>시즌마다 아이돌을 갈아끼운다</b><br>
+      뼈대는 GO 그대로다. 40칸 · 8색 대지 22 · 정거장 4 · 찬스 3 · 커뮤니티 3 · 유틸 2 · 세금 2 · 코너 4.
+      시점은 <b>하나</b>다 — 전지적 시점으로 내가 다 본다.</div>
+  </div>
+  <div class="foot"><span>핵심 차별</span><span class="src">051 · 074 · 064</span></div>
+</section>
+
+<!-- 04 게임 한 바퀴 -->
+<section class="slide" data-t="게임 한 바퀴">
+  <div class="pad">
+    <span class="num">02</span>
+    <p class="kick">게임 한 바퀴</p>
+    <h2>굴려서 벌고,<br><em>써서 남긴다</em></h2>
+    <p class="sub">시점은 <b>하나</b>다. 내가 굴리고, 내가 민다. 40칸은 <b>밟으면 뭐가 일어나느냐</b>로 갈린다.</p>
+    <div class="trio">
+      <div class="tile ent"><span class="cap">1 · 아이돌 일정 22칸</span><span class="big">굴려서<br>번다</span>
+        <span class="lil">연습 · 방송 · 공연 · 팬미팅 · 합숙 · 생활에 착지 → 대박 · 중박 · 운빨망빨 → <b style="color:#bfdbfe">코인</b></span></div>
+      <div class="tile fan"><span class="cap">2 · 창구 13칸 + 상시</span><span class="big">써서<br>민다</span>
+        <span class="lil">덕질 · 딱지 · 응원 · 스케줄 변경 → <b style="color:#fbcfe8">서사 · 덕력 · 칸 급</b></span></div>
+      <div class="tile"><span class="cap">3 · 회사 5칸</span><span class="big">빠져<br>나간다</span>
+        <span class="lil">정산 · 대형 정산 · A&amp;R · 매니지먼트 · 병가</span></div>
+    </div>
+    <div class="band">덕력이 오르면 <em>주사위 통이 커진다</em> ↻ 다시 더 크게 돈다 — <em>GO에도 모노카피바라에도 없는 고리</em></div>
+    <div class="note">덕질은 <b>칸에 안 떨어져도 늘 할 수 있다</b> — 착지는 버는 쪽, 덕질은 쓰는 쪽.
+      칸마다 <b>두 줄</b>이 붙는다(아이돌이 겪는 것 · 내가 느끼는 것). 관점이 둘이라서가 아니라 <b>대리 만족</b>이다 — 내 아이돌이 행복하니까 내가 행복하다.</div>
+  </div>
+  <div class="foot"><span>게임 한 바퀴</span><span class="src">055 · 047 · 048 · D-046</span></div>
+</section>
+
+<!-- 05 빠순이 사다리 -->
+<section class="slide" data-t="덕통사고에서 사장까지">
+  <div class="pad">
+    <span class="num">03</span>
+    <p class="kick">두 번째 주인공</p>
+    <h2>덕통사고에서<br><em>엔터 사장까지</em></h2>
+    <p class="sub">판을 도는 사람도 <b>12단계</b>로 자란다. 파워 레벨이 아니라 <b>자리와 권한</b>이 바뀐다.</p>
+    <div class="trio four">
+      <div class="tile"><span class="cap">신인초</span><span class="big">덕통사고</span>
+        <span class="lil">매일 키우는 손 · 우리 사람</span></div>
+      <div class="tile"><span class="cap">중기 · 세 갈래</span><span class="big">총대</span>
+        <span class="lil">팬덤을 먹이는 사람 · 현장 안쪽</span></div>
+      <div class="tile"><span class="cap">성장후</span><span class="big">일로 하는 팬</span>
+        <span class="lil">팬매 · 로드 · 기획 실무</span></div>
+      <div class="tile hot"><span class="cap">사장 근처</span><span class="big">내 판을 연다</span>
+        <span class="lil">운영의 장 · 내 판 · 사장</span></div>
+    </div>
+    <div class="band">작은 아이를 매일 키우던 손이, <em>언젠가 그 무대를 연다</em></div>
+    <div class="note"><b>시즌이 갈리면 다시 빠순이부터.</b> 그래야 라포가 다시 쌓이고, 신규가 들어왔을 때 전부 사장인 게임이 안 된다 (D-047).<br>아이돌은 <b>판 위에서</b> 크고 나는 <b>판 밖에서</b> 큰다 — 한 게이지로 합치지 않는다. 사장 엔딩은 대형 기획사 카피가 아니라 <b>「내 판을 연 사람」</b>이다.</div>
+  </div>
+  <div class="foot"><span>빠순이 직함 사다리</span><span class="src">020 · 003 · 017</span></div>
+</section>
+
+<!-- 06 IP 플랫폼 -->
+<section class="slide" data-t="IP 플랫폼">
+  <div class="pad">
+    <span class="num">04</span>
+    <p class="kick">왜 이 게임인가</p>
+    <h2>아이돌이 바뀌어도<br><em>게임을 다시 만들지 않는다</em></h2>
+    <p class="sub">보통 아이돌 게임은 IP가 끝나면 게임도 끝난다. 우리는 <b>판을 고정하고 아이돌만 교체</b>한다.</p>
+    <div class="trio four">
+      <div class="tile"><span class="cap">안 바뀜 · 우리 자산</span><span class="big">판 · 규칙 · 덕력</span>
+        <span class="lil">40칸 구성, 칸 역할, 덕질·직함, 팬덤 스테이지, 판정 룰. <b>개발은 한 번만</b></span></div>
+      <div class="tile hot"><span class="cap">바뀜 · 시즌팩</span><span class="big">이름 · 아트 · 서사</span>
+        <span class="lil">칸 문구·대사·아트, 서사 조각 문안, 그 팀이 실제로 거쳐온 지역</span></div>
+      <div class="tile"><span class="cap">아이돌 쪽이 왜 받나</span><span class="big">데뷔 초 서사를<br>다시 판다</span>
+        <span class="lil">지금 팬은 그 시절을 못 봤다. 게임에서 같이 산다</span></div>
+      <div class="tile"><span class="cap">시즌마다</span><span class="big">빠순이부터<br>다시</span>
+        <span class="lil">아이돌도 <b>내 자리도</b> 리셋. 덕력만 남는다</span></div>
+    </div>
+    <div class="band"><em>판정 기준</em> — 새 시즌을 얹는데 판을 고쳐야 하면, 그건 시즌팩에 있어야 할 게 판에 박힌 것이다</div>
+    <div class="note">한 시즌 <b>3개월.</b> 기간이 끝나면 닫힌다 — 판을 다 깨서 끝나는 게 아니다. 굿즈·티켓·컴백과 붙일 수 있고, 판은 검증된 손맛이라 리스크가 낮다.<br><b>왜 매번 빠순이부터인가</b> — "이미 내가 하이브야" 하면 신규가 들어왔을 때 <b>전부 하이브인 게임</b>이 된다. 어떤 시즌은 중소까지, 어떤 시즌은 하이브까지 (D-047).</div>
+  </div>
+  <div class="foot"><span>IP 플랫폼</span><span class="src">049 · 054 · 065</span></div>
+</section>
+
+<!-- 07 간지 -->
+<section class="slide chap" data-t="— PART 1 인게임">
+  <div class="bgimg" style="background-image:url('_img/%EC%BC%80%EC%9D%B4%ED%8C%9D3.png')"></div>
+  <div class="veil"></div>
+  <div class="pad">
+    <p class="kk">PART 1</p>
+    <h2>인게임 —<br><em>일정 보드</em></h2>
+    <p class="sub">아이돌이 오늘 어디 가는지. 주사위를 쓰는 곳은 여기뿐이다.</p>
+  </div>
+</section>
+
+<!-- 08 일정 보드 -->
+<section class="slide" data-t="01 일정 보드 40칸">
+  <div class="pad">
+    <span class="num">01</span>
+    <p class="kick">콘텐츠 01 · 일정 보드 <s>일정 보드</s></p>
+    <h2>40칸은 부동산이 아니라<br><em>아이돌의 일정표다</em></h2>
+    <p class="sub">GO는 칸이 <b>부동산 / 특수</b> 둘로 갈린다. 우리는 <b>밟으면 무슨 일이 일어나느냐</b>로 네 갈래다.</p>
+    <div class="trio four">
+      <div class="tile hot"><span class="cap">성장 칸</span><span class="big">6</span>
+        <span class="lil">덕질 10개가 차면 <b>급이 오른다.</b> 칸 이름이 바뀐다</span></div>
+      <div class="tile"><span class="cap">결과 칸</span><span class="big">16</span>
+        <span class="lil">그날 결과만. 대신 <b>준비도</b>가 쌓인다</span></div>
+      <div class="tile"><span class="cap">창구 칸</span><span class="big">13</span>
+        <span class="lil">게이트 · 응원 · 스케줄 변경 · 사옥</span></div>
+      <div class="tile"><span class="cap">회사 칸</span><span class="big">5</span>
+        <span class="lil">코인이 나가거나 멈춘다</span></div>
+    </div>
+    <div class="band">성장 6 + 결과 16 = <em>아이돌 일정 22칸</em> — GO의 8색 대지 자리에 그대로 들어간다</div>
+    <div class="note"><b>칸마다 두 줄이 붙는다</b> — 아이돌이 겪는 것과 내가 느끼는 것. 관점이 둘이라서가 아니라 <b>대리 만족</b>이다.<br>시점은 <b>하나</b>다. 전지적 시점으로 내가 다 본다 (D-046).</div>
+  </div>
+  <div class="foot"><span>일정 보드 40</span><span class="src">056 · 030 · 034 · 048</span></div>
+</section>
+
+<!-- 09 덕질 -->
+<section class="slide" data-t="02 덕질">
+  <div class="pad">
+    <span class="num">02</span>
+    <p class="kick">콘텐츠 02 · 덕질 <s>모노폴리 GO 건설</s></p>
+    <h2>집을 짓는 대신<br><em>밥차를 보낸다</em></h2>
+    <p class="sub">GO의 집·호텔 자리를 그대로 쓰되, 짓는 물건을 <b>실제 팬덤이 하는 일</b>로 바꿨다.</p>
+    <div class="ladder">
+      <i>밥차</i><span>도시락 몇 개</span><i>→</i><span>간이 밥차</span><i>→</i><span>밥차 1대</span><i>→</i><span>밥차 + 디저트</span><i>→</i><span>밥차 2대</span><i>→</i><span class="end">전 스태프 케이터링</span>
+    </div>
+    <div class="trio" style="margin-top:2.2cqw">
+      <div class="tile"><span class="cap">묶음</span><span class="big">6</span>
+        <span class="lil">먹이기 · 붙이기 · 나눠주기 · 열어주기 · 보내기 · 찍어주기</span></div>
+      <div class="tile hot"><span class="cap">항목 × 단</span><span class="big">12 × 6단</span>
+        <span class="lil">같은 물건이 커진다. 다른 물건으로 안 바뀐다 · 판당 72단</span></div>
+      <div class="tile"><span class="cap">그림</span><span class="big">150장</span>
+        <span class="lil">물건과 장소라 <b>전 시즌 재사용</b>된다</span></div>
+    </div>
+    <div class="note"><b>칸에 떨어졌을 때 하는 게 아니다.</b> 화면에 늘 있는 「덕질」 자리에서 한다 — 착지는 코인을 <b>버는 쪽</b>, 덕질은 <b>쓰는 쪽</b>.
+      칸 종류마다 열리는 항목이 다르고, 편지만 22칸 전부 열려 바닥이 된다 — 쉬는 날엔 마음만 보낸다.</div>
+  </div>
+  <div class="foot"><span>덕질 (건설)</span><span class="src">059 · 060 · 061</span></div>
+</section>
+
+<!-- 10 엔진 -->
+<section class="slide" data-t="03 엔진 ★">
+  <div class="pad">
+    <span class="num">03</span>
+    <p class="kick">콘텐츠 03 · 이 게임의 엔진 <s>제일 중요한 장</s></p>
+    <h2 class="sm">덕질 한 번이 <em>두 군데로 간다</em></h2>
+    <p class="sub" style="font-size:1.5cqw">GO는 건설 한 번에 <b>랜드마크 단이 오르고</b> 동시에 <b>집 1채가 칸에 얹힌다.</b> 우리도 그대로다.</p>
+    <div class="split">
+      <div class="arm">
+        <span class="tag">① GO의 「랜드마크 단」 자리</span>
+        <span class="ttl">그 항목의 단 +1</span>
+        <span class="txt">밥차 3단 → 4단</span>
+        <span class="to">↓ 12항목이 차면</span>
+        <span class="res">판 클리어 → 다음 맵</span>
+      </div>
+      <div class="arm new">
+        <span class="tag">② GO의 「집 1채」 자리</span>
+        <span class="ttl">응원봉 + 색 칩 +1</span>
+        <span class="txt">무작위 칸에. 5개 모이면 물결</span>
+        <span class="to">↓ 같은 색 10개 → 성장 칸 급 +1 → 여섯 칸이 다 차면</span>
+        <span class="res">동네가 올라간다 — GO에 없는 것</span>
+      </div>
+    </div>
+    <div class="note"><em>팬덤 게이트가 여기에 물린다.</em> GO 정거장은 남의 랜드마크를 <b>닫아</b> 진행을 깎는데, 어부지리는 그 항목을 <b>오히려 한 단 올려</b> 남의 판 클리어를 빠르게 한다.
+      <b>왼쪽은 GO에서 그대로 빌렸고, 오른쪽 끝만 새로 만들었다.</b> 안 정한 것 — 판이 넘어가려면 12항목 중 몇 개를 채워야 하나.</div>
+  </div>
+  <div class="foot"><span>엔진 · 덕질이 미는 두 축</span><span class="src">D-044 · 062 · 061 · 065</span></div>
+</section>
+
+<!-- 11 보드 성장 -->
+<section class="slide" data-t="04 보드 성장">
+  <div class="pad">
+    <span class="num">04</span>
+    <p class="kick">콘텐츠 04 · 보드 성장 <s>GO에 없는 기능</s></p>
+    <h2 class="sm">「거리 버스킹」이<br><em>「소클럽 오프닝」이 되는 순간</em></h2>
+    <p class="sub">GO는 「보드1 클리어 → 도쿄」다. <b>이 한 컷이 우리가 파는 것이고, GO에는 이 컷이 없다.</b></p>
+    <div class="trio">
+      <div class="tile hot"><span class="cap">영구 성장</span><span class="big">덕질 10개</span>
+        <span class="lil">여기서만 진짜로 큰다. <b>칸 이름이 영영 바뀐다</b></span></div>
+      <div class="tile"><span class="cap">대박</span><span class="big">그날 하루만</span>
+        <span class="lil">위 급 무대에 서고 다음 날 돌아온다</span></div>
+      <div class="tile"><span class="cap">연출</span><span class="big">주인공은 이름</span>
+        <span class="lil">GO는 <b>건물</b>이 서고, 우리는 <b>이름</b>이 바뀐다</span></div>
+    </div>
+    <div class="band">확률이 아니라 <em>쌓은 만큼</em> 자란다 — 운으로는 돈을 벌고, 키우는 건 내가 민 만큼</div>
+    <div class="note">칸 급은 <b>하나씩</b> 오른다. 세트 일괄 승급은 없다 — 「버스킹·버스킹·클럽」로 섞인 채 간다.
+      노랑 3 + 초록 3, <b>여섯 칸이 전부 상한 급에 닿으면</b> 22칸이 통째로 다음 동네. 되돌아가기 없음.
+      연출은 두 번 — 덕질 10개가 차면 칩이 칸으로 빨려 들어가며 이름이 바뀌고(작게), 여섯 칸이 다 차면 판이 통째로 갈린다(크게).</div>
+  </div>
+  <div class="foot"><span>보드 성장 = 지역 성장</span><span class="src">050 · 062 · 063 · D-026</span></div>
+</section>
+
+<!-- 12 준비도 -->
+<section class="slide" data-t="05 준비도">
+  <div class="pad">
+    <span class="num">05</span>
+    <p class="kick">콘텐츠 05 · 준비도 <s>모노카피바라 HP · ATK · DEF</s></p>
+    <h2 class="sm">무대는 여섯 칸이 만들고,<br><em>무대에 설 몸은 열여섯 칸이 만든다</em></h2>
+    <p class="sub">모노폴리 GO엔 <b>캐릭터 능력치가 아예 없다.</b> 이 층은 모노카피바라에서 가져왔다.</p>
+    <div class="trio four">
+      <div class="tile hot"><span class="cap">기량 <s style="color:#e9d5ff">ATK</s></span><span class="big">얼마나<br>잘하나</span>
+        <span class="lil">연습 8칸 → 방송·공연 대박 확률</span></div>
+      <div class="tile"><span class="cap">컨디션 <s style="color:var(--faint)">HP</s></span><span class="big">몸이<br>버티나</span>
+        <span class="lil">자유시간·생활 4칸 → 낮으면 확률이 깎인다</span></div>
+      <div class="tile"><span class="cap">케미 <s style="color:var(--faint)">DEF</s></span><span class="big">팀이<br>맞나</span>
+        <span class="lil">합숙 2칸 → 공연 대박 확률</span></div>
+      <div class="tile"><span class="cap">서사 조각 <s style="color:var(--faint)">스킬</s></span><span class="big">이야기가<br>남나</span>
+        <span class="lil">팬 일정 2칸 → 숫자가 아니라 문장</span></div>
+    </div>
+    <div class="band">스탯은 <em>결과 크기</em>가 아니라 <em>대박 확률</em>을 민다 &nbsp;·&nbsp; 기량 낮음 8% → 높음 14%</div>
+    <div class="note"><b>그래서 쉬는 칸이 손해가 아니다.</b> 코인을 안 주는데도 값진 칸이 되고, 연습이 판의 3분의 1인 이유가 여기서 나온다.
+      <b>판마다 0부터</b> — 홍대에서 쌓은 준비도가 국내 무대에 통하지 않는다 (덕력은 반대. 빠순이 것이라 계정에 영구히).</div>
+  </div>
+  <div class="foot"><span>준비도 · 성장 스탯</span><span class="src">066 · D-033 · D-037</span></div>
+</section>
+
+<!-- 13 팬덤 게이트 -->
+<section class="slide" data-t="06 팬덤 게이트">
+  <div class="pad">
+    <span class="num">06</span>
+    <p class="kick">콘텐츠 06 · 팬덤 게이트 <s>모노폴리 GO 정거장</s></p>
+    <h2>부수는 대신<br><em>내 것으로 바꾼다</em></h2>
+    <p class="sub">남이 키운 밥차 6단이, <b>현수막 이름이 바뀌는 순간 「내가 한 것」이 된다.</b> 밥차는 그대로인데 공은 내 쪽이다.</p>
+    <div class="split">
+      <div class="arm">
+        <span class="tag">공성 <s style="color:var(--faint)">Shutdown — 남의 건물을 닫는다</s></span>
+        <span class="ttl">딱지</span>
+        <span class="txt">단계도 개수도 안 줄어든다. 주인이 코인 내고 뗀다</span>
+        <span class="res">그 공이 내 것이 된다</span>
+      </div>
+      <div class="arm new">
+        <span class="tag">금고털기 <s style="color:var(--faint)">Heist — 남의 현금을 턴다</s></span>
+        <span class="ttl">어부지리</span>
+        <span class="txt">남의 코인으로 그 항목이 한 단 오른다</span>
+        <span class="res">밥차는 오히려 커진다</span>
+      </div>
+    </div>
+    <div class="band">GO는 <em>지은 것</em>을 건드리고, 우리는 <em>누가 했느냐</em>를 건드린다</div>
+    <div class="note"><b>왜 안 뺏나</b> — 시즌 하나에 아이돌 하나라 라이벌 팀이 없다. 옆집 걸 깎으면 게임 손해가 아니라 <b>마음 손해</b>다.
+      실제 문화 그대로다 — 커피차 현수막 · 홈마 워터마크 · 생카 「OO 주최」 · 광고 「OO 일동」.</div>
+  </div>
+  <div class="foot"><span>팬덤 게이트 · 6 · 16 · 26 · 36</span><span class="src">064 · D-029 · D-032</span></div>
+</section>
+
+<!-- 14 이동 연출 -->
+<section class="slide" data-t="07 이동 연출">
+  <div class="pad">
+    <span class="num">07</span>
+    <p class="kick">콘텐츠 07 · 이동 연출 <s>2026.09.18 확정</s></p>
+    <h2>이동은 밴을 타고<br><em>다음 스케줄로 가는 것</em></h2>
+    <p class="sub">부동산 말이 아니라 밴 · 스케줄 · 무대다. <b>한 화면만 봐도 무슨 게임인지 안다.</b></p>
+    <div class="trio">
+      <div class="tile"><span class="cap">1초 · 필러 공간</span><span class="big">주사위가 돈다</span>
+        <span class="lil">기다리는 1초를 이 칸이 먹는다 — GO에도 모노에도 없는 칸</span></div>
+      <div class="tile"><span class="cap">1초 · 연출 공간</span><span class="big">밴 창밖이 흐른다</span>
+        <span class="lil">야경이 흘러가며 「이동 중 · N칸」</span></div>
+      <div class="tile hot"><span class="cap">도착</span><span class="big">배경이 바뀐다</span>
+        <span class="lil">아레나 앞 · 지방 도로 · 홍대 밤</span></div>
+    </div>
+    <div class="band">급이 오르면 <em>같은 칸인데 배경이 올라간다</em> — 성장이 눈에 보이는 자리</div>
+    <div class="note">밴이 어디에 서느냐 = 그 칸이 어떤 자리냐. 시즌이 바뀌면 <b>밴 데칼과 배경만</b> 갈면 된다.</div>
+  </div>
+  <div class="foot"><span>이동 연출 · 밴</span><span class="src">077 · 076 · D-039</span></div>
+</section>
+
+<!-- 잭팟 -->
+<section class="slide" data-t="08 잭팟 (신규)">
+  <div class="pad">
+    <span class="num">08</span>
+    <p class="kick">콘텐츠 08 · 잭팟 <s>설계 중</s></p>
+    <h2>팬이 최애를<br><em>직접 만나는 순간</em></h2>
+    <p class="sub">판을 돌다 보면 <b>아이돌이 어느 칸엔가 서 있다.</b> 같은 칸에 도착하면 그게 잭팟이다.</p>
+    <div class="split">
+      <div class="arm">
+        <span class="tag">굴러가는 방식</span>
+        <span class="ttl">10번 안에 끝내라</span>
+        <span class="txt">참가비를 내고 들어간다. <b>주사위 10번 안에</b> 끝내야 한다. 못 끝내면 참가비만 날아가고, 끝낸 사람이 <b>쌓인 걸 다 가져간다.</b></span>
+        <span class="to">↓ 터지는 주기는 우리가 튜닝한다</span>
+        <span class="res">30분에 한 번? 1시간에 한 번?</span>
+      </div>
+      <div class="arm new">
+        <span class="tag">왜 이 모양인가</span>
+        <span class="ttl">숫자가 아니라<br>만남이어야 한다</span>
+        <span class="txt">누적금만 크면 그냥 도박판이다. <b>「내 최애를 드디어 만났다」</b>가 붙어야 이 게임의 잭팟이 된다.</span>
+        <span class="to">↓</span>
+        <span class="res">쫓아다니다 마주친다</span>
+      </div>
+    </div>
+    <div class="band" style="margin-top:1.5cqw;font-size:1.4cqw">아이돌이 <em>판 위를 돌아다닌다</em> — 내가 쫓아가고, 운이 좋으면 같은 칸에 선다</div>
+    <div class="note"><b>모노카피바라의 잭팟은 너무 안 터져서 실패했다.</b> 이번엔 자주 터지게 잡는다. <b>안 정한 것</b> — 누적이 전 서버냐 개인이냐 · 참가비와 주사위 수 · 「만남」을 확률로 둘지 아이돌 말을 실제로 돌릴지.</div>
+  </div>
+  <div class="foot"><span>잭팟 · 신규</span><span class="src">083 · D-048</span></div>
+</section>
+
+<!-- 15 간지 -->
+<section class="slide chap" data-t="— PART 2 판 밖">
+  <div class="bgimg" style="background-image:url('_img/%EC%BC%80%EC%9D%B4%ED%8C%9D.png')"></div>
+  <div class="veil"></div>
+  <div class="pad">
+    <p class="kk">PART 2</p>
+    <h2>판 밖 —<br><em>남는 것</em></h2>
+    <p class="sub">일정 보드는 「오늘」이고, 여기는 「남은 것」이다. 주사위를 쓰지 않는다.</p>
+  </div>
+</section>
+
+<!-- 16 입덕 -->
+<section class="slide" data-t="09 입덕">
+  <div class="pad">
+    <span class="num">09</span>
+    <p class="kick">콘텐츠 09 · 입덕 <s>모노카피바라 모험</s></p>
+    <h2>일정 보드는 「오늘」,<br><em>입덕은 「남은 것」</em></h2>
+    <p class="sub">판에서 좋은 일이 있으면 <b>비하인드</b>가 남는다. 따로 내보내지 않는다 — 이미 일어난 일을 모아 보여줄 뿐이다.</p>
+    <div class="trio four">
+      <div class="tile"><span class="cap">목적 1</span><span class="big">자랑거리</span>
+        <span class="lil">스크린샷 한 장이 나와야 퍼진다</span></div>
+      <div class="tile hot"><span class="cap">목적 2</span><span class="big">겨룰 자리</span>
+        <span class="lil">시안으로 매주 겨룬다</span></div>
+      <div class="tile"><span class="cap">목적 3</span><span class="big">밖으로</span>
+        <span class="lil">광고 대신 유저가 퍼뜨리게</span></div>
+      <div class="tile"><span class="cap">한 주에</span><span class="big">협력 하나<br>경쟁 하나</span>
+        <span class="lil">총공은 같이 밀고, 시안은 겨룬다</span></div>
+    </div>
+    <div class="band">판과 <em>겹치지 않는 게 제일 중요했다</em> — 40칸이 이미 아이돌 일정표라서</div>
+    <div class="note">옛 안(투어 = 지나온 동네 다시 가기 / 개인 일정 = 예능·라디오 보내기)은 <b>일정 보드와 정면으로 겹쳐 폐기</b>했다.
+      <b>활동 미션</b>도 같은 결이다 — 판에서 한 일이 그대로 하루·주간 과제가 된다. 따로 할 일을 만들지 않는다.</div>
+  </div>
+  <div class="foot"><span>입덕</span><span class="src">081 · 072 · 080</span></div>
+</section>
+
+<!-- 17 원정 · 총공 -->
+<section class="slide" data-t="10 원정 · 총공">
+  <div class="pad">
+    <span class="num">10</span>
+    <p class="kick">콘텐츠 10 · 입덕 안의 둘 <s>피크민 여정 · 출동</s></p>
+    <h2 class="sm"><em>원정</em>과 <em>총공</em></h2>
+    <div class="split" style="margin-top:2.4cqw">
+      <div class="arm">
+        <span class="tag">원정 <s style="color:var(--faint)">모노카피바라 여정</s></span>
+        <span class="ttl">나는 못 가.<br>그래도 내 이름은 거기 가.</span>
+        <span class="txt">목적지는 늘 <b>판보다 한 걸음 앞</b> — 홍대 판이면 지방, 국내 판이면 해외, 해외 판이면 시상식.
+          슬로건·밥차·광고·조공을 1~3단으로 한 번에 보낸다.</span>
+        <span class="to">↓</span>
+        <span class="res">주사위 없는 벌이 · 실패 없음</span>
+      </div>
+      <div class="arm new">
+        <span class="tag">총공 <s style="color:var(--faint)">모노카피바라 출동</s></span>
+        <span class="ttl">마감 전에<br>다 같이 민다.</span>
+        <span class="txt">주 1회. 월 열림 → 화~금 화력 → 토 마감 임박 → 일 블라인드 → 월 결과.
+          <b>화력은 판에서 나온다</b> — 무대 착지·대박, 응원 칸, 덕질.</span>
+        <span class="to">↓</span>
+        <span class="res">시간 초과 = 실패 · 개인 순위 없음</span>
+      </div>
+    </div>
+    <div class="note">둘 다 <b>팬덤이 실제로 하는 일</b>이고 주사위를 안 쓴다 — 주사위가 바닥나도 게임이 안 끊긴다.
+      원정의 자리 수는 <b>덕력이 연다.</b> 총공에 <b>기여도 순위표를 안 붙이는 이유</b> — 붙이면 협력이 경쟁이 된다.</div>
+  </div>
+  <div class="foot"><span>원정 · 총공</span><span class="src">070 · 071 · D-041 · D-042</span></div>
+</section>
+
+<!-- 18 시안 -->
+<section class="slide" data-t="11 시안">
+  <div class="pad">
+    <span class="num">11</span>
+    <p class="kick">콘텐츠 11 · 시안 <s>외부 제안 「천음 리그」 채택</s></p>
+    <h2>내가 만든 현수막이<br><em>남의 판에도 걸린다</em></h2>
+    <p class="sub">매주 팬이 시안을 만들어 내고, 팬덤이 고르고, <b>1등이 실제로 판에 걸린다.</b></p>
+    <div class="trio">
+      <div class="tile"><span class="cap">부문 셋</span><span class="big">문구 · 광고 시안<br>자리 꾸미기</span>
+        <span class="lil">현수막 한 줄 · 전광판 · 생일카페. 있는 덕질 항목 그대로</span></div>
+      <div class="tile"><span class="cap">점수</span><span class="big">후원은 뺐다</span>
+        <span class="lil">투표 45 · 공유 25 · 좋아요 20 · 조회 10</span></div>
+      <div class="tile hot"><span class="cap">1등 보상</span><span class="big">전 서버 판에<br>걸린다</span>
+        <span class="lil">딱지가 「남의 덕질에 내 이름」이면, 시안은 <b>「모두의 판에 내 것」</b></span></div>
+    </div>
+    <div class="band"><em>게임이 만든 것으로는 겨룰 수 없다</em> — 다 똑같이 생겨서 투표가 죽고 돈이 이긴다</div>
+    <div class="note"><b>파일은 안 올린다.</b> 촬영·업로드는 이 게임에 아무 자리도 없는 새 기능이고, 아이돌은 실존 인물이다.
+      대신 공식 소스로 게임 안에서 조립 — 파일이 아니라 <b>조립 데이터</b>가 저장되니 검수·핑거프린트·해시·저작권·AI 표기가 통째로 사라진다.</div>
+  </div>
+  <div class="foot"><span>시안 · 한 주에 경쟁 하나</span><span class="src">082 · 081 §4 · D-043</span></div>
+</section>
+
+<!-- 19 서사 · 시즌 -->
+<section class="slide" data-t="12 서사 · 시즌">
+  <div class="pad">
+    <span class="num">12</span>
+    <p class="kick">콘텐츠 12 · 서사 · 시즌 <s>모노카피바라 번영도 · 월드</s></p>
+    <h2>쌓이는 건 숫자가 아니라<br><em>문장이다</em></h2>
+    <p class="sub">GO는 지으면 <b>건물</b>이 선다. 모노카피바라는 <b>번영도</b>가 오른다. 우리는 <b>이야기 한 줄</b>이 붙는다.</p>
+    <div class="trio">
+      <div class="tile"><span class="cap">조각</span><span class="big">「그때 그 일」</span>
+        <span class="lil">덕질할 때 · 팬 일정과 생활 칸에서 · <b>시련을 넘겼을 때</b></span></div>
+      <div class="tile hot"><span class="cap">팬덤 스테이지 · 5단</span><span class="big">제로돌 →<br>서동요</span>
+        <span class="lil">동행돌 · 시련돌 · 계단돌을 지나</span></div>
+      <div class="tile"><span class="cap">시즌</span><span class="big">3개월</span>
+        <span class="lil">맵 ≈500판 — <b>끝은 아무도 못 본다</b></span></div>
+    </div>
+    <div class="band">시즌이 끝날 때 <em>"더 갈 수 있었는데"</em> 라고 느껴야 한다</div>
+    <div class="note"><b>실패도 서사가 된다</b> — 병가·운망을 지나면 한 줄이 남는다.
+      아레나를 본 사람이 드물어야 한다. 흔하면 「내가 키웠다」가 자랑이 안 된다.
+      다음 시즌엔 새 아이돌로 다시 1판부터, 그런데 <b>덕력이 남아 더 멀리 간다.</b> 그게 시즌을 계속 도는 이유다.</div>
+  </div>
+  <div class="foot"><span>서사 · 시즌 구조</span><span class="src">067 · 038 · 065 · 049</span></div>
+</section>
+
+<!-- 경제 두 갈래 (살아있는 자료) -->
+<section class="slide" data-t="자료 · 경제 두 갈래">
+  <div class="live plain">
+    <div class="fit"><iframe data-src="./economy-two-sides.html" title="경제 두 갈래" loading="lazy"></iframe></div>
+    <div class="badge">
+      <span>자료 조사 · 근거 포함</span>
+      <a href="./economy-two-sides.html" target="_blank">크게 열기 ↗</a>
+    </div>
+    <div class="tip">왼쪽에서 항목을 누르면 <em>실제 단가</em>가, 가운데 근거 자료를 누르면 <em>오른쪽 자료 칸</em>에 출처가 뜹니다 <em>— 새 창은 안 열립니다</em></div>
+  </div>
+</section>
+
+<!-- 20 용어 대조 -->
+<section class="slide" data-t="부록 · 용어 대조">
+  <div class="pad">
+    <p class="kick">부록</p>
+    <h2 class="sm">용어 대조 — <em>룰은 GO 그대로, 말만 갈아끼웠다</em></h2>
+    <div class="twocol">
+      <table>
+        <tr><th style="width:36%">모노폴리 GO</th><th style="width:24%">모노</th><th>우리</th></tr>
+        <tr class="grp"><td colspan="3">짓기 — 제일 많이 바뀐 곳</td></tr>
+        <tr class="mark"><td>건설 <s style="color:var(--faint)">집을 짓는다</s></td><td>건설</td><td class="us">덕질 <s style="color:var(--faint)">밥차를 보낸다</s></td></tr>
+        <tr class="mark"><td>랜드마크 5 × 6단</td><td>6자리 × 6단</td><td class="us">덕질 항목 12 × 6단</td></tr>
+        <tr><td>랜드마크 단</td><td>(없음)</td><td class="us">팬덤 스테이지 5단</td></tr>
+        <tr class="mark"><td>집 1채 → 호텔</td><td>(없음)</td><td class="us">응원봉 → 물결</td></tr>
+        <tr><td>색 세트 보너스</td><td>색 10 → 컬러휠</td><td class="us">색 칩 10 → 급 +1</td></tr>
+        <tr class="grp"><td colspan="3">판과 숫자</td></tr>
+        <tr><td>보드 · 대지 22</td><td>보드 · LAND</td><td class="us">일정 보드 · 아이돌 일정 22</td></tr>
+        <tr><td>넷워스 (재산)</td><td>번영도</td><td class="us">덕력 <s style="color:var(--faint)">주사위 상한</s></td></tr>
+        <tr><td>캐시 · 칭호</td><td>골드 · 번영 칭호</td><td class="us">코인 · 직함</td></tr>
+        <tr><td>월드 스테이지</td><td>월드 100</td><td class="us">맵 스테이지 ≈500</td></tr>
+      </table>
+      <table>
+        <tr><th style="width:36%">모노폴리 GO</th><th style="width:24%">모노</th><th>우리</th></tr>
+        <tr class="grp"><td colspan="3">칸 이름</td></tr>
+        <tr><td>출발 (GO)</td><td>GO</td><td class="us">사옥 <s style="color:var(--faint)">1</s></td></tr>
+        <tr class="mark"><td>정거장 ×4</td><td>STATION</td><td class="us">팬덤 게이트 <s style="color:var(--faint)">6·16·26·36</s></td></tr>
+        <tr class="mark"><td>└ 공성 · 금고털기</td><td>공성 · 금고약탈</td><td class="us">└ 딱지 · 어부지리</td></tr>
+        <tr><td>커뮤니티 체스트 ×3</td><td>공동기금</td><td class="us">응원 <s style="color:var(--faint)">3·18·34</s></td></tr>
+        <tr><td>찬스 ×3</td><td>등급롤</td><td class="us">스케줄 변경 <s style="color:var(--faint)">8·23·38</s></td></tr>
+        <tr><td>소득세 · 사치세</td><td>세금 ×2</td><td class="us">정산 · 대형 정산 <s style="color:var(--faint)">5·40</s></td></tr>
+        <tr><td>전기 · 수도회사</td><td>유틸</td><td class="us">A&amp;R · 매니지먼트 미팅</td></tr>
+        <tr><td>감옥 · 방문 · 무료주차</td><td>JAIL · 코너</td><td class="us">병가 · 스탠바이 · 온에어</td></tr>
+        <tr class="grp"><td colspan="3">판 밖</td></tr>
+        <tr><td>미션</td><td>미션</td><td class="us">활동 미션</td></tr>
+        <tr><td>(없음)</td><td>모험 └ 여정 · 출동</td><td class="us">입덕 └ 원정 · 총공</td></tr>
+        <tr><td>(없음)</td><td>엽서 · HP·ATK·DEF</td><td class="us">비하인드 · 준비도</td></tr>
+      </table>
+    </div>
+    <div class="note">칸 하나하나 이름은 <b>037 대조표</b>에 22칸 전부 1:1로 있다. 일정 보드에서 칸을 누르면 <b>「모노폴리 GO에서는」</b> 한 줄이 같이 뜬다.</div>
+  </div>
+  <div class="foot"><span>용어 대조</span><span class="src">037 · 052 · 047 · 042</span></div>
+</section>
+
+<!-- 21 지금 어디까지 -->
+<section class="slide" data-t="지금 어디까지">
+  <div class="pad">
+    <p class="kick">지금 어디까지 왔나</p>
+    <h2>컨셉은 <em>다 섰다.</em><br>남은 건 숫자와 물량</h2>
+    <div class="stats">
+      <div class="stat"><b>83</b><span>기획 문서</span></div>
+      <div class="stat"><b>50</b><span>확정 결정</span></div>
+      <div class="stat"><b>40</b><span>보드 칸 확정</span></div>
+      <div class="stat"><b>12</b><span>콘텐츠</span></div>
+    </div>
+    <div class="trio">
+      <div class="tile hot"><span class="cap">된 것</span><span class="big">뼈대 전부</span>
+        <span class="lil">40칸 · 덕질 · 보드 성장 · 준비도 · 게이트 · 입덕 · 시안 · 시즌 · 이동 연출</span></div>
+      <div class="tile"><span class="cap">하는 중</span><span class="big">화면으로 옮기는 중</span>
+        <span class="lil">일정 보드 · 입덕 두 콘텐츠 · 시안 주간 화면</span></div>
+      <div class="tile"><span class="cap">남은 것</span><span class="big">숫자 · 문안 · 그림</span>
+        <span class="lil"><b>잭팟 설계</b> · <b>비용 디테일 조사</b> · 밸런스 · 서사 조각 수백 줄 · 덕질 그림 150장</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>2026.09.18</span><span class="src">DECISIONS.md · PLAN.md</span></div>
+</section>
+
+<!-- 22 살아있는 일정 보드 -->
+<section class="slide" data-t="▶ 일정 보드 (살아있음)">
+  <div class="live">
+    <div class="fit"><iframe data-src="./board-40-places-table.html?dicefilm=2" title="일정 보드 40" loading="lazy"></iframe></div>
+    <div class="badge">
+      <span>일정 보드 40 · 실제 화면</span>
+      <a href="./board-40-places-table.html?dicefilm=2" target="_blank">크게 열기 ↗</a>
+    </div>
+    <div class="tip"><em>주사위 굴리기</em>를 누르면 필름이 돌고 밴이 도착합니다 · 칸을 누르면 그 칸 기획이 펼쳐집니다 <em>— 마우스를 올리면 이 줄은 사라집니다</em></div>
+  </div>
+</section>
+
+<!-- 23 닫는 장 -->
+<section class="slide" data-t="▶ 직접 굴려 보세요">
+  <div class="pad" style="justify-content:center">
+    <p class="kick">말로 하는 건 여기까지</p>
+    <h2>직접 <em>굴려 보세요</em></h2>
+    <p class="sub">주사위를 굴리면 밴이 움직이고, 도착한 칸을 누르면 그 칸의 기획이 그대로 펼쳐집니다.</p>
+    <div class="links">
+      <a class="main" href="./board-40-places-table.html?dicefilm=2">▶ 일정 보드 40 열기</a>
+    </div>
+    <div class="links" style="margin-top:1.3cqw">
+      <a href="./planning-docs-tool.html">기획서 툴</a>
+      <a href="./ipduk-two-contents.html">입덕 · 원정과 총공</a>
+      <a href="./sian-weekly.html">시안 · 주간</a>
+      <a href="./green-growth-sim.html">보드 성장 시뮬</a>
+      <a href="./board1-hit-outcomes-table.html">대박·중박·운망 표</a>
+    </div>
+  </div>
+  <div class="foot"><span>케이팝 몬스터즈</span><span class="src">2026.09</span></div>
+</section>
+
+</div>
+
+<div class="bar">
+  <button type="button" id="tocBtn">목차</button>
+  <button type="button" id="prev">◀</button>
+  <span class="count" id="count">1 / 1</span>
+  <button type="button" id="next">▶</button>
+  <div class="dots" id="dots"></div>
+</div>
+
+<div class="toc" id="toc">
+  <h3>목차 — 아무 데나 누르세요</h3>
+  <div class="grid" id="tocGrid"></div>
+</div>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var dots = document.getElementById("dots");
+  var count = document.getElementById("count");
+  var tocGrid = document.getElementById("tocGrid");
+  var toc = document.getElementById("toc");
+  var cur = 0;
+
+  slides.forEach(function (s, i) {
+    var d = document.createElement("i");
+    d.addEventListener("click", function () { go(i); });
+    dots.appendChild(d);
+
+    var b = document.createElement("button");
+    var t = s.getAttribute("data-t") || ("장 " + (i + 1));
+    if (t.indexOf("—") === 0) b.className = "sec";
+    b.innerHTML = '<s>' + (i + 1) + '</s><span>' + t + '</span>';
+    b.addEventListener("click", function () { toc.classList.remove("on"); go(i); });
+    tocGrid.appendChild(b);
+  });
+
+  // 끼워 넣은 일정 보드를 칸에 꽉 채운다
+  var MIN_W = 1480; // 보드가 짜인 기준 폭
+  function fitAll() {
+    document.querySelectorAll(".live:not(.plain)").forEach(function (live) {
+      var fit = live.querySelector(".fit");
+      var fr = live.querySelector("iframe");
+      if (!fit || !fr) return;
+      var w = live.clientWidth;
+      // 칸이 기준 폭보다 넓으면 원본 크기로 그린다 (늘리면 뭉개진다). 좁으면 줄인다.
+      var logical = Math.max(MIN_W, w);
+      fr.style.width = logical + "px";
+      fr.style.height = Math.round(logical * 9 / 16) + "px";
+      fit.style.transform = "scale(" + (w / logical) + ")";
+    });
+  }
+  // 보드 자체 제목줄은 덱 안에서 자리만 먹는다. 임베드에서만 감춘다 (파일은 그대로).
+  function trimHeader(fr) {
+    try {
+      var d = fr.contentDocument;
+      if (!d || d.getElementById("deckTrim")) return;
+      var st = d.createElement("style");
+      st.id = "deckTrim";
+      st.textContent =
+        "header{display:none!important}" +
+        "html,body{height:100%}" +
+        ".deck{max-width:none!important;height:100%;padding-top:8px!important;display:flex;flex-direction:column}" +
+        ".deck-main{flex:1;min-height:0}" +
+        ".slide{aspect-ratio:auto!important;height:100%}";
+      d.head.appendChild(st);
+    } catch (e) { /* 못 건드리면 그냥 둔다 */ }
+  }
+  window.addEventListener("resize", fitAll);
+
+  function go(i) {
+    cur = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function (s, n) { s.classList.toggle("on", n === cur); });
+    Array.prototype.forEach.call(dots.children, function (d, n) { d.classList.toggle("on", n === cur); });
+    count.textContent = (cur + 1) + " / " + slides.length;
+    // 켜진 장에만 일정 보드를 띄운다. 안 보이는 데서 돌릴 이유가 없다.
+    var fr = slides[cur].querySelector("iframe[data-src]");
+    if (fr && !fr.getAttribute("src")) {
+      fr.addEventListener("load", function () { trimHeader(fr); fitAll(); });
+      fr.setAttribute("src", fr.getAttribute("data-src"));
+    }
+    fitAll();
+  }
+
+  document.getElementById("prev").addEventListener("click", function () { go(cur - 1); });
+  document.getElementById("next").addEventListener("click", function () { go(cur + 1); });
+  document.getElementById("tocBtn").addEventListener("click", function () { toc.classList.toggle("on"); });
+  toc.addEventListener("click", function (e) { if (e.target === toc) toc.classList.remove("on"); });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { go(cur + 1); e.preventDefault(); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { go(cur - 1); e.preventDefault(); }
+    else if (e.key === "Home") go(0);
+    else if (e.key === "End") go(slides.length - 1);
+    else if (e.key === "Escape") toc.classList.remove("on");
+  });
+
+  go(0);
+})();
+</script>
+</body>
+</html>

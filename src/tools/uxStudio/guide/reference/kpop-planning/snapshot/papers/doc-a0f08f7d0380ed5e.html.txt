@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>판정 · 대박 / 중박 / 운빨망빨</title>
+  <style>
+  tr.c-red td:nth-child(2){background:#fee2e2}
+
+    :root { --border:#c8c8c8; --head-bg:#111827; --zebra:#f8fafc;
+      --font:ui-monospace,Menlo,Consolas,monospace; --sans:Pretendard,"Apple SD Gothic Neo",system-ui,sans-serif; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:var(--sans); background:#e5e7eb; }
+    header { padding:16px 20px; background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:30; }
+    header h1 { margin:0 0 6px; font-size:18px; }
+    header .note { margin:0; font-size:13px; color:#4b5563; line-height:1.45; }
+    .wrap { overflow:auto; max-height:calc(100vh - 130px); background:#fff; margin:12px; border:1px solid var(--border); border-radius:6px; }
+    table { border-collapse:separate; border-spacing:0; width:max-content; min-width:100%; font-family:var(--font); font-size:12px; }
+    thead th { position:sticky; top:0; z-index:20; background:var(--head-bg); color:#f9fafb; padding:10px 12px; text-align:left; white-space:nowrap; border-right:1px solid #374151; }
+    tbody td { padding:8px 12px; border-bottom:1px solid #e5e7eb; border-right:1px solid #eef2f7; white-space:nowrap; max-width:280px; overflow:hidden; text-overflow:ellipsis; }
+    tbody td:hover { white-space:normal; overflow:visible; background:#fffbeb; position:relative; z-index:2; }
+    tbody tr:nth-child(even) td { background:var(--zebra); }
+    tbody tr:hover td { background:#e0f2fe; }
+    td.num { position:sticky; left:0; z-index:10; background:#fff; font-weight:700; text-align:right; width:48px; border-right:1px solid var(--border); }
+    tbody tr:nth-child(even) td.num { background:var(--zebra); }
+    tbody tr:hover td.num { background:#e0f2fe; }
+    td.verdict { font-weight:700; }
+    tr.c-yellow td.num { box-shadow:inset 4px 0 0 #eab308; }
+    tr.c-pink td.num { border-left-color:#e91e8c; }
+    .c-orange td.num { border-left-color:#ea580c; }
+        tr.c-green td.num { box-shadow:inset 4px 0 0 #16a34a; }
+    tr.v-hit td.verdict { color:#b45309; }
+    tr.v-mid td.verdict { color:#0369a1; }
+    tr.v-miss td.verdict { color:#6b7280; }
+    footer { padding:8px 20px 16px; font-size:12px; color:#6b7280; }
+  </style>
+</head>
+<body><section class="part current-note" id="part-board1021"><h2>10/21 보드 개편 · 「제안(검수 대기)」</h2><h3>「제안(검수 대기)」 (현중 10:09 배치 · 10:25 확정 · 09:41 안은 히스토리)</h3>
+<p>&gt; 현중 원문 10:09: 「모노폴리고는 30번이고..10번과 20번이 모서리잖아.. 우리 기분이면 31번이 감옥이고 11번과 21번은 숙소가 되어야지..1번은 사옥이고 / 감옥으로 가기 없어 / 그냥 감옥 도착이야」</p>
+<table><tr><th>칸</th><th>전</th><th>후</th><th>왜 (현중 시각)</th><th>막는 문제</th></tr><tr><td>1</td><td>출발</td><td><b>사옥</b>(출발). 지나면 돈 · 사옥 건설 기회 유지</td><td>모노폴리GO 0번 출발 자리 (10:09 · 09:45)</td><td>—</td></tr><tr><td>11</td><td>스탠바이(감옥 규칙)</td><td>숙소 · <b>기숙사</b> · 짓기 없음 · 회복 · 팀 단합</td><td>모노폴리GO 10번 모서리 자리 (10:09 · 10:25 기숙사 확정)</td><td>모서리 배치가 모노폴리GO와 어긋나는 것</td></tr><tr><td>21</td><td>코너 온에어(효과 없음)</td><td>숙소 · <b>본가</b> · 짓기 없음 · 회복 · 태도 회복</td><td>모노폴리GO 20번 모서리 자리 (10:09 · 10:25 본가 확정)</td><td>효과 없는 코너</td></tr><tr><td>31</td><td>코너 병가(11로 보냄)</td><td><b>감옥 도착</b> 칸 = 도착하면 바로 갇힘, 더블 굴리기 3번으로 탈출(못 나오면 벌금 내고 나옴). 옛 11번 스탠바이 규칙(탈출 돈 · 주사위 · 벌금) 옮김. 「감옥으로 가기」 칸 없음</td><td>모노폴리GO 30번 자리 (10:09)</td><td>감옥 가는 길이 없던 문제 · 벌칙 칸이 둘로 갈리는 것</td></tr><tr><td>2·37·39</td><td>숙소 건물(휴식·태도·외국어)</td><td><b>아카데미</b> 건물(외국어·교양·태도·성실성 공부, 30단계)</td><td>늘어난 공부 스탯을 키울 건물 (09:41)</td><td>공부 스탯이 '본가' 칸에 억지로 붙던 것</td></tr><tr><td>건물 없는 칸</td><td>섞여 있음</td><td>짓기 없는 일반 칸. 건물 칸은 <b>24칸</b></td><td>(09:41)</td><td>코너·이벤트 칸에 건설 표가 생기는 것</td></tr><tr><td>8·23·38</td><td>스케줄</td><td><b>찬스</b></td><td>같은 역할이 두 이름 (09:41)</td><td>카드 표 중복</td></tr><tr><td>수익 짝</td><td>비어 있음</td><td>음반 = 보컬 녹음실 + 프로듀싱 · 공연 = 랩 · 굿즈 = 팬샵 · 영상·광고 = 예능 방송국 + 뷰티 · 팬클럽 = 사옥 · 성장만 = 댄스 + 아카데미</td><td>(09:42)</td><td>어느 칸에서 돈이 나오는지 비던 것</td></tr><tr><td>칸 수익</td><td>—</td><td>그 칸 건물 단계를 따라 오름 (모노폴리GO 보드 단계 역할)</td><td>(09:44)</td><td>수익이 건물과 따로 노는 것</td></tr><tr><td>엔터 파워</td><td>통합 레벨</td><td>건물 단계 1당 +1, 최대 270. 기획사 능력 레벨 합과 같은 값(한 번만 셈). 주사위 배수 상한을 풂</td><td>(09:45)</td><td>두 번 세기 · 팬 수 잠금 고리</td></tr><tr><td>규칙</td><td>—</td><td>보드·수익 규칙은 모노폴리GO를 따름. 모노폴리GO 0·10·20·30번 = 우리 1·11·21·31번 (1번부터 세서 하나씩 밀림)</td><td>(09:45 · 10:09)</td><td>기준이 갈리는 것</td></tr></table>
+<ul><li>모노폴리GO 대응: 팬 반응 = 공동기금 · 정산 = 세금 · 쟁탈 = 철도 · 31 = 감옥(도착).</li><li>숫자는 모두 발란스 대기. 결정(현중 10:25): 11 기숙사 · 21 본가 · 31 도착하면 바로 갇히고 더블 3번으로 탈출(현중 10:09 「그냥 감옥 도착」 · 영상 기준). 정산은 받는 칸(10:13).</li></ul></section><h2 class="part" id="part-history-board1021" style="margin-top:28px">히스토리 · 10/21 보드 개편 이전 본문 (그대로 보존)</h2><div class="old-plan"><h4>옛 안 · 10/21 09:41 보드 개편 (현중 10:09에 11·21·31 배치가 바뀜)</h4>
+<table><tr><th>칸</th><th>전</th><th>후</th><th>왜 (현중 시각)</th><th>막는 문제</th></tr><tr><td>21</td><td>코너 온에어(효과 없음)</td><td>숙소 · <b>기숙사</b> (짓기 없음, 회복 · 팀 단합)</td><td>쉬는 곳을 코너로 모음 (09:41)</td><td>효과 없는 코너가 남는 것</td></tr><tr><td>31</td><td>코너 병가(11로 보냄)</td><td>숙소 · <b>본가</b> (짓기 없음, 회복 · 태도 회복)</td><td>같은 이유 (09:41)</td><td>벌칙 코너와 휴식이 섞이는 것</td></tr><tr><td>2·37·39</td><td>숙소 건물(휴식·태도·외국어)</td><td><b>아카데미</b> 건물(외국어·교양·태도·성실성 공부, 30단계)</td><td>늘어난 공부 스탯을 키울 건물 (09:41)</td><td>공부 스탯이 '본가' 칸에 억지로 붙던 것</td></tr><tr><td>건물 없는 칸</td><td>섞여 있음</td><td>짓기 없는 일반 칸. 건물 칸은 <b>24칸</b></td><td>(09:41)</td><td>코너·이벤트 칸에 건설 표가 생기는 것</td></tr><tr><td>8·23·38</td><td>스케줄</td><td><b>찬스</b></td><td>같은 역할이 두 이름 (09:41)</td><td>카드 표 중복</td></tr><tr><td>수익 짝</td><td>비어 있음</td><td>음반 = 보컬 녹음실 + 프로듀싱 · 공연 = 랩 · 굿즈 = 팬샵 · 영상·광고 = 예능 방송국 + 뷰티 · 팬클럽 = 사옥 · 성장만 = 댄스 + 아카데미</td><td>(09:42)</td><td>어느 칸에서 돈이 나오는지 비던 것</td></tr><tr><td>칸 수익</td><td>—</td><td>그 칸 건물 단계를 따라 오름 (모노폴리GO 보드 단계 역할)</td><td>(09:44)</td><td>수익이 건물과 따로 노는 것</td></tr><tr><td>엔터 파워</td><td>통합 레벨</td><td>건물 단계 1당 +1, 최대 270. 기획사 능력 레벨 합과 같은 값(한 번만 셈). 주사위 배수 상한을 풂</td><td>(09:45)</td><td>두 번 세기 · 팬 수 잠금 고리</td></tr><tr><td>규칙</td><td>—</td><td>보드·수익 규칙은 모노폴리GO를 따름. 출발 칸 지나면 돈 · 사옥 건설 기회 유지</td><td>(09:45)</td><td>기준이 갈리는 것</td></tr></table>
+<ul><li>모노폴리GO 대응: 팬 반응 = 공동기금 · 정산 = 세금 · 캐스팅 = 철도 · 11 = 감옥.</li><li>숫자는 모두 발란스 대기. 남은 질문: 31이 본가가 되면 11로 가는 길(찬스 카드로만?) · 세금은 내는데 정산은 받음.</li></ul></div>
+  <header>
+    <h1>판정 · 대박 / 중박 / 운빨망빨 <span style='font-size:13px;opacity:.6'>— 그날 결과. 급 상승 아님</span></h1>
+    <p class="note">status: locked · Board1 10칸(노랑3 · 초록3 · 분홍2 · 주황 개인·멤버 시간 고정2) × 판정3 = 30행. 빠순이 투자 후 결과. 묶음 034.<br>
+    <b>대박</b>=<b>그날 한 급 위 무대</b>에 선다·지역 룰렛(대·소분류)·돈 큼. <b>다음엔 원래 급으로 돌아온다</b> /
+    <b>중박</b>=같은 급에서 잘함·종류만 업/보너스·지역 약하게 가능·돈 중간 /
+    <b>운빨망빨</b>=제자리(하락 없음)·보상 적음·지역 없음.<br>
+    <b style="color:#b45309">급이 진짜로 바뀌는 건 덕질 10개(같은 색)뿐이다.</b> 대박은 그날의 사건이지 성장이 아니다. (2026-09-17 정정 · 062)<br>
+    공연 사다리: 버스킹→클럽→소극장→중극장·홀→아레나·대형홀 / 방송: 온라인→라디오→케이블TV→공중파TV→해외방송 (시상식 제외).</p>
+  </header>
+  <div class="wrap"><table>
+    <thead><tr><th>번호</th><th>색</th><th>현재칸명</th><th>수준</th><th>판정</th><th>결과요약</th><th>그날 무대</th><th>그날 선 무대 예시</th><th>지역명</th><th>돈/보상감각</th><th>비고</th></tr></thead>
+    <tbody>
+<tr class="c-yellow v-hit"><td class="num">27</td><td>노랑</td><td>유튜브 라이브</td><td>온라인</td><td class='verdict'>대박</td><td>라이브 화제·클립 확산 → 라디오 게스트 제안</td><td><b>그날만 라디오급</b><br><span style='opacity:.7'>다음엔 온라인</span></td><td>심야 라디오 게스트</td><td>룰렛(대·소분류)</td><td>돈 큼</td><td>급은 안 오름 · 급은 덕질 10개</td></tr>
+<tr class="c-yellow v-mid"><td class="num">27</td><td>노랑</td><td>유튜브 라이브</td><td>온라인</td><td class='verdict'>중박</td><td>고정팬 늘고 멤버십·슈퍼챗 보너스. 같은 온라인 내 더 좋은 슬롯</td><td>같은 급<br><span style='opacity:.7'>종류·보너스만</span></td><td>멤버십 스페셜 라이브</td><td>약하게 가능(소분류 힌트)</td><td>돈 중간</td><td>급은 그대로</td></tr>
+<tr class="c-yellow v-miss"><td class="num">27</td><td>노랑</td><td>유튜브 라이브</td><td>온라인</td><td class='verdict'>운빨망빨</td><td>동시시청 안 나오고 채팅만 맴돔. 노출은 숏폼 클립 쪽으로 새어나감</td><td>제자리 (하락 없음)</td><td>숏폼 하이라이트만</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>지역명 없음</td></tr>
+<tr class="c-yellow v-hit"><td class="num">28</td><td>노랑</td><td>위버스·팬플 라이브</td><td>온라인</td><td class='verdict'>대박</td><td>팬플 라이브가 예능 방송국 귀에 들어감 → 로컬 라디오 초대</td><td><b>그날만 라디오급</b><br><span style='opacity:.7'>다음엔 온라인</span></td><td>로컬 라디오 코너</td><td>룰렛(대·소분류)</td><td>돈 큼</td><td>급은 안 오름 · 급은 덕질 10개</td></tr>
+<tr class="c-yellow v-mid"><td class="num">28</td><td>노랑</td><td>위버스·팬플 라이브</td><td>온라인</td><td class='verdict'>중박</td><td>팬클럽 결속·굿즈 링크 보너스. 같은 온라인에서 더 핫한 종류로</td><td>같은 급<br><span style='opacity:.7'>종류·보너스만</span></td><td>위버스 스페셜·팬미팅 라이브</td><td>약하게 가능(소분류 힌트)</td><td>돈 중간</td><td>급은 그대로</td></tr>
+<tr class="c-yellow v-miss"><td class="num">28</td><td>노랑</td><td>위버스·팬플 라이브</td><td>온라인</td><td class='verdict'>운빨망빨</td><td>팬만 보고 외부 확산 실패. 알림 놓친 사람만 남음</td><td>제자리 (하락 없음)</td><td>팬플 재방송·하이라이트</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>지역명 없음</td></tr>
+<tr class="c-yellow v-hit"><td class="num">30</td><td>노랑</td><td>숏폼 라이브</td><td>온라인</td><td class='verdict'>대박</td><td>바이럴 후 라디오 메인 게스트 제안</td><td><b>그날만 라디오급</b><br><span style='opacity:.7'>다음엔 온라인</span></td><td>메인 게스트 라디오</td><td>룰렛(대·소분류)</td><td>돈 큼</td><td>급은 안 오름 · 급은 덕질 10개</td></tr>
+<tr class="c-yellow v-mid"><td class="num">30</td><td>노랑</td><td>숏폼 라이브</td><td>온라인</td><td class='verdict'>중박</td><td>클립이 어느 정도 돌고 후원·챌린지 보너스. 같은 온라인 내 업</td><td>같은 급<br><span style='opacity:.7'>종류·보너스만</span></td><td>챌린지·콜라보 숏폼 라이브</td><td>약하게 가능(소분류 힌트)</td><td>돈 중간</td><td>급은 그대로</td></tr>
+<tr class="c-yellow v-miss"><td class="num">30</td><td>노랑</td><td>숏폼 라이브</td><td>온라인</td><td class='verdict'>운빨망빨</td><td>알고리즘에 묻힘. 더 짧은 노출·리플만 남음</td><td>제자리 (하락 없음)</td><td>리플·스니펫만</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>지역명 없음·낮은 노출로 새어나감</td></tr>
+<tr class="c-green v-hit"><td class="num">32</td><td>초록</td><td>거리 버스킹</td><td>버스킹</td><td class='verdict'>대박</td><td>거리 반응 폭발 → 소클럽 오프닝 제안</td><td><b>그날만 클럽급</b><br><span style='opacity:.7'>다음엔 버스킹</span></td><td>소클럽 오프닝</td><td>룰렛(대·소분류)</td><td>돈 큼</td><td>급은 안 오름 · 급은 덕질 10개</td></tr>
+<tr class="c-green v-mid"><td class="num">32</td><td>초록</td><td>거리 버스킹</td><td>버스킹</td><td class='verdict'>중박</td><td>피크타임 스팟 확보·팁 보너스. 같은 버스킹 내 더 좋은 종류</td><td>같은 급<br><span style='opacity:.7'>종류·보너스만</span></td><td>핫플 거리·야시장 버스킹</td><td>약하게 가능(소분류 힌트)</td><td>돈 중간</td><td>급은 그대로</td></tr>
+<tr class="c-green v-miss"><td class="num">32</td><td>초록</td><td>거리 버스킹</td><td>버스킹</td><td class='verdict'>운빨망빨</td><td>비·소음·인원 없음. 연습 겸 제자리</td><td>제자리 (하락 없음)</td><td>한산 골목 재시도</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>지역명 없음</td></tr>
+<tr class="c-green v-hit"><td class="num">33</td><td>초록</td><td>대학가</td><td>버스킹</td><td class='verdict'>대박</td><td>축제 반응으로 라이브하우스 콜</td><td><b>그날만 클럽급</b><br><span style='opacity:.7'>다음엔 버스킹</span></td><td>라이브하우스</td><td>룰렛(대·소분류)</td><td>돈 큼</td><td>급은 안 오름 · 급은 덕질 10개</td></tr>
+<tr class="c-green v-mid"><td class="num">33</td><td>초록</td><td>대학가</td><td>버스킹</td><td class='verdict'>중박</td><td>부스·서브스테이지 보너스. 같은 버스킹에서 더 좋은 슬롯</td><td>같은 급<br><span style='opacity:.7'>종류·보너스만</span></td><td>축제 서브·메인 근처 슬롯</td><td>약하게 가능(소분류 힌트)</td><td>돈 중간</td><td>급은 그대로</td></tr>
+<tr class="c-green v-miss"><td class="num">33</td><td>초록</td><td>대학가</td><td>버스킹</td><td class='verdict'>운빨망빨</td><td>날씨·옆 부스에 가려짐. 관객 흐름 빗나감</td><td>제자리 (하락 없음)</td><td>동아리 부스 옆 재시도</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>지역명 없음</td></tr>
+<tr class="c-green v-hit"><td class="num">35</td><td>초록</td><td>거리공연</td><td>버스킹</td><td class='verdict'>대박</td><td>페스 반응 → 댄스클럽 쇼케이스 제안</td><td><b>그날만 클럽급</b><br><span style='opacity:.7'>다음엔 버스킹</span></td><td>댄스클럽 쇼케이스</td><td>룰렛(대·소분류)</td><td>돈 큼</td><td>급은 안 오름 · 급은 덕질 10개</td></tr>
+<tr class="c-green v-mid"><td class="num">35</td><td>초록</td><td>거리공연</td><td>버스킹</td><td class='verdict'>중박</td><td>메인타임 슬롯·마켓 팁 보너스. 같은 버스킹 내 업</td><td>같은 급<br><span style='opacity:.7'>종류·보너스만</span></td><td>메인타임 슬롯·야외무대 보너스</td><td>약하게 가능(소분류 힌트)</td><td>돈 중간</td><td>급은 그대로</td></tr>
+<tr class="c-green v-miss"><td class="num">35</td><td>초록</td><td>거리공연</td><td>버스킹</td><td class='verdict'>운빨망빨</td><td>부스 소음·동선 불일치. 무대만 비고 끝</td><td>제자리 (하락 없음)</td><td>한산 타임슬롯 재배정</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>지역명 없음</td></tr>
+
+
+<tr class="c-pink v-hit"><td class="num">14</td><td>분홍</td><td>팬미팅</td><td>고정</td><td class='verdict'>대박</td><td>토크·사연 히트 · 게임·유닛 핫 · 톡콘 스페셜·앙코르 · 포토·하이터치·사인 연장 · 팬사인·미니팬미 성덕</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 큼</td><td>오프라인 팬미팅 풀</td></tr>
+<tr class="c-pink v-mid"><td class="num">14</td><td>분홍</td><td>팬미팅</td><td>고정</td><td class='verdict'>중박</td><td>토크 무난 · 사연 한 편 · 게임 보너스 · 짧은 스페셜 · 단체사진·포토 · 하이터치·사인 기본 · 짧은 팬사인·미니팬미</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 중간</td><td>결과만</td></tr>
+<tr class="c-pink v-miss"><td class="num">14</td><td>분홍</td><td>팬미팅</td><td>고정</td><td class='verdict'>운빨망빨</td><td>사연 못 읽힘 · 게임 꼬임 · 포토 축소 · 하이터치 스킵 · 스페셜 컷 · 단체사진만 · 팬사인·미니팬미 축소</td><td>제자리</td><td>— (이름 유지)</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>이름 유지</td></tr>
+<tr class="c-pink v-hit"><td class="num">15</td><td>분홍</td><td>개인방송</td><td>고정</td><td class='verdict'>대박</td><td>수다·먹방·게임 라이브 대박 · 팬콜·영통 성덕 · 편지 답장 히트 · 챌린지·미공개 컷 확산</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 큼</td><td>팬콜·영통=여기 풀</td></tr>
+<tr class="c-pink v-mid"><td class="num">15</td><td>분홍</td><td>개인방송</td><td>고정</td><td class='verdict'>중박</td><td>일상 수다 평타 · 짧은 팬콜·영통 · 편지 한두 통 · 게임·챌린지 보너스 · 팬플 소통 유지</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 중간</td><td>결과만</td></tr>
+<tr class="c-pink v-miss"><td class="num">15</td><td>분홍</td><td>개인방송</td><td>고정</td><td class='verdict'>운빨망빨</td><td>동접 저조 · 팬콜·영통 실패 · 사연 조기 종료 · 기술 사고 · 채팅만 맴돔</td><td>제자리</td><td>— (이름 유지)</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>이름 유지</td></tr>
+    
+<tr class="c-orange v-hit"><td class="num">19</td><td>주황</td><td>개인 시간</td><td>고정</td><td class='verdict'>대박</td><td>오프 리프레시 · 컨디션 피크 · 힐링 리듬 · 슬럼프 직전 한숨 돌림</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈·스킬 없음(컨디션)</td><td>오프 리프레시 풀</td></tr>
+<tr class="c-orange v-mid"><td class="num">19</td><td>주황</td><td>개인 시간</td><td>고정</td><td class='verdict'>중박</td><td>평타 오프 · 컨디션 유지 · 무난한 개인 리듬</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈·스킬 없음(컨디션)</td><td>결과만</td></tr>
+<tr class="c-orange v-miss"><td class="num">19</td><td>주황</td><td>개인 시간</td><td>고정</td><td class='verdict'>운빨망빨</td><td>컨디션 난조 · 회복 실패 · 슬럼프에 가까워짐</td><td>제자리</td><td>— (이름 유지)</td><td>없음/실패 연출</td><td>돈·스킬 없음(컨디션)</td><td>이름 유지</td></tr>
+<tr class="c-orange v-hit"><td class="num">20</td><td>주황</td><td>멤버 시간</td><td>고정</td><td class='verdict'>대박</td><td>팀 케미 한 방 · 멤버 관계·케미 회복 · 동료 힐링 하루</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈·스킬 없음(케미)</td><td>생활 케미 풀 · 안무·팬이벤트 제외</td></tr>
+<tr class="c-orange v-mid"><td class="num">20</td><td>주황</td><td>멤버 시간</td><td>고정</td><td class='verdict'>중박</td><td>평범한 멤버 합 · 관계 유지 · 생활 호흡 보너스</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈·스킬 없음(케미)</td><td>결과만</td></tr>
+<tr class="c-orange v-miss"><td class="num">20</td><td>주황</td><td>멤버 시간</td><td>고정</td><td class='verdict'>운빨망빨</td><td>멤버 간 어색 · 케미 안 맞음 · 호흡 어긋남</td><td>제자리</td><td>— (이름 유지)</td><td>없음/실패 연출</td><td>돈·스킬 없음(케미)</td><td>이름 유지</td></tr>
+
+<tr class="c-red v-hit"><td class="num">24</td><td>빨강</td><td>안무 합숙</td><td>고정</td><td class='verdict'>대박</td><td>군무·포메이션 완성 · 안무 디테일 대박 · 동선 통과 · 댄스보컬 호흡 성공 · 합숙 체력 피크</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 큼</td><td>합숙 훈련 · 연습실과 별개</td></tr>
+<tr class="c-red v-mid"><td class="num">24</td><td>빨강</td><td>안무 합숙</td><td>고정</td><td class='verdict'>중박</td><td>군무 평타 · 안무 잔여 · 동선 유지 · 호흡 유지 · 체력 평타</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 중간</td><td>같은 칸 · 결과만</td></tr>
+<tr class="c-red v-miss"><td class="num">24</td><td>빨강</td><td>안무 합숙</td><td>고정</td><td class='verdict'>운빨망빨</td><td>군무 싱크 붕괴 · 안무 말림 · 동선 꼬임 · 호흡 붕괴 · 체력 난조·합숙 실패</td><td>제자리</td><td>— (이름 유지)</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>칸 이름 유지</td></tr>
+<tr class="c-red v-hit"><td class="num">25</td><td>빨강</td><td>보컬 합숙</td><td>고정</td><td class='verdict'>대박</td><td>발성·디렉션 통과 · 파트·하모니 완성 · 랩 딕션 대박 · 스태미나 피크 · 목 관리 통과</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 큼</td><td>합숙 훈련 · 연습실과 별개</td></tr>
+<tr class="c-red v-mid"><td class="num">25</td><td>빨강</td><td>보컬 합숙</td><td>고정</td><td class='verdict'>중박</td><td>발성 평타 · 하모니 보너스 · 딕션 잔여 · 스태미나 유지 · 목 컨디션 유지</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 중간</td><td>같은 칸 · 결과만</td></tr>
+<tr class="c-red v-miss"><td class="num">25</td><td>빨강</td><td>보컬 합숙</td><td>고정</td><td class='verdict'>운빨망빨</td><td>음정 흔들림 · 하모니 붕괴 · 딕션 말림 · 스태미나 방전 · 목 난조·합숙 조기 종료</td><td>제자리</td><td>— (이름 유지)</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>칸 이름 유지</td></tr>
+
+
+<tr class="c-navy v-hit"><td class="num">37</td><td>남색</td><td>본가</td><td>고정</td><td class='verdict'>대박</td><td>가족 식사·대화 피크 · 고향 집 리셋 · 가족 행사 · 본가 쉼 후 준비</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 큼</td><td>개인 시간과 별개</td></tr>
+<tr class="c-navy v-mid"><td class="num">37</td><td>남색</td><td>본가</td><td>고정</td><td class='verdict'>중박</td><td>무난한 본가 · 고향 집 휴식 · 짧은 들름</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 중간</td><td>같은 칸 · 결과만</td></tr>
+<tr class="c-navy v-miss"><td class="num">37</td><td>남색</td><td>본가</td><td>고정</td><td class='verdict'>운빨망빨</td><td>가족 일정 꼬임 · 안 풀림 · 귀가·이동에 치임</td><td>제자리</td><td>— (이름 유지)</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>칸 이름 유지</td></tr>
+<tr class="c-navy v-hit"><td class="num">39</td><td>남색</td><td>합숙소</td><td>고정</td><td class='verdict'>대박</td><td>통금·루틴 통과 · 룸메 안정 · 숙소 식사·정돈 · 다음날 준비</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 큼</td><td>합숙 훈련·멤버 시간과 별개</td></tr>
+<tr class="c-navy v-mid"><td class="num">39</td><td>남색</td><td>합숙소</td><td>고정</td><td class='verdict'>중박</td><td>통금·루틴 평타 · 룸메·공용 무난 · 숙소 정리 보너스</td><td>칸 고정 (성장 없음)</td><td>— (이름 유지)</td><td>약하게 가능</td><td>돈 중간</td><td>같은 칸 · 결과만</td></tr>
+<tr class="c-navy v-miss"><td class="num">39</td><td>남색</td><td>합숙소</td><td>고정</td><td class='verdict'>운빨망빨</td><td>통금·루틴 붕괴 · 룸메 어긋남 · 숙소 피로로 휴식 실패</td><td>제자리</td><td>— (이름 유지)</td><td>없음/실패 연출</td><td>돈 적음·실패</td><td>칸 이름 유지</td></tr>
+
+</tbody>
+  </table></div>
+  <footer>http://127.0.0.1:7007/docs/planning/board1-hit-outcomes-table.html · CSV: data/board1_hit_outcomes.csv</footer>
+</body>
+</html>

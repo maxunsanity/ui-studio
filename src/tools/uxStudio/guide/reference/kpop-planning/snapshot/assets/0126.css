@@ -1,0 +1,31 @@
+/* P86 samples: a document first, interactive assets opened only by a deliberate click. */
+.sample-document main{max-width:1180px;padding:28px 32px 64px}
+.sample-document h1{font-size:clamp(28px,3.2vw,44px);line-height:1.25;margin:12px 0 18px}
+.sample-document .eyebrow{font-size:14px}
+.sample-document .actions{gap:10px;margin:16px 0 22px}
+.sample-document .actions a{padding:12px 17px;font-size:15px;border-radius:11px;font-weight:700}
+.sample-document .local-nav{gap:7px;padding:12px 0}
+.sample-document .local-nav a{font-size:13px}
+.sample-document .part{margin-top:34px;padding-top:12px}
+.sample-document .part>h2{padding-bottom:12px;border-bottom:2px solid #d5e7e8;margin-bottom:18px}
+.sample-document p,.sample-document li{line-height:1.85}
+.sample-document .part>p{max-width:1020px}
+.sample-document h3{margin-top:26px;font-size:19px}
+.sample-document th,.sample-document td{padding:13px 15px}
+.sample-document table{font-size:14px}
+.sample-document .open-action{display:block;width:fit-content;max-width:100%;padding:14px 20px;margin:14px 0;border:2px solid #176f78;border-radius:12px;background:#e7f2f1;text-decoration:none;font-size:16px;font-weight:800}
+.sample-document .open-action::after{content:" ↗"}
+.sample-document .doc-diagram{margin:20px 0;padding:18px;border:1px solid #c9dfe2;background:linear-gradient(135deg,#f3f8f7,#fff);border-radius:16px;overflow:auto}
+.sample-document .doc-diagram svg{display:block;max-width:100%;height:auto;margin:auto}
+.sample-document .doc-diagram figcaption{margin-top:12px;font-size:13px;color:#526f77}
+.sample-document .diagram-text{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.sample-document .history{margin-top:36px}
+.sample-document .history summary{font-size:16px;padding:3px 0}
+.sample-document .history .log-body{margin-top:16px}
+.sample-document details details{background:#f8faf8}
+.sample-document .history pre{max-height:none}
+.sample-document .log-error{color:#924725}
+.sample-document :target{scroll-margin-top:90px}
+@media(max-width:680px){.sample-document main{padding:20px 16px 40px}.sample-document h1{font-size:30px}.sample-document .actions a{font-size:13px;padding:10px 12px}.sample-document .local-nav{position:static}.sample-document .doc-diagram{padding:12px}.sample-document .doc-diagram svg{max-width:none;min-width:680px}.sample-document table{min-width:620px}.sample-document h2{font-size:22px}}
+
+.sample-document .local-nav a[aria-current="true"]{background:var(--teal);color:white;border-color:var(--teal)}

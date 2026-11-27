@@ -1,0 +1,525 @@
+# S20 · 유저 스테이터스 저장 구조 v01
+
+**이 문서는** 현재 브라우저 저장의 키·읽기·쓰기 경계와 유저 정보 표 구조안을 설명합니다.
+**보는 법** 현재 저장 → 필요한 정보 → 미등록 표·열 구조안 → 서버 목표와 확인 범위 순서로 읽습니다. 함께 보기: [오디션·메인](../../../game-simulator.html?module=simulator_module_audition) · [P173 현재 저장](../개발진행기획_v01/콘텐츠별_v03/유저저장정보_기획서.html).
+**지금 상태** 개발됨(분리된 브라우저 저장·인계·스냅샷·체크포인트 경로). 통합 계정·서버 저장과 아래 유저 표의 실제 저장 연결은 현재 개발되지 않음, 진행 중이며 화면·복원 전수 검수는 별도입니다.
+
+## 목차
+
+- [0. 현재 저장과 권한](#0-현재-저장과-권한)
+  - [writer와 관측의 구분](#writer와-관측의-구분)
+- [1. 유저가 들고 있어야 할 정보](#1-유저가-들고-있어야-할-정보)
+- [2. 유저 표·칸 구조안 (15표 · 164칸)](#2-유저-표칸-구조안-15표-164칸)
+  - [`user_account` — 계정 기본](#user_account-계정-기본)
+  - [`user_wallet` — 재화 잔액](#user_wallet-재화-잔액)
+  - [`user_member` — 보유 멤버(생성 결과 전체를 묶음)](#user_member-보유-멤버생성-결과-전체를-묶음)
+  - [`user_member_stat` — 보유 멤버 현재 능력(합류 뒤 자람)](#user_member_stat-보유-멤버-현재-능력합류-뒤-자람)
+  - [`user_member_skill` — 보유 멤버 스킬](#user_member_skill-보유-멤버-스킬)
+  - [`user_item` — 보유 아이템(들고 있는 동안 지속)](#user_item-보유-아이템들고-있는-동안-지속)
+  - [`user_building` — 건물 단계](#user_building-건물-단계)
+  - [`user_board_progress` — 보드 진행](#user_board_progress-보드-진행)
+  - [`user_season` — 시즌 상태](#user_season-시즌-상태)
+  - [`user_fan` — 팬 수·팬 단계](#user_fan-팬-수팬-단계)
+  - [`user_rapport_pair` — 멤버 쌍 라포](#user_rapport_pair-멤버-쌍-라포)
+  - [`user_mission` — 미션 진행](#user_mission-미션-진행)
+  - [`user_attendance` — 출석](#user_attendance-출석)
+  - [`user_card` — 보유 카드(idol_growth_card_owned를 유저별로)](#user_card-보유-카드idol_growth_card_owned를-유저별로)
+  - [`user_casting_history` — 오디션 판 기록(저장 호환·재현)](#user_casting_history-오디션-판-기록저장-호환재현)
+- [3. schema_column 등록용 초안](#3-schema_column-등록용-초안)
+- [4. 현재 저장과 서버 목표의 연결](#4-현재-저장과-서버-목표의-연결)
+- [5. 확인 범위와 남은 결정](#5-확인-범위와-남은-결정)
+- [6. 발란스 대기](#6-발란스-대기)
+
+## 0. 현재 저장과 권한
+
+현재 확인한 구현은 브라우저 저장을 여러 묶음으로 나눕니다. 기본 키, 지도별 키, 독립 시험 접두를 함께 확인해야 같은 진행인지 알 수 있습니다. [P173 현재 저장](../개발진행기획_v01/콘텐츠별_v03/유저저장정보_기획서.html)과 [P222 서버 저장 목표](../개발진행기획_v01/콘텐츠별_v03/유저저장_핵심제안서.html)는 구현과 목표를 나누어 읽습니다.
+
+| 기록 | 기본 키 또는 현재 설정 | 읽기·쓰기 경계 |
+|---|---|---|
+| 보드 경제 프로토타입 | `kpm:game:prototype:v1` (`profile.save_key`) | 경제 store가 읽기·묶어 쓰기·손상/이전 보존을 처리합니다. 시뮬 성장 저장과 같은 키가 아닙니다 |
+| 오디션 단독 판 | 현재 profile의 `kpopmonsters.audition.simulator.v01` | 앱이 주어진 storage에서 세션을 읽고 씁니다. duelContext이면 전달받은 별도 키를 사용합니다 |
+| 오디션 보드 판 | `kpopmonsters.audition.board.v01` | board_flow 설정을 읽습니다. `.generator`는 생성 기록이며 run과 함께 현재 원문 대조 후 교체합니다. 검토 모드·자식 대결은 별도 접미 범위입니다 |
+| 오디션 보조 기록 | 판 키의 `.team`·`.stage-names`·`.duel-clock`·`.first-impression`·`.viewport-mode`, 성장 키 `kpopmonsters.audition.growth.v01` | 앱과 판의 저장 범위 안에서 읽고 씁니다. 이 목록은 전체 기능 키의 전수 목록이 아닙니다 |
+| 합류 인계 | `kpopmonsters.handoff.audition_to_board.v1` | 오디션은 선택한 멤버의 인계만 발행합니다. 성장 스냅샷·체크포인트를 여기서 직접 소유하지 않습니다. 새 몬스 지급은 없습니다 |
+| 시험 세션 | `kpopmonsters.simulator.test-session.v1` | test-session 관리자가 현재 팀·출처·run을 만들고 초기 스냅샷·시설 기록을 준비합니다. 같은 세션인지 확인합니다 |
+| 성장 스냅샷 | `kpopmonsters.simulator.shared.v1` | 공유 표시용 현재 팀·능력·시설·위치를 검증합니다. 예상 revision과 현재 revision을 대조합니다 |
+| 성장 체크포인트 | `kpopmonsters.simulator.growth.checkpoint.v1` | 전체 이어하기 상태는 run·자료 지문·revision·checksum·구조를 대조합니다. 스냅샷만으로 지갑이나 보상 영수증을 새로 만들지 않습니다 |
+| 현재 지도 범위 | `kpopmonsters.simulator.shared.campus9.v1` · `kpopmonsters.simulator.growth.checkpoint.campus9.v1` · `kpopmonsters:board-map:campus9:facility-levels:v1` | 지도 runtime 설정과 scoped growth 어댑터가 성장 두 키를 바꿉니다. 오디션 인계와 예전 저장 전체를 한꺼번에 바꾸지 않습니다 |
+| 독립 시험 범위 | `kpopmonsters.simulator.page-test.v1:{testPage}:` + 기본 키 | 유효한 모듈 ID 범위의 get/set/remove/clear만 처리합니다. host 메뉴 이동은 현재 run·scope를 유지하며 별도 진입 URL의 독립 범위와 구분합니다 |
+| 팬·허브 및 쟁탈 흐름 | `kpopmonsters.simulator-hub.v1` · `kpopmonsters.casting-live-flow.v1` | 기능별 상태·요청 기록입니다. 전체 저장의 단일 정본이라고 보지 않습니다 |
+| 발란스 시뮬 이어하기 | `kpopmonsters.idle-sim.run.v1` | idle-sim 전용 검증·checksum·자료 지문의 단일 기록입니다. 공용 게임 키와 분리합니다 |
+
+### writer와 관측의 구분
+
+- 오디션 인계는 `publishBoardRecruitment` → `writeHandoff`가 담당합니다. 인계 자료와 실제 성장 상태를 구분합니다.
+- 시험 세션 관리자는 새 입력을 시작할 때 허용된 범위의 초기 스냅샷·시설·세션을 씁니다. 따라서 스냅샷의 모든 쓰기를 성장 화면 하나만의 작업이라고 설명하지 않습니다.
+- 성장 공유 API는 스냅샷 발행과 전체 체크포인트 저장·검증을 제공합니다. 실제 성장 화면 내부의 모든 호출·정책은 이번에 열람하지 않았습니다.
+- 건설 거래는 같은 run·차수·시설·지갑을 검사하고 변경을 임시 준비한 뒤 스냅샷·체크포인트·시설 기록을 함께 반영합니다. 실패 시 복구와 별도 오류를 구분합니다.
+- 능력·관계 허브의 source reader는 setter 없는 storage를 받아 관찰합니다. 다른 scope로 넘어가거나 누락값을 임의 확정하지 않습니다.
+
+## 1. 유저가 들고 있어야 할 정보
+
+| 정보 | 현재 확인 또는 설계 경계 | 표 구조안 |
+|---|---|---|
+| 계정·기획사 | 계정 서버 저장은 목표이며 현재 브라우저 묶음과 구별 | user_account |
+| 재화·시설·보드·팬·시즌 | 경제 상태와 전체 체크포인트 등 분리된 묶음에 있습니다. 모든 항목의 서버 통합은 미구현 | user_wallet · user_building · user_board_progress · user_fan · user_season |
+| 보유 멤버·능력·스킬 | 생성 결과·합류 인계와 현재 성장 상태를 구분합니다. 스킬 정의와 실제 획득 슬롯도 구분 | user_member · user_member_stat · user_member_skill |
+| 카드·아이템 | 정적 표는 보유 원장이 아니며 실제 진행 기록과 구별합니다. 항목별 영속 저장 전수 검수는 별도 | user_card · user_item |
+| 라포 | 현재 허브는 유효한 같은 진행의 snapshot/checkpoint 등에서 읽는 경로가 있습니다 | user_rapport_pair |
+| 미션·출석·오디션 기록 | 프로토타입 기능별 상태와 판 기록이 있으며 아래 유저 표로 통합 저장된 것은 아닙니다 | user_mission · user_attendance · user_casting_history |
+
+구조안의 아이템 지속/스킬 즉시 연결 자리와 보임·숨김·간접 구분은 보존합니다. 시즌에 남길 항목과 정리할 항목은 [P222](../개발진행기획_v01/콘텐츠별_v03/유저저장_핵심제안서.html) 및 콘텐츠별 최신 기획의 범위를 따르며 아래 과거 초안의 초기화 메모를 새 확정 결정으로 적용하지 않습니다.
+
+## 2. 유저 표·칸 구조안 (15표 · 164칸)
+
+아래 15개 user_* 표는 현재 schema_table에 등록되어 있지 않습니다. 파일 경로와 칸은 구조 설계이며 현재 저장 키·서버 저장과 같은 구현이라고 보지 않습니다. 시즌 처리의 상세 값은 최신 기획 대조가 필요합니다.
+
+### `user_account` — 계정 기본
+- 경로(구조안): `data/user/user_account.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_account_id | string | user_account_{uuid} | 숨김 |  |
+| nickname_ko | string | 닉네임 | 보임 |  |
+| agency_name_ko | string | 기획사 이름 | 보임 |  |
+| created_at | string | 가입 KST | 숨김 |  |
+| last_login_at | string | 마지막 접속 | 숨김 |  |
+| save_version | int | 저장 판 번호(호환) | 숨김 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_wallet` — 재화 잔액
+- 경로(구조안): `data/user/user_wallet.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_wallet_id | string | user_wallet_{user}_{currency} | 숨김 |  |
+| user_account_id | string | 유저 | 숨김 | user_account |
+| currency_key | string | 재화 키 | 보임 | currency |
+| amount | number | 잔액 | 보임 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_member` — 보유 멤버(생성 결과 전체를 묶음)
+- 경로(구조안): `data/user/user_member.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_member_id | string | user_member_{user}_{candidate_member} | 숨김 |  |
+| user_account_id | string | 유저 | 숨김 | user_account |
+| candidate_member_id | string | 생성 결과 원본(성격·축·배경·서사·능력·스킬·그림·이름 전부) | 숨김 | candidate_member |
+| joined_at | string | 합류 시각 | 숨김 |  |
+| growth_stage | int | 성장 단계 | 보임 |  |
+| mood | number | 기분 · 발란스 대기 | 간접 |  |
+| team_slot | int | 팀 자리 | 보임 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_member_stat` — 보유 멤버 현재 능력(합류 뒤 자람)
+- 경로(구조안): `data/user/user_member_stat.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_member_stat_id | string | user_member_stat_{user_member}_{stat} | 숨김 |  |
+| user_member_id | string | 멤버 | 숨김 | user_member |
+| stat_id | string | 세부 능력 | 숨김 | idol_growth_stat |
+| value | number | 현재 값 | 보임 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_member_skill` — 보유 멤버 스킬
+- 경로(구조안): `data/user/user_member_skill.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_member_skill_id | string | user_member_skill_{user_member}_{skill} | 숨김 |  |
+| user_member_id | string | 멤버 | 숨김 | user_member |
+| skill_ref_id | string | 스킬 | 보임 | idol_growth_member_skill_effect |
+| level | int | 레벨 | 보임 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_item` — 보유 아이템(들고 있는 동안 지속)
+- 경로(구조안): `data/user/user_item.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_item_id | string | user_item_{user}_{item} | 숨김 |  |
+| user_account_id | string | 유저 | 숨김 | user_account |
+| item_ref_id | string | 아이템 | 보임 |  |
+| count | int | 개수 | 보임 |  |
+| equipped_user_member_id | string | 장착 멤버 | 보임 | user_member |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_building` — 건물 단계
+- 경로(구조안): `data/user/user_building.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_building_id | string | user_building_{user}_{building} | 숨김 |  |
+| user_account_id | string | 유저 | 숨김 | user_account |
+| building_id | string | 건물 | 보임 | building_master |
+| level | int | 단계(1~30) | 보임 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_board_progress` — 보드 진행
+- 경로(구조안): `data/user/user_board_progress.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_board_progress_id | string | user_board_progress_{user} | 숨김 |  |
+| user_account_id | string | 유저 | 숨김 | user_account |
+| tile_index | int | 현재 칸 | 보임 |  |
+| lap | int | 바퀴 | 보임 |  |
+| dice_left | int | 남은 주사위 | 보임 |  |
+| bad_energy | number | 나쁜 기운 | 간접 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_season` — 시즌 상태
+- 경로(구조안): `data/user/user_season.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_season_id | string | user_season_{user}_{season} | 숨김 |  |
+| user_account_id | string | 유저 | 숨김 | user_account |
+| season_key | string | 시즌 | 보임 | season_config |
+| day | int | 시즌 날짜(최대 60) | 보임 |  |
+| started_at | string | 시작 | 숨김 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_fan` — 팬 수·팬 단계
+- 경로(구조안): `data/user/user_fan.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_fan_id | string | user_fan_{user} | 숨김 |  |
+| user_account_id | string | 유저 | 숨김 | user_account |
+| fan_count | number | 팬 수 | 보임 |  |
+| fan_tier_key | string | 팬 단계 | 보임 | fan_tier |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_rapport_pair` — 멤버 쌍 라포
+- 경로(구조안): `data/user/user_rapport_pair.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_rapport_pair_id | string | user_rapport_pair_{a}_{b}_{axis} | 숨김 |  |
+| user_member_a_id | string | 멤버 A | 숨김 | user_member |
+| user_member_b_id | string | 멤버 B | 숨김 | user_member |
+| axis_id | string | 라포 축 | 숨김 | rapport_axis |
+| value | number | 값 | 간접 |  |
+| stage_id | string | 단계 | 보임 | rapport_stage |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_mission` — 미션 진행
+- 경로(구조안): `data/user/user_mission.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_mission_id | string | user_mission_{user}_{mission} | 숨김 |  |
+| user_account_id | string | 유저 | 숨김 | user_account |
+| mission_ref_id | string | 미션 | 보임 | mission_config |
+| progress | number | 진행 | 보임 |  |
+| state_id | string | 상태 | 보임 | mission_state_config |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_attendance` — 출석
+- 경로(구조안): `data/user/user_attendance.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_attendance_id | string | user_attendance_{user}_{cycle} | 숨김 |  |
+| user_account_id | string | 유저 | 숨김 | user_account |
+| cycle_key | string | 출석 주기 | 보임 |  |
+| day_count | int | 출석 일수 | 보임 |  |
+| last_checked_at | string | 마지막 출석 | 숨김 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_card` — 보유 카드(idol_growth_card_owned를 유저별로)
+- 경로(구조안): `data/user/user_card.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_card_id | string | user_card_{user}_{card} | 숨김 |  |
+| user_account_id | string | 유저 | 숨김 | user_account |
+| card_id | string | 카드 | 보임 |  |
+| star | int | 별 | 보임 |  |
+| dup_count | int | 중복 | 보임 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+### `user_casting_history` — 오디션 판 기록(저장 호환·재현)
+- 경로(구조안): `data/user/user_casting_history.csv` · 현재 schema 미등록 · 시즌 처리는 최신 저장 기획과 대조
+
+| 칸 | 형 | 설명 | 노출 | 연결 |
+|---|---|---|---|---|
+| user_casting_history_id | string | user_casting_history_{user}_{batch} | 숨김 |  |
+| user_account_id | string | 유저 | 숨김 | user_account |
+| casting_batch_id | string | 판 | 숨김 | casting_batch |
+| result_kind | string | 완료/중단 | 숨김 |  |
+| convert_item_ref_id | string | 아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 | 숨김 | data_convert_link |
+| convert_skill_ref_id | string | 스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 | 숨김 | data_convert_link |
+| visibility | string | 보임/숨김/간접 (data_visibility와 같은 값) | 숨김 |  |
+| value_status | string | 발란스 대기 · 제안(검수 대기) | 숨김 |  |
+| src_doc_id | string | 근거 문서 | 숨김 |  |
+| note | string | 메모 | 숨김 |  |
+
+## 3. schema_column 등록용 초안
+
+아래는 보존한 열 설계 원문이며 실제 schema 등록본이 아닙니다. 원문에 있는 상태·시즌 메모를 현재 구현이나 새 결정으로 해석하지 않습니다.
+```csv
+schema_column_user_account__user_account_id,user_account,user_account_id,1,column,proposal_S20,string,,,,,,,,,,,"user_account_{uuid} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_account__nickname_ko,user_account,nickname_ko,2,column,proposal_S20,string,,,,,,,,,,,"닉네임 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_account__agency_name_ko,user_account,agency_name_ko,3,column,proposal_S20,string,,,,,,,,,,,"기획사 이름 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_account__created_at,user_account,created_at,4,column,proposal_S20,string,,,,,,,,,,,"가입 KST · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_account__last_login_at,user_account,last_login_at,5,column,proposal_S20,string,,,,,,,,,,,"마지막 접속 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_account__save_version,user_account,save_version,6,column,proposal_S20,int,,,,,,,,,,,"저장 판 번호(호환) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_account__convert_item_ref_id,user_account,convert_item_ref_id,7,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_account__convert_skill_ref_id,user_account,convert_skill_ref_id,8,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_account__visibility,user_account,visibility,9,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_account__value_status,user_account,value_status,10,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_account__src_doc_id,user_account,src_doc_id,11,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_account__note,user_account,note,12,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_wallet__user_wallet_id,user_wallet,user_wallet_id,1,column,proposal_S20,string,,,,,,,,,,,"user_wallet_{user}_{currency} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_wallet__user_account_id,user_wallet,user_account_id,2,column,proposal_S20,string,,,,,user_account,,,,,,"유저 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_wallet__currency_key,user_wallet,currency_key,3,column,proposal_S20,string,,,,,currency,,,,,,"재화 키 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_wallet__amount,user_wallet,amount,4,column,proposal_S20,number,,,,,,,,,,,"잔액 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_wallet__convert_item_ref_id,user_wallet,convert_item_ref_id,5,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_wallet__convert_skill_ref_id,user_wallet,convert_skill_ref_id,6,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_wallet__visibility,user_wallet,visibility,7,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_wallet__value_status,user_wallet,value_status,8,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_wallet__src_doc_id,user_wallet,src_doc_id,9,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_wallet__note,user_wallet,note,10,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member__user_member_id,user_member,user_member_id,1,column,proposal_S20,string,,,,,,,,,,,"user_member_{user}_{candidate_member} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member__user_account_id,user_member,user_account_id,2,column,proposal_S20,string,,,,,user_account,,,,,,"유저 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member__candidate_member_id,user_member,candidate_member_id,3,column,proposal_S20,string,,,,,candidate_member,,,,,,"생성 결과 원본(성격·축·배경·서사·능력·스킬·그림·이름 전부) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member__joined_at,user_member,joined_at,4,column,proposal_S20,string,,,,,,,,,,,"합류 시각 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member__growth_stage,user_member,growth_stage,5,column,proposal_S20,int,,,,,,,,,,,"성장 단계 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_member__mood,user_member,mood,6,column,proposal_S20,number,,,,,,,,,,,"기분 · 발란스 대기 · 노출 간접 · 제안(검수 대기)"
+schema_column_user_member__team_slot,user_member,team_slot,7,column,proposal_S20,int,,,,,,,,,,,"팀 자리 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_member__convert_item_ref_id,user_member,convert_item_ref_id,8,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member__convert_skill_ref_id,user_member,convert_skill_ref_id,9,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member__visibility,user_member,visibility,10,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member__value_status,user_member,value_status,11,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member__src_doc_id,user_member,src_doc_id,12,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member__note,user_member,note,13,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_stat__user_member_stat_id,user_member_stat,user_member_stat_id,1,column,proposal_S20,string,,,,,,,,,,,"user_member_stat_{user_member}_{stat} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_stat__user_member_id,user_member_stat,user_member_id,2,column,proposal_S20,string,,,,,user_member,,,,,,"멤버 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_stat__stat_id,user_member_stat,stat_id,3,column,proposal_S20,string,,,,,idol_growth_stat,,,,,,"세부 능력 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_stat__value,user_member_stat,value,4,column,proposal_S20,number,,,,,,,,,,,"현재 값 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_member_stat__convert_item_ref_id,user_member_stat,convert_item_ref_id,5,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_stat__convert_skill_ref_id,user_member_stat,convert_skill_ref_id,6,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_stat__visibility,user_member_stat,visibility,7,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_stat__value_status,user_member_stat,value_status,8,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_stat__src_doc_id,user_member_stat,src_doc_id,9,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_stat__note,user_member_stat,note,10,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_skill__user_member_skill_id,user_member_skill,user_member_skill_id,1,column,proposal_S20,string,,,,,,,,,,,"user_member_skill_{user_member}_{skill} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_skill__user_member_id,user_member_skill,user_member_id,2,column,proposal_S20,string,,,,,user_member,,,,,,"멤버 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_skill__skill_ref_id,user_member_skill,skill_ref_id,3,column,proposal_S20,string,,,,,idol_growth_member_skill_effect,,,,,,"스킬 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_member_skill__level,user_member_skill,level,4,column,proposal_S20,int,,,,,,,,,,,"레벨 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_member_skill__convert_item_ref_id,user_member_skill,convert_item_ref_id,5,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_skill__convert_skill_ref_id,user_member_skill,convert_skill_ref_id,6,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_skill__visibility,user_member_skill,visibility,7,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_skill__value_status,user_member_skill,value_status,8,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_skill__src_doc_id,user_member_skill,src_doc_id,9,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_member_skill__note,user_member_skill,note,10,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_item__user_item_id,user_item,user_item_id,1,column,proposal_S20,string,,,,,,,,,,,"user_item_{user}_{item} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_item__user_account_id,user_item,user_account_id,2,column,proposal_S20,string,,,,,user_account,,,,,,"유저 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_item__item_ref_id,user_item,item_ref_id,3,column,proposal_S20,string,,,,,,,,,,,"아이템 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_item__count,user_item,count,4,column,proposal_S20,int,,,,,,,,,,,"개수 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_item__equipped_user_member_id,user_item,equipped_user_member_id,5,column,proposal_S20,string,,,,,user_member,,,,,,"장착 멤버 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_item__convert_item_ref_id,user_item,convert_item_ref_id,6,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_item__convert_skill_ref_id,user_item,convert_skill_ref_id,7,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_item__visibility,user_item,visibility,8,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_item__value_status,user_item,value_status,9,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_item__src_doc_id,user_item,src_doc_id,10,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_item__note,user_item,note,11,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_building__user_building_id,user_building,user_building_id,1,column,proposal_S20,string,,,,,,,,,,,"user_building_{user}_{building} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_building__user_account_id,user_building,user_account_id,2,column,proposal_S20,string,,,,,user_account,,,,,,"유저 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_building__building_id,user_building,building_id,3,column,proposal_S20,string,,,,,building_master,,,,,,"건물 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_building__level,user_building,level,4,column,proposal_S20,int,,,,,,,,,,,"단계(1~30) · 노출 보임 · 제안(검수 대기)"
+schema_column_user_building__convert_item_ref_id,user_building,convert_item_ref_id,5,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_building__convert_skill_ref_id,user_building,convert_skill_ref_id,6,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_building__visibility,user_building,visibility,7,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_building__value_status,user_building,value_status,8,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_building__src_doc_id,user_building,src_doc_id,9,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_building__note,user_building,note,10,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_board_progress__user_board_progress_id,user_board_progress,user_board_progress_id,1,column,proposal_S20,string,,,,,,,,,,,"user_board_progress_{user} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_board_progress__user_account_id,user_board_progress,user_account_id,2,column,proposal_S20,string,,,,,user_account,,,,,,"유저 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_board_progress__tile_index,user_board_progress,tile_index,3,column,proposal_S20,int,,,,,,,,,,,"현재 칸 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_board_progress__lap,user_board_progress,lap,4,column,proposal_S20,int,,,,,,,,,,,"바퀴 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_board_progress__dice_left,user_board_progress,dice_left,5,column,proposal_S20,int,,,,,,,,,,,"남은 주사위 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_board_progress__bad_energy,user_board_progress,bad_energy,6,column,proposal_S20,number,,,,,,,,,,,"나쁜 기운 · 노출 간접 · 제안(검수 대기)"
+schema_column_user_board_progress__convert_item_ref_id,user_board_progress,convert_item_ref_id,7,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_board_progress__convert_skill_ref_id,user_board_progress,convert_skill_ref_id,8,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_board_progress__visibility,user_board_progress,visibility,9,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_board_progress__value_status,user_board_progress,value_status,10,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_board_progress__src_doc_id,user_board_progress,src_doc_id,11,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_board_progress__note,user_board_progress,note,12,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_season__user_season_id,user_season,user_season_id,1,column,proposal_S20,string,,,,,,,,,,,"user_season_{user}_{season} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_season__user_account_id,user_season,user_account_id,2,column,proposal_S20,string,,,,,user_account,,,,,,"유저 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_season__season_key,user_season,season_key,3,column,proposal_S20,string,,,,,season_config,,,,,,"시즌 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_season__day,user_season,day,4,column,proposal_S20,int,,,,,,,,,,,"시즌 날짜(최대 60) · 노출 보임 · 제안(검수 대기)"
+schema_column_user_season__started_at,user_season,started_at,5,column,proposal_S20,string,,,,,,,,,,,"시작 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_season__convert_item_ref_id,user_season,convert_item_ref_id,6,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_season__convert_skill_ref_id,user_season,convert_skill_ref_id,7,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_season__visibility,user_season,visibility,8,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_season__value_status,user_season,value_status,9,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_season__src_doc_id,user_season,src_doc_id,10,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_season__note,user_season,note,11,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_fan__user_fan_id,user_fan,user_fan_id,1,column,proposal_S20,string,,,,,,,,,,,"user_fan_{user} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_fan__user_account_id,user_fan,user_account_id,2,column,proposal_S20,string,,,,,user_account,,,,,,"유저 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_fan__fan_count,user_fan,fan_count,3,column,proposal_S20,number,,,,,,,,,,,"팬 수 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_fan__fan_tier_key,user_fan,fan_tier_key,4,column,proposal_S20,string,,,,,fan_tier,,,,,,"팬 단계 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_fan__convert_item_ref_id,user_fan,convert_item_ref_id,5,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_fan__convert_skill_ref_id,user_fan,convert_skill_ref_id,6,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_fan__visibility,user_fan,visibility,7,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_fan__value_status,user_fan,value_status,8,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_fan__src_doc_id,user_fan,src_doc_id,9,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_fan__note,user_fan,note,10,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_rapport_pair__user_rapport_pair_id,user_rapport_pair,user_rapport_pair_id,1,column,proposal_S20,string,,,,,,,,,,,"user_rapport_pair_{a}_{b}_{axis} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_rapport_pair__user_member_a_id,user_rapport_pair,user_member_a_id,2,column,proposal_S20,string,,,,,user_member,,,,,,"멤버 A · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_rapport_pair__user_member_b_id,user_rapport_pair,user_member_b_id,3,column,proposal_S20,string,,,,,user_member,,,,,,"멤버 B · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_rapport_pair__axis_id,user_rapport_pair,axis_id,4,column,proposal_S20,string,,,,,rapport_axis,,,,,,"라포 축 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_rapport_pair__value,user_rapport_pair,value,5,column,proposal_S20,number,,,,,,,,,,,"값 · 노출 간접 · 제안(검수 대기)"
+schema_column_user_rapport_pair__stage_id,user_rapport_pair,stage_id,6,column,proposal_S20,string,,,,,rapport_stage,,,,,,"단계 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_rapport_pair__convert_item_ref_id,user_rapport_pair,convert_item_ref_id,7,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_rapport_pair__convert_skill_ref_id,user_rapport_pair,convert_skill_ref_id,8,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_rapport_pair__visibility,user_rapport_pair,visibility,9,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_rapport_pair__value_status,user_rapport_pair,value_status,10,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_rapport_pair__src_doc_id,user_rapport_pair,src_doc_id,11,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_rapport_pair__note,user_rapport_pair,note,12,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_mission__user_mission_id,user_mission,user_mission_id,1,column,proposal_S20,string,,,,,,,,,,,"user_mission_{user}_{mission} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_mission__user_account_id,user_mission,user_account_id,2,column,proposal_S20,string,,,,,user_account,,,,,,"유저 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_mission__mission_ref_id,user_mission,mission_ref_id,3,column,proposal_S20,string,,,,,mission_config,,,,,,"미션 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_mission__progress,user_mission,progress,4,column,proposal_S20,number,,,,,,,,,,,"진행 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_mission__state_id,user_mission,state_id,5,column,proposal_S20,string,,,,,mission_state_config,,,,,,"상태 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_mission__convert_item_ref_id,user_mission,convert_item_ref_id,6,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_mission__convert_skill_ref_id,user_mission,convert_skill_ref_id,7,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_mission__visibility,user_mission,visibility,8,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_mission__value_status,user_mission,value_status,9,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_mission__src_doc_id,user_mission,src_doc_id,10,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_mission__note,user_mission,note,11,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_attendance__user_attendance_id,user_attendance,user_attendance_id,1,column,proposal_S20,string,,,,,,,,,,,"user_attendance_{user}_{cycle} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_attendance__user_account_id,user_attendance,user_account_id,2,column,proposal_S20,string,,,,,user_account,,,,,,"유저 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_attendance__cycle_key,user_attendance,cycle_key,3,column,proposal_S20,string,,,,,,,,,,,"출석 주기 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_attendance__day_count,user_attendance,day_count,4,column,proposal_S20,int,,,,,,,,,,,"출석 일수 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_attendance__last_checked_at,user_attendance,last_checked_at,5,column,proposal_S20,string,,,,,,,,,,,"마지막 출석 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_attendance__convert_item_ref_id,user_attendance,convert_item_ref_id,6,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_attendance__convert_skill_ref_id,user_attendance,convert_skill_ref_id,7,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_attendance__visibility,user_attendance,visibility,8,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_attendance__value_status,user_attendance,value_status,9,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_attendance__src_doc_id,user_attendance,src_doc_id,10,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_attendance__note,user_attendance,note,11,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_card__user_card_id,user_card,user_card_id,1,column,proposal_S20,string,,,,,,,,,,,"user_card_{user}_{card} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_card__user_account_id,user_card,user_account_id,2,column,proposal_S20,string,,,,,user_account,,,,,,"유저 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_card__card_id,user_card,card_id,3,column,proposal_S20,string,,,,,,,,,,,"카드 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_card__star,user_card,star,4,column,proposal_S20,int,,,,,,,,,,,"별 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_card__dup_count,user_card,dup_count,5,column,proposal_S20,int,,,,,,,,,,,"중복 · 노출 보임 · 제안(검수 대기)"
+schema_column_user_card__convert_item_ref_id,user_card,convert_item_ref_id,6,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_card__convert_skill_ref_id,user_card,convert_skill_ref_id,7,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_card__visibility,user_card,visibility,8,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_card__value_status,user_card,value_status,9,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_card__src_doc_id,user_card,src_doc_id,10,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_card__note,user_card,note,11,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_casting_history__user_casting_history_id,user_casting_history,user_casting_history_id,1,column,proposal_S20,string,,,,,,,,,,,"user_casting_history_{user}_{batch} · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_casting_history__user_account_id,user_casting_history,user_account_id,2,column,proposal_S20,string,,,,,user_account,,,,,,"유저 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_casting_history__casting_batch_id,user_casting_history,casting_batch_id,3,column,proposal_S20,string,,,,,casting_batch,,,,,,"판 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_casting_history__result_kind,user_casting_history,result_kind,4,column,proposal_S20,string,,,,,,,,,,,"완료/중단 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_casting_history__convert_item_ref_id,user_casting_history,convert_item_ref_id,5,column,proposal_S20,string,,,,,data_convert_link,,,,,,"아이템 연결 자리(들고 있는 동안 지속) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_casting_history__convert_skill_ref_id,user_casting_history,convert_skill_ref_id,6,column,proposal_S20,string,,,,,data_convert_link,,,,,,"스킬 연결 자리(쓰는 순간 즉시) · 빈칸 허용 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_casting_history__visibility,user_casting_history,visibility,7,column,proposal_S20,string,,,,,,,,,,,"보임/숨김/간접 (data_visibility와 같은 값) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_casting_history__value_status,user_casting_history,value_status,8,column,proposal_S20,string,,,,,,,,,,,"발란스 대기 · 제안(검수 대기) · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_casting_history__src_doc_id,user_casting_history,src_doc_id,9,column,proposal_S20,string,,,,,,,,,,,"근거 문서 · 노출 숨김 · 제안(검수 대기)"
+schema_column_user_casting_history__note,user_casting_history,note,10,column,proposal_S20,string,,,,,,,,,,,"메모 · 노출 숨김 · 제안(검수 대기)"
+```
+- 재화 FK와 전체 열 형식은 실제 마스터·schema 등록 전에 표 담당의 대조가 필요합니다. 이번에는 표·schema·생성물을 고치지 않습니다.
+
+## 4. 현재 저장과 서버 목표의 연결
+
+- 현재 코드의 분리 저장과 map/testPage 범위를 보존합니다. 단일 `kpopmonsters.user.v01`로 이미 이전했다고 쓰지 않습니다.
+- P222의 서버 정본·계정 범위·시즌 범위·요청 중복 방지는 목표 기획입니다. 현재 로컬 API와 그 목표를 구분하며 서버 실장·동기화 완료를 추정하지 않습니다.
+- 기록의 통합 형식·마이그레이션·서버 기술·충돌 복구는 해당 저장 기획과 개발 계약의 범위입니다. 옛 키를 읽었다는 이유로 삭제하거나 초기화하는 정책을 새로 만들지 않습니다.
+
+## 5. 확인 범위와 남은 결정
+
+- 실제 키·scope·인계 writer·초기 스냅샷 writer·공유 저장 API·건설 거래·허브 읽기 전용 경로를 대조했습니다.
+- 서버·계정·기기 간 동기화, 제안 user_* 표의 영속 저장, 시즌 전환과 카드·아이템 보존의 전수 구현·플레이는 이번에 검수하지 않았습니다.
+- 보호된 성장 원본은 열지 않았으므로 실제 성장 화면의 모든 저장 호출을 확인했다고 하지 않습니다. 보이는 0과 누락, 부분 스냅샷과 전체 이어하기를 구분합니다.
+
+## 6. 발란스 대기
+
+재화 종류·처음 잔액 · 팬 단계 문턱 · 건물 단계 비용 · 미션·출석 보상 · 라포 처음 값. 현재 표에 임시 수치가 있다면 그 상태를 함께 확인하며 빈칸을 새 확정 0으로 채우지 않습니다.
+
+<details><summary>작업 기록</summary>
+
+- 정비 전 전체 원문·이전 키 조사·시즌 질문·작성 기록: [S20_유저스테이터스_저장구조_v01.log.md](S20_유저스테이터스_저장구조_v01.log.md). 15표·164칸의 구조와 열 초안은 본문에 보존했습니다.
+- 대조: `shared/session.mjs:1~9,124~239`의 계약·인계·스냅샷·체크포인트, `shared/test-session.mjs:1~117`, `shared/test-storage.mjs:1~59`, `src/audition/handoff.mjs:1~131`, `session-replacement.mjs:1~71`, `src/game/board-map/state.mjs:1~73`, `construction/transaction.mjs:148~178`, `growth-relation/hub-data.mjs:58~132`, `idleSim/v02/run-checkpoint.mjs:1~71`.
+- 설정·정적 표: `data/simulator/shared/contract.json`, `data/simulator/test-session.json`, `data/audition_sim/profile.json`·`board_flow.json`, `data/board_map/map.json` runtime 키, `data/game_prototype/profile.json` save_key. 실제 user_* 15키의 schema 미등록을 확인했습니다.
+- P173·P222 전체와 원문을 대조했습니다. 실제 화면·쓰기·복원·시즌 플레이·서버 실장은 미검수이며 게임 코드는 수정하지 않았습니다.
+
+</details>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>내 앨범 줄 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  .kv { display:flex; justify-content:space-between; align-items:center; font-size:12px; }
+</style>
+<style>
+  .paper { position:absolute; border:1.5px solid var(--ln); border-radius:6px; background:var(--box); }
+  .bar { position:absolute; height:8px; border-radius:4px; background:var(--dim); }
+  .inp { position:absolute; border:2px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; padding:0 10px; font-size:15px; font-weight:700; }
+  .kb { position:absolute; left:0; right:0; bottom:0; height:250px; background:var(--dim); border-top:1.5px solid var(--ln); display:flex; align-items:center; justify-content:center; color:var(--soft); }
+</style>
+<style>
+  .rk { position:absolute; left:16px; width:354px; height:40px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; gap:8px; padding:0 10px; font-size:12px; }
+  .rk.me { border-width:2.5px; }
+  .rk .no { width:22px; font-weight:700; font-size:14px; }
+  .rk .fc { width:26px; height:26px; border-radius:50%; background:var(--dim); border:1.5px solid var(--ln); flex:none; }
+  .rk .gr { flex:1; }
+  .lane { position:absolute; left:16px; width:354px; height:46px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); }
+</style>
+</head>
+<body>
+<h1>내 앨범 줄 와이어프레임 · 1차 (HUD 줄 → 바로 이동)</h1>
+<p class="flow">⓪ HUD 내 앨범 줄 4상태 → 누르면 바로 ① 앨범 이벤트(진행 중) · ② 앨범 이벤트(끝) · ③ 앨범 발매(앨범 없음) · 이벤트 안 「다른 앨범 보기」 ④ 우리 앨범 목록</p>
+<div class="rules">
+  <b>방향(현중 11/24)</b>: 「누르면 해당 페이지로 이동 · 보상도 · 현재 몇바퀴를 돌았는지도 정보로」 → 중간 창(우리 앨범 · 보상 보기) 없음 · 줄에 순위 · 남은 시간 · 한 바퀴 보상 · <b>바퀴 수는 상세 페이지에만</b>(현중 11/24 「인게임에 표기되는건 좀 그래」)<br>
+  · <b>기준 = 게임 시뮬레이터</b>: 앨범 이벤트(나 + 가상 상대 99명 · 「100명 중 n위」 · 미정산 견적은 START 통과 때 정산 · 「실제 보드 반영 n회」 = 바퀴 수) · 버프 배지 → 줄 안으로 합침(`album-library-hud` · `album-league-buff` · `music_career_ui.json` albumLeague*)<br>
+  · <b>한 바퀴 보상</b> = 다음 START 1회 정산 견적(돈 · 팬 · 능력) · 주간 페스티벌 혜택 날이면 페스티벌 순위 혜택을 더한 값(주간 페스티벌 절 ③) · 값은 시험값
+</div>
+<div class="row" id="screens"></div>
+<script>
+const n = (k, x, y) => `<div class="n" style="left:${x}px;top:${y}px">${k}</div>`;
+const topBar = (title, time) => `
+  <div class="b" style="left:10px;top:10px;width:40px;height:40px;font-size:18px">‹</div>
+  <div class="a val" style="left:60px;top:20px;font-size:16px">${title}</div>
+  ${time ? `<div class="b" style="left:226px;top:14px;width:150px;height:32px"><span style="font-size:12px">◷ ${time}</span></div>` : ""}
+  <div class="line" style="top:60px"></div>`;
+const info = (y, h, title, lines) => `<div class="b" style="left:16px;top:${y}px;width:354px;height:${h}px;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:6px;padding:12px 14px;text-align:left"><span class="val" style="font-size:13px">${title}</span>${lines.map(l => `<span style="font-size:12px">${l}</span>`).join("")}</div>`;
+const action = (items) => `<div class="line" style="top:700px"></div>` + items.map(([t, x, w, main]) => `<div class="b" style="left:${x}px;top:716px;width:${w}px;height:56px;${main ? "border-width:2.5px" : ""}"><span class="val" style="font-size:15px">${t}</span></div>`).join("");
+// HUD 앨범 줄 (2배 크게: 실제 222×47 한 줄 → 306×64)
+const albumRow = (y, {jacket = true, rank, time, rewards, laps, empty, fest}) => `
+  <div class="b" style="left:40px;top:${y}px;width:306px;height:64px;justify-content:flex-start;gap:8px;padding:0 8px">
+    <div class="b${jacket ? "" : " off"}" style="position:static;width:46px;height:46px;flex:none"><span class="sub">${jacket ? "재킷" : "빈 재킷"}</span></div>
+    ${empty ? `<span class="val" style="font-size:14px;flex:1;text-align:left">${empty}</span>` : `
+    <div style="text-align:left;flex:1;display:flex;flex-direction:column;gap:3px">
+      <div style="display:flex;gap:6px;align-items:center"><span class="val" style="font-size:13px">${rank}</span>${time ? `<span class="sub">◷ ${time}</span>` : ""}${fest ? `<span class="pill" style="font-size:11px;padding:1px 5px;border-width:2.5px">+페스</span>` : ""}</div>
+      <div style="display:flex;gap:4px">${rewards ? rewards.map(r => `<span class="pill" style="font-size:11px;padding:1px 5px">${r}</span>`).join("") : `<span class="sub">보상 없음</span>`}</div>
+    </div>
+`}
+  </div>`;
+const rankRow = (y, no, name, score, me) => `<div class="rk${me ? " me" : ""}" style="top:${y}px"><span class="no">${no}</span><i class="fc"></i><span class="gr">${name}</span><span class="val">${score}</span></div>`;
+
+const SCREENS = [
+  { cap: "⓪ HUD 내 앨범 줄 · 4상태 (크게)", html: `<div class="b off" style="left:0;top:0;width:386px;height:840px;border:none;border-radius:0;align-items:flex-start;padding-top:620px"><span class="sub">보드 · HUD (앨범 · 페스티벌 상자 위 줄만 크게)</span></div>
+      <div class="a sub" style="left:40px;top:40px;font-size:12px">ⓐ 이벤트 중</div>
+      ${albumRow(60, { rank: "12위", time: "1일 03:10", rewards: ["돈 2,580", "팬 10", "능력 6"], laps: 7 })}
+      <div class="a sub" style="left:40px;top:150px;font-size:12px">ⓑ 이벤트 중 · 주간 페스티벌 혜택 날</div>
+      ${albumRow(170, { rank: "12위", time: "1일 03:10", rewards: ["돈 2,980", "팬 26", "능력 6"], laps: 9, fest: true })}
+      <div class="a sub" style="left:40px;top:260px;font-size:12px">ⓒ 이벤트 끝 · 다음 앨범 전</div>
+      ${albumRow(280, { rank: "최종 8위", rewards: null, laps: 23 })}
+      <div class="a sub" style="left:40px;top:370px;font-size:12px">ⓓ 앨범 없음</div>
+      ${albumRow(390, { jacket: false, empty: "첫 앨범 만들기 ›" })}
+      <div class="a sub" style="left:40px;top:470px;width:306px;font-size:12px;line-height:1.5">실제 자리: 앨범 · 페스티벌 상자(222×94) 위 줄 · 아래 줄 = 페스티벌</div>
+      ${n(1, 16, 70)}${n(2, 140, 46)}${n(3, 16, 180)}${n(4, 16, 290)}${n(5, 16, 400)}`,
+    notes: ["재킷 · 순위(앨범 이벤트 100명 중) · 남은 시간 · 줄 아무 곳 = ① 앨범 이벤트로 바로", "한 바퀴 보상 = 다음 START 1회 정산 견적(돈 · 팬 · 능력) · 3칸 고정 · 0인 건 숨김 · 바퀴 수는 HUD에 안 보임(상세 페이지에만 · 현중 11/24)", "페스티벌 혜택 날: 페스티벌 순위 혜택을 더한 값 + 「+페스」 표시", "끝: 「최종 n위」 · 보상 칸 「보상 없음」 · 누르면 ② 종료 화면", "앨범 없음: 「첫 앨범 만들기 ›」 · 누르면 ③ 앨범 발매"] },
+
+  { cap: "① 앨범 이벤트 · 진행 중", html: topBar("앨범 이벤트", "1일 03:10") + `
+      <div class="b" style="left:16px;top:72px;width:354px;height:64px;justify-content:flex-start;gap:12px;padding:0 10px"><div class="b off" style="position:static;width:46px;height:46px"><span class="sub">재킷</span></div><div style="text-align:left;flex:1"><div class="val" style="font-size:14px">앨범 이름 A</div><div class="sub">이번 앨범의 순위를 올려요</div></div><span class="pill" style="font-size:11px">다른 앨범 보기 ›</span></div>
+      <div class="a" style="left:16px;top:146px;width:354px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+        <div class="b" style="position:static;height:62px;flex-direction:column;gap:2px"><span class="sub">내 순위</span><span class="val" style="font-size:16px">12위</span><span class="sub">100명 중</span></div>
+        <div class="b" style="position:static;height:62px;flex-direction:column;gap:2px"><span class="sub">내 점수</span><span class="val" style="font-size:16px">1,240점</span><span class="sub">다음 순위까지 60점</span></div>
+        <div class="b" style="position:static;height:62px;flex-direction:column;gap:2px;border-width:2.5px"><span class="sub">돌아온 바퀴</span><span class="val" style="font-size:16px">7바퀴</span><span class="sub">이번 앨범</span></div></div>` +
+      info(220, 96, "한 바퀴 보상 · 다음 START에서 정산", ["돈 2,580 · 팬 10 · 능력 6 (현재 12위 효과)", "주간 페스티벌 혜택 날이면 페스티벌 순위 혜택이 더해져요"]) + `
+      <div class="a val" style="left:16px;top:328px;font-size:13px">상위 순위와 내 주변</div>` +
+      rankRow(350, "1", "가상 시험 상대 1", "2,980") + rankRow(396, "2", "가상 시험 상대 2", "2,710") + rankRow(442, "3", "가상 시험 상대 3", "2,500") +
+      `<div class="a sub" style="left:0;top:486px;width:386px;text-align:center">⋮</div>` +
+      rankRow(504, "11", "가상 시험 상대 11", "1,300") + rankRow(550, "12", "나", "1,240", true) + rankRow(596, "13", "가상 시험 상대 13", "1,190") + `
+      <div class="b" style="left:16px;top:646px;width:354px;height:40px"><span style="font-size:13px">이벤트 전체 순위 ›</span></div>` +
+      action([["보드에서 순위 올리기", 16, 354, true]]).replace("top:716px", "top:712px") + `
+      ${n(1, 340, 64)}${n(2, 254, 64)}${n(3, 6, 156)}${n(4, 346, 156)}${n(5, 6, 230)}${n(6, 346, 326)}${n(7, 6, 654)}${n(8, 6, 722)}`,
+    notes: ["남은 시간(앨범 이벤트 기간)", "다른 앨범 보기 = ④ 우리 앨범 목록", "순위 · 점수 · 다음 순위까지(시뮬 그대로)", "바퀴 = 이번 앨범에서 START 지난 횟수(시뮬 「실제 보드 반영 n회」) · 새 앨범이면 0 · HUD에는 안 보임", "한 바퀴 보상 = 지금 순위 효과 · 다음 START에서 돈 · 팬 · 능력 정산", "상위 3 + 내 주변 ±1(시뮬 topRows 3 · nearbyRadius 1)", "전체 순위(100명)", "보드에서 순위 올리기 = HUD로"] },
+
+  { cap: "② 앨범 이벤트 · 끝 (다음 앨범 전)", html: topBar("앨범 이벤트", "") + `
+      <div class="b" style="left:16px;top:72px;width:354px;height:64px;justify-content:flex-start;gap:12px;padding:0 10px"><div class="b off" style="position:static;width:46px;height:46px"><span class="sub">재킷</span></div><div style="text-align:left;flex:1"><div class="val" style="font-size:14px">이번 앨범 이벤트 종료</div><div class="sub">앨범 이름 A</div></div><span class="pill" style="font-size:11px">다른 앨범 보기 ›</span></div>
+      <div class="a" style="left:16px;top:150px;width:354px;display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <div class="b" style="position:static;height:70px;flex-direction:column;gap:2px"><span class="sub">최종 순위</span><span class="val" style="font-size:20px">최종 8위</span></div>
+        <div class="b" style="position:static;height:70px;flex-direction:column;gap:2px"><span class="sub">돌아온 바퀴</span><span class="val" style="font-size:20px">23바퀴</span></div></div>` +
+      info(232, 96, "순위 효과는 종료됐어요", ["이미 정산한 성장과 최종 성적은 유지돼요.", "다음 앨범은 현재 성장과 이번 성적으로 새로 시작해요."]) +
+      info(340, 96, "다음 앨범 시작 예상", ["2번째 앨범 시작 예상 5~9위", "보장 순위는 아니에요(다음 발매 때 상대가 다시 묶여요)"]) + `
+      <div class="b" style="left:16px;top:448px;width:354px;height:40px"><span style="font-size:13px">이벤트 전체 순위 ›</span></div>` +
+      action([["새 앨범 만들기", 16, 170, true], ["보드로 돌아가기", 200, 170]]) + `
+      ${n(1, 6, 82)}${n(2, 6, 160)}${n(3, 6, 242)}${n(4, 6, 350)}${n(5, 6, 722)}`,
+    notes: ["종료 제목(시뮬 「이번 앨범 이벤트 종료」)", "최종 순위 · 이번 앨범 총 바퀴", "종료 안내(시뮬 문구 그대로)", "다음 앨범 시작 예상 범위(시뮬 그대로)", "새 앨범 만들기 = ③ 앨범 발매 · 보드로 = HUD"] },
+
+  { cap: "③ 앨범 발매 (앨범 없음 · 기존 화면)", html: topBar("앨범 발매", "") + `
+      <div class="b off" style="left:16px;top:80px;width:354px;height:200px;flex-direction:column;gap:8px"><span class="sub">빈 재킷</span><span style="font-size:14px">첫 앨범을 준비해 보세요.</span><span class="sub">앨범을 발매하면 기간 한정 순위 이벤트가 열려요.</span></div>` +
+      info(300, 96, "발매하면", ["· 앨범 이벤트(100명 순위)가 열려요", "· 보드를 돌 때마다 한 바퀴 보상을 받아요"]) +
+      action([["싱글 초안 만들기", 16, 354, true]]) + `
+      ${n(1, 6, 90)}${n(2, 6, 310)}${n(3, 6, 722)}`,
+    notes: ["기존 앨범 발매 화면의 빈 상태(시뮬 「첫 앨범을 준비해 보세요」)", "발매 효과 안내 2줄(새로 넣음 · 제안)", "싱글 초안 만들기 = 기존 제작 흐름 · 이번 범위는 HUD에서 들어오는 길만"] },
+
+  { cap: "④ 우리 앨범 목록 (다른 앨범 보기)", html: topBar("우리 앨범", "") + `
+      ${[["앨범 이름 A", "싱글 2 · 이벤트 중 12위 · 7바퀴", true], ["앨범 이름 B", "싱글 1 · 최종 8위 · 23바퀴", false]].map(([t, s2, on], i) => `<div class="b" style="left:16px;top:${76 + i * 82}px;width:354px;height:72px;justify-content:flex-start;gap:12px;padding:0 10px;${on ? "border-width:2.5px" : ""}"><div class="b off" style="position:static;width:52px;height:52px"><span class="sub">재킷</span></div><div style="text-align:left;flex:1"><div class="val" style="font-size:14px">${t}</div><div class="sub">${s2}</div></div><span class="pill" style="font-size:11px">▶</span></div>`).join("")}` +
+      info(250, 120, "앨범 이름 A · 노래 정보", ["참여 멤버 · 보컬 · 랩 · 코러스", "스타일 · 언어 · 발매 일차", "대표곡 · 샘플 음원"]) +
+      action([["이 곡의 차트", 16, 354, true]]) + `
+      ${n(1, 6, 86)}${n(2, 6, 260)}${n(3, 6, 722)}`,
+    notes: ["발매 앨범 목록 · 이벤트 상태 · 최종 순위 · 바퀴(이전 앨범 최종 성적)", "고른 앨범의 멤버 · 노래 정보(시뮬 「우리 앨범」 창 내용을 여기로)", "이 곡의 차트 = 그 앨범의 ① 또는 ②"] },
+];
+
+const SHOT = new URLSearchParams(location.search).get("shot");
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+</script>
+</body>
+</html>

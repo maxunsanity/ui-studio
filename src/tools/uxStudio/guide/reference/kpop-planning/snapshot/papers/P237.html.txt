@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P237 · 월드 인기·우승 기획 시뮬레이터</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"></head><body class="sample-document"><main><header><div class="eyebrow">P237 · 핵심제안 개발 기획</div><h1>P237 · 월드 인기·우승 · 기획 시뮬레이터</h1>
+<p><strong>이 문서는</strong> 왼쪽 모바일 화면과 오른쪽 시험 입력으로 인기 기여·곡 등급·월드 순위를 비교하고, 단독 예시와 현재 연결 데이터를 구분하는 기획서입니다.</p>
+<p><strong>보는 법</strong> 1장 흐름 → 3장 <a href="/docs/planning/game-simulator.html?module=simulator_module_world_popularity_trial">시뮬레이터 실행</a> → 4장 계산 → 7장 검증 순서입니다. 기존 <a href="%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html#world-popularity-first">월드 기획 P207</a>과 <a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%8C%EC%9B%90%C3%97%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html#festival-popularity-first">상세 P191</a>을 함께 봅니다.</p>
+<p><strong>지금 상태</strong> 개발됨(공용 모바일 미리보기·오른쪽 입력·단독 시험·현재 세션의 팀/발매곡 읽기). 발란스 전송은 기존 전용 세션을 읽으며, 원본에 없는 인기·추천·찜 집계는 입력 대기입니다. 실제 인기 원장·회원 집계·최종 정책·게임 저장 연결은 현재 개발되지 않음, 진행 중입니다.</p>
+<div class="actions"><a href="/docs/planning/game-simulator.html?module=simulator_module_world_popularity_trial" target="_blank" rel="noopener">시뮬레이터 실행 ↗</a><a href="월드인기우승_기획시뮬레이터.md">짝 MD 보기</a><a href="../작성기준_v02/작성규칙.html">공통 작성 기준</a><a href="#document-history" data-open-history>로그 보기</a></div></header><nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav><section class="part" id="part-1"><h2>1. 개요</h2>
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 104" width="900" height="104" role="img" aria-labelledby="diagram-p237-0"><title id="diagram-p237-0">보유 인기는 지갑에 쌓이고 곡에 기여한 인기만 평가에 반영됩니다.</title><defs><marker id="arrow-p237-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M200,52 L233,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-0)"/><path d="M420,52 L453,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-0)"/><path d="M640,52 L673,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-0)"/><rect x="20" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="110" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">개인·크루 활동</text><rect x="240" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="330" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">인기 모으기</text><rect x="460" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="550" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">출전곡에 기여</text><rect x="680" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="770" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">곡 등급·종합 순위</text></svg><figcaption>보유 인기는 지갑에 쌓이고 곡에 기여한 인기만 평가에 반영됩니다.</figcaption></figure>
+
+<p><strong>모은 인기를 출전곡에 기여해 등급을 올리고 월드 우승에 도전합니다.</strong></p>
+<p>출처: (신규) 인기·우승 시험 · (합침) <a href="../../../../proposal-concept/fest.html">월드 제안서</a> · <a href="%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html#world-popularity-first">인기 중심 우승 방향 P207</a>.</p>
+<h3>콘텐츠 경계</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>맡는 것</th>
+<th>다른 문서에 맡기는 것</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>인기 획득·곡 기여·등급·우승 점수 비교</td>
+<td><a href="%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html#world-popularity-first">P207</a>의 음악·미디어 통합과 <a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%8C%EC%9B%90%C3%97%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html#festival-popularity-first">P191</a>의 실제 대회 연결</td>
+</tr>
+</tbody></table></div>
+<h3>현재 기준과 목표</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>왜 지금</th>
+<th>이게 핵심</th>
+<th>이게 아닌 것</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>숫자와 UI를 제작 전에 비교합니다</td>
+<td>인기 기여가 주축, 추천·찜이 보조</td>
+<td>보유 재화만으로 점수 상승, 크루원 수를 점수에 곱하기, 급등 순위를 다시 가산</td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 104" width="680" height="104" role="img" aria-labelledby="diagram-p237-1"><title id="diagram-p237-1">기존 월드 기획으로 시험하고 결과를 실제 앱 연결 기획에 반영합니다.</title><defs><marker id="arrow-p237-1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M200,52 L233,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-1)"/><path d="M420,52 L453,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-1)"/><rect x="20" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="110" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">월드 제안·상세 기획</text><rect x="240" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="330" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">인기·우승 시험</text><rect x="460" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="550" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">통합 앱·실제 월드 연결</text></svg><figcaption>기존 월드 기획으로 시험하고 결과를 실제 앱 연결 기획에 반영합니다.</figcaption></figure>
+
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>문서 번호·제목</th>
+<th>이 콘텐츠에서의 역할</th>
+<th>의존 방향</th>
+<th>읽을 장</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>제안서 원문 <a href="../../../../proposal-concept/fest.html">월드 제안서</a></td>
+<td>우승 목표·활동 흐름</td>
+<td>입력</td>
+<td>전체</td>
+<td>(합침) 현재 기획 기준</td>
+</tr>
+<tr>
+<td><a href="%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html#world-popularity-first">P207 월드 기획</a></td>
+<td>인기 중심 방향·통합 앱</td>
+<td>입력 → 시험 비교</td>
+<td>먼저 보기</td>
+<td>(합침) 실제 앱 통합 제작전</td>
+</tr>
+<tr>
+<td><a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%8C%EC%9B%90%C3%97%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html#festival-popularity-first">P191 상세</a></td>
+<td>우승 조건·남은 정책</td>
+<td>입력 → 결과 대조</td>
+<td>인기 중심 우승</td>
+<td>(합침) 공식 비중 결정 대기</td>
+</tr>
+<tr>
+<td><a href="%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P221 응원 크루</a></td>
+<td>실제 권한과 시험 크루 구분</td>
+<td>참조</td>
+<td>개요·상세 기획</td>
+<td>(합침) 실제 원장 연결 제작전</td>
+</tr>
+<tr>
+<td><a href="/docs/planning/game-simulator.html">P94 공용 시뮬레이터</a></td>
+<td>공용 실행·화면 구역</td>
+<td>실행 기반 → 이 모듈</td>
+<td>월드 인기·우승 메뉴</td>
+<td>(신규) 시험 모듈 연결 개발됨</td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 104" width="900" height="104" role="img" aria-labelledby="diagram-p237-2"><title id="diagram-p237-2">공용 시뮬레이터 안에서 조작하고 같은 기획서로 돌아옵니다.</title><defs><marker id="arrow-p237-2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M200,52 L233,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-2)"/><path d="M420,52 L453,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-2)"/><path d="M640,52 L673,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-2)"/><rect x="20" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="110" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">개인·크루 선택</text><rect x="240" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="330" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">인기 획득·곡 선택</text><rect x="460" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="550" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">기여·반응 비교</text><rect x="680" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="770" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">마감 결과 확인</text></svg><figcaption>공용 시뮬레이터 안에서 조작하고 같은 기획서로 돌아옵니다.</figcaption></figure>
+
+<p>화면 흐름: 핵심제안 시스템 개발 → 월드 인기·우승 → 공용 시뮬레이터 → 같은 기획서 · 스샷 <a href="../../../%EB%B3%B4%EA%B3%A0/20261109_%EB%8B%A8%EC%9D%B4_%EC%9B%94%EB%93%9C%EC%9D%B8%EA%B8%B0%EC%9A%B0%EC%8A%B9%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0.jpg">실제 실행 화면</a> · 이식 비교: 해당 없음(신규 인기·우승 시험).</p>
+<p><a href="/docs/planning/game-simulator.html?module=simulator_module_world_popularity_trial">눌러서 인기·우승 시뮬레이터 실행</a> · <a href="/docs/planning/game-simulator.html?module=simulator_module_world_popularity_trial">새 창으로 실행</a></p>
+<details><summary>실제 실행 화면 보기</summary>
+
+<figure><a href="../../../보고/20261109_단이_월드인기우승시뮬레이터.jpg"><img src="../../../보고/20261109_단이_월드인기우승시뮬레이터.jpg" alt="월드 인기·우승 실제 시험 화면" loading="lazy" style="display:block;width:100%;height:auto"></a><figcaption>가상 출전자·시험 지갑으로 실행한 화면입니다.</figcaption></figure>
+
+</details>
+
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>구역</th>
+<th>보이는 것과 조작</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>왼쪽 모바일</td>
+<td>출전자·보유 인기·출전곡·인기 등급·다음 등급 게이지·종합·기여·추천/찜·월드 순위</td>
+</tr>
+<tr>
+<td>오른쪽 정보 입력</td>
+<td>데이터 출처·출전곡/시작값·시험 활동·청취자·비중/등급·점수 근거·마감·내역</td>
+</tr>
+</tbody></table></div>
+<h3>단독 테스트</h3>
+<ol>
+<li>오른쪽 「단독 테스트 · CSV 예시」를 선택합니다. 예시 개인·크루·곡·시작값으로 바로 비교합니다.</li>
+<li>오른쪽 시험 활동으로 인기를 모으고, 왼쪽에서 곡에 기여합니다. 보유량·등급·점수가 즉시 바뀝니다.</li>
+<li>왼쪽 하단 「월드 순위」로 순위를 확인하고 곡을 눌러 돌아옵니다.</li>
+<li>출전곡과 시작값·규칙을 바꿔 비교하고, 오른쪽에서 마감 결과를 고정합니다.</li>
+</ol>
+<h3>발란스·현재 데이터 연결</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>순서</th>
+<th>기존 기능을 사용하는 방식</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>발란스 전송</td>
+<td><a href="/docs/planning/idle-sim.html">발란스 시뮬레이터</a>의 기존 「시뮬 전송」으로 게임 시뮬레이터를 연 뒤 같은 화면에서 「월드 인기·우승」 선택</td>
+</tr>
+<tr>
+<td>현재 세션 읽기</td>
+<td>오른쪽 「현재 연결 데이터 · 발란스 전송 포함」. 동일 testPage·세션·실행·원본 버전의 팀/발매곡만 읽음</td>
+</tr>
+<tr>
+<td>없는 입력</td>
+<td>원본에 없는 인기 지갑·기여·추천·찜은 빈칸. 출전자 유형과 시험 시작값을 입력하고 「입력값으로 비교 시작」</td>
+</tr>
+<tr>
+<td>곡이 없는 경우</td>
+<td>연결 팀은 유지하고 제목을 직접 입력한 시험곡으로 비교. 실제 발매곡으로 기록하지 않음</td>
+</tr>
+<tr>
+<td>원본 변경</td>
+<td>다시 읽기 전 조작 중단. 다른 세션·곡·버전의 점수를 섞지 않음</td>
+</tr>
+</tbody></table></div>
+<p>메뉴 왕복은 현재 host 인스턴스의 비교를 유지합니다. 새로고침하면 단독 예시는 CSV부터, 발란스 전송은 현재 원본 확인부터 다시 시작합니다. 연결 정보는 읽기만 하며 오른쪽 입력과 왼쪽 행동은 이 모듈의 메모리에만 반영됩니다. 실제 게임 지갑·발란스 판에 되돌려 쓰지 않습니다.</p>
+</section>
+<section class="part" id="part-4"><h2>4. 상세 기획</h2>
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 104" width="900" height="104" role="img" aria-labelledby="diagram-p237-3"><title id="diagram-p237-3">인기·추천·찜을 같은 기준으로 계산하고 마감 때 결과를 고정합니다.</title><defs><marker id="arrow-p237-3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M200,52 L233,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-3)"/><path d="M420,52 L453,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-3)"/><path d="M640,52 L673,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-3)"/><rect x="20" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="110" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">지갑·입력 확인</text><rect x="240" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="330" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">곡 인기·등급 반영</text><rect x="460" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="550" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">항목별 점수·순위</text><rect x="680" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="770" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">마감 결과 고정</text></svg><figcaption>인기·추천·찜을 같은 기준으로 계산하고 마감 때 결과를 고정합니다.</figcaption></figure>
+
+<h3>한 판 순서 · 확정(기획 시뮬레이터 구현)</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>점검</th>
+<th>처리</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>시작·종료</td>
+<td>단독 CSV 또는 현재 연결 정보+명시 시험값 → 비교 → 명시 마감 → 새 비교</td>
+</tr>
+<tr>
+<td>입력·출력</td>
+<td>인기 획득·기여·추천·찜·규칙 → 등급·항목별 점수·순위</td>
+</tr>
+<tr>
+<td>상태와 전이</td>
+<td>비교 진행 중 / 미정값으로 집계 대기 / 마감 결과 고정</td>
+</tr>
+<tr>
+<td>판정</td>
+<td>지갑 부족·기여량 오류·미정 기준·중복 요청·잘못된 등급 문턱 차단</td>
+</tr>
+<tr>
+<td>오류·예외</td>
+<td>반영하지 않은 동작은 이전 상태를 보존하고 이유 표시</td>
+</tr>
+<tr>
+<td>저장·복원</td>
+<td>메모리만 사용, 새로고침 복원 없음</td>
+</tr>
+<tr>
+<td>다른 모듈 연결</td>
+<td>기존 host의 scope/세션·발란스 전송 원본에서 팀/발매곡 읽기. 실제 인기 지갑·회원·월드 원장 쓰기는 제작전</td>
+</tr>
+</tbody></table></div>
+<h3>점수와 인기 등급 · 확정(시험 계산 구현) · 운영 기준 결정 대기</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>계산</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>인정 인기</td>
+<td>곡 누적 기여와 인기 인정 상한 중 작은 값</td>
+</tr>
+<tr>
+<td>인기 반영</td>
+<td>인정 인기 ÷ 인기100% 기준, 최대1 × 인기 비중 ÷ 비중합 ×100</td>
+</tr>
+<tr>
+<td>추천 반영</td>
+<td>고유 추천 인원 ÷ 반응100% 기준, 최대1 × 추천 비중 ÷ 비중합 ×100</td>
+</tr>
+<tr>
+<td>찜 반영</td>
+<td>고유 찜 인원 ÷ 반응100% 기준, 최대1 × 찜 비중 ÷ 비중합 ×100</td>
+</tr>
+<tr>
+<td>종합</td>
+<td>위 세 항목의 합. 표시 단위100점이며 실제 운영 배점 아님</td>
+</tr>
+<tr>
+<td>인기 등급</td>
+<td>인정 인기가 도달한 가장 높은 등급 문턱. 등급 보너스를 추가하지 않음</td>
+</tr>
+<tr>
+<td>다음 등급</td>
+<td>다음 문턱−인정 인기. 인정 상한이 그 문턱보다 낮으면 사유 표시</td>
+</tr>
+<tr>
+<td>순위</td>
+<td>점수 내림차순. 같은 점수는 공동 순위이며 임의 단독 우승자를 정하지 않음</td>
+</tr>
+</tbody></table></div>
+<p>처음 보이는 값은 <a href="/data/simulator/world_popularity_trial_policy.csv">시험 정책 CSV</a>에서 읽습니다. 반응·재화·능력의 원단위를 그대로 더하지 않습니다. 인기 비중을 바꾸면 모든 곡을 같은 기준으로 다시 비교합니다. 비중이 비었거나 필요한 기준이 없으면 가짜0점·공식 순위를 만들지 않습니다.</p>
+<h3>추천·찜과 개인·크루 · 확정(시험 구현) · 실제 권한 결정 대기</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>행동</th>
+<th>시험 처리</th>
+<th>실제 연결 상태</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>인기 획득</td>
+<td>선택한 개인·크루 시험 지갑에 적립</td>
+<td>실제 보상·소유·사용 권한 제작전</td>
+</tr>
+<tr>
+<td>곡 기여</td>
+<td>선택 지갑 차감·지정곡에만 누적</td>
+<td>상호 기여 권한 결정 대기</td>
+</tr>
+<tr>
+<td>추천·찜</td>
+<td>같은 청취자의 같은 반응 중복 제외·독립 취소</td>
+<td>본인·동크루 판정·실회원 인증·감상 검증 제작전</td>
+</tr>
+</tbody></table></div>
+<h3>필요 시스템</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>요소</th>
+<th>현재</th>
+<th>실제 서비스에 남은 것</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>인기 지갑·기여</td>
+<td>시험값 획득/차감·곡 기여·중복 요청 방지</td>
+<td>실제 획득 결과·소유 권한·회차/시즌 원장</td>
+</tr>
+<tr>
+<td>추천·찜</td>
+<td>시험 번호별 중복 제거·취소</td>
+<td>인증·자기/크루 정책·유효 감상·부정 반응 검증</td>
+</tr>
+<tr>
+<td>배점·등급</td>
+<td>CSV/입력 변경과 같은 계산 재사용</td>
+<td>운영 비중·기준·상한·등급 결정</td>
+</tr>
+<tr>
+<td>마감</td>
+<td>메모리 결과 고정·공동 순위</td>
+<td>실제 회차 시각·정정·시상·보상</td>
+</tr>
+</tbody></table></div>
+<h3>화면·연출 목록</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>화면</th>
+<th>구성</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>모바일</td>
+<td>보유 인기 → 출전곡/등급/다음 조건 → 기여·추천·찜 → 하단 출전곡/월드 순위 이동</td>
+</tr>
+<tr>
+<td>오른쪽</td>
+<td>단독/연결 선택·팀/곡·시작값·시험 활동·청취자·점수 근거·비중/등급·마감·시험 내역</td>
+</tr>
+<tr>
+<td>모바일 하단</td>
+<td>내 출전곡 / 월드 순위.마감·새 비교는 오른쪽 시험 패널</td>
+</tr>
+</tbody></table></div>
+<p>별도 발견 정보는 최근10번 기여량을 보여 주는 시험 보조 화면입니다. 공식 급등 계산이 아니며 종합 점수에 다시 더하지 않습니다. 개인/크루 필터는 보기만 바꾸고 원래 종합 순위를 유지합니다.</p>
+<h3>남은 결정</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>결정할 내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>인기 경제</td>
+<td>획득 활동·양·개인/크루 소유·사용 권한·상한·미사용 보존</td>
+</tr>
+<tr>
+<td>우승 배점</td>
+<td>인기/추천/찜 비중, 실력·공연게임·별도 투표 포함 여부</td>
+</tr>
+<tr>
+<td>곡 등급</td>
+<td>이름·단계 수·문턱·추가 점수 관계</td>
+</tr>
+<tr>
+<td>대회</td>
+<td>개인/크루 비교 범위·동점·마감·보상</td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 104" width="680" height="104" role="img" aria-labelledby="diagram-p237-4"><title id="diagram-p237-4">기존 화면과 실제 캡처로 표현을 확인합니다.</title><defs><marker id="arrow-p237-4" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M200,52 L233,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-4)"/><path d="M420,52 L453,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-4)"/><rect x="20" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="110" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">공용 게임 화면</text><rect x="240" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="330" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">등급·점수 게이지</text><rect x="460" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="550" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">실행 캡처로 확인</text></svg><figcaption>기존 화면과 실제 캡처로 표현을 확인합니다.</figcaption></figure>
+
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>미리보기</th>
+<th>이름·사용 위치</th>
+<th>동작·상태</th>
+<th>파일·테이블 키</th>
+<th>출처·준비 상태</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../../../%EB%B3%B4%EA%B3%A0/20261109_%EB%8B%A8%EC%9D%B4_%EC%9B%94%EB%93%9C%EC%9D%B8%EA%B8%B0%EC%9A%B0%EC%8A%B9%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0.jpg">실제 화면</a></td>
+<td>모바일·점수 막대·등급 진행 막대</td>
+<td>계산 결과에 따라 즉시 갱신</td>
+<td>정책·등급 표와 화면 구성 연결</td>
+<td>(신규) 있음</td>
+</tr>
+<tr>
+<td>해당 없음</td>
+<td>실제 음원·사진·모델</td>
+<td>시험에서 재생하지 않음</td>
+<td>해당 없음</td>
+<td>(합침) 기존 자산 보존</td>
+</tr>
+</tbody></table></div>
+<h3>추가 제작·연출 리소스</h3>
+<p>실서비스 연결과 미디어 통합 UI의 완성본은 후속입니다. 이 모듈은 우승 조건을 검토하는 숫자/행동 시뮬레이터입니다.</p>
+</section>
+<section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 104" width="680" height="104" role="img" aria-labelledby="diagram-p237-5"><title id="diagram-p237-5">CSV 수치와 UI 문구를 읽어 실제 게임 표와 분리해 계산합니다.</title><defs><marker id="arrow-p237-5" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M200,52 L233,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-5)"/><path d="M420,52 L453,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-5)"/><rect x="20" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="110" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">시험 CSV·문구</text><rect x="240" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="330" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">같은 계산 모듈</text><rect x="460" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="550" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">화면·비교 결과</text></svg><figcaption>CSV 수치와 UI 문구를 읽어 실제 게임 표와 분리해 계산합니다.</figcaption></figure>
+
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>파일·보기</th>
+<th>역할</th>
+<th>주키·참조</th>
+<th>값 (출처 꼬리표 · 결정 표시)</th>
+<th>담당</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/data/simulator/world_popularity_trial_policy.csv">policy CSV</a> · <a href="/docs/planning/game-table-tool.html?plan=planning_development_plan_world_popularity_trial#world_popularity_trial_policy">표로 보기</a></td>
+<td>시험 비중·환산 기준·상한</td>
+<td>world_popularity_trial_policy_id</td>
+<td>(신규) 확정(시험값 읽기 구현) · 운영 기준 결정 대기</td>
+<td>시험 모듈 · 운영 수치 담당 결정 대기</td>
+</tr>
+<tr>
+<td><a href="/data/simulator/world_popularity_trial_grade.csv">grade CSV</a> · <a href="/docs/planning/game-table-tool.html?plan=planning_development_plan_world_popularity_trial#world_popularity_trial_grade">표로 보기</a></td>
+<td>인기 등급 이름·문턱</td>
+<td>world_popularity_trial_grade_id</td>
+<td>(신규) 확정(시험값 읽기 구현) · 운영 기준 결정 대기</td>
+<td>시험 모듈 · 운영 수치 담당 결정 대기</td>
+</tr>
+<tr>
+<td><a href="/data/simulator/world_popularity_trial_entry.csv">entry CSV</a> · <a href="/docs/planning/game-table-tool.html?plan=planning_development_plan_world_popularity_trial#world_popularity_trial_entry">표로 보기</a></td>
+<td>가상 개인/크루·곡·초기 지갑/기여/반응</td>
+<td>world_popularity_trial_entry_id · 곡/기여 대상 참조</td>
+<td>(신규) 확정(시험값 읽기 구현) · 운영 기준 결정 대기</td>
+<td>시험 모듈 · 운영 수치 담당 결정 대기</td>
+</tr>
+<tr>
+<td><a href="/data/simulator/world_popularity_trial_activity.csv">activity CSV</a> · <a href="/docs/planning/game-table-tool.html?plan=planning_development_plan_world_popularity_trial#world_popularity_trial_activity">표로 보기</a></td>
+<td>활동 이름·시험 획득량</td>
+<td>world_popularity_trial_activity_id</td>
+<td>(신규) 확정(시험값 읽기 구현) · 운영 기준 결정 대기</td>
+<td>시험 모듈 · 운영 수치 담당 결정 대기</td>
+</tr>
+</tbody></table></div>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>시험값 구분</th>
+<th>공급</th>
+<th>현재 연결</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>비중·기준·상한·등급·출전자·활동</td>
+<td>위 CSV</td>
+<td>시험 모듈이 읽음</td>
+</tr>
+<tr>
+<td>문구·초기 기여 입력</td>
+<td>UI JSON</td>
+<td>시험 화면에만 적용</td>
+</tr>
+<tr>
+<td>실제 게임 인기 경제·우승 정책</td>
+<td>기존 원본 유지</td>
+<td>제작전</td>
+</tr>
+</tbody></table></div>
+<p>주사위 환산: 해당 없음.</p>
+</section>
+<section class="part" id="part-7"><h2>7. 개발 진행·검수</h2><aside data-music-app-current-flow><h3>음악 앱 연결 현황 · 2026-11-10 16:33 KST</h3><p>음악 앱의 월드 인기 탭에 별도 범위의 자유 시험 인기 사용 영수증과 곡별 기여 차트를 연결했습니다. 기존 비교 시뮬레이터와 원장을 합치지 않습니다. 실제 인기 획득 공급·유한 지갑·우승 비중은 대기입니다. <a href="/docs/planning/game-simulator.html?module=simulator_module_music_app&amp;testPage=simulator_module_free_test">현재 음악 앱 실행</a> · 제안(검수 대기).</p></aside>
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 104" width="900" height="104" role="img" aria-labelledby="diagram-p237-6"><title id="diagram-p237-6">시험 모듈 구현과 실제 회원·게임 연결의 제작전 범위를 구분합니다.</title><defs><marker id="arrow-p237-6" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M200,52 L233,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-6)"/><path d="M420,52 L453,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-6)"/><path d="M640,52 L673,52" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-p237-6)"/><rect x="20" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="110" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">계산·거래 시험</text><rect x="240" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="330" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">공용 화면 조작</text><rect x="460" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="550" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">정책 비교</text><rect x="680" y="20" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="770" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a">실제 연결은 제작전</text></svg><figcaption>시험 모듈 구현과 실제 회원·게임 연결의 제작전 범위를 구분합니다.</figcaption></figure>
+
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>요소</th>
+<th>상태</th>
+<th>확인 방법·증거</th>
+<th>다음 작업</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>순수 계산</td>
+<td>개발 끝</td>
+<td>CSV 입력·기여/차감·등급·비중·공동순위·마감 시험</td>
+<td>운영 정책 결정</td>
+</tr>
+<tr>
+<td>조작 UI</td>
+<td>개발 끝(시험 화면)</td>
+<td><a href="../../../%EB%B3%B4%EA%B3%A0/20261109_%EB%8B%A8%EC%9D%B4_%EC%9B%94%EB%93%9C%EC%9D%B8%EA%B8%B0%EC%9A%B0%EC%8A%B9%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0.jpg">실제 캡처</a> · 획득/기여/반응/비중/마감 확인</td>
+<td>실제 음악 앱 통합</td>
+</tr>
+<tr>
+<td>연결 정보 수신</td>
+<td>개발 끝(읽기)</td>
+<td>기존 scope의 세션/실행/원본 버전 검사·팀/발매곡 관측</td>
+<td>실제 인기 집계 공급</td>
+</tr>
+<tr>
+<td>실제 게임 연결</td>
+<td>기획 중 · 제작전</td>
+<td>입력 대기·메모리 비교 구분</td>
+<td>회원·지갑·월드 원장·보상 쓰기</td>
+</tr>
+</tbody></table></div>
+<h3>수락 기준</h3>
+<ul>
+<li>획득만으로 곡 점수가 오르지 않고, 기여하면 선택한 지갑에서 차감되어 지정곡에만 반영됩니다.</li>
+<li>지갑 초과/잘못된 기여는 반영되지 않으며 같은 요청은 한 번만 처리합니다.</li>
+<li>같은 청취자 반응은 중복되지 않고 추천 취소가 찜을 지우지 않습니다.</li>
+<li>미정 비중은 집계 대기, 마감은 결과 고정, 크루원 수는 점수 배수가 아닙니다.</li>
+<li>목록→관련 카드→실행→실제 화면에서 기획서와 같은 계산을 확인합니다.</li>
+</ul>
+<h3>뺀 것·옮긴 것·보존한 것</h3>
+<p>실력·공연게임·별도 투표는 이 시험의 점수에 추가하지 않습니다. 팬·능력·앨범 이벤트 토큰을 인기 재화로 환산하지 않습니다. 기존 기능·곡·원본 저장·이전 기획은 보존합니다.</p>
+<details><summary>작업 기록</summary>
+
+<ul>
+<li>작성 기준: <a href="../%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/%EC%9E%91%EC%84%B1%EA%B7%9C%EC%B9%99.html">P86</a> · <a href="../%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80_v02/%EA%B8%B0%ED%9A%8D%EC%84%9C_%EB%B9%88%EC%96%91%EC%8B%9D.md">빈 양식</a> · <a href="../../%EC%A0%84%EC%B2%B4%EA%B8%B0%ED%9A%8D%EC%84%9C/00_%ED%97%8C%EB%B2%95_%EA%B8%B0%ED%9A%8D%EC%84%9C%EA%B8%B0%EC%A1%B0.md">W00c</a> · <a href="../../%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B8%B0%ED%9A%8D/S17_%EA%B8%B0%ED%9A%8D%EC%84%9C%ED%88%B4_%EC%A0%9C%EC%9E%91%EA%B8%B0%EB%B3%B8%EC%96%91%EC%8B%9D_v02.md">S17</a>.</li>
+<li>원표: data/simulator/world_popularity_trial_{policy,grade,entry,activity}.csv.</li>
+<li>로더·조회: src/simulator/world-popularity-trial/view.mjs의 loadTrial → src/game/world-popularity-trial/model.mjs의 createTrial/projectTrial/transactTrial.</li>
+<li>연결 reader: src/simulator/world-popularity-trial/source.mjs → 기존 readCardGrowthState/createScopedGrowthStorage/readCareer. 게임 상태 writer 없음.</li>
+<li>실제 진입: /docs/planning/game-simulator.html?module=simulator_module_world_popularity_trial. 공용 host의 시험 모드와 구분하며 이 모듈의 게임 저장 writer는 없음. 인스턴스 메모리만 사용.</li>
+<li>이번 화면/소스 검증: <a href="../../../%EB%B3%B4%EA%B3%A0/20261109_%EB%8B%A8%EC%9D%B4_%EC%9B%94%EB%93%9C%EC%9D%B8%EA%B8%B0%EC%9A%B0%EC%8A%B9_%EA%B3%B5%EC%9A%A9%EC%97%B0%EA%B2%B0.md">공용 연결 보고</a>.</li>
+<li>검증: <a href="../../../%EB%B3%B4%EA%B3%A0/20261109_%EB%8B%A8%EC%9D%B4_%EC%9B%94%EB%93%9C%EC%9D%B8%EA%B8%B0%EC%9A%B0%EC%8A%B9%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0.md">구현 보고</a> · <a href="../../../%EB%B3%B4%EA%B3%A0/20261109_%EB%8B%A8%EC%9D%B4_P237%EC%96%91%EC%8B%9D%EB%B3%B4%EC%A0%95.md">양식 보정 보고</a>.</li>
+<li><a href="%EC%9B%94%EB%93%9C%EC%9D%B8%EA%B8%B0%EC%9A%B0%EC%8A%B9_%EA%B8%B0%ED%9A%8D%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0.log.md">변경 이력·이전 원문</a>.</li>
+</ul>
+</details>
+</section><details class="history" id="document-history" data-log-src="월드인기우승_기획시뮬레이터.log.md"><summary>로그 보기</summary><div class="log-body"></div></details></main><script type="module" src="../작성기준_v02/sample-document.js"></script></body></html>

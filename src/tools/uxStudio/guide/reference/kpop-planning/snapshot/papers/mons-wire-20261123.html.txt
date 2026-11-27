@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>몬스 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  .kv { display:flex; justify-content:space-between; align-items:center; font-size:12px; }
+</style>
+</head>
+<body>
+<h1>몬스 · 와이어프레임 1차 초안 (390×844)</h1>
+<p class="flow">⓪ HUD 아래 메뉴 「정보」 펼침 → 「몬스」 (또는 띠의 몬스 기분 게이지 펼침 → 「몬스 로비」) → ① 몬스 로비 · 보관함(27칸 · 처음 열 때) · 위 책갈피 ①-1 지킴이 · ①-2 수호 · ①-3 출동 · 칸 누르면 ② 몬스 보기(위쪽 책갈피 정보 / 단·합성) · 없는 종은 ②-2 · 아래 「배치 바꾸기」 → ③ · 같은 종 2마리가 모이면 ④ 자동 합성 · 보관함 아래 「몬스 팩」·「행복」 → ⑤</p>
+<p class="flow">몬스는 카드가 없어서 포토카드에 넣지 않음(11/23 현중) · 상세만 포토카드 아이돌 보기와 같은 틀: 큰 캐릭터가 배경 · 가운데 띠 = 대표 값 · 아래 버튼 줄 = 그 몬스에게 하는 동작 하나</p>
+<div class="rules">
+  <b>규칙 근거</b> · 몬스 4축 로비 규칙서(P243) · 2026-11-23 현중 「포토카드 구성과 비슷하게 · 인벤토리에서 누르면 상세」 「그렇게 그려」 · 「포토카드에 몬스는 안 넣는게 좋을듯 · 몬스 카드는 없잖아」<br>
+  · <b>능력 수치 없음</b>: 11/13 「공방 빼고 깔끔하게」로 공격력·방어력과 그 성장을 뺐습니다. 아이돌 6축 자리에는 <b>단 · 속성 · 희귀도 · 디펜스 역할 · 지금 자리</b>를 둡니다.<br>
+  · <b>단 1~10</b>: 1단으로만 들어오고, 같은 종·같은 단 2마리가 모이면 버튼 없이 윗단 1마리(R-MON-1·2). 10단 = 1단 512마리. 10단이 넘친 몫은 공용 행복(R-MON-4).<br>
+  · <b>27종</b>: 일반 10 · 희귀 5 · 12지신 12(`mons_catalog.csv`). 희귀·12지신은 몬스 출동·디펜스 보상에서만(P243 Q1).<br>
+  · <b>한 마리 한 자리</b>: 지킴이 · 아이돌 수호 · 스케줄 출동 중 한 곳. 미니게임·스케줄에 쓰면 24시간 휴식(쉬는 몬스는 지킴이만 됨).<br>
+  · <b>들어가는 곳</b>: 정보 탭 안(11/23 현중 「정보 탭 안」) · HUD UI 기획서의 정보 펼침 순서 아이돌 → 팀 → 관계 → 크루 → 몬스 그대로. 몬스 기분 게이지 펼침의 「몬스 로비」도 같은 화면.<br>
+  · <b>처음 열 때</b>: 보관함 책갈피(11/23 현중 「보관함 먼저」).<br>
+  · <b>기분</b>: 지킴이 기분은 표에 몬스마다 있음(0~100 · 팀 합 500 · `stage_battle_mood_rule`) → ①-1 지킴이 칸에만 보임.<br>
+  · <b>정할 것</b>: 지킴이 · 출동 유닛 칸 수(상한 10) / 몬스 보기(②)에도 기분을 넣을지 / 쓰다듬기 · 간식 돌보기(표에 제안 값만)</div>
+<div class="row" id="screens"></div>
+
+<script>
+// ── 공용 조각 (포토카드 초안과 같은 틀) ─────────────────
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (on = -1) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === on ? " on" : ""}" style="left:${i * 65}px"><i></i>${t}</div>`).join("");
+const head = title => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div>
+  <div class="a val" style="left:52px;top:16px;font-size:16px">${title}</div><div class="line" style="top:50px"></div>`;
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const bigBtn = (x, w, label, sub = "", off = false) =>
+  `<div class="b${off ? " off" : ""}" style="left:${x}px;top:706px;width:${w}px;height:60px;flex-direction:column;gap:2px">
+    <span class="val" style="font-size:16px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const bottomBar = inner => `<div class="line" style="top:698px"></div>${inner}${tabs()}`;
+const actBtn = (label, sub, off = false) =>
+  `<div class="b${off ? " off" : ""}" style="left:8px;top:706px;width:374px;height:60px;flex-direction:column;gap:2px"><span class="val" style="font-size:15px">${label}</span><span class="sub">${sub}</span></div>`;
+// 몬스 로비 위 책갈피 = 4축(P243 4장)
+const chips = on => ["보관함", "지킴이", "수호", "출동"].map((c, i) =>
+  `<div class="bm${c === on ? " on" : ""}" style="left:${8 + i * 94}px;width:90px">${c}</div>`).join("") + `<div class="line" style="top:90px"></div>`;
+const listBehind = () => head("몬스 로비") + chips("보관함") + tabs() + `<div class="dimbg"></div>`;
+
+// 몬스 칸: 속성 · 단 · 이름 · 지금 자리. 없는 종은 점선 · 「?」
+const mon = m => m.g ? `<div class="grp">${m.g}${m.more ? `<span class="pill" style="font-size:12px;padding:1px 10px">${m.more}</span>` : ""}</div>`
+  : m.no ? `<div class="m no"><div class="pic">?</div><div class="nm" style="color:var(--soft)">아직 없음</div><div class="ft"><span>${m.el}</span><span></span></div></div>`
+  : `<div class="m"><div class="pic">몬스</div><span class="pill el">${m.el}</span><span class="pill lv">${m.lv}단</span>
+     <div class="nm">${m.n}</div><div class="ft"><span>${m.at || "대기"}</span>${m.rest ? `<span>쉼</span>` : ""}</div></div>`;
+
+// 몬스 보기 공용: 위쪽 책갈피 「정보」/「단·합성」 · 큰 캐릭터 배경 · 가운데 띠 = 단
+const ladder = (now, w = 374, top = 0) => `<div class="a" style="left:8px;top:${top}px;width:${w}px;display:grid;grid-template-columns:repeat(10,1fr);gap:3px">${Array.from({length: 10}, (_, i) =>
+  `<div style="height:26px;border:1.5px solid var(--ln);border-radius:4px;background:${i < now ? "var(--fill)" : "var(--box)"};color:${i < now ? "#fff" : "var(--ink)"};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">${i + 1}</div>`).join("")}</div>`;
+const monView = ({tab, act}) => head("아홀로틀") + `
+  <div class="a" style="left:0;top:51px;width:100%;height:647px;background:repeating-linear-gradient(45deg,#eceef0 0 10px,#e3e5e8 10px 20px)"></div>
+  <div class="a" style="left:0;top:51px;width:100%;height:40px;background:var(--pane)"></div>
+  <div class="bm${tab === "정보" ? " on" : ""}" style="left:8px;width:120px">정보</div>
+  <div class="bm${tab === "단" ? " on" : ""}" style="left:132px;width:120px">단 · 합성</div>
+  <div class="line" style="top:90px"></div>
+  <div class="a" style="left:0;width:100%;top:98px;text-align:center"><span class="pill">일반</span> <span class="pill">수</span> <span class="pill">지킴이</span></div>
+  <div class="b" style="left:8px;top:${tab === "정보" ? 250 : 170}px;width:32px;height:44px;font-size:16px">‹</div>
+  <div class="b" style="left:350px;top:${tab === "정보" ? 250 : 170}px;width:32px;height:44px;font-size:16px">›</div>` +
+  (tab === "정보" ? `
+  <div class="b off" style="left:100px;top:124px;width:190px;height:270px">큰 몬스<br>3D 모델 · 대기 동작</div>
+  <div class="b" style="left:40px;top:406px;width:310px;height:44px;border-width:2px"><span class="val" style="font-size:17px">4단 · 다음 단까지 1단 8마리</span></div>
+  ${ladder(4, 374, 458)}
+  <div class="b" style="left:8px;top:494px;width:374px;height:196px;flex-direction:column;align-items:stretch;justify-content:space-around;padding:6px 12px 6px 22px">
+    <div class="kv"><span class="sub" style="font-size:12px">모은 수</span><span class="val">1단으로 치면 8 / 512마리</span></div>
+    <div class="kv"><span class="sub" style="font-size:12px">속성</span><span class="val">수</span></div>
+    <div class="kv"><span class="sub" style="font-size:12px">희귀도</span><span class="val">일반</span></div>
+    <div class="kv"><span class="sub" style="font-size:12px">디펜스 역할</span><span class="val">밝고 가벼운 공중 엄호</span></div>
+    <div class="kv"><span class="sub" style="font-size:12px">단이 오르면</span><span class="val">나쁜 기운 디펜스 스킬 단계 ↑</span></div>
+    <div class="kv"><span class="sub" style="font-size:12px">얻는 곳</span><span class="val">몬스 팩 · 각종 보상</span></div>
+  </div>` : `
+  <div class="b off" style="left:130px;top:122px;width:130px;height:128px">큰 몬스</div>
+  <div class="a" style="left:8px;top:262px;right:8px;display:flex;justify-content:space-between;align-items:center;background:var(--pane);padding:6px 8px 6px 28px">
+    <span class="val">4단 / 10단</span><span class="sub" style="font-size:12px">같은 종 · 같은 단 2마리 → 윗단 1마리</span></div>
+  ${ladder(4, 374, 300)}
+  <div class="b" style="left:8px;top:336px;width:374px;height:150px;flex-direction:column;align-items:stretch;justify-content:space-around;padding:6px 12px 6px 22px">
+    <div class="kv" style="font-weight:700"><span>단</span><span>1단으로 치면</span></div>
+    ${[["4단 (지금)", "8마리"], ["5단 (다음)", "16마리 · 8마리 남음"], ["10단 (끝)", "512마리"], ["10단 넘친 몫", "공용 행복으로"]].map(([k, v]) =>
+      `<div class="kv"><span class="sub" style="font-size:12px">${k}</span><span class="val">${v}</span></div>`).join("")}
+  </div>
+  <div class="b" style="left:8px;top:496px;width:374px;height:194px;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:8px;padding:10px 12px 6px 22px">
+    <div class="kv" style="font-weight:700"><span>합성 기록</span><span class="sub" style="font-size:11px">버튼 없이 저절로</span></div>
+    ${[["3일차", "3단 → 4단", "몬스 출동 보상"], ["2일차", "2단 → 3단", "몬스 팩"], ["2일차", "1단 → 2단", "몬스 팩"], ["1일차", "1단 받음", "몬스 팩"]].map(([d, k, s]) =>
+      `<div class="kv"><span class="sub" style="font-size:12px;width:42px">${d}</span><span class="val" style="flex:1">${k}</span><span class="sub" style="font-size:12px">${s}</span></div>`).join("")}
+  </div>`) + bottomBar(act);
+
+// ── 화면 ──────────────────────────────────────────────
+const C = [["아홀로틀", "수", 4, "지킴이"], ["피그미하마", "수", 2, "수호"], ["나무늘보", "목", 1, "출동", 1], ["슈가글라이더", "목", 3, ""], ["레서판다", "화", 1, ""], null, ["친칠라", "금", 2, "지킴이"], null, ["카피바라", "토", 5, "지킴이"], ["쿼카", "토", 1, "", 1]];
+const EL = ["수", "수", "목", "목", "화", "화", "금", "금", "토", "토"];
+const commonTiles = C.map((m, i) => m ? {n: m[0], el: m[1], lv: m[2], at: m[3], rest: m[4]} : {no: true, el: EL[i]});
+const SCREENS = [
+  { cap: "⓪ 들어가는 곳 · HUD 「정보」 펼침 → 몬스", html: `
+      <div class="a" style="left:0;top:0;width:100%;height:50px;background:var(--box)"></div>
+      <div class="b off" style="left:8px;top:8px;width:34px;height:34px;font-size:11px">팀</div>
+      <div class="a val" style="left:50px;top:16px">팀 이름 · 엔터파워 · 루비 · 팬</div><div class="line" style="top:50px"></div>
+      <div class="b off" style="left:8px;top:60px;width:374px;height:400px">보드 · 앨범/페스티벌 상자 · 좌우 이벤트 칸<br>(HUD UI 기획서 그대로)</div>
+      <div class="b" style="left:8px;top:470px;width:374px;height:50px;justify-content:flex-start;gap:12px;padding:0 10px">
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:50px;height:10px;border:1.5px solid var(--ln);border-radius:5px;background:linear-gradient(90deg,var(--fill) 66%,var(--box) 0)"></span><span class="val">몬스 12</span><span class="sub">▾</span></span>
+        <span class="val">돈 0,000</span><span class="val">주사위</span></div>
+      <div class="b off" style="left:8px;top:530px;width:374px;height:160px">필러 박스</div>
+      <div class="b" style="left:8px;top:706px;width:374px;height:60px"><span class="val" style="font-size:16px">굴리기</span></div>
+      <div class="win" style="left:262px;top:470px;width:124px;height:300px;border-radius:10px;background:var(--box);z-index:3">
+        ${["아이돌", "팀", "관계", "크루", "몬스"].map((k, i) => `<div class="a" style="left:6px;right:6px;top:${8 + i * 57}px;height:50px;border:${i === 4 ? 2.5 : 1.5}px solid var(--ln);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;background:${i === 4 ? "var(--dim)" : "var(--box)"}">${k}</div>`).join("")}
+      </div>` + tabs(5) + `${n(1, 336, 776)}${n(2, 244, 700)}${n(3, 2, 462)}`,
+    notes: ["아래 메뉴 「정보」를 누르면 위로 펼침 · 다시 누르거나 바깥을 누르면 접힘(HUD UI 기획서)", "펼침 순서 아이돌 → 팀 → 관계 → 크루 → 몬스 · 「몬스」 → ① 몬스 로비(전체 화면 · 깊이 1)", "띠의 몬스 기분 게이지 · 몬스 수 펼침에도 「몬스 로비」 · 같은 ①로 · 로비 ← 뒤로 = HUD"] },
+  { cap: "① 몬스 로비 · 보관함 27칸", html: head("몬스 로비") + chips("보관함") + `
+      <div class="grid">${[{g: "일반 8 / 10", more: "속성 ▼"}, ...commonTiles, {g: "희귀 1 / 5"}, {n: "설표", el: "수", lv: 1, at: "출동"}, {no: true, el: "목"}, {no: true, el: "금"}, {no: true, el: "토"}, {no: true, el: "화"},
+        {g: "12지신 3 / 12"}, {n: "쥐 몬스", el: "수", lv: 2, at: ""}, {no: true, el: "토"}, {n: "호랑이 몬스", el: "목", lv: 1, at: "지킴이"}, {n: "토끼 몬스", el: "목", lv: 1, at: "", rest: 1}].map(mon).join("")}</div>
+      ${n(1, 290, 96)}${n(2, 66, 150)}${n(3, 160, 276)}${n(4, 74, 650)}${n(5, 2, 700)}${n(6, 193, 700)}` + bottomBar(bigBtn(8, 183, "몬스 팩", "보유 0개") + bigBtn(199, 183, "행복 00", "10 → 몬스 팩 1")),
+    notes: ["위 책갈피 = 로비 4축(보관함 · 지킴이 · 수호 · 출동) · 보관함은 희귀도로 묶음(일반 · 희귀 · 12지신) · 속성으로 거르기(수 · 목 · 화 · 금 · 토)", "칸 1개 = 종 1개 · 위 왼쪽 속성 · 위 오른쪽 단 · 아래 지금 자리(지킴이 · 수호 · 출동 · 대기) · 「쉼」 = 24시간 휴식 중", "없는 종은 점선 「?」 · 속성만 보임 · 누르면 ②-2", "아래로 내려 12지신까지 · 같은 종은 늘 1칸(자동 합성이라 여러 마리로 안 나뉨)", "몬스 팩 열기 → ⑤ · 1단 1마리", "공용 행복 · 10마다 몬스 팩 1개로 교환(`mons_exchange_rule.csv`) → ⑤"] },
+
+  { cap: "①-1 몬스 로비 · 지킴이 (책갈피)", html: head("몬스 로비") + chips("지킴이") + `
+      <div class="b" style="left:8px;top:98px;width:374px;height:96px;flex-direction:column;align-items:stretch;justify-content:space-around;padding:6px 12px 6px 26px">
+        <div class="kv"><span class="sub" style="font-size:12px">방패</span><span class="val">◆ ◆ ◇ &nbsp;2 / 3</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">수비 가능</span><span class="val">5마리 · 앞으로 막기 약 13번</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">막는 순서</span><span class="val">방패 → 지킴이 기분 → 건물</span></div>
+      </div>
+      <div class="a" style="left:8px;top:204px;width:374px;display:flex;align-items:center;gap:8px;padding-left:26px">
+        <span class="val">지킴이 기분</span><span style="flex:1;height:12px;border:1.5px solid var(--ln);border-radius:6px;background:linear-gradient(90deg,var(--fill) 68%,var(--box) 0)"></span><span class="val">340 / 500</span></div>
+      <div class="a" style="left:8px;top:230px;width:374px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
+        ${[["아홀로틀", 4, 82], ["카피바라", 5, 74], ["친칠라", 2, 66], ["호랑이 몬스", 1, 70], ["쥐 몬스", 2, 48], ["토끼 몬스", 1, 30, 1], null, null, null, null].map(m => m
+          ? `<div class="m" style="height:132px${m[3] ? ";border-style:dashed;background:var(--dim)" : ""}"><div class="pic">몬스</div><span class="pill lv">${m[1]}단</span>
+              <div class="nm">${m[0]}</div><div class="a" style="left:5px;right:5px;bottom:20px;height:7px;border:1.2px solid var(--ln);border-radius:4px;background:linear-gradient(90deg,var(--fill) ${m[2]}%,var(--box) 0)"></div>
+              <div class="ft" style="margin-top:12px"><span>기분 ${m[2]}</span>${m[3] ? "<span>빠짐</span>" : ""}</div></div>`
+          : `<div class="m no" style="height:132px"><div class="pic">+</div><div class="nm" style="color:var(--soft)">빈 칸</div><div class="ft"><span></span></div></div>`).join("")}</div>
+      <div class="a sub" style="left:8px;top:512px;width:374px;font-size:12px;padding-left:26px">유닛 칸 수는 정할 것(상한 10) · 쉬는 몬스도 지킴이에는 들어감</div>
+      <div class="b" style="left:8px;top:540px;width:374px;height:150px;flex-direction:column;align-items:stretch;justify-content:space-around;padding:6px 12px 6px 26px">
+        <div class="kv" style="font-weight:700"><span>기분이 줄고 차는 법</span><span class="sub" style="font-size:11px">출연권 공격에만</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">한 번 막으면</span><span class="val">수비 몬스들이 합 30을 나눠 깎임</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">기분 35 미만</span><span class="val">수비에서 빠짐</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">보드 쉬는 칸 11 · 21</span><span class="val">방패 +1 · 기분 20% 회복</span></div>
+      </div>
+      ${n(1, 2, 102)}${n(2, 2, 202)}${n(3, 2, 236)}${n(4, 12, 374)}${n(5, 2, 510)}${n(6, 2, 546)}${n(7, 2, 700)}` + bottomBar(actBtn("자동 편성", "기본 순서 지킴이 → 수호 → 남은 몬스는 출동")),
+    notes: ["방패 남은 수(보드 방패 최대 3) · 수비 가능 마리 · 앞으로 막기 약 m번(판정과 같은 함수로 계산 · P243 4장) · 출연권 공격 때 막는 순서", "지킴이 기분 합 / 팀 기분 총량 500(`stage_battle_mood_rule` team_mood_total · 한 마리 최대 = 500 ÷ 출전 수)", "지킴이 칸 · 몬스마다 단 · 기분(0~100) 막대 · 칸 누르면 보관함에서 고르기 · 한 마리 한 자리(이미 수호 · 출동이면 옮김 확인)", "기분 35 미만은 점선 「빠짐」(defend_min_mood 35) · 칸에는 남아 있고 막기에서만 빠짐", "칸 수는 비앙카 장부에서 정할 것 · 화면 상한 0~10(P243 5장)", "기분 규칙 요약 · 나쁜 기운 디펜스는 몬스 스킬로 막고 이 기분을 깎지 않음(현중 11/12) · 쓰다듬기 · 간식 같은 돌보기(표에 제안 값만 있음)는 이 초안에 넣지 않음", "자동 편성 = 빈 칸을 기본 순서로 채움(P243 5장 「우선 순서」) · 유저가 칸마다 바꿀 수 있음"] },
+
+  { cap: "①-2 몬스 로비 · 수호 (책갈피)", html: head("몬스 로비") + chips("수호") + `
+      <div class="a sub" style="left:8px;top:100px;width:374px;font-size:12px;padding-left:26px">아이돌마다 수호 몬스 1마리 · 하루 1번 컨디션 게임</div>
+      ${[["아이돌 A", 78, "좋음", ["피그미하마", 2], "컨디션 게임", 0], ["아이돌 B", 42, "보통", ["슈가글라이더", 3], "오늘 함", 1], ["아이돌 C", 25, "피곤", ["토끼 몬스", 1, 1], "몬스 쉬는 중", 1], ["아이돌 D", 90, "최상", null, "수호 없음", 1], ["아이돌 E", 15, "지침", ["레서판다", 1], "컨디션 게임", 0]].map((r, i) => {
+        const y = 122 + i * 112;
+        return `<div class="b" style="left:8px;top:${y}px;width:374px;height:104px;justify-content:flex-start;align-items:stretch"></div>
+          <div class="b off" style="left:16px;top:${y + 10}px;width:62px;height:84px">아이돌</div>
+          <div class="a val" style="left:88px;top:${y + 12}px">${r[0]}</div>
+          <div class="a" style="left:88px;top:${y + 36}px;width:150px;height:10px;border:1.5px solid var(--ln);border-radius:5px;background:linear-gradient(90deg,var(--fill) ${r[1]}%,var(--box) 0)"></div>
+          <div class="a sub" style="left:88px;top:${y + 52}px;font-size:12px">컨디션 ${r[1]} / 100 · ${r[2]}</div>
+          ${r[3] ? `<div class="a" style="left:246px;top:${y + 10}px;width:56px;height:56px;border:1.5px solid var(--ln);border-radius:8px;background:var(--dim);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--soft)">몬스</div>
+            <div class="a" style="left:240px;top:${y + 70}px;width:68px;text-align:center;font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r[3][0]}</div>
+            <div class="a sub" style="left:240px;top:${y + 84}px;width:68px;text-align:center">${r[3][1]}단${r[3][2] ? " · 쉼" : ""}</div>`
+          : `<div class="a" style="left:246px;top:${y + 10}px;width:56px;height:56px;border:1.5px dashed var(--ln);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--soft)">+</div>
+            <div class="a sub" style="left:240px;top:${y + 76}px;width:68px;text-align:center">배정</div>`}
+          <div class="b${r[5] ? " off" : ""}" style="left:312px;top:${y + 22}px;width:62px;height:60px;font-size:11px;font-weight:700;padding:0 4px">${r[4]}</div>`;
+      }).join("")}
+      ${n(1, 2, 98)}${n(2, 2, 154)}${n(3, 296, 124)}${n(4, 362, 130)}${n(5, 362, 242)}${n(6, 296, 460)}${n(7, 2, 700)}` + bottomBar(actBtn("빈 자리 채우기", "대기 몬스를 수호 없는 아이돌에게 · 지킴이 다음 순서")),
+    notes: ["아이돌마다 수호 몬스 1마리 · 하루 1번 컨디션 게임(P243 2축 · 6장)", "컨디션 0~100 · 단계 이름 지침 · 피곤 · 보통 · 좋음 · 최상(`idol-condition-ui.json`) · 줄을 누르면 아이돌 보기", "수호 몬스 · 누르면 보관함에서 고르기 · 배정 · 교체 · 해제는 무료(`idol-condition-ui.json` 문구)", "컨디션 게임 → 게임 화면(기존 「컨디션 게임」 경로) · 성공하면 컨디션 회복 · 끝나면 수호 몬스 24시간 쉼 · 도중 나가면 회복 없음", "꺼짐 사유를 버튼에 그대로: 오늘 함 / 몬스 쉬는 중 / 수호 없음", "수호 없는 아이돌은 점선 「+ 배정」", "빈 자리 채우기 = 기본 순서(지킴이 다음 수호)로 대기 몬스를 배정 · 유저가 바꿀 수 있음"] },
+
+  { cap: "①-3 몬스 로비 · 출동 (책갈피)", html: head("몬스 로비") + chips("출동") + `
+      <div class="a" style="left:8px;top:100px;width:374px;display:flex;justify-content:space-between;padding-left:26px"><span class="val">보낼 수 있는 몬스 4마리</span><span class="sub" style="font-size:12px">지킴이 · 수호 · 쉼 빼고</span></div>
+      <div class="b" style="left:8px;top:126px;width:374px;height:74px;justify-content:space-between;padding:0 12px 0 26px;border-width:2px">
+        <span style="text-align:left"><span class="val">거리의 나쁜 기운</span><br><span class="sub" style="font-size:12px">출동 중 · 나무늘보 외 2마리</span></span>
+        <span style="text-align:right"><span class="val">남은 00:40</span><br><span class="sub" style="font-size:12px">끝나면 몬스 24시간 쉼</span></span></div>
+      ${[["녹음실 수호", "목", "1~8마리 · 단 제한 없음", "돈 2,400"], ["방송국 돌파", "수", "1~8마리 · 단 제한 없음", "돈 2,800"]].map((r, i) => {
+        const y = 212 + i * 150;
+        return `<div class="b" style="left:8px;top:${y}px;width:374px;height:140px"></div>
+          <div class="b off" style="left:16px;top:${y + 10}px;width:80px;height:80px">보스 그림</div>
+          <div class="a val" style="left:106px;top:${y + 12}px;font-size:15px">${r[0]}</div>
+          <div class="a" style="left:106px;top:${y + 36}px"><span class="pill">필요 속성 ${r[1]}</span> <span class="pill">몬스 출동</span></div>
+          <div class="a sub" style="left:106px;top:${y + 60}px;font-size:12px">${r[2]}</div>
+          <div class="a sub" style="left:106px;top:${y + 78}px;font-size:12px">${r[3]} · 몬스 1단 · 희귀 · 12지신 나올 수 있음</div>
+          <div class="b" style="left:16px;top:${y + 98}px;width:358px;height:34px"><span class="val">스케줄로 보내기</span></div>`;
+      }).join("")}
+      <div class="b off" style="left:8px;top:518px;width:374px;height:56px;flex-direction:column;gap:2px"><span class="val" style="color:var(--ink)">다음 열림 · 출근길 길잡이</span><span class="sub">엔터파워 1,515 · 토 · 2단 이상</span></div>
+      <div class="a sub" style="left:8px;top:584px;width:374px;font-size:12px;padding-left:26px">지금 열림 3 · 지나감 0 · 다음 열림 1 (등급 구간 · 제안 값)</div>
+      <div class="b" style="left:8px;top:610px;width:374px;height:80px;flex-direction:column;align-items:stretch;justify-content:space-around;padding:6px 12px 6px 26px">
+        <div class="kv"><span class="sub" style="font-size:12px">보낼 수 있는 몬스</span><span class="val">대기 몬스만 · 쉬는 몬스 빠짐</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">출동 중엔</span><span class="val">지킴이 수비 안 함</span></div>
+      </div>
+      ${n(1, 2, 98)}${n(2, 2, 132)}${n(3, 74, 216)}${n(4, 2, 310)}${n(5, 2, 524)}${n(6, 2, 616)}` + bottomBar(actBtn("스케줄 화면에서 보기", "몬스 출동 10개 전체 · 잠김 · 지나감 포함")),
+    notes: ["보낼 수 있는 몬스 = 지킴이 · 수호에 없고 쉬지 않는 몬스(P243 3축 · 5장)", "출동 중인 스케줄 · 보낸 몬스 · 남은 시간 · 끝나면 24시간 쉼", "열린 몬스 출동만 카드로(등급 구간 · 엔터파워 1,200 예시 · 몬스 열림 3개 제안 · P241 R-SC-13) · 필요 속성(`need_element`) · 마리 수(`mons_min~max`) · 최소 단(`mons_min_stage`) · 보상", "스케줄로 보내기 → 그 스케줄 상세로 바로 들어감(P243 「로비에서 바로 그 스케줄 상세로」) · 몬스 고르기는 스케줄 화면 것을 씀", "다음 열림 1개 미리 보기(문턱 엔터파워 · 속성 · 최소 단)", "출동 중에는 그 몬스가 수비하지 않음 · 쉬는 몬스는 출동 못 함(P243 5장)"] },
+
+  { cap: "② 몬스 보기 · 정보 (칸을 누르면)", html: monView({tab: "정보", act: actBtn("배치 바꾸기", "지금 · 기획사 지킴이")}) +
+      `${n(1, 256, 62)}${n(2, 88, 100)}${n(3, 46, 256)}${n(4, 30, 400)}${n(5, 12, 430)}${n(6, 2, 500)}${n(7, 2, 700)}`,
+    notes: ["위쪽 책갈피 정보 / 단·합성 · 같은 화면에서 바꿔 봄(포토카드 능력 / 카드와 같은 자리)", "희귀도 · 속성 · 지금 자리", "‹ › 보관함 순서의 다음 몬스", "가운데 띠 = 지금 단 · 다음 단까지 남은 1단 마리 수(R-MON-5) · 아이돌의 「단계 · 6축 평균」 자리", "단 사다리 1~10 · 아이돌 6축 막대 자리", "공격력 · 방어력 같은 수치 없음 · 모은 수 · 속성 · 희귀도 · 디펜스 역할(표 문구) · 단이 오르면 디펜스 스킬 단계만 오름(R-MON-7) · 얻는 곳", "아래 버튼 = 이 몬스의 자리 바꾸기 → ③"] },
+
+  { cap: "②-1 몬스 보기 · 단 · 합성 (위쪽 「단 · 합성」 책갈피)", html: monView({tab: "단", act: actBtn("배치 바꾸기", "지금 · 기획사 지킴이")}) +
+      `${n(1, 4, 264)}${n(2, 372, 290)}${n(3, 2, 340)}${n(4, 2, 500)}`,
+    notes: ["지금 단 / 10단 · 합성 규칙 한 줄", "단 사다리", "단마다 1단으로 치면 몇 마리 · 다음 단까지 남은 수 · 10단 넘친 몫은 공용 행복(R-MON-4)", "합성 기록 · 날 · 몇 단 → 몇 단 · 들어온 곳(옛 몬스 화면에서 남기는 것 · P243 8장)"] },
+
+  { cap: "②-2 없는 몬스 보기 (점선 칸을 누르면)", html: head("페넥여우") + `
+      <div class="a" style="left:0;top:51px;width:100%;height:647px;background:repeating-linear-gradient(45deg,#eceef0 0 10px,#e3e5e8 10px 20px)"></div>
+      <div class="a" style="left:0;width:100%;top:64px;text-align:center"><span class="pill">일반</span> <span class="pill">화</span></div>
+      <div class="b off" style="left:100px;top:96px;width:190px;height:270px">그림자 실루엣</div>
+      <div class="b" style="left:40px;top:380px;width:310px;height:44px;border-width:2px"><span class="val" style="font-size:17px">아직 없음 · 1단 1마리면 등록</span></div>
+      <div class="b" style="left:8px;top:436px;width:374px;height:120px;flex-direction:column;align-items:stretch;justify-content:space-around;padding:6px 12px 6px 22px">
+        <div class="kv"><span class="sub" style="font-size:12px">얻는 곳</span><span class="val">몬스 팩 · 각종 보상</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">희귀 · 12지신이면</span><span class="val">몬스 출동 · 디펜스 보상에서만</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">디펜스 역할</span><span class="val">민첩한 공중 추적</span></div>
+      </div>` + bottomBar(actBtn("몬스 팩 열기", "보유 0개 · 일반 몬스만 나옴")) +
+      `${n(1, 92, 100)}${n(2, 30, 374)}${n(3, 2, 440)}${n(4, 2, 700)}`,
+    notes: ["이름 · 희귀도 · 속성은 보여 줌 · 그림은 실루엣", "한 마리만 들어오면 1단으로 등록", "얻는 곳 · 디펜스 역할(희귀 · 12지신은 출동 · 디펜스 보상만 · P243 Q1)", "일반 종이면 몬스 팩 바로 열기 · 희귀 · 12지신이면 「몬스 출동 보기」로 바뀜"] },
+
+  { cap: "③ 배치 바꾸기 (창)", html: monView({tab: "정보", act: actBtn("배치 바꾸기", "지금 · 기획사 지킴이")}) + `<div class="dimbg"></div>
+      <div class="win" style="left:16px;top:170px;width:358px;height:470px">
+        <div class="a val" style="left:16px;top:14px;font-size:16px">아홀로틀 · 자리 바꾸기</div>
+        <div class="b" style="right:10px;top:8px;width:30px;height:30px">✕</div>
+        <div class="a sub" style="left:16px;top:44px;font-size:12px">한 마리는 한 자리에만 · 지금 <b style="color:var(--ink)">기획사 지킴이</b></div>
+        ${[["기획사 지킴이", "방패 3개가 다 깨지면 이어서 막음", "지금", false], ["아이돌 수호", "아이돌 1명 · 하루 1번 컨디션 게임", "고르기 ›", false], ["몬스 출동", "몬스 스케줄 상세로 바로 가기", "쉬는 중 · 00시간", true], ["대기", "아무 자리에도 안 둠", "", false]].map(([k, s, r, off], i) => `
+          <div class="b${off ? " off" : ""}" style="left:16px;top:${72 + i * 78}px;width:326px;height:68px;justify-content:space-between;padding:0 12px 0 26px;${i === 0 ? "border-width:2.5px" : ""}">
+            <span style="text-align:left"><span class="val" style="font-size:15px">${k}</span><br><span class="sub" style="font-size:12px">${s}</span></span><span class="pill" style="font-size:12px;padding:1px 10px">${r || "옮기기"}</span></div>`).join("")}
+        <div class="a sub" style="left:16px;right:16px;top:392px;font-size:12px;text-align:center">출동 · 미니게임 뒤 24시간 쉼 · 쉬는 몬스는 지킴이만</div>
+        <div class="b" style="left:16px;top:414px;width:326px;height:44px;font-weight:700;font-size:15px">몬스 로비에서 한꺼번에 바꾸기 ›</div>
+      </div>${n(1, 4, 214)}${n(2, 20, 274)}${n(3, 20, 352)}${n(4, 20, 430)}${n(5, 22, 596)}`,
+    notes: ["지금 자리 · 한 마리 한 자리(P243 5장)", "지킴이 · 몬스마다 기분으로 막음(`stage_battle_mood_rule` · ①-1)", "아이돌 수호 → 아이돌 고르기 · 그 아이돌의 컨디션 게임이 열림", "몬스 출동 · 쉬는 중이면 꺼짐 · 남은 시간 표시 · 지킴이는 쉬어도 됨", "여러 마리를 한 번에 = 몬스 로비 책갈피 ①-1 지킴이 · ①-2 수호 · ①-3 출동"] },
+
+  { cap: "④ 자동 합성 (창 · 같은 종 2마리가 모이면)", html: listBehind() + `
+      <div class="win" style="left:16px;top:200px;width:358px;height:400px">
+        <div class="a val" style="left:0;width:100%;top:16px;text-align:center;font-size:16px">아홀로틀이 5단이 됐어요</div>
+        <div class="b off" style="left:30px;top:60px;width:90px;height:100px">4단</div>
+        <div class="a val" style="left:126px;top:96px;font-size:18px">+</div>
+        <div class="b off" style="left:146px;top:60px;width:90px;height:100px">4단</div>
+        <div class="a val" style="left:244px;top:96px;font-size:18px">→</div>
+        <div class="b" style="left:268px;top:50px;width:76px;height:120px;border-width:2.5px;flex-direction:column"><span class="sub">큰 몬스</span><span class="val">5단</span></div>
+        ${ladder(5, 302, 190).replace("left:8px", "left:40px")}
+        <div class="b" style="left:16px;top:230px;width:326px;height:84px;flex-direction:column;align-items:stretch;justify-content:space-around;padding:6px 12px 6px 22px">
+          <div class="kv"><span class="sub" style="font-size:12px">다음 단까지</span><span class="val">1단 16마리</span></div>
+          <div class="kv"><span class="sub" style="font-size:12px">자리</span><span class="val">지킴이 그대로(윗단이 이어받음)</span></div>
+          <div class="kv"><span class="sub" style="font-size:12px">디펜스 스킬 단계</span><span class="val">4 → 5</span></div>
+        </div>
+        <div class="b" style="left:16px;top:328px;width:326px;height:52px;font-weight:700;font-size:15px">확인</div>
+      </div>${n(1, 22, 258)}${n(2, 22, 388)}${n(3, 22, 434)}`,
+    notes: ["버튼 없이 저절로 · 같은 종 · 같은 단 2마리 → 윗단 1마리 · 연달아 오르면 한 창에 묶어 보여 줌", "단 사다리 · 다음 단까지 · 10단에서 넘치면 「공용 행복 +1」 줄로 바뀜", "배치 중이던 몬스면 윗단이 그 자리를 이어받음(R-MON-6) · 디펜스 스킬 단계 변화"] },
+
+  { cap: "⑤ 몬스 팩 · 행복 교환 (창)", html: listBehind() + `
+      <div class="win" style="left:16px;top:170px;width:358px;height:450px">
+        <div class="a val" style="left:16px;top:14px;font-size:16px">몬스 팩</div>
+        <div class="b" style="right:10px;top:8px;width:30px;height:30px">✕</div>
+        <div class="a sub" style="left:16px;top:44px;font-size:12px">한 팩에 1단 몬스 1마리 · 일반 10종 중</div>
+        <div class="b" style="left:16px;top:70px;width:326px;height:96px;justify-content:space-between;padding:0 14px 0 26px">
+          <span class="b off" style="position:static;width:60px;height:60px;font-size:11px">팩</span><span class="val" style="font-size:16px">×00</span>
+          <span class="pill" style="font-size:12px;padding:1px 14px">열기</span></div>
+        <div class="b" style="left:16px;top:176px;width:326px;height:96px;justify-content:space-between;padding:0 14px 0 26px">
+          <span style="text-align:left"><span class="val">공용 행복 00</span><br><span class="sub" style="font-size:12px">10 → 몬스 팩 1개</span></span>
+          <span class="pill" style="font-size:12px;padding:1px 14px">교환</span></div>
+        <div class="a sub" style="left:16px;top:284px;font-size:12px">열기 결과</div>
+        <div class="b" style="left:16px;top:304px;width:326px;height:120px;justify-content:flex-start;gap:14px;padding:0 14px 0 26px">
+          <span class="b off" style="position:static;width:76px;height:96px;font-size:11px">몬스</span>
+          <span style="text-align:left;line-height:1.6"><span class="pill" style="border-width:2px;font-weight:700">NEW</span> <span class="val" style="font-size:16px">페넥여우</span><br><span class="sub" style="font-size:12px">1단으로 등록</span><br><span class="sub" style="font-size:12px">이미 있으면 「1단 +1 · 다음 단까지 00」 · 2마리면 ④</span></span></div>
+      </div>${n(1, 22, 264)}${n(2, 22, 370)}${n(3, 22, 500)}`,
+    notes: ["팩 등급 없음 · 1단 1마리만(R-MON-1)", "공용 행복 교환 · 10 → 팩 1(`mons_exchange_rule.csv` 세팅 값)", "처음 종 NEW · 있는 종은 1단 +1 · 같은 단 2마리가 되면 ④ 자동 합성으로 이어짐"] },
+];
+
+// ?shot=번호 = 그 화면 한 장만(기획서 대표 그림 캡처용)
+const SHOT = new URLSearchParams(location.search).get("shot");
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+</script>
+</body>
+</html>

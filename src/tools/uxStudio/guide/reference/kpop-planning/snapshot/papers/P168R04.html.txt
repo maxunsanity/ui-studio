@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>카드 모바일 · 덱 모음 구성안</title><link rel="stylesheet" href="./preview.css"></head>
+<body><header class="preview-header"><div><span class="preview-tag">모바일 구성안 · 제안(검수 대기)</span><h1>카드덱을 폰 안에서 고르고, 한 장까지</h1></div><a href="/docs/planning/planning-docs-tool.html?face=development&doc=P94&plan=planning_development_plan_simulator&simulation=simulator_module_cardbook&testPage=simulator_module_audition">기존 카드 도구</a></header>
+<main class="preview-layout"><section class="preview-stage" aria-label="클릭 가능한 모바일 구성안"><div id="preview-phone"></div><p class="preview-caption">표지 → 12장 → 상세를 직접 눌러 볼 수 있습니다.</p></section><aside class="preview-notes">
+<div class="note-label">단이의 배치 제안</div><h2>한 화면에서는<br>한 가지 선택에 집중합니다.</h2><ol class="flow"><li><b>덱 모음</b><span>2열 × 2행 · 4개씩 넘기기<br>표지·이름·수집 진행을 한눈에</span></li><li><b>덱 안의 12장</b><span>4열 × 3행 · 번호 자리 유지<br>보유·미보유·장수를 함께</span></li><li><b>카드 상세</b><span>그림·별·설명·효과 대상<br>12장 보기로 한 단계 돌아가기</span></li></ol>
+<section class="note-card"><h3>아이돌 능력은 같은 자리에서</h3><p>위쪽 전환을 유지합니다. 현재 멤버·6축·18세부를 보고 카드로 돌아오면 선택한 덱과 페이지를 유지합니다.</p></section>
+<section class="note-card"><h3>오른쪽에서 폰 안으로</h3><p>덱 분류, 수집 진행, 12장 보유 상태, 카드 효과·대상을 옮기는 구성입니다. 테스트 획득·초기화·표지 단계 미리보기·원문 키는 기존 검수 패널에 둡니다.</p></section>
+<p class="preview-source">모노 참조: 앨범 목록 → 12장 격자 → 카드 상세.<br>게임 수치·성장·해금 규칙을 복사하지 않습니다.</p>
+<details><summary>이 시안의 데이터 범위</summary><p>20덱·각 12장·그림·별·효과 설명은 현재 CSV와 UI 설정을 읽습니다. 수집 11/240과 덱별 장수는 2026-10-27 14:39 현재 도구 화면의 검수 기록입니다. 멤버명도 14:39 도구 화면 검수 기록입니다. 작사 덱의 12자리 외 개별 보유 정보는 미연결로 표시합니다. 시안은 저장·팩 개봉·성장·지급을 실행하지 않습니다. 아이돌 능력은 같은 세션·실행의 읽기 가능한 기록이 있을 때만 표시합니다.</p></details>
+</aside></main><p id="preview-error" role="alert" hidden></p><script type="module" src="./preview.mjs"></script></body></html>

@@ -1,0 +1,192 @@
+# P152R04 · 여정 길 35개 · 케이팝 현재 세팅값 변환 출처 부록
+
+**이 문서는** 기존 탐험 35길의 이름·소개·원래 ID를 케이팝몬스터즈의 칸·그룹과 연결한 출처 목록입니다.
+
+**보는 법** 목차 → 35길 변환표 → 보드 칸·그룹 → 현재 원표 대조 순서로 읽습니다. 시뮬레이터 없음(출처 부록). 현재 흐름은 [P152 모험](../개발진행기획_v01/콘텐츠별_v03/라포AI탐험_기획서.html)과 [P206 탐험·여정발견 통합기획](../개발진행기획_v01/콘텐츠별_v03/탐험_여정발견_통합기획_v01.html)을 함께 봅니다.
+
+**지금 상태** 개발됨(35길 원표 연결 확인). 이름·소개는 임시이고 수치는 발란스 대기입니다. 실제 화면·플레이 대조는 남아 있습니다.
+
+## 목차
+
+- [출처와 임시 자료의 범위](#source-context)
+- [1. 칸 구분](#route-columns)
+- [2. 35줄 변환표](#route-list)
+- [3. 다른 글 표](#supporting-content)
+- [4. 보드 칸·그룹](#board-group-map)
+- [5. 현재 원표 대조와 확인 범위](#source-check)
+
+<a id="source-context"></a>
+
+## 출처와 임시 자료의 범위
+
+(이식·합침) 이 목록은 원래 35길의 식별자와 수치를 보존하고 제목·소개·칸·그룹을 변환한 자료입니다. 현재 [adventure_route 원표](../../../../../data/game/adventure_route.csv)의 `src_doc_id=여정길35_케이팝현재세팅값변환_v01`이 이 문서를 가리킵니다. 원래 숫자의 출처 표기는 보존하며 수치를 새로 확정하지 않습니다.
+
+아래 변환표는 작성 당시의 임시 문구와 판단을 담은 출처입니다. D01·D02의 31번 칸 연결과 머무는 동네 6길의 그룹 결정은 원문 상단에 기록돼 있습니다. 표 안의 옛 「현중 결정 대기」 문구와 함께 읽을 수 있도록 해당 결정·작성 기록은 하단 접기에 보존했습니다.
+
+<a id="route-columns"></a>
+
+## 1. 칸 구분 (adventure_config → 우리 adventure_route)
+| 구분 | 칸 | 처리 |
+| --- | --- | --- |
+| 구조(그대로) | adventure_id(→ `mono_adventure_id`), board_index, group_id, sort_order, is_active, clear_concept_id, party_min/rec/max, reward_bundle_id, narrative_pool_id | 값·순서·줄 수 그대로 |
+| 숫자(그대로·발란스 대기) | unlock_prosperity, duration_min | 원본값, note에 「원본값 · 모노 dist/adventure_config.csv:행」 |
+| 내용(바꿈) | title, synopsis | 케이팝 임시 글, `content_status=임시` 표시(칸 이름은 유르넷 확정) |
+| 새 ID | route_id | `adventure_route_<slug>` (유르넷 11:51 ①) |
+
+<a id="route-list"></a>
+
+## 2. 35줄 변환표
+열: 원본 ID · 원본 이름(컨셉) · group · board_index · unlock_prosperity · duration_min · party(최소/추천/최대) · **임시 케이팝 이름** · 임시 한 줄 소개 · slug · 우리 임시줄 녹임
+
+| 원본 | 원본 이름(컨셉) | grp | bi | 해금 | 분 | 인원 | 임시 이름 | 임시 소개 | slug | 녹임 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| L01 | 풀밭 첫 골목(warmth) | path | 2 | 0 | 20 | 1/1/5 | 거리 버스킹 | 연습생 시절처럼 거리에서 한 곡. 돌아오면 엽서 한 장. | street_busking | ← `adventure_route_busking` |
+| L02 | 빨래터 뒷길(warmth) | path | 3 | 0 | 20 | 1/1/5 | 새벽 녹음 | 모두 잠든 시간의 녹음실. 마지막 테이크 이야기를 받아 와요. | dawn_recording | ← `adventure_route_recording` |
+| L03 | 시장 옆 공터(skirmish) | path | 7 | 0 | 20 | 1/1/5 | 방송국 미팅 | 대기실 복도의 작은 신경전. 다음 무대의 실마리를 들고 와요. | broadcast_meeting | ← `adventure_route_broadcast` |
+| L04 | 담장 밑 오솔길(pathfind) | path | 8 | 45 | 25 | 1/2/5 | 지방 행사 가는 길 | 버스로 몇 시간. 낯선 길을 찾아 작은 무대에 닿아요. | regional_event_road | ← `adventure_route_tour` |
+| T01 | 따뜻한 처마 밑(warmth) | stay | 5 | 45 | 25 | 1/1/5 | 팬 사인회 | 긴 줄 끝까지 인사하고, 따뜻한 말 한마디를 받아 와요. | fan_signing | ← `adventure_route_signing` |
+| E01 | 숲속 작은 집(warmth) | meet | 10 | 100 | 30 | 1/2/5 | 숙소 작은 방 | 숙소 구석 작은 방. 두고 온 꿈 이야기를 편지에 담아 와요. | dorm_small_room | |
+| L05 | 돌다리 앞 마당(pathfind) | path | 19 | 175 | 35 | 1/2/5 | 연습실 복도 | 밤늦은 연습실 복도. 길을 잃은 동선을 다시 찾아요. | practice_hall_corridor | |
+| L06 | 그늘진 정자 길(bargain) | path | 20 | 175 | 35 | 1/2/5 | 기획사 회의실 | 쉬는 척하는 회의실. 누군가는 여기서 계획을 바꿔요. | agency_meeting_room | |
+| T02 | 짐 푸는 마당(bargain) | stay | 9 | 175 | 35 | 1/2/5 | 정산실 앞 | 짐을 풀다 말고 셈을 하는 매니저들. 계산법을 몰래 배워 와요. | settlement_office | |
+| E03 | 맑은 손길(blessing) | meet | 37 | 175 | 35 | 1/2/5 | 맑은 응원봉 | 갑자기 환해지는 객석. 응원봉이 남긴 말만 모아 와요. | clear_lightstick | |
+| L07 | 낡은 비석 언덕(relic) | path | 25 | 300 | 40 | 1/2/5 | 옛 데뷔 포스터 골목 | 빛바랜 데뷔 포스터. 잊힌 약속을 편지처럼 읽어 와요. | old_debut_poster_alley | |
+| L08 | 바람 부는 밭둑(skirmish) | path | 26 | 300 | 40 | 1/2/5 | 음악방송 리허설 | 짧은 리허설 소동. 소란은 짧고 남는 말은 길어요. | music_show_rehearsal | |
+| T03 | 모래 깔린 마당(trial) | stay | 24 | 300 | 40 | 1/2/5 | 댄스 연습실 배틀 | 땀 냄새 나는 연습실. 겨룬 뒤에도 웃으며 남는 말이 있어요. | dance_room_battle | |
+| E05 | 장난꾸러기 장터(bargain) | meet | 44 | 300 | 40 | 1/2/5 | 굿즈 장터 | 물건이 바뀌는 굿즈 장터. 장난 같은 교환 뒤의 진심을 찾아요. | goods_market | |
+| E07 | 돌에 스민 기도(relic) | meet | 31 | 400 | 45 | 1/2/5 | 팬레터 보관함 | 먼지 쌓인 팬레터 상자. 누가 무엇을 빌었는지 닦아 와요. | fan_letter_box | |
+| L09 | 안개 낀 골목(pathfind) | path | 34 | 500 | 50 | 1/2/5 | 안개 낀 대기실 복도 | 낮에도 흐린 대기실 복도. 정해진 동선 밖 발자국을 쫓아요. | foggy_waiting_corridor | |
+| L10 | 닫힌 가게 앞(bargain) | path | 35 | 500 | 50 | 1/2/5 | 문 닫은 팬샵 앞 | 셔터 내린 팬샵. 숨긴 거래의 흔적을 찾아요. | closed_fanshop | |
+| T04 | 낮은 울타리 안(watch) | stay | 27 | 500 | 50 | 1/2/5 | 숙소 앞 울타리 | 조용한 척하는 숙소 앞. 지키려는 마음을 물어보고 와요. | dorm_fence | |
+| E09 | 겨룸의 표시석(trial) | meet | 12 | 500 | 50 | 2/3/5 | 오디션 심사석 | 강한 이가 기다리는 심사석. 왜 겨뤘는지가 남아요. | audition_judge_seat | |
+| L11 | 긴 담장 너머(watch) | path | 40 | 1000 | 60 | 1/2/5 | 긴 출근길 담장 | 끝없는 출근길 담장. 너머의 낮은 숨소리를 받아 와요. | long_commute_wall | |
+| L12 | 갈림길 표지석(pathfind) | path | 41 | 1000 | 60 | 1/2/5 | 컴백 갈림길 | 콘셉트가 갈리는 갈림길. 돌아온 이야기만 남아요. | comeback_crossroad | |
+| T05 | 불빛 남는 창가(warmth) | stay | 56 | 1000 | 60 | 1/2/5 | 불 켜진 작업실 창가 | 프로듀싱 스튜디오 창가 불빛. 쉬어 간 한숨을 엽서로. | lit_studio_window | |
+| E08 | 떠나거나 남는 길(pathfind) | meet | 58 | 1000 | 60 | 1/2/5 | 남을까 떠날까 계약서 | 재계약을 고르던 날. 고르지 않은 쪽 이야기도 데려와요. | stay_or_leave_contract | |
+| E10 | 접힌 보물 지도(relic) | meet | 60 | 1000 | 60 | 1/2/5 | 접힌 데모 테이프 | 서랍 속 데모 한 장. 왜 묻어 두었는지가 진짜 보물이에요. | folded_demo_tape | |
+| E11 | 높은 층계의 문(ascent) | meet | 54 | 1500 | 70 | 2/3/5 | 차트 계단 | 계단만 보이는 차트 꼭대기. 오르기 전 망설임을 받아 와요. | chart_stairs | |
+| L13 | 깊은 숲 가장자리(trial) | path | 50 | 2500 | 80 | 2/3/5 | 페스티벌 무대 뒤 | 조명이 끊기는 무대 뒤. 강한 상대일수록 말도 무거워요. | festival_backstage | |
+| L14 | 침묵의 연못가(gaze) | path | 51 | 2500 | 80 | 1/2/5 | 조용한 댓글 연못 | 조용한데 발밑이 울리는 댓글창. 지워진 기억을 떠 와요. | silent_comment_pond | |
+| T06 | 뒷골목 접선처(bargain) | stay | 59 | 2500 | 80 | 2/3/5 | 루머 뒷골목 | 사람 적은 뒷골목. 루머 무리와 스친 흔적을 다치지 않게 적어 와요. | rumor_back_alley | |
+| E02 | 달콤한 속삭임(whisper) | meet | 22 | 2500 | 80 | 2/3/5 | 달콤한 계약 제안 | 너무 달콤한 제안. 왜 흔들렸는지 적어 와요. | sweet_contract_offer | |
+| E12 | 글자가 빛나는 탑(ascent) | meet | 57 | 2500 | 80 | 2/3/5 | 가사가 빛나는 타워 | 벽에 가사가 남는 방송 타워. 적어 둔 소원을 읽어 와요. | glowing_lyrics_tower | |
+| D01 | 동쪽 어둠 입구(gate) | gate | 11 | 2500 | 80 | 2/3/5 | 동쪽 나쁜 기운 입구 | 보드 한쪽에 고인 나쁜 기운. 입구의 숨결만으로 충분해요. | east_bad_energy_gate | |
+| E04 | 눈이 멈춘 골목(gaze) | meet | 42 | 4000 | 90 | 2/3/5 | 카메라가 멈춘 골목 | 렌즈와 눈이 마주치면 굳는 골목. 멈춘 숨을 깨지 않게 전해요. | frozen_camera_alley | |
+| E06 | 리듬 구슬의 속삭임(whisper) | meet | 52 | 4000 | 90 | 2/3/5 | 메트로놈의 속삭임 | 탁탁 울리는 메트로놈. 대가를 치른 꿈 조각을 주워 와요. | metronome_whisper | |
+| L15 | 끝까지 가는 언덕(trial) | path | 55 | 5000 | 100 | 2/3/5 | 앙코르 언덕 | 가장 높은 앙코르 길. 하루의 끝과 다음 약속이 겹쳐요. | encore_hill | |
+| D02 | 서쪽 돌문 아래(gate) | gate | 43 | 5000 | 100 | 2/3/5 | 서쪽 나쁜 기운 돌문 | 반대편 돌문. 같은 나쁜 기운인데 냄새가 달라요. | west_bad_energy_stone_gate | |
+
+- 녹임 규칙: 우리 임시 표는 3줄이 아니라 **5줄**(`adventure_route.csv` 2–6행: busking·recording·broadcast·signing·tour)이다. 해금 0·20분인 L01–L03에 앞 3줄, 해금 45·25분인 L04·T01에 tour·signing을 넣었다. 우리 임시 줄의 concept_id(adventure_concept_stage 등)·unlock_fan_pct는 쓰지 않고 원본 칸 값을 따른다(구조 원본 유지). 기존 5개 route_id는 지우지 않고 보고에 「녹인 자리」로 적는다(11:21 ⑤).
+
+<a id="supporting-content"></a>
+
+## 3. 다른 글 표 — 바꿀 칸 / 그대로 둘 칸 / 예시
+| 원본 표(dist/) | 줄 | 내용(바꿈) | 구조(그대로) | 변환 예시 (원본 → 임시) |
+|---|---|---|---|---|
+| adventure_group_config | 4 | label | group_id, sort_order, dot_color | path 「길 위」→「활동 길」 · stay 「머무는 동네」→「쉬는 곳」 · gate 「입구」→「나쁜 기운 입구」 |
+| adventure_clear_concept_config | 13 | label, hint_text | clear_concept_id, required_role, bonus_role, is_active | skirmish 「가벼운 다툼 / 힘으로 소란을 잠재워요」→「작은 신경전 / 무대 실력으로 소란을 잠재워요」 · warmth 「온기·쉼 / 따뜻한 마음이 문을 열어요」→「팬 온기 / 따뜻한 응원이 문을 열어요」 · gate 「어둠 입구」→「나쁜 기운 입구」. 역할(fight·scout…)↔우리 카드 무리 대응은 유르넷 확정(adventure_concept 표) |
+| adventure_narrative_fragment_config | 249 | text | fragment_id(→mono_fragment_id), adventure_id, clear_concept_id, result_key, slot, weight, is_active | nf_open_l01_perfect 「풀밭 첫 골목에서 돌아온 날.」→「거리 버스킹에서 돌아온 날.」 · nf_close_l01_good 「골목 끝에 풀씨만 남았어요.」→「골목 끝에 박수 소리만 남았어요.」 · nf_body_skirmish_perfect 「다툼이 웃으며 사그라들고, 먼지만 편지에 남았어요.」→「신경전이 웃음으로 끝나고, 리허설 먼지만 편지에 남았어요.」 |
+| adventure_progress_slide_config | 140 | caption | adventure_id+beat_id(→mono_ 2칸), sort_order, still_id, transition_id, progress_pct_* | L01 depart 「마을 끝, 풀숲이 손을 흔들어요」→「거리 끝, 첫 관객이 손을 흔들어요」 · L01 threshold 「작은 다툼의 먼지가 일어요」→「앰프 소리에 작은 소란이 일어요」 · E09 arrive 「표시석이 고개를 숙인 듯해요」→「심사석이 고개를 끄덕인 듯해요」 |
+| adventure_fail_message_config | 15 | text | fail_id, clear_concept_id, weight, is_active | fail_skirmish 「소란에 발이 묶였어요…」→「리허설 소동에 발이 묶였어요…」 · fail_common_b 「…다음엔 맞는 손을 데려가요.」→「…다음엔 맞는 멤버를 데려가요.」 |
+| adventure_scene_line_config / dialogue_line_config | 71 / 39 | text | id, concept/role, slot/beat, weight | sc_common_1a 「해가 기울 무렵에야 그곳에 닿았어요.」→ 그대로 써도 됨(장소 단어 없음 → 바꾸지 않는 줄은 「원본 그대로」 표시) · dl_fight_mid_a 「앞은 내가 볼게…」→「센터는 내가 설게. 뒤로 반 걸음만…」 |
+| adventure_lobby_copy / onboard_copy | 75 / – | ko_text | copy_id, slot | 「모험 티켓」→「여정 티켓」 · `lob_dungeon` 키 글은 원본 글을 먼저 띄운 뒤(12:30 완료 기준) 임시 글로 |
+| adventure_boss_copy / boss_config subtitle | 136 / 1 | ko_text, subtitle | copy_id, slot, key | boss_title 「잊힌 사원」→「나쁜 기운 사원」 · boss_sub 「괴수 보스를 쓰러뜨려요」→「나쁜 기운 보스를 걷어내요」 |
+| dispatch_review_target(출동) | 10 | title | target_id, boss_art, need_species, need_role, scale, time_limit_sec, reward_* | dp01 「풀숲 거인」→「거리의 나쁜 기운」 · dp02 「빨래터 수호」→「녹음실 수호」 · dp03 「시장 돌파」→「방송국 돌파」. need_species(liubei 등 모노 종)·boss_art는 우리 카드로 바꿀 대상이지만 **현중 결정 대기** |
+
+- 숫자 칸(weight, progress_pct, scale, reward_gold…)은 위 모든 표에서 원본값 그대로 · 출처 · 발란스 대기.
+- 바꾸지 않은 글 줄도 `content_status`에 「원본 그대로」로 남겨 검수 누락을 막는다.
+
+<a id="board-group-map"></a>
+
+## 4. 보드 칸·그룹 — 우리 보드에 맞춤 (현중 12:50 결정) · 제안(검수 대기) · 유르넷 검수
+- **현중 결정(12:50):** 원본 board_index·group_id를 그대로 두지 않고, 지금 우리 보드 칸에 맞춘다. **왜:** 우리 게임 보드와 맞아야 여정이 우리 게임 흐름에 붙는다. **막는 것:** 원본 모노 보드(칸 번호 2~60) 기준 표시·해금이 우리 보드와 어긋나는 것.
+- **원본 뜻(읽은 곳):** board_index는 원본 화면에서 「보드 N」 글자로만 쓴다(`monocapibara/src/ui/adventure/AdventureView.ts:7624`, 읽기 `core/adventure/csvAccess.ts:16`). 해금은 board_index가 아니라 unlock_prosperity로 정해진다. group_id는 `adventure_group_config`(path·stay·meet·gate)의 이름·점 색으로 목록과 상세에 쓴다(`AdventureView.ts:4318 groupLabel`, `:6464`, `:7623`).
+- **우리 보드:** `data/game/board_tile.csv` 40칸(pos 1~40). 시설은 `facility.csv` 기준이고, 칸 종류는 `group` 칸(corner_start·facility·company·fan_react·settle·casting·schedule·corner_rest·corner_jail)이다. 원본은 칸 번호가 60까지라 1:1로 옮길 수 없다.
+- **맞춤 규칙:**
+  1. 길마다 임시 케이팝 이름의 장소와 같은 시설·칸 하나에 붙인다. 예: 녹음은 보컬 녹음실, 방송은 예능 방송국, 무대는 콘서트장, 팬은 팬샵·팬 반응.
+  2. **여러 길이 한 칸을 같이 써도 된다.** 40칸에 35길이라 장소가 겹친다.
+  3. 원본 board_index 숫자는 `mono_board_index`로 남기고, 새 칸은 `tile_id`(→ board_tile FK)로 둔다. 칸 이름은 유르넷이 확정한다.
+  4. **그룹은 붙은 칸의 종류를 따른다.**
+     - 활동: facility, company, corner_start
+     - 쉼: corner_rest
+     - 만남: fan_react, schedule, settle, casting
+     - 나쁜 기운 입구: corner_jail
+     - group_id 이름(예: `adventure_group_activity`)은 유르넷이 확정한다. 점 색은 원본 4색을 순서대로 다시 쓰고, 새 색은 만들지 않는다.
+  5. 해금(unlock_prosperity)·시간·인원은 원본값 그대로 두고 발란스 대기다. 칸 위치로 해금을 바꾸지 않는다.
+
+| 원본 | 원본 bi / 그룹 | 임시 이름 | → 우리 칸 | 칸 이름(종류) | → 우리 그룹 | 이유 |
+|---|---|---|---|---|---|---|
+| L01 | 2 / path | 거리 버스킹 | board_tile_33 | 콘서트장(facility) | 활동 | 무대 공연 |
+| L02 | 3 / path | 새벽 녹음 | board_tile_07 | 보컬 녹음실(facility) | 활동 | 녹음 |
+| L03 | 7 / path | 방송국 미팅 | board_tile_27 | 예능 방송국(facility) | 활동 | 방송국 |
+| L04 | 8 / path | 지방 행사 가는 길 | board_tile_33 (L01과 같이 씀) | 콘서트장(facility) | 활동 | 행사 무대 |
+| T01 | 5 / stay | 팬 사인회 | board_tile_12 | 팬샵(facility) | 활동 | 팬 만남 시설 |
+| E01 | 10 / meet | 숙소 작은 방 | board_tile_11 | 기숙사(corner_rest) | 쉼 | 숙소 |
+| L05 | 19 / path | 연습실 복도 | board_tile_04 | 댄스 연습실(facility) | 활동 | 연습실 |
+| L06 | 20 / path | 기획사 회의실 | board_tile_01 | 출발 · 사옥(corner_start) | 활동 | 기획사 |
+| T02 | 9 / stay | 정산실 앞 | board_tile_05 | 정산(settle) | 만남 | 정산 |
+| E03 | 37 / meet | 맑은 응원봉 | board_tile_03 | 팬 반응(fan_react) | 만남 | 응원 |
+| L07 | 25 / path | 옛 데뷔 포스터 골목 | board_tile_02 | 아카데미(facility) | 활동 | 데뷔 전 |
+| L08 | 26 / path | 음악방송 리허설 | board_tile_28 | 예능 방송국(facility) | 활동 | 방송 |
+| T03 | 24 / stay | 댄스 연습실 배틀 | board_tile_24 | 댄스 연습실(facility) | 활동 | 연습실 |
+| E05 | 44 / meet | 굿즈 장터 | board_tile_14 | 팬샵(facility) | 활동 | 굿즈 |
+| E07 | 31 / meet | 팬레터 보관함 | board_tile_18 | 팬 반응(fan_react) | 만남 | 팬레터 |
+| L09 | 34 / path | 안개 낀 대기실 복도 | board_tile_30 | 예능 방송국(facility) | 활동 | 대기실 |
+| L10 | 35 / path | 문 닫은 팬샵 앞 | board_tile_15 | 팬샵(facility) | 활동 | 팬샵 |
+| T04 | 27 / stay | 숙소 앞 울타리 | board_tile_11 (E01과 같이 씀) | 기숙사(corner_rest) | 쉼 | 숙소 |
+| E09 | 12 / meet | 오디션 심사석 | board_tile_06 | 쟁탈전(casting) | 만남 | 겨룸·쟁탈 |
+| L11 | 40 / path | 긴 출근길 담장 | board_tile_21 | 본가(corner_rest) | 쉼 | 집과 출근길 |
+| L12 | 41 / path | 컴백 갈림길 | board_tile_08 | 찬스(schedule) | 만남 | 갈림길·선택 |
+| T05 | 56 / stay | 불 켜진 작업실 창가 | board_tile_10 | 프로듀싱 스튜디오(facility) | 활동 | 작업실 |
+| E08 | 58 / meet | 남을까 떠날까 계약서 | board_tile_13 | 프로듀싱 스튜디오(company) | 활동 | 회사 계약 |
+| E10 | 60 / meet | 접힌 데모 테이프 | board_tile_29 | 프로듀싱 스튜디오(company) | 활동 | 데모 |
+| E11 | 54 / meet | 차트 계단 | board_tile_23 | 찬스(schedule) | 만남 | 차트 기회 |
+| L13 | 50 / path | 페스티벌 무대 뒤 | board_tile_32 | 콘서트장(facility) | 활동 | 무대 뒤 |
+| L14 | 51 / path | 조용한 댓글 연못 | board_tile_34 | 팬 반응(fan_react) | 만남 | 댓글 반응 |
+| T06 | 59 / stay | 루머 뒷골목 | board_tile_38 | 찬스(schedule) | 만남 | 돌발 일정 |
+| E02 | 22 / meet | 달콤한 계약 제안 | board_tile_40 | 정산(settle) | 만남 | 돈 이야기 |
+| E12 | 57 / meet | 가사가 빛나는 타워 | board_tile_22 | 보컬 녹음실(facility) | 활동 | 가사 |
+| D01 | 11 / gate | 동쪽 나쁜 기운 입구 | board_tile_31 (임시) | 감옥(corner_jail) | 나쁜 기운 입구 | 막히는 칸 · **현중 결정 대기** |
+| E04 | 42 / meet | 카메라가 멈춘 골목 | board_tile_19 | 뷰티 스튜디오(facility) | 활동 | 촬영·비주얼 |
+| E06 | 52 / meet | 메트로놈의 속삭임 | board_tile_09 | 보컬 녹음실(facility) | 활동 | 리듬 |
+| L15 | 55 / path | 앙코르 언덕 | board_tile_35 | 콘서트장(facility) | 활동 | 앙코르 |
+| D02 | 43 / gate | 서쪽 나쁜 기운 돌문 | board_tile_31 (D01과 같이 씀, 임시) | 감옥(corner_jail) | 나쁜 기운 입구 | **현중 결정 대기** |
+
+- **그룹 수 변화(원본 → 맞춤):** path 15·stay 6·meet 12·gate 2 → 활동 21·쉼 3·만남 9·나쁜 기운 입구 2. 원본 「머무는 동네」(T01~T06)는 우리 칸 종류를 따르면 대부분 활동·만남으로 흩어진다.
+- **안 쓰는 칸:** 16·26·36(쟁탈전), 17·20(뷰티), 25(댄스), 37·39(아카데미)는 아직 붙은 길이 없다.
+- **어긋남(현중 결정 대기):**
+  - 우리 보드에는 「나쁜 기운」 칸이 없어 D01·D02를 감옥(31)에 임시로 붙였다.
+  - 그룹을 칸 종류에서 정하면 원본 stay 6줄의 성격(머무는 곳)이 사라진다. 길 성격을 지킬지, 칸 종류를 따를지 정해야 한다.
+
+
+<a id="source-check"></a>
+
+## 5. 현재 원표 대조와 확인 범위
+
+- `adventure_route.csv`의 기존 35행과 이 문서의 35길을 원래 ID로 대응했습니다. 새 ID·이름·소개·시간·원래 보드 번호·해금·최소/추천/최대 인원·연결 칸·그룹, 11개 항목이 일치합니다. 칸 뒤 괄호 설명은 ID에서 제외하고 그룹 이름은 실제 그룹 ID로 대응했습니다.
+- 상세표의 그룹은 **활동 21 · 쉼 3 · 만남 9 · 나쁜 기운 입구 2**입니다. 그룹 요약의 20/10만 상세 집계에 맞췄으며 길별 상세·CSV 값은 바꾸지 않았습니다.
+- 이 출처 ID는 길 35행·그룹 4행·진행 슬라이드 140행·서사 조각 249행, 합계 428행에서 사용됩니다. 표의 직접 출처라는 뜻이며 임시 글·발란스 수치를 운영 확정했다는 뜻은 아닙니다.
+- 실행 로더는 기존 길을 읽은 뒤 추가 탐험과 도시·콘텐츠 표시 설정을 적용합니다. 이 목록의 35길이 현재 화면의 전체 목록이거나 모든 표시 이름과 같다고 단정하지 않습니다.
+- 실제 화면·플레이·모노 원숫자 재검증은 이번 대조에서 하지 않았습니다. 숫자의 새 결정과 콘텐츠 검수는 각 원본의 상태를 따릅니다.
+
+<details><summary>작업 기록 · 원문 작성·결정과 보존</summary>
+
+### 원문 상단 기록
+
+> **10/23 12:56 현중 확정:** 나쁜 기운 입구 2길(D01·D02)은 31번 감옥 칸에 둔다(`tile_id`=31번 칸, 그룹=나쁜 기운 입구). 새 칸은 만들지 않는다. **왜:** 감옥 칸은 잡혀서 막히는 칸이라 나쁜 기운에 들어가는 길의 성격과 가장 가깝다. 우리 40칸 보드 구조를 바꾸지 않고 붙일 수 있다. **확인:** 두 길의 상세 화면이 「보드 31」로 나오고, 그룹 점이 나쁜 기운 입구 색이어야 한다. 「현중 결정 대기」에서 이 항목을 지운다.
+
+> **10/23 12:55 현중 확정:** 원본 「머무는 동네」 6길도 다른 길처럼 붙은 우리 칸 종류를 따라 그룹을 정한다(활동·쉼·만남·나쁜 기운 입구). 길 성격을 살리려고 따로 쉼 그룹으로 묶지 않는다. **왜:** 여정 그룹이 우리 보드 칸과 하나의 규칙으로 맞아야 길이 어느 칸에 있는지와 그 길의 성격이 어긋나지 않는다. 예외를 두면 길마다 규칙이 갈려 나중에 표와 화면이 다시 꼬인다. **적용:** 변환표 4절의 6길 그룹을 칸 종류 기준 값으로 확정한다. 「현중 결정 대기」에서 이 항목을 지운다. **확인:** 35길 모두 그룹이 붙은 칸 종류와 같은지 검사한다(예외 0).
+
+- 시각: 2026-10-23 12:5x KST · 작성: 총괄(이스라트) · 상태: **임시·제안(검수 대기)** — 이름·글은 콘텐츠 기획(이올카), 영어 뜻 이름(slug)은 시스템 기획(유르넷)이 검수
+- 근거 결정: 현중 10/23 12:42 「원본 35개는 두고 안의 내용만 케이팝몬스터즈 컨셉으로 바꾼다, 임시라도」
+- 원본: `모노카피바라 프로젝트/monocapibara/dist/adventure_config.csv` 2–36행(35줄). 숫자 칸은 전부 **원본값 그대로(출처 이 파일) · 발란스 대기**. 이 표의 숫자는 옮겨 적은 것이고 새로 만든 숫자는 없다.
+- 컨셉 근거(우리 쪽): `data/game/facility.csv` name_ko(댄스 연습실·녹음실·콘서트홀·방송국·팬샵·기획사·숙소·프로듀싱 스튜디오·뷰티 스튜디오), `data/game/board_tile.csv` name_ko(사옥·아카데미·팬 반응·정산·쟁탈전·찬스), `data/game/mons.csv`(핑크·그린·블루·옐로·퍼플 몬즈), `docs/planning/game-simulator.md`(나쁜 기운), 우리 임시 `data/game/adventure_route.csv` 5줄.
+
+
+### 이번 대조
+
+- 작성: codex · 원문 전문과 현재 35길 원표·그룹/슬라이드/서사 출처, 경제·시뮬레이터 로더를 읽어 대조했습니다.
+- 그룹 요약 집계 오기만 20/10에서 21/9로 정정했습니다. 길별 상세·수치·CSV·코드는 변경하지 않았습니다.
+- 이전 본문 전체는 [짝 로그](여정길35_케이팝임시변환_v01.log.md)에 원문 그대로 보존했습니다. 실제 뷰어·플레이 검수와 등록은 별도 확인입니다.
+
+</details>

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>P105 · 핵심제안 시스템 개발 진행 점검</title><style>*{box-sizing:border-box}:root{--bg:#f2f5f8;--ink:#243243;--line:#d9e2eb;--card:#fff;--accent:#237f87;--soft:#edf4f0}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 system-ui,-apple-system,sans-serif}
+main{max-width:1080px;padding:30px 24px 60px;margin:auto}h1{font-size:30px;line-height:1.3}h2{font-size:22px;margin-top:34px}
+blockquote{margin:12px 0;padding:12px 16px;background:#fff6df;border-radius:12px}blockquote p{margin:4px 0}
+.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;background:var(--card);border-radius:12px;overflow:hidden;font-size:14px;margin:12px 0}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}th{background:var(--soft);white-space:nowrap}
+pre{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;font-size:13px}
+a{color:var(--accent)}hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+.origin-tag{font-size:.5em;font-weight:500;opacity:.55;margin-left:.4em;white-space:nowrap;vertical-align:middle}
+@media(max-width:600px){main{padding:22px 16px}h1{font-size:25px}}</style></head><style>main{max-width:1160px;margin:auto;padding:24px}table{width:100%;border-collapse:collapse}td,th{padding:9px;vertical-align:top}details.previous-spec{margin:28px 0;padding:16px;border:1px solid #d9e2eb;border-radius:12px;background:#f7f9fb}details.previous-spec>summary{font-weight:700;cursor:pointer}.current-note{padding:16px;background:#eef8f2;border-radius:12px}.part{scroll-margin-top:80px}pre{white-space:pre-wrap;overflow-wrap:anywhere}code{overflow-wrap:anywhere}img{max-width:100%}</style><body><main><header><h1>P105 · 핵심제안 시스템 개발 진행 점검</h1>
+<p>상태: 2026년 10월 15일 · 비이벤트 시스템 전체 정리</p>
+<p>현재 성장의 기준은 아이돌 성장 v02입니다. 오디션·건설·방어의 독립 시뮬레이터를 공통 데이터 계약으로 연결하고, 메뉴·기획·제안 카드의 기준을 맞춥니다. 과거 작업 수나 옛 검토 의견은 현재 완료율로 사용하지 않습니다.</p>
+</header><nav aria-label="기획서 세부 내용" class="local-nav"><a href="#part-1">1. 실행되는 것</a><a href="#part-2">2. 같은 데이터로 보는 범위</a><a href="#part-3">3. 현재 구현과 후속 구분</a><a href="#part-4">4. 문서와 제안 카드</a><a href="#part-5">5. 보존한 것</a><a href="#part-6">6. 검사 기준</a><a href="#part-7">7. 보고와 증거</a><a href="#part-8">8. 문서 정보와 변경 이력</a></nav><section class="part" id="part-1"><h2>1. 실행되는 것</h2>
+<table>
+<thead>
+<tr>
+<th>영역</th>
+<th>현재 확인 대상</th>
+<th>대표 문서</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>오디션</td>
+<td>16인 첫인상·서바이벌·영입·짝 몬스·서사</td>
+<td>P100</td>
+</tr>
+<tr>
+<td>성장</td>
+<td>대표4·세부12·학습2+일본어 보존, 카드·칸·시설, 팀/개별 표시</td>
+<td>P107</td>
+</tr>
+<tr>
+<td>로컬 연결</td>
+<td>같은 후보·몬스 ID, 성장 합계 단위, 시설별 단계</td>
+<td>P140</td>
+</tr>
+<tr>
+<td>건설</td>
+<td>30단계 재정비 예정·밀착3동·전체복셀, 성장 단계 가져오기</td>
+<td>P81/P106</td>
+</tr>
+<tr>
+<td>방어</td>
+<td>자동10·피니시5·AI·독립3동HP·보스3구간, 성장 팀 가져오기</td>
+<td>P104/P138</td>
+</tr>
+<tr>
+<td>메뉴</td>
+<td>최신 성장 기본, 주요5개 흐름, 보조 도구 접힘, 구URL 유지</td>
+<td>P75</td>
+</tr>
+</tbody>
+</table>
+</section><section class="part" id="part-2"><h2>2. 같은 데이터로 보는 범위</h2>
+<p>성장 v02가 팀·능력·시설 진행의 주인입니다. 대표 현재값은 세부 3개의 평균이고, 그룹 성장 합은 세부 12개의 합입니다. 학습 3언어와 재능 4축은 별도로 전달합니다. 실제 성장 배분은 영어·중국어이며 일본어는 보존값입니다. 건설과 방어는 스냅샷을 읽어 자신의 시험 상태를 만들며 원본 성장에는 피해·보상을 쓰지 않습니다.</p>
+</section><section class="part" id="part-3"><h2>3. 현재 구현과 후속 구분</h2>
+<table>
+<thead>
+<tr>
+<th>후속</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>운영 경제 통합</td>
+<td>v02 성장 팬·이식 팬 총합·구형 칸 팬의 의미가 다름</td>
+</tr>
+<tr>
+<td>전투 보상·피해 되쓰기</td>
+<td>저장 정책과 성장/전투 계수 검증 필요</td>
+</tr>
+<tr>
+<td>성장 능력→전투 피해</td>
+<td>기존 방어 균형을 바꾸므로 별도 수치 검증 필요</td>
+</tr>
+<tr>
+<td>실제 미니게임 완성</td>
+<td>후보와 연결 함수가 있어도 게임 본체 완성과 다름</td>
+</tr>
+<tr>
+<td>추가 영입 본 연출</td>
+<td>현재 간이 4인 선택과 기획된 3회 서바이벌 구분</td>
+</tr>
+<tr>
+<td>계정 서버·다기기</td>
+<td>현재 브라우저 로컬 계약 범위</td>
+</tr>
+<tr>
+<td>전조합 장기 균형·15추가부지</td>
+<td>리소스20종과 실제 검증5부지를 구분</td>
+</tr>
+</tbody>
+</table>
+</section><section class="part" id="part-4"><h2>4. 문서와 제안 카드</h2>
+<p>P100/P107은 최신 실행을 앞에 두고 옛 상세를 접었습니다. P75/P105는 전체 안내를 갱신했고 P106/P108은 최신 성장과 구형 경제 경계를 드러냈습니다. P140은 필드·단위·소유권·연결 실패 시 동작을 명시합니다. 아이돌·오디션·건물·악귀·몬스 스킬 카드에는 현재 시연과 실행 경로를 보완합니다.</p>
+</section><section class="part" id="part-5"><h2>5. 보존한 것</h2>
+<p>과거 공용 보고·증거·이벤트게임 자산은 보존합니다. 오래된 설명용 시뮬레이터는 보조 도구로 접고, 기존 URL은 계속 열립니다. 60일 경제 실험은 비교 자료로 남깁니다.</p>
+</section><section class="part" id="part-6"><h2>6. 검사 기준</h2>
+<ul>
+<li>후보·몬스 ID와 학습 3언어가 이어지는가.</li>
+<li>대표 합과 세부 합의 차이를 변환 계약이 설명하는가.</li>
+<li>같은 보드 칸의 시설 단계만 건설·방어로 넘어가는가.</li>
+<li>오래된 탭이 최신 상태를 덮어쓰지 않는가.</li>
+<li>메뉴·제안서·현재 기획이 같은 실행 모듈을 여는가.</li>
+<li>이벤트 자산 변경이 없는가.</li>
+</ul>
+</section><section class="part" id="part-7"><h2>7. 보고와 증거</h2>
+<p><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/%EB%B3%B4%EA%B3%A0-20261015-10.md">지시10 보고</a> · <a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P140">공통 데이터 P140</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/%EB%B3%B4%EA%B3%A0-20261015-09.md">기존 방어·건설 1차 보고</a></p>
+</section><section class="part" id="part-8"><h2>8. 문서 정보와 변경 이력</h2>
+<p>이전 10월 12일 점검표와 10월 15일 방어·건설 마감 기록은 아래에 보존합니다. 이번 변경은 승인이나 전체 게임 완성을 자칭하지 않습니다.</p>
+</section><details class="previous-spec"><summary>이전 상세 설계와 결정 기록 · 10월 15일 정리 전</summary>
+<p>이 아래는 당시 설계·검토 기록입니다. 현재 실행 기준과 데이터 연결은 위 본문을 따릅니다.</p>
+<h1>핵심제안 진행 점검 · 개발된 것과 아직 안 한 제안 (신규)</h1>
+<blockquote>
+<p>claude · 2026-10-12 · 현중 채팅 직접 지시</p>
+</blockquote>
+<blockquote>
+<p><strong>갱신 · 10/12 17시 · 규격 정리(P86):</strong> 오디션은 시뮬 v01이 있음(P100 갱신) · 10번 몬스 스킬은 2번 몬스와 악귀(P96)로 합침 · 나쁜 기운 디펜스 대표는 P104(7장 규격) · P116은 최신 개발 기록 · 「제안(검수 대기)」 표시는 쓰지 않음(현중 10/12 17:06) · 시뮬에 들어간 값은 확정.</p>
+<p>이 탭의 기준(현중 10/12): <strong>모노카피바라 소스가 아니라, 바뀌는 제안서 내용을 토대로 만들어 나가는 개발 기획서를 담는 탭</strong>이다. 그래서 이 점검도 「제안서 → 개발 기획서」가 이어졌는지를 본다.</p>
+</blockquote>
+<h2>목차</h2>
+<ul>
+<li><a href="#history-%EA%B0%84%EB%9E%B5">간략</a></li>
+<li><a href="#history-%EA%B0%B1%EC%8B%A0--1012-%EB%82%AE--4%EA%B0%9C-%EC%9E%91%EC%84%B1-%EC%8B%A0%EA%B7%9C">갱신 · 10/12 낮 · 4개 작성</a></li>
+<li><a href="#history-1-%EC%A7%80%EA%B8%88%EA%B9%8C%EC%A7%80-%EA%B0%9C%EB%B0%9C%EB%90%9C-%EA%B2%83--%EA%B0%9C%EB%B0%9C-%EC%BD%98%ED%85%90%EC%B8%A0-10%EA%B0%9C-%EC%8B%A0%EA%B7%9C">1. 지금까지 개발된 것 · 개발 콘텐츠 10개</a></li>
+<li><a href="#history-2-%EA%B2%80%ED%86%A0-%EC%9D%98%EA%B2%AC-%EC%8B%A0%EA%B7%9C">2. 검토 의견</a></li>
+<li><a href="#history-3-%EC%A0%9C%EC%95%88%EC%84%9C-%EC%A4%91-%EC%95%84%EC%A7%81-%EA%B0%9C%EB%B0%9C-%EA%B8%B0%ED%9A%8D%EC%84%9C%EA%B0%80-%EC%97%86%EB%8A%94-%EA%B2%83-%EC%8B%A0%EA%B7%9C">3. 제안서 중 아직 개발 기획서가 없는 것</a></li>
+<li><a href="#history-3-1-%EC%9D%B4%EC%8B%9D-%EB%AC%B8%EC%84%9C%EB%A1%9C-%EC%9E%87%EB%8A%94-%EA%B3%B3--%EB%A7%81%ED%81%AC%EB%A7%8C-%EC%8B%A0%EA%B7%9C">3-1. 이식 문서로 잇는 곳 · 링크만</a></li>
+<li><a href="#history-3-2-%ED%99%94%EB%A9%B4-%EC%9D%B4%EB%8F%99--%EB%A7%81%ED%81%AC%EB%A7%8C-%EC%8B%A0%EA%B7%9C">3-2. 화면 이동 · 링크만</a></li>
+<li><a href="#history-4-%EA%B0%9C%EB%B0%9C-%EA%B8%B0%ED%9A%8D-%EB%8C%80%EC%83%81%EC%9D%B4-%EC%95%84%EB%8B%8C-%EC%A0%9C%EC%95%88-%EB%8D%B1-%EC%8B%A0%EA%B7%9C">4. 개발 기획 대상이 아닌 제안 덱</a></li>
+<li><a href="#history-5-%EB%8B%A4%EC%9D%8C-%EC%88%9C%EC%84%9C-%EC%A0%9C%EC%95%88-%EC%8B%A0%EA%B7%9C">5. 다음 순서 제안</a></li>
+<li><a href="#history-6-%EC%99%BC%EC%AA%BD-%EB%AA%A9%EB%A1%9D-%EC%A0%95%EB%A6%AC-%EC%8B%A0%EA%B7%9C">6. 왼쪽 목록 정리</a></li>
+</ul>
+<hr/>
+<h2>10월15일 방어·건설1차 마감</h2>
+<p>이번 갱신의 대상은 이 채팅의 나쁜 기운 디펜스·방어진지·건설시험입니다. 전체 핵심제안/아이돌/경제/미니게임 완료를 뜻하지 않습니다. 아래10/12 검토·타담당 진행 기록은 당시 기준으로 보존합니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>현재 구현/검사</th>
+<th>후속 또는 검증 한계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>스킬/피니시</td>
+<td>자동10종 중 몬스당1종 고정 후 강화, 최초5회에5명 배분. 피니시5종은 카드 습득/강화→버튼 전원 발동→쿨타임 재사용. 판 종료 시 습득/강화/사용 횟수 초기화</td>
+<td>전 난이도 승률 확정은 별도</td>
+</tr>
+<tr>
+<td>AI/웨이브</td>
+<td>감지·공격·상실·복귀 경계/상태·표적 예약/유지, 길목 사전배치/분담. 체력 대신 수량 우선 조절, 쉬움1길목·일반/도전 동시 다발 기준, 무리 뒤2.5초 연결</td>
+<td>01~03 보고/현재표 기준. 마감 뒤 남은 무리/보스까지 정리</td>
+</tr>
+<tr>
+<td>방어진지/보스</td>
+<td>독립HP3동·각 옥상보석·표적 분산/파괴 재배정·밀착 외곽길. 보스 정확3등분(2/3·1/3) 패턴·약화 전환</td>
+<td>본관 파괴 패배, 부속 파괴 지원손실. 최종 후반 보스GPU 장면/전조합 성능·승률은 미완</td>
+</tr>
+<tr>
+<td>리소스/건설</td>
+<td>9건물 30단계(본관 1 + 부속 2) 기준으로 재정비 ·. 본관 1 + 부속 2 밀착, 전체층 복셀4.2초·완성 모델 전환, 단계/자동/정지/초기화 시험</td>
+<td>무료 보드3단계 유지. 일반 경제 어댑터/운영 저장·15시설 실제 배치 별도</td>
+</tr>
+</tbody>
+</table>
+<p><a href="/docs/planning/game-simulator.html?module=simulator_module_building">건설시험</a> · <a href="/docs/planning/game-simulator.html?module=simulator_module_bad_energy">방어시험</a> · <a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P138&amp;plan=planning_development_plan_bad_energy">P138 통합 명세</a></p>
+<p><strong>검사 근거:</strong> <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/%EB%B3%B4%EA%B3%A0-20261015-06.md">06 독립3동/보스/자산</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/%EB%B3%B4%EA%B3%A0-20261015-07.md">07 밀착/경로/시공</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/%EB%B3%B4%EA%B3%A0-20261015-08.md">08 전체복셀</a> · <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/%EB%B3%B4%EA%B3%A0-20261015-09.md">09 기획서 정합</a>. 07은20사례60초 자연 전투 및75초 실제 화면,08은50조합 복셀814확인·제어43·모드17과 대표 실제 시공/완성 화면입니다.08의 긴 GPU 자동 완주 중단을 완료로 계산하지 않습니다.</p>
+<h2>간략 · 아래는10/12 점검 이력</h2>
+<p><strong>한 줄</strong> 지금 개발 기획서는 보드 구동과 전투·연출 쪽에 몰려 있고, 게임의 중심 고리(배수 → 칸 수익 → 시설 업그레이드 → 아이돌 능력 → 팬 → 수익 → 도시)는 개발 기획서가 아직 하나도 없다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>개발 콘텐츠(대표 기획서 있음)</td>
+<td>14 (10/12 낮에 4개 추가 · 아래 「갱신」)</td>
+</tr>
+<tr>
+<td>그중 공용 시뮬레이터에서 실제로 돌려 볼 수 있는 것</td>
+<td>7</td>
+</tr>
+<tr>
+<td>그중 기획서만 있는 것</td>
+<td>4 (출연권 대전 · 게릴라 공연 · 아이돌 능력 · 새 도시 진출) · 건물 성장 · 팬과 수익은 60일 시뮬(이식 경제)에 값이 있음</td>
+</tr>
+<tr>
+<td>개발 기획서가 아직 없는 제안</td>
+<td>12 (처음 16에서 4개 작성)</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2>갱신 · 10/12 낮 · 4개 작성 (신규)</h2>
+<p>현중 지시(「커서가 모노 이식 중이니 새로운 것만 · 아이돌 능력 · 팬과 수익 · 새 도시 진출 · 건물 성장만」)로 네 개의 대표 개발 기획서를 썼습니다. 모두 시스템 구조(모듈 · 이벤트 · 상태 · 저장)까지 넣었고, 왼쪽 목록에서 「개발 기획서 필요」 → 「개발 콘텐츠」로 옮겼습니다.</p>
+<table>
+<thead>
+<tr>
+<th>번호</th>
+<th>대표 기획서</th>
+<th>핵심</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P106</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P106">건물 성장 · 기능과 수익</a></td>
+<td>한 번만 묻는 업그레이드 · 시설 4종 효과 · 완공 이벤트</td>
+</tr>
+<tr>
+<td>P107</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P107">아이돌 능력</a></td>
+<td>능력 4종 제안 · 오르는 길 · 쓰이는 곳 · 성장 단계 · 칸 수익에 직접 곱하지 않음</td>
+</tr>
+<tr>
+<td>P108</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P108">팬과 수익</a></td>
+<td>칸마다 팬 · 도착 수익 식 · 이식 경제(팬 한 숫자)와의 경계</td>
+</tr>
+<tr>
+<td>P109</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P109">새 도시 진출</a></td>
+<td>진입 조건 결정 대기(안 C 제안) · 20칸 보드 · 다녀오기 · 귀환</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2>1. 지금까지 개발된 것 · 개발 콘텐츠 10개 (신규)</h2>
+<p>왼쪽 목록 순서(게임 흐름 순) 그대로다.</p>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>콘텐츠</th>
+<th>대표 기획서</th>
+<th>근거 제안서</th>
+<th>진행 단계</th>
+<th>남은 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>오디션</td>
+<td>P100</td>
+<td>오디션</td>
+<td>시뮬 「오디션」 v01(16명 서바이벌 · 12초 · 재능 200 · 현재 40 · 짝 몬스 배정) · 시뮬 표 4개</td>
+<td>사옥 짧은 오디션 · 계정 저장 · 몬스 획득 컷씬 연결</td>
+</tr>
+<tr>
+<td>2</td>
+<td>몬스와 악귀</td>
+<td>P96</td>
+<td>악귀와 몬스 · 몬스 스킬(10번 합침)</td>
+<td>시뮬 「몬스 · 애니」 v01 · P125 디펜스 v07에 기본10종 공통14클립·30% 확대·성장·각 몬스 카메라 연결</td>
+<td>아육대(지상 종목) 연출은 후속</td>
+</tr>
+<tr>
+<td>3</td>
+<td>보드 기본 구성</td>
+<td>P87</td>
+<td>보드</td>
+<td>시뮬 「보드 기본」 · 대표 기획서가 작성 예시 양식</td>
+<td>보드 제안(40칸 8역할 · 시설 활동 20칸)을 개발 기획서로 다시 정리</td>
+</tr>
+<tr>
+<td>4</td>
+<td>보드 주사위 구동</td>
+<td>P74</td>
+<td>보드 · 배수 걸기</td>
+<td>시뮬 「주사위 · 증설」 · 도시맵 툴 원문 보존</td>
+<td>배수 판단 기획 없음(→ 3절 1번)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>필러 룰렛</td>
+<td>P72</td>
+<td>잭팟(도착 룰렛) · 보드</td>
+<td>시뮬 「도착 · 필러」 · 확률은 예시 · 보상 임시</td>
+<td>보상 · 확률 확정, 잭팟 본편(→ 3절 2번)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>출연권 대전</td>
+<td>P98</td>
+<td>쟁탈(FS04)</td>
+<td>기획서만 · CSV 4개</td>
+<td>미니게임 3종 연출 6클립 · 시뮬 모듈</td>
+</tr>
+<tr>
+<td>7</td>
+<td>게릴라 공연</td>
+<td>P102</td>
+<td>쟁탈(FS04 · FS03k)</td>
+<td>기획서만 · CSV 1개</td>
+<td>응원봉 찾기 시뮬 · 수익 이전 값</td>
+</tr>
+<tr>
+<td>8</td>
+<td>보드 건물 유닛</td>
+<td>P81</td>
+<td>건물 성장</td>
+<td>10/15: 실제5부지30단계 재정비 예정·밀착3동·전체복셀 · 기존 무료 보드3단계 유지</td>
+<td>일반 성장경제 연결/15부지·전조합 검증 별도</td>
+</tr>
+<tr>
+<td>9</td>
+<td>나쁜 기운 디펜스</td>
+<td>P104 대표 · P138 최신 통합명세</td>
+<td>악귀와 몬스 · 몬스 스킬</td>
+<td>10/15 방어1차 구현 마감: 자동10/피니시5·AI/웨이브·독립3HP/보석/배치·보스3구간</td>
+<td>사용자 플레이 검수/최종 균형 별도. P125 및01~08보고로 이력 추적</td>
+</tr>
+<tr>
+<td>10</td>
+<td>[이벤트] 월드 디펜스</td>
+<td>P88</td>
+<td>악귀와 몬스(옛 공성)</td>
+<td>구현 v05 · 시뮬 「악귀 방어전」</td>
+<td>언제 열리는지(발동 조건) 미정</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2>2. 10/12 검토 의견 이력</h2>
+<ol>
+<li><strong>중심 경제 고리가 비어 있다.</strong> 경제 · 건물 성장 · 아이돌 능력 · 팬과 수익 제안은 서로를 가리키며 하나의 고리를 설명하는데, 이 고리를 다루는 개발 기획서가 없다. 지금 있는 것은 주사위를 굴려 칸에 도착하기(P74)와 도착 연출(P72)까지다. 도착한 뒤 돈이 얼마 들어오고, 그 돈이 어디로 가는지는 아직 개발 기획이 없다.</li>
+<li><strong>전투 · 디펜스 쪽은 세 갈래가 겹친다.</strong> 월드 디펜스(P88 · 이벤트) · 나쁜 기운 디펜스(P104) · 몬스(P96)가 모두 「악귀와 몬스」 제안에서 나왔다. P104가 「같은 싸움이지만 건물 하나」로 경계를 그었으니, P88의 발동 조건이 정해지면 두 문서의 관계를 한 줄로 정리하면 된다.</li>
+<li><strong>기획서만 있는 콘텐츠 2개(캐스팅권 대전 · 게릴라 공연)는 시뮬 모듈이 없다.</strong> 오디션은 10/12 시뮬 v01이 생겼다(옛 안 → 10/12 17시 「시뮬 없음」). 공용 시뮬레이터(P94)에 모듈을 붙이는 것이 다음 개발 단계다.</li>
+<li><strong>10/15 보완:</strong> P81의 별도 건설/방어 시험은 밀착3동(30단계로 재정비 예정)·전체복셀까지 구현했다. 기존 무료 보드는3단계다. 건물 성장의 일반 경제·기능/수익 통합은 이 시각 시험의 완료와 구분한다(P106).</li>
+<li><strong>P75 전체 안내가 10/07 기준에 멈춰 있다.</strong> 「콘텐츠 5개」로 적혀 있어 지금 10개와 맞지 않는다. 이 점검 문서가 지금 기준이고, P75 갱신은 따로 필요하다.</li>
+<li><strong>보드 기본 구성(P87)은 대표 기획서가 「작성 예시」다.</strong> 보드 제안(40칸 8역할)을 그대로 따르는 대표 기획서로 바꿔 쓸지 정해야 한다.</li>
+</ol>
+<hr/>
+<h2>3. 제안서 중 아직 개발 기획서가 없는 것 (신규)</h2>
+<p>게임 흐름 순서다. 「일부」는 다른 개발 기획서나 시뮬에 조각이 있다는 뜻이다. 막는 결정은 각 제안서의 결정 대기 절 기준이다.</p>
+<table>
+<thead>
+<tr>
+<th>번호</th>
+<th>제안서</th>
+<th>제안 핵심</th>
+<th>지금 있는 것</th>
+<th>개발 기획서로 써야 할 것</th>
+<th>막는 결정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="/docs/planning/proposal-concept/dice.md">배수 걸기(주사위 투자)</a></td>
+<td>배수를 먼저 고르고 굴림 · 주사위 = 기획사의 재력 · 얻는 곳(유료 · 이벤트 · 자동)</td>
+<td>일부 · P74 시뮬에 배수 선택</td>
+<td>배수별 수익 · 주사위 지급 · 바닥났을 때</td>
+<td>제안서 「아직 정할 것」</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="/docs/planning/proposal-concept/jackpot.md">잭팟</a></td>
+<td>랩 스튜디오 · 방송 칸 도착 시 드문 잭팟 · 팬이 많을수록 큰 수익 · 팬이 무대로 몰려드는 연출</td>
+<td>일부 · P72 도착 룰렛</td>
+<td>팬 비례 수익 · 몰려드는 연출 · 새 팬 증가 없음 규칙</td>
+<td>후속 결정</td>
+</tr>
+<tr>
+<td>3 ✅ P106</td>
+<td><a href="/docs/planning/proposal-concept/growth.md">건물 성장</a></td>
+<td>두 업그레이드 · 시설별 쓰임 · 수익 A/B/C로 돌아옴</td>
+<td>10/16: 9건물 30단계(본관 1 + 부속 2) 기준으로 재정비</td>
+<td>일반 경제의 업그레이드 효과/비용/수익 자동 연결은 별도</td>
+<td>경제 기존 결정 범위 유지</td>
+</tr>
+<tr>
+<td>4 ✅ P107</td>
+<td><a href="/docs/planning/proposal-concept/idol.md">아이돌 능력</a></td>
+<td>업그레이드 · 활동과 원정 두 경로 · 능력 → 성과 · 수익 · 꽃 단계</td>
+<td>없음</td>
+<td>능력 항목 · 오르는 길 · 쓰이는 곳</td>
+<td>원정을 넣을지</td>
+</tr>
+<tr>
+<td>5 ✅ P108</td>
+<td><a href="/docs/planning/proposal-concept/fandom.md">팬과 수익</a></td>
+<td>팬이 모일수록 같은 활동의 수익이 커짐</td>
+<td>없음</td>
+<td>팬 수 → 칸 수익 규칙</td>
+<td>「다음에 정할 항목」</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="/docs/planning/proposal-concept/gauge.md">팬덤 게이지</a></td>
+<td>모인 팬을 보여 줌(모으지 않음) · 보드 위 팬 무리</td>
+<td>없음(옛 팬 모습 시안만)</td>
+<td>게이지 · 팬 무리 표시 규칙</td>
+<td>—</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="/docs/planning/proposal-concept/economy.md">게임 경제</a></td>
+<td>수입이 한 지갑으로 모여 시설 → 아이돌 → 기획사 → 도시로 도는 순환</td>
+<td>없음(게릴라가 「한 지갑」만 참조)</td>
+<td>전체 순환 · 들어오는 곳과 나가는 곳</td>
+<td>근거와 결정 대기</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="/docs/planning/proposal-concept/city.md">도시</a></td>
+<td>기획사가 아이돌을 키우는 경제구역 · 대표 시설 역할 · 도시 화면</td>
+<td>일부 · P82~P84 도시 원본 연결</td>
+<td>시설 역할 · 도시 등급 · 화면</td>
+<td>—</td>
+</tr>
+<tr>
+<td>9 ✅ P109</td>
+<td><a href="/docs/planning/proposal-concept/city-expand.md">새 도시 진출</a></td>
+<td>아이돌이 크면 다른 도시 보드가 열림 · 성과는 내 도시로</td>
+<td>없음</td>
+<td>진입 · 귀환 규칙</td>
+<td>진입 조건(능력 또는 찬스)</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="/docs/planning/_이전기획_보관/20261116_카드옛구조/proposal-concept/cards.md">카드</a></td>
+<td>플레이를 따라가는 다섯 장면 · 카드북 20테마 · 획득과 성장 · 엔딩</td>
+<td>일부 · 이식 <a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S07">S07 5절</a>: 메인덱 20개 · 덱당 9장 · 별은 얻을 때 고정 · 보유 수로 덱 성장</td>
+<td>획득 · 성장 · 카드북 · 쓰임 · 보관함</td>
+<td>결정 대기</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="/docs/planning/proposal-concept/season.md">시즌</a></td>
+<td>최대 60일 · 늦게 들어와도 참여 · 끝나면 리셋, 보관함 카드만 남음</td>
+<td>없음</td>
+<td>시작 · 리셋 · 보관함</td>
+<td>결정 대기</td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="/docs/planning/proposal-concept/fest.md">월드 페스티벌</a></td>
+<td>시즌 끝 대회 · 레벨별 출전권 4등급 · 중간 페스티벌</td>
+<td>없음</td>
+<td>출전 · 한 판 흐름 · 채점</td>
+<td>유저 채점 방식</td>
+</tr>
+<tr>
+<td>13</td>
+<td><a href="/docs/planning/proposal-concept/song.html">음원 · 영상</a></td>
+<td>축제에 나온 음원 · 영상을 굿즈로 · 게임 수익과 상품 수익 구분</td>
+<td>없음</td>
+<td>음원 만들기 · 판매 흐름</td>
+<td>남은 설계</td>
+</tr>
+<tr>
+<td>14</td>
+<td><a href="/docs/planning/proposal-concept/mons-skill.md">몬스 스킬</a></td>
+<td>10/15 현재: 카드3장 중 선택·몬스당 자동1종 고정강화·판 종료 초기화</td>
+<td>자동10종/피니시5종 습득·전원 발동·쿨타임 재사용 구현</td>
+<td>사용자 플레이 검수/최종 계수 조정</td>
+<td>P104/P138·01~08 보고</td>
+</tr>
+<tr>
+<td>15</td>
+<td><a href="/docs/planning/proposal-concept/pay.md">유료화</a></td>
+<td>속도 · 꾸밈 · 소장만 팔고 순위는 팔지 않음 · 상품 6가지</td>
+<td>없음</td>
+<td>상품 · 지갑이 열리는 순간 · 금지선</td>
+<td>결제와 유저 채점의 관계</td>
+</tr>
+<tr>
+<td>16</td>
+<td><a href="/docs/planning/proposal-concept/promo.html">홍보(리드 제너레이션)</a></td>
+<td>홍보 덱 · 연락처 모으기 · 리드 미션</td>
+<td>없음</td>
+<td>게임 밖 운영 기획</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>일부 진행 5</strong> · 1 배수 걸기 · 2 잭팟 · 3 건물 성장 · 8 도시 · 14 몬스 스킬
+<strong>전혀 없음 11</strong> · 나머지</p>
+<hr/>
+<h2>3-1. 이식 문서로 잇는 곳 · 링크만 (신규)</h2>
+<p>10/12 수정(이스라트 12:03 · 현중 12:47): 아래는 핵심제안 개발 기획서를 따로 만들지 않고, 모노에서 옮긴 이식 문서(책갈피 S 문서)로 링크만 잇는다.</p>
+<table>
+<thead>
+<tr>
+<th>자리</th>
+<th>이식 문서</th>
+<th>제안과 다른 점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>미션</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S11">S11 미션</a></td>
+<td>보석 · 카드 팩 보상 뺌(충돌 12)</td>
+</tr>
+<tr>
+<td>이벤트 운영 · 특가</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S13">S13</a> · <a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S13a">S13a 특가</a> · <a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S13b">S13b 미니게임 이벤트</a> · <a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S13c">S13c 협동</a></td>
+<td>보석 결제 · 레일 자리</td>
+</tr>
+<tr>
+<td>상점</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S07b">S07b 상점</a></td>
+<td>원화 직판 → 보석 사다리(충돌 11)</td>
+</tr>
+<tr>
+<td>화면 · 로비 · 보드 연출</td>
+<td><a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S12">S12 로비</a> · <a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S06b">S06b 보드 연출</a> · <a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S06">S06</a> · <a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S06a">S06a</a></td>
+<td>로비 · 건설 탭(충돌 10)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>아직 빈 곳(개발 기획서도 이식 문서도 없음)</strong>: 출석(커서가 S11a로 옮기는 중 · 모노 원본 대기) · 미니게임 상세(골격은 P07 · W05 3-5 · 캐스팅 3종은 P98) · 시나리오(P59 · 개발 기획서로 둘지 결정 대기).</p>
+<h3>3-2. 화면 이동 · 링크만 (신규)</h3>
+<table>
+<thead>
+<tr>
+<th>화면 흐름</th>
+<th>제안</th>
+<th>이식 · 링크</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>하단 탭</td>
+<td>W03 B안 · 건설 탭 빠짐</td>
+<td>S06 탭 구성(건설 탭 있음 · ☐ 제안 내용과 다름)</td>
+</tr>
+<tr>
+<td>첫 화면 · 로비</td>
+<td>인게임 메인이 첫 화면(로비 없음)</td>
+<td>S12 로비(☐ 제안 내용과 다름 · 현중 결정 대기)</td>
+</tr>
+<tr>
+<td>카드덱</td>
+<td>카드 제안 다섯 장면</td>
+<td>S07 카드덱 화면</td>
+</tr>
+<tr>
+<td>디펜스</td>
+<td>보드 → 카메라 → 디펜스 → 결과 → 보드</td>
+<td>P104 · P88 · S06 도착 줌</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 개발 기획 대상이 아닌 제안 덱 (신규)</h2>
+<p>아래 덱은 기능을 제안하는 덱이 아니라 안내 · 정리용이라 위 목록에서 뺐다.</p>
+<table>
+<thead>
+<tr>
+<th>덱</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>빌려 쓰는 것(mono)</td>
+<td>모노 구조와 케이팝 역할 대응 안내</td>
+</tr>
+<tr>
+<td>개발 일정(plan)</td>
+<td>제작 순서와 확인 기준</td>
+</tr>
+<tr>
+<td>결정 대기(wait) · 기획 필요(empty)</td>
+<td>다른 제안의 질문 모음</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2>5. 다음 순서 제안 (신규)</h2>
+<p>현중 검수 전 제안이다.</p>
+<ol>
+<li><strong>경제 고리 먼저</strong> · 배수 걸기 → 팬과 수익(잭팟 포함) → 건물 성장(기능 · 수익) → 아이돌 능력(유르넷 검수 동의). 10/12: 팬과 수익 P108 · 건물 성장 P106 · 아이돌 능력 P107 작성 · 배수는 이식 S03(배수 팬 문턱 = ☐ 제안 내용과 다름). <strong>값은 표 이름 · 키만 적고, 시즌 예산 · 60일 시뮬 결과는 <a href="/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=S02">S02</a> 한 곳</strong>(비앙카 12:04 · 현중 12:47).</li>
+<li><strong>시즌 틀</strong> · 시즌 → 카드 → 월드 페스티벌 → 음원 · 영상.</li>
+<li><strong>도시 확장</strong> · 도시 → 새 도시 진출(진입 조건 결정 뒤).</li>
+<li><strong>10/15 전투1차 마감</strong> · 최신 범위는 위 마감 표와P138을 따릅니다. 자동10종은 몬스당 하나를 배워 이후 그 기술만 강화합니다. 사용자 플레이 검수와 전 난이도 계수/승률 조정은 후속입니다.</li>
+<li><strong>유료화 · 홍보</strong>는 위가 정해진 뒤.</li>
+</ol>
+<hr/>
+<h2>6. 왼쪽 목록 정리 (신규)</h2>
+<p>이번에 왼쪽 목록을 아래처럼 정리했다. 기존 개발 콘텐츠 10개의 이름과 순서는 바꾸지 않았다.</p>
+<pre><code>공용 도구          게임 시뮬레이터 · 전체 테이블
+개발 콘텐츠 14      게임 흐름 순 · 10/12 낮에 팬과 수익 · 건물 성장 · 아이돌 능력 · 새 도시 진출 추가
+개발 기획서 필요 12  위 3절 목록(✅ 4개는 개발 콘텐츠로 옮김) — 누르면 그 제안서 원문이 열린다 (새로 추가)
+공통 작성 기준·안내   진행 점검(이 문서) · 공통 작성 규칙 · 전체 안내 · 참고 자료
+</code></pre>
+<ul>
+<li>「개발 기획서 필요」 항목은 대표 기획서 자리에 제안서 상세(md)를, 자료 자리에 제안 덱(html)을 둔다. 개발 기획서가 생기면 그 항목을 「개발 콘텐츠」로 옮긴다.</li>
+<li>제안서 원문은 읽기 전용이라 고치지 않았다. 목록 표(planning_development_plan · planning_development · planning_development_reference)와 기획서 툴 목록 그리기만 바꿨다.</li>
+</ul>
+<hr/>
+<h2>문서 정보</h2>
+<ul>
+<li>작성: claude · 2026-10-12 · 현중 채팅 직접 지시</li>
+<li>근거: data/planning_development*.csv · data/simulator/v01/simulator_module.csv · docs/planning/proposal-concept/*.md · 콘텐츠별_v03 대표 기획서</li>
+<li>상태: 제안(검수 대기)</li>
+</ul>
+<h2>10/12 이력 · v05 당시 구현 갱신</h2>
+<p>v04의 현재 참조를 P115 v05로 옮깁니다. 이전 P114 구현과 문서를 보존하며, 편성 수별 적 체력 총량·개별 생존 시간·전장 밖 우측 스킬 패널을 보완합니다.</p>
+<h2>10/12 이력 · v06 이동·지역 분담 연결</h2>
+<p>현재 대표 문서·실행은 P116 v06입니다. 악귀의 동시 이동·길목별 합류 지점·새 지역 개방 시 몬스 담당/표적 재배정을 연결합니다. 이전 P115와 편성 발란스·우측 스킬·원본 도시는 보존합니다. 구현·파일·빌드·연결 확인까지만 수행하며 플레이 검수는 현중 담당입니다.</p>
+<p><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P116&amp;plan=planning_development_plan_bad_energy">P116 현재 디펜스</a>입니다.</p>
+<h2>10/12 이력 · v07 화면·카메라 마무리</h2>
+<p>대표 P104와 몬스 대표 P96을 유지하며 최신 디펜스 구현 기록은 P125 v07에서 확인합니다. 선택 카드3장은 하단, 보유5슬롯·쿨타임·몬스와 나머지 정보는 스크롤 없는 우측입니다. 전체/전투 구역 버튼과 지상·공중 표적에 반응하는 몬스 뒤 원근 시점을 연결합니다. 기존 편성 발란스·이동·분담·원본 리소스는 유지합니다. 파일·빌드·자료·연결 확인만 수행하며 실제 플레이 검수는 현중 담당입니다. 새 변경은 제안(검수 대기)입니다.</p>
+<p><a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P125&amp;plan=planning_development_plan_bad_energy">P125 최신 디펜스 기록</a>입니다.</p>
+<ul>
+<li>10/15 · codex(단이) · 지시09: 이번 방어·건설1차 마감만 현재 표에 보완. 다른 담당자의 아이돌/경제/미니게임 상태와 수치는 재판정하지 않음.</li>
+</ul>
+</details>
+</main></body></html>
+

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P210 · 잭팟 · 대표 개발 기획서</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"><link rel="stylesheet" href="./리소스/핵심제안_시뮬_20261102/sim.css"><style>.sample-document :target{scroll-margin-top:132px}.sample-document header .actions{flex-wrap:wrap}.sample-document header p{font-size:14px}.doc-ui-section{margin-top:42px;padding-top:24px;border-top:2px solid #c8dcd5}.doc-ui-section>h3{margin:0 0 10px;font-size:23px;color:#2c5659}.doc-ui-section>p{font-size:14px}.doc-ui-section details{padding:0;margin:16px 0;border:1px solid #c9dcd4;border-radius:16px;overflow:hidden;background:#f4f8f2}.doc-ui-section summary{cursor:pointer;min-height:58px;padding:16px 18px;font-weight:700;color:#315e5c;list-style:none}.doc-ui-section summary:after{content:"+";float:right;font-size:20px}.doc-ui-section details[open]>summary:after{content:"−"}.doc-ui-section summary::-webkit-details-marker{display:none}.doc-ui-section [data-sim-host]{padding:0 18px 18px;min-width:0}.doc-key{margin:18px 0;padding:16px 20px;border-left:6px solid #2f7f86;background:#eef6f5;border-radius:12px;font-size:16px;line-height:1.8}.doc-key b{color:#1f4f55}@media(max-width:680px){.sample-document :target{scroll-margin-top:18px}}</style><script type="module" src="./리소스/핵심제안_시뮬_20261102/jackpot.mjs"></script></head><body class="sample-document"><main><header><div class="eyebrow">P210 · 핵심제안 개발 · 대표 개발 기획서</div><h1>잭팟 · 대표 개발 기획서</h1><p>굴릴 때마다 통이 쌓이고, 대박 안에서 드물게 터집니다. <a href="#sim-preview">하단 시뮬레이터</a>로 직접 굴려 봅니다.</p><div class="actions"><a href="./잭팟_핵심제안서.md">짝 MD로 읽기</a><a href="../../기획서/산출_기획서_잭팟_보완판_v1_클로드.html">상세 정본 · 책갈피 P199</a><a href="/docs/planning/proposal-concept/jackpot.html" target="_blank" rel="noopener">제안서 원문</a><a href="#sim-preview">잭팟 통 시뮬레이터</a></div></header>
+<p><b>이 문서는</b> 콘서트장 · 예능 방송국 도착 대박 중 드물게 터지는 잭팟이 어떻게 쌓이고 터지는지 정리한 대표 개발 기획서입니다.</p>
+
+<p><b>보는 법</b> 1장 그림 → 4장 「한 판 순서」 → 하단 「잭팟 통 시뮬레이터」 순서로 읽습니다. 세부 결정과 근거는 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9E%AD%ED%8C%9F_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9E%AD%ED%8C%9F_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P199 잭팟 보완판</a>에 있습니다.</p>
+
+<p><b>지금 상태</b> 통 누적·판정·지급의 공통 경제 코드와 독립 문서 시안이 있습니다. 전용 통합·실제 화면·운영 저장·피드 연결의 전체 검수는 남아 있습니다.</p>
+<nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (합침) 제안서 <a href="/docs/planning/proposal-concept/jackpot.html" data-paper-path="docs/planning/proposal-concept/jackpot.html">잭팟</a> · 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9E%AD%ED%8C%9F_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9E%AD%ED%8C%9F_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P199 잭팟 보완판</a> · 현중 11/01~11/02 지시</p>
+
+<div class="doc-key"><b>핵심</b> 잭팟은 <b>통</b>입니다. 굴릴 때마다 조금씩 쌓이고, 콘서트장 · 방송국에서 <b>대박이 났을 때 드물게</b> 통 전부를 받습니다. 팬 수는 늘지 않고, 데뷔 이후에는 그 무대가 피드 맨 위에 오릅니다.</div>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1152 100" width="1152" height="100" role="img" aria-labelledby="title-P210-0"><title id="title-P210-0">설명 흐름도 P210-0</title><defs><marker id="arrow-P210-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L243,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P210-0)"/><path d="M423,50 L445.5,50 L468,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P210-0)"/><path d="M648,50 L688.5,50 L729,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P210-0)"/><rect x="666.5" y="57" width="44" height="25" rx="7" fill="#f3f8f7"/><text x="688.5" y="75" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">드물게</text><path d="M909,50 L931.5,50 L954,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P210-0)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">굴림마다 통 쌓임</tspan></text><rect x="243" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">콘서트장 · 방송국 도착</tspan></text><rect x="468" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">대박?</tspan></text><rect x="729" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="819" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="819" dy="0">잭팟 · 통 전부</tspan></text><rect x="954" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="1044" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="1044" dy="0">데뷔 이후 피드 맨 위</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">굴림마다 통 쌓임 → 콘서트장 · 방송국 도착 / 콘서트장 · 방송국 도착 → 대박? / 대박? → [드물게] 잭팟 · 통 전부 / 잭팟 · 통 전부 → 데뷔 이후 피드 맨 위</p></figure>
+
+
+
+<h3 id="콘텐츠-경계">콘텐츠 경계</h3>
+
+<ul>
+<li>맡는 것: 잭팟 통 · 발동 조건 · 연출 · 피드 연결.</li>
+<li>다른 문서에 맡기는 것: 배수 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%B0%EC%88%98%EA%B1%B8%EA%B8%B0_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%B0%EC%88%98%EA%B1%B8%EA%B8%B0_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P209 배수 걸기</a> · 팬 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%AC%EB%8D%A4%EA%B2%8C%EC%9D%B4%EC%A7%80_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%AC%EB%8D%A4%EA%B2%8C%EC%9D%B4%EC%A7%80_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P211 팬덤 게이지</a>.</li>
+</ul>
+
+<h3 id="현재-기준과-목표">현재 기준과 목표</h3>
+
+<div class="table-scroll"><table><thead><tr><th>무엇</th><th>기준</th></tr></thead><tbody><tr><td>금액</td><td>잭팟 통(쌓인 만큼) · 상한 없음 · 표 값 그대로</td></tr><tr><td>발동</td><td>대박 안에서 통 추첨(chance). 올킬 뒤 후속 룰렛(second_roulette_chance_pct)은 별도</td></tr><tr><td>콘서트장 vs 방송국</td><td>보상 같고 연출만 다름(떼창 / 화제 클립)</td></tr><tr><td>배수</td><td>붙음</td></tr></tbody></table></div>
+
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>이 콘텐츠에서의 역할</th><th>의존 방향</th></tr></thead><tbody><tr><td>제안서 원문 <a href="/docs/planning/proposal-concept/jackpot.html" data-paper-path="docs/planning/proposal-concept/jackpot.html">잭팟</a></td><td>기준</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9E%AD%ED%8C%9F_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9E%AD%ED%8C%9F_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P199 잭팟 보완판</a></td><td>상세 정본(결정 · 근거 · 조사)</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%8C%EC%9B%90%EC%98%81%EC%83%81_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9D%8C%EC%9B%90%EC%98%81%EC%83%81_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P208 음원 · 영상</a></td><td>잭팟 무대 = 피드 맨 위</td><td>출력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%AC%EB%8D%A4%EA%B2%8C%EC%9D%B4%EC%A7%80_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%ED%8C%AC%EB%8D%A4%EA%B2%8C%EC%9D%B4%EC%A7%80_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P211 팬덤 게이지</a></td><td>팬 수는 늘지 않음</td><td>제약</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: 보드 도착 → 필러 대박 → 잭팟 룰렛 → 연출 → 피드 · 스샷 미완 · 이식 비교 해당 없음</p>
+
+<ul>
+<li>전용 잭팟 정책 모듈의 별도 등록은 없습니다. 다만 공통 경제의 통 누적·지급 결과를 성장 허브가 받는 코드 경로는 있습니다. 아래 문서 시안과 구분하며 이번 정정에서 실제 화면·지급·저장을 실행 검수한 것은 아닙니다.</li>
+<li>이 문서 하단 <b>잭팟 통 시뮬레이터</b>에서 굴릴 때마다 통이 쌓이고 대박 안에서 드물게 터지는 흐름을 봅니다. 숫자는 모두 임시 시안입니다.</li>
+</ul>
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서-임시-시안">한 판 순서 (임시 시안)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>독립 문서 시안은 지급 뒤 0. 공통 경제는 표의 시작 통 금액으로 복원</td></tr><tr><td>입력·출력</td><td>입력 = 도착 칸 · 필러 판정 / 출력 = 코인 · 연출 · 피드</td></tr><tr><td>상태와 전이</td><td>누적 → 대박 → 통 추첨 → 지급. 후속 룰렛 표시는 별도</td></tr><tr><td>판정</td><td>통 지급 chance와 올킬 후속 룰렛 확률을 따로 읽음. 독립 시안 입력은 운영값과 구분</td></tr><tr><td>오류·예외</td><td>팬 수 · 투표 · 점수에는 안 들어감</td></tr><tr><td>저장·복원</td><td>통 금액은 저장(시즌 끝 리셋)</td></tr><tr><td>다른 모듈 연결</td><td>보드 · 필러 · 피드 · 배수</td></tr></tbody></table></div>
+
+<h3 id="연출-확정-근거-jackpotcsv-현중-1004-잭팟은-팬을-늘리지-않음">연출 (확정 근거: jackpot.csv · 현중 10/04 「잭팟은 팬을 늘리지 않음」)</h3>
+
+<p>콘서트장 = 팬이 무대로 몰려드는 떼창 · 방송국 = 시청률 · 화제 클립 폭발. 지금 있는 곳의 팬으로 연출합니다(방문 중이면 현지 팬).</p>
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>잭팟 통 저장 · 발동 판정 · 두 연출 · 피드 맨 위 올리기.</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<p>잭팟 룰렛 · 떼창 연출 · 화제 클립 연출 · 피드 카드.</p>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<ul>
+<li>통 쌓이는 비율 · 발동 확률 — 표 값 · 발란스 대기</li>
+</ul>
+
+<h3>현재 코드와 독립 시안의 경계</h3><p>공통 경제는 굴림마다 <code>jackpot_pot_add_pct</code>만큼 배수 없이 통에 쌓고, <code>hit_big</code> 뒤 <code>jackpot.csv.chance</code>로 통 지급을 추첨합니다. 지급 때만 <code>dice_mult_apply</code> 조건의 주사위 배수와 해당 돈 버프를 적용합니다. 지급 뒤에는 <code>jackpot_pot_start_pct</code>의 시작 통 금액으로 복원합니다. 표 note에 남은 누적 배수 설명과 현재 실행이 다른 점은 표 담당의 후속 대조 항목이며 여기서 숫자나 원표를 고치지 않습니다.</p><p>올킬 후속 룰렛의 <code>second_roulette_chance_pct</code>는 통 지급과 별도입니다. 독립 문서 시안은 자체 입력으로 확률·누적을 보여 주고 지급 뒤 0이 되는 메모리 예시이며 CSV·지갑·운영 저장을 읽지 않습니다. 이전 팬 집결 시연의 팬×배수도 현재 통 계산식이 아닙니다.</p><p>팬이 많을수록 큰 수익이라는 방향과 현재 연결을 구분합니다. 공통 엔진의 잭팟 팬 항은 <code>fan_income_modifier_jackpot</code> 계수가 비어 현재 0이고 통 지급은 별도로 남습니다. 팬 집결 연출·음악 피드·시즌 통 저장의 기획과 실제 전체 연결 완료는 같은 뜻이 아닙니다. 피드와 음악의 현재 범위는 P208을 따르며 이번 문서 정정에서 완료로 승격하지 않습니다.</p>
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<div class="table-scroll"><table><thead><tr><th>미리보기</th><th>이름·사용 위치</th><th>동작·상태</th><th>파일·테이블 키</th><th>출처·준비 상태</th></tr></thead><tbody><tr><td>미제작</td><td>떼창 · 화제 클립 연출</td><td>잭팟 터짐</td><td>jackpot.csv</td><td>미제작</td></tr><tr><td><a href="#sim-preview">하단 시뮬레이터</a></td><td>잭팟 통 시뮬레이터</td><td>굴리기 · 통 쌓임 · 터짐</td><td>핵심제안_시뮬_20261102/jackpot.mjs</td><td>시안 있음</td></tr></tbody></table></div>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<p>잭팟 전용 피드 카드 테두리는 미제작입니다.</p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일·보기</th><th>역할</th><th>주키·참조</th><th>값</th><th>담당</th></tr></thead><tbody><tr><td>jackpot.csv (기존)</td><td>잭팟 지급 · 연출</td><td>payout_formula · trigger</td><td>(이식) 기존 값</td><td>발란스</td></tr><tr><td>economy_config (기존)</td><td>통 쌓이는 비율</td><td>jackpot_pot_add_pct</td><td>(이식) 기존 값</td><td>발란스</td></tr></tbody></table></div>
+
+<p>주사위 환산: 해당 없음.</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>상태</th><th>확인 방법·증거</th><th>다음 작업</th></tr></thead><tbody><tr><td>기획(이 문서 · 책갈피 상세)</td><td>기획 중</td><td>P199 · 이 문서</td><td>현중 확인</td></tr><tr><td>공통 경제 통 누적·지급</td><td>부분 코드 확인·검수 대기</td><td>원표·실제 읽기 경로 대조; 실제 UI·운영 전체 미검수</td><td>관련 화면·저장·통합 검수</td></tr><tr><td>잭팟 통 시뮬레이터</td><td>개발 끝(시안)</td><td>이 문서 하단</td><td>실제 표 연결</td></tr><tr><td>전용 정책 모듈 · 본게임 통합</td><td>기획 중 · 작업전</td><td>—</td><td>표 확정 뒤</td></tr></tbody></table></div>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<p>잭팟은 대박 안에서만 터지고, 팬 수 · 투표 · 점수를 늘리지 않아야 합니다.</p>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p>세부 결정과 근거는 책갈피 P199에 둡니다. 제안서 원문 jackpot.md는 그대로 보존합니다.</p>
+
+<details><summary>작업 기록</summary>
+
+<p>대표 개발 기획서(신규 · 핵심제안서). 상세 정본 P199. 변경 이력은 잭팟_핵심제안서.log.md.</p>
+
+</details>
+</section><section class="doc-ui-section" aria-label="하단 시뮬레이터"><h3>잭팟 통 시뮬레이터 · 임시 시안</h3><p>굴림마다 통이 쌓이고, 콘서트장 · 방송국 대박 안에서 드물게 통 전부를 받습니다. 확률 · 쌓이는 양은 시안 입력값입니다.</p><details id="sim-preview"><summary>시뮬레이터 펼치기 · 굴리기 · 통 쌓임 · 터짐</summary><div data-sim-host="jackpot"></div></details></section><details class="history"><summary>로그 · 변경 이력과 이전 기록</summary><p><a href="./잭팟_핵심제안서.log.md" target="_blank" rel="noopener">이 문서의 로그 열기</a></p></details><details id="source-reading-history"><summary>정정 전 원문과 읽기 검수 기록</summary><p><a href="./잭팟_핵심제안서.log.md">짝 로그에서 직전 MD·HTML 전체 원문 보기</a> · 문서·소스 정적 대조이며 새 실행·화면 검수·수치 결정이 아닙니다.</p></details>
+</main></body></html>

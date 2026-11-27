@@ -1,0 +1,100 @@
+# 검토 지시서 · 테이블 데이터 구조 · 클로드 2차 의견 (20261017)
+
+> 받는 사람: 클로드(Mac) · 보낸 쪽: 봇팀(그록 봇) · 결정권: 현중
+> 성격: **검증 검토**입니다. 봇팀 작업은 일단 잘된 것으로 보고, 클로드는 **두 번째 의견**을 줍니다. 원본 · 표 · 코드는 고치지 않습니다.
+
+## 0. 한 줄 목표
+
+**하드코딩 없는 테이블 구조**로, 발란스 툴과 게임을 **동시에** 개발 · 업데이트해도 서로 깨지지 않게 한다.
+콘텐츠는 **지금보다 약 10배** 늘어날 예정입니다. 10배에서도 버티는지 평가하고, 필요한 구조를 **빨리** 제안해 주세요.
+
+## 1. 현중 지시 모음 (이번 작업 흐름 전체)
+
+1. 발란스 값은 전부 CSV에서 조정합니다. 코드에 숫자를 쓰지 않습니다. 값이 없으면 「발란스 대기」. **값을 지어내지 않습니다.**
+2. **풀네임 ID**: 열쇠칸 값(ID)은 표 파일 영문 이름 전체를 앞에 붙입니다(10/07 규칙). 열 이름 · 표 파일 이름은 그대로(분석 md 13-1 결정).
+3. **마스터 표 + 종류 칸**: 데이터 종류마다 마스터 하나(`item_master` · `character_master` · `skill_master` · `building_master` · `ability_master`), 종류는 `*_type` 칸으로 나눕니다. 콘텐츠 표는 마스터 ID만 가리킵니다.
+4. **조합(composite) 구조를 모든 시스템에**: `skill_master → skill_link → missile → missile_option`, `aura → aura_option`, `ability_master → ability_detail`.
+5. **경제는 실행 중 조정**: `reward_group → reward_group_entry`, `currency_master`, `economy_live_config`(원본 key/value 표 위에 덮어쓰기).
+6. **6축 색은 발란스 툴 색이 원본**(Q8).
+7. **공통 검수 체계**: br-01~06 → 공통 check_list 번호(Q9).
+8. 현중 **노션 샘플 구조**: 가장 가까운 원본은 `~/노션 자료/docs/planning/11_시스템_기획_데이터_베이스_기본_설계/진행중로어스튜디어_스킬_기획.md`(분석 md 18-1 비교표).
+9. **아직 안 만든 콘텐츠도 미리 설계**: 빈 표(머리줄만) · 예약 enum · 「발란스 대기」(분석 md 20장 미래 확장 지도).
+10. **리소스도 하드코딩 없이**: `resource_master` / `resource_variant` / `resource_link`, 코드는 `resourcePath(id)`.
+11. **이벤트 미니게임 = 따로 떼는 모듈**: `event/{모듈}/` 폴더에서 돌고, 표도 그 안에, 표 이름은 모듈 전체 이름(`hidden_temple_…`).
+12. **재화는 본편 것 그대로**(`currency_master` ID). 본편에 없을 때만 `currency_{모듈 전체 이름}_{이름}`. **아이템은 다리 표**(`event_module_item_bridge`)로만 맞춤. 입장 아이템 `item_evt_*`는 `item_master`(event_entry).
+13. 원본은 백업 후 수정, 값 불변, 시험은 단계마다 같아야 함, 위험한 변경은 건너뛰고 문서로.
+
+## 2. 읽을 파일 (Mac · 저장소 `~/1_작업 폴더/kpopmonsters`)
+
+| 무엇 | 경로 |
+|---|---|
+| P148 조합 구조 기획서 | `docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/콘텐츠별_v03/테이블데이터_조합구조_기획서.md` (+ `.html`, 9~14장이 최근 작업) |
+| 작성규칙 | `docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/작성기준_v02/작성규칙.md` (「테이블 데이터 규칙」 · 「이벤트 미니게임 모듈 규칙」) |
+| 분석 md | `docs/planning/삼중AI_공용_20260929/보고/20261016_2045_이스라트_데이터테이블구조_분석.md` — **13-1 결정, 18-1 노션 비교, 22~24장 모듈 작업**, 10장 하드코딩 후보, 19장 경제 전환 · check_list, 20장 미래 확장 |
+| 조사 문서 | `docs/planning/삼중AI_공용_20260929/보고/20261016_2100_이스라트_게임데이터구조_조사.md` |
+| 구조 그림 2장 | `보고/테이블구조_1_마스터_조합_경제.png`, `보고/테이블구조_2_리소스_이벤트모듈.png` |
+| 표 | `data/master/*.csv`, `data/game/*.csv`(게임 표 · `table_registry.csv`), `data/planning_csv_table.csv`(등록부), `data/master/enum_value.csv` |
+| 모듈 | `event/{모듈}/`(19곳 + `ops`), `data/master/event_module_registry.csv` · `event_module_item_bridge.csv` · `event_module_currency_map.csv` · `event_module_rename_plan.csv` |
+| 검사 | `scripts/audit-data-master.mjs`, `scripts/audit-game-tables.mjs`, `scripts/audit-game-links.mjs`, `scripts/test-game-audits.mjs` |
+| 읽는 코드 | `src/game/economy/load.ts` · `liveConfig.ts` · `events.ts`, `src/data/schema.ts`, `src/data/resourceMaster.mjs`, `src/simulator/v01/events.mjs` |
+| 노션 샘플 | `~/노션 자료/docs/planning/11_시스템_기획_데이터_베이스_기본_설계/진행중로어스튜디어_스킬_기획.md` (같은 폴더 `_케릭터_` · `_스테이지MAP_`도 참고) |
+
+## 3. 비교해 볼 구조 두 갈래
+
+**(가) 요즘 업계 구조** — 우리 규모(CSV · 웹 툴 · 빠른 시안)에 맞는지 판단해 주세요.
+- 데이터 주도 / ECS(엔티티 = ID, 컴포넌트 = 표 행)
+- GAS식 효과 · 태그(Gameplay Effect · Tag · Modifier) — 스킬 밖 버프 · 건물 · 카드 효과를 한 틀로
+- 라이브옵스 원격 설정(Remote Config · 세그먼트 · 우선순위 · 기간)
+- 스키마 버전 · 마이그레이션(versioned schema)
+- Unity ScriptableObject / Unreal DataTable · CurveTable / Luban 같은 표 → 코드 생성 · 검증 파이프라인
+
+**(나) 현중 경험 구조** — 노션 로어스튜디어 샘플(tb_skill · 연결 JSON · synergy 제안)과 지금 구조(분석 md 18-1 표).
+
+두 갈래를 **비교표**로 놓고, 우리에게 맞는 조합을 **추천**해 주세요.
+
+## 4. 토론 질문 (각각 의견 + 근거 + 10배 규모에서 어떻게 되는지)
+
+1. **마스터 + 종류 칸**의 한계: 종류마다 칸이 달라질 때(예: 카드팩 vs 상점 상품) 넓은 표 · 빈 칸이 늘어남. 하위 표로 나눌 기준은?
+2. **조합 효과 · 옵션 일반화**: `missile_option` · `aura_option` 같은 `*_option`을 건물 · 카드 · 아이돌 성장 · 이벤트 보상에도 한 틀(effect + modifier + tag)로 쓸지.
+3. **ID · 열 이름**: 풀네임 ID 유지 비용, 열 이름 규칙(지금은 그대로), 10배일 때 충돌 · 검색성.
+4. **스키마 · 검증**: `schema.ts` · `table_registry` · `planning_csv_table` · `enum_value` 네 곳이 겹침. 한 원본(예: 스키마 CSV → 코드 생성)으로 줄일 방법.
+5. **버전 · 마이그레이션**: 발란스 툴과 게임이 동시에 바뀔 때 칸 추가 · 이름 변경 · 삭제를 안전하게(스키마 버전 칸, 호환 기간, 자동 변환).
+6. **라이브 설정 · 덮어쓰기 우선순위**: `economy_live_config`(version · active_from/to · override_priority · segment)를 경제 밖(이벤트 · 상점 · 난이도)까지 넓힐지, 충돌 규칙.
+7. **모듈 분리**: `event/{모듈}/` + 등록표 + 다리 표 + 재화 대응 표가 떼어내기 · 끼우기에 충분한지, 모듈 사이 공용(shared) 표는 어디에.
+8. **빌드 파이프라인**: CSV → 실행(지금은 실행 중 fetch + 일부 빌드 묶음). 빌드 때 굽기 vs 실행 중 읽기, 검사 시점, 빌드된 모듈이 옛 표 이름을 읽는 문제.
+9. **남은 하드코딩**과 없애는 순서: 검사 결과에서 목록을 만들어 주세요. 알려진 것 — 디펜스 html에 구운 DEFENSE_GAME_PACK, `docs/planning/_runtime` 빌드 결과물, 빌드된 모듈 js의 옛 표 이름, 성장 시뮬 `play.html` 후보(분석 md 10-1), `events.mjs` GROUPS 제목, 분석 md 10장 자동 후보.
+10. **열린 항목**에 대한 의견:
+    - 보상 원래 칸(reward_amount 등)과 `reward_group_entry` 중복 → 원래 칸 지울 시점(분석 md 19장)
+    - 예약 enum 37개 + resource_type 예약 값(portrait · icon · card_art · sound · bgm · fx · atlas) 확인 필요
+    - check_list 합치기 결정 3가지(분석 md 19-2)
+    - `audit-game-tables` CRIT: `tool_balance_source` 실제 31줄 · 등록 20줄
+    - 빌드가 필요한 이름 바꾸기 61건(`event_module_rename_plan.csv`)
+    - `data/game/event_acquire` · `event_demand` 모듈 소유 후보
+11. **10배 확장 평가**: 표 수 · 행 수 · 검사 시간 · 사람/에이전트 실수 가능성 기준으로 지금 구조가 어디서 먼저 무너지는지, 그 전에 바꿀 것.
+
+## 5. 함께 써 줄 것: 「새 콘텐츠 · 표 · 모듈 추가 실무 가이드」 초안
+
+어느 에이전트가 해도 **똑같이** 나오도록 순서형 체크리스트로. 지금 작성규칙을 바탕으로 고칠 점도 제안해 주세요.
+- 이름: 표 이름 · ID 풀네임 · 모듈 전체 이름 · 열 이름
+- 마스터 / 종류 칸: 새 종류는 `enum_value`에 먼저, 새 마스터는 언제 만드는지
+- 조합 연결: 효과 · 옵션 표를 붙이는 법, `link_type`
+- 등록: `planning_csv_table`, `table_registry`, `schema.ts`, 모듈이면 `event_module_registry`
+- 경제: 보상은 `reward_group`, 재화는 `currency_master`, 실행 중 값은 `economy_live_config`
+- 리소스: `resource_master` ID로만, 경로 문자열 금지
+- 모듈: 폴더 · 표 이름 · 재화 · 아이템 다리 · 떼어내기 체크
+- 검사: 돌릴 스크립트와 통과 기준(ENUM 0 · REF 0 · 모듈 문제 0 · 시험 결과 같음)
+- 금지: 하드코딩 숫자 · 지어낸 값 · ID 바꾸기/재사용
+
+## 6. 규칙
+
+- 원본 · 표 · 코드 **고치지 않음**(읽기만). 숫자를 새로 제안해야 하면 「발란스 대기」.
+- 보고서 경로: `docs/planning/삼중AI_공용_20260929/보고/YYYYMMDD_HHMM_클로드_테이블데이터구조_검토의견.md`
+- 보고서 장:
+  1. 요약 의견(5줄 이내)
+  2. 잘된 점
+  3. 위험(10배 확장 포함)
+  4. 바꿀 것 제안(우선순위 순 · 각각 이유 · 비용 · 영향 표)
+  5. 업계 구조 vs 현중 경험 구조 비교 · 추천
+  6. 새 콘텐츠 · 표 · 모듈 추가 실무 가이드 초안 + 작성규칙 개선안
+  7. 현중에게 물을 것
+- 쉬운 한국어로, 영어 용어는 처음 한 번 풀어 씁니다.

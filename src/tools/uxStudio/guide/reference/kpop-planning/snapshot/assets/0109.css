@@ -1,0 +1,49 @@
+/* 2026-10-03: preserve page content; allocate space to the explanation. */
+body[data-proposal-layout] .slide.active{padding:2.5cqw 3.3cqw 1.6cqw}
+body[data-proposal-layout] .meta{font-size:.93cqw;flex:none}
+body[data-proposal-layout] h1{font-size:3.08cqw;line-height:1.17;margin:1cqw 0 .6cqw;word-break:keep-all}
+body[data-proposal-layout] h2{font-size:2.75cqw;line-height:1.2;margin:1cqw 0 .6cqw;word-break:keep-all}
+body[data-proposal-layout] .lead{font-size:1.16cqw;line-height:1.5;flex:none;word-break:keep-all}
+body[data-proposal-layout] .footer{flex:none;min-height:1.8cqw;font-size:.82cqw;line-height:1.4;margin-top:1cqw;padding-top:.55cqw}
+.proposal-source{position:relative;flex:1;min-width:0;font-size:.85cqw;color:var(--soft)}
+.proposal-source summary{cursor:pointer;width:max-content;padding:.2cqw .6cqw;border:1px solid #48536b;border-radius:99px;font-weight:750;list-style:none}
+.proposal-source summary:before{content:'＋ ';color:var(--cyan)}
+.proposal-source[open] summary:before{content:'− '}
+.proposal-source-content{position:absolute;bottom:2.3cqw;left:0;width:min(68cqw,95vw);max-height:13cqw;overflow:auto;z-index:8;border:1px solid #657184;border-radius:.75cqw;background:#111827f5;box-shadow:0 .6cqw 2cqw #0007;padding:1cqw 1.2cqw;color:#d3dcec;font-size:.93cqw;line-height:1.6;font-weight:500}
+body[data-proposal-layout] .footer>.page{font-variant-numeric:tabular-nums}
+body[data-proposal-layout] a:focus-visible,body[data-proposal-layout] button:focus-visible,body[data-proposal-layout] summary:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+@media print{.proposal-source-content{position:static;max-height:none;width:auto}.proposal-source summary{display:none}}
+
+body[data-proposal-kind="season"] .grid2{grid-template-columns:1.4fr .6fr;gap:1.5cqw;margin-top:1.2cqw}
+body[data-proposal-kind="season"] .panel.tl{justify-content:space-between;padding:1.3cqw 2.1cqw;gap:1.1cqw}
+body[data-proposal-kind="season"] .tl h3{font-size:1.13cqw}
+body[data-proposal-kind="season"] .tl-bar{margin:3.4cqw 2.1cqw 4.3cqw;flex:none;height:.65cqw}
+body[data-proposal-kind="season"] .tl-tick{width:1.65cqw;height:1.65cqw;border-width:.18cqw}
+body[data-proposal-kind="season"] .tl-lab b{font-size:1.8cqw}
+body[data-proposal-kind="season"] .tl-lab span{font-size:.95cqw}
+body[data-proposal-kind="season"] .tl-lab:first-of-type{transform:none}
+.season-days{display:grid;grid-template-columns:repeat(15,1fr);gap:.34cqw;width:100%;margin-top:.3cqw}
+.day-mark{aspect-ratio:1.55;border:1px solid #3e5866;border-radius:.2cqw;background:#17333d}
+.day-mark:nth-child(n+31){background:#322c40;border-color:#665468}
+.day-mark.midpoint{background:var(--gold);border-color:var(--gold)}
+.day-mark.last-day{background:var(--pink);border-color:var(--pink)}
+body[data-proposal-kind="season"] .tl-join{font-size:1cqw;line-height:1.5;padding:.8cqw 1cqw;flex:none}
+body[data-proposal-kind="season"] .st{border-radius:.75cqw;padding:1cqw;gap:.3cqw;background:#151f33}
+body[data-proposal-kind="season"] .st b{font-size:1.35cqw;line-height:1.3}
+body[data-proposal-kind="season"] .st p{font-size:1.02cqw;line-height:1.5}
+body[data-proposal-kind="season"] .rk{grid-template-columns:1.45fr .65fr;gap:1.5cqw;margin-top:1.2cqw}
+body[data-proposal-kind="season"] .col h3{font-size:1.65cqw}
+body[data-proposal-kind="season"] .it{padding:1cqw .65cqw;background:#172034;gap:.75cqw}
+body[data-proposal-kind="season"] .it b{font-size:1.3cqw}
+body[data-proposal-kind="season"] .it .x{display:inline-block;border:1px solid currentColor;border-radius:99px;padding:.25cqw .6cqw;margin-top:.6cqw;font-size:.9cqw}
+body[data-proposal-kind="season"] .col.keep{background:linear-gradient(145deg,#373021,#171e2e);border-width:1px}
+body[data-proposal-kind="season"] .keep .it{background:transparent;border:0}
+body[data-proposal-kind="season"] .vault{grid-template-columns:1fr 1fr;gap:2cqw;margin-top:1.2cqw}
+body[data-proposal-kind="season"] .vault .ph-box{border:1px solid #ad8d52;background:radial-gradient(ellipse at 30% 45%,#5b473a55,transparent 65%),linear-gradient(135deg,#252939,#121926);border-radius:1.3cqw;gap:1.6cqw;padding:1.6cqw}
+body[data-proposal-kind="season"] .vault .ph-box img{height:24cqw;max-width:50%;object-fit:contain;border-width:1px;box-shadow:0 .7cqw 2cqw #0008;filter:none;transform:rotate(-4deg)}
+body[data-proposal-kind="season"] .vault .lbl{text-align:left;font-weight:600;font-size:.97cqw;line-height:1.5}
+body[data-proposal-kind="season"] .vault .point{gap:1cqw;padding:1.3cqw 0}
+body[data-proposal-kind="season"] .vault .point em{font-size:.95cqw;border:1px solid #52617b;border-radius:.4cqw;padding:.3cqw .5cqw;min-width:3.6cqw;text-align:center;color:var(--gold)}
+body[data-proposal-kind="season"] .vault .point b{font-size:1.4cqw;line-height:1.4;margin-bottom:.4cqw}
+body[data-proposal-kind="season"] .vault .point div{font-size:1.1cqw;line-height:1.5}

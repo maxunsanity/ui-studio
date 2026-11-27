@@ -1,0 +1,41 @@
+# AI 컷씬 마스터 · 콘티 양식 v0.1
+
+작성자: 단이. 사용자는 자유문장으로 요청한다. 아래 필드는 AI가 채우는 규격이며 사용자가 직접 JSON을 작성할 필요는 없다.
+
+## 장면 수준
+
+| 필드 | 형식 | 의미 |
+|---|---|---|
+| schemaVersion | 정수 1 | 변환 규격 |
+| sceneId, title | 문자열 | 파일 이름이 바뀌어도 유지할 씬 ID와 제목 |
+| fps, totalFrames | 양의 정수 | 프레임 기준과 장면 길이 |
+| actors | id, assetId, variant 목록 | 같은 모델을 쓴 두 배우도 독립 ID |
+| constraints | 문자열 목록 | 사용자 필수 조건을 원문 수준으로 보존 |
+| assumptions | 문자열 목록 | 미지정 사항에 대한 임시 선택 |
+| unresolved | 문자열 목록 | 자산·연기·구현 미결 |
+| knowledgeReview | 문서·해시·절·적용 이유·규칙 | 이번에 읽고 판단한 근거 |
+| rejectedTechniques | 기법 ID·이유 | 관련돼도 쓰지 않은 기법 |
+
+## 비트와 컷의 차이
+
+비트는 이야기의 의미 단위다. 컷은 카메라 화면의 연속 구간이다. 한 대사 중 두 화면을 보여줄 수도 있고, 한 화면에 여러 대사가 들어갈 수도 있다. 컷이 대사나 모션의 소유자가 되지 않도록 ID로 연결한다.
+
+| 배열 | 필수 항목 | 작성 규칙 |
+|---|---|---|
+| beats | id, startFrame, endFrame, speaker, addressees, text, intent, listenerReaction | 무언 구간은 speaker=null, text=""; 대사가 있으면 실제 화자 지정 |
+| shots | id, startFrame, endFrame, beatIds, subjects, framing, movement, purpose, knowledgeIds | 시간순 정렬, 장면 전체에 공백/중첩 없이 배치 |
+| actions | id, actorId, motionId, startFrame, endFrame, reason | 검수된 실제 모션만 배치; 컷 경계에서 분할할 필요 없음 |
+
+시간 구간은 [시작, 끝)이다. 24fps에서 72프레임은 3초이며 endFrame=600이면 장면 길이는 25초다. beats는 대사 겹침 표현 때문에 무조건 비중첩을 강제하지 않지만 의미 검토가 필요하다. 행동 마스크와 복수 레이어 혼합은 이 초안에서 자동 실행하지 않으며 다음 실행 규격으로 넘긴다.
+
+## 콘티 작성 순서
+
+상황과 감정 변화 → 비트와 대사 → 청자 반응 → 촬영 대상과 구도 → 행동 리소스 → 시간 정리 → 근거와 검사 순서로 작성한다. 카메라가 화려해 보이는 순서로 대본 의미를 뒤집지 않는다.
+
+모션이 없으면 행동 의도를 listenerReaction/purpose에 쓰고 unresolved로 남긴다. 없는 모션 ID를 actions에 넣지 않는다. 시간은 임시 읽기 길이인지 실제 음성 길이인지 assumptions에 명시한다.
+
+## 예시와 수정
+
+완성된 예시 데이터는 runs/greeting-02/storyboard.json, 검토용 표는 같은 폴더의 콘티_검토표.md에 있다. 25초·5컷 대화 초안이며 모션과 배경 연결은 미결이다.
+
+‘마지막 얼굴을 더 가까이’면 마지막 shot의 구도만 수정한다. ‘답하기 전에 더 망설여’면 해당 beat와 반응 시간, 영향을 받는 뒤 컷을 함께 검토한다. 사용자 원안·잠금·기준 리비전은 향후 에디터 패치 단계에서 강제 검사해야 하며 이 JSON 검증기가 대신한다고 주장하지 않는다.

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사옥 정산 칸 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; gap:6px; }
+  .board { position:absolute; left:0; right:0; top:120px; height:300px; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:12px; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:97.5px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; border-top:1.5px solid var(--ln); background:var(--box); }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  .chip { display:inline-flex; align-items:center; gap:3px; border:1.5px solid var(--ln); border-radius:999px; padding:1px 7px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .chip i { width:12px; height:12px; border-radius:50%; background:var(--dim); border:1px solid var(--ln); }
+  .say { position:absolute; left:6px; right:6px; border:1.5px solid var(--ln); border-radius:12px; background:var(--box); padding:6px 10px; font-size:12px; display:flex; align-items:center; gap:8px; }
+  .face { width:28px; height:28px; border-radius:50%; background:var(--dim); border:1.5px solid var(--ln); flex:none; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; }
+  .pill { position:absolute; left:6px; right:6px; height:24px; border:1.5px solid var(--ln); border-radius:6px; background:var(--box); display:flex; align-items:center; padding:0 8px; font-size:11px; gap:6px; }
+  .pill .tag { border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-weight:700; }
+  .card { position:absolute; left:12px; width:366px; border:2.5px solid var(--ln); border-radius:10px; background:var(--box); }
+  .line { display:flex; align-items:center; gap:6px; padding:0 10px; height:40px; font-size:12px; border-top:1px solid #c9ccd1; }
+  .line .t { flex:1; text-align:left; }
+  .toast { position:absolute; left:12px; width:366px; height:30px; border:1.5px solid var(--ln); border-radius:999px; background:var(--box); display:flex; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+</style>
+</head>
+<body>
+<h1>사옥 · 정산 칸 와이어프레임 · 1차 (HUD 남은 작업 5-2)</h1>
+<p class="flow">① 출발 칸을 지남 → 한 바퀴 정산 카드(한 장 두 줄) → 이동 계속 / ② 자동 중엔 한 줄 / ③ 받을 것이 없을 때 / ④ 사옥 칸(1번)에 멈춤 / ⑤ 정산 칸(5 · 40번) 도착</p>
+<div class="rules">
+  <b>규칙(표 · 이미 정한 것)</b>: 한 바퀴 정산 = 출발(1번)을 지나거나 멈출 때 · 앨범 이벤트(차트 순위 · 페스티벌 날이면 「+페스」를 더함) + 방송 · 공연 활동을 돈 · 팬 · 능력으로 받음(HUD 「내 앨범 줄」 · 방송 · 공연 탭).
+  화면은 <b>보드 HUD 안 카드 한 장 · 두 줄 · 모달 없음 · 자동 중엔 한 줄</b>(현중 11/27 「전부 추천대로」 질문 18 · 스튜디오 「별도 정산 확인 모달 없음」과 같음).
+  사옥 칸 멈춤 = 사옥 도착 수익(사옥 단계 · 판정 · 룰렛 없음 · <code>data/game/board_tile.csv</code> hit_roulette 0). 정산 칸 5 · 40 = 고정 수익 S × 0.6% × 주사위 배수 · 판정 없음(<code>board_tile_reward.csv</code> · <code>economy_config.csv</code> settle_pct 0.6).
+</div>
+
+<div class="row">
+
+<!-- ① 출발 지남 -->
+<div>
+<p class="cap">① 출발 칸을 지남 · 한 바퀴 정산</p>
+<div class="phone">
+  <div class="b" style="left:8px;top:12px;width:374px;height:96px;">위쪽 줄 · 내 앨범 줄</div>
+  <div class="board">보드 · 말이 출발 칸을 지남 · 사옥 반짝</div>
+  <div class="card" style="top:438px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 10px;height:36px;"><b style="font-size:14px;">한 바퀴! 정산</b><span class="chip">+페스</span></div>
+    <div class="line"><span class="t"><b>앨범 이벤트</b> · 12위</span><span class="chip"><i></i>돈 +4,300</span><span class="chip"><i></i>팬 +17</span><span class="chip"><i></i>능력 +1</span></div>
+    <div class="line"><span class="t"><b>방송 · 공연</b> · 3회</span><span class="chip"><i></i>돈 +n</span><span class="chip"><i></i>팬 +n</span><span class="chip"><i></i>능력 +n</span></div>
+  </div>
+  <div class="n" style="left:4px;top:430px;">1</div>
+  <div class="n" style="left:354px;top:430px;">2</div>
+  <div class="n" style="left:4px;top:476px;">3</div>
+  <div class="b off" style="left:8px;top:640px;width:93px;height:43px;font-weight:700;">×5</div>
+  <div class="b off" style="left:107px;top:631px;width:275px;height:61px;font-weight:700;">이동 중</div>
+  <div class="b" style="left:2px;top:728px;width:386px;height:37px;font-size:11px;justify-content:space-around;"><span>돈 n</span><span>주사위 n / 상한</span><span>몬스 기분</span></div>
+  <div class="tab" style="left:0;"><i></i>포토카드</div><div class="tab" style="left:97.5px;"><i></i>스케줄</div><div class="tab" style="left:195px;"><i></i>건설</div><div class="tab" style="left:292.5px;"><i></i>미션</div>
+</div>
+<ul class="notes">
+  <li><b>1</b>말이 출발 칸을 지나는 순간 필러 자리에 카드 한 장 · 2초 뒤 접히고 이동은 계속 · 누를 버튼 없음(모달 아님)</li>
+  <li><b>2</b>주간 페스티벌 혜택 날이면 「+페스」 · 앨범 줄 값에 페스티벌 순위 혜택이 더해짐</li>
+  <li><b>3</b>두 줄: 앨범 이벤트(순위) · 방송 · 공연(이번 바퀴 활동 수) · 0인 보상 칩은 숨김 · 받은 값은 앨범 이벤트 「돌아온 바퀴」 · 방송 · 공연 기록에 남음</li>
+</ul>
+</div>
+
+<!-- ② 자동 중 한 줄 -->
+<div>
+<p class="cap">② 자동 중 · 한 줄</p>
+<div class="phone">
+  <div class="b" style="left:8px;top:12px;width:374px;height:96px;">위쪽 줄 · 내 앨범 줄</div>
+  <div class="board">보드 · 자동 이동</div>
+  <div class="toast" style="top:590px;"><b>한 바퀴 정산</b><span class="chip"><i></i>돈 +n</span><span class="chip"><i></i>팬 +n</span><span class="chip"><i></i>능력 +n</span></div>
+  <div class="n" style="left:4px;top:582px;">1</div>
+  <div class="b off" style="left:8px;top:640px;width:93px;height:43px;font-weight:700;">×5</div>
+  <div class="b" style="left:107px;top:631px;width:275px;height:61px;font-weight:700;font-size:15px;border-width:3px;flex-direction:column;gap:2px;">자동 굴리는 중<span style="font-size:11px;font-weight:400;">누르면 멈춤</span></div>
+  <div class="b" style="left:2px;top:728px;width:386px;height:37px;font-size:11px;justify-content:space-around;"><span>돈 n</span><span>주사위 n / 상한</span><span>몬스 기분</span></div>
+  <div class="tab" style="left:0;"><i></i>포토카드</div><div class="tab" style="left:97.5px;"><i></i>스케줄</div><div class="tab" style="left:195px;"><i></i>건설</div><div class="tab" style="left:292.5px;"><i></i>미션</div>
+</div>
+<ul class="notes">
+  <li><b>1</b>자동 굴리기 중에는 두 줄을 합친 한 줄만 1.5초 · 자동은 멈추지 않음 · 자세한 내역은 앨범 이벤트 · 방송 · 공연 기록에서</li>
+</ul>
+</div>
+
+<!-- ③ 받을 것 없음 -->
+<div>
+<p class="cap">③ 받을 것이 없을 때</p>
+<div class="phone">
+  <div class="b" style="left:8px;top:12px;width:374px;height:96px;">위쪽 줄 · 내 앨범 줄 「첫 앨범 만들기 ›」</div>
+  <div class="board">보드 · 출발 칸을 지남</div>
+  <div class="card" style="top:520px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 10px;height:36px;"><b style="font-size:14px;">한 바퀴!</b></div>
+    <div class="line"><span class="t">앨범을 내면 한 바퀴마다 보상을 받아요</span><span class="chip">첫 앨범 만들기 ›</span></div>
+  </div>
+  <div class="n" style="left:4px;top:512px;">1</div>
+  <div class="b off" style="left:8px;top:640px;width:93px;height:43px;font-weight:700;">×5</div>
+  <div class="b off" style="left:107px;top:631px;width:275px;height:61px;font-weight:700;">이동 중</div>
+  <div class="b" style="left:2px;top:728px;width:386px;height:37px;font-size:11px;justify-content:space-around;"><span>돈 n</span><span>주사위 n / 상한</span><span>몬스 기분</span></div>
+  <div class="tab" style="left:0;"><i></i>포토카드</div><div class="tab" style="left:97.5px;"><i></i>스케줄</div><div class="tab" style="left:195px;"><i></i>건설</div><div class="tab" style="left:292.5px;"><i></i>미션</div>
+</div>
+<ul class="notes">
+  <li><b>1</b>앨범이 없으면 안내 한 줄 + 「첫 앨범 만들기 ›」(누르면 이동이 끝난 뒤 앨범 발매로) · 앨범은 있는데 이벤트가 끝났으면 「앨범 이벤트가 끝났어요 · 새 앨범 만들기 ›」 · 자동 중에는 띄우지 않음</li>
+</ul>
+</div>
+
+<!-- ④ 사옥 칸 멈춤 -->
+<div>
+<p class="cap">④ 사옥 칸(1번)에 멈춤</p>
+<div class="phone">
+  <div class="b" style="left:8px;top:12px;width:374px;height:96px;">위쪽 줄 · 내 앨범 줄</div>
+  <div class="board">보드 · 1 출발 · 사옥</div>
+  <div class="card" style="top:428px;opacity:.55;">
+    <div style="display:flex;align-items:center;padding:0 10px;height:32px;"><b>한 바퀴! 정산</b>&nbsp;· 앨범 이벤트 · 방송 · 공연 (접힘)</div>
+  </div>
+  <div class="n" style="left:4px;top:420px;">1</div>
+  <div class="pill" style="top:470px;"><span class="tag">도착 성공</span>1 · 출발 · 사옥</div>
+  <div class="b" style="left:12px;top:500px;width:366px;height:60px;border-width:2.5px;justify-content:space-between;padding:0 12px;"><span style="display:flex;flex-direction:column;align-items:flex-start;"><b style="font-size:14px;">사옥 도착 수익</b><span style="font-size:11px;color:var(--soft);">사옥 n단계</span></span><span class="chip"><i></i>돈 +n</span></div>
+  <div class="n" style="left:4px;top:492px;">2</div>
+  <div class="say" style="top:568px;height:48px;"><span class="face">몬</span><span><b>몬스</b> · 한마디 한 줄</span></div>
+  <div class="b" style="left:8px;top:640px;width:93px;height:43px;font-weight:700;">×5</div>
+  <div class="b" style="left:107px;top:631px;width:275px;height:61px;font-weight:700;font-size:15px;">굴리기</div>
+  <div class="n" style="left:100px;top:622px;">3</div>
+  <div class="b" style="left:2px;top:728px;width:386px;height:37px;font-size:11px;justify-content:space-around;"><span>돈 n</span><span>주사위 n / 상한</span><span>몬스 기분</span></div>
+  <div class="tab" style="left:0;"><i></i>포토카드</div><div class="tab" style="left:97.5px;"><i></i>스케줄</div><div class="tab" style="left:195px;"><i></i>건설</div><div class="tab" style="left:292.5px;"><i></i>미션</div>
+</div>
+<ul class="notes">
+  <li><b>1</b>한 바퀴 정산은 ①과 같이 먼저 뜨고 위 한 줄로 접힘</li>
+  <li><b>2</b>사옥 도착 수익 한 줄 · 사옥 단계 기준 · 판정 · 룰렛 없음</li>
+  <li><b>3</b>몬스 한마디 한 줄이면 넘기기 없이 바로 굴리기(운망 끝과 같은 규칙)</li>
+</ul>
+</div>
+
+<!-- ⑤ 정산 칸 -->
+<div>
+<p class="cap">⑤ 정산 칸(5 · 40번) 도착</p>
+<div class="phone">
+  <div class="b" style="left:8px;top:12px;width:374px;height:96px;">위쪽 줄</div>
+  <div class="board">보드 · 40 정산</div>
+  <div class="pill" style="top:470px;"><span class="tag">도착 성공</span>40 · 정산</div>
+  <div class="b" style="left:12px;top:500px;width:366px;height:60px;border-width:2.5px;justify-content:space-between;padding:0 12px;"><span style="display:flex;flex-direction:column;align-items:flex-start;"><b style="font-size:14px;">정산</b><span style="font-size:11px;color:var(--soft);">× 주사위 배수 5</span></span><span class="chip"><i></i>돈 +n</span></div>
+  <div class="n" style="left:4px;top:492px;">1</div>
+  <div class="b" style="left:8px;top:640px;width:93px;height:43px;font-weight:700;">×5</div>
+  <div class="b" style="left:107px;top:631px;width:275px;height:61px;font-weight:700;font-size:15px;">굴리기</div>
+  <div class="n" style="left:100px;top:622px;">2</div>
+  <div class="b" style="left:2px;top:728px;width:386px;height:37px;font-size:11px;justify-content:space-around;"><span>돈 n</span><span>주사위 n / 상한</span><span>몬스 기분</span></div>
+  <div class="tab" style="left:0;"><i></i>포토카드</div><div class="tab" style="left:97.5px;"><i></i>스케줄</div><div class="tab" style="left:195px;"><i></i>건설</div><div class="tab" style="left:292.5px;"><i></i>미션</div>
+</div>
+<ul class="notes">
+  <li><b>1</b>룰렛 없이 결과 한 줄 「정산」 + 돈 칩 · 배수 표시 · 판정 없음(S × 0.6% × 배수)</li>
+  <li><b>2</b>대사 없이 바로 굴리기(HUD 「정산 · 큰 정산 · 기숙사 · 본가 = 굴리기만」)</li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>

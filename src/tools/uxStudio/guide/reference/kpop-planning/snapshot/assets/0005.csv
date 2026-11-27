@@ -1,0 +1,24 @@
+casting_battle_flow_config_id,key,value,enabled,value_status,note
+casting_battle_flow_config_party,default_party_count,10,1,시험 값,자기 몬스를 우선하고 부족한 출전 자리는 기획사 지원
+casting_battle_flow_config_mood,mood_cost_percent,10,1,시험 값,공용 기분 한 판 비용 · 확정 발란스 아님
+casting_battle_flow_config_reward_r,base_arrival_r,100,1,시험 값,연결 검토용 독립 R · 새 30단계 건설비에서 산출한 확정값 아님
+casting_battle_flow_config_hit,hit_coin_mult,15,1,기존 제안,적중 보상 R×15 · 기존 steal_rule 참고
+casting_battle_flow_config_block,block_coin_mult,7.5,1,기존 제안,방어 보상 R×7.5 · 기존 steal_rule 참고
+casting_battle_flow_config_hit_fan,hit_fan_pct,2,1,기존 제안,적중 때 봇 현재 팬 비례 · 주사위 배수 중복 적용 없음
+casting_battle_flow_config_block_fan,block_fan_pct,0,1,기존 제안,방어 때 팬 이동 없음
+casting_battle_flow_config_mega,mega_chance_pct,2,1,기존 제안,건물 적중에만 메가 추첨
+casting_battle_flow_config_mega_coin,mega_coin_mult,3,1,기존 제안,메가는 코인 보상만 배율 적용
+casting_battle_flow_config_victim_hit,victim_hit_pct,10,1,확인 필요,피해 봇 코인 손실 · 공격자 보상과 별도 계산
+casting_battle_flow_config_victim_block,victim_block_pct,0,1,확인 필요,방어한 봇 코인 손실
+casting_battle_flow_config_victim_cap,victim_daily_cap_pct,30,0,확인 필요,봇 일 시작 코인 대비 일일 손실 상한 · 10/26 22:25 현중 「최대치 없음」으로 꺼 둠
+casting_battle_flow_config_victim_protect,victim_protect_pct,50,0,확인 필요,봇 일 시작 코인 대비 보호 잔액 · 10/26 22:25 현중 「최대치 없음」으로 꺼 둠
+casting_battle_flow_config_victim_hits,victim_daily_hits,3,0,확인 필요,일일 유효 현금 피해 횟수 · 10/26 22:25 현중 「최대치 없음」으로 꺼 둠
+casting_battle_flow_config_fan_loss,fan_daily_loss_pct,5,0,기존 제안,봇 일 시작 팬 대비 일일 손실 상한 · 10/26 22:25 현중 「최대치 없음」으로 꺼 둠
+casting_battle_flow_config_fan_wins,fan_daily_gain_wins,3,0,기존 제안,팬 이동 정산 횟수 검토값 · 10/26 22:25 현중 「최대치 없음」으로 꺼 둠
+casting_battle_flow_config_repair,repair_cost_ratio,0.5,1,현중 17:24 무조건 50% · 재결정 재료,수리비 = 그 건물 제작 비용의 50%(쟁탈전·나쁜 기운 같음 · 고정 800 안 씀) · 이전 0.25 · 제작 비용 = facility_growth_level.csv(정본 · 현중 10/26 10:40) · 현중 13:58 · 17:24 다시 확인
+casting_battle_flow_config_models,model_base_path,/data/res/facility_growth_blender_v01/models/,1,실제 리소스 경로,신맵 9시설 네이티브 3동×10단계 GLB
+casting_battle_flow_config_status,value_status,시험 수치 · 정밀 제안,1,안내,쟁탈 도착은 100% 출연권 대전 · 게릴라 제외
+casting_battle_flow_config_basis,reward_basis,arrival_r,1,정산 기준 구분,기존 money_pct_s 단위로 표기하지 않음
+casting_battle_flow_config_money_unit,reward_money_unit,growth_money,1,성장 지갑 연결,growth_money는 단위 태그이며 정식 단위 환산·실제 성장 보유금 연결은 대기합니다. 시험 단위를 실보유금의 확정 단위로 간주하지 않습니다.
+casting_battle_flow_config_fan_unit,reward_fan_unit,growth_fans,1,성장 팬 연결,growth_fans는 단위 태그이며 정식 단위 환산·실제 성장 팬 보유량 연결은 대기합니다. 시험 단위를 실보유량의 확정 단위로 간주하지 않습니다.
+casting_battle_flow_config_presentation_only,presentation_only,0,1,실제 지급,10/26 22:39 현중 「실제 들어와야지」: 모든 시뮬에서 실제 돈·팬 지급 · 이전 값 1(연출만)

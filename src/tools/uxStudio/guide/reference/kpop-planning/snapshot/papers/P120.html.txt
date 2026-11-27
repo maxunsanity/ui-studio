@@ -1,0 +1,105 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P120 · 보드 건물 유닛 히스토리 · 10/07 보존 원문</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../콘텐츠별_v03/content.css"></head><body><p class="current-note"><b>이 문서는 옛 안(히스토리)입니다. 10/21 보드 개편(21 기숙사 · 31 본가 · 2·37·39 아카데미 · 8·23·38 찬스)은 각 기획서 첫 장 맨 위 「제안(검수 대기)」에 있습니다.</b></p><main><header><div class="eyebrow">P120 · 히스토리 · 이전 기획</div><h1>보드 건물 유닛 히스토리 · 10/07 보존 원문</h1><span class="pill">히스토리</span><p>10/12 규격 정리 때 대표 기획서에서 옮긴 이전 기획입니다. 지금 기준은 <a href="/docs/planning/planning-docs-tool.html?face=development&doc=P81&plan=planning_development_plan_building">대표 기획서</a>입니다.</p></header><section class="part hist"><h2>2026-10-07 · 보존한 상세 원문</h2>
+<p>다음은 기존 자료입니다. 실행 주소/문서 내장 안내는 당시 기록이며 현재 실행은 P94를 사용합니다. 설명·설정·제작 근거를 삭제하지 않습니다.</p>
+<h1>도시맵 통합 툴 v17</h1>
+<p>상태: 숫자는 임시 시안입니다.</p>
+<p>현재 실행 HTML: <a href="/docs/planning/p58-citymap-temp.html">p58-citymap-temp.html</a>입니다.</p>
+<p>2026-10-07 최신 직접 지시에 따라 옥상 개방8·지하 교체7·건물 접힘7을 섞습니다. 악귀가 먼저 몰려온 뒤 22개 건물이 전개를 마치고 방어합니다. 쌍포15·드론7을 유지합니다. 평소 건물·공연장·숲·차도·인도 원본을 보존하고 상시 헬기장은 표시하지 않습니다.</p>
+<p>변형·건물 탭에서 세 가지 비교 버튼·진행도·원상 복원을 확인합니다. 악귀 방어 탭에서 한 판 전체를 실행합니다. 보드·증설 및 그림·설정은 같은 페이지에서 확인합니다. 저장한 전투는 다른 도구로 이동할 때 일시 정지하고 복구합니다.</p>
+<p>설계: <a href="/docs/planning/삼중AI_공용_20260929/산출/악귀디펜스/변형_v05/설계.md">변형_v05/설계.md</a>입니다. 데이터는 data/defense_proto/v05, 계산은 src/game/defense-proto-v05, 부품 연출은 src/ui/defense-proto-v05를 사용합니다.</p>
+<p>2026-10-07 현중의 인덱스·키 풀네임 지시를 반영합니다. 새 방어·변형 표 26개, 567행의 ID는 CSV 파일명 전체로 시작하며 외래키도 같은 이름을 사용합니다. 열 이름·도시 자리·실제 자산 파일 경로는 유지합니다. 단서의 data/game 변경은 원본 대조 후 참조하며 직접 수정하지 않습니다.</p></section><section class="part hist"><h2>보드 저장 복구와 개발 기획 모음</h2>
+<p>풀네임 전환 전 저장은 원본을 별도 저장 키에 보존한 뒤 검증한 tile→board_tile 키만 변환합니다. 잔액·턴·단계·미수령 결과를 그대로 유지합니다. 기획서 툴의 <a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P75">개발 진행 기획</a>에 디펜스·도시·보드·툴 자료와 현중이 지정한 단계2 검수 화면을 모읍니다.</p></section><section class="part hist"><h2>뺀 것 · 옮긴 것</h2>
+<p>v04 상시 헬기장 안은 현중의 중단 지시로 현재 화면에서 제외하고 이전 버전·백업·검수 증거를 보존합니다. 원본 기획과 본게임 CSV는 변경하지 않습니다.</p></section><section class="part hist"><h2>옛 안 → 2026-10-07 중단·전환 전 기록</h2>
+<p>아래 본문은 이전 시안의 기록입니다. 현재 실행 기준은 위 v05 설명입니다.</p>
+<h1>도시맵·보드 메인 툴</h1>
+<p>HTML: <a href="/docs/planning/p58-citymap-temp.html">p58-citymap-temp.html</a></p></section><section class="part hist"><h2>현재 화면</h2>
+<p>기존 v15의 보드 한 턴, 왼쪽 건물 선택, 원본 도시·중앙 숲·도로, 건물 그림 모음, 접기 기능, 설정·원본 링크를 유지합니다.</p></section><section class="part hist"><h2>2026-10-06 악귀 디펜스 연결</h2>
+<p>상단 화면 이동에 <a href="/docs/planning/p58-defense-proto-v01.html">악귀 디펜스</a>를 추가합니다. 디펜스 화면은 도시 v06 원본을 함께 사용합니다. 대지22곳(시설20+본가·숙소37·39)에 방공포15·드론7을 배치합니다. 특수18칸에는 붙이지 않습니다. 상태와 모든 수치는 임시 시안입니다.</p></section><section class="part hist"><h2>뺀 것·옮긴 것</h2>
+<p>기존 기능을 삭제하거나 옮기지 않습니다. 기존 보드 턴 내부의 짧은 전투를 유지하며, 약5분의 새 전투는 별도 화면에서 연결합니다. 이전 v15와 수정 전 메인 HTML은 백업으로 보존합니다.</p></section><section class="part hist"><h2>2026-10-07 · 연결 추가</h2>
+<p>보드 턴의 기존 악귀 디펜스 링크는 p58-defense-proto-v01.html의 행렬 v03을 엽니다. 몬스5의 이전 실행은 p58-defense-proto-20261006-v02.html에 보존합니다. 도시 원본·22대지·숲·도로·보드 턴·건물 그림판은 변경하지 않습니다. 상태는</p></section><section class="part hist"><h2>(이전) 2. 필요 관련 시스템 기획서</h2>
+<p>P87은보드 배치, P74는증설 입력/저장, P76은3종 변형, P88은방어전, P91은관련 CSV, P82는원본 모델을 제공합니다.</p></section><section><hr/><h2>(이전 · 10/14 부속 4동안) P81 부속 건물 줄 원문 · 10/15 3동으로 바뀜(현중 11:25)</h2>
+<p>| 성장 단계 | 전체 10단계 = 본관 1 + 부속 건물 세우기 3(2~4단계) + 부속 업그레이드 6(5~10단계) · 본관은 바뀌지 않음 · 부속 최대 3개 · 부속마다 외형 1~3단계(<a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P106&amp;plan=planning_development_plan_building_growth#annex">P106 「04-1 부속 건물」</a>) | 임시 시안(현중 10/14 15:52) · 10/07 「본관 2 · 3단계 블록 추가」는 부속 외형으로 다시 씀 |</p>
+<p>| 4~10단계 외형 | 부속 건물 방식으로 정함(아래 「부속 건물 외형 · 자리 · 연출」) | 임시 시안(현중 10/14 15:52) |</p>
+<blockquote>
+<p><strong>10/14 16:0x 바뀜(현중 15:52 · 임시 시안):</strong> 외형은 본관이 변하지 않고, 단계마다 옆에 부속 건물이 하나씩 서고(2~4단계) 그다음 부속들이 차례대로 업그레이드(5~10단계 · 부속 최대 3개 · 부속마다 1~3단계)됩니다. 아래 블록 조립 연출은 대상을 부속으로 바꿔 그대로 씁니다. 규칙 · 부속 이름 · 자리는 <a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P106&amp;plan=planning_development_plan_building_growth#annex">P106 「04-1 부속 건물」</a>. 이 절의 10/07 원문은 그대로 둡니다.</p>
+</blockquote>
+<h4>부속 건물 외형 · 자리 · 연출 (신규 · 임시 시안 · 현중 10/14 15:52)</h4>
+<p>본관은 1단계 원본 건물 · 간판 · 출입구 그대로 둡니다. 단계가 오르면 본관 옆에 부속 건물이 서고, 다 서면 부속이 차례로 커집니다. 단계 규칙 · 부속 이름은 <a href="/docs/planning/planning-docs-tool.html?face=development&amp;doc=P106&amp;plan=planning_development_plan_building_growth#annex">P106 「04-1 부속 건물」</a>이 맡고, 이 절은 <strong>모양 · 자리 · 연출</strong>만 정합니다.</p>
+<table>
+<thead>
+<tr>
+<th>부속 단계</th>
+<th>모양(10/07 블록 방식 그대로)</th>
+<th>쓰는 시설 단계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>본관 옆 바닥 기초 위에 작은 단층 블록 건물 · 시설 상징색 간판 하나</td>
+<td>부속 A 2 · B 3 · C 4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1단계 위에 블록으로 한 층 · 창문 띠 · 기둥 · 지붕 테두리(10/07 「2단계」 외형을 부속에)</td>
+<td>A 5 · B 6 · C 7</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2단계 위에 작은 상부 공간 · 테라스 · 옥상 장식(10/07 「3단계」 외형을 부속에)</td>
+<td>A 8 · B 9 · C 10</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>정한 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>자리</td>
+<td>부속 A = 본관 왼쪽 · B = 오른쪽 · C = 뒤. 칸 경계 안에 두고, 본관 정면 · 간판 · 출입구를 가리지 않음. 뒤 자리(C)는 기본 카메라에서 지붕이 보이도록 본관보다 낮게(가안)</td>
+</tr>
+<tr>
+<td>크기</td>
+<td>부속 3단계 완성 높이도 본관보다 낮게 · 부속 셋을 합쳐도 칸 밖으로 나가지 않게(모델 치수는 이 문서 GLB 기준으로 맞춤 · 가안)</td>
+</tr>
+<tr>
+<td>세우기 연출(2~4단계)</td>
+<td>대상 강조 사각 테두리를 빈 부속 자리에 → 바닥 기초 → 블록 조립(아래 「건설 연출 순서」 그대로) → 완성 강조</td>
+</tr>
+<tr>
+<td>업그레이드 연출(5~10단계)</td>
+<td>그 부속만 강조 → 그 부속 위에 블록 추가(10/07 2 · 3단계 방식) → 완성 강조</td>
+</tr>
+<tr>
+<td>카메라</td>
+<td>그 부속으로 다가갔다가, 끝나면 본관 + 부속 전체를 한 번 보여 줌</td>
+</tr>
+<tr>
+<td>10단계 완성</td>
+<td>부속 셋 모두 3단계가 되는 순간 「완성 빛」 입자를 본관 둘레로 한 번 더(색 · 크기는 아래 표 값 그대로)</td>
+</tr>
+<tr>
+<td>방어 변형(대지 22곳)</td>
+<td>변형 · 쌍포 · 드론은 본관에서만. 부속은 그 자리에 그대로 남음(소켓 · 쌍포 사거리와 겹치는지 시뮬로 확인)</td>
+</tr>
+<tr>
+<td>원본 보존</td>
+<td>본관 원본 GLB · Blender는 손대지 않고, 부속은 「추가 부품 정적 형상」 GLB로 따로 만듦</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>부속 건물 모델(신규 · 임시 시안): 시설 6종(댄스 연습실 · 녹음실 · 콘서트홀 · 방송국 · 팬샵 · 기획사) × 부속 3개 × 단계 3 = 정적 형상 54개(GLB 추가 부품). 보드 시설 20곳은 같은 시설 종류끼리 모델을 같이 씀. 그림 설명은 <a href="/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/시안/건물성장_20261014/P106_01_부속건물10단계.png">P106 10단계 그림</a>. 기하 분할은 시연용이며 본게임 전용 리깅/애니메이션과 사운드는 제작 대기입니다.</p>
+</li>
+<li>
+<p>새 표 제안(파일 없음 · 임시 시안): <code>facility_annex.csv</code>(<code>fac_id</code> · <code>slot</code> A/B/C · <code>name_ko</code> · <code>model_id</code> · <code>place</code> 왼쪽/오른쪽/뒤). 시설 단계 → 부속 · 부속 단계는 P106 규칙으로 계산.</p>
+</li>
+<li>
+<p>부속 건물(10/14 · 임시 시안): 미구현. 시뮬 P94 「주사위·증설」 모듈은 지금 본관에 2 · 3단계 블록을 붙입니다 → 부속 자리에 세우고 차례로 키우는 방식으로 바꾸는 일은 개발 담당(단이 · 커서) · 수락 기준: 2 · 3 · 4단계에 부속이 하나씩 서고 5단계부터 A → B → C 차례로 커짐 · 본관 모양은 10단계까지 그대로 · 방어 변형 뒤 원상 복원 때 부속 위치 그대로. 방어전에서 전개 전 공격0, 쌍포 양쪽 발사·드론 표적 변경, 복원과 다른 모듈 전환 뒤 원본 위치를 확인합니다.</p>
+</li>
+</ul></section></main><script src="../작성기준_v02/document.js"></script><script src="../콘텐츠별_v03/development-links.js"></script></body></html>

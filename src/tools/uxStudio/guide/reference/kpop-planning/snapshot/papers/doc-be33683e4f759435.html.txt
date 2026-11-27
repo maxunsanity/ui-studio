@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<!-- R57 (2026-09-30 · 클로드 · 제안(검수 대기)) 행보판 최신화: 행보판 B안 · 보드 성장 A안 · 전투 B안 · 주체 「기획사」(현중 13:04).
+     옛 팬 서술 · D-074 두 시점(?view=fan|ent) · 덕질 · 색 칩 · 응원봉 · 입덕/원정/총공/시안은 지우지 않고 보관(헌법 제24조 · 칸 표 v0 §6).
+     기본 화면(?view 없음) = R57 최신 서술. ?view=fan|ent = 보관된 옛 시점 그대로. 백업: docs/planning/_backup_클로드_R57/ -->
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>케이팝 몬스터즈 기획 · 행보판 40 (09-30 최신화)</title>
+<style>
+:root {
+  --page:#e8eaef; --ink:#111827; --muted:#6b7280; --line:#c9ced6;
+  --brown:#8B4513; --sky:#6db7e8; --pink:#e91e8c; --orange:#f97316;
+  --red:#dc2626; --yellow:#eab308; --green:#16a34a; --navy:#1e3a8a;
+  --station:#64748b; --util:#0ea5e9; --special:#9ca3af;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Pretendard,"Apple SD Gothic Neo",system-ui,sans-serif;background:var(--page);color:var(--ink)}
+header{padding:10px 18px 8px;background:#fff;border-bottom:1px solid var(--line)}
+header .brand{margin:0;font-size:18px;font-weight:900;letter-spacing:-0.03em;line-height:1.2}
+header h1{margin:3px 0 0;font-size:13px;font-weight:700;color:#4b5563}
+header p{margin:3px 0 0;font-size:12px;color:var(--muted)}
+.deck{max-width:1480px;margin:0 auto;padding:10px 14px 12px}
+.deck-main{display:grid;grid-template-columns:minmax(300px,38%) minmax(0,1fr);gap:12px;align-items:stretch}
+.boardcol{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}
+.pptcol{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}
+.slide{display:grid;grid-template-columns:1.12fr 1fr;aspect-ratio:16/9;width:100%;
+  background:#0b0b16;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 10px 28px rgba(15,23,42,.08)}
+.slide-copy{min-width:0;min-height:0;overflow:hidden;background:#fff;padding:10px 12px 12px;display:flex;flex-direction:column}
+.slide-kicker{font-size:10px;font-weight:800;letter-spacing:.08em;color:#94a3b8;text-transform:uppercase;margin:0 0 6px;flex:0 0 auto}
+.slide-copy .side{flex:1;min-height:0;overflow:auto}
+.phone-hud{display:none}
+.rightcol{display:contents}
+.stage{background:#fff;border:1px solid var(--line);border-radius:12px;min-height:168px}
+.board-wrap{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px;flex:1;min-height:0;display:flex}
+.board{display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:3px;aspect-ratio:1;width:100%;max-width:none;margin:0;background:#d1d5db;padding:3px;border-radius:8px}
+@media (max-width:1080px){
+  .deck-main{grid-template-columns:1fr}
+  .slide{aspect-ratio:16/9}
+  .board{max-width:560px;margin:0 auto}
+}
+.center{grid-column:2/11;grid-row:2/11;background:#f8fafc;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:12px;font-weight:600;text-align:center;padding:10px 12px;pointer-events:none;line-height:1.4}
+.center .ctitle{font-size:14px;font-weight:900;margin:0 0 4px;letter-spacing:-0.02em}
+.center .csub{font-size:11px;font-weight:700;color:var(--muted);margin:0 0 8px}
+.center .csteps{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin:0 0 8px}
+.center .csteps span{font-size:10px;font-weight:800;padding:3px 7px;border-radius:999px;background:#eef2ff;color:#3730a3}
+.center .cbody{font-size:10.5px;font-weight:600;color:#475569;margin:0;max-width:28em}
+.cell{background:#fff;border:1px solid #b8bec8;border-radius:4px;padding:3px 4px 3px;cursor:pointer;display:flex;flex-direction:column;gap:0;min-height:0;min-width:0;position:relative;overflow:hidden}
+.cell:hover{outline:2px solid #111;z-index:2}
+.cell.on{outline:2px solid #111;background:#fff7ed;z-index:2}
+.cell.pulse{animation:pulse .55s ease}
+@keyframes pulse{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+.cell .hd{display:flex;align-items:center;justify-content:space-between;gap:2px;width:100%;flex:0 0 auto;min-height:0}
+.cell .n{font-size:8px;font-weight:800;color:#64748b;line-height:1}
+.cell .nm{font-size:9px;font-weight:800;line-height:1.15;padding:1px 0 0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:keep-all}
+.cell .go{font-size:7px;font-weight:600;color:#94a3b8;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.cell.empty .nm{color:#94a3b8;font-weight:600}
+.cell.corner{padding:6px 5px;justify-content:center}
+.cell.corner .nm{font-size:11px;-webkit-line-clamp:2}
+.cell.corner .go{white-space:normal}
+.stripe{position:absolute;background:currentColor}
+.stripe.brown{background:var(--brown)}.stripe.sky{background:var(--sky)}
+.stripe.pink{background:var(--pink)}.stripe.orange{background:var(--orange)}
+.stripe.red{background:var(--red)}.stripe.yellow{background:var(--yellow)}
+.stripe.green{background:var(--green)}.stripe.navy{background:var(--navy)}
+.stripe.station{background:var(--station)}.stripe.util{background:var(--util)}
+.stripe.special{background:var(--special)}
+.cell.side-s .stripe,.cell.corner .stripe{left:0;right:0;top:0;height:4px}
+.cell.side-n .stripe{left:0;right:0;bottom:0;top:auto;height:4px}
+.cell.side-w .stripe{top:0;bottom:0;right:0;left:auto;width:4px;height:auto}
+.cell.side-e .stripe{top:0;bottom:0;left:0;right:auto;width:4px;height:auto}
+.cell.side-s{padding-top:7px}
+.cell.side-n{padding-bottom:7px}
+.cell.side-w{padding-right:7px}
+.cell.side-e{padding-left:7px}
+.cell.g-window.side-w,.cell.g-company.side-w{box-shadow:inset 2px 0 0 #be185d}
+.cell.g-company.side-w{box-shadow:inset 2px 0 0 #d97706}
+.cell.g-window.side-e,.cell.g-company.side-e{box-shadow:inset -2px 0 0 #be185d}
+.cell.g-company.side-e{box-shadow:inset -2px 0 0 #d97706}
+.cell.g-window.side-n,.cell.g-company.side-n{box-shadow:inset 0 2px 0 #be185d}
+.cell.g-company.side-n{box-shadow:inset 0 2px 0 #d97706}
+.cell.g-window.side-s,.cell.g-company.side-s{box-shadow:inset 0 -2px 0 #be185d}
+.cell.g-company.side-s{box-shadow:inset 0 -2px 0 #d97706}
+.cell.g-window.corner{box-shadow:inset 0 0 0 2px #be185d}
+.cell.g-company.corner{box-shadow:inset 0 0 0 2px #d97706}
+.side{background:#fff;padding:0}
+.side .hint{color:var(--muted);font-size:13px;margin:28px 8px}
+.side .tag{font-size:11px;font-weight:800;color:var(--muted)}
+.side h2{margin:2px 0 8px;font-size:20px;letter-spacing:-.03em;line-height:1.2}
+.side .lv{display:inline-block;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px;background:#ecfdf5;color:#166534;margin-bottom:8px}
+.side .lv.y{background:#fef9c3;color:#854d0e}
+.side .desc{font-size:13.5px;line-height:1.5;margin:0 0 12px;color:#374151}
+.side h3{margin:12px 0 8px;font-size:12px;font-weight:800}
+.path{display:flex;flex-direction:column;gap:4px;margin:0 0 10px}
+.path .step{font-size:12px;padding:6px 8px;border-radius:7px;border:1px solid #e5e7eb;background:#fafafa;color:#6b7280}
+.path .step.now{border-color:#16a34a;background:#f0fdf4;color:#14532d;font-weight:800}
+.path .step.now.y{border-color:#ca8a04;background:#fefce8;color:#713f12}
+.path .step.done{color:#9ca3af;text-decoration:line-through}
+.btn-grow{width:100%;border:0;border-radius:10px;padding:11px 12px;font-weight:900;font-size:14px;cursor:pointer;background:#111827;color:#fff}
+.btn-grow:disabled{opacity:.4;cursor:not-allowed}
+.btn-grow.green{background:#15803d}
+.btn-grow.yellow{background:#a16207}
+.side .lv.p{background:#fce7f3;color:#9d174d}
+.fx{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.fx li{border:1px solid #e5e7eb;border-radius:8px;padding:8px 10px;background:#fafafa}
+.fx .k{font-size:11px;font-weight:900;margin-bottom:3px}
+.fx .k.daebak{color:#c2410c}.fx .k.jungbak{color:#a16207}.fx .k.unmang{color:#64748b}
+.fx .t{font-size:12.5px;line-height:1.4;color:#1f2937}
+.overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:50}
+.overlay.show{display:flex}
+.overlay .bg{position:absolute;inset:0;background:rgba(15,23,42,.55)}
+.card{position:relative;width:min(340px,90vw);background:#fff;border-radius:16px;padding:22px 20px 20px;text-align:center;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);animation:pop .4s cubic-bezier(.2,1.2,.4,1)}
+@keyframes pop{from{opacity:0;transform:scale(.86) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.card .stamp{position:absolute;top:12px;right:12px;width:58px;height:58px;border:3px solid #c2410c;border-radius:50%;
+  color:#c2410c;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;
+  transform:rotate(12deg) scale(0);opacity:0}
+.card .stamp.show{animation:stampIn .35s cubic-bezier(.2,1.4,.4,1) .15s forwards}
+@keyframes stampIn{0%{transform:rotate(12deg) scale(0);opacity:0}70%{transform:rotate(-4deg) scale(1.12);opacity:1}100%{transform:rotate(12deg) scale(1);opacity:.92}}
+.card .lab{font-size:11px;font-weight:800;letter-spacing:.08em;color:#16a34a;margin-bottom:10px}
+.card .before{font-size:13px;color:#94a3b8;text-decoration:line-through;margin-bottom:6px}
+.card .arrow{font-size:18px;font-weight:900;color:#16a34a;margin:2px 0 8px}
+.card .after{font-size:20px;font-weight:900;line-height:1.25}
+.card .chip{margin-top:12px;display:inline-block;font-size:12px;font-weight:800;padding:5px 10px;border-radius:8px;background:#dcfce7;color:#166534}
+
+.sysbar{position:relative;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:8px 10px;max-width:none;margin:10px 0 0;
+  background:#fff;border:1px solid var(--line);border-radius:12px;z-index:8}
+.sysbar button{appearance:none;border:1px solid var(--line);background:#fff;border-radius:12px;padding:6px 12px 5px;cursor:pointer;color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;gap:1px;line-height:1.15}
+.sysbar button b{font-size:12px;font-weight:800}
+.sysbar button i{font-size:9px;font-weight:700;font-style:normal;color:#9ca3af;letter-spacing:.02em}
+.sysbar button.on i{color:#cbd5e1}
+.sysbar .sysrow{width:100%;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
+.sys-fly{position:relative;display:inline-flex;flex-direction:column;align-items:center}
+.sysbar .sysrow.sub{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);
+  width:max-content;margin:0;padding:8px 10px;z-index:30;flex-wrap:nowrap;
+  background:#fff;border:1px solid var(--line);border-radius:12px;
+  box-shadow:0 12px 28px rgba(15,23,42,.18)}
+.sysbar .sysrow.sub::before{content:"";position:absolute;top:auto;bottom:-5px;left:50%;
+  width:10px;height:10px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  transform:translateX(-50%) rotate(45deg)}
+.sysbar .branch{font-size:10px;font-weight:800;color:#9ca3af;letter-spacing:.02em}
+.sysbar .sysrow.sub button{padding:5px 11px 4px;border-radius:10px;background:#f8fafc}
+.sysbar .sysrow.sub button b{font-size:11.5px}
+.sysbar .caret{font-size:9px;opacity:.55;margin-left:2px;display:inline-block;transition:transform .2s}
+.sysbar button.open .caret{transform:none;opacity:.9}
+.sysbar .sysrow.sub[hidden]{display:none}
+.sysbar button:hover{background:#fff7ed;border-color:#fdba74}
+.sysbar button.on{background:#111827;color:#fff;border-color:#111827}
+.sysbar .hint{width:100%;text-align:center;font-size:11px;color:var(--muted);font-weight:600;margin:0 0 4px}
+.gazebar{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.gazebar button{appearance:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:800;cursor:pointer}
+.gazebar button.on{background:#111827;color:#fff;border-color:#111827}
+.cell .g{display:none}
+.cell.dim{opacity:.32}
+.gaze-box{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px}
+.gaze-col{border:1px solid #e5e7eb;border-radius:10px;padding:8px 10px;background:#f8fafc}
+.gaze-col h3{margin:0 0 4px}
+.gaze-col .desc{margin:0;font-size:12.5px}
+@media (max-width:720px){.gaze-box{grid-template-columns:1fr}}
+.ex{display:inline-block;font-size:10px;font-weight:800;padding:2px 7px;border-radius:999px;background:#fef3c7;color:#92400e;margin-left:6px}
+
+/* ===== 기획 쇼케이스 ===== */
+.desc.big{font-size:15px;font-weight:800;color:#111827;line-height:1.5}
+.cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin:0 0 10px}
+.cmp th,.cmp td{border:1px solid #e5e7eb;padding:5px 8px;text-align:left}
+.cmp th{background:#f3f4f6;font-size:11px;color:#6b7280;font-weight:800}
+.cmp td:last-child{background:#fffbeb}
+.note-ok{background:#f0fdf4;border-left:3px solid #16a34a;padding:8px 10px;border-radius:0 6px 6px 0;margin:10px 0 0!important;color:#14532d!important}
+.note-warn{background:#fff7ed;border-left:3px solid #f97316;padding:8px 10px;border-radius:0 6px 6px 0;margin:10px 0 0!important;color:#7c2d12!important}
+.note-gray{background:#f8fafc;border-left:3px solid #cbd5e1;padding:8px 10px;border-radius:0 6px 6px 0;margin:10px 0 0!important;color:#475569!important}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+.way{border:1px solid #e5e7eb;border-radius:10px;padding:10px;background:#fafafa}
+.way .wt{font-size:14px;font-weight:900;color:#be185d}
+.way .wg{font-size:10px;font-weight:800;color:#9ca3af;margin:1px 0 6px}
+.way p{margin:0;font-size:12px;line-height:1.5;color:#374151}
+
+/* 상태 바 */
+.hud{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 10px;background:#fff;
+  border:1px solid var(--line);border-radius:10px;margin:0 0 10px}
+.hud .unit{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:800}
+.hud .unit b{font-size:15px;font-weight:900;letter-spacing:-.02em}
+.hud .unit .lab{color:#9ca3af}
+.hud .sep{width:1px;height:18px;background:#e5e7eb}
+.chips{display:flex;gap:3px}
+.chip-col{width:20px;text-align:center}
+.chip-col .bar{height:26px;border-radius:3px;background:#e5e7eb;position:relative;overflow:hidden}
+.chip-col .bar i{position:absolute;left:0;right:0;bottom:0;display:block;transition:height .45s cubic-bezier(.2,1,.3,1)}
+.chip-col .n{font-size:9px;font-weight:800;color:#9ca3af;margin-top:1px}
+.chip-col.full .n{color:#111827}
+.chip-col.full .bar{outline:2px solid #111827;animation:chipFull .5s ease}
+@keyframes chipFull{0%{transform:scale(1)}45%{transform:scale(1.25)}100%{transform:scale(1)}}
+.prep{display:flex;gap:6px}
+.prep .p1{font-size:10px;font-weight:800;color:#6b7280}
+.prep .pv{display:inline-block;min-width:26px;text-align:center;font-size:11px;font-weight:900;
+  background:#eef2ff;color:#3730a3;border-radius:5px;padding:2px 5px}
+
+/* 응원봉 */
+.cell .sticks{position:absolute;left:3px;bottom:2px;display:flex;gap:1px}
+.cell .sticks i{width:3px;height:7px;border-radius:1px;background:#f472b6;display:block}
+.cell .sticks.wave i{background:#a855f7;box-shadow:0 0 4px #a855f7}
+.cell.lit{animation:lit .5s ease}
+@keyframes lit{0%{box-shadow:0 0 0 0 rgba(244,114,182,.7)}100%{box-shadow:0 0 0 10px rgba(244,114,182,0)}}
+
+/* 덕질 목록 */
+.duk{display:flex;flex-direction:column;gap:5px;margin:0 0 10px}
+.duk-row{display:grid;grid-template-columns:auto 1fr auto;gap:7px;align-items:center;
+  border:1px solid #e5e7eb;border-radius:8px;padding:6px 8px;background:#fafafa;cursor:pointer}
+.duk-row:hover{background:#fff7ed;border-color:#fdba74}
+.duk-row .g{font-size:9px;font-weight:800;color:#9ca3af}
+.duk-row .nm{font-size:13px;font-weight:800}
+.duk-row .cur{font-size:11px;color:#6b7280}
+.duk-row .st{display:flex;gap:2px}
+.duk-row .st i{width:7px;height:7px;border-radius:50%;background:#e5e7eb;display:block}
+.duk-row .st i.on{background:#f59e0b}
+.duk-card{border:1px solid #e5e7eb;border-radius:10px;padding:8px 9px;margin:0 0 8px;background:#fafafa;cursor:pointer}
+.duk-card:hover{background:#fff7ed;border-color:#fdba74}
+.duk-card.pick{border-color:#111827;background:#fff7ed;box-shadow:0 0 0 1px #111827}
+.duk-card .hd{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin:0 0 4px}
+.duk-card .g{font-size:9px;font-weight:800;color:#9ca3af}
+.duk-card .nm{font-size:13px;font-weight:900}
+.duk-card .duk-where{margin-left:auto;font-size:10px;font-weight:700;color:#94a3b8}
+.duk-card .blurb{margin:0 0 6px;font-size:11.5px;font-weight:600;color:#475569;line-height:1.4}
+.duk-card .now{font-size:11px;font-weight:800;color:#92400e;margin:0 0 6px}
+.ladder{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin:0}
+.ladder .s{border:1px solid #e5e7eb;border-radius:6px;padding:5px 3px;font-size:9.5px;
+  line-height:1.25;text-align:center;background:#fff;word-break:keep-all}
+.ladder .s b{display:block;font-size:8.5px;color:#9ca3af;margin-bottom:2px}
+.ladder .s.on{border-color:#f59e0b;background:#fffbeb;font-weight:800}
+.ladder .s.done{opacity:.55;background:#f8fafc}
+
+/* ===== 연출 두 칸 ===== */
+.stagewrap{display:contents}
+
+/* 위 · 16:9 슬라이드 왼쪽 : 착지 그림 */
+.stage-main{position:relative;min-height:0;height:100%;overflow:hidden;background:#0b0b16}
+.scene{position:absolute;inset:0;background-size:cover;background-position:50% 55%;
+  opacity:0;transition:opacity .55s ease}
+.scene.country{background-image:url("_img/%EC%BC%80%EC%9D%B4%ED%8C%9D.png")}
+.scene.arena{background-image:url("_img/image23213.png")}
+.scene.city{background-image:url("_img/1231231.png")}
+.stage-main[data-place="country"] .scene.country{opacity:1}
+.stage-main[data-place="arena"] .scene.arena{opacity:1}
+.stage-main[data-place="city"] .scene.city{opacity:1}
+.scene.land{z-index:1;overflow:hidden;background:none}
+.scene.land img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0 50%;pointer-events:none;user-select:none}
+.stage-main.has-land .scene.country,
+.stage-main.has-land .scene.arena,
+.stage-main.has-land .scene.city{opacity:0}
+.stage-main.has-land .scene.land{opacity:1}
+.scene.film{z-index:5;background-image:url("_img/dice-film.png");background-size:auto 108%;background-repeat:repeat-x;background-position:0 50%}
+.stage-main.filming .scene.country,
+.stage-main.filming .scene.arena,
+.stage-main.filming .scene.city,
+.stage-main.filming .scene.land,
+.stage-main.filming .scene.window{opacity:0!important}
+.stage-main.filming .scene.film{opacity:1!important;transition:none;animation:filmPan 2s linear forwards}
+@keyframes filmPan{from{background-position:0 50%}to{background-position:-180% 50%}}
+/* 이동 중 : 밴 창밖이 위를 덮고 흐른다 */
+.scene.window{background-image:url("_img/%EC%BC%80%EC%9D%B4%ED%8C%9D3.png");z-index:2}
+.stage-main.moving .scene.window{opacity:1;animation:pan .9s linear infinite}
+@keyframes pan{from{background-position:58% 55%}to{background-position:42% 55%}}
+/* 도착 순간 한 번 밝아짐 */
+.flash{position:absolute;inset:0;z-index:3;background:#fff;opacity:0;pointer-events:none}
+.stage-main.arrive .flash{animation:flash .5s ease-out}
+@keyframes flash{0%{opacity:.55}100%{opacity:0}}
+.stage-main.arrive .scene{transform:scale(1.04);transition:transform .5s ease}
+.place-tag{position:absolute;left:12px;bottom:10px;z-index:6;font-size:11px;font-weight:800;color:#fff;
+  background:rgba(0,0,0,.5);padding:5px 11px;border-radius:999px;backdrop-filter:blur(3px)}
+.eye-tag{position:absolute;right:12px;top:10px;z-index:6;font-size:11px;font-weight:900;color:#fff;
+  background:rgba(168,85,247,.85);padding:5px 11px;border-radius:999px;opacity:0;transition:opacity .3s}
+.eye-tag.on{opacity:1}
+
+/* 보드 아래 · 주사위 필러 · 스케줄 필름 */
+.stage-filler{position:relative;height:108px;border-radius:12px;border:1px solid var(--line);
+  background:#08080e;overflow:hidden;
+  display:flex;flex-direction:row;align-items:flex-end;justify-content:space-between;padding:10px 12px;gap:10px}
+.film-preview{position:absolute;inset:0;background:url("_img/dice-film.png") 0 50%/auto 145% repeat-x;
+  opacity:.78}
+.stage-filler.spin .film-preview{opacity:1;filter:brightness(1.12);animation:filmPan 1.1s linear infinite}
+.ring-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,14,.55),rgba(8,8,14,.2) 40%,rgba(8,8,14,.75));pointer-events:none}
+.filler-copywrap{position:relative;z-index:2;min-width:0}
+.filler-lab{margin:0 0 2px;font-size:9px;font-weight:800;letter-spacing:.08em;color:#c4b5fd}
+.filler-copy{position:relative;z-index:2;font-size:13px;font-weight:900;color:#f5e9ff;letter-spacing:.01em;text-shadow:0 1px 8px #000}
+.filler-why{margin:3px 0 0;font-size:10.5px;font-weight:700;color:#ddd6fe;line-height:1.35;max-width:28em;text-shadow:0 1px 6px #000}
+.stage-filler.spin .filler-copy{color:#f0abfc}
+.roll-btn{position:relative;z-index:2;border:0;border-radius:999px;padding:8px 14px;font-size:12px;font-weight:900;cursor:pointer;
+  background:#a855f7;color:#fff;box-shadow:0 4px 14px rgba(168,85,247,.45);white-space:nowrap}
+.roll-btn:hover{background:#9333ea}
+.roll-btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* ── 075 ② 칸 위에 보이는 것 — 응원봉 · 급 배지 ── */
+.cell .hb{display:flex;gap:1px;align-items:flex-end;margin-top:auto;min-height:5px;pointer-events:none}
+.cell .hb i{display:block;width:4px;height:4px;border-radius:1px;background:#fbbf24;box-shadow:0 0 2px rgba(251,191,36,.8)}
+.cell.wave .hb i{background:#ec4899;box-shadow:0 0 4px rgba(236,72,153,1);animation:hbwave .9s ease-in-out infinite}
+.cell.wave .hb i:nth-child(2){animation-delay:.1s}.cell.wave .hb i:nth-child(3){animation-delay:.2s}
+.cell.wave .hb i:nth-child(4){animation-delay:.3s}.cell.wave .hb i:nth-child(5){animation-delay:.4s}
+.cell.wave{box-shadow:inset 0 0 0 2px rgba(236,72,153,.5)}
+@keyframes hbwave{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.cell .lvb{font-size:6.5px;font-weight:900;line-height:1;padding:1px 2px;border-radius:3px;border:1px solid #854d0e;color:#854d0e;background:#fff;pointer-events:none;flex:0 0 auto;white-space:nowrap}
+.cell .lvb.g{border-color:#166534;color:#166534;background:#fff}
+.cell.lit{animation:lit .7s ease}
+@keyframes lit{0%{background:#fff}35%{background:#fef9c3}100%{background:#fff}}
+
+/* ── 075 ③ 칸 패널에 더 들어가는 것 ── */
+.side .dukbox{margin-top:14px;padding-top:12px;border-top:2px solid #e5e7eb}
+.side .duklist{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 4px}
+.side .duklist span{font-size:10.5px;font-weight:800;padding:3px 7px;border-radius:999px;background:#f1f5f9;color:#334155}
+.side .duklist span b{font-weight:900;color:#0f172a}
+.side .chiprow{display:flex;align-items:center;gap:8px;margin:6px 0 2px}
+.side .chipdot{width:14px;height:14px;border-radius:4px;flex:0 0 auto;border:1px solid rgba(0,0,0,.15)}
+.side .chipbar-in{flex:1;height:9px;border-radius:99px;background:#e5e7eb;overflow:hidden}
+.side .chipbar-in i{display:block;height:100%;transition:width .25s}
+.side .chipnum{font-size:10.5px;font-weight:900;color:#475569;font-variant-numeric:tabular-nums}
+.side .ready{display:flex;flex-wrap:wrap;gap:4px;margin:0}
+.side .ready span{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;background:#ecfdf5;color:#166534}
+.side .ready span.none{background:#f3f4f6;color:#6b7280}
+.side .btn-duk{width:100%;margin-top:10px;appearance:none;border:0;border-radius:10px;padding:9px;cursor:pointer;
+  font-family:inherit;font-size:12.5px;font-weight:900;color:#fff;background:#111827}
+.side .btn-duk:hover{background:#1f2937}
+.side .btn-duk:disabled{background:#d1d5db;cursor:not-allowed}
+.side .mini{font-size:11px;color:#6b7280;font-weight:600;margin:6px 0 0;line-height:1.5}
+
+/* ── 효과 셋 · 색 칩 8 ── */
+.chipbar{background:#fff;border:1px solid var(--line);border-radius:12px;padding:7px 10px}
+.chipbar .ct{font-size:11.5px;font-weight:700;color:#334155;margin:0 0 5px;line-height:1.4}
+.chipbar .ct b{color:var(--ink)}
+.chipbar .ct span.why{display:inline;font-size:11px;font-weight:600;color:var(--muted);margin-left:4px}
+.chipgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+@media (max-width:560px){.chipgrid{grid-template-columns:repeat(2,1fr)}}
+.chipcell{border:1px solid #e5e7eb;border-radius:8px;padding:5px 6px;background:#fafafa}
+.chipcell.mine{border-color:#111827;background:#fff7ed;box-shadow:0 0 0 1px #111827}
+.chipcell .h{display:flex;align-items:center;gap:4px;font-size:10.5px;font-weight:800;color:#334155}
+.chipcell .h i{width:9px;height:9px;border-radius:3px;display:block}
+.chipcell .h em{margin-left:auto;font-style:normal;font-weight:900;color:#64748b;font-variant-numeric:tabular-nums}
+.chipcell .dots{display:flex;gap:2px;margin-top:4px}
+.chipcell .dots i{width:7px;height:7px;border-radius:2px;background:#e5e7eb;display:block}
+.chipcell .dots i.on{box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.chipcell .kind{font-size:9.5px;font-weight:700;color:#0f172a;margin:2px 0 0;line-height:1.25;word-break:keep-all}
+.chipcell .why{font-size:9.5px;font-weight:700;color:#64748b;margin:3px 0 0;line-height:1.25}
+.chipcell .mine-tag{font-size:9px;font-weight:900;color:#c2410c;margin-left:3px}
+.color-kind{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:0 0 8px;font-size:12px;font-weight:800;color:#334155}
+.color-kind i{width:10px;height:10px;border-radius:3px;display:block;flex:0 0 auto}
+.color-kind span{font-weight:600;color:#64748b}
+.chipcell.pop{animation:pop .6s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+.chipbar .hornline{display:flex;align-items:center;gap:8px;margin-top:6px;padding-top:6px;border-top:1px dashed #e5e7eb;font-size:10.5px;font-weight:700;color:#475569}
+.chipbar .hornline b{color:#111827}
+.chipbar .hornline button{margin-left:auto;appearance:none;border:1px solid var(--line);background:#fff;border-radius:8px;
+  padding:4px 9px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;color:#374151}
+.fxtoast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(14px);z-index:60;
+  background:#111827;color:#fff;border-radius:12px;padding:10px 16px;font-size:12.5px;font-weight:800;
+  opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 12px 30px rgba(0,0,0,.25);max-width:90vw;text-align:center}
+.fxtoast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.fxtoast b{color:#fcd34d}
+
+/* ===== R57 최신화 ===== */
+.r57band{max-width:1480px;margin:8px auto 0;padding:0 14px}
+.r57band .band{background:#111827;color:#fff;border-radius:12px;padding:9px 14px;font-size:12.5px;font-weight:700;line-height:1.5}
+.r57band .band b{color:#fcd34d}
+.r57band .band a{color:#a5b4fc}
+.r57band .band .sub{display:block;font-weight:600;color:#cbd5e1;font-size:11.5px;margin-top:2px}
+.r57sec{max-width:1480px;margin:8px auto 0;padding:0 14px}
+.r57sec details{background:#fff;border:1px solid var(--line);border-radius:12px;margin:0 0 8px;overflow:hidden}
+.r57sec summary{cursor:pointer;padding:10px 14px;font-size:14px;font-weight:900;letter-spacing:-.02em;list-style:none}
+.r57sec summary::-webkit-details-marker{display:none}
+.r57sec summary::before{content:"▸ ";color:#94a3b8}
+.r57sec details[open] summary::before{content:"▾ "}
+.r57sec summary small{font-size:11px;font-weight:700;color:#64748b;margin-left:6px}
+.r57sec .in{padding:0 14px 12px;font-size:13px;line-height:1.55;color:#374151}
+.r57sec .in h4{margin:12px 0 6px;font-size:12.5px;font-weight:900;color:#111827}
+.r57sec .in p{margin:0 0 8px}
+.r57sec .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(max-width:900px){.r57sec .grid3{grid-template-columns:1fr}}
+.r57sec .card57{border:1px solid #e5e7eb;border-radius:10px;padding:9px 11px;background:#fafafa}
+.r57sec .card57 b.h{display:block;font-size:12px;letter-spacing:.06em;color:#6b7280;margin-bottom:4px}
+.r57tbl{width:100%;border-collapse:collapse;font-size:12px;margin:4px 0 8px}
+.r57tbl th,.r57tbl td{border:1px solid #e5e7eb;padding:4px 7px;text-align:left;vertical-align:top}
+.r57tbl th{background:#f3f4f6;font-size:11px;color:#6b7280;font-weight:800}
+.r57tbl td.c{white-space:nowrap}
+.r57tbl i.sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.pend{display:inline-block;font-size:10.5px;font-weight:800;color:#9a3412;background:#ffedd5;border-radius:999px;padding:1px 7px;margin-left:4px;white-space:nowrap}
+.gan{display:inline-block;font-size:10.5px;font-weight:800;color:#1e40af;background:#dbeafe;border-radius:999px;padding:1px 7px;margin-left:4px;white-space:nowrap}
+.src57{font-size:11px;color:#94a3b8;margin:6px 0 0!important}
+.growbox{border:1px solid #d1fae5;background:#f0fdf4;border-radius:10px;padding:9px 11px;margin:10px 0 0}
+.growbox h3{margin:0 0 6px!important}
+.growbox .steps3{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 6px}
+.growbox .steps3 span{font-size:11.5px;font-weight:800;padding:3px 8px;border-radius:999px;background:#fff;border:1px solid #bbf7d0;color:#14532d}
+.growbox ul{margin:0;padding-left:18px;font-size:12.5px;line-height:1.55;color:#1f2937}
+.oneline{border-left:3px solid #6366f1;background:#eef2ff;padding:8px 10px;border-radius:0 8px 8px 0;font-size:13.5px;font-weight:700;color:#1e1b4b;margin:0 0 10px;line-height:1.5}
+.oneline small{display:block;font-size:10.5px;font-weight:800;color:#6366f1;letter-spacing:.06em;margin-bottom:2px}
+.archive57{max-width:1480px;margin:10px auto 20px;padding:0 14px}
+.archive57 > details{background:#f8fafc;border:1px dashed #94a3b8;border-radius:12px}
+.archive57 > details > summary{cursor:pointer;padding:10px 14px;font-size:13px;font-weight:900;color:#475569}
+.archive57 .in{padding:0 14px 14px;font-size:12.5px;line-height:1.5;color:#475569}
+.archive57 h4{margin:12px 0 6px;font-size:12.5px;color:#334155}
+.viewband{background:#7c2d12;color:#fff;font-size:12.5px;font-weight:800;padding:8px 18px}
+.viewband a{color:#fde68a}
+.cityline{font-size:12px;color:#334155;background:#f1f5f9;border-radius:8px;padding:6px 9px;margin:0 0 10px}
+.cityline b{color:#0f172a}
+.r57legend{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-size:12px;color:#334155}
+.r57legend .row{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:4px}
+.r57legend .row span{display:inline-flex;align-items:center;gap:4px;font-weight:700}
+.r57legend .row i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.cell .lvb.j{background:#111827;color:#fde68a}
+body.mode-concept > header,body.mode-concept > .r57band,body.mode-concept > .r57sec,body.mode-concept > .deck,body.mode-concept > .archive57{display:none!important}
+body.mode-detail #conceptHome{display:none!important}
+body.mode-detail{padding-bottom:72px}
+#conceptHome{min-height:100vh;background:#080b14;color:#f8f8fc;font-family:Pretendard,"Apple SD Gothic Neo",system-ui,sans-serif;padding:22px 22px 78px}
+.ch-top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.ch-top b{font-size:13px;letter-spacing:.08em;color:#d4c1f4}
+.ch-badge{margin-left:auto;border:1px solid #6f5b87;color:#fde68a;border-radius:99px;padding:4px 10px;font-size:12px;font-weight:900}
+.ch-top h1{margin:0;font-size:28px;letter-spacing:-.04em}
+.ch-stage{width:min(1100px,100%);margin:0 auto;aspect-ratio:16/9;background:radial-gradient(circle at 70% 20%,rgba(180,139,255,.18),transparent 32%),linear-gradient(145deg,#12182a,#090d18);border:1px solid #313951;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;padding:28px 32px}
+.ch-slide{display:none;flex:1;min-height:0;flex-direction:column}
+.ch-slide.on{display:flex}
+.ch-slide h2{margin:0 0 8px;font-size:32px;letter-spacing:-.04em}
+.ch-slide .lead{margin:0 0 16px;color:#b8c1d3;font-weight:700}
+.doors{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;flex:1;min-height:0}
+.door{border-radius:14px;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;min-height:0}
+.door strong{font-size:20px;letter-spacing:-.03em}
+.door span{font-size:13px;font-weight:700;opacity:.9;margin-top:4px}
+.door.land{background:linear-gradient(180deg,#3a2a18,#1a120c)}
+.door.show{background:linear-gradient(180deg,#4a1848,#1a0c18)}
+.door.story{background:linear-gradient(180deg,#14324a,#0c141c)}
+.door.book{background:linear-gradient(180deg,#3a3010,#161208)}
+.day{display:flex;gap:18px;align-items:center;flex:1}
+.cal{width:180px;height:160px;border-radius:16px;background:#fff;color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900}
+.cal small{color:#e11d48;letter-spacing:.12em}
+.cal b{font-size:42px;line-height:1}
+.van{flex:1;height:170px;display:flex;align-items:center}
+.van svg{width:100%;height:150px}
+.wait{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;flex:1}
+.wait div{border:1px solid #3a3018;background:#1a160e;border-radius:12px;padding:16px}
+.wait b{display:block;color:#fde68a;margin-bottom:6px}
+.wait span{color:#e7e5e4;font-size:14px;font-weight:700;line-height:1.4}
+.ch-nav{display:flex;gap:8px;align-items:center;margin-top:12px}
+.ch-nav button{border:1px solid #3b4560;background:#182137;color:#fff;border-radius:99px;padding:8px 14px;font-weight:900;cursor:pointer}
+.ctabs{position:fixed;left:0;right:0;bottom:0;display:flex;gap:8px;justify-content:center;padding:10px;background:rgba(8,11,20,.94);border-top:1px solid #313951;z-index:20}
+.ctabs button{border:1px solid #3b4560;background:#182137;color:#e5e7eb;border-radius:12px;padding:10px 18px;font-weight:900;cursor:pointer}
+.ctabs button.on{background:linear-gradient(90deg,#a855f7,#f472b6);color:#fff;border-color:transparent}
+</style>
+</head>
+<body><section class="part current-note" id="part-board1021"><h2>10/21 보드 개편 · 「제안(검수 대기)」</h2><h3>「제안(검수 대기)」 (현중 10:09 배치 · 10:25 확정 · 09:41 안은 히스토리)</h3>
+<p>&gt; 현중 원문 10:09: 「모노폴리고는 30번이고..10번과 20번이 모서리잖아.. 우리 기분이면 31번이 감옥이고 11번과 21번은 숙소가 되어야지..1번은 사옥이고 / 감옥으로 가기 없어 / 그냥 감옥 도착이야」</p>
+<table><tr><th>칸</th><th>전</th><th>후</th><th>왜 (현중 시각)</th><th>막는 문제</th></tr><tr><td>1</td><td>출발</td><td><b>사옥</b>(출발). 지나면 돈 · 사옥 건설 기회 유지</td><td>모노폴리GO 0번 출발 자리 (10:09 · 09:45)</td><td>—</td></tr><tr><td>11</td><td>스탠바이(감옥 규칙)</td><td>숙소 · <b>기숙사</b> · 짓기 없음 · 회복 · 팀 단합</td><td>모노폴리GO 10번 모서리 자리 (10:09 · 10:25 기숙사 확정)</td><td>모서리 배치가 모노폴리GO와 어긋나는 것</td></tr><tr><td>21</td><td>코너 온에어(효과 없음)</td><td>숙소 · <b>본가</b> · 짓기 없음 · 회복 · 태도 회복</td><td>모노폴리GO 20번 모서리 자리 (10:09 · 10:25 본가 확정)</td><td>효과 없는 코너</td></tr><tr><td>31</td><td>코너 병가(11로 보냄)</td><td><b>감옥 도착</b> 칸 = 도착하면 바로 갇힘, 더블 굴리기 3번으로 탈출(못 나오면 벌금 내고 나옴). 옛 11번 스탠바이 규칙(탈출 돈 · 주사위 · 벌금) 옮김. 「감옥으로 가기」 칸 없음</td><td>모노폴리GO 30번 자리 (10:09)</td><td>감옥 가는 길이 없던 문제 · 벌칙 칸이 둘로 갈리는 것</td></tr><tr><td>2·37·39</td><td>숙소 건물(휴식·태도·외국어)</td><td><b>아카데미</b> 건물(외국어·교양·태도·성실성 공부, 30단계)</td><td>늘어난 공부 스탯을 키울 건물 (09:41)</td><td>공부 스탯이 '본가' 칸에 억지로 붙던 것</td></tr><tr><td>건물 없는 칸</td><td>섞여 있음</td><td>짓기 없는 일반 칸. 건물 칸은 <b>24칸</b></td><td>(09:41)</td><td>코너·이벤트 칸에 건설 표가 생기는 것</td></tr><tr><td>8·23·38</td><td>스케줄</td><td><b>찬스</b></td><td>같은 역할이 두 이름 (09:41)</td><td>카드 표 중복</td></tr><tr><td>수익 짝</td><td>비어 있음</td><td>음반 = 보컬 녹음실 + 프로듀싱 · 공연 = 랩 · 굿즈 = 팬샵 · 영상·광고 = 예능 방송국 + 뷰티 · 팬클럽 = 사옥 · 성장만 = 댄스 + 아카데미</td><td>(09:42)</td><td>어느 칸에서 돈이 나오는지 비던 것</td></tr><tr><td>칸 수익</td><td>—</td><td>그 칸 건물 단계를 따라 오름 (모노폴리GO 보드 단계 역할)</td><td>(09:44)</td><td>수익이 건물과 따로 노는 것</td></tr><tr><td>엔터 파워</td><td>통합 레벨</td><td>건물 단계 1당 +1, 최대 270. 기획사 능력 레벨 합과 같은 값(한 번만 셈). 주사위 배수 상한을 풂</td><td>(09:45)</td><td>두 번 세기 · 팬 수 잠금 고리</td></tr><tr><td>규칙</td><td>—</td><td>보드·수익 규칙은 모노폴리GO를 따름. 모노폴리GO 0·10·20·30번 = 우리 1·11·21·31번 (1번부터 세서 하나씩 밀림)</td><td>(09:45 · 10:09)</td><td>기준이 갈리는 것</td></tr></table>
+<ul><li>모노폴리GO 대응: 팬 반응 = 공동기금 · 정산 = 세금 · 쟁탈 = 철도 · 31 = 감옥(도착).</li><li>숫자는 모두 발란스 대기. 결정(현중 10:25): 11 기숙사 · 21 본가 · 31 도착하면 바로 갇히고 더블 3번으로 탈출(현중 10:09 「그냥 감옥 도착」 · 영상 기준). 정산은 받는 칸(10:13).</li></ul></section><h2 class="part" id="part-history-board1021" style="margin-top:28px">히스토리 · 10/21 보드 개편 이전 본문 (그대로 보존)</h2><div class="old-plan"><h4>옛 안 · 10/21 09:41 보드 개편 (현중 10:09에 11·21·31 배치가 바뀜)</h4>
+<table><tr><th>칸</th><th>전</th><th>후</th><th>왜 (현중 시각)</th><th>막는 문제</th></tr><tr><td>21</td><td>코너 온에어(효과 없음)</td><td>숙소 · <b>기숙사</b> (짓기 없음, 회복 · 팀 단합)</td><td>쉬는 곳을 코너로 모음 (09:41)</td><td>효과 없는 코너가 남는 것</td></tr><tr><td>31</td><td>코너 병가(11로 보냄)</td><td>숙소 · <b>본가</b> (짓기 없음, 회복 · 태도 회복)</td><td>같은 이유 (09:41)</td><td>벌칙 코너와 휴식이 섞이는 것</td></tr><tr><td>2·37·39</td><td>숙소 건물(휴식·태도·외국어)</td><td><b>아카데미</b> 건물(외국어·교양·태도·성실성 공부, 30단계)</td><td>늘어난 공부 스탯을 키울 건물 (09:41)</td><td>공부 스탯이 '본가' 칸에 억지로 붙던 것</td></tr><tr><td>건물 없는 칸</td><td>섞여 있음</td><td>짓기 없는 일반 칸. 건물 칸은 <b>24칸</b></td><td>(09:41)</td><td>코너·이벤트 칸에 건설 표가 생기는 것</td></tr><tr><td>8·23·38</td><td>스케줄</td><td><b>찬스</b></td><td>같은 역할이 두 이름 (09:41)</td><td>카드 표 중복</td></tr><tr><td>수익 짝</td><td>비어 있음</td><td>음반 = 보컬 녹음실 + 프로듀싱 · 공연 = 랩 · 굿즈 = 팬샵 · 영상·광고 = 예능 방송국 + 뷰티 · 팬클럽 = 사옥 · 성장만 = 댄스 + 아카데미</td><td>(09:42)</td><td>어느 칸에서 돈이 나오는지 비던 것</td></tr><tr><td>칸 수익</td><td>—</td><td>그 칸 건물 단계를 따라 오름 (모노폴리GO 보드 단계 역할)</td><td>(09:44)</td><td>수익이 건물과 따로 노는 것</td></tr><tr><td>엔터 파워</td><td>통합 레벨</td><td>건물 단계 1당 +1, 최대 270. 기획사 능력 레벨 합과 같은 값(한 번만 셈). 주사위 배수 상한을 풂</td><td>(09:45)</td><td>두 번 세기 · 팬 수 잠금 고리</td></tr><tr><td>규칙</td><td>—</td><td>보드·수익 규칙은 모노폴리GO를 따름. 출발 칸 지나면 돈 · 사옥 건설 기회 유지</td><td>(09:45)</td><td>기준이 갈리는 것</td></tr></table>
+<ul><li>모노폴리GO 대응: 팬 반응 = 공동기금 · 정산 = 세금 · 캐스팅 = 철도 · 11 = 감옥.</li><li>숫자는 모두 발란스 대기. 남은 질문: 31이 본가가 되면 11로 가는 길(찬스 카드로만?) · 세금은 내는데 정산은 받음.</li></ul></div>
+<header>
+  <p class="brand">케이팝 몬스터즈 기획</p>
+  <h1 id="hdTitle">행보판 40 · 기획사가 아이돌을 키우는 판 <span class="gan">09-30 최신화 · 제안(검수 대기)</span></h1>
+  <p id="hdLine">주체 = <b>기획사</b>(현중 13:04). 행보판 = 도시숲(중앙 숲 공원 + 둘레 8구역). 대지 22 = 구역 안 건물 칸(건물 칸 20 + 생활 2) · 특수 18 = 구역 사이 교차로 · 광장 · 사옥. B안 셈법으로는 건물 칸 22(유틸 13·29 포함) · 창구 7(캐스팅 4 · 팬덤 반응 3) · 고정 5 · 코너 4 · 생활 2.</p>
+  <div class="gazebar" id="gazebar">
+    <button type="button" data-gaze="both" class="on">40칸 전체</button>
+    <button type="button" data-gaze="enter">대지 22만</button>
+    <button type="button" data-gaze="fan">특수 18만</button>
+  </div>
+</header>
+<div class="deck">
+  <div class="deck-main">
+    <section class="boardcol" aria-label="인게임 보드">
+      <div class="board-wrap"><div class="board" id="board"><div class="center"><div>
+<div class="ctitle">인게임 보드</div>
+<p class="csub" id="cSub">설명용 평면 도식 · 게임 화면은 3D로 기울어진 도시숲</p>
+<div class="csteps"><span>대지 22(건물 20 · 생활 2)</span><span>캐스팅 4</span><span>팬덤 반응 3</span><span>사옥 · 회사 5</span><span>스케줄 변경 3</span><span>코너 3</span></div>
+<p class="cbody" id="cBody">칸을 누르면 오른쪽 슬라이드가 열린다. 옛 팬 시점 설명은 맨 아래 「보관」.</p>
+</div></div></div></div>
+      <div class="stage-filler" id="stageFiller">
+        <div class="film-preview" id="filmPreview"></div>
+        <div class="ring-veil"></div>
+        <div class="filler-copywrap">
+          <p class="filler-lab">필러 · 주사위 맛</p>
+          <div class="filler-copy" id="fillerCopy">스케줄 필름이 스친다</div>
+          <p class="filler-why">말이 칸을 튀는 게 아니다. 다음 일정 컷이 파노라마 필름처럼 지나간다. (077)</p>
+        </div>
+        <button type="button" class="roll-btn" id="rollBtn">주사위 굴리기</button>
+      </div>
+    </section>
+    <section class="pptcol">
+      <article class="slide" id="slide" aria-label="칸 설명">
+        <div class="stage-main" id="stageMain" data-place="city">
+          <div class="scene country"></div>
+          <div class="scene arena"></div>
+          <div class="scene city"></div>
+          <div class="scene land" id="landScene">
+            <img id="landImg" alt="" draggable="false">
+          </div>
+          <div class="scene window"></div>
+          <div class="scene film" id="filmScene"></div>
+          <div class="flash"></div>
+          <div class="eye-tag" id="eyeTag">이동 중</div>
+          <div class="place-tag" id="placeTag">사옥</div>
+        </div>
+        <div class="slide-copy">
+          <p class="slide-kicker" id="slideKicker">칸 설명 · 16:9</p>
+          <aside class="side" id="side"><p class="hint">칸을 누르면 이 슬라이드가 바뀐다. 왼쪽은 보드, 아래는 색 칩.</p></aside>
+        </div>
+      </article>
+      <div class="r57legend" id="r57legend"><b>칸 위 색 = 건물 묶음</b> (행보판 B안) · 건물이 곧 계기판 — 도착 때만 몸집 게이지가 잠깐 뜬다(04장 R-04-11). 옛 색 칩 표시는 맨 아래 보관.
+  <div class="row"><span><i style="background:var(--brown)"></i>갈 · 댄스 기초</span><span><i style="background:var(--sky)"></i>하늘 · 녹음실</span><span><i style="background:var(--pink)"></i>분홍 · 팬샵</span><span><i style="background:var(--orange)"></i>주황 · 기획사</span><span><i style="background:var(--red)"></i>빨강 · 댄스 심화</span><span><i style="background:var(--yellow)"></i>노랑 · 예능 방송국(판정)</span><span><i style="background:var(--green)"></i>초록 · 랩 스튜디오(판정)</span><span><i style="background:var(--navy)"></i>남색 · 생활</span></div></div>
+      <div class="chipbar" id="chipbar">
+        <p class="ct"><b>색 칩</b> — 칸 위 색이 <b>스케줄 종류</b>다 (GO 8색 세트). 덕질 1회 = 그 색 +1. <b>10개면 터지고 0.</b>
+          <span class="why">노랑=방송 급 · 초록=공연 급 · 나머지 6색=코인·주사위·서사.</span></p>
+        <div class="chipgrid" id="chipgrid"></div>
+        <div class="hornline">응원봉 켜진 칸 <b id="hornCount">0</b>개 · 한 칸에 <b>5개면 물결</b> — 켜지는 칸도, 급 오르는 칸도 <b>무작위</b>
+          <button type="button" id="chipReset">되돌리기</button></div>
+      </div>
+    </section>
+  </div>
+  <div class="sysbar" id="sysbar">
+    <p class="hint" id="sysHint">시스템 메뉴 · 작은 글씨 = 모노카피바라 원래 이름 · <b>건설</b> = 하단 건설 탭(A안) · 입덕 등 옛 팬 메뉴 4개는 <b style="color:#c2410c">보관 · 기획 없음 · 결정 대기</b></p>
+    <div class="sysrow">
+      <button type="button" data-sys="loop"><b>일정 보드</b><i>보드</i></button>
+      <button type="button" data-sys="duk"><b id="sysDukNm">건설</b><i id="sysDukWas">건설</i></button>
+      <button type="button" data-sys="mission"><b>활동 미션</b><i>미션</i></button>
+      <div class="sys-fly" id="sysFly">
+        <button type="button" data-sys="season"><b>입덕 <span class="caret">▴</span></b><i>모험</i></button>
+        <div class="sysrow sub" id="subsys" hidden>
+          <span class="branch">입덕 안에</span>
+          <button type="button" data-sys="tour"><b>원정</b><i>여정</i></button>
+          <button type="button" data-sys="dispatch"><b>총공</b><i>출동</i></button>
+          <button type="button" data-sys="sian"><b>시안</b><i>천음 리그</i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="r57band" id="detailHead"><div class="band"><b>상세 내용</b> · 위 행보판(PPT)이 본문이고, 아래는 칸 표 · 규칙 · 결정 대기 등 근거 <span class="sub">09-30 16:3x 이스터즈 정리 · 현중 「행보판 PPT 고정 · 상세는 밑으로」</span></div></div>
+<div class="r57band" id="r57band"><div class="band">
+  <b>09-30 최신화 (R57)</b> · 행보판 B안(현중 10:47) · 보드 성장 A안(이스터즈 11:18) · 전투 B안 공연형(현중 10:47) · 주체 「기획사」(현중 13:04) · 행보판 = 도시숲(현중 13:10) · 출연권 · 게릴라 = 돈 · 도착 수입 × 배수 · 시즌 끝 = 아이돌 · 팬 · 건물 리셋, 카드만 남음 · 시즌 하나 = 세계관 하나(현중 14:48~14:50) · 상태 <b>제안(검수 대기)</b>
+  <span class="sub">근거: <a href="./삼중AI_공용_20260929/산출/전체기획서/02_보드찬스칸연출_클로드.md">02장 보드·칸 연출(R55)</a> · <a href="./삼중AI_공용_20260929/산출/제안서/제안서_통합_2컨셉.md">제안서 통합 1장(P00)</a> · <a href="./삼중AI_공용_20260929/회의/20260930_1055_이스터즈_행보판B안_칸재배치표_v0.md">칸 표 v0</a> · <a href="./삼중AI_공용_20260929/산출/전체기획서/04_성장건물경제_클로드.md">04장</a> · <a href="./삼중AI_공용_20260929/회의/20260930_1315_이스터즈_현중결정기록_도시숲메인연출_이동수단.md">현중 결정 기록 13:15</a> · 도시숲 v3(코덱스 outputs/홍대_8구역_블록도시_이미지기획_v3.md) · 숫자는 전부 가안</span>
+</div></div>
+<div class="r57sec" id="r57sec">
+<details open><summary>행보판 = 도시숲 <small>현중 13:10 「도시맵 툴의 도시숲이 메인 연출 · 40개 보드 건물이 그 안에」</small></summary><div class="in">
+  <p>행보판은 따로 떨어진 네모 판이 아니라 <b>도시 그 자체</b>다. 가운데 <b>중앙 숲 공원</b>, 둘레에 성격이 다른 <b>8구역</b>, 그 사이를 도로가 잇는다. 주사위는 40칸 <b>순서</b>를 정하고, 말(차량)은 <b>실제 도로</b>로 그 칸의 건물까지 간다(보드 = 일정 순서 · 도시 = 장소 · 헌법 제7조). 왼쪽의 링 보드는 <b>설명용 평면 도식</b>이고 게임 화면은 기울어진 3D 도시다(02장 R-02-6).</p>
+  <table class="r57tbl"><tr><th>북서</th><th>북</th><th>북동</th></tr>
+  <tr><td><i class="sw" style="background:var(--brown)"></i>갈 · 댄스(기초)</td><td><i class="sw" style="background:var(--sky)"></i>하늘 · 녹음실</td><td><i class="sw" style="background:var(--pink)"></i>분홍 · 팬샵</td></tr>
+  <tr><td><i class="sw" style="background:var(--navy)"></i>남색 · 생활</td><td><b>중앙 숲 공원</b></td><td><i class="sw" style="background:var(--orange)"></i>주황 · 기획사(컴백 준비)</td></tr>
+  <tr><td><i class="sw" style="background:var(--green)"></i>초록 · 랩 스튜디오</td><td><i class="sw" style="background:var(--yellow)"></i>노랑 · 예능 방송국</td><td><i class="sw" style="background:var(--red)"></i>빨강 · 댄스(심화)</td></tr></table>
+  <div class="grid3">
+    <div class="card57"><b class="h">대지 22 = 구역 안 건물</b>일정 칸(건물 칸 20 + 생활 2)은 8구역 안의 건물이다. 도착하면 카메라가 그 건물로 확대된다(도착 줌 T0).</div>
+    <div class="card57"><b class="h">특수 18 = 구역 사이</b>교차로 · 광장 · 전광판(스케줄 변경) · 공원 사방 환승 지점(캐스팅 4) · 회사 복합시설.</div>
+    <div class="card57"><b class="h">회사 5 = 우리 기획사 사옥</b>1 사옥 · 5 정산 · 13 A&amp;R · 29 매니지먼트 · 40 대형 정산 = 북쪽 회사 복합시설 하나(v3 §5-1).</div>
+  </div>
+  <h4>이동 수단 <span class="pend">경계값 결정 대기</span></h4>
+  <p>주사위 작은 수는 <b>벤</b>(도로 위), 그 이상은 <b>헬기</b>, 더 크면 <b>비행기</b>(현중 13:14). 14:39 정리 가안: 눈의 <b>합</b> 기준 벤 2~7 · 헬기 8~10 · 비행기 11~12 — 현중 처음 말은 「2~6 벤」이라 <b>7은 확인 필요</b>. 헬기는 가장 가까운 사옥 칸(1 · 5 · 13 · 29 · 40) 옥상에서 떠서 도착 건물 옥상에 내림 · 비행기는 스쳐 지나가 벤으로 이어짐 · 첫 탑승만 전체 연출, 이후 절반 · 길게 눌러 넘김(가안).</p>
+  <p class="src57">근거: 현중 13:10~13:14 결정 기록 · 도시숲 v3 §3-1 배치 · §5-1 배치 원칙 · §5-2 좌표(512×512m 제작 맵 임시 기준) · §5-3 이동 연출. v3는 9/28 기준이라 팬/사장 두 시점이 있었음 → 「기획사」 한 시점으로 읽어 옮김. v3가 뺀 「40개 반복 건물 · 4열×10행」은 쓰지 않음.</p>
+</div></details>
+<details><summary>행보판 한 턴 — 기획사가 하는 일 <small>02장 그림 1 · P00 A-1</small></summary><div class="in">
+  <table class="r57tbl"><tr><th>#</th><th>동작</th><th>한 줄</th></tr>
+  <tr><td>1</td><td><b>굴린다</b></td><td>주사위 = 투자. 배수(×1 · ×3 …)를 올리면 돈을 더 쓰고 더 많이 자란다.</td></tr>
+  <tr><td>2</td><td><b>도착한다</b></td><td>아이돌이 그날 그 일정을 간다. 도시 패널이 커지고 카메라가 그 건물로 확대(T0 · 1.5초 가안).</td></tr>
+  <tr><td>3</td><td><b>칸 종류대로</b></td><td>대지: 도착 수입(× 배수), 그 돈을 투자하면 건물이 자람 / 방송 · 공연 칸만 대박 · 중박 · 운망 판정 → 팬덤 게이지 / 쟁탈: 쟁탈 룰렛(출연권 경쟁 · 게릴라 공연) / 팬덤 반응: 카드 한 장 / 스케줄 변경: 카드 1장 / 정산: 코인 나감 / 코너 · 생활: 이벤트 · 쉼.</td></tr>
+  <tr><td>4</td><td><b>짓는다</b></td><td>번 코인은 하단 <b>건설</b> 탭으로 — 랜드마크 5(가안)를 지어 스테이지 클리어 → 다음 동네. 건물 6의 정체 단계는 따라간다. 랜드마크 5 ≠ 건물 6.</td></tr>
+  <tr><td>5</td><td><b>한 바퀴</b></td><td>사옥(1)을 지나면 한 바퀴. 한 바퀴 보상은 <span class="pend">기획 없음 · 결정 대기</span></td></tr></table>
+  <p class="src57">근거: 02장 그림 1 · R-02-1~10 · P00 1장 A-1~A-5 · 04장 R-04-6~8 · 연출 v0 T0~T3.</p>
+</div></details>
+<details id="sec22" open><summary>대지 22칸 — 역할 · 컨셉 · 기능 <small>능력치 · 건물 성장 · 팬이 모여듦</small></summary><div class="in">
+  <div class="grid3">
+    <div class="card57"><b class="h">역할</b>아이돌의 <b>일정 자리 = 건물 6의 칸</b>. 도시숲 구역 안 건물과 이어진다. 생활 37 · 39는 건물 없는 쉼 칸.</div>
+    <div class="card57"><b class="h">컨셉</b>GO처럼 땅에 집 → 호텔을 쌓는 칸이 <b>아니다</b>(헌법 제7조). 도착하면 <b>돈이 들어오고</b>, 그 돈을 <b>투자하면</b> 건물이 자라며 도착한 아이돌의 능력치가 오른다(현중 13:42 · 13:46). 팬(팬덤 게이지)은 건물과 따로 쌓인다(13:44).</div>
+    <div class="card57"><b class="h">기능</b>도착 → T0 확대 → <b>도착 수입 = (100 + 20×단계) × 팬덤 배율 × 주사위 배수</b><span class="gan">가안 · FS02</span> → 투자로 건물 10단계 성장(정체 · 꾸밈 세부는 BD-3) · 방송 · 공연 칸만 판정 → 팬덤 게이지.</div>
+  </div>
+  <h4>색 → 건물 · 정체 3단 <span class="gan">이름 전부 가안 · GR-10 · BD-1</span></h4>
+  <table class="r57tbl"><tr><th>색</th><th>건물</th><th>칸</th><th>정체 1 → 2 → 3</th><th>판정</th></tr>
+  <tr><td class="c"><i class="sw" style="background:var(--brown)"></i>갈 · <i class="sw" style="background:var(--red)"></i>빨강</td><td>댄스(기초 · 심화)</td><td>2 · 4 · 22 · 24 · 25</td><td>옥상 연습실 → 연습 스튜디오 → 안무 센터</td><td>없음</td></tr>
+  <tr><td class="c"><i class="sw" style="background:var(--sky)"></i>하늘</td><td>녹음실</td><td>7 · 9 · 10</td><td>녹음 부스 → 스튜디오 → 레이블 스튜디오</td><td>없음</td></tr>
+  <tr><td class="c"><i class="sw" style="background:var(--pink)"></i>분홍</td><td>팬샵</td><td>12 · 14 · 15</td><td>응원봉 매대 → 팝업스토어 → 플래그십 스토어</td><td>없음</td></tr>
+  <tr><td class="c"><i class="sw" style="background:var(--orange)"></i>주황</td><td>기획사</td><td>17 · 19 · 20 (+ 유틸 13 · 29)</td><td>작은 사무실 → 사옥 → 타워</td><td>없음</td></tr>
+  <tr><td class="c"><i class="sw" style="background:var(--yellow)"></i>노랑</td><td>예능 방송국</td><td>27 · 28 · 30</td><td>개인방송 스튜디오 → 케이블 예능 방송국 → 지상파 · 시상식</td><td><b>있음</b></td></tr>
+  <tr><td class="c"><i class="sw" style="background:var(--green)"></i>초록</td><td>랩 스튜디오</td><td>32 · 33 · 35</td><td>버스킹 무대 → 소극장 · 랩 스튜디오 → 아레나</td><td><b>있음</b></td></tr>
+  <tr><td class="c"><i class="sw" style="background:var(--navy)"></i>남색</td><td>(건물 없음 · 생활)</td><td>37 · 39</td><td>—</td><td>없음</td></tr></table>
+  <h4>규칙 (04장 · 오전 결정)</h4>
+  <ul>
+    <li><b>판정(대박 · 중박 · 운망)은 방송 · 공연 칸만</b>(27 · 28 · 30 · 32 · 33 · 35). 판정은 팬덤 게이지를 채우고, 건물은 투자로만 자란다. 나머지 대지는 도착 수입만(R-02-3).</li>
+    <li><b>대박 보상</b> <span class="pend">보류 · 결정 대기 (현중 13:25)</span> — 오전 합의 「대박은 코인만 크게 · 건물은 안 큼」(R-04-2) / FS01 「대박 → 인기 · 팬심 상승」 두 안을 그대로 둔다.</li>
+    <li><b>카드팩</b>은 건물 몸집 눈금 · 정체 변신 때만 나온다(팬샵 도착마다 아님 · R-04-9).</li>
+    <li><b>판이 바뀌어도 정체 단계는 유지</b>(R-04-8). 몸집 이월은 <span class="pend">GR-6</span></li>
+    <li><b>새 게이지 금지</b> — 건물이 곧 계기판. 도착 때만 몸집 게이지가 잠깐 뜬다(R-04-11).</li>
+    <li>유틸 13 · 29가 기획사 성장 포인트를 받는지 <span class="pend">결정 대기</span> (02장 R-02-2는 기획사 칸에 넣고, 04장 R-04-10은 말이 없음).</li>
+  </ul>
+  <h4>팬이 건물에 모여듦 <span class="pend">A안 건물 성장과의 관계 결정 대기</span></h4>
+  <p>현중 13:16~13:19: 모노폴리의 건설 대신 <b>팬들이 그 건물에 모여드는 연출</b> — 거의 점처럼 보이는 팬이 건물 주변을 웅성웅성 오간다(심시티 사람들 느낌 · 덩어리로 쌓이는 그림 아님). 팬심 = 이 도시에 사는 팬, 1 · 10 · 100 · 1000 · 1만 명 단위 유닛(크기 · 색 · 모양으로 구별). 상단 HUD에 「팬덤율」(전체 아이돌 인기).</p>
+  <table class="r57tbl"><tr><th>안</th><th>칸이 세지는 모습</th></tr>
+  <tr><td>A안 건물 성장(오전 결정)</td><td>도착 × 배수 → 몸집 → 정체 3단 → 꾸밈</td></tr>
+  <tr><td>팬이 모여듦(현중 13:16)</td><td>그 건물 둘레에 팬심 유닛이 모여 웅성거림</td></tr>
+  <tr><td>둘 다</td><td>두 가지가 함께 보임</td></tr></table>
+  <p>현중 13:42~13:46 발언(기록 · 반영 대기): 건물은 <b>10단계</b> 정도 · 대지 22 = <b>능력치 칸</b>(춤 연습실에 투자하면 그 아이돌이 춤을 잘 추게 됨) · <b>서사</b>는 대지가 아니라 찬스 · 온에어 · 스탠바이 · 매니지먼트 미팅 · 팬미팅 같은 칸으로 쌓임 · 원정은 따로 · 팬 증가(팬덤 게이지)는 건물이 커지는 것과 <b>따로</b> 쌓는 구조 · 팬이 늘면 기획사가 돈을 벌고 그 돈으로 다시 건물을 짓는다. → 위 정체 3단 · 팬 유닛과의 관계는 <span class="pend">결정 대기</span></p>
+  <p class="src57">근거: 02장 3-3 · R-02-3 · R-02-10 · 04장 R-04-1~11 · 연출 v0 §2 · P00 B-2 · B-3 · 현중 결정 기록 13:15(팬심 · 팬덤율 · 모여듦 · 13:42~13:46) · FS01 「팬심시티 경제 순환」(13:23). 이름 충돌 주의: 「팬덤 반응」 3칸 ↔ HUD 「팬덤율」 · 옛 게이지 「팬심(→화제성)」 ↔ 새 단위 「팬심」은 다른 뜻.</p>
+</div></details>
+<details id="secGate" open><summary>팬덤 게이트(옛 이름) → 캐스팅 4칸 = GO 정거장 — 역할 · 컨셉 · 기능 · 두 게임 <small>행보판 B안 · 09-30 10:47 · 정거장 두 게임 14:33 · FS03</small></summary><div class="in">
+  <div class="grid3">
+    <div class="card57"><b class="h">역할</b>기획사가 아이돌을 위해 <b>출연권을 따 오는 자리</b> — 6 예능 방송국 · 16 광고주 · 26 공연기획 · 36 해외. <b>GO 정거장 역할 그대로</b> — 다른 기획사와 부딪히는 자리.</div>
+    <div class="card57"><b class="h">컨셉</b>노래가 울리면 무대 위에 콘셉트 세계가 열린다. 같은 출연권을 두고 <b>기획사의 몬스끼리</b> 겨루거나, 상대 도시에서 <b>게릴라 공연</b>을 한다. 「약탈」이라는 말은 쓰지 않는다(현중 14:14).</div>
+    <div class="card57"><b class="h">기능</b>쟁탈 룰렛 → ① <b>출연권 경쟁</b>(GO 공성) ② <b>게릴라 공연</b>(GO 금고털기) · 막기 = <b>몬스 수비</b>(GO 쉴드) · 출연권 경쟁만 승패 · 성장 포인트 없음 · 건물은 부수지 않음</div>
+  </div>
+  <h4>GO 정거장 두 게임 — 쟁탈 칸 (FS03 5절 · 현중 채팅 14:33 · 제안)</h4>
+  <table class="r57tbl"><tr><th>GO</th><th>쟁탈 칸</th><th>하는 일</th><th>막기</th></tr>
+  <tr><td>정거장 → 룰렛</td><td><b>쟁탈 룰렛</b></td><td>이번 쟁탈에서 무엇이 열리나. 비율 <span class="pend">W14</span></td><td>—</td></tr>
+  <tr><td>공성</td><td><b>출연권 경쟁</b></td><td>상대 유저가 보유한 출연권에 도전. 마주 선 무대에서 내 마스코트와 상대 유저의 수비 마스코트가 겨룸. 이기면 권리와 이후 보유 수익의 주인이 우리 쪽으로 이동. 건물은 그대로. 캐스팅 카드 · 연결 건물 +1은 별도 후보(R-02-8)</td><td>몬스 수비</td></tr>
+  <tr><td>금고털기</td><td><b>게릴라 공연</b></td><td>상대 유저의 도시에서 기습 공연. 상대 유저 수익 일부가 우리 기획사로 일회 이동. 금액·관객 반응 방식·팬 이동은 결정 대기</td><td>방어 가능 여부 <span class="pend">W16</span></td></tr>
+  <tr><td>쉴드</td><td><b>몬스 수비</b></td><td>내 몬스가 내 쟁탈 대상 앞을 지킴. 얻는 곳 · 개수 <span class="pend">W14</span></td><td>—</td></tr></table>
+  <p><b>돈(현중 최신 설명)</b>: 상대 유저의 출연권을 가져오면 이후 보유 수익의 주인이 바뀐다. 게릴라 콘서트는 상대 유저의 수익 일부가 우리에게 한 번 이동한다. 액수·주기·배수 적용 여부는 결정 대기.</p>
+  <p>상대는 다른 유저(현중 10/01 직접 설명) · 상대 선택/비동기 방식 <span class="pend">W10</span> · 수익 이동량 <span class="pend">W9</span> · 맞불 공연(GO 복수) <span class="pend">W12</span> · 14:15 합의안(쟁탈 칸 = 대결 없음 · 게릴라 권리 = 방송 · 공연 칸 승리)과 다른 곳은 FS03 부록 B.</p>
+  <h4>도시숲 위치 — 공원 사방 환승 지점 (v3 §5-2 · 좌표 = 제작 맵 임시)</h4>
+  <table class="r57tbl"><tr><th>칸</th><th>B안</th><th>위치 (x, z)m</th><th>연결 건물 후보</th></tr>
+  <tr><td>6</td><td>예능 방송국 쟁탈</td><td>공원 북쪽 (0, −118)</td><td rowspan="4">R-02-8은 후보 4개(예능 방송국 · 팬샵 · 랩 스튜디오 · 기획사)만 나열 — 칸별 짝은 <span class="pend">결정 대기</span></td></tr>
+  <tr><td>16</td><td>광고주 쟁탈</td><td>공원 동쪽 (108, 0)</td></tr>
+  <tr><td>26</td><td>공연기획 쟁탈</td><td>공원 남쪽 (0, 118)</td></tr>
+  <tr><td>36</td><td>해외 쟁탈</td><td>공원 서쪽 (−108, 0)</td></tr></table>
+  <p>캐스팅 카드의 내용 · 보상은 <span class="pend">기획 없음 · 결정 대기</span> · 「팬덤 게이트」라는 이름을 남길지도 기획 없음.</p>
+  <h4>같이 바뀐 칸 — 응원(옛) → 팬덤 반응 3칸</h4>
+  <p>3 · 18 · 34 = <b>팬덤 반응</b>: 찬스처럼 카드 한 장(응원 · 화제 · 루머). 옛 공동기금 빈칸을 채움(R-02-9). 카드별 효과는 <span class="pend">기획 없음 · 결정 대기</span> · 팬덤 반응이 팬심을 늘리는지도 결정 대기(HUD 「팬덤율」과 이름이 비슷함).</p>
+  <p class="src57">근거: 02장 R-02-8 · R-02-9 · 3-3 · 칸 표 v0 §3 · 옛 사장 보드 문장(VIEW_PATCH.ent 6 · 16 · 26 · 36)을 재료로 · 옛 팬덤 게이트 설명은 맨 아래 보관.</p>
+</div></details>
+<details id="secPend"><summary>기획 없음 · 결정 대기 <small>지어내지 않고 라벨만</small></summary><div class="in">
+  <table class="r57tbl"><tr><th>항목</th><th>지금</th><th>ID</th></tr>
+  <tr><td>칸 이름 확정(특히 25 · 17 · 19 · 20)</td><td>그대로 · 고침</td><td>BD-1</td></tr>
+  <tr><td>쟁탈 4칸 모을수록 커지는 정거장 규칙</td><td>쓴다 · 안 쓴다 · 연결 건물 +1만 (출연권 경쟁이 생겨 W14와 같이 볼 것)</td><td>BD-2</td></tr>
+  <tr><td>쟁탈 룰렛 비율 · 몬스 수비 얻는 곳 · 개수 / 쟁탈 대상 4곳 무대 이름 / 게릴라를 막을 수 있나</td><td>제안만 · 숫자 없음</td><td>W14 · W15 · W16 (FS03)</td></tr>
+  <tr><td>출연권 경쟁 · 게릴라 상대 / 이동량 / 맞불 공연</td><td>상대는 유저 확정. 유저 선택·비동기 방식과 수익 이동량은 미정</td><td>W10 · W9 · W12 (FS04)</td></tr>
+  <tr><td>칸 사다리 = 건물 단계 세부 · 댄스 · 녹음실 · 팬샵 · 기획사 칸의 승격 이름</td><td>open</td><td>BD-3</td></tr>
+  <tr><td>캐스팅 카드 내용 · 보상 · 쟁탈 칸 ↔ 연결 건물 짝</td><td>기획 없음</td><td>결정 대기</td></tr>
+  <tr><td>팬덤 반응 카드(응원 · 화제 · 루머) 효과</td><td>기획 없음</td><td>결정 대기</td></tr>
+  <tr><td>유틸 13 · 29 성장 포인트</td><td>R-02-2 vs R-04-10</td><td>결정 대기</td></tr>
+  <tr><td>성장 포인트 공식</td><td>도착 × 배수(가안)</td><td>GR-9</td></tr>
+  <tr><td>판 전환 때 몸집</td><td>리셋 · 일부 이월 · 유지 (시즌 끝에는 건물 전부 리셋 · 현중 14:50)</td><td>GR-6</td></tr>
+  <tr><td>랜드마크 수 · 이름 · 3D 판 위 위치 / A안 랜드마크 5 vs v3 구역 대표 랜드마크 8</td><td>5 가안</td><td>LM-1 · LM-2</td></tr>
+  <tr><td>정체 변신 결과가 Board1 급(초록 = 버스킹 · 노랑 = 온라인 방송 한정) 안에 서는지, 다음 판 급인지</td><td>open</td><td>결정 대기</td></tr>
+  <tr><td>정체 변신(T2) 첫 회 스킵</td><td>불가 · 가능</td><td>CZ-2</td></tr>
+  <tr><td>대박 보상 — 코인만(오전 합의) vs 인기 · 팬심 상승(FS01)</td><td>보류(현중 13:25)</td><td>결정 대기</td></tr>
+  <tr><td>팬이 모여듦 연출이 A안 건물 성장을 대신하는지 · 둘 다인지 · 건물 10단계(13:42)와의 관계</td><td>두 안 병기</td><td>결정 대기</td></tr>
+  <tr><td>팬덤율 계산 출처 · 팬심 증감처 · 아이돌별 팬인지 기획사 전체 팬인지</td><td>open</td><td>결정 대기</td></tr>
+  <tr><td>이동 수단 경계값(벤 · 헬기 · 비행기)</td><td>합 기준 가안 2~7 / 8~10 / 11~12 · 7 확인 필요</td><td>결정 대기</td></tr>
+  <tr><td>생활 칸(37 · 39) 「컨디션 회복」 효과</td><td>이름만 있음</td><td>결정 대기</td></tr>
+  <tr><td>한 바퀴(사옥 통과) 보상</td><td>기획 없음</td><td>결정 대기</td></tr>
+  <tr><td>옛 팬 시스템 메뉴 4개(입덕 · 원정 · 시안 등 · 보관 ⑥)의 새 대응 기획(원정은 따로 둔다 · 현중 13:42)</td><td>기획 없음(옛 팬 컨셉 · 보관)</td><td>결정 대기</td></tr>
+  <tr><td>봉합전을 쓸까(08장 B안은 씀 · 05장 · 10장은 서랍)</td><td>선택지 3</td><td>BT-4</td></tr>
+  <tr><td>성장 · HUD 말(주어는 「기획사」로 정해짐 · 현중 13:04)</td><td>용어 open</td><td>ID-2</td></tr>
+  <tr><td>스탠바이 · 온에어 코너 특집 내용 · 서사가 쌓이는 방식(13:42)</td><td>「시즌 이벤트만 나중에」 그대로</td><td>–</td></tr></table>
+</div></details>
+</div>
+
+
+<div class="archive57" id="archive57"><details><summary>보관 (옛 컨셉 · 09-30 R57 · 헌법 제24조 — 지우지 않고 접어 둠)</summary><div class="in">
+  <p>아래는 09-23판 행보판(일정 보드 40)의 옛 서술이다. 헌법 제1조(09-30 · 「빠순이 → 사장」 시나리오 폐기 · 성장축 = 아이돌 하나 · 시점은 하나)와 행보판 B안 · 보드 성장 A안에 맞지 않아 기본 화면에서 뺐다. 원본 파일 전체는 <code>docs/planning/_backup_클로드_R57/board-40-places-table.html</code>.</p>
+  <h4>① 옛 헤더 문장</h4>
+  <p>「일정 보드 40 · 최애 한 바퀴」 · 「시점은 하나 — 내가 다 본다. 색 난 칸 = 아이돌 스케줄 22. 정거장·회색 특수칸 = 내가 손 대는 창구 13. 정산·미팅·병가는 회사 일 5.」 · 시선 버튼 「둘 다 보기 / 아이돌 일정만 / 내가 손 대는 칸만」 · 가운데 「아이돌 일정 22 · 내 창구 13 · 회사 일 5」</p>
+  <h4>② 옛 40칸 표 (칸 번호 · 옛 이름 · GO 자리 · 아이돌은 · 나는(팬) · 옛 설명)</h4>
+  <div id="archCells"></div>
+  <h4>③ 옛 팬덤 게이트 — 겨루는 자리</h4>
+  <p>「밥차는 그대로다. 현수막에 걸린 이름만 바뀐다.」 이중 롤(GO 그대로): ① 등급 롤 — 대박 / 중박 / 운빨망빨 ② 방식 롤 — 딱지 / 어부지리. <b>딱지</b>(GO 공성 Shutdown): 남의 덕질에 내 이름을 건다(현수막 · 워터마크 · 「OO 주최」), 주인이 코인 내고 뗀다. <b>어부지리</b>(GO 금고털기 Heist): 남의 코인으로 그 자리에 덕질이 들어간다 — 밥차는 한 단 커지고 이름은 내 것. 「아무것도 안 뺏는다 — 시즌 하나에 아이돌 하나라 모두가 같은 최애를 민다.」 막는 것: 고정팬(GO 쉴드 · 펫).</p>
+  <h4>④ 옛 응원 — 작게 한 번씩 미는 자리</h4>
+  <p>밟으면 한 번 응원한다. 친구와 팀을 짜고 인증을 모아 3단을 채운다. 매주 리셋. GO 주간 팀(친구 2명) → 응원 팀 · 열쇠 → 응원 인증 · 상자 3단 → 응원 3단 · 파트너 없으면 현금 → 팀 없으면 코인. 큰 협력(총공)은 입덕으로 옮겼고, 겨루기는 팬덤 게이트(딱지)에 있다. (081)</p>
+  <h4>⑤ 덕질 12항목 · 색 칩 · 응원봉</h4>
+  <p>덕질(GO 건설 자리) — 항목 12개를 각각 1~6단까지 키운다(밥차 · 커피차 · 간식 · 편지 · 지하철 광고 · 전광판 · 슬로건 · 응원키트 · 생일카페 · 팝업 · 직캠 · 팬아트 · 번역). 상시 버튼 · 한 번 = 덕력 +1 · 색 칩 +1 · 고른 항목 1단 · 무작위 응원봉. 색 칩: 덕질 1회 = 그 색 +1, 10개면 터지고 0. 응원봉(GO 집 · D-036): 한 칸에 5개면 물결. A&amp;R · 매니지먼트만 덕질 불가, 덕력이 높아지면 유틸 칸이 수입으로 뒤집힌다.</p>
+  <div id="archDuk"></div>
+  <h4>⑥ 입덕 · 원정 · 총공 · 시안 (옛 시스템 메뉴)</h4>
+  <div id="archSys"></div>
+  <h4>⑦ 옛 판정 규칙</h4>
+  <p>정산(5 · 40): 「넷 다 마이너스. 대박이어도 잃는다 — 대박 = 적게 나감 · 중박 = 보통 · 운빨망빨 = 많이 뜯김.」 연습 · 팬 · 합숙 · 자유 · 생활 칸마다 대박 · 중박 · 운망 보상 목록이 있었다(보상 풀 등급 하 · 중하 · 중상 · 상). 방송 · 공연 칸은 5단 사다리(방송: 온라인 → 라디오 → 케이블TV → 공중파TV → 해외방송 / 공연: 버스킹 → 클럽 → 소극장 → 중극장 · 홀 → 아레나 · 대형홀)와 「성장 →」 버튼. → 지금은 판정은 방송 · 공연 칸만, 칸 사다리 = 건물 정체 단계(R-02-10).</p>
+  <h4>⑧ D-074 두 시점 (09-30 보관 · 헌법 제1조 · 칸 표 v0 §6)</h4>
+  <p>같은 40칸을 팬 시점(제안서 A · 스밍 · 투표 · 앨범 구매 · 현생 · 용돈 · 알바 …)과 엔터 사장 시점(제안서 B · 「나는」 = 사장 · 캐스팅 · 팬덤 반응 …)으로 갈아끼우던 코드(VIEW_PATCH · CEO_LINE · CHIP_PATCH)는 파일 안에 그대로 있다. 열어 보기: <a href="?view=fan">?view=fan</a> · <a href="?view=ent">?view=ent</a> (맨 위에 「보관된 옛 시점」 띠가 뜬다).</p>
+</div></details></div>
+<div class="fxtoast" id="fxtoast"></div>
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="bg"></div>
+  <div class="card" id="card">
+    <div class="stamp" id="stamp">대박</div>
+    <div class="lab">LEVEL UP</div>
+    <div class="before" id="cardBefore"></div>
+    <div class="arrow">↓</div>
+    <div class="after" id="cardAfter"></div>
+    <div class="chip" id="cardChip"></div>
+  </div>
+</div>
+<script>
+(function () {
+
+  // 스케줄 변경 풀 — chance-state-sim.html 과 동기
+  const SCHEDULE_CARDS = [
+    {t:"숏폼 바이럴 운", minB:0, maxB:1, minS:0, maxS:4},
+    {t:"팬플·유튜브 콜라보 제안", minB:0, maxB:2, minS:0, maxS:4},
+    {t:"알고리즘 묻힘", minB:0, maxB:1, minS:0, maxS:4},
+    {t:"라디오 게스트 콜", minB:1, maxB:4, minS:0, maxS:4},
+    {t:"케이블 음방·예능 변수", minB:2, maxB:4, minS:0, maxS:4},
+    {t:"케이블 음방 사녹·본방 콜", minB:2, maxB:4, minS:0, maxS:4},
+    {t:"공중파 스케줄 변수", minB:3, maxB:4, minS:0, maxS:4},
+    {t:"공중파 음방 사녹·본방 콜", minB:3, maxB:4, minS:0, maxS:4},
+    {t:"해외 토크·스팟 일정", minB:4, maxB:4, minS:0, maxS:4},
+    {t:"OST·카메오 변수", minB:2, maxB:4, minS:0, maxS:4},
+    {t:"게릴라 버스킹 반응", minB:0, maxB:4, minS:0, maxS:0},
+    {t:"소클럽 스카우트 힌트", minB:0, maxB:4, minS:0, maxS:1},
+    {t:"프리뷰·쇼케이스 콜", minB:0, maxB:4, minS:0, maxS:2},
+    {t:"홀 게스트 스케줄 변수", minB:0, maxB:4, minS:3, maxS:4},
+    {t:"아레나급 리스크·변수", minB:0, maxB:4, minS:4, maxS:4},
+    {t:"스케줄 하루 비움", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"스케줄 겹침", minB:1, maxB:4, minS:1, maxS:4},
+    {t:"리허설·사운드체크 밀림", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"광고·CF 촬영 콜", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"브랜드·앰버서더 콜", minB:1, maxB:4, minS:0, maxS:4},
+    {t:"화보·자켓·인터뷰 하루 끼움", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"뮤비 촬영 콜", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"녹음·믹스 하루 끼움", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"헤어메이크·스타일 끼움", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"회사 미팅·평가 끼움", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"컴백·앨범 러시", minB:1, maxB:4, minS:1, maxS:4},
+    {t:"화제·사고 여파", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"여론·루머 대응 변수", minB:1, maxB:4, minS:0, maxS:4},
+    {t:"예능 캐릭터화 변수", minB:2, maxB:4, minS:0, maxS:4},
+    {t:"소액 머니·응원 보너스", minB:0, maxB:2, minS:0, maxS:2}
+  ];
+
+  const TRACKS = {
+    green: {
+      label: "공연",
+      ladder: ["버스킹", "클럽", "소극장", "중극장·홀", "아레나·대형홀"],
+      kinds: {
+        "버스킹": ["거리 버스킹", "대학가", "거리공연"],
+        "클럽": ["소클럽 오프닝", "라이브하우스", "댄스클럽 쇼케이스"],
+        "소극장": ["소극장 쇼케이스", "블랙박스", "팬소극장"],
+        "중극장·홀": ["중극장", "랩 스튜디오", "시티홀"],
+        "아레나·대형홀": ["잠실 아레나급", "올림픽홀급", "고척·돔급"]
+      },
+      fail: ["한산 재시도", "날씨·소음에 가려짐", "동선 빗나감"],
+      mid: ["피크타임 보너스", "서브 슬롯 업", "팁·반응 보너스"]
+    },
+    yellow: {
+      label: "방송",
+      ladder: ["온라인", "라디오", "케이블TV", "공중파TV", "해외방송"],
+      kinds: {
+        "온라인": ["유튜브 라이브", "위버스·팬플 라이브", "숏폼 라이브"],
+        "라디오": ["심야 라디오", "로컬 라디오", "메인 라디오 게스트"],
+        "케이블TV": ["케이블 음방", "케이블 예능", "케이블 인터뷰"],
+        "공중파TV": ["공중파 음방", "공중파 예능", "공중파 인터뷰"],
+        "해외방송": ["해외 토크", "해외 음방", "글로벌 라이브"]
+      },
+      fail: ["노출 안 됨", "알고리즘에 묻힘", "재방송·하이라이트만"],
+      mid: ["고정팬 보너스", "멤버십·클립 보너스", "같은 수준 더 좋은 슬롯", "OST·카메오 보너스"]
+    }
+  };
+
+  // 덕질 항목 12 — 각각 1~6단 (061)
+  const DUK = [
+    {id:"bapcha", g:"먹이기", nm:"밥차", blurb:"연습실·랩 스튜디오에 밥을 넣는다. 초반 덕질의 얼굴.", steps:["도시락 몇 개","간이 밥차","밥차 1대","밥차 + 디저트","밥차 2대","전 스태프 케이터링"]},
+    {id:"coffee", g:"먹이기", nm:"커피차", blurb:"밤에 남는 스태프 커피. 밥차의 짝.", steps:["커피 몇 잔","소형 커피차","커피차 1대","커피차 + 컵홀더","커피차 2대","전 현장 상시 운영"]},
+    {id:"snack",  g:"먹이기", nm:"간식", blurb:"짧은 쉬는 시간에 집어 먹는 것.", steps:["간식 한 박스","간식 + 음료","간식 카트","영양 간식 세트","대형 간식 부스","전 스태프 간식방"]},
+    {id:"letter", g:"보내기", nm:"편지", blurb:"22칸 어디서든 되는 바닥. 쉬는 날엔 이것만.", steps:["손편지 1통","편지 + 꽃","편지 묶음","팬덤 단체 편지","편지 + 선물","이름으로 기부"]},
+    {id:"subway", g:"붙이기", nm:"지하철 광고", blurb:"출근길에 최애를 붙인다.", steps:["역 1곳 소형","역 1곳 대형","역 3곳","노선 하나","환승역 집중","전 노선"]},
+    {id:"led",    g:"붙이기", nm:"전광판", blurb:"도시가 최애를 말한다.", steps:["소형 옥외 1면","대형 옥외 1면","번화가 1면","번화가 여러 면","랜드마크 전광판","해외 전광판"]},
+    {id:"slogan", g:"나눠주기", nm:"슬로건", blurb:"객석이 한 문장이 된다.", steps:["100장","300장","500장","1000장","전 좌석","전 좌석 + 특수 연출"]},
+    {id:"kit",    g:"나눠주기", nm:"응원키트", blurb:"손에 쥐여 주는 응원.", steps:["부채","부채 + 스티커","키트 소형","키트 정식","키트 + 굿즈","전 좌석 키트"]},
+    {id:"bdcafe", g:"열어주기", nm:"생일카페", blurb:"팬이 하루 가게를 연다.", steps:["테이블 1개","카페 일부","카페 1곳 통대관","카페 3곳","여러 도시 동시","해외 포함"]},
+    {id:"popup",  g:"열어주기", nm:"팝업", blurb:"잠시 여는 자리. 생카의 짝.", steps:["부스 1개","소형 팝업","팝업 1주","팝업 + 굿즈","대형 팝업","전시급"]},
+    {id:"fancam", g:"찍어주기", nm:"직캠", blurb:"무대를 남겨 준다.", steps:["폰 촬영","보급 카메라","망원 렌즈","홈마 장비","다각 촬영","자체 중계"]},
+    {id:"art",    g:"찍어주기", nm:"팬아트·번역", blurb:"보고 읽게 만든다.", steps:["짤 1장","팬아트","교차편집","다국어 번역","팬 매거진","자체 콘텐츠 채널"]}
+  ];
+  const DUK_LV = {};
+  DUK.forEach(function (d) { DUK_LV[d.id] = 0; });
+  var selectedDuk = null;
+  // 칸 종류마다 열리는 항목 (059·060·061)
+  const DUK_BY_TRACK = {
+    practice: ["bapcha","coffee","snack","letter"],
+    camp:     ["bapcha","coffee","snack","letter"],
+    yellow:   ["subway","led","fancam","art","letter"],
+    green:    ["slogan","kit","bapcha","subway","led","fancam","art","letter"],
+    fanfix:   ["bdcafe","popup","slogan","letter"],
+    freetime: ["letter"],
+    living:   ["letter"]
+  };
+  const TRACK_KO = {practice:"연습", camp:"합숙", yellow:"방송", green:"공연",
+    fanfix:"팬 일정", freetime:"자유시간", living:"생활 거점"};
+  // 8색 칩 (062·030) — GO 부동산 색 = 우리 스케줄 종류. 10개면 보상
+  const CHIP_DEF = [
+    {k:"brown", nm:"갈", set:"연습", cells:"피지컬 · 미디어", c:"#8B4513"},
+    {k:"sky", nm:"하늘", set:"연습", cells:"트레이닝 · 컨디션 · 공부", c:"#6db7e8"},
+    {k:"pink", nm:"분홍", set:"연습 · 팬", cells:"서브연습 · 팬미팅 · 개인방송", c:"#e91e8c"},
+    {k:"orange", nm:"주황", set:"연습 · 오프", cells:"메인연습 · 개인시간 · 멤버시간", c:"#f97316"},
+    {k:"red", nm:"빨강", set:"연습 · 합숙", cells:"집중연습 · 안무합숙 · 보컬합숙", c:"#dc2626"},
+    {k:"yellow", nm:"노랑", set:"방송", cells:"유튜브 · 위버스 · 숏폼", c:"#eab308"},
+    {k:"green", nm:"초록", set:"공연", cells:"버스킹 · 대학가 · 거리공연", c:"#16a34a"},
+    {k:"navy", nm:"남색", set:"생활", cells:"본가 · 합숙소", c:"#1e3a8a"}
+  ];
+
+  const CELLS = [
+    {id:1, go:"출발(GO)", name:"사옥", stripe:"special", gaze:"window", enter:"출근. 오늘 스케줄표가 벽에 붙는다.", fan:"앱 켜. 최애가 오늘 어디 가는지 보는 날.", desc:"한 바퀴 기준. 쉬는 맛으로 돌아오는 칸."},
+    {id:2, go:"갈색 대지", name:"피지컬", stripe:"brown", track:"practice", kind:"피지컬", gaze:"land", enter:"PT. 땀이 일정이다.", fan:"스토리 올라오면 ‘살 빠졌네’부터 적는다.", desc:"피지컬 PT·체력·근력·스테미너. 연습실 바디 컨디션 본체."},
+    {id:3, go:"공동기금(커뮤니티 상자)", name:"응원", stripe:"special", track:"community", kind:"응원", gaze:"window", enter:"회사는 안 건드림. 팬들이 모으는 날.", fan:"친구랑 조금씩. 밟을 때마다 한 번.", desc:"밟으면 한 번 응원한다. 친구와 주간 팀을 짜고 인증을 모아 3단을 채운다. 매주 리셋. 큰 협력(총공)은 입덕으로 옮겼다."},
+    {id:4, go:"갈색 대지", name:"미디어 대응", stripe:"brown", track:"practice", kind:"미디어", gaze:"land", enter:"카메라 앞에서 멘트 연습.", fan:"인터뷰 나오면 캡처·정정·총대가 대기.", desc:"미디어 트레이닝·인터뷰·카메라 대응·인성·예절. 방송·기자·태도 축."},
+    {id:5, go:"소득세", name:"정산", stripe:"special", track:"tax", kind:"정산", gaze:"company", enter:"회사 계산기. 코인이 나간다.", fan:"옆에서 ‘이번 달 정산 힘드네…’만. 기부 칸 아님.", desc:"모노폴리 GO 소득세 자리. 착지하면 코인이 나감. 주사위=주사위 · 재화=코인. 팬덤 게이트(딱지)와 달리 내 코인이 나간다."},
+    {id:6, go:"정거장", name:"팬덤 게이트", stripe:"station", track:"gate", kind:"팬덤 게이트", gaze:"window", enter:"정거장. 아이돌은 스쳐 지나감.", fan:"남의 밥차에 내 이름 걸러 간다.", desc:"딱지·어부지리 창구. 밥차는 그대로고 현수막에 걸린 이름만 바뀐다. 아무것도 안 뺏는다. GO 정거장 자리. 쌓기(덕질)는 아이돌 일정 22칸에서."},
+    {id:7, go:"하늘색 대지", name:"트레이닝", stripe:"sky", track:"practice", kind:"연습", grade:"하", gaze:"land", enter:"기초 연습. 아직 서툴러도 반복.", fan:"연습실 브이로그면 무한재생.", desc:"기초·입문 트레이닝. 연습 보상 풀 · 등급 하."},
+    {id:8, go:"찬스(Chance)", name:"스케줄 변경", stripe:"special", track:"chance", gaze:"window", enter:"콜이 끼거나 빠지거나.", fan:"총공 일정 다시 짠다. 멘탈도.", desc:"성장 없음. 일정이 끼어들거나 비거나 겹침. 방송·공연 등급에 맞춰 풀 교체·삭제. 광고·CF·뮤비·화보·녹음·헤어메이크·회사평가·프리뷰 콜 및 화제·여론 변수 포함. (합숙은 빨강 칸)"},
+    {id:9, go:"하늘색 대지", name:"컨디셔닝", stripe:"sky", track:"practice", kind:"컨디셔닝", gaze:"land", enter:"식단·스트레칭. 몸 관리하는 날.", fan:"‘밥은 먹었니’가 덕질이다.", desc:"식단·체형·스트레칭·컨디셔닝. 피지컬(2)의 관리·컨디션 축."},
+    {id:10, go:"하늘색 대지", name:"공부", stripe:"sky", track:"practice", kind:"공부", gaze:"land", enter:"외국어·작사 숙제.", fan:"발음 고쳐 주는 팬이 꼭 있다.", desc:"외국어·작사·작곡·이미지 메이킹 등 학습형 트레이닝. 공부 감각의 연습 칸."},
+    {id:11, go:"감옥 / 방문", name:"스탠바이", stripe:"special", track:"corner", kind:"스탠바이", gaze:"window", enter:"촬영 전 대기. 아직 카메라 안 켜짐.", fan:"본방 10분 전, 채팅창만 뜨거움.", desc:"코너 이벤트 구간. 기본은 혜택·효과 없음(GO 방문). 촬영·방송 전 스탠바이 감각. 시즌 이벤트만 나중에 얹을 수 있음."},
+    {id:12, go:"분홍 대지", name:"서브 연습실", stripe:"pink", track:"practice", kind:"연습", grade:"중하", gaze:"land", enter:"작은 방에서 한 번 더.", fan:"거울 셀카 하나가 피드가 된다.", desc:"서브 연습실. 연습 보상 풀 · 등급 중하."},
+    {id:13, go:"전기회사", name:"A&R 미팅", stripe:"util", track:"util", kind:"A&R 미팅", gaze:"company", enter:"곡·콘셉트 회의. 팬은 못 들어옴.", fan:"밖에서 ‘이번 앨범 뭐야’만 수군.", desc:"덕질(팬덤 스테이지 쌓기) 불가. 앨범·곡·콘셉트 쪽 회사 미팅. GO 전기회사 자리. 착지·코인 규칙은 유틸."},
+    {id:14, go:"분홍 대지", name:"팬미팅", stripe:"pink", track:"fanfix", kind:"팬미팅", gaze:"land", enter:"팬 앞에서 토크·하이터치.", fan:"추첨·줄서기·울기. 성덕의 날.", desc:"오프라인 팬 전용 행사. 토크·게임·사연·톡콘·유닛 코너·스페셜 무대·포토·하이터치 등. 칸 이름 고정."},
+    {id:15, go:"분홍 대지", name:"개인방송", stripe:"pink", track:"fanfix", kind:"개인방송", gaze:"land", enter:"폰 켜고 수다.", fan:"동접·하트·클립 담당은 나.", desc:"팬을 위한 개인·팬플 방송. 수다·먹방·게임 라이브·팬콜·영통·편지 답장 등. 칸 이름 고정. (노랑 방송 성장칸과 별개)"},
+    {id:16, go:"정거장", name:"팬덤 게이트", stripe:"station", track:"gate", kind:"팬덤 게이트", gaze:"window", enter:"정거장. 아이돌은 스쳐 지나감.", fan:"남의 밥차에 내 이름 걸러 간다.", desc:"딱지·어부지리 창구. 밥차는 그대로고 현수막에 걸린 이름만 바뀐다. 아무것도 안 뺏는다. GO 정거장 자리. 쌓기(덕질)는 아이돌 일정 22칸에서."},
+    {id:17, go:"주황 대지", name:"메인 연습실", stripe:"orange", track:"practice", kind:"연습", grade:"중상", gaze:"land", enter:"본연습. 제대로 굴러가는 날.", fan:"안무 직캠 기다림.", desc:"메인 연습실. 연습 보상 풀 · 등급 중상."},
+    {id:18, go:"공동기금(커뮤니티 상자)", name:"응원", stripe:"special", track:"community", kind:"응원", gaze:"window", enter:"회사는 안 건드림. 팬들이 모으는 날.", fan:"친구랑 조금씩. 밟을 때마다 한 번.", desc:"밟으면 한 번 응원한다. 친구와 주간 팀을 짜고 인증을 모아 3단을 채운다. 매주 리셋. 큰 협력(총공)은 입덕으로 옮겼다."},
+    {id:19, go:"주황 대지", name:"개인 시간", stripe:"orange", track:"freetime", kind:"개인 시간", gaze:"land", enter:"혼자 오프. 숨 고르기.", fan:"사생 금지. 마음만 쉬게 둔다.", desc:"혼자 쉬는 오프. 숨 고르기·컨디션 정돈. 칸 이름 고정. (연습 컨디셔닝 세션과 별개)"},
+    {id:20, go:"주황 대지", name:"멤버 시간", stripe:"orange", track:"freetime", kind:"멤버 시간", gaze:"land", enter:"멤버끼리만. 케미 충전.", fan:"케미 컷 하나만 나와도 축제.", desc:"멤버끼리 보내는 생활 스케줄. 팀 케미·관계 호흡. 칸 이름 고정. (연습 합·팬이벤트와 별개)"},
+    {id:21, go:"무료주차", name:"온에어", stripe:"special", track:"corner", kind:"온에어", gaze:"window", enter:"평소엔 빈 칸. 특집 올 자리.", fan:"지켜보기. 특집 때만 몰린다.", desc:"코너 이벤트 구간. 기본은 혜택·효과 없음(GO 무료주차). 온에어 자리 — 평소 무효과, 시즌·특집 이벤트만 나중에 꽂음."},
+    {id:22, go:"빨강 대지", name:"집중 트레이닝", stripe:"red", track:"practice", kind:"연습", grade:"상", gaze:"land", enter:"강도 올린 연습. 후반전.", fan:"‘살 빠졌다’ 다음은 ‘다치지 마’.", desc:"집중 트레이닝. 연습 보상 풀 · 등급 상 · 보드 후반 난이도."},
+    {id:23, go:"찬스(Chance)", name:"스케줄 변경", stripe:"special", track:"chance", gaze:"window", enter:"콜이 끼거나 빠지거나.", fan:"총공 일정 다시 짠다. 멘탈도.", desc:"성장 없음. 일정이 끼어들거나 비거나 겹침. 방송·공연 등급에 맞춰 풀 교체·삭제. 광고·CF·뮤비·화보·녹음·헤어메이크·회사평가·프리뷰 콜 및 화제·여론 변수 포함. (합숙은 빨강 칸)"},
+    {id:24, go:"빨강 대지", name:"안무 합숙", stripe:"red", track:"camp", kind:"안무 합숙", gaze:"land", enter:"며칠 묶인 군무 합숙.", fan:"합숙 브이로그 = 야식.", desc:"며칠 묶인 안무·군무 합숙 행보. 연습실 상시 세션(트레이닝 사다리)과 별개."},
+    {id:25, go:"빨강 대지", name:"보컬 합숙", stripe:"red", track:"camp", kind:"보컬 합숙", gaze:"land", enter:"목 관리하며 하모니.", fan:"라이브 음원 올라오면 무한청취.", desc:"며칠 묶인 보컬·하모니 합숙 행보. 연습실 상시 세션(트레이닝 사다리)과 별개."},
+    {id:26, go:"정거장", name:"팬덤 게이트", stripe:"station", track:"gate", kind:"팬덤 게이트", gaze:"window", enter:"정거장. 아이돌은 스쳐 지나감.", fan:"남의 밥차에 내 이름 걸러 간다.", desc:"딱지·어부지리 창구. 밥차는 그대로고 현수막에 걸린 이름만 바뀐다. 아무것도 안 뺏는다. GO 정거장 자리. 쌓기(덕질)는 아이돌 일정 22칸에서."},
+    {id:27, go:"노랑 대지", stripe:"yellow", track:"yellow", level:0, kind:0, gaze:"land", enter:"카메라 켜고 송출.", fan:"알림 켜 놓고 본방 사수.", desc:"공개 플랫폼 라이브. 유튜브 채널 실시간 송출·클립 확산이 핵심인 온라인 출연 칸."},
+    {id:28, go:"노랑 대지", stripe:"yellow", track:"yellow", level:0, kind:1, gaze:"land", enter:"팬클럽만 보는 방송.", fan:"멤버십 켜 둔 사람만 들어옴.", desc:"공식 팬플랫폼(위버스 등) 전용 라이브. 팬클럽·멤버십 대상 폐쇄형 소통 방송 칸."},
+    {id:29, go:"수도회사", name:"매니지먼트 미팅", stripe:"util", track:"util", kind:"매니지먼트 미팅", gaze:"company", enter:"일정·활동 회의. 회사 문.", fan:"밖에서 일정표만 새로고침.", desc:"덕질(팬덤 스테이지 쌓기) 불가. 일정·활동·아티스트 운영 미팅. GO 수도회사 자리. 착지·코인 규칙은 유틸."},
+    {id:30, go:"노랑 대지", stripe:"yellow", track:"yellow", level:0, kind:2, gaze:"land", enter:"세로 영상 찍는 날.", fan:"좋아요·댓글 총공.", desc:"숏폼 플랫폼 라이브·세로형 클립. 알고리즘 노출·바이럴을 노리는 온라인 출연 칸."},
+    {id:31, go:"감옥으로(Go To Jail)", name:"병가", stripe:"special", track:"gotojail", kind:"병가", gaze:"company", enter:"몸 퍼짐. 강제 휴식.", fan:"마음만 보냄. 재촉 금지.", desc:"강제 휴식·병가. 모노폴리 GO 감옥행 그대로 — 새로 기획할 게 없다. 더블로 나온다. 준비도와 엮지 않는다."},
+    {id:32, go:"초록 대지", stripe:"green", track:"green", level:0, kind:0, gaze:"land", enter:"거리 위에 선다.", fan:"꽃·보드·직캠 삼각대.", desc:"거리 버스킹. 보행 상권·버스킹존에서 하는 저장벽 야외 공연 칸."},
+    {id:33, go:"초록 대지", stripe:"green", track:"green", level:0, kind:1, gaze:"land", enter:"캠퍼스 게스트.", fan:"학식 먹으며 기다림.", desc:"대학가·캠퍼스 야외. 축제·동아리 행사 연계 게릴라·게스트 슬롯 공연 칸."},
+    {id:34, go:"공동기금(커뮤니티 상자)", name:"응원", stripe:"special", track:"community", kind:"응원", gaze:"window", enter:"회사는 안 건드림. 팬들이 모으는 날.", fan:"친구랑 조금씩. 밟을 때마다 한 번.", desc:"밟으면 한 번 응원한다. 친구와 주간 팀을 짜고 인증을 모아 3단을 채운다. 매주 리셋. 큰 협력(총공)은 입덕으로 옮겼다."},
+    {id:35, go:"초록 대지", stripe:"green", track:"green", level:0, kind:2, gaze:"land", enter:"야외 스테이지.", fan:"슬롯 시간 맞춰 총출동.", desc:"거리공연. 지정 야외 스테이지·거리페스형 공개 공연 슬롯 칸."},
+    {id:36, go:"정거장", name:"팬덤 게이트", stripe:"station", track:"gate", kind:"팬덤 게이트", gaze:"window", enter:"정거장. 아이돌은 스쳐 지나감.", fan:"남의 밥차에 내 이름 걸러 간다.", desc:"딱지·어부지리 창구. 밥차는 그대로고 현수막에 걸린 이름만 바뀐다. 아무것도 안 뺏는다. GO 정거장 자리. 쌓기(덕질)는 아이돌 일정 22칸에서."},
+    {id:37, go:"남색 대지", name:"본가", stripe:"navy", track:"living", kind:"본가", gaze:"land", enter:"고향 집. 가족 밥.", fan:"귀성 사진에 ‘잘 쉬어’.", desc:"가족·고향 집 행보. 개인 시간(혼자 오프)과 별개. 아이돌 일정."},
+    {id:38, go:"찬스(Chance)", name:"스케줄 변경", stripe:"special", track:"chance", gaze:"window", enter:"콜이 끼거나 빠지거나.", fan:"총공 일정 다시 짠다. 멘탈도.", desc:"성장 없음. 일정이 끼어들거나 비거나 겹침. 방송·공연 등급에 맞춰 풀 교체·삭제. 광고·CF·뮤비·화보·녹음·헤어메이크·회사평가·프리뷰 콜 및 화제·여론 변수 포함. (합숙은 빨강 칸)"},
+    {id:39, go:"남색 대지", name:"합숙소", stripe:"navy", track:"living", kind:"합숙소", gaze:"land", enter:"통금·룸메·숙소 루틴.", fan:"숙소 브이로그면 또 봄.", desc:"숙소 생활 행보(통금·룸메·식사·루틴). 안무·보컬 합숙(훈련)·멤버 시간(케미 오프)과 별개. 아이돌 일정."},
+    {id:40, go:"사치세", name:"대형 정산", stripe:"special", track:"tax", kind:"대형 정산", gaze:"company", enter:"큰 계산. 코인 더 나감.", fan:"옆에서 한숨만. 기부 칸 아님.", desc:"모노폴리 GO 사치세 자리. 착지하면 더 큰 코인이 나감. 정산보다 센 지출. 팬카페 기부(빠순이)와 별개 — 아이돌 쪽 정산."}
+  ];
+
+  // ══════════ 시점 (D-072) — 같은 40칸을 누가 보느냐에 따라 갈아끼운다 ══════════
+  // ?view=fan  → 제안서 A · 팬 시점     (팬이 갈 수 없는 19칸을 팬의 자리로)
+  // ?view=ent  → 제안서 B · 엔터 사장 시점 (팬이 하는 7칸을 회사의 자리로 · 「나는」은 사장)
+  // 없으면 지금까지의 합친 판 그대로. 칸 데이터(CELLS)는 건드리지 않고 여기서만 덮어쓴다.
+  const VIEW = (function () {
+    var q = (location.search.match(/[?&]view=(fan|ent)/) || [])[1];
+    var b = document.body && document.body.dataset ? document.body.dataset.view : "";
+    return q || (b === "fan" || b === "ent" ? b : "all");
+  })();
+
+  const VIEW_PATCH = {
+    fan: {
+      1:  {name:"출근길", kind:"출근길", gaze:"window", enter:"사옥으로 출근한다.", fan:"사옥 앞에서 손 흔든다. 공식 출근길만.", desc:"한 바퀴 기준. 최애가 출근하는 사옥 앞 — 팬이 공식적으로 볼 수 있는 자리."},
+      // 연습 8 → 온라인 덕질 : 최애가 안 보이는 데서 연습할 때, 팬도 안 보이는 데서 민다
+      2:  {name:"스밍", kind:"스밍", art:false, fan:"음원을 돌린다. 차트에 이름이 올라가게.", desc:"음원 스트리밍. 최애가 안 보이는 데서 연습할 때 팬도 안 보이는 데서 민다."},
+      4:  {name:"투표", kind:"투표", art:false, fan:"음방 · 시상식 투표. 하루 한 표도 안 빼먹는다.", desc:"음악방송 · 시상식 투표. 1위 트로피로 이어진다."},
+      7:  {name:"앨범 구매", kind:"앨범 구매", art:false, fan:"초동을 채운다. 포카는 덤.", desc:"앨범 구매 · 초동 판매량. 판매량이 곧 체급이다."},
+      9:  {name:"뮤비 조회수", kind:"뮤비 조회수", art:false, fan:"뮤비를 돌린다. 억뷰까지.", desc:"뮤직비디오 조회수 올리기."},
+      10: {name:"번역 · 자막", kind:"번역", art:false, fan:"영상에 자막을 단다. 해외 팬이 읽게.", desc:"번역 · 자막. 최애를 밖으로 퍼뜨린다."},
+      12: {name:"해시태그", kind:"해시태그", art:false, fan:"정한 시간에 다 같이 해시태그. 실트 올리기.", desc:"SNS 해시태그 · 실시간 트렌드."},
+      17: {name:"리뷰 · 댓글", kind:"리뷰", art:false, fan:"기사 댓글 · 음원 리뷰로 분위기를 민다.", desc:"댓글 · 리뷰 · 여론."},
+      22: {name:"총력 스밍", kind:"총력 스밍", art:false, fan:"컴백 직전. 밤새 스밍 · 투표를 몰아친다.", desc:"컴백 직전 총력전. 온라인 덕질의 끝판."},
+      // 합숙 2 → 팬도 준비한다
+      24: {name:"굿즈 제작", kind:"굿즈 제작", art:false, fan:"슬로건 · 포토카드 · 응원 굿즈를 만든다.", desc:"팬이 만드는 굿즈. 컴백을 준비할 때 팬도 준비한다."},
+      25: {name:"서포트 준비", kind:"서포트 준비", art:false, fan:"생일 · 컴백 서포트를 모금하고 기획한다.", desc:"서포트 모금 · 기획. 커피차 · 전광판을 올리기 전 단계."},
+      // 사적 공간 4 → 팬의 현생 · 지갑 (사생 금지 — 팬은 숙소 · 본가 · 개인 시간을 안 따라간다)
+      19: {name:"현생 · 학교", kind:"현생", gaze:"window", art:false, enter:"오늘은 쉬는 날.", fan:"수업 · 과제. 덕질은 잠깐 쉰다.", desc:"현생. 쉬어 가는 칸."},
+      20: {name:"현생 · 회사", kind:"현생", gaze:"window", art:false, enter:"오늘은 쉬는 날.", fan:"출근 · 야근. 폰은 몰래 본다.", desc:"현생. 쉬어 가는 칸."},
+      37: {name:"용돈", kind:"용돈", gaze:"window", art:false, enter:"오늘은 쉬는 날.", fan:"집에서 용돈을 받는다. 덕질 자금 충전.", desc:"수입. 팬의 지갑이 채워지는 칸."},
+      39: {name:"알바", kind:"알바", gaze:"window", art:false, enter:"오늘은 쉬는 날.", fan:"알바비가 들어온다. 바로 커피차 견적.", desc:"수입. 팬의 지갑이 채워지는 칸."},
+      // 회사 5 → 팬의 지출 · 운 · 기다림
+      5:  {name:"현생 지출", kind:"현생 지출", gaze:"window", art:false, enter:"—", fan:"월세 · 교통비가 나간다. 덕질 예산이 준다.", desc:"GO 소득세 자리. 착지하면 내 코인이 나간다."},
+      40: {name:"큰 지출", kind:"큰 지출", gaze:"window", art:false, enter:"—", fan:"학비 · 카드값. 이번 달은 허리띠.", desc:"GO 사치세 자리. 더 큰 코인이 나간다."},
+      13: {name:"티켓팅", kind:"티켓팅", gaze:"window", art:false, enter:"콘서트 준비 중.", fan:"콘서트 티켓팅. 새로고침 광클.", desc:"GO 유틸 자리. 주사위 눈만큼 쓴다 — 운이 좋으면 싸게, 나쁘면 비싸게."},
+      29: {name:"굿즈 오픈", kind:"굿즈 오픈", gaze:"window", art:false, enter:"공식 굿즈 출시.", fan:"공식 굿즈 오픈런. 품절 전에.", desc:"GO 유틸 자리. 주사위 눈만큼 쓴다."},
+      31: {name:"공백기", kind:"공백기", fan:"기다린다. 재촉 금지, 마음만 보낸다.", desc:"GO 감옥 자리. 최애가 쉬는 동안 몇 턴 묶인다."}
+    },
+    ent: {
+      // 팬이 하는 7칸 → 회사의 자리
+      3:  {name:"팬덤 반응", kind:"팬덤 반응", enter:"팬들이 움직인다.", desc:"GO 공동기금 자리. 화제성이 오르내린다 — 팬덤이 뜨거우면 같은 무대에서 더 번다."},
+      18: {name:"팬덤 반응", kind:"팬덤 반응", enter:"팬들이 움직인다.", desc:"GO 공동기금 자리. 화제성이 오르내린다 — 팬덤이 뜨거우면 같은 무대에서 더 번다."},
+      34: {name:"팬덤 반응", kind:"팬덤 반응", enter:"팬들이 움직인다.", desc:"GO 공동기금 자리. 화제성이 오르내린다 — 팬덤이 뜨거우면 같은 무대에서 더 번다."},
+      6:  {name:"쟁탈 · 예능 방송국", kind:"쟁탈", enter:"방송 출연 제안을 기다린다.", desc:"옛 엔터 사장 시점 보관 문구. 현재 쟁탈은 다른 유저의 권리 또는 수익 일부를 가져오는 두 게임이며, 위 쟁탈 4칸 절과 FS04 제안서를 따른다."},
+      16: {name:"쟁탈 · 광고주", kind:"쟁탈", enter:"광고 제안을 기다린다.", desc:"GO 정거장 자리. 광고 쟁탈 선점. 광고는 매출의 5.7%."},
+      26: {name:"쟁탈 · 공연기획", kind:"쟁탈", enter:"공연 제안을 기다린다.", desc:"GO 정거장 자리. 공연기획사와 계약 — 랩 스튜디오 크기가 곧 체급이다."},
+      36: {name:"쟁탈 · 해외", kind:"쟁탈", enter:"해외 진출을 기다린다.", desc:"GO 정거장 자리. 해외 에이전시 — 체급이 바뀌는 문."},
+      // 회사 칸 설명에서 팬 쪽 말 걷어내기
+      5:  {desc:"GO 소득세 자리. 착지하면 회사 자금이 나간다 — 투자 원가를 먼저 회수한다."},
+      13: {desc:"GO 전기회사 자리. 곡 · 콘셉트 회의. 앨범 방향이 여기서 정해진다."},
+      29: {desc:"GO 수도회사 자리. 일정 · 활동 · 아티스트 운영 회의."},
+      40: {desc:"GO 사치세 자리. 착지하면 더 큰 회사 자금이 나간다 — 음반 · 콘서트 원가를 한꺼번에 회수한다."}
+    }
+  };
+
+  // B · 사장 시점에서 「나는」 = 사장이 하는 일 (40칸 전부)
+  const CEO_LINE = {
+    1:"출근. 오늘 어디에 얼마를 쓸지 정한다.", 2:"PT 트레이너 비용. 몸이 곧 상품이다.",
+    3:"팬 반응을 본다. 뜨거우면 밀고, 식으면 판을 다시 짠다.", 4:"미디어 트레이닝을 붙인다. 말실수 하나가 리스크다.",
+    5:"정산일. 투자 원가부터 회수한다.", 6:"예능 방송국 PD를 만난다. 한 자리라도 먼저.",
+    7:"연습생 트레이닝비. 제일 길고 제일 큰돈이다.", 8:"CF 캐스팅이 오거나 스캔들이 터진다. 일정표를 다시 짠다.",
+    9:"식단 · 관리사 비용. 컨디션이 무대를 가른다.", 10:"외국어 · 작사 선생님. 해외 시장을 본다.",
+    11:"촬영 대기. 돈은 이미 나갔다.", 12:"연습실 대관비. 작은 방부터.",
+    13:"곡 · 콘셉트 회의. 앨범 방향을 정한다.", 14:"팬미팅 대관 · 운영. 팬심을 사는 자리.",
+    15:"개인방송 기획. 돈은 적게 들고 팬심은 크게 번다.", 16:"광고주 미팅. 한 건이 크다.",
+    17:"메인 연습실 · 안무가. 본격적으로 돈이 들어간다.", 18:"팬 반응을 본다. 뜨거우면 밀고, 식으면 판을 다시 짠다.",
+    19:"쉬게 한다. 쉬는 것도 관리다.", 20:"멤버 케미를 챙긴다. 팀이 깨지면 다 잃는다.",
+    21:"특집 편성을 노린다.", 22:"컴백 직전 집중 투자. 여기서 아끼면 무대에서 잃는다.",
+    23:"CF 캐스팅이 오거나 스캔들이 터진다. 일정표를 다시 짠다.", 24:"합숙비 · 안무가 · 숙소. 며칠에 목돈이 나간다.",
+    25:"보컬 트레이너 합숙. 라이브가 되는 팀을 만든다.", 26:"공연기획사와 계약. 랩 스튜디오 크기가 체급이다.",
+    27:"자체 채널 송출. 제작비는 적고 노출은 크다.", 28:"팬플랫폼 방송. 멤버십이 매출이 된다.",
+    29:"일정 · 활동 회의. 다음 분기를 짠다.", 30:"숏폼 챌린지를 기획한다. 바이럴은 운이다.",
+    31:"아티스트가 아프다. 일정이 멈추고 돈만 나간다.", 32:"거리 공연 허가 · 장비. 제일 싼 무대.",
+    33:"축제 게스트 캐스팅. 출연료가 들어온다.", 34:"팬 반응을 본다. 뜨거우면 밀고, 식으면 판을 다시 짠다.",
+    35:"야외 스테이지 슬롯. 관객이 곧 홍보다.", 36:"해외 에이전시를 만난다. 체급이 바뀌는 문.",
+    37:"휴가를 준다. 가족도 관리 대상이다.", 38:"CF 캐스팅이 오거나 스캔들이 터진다. 일정표를 다시 짠다.",
+    39:"숙소 운영비. 매달 고정으로 나간다.", 40:"대형 정산. 음반 · 콘서트 원가를 한꺼번에 회수한다."
+  };
+
+  // 색 그룹 요약판도 같은 시점을 탄다 (대지 22칸의 색 묶음 이름)
+  const CHIP_PATCH = {
+    fan: {
+      brown:  {set:"온라인", cells:"스밍 · 투표"},
+      sky:    {set:"온라인", cells:"앨범 · 뮤비 · 번역"},
+      pink:   {set:"온라인 · 팬", cells:"해시태그 · 팬미팅 · 개인방송"},
+      orange: {set:"온라인 · 현생", cells:"리뷰 · 학교 · 회사"},
+      red:    {set:"온라인 · 준비", cells:"총력 스밍 · 굿즈 제작 · 서포트 준비"},
+      navy:   {set:"지갑", cells:"용돈 · 알바"}
+    }
+  };
+
+  (function applyView() {
+    var cp = CHIP_PATCH[VIEW] || {};
+    CHIP_DEF.forEach(function (d) { if (cp[d.k]) Object.assign(d, cp[d.k]); });
+    var p = VIEW_PATCH[VIEW] || {};
+    CELLS.forEach(function (c) {
+      if (p[c.id]) Object.assign(c, p[c.id]);
+      if (VIEW === "ent" && CEO_LINE[c.id]) c.fan = CEO_LINE[c.id];
+    });
+    // 가운데 요약도 시점에 맞춰 센다 (숫자는 칸 데이터에서 나온다)
+    var steps = document.querySelector(".csteps");
+    if (!steps || VIEW === "all") return;
+    var parts;
+    if (VIEW === "fan") {
+      var changed = CELLS.filter(function (c) { return p[c.id] && p[c.id].name; }).length;
+      parts = ["그대로 둔 칸 " + (CELLS.length - changed), "팬의 자리로 바꾼 칸 " + changed];
+    } else {
+      var n = function (g) { return CELLS.filter(function (c) { return c.gaze === g; }).length; };
+      parts = ["아이돌 일정 " + n("land"), "회사가 움직이는 창구 " + n("window"), "회사 일 " + n("company")];
+    }
+    steps.innerHTML = parts.map(function (t) { return "<span>" + t + "</span>"; }).join("");
+  })();
+
+
+  // ══════════ R57 (09-30) 최신화 — 기본 화면(?view 없음)에만 적용 · 옛 데이터는 CELLS_OLD로 보관 ══════════
+  const R57 = VIEW === "all";
+  const CELLS_OLD = CELLS.map(function (c) { return Object.assign({}, c); });
+  const R57_BLD = {
+    dance: {nm:"댄스", steps:["옥상 연습실","연습 스튜디오","안무 센터"]},
+    rec:   {nm:"녹음실", steps:["녹음 부스","스튜디오","레이블 스튜디오"]},
+    shop:  {nm:"팬샵", steps:["응원봉 매대","팝업스토어","플래그십 스토어"]},
+    agency:{nm:"기획사", steps:["작은 사무실","사옥","타워"]},
+    tv:    {nm:"예능 방송국", steps:["개인방송 스튜디오","케이블 예능 방송국","지상파 · 시상식"]},
+    hall:  {nm:"랩 스튜디오", steps:["버스킹 무대","소극장 · 랩 스튜디오","아레나"]}
+  };
+  const R57_ZONE = {brown:"북서 · 갈 구역", sky:"북 · 하늘 구역", pink:"북동 · 분홍 구역", orange:"동 · 주황 구역",
+    red:"남동 · 빨강 구역", yellow:"남 · 노랑 구역", green:"남서 · 초록 구역", navy:"서 · 남색 구역"};
+  // k: land(건물 칸) · judge(방송·공연 판정 칸) · life · scout · fanre · chance · tax · corner · jail · util · hq
+  const R57_CELLS = {
+    1:{nm:"사옥(출발)", k:"hq", g:"company", pos:"북쪽 회사 복합시설 (−70, −220) · 기획사 본관", line:"기획사 본관. 한 바퀴의 기준 — 오늘 어디에 얼마를 쓸지(배수) 정하고 출발한다."},
+    2:{nm:"기초 체력", k:"land", b:"dance", line:"기획사가 PT · 체력 훈련 비용을 대고 → 아이돌이 몸을 만든다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 댄스 건물이 자라고 아이돌 능력치가 오른다."},
+    3:{nm:"팬덤 반응", k:"fanre", pos:"갈↔남색 접점 (−170, −118) · 광장", line:"팬 반응이 들어온다 — 카드 한 장(응원 · 화제 · 루머). 기획사는 그 반응으로 판을 읽는다."},
+    4:{nm:"기초 안무", k:"land", b:"dance", line:"기획사가 기초 안무 레슨을 붙이고 → 아이돌이 기본기를 다진다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 댄스 건물이 자라고 아이돌 능력치가 오른다."},
+    5:{nm:"정산", k:"tax", g:"company", pos:"회사 복합시설 서쪽 (−116, −214) · 정산 창구", line:"기획사 정산 창구. 코인이 나간다(판정 없음)."},
+    6:{nm:"예능 방송국 쟁탈", k:"scout", pos:"공원 북쪽 (0, −118) · 환승 지점", line:"기획사가 아이돌을 위해 예능 방송국 PD를 만나 출연을 잡아 온다."},
+    7:{nm:"보컬 레슨", k:"land", b:"rec", line:"기획사가 보컬 트레이너를 붙이고 → 아이돌이 레슨을 받는다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 녹음실이 자라고 아이돌 능력치가 오른다."},
+    8:{nm:"스케줄 변경", k:"chance", pos:"하늘↔분홍 도로 (108, −172) · 첫 번째 일정 전광판", line:"일정표를 다시 짠다 — 카드 1장(끼움 · 콜 · 비움 · 겹침)."},
+    9:{nm:"가이드 녹음", k:"land", b:"rec", line:"기획사가 가이드 녹음 세션을 잡고 → 아이돌이 곡을 입에 붙인다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 녹음실이 자라고 아이돌 능력치가 오른다."},
+    10:{nm:"녹음 부스", k:"land", b:"rec", line:"기획사가 녹음 부스를 잡고 → 아이돌이 녹음한다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 녹음실이 자라고 아이돌 능력치가 오른다."},
+    11:{nm:"스탠바이", k:"corner", pos:"분홍↔주황 접점 (170, −118) · 대기 광장", line:"촬영 전 대기 코너. 평소엔 조용하고, 시즌 · 특집 이벤트가 꽂히는 자리."},
+    12:{nm:"응원봉 매대", k:"land", b:"shop", line:"기획사가 응원봉 매대를 열고 → 아이돌 응원봉이 팬을 만난다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 팬샵이 자라고 아이돌 능력치가 오른다."},
+    13:{nm:"A&R 미팅", k:"util", g:"company", pos:"회사 복합시설 내부 (−42, −185) · 회의동", line:"기획사 회의동 — 곡 · 콘셉트 방향을 정한다."},
+    14:{nm:"팬사인회", k:"land", b:"shop", line:"기획사가 팬사인회를 열고 → 아이돌이 팬을 만난다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 팬샵이 자라고 아이돌 능력치가 오른다."},
+    15:{nm:"팝업스토어", k:"land", b:"shop", line:"기획사가 팝업스토어를 열고 → 팬이 찾아온다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 팬샵이 자라고 아이돌 능력치가 오른다."},
+    16:{nm:"광고주 쟁탈", k:"scout", pos:"공원 동쪽 (108, 0) · 환승 지점", line:"기획사가 아이돌을 위해 광고주를 만나 광고를 잡아 온다."},
+    17:{nm:"콘셉트 회의", k:"land", b:"agency", line:"기획사가 컴백 콘셉트를 짜고 → 아이돌이 새 콘셉트를 입는다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 기획사 건물이 자라고 아이돌 능력치가 오른다."},
+    18:{nm:"팬덤 반응", k:"fanre", pos:"주황↔빨강 접점 (175, 118) · 광장", line:"팬 반응이 들어온다 — 카드 한 장(응원 · 화제 · 루머). 기획사는 그 반응으로 판을 읽는다."},
+    19:{nm:"뮤비 촬영", k:"land", b:"agency", line:"기획사가 뮤비 촬영을 잡고 → 아이돌이 촬영한다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 기획사 건물이 자라고 아이돌 능력치가 오른다."},
+    20:{nm:"쇼케이스", k:"land", b:"agency", line:"기획사가 쇼케이스를 열고 → 아이돌이 컴백을 선보인다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 기획사 건물이 자라고 아이돌 능력치가 오른다."},
+    21:{nm:"온에어", k:"corner", pos:"노랑 구역 남동 접점 (100, 190) · 송출 앞 광장", line:"송출 앞 코너. 평소엔 효과 없음, 시즌 · 특집 때 켜지는 자리."},
+    22:{nm:"집중 트레이닝", k:"land", b:"dance", line:"기획사가 컴백 직전 집중 투자를 하고 → 아이돌이 강도 높은 훈련을 한다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 댄스 건물이 자라고 아이돌 능력치가 오른다."},
+    23:{nm:"스케줄 변경", k:"chance", pos:"빨강↔노랑 도로 (108, 145) · 두 번째 일정 전광판", line:"일정표를 다시 짠다 — 카드 1장(끼움 · 콜 · 비움 · 겹침)."},
+    24:{nm:"안무 합숙", k:"land", b:"dance", line:"기획사가 합숙(숙소 · 안무가)을 잡고 → 아이돌이 며칠 군무를 맞춘다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 댄스 건물이 자라고 아이돌 능력치가 오른다."},
+    25:{nm:"안무 영상 촬영", k:"land", b:"dance", line:"기획사가 안무 영상 촬영을 잡고 → 아이돌이 군무를 찍는다 → 도착 수입(× 배수)이 들어온다 → 그 돈을 투자하면 댄스 건물이 자라고 아이돌 능력치가 오른다."},
+    26:{nm:"공연기획 쟁탈", k:"scout", pos:"공원 남쪽 (0, 118) · 환승 지점", line:"기획사가 아이돌을 위해 공연기획사를 만나 무대를 잡아 온다."},
+    27:{nm:"유튜브 라이브", up:"→ 음악방송", k:"judge", b:"tv", line:"기획사가 방송을 잡고 → 아이돌이 라이브를 한다 → 대박 · 중박 · 운망 판정 → 팬덤 게이지가 찬다."},
+    28:{nm:"팬플 라이브", up:"→ 예능", k:"judge", b:"tv", line:"기획사가 팬플랫폼 방송을 잡고 → 아이돌이 팬과 소통한다 → 판정 → 팬덤 게이지가 찬다."},
+    29:{nm:"매니지먼트 미팅", k:"util", g:"company", pos:"회사 복합시설 동쪽 (−25, −225) · 회의동", line:"기획사 회의동 — 일정 · 활동을 짠다."},
+    30:{nm:"숏폼 라이브", up:"→ 시상식", k:"judge", b:"tv", line:"기획사가 숏폼 방송을 잡고 → 아이돌이 세로 영상을 찍는다 → 판정 → 팬덤 게이지가 찬다."},
+    31:{nm:"병가", k:"jail", pos:"주황↔빨강 안쪽 (190, 70) · 회복 클리닉", line:"아이돌이 아프다 — 강제 휴식(GO 감옥 그대로). 일정이 멈춘다."},
+    32:{nm:"거리 버스킹", up:"→ 소극장", k:"judge", b:"hall", line:"기획사가 무대를 잡고 → 아이돌이 거리에 선다 → 판정 → 팬덤 게이지가 찬다."},
+    33:{nm:"대학 축제", up:"→ 랩 스튜디오", k:"judge", b:"hall", line:"기획사가 대학 축제 무대를 잡고 → 아이돌이 캠퍼스에 선다 → 판정 → 팬덤 게이지가 찬다."},
+    34:{nm:"팬덤 반응", k:"fanre", pos:"남색↔초록 접점 (−175, 118) · 광장", line:"팬 반응이 들어온다 — 카드 한 장(응원 · 화제 · 루머). 기획사는 그 반응으로 판을 읽는다."},
+    35:{nm:"거리공연", up:"→ 아레나", k:"judge", b:"hall", line:"기획사가 야외 스테이지를 잡고 → 아이돌이 공연한다 → 판정 → 팬덤 게이지가 찬다."},
+    36:{nm:"해외 쟁탈", k:"scout", pos:"공원 서쪽 (−108, 0) · 환승 지점", line:"기획사가 아이돌을 위해 해외 에이전시를 만나 해외 일정을 잡아 온다."},
+    37:{nm:"본가", k:"life", line:"기획사가 휴가를 준다 — 아이돌이 고향 집에서 쉰다(컨디션 회복 · 효과 결정 대기)."},
+    38:{nm:"스케줄 변경", k:"chance", pos:"갈↔남색 도로 (−108, −155) · 세 번째 일정 전광판", line:"일정표를 다시 짠다 — 카드 1장(끼움 · 콜 · 비움 · 겹침)."},
+    39:{nm:"숙소", k:"life", line:"기획사가 숙소를 운영하고 → 아이돌이 쉰다(컨디션 회복 · 효과 결정 대기)."},
+    40:{nm:"대형 정산", k:"tax", g:"company", pos:"회사 복합시설 북서 (−134, −236) · 금융동", line:"기획사 금융동 — 더 큰 코인이 나간다(판정 없음)."}
+  };
+  if (R57) {
+    CELLS.forEach(function (c) {
+      var r = R57_CELLS[c.id];
+      if (!r) return;
+      c.r57 = r;
+      c.name = r.nm;
+      c.gaze = r.g || ((r.k === "land" || r.k === "judge" || r.k === "life") ? "land" : "window");
+      c.enter = ""; c.fan = "";
+    });
+    CHIP_DEF.forEach(function (d) {
+      var m = {brown:["댄스","기초 체력 · 기초 안무"], sky:["녹음실","보컬 레슨 · 가이드 녹음 · 녹음 부스"], pink:["팬샵","응원봉 매대 · 팬사인회 · 팝업스토어"],
+        orange:["기획사","콘셉트 회의 · 뮤비 촬영 · 쇼케이스"], red:["댄스 심화","집중 트레이닝 · 안무 합숙 · 안무 영상 촬영"], yellow:["예능 방송국 · 판정","유튜브 · 팬플 · 숏폼 라이브"],
+        green:["랩 스튜디오 · 판정","거리 버스킹 · 대학 축제 · 거리공연"], navy:["생활","본가 · 숙소"]}[d.k];
+      if (m) { d.set = m[0]; d.cells = m[1]; }
+    });
+  }
+
+
+
+  
+  function practiceIncludes(cell) {
+    const map = {
+      "피지컬": "피지컬 PT · 체력 · 근력 · 스테미너",
+      "미디어": "미디어 트레이닝 · 인터뷰 · 기자회견 대응 · 화술(카메라) · 예능 대응 · 캠프랙 · 인성·예절·에티켓",
+      "연습": "댄스 · 안무 · 군무 · 보컬 · 랩 · 댄스보컬 · 녹음·믹스 · 연기 · 스테이지 (하→중하→중상→상 난이도)",
+      "컨디셔닝": "컨디셔닝 · 식단·체형 · 스트레칭 · 유연성 · 회복",
+      "공부": "외국어 · 한국어 · 작사 · 작곡·프로듀싱 · 이론·과제 · 이미지 메이킹 · 스타일·헤어 감각"
+    };
+    return map[cell.kind] || "";
+  }
+
+  function practiceEffects(cell) {
+    const pools = {
+      "피지컬": {
+        daebak: ["PT 세션 대박 · 스테미너 피크", "근력·체력 평가 통과", "고강도 트레이닝 소화 · 컨디션 피크"],
+        jungbak: ["평타 PT · 근성장 보너스", "체력 유지 세션", "스테미너 잔여 보너스"],
+        unmang: ["근육통 · 집중 실패", "오버트레이닝 · 제자리", "체력 난조 · 세션 조기 종료"]
+      },
+      "미디어": {
+        daebak: ["인터뷰·카메라 대응 대박", "기자회견 대응 통과 · 멘트 안정", "미디어 트레이닝 통과 · 멘트 안정", "예능·카메라 앞 위기 대응 성공", "인성·예절 평가 통과"],
+        jungbak: ["미디어 트레이닝 평타", "인터뷰 무난 통과", "기자회견 리허설 보너스", "카메라 표정·시선 보너스", "예절·에티켓 잔여 보너스"],
+        unmang: ["멘트 실수 · 대응 실패", "카메라 얼음 · 제자리", "기자 질문 말림 · 감점", "기자회견 말림 · 감점", "태도·예절 감점"]
+      },
+      "연습": {
+        daebak: [
+          "안무·군무 합 대박 · 포메이션 통과",
+          "댄스 기본기·장르 댄스 대박",
+          "보컬 레슨 대박 · 디렉션 통과",
+          "랩 플로우·딕션 대박",
+          "댄스보컬 안정 · 녹음 부스 통과",
+          "녹음·믹스 세션 대박 · 트랙 통과",
+          "연기 레슨 대박 · 카메라/무대 표현 통과",
+          "스테이지 퍼포먼스 대박 · 라이브 매너 통과"
+        ],
+        jungbak: [
+          "안무 평타 · 팀 합 보너스",
+          "댄스 세션 유지",
+          "보컬·랩 평타 진도",
+          "파트·하모니 보너스",
+          "녹음 테이크 잔여 보너스",
+          "믹스·더빙 잔여 보너스",
+          "연기 레슨 평타",
+          "스테이지 매너 잔여 보너스"
+        ],
+        unmang: [
+          "군무 싱크 붕괴 · 재시도",
+          "안무 디테일 말림 · 제자리",
+          "음정 흔들림 · 제자리",
+          "랩 딕션 말림",
+          "댄스보컬 호흡 붕괴 · 재시도",
+          "녹음·믹스 말림 · 재테이크",
+          "연기 얼음 · 표정 붕괴",
+          "스테이지 동선 말림 · 재시도"
+        ]
+      },
+      "컨디셔닝": {
+        daebak: ["컨디션 피크 · 체형 관리 성공", "유연성·스트레칭 대박", "회복 루틴 통과 · 컨디셔닝 완료"],
+        jungbak: ["식단·스트레칭 평타", "컨디셔닝 유지 보너스", "쿨다운·회복 잔여"],
+        unmang: ["컨디션 난조 · 회복 실패", "식단 붕괴 · 제자리", "유연성 정체 · 세션 스킵"]
+      },
+      "공부": {
+        daebak: ["학습 진도 대박 · 과제 통과", "외국어 회화·가사 소화 대박", "작사·작곡 디렉션 통과", "이미지 메이킹 통과 · 콘셉트 소화"],
+        jungbak: ["외국어·작사 평타 진도", "과제 무난 제출", "프로듀싱·이론 잔여 보너스", "이미지·스타일 잔여 보너스"],
+        unmang: ["집중 실패 · 진도 제자리", "과제 미제출 · 감점", "언어·작사 슬럼프", "콘셉트 안 맞음 · 이미지 재정비"]
+      }
+    };
+    const p = pools[cell.kind] || { daebak: ["레슨 대박"], jungbak: ["평타"], unmang: ["제자리"] };
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    var prefix = "";
+    if (cell.kind === "연습" && cell.grade) {
+      prefix = "[" + cell.grade + "] ";
+    }
+    return [
+      {k:"대박", c:"daebak", t: prefix + pick(p.daebak)},
+      {k:"중박", c:"jungbak", t: prefix + pick(p.jungbak)},
+      {k:"운망", c:"unmang", t: prefix + pick(p.unmang)}
+    ];
+  }
+
+
+
+
+  function livingIncludes(cell) {
+    const map = {
+      "본가": "가족 식사 · 고향 집 체류 · 부모님·형제 시간 · 가족 행사 · 본가 휴식·정돈 (혼자 숙소 오프→개인 시간)",
+      "합숙소": "통금 · 룸메 생활 · 숙소 식사 · 호실·공용 루틴 · 숙소 점검·정리 · 합숙소 휴식 (훈련→안무·보컬 합숙 · 케미 오프→멤버 시간)"
+    };
+    return map[cell.kind] || "";
+  }
+  function livingEffects(cell) {
+    const pools = {
+      "본가": {
+        daebak: [
+          "가족 식사·대화로 컨디션·마음 피크",
+          "고향 집 체류 · 리셋 성공",
+          "가족 행사·모임 소화 · 관계 회복",
+          "본가에서 제대로 쉼 · 다음 스케줄 준비 완료"
+        ],
+        jungbak: [
+          "무난한 본가 하루 · 가족 평타",
+          "고향 집 휴식 유지",
+          "짧은 본가 들름 · 보너스"
+        ],
+        unmang: [
+          "가족 일정 꼬임 · 본가 짧아짐",
+          "본가인데 마음·컨디션 안 풀림",
+          "귀가·이동에 치여 휴식 실패"
+        ]
+      },
+      "합숙소": {
+        daebak: [
+          "통금·루틴 잘 지켜 숙소 컨디션 피크",
+          "룸메 생활 안정 · 숙소 호흡 좋음",
+          "숙소 식사·정돈 루틴 통과",
+          "합숙소 휴식으로 다음날 훈련 준비 완료"
+        ],
+        jungbak: [
+          "통금·루틴 평타 유지",
+          "룸메·공용 생활 무난",
+          "숙소 식사·정리 보너스"
+        ],
+        unmang: [
+          "통금 위반·루틴 붕괴",
+          "룸메·호실 생활 어긋남",
+          "숙소 소음·피로로 휴식 실패"
+        ]
+      }
+    };
+    const p = pools[cell.kind] || pools["본가"];
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    return [
+      {k:"대박", c:"daebak", t: pick(p.daebak)},
+      {k:"중박", c:"jungbak", t: pick(p.jungbak)},
+      {k:"운망", c:"unmang", t: pick(p.unmang)}
+    ];
+  }
+
+  function campIncludes(cell) {
+    const map = {
+      "안무 합숙": "군무 · 포메이션 · 안무 디테일 · 장르 댄스 · 스테이지 동선 · 댄스보컬 호흡 · 합숙 체력·반복 소화 (숙소 생활→합숙소 칸)",
+      "보컬 합숙": "보컬 디렉션 · 발성 · 파트 · 하모니 · 랩 딕션(합숙) · 라이브 스태미나 · 목 관리·보컬 컨디션 (숙소 생활→합숙소 칸)"
+    };
+    return map[cell.kind] || "";
+  }
+  function campEffects(cell) {
+    const pools = {
+      "안무 합숙": {
+        daebak: [
+          "군무·포메이션 합숙 완성",
+          "안무 디테일·장르 댄스 대박",
+          "스테이지 동선 합숙 통과",
+          "댄스보컬 호흡 합숙 성공",
+          "합숙 체력·반복 소화 피크"
+        ],
+        jungbak: [
+          "군무 평타 진도 · 포메이션 보너스",
+          "안무 디테일 잔여",
+          "동선 유지 보너스",
+          "댄스보컬 호흡 유지",
+          "합숙 체력 평타"
+        ],
+        unmang: [
+          "군무 싱크 붕괴 · 합숙 재시도",
+          "안무 디테일 말림 · 제자리",
+          "스테이지 동선 꼬임",
+          "댄스보컬 호흡 붕괴",
+          "체력 난조 · 합숙 소화 실패"
+        ]
+      },
+      "보컬 합숙": {
+        daebak: [
+          "보컬 디렉션·발성 합숙 통과",
+          "파트·하모니 합숙 완성",
+          "랩 딕션 합숙 대박",
+          "라이브 스태미나 피크",
+          "목 관리·보컬 컨디션 통과"
+        ],
+        jungbak: [
+          "발성 평타 진도",
+          "하모니·파트 보너스",
+          "딕션 잔여 보너스",
+          "스태미나 유지",
+          "목 컨디션 유지"
+        ],
+        unmang: [
+          "음정 흔들림 · 합숙 제자리",
+          "하모니 붕괴 · 재시도",
+          "랩 딕션 말림",
+          "라이브 스태미나 방전",
+          "목 난조 · 합숙 조기 종료"
+        ]
+      }
+    };
+    const p = pools[cell.kind] || pools["안무 합숙"];
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    return [
+      {k:"대박", c:"daebak", t: pick(p.daebak)},
+      {k:"중박", c:"jungbak", t: pick(p.jungbak)},
+      {k:"운망", c:"unmang", t: pick(p.unmang)}
+    ];
+  }
+
+  function fanfixIncludes(cell) {
+    const map = {
+      "팬미팅": "토크·Q&A · 게임·미션 · 사연 읽기 · 톡콘 · 유닛·멤버 코너 · 커버·스페셜 무대 · 히든 미리듣기 · 앙코르 · 오프닝/엔딩 · 단체사진 · 포토타임 · 하이터치 · 사인 세션 · 팬사인 · 미니팬미",
+      "개인방송": "수다·일상 라이브 · 먹방·게임 라이브 · 팬콜 · 영통 · 편지·사연 답장 · 팬플 소통 방송 · 챌린지·같이 놀기 · 미공개 컷 공유"
+    };
+    return map[cell.kind] || "";
+  }
+
+  function fanfixEffects(cell) {
+    const pools = {
+      "팬미팅": {
+        daebak: [
+          "토크·Q&A 대박 · 사연 히트",
+          "게임·미션 폭소 · 유닛 코너 핫",
+          "톡콘 스페셜 무대 · 앙코르",
+          "포토·하이터치·사인 세션 연장",
+          "팬사인·미니팬미 성덕 슬롯",
+          "히든 트랙 미리듣기 반응 폭발"
+        ],
+        jungbak: [
+          "토크 무난 · 사연 한 편",
+          "게임 보너스 · 멤버 코너",
+          "짧은 스페셜·커버 한 곡",
+          "단체사진·그룹 포토 보너스",
+          "하이터치·사인 기본 슬롯",
+          "짧은 팬사인·미니팬미 슬롯"
+        ],
+        unmang: [
+          "사연 못 읽힘 · 게임 꼬임",
+          "포토타임 축소 · 하이터치 스킵",
+          "스페셜 무대 컷 · 단체사진만",
+          "진행 지연 · 큐시트 축소",
+          "호명·이벤트 추첨 없음",
+          "팬사인·미니팬미 축소·스킵"
+        ]
+      },
+      "개인방송": {
+        daebak: [
+          "수다 라이브 대박 · 동접 피크",
+          "팬콜·영통 성덕 타임",
+          "편지·사연 답장 히트",
+          "먹방·게임 라이브 클립 확산",
+          "챌린지·미공개 컷 반응 폭발"
+        ],
+        jungbak: [
+          "일상 수다 평타 · 하트 보너스",
+          "짧은 팬콜·영통 슬롯",
+          "편지 한두 통 답장",
+          "게임·챌린지 보너스",
+          "팬플 소통 방송 유지"
+        ],
+        unmang: [
+          "동접 저조 · 알고리즘 묻힘",
+          "팬콜·영통 연결 실패",
+          "사연 못 읽고 조기 종료",
+          "기술 사고·소리 끊김",
+          "채팅만 맴돌고 확산 없음"
+        ]
+      }
+    };
+    const p = pools[cell.kind] || pools["팬미팅"];
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    return [
+      {k:"대박", c:"daebak", t: pick(p.daebak)},
+      {k:"중박", c:"jungbak", t: pick(p.jungbak)},
+      {k:"운망", c:"unmang", t: pick(p.unmang)}
+    ];
+  }
+
+  function freetimeIncludes(cell) {
+    const map = {
+      "개인 시간": "혼자 오프 · 컨디션 정돈 · 리프레시 (본가·가족 행보 아님 · PT·식단 세션 아님)",
+      "멤버 시간": "멤버 케미·관계 호흡 오프 (합숙소 통금·숙소 루틴 아님 · 안무·군무·팬이벤트 아님)"
+    };
+    return map[cell.kind] || "";
+  }
+
+  function freetimeEffects(cell) {
+    const pools = {
+      "개인 시간": {
+        daebak: [
+          "오프 리프레시 · 컨디션 피크",
+          "힐링 리듬 · 혼자 숨 고르기 성공",
+          "슬럼프 직전에서 한숨 돌림"
+        ],
+        jungbak: [
+          "평타 오프 · 컨디션 유지",
+          "무난한 개인 리듬"
+        ],
+        unmang: [
+          "컨디션 난조 · 회복 실패",
+          "쉬려다 슬럼프에 가까워짐"
+        ]
+      },
+      "멤버 시간": {
+        daebak: [
+          "팀 케미 한 방",
+          "멤버 관계·케미 회복",
+          "동료 힐링 하루"
+        ],
+        jungbak: [
+          "평범한 멤버 합 · 관계 유지",
+          "생활 호흡 보너스"
+        ],
+        unmang: [
+          "멤버 간 어색 · 케미 안 맞음",
+          "호흡 어긋남"
+        ]
+      }
+    };
+    const p = pools[cell.kind] || pools["개인 시간"];
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    return [
+      {k:"대박", c:"daebak", t: pick(p.daebak)},
+      {k:"중박", c:"jungbak", t: pick(p.jungbak)},
+      {k:"운망", c:"unmang", t: pick(p.unmang)}
+    ];
+  }
+
+
+  function trackOf(cell) { return cell.track ? TRACKS[cell.track] : null; }
+  function levelName(cell) {
+    const tr = trackOf(cell);
+    return tr ? tr.ladder[cell.level] : "";
+  }
+  function cellName(cell) {
+    if (R57 && cell.r57) return cell.r57.nm;
+    if (!cell.track) return cell.name || "";
+    if (cell.track === "chance" || cell.track === "practice" || cell.track === "fanfix" || cell.track === "freetime" || cell.track === "camp" || cell.track === "living" || cell.track === "gate" || cell.track === "community" || cell.track === "tax" || cell.track === "gotojail" || cell.track === "util" || cell.track === "corner" || cell.track === "gotojail") {
+      return cell.name || "";
+    }
+    const tr = trackOf(cell);
+    const kinds = tr.kinds[tr.ladder[cell.level]];
+    return kinds[cell.kind % kinds.length];
+  }
+  function pickUniqueKind(cell, level) {
+    const tr = trackOf(cell);
+    const kinds = tr.kinds[tr.ladder[level]];
+    const used = {};
+    CELLS.forEach(function (c) {
+      if (c.track === cell.track && c.id !== cell.id && c.level === level) used[c.kind] = true;
+    });
+    const free = [];
+    for (var i = 0; i < kinds.length; i++) if (!used[i]) free.push(i);
+    if (!free.length) return Math.floor(Math.random() * kinds.length);
+    return free[Math.floor(Math.random() * free.length)];
+  }
+  function effectsFor(cell) {
+    const tr = trackOf(cell);
+    if (!tr) return null;
+    const lv = tr.ladder[cell.level];
+    const kinds = tr.kinds[lv];
+    const now = kinds[cell.kind % kinds.length];
+    const midKind = kinds[(cell.kind + 1) % kinds.length];
+    const midTxt = tr.mid[cell.kind % tr.mid.length] + " · " + midKind;
+    const failTxt = tr.fail[cell.kind % tr.fail.length];
+    var daebak;
+    if (cell.level >= tr.ladder.length - 1) {
+      daebak = "이미 꼭대기 · " + now + " 보너스";
+    } else {
+      const nextLv = tr.ladder[cell.level + 1];
+      const nextKinds = tr.kinds[nextLv];
+      // preview unique-ish next
+      const used = {};
+      CELLS.forEach(function (c) {
+        if (c.track === cell.track && c.id !== cell.id && c.level === cell.level + 1) used[c.kind] = true;
+      });
+      var ni = cell.kind % nextKinds.length;
+      for (var i = 0; i < nextKinds.length; i++) {
+        if (!used[i]) { ni = i; break; }
+      }
+      daebak = nextKinds[ni];
+    }
+    return [
+      {k:"대박", c:"daebak", t: daebak},
+      {k:"중박", c:"jungbak", t: midTxt},
+      {k:"운망", c:"unmang", t: failTxt}
+    ];
+  }
+  function canGrow(cell) {
+    const tr = trackOf(cell);
+    return !!(tr && cell.level < tr.ladder.length - 1);
+  }
+
+  // 반시계: 사옥(좌하) → 왼쪽↑ → 위→ → 오른쪽↓ → 아래←
+  function pos(i) {
+    if (i <= 10) return { c: 1, r: 11 - i };
+    if (i <= 20) return { c: 1 + (i - 10), r: 1 };
+    if (i <= 30) return { c: 11, r: 1 + (i - 20) };
+    return { c: 11 - (i - 30), r: 11 };
+  }
+
+  const board = document.getElementById("board");
+  const side = document.getElementById("side");
+  const overlay = document.getElementById("overlay");
+  const stamp = document.getElementById("stamp");
+  const cardBefore = document.getElementById("cardBefore");
+  const cardAfter = document.getElementById("cardAfter");
+  const cardChip = document.getElementById("cardChip");
+  const cellEls = {};
+  let selectedId = null;
+  let busy = false;
+
+  function boardSide(id) {
+    if ([1, 11, 21, 31].indexOf(id) >= 0) return "corner";
+    if (id >= 2 && id <= 10) return "side-w";
+    if (id >= 12 && id <= 20) return "side-n";
+    if (id >= 22 && id <= 30) return "side-e";
+    return "side-s";
+  }
+
+  CELLS.forEach(function (cell, i) {
+    const p = pos(i);
+    const el = document.createElement("button");
+    el.type = "button";
+    el.dataset.id = String(cell.id);
+    const empty = !cell.track && !cell.name;
+    var gaze = cell.gaze || "land";
+    el.className = "cell" + (empty ? " empty" : "") + " " + boardSide(cell.id) + " g-" + gaze;
+    el.style.gridColumn = String(p.c);
+    el.style.gridRow = String(p.r);
+    el.title = R57 ? (gaze === "land" ? "대지 · 구역 안 건물 칸" : gaze === "company" ? "기획사 사옥(회사 복합시설)" : "특수 칸 · 구역 사이") : (gaze === "window" ? "내가 손 대는 창구" : gaze === "company" ? "회사 일" : "아이돌 일정");
+    el.innerHTML = '<span class="stripe ' + cell.stripe + '"></span><span class="hd"><span class="n">' + cell.id + '</span></span><span class="nm"></span><span class="go"></span><span class="hb"></span>';
+    el.querySelector(".nm").textContent = cell.track ? cellName(cell) : (cell.name || "—");
+    el.querySelector(".go").textContent = goShort(cell);
+    el.addEventListener("click", function () { if (!busy) show(cell.id); });
+    board.appendChild(el);
+    cellEls[cell.id] = el;
+  });
+
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function paintCell(cell) {
+    const el = cellEls[cell.id];
+    if (!el) return;
+    el.querySelector(".nm").textContent = cell.track ? cellName(cell) : (cell.name || "—");
+    var goEl = el.querySelector(".go");
+    if (goEl) goEl.textContent = goShort(cell);
+    paintMarks(cell);
+  }
+
+  function goShort(cell) {
+    var g = cell.go || "";
+    g = g.split("(")[0].split("·")[0].trim();
+    if (g.indexOf("감옥 /") === 0) return "방문";
+    if (g === "감옥으로") return "감옥행";
+    if (g.indexOf("공동기금") === 0) return "공동기금";
+    return g;
+  }
+
+  /* ───────── 075 ② 칸 위 · 응원봉과 급 배지 ─────────
+     응원봉 = 모노폴리 GO의 집 (D-036). 덕질 한 번마다 무작위 아이돌 일정 칸에 하나 켜지고,
+     5개면 물결 — 그 칸 착지 수입이 오른다. 급 배지는 노랑·초록만. */
+  const SCHED_TRACKS = ["practice","camp","yellow","green","fanfix","freetime","living"];
+  function isSchedule(cell) { return SCHED_TRACKS.indexOf(cell.track) >= 0; }
+  const HORN_MAX = 5;
+
+  function paintMarks(cell) {
+    const el = cellEls[cell.id];
+    if (!el) return;
+    // 응원봉
+    const hb = el.querySelector(".hb");
+    if (hb) {
+      const n = cell.horns || 0;
+      hb.innerHTML = new Array(n + 1).join("<i></i>");
+      el.classList.toggle("wave", n >= HORN_MAX);
+    }
+    // 급 배지 — 노랑(방송) · 초록(공연)만 · R57: 「판정」 배지
+    var lvb = el.querySelector(".lvb");
+    if (R57) {
+      if (cell.r57 && cell.r57.k === "judge") {
+        if (!lvb) { lvb = document.createElement("span"); lvb.className = "lvb j"; var hd0 = el.querySelector(".hd"); (hd0 || el).appendChild(lvb); }
+        lvb.textContent = "판정"; lvb.title = "대박 · 중박 · 운망 판정 칸(방송 · 공연만)";
+      } else if (lvb) { lvb.remove(); }
+    } else if (cell.track === "yellow" || cell.track === "green") {
+      if (!lvb) {
+        lvb = document.createElement("span");
+        lvb.className = "lvb" + (cell.track === "green" ? " g" : "");
+        var hd = el.querySelector(".hd");
+        (hd || el).appendChild(lvb);
+      }
+      lvb.textContent = (cell.level + 1) + "급";
+      lvb.title = levelName(cell);
+    } else if (lvb) {
+      lvb.remove();
+    }
+  }
+
+  /* ───────── 색 칩 8 (D-026) ───────── */
+  const CHIPS = {};
+  CHIP_DEF.forEach(function (c) { CHIPS[c.k] = 0; });
+  const CHIP_C = {};
+  CHIP_DEF.forEach(function (c) { CHIP_C[c.k] = c.c; });
+  const CHIP_NM = {};
+  CHIP_DEF.forEach(function (c) { CHIP_NM[c.k] = c.nm; });
+
+  function toast(msg) {
+    const t = document.getElementById("fxtoast");
+    if (!t) return;
+    t.innerHTML = msg;
+    t.classList.add("show");
+    clearTimeout(t._t);
+    t._t = setTimeout(function () { t.classList.remove("show"); }, 2400);
+  }
+
+  function chipWhy(k) {
+    if (k === "yellow") return "10개 → 방송 칸 하나가 한 급";
+    if (k === "green") return "10개 → 공연 칸 하나가 한 급";
+    return "10개 → 코인 · 주사위 · 서사";
+  }
+  function chipDots(n, color) {
+    var s = "";
+    for (var i = 0; i < 10; i++) {
+      s += '<i class="' + (i < n ? "on" : "") + '"' + (i < n ? ' style="background:' + color + '"' : "") + "></i>";
+    }
+    return '<div class="dots" aria-hidden="true">' + s + "</div>";
+  }
+  function renderChips(popKey) {
+    const g = document.getElementById("chipgrid");
+    if (!g) return;
+    var sel = selectedId ? CELLS.find(function (c) { return c.id === selectedId; }) : null;
+    var mine = sel && isSchedule(sel) ? sel.stripe : "";
+    g.innerHTML = CHIP_DEF.map(function (c) {
+      const n = CHIPS[c.k];
+      var isMine = mine === c.k;
+      return '<div class="chipcell' + (popKey === c.k ? " pop" : "") + (isMine ? " mine" : "") + '" data-k="' + c.k + '">' +
+        '<div class="h"><i style="background:' + c.c + '"></i>' + c.nm + " · " + c.set +
+        (isMine ? '<span class="mine-tag">이 칸</span>' : "") +
+        '<em>' + n + ' / 10</em></div>' +
+        '<p class="kind">' + c.cells + "</p>" +
+        chipDots(n, c.c) +
+        '<p class="why">' + chipWhy(c.k) + "</p></div>";
+    }).join("");
+    const hc = document.getElementById("hornCount");
+    if (hc) hc.textContent = String(CELLS.filter(function (c) { return (c.horns || 0) > 0; }).length);
+  }
+
+  /* ───────── 075 효과 셋 ─────────
+     ① 색 칩이 찬다 (10개면 터진다)  ② 응원봉이 켜진다 (5개면 물결)  ③ 이름이 바뀐다 (급 오름) */
+  function lightHorn() {
+    const pool = CELLS.filter(function (c) { return isSchedule(c) && (c.horns || 0) < HORN_MAX; });
+    if (!pool.length) return null;
+    const t = pool[Math.floor(Math.random() * pool.length)];
+    t.horns = (t.horns || 0) + 1;
+    paintMarks(t);
+    const el = cellEls[t.id];
+    el.classList.remove("lit"); void el.offsetWidth; el.classList.add("lit");
+    return t;
+  }
+
+  async function burstChip(key) {
+    CHIPS[key] = 0;
+    renderChips(key);
+    if (key === "yellow" || key === "green") {
+      const pool = CELLS.filter(function (c) { return c.track === key && canGrow(c); });
+      if (!pool.length) { toast(CHIP_NM[key] + " 10개 — <b>이미 다 꼭대기</b>"); return; }
+      const t = pool[Math.floor(Math.random() * pool.length)];
+      toast(CHIP_NM[key] + " 10개 · <b>" + (key === "yellow" ? "방송" : "공연") + " 칸 하나가 한 급</b> — 무작위로 " + t.id + "번");
+      await grow(t.id);
+    } else {
+      toast(CHIP_NM[key] + " 10개 · <b>코인 · 주사위 · 서사 조각</b>");
+    }
+  }
+
+  async function doDuk(cell) {
+    if (busy || !isSchedule(cell)) return;
+    const key = cell.stripe;
+    const ids = DUK_BY_TRACK[cell.track] || [];
+    var target = selectedDuk && ids.indexOf(selectedDuk) >= 0 ? selectedDuk : null;
+    if (!target) {
+      target = ids.filter(function (id) { return (DUK_LV[id] || 0) < 5; })[0] || ids[0];
+    }
+    var dukItem = DUK.find(function (x) { return x.id === target; });
+    var beforeLv = dukItem ? (DUK_LV[target] || 0) : 0;
+    if (dukItem && beforeLv < 5) DUK_LV[target] = beforeLv + 1;
+    selectedDuk = target;
+    CHIPS[key] = (CHIPS[key] || 0) + 1;
+    const lit = lightHorn();
+    renderChips();
+    if (selectedId === cell.id) show(cell.id);
+    var dukTxt = "";
+    if (dukItem) {
+      var afterLv = DUK_LV[target] || 0;
+      dukTxt = " · <b>" + dukItem.nm + "</b> " + (beforeLv + 1) + "단 " + dukItem.steps[beforeLv] +
+        (afterLv > beforeLv ? " → " + (afterLv + 1) + "단 " + dukItem.steps[afterLv] : " · 이미 만단");
+    }
+    if (CHIPS[key] >= 10) {
+      await burstChip(key);
+    } else {
+      toast("덕력 +1 · " + CHIP_NM[key] + " 칩 " + CHIPS[key] + "/10" + dukTxt +
+        (lit ? " · 응원봉이 <b>" + lit.id + "번</b>에 켜졌다" + (lit.horns >= HORN_MAX ? " — <b>물결!</b>" : "") : ""));
+    }
+  }
+
+  /* ───────── 075 ③ 칸 패널에 더 들어가는 것 ─────────
+     여기서 열리는 덕질 · 이 칸을 덕질하면 차는 색 칩 · 이 칸이 올리는 준비도 */
+  const READY_BY_TRACK = {
+    practice: ["기량"], camp: ["케미"], fanfix: ["서사 조각"],
+    freetime: ["컨디션"], living: ["컨디션"], yellow: [], green: []
+  };
+  function dukWhere(id) {
+    var out = [];
+    Object.keys(DUK_BY_TRACK).forEach(function (t) {
+      if (DUK_BY_TRACK[t].indexOf(id) >= 0) out.push(TRACK_KO[t]);
+    });
+    return out.join(" · ");
+  }
+  function dukLadderHtml(d, lv) {
+    return '<div class="ladder">' + d.steps.map(function (s, i) {
+      var cls = "s";
+      if (i < lv) cls += " done";
+      if (i === lv) cls += " on";
+      return '<div class="' + cls + '"><b>' + (i + 1) + "단</b>" + s + "</div>";
+    }).join("") + "</div>";
+  }
+  function dukCardHtml(d, pickable) {
+    var lv = DUK_LV[d.id] || 0;
+    var pick = pickable && selectedDuk === d.id;
+    return '<div class="duk-card' + (pick ? " pick" : "") + '" data-duk="' + d.id + '">' +
+      '<div class="hd"><span class="g">' + d.g + "</span><span class=\"nm\">" + d.nm + "</span>" +
+      '<span class="duk-where">' + dukWhere(d.id) + "</span></div>" +
+      '<p class="blurb">' + d.blurb + "</p>" +
+      '<p class="now">지금 ' + (lv + 1) + "단 · " + d.steps[lv] + (lv >= 5 ? " · 만단" : " → 다음 " + d.steps[Math.min(lv + 1, 5)]) + "</p>" +
+      dukLadderHtml(d, lv) +
+      "</div>";
+  }
+  function bindDukCards(cell) {
+    document.querySelectorAll(".duk-card").forEach(function (card) {
+      card.onclick = function () {
+        selectedDuk = card.getAttribute("data-duk");
+        if (cell) show(cell.id);
+        else showSys("duk");
+      };
+    });
+  }
+  function dukCatalogHtml() {
+    var groups = ["먹이기", "보내기", "붙이기", "나눠주기", "열어주기", "찍어주기"];
+    var html = '<h3>항목 12 · 같은 물건이 6단까지 커진다</h3>' +
+      '<p class="mini">1단은 혼자 해도 되고, 6단은 팬덤이 모여야 한다. 밥차는 끝까지 밥차 — 단마다 다른 물건으로 안 바뀐다. (061)</p>';
+    groups.forEach(function (g) {
+      html += "<h3>" + g + "</h3>";
+      DUK.forEach(function (d) {
+        if (d.g === g) html += dukCardHtml(d, false);
+      });
+    });
+    html += '<p class="desc note-ok">연습실에 슬로건을 못 걸고, 음방에 밥차를 못 보낸다. 칸 종류마다 열리는 항목이 다르다. <b>편지만 22칸 전부.</b></p>';
+    return html;
+  }
+
+  function dukBlock(cell) {
+    if (!cell || !isSchedule(cell)) return "";
+    const key = cell.stripe;
+    const ids = DUK_BY_TRACK[cell.track] || [];
+    const cards = ids.map(function (id) {
+      const d = DUK.find(function (x) { return x.id === id; });
+      return d ? dukCardHtml(d, true) : "";
+    }).join("");
+    const ready = READY_BY_TRACK[cell.track] || [];
+    const readyHtml = ready.length
+      ? ready.map(function (r) { return "<span>" + r + " ↑</span>"; }).join("")
+      : '<span class="none">준비도 안 줌 · <b>코인만</b></span>';
+    const n = CHIPS[key] || 0;
+
+    return '<div class="dukbox">' +
+      '<h3>여기서 열리는 덕질 <span style="color:#9ca3af;font-weight:700">(' + (TRACK_KO[cell.track] || "") + " · " + ids.length + "항목 × 6단)</span></h3>" +
+      '<p class="mini">항목을 고르고 <b>덕질 한 번</b>이면 그 물건이 한 단 커진다. 고르지 않으면 아직 만단이 아닌 것부터.</p>' +
+      (cards || '<span class="none">없음</span>') +
+      '<h3>덕질하면 차는 색 칩</h3>' +
+      '<div class="chiprow"><span class="chipdot" style="background:' + (CHIP_C[key] || "#ccc") + '"></span>' +
+      '<div class="chipbar-in"><i style="width:' + (n * 10) + '%;background:' + (CHIP_C[key] || "#ccc") + '"></i></div>' +
+      '<span class="chipnum">' + n + " / 10</span></div>" +
+      '<h3>이 칸이 올리는 준비도</h3><div class="ready">' + readyHtml + "</div>" +
+      '<button type="button" class="btn-duk" id="btnDuk">덕질 한 번 (상시)</button>' +
+      '<p class="mini">덕질은 <b>상시</b>다 — 칸에 착지해야 하는 게 아니다 (D-019).<br>' +
+      "한 번 할 때마다 <b>덕력 +1 · 그 칸 색 칩 +1 · 고른 항목 1단 · 무작위 칸에 응원봉 1개</b>. 급은 <b>색 칩 10개</b>로만 오른다.</p>" +
+      "</div>";
+  }
+  function paint(cell, html) {
+    if (R57) { side.innerHTML = html; return; }
+    side.innerHTML = html + dukBlock(cell);
+    const db = document.getElementById("btnDuk");
+    if (db) db.onclick = function () { doDuk(cell); };
+    bindDukCards(cell);
+  }
+
+
+  function goLine(cell) {
+    if (!cell.go) return "";
+    return '<h3>모노폴리 GO에서는</h3><p class="desc">' + cell.go + "</p>";
+  }
+
+  function gazeRole(cell) {
+    if (VIEW === "fan") return cell.gaze === "land" ? "최애 일정" : "내가 하는 것";
+    if (VIEW === "ent") return cell.gaze === "company" ? "회사 일" : cell.gaze === "window" ? "회사가 움직이는 창구" : "아이돌 일정";
+    if (cell.gaze === "window") return "내가 손 대는 창구";
+    if (cell.gaze === "company") return "회사 일 · 손 못 댐";
+    return "아이돌 일정";
+  }
+
+  function gazeBlock(cell) {
+    var cls = cell.gaze === "window" ? " p" : cell.gaze === "company" ? " y" : "";
+    var ex = cell.gaze === "company" ? '<span class="ex">예외</span>' : "";
+    return '<div class="lv' + cls + '">' + gazeRole(cell) + ex + "</div>" +
+      '<div class="gaze-box">' +
+      '<div class="gaze-col"><h3>아이돌은</h3><p class="desc">' + (cell.enter || "—") + "</p></div>" +
+      '<div class="gaze-col"><h3>' + (VIEW === "ent" ? "사장은" : VIEW === "fan" ? "팬인 나는" : "나는") + '</h3><p class="desc">' + (cell.fan || "—") + "</p></div>" +
+      "</div>";
+  }
+
+  let gazeMode = "both";
+  function applyGaze() {
+    document.querySelectorAll("#gazebar button").forEach(function (b) {
+      b.classList.toggle("on", b.getAttribute("data-gaze") === gazeMode);
+    });
+    CELLS.forEach(function (cell) {
+      var el = cellEls[cell.id];
+      if (!el) return;
+      var dim = false;
+      if (gazeMode === "enter") dim = R57 ? cell.gaze !== "land" : cell.gaze === "window";
+      if (gazeMode === "fan") dim = cell.gaze === "land";
+      el.classList.toggle("dim", dim);
+    });
+  }
+  document.querySelectorAll("#gazebar button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      gazeMode = b.getAttribute("data-gaze") || "both";
+      applyGaze();
+      if (selectedId) show(selectedId);
+    });
+  });
+  applyGaze();
+
+  // 쇼케이스 초기 상태 — 응원봉이 이미 조금 켜져 있고 한 칸은 물결
+  CELLS.forEach(function (c) { c.horns = 0; });
+  (function seed() {
+    if (R57) { CELLS.forEach(paintMarks); renderChips(); return; }
+    const pool = CELLS.filter(isSchedule);
+    [1, 1, 2, 3, HORN_MAX].forEach(function (n) {
+      const t = pool[Math.floor(Math.random() * pool.length)];
+      if (t) t.horns = Math.max(t.horns || 0, n);
+    });
+    CHIPS.green = 7; CHIPS.yellow = 4; CHIPS.pink = 2;
+    DUK_LV.bapcha = 2; DUK_LV.slogan = 1; DUK_LV.letter = 0;
+    CELLS.forEach(paintMarks);
+    renderChips();
+  })();
+  document.getElementById("chipReset").onclick = function () {
+    CHIP_DEF.forEach(function (c) { CHIPS[c.k] = 0; });
+    DUK.forEach(function (d) { DUK_LV[d.id] = 0; });
+    selectedDuk = null;
+    CELLS.forEach(function (c) { c.horns = 0; paintMarks(c); });
+    renderChips();
+    if (selectedId) show(selectedId);
+    toast("색 칩 · 응원봉 · 덕질 단 되돌림");
+  };
+
+  function colorKindLine(cell) {
+    var d = null;
+    for (var i = 0; i < CHIP_DEF.length; i++) {
+      if (CHIP_DEF[i].k === cell.stripe) d = CHIP_DEF[i];
+    }
+    if (!d) return "";
+    return '<p class="color-kind"><i style="background:' + d.c + '"></i><b>' + d.nm + "</b> · " + d.set +
+      "<span>" + d.cells + "</span></p>";
+  }
+
+
+  function r57Show(cell) {
+    var r = cell.r57, b = r.b ? R57_BLD[r.b] : null;
+    var html = '<div class="tag">칸 ' + cell.id + ' · 행보판 B안 <span class="gan">이름 가안 · BD-1</span></div><h2>' + r.nm + (r.up ? ' <span style="font-size:13px;color:#64748b">' + r.up + '</span>' : '') + '</h2>' + colorKindLine(cell);
+    var where = r.pos ? r.pos : (R57_ZONE[cell.stripe] ? R57_ZONE[cell.stripe] + " 안 건물" : "");
+    if (where) html += '<p class="cityline"><b>도시숲 위치</b> · ' + where + (r.pos ? ' <span style="color:#94a3b8">(v3 §5-2 · 제작 맵 임시 좌표)</span>' : ' <span style="color:#94a3b8">(v3 §3-1 · §4)</span>') + '</p>';
+    html += '<div class="oneline"><small>이 칸에서 · 주체 = 기획사</small>' + r.line + '</div>';
+    var gl = cell.go ? '<h3>모노폴리 GO에서는</h3><p class="desc">' + cell.go + '</p>' : '';
+    if (r.k === "land" || r.k === "judge") {
+      html += '<div class="growbox"><h3>이 칸의 건물 성장 — ' + b.nm + '</h3>' +
+        '<div class="steps3">' + b.steps.map(function (s, i) { return '<span>정체 ' + (i + 1) + ' · ' + s + '</span>'; }).join('') + '<span class="gan">이름 가안</span></div><ul>' +
+        '<li>도착하면 <b>도착 수입(× 주사위 배수)</b> <span class="gan">가안 · FS02</span>. 그 돈을 <b>투자하면</b> 건물이 자라고(10단계 · 현중 13:42) 도착한 아이돌의 능력치가 오른다.</li>' +
+        '<li>판정: ' + (r.k === "judge" ? '<b>있음</b> — 대박 · 중박 · 운망(방송 · 공연 칸만 · R-02-3) → 팬덤 게이지가 찬다.' : '<b>없음</b> — 도착 수입만(R-02-3).') + '</li>' +
+        (r.k === "judge" ? '<li>대박 보상 <span class="pend">보류 · 결정 대기</span> — 「코인만 크게 · 건물은 안 큼」(오전 합의) / 「인기 · 팬심 상승」(FS01).</li>' : '') +
+        '<li>카드팩은 몸집 눈금 · 정체 변신 때만(R-04-9) · 판이 바뀌어도 정체 유지(R-04-8).</li>' +
+        '<li>도착하면 도시 패널이 커지고 이 건물로 확대(T0) · 눈금이면 T1 · 변신이면 T2 전체 화면 · 꾸밈이면 T3(시간 전부 가안).</li>' +
+        '<li>팬이 이 건물에 모여드는 연출(현중 13:16 · 점 같은 팬이 웅성웅성) — 건물 성장과의 관계 <span class="pend">결정 대기</span></li>' +
+        '</ul></div>';
+      if (r.k === "judge") {
+        html += '<h3>칸 사다리 = 건물 정체 단계 (R-02-10)</h3><div class="path">' +
+          '<div class="step now' + (cell.track === "yellow" ? ' y' : '') + '">지금 · ' + r.nm + '</div><div class="step">정체가 오르면 ' + r.up.replace('→ ', '') + ' <span class="gan">가안</span></div></div>';
+        html += '<h3>전투 B안 (공연형 대결)</h3><p class="desc">' + (r.b === "tv"
+          ? '때리는 전투는 없다. 예능 방송국 칸 대박 → <b>음방 1위 대결</b> 티켓 후보(비동기 · 15초 무대). 입장은 도시에서 예능 방송국을 눌러서(08장 R-08-7).'
+          : '때리는 전투는 없다. 그림자에 잠식된 랩 스튜디오 칸에 도착하면 <b>봉합전</b>(30초 자동 공연 대결) — 쓸지는 <span class="pend">BT-4</span>. 던전 정화 공연은 도시에서 랩 스튜디오를 눌러서(08장 R-08-6 · 8).') + '</p>';
+        html += '<p class="desc" style="color:#64748b">Board1 초록 = 버스킹 규모 · 노랑 = 온라인 방송(v3 §4). 정체 변신 결과가 Board1 급 안에 서는지 다음 판 급인지 <span class="pend">결정 대기</span></p>';
+      }
+      html += gl;
+      html += '<p class="src57">근거: 02장 3-3 · R-02-3 · R-02-10 · 04장 R-04-1~11 · 연출 v0 §1~2 · 현중 기록 13:15 · 옛 팬 1인칭 문장과 옛 칸별 보상 목록은 맨 아래 보관.</p>';
+    } else if (r.k === "life") {
+      html += '<p class="desc"><b>건물 없는 생활 칸</b> · 성장 포인트 없음(R-04-10) · 판정 없음. 효과는 「컨디션 회복」이라는 이름만 있음 <span class="pend">기획 없음 · 결정 대기</span></p>' + gl;
+      html += '<p class="src57">근거: 칸 표 v0 §1 · 04장 R-04-10 · 도시숲 v3 §4 ⑧(사적인 공간 · 랩 스튜디오나 대기 줄을 두지 않음).</p>';
+    } else if (r.k === "scout") {
+      html += '<h3>쟁탈 칸 (옛 팬덤 게이트) · GO 정거장</h3><p class="desc">도착하면 <b>쟁탈 룰렛</b> → ① <b>출연권 경쟁</b>(GO 공성): 상대 유저의 출연권에 도전, 내 마스코트와 상대의 수비 마스코트가 겨뤄 이기면 권리와 이후 보유 수익의 주인이 바뀜 ② <b>게릴라 공연</b>(GO 금고털기): 다른 유저의 도시에서 깜짝 공연, 상대 유저의 수익 일부가 우리에게 한 번 이동. 팬 이동은 미정. 출연권 방어 = <b>상대 유저의 세계관 마스코트</b> · 게릴라 방어는 미정. 출연권 경쟁만 승패 판정 · 건물은 부수지 않음. 비율 · 수비 <span class="pend">W14</span> · 상대 선택 <span class="pend">W10</span> · 수익 이동량 <span class="pend">W9</span> (FS03 5절 · 제안)</p>' + gl;
+      html += '<p class="desc">캐스팅 카드 · 연결 건물 +1 <b>후보</b>(R-02-8)는 캐스팅권을 가진 쪽 · 모을수록 커지는 규칙 <span class="pend">BD-2</span></p>';
+      html += '<p class="desc"><a href="#secGate" onclick="document.getElementById(\'secGate\').open=true">↑ 쟁탈 4칸 — 역할 · 컨셉 · 기능 절</a></p>';
+      html += '<p class="src57">근거: 02장 R-02-8 · 칸 표 v0 §3 · 도시숲 v3 §5-1(공원 사방 환승 지점).</p>';
+    } else if (r.k === "fanre") {
+      html += '<h3>팬덤 반응 (옛 응원)</h3><p class="desc">찬스처럼 카드 한 장 — 응원 · 화제 · 루머(R-02-9). 성장 포인트 없음 · 판정 없음. 카드별 효과 · 팬심을 늘리는지 <span class="pend">기획 없음 · 결정 대기</span> (HUD 「팬덤율」과 이름이 비슷하니 주의).</p>' + gl;
+      html += '<p class="src57">근거: 02장 R-02-9 · 칸 표 v0 §3.</p>';
+    } else if (r.k === "chance") {
+      html += '<h3>스케줄 변경 (옛 찬스)</h3><p class="desc">카드 1장 — 끼움 · 콜 · 비움 · 겹침. 칸은 안 크고, 방송 · 공연 급에 따라 풀이 바뀐다(R-02-4). 서사가 쌓이는 칸 후보(현중 13:42 · 반영 대기).</p>';
+      html += '<h3>풀 카드 (' + SCHEDULE_CARDS.length + ')</h3><ul class="fx">';
+      SCHEDULE_CARDS.forEach(function (c) { html += '<li><div class="k jungbak">카드</div><div class="t">' + c.t + '</div></li>'; });
+      html += '</ul>' + gl + '<p class="src57">근거: 02장 R-02-4 · 그림 5 · 033.</p>';
+    } else if (r.k === "tax") {
+      html += '<p class="desc">착지하면 코인이 나간다' + (cell.id === 40 ? '(정산보다 크게)' : '') + '. <b>판정 없음</b>(R-02-3 · 판정은 방송 · 공연 칸만).</p>' + gl + '<p class="src57">근거: 02장 3-3 · 칸 표 v0 §2. 옛 「넷 다 마이너스」 판정 서술은 보관.</p>';
+    } else if (r.k === "corner") {
+      html += '<p class="desc">평소엔 아무 일도 안 일어난다. 시즌 · 특집 이벤트가 꽂히는 자리. 서사가 쌓이는 칸 후보(현중 13:42 · 반영 대기) · 특집 내용은 「시즌 이벤트만 나중에」 그대로.</p>' + gl + '<p class="src57">근거: 02장 3-3 · 034.</p>';
+    } else if (r.k === "jail") {
+      html += '<p class="desc">GO 감옥 그대로 — 밟으면 가고, 더블로 나온다. 준비도와 엮지 않는다.</p>' + gl + '<p class="src57">근거: 034 · 02장 3-3.</p>';
+    } else if (r.k === "util") {
+      html += '<p class="desc">GO 유틸(전기 · 수도회사) 자리 · 기획사 회의동. 기획사 건물 성장 포인트를 받는지 <span class="pend">결정 대기</span>(02장 R-02-2 vs 04장 R-04-10) · 판정 없음. 서사가 쌓이는 칸 후보(현중 13:42 · 매니지먼트 미팅 예 · 반영 대기).</p>' + gl + '<p class="src57">근거: 02장 R-02-2 · 3-3. 옛 유틸 설명은 맨 아래 보관.</p>';
+    } else if (r.k === "hq") {
+      html += '<p class="desc">사옥 · 정산 · A&amp;R · 매니지먼트 · 대형 정산 5칸이 북쪽 <b>회사 복합시설 하나</b> = 우리 기획사 사옥(v3 §5-1). 사옥을 지나면 한 바퀴 — 한 바퀴 보상 <span class="pend">기획 없음 · 결정 대기</span></p>' + gl + '<p class="src57">근거: 02장 3-3 · 도시숲 v3 §5-1 · §5-2.</p>';
+    }
+    side.innerHTML = html;
+  }
+
+  function show(id) {
+    const cell = CELLS.find(function (c) { return c.id === id; });
+    if (!cell) return;
+    paintStage(cell, true);
+    if (selectedId && cellEls[selectedId]) cellEls[selectedId].classList.remove("on");
+    selectedId = id;
+    cellEls[id].classList.add("on");
+    var kicker = document.getElementById("slideKicker");
+    if (kicker) {
+      var goNm = goShort(cell);
+      kicker.textContent = "칸 " + cell.id + (goNm ? " · GO " + goNm : " · 칸 설명");
+    }
+    renderChips();
+    if (R57 && cell.r57) { if (kicker) kicker.textContent = "칸 " + cell.id + " · " + cell.r57.nm; r57Show(cell); return; }
+
+    const title = cell.track ? cellName(cell) : (cell.name || ("칸 " + cell.id));
+    const tr = trackOf(cell);
+    var html = '<div class="tag">칸 ' + cell.id + "</div><h2>" + title + "</h2>" + colorKindLine(cell) + gazeBlock(cell);
+    if (cell.track !== "tax" && cell.track !== "community" && cell.track !== "corner" && cell.track !== "util" && cell.track !== "gotojail") {
+      html += goLine(cell);
+    }
+
+    if (cell.track === "tax") {
+      html += '<div class="lv">' + cell.name + ' · 회사 일 · 코인 나감</div>';
+      html += '<h3>보드명</h3><p class="desc">' + cell.desc + "</p>";
+      html += '<h3>모노폴리 GO에서는</h3><p class="desc">소득세 / 사치세. 밟으면 코인 지출.</p>';
+      html += '<h3>판정</h3><p class="desc"><b>넷 다 마이너스.</b> 대박이어도 잃는다 — 대박 = 적게 나감 · 중박 = 보통 · 운빨망빨 = 많이 뜯김. 대형 정산(40)이 정산(5)보다 세다.</p>';
+      paint(cell, html);
+      return;
+    }
+
+    if (cell.track === "community") {
+      html += '<div class="lv p">응원 · 작게 한 번씩 미는 자리</div>';
+      html += '<h3>하는 일</h3><p class="desc">밟으면 <b>한 번 응원한다.</b> 친구와 팀을 짜고 인증을 모아 3단을 채운다. 매주 리셋.</p>';
+      html += '<h3>GO → 우리</h3><table class="cmp"><tr><th>모노폴리 GO</th><th>우리</th></tr>' +
+        '<tr><td>주간 팀 (친구 2명)</td><td><b>응원 팀</b></td></tr>' +
+        '<tr><td>열쇠</td><td><b>응원 인증</b></td></tr>' +
+        '<tr><td>상자 3단</td><td><b>응원 3단</b></td></tr>' +
+        '<tr><td>파트너 없으면 현금</td><td>팀 없으면 코인</td></tr></table>';
+      html += '<p class="desc note-ok"><b>작은 협력이다.</b> 큰 협력(총공)은 <b>입덕</b>으로 옮겼고, 겨루기는 팬덤 게이트(딱지)에 있다. (081)</p>';
+      paint(cell, html);
+      return;
+    }
+
+    if (cell.track === "gate") {
+      html += '<div class="lv p">팬덤 게이트 · 겨루는 자리</div>';
+      html += '<h3>한 줄</h3><p class="desc big"><b>밥차는 그대로다. 현수막에 걸린 이름만 바뀐다.</b></p>';
+      html += '<h3>이중 롤 (GO 그대로)</h3><p class="desc">① 등급 롤 — 대박 / 중박 / 운빨망빨 &nbsp;② 방식 롤 — 딱지 / 어부지리</p>';
+      html += '<div class="two">' +
+        '<div class="way"><div class="wt">딱지</div><div class="wg">GO 공성(Shutdown)</div>' +
+        '<p>남의 덕질에 <b>내 이름을 건다.</b> 현수막·워터마크·「OO 주최」.<br>주인이 <b>코인 내고 뗀다</b> — 값은 그 칸 덕질 한 번 값.</p></div>' +
+        '<div class="way"><div class="wt">어부지리</div><div class="wg">GO 금고털기(Heist)</div>' +
+        '<p><b>남의 코인으로 그 자리에 덕질이 들어간다.</b><br>밥차는 <b>한 단 커지고</b> 이름은 내 것. 떼도 올라간 단은 안 내려간다.</p></div></div>';
+      html += '<h3>아무것도 안 뺏는다</h3><p class="desc">시즌 하나에 아이돌 하나라 <b>모두가 같은 최애를 민다.</b> 옆집 걸 깎으면 게임 손해가 아니라 마음 손해다.<br>어부지리는 밥차가 오히려 커진다 — 손해 본 사람은 있는데 <b>최애는 이득</b>이다.</p>';
+      html += '<p class="desc note-ok">막는 것: <b>고정팬</b> (GO 쉴드·펫). 쌓기(덕질)는 여기가 아니라 <b>아이돌 일정 22칸</b>에서.</p>';
+      paint(cell, html);
+      return;
+    }
+
+    if (cell.track === "corner") {
+      html += '<div class="lv">' + cell.name + ' · 코너 · 기본 무효과</div>';
+      html += '<h3>보드명</h3><p class="desc">' + cell.desc + "</p>";
+      html += '<h3>모노폴리 GO에서는</h3><p class="desc">' + (cell.id === 11 ? '감옥/방문(Just Visiting)' : '무료주차(Free Parking)') + '. 효과 없는 경우가 많은 이벤트 구간.</p>';
+      html += '<h3>규칙</h3><p class="desc">평소엔 <b>아무 일도 안 일어난다.</b> 대신 <b>시즌·특집 이벤트가 꽂히는 유일한 자리</b>다.<br>판에 "평소엔 조용한데 특집 때만 켜지는 칸"이 둘 있는 게 리듬에 좋다.</p>';
+      html += '<p class="desc note-ok">모노카피바라는 여기에 작게나마 회복을 주지만, 우리는 <b>비워 둔다</b> — 켜질 때 더 커 보이게.</p>';
+      paint(cell, html);
+      return;
+    }
+
+    if (cell.track === "util") {
+      html += '<div class="lv">' + cell.name + ' · 덕질 불가 · GO 유틸</div>';
+      html += '<h3>보드명</h3><p class="desc">' + cell.desc + "</p>";
+      html += '<h3>모노폴리 GO에서는</h3><p class="desc">전기회사 / 수도회사. 건물을 못 짓는 칸. 우리는 건설=덕질이라 <b>덕질을 못 하는 회사 미팅 칸</b>이다.</p>';
+      html += '<h3>요금</h3><p class="desc"><b>주사위 눈 × 배수</b>만큼 코인이 나간다 (GO 그대로).<br>나중에 <b>덕력이 높아지면 이 칸이 수입으로 뒤집힌다</b> — "회사가 이제 내 말도 듣는다".</p>';
+      html += '<p class="desc note-warn">판에서 <b>덕질이 안 되는 칸은 이 둘뿐</b>이다.</p>';
+      paint(cell, html);
+      return;
+    }
+
+    if (cell.track === "gotojail") {
+      html += '<div class="lv">병가 · GO 감옥행 그대로</div>';
+      html += '<h3>보드명</h3><p class="desc">' + cell.desc + "</p>";
+      html += '<h3>모노폴리 GO에서는</h3><p class="desc">감옥으로(Go To Jail). <b>GO 감옥 그대로다 — 새로 기획할 게 없다.</b> 밟으면 가고, 더블로 나온다. 탈출권·코인 조기 복귀도 GO와 같게.</p>';
+      html += '<p class="desc note-ok"><b>준비도와 엮지 않는다.</b> 컨디션이 낮으면 무대 판정이 나빠질 뿐, 병가로 끌려가지 않는다. 엮는 순간 GO에 없는 시스템이 하나 더 생긴다.</p>';
+      paint(cell, html);
+      return;
+    }
+
+    if (cell.track === "chance") {
+      html += '<div class="lv">스케줄 변경 · 성장 없음 · 상태 연동</div>';
+      html += '<h3>보드명</h3><p class="desc">' + cell.desc + "</p>";
+      html += '<h3>풀 카드 (' + SCHEDULE_CARDS.length + ')</h3><ul class="fx">';
+      SCHEDULE_CARDS.forEach(function (c) {
+        html += '<li><div class="k jungbak">카드</div><div class="t">' + c.t + "</div></li>";
+      });
+      html += "</ul>";
+      html += '<p class="desc" style="color:#6b7280;margin:12px 0 0">등급에 따라 보이는 카드만 남음(교체·삭제). 뽑기 시안: <code>chance-state-sim.html</code></p>';
+      paint(cell, html);
+      return;
+    }
+
+    if (cell.track === "practice") {
+      html += '<div class="lv">' + (cell.kind === '연습' && cell.grade ? (cell.name + ' · ' + cell.grade + ' · 성장 없음') : ((cell.name || '연습') + ' · 성장 없음 · 판정만')) + '</div>';
+      html += '<h3>보드명</h3><p class="desc">' + cell.desc + "</p>";
+      html += '<h3>보상으로 넣는 것</h3><p class="desc">' + practiceIncludes(cell) + "</p>";
+      var pfx = practiceEffects(cell);
+      for (var i = pfx.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = pfx[i]; pfx[i] = pfx[j]; pfx[j] = tmp;
+      }
+      html += "<h3>보상 3종</h3><ul class=\"fx\">" + pfx.map(function (e) {
+        return "<li><div class=\"k " + e.c + "\">" + e.k + "</div><div class=\"t\">" + e.t + "</div></li>";
+      }).join("") + "</ul>";
+      html += '<p class="desc" style="color:#6b7280;margin:12px 0 0">칸 이름 고정. 대박·중박·운망은 풀에서 뽑은 그날 결과.</p>';
+      paint(cell, html);
+      return;
+    }
+
+    if (cell.track === "fanfix") {
+      html += '<div class="lv p">' + cell.name + ' · 성장 없음 · 판정만</div>';
+      html += '<h3>보드명</h3><p class="desc">' + cell.desc + "</p>";
+      html += '<h3>이 칸에 넣는 것</h3><p class="desc">' + fanfixIncludes(cell) + "</p>";
+      var ffx = fanfixEffects(cell);
+      for (var i = ffx.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = ffx[i]; ffx[i] = ffx[j]; ffx[j] = tmp;
+      }
+      html += "<h3>대박·중박·운망</h3><ul class=\"fx\">" + ffx.map(function (e) {
+        return "<li><div class=\"k " + e.c + "\">" + e.k + "</div><div class=\"t\">" + e.t + "</div></li>";
+      }).join("") + "</ul>";
+      html += '<p class="desc" style="color:#6b7280;margin:12px 0 0">칸 이름 고정. 팬콜·영통은 개인방송 판정 풀.</p>';
+      paint(cell, html);
+      return;
+    }
+    if (cell.track === "camp") {
+      html += '<div class="lv">' + cell.name + ' · 성장 없음 · 합숙 훈련 판정</div>';
+      html += '<h3>보드명</h3><p class="desc">' + cell.desc + "</p>";
+      html += '<h3>합숙 때 하는 훈련</h3><p class="desc">' + campIncludes(cell) + "</p>";
+      var cfx = campEffects(cell);
+      for (var i = cfx.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = cfx[i]; cfx[i] = cfx[j]; cfx[j] = tmp;
+      }
+      html += "<h3>대박·중박·운망</h3><ul class=\"fx\">" + cfx.map(function (e) {
+        return "<li><div class=\"k " + e.c + "\">" + e.k + "</div><div class=\"t\">" + e.t + "</div></li>";
+      }).join("") + "</ul>";
+      html += '<p class="desc" style="color:#6b7280;margin:12px 0 0">칸 이름 고정. 연습실 트레이닝 사다리와 별개 · 합숙 훈련만.</p>';
+      paint(cell, html);
+      return;
+    }
+
+    if (cell.track === "freetime") {
+      html += '<div class="lv p">' + cell.name + ' · 성장 없음 · 판정만</div>';
+      html += '<h3>보드명</h3><p class="desc">' + cell.desc + "</p>";
+      html += '<h3>이 칸에 넣는 것</h3><p class="desc">' + freetimeIncludes(cell) + "</p>";
+      var tfx = freetimeEffects(cell);
+      for (var i = tfx.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = tfx[i]; tfx[i] = tfx[j]; tfx[j] = tmp;
+      }
+      html += "<h3>대박·중박·운망</h3><ul class=\"fx\">" + tfx.map(function (e) {
+        return "<li><div class=\"k " + e.c + "\">" + e.k + "</div><div class=\"t\">" + e.t + "</div></li>";
+      }).join("") + "</ul>";
+      html += '<p class="desc" style="color:#6b7280;margin:12px 0 0">칸 이름 고정. 컨디션·케미 판정만. 본가·합숙소와 별개. 돈·스킬성장 없음.</p>';
+      paint(cell, html);
+      return;
+    }
+
+    if (cell.track === "living") {
+      html += '<div class="lv">' + cell.name + ' · 성장 없음 · 생활 판정</div>';
+      html += '<h3>보드명</h3><p class="desc">' + cell.desc + "</p>";
+      html += '<h3>이 칸에 넣는 것</h3><p class="desc">' + livingIncludes(cell) + "</p>";
+      var lfx = livingEffects(cell);
+      for (var i = lfx.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = lfx[i]; lfx[i] = lfx[j]; lfx[j] = tmp;
+      }
+      html += "<h3>대박·중박·운망</h3><ul class=\"fx\">" + lfx.map(function (e) {
+        return "<li><div class=\"k " + e.c + "\">" + e.k + "</div><div class=\"t\">" + e.t + "</div></li>";
+      }).join("") + "</ul>";
+      html += '<p class="desc" style="color:#6b7280;margin:12px 0 0">칸 이름 고정. 훈련 합숙·멤버 시간과 별개.</p>';
+      paint(cell, html);
+      return;
+    }
+
+
+    if (tr) {
+      html += '<div class="lv' + (cell.track === "yellow" ? " y" : (cell.track === "pink" ? " p" : "")) + '">' +
+        tr.label + " · 지금 " + levelName(cell) + " · 꼭대기 " + tr.ladder[tr.ladder.length - 1] + "</div>";
+      html += '<h3>보드명</h3><p class="desc">' + cell.desc + "</p>";
+      html += "<h3>이 칸 성장</h3><div class=\"path\">";
+      tr.ladder.forEach(function (name, i) {
+        var cls = "step";
+        if (i < cell.level) cls += " done";
+        if (i === cell.level) cls += " now" + (cell.track === "yellow" ? " y" : (cell.track === "pink" ? " p" : ""));
+        html += '<div class="' + cls + '">' + (i + 1) + ". " + name + (i === cell.level ? " ← 지금" : "") + "</div>";
+      });
+      html += "</div>";
+      const growLabel = canGrow(cell)
+        ? ("성장 → " + tr.ladder[cell.level + 1])
+        : "최고 수준";
+      html += '<button type="button" class="btn-grow ' + cell.track + '" id="btnGrow"' +
+        (canGrow(cell) ? "" : " disabled") + ">" + growLabel + "</button>";
+
+      var fx = effectsFor(cell).slice();
+      for (var i = fx.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = fx[i]; fx[i] = fx[j]; fx[j] = tmp;
+      }
+      html += "<h3>보상 3종</h3><ul class=\"fx\">" + fx.map(function (e) {
+        return "<li><div class=\"k " + e.c + "\">" + e.k + "</div><div class=\"t\">" + e.t + "</div></li>";
+      }).join("") + "</ul>";
+    } else if (cell.desc) {
+      html += '<p class="desc">' + cell.desc + "</p>";
+    }
+
+    paint(cell, html);
+    const btn = document.getElementById("btnGrow");
+    if (btn) btn.onclick = function () { grow(cell.id); };
+  }
+
+  async function grow(id) {
+    const cell = CELLS.find(function (c) { return c.id === id; });
+    if (!cell || !canGrow(cell) || busy) return;
+    busy = true;
+    setLandArt("fx-rename.png");
+    if (placeTag) placeTag.textContent = "이름 바뀜";
+    const tr = trackOf(cell);
+    const before = cellName(cell);
+    const beforeLv = levelName(cell);
+    cell.level += 1;
+    cell.kind = pickUniqueKind(cell, cell.level);
+    const after = cellName(cell);
+    const afterLv = levelName(cell);
+
+    cardBefore.textContent = before + " · " + beforeLv;
+    cardAfter.textContent = after;
+    cardChip.textContent = beforeLv + " → " + afterLv;
+    stamp.classList.remove("show");
+    overlay.classList.add("show");
+    overlay.setAttribute("aria-hidden", "false");
+    await wait(380);
+    stamp.classList.add("show");
+    await wait(900);
+    overlay.classList.remove("show");
+    overlay.setAttribute("aria-hidden", "true");
+    stamp.classList.remove("show");
+
+    paintCell(cell);
+    const el = cellEls[cell.id];
+    el.classList.remove("pulse");
+    void el.offsetWidth;
+    el.classList.add("pulse");
+    busy = false;
+    show(cell.id);
+  }
+
+  const SYS = {
+    loop: {
+      title: "일정 보드",
+      was: "모험",
+      tag: "시스템 · 본체 플레이",
+      desc: "일정 보드 40칸을 돌며 아이돌 일정에 착지하는 본체 플레이. 주사위를 굴린다. 이 판이 「오늘」이고, 여기서 일어난 일이 입덕에 남는다."
+    },
+    tour: {
+      title: "원정",
+      was: "여정",
+      tag: "입덕 안에 · 보내고 기다리기",
+      desc: "내가 못 가는 데로 보내고 기다린다. 지방 공연에 슬로건, 해외 팬미팅에 서포트, 시상식에 광고. 판이 홍대면 해외는 못 가니까 거기로 보낸다. 돌아오면 비하인드가 남는다. 판 안 덕질(한 단씩 키우기)과 겹치지 않는다."
+    },
+    duk: {
+      title: "덕질",
+      was: "건설",
+      tag: "시스템 · 상시 · 항목 12 × 6단",
+      desc: "GO 랜드마크 건설 자리. 항목 12개를 각각 1~6단까지 키운다. 같은 물건이 커진다 — 밥차 도시락이 전 스태프 케이터링이 된다. 상시 버튼, 착지 필요 없음. 한 번 = 덕력 +1 · 색 칩 +1 · 고른 항목 1단 · 무작위 응원봉. A&R·매니지먼트만 덕질 불가."
+    },
+    mission: {
+      title: "활동 미션",
+      was: "미션",
+      tag: "시스템 · 하루 과제",
+      desc: "하루·주간 과제. 판에서 할 일을 가리킬 뿐 판 밖으로 데려가지 않는다. 하루 미션은 그냥 놀아도 채워지고, 주간 미션만 마음먹고 해야 한다."
+    },
+    season: {
+      title: "입덕",
+      was: "모험",
+      tag: "남은 것이 쌓이는 집",
+      desc: "일정 보드는 「오늘」이고 입덕은 「남은 것」이다. 판에서 좋은 일이 있으면 비하인드(음악·이미지·영상)가 남고, 내 것에 쌓이고, 남들 것에 흐르고, 주간 차트에서 겨룬다. 새로 내보내는 데가 아니다."
+    },
+    sian: {
+      title: "시안",
+      was: "천음 리그 (외부 제안)",
+      tag: "입덕 안에 · 만들고 고르고 걸린다",
+      desc: "팬이 공식 소스로 꾸며서 내고, 팬덤이 고르고, 1등이 다음 주 전 서버 판에 걸린다. 파일은 안 올린다 — 우리 아이돌은 실존 인물이라 자유 업로드가 안 된다. 부문 셋은 문구(현수막 한 줄)·광고 시안(전광판)·자리 꾸미기(생카 포스터). 후원 지표는 뺐다. 총공과 같은 주에 도는데, 총공은 협력(순위 없음)이고 시안은 경쟁(순위 있음)이다. (082)"
+    },
+    dispatch: {
+      title: "총공",
+      was: "출동",
+      tag: "입덕 안에 · 다 같이 깎기",
+      desc: "큰 걸 앞에 두고 마감 전에 다 같이 민다. 차트 1위·투표·초동. 나 + 친구 + 서버 전체. 시간 초과는 실패(모노 출동 그대로). 판에서 뺐다 — 3·18·34 칸은 작은 「응원」으로 남았다."
+    }
+  };
+
+  const SYS_OLD = JSON.parse(JSON.stringify(SYS));
+  if (R57) {
+    SYS.duk = {title:"건설", was:"건설", tag:"시스템 · 하단 건설 탭 · 보드 성장 A안",
+      desc:"하단 건설 탭에서 착지로 번 <b>코인</b>으로 이 판의 <b>랜드마크 5(가안)</b>를 단계마다 짓는다. 5개를 다 지으면 <b>스테이지 클리어 → 다음 동네</b>. 랜드마크 단계 보상 = 주사위 · 코인 · 스태프 팩. <b>랜드마크 5 ≠ 건물 6</b> — 건물 6은 도착으로 자라고 다음 판으로 따라간다. 건설은 코인, 건물 성장은 배수를 쓴다(자원이 다름). 혜택 탭 자리는 LX-1(03장). 랜드마크 수 · 이름 · 위치는 LM-1 · LM-2 결정 대기. (근거: P00 A-2 · A-4 · A-5 · 04장 R-04-6 · 7 · 03장 R-03-6)"};
+    SYS.loop = {title:"행보판", was:"보드", tag:"시스템 · 본체 플레이", desc:"행보판 40칸 = 도시숲. 기획사가 주사위(= 투자 · 배수)를 굴려 아이돌을 그날 일정으로 보낸다. 도착한 칸의 건물이 자라고, 번 코인은 건설로 간다. (근거: 02장 · P00 1장)"};
+  }
+  function showSys(key) {
+    const s = SYS[key];
+    if (!s) return;
+    if (selectedId && cellEls[selectedId]) cellEls[selectedId].classList.remove("on");
+    selectedId = null;
+    renderChips();
+    var kicker = document.getElementById("slideKicker");
+    if (kicker) kicker.textContent = "시스템 · " + s.title;
+    document.querySelectorAll("#sysbar button").forEach(function (b) {
+      b.classList.toggle("on", b.getAttribute("data-sys") === key);
+    });
+    var html = '<div class="tag">' + s.tag + "</div><h2>" + s.title + "</h2>";
+    html += '<div class="lv">' + s.was + " → " + s.title + "</div>";
+    html += '<h3>설명</h3><p class="desc">' + s.desc + "</p>";
+    if (key === "duk" && !R57) html += dukCatalogHtml();
+    if (key === "season") {
+      html += '<h3>이 아래에 들어가는 것</h3><ul class="fx">' +
+        '<li><div class="k jungbak">원정 · 옛 여정</div><div class="t">못 가는 데로 보내고 기다린다. 지방 공연 슬로건 · 해외 서포트 · 시상식 광고.</div></li>' +
+        '<li><div class="k jungbak">총공 · 옛 출동</div><div class="t">마감 전에 다 같이 민다. 시간 초과는 실패. 판에서 뺐다.</div></li>' +
+        '<li><div class="k daebak">시안 · 천음 리그에서</div><div class="t">팬이 꾸며 내고 팬덤이 고른다. 1등은 다음 주 전 서버 판에 걸린다. 파일 업로드는 없다.</div></li>' +
+        '</ul><p class="desc" style="color:#6b7280;margin:0">판에서 일어난 일이 <b>비하인드</b>로 남는다. 새로 내보내는 게 아니다. (081) 이벤트·카드 대전은 아직 안 넣음.</p>';
+    }
+    html += '<p class="desc" style="color:#6b7280;margin:12px 0 0">' + (R57 ? '09-30 최신화 · 제안(검수 대기).' : '기획서 042. 보드 칸과 같은 결의 시스템 설명.') + '</p>';
+    side.innerHTML = html;
+    if (key === "duk" && !R57) bindDukCards(null);
+    var menuFile = MENU_ART[key];
+    if (menuFile) {
+      setLandArt(menuFile);
+      if (placeTag) placeTag.textContent = s.title;
+      if (fillerCopy) fillerCopy.textContent = s.tag;
+    }
+  }
+
+  // ===== 주사위 굴리기 : 필러(주사위) → 연출(밴 이동) → 도착 =====
+  var stageMain = document.getElementById("stageMain");
+  var stageFiller = document.getElementById("stageFiller");
+  var rollBtn = document.getElementById("rollBtn");
+  var fillerCopy = document.getElementById("fillerCopy");
+  var placeTag = document.getElementById("placeTag");
+  var eyeTag = document.getElementById("eyeTag");
+  var walker = 1;
+
+  // 밴이 어디에 서느냐 = 그 칸이 어떤 자리냐
+  // 아레나 = 큰 무대(초록 3급 이상) · 지방 = 야외·집 쪽 · 도시 = 나머지 서울 일정
+  var PLACE = { city: "홍대 밤", country: "지방 도로", arena: "아레나 앞" };
+  var placeKey = "city";
+  var LAND_BY_ID = {
+    1: "land-office.png",
+    2: "land-physical.png",
+    3: "land-cheer.png",
+    4: "land-media.png",
+    5: "land-tax.png",
+    6: "land-gate.png",
+    7: "land-train.png",
+    8: "land-chance.png",
+    9: "land-condition.png",
+    10: "land-study.png",
+    11: "land-standby.png",
+    12: "land-train.png",
+    13: "land-ar.png",
+    14: "land-fanmeet.png",
+    15: "land-fanlive.png",
+    16: "land-gate.png",
+    17: "land-train.png",
+    18: "land-cheer.png",
+    19: "land-alone.png",
+    20: "land-member.png",
+    21: "land-onair.png",
+    22: "land-train.png",
+    23: "land-chance.png",
+    24: "land-dance-camp.png",
+    25: "land-vocal-camp.png",
+    26: "land-gate.png",
+    27: "land-youtube.png",
+    28: "land-weverse.png",
+    29: "land-mgmt.png",
+    30: "land-shortform.png",
+    31: "land-sick.png",
+    32: "land-busking.png",
+    33: "land-campus.png",
+    34: "land-cheer.png",
+    35: "land-streetshow.png",
+    36: "land-gate.png",
+    37: "land-home.png",
+    38: "land-chance.png",
+    39: "land-dorm.png",
+    40: "land-tax-big.png"
+  };
+  var MENU_ART = {
+    loop: "menu-loop.png",
+    tour: "menu-expedition.png",
+    duk: "menu-duk.png",
+    mission: "menu-mission.png",
+    season: "menu-season.png",
+    dispatch: "menu-raid.png"
+  };
+
+  function placeOf(cell) {
+    if (!cell) return "city";
+    if (cell.track === "green") return (cell.level >= 3) ? "arena" : "country";
+    if (cell.track === "yellow" && cell.level >= 4) return "arena";
+    if (cell.id === 19 || cell.id === 20 || cell.id === 37) return "country";
+    return "city";
+  }
+
+  function landFileOf(cell) {
+    if (!cell) return null;
+    if (cell.art === false) return null;   // 시점에서 갈아끼운 칸 — 옛 그림을 쓰지 않는다
+    if (cell.track === "yellow") {
+      if ((cell.level || 0) === 0) {
+        return ["land-y-youtube.png", "land-y-weverse.png", "land-y-short.png"][cell.kind % 3];
+      }
+      return ["land-y-radio.png", "land-y-cable.png", "land-y-tv.png", "land-y-global.png"][Math.min(cell.level, 4) - 1];
+    }
+    if (cell.track === "green") {
+      if ((cell.level || 0) === 0) {
+        return ["land-g-street.png", "land-g-campus.png", "land-g-slot.png"][cell.kind % 3];
+      }
+      return ["land-g-club.png", "land-g-theater.png", "land-g-hall.png", "land-g-arena.png"][Math.min(cell.level, 4) - 1];
+    }
+    return LAND_BY_ID[cell.id] || null;
+  }
+
+  var landPanTimer = 0;
+  var landPanT0 = 0;
+  function stopLandPan() {
+    if (landPanTimer) { clearInterval(landPanTimer); landPanTimer = 0; }
+  }
+  function startLandPan() {
+    stopLandPan();
+    var img = document.getElementById("landImg");
+    if (!img) return;
+    landPanT0 = Date.now();
+    img.style.objectPosition = "0% 50%";
+    landPanTimer = setInterval(function () {
+      var p = ((Date.now() - landPanT0) % 12000) / 12000 * 100;
+      img.style.objectPosition = p.toFixed(2) + "% 50%";
+    }, 50);
+  }
+  function setLandArt(file) {
+    var landEl = document.getElementById("landScene");
+    var img = document.getElementById("landImg");
+    if (!stageMain || !landEl) return;
+    if (file) {
+      if (img) img.src = "_img/" + file;
+      landEl.style.backgroundImage = "none";
+      stageMain.classList.add("has-land");
+      landEl.classList.add("panning");
+      startLandPan();
+    } else {
+      stopLandPan();
+      if (img) img.removeAttribute("src");
+      landEl.classList.remove("panning");
+      stageMain.classList.remove("has-land");
+    }
+  }
+
+  var paintedOnce = false;
+  function paintStage(cell, flash) {
+    if (!stageMain || !cell) return;
+    placeKey = placeOf(cell);
+    stageMain.setAttribute("data-place", placeKey);
+    var nm = cell.track ? cellName(cell) : (cell.name || ("칸 " + cell.id));
+    if (placeTag) {
+      var lv = (cell.track === "yellow" || cell.track === "green") ? levelName(cell) : "";
+      placeTag.textContent = lv ? (lv + " · " + nm) : nm;
+    }
+    setLandArt(landFileOf(cell));
+    if (flash && paintedOnce) {
+      stageMain.classList.add("arrive");
+      setTimeout(function () { stageMain.classList.remove("arrive"); }, 520);
+    }
+    paintedOnce = true;
+  }
+
+  function landOn(id, eye) {
+    var cell = CELLS.find(function (c) { return c.id === id; });
+    var nm = cell ? (cell.track ? cellName(cell) : (cell.name || ("칸 " + id))) : ("칸 " + id);
+    fillerCopy.textContent = "도착 — " + nm + " · 글은 오른쪽에";
+    if (eyeTag) { eyeTag.textContent = "도착"; eyeTag.classList.add("on"); }
+    if (cell) paintStage(cell, true);
+    if (selectedId && cellEls[selectedId]) cellEls[selectedId].classList.remove("on");
+    selectedId = id;
+    if (cellEls[id]) {
+      cellEls[id].classList.add("on");
+      cellEls[id].classList.add("pulse");
+      setTimeout(function () { cellEls[id].classList.remove("pulse"); }, 600);
+    }
+    renderChips();
+    paintDiceArrive(eye, cell);
+  }
+
+  function paintDiceMove(eye) {
+    var kicker = document.getElementById("slideKicker");
+    if (kicker) kicker.textContent = "주사위 굴리기 · 077";
+    if (placeTag) placeTag.textContent = "필름 스치는 중";
+    side.innerHTML =
+      '<div class="tag">필러 공간 · 손맛</div><h2>주사위 굴리기</h2>' +
+      '<p class="color-kind"><b>컨셉</b> · 스케줄 필름이 파노라마로 스친다</p>' +
+      '<p class="desc big">말이 칸을 튀는 게 아니다. <b>다음 스케줄 컷이 필름처럼 지나간다.</b></p>' +
+      '<h3>지금 순서</h3><div class="path">' +
+      '<div class="step now">① 주사위 눈 · 이번엔 <b>' + eye + "칸</b></div>" +
+      '<div class="step now y">② 필름이 스친다 — 지나가는 일정</div>' +
+      '<div class="step">③ 도착하면 이 글은 그대로 남는다</div></div>' +
+      '<p class="desc note-ok">GO·모노는 판 위에서 말만 튄다. 우리만 <b>기다리는 시간을 연출로 먹는다.</b> 밴이 다음 스케줄로 가는 맛. 플레이가 아니라 미리보기다. (077 · D-039)</p>';
+  }
+
+  function paintDiceArrive(eye, cell) {
+    var nm = cell ? (cell.track ? cellName(cell) : (cell.name || ("칸 " + cell.id))) : "—";
+    var kicker = document.getElementById("slideKicker");
+    if (kicker) kicker.textContent = "도착 · " + eye + "칸 이동";
+    side.innerHTML =
+      '<div class="tag">필러 공간 · 손맛</div><h2>주사위 굴리기</h2>' +
+      '<p class="color-kind"><b>컨셉</b> · 스케줄 필름이 파노라마로 스친다</p>' +
+      '<p class="desc big">말이 칸을 튀는 게 아니다. <b>다음 스케줄 컷이 필름처럼 지나간다.</b></p>' +
+      '<h3>방금 순서</h3><div class="path">' +
+      '<div class="step done">① 주사위 눈 · ' + eye + "칸</div>" +
+      '<div class="step done">② 필름이 스쳤다</div>' +
+      '<div class="step now">③ 도착 · <b>' + nm + "</b></div></div>" +
+      '<p class="desc note-ok">영상은 여기까지다. <b>글은 되감지 않는다.</b> GO·모노는 판 위에서 말만 튄다. 우리만 기다리는 시간을 연출로 먹는다. (077 · D-039)</p>' +
+      (R57 ? '<p class="desc note-gray">이동: 주사위 2~6 벤(도로) · 그 이상 헬기 · 더 크면 비행기 — 경계값 결정 대기(현중 13:14). 도착하면 그 건물로 확대(T0).</p>' : '') +
+      '<button type="button" class="btn-grow" id="btnOpenCell">이 칸 설명 읽기 · ' + nm + "</button>" +
+      '<p class="mini">보드의 칸을 눌러도 같은 설명이 열린다.</p>';
+    var btn = document.getElementById("btnOpenCell");
+    if (btn && cell) btn.onclick = function () { show(cell.id); };
+  }
+
+  if (rollBtn) rollBtn.addEventListener("click", function () {
+    rollBtn.disabled = true;
+    var eye = 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6);
+
+    stageFiller.classList.add("spin");
+    stageMain.classList.add("filming");
+    fillerCopy.textContent = eye + "칸 · 필름 스치는 중";
+    if (eyeTag) { eyeTag.textContent = "이동 중 · " + eye + "칸"; eyeTag.classList.add("on"); }
+    paintDiceMove(eye);
+
+    setTimeout(function () {
+      stageFiller.classList.remove("spin");
+      stageMain.classList.remove("filming");
+      walker = ((walker - 1 + eye) % 40) + 1;
+      landOn(walker, eye);
+      rollBtn.disabled = false;
+    }, 2000);
+  });
+
+  var subsysEl = document.getElementById("subsys");
+  var seasonBtn = document.querySelector('#sysbar button[data-sys="season"]');
+  function setSub(open) {
+    if (subsysEl) subsysEl.hidden = !open;
+    if (seasonBtn) seasonBtn.classList.toggle("open", !!open);
+  }
+  document.querySelectorAll("#sysbar button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var key = b.getAttribute("data-sys");
+      // 입덕(모험)을 누르면 그 아래 원정·총공이 펼쳐진다
+      if (key === "season") setSub(subsysEl ? subsysEl.hidden : true);
+      else if (key !== "tour" && key !== "dispatch" && key !== "sian") setSub(false);
+      showSys(key);
+    });
+  });
+
+  (function r57Init() {
+    var chipbar = document.getElementById("chipbar");
+    var legend = document.getElementById("r57legend");
+    var fly = document.getElementById("sysFly");
+    if (R57) {
+      if (chipbar) chipbar.hidden = true;
+      if (fly) fly.style.display = "none";
+    } else {
+      if (legend) legend.style.display = "none";
+      ["r57band", "r57sec"].forEach(function (id) { var e = document.getElementById(id); if (e) e.style.display = "none"; });
+      var nm = document.getElementById("sysDukNm"); if (nm) nm.textContent = "덕질";
+      var hint = document.getElementById("sysHint"); if (hint) hint.innerHTML = "시스템 메뉴 · 엔터 용어 (042) · 작은 글씨 = 모노카피바라 원래 이름 · 입덕은 <b>위로</b> 원정·총공·시안 <b style='color:#c2410c'>— 적는 중 · 확정 아님</b>";
+      var t = document.getElementById("hdTitle"); if (t) t.textContent = "일정 보드 40 · 최애 한 바퀴";
+      var hl = document.getElementById("hdLine"); if (hl) hl.textContent = "시점은 하나 — 내가 다 본다. 색 난 칸 = 아이돌 스케줄 22. 정거장·회색 특수칸 = 내가 손 대는 창구 13. 정산·미팅·병가는 회사 일 5.";
+      var band = document.createElement("div"); band.className = "viewband";
+      band.innerHTML = "보관된 옛 시점 (D-074 · ?view=" + VIEW + ") — 09-30 보관(헌법 제1조 · 칸 표 v0 §6). 최신 행보판은 <a href='?'>?view 없이 열기</a>.";
+      document.body.insertBefore(band, document.body.firstChild);
+    }
+    // 보관 블록: 옛 40칸 표 · 덕질 목록 · 옛 시스템 메뉴
+    var ac = document.getElementById("archCells");
+    if (ac) {
+      ac.innerHTML = '<table class="r57tbl"><tr><th>칸</th><th>옛 이름</th><th>GO 자리</th><th>아이돌은</th><th>나는(팬)</th><th>옛 설명</th></tr>' +
+        CELLS_OLD.map(function (c) {
+          var nm0 = c.name || (c.track === "yellow" ? ["유튜브 라이브", "위버스·팬플 라이브", "숏폼 라이브"][c.kind] : c.track === "green" ? ["거리 버스킹", "대학가", "거리공연"][c.kind] : "");
+          return "<tr><td>" + c.id + "</td><td>" + nm0 + "</td><td>" + (c.go || "") + "</td><td>" + (c.enter || "") + "</td><td>" + (c.fan || "") + "</td><td>" + (c.desc || "") + "</td></tr>";
+        }).join("") + "</table>";
+    }
+    var ad = document.getElementById("archDuk");
+    if (ad) ad.innerHTML = '<table class="r57tbl"><tr><th>묶음</th><th>항목</th><th>한 줄</th><th>1 → 6단</th></tr>' + DUK.map(function (d) {
+      return "<tr><td>" + d.g + "</td><td>" + d.nm + "</td><td>" + d.blurb + "</td><td>" + d.steps.join(" → ") + "</td></tr>"; }).join("") + "</table>";
+    var asy = document.getElementById("archSys");
+    if (asy) asy.innerHTML = '<table class="r57tbl"><tr><th>메뉴</th><th>옛 이름</th><th>옛 설명</th></tr>' + ["season", "tour", "dispatch", "sian", "duk", "loop"].map(function (k) {
+      var o = SYS_OLD[k]; return o ? "<tr><td>" + o.title + "</td><td>" + o.was + "</td><td>" + o.desc + "</td></tr>" : ""; }).join("") + "</table>" +
+      '<p>→ 새 대응 기획은 근거 문서에서 못 찾음 — <b>기획 없음 · 결정 대기</b>. 원정은 따로 둔다(현중 13:42).</p>';
+  })();
+
+  show(1);
+
+})();
+</script>
+</body>
+</html>

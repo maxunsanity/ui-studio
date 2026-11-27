@@ -1,0 +1,280 @@
+<title>발란스 시뮬레이터 UI 시안 v02</title>
+<style>
+/* 레이아웃: 휴대폰 세로 한 칸(아크메이지식) — 위 스킬 띠 · 행동 카드 · 잠긴 행동 · 목표 줄 · 아래 탭 격자 */
+:root{
+  color-scheme:dark;
+  --bg:#0e1118;--bg2:#151a24;--card:#1d2330;--card2:#252c3b;--line:#2f3748;
+  --txt:#e6e9f0;--dim:#8a93a6;--blue:#5b6fd6;--blue2:#7d8ff0;--red:#a8324a;--gold:#f0b429;--green:#2e8b57;--cy:#3fc3d0;
+  --st-ok:#2e9e6a;--st-tbl:#4f7cac;--st-none:#c2453d;--st-wait:#d08a1a;--st-cand:#8a6fc2;
+  --f:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{background:#05070b;color:var(--txt);font:14px/1.45 var(--f);display:grid;place-items:center}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+.phone{width:390px;height:844px;flex:none;transform-origin:center center;overflow:hidden;background:linear-gradient(180deg,#1b2a3e 0%,#0e1118 32%);display:flex;flex-direction:column;position:relative}
+.ui-tag{position:absolute;top:6px;right:8px;font-size:10px;color:var(--gold);background:#2a2110;border:1px solid #5a4415;border-radius:999px;padding:1px 8px;z-index:3}
+/* 스킬 띠 */
+.skillbar{display:grid;grid-template-columns:1fr auto auto;align-items:stretch;margin:26px 10px 8px;border-radius:12px;overflow:hidden;background:#0b0e14;border:1px solid var(--line)}
+.skillbar .nm{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:18px;font-weight:600}
+.skillbar .ic{font-size:22px}
+.skillbar .lv{background:var(--blue);padding:0 14px;display:flex;align-items:center;font-weight:700;font-size:13px;min-width:92px}
+.skillbar .ct{background:#2a3140;padding:0 12px;display:flex;align-items:center;font-size:13px;color:var(--dim)}
+.main{flex:1;min-height:0;overflow:hidden;padding:0 10px 8px;display:flex;flex-direction:column;gap:10px}
+/* 행동 카드 */
+.act{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+.act .hd{display:flex;gap:10px;align-items:flex-start}
+.act .hd .ic{font-size:30px;line-height:1}
+.act .hd h2{font-size:17px;font-weight:600}
+.act .hd p{color:var(--dim);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:250px}
+.act .hd .min{margin-left:auto;width:36px;height:30px;border-radius:8px;background:var(--card2);border:1px solid var(--line);color:var(--dim)}
+.chips{display:flex;gap:5px;flex-wrap:nowrap;margin:10px 0 8px}
+.chip{display:inline-flex;gap:4px;align-items:center;background:#2a3142;border-radius:999px;padding:3px 8px;font-size:12px;font-weight:600;white-space:nowrap}
+.chip.c2{color:var(--blue2)}.chip.c3{color:var(--gold);background:#3a2e14}
+.chip small{color:var(--dim);font-weight:400}
+.rollline{display:flex;align-items:center;gap:8px;margin-top:8px;height:34px;padding:0 8px;background:#151a24;border:1px solid var(--line);border-radius:8px;font-size:13px;overflow:hidden}
+.rollline .dice{display:flex;gap:3px}.rollline .dice i{font-style:normal;font-size:26px;line-height:1;color:#f3f4f8}
+.rollline .dice i.roll{animation:dz .09s linear infinite}@keyframes dz{50%{transform:rotate(18deg) translateY(-2px)}}
+.rollline b{font-size:16px;color:var(--gold);min-width:20px;text-align:center}.rollline .arrow{color:var(--dim)}
+.rollline .land{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rollline .land em{font-style:normal;color:var(--dim);font-size:12px}
+.lvbar{position:relative;height:26px;border-radius:6px;background:#2a3140;overflow:hidden;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:13px}
+.lvbar i{position:absolute;inset:0 auto 0 0;background:#8fa0d8;opacity:.45}
+.lvbar b,.lvbar span{position:relative}
+.runzone{display:grid;grid-template-columns:auto 1fr;gap:10px;margin-top:10px;align-items:center}.outrow{display:grid;grid-template-columns:repeat(4,52px);gap:6px}
+.slot{background:#15301f;border:1px solid #2b5c3b;border-radius:10px;padding:6px 4px;text-align:center;position:relative}
+.slot .q{font-size:11px;color:var(--txt);background:#2a3140;border-radius:6px;padding:0 4px;display:inline-block;min-width:36px}
+.slot .ic{font-size:20px;margin:2px 0}
+.slot .p{font-size:10px;color:var(--dim);white-space:nowrap}
+.slot.off{background:#1d2330;border-color:var(--line);opacity:.7}
+.runrow{display:grid;gap:8px}
+.prog{height:14px;border-radius:5px;background:#2a3140;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--blue)}
+.go{height:40px;border-radius:8px;font-size:17px;font-weight:600;background:var(--green)}
+.go.stop{background:var(--red)}
+/* 잠긴 행동 */
+.lock{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;opacity:.85}
+.lock .ic{width:30px;height:30px;border-radius:50%;background:#3a2a14;display:grid;place-items:center}
+.lock .t{flex:1}.lock .t b{display:block;color:#9aa3b5;font-weight:500;font-size:15px}
+.lock .t span{color:var(--gold);font-size:13px;font-weight:600}
+.lock .btn{background:#2a3140;border-radius:8px;padding:6px 12px;color:var(--dim);font-size:13px}
+.lock.q{justify-content:center;color:var(--dim);font-size:18px}
+.lock.open .ic{background:#1f3a2a}.lock.open .t b{color:var(--txt)}.lock.open .t span{color:var(--green)}
+/* 상태 꼬리표 */
+.st{display:inline-block;font-size:10.5px;border-radius:999px;padding:1px 7px;border:1px solid;vertical-align:middle;white-space:nowrap}
+.st.ok{color:var(--st-ok);border-color:var(--st-ok)}.st.tbl{color:var(--st-tbl);border-color:var(--st-tbl)}.st.none{color:var(--st-none);border-color:var(--st-none)}.st.wait{color:var(--st-wait);border-color:var(--st-wait)}.st.cand{color:var(--st-cand);border-color:var(--st-cand)}
+/* 패널 공용 */
+.sec h3{font-size:13px;color:var(--dim);font-weight:500;margin:4px 2px 6px;display:flex;gap:6px;align-items:center}
+.row{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;gap:6px}
+.row .h{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}.row .h b{flex:1;font-weight:600}
+.row .h em{font-style:normal;color:var(--dim);font-size:12.5px}
+.bar{height:8px;border-radius:4px;background:#2a3140;position:relative;overflow:visible}
+.bar s{position:absolute;top:-3px;bottom:-3px;width:2px;background:#fff;opacity:.6}
+.ax{display:grid;grid-template-columns:78px 1fr 40px;gap:8px;align-items:center;font-size:13px}
+.ax em{font-style:normal;color:var(--dim);text-align:right;font-size:12px}
+.ladder{display:flex;gap:4px;flex-wrap:wrap}
+.ladder span{background:#2a3140;border-radius:6px;padding:3px 8px;font-size:12px}
+.ladder span.now{background:var(--blue);font-weight:600}
+.note{color:var(--dim);font-size:12px}
+.axes{display:grid;gap:8px;margin-top:12px}.row.cur{border-color:var(--blue2)}
+.bet{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px;display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center}.bet>b{font-weight:600;font-size:14px;white-space:nowrap}
+.bet .bh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.bet .bh b{font-weight:600}.bet .bh .note b{color:var(--gold);font-weight:700}
+.bl{display:grid;grid-template-columns:repeat(10,1fr);gap:2px}
+.bm{height:26px;border-radius:6px;background:#2a3140;font-size:10px;font-weight:700;color:var(--txt);padding:0}
+.bm.on{background:var(--blue);box-shadow:0 0 0 2px var(--blue2)}.bm.lk{opacity:.45;font-size:10px}
+.bf{display:flex;gap:4px;align-items:center;flex-wrap:wrap}.bf .note{margin-right:2px}
+.seg{font-size:11.5px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--dim)}.seg.on{color:var(--gold);border-color:#5a4415;background:#2a2110}
+.bet p.note{font-size:11px}
+.rows{display:grid;gap:5px}.row.slim{padding:6px 10px;gap:4px}.row.slim .h{font-size:13px}.sec{display:grid;gap:6px}.sec h3{margin:2px}
+/* 아래 */
+.coin{margin-right:auto;display:flex;align-items:center;gap:6px;background:#232a38;border:1px solid var(--line);border-radius:999px;padding:2px 10px 2px 4px;font-weight:600;font-size:12px}
+.coin .c{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe08a,var(--gold));display:grid;place-items:center;font-size:12px;color:#5a3d00}
+.goal{position:relative;display:flex;align-items:center;gap:8px;padding:10px 12px;background:linear-gradient(90deg,#3a3320,#6b5a2a);font-size:14px}
+.goal b{flex:1;font-weight:500}.goal .n{background:#2a2a2a;border-radius:8px;padding:4px 10px;font-size:13px}
+.tabs{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:8px;background:#0b0e14}
+.tab{aspect-ratio:1;border-radius:10px;background:#1b2130;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10.5px;color:var(--dim);gap:2px;position:relative}
+.tab .i{font-size:20px;line-height:1}
+.tab.on{border:2px solid var(--blue2);background:#232d4a;color:var(--txt)}
+.tab.lk .i{filter:grayscale(1);opacity:.55}
+.tab .dot{position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%}
+.tab.more{background:#232a55;color:var(--blue2);font-size:20px}
+/* 모달 */
+.modal{position:fixed;inset:0;background:#000a;display:grid;place-items:center;z-index:9;padding:16px}
+.modal[hidden]{display:none}
+.box{width:min(400px,100%);background:#2a3140;border-radius:14px;border:1px solid var(--line);padding:16px;max-height:85vh;overflow:auto}
+.box .t{display:flex;align-items:center;font-size:18px;margin-bottom:12px}.box .t b{flex:1;font-weight:500}
+.box .x{font-size:20px;color:var(--dim);width:32px;height:32px}
+.box .in{background:#1f2533;border-radius:10px;padding:12px;display:grid;gap:6px;font-size:13.5px}
+.box .in div{display:flex;justify-content:space-between;gap:12px}.box .in div span:last-child{color:var(--dim);text-align:right}
+.box .in .sub{display:block!important;color:var(--dim);font-size:12px;margin-top:4px}
+.box p{font-size:13px;color:#c5cbd8;margin:8px 0}
+.box code{font-size:11.5px;color:var(--cy);word-break:break-all}
+.toolrow{display:flex;gap:6px;justify-content:center;padding:6px;background:#0b0e14;border-top:1px solid var(--line)}
+.toolrow button{font-size:12px;color:var(--dim);border:1px solid var(--line);border-radius:8px;padding:4px 10px}
+.toolrow button.on{color:var(--gold);border-color:#5a4415}
+.float{position:absolute;pointer-events:none;font-size:12px;font-weight:700;color:#bfe8c9;background:#1e4a2d;border-radius:6px;padding:1px 6px;animation:up 1s ease-out forwards}
+@keyframes up{to{transform:translateY(-38px);opacity:0}}
+.flyer{position:fixed;z-index:20;pointer-events:none;display:flex;align-items:center;gap:3px;background:#1e4a2d;border:1px solid #4caf74;border-radius:999px;padding:2px 8px 2px 4px;color:#d6f5df;font:700 12px var(--f);box-shadow:0 4px 14px #0009;transform:translate(-50%,-50%);white-space:nowrap}
+.flyer span{font-size:18px}
+.bump{animation:bump .35s ease-out}@keyframes bump{40%{transform:scale(1.18);filter:brightness(1.5)}}
+.spin{animation:spin .5s ease-out}@keyframes spin{0%{transform:rotate(0) scale(1)}50%{transform:rotate(200deg) scale(1.25)}100%{transform:rotate(360deg) scale(1)}}
+.q.hit{animation:hit .4s}@keyframes hit{40%{background:#2e8b57;color:#fff}}
+@media (prefers-reduced-motion:reduce){.bump,.spin,.q.hit{animation:none}}
+@media (prefers-reduced-motion:reduce){.float{display:none}}
+</style>
+<div class="phone">
+<details data-ep-current-correction="20261026" role="note" style="position:absolute;top:6px;left:10px;right:10px;z-index:30;padding:2px 6px;border:1px solid #5a4415;border-radius:6px;background:#2a2110;color:#f0d38c;font-size:10px;line-height:1.4"><summary style="cursor:pointer">현재 EP 정정 · 9건물 합 9~270</summary><div style="padding:6px 0;max-height:55vh;overflow:auto;color:#f5ead2"><strong>현재 엔터파워 정정 · 2026-10-26</strong><p>이 조사·시안의 D1/D11 「계산 없음·문서만」은 작성 당시 기록입니다. 현재 제품은 건설 8개 + 사옥 1개, 실제 9건물의 정본 단계 합을 계산합니다. 각 건물 1~30단계이며 전부 1이면 9, 전부 30이면 270입니다. 칸 단계 합산이나 강제 9를 쓰지 않고 실제 0을 보존하며 상태·기록이 없으면 값 없음으로 표시합니다.</p><p>현재 근거: <a href="../개발진행기획_v01/콘텐츠별_v03/엔터파워_기획서.html">P172 엔터파워 기획서</a> · <a href="../../../idle-sim.html">현재 발란스 시뮬레이터</a> · <code>enterPower.mjs</code> · <code>session.ts:canonicalFacilityLevels</code> · <code>commonWindow/replay.ts</code>. 배수 해금·혜택은 기존 등록 표/규칙을 따르고 미정 문턱·팬 보정 값은 발란스 대기로 둡니다. 원문의 제안(검수 대기)와 당시 그림·값은 보존합니다.</p></div></details>
+
+  <div class="skillbar"><div class="nm"><span class="ic" data-sk-ic>🎲</span><span data-sk-nm>굴림</span></div><div class="lv" data-sk-lv>배수 ×1</div><div class="ct" data-sk-ct>열림 —/10</div></div>
+  <main class="main" data-main></main>
+  <div class="goal"><b data-goal>다음 목표: 데뷔 · 능력 140</b><span class="n" data-goal-n>0 / 5</span></div>
+  <nav class="tabs" data-tabs aria-label="스킬"></nav>
+  <div class="toolrow"><span class="coin"><span class="c">S</span><span>—</span></span><button type="button" data-in="free" class="on">무료 800</button><button type="button" data-in="heavy">헤비 66,667</button><button type="button" data-offline>오프라인 보상</button></div>
+</div>
+<div class="modal" data-modal hidden><div class="box" data-box></div></div>
+<script>
+const FLOW={"N": [{"id": "IN1", "g": "IN", "n": "무료 주사위(무료 800/일)", "k": "800/일 총량(확정)", "st": "ok", "rise": "쓸 수 있는 주사위 개수. 성장 자체가 아니라 모든 성장의 연료.", "link": "60일 계산 입력으로 매일 받음(1일차도 받음 = first_day_grant 1, 임시). 주사위 1개 = 굴림 1회(배수 기본 1).", "src": ["data/core_proposal/dice_input_scenario.csv", "data/game/dice_grant_config.csv", "src/tools/balanceTool/seasonSim.ts(dicePerDay)"], "note": "카드팩·아이템이 800 중 몇 개인지는 발란스 대기(결정 18)."}, {"id": "IN2", "g": "IN", "n": "새 지급 경로(무료 800 부족분)", "k": "경로·개수 발란스 대기", "st": "wait", "rise": "무료 800에서 기존 지급(충전·출석·선물 등)을 뺀 나머지를 채울 새 지급 경로.", "link": "무료 800에 합쳐지는 공급 경로. 어떤 경로인지 정해지지 않음.", "src": ["발란스_종합체크문서.md 결정 27", "보고/20261026_0940_이스라트_성장데이터리스트.md 13장"], "note": "경로가 정해지면 이 박스가 「무료 주사위」로 이어져요."}, {"id": "IN3", "g": "IN", "n": "구매 주사위(헤비 66,667/일)", "k": "헤비 66,667/일 · 50원/개", "st": "ok", "rise": "구매로 늘어나는 주사위 개수(연료).", "link": "60일 계산 입력(표 값 / 무료 800 / 헤비 중 선택). 굴림 하나 = 주사위 1개.", "src": ["data/core_proposal/dice_input_scenario.csv", "data/game/tool_economy_season_budget_config.csv"], "note": "「쓴 돈(원 환산)」은 이 박스에 합쳤어요."}, {"id": "IN4", "g": "IN", "n": "무료/구매 구분 칸(무료·구매)", "k": "지갑 칸 하나뿐", "st": "none", "rise": "무료 주사위와 구매 주사위를 나눠 적는 칸.", "link": "지금 지갑은 한 칸이라 둘을 못 나눔(장부 kind로도 못 나눔).", "src": ["src/tools/balanceTool/commonWindow/adapter.ts(dice.free · bought)", "발란스_시각화_전수대조표_20261025.md 3장"], "note": "만들기로 정했지만 아직 안 만든 것."}, {"id": "IN5", "g": "IN", "n": "상점(SKU·보석 사다리·세일)", "k": "SKU 9 · 보석 4단 · 세일 22", "st": "tbl", "rise": "돈으로 사는 주사위·보석의 가격표.", "link": "구매 주사위의 가격표. 60일 계산은 표가 아니라 「50원/개」 입력을 씀.", "src": ["data/master/item_master_shop_sku.csv", "data/master/item_master_shop_gem_ladder.csv", "data/master/item_master_sale_offer.csv"], "note": "표가 계산에 이어지는지 이번에 줄 단위로는 안 열어봄."}, {"id": "IN6", "g": "IN", "n": "주사위 보관 상한(보관 상한)", "k": "13단 · 팬 문턱 13칸 = 0", "st": "wait", "rise": "쌓아 둘 수 있는 주사위 수.", "link": "팬 수로 단계가 오르면 보관 상한이 늘어남(표 근거). 계산 연결은 확인 못 함.", "src": ["data/game/dice_cap_level.csv"], "note": "60일 계산은 보관 상한을 쓰지 않음(막힘 = 주사위가 다 떨어졌을 때 · 결정 58)."}, {"id": "IN7", "g": "IN", "n": "출석·복귀·무료 선물(무료 지급)", "k": "출석 7일 21~42 · 복귀 · 선물", "st": "ok", "rise": "무료로 받는 주사위(무료 800의 일부).", "link": "이식 경제의 지급 코드. 무료 800 총량에 합쳐진 것으로 읽음(결정 17).", "src": ["data/game/dice_grant_config.csv", "src/game/economy/attendance.ts · charge.ts(파일 이름·grep만 확인)"], "note": "코드는 줄 단위로 못 열어봄(보고서 15장)."}, {"id": "IN8", "g": "IN", "n": "미션 보상 주사위(미션)", "k": "미션 12 · 일일 굴림 8 …", "st": "tbl", "rise": "미션 진행으로 받는 주사위.", "link": "굴림·증설을 하면 진행이 오르고 보상으로 주사위가 나옴(표 근거). 이식 경제 missions.ts는 있으나 이번엔 안 열어봄.", "src": ["data/game/mission_config.csv"], "note": "무료 800 총량에 어떻게 들어가는지 정해진 기록은 못 찾음."}, {"id": "IN9", "g": "IN", "n": "모험 파견 보상 주사위(파견)", "k": "성공 1회 4개 · 채움 100", "st": "tbl", "rise": "모험 파견 성공으로 받는 주사위.", "link": "파견은 시간으로 진행되고 주사위를 쓰지 않음. 주사위가 나오는 쪽(공급).", "src": ["data/game/adventure_config.csv", "data/game/adventure_dispatch_*.csv"], "note": "무료 800 총량과의 관계는 기록 못 찾음."}, {"id": "R1", "g": "RL", "n": "굴림(주사위 2개 합 · 이동)", "k": "1개 = 1회 · 보드 40칸", "st": "ok", "rise": "말이 움직일 칸 수. 능력이 직접 오르는 게 아니라 어느 칸에 도착할지를 정함.", "link": "핵심 제안 시뮬: 1~6 두 번 합(2~12). 이식 경제: board.roll → peekMove → 칸 처리. 출발 칸 통과는 돈 보너스(0.217%S · 성장 아님). 주사위가 다 떨어지면 막힘.", "src": ["src/game/core-proposal/sim.ts", "src/game/economy/session.ts(rollEconomy)", "data/game/board_tile.csv"], "note": "확인 필요: sim.ts는 병가 칸 11·31을 숫자로 박아 둠(보드 표는 11=기숙사, 31=감옥). 이번에 실행해 확인하진 않음."}, {"id": "R2", "g": "RL", "n": "굴림 배수(굴림 배수 ×1~×1000)", "k": "10단 ×1 ~ ×1000", "st": "ok", "rise": "한 번에 거는 주사위 수. 돈 수익에 곱해짐.", "link": "돈 수익에는 곱해짐(코드 확인). 능력에 곱하는지는 「굴림 배수의 능력 반영」 박스.", "src": ["data/master/item_master_dice_mult.csv", "src/game/economy/session.ts(multOptions)", "data/core_proposal/dice_input_scenario.csv(roll_mult_rule)"], "note": "해금은 팬 수(문턱은 평균 변환 안 함)."}, {"id": "T1", "g": "TL", "n": "능력 시설 칸(녹음실·연습실·뷰티·프로듀싱·방송국·콘서트장)", "k": "시설 칸 약 18칸", "st": "ok", "rise": "도착하면 레슨 도착 능력이 오름(+ 칸 수익 · 팬).", "link": "굴림 → 시설 칸 도착 → lessonArrival → 멤버 전원 능력. 방송국·콘서트장은 kind=무대(stage).", "src": ["src/game/core-proposal/systems.ts(lessonArrival)", "data/core_proposal/facility_growth.csv", "data/core_proposal/fan_income_tile.csv(ability_weight)", "data/game/board_tile.csv"], "note": "칸 수 = board_tile.csv의 fac_id별 3칸씩(프로듀싱은 group이 facility 1·company 2로 갈림). 확인 필요: 랩 레슨 칸이 녹음실인지 콘서트장인지 표 두 곳이 다름(C-25 미결: idol_ability_stat은 녹음실 · facility_growth는 콘서트장)."}, {"id": "T2", "g": "TL", "n": "아카데미 칸(공부 칸)", "k": "칸 2·37·39 · 능력 연결 없음", "st": "tbl", "rise": "외국어·교양·태도 공부 칸. 지금은 수익만 나오고 능력 올리는 길이 비어 있음.", "link": "facility_growth.lesson_stat_id가 빈칸이라 도착해도 능력이 안 오름. 태도·학습으로 이어질 자리만 있음.", "src": ["data/core_proposal/facility_growth.csv(facility_dorm)", "data/game/board_tile.csv"], "note": "빨간 점선 = 끊긴 연결."}, {"id": "T3", "g": "TL", "n": "사옥 칸 · 출발 칸(1번)", "k": "1번 칸 · 통과 보너스 · 증설", "st": "ok", "rise": "출발 칸을 지나면 돈 보너스, 사옥 칸에 서 있을 때 사옥 증설 가능.", "link": "굴림이 한 바퀴 돌 때마다 통과. 사옥 증설 → 캐스팅권 → 멤버 수.", "src": ["data/core_proposal/core_proposal_config.csv(pass_start_pct)", "data/core_proposal/facility_growth.csv(facility_company)"], "note": ""}, {"id": "T4", "g": "TL", "n": "휴식 칸(기숙사 11 · 본가 21)", "k": "다음 레슨 +50%(연결 확인)", "st": "cand", "rise": "다음 레슨 도착 능력 +50%(휴식 보너스 50).", "link": "sim.ts는 group==='life' 칸에서 휴식 대기를 켜는데, 보드 표의 휴식 칸 group은 corner_rest라 값이 맞는지 확인 필요(코드·표를 읽어서 본 것이고, 실행해 확인하진 않음).", "src": ["src/game/core-proposal/sim.ts:26", "data/game/board_tile.csv(corner_rest)", "data/core_proposal/idol_ability_source.csv(rest_bonus)"], "note": "확인되면 상태가 「계산 있음」으로 바뀔 수 있어요."}, {"id": "T5", "g": "TL", "n": "찬스 칸(스케줄 칸 8·23·38)", "k": "카드 풀·효과 비어 있음", "st": "none", "rise": "찬스 카드·스케줄 효과로 능력·돈·팬이 바뀌는 칸.", "link": "핵심 제안 시뮬은 「비움」 한 가지(25% 확률 · 모든 능력 +0.3)만 임시 정책값으로 계산. 스케줄 카드 풀·효과는 비어 있음. 60일 공통 창에는 없음.", "src": ["data/game/board_tile.csv(group=schedule)", "data/game/table_link_exception.csv:25", "src/game/core-proposal/sim.ts(scheduleEmptyPct)"], "note": "현중 10/26: 찬스·스케줄은 아직 안 만든 것으로 봄. 풀·효과는 check_list_17·23 답 전까지 비워 둠."}, {"id": "T6", "g": "TL", "n": "팬 반응 칸(3·18·34)", "k": "팬 이벤트 행 비면 효과 0", "st": "none", "rise": "팬이 반응하는 이벤트로 팬·카드가 바뀌는 칸.", "link": "이식 경제 handler는 있으나 팬 이벤트 행이 비어 있으면 수익 0·효과 0으로 끝남. 핵심 제안 시뮬엔 없음.", "src": ["src/game/economy/session.ts:168", "data/game/board_tile.csv(fan_react)", "data/game/table_link_exception.csv:25"], "note": "현중 10/26: 팬 반응은 아직 안 만든 것으로 봄."}, {"id": "T7", "g": "TL", "n": "쟁탈 칸(쟁탈전 6·16·26·36)", "k": "36번만 입장권 연결", "st": "ok", "rise": "36번 칸 도착 시 다른 도시 입장권을 얻음(열린 도시가 있을 때 확률).", "link": "굴림 → 36번 도착 → 입장권 → 도시 방문. 다른 쟁탈 칸은 성장 연결 제외.", "src": ["src/game/core-proposal/sim.ts(CASTING_OTHER_CITY)", "data/core_proposal/city_visit_region.csv", "data/core_proposal/fan_income_tile.csv(쟁탈 보드 note)"], "note": ""}, {"id": "M0", "g": "EC", "n": "돈(도착 수익 · 증설 자금)", "k": "S 대비 % · 상한 발란스 대기", "st": "ok", "rise": "도착 수익이 쌓이는 돈. 건물 증설에 쓰임(성장의 중간 다리).", "link": "도착 수익 = (시설 기본 % + 팬 곡선 %) × 칸 가중치 × 굴림 배수 × 판정. 이 돈으로 증설.", "src": ["src/game/core-proposal/systems.ts(tileIncome)", "data/core_proposal/core_proposal_config.csv", "data/game/income.csv"], "note": "돈 수입 자체는 성장이 아니라서 다리 역할로만 넣음."}, {"id": "D1", "g": "D", "n": "건물 단계(9건물 × 30단계)", "k": "30단계 · 비용 100 → 263,373,318", "st": "ok", "rise": "건물별 단계(칸에 서 있을 때 돈으로 증설). 증설 비용도 이 박스에 합침.", "link": "굴림 → 시설 칸 도착 → 돈이 되면 증설(정책 always). 단계가 오르면 레슨 배수 · 완공 능력 · 멤버 자리가 같이 오름.", "src": ["data/master/building_master_level.csv", "data/core_proposal/facility_growth_level.csv", "src/game/core-proposal/systems.ts(upgrade)", "src/game/economy/session.ts(upgradeFacility)"], "note": "엔터 파워 최대 270은 문서 정의일 뿐 계산 없음(「엔터 파워」 박스)."}, {"id": "D9", "g": "D", "n": "대지 건설(대지 22칸)", "k": "22칸 · 이식 경제만", "st": "cand", "rise": "시설을 지을 대지 칸.", "link": "돈으로 짓는 이식 경제 기능. 굴림 도착과 어떻게 이어지는지 이번에 못 봄(시설 단계와 따로 셈).", "src": ["data/game/land_lot.csv", "src/game/economy/session.ts(buildLot · 이름만 확인)"], "note": ""}, {"id": "M6", "g": "MD", "n": "칸 가중치 · 짝 포지션 보정", "k": "짝 포지션 +25% · 가중치 1.0/1.5", "st": "ok", "rise": "같은 도착이라도 칸·포지션에 따라 오르는 양이 달라지는 보정.", "link": "굴림 도착 → 기본 0.22에 칸 가중치를 곱하고, 멤버의 포지션 능력이면 +25%.", "src": ["data/core_proposal/idol_ability_source.csv(position_bonus)", "data/core_proposal/fan_income_tile.csv(ability_weight)", "src/game/core-proposal/systems.ts(addAbility)"], "note": ""}, {"id": "M1", "g": "MD", "n": "건물 레슨 배수(건물 레슨 배수)", "k": "1.0 → 5.35(30단계 · 합친 표)", "st": "ok", "rise": "같은 주사위로 능력이 오르는 정도(건물이 높을수록 더 오름).", "link": "레슨 도착 증가량에 곱함(현재 코드). 결정 75 방향(필요 누적 = 기본 ÷ 배수)과 같은 방향. 10단계 표(필요 누적) 쪽은 아직 구현 안 함.", "src": ["data/master/building_master_level.csv(effect_lesson_mult)", "src/game/core-proposal/model.ts · data.ts(lessonSource=merged)", "보고/20261025_1947_이스라트_합친표전환60일_보고.md"], "note": "곡선은 임시(재결정 재료). 옛 단독 시뮬 scripts/core-proposal-sim.mjs는 그룹 능력 척도가 달라져 단계 문턱 검사가 깨짐(보고서 후보 9)."}, {"id": "M2", "g": "MD", "n": "재능 흡수율(재능 흡수율 5구간)", "k": "×0.50 · 0.75 · 1.00 · 1.35 · 1.75", "st": "ok", "rise": "능력이 재능(1차/2차 경계)까지 오르는 속도 배율. 재능 값 자체는 안 오름(생성기가 한 번 뽑음).", "link": "레슨 도착 증가량이 능력 점수가 재능 이하일 때(일반 성장 1차) 이 배율로 바뀜.", "src": ["data/idol_ability_sim/absorb_decay_table.csv(TALENT_ABSORB_TIER)", "src/game/core-proposal/talent.ts(talentGain)", "data/core_proposal/idol_ability_talent.csv"], "note": "모두 임시(나중에 결정)."}, {"id": "M3", "g": "MD", "n": "2차 성장 감속(2차 성장)", "k": "×0.5 → … → ×0.0002 · 끝 100", "st": "ok", "rise": "능력이 재능을 넘은 뒤(2차 성장) 오르는 속도.", "link": "능력 > 재능이면 자동 적용. 같은 주사위라도 더 많이 쌓아야 오르는 구간.", "src": ["data/idol_ability_sim/absorb_decay_table.csv(FILL_DECAY_STEP)", "data/core_proposal/idol_ability_talent.csv(over_talent_*)", "src/game/core-proposal/talent.ts"], "note": "천장 100은 임시(나중에 결정)."}, {"id": "M4", "g": "MD", "n": "단계 최대치(단계 최대치 detail_max)", "k": "38 · 63 · 100 · 150 · 200", "st": "tbl", "rise": "멤버 단계마다 능력이 오를 수 있는 위쪽 한도(재능보다 먼저 막음).", "link": "talent.ts가 읽어서 화면의 구역(1차/2차/단계 초과)을 가르지만, 멤버 단계를 올리는 일차별 계산은 공통 창에 없음.", "src": ["data/idol_ability_sim/idol_growth_stage_gate.csv", "src/game/core-proposal/talent.ts(zoneOf)"], "note": "확인 필요: 단계 최대치 150·200이 천장 100보다 큼(표 값 그대로 적음). 천장 100과 어떻게 맞출지는 정해진 기록 못 찾음."}, {"id": "M5", "g": "MD", "n": "10단계 구간 · 필요 누적(능력 × 10단계 표)", "k": "결정 71~75 · 구현 안 함", "st": "none", "rise": "능력 하나의 범위를 10단계로 나누고, 단계마다 필요한 주사위 누적을 정하는 표.", "link": "주사위 개수에 비례(결정 70)해 오르되 구간을 둠. 제안식(검수 대기): 필요 누적 = 기본 × 단계 계수 × 2차 가중 ÷ 건물 배수.", "src": ["비앙카_발란스작업서류.md ⑪(652~883줄)", "발란스_종합체크문서.md 결정 70~76"], "note": "구조는 정했지만 구현을 시작하지 않음. 지금 60일 계산은 이 표 없이 돌아감."}, {"id": "M8", "g": "MD", "n": "굴림 배수의 능력 반영(배수 → 능력)", "k": "결정 70과 어긋날 수 있음", "st": "cand", "rise": "굴림 배수를 올리면 능력도 더 오르는지.", "link": "dice_input_scenario의 roll_mult_rule 설명: core 레슨 도착은 배수를 안 곱해서 배수를 올려도 능력은 안 늘고 주사위만 더 씀. 반면 growth_source.csv에는 dice_mult_apply 1이 있고, 결정 70은 능력이 주사위 개수에 비례해야 한다고 함.", "src": ["data/core_proposal/dice_input_scenario.csv(roll_mult_rule)", "data/game/growth_source.csv(dice_mult_apply)", "src/game/core-proposal/systems.ts(lessonArrival)"], "note": "현중 확인이 필요한 항목. 이 문서에서는 판단하지 않음."}, {"id": "M9", "g": "I", "n": "성장 원천 표(성장 원천 167줄)", "k": "칸 93 · 카드 21 · 찬스 21 · 잭팟 21 · 미니게임 11", "st": "tbl", "rise": "능력이 오르는 모든 원천의 기본 증가량 표(옛 성장 모듈 기준 표).", "link": "core 시뮬은 이 표 대신 idol_ability_source 7줄을 씀. 이 표는 이식 쪽 기준 표.", "src": ["data/game/growth_source.csv", "data/game/growth_modifier.csv(82)", "data/game/stack_group.csv"], "note": "대표 줄만 읽고 개수를 적음."}, {"id": "M10", "g": "I", "n": "아이템·스킬로 바뀌는 성장(아이템 성장 효과)", "k": "표 0줄 · 최우선 원칙 G31", "st": "none", "rise": "모든 성장 데이터를 아이템(가진 동안)·스킬(즉시)로 바꿀 수 있어야 한다는 원칙의 효과 표.", "link": "도착 시 증가량을 아이템·스킬이 바꾸는 자리. 표가 비어 있음.", "src": ["data/game/item_growth_effect.csv(머리줄만)"], "note": ""}, {"id": "M11", "g": "MD", "n": "척도 환산(그룹 점수 ↔ 100 척도)", "k": "임시 이음 · 척도 다름", "st": "ok", "rise": "능력점을 그룹 문턱(140~15000)과 멤버 천장(100)이 같이 읽도록 잇는 환산.", "link": "그룹 단계·도시 문턱 판정에 쓰임.", "src": ["data/core_proposal/idol_ability_talent.csv(unit_bridge_kind)", "src/game/core-proposal/talent.ts(scale)"], "note": "그룹 문턱과 멤버 천장은 서로 다른 척도라 표 값을 그대로 비교하면 안 됨."}, {"id": "A1", "g": "A", "n": "아이돌 능력(능력 6축: 보컬·댄스·랩·비주얼·끼·프로듀싱)", "k": "천장 = 만렙 = 100(임시)", "st": "ok", "rise": "멤버별 능력 점수(6축 + 세부 18개).", "link": "굴림 → 시설 칸 도착 → (건물 배수 · 재능 1차/2차 · 칸 가중치) → 멤버 전원 각자 전량. 시설 완공 때 한 번, 스케줄 「비움」 0.3(자리값), 다른 도시 무대 칸 0.5도 더해짐.", "src": ["src/game/core-proposal/systems.ts(addAbility · lessonArrival)", "data/core_proposal/idol_ability_source.csv", "data/core_proposal/idol_ability_stat.csv", "data/core_proposal/idol_ability_talent.csv"], "note": "노력의 기회(만렙 기준 약 10%)는 아직 정한 게 없음(현중 10/26)."}, {"id": "A2", "g": "A", "n": "숨은 태도(태도·성실성)", "k": "아카데미 연결 없음 · 천장 안 정함", "st": "tbl", "rise": "6각형 밖 숨김 값.", "link": "아카데미 칸은 lesson_stat_id가 비어 능력에 안 이어짐. 도시 방문 17번 현지 무대 칸이 이 값을 +0.5 주도록 표에 적혀 있음.", "src": ["data/core_proposal/idol_ability_stat.csv(hidden_attitude)", "data/core_proposal/city_visit_tile.csv(17번)", "data/core_proposal/facility_growth.csv(facility_dorm)"], "note": "아카데미 → 태도 길이 「작업 안 된 연결」."}, {"id": "A7", "g": "A", "n": "학습(영어·중국어·일본어 등급)", "k": "등급 1~5 · 표만", "st": "cand", "rise": "언어 학습 점수·등급.", "link": "학습 칸·학습 미니게임 자리. core 시뮬엔 없고 프로토 쪽 사용은 확인 못 함.", "src": ["data/idol_ability_sim/idol_growth_study_grade.csv", "idol_growth_study_start.csv", "idol_growth_sim_config.csv(STUDY_MAX)"], "note": ""}, {"id": "C1", "g": "C", "n": "팬 수(칸별 팬 수)", "k": "팬 곡선 cap 0.55 · half 800", "st": "ok", "rise": "칸별 팬 · 팬덤 합 · 팬 수익 곡선.", "link": "능력이 오른 양(멤버 평균)만큼 팬이 늘고, 완공 때 fan_gain이 더해짐. 그 팬이 칸 수익 곡선에 들어감.", "src": ["data/core_proposal/fan_income_config.csv", "data/core_proposal/idol_ability_stat.csv(fan_gain_per_point)", "data/core_proposal/facility_growth_level.csv(fan_gain)", "src/game/core-proposal/systems.ts(addAbilityFans)"], "note": "⚠ fan_gain_per_point와 시뮬이 읽는 fan_gain이 전부 0(자리값)이라, 지금 표 값으로는 팬이 오르지 않음."}, {"id": "B5", "g": "B", "n": "도시 진출(새 도시 2지역)", "k": "문턱 6000 · 15000 · 방문 굴림 20", "st": "ok", "rise": "해금 · 방문 굴림 · 수입 배율 · 현지 팬. 방문 중 현지 무대 칸이 능력을 올림.", "link": "그룹 능력 문턱 + 입장권(쟁탈 36번) → 방문 20칸 보드를 굴림으로 돎 → 무대 칸에서 능력.", "src": ["data/core_proposal/city_visit_region.csv", "data/core_proposal/city_visit_tile.csv", "src/game/core-proposal/systems.ts(startVisit · visitStep)"], "note": "표의 문턱 값은 10/25 목표표에 맞춰 고쳐져 결정 44의 140·300과 다름."}, {"id": "E4", "g": "E", "n": "카드팩(카드팩 4종)", "k": "팩당 3장 · 보장 별 1~4", "st": "tbl", "rise": "카드를 얻는 팩(별 등급 확률).", "link": "주사위로 굴려 얻는 칸 연결은 못 찾음. 카드팩은 무료 800 총량의 일부로 정해짐(결정 18·62).", "src": ["data/master/item_master_card_pack.csv", "data/game/card_pack_odds.csv", "src/game/economy/packs.ts(이름만 확인)"], "note": ""}, {"id": "F1", "g": "F", "n": "라포 4축(라포: 신뢰·이해·협력·긴장)", "k": "이벤트 47개 · 0~100", "st": "tbl", "rise": "멤버 쌍의 라포 점수.", "link": "칸 도착 시 관계 사건(표: source_kind=칸, 예: 4번 칸 협력 +0.22). 프로토 board-rapport.mjs는 칸 도착에서 부르지만 핵심 제안 시뮬·공통 창엔 연결 없음.", "src": ["data/rapport_sim/rapport_event.csv", "data/rapport_sim/rapport_axis.csv", "src/simulator/shared/board-rapport.mjs(머리말)"], "note": "쿨다운 0은 임시."}, {"id": "I7", "g": "I", "n": "찬스 카드 효과(찬스 카드 68장 · 효과 27)", "k": "효과 크기 1 = 자리값", "st": "none", "rise": "찬스 사건으로 능력·돈·팬이 바뀜.", "link": "찬스 칸 도착에서 발동. 60일 계산엔 안 들어감.", "src": ["data/idol_ability_sim/chance_card.csv", "data/idol_ability_sim/chance_effect.csv"], "note": "현중 10/25·10/26: 아직 안 만든 것."}, {"id": "H2", "g": "H", "n": "오디션 미니게임 성장(미니게임 7종)", "k": "후보 · growth_point 0", "st": "cand", "rise": "능력(보컬·댄스·랩·비주얼) 성장 점수.", "link": "미니게임 결과로 오름. 주사위 굴림과의 연결은 불분명.", "src": ["data/audition_sim/minigame.csv", "data/idol_ability_sim/idol_growth_board_minigame.csv"], "note": ""}, {"id": "X1", "g": "X", "n": "클릭 성장(클릭으로 오르는 성장)", "k": "click-growth.mjs", "st": "cand", "rise": "클릭으로 오르는 성장(라포 ×1 연결).", "link": "주사위 굴림과의 관계 불분명. 어떤 능력을 얼마나 올리는지 이번에 못 열어봄.", "src": ["src/simulator/click-growth.mjs(629줄 · 머리말만)"], "note": "성장데이터리스트 후보 2."}, {"id": "X2", "g": "X", "n": "원정 완료(원정)", "k": "원정 25 · pending", "st": "cand", "rise": "원정 완료 시 능력.", "link": "원정 기획에서 정함(범위 밖). 주사위와의 연결 불분명.", "src": ["data/core_proposal/idol_ability_source.csv(expedition)"], "note": "성장데이터리스트 후보 3."}, {"id": "X3", "g": "X", "n": "유저(대표) 레벨", "k": "표·코드에 없음", "st": "cand", "rise": "계정(대표) 레벨.", "link": "표·코드에 없음. 만들지, 주사위와 어떻게 이을지 현중 결정 필요.", "src": ["보고/20261026_0940_이스라트_성장데이터리스트.md 14장 5번"], "note": ""}, {"id": "X4", "g": "X", "n": "방치 시뮬레이터 오프라인 진행", "k": "이번에 안 읽음", "st": "cand", "rise": "오프라인에서 진행되는 새 성장일 수 있음.", "link": "클로드 기획서에 있을 수 있으나 이번에 안 읽음.", "src": ["보고/20261025_2135_클로드_방치시뮬레이터_기획제작보고.md(안 읽음)"], "note": "성장데이터리스트 후보 7."}, {"id": "A5", "g": "A", "n": "멤버 단계(아이돌 단계 5단)", "k": "연습생 → 데뷔 → 라이징 스타 → 톱스타 → 월드스타", "st": "tbl", "rise": "멤버 단계 · 단계 최대치(아이돌 등급 큰 지표와 같은 줄기).", "link": "능력이 문턱을 넘으면 오름(단계 최대치가 먼저 막고 단계가 오르면 재능까지). 올림 계산은 공통 창에 구조 없음.", "src": ["data/idol_ability_sim/idol_growth_stage_gate.csv", "src/tools/balanceTool/commonWindow/adapter.ts(emptyIndicators idolGrade)"], "note": "아이돌 등급은 전수대조표에 「성장 지표 카드」로 있으나 값 연결은 이 한 곳뿐."}, {"id": "A6", "g": "A", "n": "꽃 단계(새싹·봉오리·개화)", "k": "표시 이름만", "st": "tbl", "rise": "능력 값에 따라 바뀌는 표시 이름.", "link": "능력 값을 읽어 이름만 바꿈(표시 전용).", "src": ["data/core_proposal/idol_flower_stage.csv"], "note": ""}, {"id": "B1", "g": "B", "n": "그룹 단계(그룹 단계 5단)", "k": "문턱 0 · 140 · 1100 · 6000 · 15000", "st": "ok", "rise": "그룹 단계 · 출전권 등급(festival_grade 0~4).", "link": "멤버 평균 능력이 문턱을 넘으면 오름(checkStage). 굴림 → 능력 → 그룹 단계.", "src": ["data/core_proposal/idol_growth_stage.csv", "src/game/core-proposal/systems.ts(checkStage)", "data/core_proposal/core_proposal_config.csv(sim_debut_song_rule)"], "note": "결정 43의 20·60·140·300과 표 값이 다름(표는 10/25 클로드가 목표표에 맞춰 고침). 그룹 단계와 멤버 단계는 서로 다른 목록."}, {"id": "B2", "g": "B", "n": "팀 등급(팀 등급 3단)", "k": "솔로 · 완성체 · 정상", "st": "tbl", "rise": "팀 등급.", "link": "멤버 합 + 기획사 + 카드 + 팀 스탯 무게. 프로토 team-grade.mjs엔 계산이 있으나 핵심 제안·60일엔 일차별 계산 없음.", "src": ["data/idol_ability_sim/idol_team_grade.csv", "src/game/fan-tier/team-grade.mjs"], "note": "문턱 평균 기준 재정리는 발란스 대기(Q05·Q24)."}, {"id": "B3", "g": "B", "n": "팀 스탯(호흡·포메이션·화음·콘셉트 조화·케미·단합도)", "k": "6개 · 최대 발란스 대기", "st": "tbl", "rise": "팀 공통 스탯.", "link": "멤버 합류·팀 결성 뒤 열림(출처·연결 표 별도). 주사위와의 연결은 간접.", "src": ["data/idol_ability_sim/idol_growth_team_stat.csv", "idol_growth_team_axis_influence.csv", "idol_growth_team_form_step.csv"], "note": ""}, {"id": "B4", "g": "B", "n": "멤버 수(멤버 수 1 → 5명)", "k": "사옥 2·3·4·5단계에서 +1", "st": "ok", "rise": "그룹 인원. 사옥 캐스팅권 +1(단계 2·3·4·5)을 이 박스에 합침.", "link": "사옥 증설 → 캐스팅권 → 멤버 추가(upgrade hq). 굴림 → 출발 칸/사옥 칸 → 돈 → 증설.", "src": ["data/core_proposal/core_proposal_config.csv(max_members · member_join_ability_pct)", "data/core_proposal/facility_growth.csv(facility_company)"], "note": ""}, {"id": "B6", "g": "B", "n": "출전권(출전권 4등급)", "k": "표 4줄이 비어 있음", "st": "none", "rise": "대회 출전 자격 등급.", "link": "그룹 단계의 festival_grade에서 정해질 자리. 읽는 코드 없음.", "src": ["data/game/festival_ticket.csv", "data/core_proposal/idol_growth_stage.csv(festival_grade)"], "note": ""}, {"id": "C2", "g": "C", "n": "팬 7층(콘크리트·코어·라이트·머글·휴덕·악개·안티)", "k": "층 이동 비율 대부분 임시", "st": "cand", "rise": "층별 인원 이동(라이트 → 코어 → 콘크리트 · 이탈 · 안티).", "link": "활동한 날·큰 이벤트·이탈로 움직임. 굴림과 어떻게 이어지는지 불분명. 공통 창엔 층 비율 구조 없음.", "src": ["data/fan_tier/fan_tier.csv", "fan_tier_transition.csv", "src/game/fan-tier/crowd.mjs"], "note": ""}, {"id": "C3", "g": "C", "n": "팬 마일스톤(팬 마일스톤 8단)", "k": "1·3·7·15·30·50·75·100%", "st": "tbl", "rise": "시즌 팬 상한 대비 달성 단계.", "link": "팬 수가 오르면 단계 달성. 읽는 코드는 mount.ts 쪽으로 보이나 확인 못 함.", "src": ["data/game/fan_milestone_reward.csv"], "note": "보상 연결은 발란스 대기."}, {"id": "C4", "g": "C", "n": "판정 팬 배율(올킬·차트인·광탈)", "k": "1.5 · 1 · 0.5", "st": "tbl", "rise": "도착 판정에 따른 팬 반응 배율.", "link": "판정은 도착 때 돈 수익 배율(대박 ×2 · 중박 ×1 · 운망 ×0.5)로는 계산됨. 팬 배율 표(fan_hit_rate)는 balanceTool 화면 쪽에서만 읽히고 계산에 쓰는 곳은 못 찾음.", "src": ["data/core_proposal/fan_hit_rate.csv", "src/game/core-proposal/systems.ts(judgeRoll)", "src/tools/balanceTool/data.ts"], "note": "성장데이터리스트에는 「계산 있음」으로 적혔으나 이번에 코드를 다시 보고 「표만 있음」으로 바꿈."}, {"id": "C5", "g": "C", "n": "악개 발생(악개)", "k": "1.176(임시) · 총량 불변", "st": "tbl", "rise": "특출난 팀에서 악개 비율.", "link": "팬이 늘 때 적용되는 config 값. 화면 팬 수에서 악개 제외.", "src": ["data/core_proposal/fan_income_config.csv(toxic_standout_ratio)"], "note": ""}, {"id": "C6", "g": "C", "n": "주사위 배수 해금(주사위 배수 10단)", "k": "팬 수로 ×1 ~ ×1000 열림", "st": "ok", "rise": "쓸 수 있는 굴림 배수.", "link": "팬 수가 문턱을 넘으면 더 큰 배수를 쓸 수 있음(이식 경제 multOptions). 굴림 배수 박스로 되돌아감.", "src": ["data/master/item_master_dice_mult.csv", "src/game/economy/session.ts"], "note": "문턱은 평균 변환 안 함."}, {"id": "C8", "g": "C", "n": "팬 기준 해금(모험 길 해금 팬 %)", "k": "공통 창 쪽 구조 없음", "st": "none", "rise": "팬 수로 열리는 모험 길.", "link": "팬이 쓰는 코드를 못 찾음(이식 경제엔 있음 확인 못 함).", "src": ["data/game/adventure_route.csv(unlock_fan_pct)"], "note": ""}, {"id": "D5", "g": "D", "n": "건물 완공 능력(완공 능력)", "k": "단계당 0 또는 1 · 합 29", "st": "ok", "rise": "건물 단계가 오를 때 한 번 능력이 오름.", "link": "굴림 → 도착 → 증설 → 단계 올림 → 능력(addAbility complete).", "src": ["data/core_proposal/facility_growth_level.csv(stat_gain)", "src/game/core-proposal/systems.ts(upgrade)"], "note": ""}, {"id": "D6", "g": "D", "n": "건물 팬 계수(건물 팬 계수)", "k": "1 → 2.125 · 시뮬은 0", "st": "tbl", "rise": "건물 단계별 팬 이득 계수.", "link": "합친 표엔 값이 있으나 core는 0 자리값, fan-gain.mjs의 buildingFactor는 null.", "src": ["data/master/building_master_level.csv(effect_fan_gain)", "src/game/fan-tier/fan-gain.mjs"], "note": ""}, {"id": "D10", "g": "D", "n": "기획사 능력(건물 단계 합 × 무게)", "k": "최대 발란스 대기", "st": "wait", "rise": "건물 단계 합에 무게를 곱한 점수(팀 등급 계산에 씀).", "link": "건물 단계 합이 올라가면 오름.", "src": ["data/idol_ability_sim/agency_ability_link.csv"], "note": ""}, {"id": "D11", "g": "D", "n": "엔터 파워(건물 단계 합 · 통합 레벨)", "k": "최대 270(문서만)", "st": "none", "rise": "그룹 전체 레벨(건물 단계 합).", "link": "건물 단계 합. 표 행·계산 코드 없음(fan-gain.mjs enterFactor = null).", "src": ["발란스_시각화_전수대조표_20261025.md 2장", "data/idol_ability_sim/idol_growth_growth_factor.csv(줄 없음)"], "note": ""}, {"id": "D12", "g": "D", "n": "기획사 등급/레벨(기획사 등급)", "k": "이름·단계 표 없음", "st": "none", "rise": "소속사 이름·단계.", "link": "엔터 파워(미정)로 정해질 자리. 현중 확인 대기.", "src": ["발란스_시각화_전수대조표_20261025.md #2", "건물성장_기획서(16줄)"], "note": ""}, {"id": "E1", "g": "E", "n": "카드 별 등급(카드 성장 · 별 1~4)", "k": "240장 · growth_level 전부 0", "st": "tbl", "rise": "카드 별(1~4성) · 중복 카드 → 별 변환.", "link": "카드팩에서 나온 카드. growth_level 240줄이 전부 0이고 올리는 계산은 프로토 쪽 확인 못 함.", "src": ["data/game/card.csv", "data/idol_ability_sim/idol_growth_star_convert.csv", "idol_growth_card_owned.csv"], "note": ""}, {"id": "E2", "g": "E", "n": "카드 효과 양(카드 효과)", "k": "effect_amount 읽는 코드 없음", "st": "none", "rise": "카드 보유에 따른 능력 효과.", "link": "effect_amount를 읽는 코드가 없어 카드가 능력에 영향을 못 줌.", "src": ["data/game/card.csv(effect_amount)", "발란스_종합체크문서.md 4-A Q21"], "note": ""}, {"id": "E3", "g": "E", "n": "카드 수집 보상(카드 수집)", "k": "테마 20 · 수집 25/50/75/100%", "st": "cand", "rise": "테마 완성 수 · 수집 %.", "link": "카드 모음에서 오름. 주사위 굴림과의 연결은 불분명.", "src": ["data/game/card_theme.csv", "card_collection_reward.csv", "card_book_config.csv"], "note": ""}, {"id": "E5", "g": "E", "n": "카드 덱 · 카드 부스트(카드덱)", "k": "덱 13~20 · 최대 20", "st": "cand", "rise": "덱에 모인 카드 수로 성장 보정.", "link": "옛 성장 모듈 표. 현재 흐름과 어떻게 이어지는지 불분명.", "src": ["data/idol_ability_sim/idol_growth_growth_factor.csv(FAN_DECK)", "idol_growth_stage_gate.csv(deck_need)"], "note": ""}, {"id": "F2", "g": "F", "n": "라포 효과 계수(라포 효과)", "k": "0.001/점 · 상한 0.1 · 지금 0", "st": "tbl", "rise": "모험 성공 · 기분 · 단계 문턱 · 클릭 성장 보정.", "link": "라포 점수가 오르면 계수만큼 보정(연결만 있고 효과 0).", "src": ["data/rapport_sim/rapport_effect_map.csv"], "note": ""}, {"id": "F3", "g": "F", "n": "성격 변화(성격 특성 6규칙)", "k": "period 7(임시)", "st": "tbl", "rise": "성격 특성이 더해지거나 빠짐.", "link": "긴장이 오래 높음 등으로 바뀜. 아이템·스킬 자리.", "src": ["data/rapport_sim/trait_change_rule.csv"], "note": ""}, {"id": "F4", "g": "F", "n": "라포 쌍(멤버 짝 점수 기록)", "k": "표 0줄", "st": "none", "rise": "멤버 짝별 점수 기록.", "link": "런타임에 채워질 자리. 표 0줄.", "src": ["data/game/rapport_pair.csv"], "note": "결정 59: 라포 쌍 하루 단위 계산 신설(구현 대기)."}, {"id": "G1", "g": "G", "n": "몬스 기분(몬스 기분 0~100)", "k": "시간·돌봄·쇼로 오르내림", "st": "cand", "rise": "기분 게이지(다마고치식).", "link": "시간과 돌봄으로 움직이고 주사위 굴림에서 직접 오르는 길은 못 찾음.", "src": ["data/stage_battle/stage_battle_mood_rule.csv", "stage-battle/resolve.ts(moodFor)"], "note": ""}, {"id": "G6", "g": "G", "n": "몬스 자체 성장(몬스 레벨)", "k": "표에 레벨·등급 열 없음", "st": "cand", "rise": "몬스 자체 레벨·등급.", "link": "몬스 표에 레벨·등급 열이 없어 구조도 없음. 주사위와의 연결도 불분명.", "src": ["data/game/mons.csv", "data/mons_proto/mons_catalog.csv"], "note": "구조 없음 + 연결 불분명 → 후보로 둠."}, {"id": "H1", "g": "H", "n": "오디션 성장 단계(오디션 단계 0~4)", "k": "주사위 사용량 값 비어 있음", "st": "wait", "rise": "연습생 → … → 월드스타 단계 · 스토리 해금(멤버 단계와 같은 줄기).", "link": "주사위 사용(값 미정). 표에 주사위 비용 칸은 있으나 값이 비어 있음.", "src": ["data/audition_sim/growth_step.csv"], "note": "표 note: 단계 판정은 덱·무대 합으로 대체."}, {"id": "H3", "g": "H", "n": "모험 길 해금(모험 번영도)", "k": "길 35 · 티켓 일 3", "st": "cand", "rise": "번영도 → 길 해금.", "link": "모노 이식 코드로 있음. 본 게임 굴림과의 연결은 확인 못 함(팬 % 해금은 구조 없음).", "src": ["data/game/adventure_route.csv", "adventure_config.csv", "data/mono_raw/adventure/adventure_difficulty_badge_config.csv"], "note": ""}, {"id": "H6", "g": "H", "n": "서사 해금(스토리 해금)", "k": "해금만 · 발란스 값 없음", "st": "none", "rise": "멤버 단계로 열리는 서사.", "link": "멤버 단계가 오르면 해금. 발란스 값 없음.", "src": ["data/audition_sim/story.csv(unlock_step)", "data/rapport_sim/member_story_template.csv"], "note": ""}]};
+// 보드 40칸(board_tile · idol_growth_source 이름). out = 이 칸에서 날아갈 보상 자리(조사표 10:30·11:05 기준 시안 · 계산 연결 전)
+const BOARD=[[1, "사옥(출발)", "사옥", "corner_start", []], [2, "아카데미", "아카데미", "facility", []], [3, "팬덤 반응", "팬 반응", "fan_react", []], [4, "기초 안무", "댄스 연습실", "facility", ["ability"]], [5, "정산", "정산", "settle", ["money"]], [6, "방송국 쟁탈", "쟁탈", "casting", []], [7, "보컬 레슨", "보컬 녹음실", "facility", ["ability", "money"]], [8, "스케줄 변경", "찬스", "schedule", []], [9, "가이드 녹음", "보컬 녹음실", "facility", ["ability", "money"]], [10, "녹음 부스", "프로듀싱 스튜디오", "facility", ["ability"]], [11, "기숙사", "휴식", "corner_rest", []], [12, "응원봉 매대", "팬샵", "facility", ["money"]], [13, "A&R 미팅", "프로듀싱 스튜디오", "company", ["ability", "money"]], [14, "팬사인회", "팬샵", "facility", ["money"]], [15, "팝업스토어", "팬샵", "facility", ["money"]], [16, "광고주 쟁탈", "쟁탈", "casting", []], [17, "콘셉트 회의", "뷰티 스튜디오", "facility", ["ability"]], [18, "팬덤 반응", "팬 반응", "fan_react", []], [19, "뮤비 촬영", "뷰티 스튜디오", "facility", ["ability"]], [20, "쇼케이스", "뷰티 스튜디오", "facility", ["ability"]], [21, "본가", "휴식", "corner_rest", []], [22, "집중 트레이닝", "보컬 녹음실", "facility", ["ability", "money"]], [23, "스케줄 변경", "찬스", "schedule", []], [24, "안무 합숙", "댄스 연습실", "facility", ["ability"]], [25, "안무 영상 촬영", "댄스 연습실", "facility", ["ability"]], [26, "공연기획 쟁탈", "쟁탈", "casting", []], [27, "유튜브 라이브", "예능 방송국", "facility", ["ability", "money", "fan"]], [28, "팬플 라이브", "예능 방송국", "facility", ["ability", "money", "fan"]], [29, "매니지먼트 미팅", "프로듀싱 스튜디오", "company", ["ability", "money"]], [30, "숏폼 라이브", "예능 방송국", "facility", ["ability", "money", "fan"]], [31, "감옥", "감옥", "corner_jail", []], [32, "거리 버스킹", "콘서트장", "facility", ["ability", "money", "fan"]], [33, "대학 축제", "콘서트장", "facility", ["ability", "money", "fan"]], [34, "팬덤 반응", "팬 반응", "fan_react", []], [35, "거리공연", "콘서트장", "facility", ["ability", "money", "fan"]], [36, "해외 쟁탈", "쟁탈", "casting", ["ticket"]], [37, "아카데미", "아카데미", "facility", []], [38, "스케줄 변경", "찬스", "schedule", []], [39, "아카데미", "아카데미", "facility", []], [40, "대형 정산", "정산", "settle", ["money"]]];
+let pos=1;
+const NODE=Object.fromEntries(FLOW.N.map(n=>[n.id,n]));
+const STT={ok:"계산 있음",tbl:"표만 있음",none:"구조 없음",wait:"발란스 대기",cand:"후보 확인 필요"};
+const st=id=>""; // 게임 화면: 상태 꼬리표 안 보임(흐름표 상태는 탭 점 색으로만)
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+// 주기: 무료 800/일 · 헤비 66,667/일(결정 56) → 굴림 1번 = 하루 초 ÷ 하루 개수
+const INPUT={free:{label:"무료 800/일",perDay:800},heavy:{label:"헤비 66,667/일",perDay:66667}};
+let input="free",tab="roll",running=false,raf=0,t0=0,page=0,bet=1,betMode="manual";
+const GATE=10; // economy_config gate_min_rolls: 그 배수로 최소 10번 굴릴 주사위가 있어야 걸 수 있음
+const BETMODE={manual:"직접",fixed:"고정",max:"열린 최대",pct:"보유 %"};
+const cycleSec=()=>86400/INPUT[input].perDay;
+const fmtSec=s=>s>=60?`${(s/60).toFixed(1)}분`:`${s.toFixed(s<10?1:0)}초`;
+// 배수 사다리·팬 문턱: 흐름표 R2(item_master_dice_mult)
+const LADDER=[1,2,5,10,20,50,100,200,500,1000],FANMIN=[0,0,0,0,0,5500,8010,9370,10610,11210];
+const AXES=[["보컬","🎤"],["댄스","💃"],["랩","🎙"],["비주얼","✨"],["끼","🎭"],["프로듀싱","🎹"]];
+const BUILD=[["facility_recording","보컬 녹음실","보컬 · 랩"],["facility_dance","댄스 연습실","댄스"],["facility_concert","콘서트장","랩 · 무대"],["facility_agency","뷰티 스튜디오","비주얼"],["facility_broadcast","예능 방송국","끼 · 무대"],["facility_producing","프로듀싱 스튜디오","프로듀싱"],["facility_fanshop","팬샵","팬 · 수익"],["facility_dorm","아카데미","외국어·태도(능력 연결 없음)"],["facility_company","사옥","출발 칸 · 캐스팅권"]];
+const STAGES=[["연습생",0],["데뷔",140],["솔로",1100],["완성체",6000],["정상",15000]];
+const MILE=[1,3,7,15,30,50,75,100];
+// 탭: 열린 것 = 흐름표 「계산 있음」, 잠긴 것 = 구조 없음 · 대기 · 표만 · 후보 (데이터가 들어오면 열림)
+const TABS=[
+ {id:"roll",i:"🎲",n:"굴림",node:"R1",open:1},{id:"ability",i:"🎤",n:"능력",node:"A1",open:1},{id:"build",i:"🏢",n:"건물",node:"D1",open:1},
+ {id:"fan",i:"💗",n:"팬",node:"C1",open:1},{id:"group",i:"⭐",n:"단계",node:"B1",open:1},{id:"city",i:"🗺",n:"도시",node:"B5",open:1},
+ {id:"card",i:"🃏",n:"카드",node:"E1"},{id:"rapport",i:"🤝",n:"라포",node:"F1"},{id:"chance",i:"🎴",n:"찬스",node:"T5"},{id:"fanreact",i:"📣",n:"팬 반응",node:"T6"},
+ {id:"ticket",i:"🎫",n:"출전권",node:"B6"},{id:"agency",i:"🏷",n:"기획사 등급",node:"D12"},{id:"mons",i:"🐾",n:"몬스",node:"G1"},
+ {id:"audition",i:"🎬",n:"오디션",node:"H1"},{id:"adventure",i:"🧭",n:"모험",node:"H3"},{id:"team",i:"🫶",n:"팀 스탯",node:"B3"},{id:"lang",i:"📚",n:"학습",node:"A7"},
+ {id:"attitude",i:"🧘",n:"태도",node:"A2"},{id:"item",i:"🎁",n:"아이템",node:"M10"},{id:"fan7",i:"🌈",n:"팬 7층",node:"C2"},{id:"store",i:"🛒",n:"상점",node:"IN5"},
+ {id:"mission",i:"✅",n:"미션",node:"IN8"},{id:"stagecap",i:"📦",n:"보관 상한",node:"IN6"}
+];
+const PER=13;
+function renderTabs(){
+  const list=TABS.slice(page*PER,page*PER+PER);
+  document.querySelector("[data-tabs]").innerHTML=list.map(t=>{const n=NODE[t.node];const col=n?`var(--st-${n.st})`:"#555";
+    return `<button type="button" class="tab ${t.id===tab?"on":""} ${t.open?"":"lk"}" data-tab="${t.id}" aria-label="${esc(t.n)}"><span class="dot" style="background:${col}"></span><span class="i">${t.open?t.i:"🔒"}</span>${t.open?esc(t.n):"???"}</button>`}).join("")
+    +`<button type="button" class="tab more" data-page aria-label="다음 탭">${page?"‹":"›"}</button>`;
+}
+function head(ic,nm,lv,ct){document.querySelector("[data-sk-ic]").textContent=ic;document.querySelector("[data-sk-nm]").textContent=nm;document.querySelector("[data-sk-lv]").textContent=lv;document.querySelector("[data-sk-ct]").textContent=ct;}
+function rollView(){
+  head("🎲","굴림",`배수 ×${bet}`,"열림 5/10");
+  const openM=LADDER.filter((m,i)=>FANMIN[i]===0),lockedM=LADDER.map((m,i)=>[m,FANMIN[i]]).filter(x=>x[1]>0);
+  const betCard=`<section class="bet"><b>🎲 배수</b><div class="bl">${LADDER.map((m,i)=>{const open=FANMIN[i]===0;return `<button type="button" class="bm ${m===bet?"on":""} ${open?"":"lk"}" data-bet="${m}" ${open?"":"disabled"}>${open?"×"+m:"🔒"}</button>`}).join("")}</div></section>`;
+  const ladder=betCard+lockedM.slice(0,1).map(([m,f])=>`<div class="lock"><span class="ic">🔒</span><span class="t"><b>배수 ×${m} 굴림</b><span>팬 ${f.toLocaleString("ko-KR")} 필요</span></span><button type="button" class="btn">해금</button></div>`).join("");
+  return `<section class="act">
+    <div class="hd"><span class="ic" data-die>🎲</span><div><h2>주사위 굴림 ${st("R1")}</h2><p>보드 40칸</p></div><button type="button" class="min" aria-label="접기">–</button></div>
+    <div class="chips"><span class="chip" title="${esc(INPUT[input].label)} · 하루 초 ÷ 하루 개수">⏱ ${fmtSec(cycleSec())}</span><span class="chip c2" title="한 번에 거는 배수">🎲 ×${bet}</span><span class="chip c3" title="건물 레슨 배수">✦ ×—</span><span class="chip" title="재능">🌱 ×—</span></div>
+    <div class="lvbar"><i style="width:0%"></i><b>다음 증설까지</b><span>돈 — / — ${st("D1")}</span></div>
+    <div class="rollline" data-rollline><span class="dice"><i data-d1>⚀</i><i data-d2>⚀</i></span><b data-sum>—</b><span class="arrow">→</span><span class="land" data-land>1번 · 출발(사옥)</span></div>
+    <div class="runzone"><div class="outrow">
+      <div class="slot" data-out="ability" data-to="[data-tab=ability]"><span class="q">—</span><div class="ic">🎤</div><span class="p">능력</span></div>
+      <div class="slot" data-out="money" data-to=".coin"><span class="q">—</span><div class="ic">💰</div><span class="p">돈</span></div>
+      <div class="slot" data-out="fan" data-to="[data-tab=fan]"><span class="q">—</span><div class="ic">💗</div><span class="p">팬</span></div>
+      <div class="slot off" data-out="ticket" data-to="[data-tab=city]"><span class="q">—</span><div class="ic">🎫</div><span class="p">입장권</span></div>
+    </div>
+    <div class="runrow"><div class="prog"><i data-prog></i></div><button type="button" class="go ${running?"stop":""}" data-run>${running?"중단":"시작"}</button></div></div>
+  </section>${ladder}`;
+}
+function abilityView(){
+  head("🎤","능력","아이돌","천장 100");
+  return `<section class="act"><div class="hd"><span class="ic">🎤</span><div><h2>아이돌</h2><p>재능 — · 능력 —</p></div></div>
+  <div class="axes">${AXES.map(([a,i])=>`<div class="ax"><span>${i} ${a}</span><div class="bar"><s style="left:50%"></s></div><em>—</em></div>`).join("")}</div></section>
+`; // 10/26 현중: 아이돌 한 명만(팀은 나중)
+}
+function buildView(){
+  head("🏢","건물","9건물","Lv —");
+  return `<div class="rows">${BUILD.map(([id,n])=>`<div class="row slim"><div class="h"><b>${esc(n)}</b><em>Lv —/30</em></div><div class="bar"></div></div>`).join("")}</div>`;
+}
+function fanView(){
+  head("💗","팬","팬 —","0/8");
+  return `<section class="act"><div class="hd"><span class="ic">💗</span><div><h2>팬 —</h2><p>다음 마일스톤 —</p></div></div><div class="lvbar" style="margin-top:10px"><i style="width:0%"></i><b>마일스톤</b><span>0 / 8</span></div></section>
+  ${MILE.slice(0,3).map(m=>`<div class="lock"><span class="ic">🔒</span><span class="t"><b>팬 마일스톤 ${m}%</b><span>보상 —</span></span></div>`).join("")}`;
+}
+function groupView(){
+  head("⭐","단계","연습생","1/5");
+  return `<div class="rows">${STAGES.map(([n,v],i)=>`<div class="row slim ${i?"":"cur"}"><div class="h"><b>${i?"🔒 ":""}${n}</b><em>${v.toLocaleString("ko-KR")}</em></div><div class="bar"></div></div>`).join("")}</div>`;
+}
+function cityView(){
+  head("🗺","도시","0/2","입장권 —");
+  return `${[["새 도시 1","6,000"],["새 도시 2","15,000"]].map(([n,f])=>`<div class="lock"><span class="ic">🔒</span><span class="t"><b>${n}</b><span>능력 ${f}</span></span><button type="button" class="btn">입장</button></div>`).join("")}`;
+}
+function lockedView(t){
+  head("🔒","???","잠김","—");
+  return `<div class="lock q" style="min-height:120px">🔒 ???</div>`;
+}
+function render(){
+  const t=TABS.find(x=>x.id===tab);
+  const html=!t.open?lockedView(t):{roll:rollView,ability:abilityView,build:buildView,fan:fanView,group:groupView,city:cityView}[tab]();
+  document.querySelector("[data-main]").innerHTML=html;renderTabs();
+}
+function loop(now){
+  if(!running)return;const T=cycleSec()*1000,dispT=Math.min(T,1600);// 화면용: 한 바퀴를 최대 1.6초로 줄여 보여 줌(시안)
+  const p=((now-t0)%dispT)/dispT;const bar=document.querySelector("[data-prog]");if(bar)bar.style.width=(p*100).toFixed(1)+"%";
+  if(now-(loop.last||0)>dispT){loop.last=now;pop();}
+  raf=requestAnimationFrame(loop);
+}
+// 한 바퀴 끝 = 굴림 1번: 주사위가 돌고 → 도착 칸 보상이 각자 자리(능력 탭 · 돈 · 팬 탭 · 도시 탭)로 날아감. 어느 보상이 나오는지는 시안 연출(계산 연결 전 · 값 +?)
+function pop(){
+  const FACE="⚀⚁⚂⚃⚄⚅",d1=document.querySelector("[data-d1]"),d2=document.querySelector("[data-d2]"),sum=document.querySelector("[data-sum]"),land=document.querySelector("[data-land]");
+  const die=document.querySelector("[data-die]");if(die){die.classList.remove("spin");void die.offsetWidth;die.classList.add("spin");}
+  const a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6); // 주사위 2개 × 6면(board_runtime dice_count 2 · faces 6)
+  if(!d1)return;d1.classList.add("roll");d2.classList.add("roll");sum.textContent="…";
+  let n=0;const iv=setInterval(()=>{d1.textContent=FACE[Math.floor(Math.random()*6)];d2.textContent=FACE[Math.floor(Math.random()*6)];if(++n>4){clearInterval(iv);
+    d1.classList.remove("roll");d2.classList.remove("roll");d1.textContent=FACE[a-1];d2.textContent=FACE[b-1];sum.textContent=a+b;
+    pos=((pos-1+a+b)%40)+1;const t=BOARD[pos-1];
+    land.innerHTML=`${t[0]}번 · ${esc(t[2])} <em>${esc(t[1])}${t[3]==="corner_jail"?" · 룰(탈출 굴림)":t[4].length?"":" · 보상 없음"}</em>${a===b?' <em style="color:var(--gold)">더블</em>':""}`;
+    if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+    t[4].forEach((k,i)=>{const sl=document.querySelector(`.slot[data-out="${k}"]`);if(sl)setTimeout(()=>fly(sl),120+i*130);});
+  }},80);
+}
+function fly(sl){
+  const to=document.querySelector(sl.dataset.to);if(!to)return;
+  const a=sl.querySelector(".ic").getBoundingClientRect(),b=to.getBoundingClientRect();
+  const el=document.createElement("div");el.className="flyer";el.innerHTML=`<span>${sl.querySelector(".ic").textContent}</span><b>+?×${bet}</b>`;
+  const x0=a.left+a.width/2,y0=a.top+a.height/2,x1=b.left+b.width/2,y1=b.top+b.height/2;
+  el.style.left=x0+"px";el.style.top=y0+"px";document.body.appendChild(el);
+  const k=document.querySelector(".phone").getBoundingClientRect().width/390;el.style.setProperty("--k",k);
+  const mx=(x0+x1)/2+(Math.random()*80-40)*k,my=Math.min(y0,y1)-90*k;
+  el.animate([{transform:`translate(-50%,-50%) scale(${k})`,offset:0},{transform:`translate(calc(-50% + ${mx-x0}px),calc(-50% + ${my-y0}px)) scale(${1.15*k})`,offset:.45},{transform:`translate(calc(-50% + ${x1-x0}px),calc(-50% + ${y1-y0}px)) scale(${.6*k})`,opacity:.9,offset:1}],{duration:820,easing:"cubic-bezier(.3,.7,.4,1)"}).onfinish=()=>{el.remove();to.classList.remove("bump");void to.offsetWidth;to.classList.add("bump");};
+  const q=sl.querySelector(".q");if(q){q.classList.remove("hit");void q.offsetWidth;q.classList.add("hit");}
+}
+function offline(){
+  const box=document.querySelector("[data-box]");
+  box.innerHTML=`<div class="t"><b>오프라인 보상 (자리 비운 시간)</b><button type="button" class="x" data-close aria-label="닫기">✕</button></div>
+  <div class="in"><b>행동 - 굴림: 주사위 굴림</b>
+   <div><span>굴림 횟수</span><span>—</span></div>
+   <div><span>능력 오름</span><span>—</span></div><div><span>돈</span><span>—</span></div><div><span>팬</span><span>—</span></div><div><span>증설 · 건설</span><span>—</span></div></div>`;
+  document.querySelector("[data-modal]").hidden=false;
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.tab){tab=b.dataset.tab;running=false;cancelAnimationFrame(raf);render();}
+  else if(b.hasAttribute("data-page")){page=page?0:1;renderTabs();}
+  else if(b.hasAttribute("data-run")){running=!running;if(running){t0=performance.now();raf=requestAnimationFrame(loop);}else cancelAnimationFrame(raf);render();if(running)raf=requestAnimationFrame(loop);}
+  else if(b.dataset.in){input=b.dataset.in;document.querySelectorAll("[data-in]").forEach(x=>x.classList.toggle("on",x===b));render();}
+  else if(b.dataset.bet){bet=Number(b.dataset.bet);render();}
+  else if(b.dataset.betmode){betMode=b.dataset.betmode;render();}
+  else if(b.hasAttribute("data-offline"))offline();
+  else if(b.hasAttribute("data-close"))document.querySelector("[data-modal]").hidden=true;
+});
+document.querySelector("[data-modal]").addEventListener("click",e=>{if(e.target.matches("[data-modal]"))e.currentTarget.hidden=true;});
+function fit(){const ph=document.querySelector(".phone");const k=Math.min(innerWidth/390,innerHeight/844);ph.style.transform=`scale(${k})`;}
+addEventListener("resize",fit);fit();
+render();
+</script>

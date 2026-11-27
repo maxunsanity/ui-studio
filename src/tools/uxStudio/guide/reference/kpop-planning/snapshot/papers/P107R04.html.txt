@@ -1,0 +1,112 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><title>아이돌 능력 그래픽 시안</title>
+<style>
+/* 레이아웃: v02와 같은 휴대폰 한 칸(390×844 · 창에 맞춰 확대) — 위: 바깥 아이돌 카드 / 아래: 능력 탭 안 */
+:root{color-scheme:dark;--bg:#0e1118;--card:#1d2330;--card2:#252c3b;--line:#2f3748;--txt:#e6e9f0;--dim:#8a93a6;--blue:#5b6fd6;--blue2:#7d8ff0;--gold:#f0b429;--vio:#a78bfa;--pk:#ff7fb0;
+--t1:#6b7280;--t2:#60a5fa;--t3:#34d399;--t4:#fbbf24;--t5:#f472b6;--f:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;overflow:hidden}
+body{background:#05070b;color:var(--txt);font:14px/1.4 var(--f);display:grid;place-items:center}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.phone{width:390px;height:844px;flex:none;overflow:hidden;background:linear-gradient(180deg,#1b2a3e 0%,#0e1118 30%);display:flex;flex-direction:column;gap:6px;padding:8px 10px;transform-origin:center}
+.tag{font-size:10px;color:var(--gold);align-self:flex-end;border:1px solid #5a4415;border-radius:999px;padding:0 8px}
+/* 바깥 아이돌 카드 */
+.idol{display:grid;grid-template-columns:56px 1fr 64px;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
+.face{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:26px;background:radial-gradient(circle at 35% 30%,#fff3,#0000 60%),linear-gradient(135deg,var(--pk),var(--vio));position:relative}
+.face .ring{position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(var(--gold) var(--p),#2a3140 0);-webkit-mask:radial-gradient(circle,#0000 60%,#000 61%);mask:radial-gradient(circle,#0000 60%,#000 61%)}
+.idol h2{font-size:16px;font-weight:700;display:flex;gap:6px;align-items:center}
+.grade{font-size:11px;font-weight:700;color:#1a1200;background:var(--gold);border-radius:6px;padding:1px 6px}
+.idol p{font-size:11.5px;color:var(--dim)}.idol p b{color:var(--txt);font-weight:600}
+.pop{font-size:12px;color:#7ee2a8;font-weight:700;margin-left:4px}
+/* 능력 탭 */
+.sk{display:grid;grid-template-columns:1fr auto auto;border-radius:12px;overflow:hidden;background:#0b0e14;border:1px solid var(--line)}
+.sk div{padding:9px 12px;font-weight:600}.sk .lv{background:var(--blue);font-size:13px}.sk .ct{background:#2a3140;color:var(--dim);font-size:13px}
+.radarbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 8px 8px;position:relative}
+.legend{display:flex;gap:8px;flex-wrap:wrap;font-size:10.5px;color:var(--dim);justify-content:center}
+.legend i{display:inline-block;width:12px;height:0;border-top:2px solid;vertical-align:middle;margin-right:3px}
+.meters{display:grid;gap:4px}
+.m{display:grid;grid-template-columns:66px 1fr 32px 60px;gap:6px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 8px;white-space:nowrap;font-size:12.5px;text-align:left}
+.m.on{border-color:var(--blue2);background:#222a40}
+.bar{position:relative;height:12px;border-radius:6px;background:linear-gradient(90deg,#2a3140,#2a3140)}
+.bar .z1{position:absolute;top:0;bottom:0;left:0;border-radius:6px 0 0 6px;opacity:.28}
+.bar .z2{position:absolute;top:0;bottom:0;border-radius:0 6px 6px 0;background:linear-gradient(90deg,#a78bfa55,#a78bfa08)}
+.bar .cur{position:absolute;top:2px;bottom:2px;left:0;border-radius:4px;transition:width .5s}
+.bar .tl{position:absolute;top:-3px;bottom:-3px;width:2px;background:#fff}
+.bar .sm{position:absolute;top:-4px;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--gold);transform:translateX(-4px)}
+.m b{font-weight:700;text-align:right}
+.chip{white-space:nowrap;font-size:10px;font-weight:700;border-radius:999px;padding:1px 6px;text-align:center;color:#111}
+.curve{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.curve h4{font-size:12px;font-weight:600;display:flex;justify-content:space-between}.curve h4 span{display:none}
+.det{display:flex;gap:6px;margin-top:6px}.det span{flex:1;background:#2a3140;border-radius:8px;padding:3px 6px;font-size:11px;text-align:center}.det b{display:block;font-size:13px}
+.days{display:flex;gap:4px;align-items:center;font-size:11px;color:var(--dim)}.days button{flex:1;border:1px solid var(--line);border-radius:6px;padding:3px 0;font-size:11px;color:var(--dim)}.days button.on{color:var(--gold);border-color:#5a4415;background:#2a2110}
+.note{font-size:10.5px;color:var(--dim);text-align:center}
+@media (prefers-reduced-motion:reduce){.bar .cur{transition:none}}
+</style>
+<div class="phone">
+  <span class="tag">시안 · 예시 아이돌(생성기 규칙 · 표 값 계산 결과)</span>
+  <section class="idol" data-idol></section>
+  <div class="sk"><div data-sk>🎤 능력</div><div class="lv" data-lv>—</div><div class="ct" data-ct>—</div></div>
+  <section class="radarbox"><svg data-radar viewBox="0 0 360 190" width="100%" height="190" role="img" aria-label="능력 육각형"></svg>
+    <div class="legend"><span><i style="border-color:#fff;border-top-style:dashed"></i>재능</span><span><i style="border-color:var(--gold);border-top-style:dotted"></i>단계 최대치</span><span><i style="border-color:#5b6475"></i>천장 100</span><span><i style="border-color:var(--pk)"></i>지금 능력</span></div></section>
+  <div class="meters" data-meters></div>
+  <section class="curve"><h4><b data-ctitle>흡수율</b><span>능력 0 → 100에서 한 번 오를 때 받는 몫</span></h4><svg data-curve viewBox="0 0 350 56" width="100%" height="56"></svg><div class="det" data-det></div></section>
+  <div class="days"><span>일차</span><span data-days style="display:flex;gap:4px;flex:1"></span></div>
+</div>
+<script>
+const S={"snaps": {"0": {"id": "멤버1", "specialty": "visual", "axes": [{"stat": "idol_ability_stat_vocal", "axis": "vocal", "talent": 46.666666666666664, "score": 0, "zone": "first", "stageMax": 38, "line": 38, "maxed": false}, {"stat": "idol_ability_stat_dance", "axis": "dance", "talent": 38.333333333333336, "score": 0, "zone": "first", "stageMax": 38, "line": 38, "maxed": false}, {"stat": "idol_ability_stat_rap", "axis": "rap", "talent": 40, "score": 0, "zone": "first", "stageMax": 38, "line": 38, "maxed": false}, {"stat": "idol_ability_stat_visual", "axis": "visual", "talent": 83.33333333333333, "score": 0, "zone": "first", "stageMax": 38, "line": 38, "maxed": false}, {"stat": "idol_ability_stat_charm", "axis": "charm", "talent": 36.666666666666664, "score": 0, "zone": "first", "stageMax": 38, "line": 36.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_producing", "axis": "producing", "talent": 35, "score": 0, "zone": "first", "stageMax": 38, "line": 35, "maxed": false}], "talent": 37.27777777777778, "ability": 0, "zone": "first", "maxed": false, "stageIdx": 0}, "5": {"id": "멤버1", "specialty": "visual", "axes": [{"stat": "idol_ability_stat_vocal", "axis": "vocal", "talent": 46.666666666666664, "score": 0.7522156249999999, "zone": "first", "stageMax": 38, "line": 38, "maxed": false}, {"stat": "idol_ability_stat_dance", "axis": "dance", "talent": 38.333333333333336, "score": 0.6672575000000002, "zone": "first", "stageMax": 38, "line": 38, "maxed": false}, {"stat": "idol_ability_stat_rap", "axis": "rap", "talent": 40, "score": 0.7742175000000001, "zone": "first", "stageMax": 38, "line": 38, "maxed": false}, {"stat": "idol_ability_stat_visual", "axis": "visual", "talent": 83.33333333333333, "score": 0.5682600000000002, "zone": "first", "stageMax": 38, "line": 38, "maxed": false}, {"stat": "idol_ability_stat_charm", "axis": "charm", "talent": 36.666666666666664, "score": 0.7768775000000002, "zone": "first", "stageMax": 38, "line": 36.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_producing", "axis": "producing", "talent": 35, "score": 0.4504499999999999, "zone": "first", "stageMax": 38, "line": 35, "maxed": false}], "talent": 37.27777777777778, "ability": 0.6648796875000001, "zone": "first", "maxed": false, "stageIdx": 0}, "10": {"id": "멤버1", "specialty": "visual", "axes": [{"stat": "idol_ability_stat_vocal", "axis": "vocal", "talent": 46.666666666666664, "score": 1.8880312500000005, "zone": "first", "stageMax": 63, "line": 46.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_dance", "axis": "dance", "talent": 38.333333333333336, "score": 1.3801375000000018, "zone": "first", "stageMax": 63, "line": 38.333333333333336, "maxed": false}, {"stat": "idol_ability_stat_rap", "axis": "rap", "talent": 40, "score": 1.7269875000000015, "zone": "first", "stageMax": 63, "line": 40, "maxed": false}, {"stat": "idol_ability_stat_visual", "axis": "visual", "talent": 83.33333333333333, "score": 1.1503800000000013, "zone": "first", "stageMax": 63, "line": 63, "maxed": false}, {"stat": "idol_ability_stat_charm", "axis": "charm", "talent": 36.666666666666664, "score": 1.5794975000000024, "zone": "first", "stageMax": 63, "line": 36.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_producing", "axis": "producing", "talent": 35, "score": 1.051049999999999, "zone": "first", "stageMax": 63, "line": 35, "maxed": false}], "talent": 43.27777777777777, "ability": 1.4626806250000008, "zone": "first", "maxed": false, "stageIdx": 1}, "20": {"id": "멤버1", "specialty": "visual", "axes": [{"stat": "idol_ability_stat_vocal", "axis": "vocal", "talent": 46.666666666666664, "score": 3.703415625000005, "zone": "first", "stageMax": 63, "line": 46.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_dance", "axis": "dance", "talent": 38.333333333333336, "score": 3.0729124999999926, "zone": "first", "stageMax": 63, "line": 38.333333333333336, "maxed": false}, {"stat": "idol_ability_stat_rap", "axis": "rap", "talent": 40, "score": 3.84111, "zone": "first", "stageMax": 63, "line": 40, "maxed": false}, {"stat": "idol_ability_stat_visual", "axis": "visual", "talent": 83.33333333333333, "score": 2.522519999999992, "zone": "first", "stageMax": 63, "line": 63, "maxed": false}, {"stat": "idol_ability_stat_charm", "axis": "charm", "talent": 36.666666666666664, "score": 3.2035500000000012, "zone": "first", "stageMax": 63, "line": 36.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_producing", "axis": "producing", "talent": 35, "score": 2.125200000000002, "zone": "first", "stageMax": 63, "line": 35, "maxed": false}], "talent": 43.27777777777777, "ability": 3.078118020833332, "zone": "first", "maxed": false, "stageIdx": 1}, "30": {"id": "멤버1", "specialty": "visual", "axes": [{"stat": "idol_ability_stat_vocal", "axis": "vocal", "talent": 46.666666666666664, "score": 6.302756249999992, "zone": "first", "stageMax": 63, "line": 46.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_dance", "axis": "dance", "talent": 38.333333333333336, "score": 5.0855175, "zone": "first", "stageMax": 63, "line": 38.333333333333336, "maxed": false}, {"stat": "idol_ability_stat_rap", "axis": "rap", "talent": 40, "score": 5.57639250000001, "zone": "first", "stageMax": 63, "line": 40, "maxed": false}, {"stat": "idol_ability_stat_visual", "axis": "visual", "talent": 83.33333333333333, "score": 3.7976399999999795, "zone": "first", "stageMax": 63, "line": 63, "maxed": false}, {"stat": "idol_ability_stat_charm", "axis": "charm", "talent": 36.666666666666664, "score": 4.97082250000001, "zone": "first", "stageMax": 63, "line": 36.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_producing", "axis": "producing", "talent": 35, "score": 3.280200000000013, "zone": "first", "stageMax": 63, "line": 35, "maxed": false}], "talent": 43.27777777777777, "ability": 4.8355547916666675, "zone": "first", "maxed": false, "stageIdx": 1}, "45": {"id": "멤버1", "specialty": "visual", "axes": [{"stat": "idol_ability_stat_vocal", "axis": "vocal", "talent": 46.666666666666664, "score": 9.799956249999962, "zone": "first", "stageMax": 63, "line": 46.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_dance", "axis": "dance", "talent": 38.333333333333336, "score": 7.874842499999963, "zone": "first", "stageMax": 63, "line": 38.333333333333336, "maxed": false}, {"stat": "idol_ability_stat_rap", "axis": "rap", "talent": 40, "score": 8.531354999999962, "zone": "first", "stageMax": 63, "line": 40, "maxed": false}, {"stat": "idol_ability_stat_visual", "axis": "visual", "talent": 83.33333333333333, "score": 5.641019999999961, "zone": "first", "stageMax": 63, "line": 63, "maxed": false}, {"stat": "idol_ability_stat_charm", "axis": "charm", "talent": 36.666666666666664, "score": 7.705179999999988, "zone": "first", "stageMax": 63, "line": 36.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_producing", "axis": "producing", "talent": 35, "score": 4.862550000000027, "zone": "first", "stageMax": 63, "line": 35, "maxed": false}], "talent": 43.27777777777777, "ability": 7.402483958333311, "zone": "first", "maxed": false, "stageIdx": 1}, "60": {"id": "멤버1", "specialty": "visual", "axes": [{"stat": "idol_ability_stat_vocal", "axis": "vocal", "talent": 46.666666666666664, "score": 13.906856249999949, "zone": "first", "stageMax": 100, "line": 46.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_dance", "axis": "dance", "talent": 38.333333333333336, "score": 10.345282499999916, "zone": "first", "stageMax": 100, "line": 38.333333333333336, "maxed": false}, {"stat": "idol_ability_stat_rap", "axis": "rap", "talent": 40, "score": 11.428094999999919, "zone": "first", "stageMax": 100, "line": 40, "maxed": false}, {"stat": "idol_ability_stat_visual", "axis": "visual", "talent": 83.33333333333333, "score": 7.595279999999942, "zone": "first", "stageMax": 100, "line": 83.33333333333333, "maxed": false}, {"stat": "idol_ability_stat_charm", "axis": "charm", "talent": 36.666666666666664, "score": 10.405342499999946, "zone": "first", "stageMax": 100, "line": 36.666666666666664, "maxed": false}, {"stat": "idol_ability_stat_producing", "axis": "producing", "talent": 35, "score": 6.514200000000043, "zone": "first", "stageMax": 100, "line": 35, "maxed": false}], "talent": 46.666666666666664, "ability": 10.032509374999954, "zone": "first", "maxed": false, "stageIdx": 2}}, "detail": {"idol_growth_stat_vocal_pitch": 50, "idol_growth_stat_vocal_voice": 45, "idol_growth_stat_vocal_interpret": 45, "idol_growth_stat_dance_accuracy": 45, "idol_growth_stat_dance_rhythm": 40, "idol_growth_stat_dance_expression": 30, "idol_growth_stat_rap_flow": 45, "idol_growth_stat_rap_diction": 40, "idol_growth_stat_rap_presence": 35, "idol_growth_stat_visual_face": 80, "idol_growth_stat_visual_camera": 90, "idol_growth_stat_visual_style": 80, "idol_growth_stat_charm_star": 30, "idol_growth_stat_charm_variety": 40, "idol_growth_stat_charm_talk": 40, "idol_growth_stat_rap_lyrics": 30, "idol_growth_stat_producing_compose": 50, "idol_growth_stat_producing_arrange": 25}, "specialty": "visual", "axisTalent": {"vocal": 46.666666666666664, "dance": 38.333333333333336, "rap": 40, "visual": 83.33333333333333, "charm": 36.666666666666664, "producing": 35}};
+const AX=[["vocal","보컬","🎤"],["dance","댄스","💃"],["rap","랩","🎙"],["visual","비주얼","✨"],["charm","끼","🎭"],["producing","프로듀싱","🎹"]];
+// 재능 흡수율 5구간(absorb_decay_table TALENT_ABSORB_TIER) · 2차 감속(FILL_DECAY_STEP 2~7행, 강도 「중」: 폭을 재능~천장에 늘려 씀) · 천장 100(임시)
+const TIER=[[0,29,.5,"최하","--t1"],[30,49,.75,"하","--t2"],[50,69,1,"중","--t3"],[70,84,1.35,"상","--t4"],[85,100,1.75,"최상","--t5"]];
+const DECAY=[[20,.5],[15,.18],[8,.04],[4,.008],[2,.0015],[1,.0002]];
+// 단계(idol_growth_stage_gate): 이름 · 다음 승급 무대 · 세부 최대
+const STAGE=[["연습생","데뷔 쇼케이스",38],["데뷔","음악방송 첫 1위",63],["라이징 스타","단독 콘서트",100],["톱스타","월드투어 첫 공연",150],["월드스타","",200]];
+const DETAIL={vocal:["음정","발성","곡해석"],dance:["칼군무","리듬감","표현력"],rap:["플로우","딕션","무대장악"],visual:["얼굴","카메라","스타일"],charm:["스타성","예능감","입담"],producing:["작사","작곡","편곡"]};
+const DKEY={vocal:["vocal_pitch","vocal_voice","vocal_interpret"],dance:["dance_accuracy","dance_rhythm","dance_expression"],rap:["rap_flow","rap_diction","rap_presence"],visual:["visual_face","visual_camera","visual_style"],charm:["charm_star","charm_variety","charm_talk"],producing:["rap_lyrics","producing_compose","producing_arrange"]};
+const tierOf=t=>TIER.find(x=>t>=x[0]&&t<=x[1])||TIER[0];
+const col=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const days=Object.keys(S.snaps).map(Number).sort((a,b)=>a-b);let day=30,sel=S.specialty,prev=null;
+function snap(){return S.snaps[day];}
+function axisRec(a){return snap().axes.find(x=>x.axis===a);}
+function rateAt(talent,score){if(score<talent)return tierOf(talent)[2];const w=100-talent;let x=talent;for(const [pw,r] of DECAY){x+=w*pw/50;if(score<x)return r;}return DECAY[DECAY.length-1][1];}
+function idolCard(){
+  const s=snap(),st=STAGE[s.stageIdx]||STAGE[0],nx=STAGE[s.stageIdx+1];const avg=s.ability??0;const pAvg=prev?prev.ability:avg;
+  const pct=Math.min(100,avg/(st[2]||100)*100);
+  document.querySelector("[data-idol]").innerHTML=`<div class="face" style="--p:${pct}%"><span class="ring"></span>✨</div>
+  <div><h2>아이돌 <span class="grade">${st[0]}</span></h2><p>능력 <b>${avg.toFixed(1)}</b>${avg>pAvg?`<span class="pop">+${(avg-pAvg).toFixed(1)}</span>`:""} · 특기 ${AX.find(a=>a[0]===S.specialty)[1]}</p><p>${nx?`다음: <b>${st[1]}</b> → ${nx[0]}`:"최고 단계"}</p></div>
+  <svg viewBox="0 0 64 64" width="64" height="64">${hex(32,32,28,s,true)}</svg>`;
+}
+function pts(cx,cy,R,vals){return vals.map((v,i)=>{const a=-Math.PI/2+i*Math.PI/3;return [cx+Math.cos(a)*R*v,cy+Math.sin(a)*R*v];});}
+const poly=(p,attr)=>`<polygon points="${p.map(q=>q.join(",")).join(" ")}" ${attr}/>`;
+function hex(cx,cy,R,s,mini){
+  const tal=AX.map(([a])=>axisRec(a).talent/100),cur=AX.map(([a])=>Math.max(.02,axisRec(a).score/100)),sm=AX.map(([a])=>Math.min(1,axisRec(a).stageMax/100));
+  let g=poly(pts(cx,cy,R,[1,1,1,1,1,1]),`fill="#151a24" stroke="#5b6475" stroke-width="1"`);
+  if(!mini){for(const k of[.25,.5,.75])g+=poly(pts(cx,cy,R,Array(6).fill(k)),`fill="none" stroke="#2a3140"`);}
+  g+=poly(pts(cx,cy,R,sm),`fill="none" stroke="${col("--gold")}" stroke-dasharray="2 3" stroke-width="${mini?1:1.4}"`);
+  g+=poly(pts(cx,cy,R,tal),`fill="#ffffff10" stroke="#fff" stroke-dasharray="5 4" stroke-width="${mini?1:1.5}"`);
+  g+=poly(pts(cx,cy,R,cur),`fill="${col("--pk")}55" stroke="${col("--pk")}" stroke-width="${mini?1.2:2}"`);
+  if(!mini)pts(cx,cy,R*1.18,[1,1,1,1,1,1]).forEach(([x,y],i)=>{const r=axisRec(AX[i][0]);g+=`<text x="${x}" y="${y}" fill="${AX[i][0]===sel?col("--gold"):"#c5cbd8"}" font-size="11" text-anchor="middle" dominant-baseline="middle">${AX[i][2]} ${AX[i][1]} ${r.score.toFixed(1)}</text>`;});
+  return g;
+}
+function meters(){
+  document.querySelector("[data-meters]").innerHTML=AX.map(([a,n,i])=>{const r=axisRec(a),t=tierOf(r.talent),line=Math.min(r.talent,r.stageMax);
+    const now=rateAt(r.talent,r.score);
+    return `<button type="button" class="m ${a===sel?"on":""}" data-ax="${a}"><span>${i} ${n}</span><span class="bar"><span class="z1" style="width:${line}%;background:${col(t[4])}"></span><span class="z2" style="left:${r.talent}%;right:0"></span><span class="cur" style="width:${Math.max(1,r.score)}%;background:${col(t[4])}"></span><span class="tl" style="left:${r.talent}%"></span><span class="sm" style="left:${Math.min(100,r.stageMax)}%"></span></span><b>${r.score.toFixed(1)}</b><span class="chip" style="background:${col(t[4])}">${t[3]} ×${now}</span></button>`;}).join("");
+}
+function curve(){
+  const r=axisRec(sel),W=350,H=56,y=v=>H-6-(Math.log10(v/0.0002)/Math.log10(1.75/0.0002))*(H-14);let d="",x0=0;
+  const t=tierOf(r.talent);let segs=[[0,r.talent,t[2]]];let x=r.talent;for(const [pw,rt] of DECAY){const nx=x+(100-r.talent)*pw/50;segs.push([x,nx,rt]);x=nx;}
+  let svg=segs.map(([a,b,rt],k)=>`<rect x="${a/100*W}" y="${y(rt)}" width="${Math.max(1,(b-a)/100*W)}" height="${H-6-y(rt)}" fill="${k?col("--vio"):col(t[4])}" opacity="${k?.55:.8}"/>`).join("");
+  svg+=`<line x1="${r.talent/100*W}" x2="${r.talent/100*W}" y1="2" y2="${H}" stroke="#fff" stroke-dasharray="3 3"/><text x="${r.talent/100*W+3}" y="10" fill="#fff" font-size="9">재능 ${r.talent.toFixed(0)}</text>`;
+  svg+=`<circle cx="${r.score/100*W}" cy="${y(rateAt(r.talent,r.score))}" r="4.5" fill="${col("--pk")}" stroke="#fff"/><text x="${W-2}" y="${H-1}" fill="#8a93a6" font-size="9" text-anchor="end">100</text><text x="1" y="${H-1}" fill="#8a93a6" font-size="9">0</text>`;
+  document.querySelector("[data-curve]").innerHTML=svg;
+  const nm=AX.find(a=>a[0]===sel);document.querySelector("[data-ctitle]").textContent=`${nm[2]} ${nm[1]} 흡수율 · ${t[3]} ×${t[2]} → 2차 ×0.5 … ×0.0002`;
+  document.querySelector("[data-det]").innerHTML=DKEY[sel].map((k,i)=>`<span>${DETAIL[sel][i]}<b>재능 ${S.detail["idol_growth_stat_"+k]??"—"}</b></span>`).join("");
+}
+function render(){
+  const s=snap(),st=STAGE[s.stageIdx]||STAGE[0];
+  document.querySelector("[data-lv]").textContent=`평균 ${s.ability.toFixed(1)}`;document.querySelector("[data-ct]").textContent=`단계 최대 ${st[2]}`;
+  idolCard();document.querySelector("[data-radar]").innerHTML=hex(180,96,74,s,false);meters();curve();
+  document.querySelector("[data-days]").innerHTML=days.map(d=>`<button type="button" class="${d===day?"on":""}" data-day="${d}">${d}일</button>`).join("");
+}
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.ax){sel=b.dataset.ax;render();}if(b.dataset.day){prev=snap();day=Number(b.dataset.day);render();prev=null;}});
+function fit(){const k=Math.min(innerWidth/390,innerHeight/844);document.querySelector(".phone").style.transform=`scale(${k})`;}addEventListener("resize",fit);fit();render();
+</script>
+</body></html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P217 · 유료화 · 대표 개발 기획서</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"><link rel="stylesheet" href="./리소스/핵심제안_시뮬_20261102/sim.css"><style>.sample-document :target{scroll-margin-top:132px}.sample-document header .actions{flex-wrap:wrap}.sample-document header p{font-size:14px}.doc-ui-section{margin-top:42px;padding-top:24px;border-top:2px solid #c8dcd5}.doc-ui-section>h3{margin:0 0 10px;font-size:23px;color:#2c5659}.doc-ui-section>p{font-size:14px}.doc-ui-section details{padding:0;margin:16px 0;border:1px solid #c9dcd4;border-radius:16px;overflow:hidden;background:#f4f8f2}.doc-ui-section summary{cursor:pointer;min-height:58px;padding:16px 18px;font-weight:700;color:#315e5c;list-style:none}.doc-ui-section summary:after{content:"+";float:right;font-size:20px}.doc-ui-section details[open]>summary:after{content:"−"}.doc-ui-section summary::-webkit-details-marker{display:none}.doc-ui-section [data-sim-host]{padding:0 18px 18px;min-width:0}.doc-key{margin:18px 0;padding:16px 20px;border-left:6px solid #2f7f86;background:#eef6f5;border-radius:12px;font-size:16px;line-height:1.8}.doc-key b{color:#1f4f55}@media(max-width:680px){.sample-document :target{scroll-margin-top:18px}}</style><script type="module" src="./리소스/핵심제안_시뮬_20261102/pay.mjs"></script></head><body class="sample-document"><main><header><div class="eyebrow">P217 · 핵심제안 개발 · 대표 개발 기획서</div><h1>유료화 · 대표 개발 기획서</h1><p>돈은 속도 · 꾸밈 · 소장만 삽니다. <a href="#sim-preview">하단 시뮬레이터</a>에서 상품마다 팔아도 되는지 확인합니다.</p><div class="actions"><a href="./유료화_핵심제안서.md">짝 MD로 읽기</a><a href="../../기획서/산출_기획서_유료화_보완판_v1_클로드.html">상세 정본 · 책갈피 P197</a><a href="/docs/planning/proposal-concept/pay.html" target="_blank" rel="noopener">제안서 원문</a><a href="#sim-preview">판매 판정 시뮬레이터</a></div></header>
+<p><b>이 문서는</b> 무엇을 팔고 무엇을 팔지 않는지, 돈이 순위에 어떻게 닿지 않게 하는지 정리한 대표 개발 기획서입니다.</p>
+
+<p><b>보는 법</b> 1장 그림 → 4장 「한 판 순서」 → 하단 「판매 판정 시뮬레이터」 순서로 읽습니다. 세부 결정과 근거는 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9C%A0%EB%A3%8C%ED%99%94_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9C%A0%EB%A3%8C%ED%99%94_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P197 유료화 보완판</a>에 있습니다.</p>
+
+<p><b>지금 상태</b> 공통 상점의 표 읽기·거래·같은 진행 저장 코드와 독립 판매 분류 시안이 있습니다. 실제 UI 정상·운영 결제·확률 공개·전체 정책 통합은 검수 전입니다.</p>
+<nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (합침) 제안서 <a href="/docs/planning/proposal-concept/pay.html" data-paper-path="docs/planning/proposal-concept/pay.html">유료화</a> · 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9C%A0%EB%A3%8C%ED%99%94_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9C%A0%EB%A3%8C%ED%99%94_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P197 유료화 보완판</a> · 현중 11/01~11/02 지시</p>
+
+<div class="doc-key"><b>핵심</b> 돈은 <b>속도 · 꾸밈 · 소장</b>에만 씁니다. 투표 · 채점 · 순위로 가는 길에는 돈이 들어갈 자리가 없고, 결제는 능력을 빨리 키워 <b>무대 편성 점수에만 간접</b>으로 닿습니다.</div>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 702 364" width="702" height="364" role="img" aria-labelledby="title-P217-0"><title id="title-P217-0">설명 흐름도 P217-0</title><defs><marker id="arrow-P217-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M139.63636363636363,150 L238.5,50 L279,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P217-0)"/><path d="M198,151.6551724137931 L238.5,138 L279,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P217-0)"/><path d="M198,212.3448275862069 L238.5,226 L279,226" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P217-0)"/><path d="M459,50 L481.5,50 L504,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P217-0)"/><path d="M139.63636363636363,214 L238.5,314 L279,314" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P217-0)"/><rect x="216.5" y="321" width="44" height="25" rx="7" fill="#f3f8f7"/><text x="238.5" y="339" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#385f68">못 삼</text><rect x="18" y="150" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="187" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">유료 재화 하나</tspan></text><rect x="279" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="369" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="369" dy="0">속도 · 주사위 · 추가 권</tspan></text><rect x="279" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="369" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="369" dy="0">꾸밈</tspan></text><rect x="279" y="194" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="369" y="231" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="369" dy="0">소장 · 팩 · 패스</tspan></text><rect x="504" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="594" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="594" dy="0">무대 편성 점수에 간접</tspan></text><rect x="279" y="282" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="369" y="319" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="369" dy="0">투표 · 채점 · 순위</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">유료 재화 하나 → 속도 · 주사위 · 추가 권 / 유료 재화 하나 → 꾸밈 / 유료 재화 하나 → 소장 · 팩 · 패스 / 속도 · 주사위 · 추가 권 → 무대 편성 점수에 간접 / 유료 재화 하나 → [못 삼] 투표 · 채점 · 순위</p></figure>
+
+
+
+<h3 id="콘텐츠-경계">콘텐츠 경계</h3>
+
+<ul>
+<li>맡는 것: 유료 재화 · 파는 것 · 안 파는 것 · 시즌 패스 · 확률 공개.</li>
+<li>다른 문서에 맡기는 것: 자원 흐름 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B2%8C%EC%9E%84%EA%B2%BD%EC%A0%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B2%8C%EC%9E%84%EA%B2%BD%EC%A0%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P212 게임 경제</a> · 배수 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%B0%EC%88%98%EA%B1%B8%EA%B8%B0_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%B0%B0%EC%88%98%EA%B1%B8%EA%B8%B0_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P209 배수 걸기</a>.</li>
+</ul>
+
+<h3 id="현재-기준과-목표">현재 기준과 목표</h3>
+
+<div class="table-scroll"><table><thead><tr><th>파는 것</th><th>안 파는 것</th></tr></thead><tbody><tr><td>주사위 · 카드 팩(확률 공개) · <b>몬스 팩(확률 공개 · NEW 11/02)</b> · 시즌 패스</td><td>투표권 · 공유권 · 채점단 자리</td></tr><tr><td>—</td><td>카드 트레이드에 돈 · 유료 재화 끼우기(중복분 카드 1 ↔ 1만)</td></tr><tr><td>추가 곡 만드는 권 · 다시 만들기</td><td>맞불 공연 · 게릴라 보호</td></tr><tr><td>무대 · 재킷 · 크루 홈 꾸밈</td><td>입장권 직접 판매 · 연고 도시 바꾸기</td></tr><tr><td>시즌 한정 콜라보 카드(속도 효과만 · 출전 불가)</td><td>몬스 별 · 능력 · 조각</td></tr></tbody></table></div>
+
+<ul>
+<li>유료 재화는 하나이고 시즌을 넘어 이월됩니다.</li>
+<li>아이돌 카드는 그 아이돌 전용이고 처음 1장만 능력이 됩니다(현중 11/02). 카드 팩은 능력을 빨리 모으는 「속도」 상품입니다. 카드는 무대 편성 점수에만 간접으로 닿고, 투표 · 채점에는 닿지 않습니다.</li>
+</ul>
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>이 콘텐츠에서의 역할</th><th>의존 방향</th></tr></thead><tbody><tr><td>제안서 원문 <a href="/docs/planning/proposal-concept/pay.html" data-paper-path="docs/planning/proposal-concept/pay.html">유료화</a></td><td>기준</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9C%A0%EB%A3%8C%ED%99%94_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9C%A0%EB%A3%8C%ED%99%94_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P197 유료화 보완판</a></td><td>상세 정본(결정 · 근거 · 조사)</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B2%8C%EC%9E%84%EA%B2%BD%EC%A0%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B2%8C%EC%9E%84%EA%B2%BD%EC%A0%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P212 게임 경제</a></td><td>자원 장부 · 판매 칸</td><td>양방향</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P207 월드 페스티벌</a></td><td>돈이 닿지 않는 곳</td><td>제약</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: 상점 → 상품 → 결제 → 지급 · 스샷 미완 · 이식 비교 해당 없음</p>
+
+<ul>
+<li>전용 유료화 정책 모듈은 별도 등록되어 있지 않습니다. 현재 공통 상점(simulator_module_shop)은 상품 조회·보석 차감·팩 보관·같은 진행 저장 코드 경로를 갖습니다. 실제 UI 정상이나 운영 결제 완료를 확인한 것은 아닙니다.</li>
+<li>이 문서 하단 <b>판매 판정 시뮬레이터</b>에서 상품을 누르면 팔아도 되는지와 이유가 나옵니다. 숫자는 모두 임시 시안입니다.</li>
+</ul>
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서-임시-시안">한 판 순서 (임시 시안)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>상점에서 유료 재화로 구매</td></tr><tr><td>입력·출력</td><td>입력 = 결제 / 출력 = 속도 · 꾸밈 · 소장 아이템</td></tr><tr><td>상태와 전이</td><td>결제 → 유료 재화 → 상품</td></tr><tr><td>판정</td><td>순위에 닿는 상품은 목록에 없음</td></tr><tr><td>오류·예외</td><td>확률 상품은 확률 공개 화면 필수</td></tr><tr><td>저장·복원</td><td>유료 재화 · 유료 권은 계정 범위 이월</td></tr><tr><td>다른 모듈 연결</td><td>게임 경제 · 시즌 · 카드</td></tr></tbody></table></div>
+
+<h3 id="몬스-팩-new-현중-1102-1252">몬스 팩 (NEW · 현중 11/02 12:52)</h3>
+
+<p>몬스 팩은 카드팩과 같은 아이템 구조(타입만 몬스)입니다. 무료로는 한 시즌에 튜토리얼 1 · 기획사 등급 6 · 엔터파워 5 · 미션 5 = 17개를 받고, <b>나머지는 유료 샵과 다른 보상</b>으로 받습니다. 몬스 팩은 속도 · 소장 상품이고, 몬스 힘은 투표 · 페스티벌 순위에 직접 닿지 않습니다. 같은 종은 자동 합성(행복도 · 시즌 안)이고 상한을 찍은 종은 나오지 않습니다. 가격 · 하루 횟수 · 확률표는 결정 대기입니다(세부 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%AA%AC%EC%8A%A4%EB%B3%B4%EC%9C%A0_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%AA%AC%EC%8A%A4%EB%B3%B4%EC%9C%A0_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P223</a>).</p>
+
+<h3 id="아이돌-등급-카드팩-new-현중-1102-1638-가격-임시">아이돌 등급 카드팩 (NEW · 현중 11/02 16:38 · 가격 임시)</h3>
+
+<p>상점 팩 탭에 아이돌 등급 카드팩 5종을 보석으로 팝니다(현중 16:38 「유료템이니깐 임시로」). 그 등급 이상 아이돌이 있어야 열리고, 없으면 가방에 보관합니다. 가격은 지금 「주사위 75 + 팩」 750 보석 × 단계 비율 × 5로 잡은 <b>임시값</b>입니다. 상점 등급 팩 5종은 두 겹 주머니의 <b>일반(normal) 주머니</b>로 뽑습니다(고급 주머니는 주간 월드스타 미션 보상에만 있음 · 세부 <a href="카드_기획서.html">P168</a>).</p>
+
+<div class="table-scroll"><table><thead><tr><th>상품</th><th>보석(임시)</th><th>표</th></tr></thead><tbody><tr><td>연습생 카드팩</td><td>260</td><td>item_master_shop_sku_idol_stage_0</td></tr><tr><td>데뷔조 카드팩</td><td>430</td><td>item_master_shop_sku_idol_stage_1</td></tr><tr><td>라이징 스타 카드팩</td><td>680</td><td>item_master_shop_sku_idol_stage_2</td></tr><tr><td>톱스타 카드팩</td><td>1,020</td><td>item_master_shop_sku_idol_stage_3</td></tr><tr><td>월드스타 카드팩</td><td>1,360</td><td>item_master_shop_sku_idol_stage_4</td></tr></tbody></table></div>
+
+<p>기록: <a href="/docs/planning/balance-tool.html?topic=balance_topic_idol_cards" data-paper-path="docs/planning/balance-tool.html">발란스 툴 「아이돌 카드 · 팩 장부」</a> · 세부 <a href="/docs/planning/_%EC%9D%B4%EC%A0%84%EA%B8%B0%ED%9A%8D_%EB%B3%B4%EA%B4%80/20261116_%EC%B9%B4%EB%93%9C%EC%98%9B%EA%B5%AC%EC%A1%B0/_%EC%9D%B4%EC%A0%84%EA%B8%B0%ED%9A%8D_%EB%B3%B4%EA%B4%80/20261116_%EC%B9%B4%EB%93%9C%EC%98%9B%EA%B5%AC%EC%A1%B0/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%B9%B4%EB%93%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/_%EC%9D%B4%EC%A0%84%EA%B8%B0%ED%9A%8D_%EB%B3%B4%EA%B4%80/20261116_%EC%B9%B4%EB%93%9C%EC%98%9B%EA%B5%AC%EC%A1%B0/_%EC%9D%B4%EC%A0%84%EA%B8%B0%ED%9A%8D_%EB%B3%B4%EA%B4%80/20261116_%EC%B9%B4%EB%93%9C%EC%98%9B%EA%B5%AC%EC%A1%B0/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%B9%B4%EB%93%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P225</a>. 카드는 능력이 되므로 하루 구매 한도 · 가격은 발란스 때 다시 봅니다.</p>
+
+<h3 id="시즌-패스-임시-시안">시즌 패스 (임시 시안)</h3>
+
+<p>보상 = 주사위 · 꾸밈 · 추가 곡 만드는 권 · 입장권(패스로만). 보관함은 일반 카드 중 고른 카드 · 속도 효과만.</p>
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>유료 재화 · 상점 · 확률 공개 · 시즌 패스 · 이월.</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<p>상점 · 확률 공개 · 시즌 패스.</p>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<ul>
+<li>(NEW) 몬스 팩 가격 · 하루 횟수 · 확률 공개표 — 유료화 · 발란스</li>
+</ul>
+
+<ul>
+<li>가격 · 패스 보상 크기 — 발란스 · 운영</li>
+<li>무과금 카드북 범위 — 발란스 대기</li>
+</ul>
+
+<h3>공통 상점·프로토 결제·판매 분류 시안</h3><p>공통 상점은 <code>shop-sim.mjs</code> → <code>shop.ts</code>의 기존 상품·비용·보상 로더를 사용합니다. 확인 뒤 보석 차감과 주사위 지급 또는 팩 보관을 계산하고, 공통 메뉴 거래가 같은 진행의 저장과 중복 요청·복구 경계를 맡습니다. 이 코드를 읽었다는 것과 실제 UI·저장·지급의 모든 조건을 통과했다는 것은 다릅니다.</p><p>보석 구매의 <code>buyGem</code>은 실제 결제가 아니라 항상 성공하는 프로토 결제입니다. <code>shop_tab</code>의 패스·꾸밈은 꺼져 있고 현재 상점 UI는 준비 중으로 표시합니다. 독립 판매 판정 시안은 자체 항목을 분류할 뿐 실제 상품·가격·결제·지갑을 읽지 않습니다. 모든 최신 상품을 포함한 판정표로 읽지 않습니다.</p><p>등급팩·몬스팩의 상품 정책과 임시 수치는 현재 P168·P223 등 소유 원본을 따릅니다. 이 정정은 기존 본문의 가격·팩 표·normal 주머니 설명을 다시 결정하거나 시안 항목을 고치는 작업이 아닙니다. 시즌 이월·확률 공개·운영 결제의 완료도 새로 판정하지 않습니다.</p>
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<div class="table-scroll"><table><thead><tr><th>미리보기</th><th>이름·사용 위치</th><th>동작·상태</th><th>파일·테이블 키</th><th>출처·준비 상태</th></tr></thead><tbody><tr><td>상점 코드 경로·패스 준비 중</td><td>상점 · 시즌 패스</td><td>상품 · 단계</td><td>—</td><td>원본 시안 있음(pay.html)</td></tr><tr><td><a href="#sim-preview">하단 시뮬레이터</a></td><td>판매 판정 시뮬레이터</td><td>상품 눌러 보기</td><td>핵심제안_시뮬_20261102/pay.mjs</td><td>시안 있음</td></tr></tbody></table></div>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<p>운영 결제·확률 공개·시즌 패스·꾸밈 화면의 연결과 검수가 남아 있습니다. 현재 상점의 코드 경로와 운영 전체 준비 상태를 구분합니다.</p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일·보기</th><th>역할</th><th>주키·참조</th><th>값</th><th>담당</th></tr></thead><tbody><tr><td>shop_product (후보)</td><td>상품 · 판매 여부</td><td>상품 id</td><td>(신규) 결정 대기</td><td>표 담당</td></tr><tr><td><code>data/game/shop_tab.csv</code></td><td>켜진 탭과 준비 중 탭</td><td><code>tab_id</code>, <code>active</code></td><td>현재 로더 입력</td><td>시스템</td></tr><tr><td><code>data/master/item_master_shop_sku.csv</code></td><td>상품 종류·표시·일일 한도</td><td><code>item_master_id</code>, <code>tab_id</code></td><td>현재 임시 상품</td><td>시스템·발란스</td></tr><tr><td><code>data/master/item_master_shop_gem_ladder.csv</code></td><td>보석 상품·프로토 결제 단계</td><td><code>item_master_id</code></td><td>운영 결제 아님</td><td>시스템·발란스</td></tr><tr><td><code>data/master/cost_group.csv</code> · <code>cost_group_entry.csv</code></td><td>보석·원화 비용 원천</td><td><code>source_kind</code> + <code>source_ref_id</code>, <code>cost_group_id</code></td><td>현재 상품 비용</td><td>시스템·발란스</td></tr><tr><td><code>data/master/reward_group.csv</code> · <code>reward_group_entry.csv</code></td><td>주사위·팩 보상 원천</td><td><code>source_id</code>, <code>reward_group_id</code></td><td>현재 지급 묶음</td><td>시스템·발란스</td></tr><tr><td><code>data/master/item_master_card_pack.csv</code></td><td>보관 팩과 개봉 종류·주머니 연결</td><td><code>item_master_id</code>, <code>pack_type</code>, <code>pocket_set</code></td><td>현재 임시 팩 정의</td><td>콘텐츠·발란스</td></tr></tbody></table></div>
+
+<p>주사위 환산: 발란스 툴 인용.</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>상태</th><th>확인 방법·증거</th><th>다음 작업</th></tr></thead><tbody><tr><td>기획(이 문서 · 책갈피 상세)</td><td>기획 중</td><td>P197 · 이 문서</td><td>현중 확인</td></tr><tr><td>공통 상점 거래·저장</td><td>부분 코드 확인·검수 대기</td><td>원표·실제 읽기 경로 대조; 실제 UI·운영 전체 미검수</td><td>관련 화면·저장·통합 검수</td></tr><tr><td>판매 판정 시뮬레이터</td><td>개발 끝(시안)</td><td>이 문서 하단</td><td>실제 표 연결</td></tr><tr><td>전용 정책 모듈 · 운영 결제 통합</td><td>기획 중 · 작업전</td><td>—</td><td>표 확정 뒤</td></tr></tbody></table></div>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<p>투표 · 채점 · 순위에 닿는 상품이 없고, 확률 상품에 확률 공개 화면이 있어야 합니다.</p>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p>세부 결정과 근거는 책갈피 P197에 둡니다. 제안서 원문 pay.md는 그대로 보존합니다.</p>
+
+<details><summary>작업 기록</summary>
+
+<p>대표 개발 기획서(신규 · 핵심제안서). 상세 정본 P197. 변경 이력은 유료화_핵심제안서.log.md.</p>
+
+</details>
+</section><section class="doc-ui-section" aria-label="하단 시뮬레이터"><h3>판매 판정 시뮬레이터 · 임시 시안</h3><p>상품을 누르면 판매 가능 여부와 이유(속도 · 꾸밈 · 소장인지, 순위에 닿는지)가 나옵니다.</p><details id="sim-preview"><summary>시뮬레이터 펼치기 · 상품 눌러 보기</summary><div data-sim-host="pay"></div></details></section><details class="history"><summary>로그 · 변경 이력과 이전 기록</summary><p><a href="./유료화_핵심제안서.log.md" target="_blank" rel="noopener">이 문서의 로그 열기</a></p></details><details id="source-reading-history"><summary>정정 전 원문과 읽기 검수 기록</summary><p><a href="./유료화_핵심제안서.log.md">짝 로그에서 직전 MD·HTML 전체 원문 보기</a> · 문서·소스 정적 대조이며 새 실행·화면 검수·수치 결정이 아닙니다.</p></details>
+</main></body></html>

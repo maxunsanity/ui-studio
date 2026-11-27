@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>관계 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --dim:#e3e5e8; --red:#d0453a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  h2.grp { font-size:15px; margin:8px 24px 0; padding-top:12px; border-top:2px solid #c9ccd1; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .row { display:flex; flex-wrap:wrap; gap:40px; padding:16px 24px 24px 50px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .st { position:static; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .pill.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .red { color:var(--red); font-weight:700; }
+  .dot { position:absolute; width:12px; height:12px; border-radius:50%; background:var(--red); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .face { display:inline-block; width:30px; height:30px; border-radius:50%; background:var(--dim); border:1.5px solid var(--ln); flex:none; }
+  .ic { display:inline-block; width:22px; height:22px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); flex:none; }
+  .pic { background:repeating-linear-gradient(45deg,#e6e8eb 0 8px,#dcdfe3 8px 16px); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; text-align:center; }
+  .bar { display:block; height:6px; border:1px solid var(--ln); border-radius:3px; background:var(--box); overflow:hidden; }
+  .bar i { display:block; height:100%; background:var(--ink); }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); overflow:hidden; }
+  .sec { position:absolute; left:12px; font-weight:700; font-size:13px; }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  /* 흐름도 */
+  .fl { display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:12px 24px 4px; }
+  .fb { border:1.5px solid var(--ln); border-radius:8px; background:var(--box); padding:8px 12px; min-width:110px; text-align:center; }
+  .fb b { display:block; font-size:14px; }
+  .fb small { color:var(--soft); font-size:12px; }
+  .fb.win2 { border-style:dashed; background:var(--pane); }
+  .ar { font-size:18px; color:var(--ln); }
+  .flnote { margin:2px 24px 0; font-size:13px; }
+  .flnote span { display:inline-block; margin-right:16px; }
+  .dimbg { z-index:2; } .win { z-index:3; }
+</style>
+</head>
+<body>
+<h1>관계(라포) · 와이어프레임 5차(관계도 다시 넣음) (서 있는 캐릭터 · 거리 = 친한 정도 · 390×844)</h1>
+<p class="flow">현중 11/20: 카드가 아니라 캐릭터를 크게 · 단체 사진처럼 한 자리에 한 명씩 서 있음 · 한 명을 고르면 친한 순서대로 줄을 서고, 친할수록 붙고 안 친하면 떨어짐 · 아래에 수치를 크게 · 상세는 창 · 기준: 라포 표(rapport_stage · staff_rapport_bonus · staff_seat) + 게임 시뮬레이터 관계 모듈 · 이름 · 값은 예시</p>
+<h2 class="grp">흐름</h2>
+<div class="fl">
+  <div class="fb"><b>아래 「정보」</b><small>펼침 → 관계</small></div><span class="ar">→</span>
+  <div class="fb"><b>① 다 같이</b><small>단체 사진처럼 나란히</small></div><span class="ar">→ 한 명 누름 →</span>
+  <div class="fb"><b>② 친한 순서로 서기</b><small>고른 사람이 맨 앞 · 거리 = 친한 정도</small></div><span class="ar">→ 다른 사람 누름 →</span>
+  <div class="fb win2"><b>④ 둘 사이</b><small>축 4개 · 다음 단계</small></div>
+</div>
+<div class="fl">
+  <div class="fb"><b>① 다 같이</b><small>오른쪽 위 「관계도」</small></div><span class="ar">⇄</span>
+  <div class="fb"><b>⑧ 관계도로 보기</b><small>원형 · 선 굵기 = 단계 · 숫자 = 가까움</small></div><span class="ar">→ 얼굴 → ② · 선 → ④</span>
+</div>
+<div class="fl">
+  <div class="fb"><b>①②⑧ 아래 할 일 목록</b><small>사이가 먼 쌍부터</small></div><span class="ar">→ 함께 보내기 →</span>
+  <div class="fb win2"><b>⑦ 함께 보낼 스케줄</b><small>둘이 편성된 채</small></div><span class="ar">→</span>
+  <div class="fb"><b>스케줄 화면</b><small>남은 자리 · 출발</small></div>
+</div>
+<div class="fl">
+  <div class="fb"><b>③ 스태프와</b><small>아이돌 고르기 · 스태프가 친한 순서로</small></div><span class="ar">→ 줄 · 스케줄 › →</span>
+  <div class="fb win2"><b>⑤ 스태프 짝</b><small>다음 단계 · 오르는 스케줄</small></div>
+</div>
+<div class="fl">
+  <div class="fb"><b>모험 · 스케줄 끝</b><small>단계가 오르면</small></div><span class="ar">→</span>
+  <div class="fb win2"><b>⑥ 라포가 올랐어요</b><small>둘이 한 걸음 가까워짐</small></div>
+</div>
+<p class="flnote"><span>□ 화면</span><span>⬚ 창(점선)</span><span>· 보기 전용 · 라포는 모험 · 스케줄에서 오름 · ②에서 맨 앞 사람을 다시 누르면 ①로</span></p>
+<div id="screens"></div>
+
+<script>
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = () => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === 5 ? " on" : ""}" style="left:${(i * 386 / 6).toFixed(1)}px;width:${(386 / 6).toFixed(1)}px"><i></i>${t}</div>`).join("");
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const rtop = `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div><div class="a val" style="left:52px;top:16px;font-size:16px">관계</div>
+  <span class="a sub" style="right:12px;top:18px;font-size:12px">보기 전용 · 모험 · 스케줄에서 올라요</span><div class="line" style="top:50px"></div>`;
+const chips = on => `<div class="a" style="left:8px;right:8px;top:58px;display:flex;gap:6px">${["아이돌끼리", "스태프와"].map((t, i) => `<span class="pill${i === on ? " on" : ""}" style="flex:1;text-align:center;font-size:14px;padding:6px 0">${t}</span>`).join("")}</div>`;
+const vt = v => `<div class="a" style="right:10px;top:12px;display:flex;border:1.5px solid var(--ln);border-radius:999px;overflow:hidden">${["서기", "관계도"].map((t, i) => `<b style="font-size:12px;padding:4px 10px;${(v === "map") === (i === 1) ? "background:var(--ink);color:#fff" : "background:var(--box)"}">${t}</b>`).join("")}</div>`;
+const rtopV = v => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div><div class="a val" style="left:52px;top:16px;font-size:16px">관계</div>${vt(v)}<div class="line" style="top:50px"></div>`;
+const page = (on, body, v) => (on === 0 ? rtopV(v || "line") : rtop) + chips(on) + body + tabs();
+// ⑧ 관계도 · 얼굴 5개 원형 · 선 굵기 = 단계 · 숫자 = 가까움 · 점선 테두리 숫자 = 긴장 · 흐린 점선 = 처음 봄
+const MEM = ["A", "B", "C", "D", "E"];
+const STW = { "처음 봄": 1.5, "아는 사이": 2, "동료": 3.5, "친한 동료": 5, "단짝": 7 };
+const LINKS = [["A", "B", 92, "단짝"], ["A", "C", 74, "친한 동료"], ["A", "E", 48, "동료"], ["A", "D", 30, "아는 사이", 1], ["C", "D", 58, "동료"], ["B", "C", 66, "동료"], ["B", "D", 40, "아는 사이"], ["B", "E", 55, "동료"], ["C", "E", 35, "아는 사이"], ["D", "E", 0, "처음 봄"]];
+const MTOP = 92, MH = 304;
+const relMap = () => { const cx = 195, cy = MTOP + 150, r = 112;
+  const P = {}; MEM.forEach((m, i) => P[m] = [cx + r * Math.sin(i * 2 * Math.PI / 5), cy - r * Math.cos(i * 2 * Math.PI / 5)]);
+  let svg = "", nums = "";
+  for (const [a, b, c, st, ten] of LINKS) {
+    const [x1, y1] = P[a], [x2, y2] = P[b]; const first = st === "처음 봄";
+    svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${first ? "#b9bdc4" : "#4b515a"}" stroke-width="${STW[st]}" ${first ? 'stroke-dasharray="3 4"' : ten ? 'stroke-dasharray="8 4"' : ""}/>`;
+    if (!first) { const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+      nums += `<b class="a" style="left:${mx - 15}px;top:${my - 10}px;width:30px;height:20px;line-height:17px;text-align:center;font-size:12px;background:#fff;border:1.5px ${ten ? "dashed" : "solid"} var(--ln);border-radius:999px">${c}</b>`; }
+  }
+  return `<svg class="a" style="left:0;top:0" width="390" height="${MTOP + MH}">${svg}</svg>` + nums +
+    MEM.map(m => `<i class="a face" style="left:${P[m][0] - 23}px;top:${P[m][1] - 23}px;width:46px;height:46px;${m === "A" ? "" : ""}"></i>` + `<b class="a" style="left:${P[m][0] - 34}px;width:68px;top:${P[m][1] + 26}px;text-align:center;font-size:12px"><span style="background:var(--box);border:1.5px solid var(--ln);border-radius:6px;padding:1px 6px">멤버 ${m}</span></b>`).join("") +
+    `<div class="a sub" style="left:12px;right:12px;top:${MTOP + MH - 20}px;text-align:center;font-size:11px">선 굵기 = 단계 · 숫자 = 가까움 · 점선 = 긴장 · 흐린 점선 = 처음 봄</div>`; };
+const badge = (t, dark = true) => `<span style="display:inline-block;font-size:11px;font-weight:700;padding:1px 6px;border-radius:4px;white-space:nowrap;${dark ? "background:var(--ink);color:#fff" : "border:1.5px dashed var(--ln);color:var(--ink);background:var(--box)"}">${t}</span>`;
+// 서 있는 캐릭터(전신) · x = 왼쪽, top = 머리 위, w = 폭, h = 키
+const fig = (x, top, w, h, o = {}) => { const hd = Math.round(w * 0.62); const ln = o.dash ? "dashed" : "solid"; const bw = o.base ? 3 : 1.5;
+  return `<span class="a" style="left:${x + (w - hd) / 2}px;top:${top}px;width:${hd}px;height:${hd}px;border-radius:50%;border:${bw}px ${ln} var(--ln);background:${o.ghost ? "transparent" : "var(--dim)"}"></span>
+  <span class="a" style="left:${x}px;top:${top + hd + 4}px;width:${w}px;height:${h - hd - 4}px;border-radius:${w / 2}px ${w / 2}px 8px 8px;border:${bw}px ${ln} var(--ln);background:${o.ghost ? "transparent" : "var(--dim)"};display:flex;align-items:flex-start;justify-content:center;padding-top:12px;font-size:11px;color:var(--soft)">${o.inner || ""}</span>`; };
+// 발 아래 글 · 이름 · 큰 숫자 · 배지
+const lab = (x, w, y, name, num, b1, b2) => `<div class="a" style="left:${x + w / 2 - 36}px;top:${y}px;width:72px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px">
+  ${name ? `<b style="font-size:12px;white-space:nowrap">${name}</b>` : ""}${num !== "" ? `<b style="font-size:26px;line-height:1">${num}</b>` : ""}${b1 ? badge(b1) : ""}${b2 ? badge(b2, false) : ""}</div>`;
+// 머리 위 이름표
+const tag = (x, w, y, name, on = false) => `<div class="a" style="left:${x + w / 2 - 40}px;width:80px;top:${y}px;display:flex;justify-content:center"><b style="font-size:12px;white-space:nowrap;background:${on ? "var(--ink)" : "var(--box)"};color:${on ? "#fff" : "var(--ink)"};border:1.5px solid var(--ln);border-radius:6px;padding:2px 8px;line-height:1.3">${name}</b></div>`;
+const floor = y => `<div class="a" style="left:12px;right:12px;top:${y}px;border-top:2px solid #c9ccd1"></div>`;
+const axis = (y, t, v, dash = false) => `<div class="a" style="left:20px;right:20px;top:${y}px;display:flex;align-items:center;gap:10px"><b style="width:40px;font-size:13px">${t}</b><span class="bar" style="flex:1;height:10px;${dash ? "border-style:dashed" : ""}"><i style="width:${v}%"></i></span><b style="width:28px;text-align:right;font-size:13px">${v}</b></div>`;
+
+// 쌍 줄 · 두 얼굴 · 이름 · 단계 · 긴장 · 가까움 막대
+const pair = (y, a, b, st, ten, p) => `<div class="b" style="left:12px;right:12px;top:${y}px;height:56px;justify-content:flex-start;gap:10px;padding:0 10px">
+  <span style="position:relative;width:50px;height:32px;flex:none"><i class="face a" style="left:0;top:0;width:32px;height:32px"></i><i class="face a" style="left:18px;top:0;width:32px;height:32px"></i></span>
+  <div style="flex:1;text-align:left"><b style="font-size:14px">멤버 ${a} · 멤버 ${b}</b><div style="display:flex;gap:6px;align-items:center;margin-top:3px">${badge(st)}${ten ? badge(ten, false) : ""}</div></div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span class="sub" style="font-size:11px">가까움 <b style="color:var(--ink);font-size:13px">${p}</b></span><span class="bar" style="width:70px;height:8px"><i style="width:${p}%"></i></span></div></div>`;
+// 할 일 줄 · 두 얼굴 · 이름 · 배지 · 다음 단계까지 · 함께 보내기
+const go = t => `<span style="flex:none;border:1.5px solid var(--ln);border-radius:999px;padding:5px 9px;font-size:12px;font-weight:700;background:var(--box);white-space:nowrap">${t}</span>`;
+const todo = (y, a, b, st, ten, cut, next) => `<div class="b" style="left:12px;right:12px;top:${y}px;height:62px;justify-content:flex-start;gap:9px;padding:0 10px">
+  <span style="position:relative;width:46px;height:30px;flex:none"><i class="face a" style="left:0;top:0;width:30px;height:30px"></i><i class="face a" style="left:16px;top:0;width:30px;height:30px"></i></span>
+  <div style="flex:1;text-align:left;min-width:0"><b style="font-size:13px">멤버 ${a} · 멤버 ${b}</b><div style="display:flex;gap:4px;align-items:center;margin:2px 0">${badge(st)}${ten ? badge(ten, false) : ""}${cut ? badge(cut, false) : ""}</div><span class="sub" style="font-size:11px">${next}</span></div>${go("함께 보내기 ›")}</div>`;
+const listHead = (y, l, r) => `<div class="a" style="left:16px;right:16px;top:${y}px;display:flex;justify-content:space-between"><b style="font-size:13px">${l}</b><span class="sub" style="font-size:12px">${r}</span></div>`;
+// ② 멤버 A 기준 줄 서기 · c = 가까움(0~100) · 간격 = (100 - c) × 0.72
+const W = 50, TOP = 126, H = 242, FEET = TOP + H;
+const LINE = [{ m: "B", c: 92, st: "단짝" }, { m: "C", c: 74, st: "친한 동료" }, { m: "E", c: 48, st: "동료" }, { m: "D", c: 30, st: "아는 사이", ten: "긴장 중" }];
+let px = 12; const POS = LINE.map(p => (px = px + W + Math.round((100 - p.c) * 0.72)));
+const lineup = () => fig(12, TOP, W, H, { base: true, inner: "기준" }) + tag(12, W, TOP - 26, "멤버 A", true) +
+  LINE.map((p, i) => fig(POS[i], TOP, W, H, { dash: !!p.ten }) + tag(POS[i], W, TOP - 26, "멤버 " + p.m) + lab(POS[i], W, FEET + 8, "", p.c, p.st, p.ten)).join("") + floor(FEET);
+// ③ 스태프 9명 · v = 라포 값 · 단계 = 12 / 16 / 20 · 간격 = 남은 폭을 (20 - v)에 비례해 나눔
+const IW = 54, SW = 44, STOP = 236, SH = 176, SFEET = STOP + SH;
+const STAFF = [{ s: "보컬·랩", v: 18, st: 2, b: "+10%" }, { s: "스타일리스트", v: 13, st: 1, b: "+5%" }, { s: "매니지먼트·A&R", v: 8, st: 0, b: "—" }, { s: "댄스", v: 5, st: 0, b: "—" }, { s: "작곡", v: 4, st: 0, b: "—" }, { s: "홍보·마케팅", v: 3, st: 0, b: "—" }, { s: "연기", v: 2, st: 0, b: "—" }, { s: "무대 디렉터", v: 1, st: 0, b: "—" }, { s: "비즈니스·레이블", v: 0, st: 0, b: "—" }];
+// 연출만: 위치 = 기준 옆 + (20 - v) × 14 · 먼 사람은 뒤로 겹쳐 섬(작고 흐리게) · 숫자는 아래 목록에
+const SPOS = STAFF.map(p => 12 + IW - 6 + Math.round((20 - Math.min(p.v, 20)) * 14));
+const staffLine = () => fig(12, STOP - 20, IW, SH + 20, { base: true, inner: "멤버 A" }) +
+  STAFF.map((p, i) => ({ p, i })).reverse().map(({ p, i }) => { const far = p.st === 0; const sh = far ? SH - 40 : SH; return `<div style="${far ? "opacity:.55" : ""}">${fig(SPOS[i], STOP + (SH - sh), SW, sh, { inner: p.st ? p.st + "단계" : "" })}</div>`; }).join("") + floor(SFEET);
+const dots = st => `<span style="display:flex;gap:3px">${[1, 2, 3].map(k => `<i style="width:10px;height:10px;border-radius:50%;border:1.5px solid var(--ln);background:${k <= st ? "var(--ink)" : "var(--box)"}"></i>`).join("")}</span>`;
+const SNEED = [12, 16, 20];
+const nextOf = p => { const k = SNEED.findIndex(t => t > p.v); return k < 0 ? "최고 단계" : `${k + 1}단계까지 ${SNEED[k] - p.v}`; };
+const srow = (y, p, k) => `<div class="b" style="left:12px;right:12px;top:${y}px;height:40px;justify-content:flex-start;gap:8px;padding:0 10px">
+  <b style="width:14px;font-size:11px;color:var(--soft)">${k}</b><i class="face" style="width:24px;height:24px"></i>
+  <div style="flex:1;text-align:left"><span style="display:flex;align-items:center;gap:6px"><b style="font-size:13px">${p.s}</b>${dots(p.st)}</span><span class="sub" style="font-size:11px">${nextOf(p)} · 지금 ${p.b === "—" ? "보너스 없음" : p.b}</span></div>
+  <b style="width:24px;text-align:right;font-size:15px">${p.v}</b>${go("스케줄 ›")}</div>`;
+
+const SCREENS = [
+ { grp: "화면" },
+ { cap: "① 다 같이 (처음 · 단체 사진처럼)", html: page(0, `
+   ${["A", "B", "C", "D", "E"].map((m, i) => fig(12 + i * 76, TOP, 60, H) + tag(12 + i * 76, 60, TOP - 26, "멤버 " + m)).join("")}
+   ${floor(FEET)}
+   ${listHead(410, "10쌍 · 사이가 먼 쌍부터", "같이 보내면 올라요")}
+   ${todo(432, "A", "D", "아는 사이", "긴장 중", "성장 −1%", "동료까지 신뢰 +6")}
+   ${todo(498, "A", "E", "동료", "", "", "친한 동료까지 신뢰 +9 · 이해 +4")}
+   ${todo(564, "C", "D", "동료", "", "", "친한 동료까지 신뢰 +3")}
+   ${todo(630, "A", "C", "친한 동료", "", "", "단짝까지 이해 +5")}
+   ${todo(696, "A", "B", "단짝", "", "", "최고 단계")}
+   `) + n(1, 4, 62) + n(2, 4, 200) + n(3, 4, 446) + n(4, 4, 512) + n(5, 262, 452) + n(6, 270, 4),
+   notes: ["탭 2개 · 아이돌끼리 / 스태프와", "멤버가 한 자리에 한 명씩 크게 서 있음(전신) · 단체 사진 모양 · 순서는 팀 순서 · 한 명을 누르면 ②", "아래 = 할 일 목록 · 사이가 먼 쌍부터(모험 쌍 고르기 규칙 adventure_pair_pick_rule과 같은 순서 · 긴장 뺀 축 합이 낮은 순) · 줄을 누르면 ④", "줄마다 다음 단계까지 남은 양(신뢰 · 이해 문턱) · 사이가 나빠 성장이 깎이면 「성장 −n%」 배지", "함께 보내기 › → ⑦ 두 사람이 편성된 채 스케줄 고르기", "오른쪽 위 보기 바꾸기 · 서기(지금) / 관계도 → ⑧ · 아이돌끼리 탭에만 있음 · 마지막에 본 보기를 기억"] },
+
+ { cap: "② 멤버 A를 눌렀을 때 (친한 순서 · 거리 = 친한 정도)", html: page(0, `
+   ${lineup()}
+   ${listHead(470, "멤버 A의 4쌍 · 사이가 먼 쌍부터", "같이 보내면 올라요")}
+   ${todo(492, "A", "D", "아는 사이", "긴장 중", "성장 −1%", "동료까지 신뢰 +6")}
+   ${todo(558, "A", "E", "동료", "", "", "친한 동료까지 신뢰 +9 · 이해 +4")}
+   ${todo(624, "A", "C", "친한 동료", "", "", "단짝까지 이해 +5")}
+   ${todo(690, "A", "B", "단짝", "", "", "최고 단계")}
+   `) + n(1, 4, 200) + n(2, 128, 250) + n(3, 352, 250) + n(4, 4, 410) + n(5, 4, 506),
+   notes: ["고른 사람이 맨 앞(굵은 테 · 「기준」)", "나머지가 친한 순서대로 줄을 섬 · 친할수록 붙고 안 친하면 떨어짐(간격 = 가까움)", "긴장 있는 사람은 점선 몸 · 긴장 배지", "발 아래 큰 숫자 = 가까움 · 단계 배지(처음 봄 · 아는 사이 · 동료 · 친한 동료 · 단짝)", "아래 = 고른 사람의 쌍만 할 일 목록 · 사이가 먼 쌍부터(①과 같은 규칙) · 다음 단계까지 남은 양 · 함께 보내기 › → ⑦ · 줄을 누르면 ④ · 멤버 A를 다시 누르면 ①"] },
+
+ { cap: "⑧ 관계도로 보기 (오른쪽 위 「관계도」)", html: page(0, `
+   ${relMap()}
+   ${listHead(410, "10쌍 · 사이가 먼 쌍부터", "같이 보내면 올라요")}
+   ${todo(432, "A", "D", "아는 사이", "긴장 중", "성장 −1%", "동료까지 신뢰 +6")}
+   ${todo(498, "A", "E", "동료", "", "", "친한 동료까지 신뢰 +9 · 이해 +4")}
+   ${todo(564, "C", "D", "동료", "", "", "친한 동료까지 신뢰 +3")}
+   ${todo(630, "A", "C", "친한 동료", "", "", "단짝까지 이해 +5")}
+   ${todo(696, "A", "B", "단짝", "", "", "최고 단계")}
+   `, "map") + n(1, 270, 4) + n(2, 214, 96) + n(3, 104, 160) + n(4, 4, 392) + n(5, 4, 446),
+   notes: ["보기 바꾸기 · 관계도 선택 · 서기를 누르면 ①", "얼굴 5개가 원으로 섬 · 이름표는 얼굴 아래 · 얼굴을 누르면 ② 그 사람 기준 친한 순서로 서기", "쌍마다 선 하나 · 선 굵기 = 단계(처음 봄 · 아는 사이 · 동료 · 친한 동료 · 단짝) · 선 위 숫자 = 가까움 · 긴장 중이면 점선 · 처음 봄은 흐린 점선(숫자 없음) · 선이나 숫자를 누르면 ④ 둘 사이", "읽는 법 한 줄", "아래 할 일 목록은 ①과 같음 · 사이가 먼 쌍부터 · 함께 보내기 › → ⑦"] },
+
+ { cap: "③ 스태프와 (스태프 9명이 친한 순서로)", html: page(1, `
+   <div class="a" style="left:12px;right:12px;top:100px;display:flex;justify-content:space-between">${["A", "B", "C", "D", "E"].map((m, i) => `<span style="display:flex;flex-direction:column;align-items:center;gap:2px"><i class="face" style="width:36px;height:36px;${i === 0 ? "border-width:3px;border-color:var(--ink)" : ""}"></i><b style="font-size:11px">멤버 ${m}</b></span>`).join("")}</div>
+   <div class="b" style="left:12px;right:12px;top:160px;height:42px;justify-content:space-between;padding:0 12px"><b style="font-size:13px">멤버 A 보너스</b><span class="bar" style="width:140px;height:8px"><i style="width:66%"></i></span><b style="font-size:15px">10 / 15%</b></div>
+   ${staffLine()}
+   <div class="a" style="left:16px;right:16px;top:422px;display:flex;justify-content:space-between"><b style="font-size:13px">스태프 9명 · 곧 오르는 순</b><span class="sub" style="font-size:12px">회장 짝 1단계 · 덱 +5%</span></div>
+   ${STAFF.slice(0, 7).map((p, k) => srow(444 + k * 44, p, k + 1)).join("")}
+   <div class="a sub" style="left:0;right:0;top:752px;text-align:center;font-size:11px">아래로 밀면 2명 더</div>
+   `) + n(1, 4, 108) + n(2, 4, 172) + n(3, 70, 214) + n(4, 300, 214) + n(5, 4, 456) + n(6, 222, 420) + n(7, 236, 456),
+   notes: ["아이돌 고르기 · 고른 아이돌이 맨 앞에 섬", "보너스 게이지 · 9자리 보너스 합 / 상한 15%", "위는 연출 · 스태프 9명이 라포 높은 순서로 섬 · 높을수록 고른 아이돌 옆에 붙고, 낮을수록 멀리 뒤에 겹쳐 섬", "단계 1 이상은 크고 진하게 · 0단계는 작고 흐리게 뒤쪽", "아래 = 할 일 목록 · 다음 단계에 가까운 자리부터(조금만 더 하면 보너스가 오르는 자리) · 자리 이름 · 단계 점 3개(12 / 16 / 20) · 「n단계까지 m · 지금 보너스」 · 라포 값 · 줄을 누르면 ⑤", "팬클럽 회장 짝은 스태프 줄에 넣지 않고 한 줄로 따로 · 누르면 ⑤(회장 짝)", "스케줄 › → ⑤의 「많이 오르는 스케줄」(그 자리 전용 스케줄 · adventure_route.staff_role_bonus · 9자리 모두 1개 이상)"] },
+
+ { grp: "창" },
+ { cap: "④ 둘 사이 (②에서 멤버 D를 누르면)", html: page(0, lineup()) + `<div class="dimbg"></div>
+   <div class="win" style="left:20px;right:20px;top:150px;height:560px">
+     <div class="b" style="right:12px;top:12px;width:30px;height:30px;font-size:14px">✕</div>
+     <div class="a" style="left:0;right:0;top:28px;display:flex;justify-content:center;gap:36px">${["A", "D"].map(m => `<span style="display:flex;flex-direction:column;align-items:center;gap:4px"><i class="face" style="width:60px;height:60px"></i><b style="font-size:13px">멤버 ${m}</b></span>`).join("")}</div>
+     <div class="a" style="left:0;right:0;top:120px;display:flex;justify-content:center;gap:6px">${badge("아는 사이")}${badge("긴장 중", false)}</div>
+     <div class="b" style="left:20px;right:20px;top:152px;height:56px;flex-direction:column;gap:3px"><b style="font-size:13px">다음 · 동료</b><span class="sub" style="font-size:12px">신뢰 40 · 이해 40 둘 다 넘으면</span></div>
+     ${axis(232, "신뢰", 34)}${axis(266, "이해", 41)}${axis(300, "협력", 22)}${axis(334, "긴장", 48, true)}
+     <div class="b" style="left:20px;right:20px;top:370px;height:56px;flex-direction:column;gap:3px;border-style:dashed"><b style="font-size:14px">사이가 나빠서 성장 −1%</b><span class="sub" style="font-size:12px">긴장이 신뢰 · 이해 평균보다 높으면 · 최대 −10%</span></div>
+     <div class="a sub" style="left:20px;right:20px;top:440px;font-size:12px;line-height:1.6">처음 케미 · 보통<br>오르는 곳 · 모험 · 보드 칸 · 카드 · 발표 사건</div>
+     <div class="b" style="left:20px;right:20px;top:486px;height:52px;font-size:15px">닫기</div>
+   </div>` + n(1, 112, 270) + n(2, 16, 318) + n(3, 16, 384) + n(4, 16, 534) + n(5, 16, 592),
+   notes: ["두 얼굴 · 단계 · 긴장 배지", "다음 단계와 문턱(신뢰 · 이해 둘 다) · 단짝이면 「최고 단계」", "축 4개 막대 0~100 · 긴장은 점선 막대 · 아직 모르면 「—」", "효과 한 줄 · 사이가 나쁘면 성장 감소 · 나쁨 = 긴장 − 신뢰 · 이해 평균 · 1점당 0.1% · 최대 10% · 0 이하면 「영향 없음」 (rapport_effect_map · 제안 값)", "처음 케미(찰떡 · 보통 · 최악) · 오르는 곳 한 줄"] },
+
+ { cap: "⑤ 스태프 짝 (③에서 스태프를 누르면)", html: page(1, staffLine()) + `<div class="dimbg"></div>
+   <div class="win" style="left:20px;right:20px;top:150px;height:520px">
+     <div class="b" style="right:12px;top:12px;width:30px;height:30px;font-size:14px">✕</div>
+     <div class="a" style="left:0;right:0;top:28px;display:flex;justify-content:center;align-items:center;gap:18px"><span style="display:flex;flex-direction:column;align-items:center;gap:4px"><i class="face" style="width:60px;height:60px"></i><b style="font-size:13px">멤버 A</b></span><b style="font-size:18px">↔</b><span style="display:flex;flex-direction:column;align-items:center;gap:4px"><i class="face" style="width:60px;height:60px"></i><b style="font-size:13px">보컬·랩 스태프</b></span></div>
+     <div class="a" style="left:0;right:0;top:120px;text-align:center">${badge("2단계")} <b style="font-size:13px;margin-left:6px">보너스 +10%</b></div>
+     <div class="a" style="left:20px;right:20px;top:156px"><div style="display:flex;justify-content:space-between;font-size:12px"><b>라포 18</b><span class="sub">3단계까지 2</span></div><span class="bar" style="height:10px;margin-top:6px"><i style="width:50%"></i></span>
+       <div style="display:flex;justify-content:space-between;font-size:11px;margin-top:4px" class="sub"><span>12 · 1단계</span><span>16 · 2단계</span><span>20 · 3단계</span></div></div>
+     <div class="a" style="left:20px;top:232px;font-weight:700;font-size:13px">많이 오르는 스케줄</div>
+     ${["거리 버스킹", "새벽 녹음", "메트로놈의 속삭임"].map((t, i) => `<div class="b" style="left:20px;right:20px;top:${256 + i * 46}px;height:38px;justify-content:space-between;padding:0 12px;font-size:13px"><span>${t}</span><span class="pill" style="font-size:11px">스케줄 ›</span></div>`).join("")}
+     <div class="b" style="left:20px;width:150px;top:440px;height:52px;font-size:15px">명함 보기</div>
+     <div class="b" style="right:20px;width:150px;top:440px;height:52px;font-size:15px">닫기</div>
+   </div>` + n(1, 16, 190) + n(2, 16, 308) + n(3, 16, 384) + n(4, 16, 606),
+   notes: ["아이돌 ↔ 스태프 · 단계 배지 · 지금 보너스", "라포 값 · 다음 단계까지 · 문턱 12 / 16 / 20 · 3단계면 「최고 단계」", "많이 오르는 스케줄 · 그 자리 전용 스케줄 · 스케줄 › → 스케줄 화면", "명함 보기 → 스태프 명함(기존) · 회장 짝이면 「덱 효과는 가장 높은 1개만」 한 줄"] },
+
+ { cap: "⑥ 라포가 올랐어요 (둘이 한 걸음 가까워짐)", html: `<div class="pic a" style="left:0;right:0;top:0;height:774px;font-size:13px">모험 · 스케줄 결과</div>` + tabs() + `<div class="dimbg"></div>
+   <div class="win" style="left:20px;right:20px;top:130px;height:520px">
+     <div class="a val" style="left:0;right:0;top:22px;text-align:center;font-size:20px">라포가 올랐어요!</div>
+     ${tag(60, 58, 58, "멤버 B")}${tag(128, 58, 82, "멤버 D")}${fig(60, 86, 58, 234)}${fig(128, 110, 58, 210)}${fig(250, 110, 58, 210, { ghost: true, dash: true, inner: "전" })}
+     <div class="a" style="left:194px;top:180px;font-size:22px;font-weight:700">←</div>
+          <div class="a" style="left:0;right:0;top:362px;display:flex;justify-content:center;align-items:center;gap:12px">${badge("아는 사이", false)}<b style="font-size:20px">→</b>${badge("동료")}</div>
+     <div class="a sub" style="left:20px;right:20px;top:396px;text-align:center;font-size:12px">신뢰 · 이해가 40을 넘었어요</div>
+     <div class="b" style="left:20px;right:20px;top:440px;height:52px;font-size:15px;font-weight:700;border-width:2px">확인</div>
+   </div>` + n(1, 30, 210) + n(2, 30, 496) + n(3, 30, 586),
+   notes: ["멀리 있던 자리(점선) → 한 걸음 다가와 붙어 섬 · 단계가 바뀔 때만 · 여러 쌍이면 한 장씩", "전 → 후 배지 · 이유 한 줄 · 스태프 짝이면 「1단계 → 2단계 · 보너스 +10%」", "확인 → 원래 결과 화면"] },
+
+ { cap: "⑦ 함께 보낼 스케줄 (①②에서 함께 보내기)", html: page(0, lineup()) + `<div class="dimbg"></div>
+   <div class="win" style="left:20px;right:20px;top:250px;height:500px">
+     <div class="b" style="right:12px;top:12px;width:30px;height:30px;font-size:14px">✕</div>
+     <div class="a" style="left:20px;top:22px;display:flex;align-items:center;gap:10px"><span style="position:relative;width:56px;height:36px"><i class="face a" style="left:0;top:0;width:36px;height:36px"></i><i class="face a" style="left:20px;top:0;width:36px;height:36px"></i></span><b style="font-size:16px">멤버 A · 멤버 D 함께 보내기</b></div>
+     <div class="a sub" style="left:20px;right:20px;top:72px;font-size:12px">둘이 편성된 채로 열려요 · 남은 자리는 스케줄 화면에서</div>
+     ${[["지방 행사 가는 길", 25], ["숙소 작은 방", 30], ["연습실 복도", 35]].map(([t, m], k) => `<div class="b" style="left:20px;right:20px;top:${104 + k * 62}px;height:54px;justify-content:space-between;padding:0 12px"><div style="text-align:left"><b style="font-size:14px">${t}</b><div class="sub" style="font-size:11px;margin-top:2px">${m}분 · 추천 2명</div></div>${go("보내기 ›")}</div>`).join("")}
+     <div class="b" style="left:20px;right:20px;top:300px;height:56px;flex-direction:column;gap:3px;border-style:dashed"><b style="font-size:13px">대성공이면 신뢰 · 이해 · 협력이 올라요</b><span class="sub" style="font-size:11px">결과 등급에 따라 오르는 양이 달라요</span></div>
+     <div class="b" style="left:20px;width:150px;top:420px;height:52px;font-size:14px">스케줄 전체 보기</div>
+     <div class="b" style="right:20px;width:150px;top:420px;height:52px;font-size:15px">닫기</div>
+   </div>` + n(1, 4, 272) + n(2, 4, 366) + n(3, 4, 562) + n(4, 4, 682),
+   notes: ["고른 두 사람 · 이 둘이 편성된 채로 스케줄 화면이 열림", "추천 인원이 2명인 스케줄부터(adventure_route.party_rec = 2) · 보내기 › → 스케줄 화면(둘 편성 · 남은 자리 비움)", "결과 등급별 오르는 축(rapport_adventure_gain · 제안 값)", "스케줄 전체 보기 → 스케줄 화면(둘 편성) · 새로 정할 것: 스케줄 화면의 「편성 채워 열기」 입구"] }
+];
+
+const SHOT = new URLSearchParams(location.search).get("shot");
+const PH = SCREENS.filter(s => !s.grp);
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${PH[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff";
+  for (const m of document.querySelectorAll(".phone .n")) if (m.style.left === "4px") m.style.top = (parseFloat(m.style.top) - 16) + "px"; }
+else {
+  let out = "", buf = [];
+  const flush = () => { if (buf.length) out += `<div class="row">${buf.join("")}</div>`; buf = []; };
+  for (const s of SCREENS) {
+    if (s.grp) { flush(); out += `<h2 class="grp">${s.grp}</h2>`; continue; }
+    buf.push(`<div><p class="cap">${s.cap}</p><div class="pw" style="position:relative"><div class="phone">${s.html}</div></div>
+      <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`);
+  }
+  flush();
+  document.getElementById("screens").innerHTML = out;
+  for (const ph of document.querySelectorAll(".phone")) for (const m of ph.querySelectorAll(".n"))
+    if (m.style.left === "4px") { m.style.left = "-26px"; m.style.top = (parseFloat(m.style.top) + 2) + "px"; ph.parentElement.append(m); }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+# P75 · 핵심제안 시스템 개발 · 전체 안내
+
+상태: 최신 아이돌 성장 v02 기준 전체 정리 · 2026년 10월 15일
+
+**오디션에서 영입한 팀을 성장시키고, 성장한 팀과 시설을 건설·방어 시험에서 확인합니다.** 대표 기획서·제안 카드·시뮬레이터가 같은 현재 기준을 안내하도록 정리했습니다. 이벤트 게임은 이번 정리 대상에서 제외합니다.
+
+## 1. 시작할 화면
+
+[게임 시뮬레이터](/docs/planning/game-simulator.html)는 아이돌 성장으로 시작합니다. 주요 메뉴는 아이돌 성장 → 오디션 → 주사위 → 건설·증설 → 나쁜 기운 디펜스입니다. 옛 보드 설명·필러·몬스 애니메이션·리소스·기존 방어전은 **보조 도구·기존 테스트**에 접어서 둡니다. 기존 링크와 모듈 ID는 유지합니다.
+
+## 2. 현재 대표 기획과 실행
+
+| 분야 | 대표 기획 | 현재 실행과 범위 |
+|---|---|---|
+| 오디션 | [P100](/docs/planning/planning-docs-tool.html?face=development&doc=P100) | 첫인상·16인 서바이벌·영입·몬스·128행 서사 |
+| 아이돌 성장 | [P107](/docs/planning/planning-docs-tool.html?face=development&doc=P107) | 최신 통합 v02. 대표4·세부12·학습2+일본어 보존·카드·보드·시설 |
+| 공통 데이터 | [P140](/docs/planning/planning-docs-tool.html?face=development&doc=P140) | ID·합계 단위·소유권·로컬 상태 전달 |
+| 건물 성장 | [P106](/docs/planning/planning-docs-tool.html?face=development&doc=P106) | 성장 v02의 시설 기능과 3D 시공 시험 경계 |
+| 건설·증설 | [P81](/docs/planning/planning-docs-tool.html?face=development&doc=P81) | 9건물 30단계(본관 1 + 부속 2) 기준으로 재정비 · 밀착 3동·전체 복셀 연출 |
+| 나쁜 기운 디펜스 | [P104](/docs/planning/planning-docs-tool.html?face=development&doc=P104), [P138](/docs/planning/planning-docs-tool.html?face=development&doc=P138) | 자동10종·피니시5종·독립3동·보스3구간 |
+| 팬과 수익 | [P108](/docs/planning/planning-docs-tool.html?face=development&doc=P108) | 성장v02와 기존경제 계산을 구분, 운영경제 통합 후속 |
+
+## 3. 데이터 기준
+
+성장 규칙은 `data/idol_ability_sim/v02/`, 오디션 생성은 `data/audition_sim/v01/`, 방어 규칙은 `data/bad_energy/v06/`를 각 영역의 기준으로 사용합니다. 연결은 `data/simulator/shared/v01/` 계약을 거칩니다. 같은 이름이라는 이유로 서로 다른 단위의 숫자를 합치지 않습니다.
+
+성장이 쓰는 상태를 건설·방어는 복사해서 읽습니다. 3D 건설 시험값·전투 피해·전투 보상은 성장 경제에 되쓰지 않습니다. 기존 60일 경제 실험은 비교 자료이며 최신 성장의 대체 실행 경로가 아닙니다.
+
+## 4. 제안 카드 읽는 법
+
+[아이돌](/docs/planning/proposal-concept/idol.html), [오디션](/docs/planning/proposal-concept/audition.html), [건물 성장](/docs/planning/proposal-concept/growth.html), [악귀와 몬스](/docs/planning/proposal-concept/bad-data.html), [몬스 스킬](/docs/planning/proposal-concept/mons-skill.html) 카드에 현재 구현·실행 링크를 보완했습니다. 카드의 콘셉트 그림과 실제 플레이 화면은 구분하며, 구형 설명용 수치를 실행 데이터로 사용하지 않습니다.
+
+## 5. 전체 정리 원칙
+
+대표 기획서의 앞부분에는 현재 실행 기준을 둡니다. 이전 상세 설계·작업 로그는 접힌 기록으로 보존하고, 공용 보고와 증거는 삭제하지 않습니다. 중복되는 성장 메뉴와 오래된 「시뮬 없음」 설명을 최신 메뉴로 모읍니다.
+
+## 6. 아직 별도인 영역
+
+출연권 대전·게릴라 공연·새 도시 진출·시즌·운영 경제는 각 기획서의 개발 상태를 유지합니다. 이벤트 게임도 기존 항목·데이터·코드를 유지합니다. 이번 연결은 전체 게임 완성이나 계정 서버 연동을 뜻하지 않습니다.
+
+## 7. 확인 자료
+
+[진행 점검 P105](/docs/planning/planning-docs-tool.html?face=development&doc=P105) · [전체 테이블](/docs/planning/game-table-tool.html) · [공통 작성 규칙 P86](/docs/planning/planning-docs-tool.html?face=development&doc=P86) · [이번 보고](/docs/planning/삼중AI_공용_20260929/보고/보고-20261015-10.md)
+
+## 8. 문서 정보와 변경 이력
+
+2026년 10월 15일 지시10. 이전 전체 안내는 아래에 보존합니다. 검수 기록과 남은 일은 공용 보고에서 확인합니다.
+
+
+<details class="previous-spec"><summary>이전 상세 설계와 결정 기록 · 10월 15일 정리 전</summary>
+
+이 아래는 당시 설계·검토 기록입니다. 현재 실행 기준과 데이터 연결은 위 본문을 따릅니다.
+
+# P75 · 핵심제안 시스템 개발 · 전체 안내
+
+상태:10/15 방어·건설1차 마감 반영 · 기존10/12 작성 규격 유지
+히스토리: 이전 안내 1건 · [P124 전체 안내 10/07 판](목차_히스토리_1007.md)
+
+## 간략
+
+기획서 툴 「핵심제안 시스템 개발」 탭은 **바뀌어 가는 제안서를 바탕으로 만든 개발 기획서**를 담습니다. 모든 대표 기획서는 [P86 작성 규칙](작성기준_v02/작성규칙.html)의 같은 장 이름 · 같은 순서(1 개요 → 7 개발 진행·검수 → 문서 정보·변경 이력)를 씁니다. 첫 장은 언제나 지금 제안서와 시뮬 기준이고, 이전 기획은 「이 콘텐츠의 자료 › 히스토리 · 이전 기획」에 있습니다. 시뮬에 들어간 값은 확정이고, 모노 이식 결과는 책갈피 S 문서에만 두고 여기서는 링크만 겁니다.
+
+## 10월15일 방어·건설1차 마감
+
+이번 마감은 나쁜 기운 디펜스·방어진지·건설시험 범위입니다. 다른 아이돌/경제/미니게임의 진행 상태를 완료로 바꾸지 않습니다.
+
+| 범위 | 현재 실행 | 남은 경계 |
+|---|---|---|
+| 건물 외형/시공 |9건물 30단계(본관 1 + 부속 2) 기준으로 재정비 · 밀착3동·전체복셀4.2초. P81/P106 | 기존 무료 보드3단계 유지, 일반 경제 자동 연결/나머지15부지 별도 |
+| 방어/보스 | 건물별 독립HP/보석·담당 분산/외곽길, 보스3체력구간·패턴/약화. P104/P138 | 사용자 플레이 검수, 전조합 승률/기기 성능 확정 별도 |
+
+[건설시험](/docs/planning/game-simulator.html?module=simulator_module_building) · [방어시험](/docs/planning/game-simulator.html?module=simulator_module_bad_energy) · [P138 최신 통합 명세](/docs/planning/planning-docs-tool.html?face=development&doc=P138&plan=planning_development_plan_bad_energy) · [09 마감 보고](/docs/planning/삼중AI_공용_20260929/보고/보고-20261015-09.md)
+
+## 개발 콘텐츠
+
+| 콘텐츠 | 문서 | 상태 |
+| --- | --- | --- |
+| [오디션](/docs/planning/planning-docs-tool.html?face=development&doc=P100&plan=planning_development_plan_audition) | P100 | 대표 기획서 · 기획 단계 |
+| [몬스와 악귀](/docs/planning/planning-docs-tool.html?face=development&doc=P96&plan=planning_development_plan_mons) | P96 | 기본10종 · v04 성장·몬스별 카메라 연동 |
+| [보드 기본 구성](/docs/planning/planning-docs-tool.html?face=development&doc=P87&plan=planning_development_plan_board) | P87 | 제안서 기준 |
+| [보드 주사위 구동](/docs/planning/planning-docs-tool.html?face=development&doc=P74&plan=planning_development_plan_dice) | P74 | 기존 구동 자료 |
+| [필러 룰렛](/docs/planning/planning-docs-tool.html?face=development&doc=P72&plan=planning_development_plan_filler) | P72 | 시안 · 임시 보상 |
+| [팬과 수익](/docs/planning/planning-docs-tool.html?face=development&doc=P108&plan=planning_development_plan_fan_income) | P108 | 대표 기획서 · 기획 단계 |
+| [출연권 대전](/docs/planning/planning-docs-tool.html?face=development&doc=P98&plan=planning_development_plan_casting) | P98 | 대표 기획서 · 기획 단계 |
+| [게릴라 공연](/docs/planning/planning-docs-tool.html?face=development&doc=P102&plan=planning_development_plan_guerrilla) | P102 | 대표 기획서 · 기획 단계 |
+| [보드 건물 유닛](/docs/planning/planning-docs-tool.html?face=development&doc=P81&plan=planning_development_plan_building) | P81 | 건설시험10단계/전체복셀1차 마감 · 무료 보드3단계 유지 |
+| [건물 성장 · 기능과 수익](/docs/planning/planning-docs-tool.html?face=development&doc=P106&plan=planning_development_plan_building_growth) | P106 | 시각/방어시험10단계 구현 · 일반 성장경제는 기존 개발 범위 |
+| [아이돌 능력](/docs/planning/planning-docs-tool.html?face=development&doc=P107&plan=planning_development_plan_idol_ability) | P107 | 대표 기획서 · 기획 단계 |
+| [새 도시 진출](/docs/planning/planning-docs-tool.html?face=development&doc=P109&plan=planning_development_plan_city_visit) | P109 | 대표 기획서 · 기획 단계 |
+| [나쁜 기운 디펜스](/docs/planning/planning-docs-tool.html?face=development&doc=P104&plan=planning_development_plan_bad_energy) | P104 | 방어·건설1차 구현 마감 · 사용자 플레이 검수/최종균형 별도 |
+| [[이벤트] 월드 디펜스](/docs/planning/planning-docs-tool.html?face=development&doc=P88&plan=planning_development_plan_defense) | P88 | 이벤트 · 현재 v05 · 발동 미정 |
+
+## 공용 툴
+
+| 툴 | 문서 | 상태 |
+| --- | --- | --- |
+| [게임 시뮬레이터](/docs/planning/planning-docs-tool.html?face=development&doc=P94&plan=planning_development_plan_simulator) | P94 | 공용 실행 |
+| [전체 테이블](/docs/planning/planning-docs-tool.html?face=development&doc=P73&plan=planning_development_plan_tables) | P73 | 공용 툴 |
+| [핵심제안 발란스](/docs/planning/planning-docs-tool.html?face=development&doc=P110&plan=planning_development_plan_core_balance) | P110 | 공용 · 발란스 v01 |
+
+## 안내
+
+| 안내 | 문서 | 상태 |
+| --- | --- | --- |
+| [핵심제안 진행 점검](/docs/planning/planning-docs-tool.html?face=development&doc=P105&plan=planning_development_plan_review) | P105 |10/15 방어·건설 마감 반영 · 타담당10/12 기록 보존 |
+| [공통 작성 규칙](/docs/planning/planning-docs-tool.html?face=development&doc=P86&plan=planning_development_plan_guide) | P86 | 작성 기준 |
+| [전체 안내·툴 연결](/docs/planning/planning-docs-tool.html?face=development&doc=P75&plan=planning_development_plan_overview) | P75 | 공통 안내 |
+| [참고 자료 · 전투·AI](/docs/planning/planning-docs-tool.html?face=development&doc=P95&plan=planning_development_plan_reference_battle_ai) | P95 | 외부 레퍼런스 |
+
+## 개발 기획서가 필요한 제안
+
+| 제안 | 문서 | 상태 |
+| --- | --- | --- |
+| [배수 걸기(주사위 투자)](/docs/planning/planning-docs-tool.html?face=development&doc=PCDICEMD&plan=planning_development_plan_todo_dice) | PCDICEMD | 개발 기획서 필요 · 일부 진행 |
+| [잭팟](/docs/planning/planning-docs-tool.html?face=development&doc=PCJACKMD&plan=planning_development_plan_todo_jackpot) | PCJACKMD | 개발 기획서 필요 · 일부 진행 |
+| [팬덤 게이지](/docs/planning/planning-docs-tool.html?face=development&doc=PCGAUGEMD&plan=planning_development_plan_todo_gauge) | PCGAUGEMD | 개발 기획서 필요 |
+| [게임 경제](/docs/planning/planning-docs-tool.html?face=development&doc=PCECONOMYMD&plan=planning_development_plan_todo_economy) | PCECONOMYMD | 개발 기획서 필요 |
+| [도시](/docs/planning/planning-docs-tool.html?face=development&doc=PCITYMD&plan=planning_development_plan_todo_city) | PCITYMD | 개발 기획서 필요 · 일부 진행 |
+| [카드](/docs/planning/planning-docs-tool.html?face=development&doc=PCCARDMD&plan=planning_development_plan_todo_cards) | PCCARDMD | 개발 기획서 필요 |
+| [시즌](/docs/planning/planning-docs-tool.html?face=development&doc=PCSEASONMD&plan=planning_development_plan_todo_season) | PCSEASONMD | 개발 기획서 필요 |
+| [월드 페스티벌](/docs/planning/planning-docs-tool.html?face=development&doc=PCFESTMD&plan=planning_development_plan_todo_fest) | PCFESTMD | 개발 기획서 필요 |
+| [음원 · 영상](/docs/planning/planning-docs-tool.html?face=development&doc=PCSONG&plan=planning_development_plan_todo_song) | PCSONG | 개발 기획서 필요 |
+| [몬스 스킬](/docs/planning/planning-docs-tool.html?face=development&doc=P96&plan=planning_development_plan_todo_mons_skill) | P96 | 2번 「몬스와 악귀」로 합침 |
+| [유료화](/docs/planning/planning-docs-tool.html?face=development&doc=PCPAYMD&plan=planning_development_plan_todo_pay) | PCPAYMD | 개발 기획서 필요 |
+| [홍보(리드 제너레이션)](/docs/planning/planning-docs-tool.html?face=development&doc=PCPROMO&plan=planning_development_plan_todo_promo) | PCPROMO | 개발 기획서 필요 |
+
+## 읽는 법
+
+1. 왼쪽에서 콘텐츠를 고르면 대표 기획서가 열립니다.
+2. 위 카드의 단추: 시뮬레이터(P94) · 사용 CSV · 전체 테이블(P73) · 리소스 툴.
+3. 「이 콘텐츠의 자료」 목록: 관련 시스템 · 리소스 · 툴 · 표 · 사용 CSV · **히스토리 · 이전 기획** · 작성 예시.
+4. 숫자는 60일 시뮬(이식 경제 · [발란스 툴](/docs/planning/balance-tool.html))이 기준이고, 디펜스 · 오디션처럼 자기 시뮬이 있는 콘텐츠는 그 시뮬 값이 기준입니다.
+
+## 문서 정보·변경 이력
+
+- P75 · 전체 안내 · HTML [목차.html](목차.html) · 짝 MD 이 문서.
+- 10/07 · 단이(codex) · 전체 안내 v01 · v02 → [P124 히스토리](목차_히스토리_1007.md).
+- 10/12 · 클로드 · 규격 정리 · 탭 목록을 `data/planning_development_plan.csv`에서 다시 만듦.
+
+- 10/15 · codex(단이) · 지시09: 방어·건설 범위1차 마감/실제 실행·후속 경계를 갱신. 다른 개발 콘텐츠 상태는 변경하지 않음.
+
+
+</details>

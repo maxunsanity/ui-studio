@@ -1,0 +1,85 @@
+# P93 · 악귀 디펜스 · 사용 CSV
+
+상태: 제안(검수 대기)입니다.
+
+## 개요
+
+이 기획의 기능·기획 근거·리소스 자료로 사용하는 CSV 45개를 나열합니다. 실제 실행에서 읽는 표·기획 참고·리소스 제작 설정을 구분합니다. 공용 로더가 묶음 검사를 위해 읽는 모든 표의 목록은 P73에서 확인합니다. 수치는 시안 예시이며 빈 값과 대사를 임의로 채우지 않습니다.
+
+## 필요 관련 시스템
+
+[대표 기획서](/docs/planning/planning-docs-tool.html?face=development&doc=P88&plan=planning_development_plan_defense) · [전체 테이블](/docs/planning/planning-docs-tool.html?face=development&doc=P73) · [작성 기준 P86](/docs/planning/planning-docs-tool.html?face=development&doc=P86)
+
+## 보기 방법
+
+왼쪽 CSV 목록에서 표를 선택하면 동일 내용판에 실제 행이 나타납니다. 모바일 내장 화면은 CSV 선택 목록을 제공합니다. 파일의 용도는 바로 설명하며 원본 경로·주키·사용 기획·근거는 접은 설명에서 펼쳐 봅니다. 목록 검색과 행 검색은 별도로 동작합니다. 참조 버튼·40행씩 보기·표시 열 선택·뒤로/앞으로·CSV/ZIP 복사본 받기를 제공합니다.
+
+## CSV 목록
+
+| CSV 파일 | 분류 | 용도 | 원본 경로 |
+| --- | --- | --- | --- |
+| [entity_config.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_entity_config) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · PET/NPC 종류와 이동·공격 패턴 | `data/defense_proto/v05/defense_proto_v05_entity_config.csv` |
+| [profile.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_profile) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 시연 시간·상한·자동 선택 기준 | `data/defense_proto/v05/defense_proto_v05_profile.csv` |
+| [asset.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_asset) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 실제 모델 파일·배율 | `data/defense_proto/v05/defense_proto_v05_asset.csv` |
+| [enemy.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_enemy) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 악귀 종류·HP·속도·반경 | `data/defense_proto/v05/defense_proto_v05_enemy.csv` |
+| [model.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_model) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 드론·쌍포 외형 연결 | `data/defense_proto/v05/defense_proto_v05_model.csv` |
+| [movement_pattern.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_movement_pattern) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 이륙·순찰·추적·판단·냉각 | `data/defense_proto/v05/defense_proto_v05_movement_pattern.csv` |
+| [attack_pattern.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_attack_pattern) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 레이저/쌍포·피해·연사·사거리 | `data/defense_proto/v05/defense_proto_v05_attack_pattern.csv` |
+| [entity_instance.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_entity_instance) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 22대지 개체별 위상·속도·배치 | `data/defense_proto/v05/defense_proto_v05_entity_instance.csv` |
+| [defense_land.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_defense_land) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 40칸 중22대지 대상 | `data/defense_proto/v05/defense_proto_v05_defense_land.csv` |
+| [skill.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_skill) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 장치 스킬6종과 최대 레벨 | `data/defense_proto/v05/defense_proto_v05_skill.csv` |
+| [skill_effect.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_skill_effect) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 스킬 수치 연산 | `data/defense_proto/v05/defense_proto_v05_skill_effect.csv` |
+| [skill_offer.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_skill_offer) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 스킬 선택 후보·제시 시각 | `data/defense_proto/v05/defense_proto_v05_skill_offer.csv` |
+| [wave.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_wave) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 연속 웨이브 구간·악귀 비율 | `data/defense_proto/v05/defense_proto_v05_wave.csv` |
+| [road_node.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_road_node) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 도로 노드 좌표 | `data/defense_proto/v05/defense_proto_v05_road_node.csv` |
+| [road_edge.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_road_edge) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 도로 간선 연결 | `data/defense_proto/v05/defense_proto_v05_road_edge.csv` |
+| [route.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_route) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 폐곡선 순환 경로 | `data/defense_proto/v05/defense_proto_v05_route.csv` |
+| [route_step.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_route_step) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 순서 있는 경로 간선 | `data/defense_proto/v05/defense_proto_v05_route_step.csv` |
+| [spawn.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_spawn) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 입구별 행렬 출현 간격 | `data/defense_proto/v05/defense_proto_v05_spawn.csv` |
+| [visual.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_visual) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 카메라·피격·연무·사망·표시 제한 | `data/defense_proto/v05/defense_proto_v05_visual.csv` |
+| [ui_text.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_ui_text) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 화면과 스킬 안내 문구 | `data/defense_proto/v05/defense_proto_v05_ui_text.csv` |
+| [tuning.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_tuning) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 밀집·거리·보스·부상 표적 판단 | `data/defense_proto/v05/defense_proto_v05_tuning.csv` |
+| [pad_style.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_pad_style) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 이전 받침 형태 공용 기반 · 평소 미표시 | `data/defense_proto/v05/defense_proto_v05_pad_style.csv` |
+| [rooftop.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_rooftop) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 건물40곳 소켓·지지 기하 기반 | `data/defense_proto/v05/defense_proto_v05_rooftop.csv` |
+| [transform_pattern.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_transform_pattern) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 변형3종 패널·시간·이동 패턴 | `data/defense_proto/v05/defense_proto_v05_transform_pattern.csv` |
+| [transformation.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_transformation) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 22대지 변형 종류·높이·지연 | `data/defense_proto/v05/defense_proto_v05_transformation.csv` |
+| [transform_config.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense_proto_v05_transform_config) | 실행에서 읽음 | 현재 v05 전투·장치·스킬·변형 로더에서 읽습니다 · 침입→변형→방어→복원 순서 | `data/defense_proto/v05/defense_proto_v05_transform_config.csv` |
+| [buildings.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#city_v06_buildings) | 리소스·제작 설정 | 방어전의 도시 원본·도로·숲 제작과 배치 자료입니다 · 40개 건물의 기능·배치·치수·모델 | `docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/config/buildings.csv` |
+| [palette.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#city_v06_palette) | 리소스·제작 설정 | 방어전의 도시 원본·도로·숲 제작과 배치 자료입니다 · 모델 제작 색상 | `docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/config/palette.csv` |
+| [roads.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#city_v06_roads) | 리소스·제작 설정 | 방어전의 도시 원본·도로·숲 제작과 배치 자료입니다 · 이전 도로 사각형 참조 | `docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/config/roads.csv` |
+| [decor.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#city_v06_decor) | 리소스·제작 설정 | 방어전의 도시 원본·도로·숲 제작과 배치 자료입니다 · 이전 거리·공원 장식 참조 | `docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/config/decor.csv` |
+| [sockets.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#city_v06_sockets) | 리소스·제작 설정 | 방어전의 도시 원본·도로·숲 제작과 배치 자료입니다 · 건물의 장착 위치 | `docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/config/sockets.csv` |
+| [asset_manifest.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#city_v06_asset_manifest) | 리소스·제작 설정 | 방어전의 도시 원본·도로·숲 제작과 배치 자료입니다 · 모델 경로·삼각형·파일 용량 | `docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/config/asset_manifest.csv` |
+| [forest_units.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#city_v06_forest_units) | 리소스·제작 설정 | 방어전의 도시 원본·도로·숲 제작과 배치 자료입니다 · 숲 원본 유닛 종류 | `docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/config/forest_units.csv` |
+| [forest_placements.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#city_v06_forest_placements) | 리소스·제작 설정 | 방어전의 도시 원본·도로·숲 제작과 배치 자료입니다 · 숲 식생·시설물 실제 배치 | `docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/config/forest_placements.csv` |
+| [street_blocks.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#city_v06_street_blocks) | 리소스·제작 설정 | 방어전의 도시 원본·도로·숲 제작과 배치 자료입니다 · 포장·경계석·차선 블록 실제 배치 | `docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/config/street_blocks.csv` |
+| [board_tile.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#board_tile) | 기획 참고 | 공용 게임 기획과 대조합니다. 현재 v05 실행값을 대신하지 않습니다 · both | `data/game/board_tile.csv` |
+| [map_node.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#map_node) | 기획 참고 | 공용 게임 기획과 대조합니다. 현재 v05 실행값을 대신하지 않습니다 · both | `data/game/map_node.csv` |
+| [resource.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#resource) | 기획 참고 | 공용 게임 기획과 대조합니다. 현재 v05 실행값을 대신하지 않습니다 · both | `data/game/resource.csv` |
+| [akgwi.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#akgwi) | 기획 참고 | 공용 게임 기획과 대조합니다. 현재 v05 실행값을 대신하지 않습니다 · both | `data/game/akgwi.csv` |
+| [akgwi_wave.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#akgwi_wave) | 기획 참고 | 공용 게임 기획과 대조합니다. 현재 v05 실행값을 대신하지 않습니다 · both | `data/game/akgwi_wave.csv` |
+| [defense.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#defense) | 기획 참고 | 공용 게임 기획과 대조합니다. 현재 v05 실행값을 대신하지 않습니다 · both | `data/game/defense.csv` |
+| [mons.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#mons) | 기획 참고 | 공용 게임 기획과 대조합니다. 현재 v05 실행값을 대신하지 않습니다 · both | `data/game/mons.csv` |
+| [mons_skill.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#mons_skill) | 기획 참고 | 공용 게임 기획과 대조합니다. 현재 v05 실행값을 대신하지 않습니다 · both | `data/game/mons_skill.csv` |
+| [siege_config.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#siege_config) | 기획 참고 | 공용 게임 기획과 대조합니다. 현재 v05 실행값을 대신하지 않습니다 · both | `data/game/siege_config.csv` |
+| [check_list.csv](/docs/planning/game-table-tool.html?plan=planning_development_plan_defense#check_list) | 기획 참고 | 공용 게임 기획과 대조합니다. 현재 v05 실행값을 대신하지 않습니다 · tool | `data/game/check_list.csv` |
+
+## 사용 근거
+
+- data/defense_proto/v05/city_integration.json입니다.
+- data/game/README.md입니다.
+- docs/planning/p58-defense-proto-v01.md입니다.
+- docs/planning/삼중AI_공용_20260929/산출/도시맵_시안/도시맵_전체_v06/사용과연동.md입니다.
+- src/game/defense-proto-v05/data.mjs입니다.
+
+## 등록과 확장
+
+planning_csv_table.csv는 원본 파일을 한 번씩 등록하고 planning_csv_usage.csv는 콘텐츠와 CSV를 연결합니다. 여러 기획이 쓰는 파일은 복제하지 않고 관계를 여러 개 연결합니다. sort_order=0은 처음 열 대표 CSV를 지정합니다. 새 파일은 영역·버전이 포함된 table_key로 구분합니다. 동일 공용 뷰어를 사용하며 화면 코드를 수정하지 않고 등록으로 표를 늘립니다.
+
+## 진행·검수
+
+기능84건·확장7건·등록/경로/보존37건·주소123건을 확인합니다. 등록확장 검수 fixture는 브라우저 안에서만 사용하며 실제 원본에 저장하지 않습니다. 스키마 전체 게임플레이 검증이나 미정 콘텐츠의 완성을 주장하지 않습니다.
+
+## 뺀 것·옮긴 것
+
+2026-10-07에 흩어진 CSV 진입점을 공용 뷰어로 연결합니다. 기존 게임·보드·디펜스 데이터와 원본 모델·도시 설정·이전 전용 뷰어를 보존합니다.

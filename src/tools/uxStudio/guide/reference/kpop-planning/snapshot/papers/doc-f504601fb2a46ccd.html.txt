@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>033 · 스케줄 변경 상태 연동</title>
+<style>
+:root{--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--bg:#f3f4f6;--card:#fff;--accent:#7c3aed}
+*{box-sizing:border-box}
+body{margin:0;font-family:Pretendard,"Apple SD Gothic Neo",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 18px}
+header h1{margin:0;font-size:17px}
+header p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.wrap{max-width:920px;margin:0 auto;padding:16px;display:grid;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.card h2{margin:0 0 10px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px}
+label{font-size:12px;font-weight:800;color:var(--muted)}
+select{font-size:13px;padding:6px 10px;border-radius:8px;border:1px solid var(--line)}
+.badge{display:inline-block;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px;background:#ede9fe;color:#5b21b6}
+ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.55}
+li.del{color:#9ca3af;text-decoration:line-through}
+li.keep{font-weight:600}
+.note{font-size:12.5px;color:var(--muted);margin-top:8px}
+button{border:0;background:var(--accent);color:#fff;font-weight:800;padding:10px 14px;border-radius:10px;cursor:pointer}
+.draw{margin-top:10px;padding:12px;border-radius:10px;background:#faf5ff;border:1px solid #ddd6fe;font-size:14px;font-weight:700;min-height:48px}
+</style>
+</head>
+<body>
+<header>
+  <h1>033 · 스케줄 변경 · 상태 연동</h1>
+  <p>성장 없음 · 방송·공연 등급에 따라 풀 교체·삭제 · 칸 8·23·38</p>
+</header>
+<div class="wrap">
+  <section class="card">
+    <h2>현재 등급 (연동 소스)</h2>
+    <div class="row">
+      <label>방송</label>
+      <select id="broadcast">
+        <option value="0">온라인</option>
+        <option value="1">라디오</option>
+        <option value="2">케이블TV</option>
+        <option value="3">공중파TV</option>
+        <option value="4">해외방송</option>
+      </select>
+      <label>공연</label>
+      <select id="stage">
+        <option value="0">버스킹</option>
+        <option value="1">클럽</option>
+        <option value="2">소극장</option>
+        <option value="3">중극장·홀</option>
+        <option value="4">아레나·대형홀</option>
+      </select>
+      <span class="badge">스케줄 변경 칸은 이름 고정</span>
+    </div>
+    <p class="note">등급 올리면 초반 카드는 삭제(취소선). 방송·공연만 성장형.</p>
+  </section>
+  <section class="card">
+    <h2>지금 풀에 있는 카드</h2>
+    <ul id="pool"></ul>
+    <button type="button" id="btnDraw" style="margin-top:12px">스케줄 변경 뽑기</button>
+    <div class="draw" id="draw">등급 고른 뒤 뽑아 봐.</div>
+  </section>
+</div>
+<script>
+(function(){
+  // each card: {t, minB, minS, maxB, maxS} — shown if broadcast>=minB && stage>=minS && broadcast<=maxB && stage<=maxS
+  const CARDS = [
+    {t:"숏폼 바이럴 운", minB:0, maxB:1, minS:0, maxS:4},
+    {t:"팬플·유튜브 콜라보 제안", minB:0, maxB:2, minS:0, maxS:4},
+    {t:"알고리즘 묻힘", minB:0, maxB:1, minS:0, maxS:4},
+    {t:"라디오 게스트 콜", minB:1, maxB:4, minS:0, maxS:4},
+    {t:"케이블 음방·예능 변수", minB:2, maxB:4, minS:0, maxS:4},
+    {t:"케이블 음방 사녹·본방 콜", minB:2, maxB:4, minS:0, maxS:4},
+    {t:"공중파 스케줄 변수", minB:3, maxB:4, minS:0, maxS:4},
+    {t:"공중파 음방 사녹·본방 콜", minB:3, maxB:4, minS:0, maxS:4},
+    {t:"해외 토크·스팟 일정", minB:4, maxB:4, minS:0, maxS:4},
+    {t:"OST·카메오 변수", minB:2, maxB:4, minS:0, maxS:4},
+    {t:"게릴라 버스킹 반응", minB:0, maxB:4, minS:0, maxS:0},
+    {t:"소클럽 스카우트 힌트", minB:0, maxB:4, minS:0, maxS:1},
+    {t:"프리뷰·쇼케이스 콜", minB:0, maxB:4, minS:0, maxS:2},
+    {t:"홀 게스트 스케줄 변수", minB:0, maxB:4, minS:3, maxS:4},
+    {t:"아레나급 리스크·변수", minB:0, maxB:4, minS:4, maxS:4},
+    {t:"스케줄 하루 비움", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"스케줄 겹침", minB:1, maxB:4, minS:1, maxS:4},
+    {t:"리허설·사운드체크 밀림", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"광고·CF 촬영 콜", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"브랜드·앰버서더 콜", minB:1, maxB:4, minS:0, maxS:4},
+    {t:"화보·자켓·인터뷰 하루 끼움", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"뮤비 촬영 콜", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"녹음·믹스 하루 끼움", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"헤어메이크·스타일 끼움", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"회사 미팅·평가 끼움", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"컴백·앨범 러시", minB:1, maxB:4, minS:1, maxS:4},
+    {t:"화제·사고 여파", minB:0, maxB:4, minS:0, maxS:4},
+    {t:"여론·루머 대응 변수", minB:1, maxB:4, minS:0, maxS:4},
+    {t:"예능 캐릭터화 변수", minB:2, maxB:4, minS:0, maxS:4},
+    {t:"소액 머니·응원 보너스", minB:0, maxB:2, minS:0, maxS:2}
+  ];
+
+  const broadcast = document.getElementById("broadcast");
+  const stage = document.getElementById("stage");
+  const pool = document.getElementById("pool");
+  const draw = document.getElementById("draw");
+
+  function activeCards(){
+    const b = +broadcast.value, s = +stage.value;
+    return CARDS.filter(c => b>=c.minB && b<=c.maxB && s>=c.minS && s<=c.maxS);
+  }
+  function render(){
+    const b = +broadcast.value, s = +stage.value;
+    const act = new Set(activeCards().map(c=>c.t));
+    pool.innerHTML = CARDS.map(c => {
+      const on = act.has(c.t);
+      return '<li class="'+(on?'keep':'del')+'">'+(on?'':'[삭제] ')+c.t+'</li>';
+    }).join("");
+  }
+  broadcast.onchange = stage.onchange = render;
+  document.getElementById("btnDraw").onclick = function(){
+    const a = activeCards();
+    if(!a.length){ draw.textContent = "풀이 비어 있음"; return; }
+    const c = a[Math.floor(Math.random()*a.length)];
+    draw.textContent = "뽑힘 · " + c.t;
+  };
+  render();
+})();
+</script>
+</body>
+</html>

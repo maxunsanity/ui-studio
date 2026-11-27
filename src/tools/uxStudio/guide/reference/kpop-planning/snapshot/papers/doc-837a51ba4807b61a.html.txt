@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>초록 공연 · 보드 GROWTH (기획)</title>
+  <style>
+    :root {
+      --bg: #eef2ef;
+      --paper: #fff;
+      --ink: #14201a;
+      --muted: #5f6d66;
+      --line: #d5ddd8;
+      --green: #159a45;
+      --green-deep: #0f7a36;
+      --green-soft: #e8f8ee;
+      --select: #bbf7d0;
+      --gold: #c9a227;
+      --board: #1a3d2a;
+      --board-edge: #0f2819;
+      --tile: #f7fbf8;
+      --frame: 980px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 50% 0%, #dcefe3 0%, transparent 55%),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.45;
+      min-height: 100vh;
+    }
+    .wrap {
+      max-width: var(--frame);
+      margin: 0 auto;
+      padding: 16px 14px 40px;
+    }
+    header {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px 12px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 0 rgba(20, 32, 26, 0.04);
+    }
+    header .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      margin: 0 0 4px;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    header p {
+      margin: 0;
+      font-size: 12.5px;
+      color: var(--muted);
+      max-width: 640px;
+    }
+    .ladder {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+    .ladder span {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #f3f5f4;
+      color: var(--muted);
+      border: 1px solid var(--line);
+    }
+    .ladder span.on {
+      background: var(--green-soft);
+      color: var(--green-deep);
+      border-color: #86efac;
+    }
+    .btn {
+      font: inherit;
+      font-size: 12.5px;
+      font-weight: 800;
+      border-radius: 10px;
+      padding: 8px 14px;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      transition: transform .12s ease, box-shadow .12s ease, background .15s;
+    }
+    .btn:hover:not(:disabled) { transform: translateY(-1px); }
+    .btn:disabled { opacity: .38; cursor: not-allowed; transform: none; }
+    .btn-grow {
+      background: linear-gradient(180deg, #22c55e, var(--green));
+      color: #fff;
+      border-color: var(--green-deep);
+      box-shadow: 0 4px 12px rgba(21, 154, 69, 0.28);
+      font-size: 14px;
+      padding: 10px 22px;
+      min-width: 110px;
+    }
+    .btn-grow:hover:not(:disabled) {
+      box-shadow: 0 6px 16px rgba(21, 154, 69, 0.36);
+    }
+    .btn-reset {
+      background: #fff;
+      color: var(--muted);
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr minmax(240px, 280px);
+      gap: 14px;
+      align-items: start;
+    }
+    @media (max-width: 780px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    /* —— Board face —— */
+    .stage {
+      position: relative;
+    }
+    .board-shell {
+      background: linear-gradient(160deg, #24543a 0%, var(--board) 45%, var(--board-edge) 100%);
+      border-radius: 18px;
+      padding: 14px 14px 16px;
+      box-shadow:
+        0 12px 28px rgba(15, 40, 25, 0.28),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+      position: relative;
+      overflow: hidden;
+      transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s;
+    }
+    .board-shell.swap-flash {
+      animation: boardSwap .7s ease;
+    }
+    @keyframes boardSwap {
+      0% { transform: translateX(0) scale(1); filter: brightness(1); }
+      30% { transform: translateX(-18px) scale(0.97); filter: brightness(1.25); }
+      55% { transform: translateX(22px) scale(1.02); filter: brightness(1.35); }
+      100% { transform: translateX(0) scale(1); filter: brightness(1); }
+    }
+    .board-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: #e8f5ec;
+    }
+    .board-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(255,255,255,0.14);
+      letter-spacing: 0.02em;
+    }
+    .board-badge.b2 {
+      background: rgba(34, 197, 94, 0.35);
+      border-color: rgba(134, 239, 172, 0.5);
+    }
+    .board-hint {
+      font-size: 11px;
+      opacity: 0.78;
+      font-weight: 600;
+    }
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .tile {
+      position: relative;
+      background: var(--tile);
+      border-radius: 12px;
+      min-height: 132px;
+      padding: 12px 11px 14px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      text-align: left;
+      box-shadow:
+        0 2px 0 rgba(0,0,0,0.12),
+        inset 0 0 0 1px rgba(21, 154, 69, 0.12);
+      transition:
+        transform .18s ease,
+        box-shadow .2s ease,
+        border-color .2s,
+        opacity .35s ease,
+        filter .35s ease;
+      overflow: hidden;
+    }
+    .tile::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #4ade80, var(--green));
+      opacity: 0.85;
+    }
+    .tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
+    .tile.selected {
+      border-color: var(--green);
+      background: #f0fdf4;
+      box-shadow:
+        0 0 0 3px rgba(34, 197, 94, 0.28),
+        0 8px 18px rgba(21, 154, 69, 0.22);
+      z-index: 2;
+    }
+    .tile.dim {
+      opacity: 0.45;
+      filter: saturate(0.7);
+    }
+    .tile.pulse {
+      animation: tilePulse .85s ease;
+    }
+    @keyframes tilePulse {
+      0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.55); transform: scale(1); }
+      40% { box-shadow: 0 0 0 10px rgba(34,197,94,0); transform: scale(1.04); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); transform: scale(1); }
+    }
+    .tile .slot-id {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .tile .venue {
+      margin: 8px 0 10px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      min-height: 2.6em;
+      color: var(--ink);
+    }
+    .chip {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green-deep);
+      border: 1px solid #86efac;
+    }
+    .tile .arrive-tag {
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--green);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .tile.selected .arrive-tag { opacity: 0.9; }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .toast {
+      min-height: 1.3em;
+      margin: 10px 2px 0;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #d1fae5;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+      transition: opacity .25s;
+    }
+    .toast.pop {
+      animation: toastPop .45s ease;
+    }
+    @keyframes toastPop {
+      0% { opacity: 0; transform: translateY(4px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* —— Filler panel —— */
+    .side {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 1px 0 rgba(20, 32, 26, 0.04);
+    }
+    .side h2 {
+      margin: 0 0 4px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--green-deep);
+    }
+    .side .sub {
+      margin: 0 0 12px;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+    .filler-list { list-style: none; margin: 0; padding: 0; }
+    .filler-list li {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: #fafcfb;
+    }
+    .filler-list .kind {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--muted);
+      margin-bottom: 3px;
+      letter-spacing: 0.02em;
+    }
+    .filler-list .val {
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .filler-list .ex {
+      margin-top: 3px;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+    .empty-side {
+      color: var(--muted);
+      font-size: 12.5px;
+      padding: 28px 10px;
+      text-align: center;
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      background: #fafcfb;
+    }
+
+    /* —— Card overlay —— */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .2s, visibility .2s;
+    }
+    .overlay.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .overlay-bg {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 24, 16, 0.48);
+      backdrop-filter: blur(2px);
+    }
+    .reveal-card {
+      position: relative;
+      width: min(300px, 86vw);
+      background: linear-gradient(165deg, #fff 0%, #f3faf5 100%);
+      border-radius: 16px;
+      padding: 22px 20px 20px;
+      border: 2px solid #86efac;
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.28),
+        0 0 0 1px rgba(255,255,255,0.5) inset;
+      transform: translateY(40px) scale(0.86) rotateX(8deg);
+      opacity: 0;
+      transform-origin: center center;
+      will-change: transform, opacity;
+    }
+    .overlay.show .reveal-card {
+      animation: cardIn .42s cubic-bezier(.2,.9,.2,1) forwards;
+    }
+    .overlay.fly .reveal-card {
+      animation: none;
+      transition: transform .55s cubic-bezier(.45,.05,.55,1), opacity .5s ease;
+    }
+    @keyframes cardIn {
+      0% { opacity: 0; transform: translateY(48px) scale(0.82) rotate(-3deg); }
+      60% { opacity: 1; transform: translateY(-6px) scale(1.03) rotate(1deg); }
+      100% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+    }
+    .reveal-card .label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--green);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .reveal-card .before {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+      text-decoration: line-through;
+      text-decoration-color: #94a3b8;
+      margin-bottom: 6px;
+    }
+    .reveal-card .arrow {
+      font-size: 18px;
+      color: var(--green);
+      font-weight: 800;
+      margin: 2px 0 8px;
+    }
+    .reveal-card .after {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+    .reveal-card .level-up {
+      margin-top: 14px;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: var(--green-soft);
+      color: var(--green-deep);
+      border: 1px solid #86efac;
+    }
+    .stamp {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 64px;
+      height: 64px;
+      border: 3px solid #c2410c;
+      border-radius: 50%;
+      color: #c2410c;
+      font-size: 13px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(12deg) scale(0);
+      opacity: 0;
+      letter-spacing: 0.04em;
+      background: rgba(254, 226, 226, 0.35);
+    }
+    .stamp.show {
+      animation: stampIn .35s cubic-bezier(.2,1.4,.4,1) .18s forwards;
+    }
+    @keyframes stampIn {
+      0% { transform: rotate(12deg) scale(0); opacity: 0; }
+      70% { transform: rotate(-4deg) scale(1.12); opacity: 1; }
+      100% { transform: rotate(12deg) scale(1); opacity: 0.92; }
+    }
+
+    .foot {
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="row">
+        <div>
+          <h1>032 · 초록 공연 — 보드 GROWTH</h1>
+          <p>
+            보드 칸을 눌러 <b>도착/선택</b> → <b>성장</b>으로 카드 연출 후 칸에 반영.
+            Board1 상한=클럽×3 → Board2 국내. 기획 미리보기 (초록만).
+          </p>
+        </div>
+        <button type="button" class="btn btn-reset" id="btnReset">다시하기</button>
+      </div>
+      <div class="ladder" id="ladder"></div>
+    </header>
+
+    <div class="layout">
+      <section class="stage">
+        <div class="board-shell" id="boardShell">
+          <div class="board-top">
+            <span class="board-badge" id="boardBadge">Board1 · 홍대·수도권</span>
+            <span class="board-hint" id="boardHint">칸 하나 선택 → 성장</span>
+          </div>
+          <div class="tiles" id="tiles"></div>
+          <div class="controls">
+            <button type="button" class="btn btn-grow" id="btnGrow" disabled>성장</button>
+          </div>
+          <p class="toast" id="toast"></p>
+        </div>
+        <p class="foot">한 칸씩만 성장 (덕질 10개마다 하나) · 사다리: 버스킹 → 클럽 → 소극장 → 중극장·홀 → 아레나·대형홀</p>
+      </section>
+
+      <aside class="side">
+        <h2>필러 종류 3</h2>
+        <p class="sub" id="rightHint">보드에서 칸을 선택하세요.</p>
+        <div id="right">
+          <div class="empty-side">도착한 칸의<br/>대분류 · 소분류 · 지역명</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="overlay-bg"></div>
+    <div class="reveal-card" id="revealCard">
+      <div class="stamp" id="stamp">대박</div>
+      <div class="label">LEVEL UP</div>
+      <div class="before" id="cardBefore"></div>
+      <div class="arrow">↓</div>
+      <div class="after" id="cardAfter"></div>
+      <div class="level-up" id="cardLevel"></div>
+    </div>
+  </div>
+
+  <script>
+    const LADDER = ["버스킹", "클럽", "소극장", "중극장·홀", "아레나·대형홀"];
+    const KINDS = {
+      "버스킹": ["거리 버스킹", "대학가", "거리공연"],
+      "클럽": ["소클럽 오프닝", "라이브하우스", "댄스클럽 쇼케이스"],
+      "소극장": ["소극장 쇼케이스", "블랙박스", "팬소극장"],
+      "중극장·홀": ["중극장", "콘서트홀", "시티홀"],
+      "아레나·대형홀": ["잠실 아레나급", "올림픽홀급", "고척·돔급"]
+    };
+    const FILLERS = {
+      Board1: {
+        "버스킹": [
+          { kind: "1. 대분류", value: "마포·홍대권 / 대학가 / 번화가", ex: "Board1 권역 풀" },
+          { kind: "2. 소분류", value: "거리·출구·골목 / 캠퍼스 / 상권", ex: "권역 안 동선" },
+          { kind: "3. 지역명", value: "예: 홍대 걷고싶은거리", ex: "대박·중박 때 붙는 필러" }
+        ],
+        "클럽": [
+          { kind: "1. 대분류", value: "마포·홍대권 (클럽권)", ex: "Board1 상한" },
+          { kind: "2. 소분류", value: "라이브하우스 골목 / 클럽 데이", ex: "실내 소규모" },
+          { kind: "3. 지역명", value: "예: 홍대 라이브하우스권", ex: "필러" }
+        ]
+      },
+      Board2: {
+        "클럽": [
+          { kind: "1. 대분류", value: "국내 (광역·도시)", ex: "Board2 국내" },
+          { kind: "2. 소분류", value: "도시 클럽권", ex: "부산·대구…" },
+          { kind: "3. 지역명", value: "예: 부산 클럽 거리", ex: "필러" }
+        ],
+        "소극장": [
+          { kind: "1. 대분류", value: "국내", ex: "Board2" },
+          { kind: "2. 소분류", value: "광역시 소극장권", ex: "" },
+          { kind: "3. 지역명", value: "예: 대구 소극장", ex: "필러" }
+        ],
+        "중극장·홀": [
+          { kind: "1. 대분류", value: "국내", ex: "Board2" },
+          { kind: "2. 소분류", value: "콘서트홀권", ex: "" },
+          { kind: "3. 지역명", value: "예: 콘서트홀", ex: "필러" }
+        ],
+        "아레나·대형홀": [
+          { kind: "1. 대분류", value: "국내 정점", ex: "초록 최고치" },
+          { kind: "2. 소분류", value: "아레나·대형홀권", ex: "해외는 스팟" },
+          { kind: "3. 지역명", value: "예: 아레나 / 올림픽홀급", ex: "필러" }
+        ]
+      }
+    };
+
+    const state = {
+      board: "Board1",
+      slots: [
+        { id: "A", levelIdx: 0, kindIdx: 0 },
+        { id: "B", levelIdx: 0, kindIdx: 1 },
+        { id: "C", levelIdx: 0, kindIdx: 2 }
+      ],
+      active: null,
+      busy: false,
+      highlightId: null
+    };
+
+    
+    function pickUniqueKindIdx(levelIdx, exceptId) {
+      const lv = LADDER[levelIdx];
+      const kinds = KINDS[lv];
+      const used = new Set(
+        state.slots.filter((x) => x.id !== exceptId && x.levelIdx === levelIdx).map((x) => x.kindIdx % kinds.length)
+      );
+      const free = [];
+      for (let i = 0; i < kinds.length; i++) if (!used.has(i)) free.push(i);
+      if (!free.length) return Math.floor(Math.random() * kinds.length);
+      return free[Math.floor(Math.random() * free.length)];
+    }
+
+function levelName(i) { return LADDER[i]; }
+    function slotLabel(s) {
+      const kinds = KINDS[levelName(s.levelIdx)];
+      return kinds[s.kindIdx % kinds.length];
+    }
+    function allClub() { return state.slots.every((s) => s.levelIdx >= 1); }
+    function canGrow(s) {
+      if (state.board === "Board1") return s.levelIdx < 1;
+      return s.levelIdx < LADDER.length - 1;
+    }
+    function fillersFor(s) {
+      const lv = levelName(s.levelIdx);
+      const b = state.board;
+      return (FILLERS[b] && FILLERS[b][lv]) || FILLERS.Board2[lv] || FILLERS.Board1["버스킹"];
+    }
+
+    const ladderEl = document.getElementById("ladder");
+    const tilesEl = document.getElementById("tiles");
+    const rightEl = document.getElementById("right");
+    const rightHint = document.getElementById("rightHint");
+    const boardBadge = document.getElementById("boardBadge");
+    const boardHint = document.getElementById("boardHint");
+    const boardShell = document.getElementById("boardShell");
+    const toast = document.getElementById("toast");
+    const btnGrow = document.getElementById("btnGrow");
+    const btnReset = document.getElementById("btnReset");
+    const overlay = document.getElementById("overlay");
+    const revealCard = document.getElementById("revealCard");
+    const stamp = document.getElementById("stamp");
+    const cardBefore = document.getElementById("cardBefore");
+    const cardAfter = document.getElementById("cardAfter");
+    const cardLevel = document.getElementById("cardLevel");
+
+    function setToast(msg) {
+      toast.textContent = msg || "";
+      toast.classList.remove("pop");
+      void toast.offsetWidth;
+      if (msg) toast.classList.add("pop");
+    }
+
+    function renderLadder() {
+      ladderEl.innerHTML = LADDER.map((n, i) => {
+        const used = state.slots.some((s) => s.levelIdx === i);
+        return '<span class="' + (used ? "on" : "") + '">' + (i + 1) + ". " + n + "</span>";
+      }).join("");
+    }
+
+    function showFillers(s) {
+      if (!s) {
+        rightHint.textContent = "보드에서 칸을 선택하세요.";
+        rightEl.innerHTML = '<div class="empty-side">도착한 칸의<br/>대분류 · 소분류 · 지역명</div>';
+        return;
+      }
+      rightHint.textContent =
+        "선택 「" + slotLabel(s) + "」 · " + levelName(s.levelIdx) + " · " + state.board;
+      const ul = document.createElement("ul");
+      ul.className = "filler-list";
+      fillersFor(s).forEach((f) => {
+        const li = document.createElement("li");
+        li.innerHTML =
+          '<div class="kind">' + f.kind + "</div>" +
+          '<div class="val">' + f.value + "</div>" +
+          '<div class="ex">' + (f.ex || "") + "</div>";
+        ul.appendChild(li);
+      });
+      rightEl.innerHTML = "";
+      rightEl.appendChild(ul);
+    }
+
+    function updateBoardChrome() {
+      if (state.board === "Board2") {
+        boardBadge.textContent = "Board2 · 국내";
+        boardBadge.className = "board-badge b2";
+        boardHint.textContent = "국내 풀 · 아레나까지";
+      } else {
+        boardBadge.textContent = "Board1 · 홍대·수도권";
+        boardBadge.className = "board-badge";
+        boardHint.textContent = "칸 하나 선택 → 성장";
+      }
+    }
+
+    function arrive(id) {
+      if (state.busy) return;
+      state.active = id;
+      state.highlightId = null;
+      setToast("도착 · 칸 " + id + " 선택");
+      render();
+      showFillers(state.slots.find((x) => x.id === id));
+    }
+
+    function wait(ms) {
+      return new Promise((r) => setTimeout(r, ms));
+    }
+
+    async function playGrowAnimation(slotId, beforeLabel, afterLabel, afterLevel, doBoard2) {
+      const tileEl = tilesEl.querySelector('[data-id="' + slotId + '"]');
+      cardBefore.textContent = beforeLabel;
+      cardAfter.textContent = afterLabel;
+      cardLevel.textContent = "수준 업 · " + afterLevel;
+      stamp.classList.remove("show");
+      overlay.classList.remove("fly");
+      overlay.classList.add("show");
+      overlay.setAttribute("aria-hidden", "false");
+
+      await wait(420);
+      stamp.classList.add("show");
+      await wait(720);
+
+      // Fly into tile
+      const cardRect = revealCard.getBoundingClientRect();
+      const tileRect = tileEl
+        ? tileEl.getBoundingClientRect()
+        : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 40, height: 40 };
+
+      const cx = cardRect.left + cardRect.width / 2;
+      const cy = cardRect.top + cardRect.height / 2;
+      const tx = tileRect.left + tileRect.width / 2;
+      const ty = tileRect.top + tileRect.height / 2;
+      const dx = tx - cx;
+      const dy = ty - cy;
+
+      overlay.classList.add("fly");
+      revealCard.style.transform =
+        "translate(" + dx + "px," + dy + "px) scale(0.12)";
+      revealCard.style.opacity = "0";
+
+      await wait(560);
+
+      overlay.classList.remove("show", "fly");
+      overlay.setAttribute("aria-hidden", "true");
+      revealCard.style.transform = "";
+      revealCard.style.opacity = "";
+      stamp.classList.remove("show");
+
+      state.highlightId = slotId;
+      render();
+      const grown = tilesEl.querySelector('[data-id="' + slotId + '"]');
+      if (grown) {
+        grown.classList.add("pulse");
+        await wait(200);
+      }
+
+      if (doBoard2) {
+        boardShell.classList.remove("swap-flash");
+        void boardShell.offsetWidth;
+        boardShell.classList.add("swap-flash");
+        updateBoardChrome();
+        setToast("Board2 국내 해금 · 필러 풀 교체 · 소극장→아레나");
+        await wait(700);
+        boardShell.classList.remove("swap-flash");
+      }
+
+      await wait(650);
+      state.highlightId = null;
+      render();
+    }
+
+    async function grow() {
+      if (state.busy || !state.active) return;
+      const s = state.slots.find((x) => x.id === state.active);
+      if (!s) return;
+
+      if (s.levelIdx >= LADDER.length - 1) {
+        setToast("이미 최고치 (아레나·대형홀)");
+        return;
+      }
+      if (state.board === "Board1" && s.levelIdx >= 1) {
+        setToast("Board1 상한=클럽. 다른 칸을 클럽으로.");
+        return;
+      }
+      if (!canGrow(s)) return;
+
+      state.busy = true;
+      btnGrow.disabled = true;
+
+      const beforeLabel = slotLabel(s) + " · " + levelName(s.levelIdx);
+      s.levelIdx += 1;
+      const lv = levelName(s.levelIdx);
+      s.kindIdx = pickUniqueKindIdx(s.levelIdx, s.id);
+      const afterLabel = slotLabel(s);
+      let unlockedBoard2 = false;
+      if (state.board === "Board1" && allClub()) {
+        state.board = "Board2";
+        unlockedBoard2 = true;
+      }
+
+      try {
+        await playGrowAnimation(s.id, beforeLabel, afterLabel, lv, unlockedBoard2);
+        if (!unlockedBoard2) {
+          setToast("칸 " + s.id + " → " + lv + " · 「" + afterLabel + "」");
+        }
+        showFillers(s);
+      } finally {
+        state.busy = false;
+        render();
+        showFillers(s);
+      }
+    }
+
+    function reset() {
+      if (state.busy) return;
+      state.board = "Board1";
+      state.slots = [
+        { id: "A", levelIdx: 0, kindIdx: 0 },
+        { id: "B", levelIdx: 0, kindIdx: 1 },
+        { id: "C", levelIdx: 0, kindIdx: 2 }
+      ];
+      state.active = null;
+      state.highlightId = null;
+      overlay.classList.remove("show", "fly");
+      revealCard.style.transform = "";
+      revealCard.style.opacity = "";
+      setToast("초기화 · 버스킹 3종으로 시작");
+      updateBoardChrome();
+      render();
+      showFillers(null);
+    }
+
+    function render() {
+      renderLadder();
+      updateBoardChrome();
+      tilesEl.innerHTML = "";
+      const dimOthers = !!state.highlightId;
+
+      state.slots.forEach((s) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "tile";
+        btn.dataset.id = s.id;
+        if (state.active === s.id) btn.classList.add("selected");
+        if (dimOthers && state.highlightId !== s.id) btn.classList.add("dim");
+        btn.innerHTML =
+          '<div class="slot-id">칸 ' + s.id + "</div>" +
+          '<div class="venue">' + slotLabel(s) + "</div>" +
+          '<span class="chip">' + levelName(s.levelIdx) + "</span>" +
+          '<span class="arrive-tag">도착 ✓</span>';
+        btn.onclick = () => arrive(s.id);
+        tilesEl.appendChild(btn);
+      });
+
+      const active = state.slots.find((x) => x.id === state.active);
+      btnGrow.disabled = state.busy || !active || !canGrow(active);
+    }
+
+    btnGrow.onclick = () => grow();
+    btnReset.onclick = () => reset();
+
+    render();
+    showFillers(null);
+  </script>
+</body>
+</html>

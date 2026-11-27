@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>제5장 작업 방식 (AI 팀이 일하는 법)</title>
+<style>
+:root{--bg:#070a12;--s:#141b2e;--line:#34405f;--ink:#ffffff;--mu:#c9d1e3;--ac:#c4a3ff;--nv:#6f8cff;--red:#ff6b6b;--ok:#62e0a6}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#000;font-family:"Apple SD Gothic Neo","Noto Sans CJK KR","Noto Sans KR",sans-serif;color:var(--ink)}
+#vp{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#stage{width:1920px;height:1080px;position:relative;flex:none;transform-origin:center center}
+.sl{position:absolute;inset:0;background:var(--bg);padding:90px 130px 150px;display:none;flex-direction:column}
+.sl.on{display:flex}
+.k{font-size:30px;font-weight:800;color:var(--ac);letter-spacing:1px;margin-bottom:18px}
+h1{font-size:76px;line-height:1.15;margin:0 0 40px;font-weight:800}
+.b{font-size:38px;line-height:1.5;color:var(--mu);margin:0}
+.b b{color:var(--ink)}
+.dg{flex:1;display:flex;align-items:center;justify-content:center;gap:40px}
+.bx{border-radius:28px;padding:34px 40px;font-size:40px;font-weight:800;text-align:center;line-height:1.25}
+.bx small{display:block;font-size:28px;font-weight:600;margin-top:8px;opacity:.9}
+.v{background:var(--ac);color:#150b2e}.n{background:var(--nv);color:#fff}.o{border:4px solid var(--nv)}.g{background:var(--s);border:3px solid var(--line)}
+.d{text-align:left;font-size:36px;padding:22px 34px}.d small{font-size:28px}
+.r{border:5px solid var(--red);color:var(--red)}
+.ar{font-size:80px;font-weight:900;color:var(--mu);line-height:1}
+.num{display:inline-flex;width:110px;height:110px;border-radius:50%;background:var(--ac);color:#150b2e;font-size:64px;font-weight:900;align-items:center;justify-content:center;margin-right:36px;vertical-align:middle}
+.foot{position:absolute;left:0;right:0;bottom:0;height:100px;display:flex;align-items:center;justify-content:space-between;padding:0 130px;border-top:2px solid var(--line);font-size:26px;color:var(--mu)}
+.nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:14px;align-items:center;z-index:9}
+.nav button{background:#1c2540;color:#fff;border:2px solid var(--line);border-radius:12px;padding:10px 24px;font-size:24px;cursor:pointer}
+.nav button:disabled{opacity:.3}
+#cnt{font-size:24px;color:#fff;min-width:90px;text-align:center}
+@media print{@page{size:1920px 1080px;margin:0}html,body{background:var(--bg)}#vp{position:static;display:block}#stage{transform:none!important;width:auto;height:auto}.sl{position:relative;display:flex!important;width:1920px;height:1080px;page-break-after:always;break-after:page}.nav{display:none}}
+</style></head><body>
+<div id="vp"><div id="stage">
+
+<section class="sl" style="justify-content:center">
+ <div class="k" style="font-size:36px">헌법 기조 · 제5장</div>
+ <h1 style="font-size:132px;margin-bottom:50px">AI 팀은<br/>이렇게 일해요</h1>
+ <p class="b">원칙 다섯 가지 · 역할 · 일하는 순서 · 폴더</p>
+ <div class="foot"><span>케이팝몬스터즈 · 2026.11.13</span><span>1차 개발 기준 · 초안</span></div>
+</section>
+
+<section class="sl">
+ <div class="k">최우선 원칙</div><h1>모두가 성향에 박아 두는 다섯 가지</h1>
+ <div class="dg" style="flex-direction:column;align-items:stretch;gap:22px">
+  <div class="bx g" style="text-align:left;padding:22px 40px">① 원본 먼저 읽기</div>
+  <div class="bx g" style="text-align:left;padding:22px 40px">② 보고는 모두 총괄(이스라트)에게</div>
+  <div class="bx g" style="text-align:left;padding:22px 40px">③ 역할(이름) · 현재 세팅값(비면 0동작) · 초안 기준</div>
+  <div class="bx g" style="text-align:left;padding:22px 40px">④ 정시 기준 · 평소 30분 · 급하면 10분</div>
+  <div class="bx g" style="text-align:left;padding:22px 40px">⑤ 작업할 때마다 보고/ 갱신</div>
+ </div>
+</section>
+
+<section class="sl">
+ <div class="k">원칙 ① · 현중 13:38 「반드시 명기」</div>
+ <h1><span class="num">1</span>원본을 먼저 읽는다</h1>
+ <p class="b">대화·기획·답변 전에 <b>기획서툴 7007 원본</b>을 열어 읽는다.<br/>요약된 기억만 믿고 답하지 않는다.</p>
+ <div class="dg"><div class="bx v">7007에서<br/>원본 열기</div><div class="ar">→</div><div class="bx v">읽기</div><div class="ar">→</div><div class="bx n">답하기 · 작업</div></div>
+</section>
+
+<section class="sl">
+ <div class="k">원칙 ② · 현중 13:39 「강하게 명기」</div>
+ <h1><span class="num">2</span>보고는 모두 총괄에게</h1>
+ <p class="b">보고·질문·대화는 <b>총괄(이스라트)</b>이 받아 처리한다.<br/>현중에게 직접 보내지 않는다.</p>
+ <div class="dg"><div class="bx g">모든 AI<br/>기획팀</div><div class="ar">→</div><div class="bx v">총괄<small>(이스라트)</small></div><div class="ar">→</div><div class="bx n">결정<small>(현중)</small></div></div>
+</section>
+
+<section class="sl">
+ <div class="k">원칙 ② · 예외</div>
+ <h1>현중에게 직접 보내지 않는다</h1>
+ <p class="b">현중은 <b>일이 막혔을 때만</b> 단톡방에서 직접 말한다.<br/>토의 결과는 총괄을 통해 현중에게 간다.</p>
+ <div class="dg"><div class="bx g">AI · 기획팀</div><div class="ar" style="color:var(--red)">✕</div><div class="bx r">현중에게 직접</div><div style="width:60px"></div><div class="bx o">막힐 때만<small>단톡방</small></div></div>
+</section>
+
+<section class="sl">
+ <div class="k">원칙 ③</div>
+ <h1><span class="num">3</span>쓰는 법 세 가지</h1>
+ <p class="b">이름은 역할(이름) · 숫자는 표의 세팅값(비면 0동작)으로 쓴다 · 초안은 표시한다.</p>
+ <div class="dg"><div class="bx g">이름<small>개발(아론·슈덴)</small></div><div class="bx g">숫자<small>세팅값·비면 0동작</small></div><div class="bx g">초안<small>초안 기준 · 현중 확정</small></div></div>
+</section>
+
+<section class="sl">
+ <div class="k">원칙 ④ · 현중 13:39</div>
+ <h1><span class="num">4</span>루틴은 매 정시 기준</h1>
+ <p class="b">루틴은 <b>현중이 지시할 때만</b> 연다. (현중 14:38)<br/>열면 평소 <b>30분</b>, 급하면 <b>10분</b> · 바뀐 게 없으면 조용히.</p>
+ <div class="dg" style="flex-direction:column;gap:30px">
+  <div style="display:flex;gap:30px"><div class="bx v">정시</div><div class="bx g" style="opacity:.5">:10</div><div class="bx g" style="opacity:.5">:20</div><div class="bx v">:30</div><div class="bx g" style="opacity:.5">:40</div><div class="bx g" style="opacity:.5">:50</div><div class="bx v">정시</div></div>
+  <div style="font-size:30px;color:var(--mu)"><span style="color:var(--ac)">■</span> 평소 30분 &nbsp;&nbsp; <span>■</span> 급하면 10분 (전부)</div>
+ </div>
+</section>
+
+<section class="sl">
+ <div class="k">원칙 ⑤ · 현중 13:44</div>
+ <h1><span class="num">5</span>작업할 때마다 보고/ 갱신</h1>
+ <p class="b">지시문을 읽고 일할 때마다 <b>보고/ 문서</b>를 고친다.<br/>총괄이 폴더만 보고도 진행을 알 수 있게.</p>
+ <div class="dg"><div class="bx o">시작</div><div class="ar">→</div><div class="bx o">중간</div><div class="ar">→</div><div class="bx v">완료</div><div style="width:40px"></div><div class="bx n">보고/<small>단계마다 갱신</small></div></div>
+</section>
+
+<section class="sl">
+ <div class="k">역할</div>
+ <h1>결정은 현중, 조율은 총괄</h1>
+ <div class="dg" style="flex-direction:column;gap:20px">
+  <div class="bx v" style="padding:24px 80px">결정(현중)</div><div class="ar" style="font-size:56px">↓</div>
+  <div class="bx n" style="padding:24px 80px">총괄(이스라트)</div><div class="ar" style="font-size:56px">↓</div>
+  <div style="display:flex;gap:40px"><div class="bx g" style="font-size:32px">기획팀<small>UI(제나) · 시스템(유르넷)<br/>콘텐츠(이올카) · 발란스(비앙카)</small></div><div class="bx g" style="font-size:32px">개발 · 스펙<small>개발(아론·슈덴·단이)<br/>스펙 정리(클로드)</small></div></div>
+ </div>
+</section>
+
+<section class="sl">
+ <div class="k">일하는 순서</div>
+ <h1>결정에서 다시 결정으로</h1>
+ <p class="b">한 바퀴 돌면 다음 결정이 나온다.</p>
+ <div class="dg" style="gap:24px"><div class="bx v">결정</div><div class="ar">→</div><div class="bx n">기록</div><div class="ar">→</div><div class="bx n">지시</div><div class="ar">→</div><div class="bx n">작업·보고</div><div class="ar">→</div><div class="bx n">검수</div><div class="ar">↻</div></div>
+</section>
+
+<section class="sl">
+ <div class="k">폴더</div>
+ <h1>폴더마다 할 일이 정해져 있다</h1>
+ <p class="b">지시는 입력/에서 받고, 결과는 정해진 폴더에 남긴다.</p>
+ <div class="dg"><div class="bx v">입력/<small>지시</small></div><div class="ar">→</div>
+  <div style="display:flex;flex-direction:column;gap:24px"><div class="bx n">보고/<small>진행·결과</small></div><div class="bx n">질의응답/<small>질문과 답</small></div></div>
+  <div class="ar">→</div><div class="bx o">산출/<small>기획서</small></div></div>
+</section>
+
+<section class="sl" style="justify-content:center;align-items:center;text-align:center">
+ <h1 style="font-size:96px">읽고, 총괄에게 보고하고,<br/>보고/를 갱신한다</h1>
+ <p class="b">헌법 기조 제5장 · 1차 개발 기준</p>
+</section>
+
+<section class="sl" style="padding-bottom:120px"><div class="k">주고받기 · 한 바퀴</div><h1 style="margin-bottom:24px">지시 → 질문 → 답 → 보고</h1>
+ <div style="flex:1;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;gap:30px 70px;position:relative">
+  <div class="bx v">① 총괄<small>입력/에 지시</small></div>
+  <div class="bx n">② 에이전트<small>읽고, 질문은 질의응답/</small></div>
+  <div style="display:flex;align-items:center;justify-content:center"><div style="width:250px;height:250px;transform:rotate(45deg);background:#2a2147;border:5px solid var(--ac);display:flex;align-items:center;justify-content:center"><div style="transform:rotate(-45deg);font-size:34px;font-weight:800;text-align:center;line-height:1.2">③ 총괄<br/>스스로<br/>판단 가능?</div></div></div>
+  <div style="display:flex;flex-direction:column;gap:20px;justify-content:center"><div class="bx o" style="font-size:32px;padding:20px">예 → 같은 파일 아래 답</div><div class="bx r" style="font-size:32px;padding:20px">아니오 → 현중에게 하나만<small>답을 파일 아래에</small></div></div>
+  <div class="bx v">⑥ 총괄<small>검수 · 지시 갱신 · 현중엔 필요한 것만</small></div>
+  <div class="bx n">⑤ 에이전트<small>보고/ 시작→중간→완료</small></div>
+  <div class="bx n" style="grid-column:span 2">④ 에이전트<small>답 읽고 작업 계속</small></div>
+  <div class="ar" style="position:absolute;left:23.2%;top:20%">→</div>
+  <div class="ar" style="position:absolute;left:48.6%;top:20%">→</div>
+  <div class="ar" style="position:absolute;left:74%;top:20%">→</div>
+  <div class="ar" style="position:absolute;right:20%;top:44%">↙</div>
+  <div class="ar" style="position:absolute;left:48.6%;top:72%">←</div>
+  <div class="ar" style="position:absolute;left:23.2%;top:72%">←</div>
+  <div class="ar" style="position:absolute;left:10%;top:44%">↑</div>
+ </div></section>
+
+<section class="sl"><div class="k">파일 이름 · 질의응답/ (실제 파일에서)</div><h1>이름만 봐도 누가 누구에게</h1>
+ <div class="dg" style="flex-direction:column;align-items:stretch;gap:26px">
+  <div style="display:flex;gap:14px;font-size:34px;font-weight:800;justify-content:center"><div class="bx g" style="font-size:34px">20261022_1303</div><div class="bx n" style="font-size:34px">클로드</div><div class="bx o" style="font-size:34px">그룻봇에</div><div class="bx g" style="font-size:34px">월드컵성격_질문</div><div class="bx g" style="font-size:34px">.md</div></div>
+  <div style="display:flex;gap:14px;justify-content:center"><div class="bx g" style="font-size:28px">날짜_시각<small>커서는 초까지 HHMMSS</small></div><div class="bx n" style="font-size:28px">보낸 이</div><div class="bx o" style="font-size:28px">받는 이<small>「~에」 또는 맨 끝</small></div><div class="bx g" style="font-size:28px">주제<small>「답」이면 답 파일</small></div></div>
+  <div class="bx g" style="text-align:left;font-size:30px;font-weight:600;line-height:1.6">20261022_110153_커서3_성장표줄넣기_<b style="color:var(--ac)">그룻봇</b>.md &nbsp;← 받는 이 맨 끝<br/>20261022_1318_클로드_<b style="color:var(--ac)">답</b>_배경조각방향검수_캐스팅줄안_그룻봇.md<br/>20261022_1023_이스라트_<b style="color:var(--ac)">클로드에</b>_라포처음값_요인결정.md</div>
+ </div></section>
+
+<section class="sl"><div class="k">파일 이름 · 입력/ · 답 쓰는 법</div><h1>지시 파일과 답 붙이기</h1>
+ <div class="dg" style="align-items:stretch;gap:36px">
+  <div class="bx g" style="flex:1;text-align:left;font-size:34px">입력/<small style="font-size:28px;line-height:1.6">개발-커서_현재지시.md ← 커서 고정 지시<br/>공통-20261022_1029_…_클로드커서동시지시.md<br/>배정_1748_클로드_구조전환_멈춤.md<br/>현중_… ← 현중 규칙 모음</small></div>
+  <div class="bx g" style="flex:1;text-align:left;font-size:34px">답은 같은 파일 아래<small style="font-size:28px;line-height:1.6">## 이스라트 답 (10/22 13:05)<br/>현중 결정은 그 답 안에 원문·시각으로<br/>(「## 현중 답」 제목은 아직 없음)</small></div>
+ </div>
+ <div class="bx r" style="font-size:28px;text-align:left;font-weight:600;line-height:1.5">어긋남: 그룻봇 = 이스라트(총괄) 같은 뜻 · 받는 이 위치가 「~에」/맨 끝 섞임 · 시각 HHMM/HHMMSS 섞임 · 0919·1008처럼 받는 이 빠진 이스라트 답 파일</div>
+</section>
+
+<section class="sl"><div class="k">모바일 활용 (AI 활용) · 1/2</div><h1>폰으로 지시하면, 맥에서 일한다</h1>
+ <div class="dg" style="align-items:stretch;gap:36px">
+  <div class="bx v" style="flex:1;text-align:left;font-size:40px">현중 · 폰<small style="font-size:30px;line-height:1.6">Grok Bot 앱으로<br/>총괄(이스라트)에게 지시<br/>자리에 없어도 된다</small></div>
+  <div class="ar" style="align-self:center">→</div>
+  <div class="bx n" style="flex:1.3;text-align:left;font-size:40px">총괄(이스라트) · 맥<small style="font-size:30px;line-height:1.6">로컬로 붙은 맥에서 작업<br/>저장소 · 기획서툴 7007<br/>입력/ · 질의응답/ · 보고/<br/>파일 읽기 · 지시서 쓰기 · 질문에 답</small></div>
+ </div>
+ <p class="b" style="margin-top:30px">현중은 폰으로 <b>결정</b>하고, <b>결과 확인</b>(캡처·PDF)하고, 막힐 때만 <b>단톡방</b>에서 말한다.</p>
+</section>
+
+<section class="sl"><div class="k">모바일 활용 (AI 활용) · 2/2</div><h1 style="margin-bottom:28px">폰 지시 한 바퀴</h1>
+ <div style="display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:nowrap">
+  <div class="bx v" style="font-size:30px;padding:24px 22px">① 폰 지시</div><div class="ar" style="font-size:54px">→</div>
+  <div class="bx n" style="font-size:30px;padding:24px 22px">② 총괄<small>원본 읽기</small></div><div class="ar" style="font-size:54px">→</div>
+  <div class="bx n" style="font-size:30px;padding:24px 22px">③ 총괄<small>입력/ · 답 쓰기</small></div><div class="ar" style="font-size:54px">→</div>
+  <div class="bx o" style="font-size:30px;padding:24px 22px">④ 에이전트<small>작업 · 보고/ 갱신</small></div><div class="ar" style="font-size:54px">→</div>
+  <div class="bx n" style="font-size:30px;padding:24px 22px">⑤ 총괄<small>검수</small></div><div class="ar" style="font-size:54px">→</div>
+  <div class="bx v" style="font-size:30px;padding:24px 22px">⑥ 폰<small>결정만 하나씩</small></div>
+ </div>
+ <p class="b" style="margin-top:20px;font-size:30px;text-align:center">④ 에이전트 = 커서 · 코덱스(단이) 등</p>
+ <div class="bx r" style="margin-top:34px;text-align:left;font-size:32px;font-weight:600;line-height:1.6">주의 · 맥은 켜져 있고 연결돼 있어야 한다 (끊기면 앱 다시 켜기)<br/>· 비밀번호는 보안 입력창으로만, 채팅에 쓰지 않는다<br/>· 7007 확인은 목록에서 열어서 한다</div>
+</section>
+
+<section class="sl"><div class="k">자세히 · 1/8 · 보고 파일 이름</div><h1>보고 파일 이름 규칙</h1>
+ <p class="b">보고/ 에 <b>YYYYMMDD_HHMMSS_역할또는이름_주제.md</b><br/>캡처 png는 같은 이름 앞부분으로 옆에 둔다.</p>
+ <div class="dg" style="flex-direction:column;align-items:stretch;gap:22px">
+  <div class="bx g" style="text-align:left;font-size:34px">📄 20261022_134648_커서3_판정화면수정.md</div>
+  <div class="bx g" style="text-align:left;font-size:34px">🖼 20261022_134639_커서3_판정화면_2차룰렛.png</div>
+  <div class="bx g" style="text-align:left;font-size:34px">🖼 20261022_134639_커서3_판정화면_결과문장.png</div>
+ </div></section>
+
+<section class="sl"><div class="k">자세히 · 2/8 · 보고 파일 칸</div><h1>보고 파일에 꼭 있는 칸</h1>
+ <div class="dg" style="display:grid;grid-template-columns:1fr 1fr;gap:20px 30px;align-items:stretch">
+  <div class="bx g d">한 줄<small>무엇을 했고 결과는 어떤지</small></div>
+  <div class="bx g d">원인 / 근거<small>파일:줄로</small></div>
+  <div class="bx g d">고친 것<small>파일:줄 · 백업 · 빌드 없음 · 7007 재시작 없음</small></div>
+  <div class="bx g d">화면<small>7007 목록에서 누른 순서 + 캡처 png</small></div>
+  <div class="bx g d">시험<small>돌린 명령과 결과</small></div>
+  <div class="bx g d">읽은 원본 서류<small>읽은 지시·표·코드 목록</small></div>
+  <div class="bx g d">이번 창이 아닌 것<small>내가 안 한 변경은 따로 적기</small></div>
+  <div class="bx g d">다음<small>막힌 것 · 다음에 할 일</small></div>
+ </div></section>
+
+<section class="sl"><div class="k">자세히 · 3/8 · 보고 예시 (커서 13:46 보고에서 발췌)</div><h1>보고 예시</h1>
+ <div class="bx g" style="text-align:left;font-weight:500;font-size:28px;line-height:1.55;font-family:Menlo,'Noto Sans Mono CJK KR',monospace;flex:1">
+ # 판정 화면 수정<br/>
+ <span style="color:var(--ac)">## 한 줄</span> 올킬 뒤에 스케줄 룰렛이 화면에 열리게 했다…<br/>
+ <span style="color:var(--ac)">## 원인</span> 가중치가 비면 줄을 고르지 않음 `src/game/economy/config.ts:120`<br/>
+ <span style="color:var(--ac)">## 고친 것</span> `play.html` · 백업 `play.132709전_커서.html` · 빌드 없음. 7007 재시작 없음.<br/>
+ <span style="color:var(--ac)">## 화면</span> 7007 목록 → 핵심제안 개발 → 5. 보드 주사위 구동 → 시뮬레이터 · 캡처 png 2장<br/>
+ <span style="color:var(--ac)">## 시험</span> check-judge-lookup 종료 0 · test-game-economy 31/31<br/>
+ <span style="color:var(--ac)">## 읽은 원본 서류</span> 입력/개발-커서_현재지시.md · session.ts …<br/>
+ <span style="color:var(--ac)">## 이번 창이 아닌 것</span> 13:21 mobile-frame 묶음 · 10:58 빌드<br/>
+ <span style="color:var(--ac)">## 다음</span> 스킬 발동 캡처 없음 → ③으로 넘어가지 않음
+ </div></section>
+
+<section class="sl"><div class="k">자세히 · 4/8 · 질의응답 · 지시</div><h1>질문 파일과 지시서 쓰는 법</h1>
+ <div class="dg" style="align-items:stretch;gap:40px">
+  <div class="bx g" style="flex:1;text-align:left;font-size:34px">질의응답/<small style="font-size:28px;line-height:1.5">이름: YYYYMMDD_HHMM_보낸이_받는이에_주제.md<br/>예: 20261022_1303_클로드_그룻봇에_월드컵성격_질문.md<br/><b style="color:var(--ac)">답은 같은 파일 아래</b>에 「## 이스라트 답 (시각)」으로<br/>받는 사람은 총괄(이스라트)</small></div>
+  <div class="bx g" style="flex:1;text-align:left;font-size:34px">입력/ 지시서<small style="font-size:28px;line-height:1.5">① 현중 원문 인용 + 시각<br/>② 이유<br/>③ 막는 문제<br/>④ 파일:줄<br/>⑤ 완료 기준</small></div>
+ </div></section>
+
+<section class="sl"><div class="k">자세히 · 5/8 · 백업 · 표</div><h1>백업 이름과 표 칸 바꾸기</h1>
+ <div class="dg" style="flex-direction:column;gap:36px">
+  <div style="display:flex;gap:30px;align-items:center"><div class="bx g" style="font-size:34px">고치기 전 백업</div><div class="ar">→</div><div class="bx v" style="font-size:34px">파일.HHMMSS전_이름<small>예: play.132709전_커서.html</small></div></div>
+  <div style="display:flex;gap:24px;align-items:center"><div class="bx n" style="font-size:30px">schema_table.csv<br/>schema_column.csv</div><div class="ar">→</div><div class="bx n" style="font-size:30px">node scripts/<br/>schema-generate.mjs</div><div class="ar">→</div><div class="bx n" style="font-size:30px">--check<br/>종료 0</div></div>
+  <div class="bx r" style="font-size:32px">✕ schema.ts · table_registry.csv 손으로 고치지 않음</div>
+ </div></section>
+
+<section class="sl"><div class="k">자세히 · 6/8 · 금지</div><h1>하지 않는 것</h1>
+ <div class="dg" style="display:grid;grid-template-columns:1fr 1fr;gap:24px 30px;align-items:stretch">
+  <div class="bx r">✕ 지시 없는 빌드</div><div class="bx r">✕ 7007 재시작</div>
+  <div class="bx r">✕ 모노 폴더 쓰기<small>읽기만</small></div><div class="bx r">✕ 숫자 지어내기<small>현재 세팅값 또는 0동작 표기 · 숫자는 비앙카</small></div>
+  <div class="bx r">✕ 옛 카드·새 카드 중복</div><div class="bx r">✕ 저장·새 게임·초기화·설정 버튼</div>
+ </div></section>
+
+<section class="sl"><div class="k">자세히 · 7/8 · 확인 규칙 (현중 10/21 18:13)</div><h1>7007 목록에서 열어야 확인</h1>
+ <p class="b">카드 주소로 바로 연 화면은 완료가 아니다.<br/>목록에서 직접 눌러 연 화면 + <b>보고/ 캡처</b>가 있어야 완료.</p>
+ <div class="dg"><div class="bx v">7007 목록</div><div class="ar">→</div><div class="bx n">카드</div><div class="ar">→</div><div class="bx n">버튼</div><div class="ar">→</div><div class="bx o">캡처 png<small>보고/</small></div></div></section>
+
+<section class="sl"><div class="k">자세히 · 8/8 · 루틴 순서</div><h1>정시 루틴은 이 순서로</h1>
+ <p class="b"><b>루틴은 현중이 지시할 때만 연다</b> — 스스로 만들거나 켜지 않는다.<br/>열면: 매 정시 기준 · 평소 30분 · 급하면 10분</p>
+ <div class="dg" style="gap:24px"><div class="bx n">보고/<br/>읽기</div><div class="ar">→</div><div class="bx n">검수<small>원본·7007 대조</small></div><div class="ar">→</div><div class="bx n">지시서<br/>갱신</div><div class="ar">→</div><div class="bx o">바뀐 게 없으면<br/>조용히</div></div></section>
+
+</div></div>
+<div class="nav"><button id="prev">← 이전</button><span id="cnt"></span><button id="next">다음 →</button></div>
+<script>
+(function(){var st=document.getElementById('stage'),s=[].slice.call(document.querySelectorAll('.sl')),i=0,c=document.getElementById('cnt'),p=document.getElementById('prev'),n=document.getElementById('next');
+function fit(){var k=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform='scale('+k+')';}
+function go(x){i=Math.max(0,Math.min(s.length-1,x));s.forEach(function(e,j){e.classList.toggle('on',j===i)});c.textContent=(i+1)+' / '+s.length;p.disabled=i===0;n.disabled=i===s.length-1;history.replaceState(null,'','#'+(i+1));}
+p.onclick=function(){go(i-1)};n.onclick=function(){go(i+1)};addEventListener('resize',fit);
+addEventListener('keydown',function(e){if(['ArrowRight','PageDown',' '].indexOf(e.key)>=0){go(i+1);e.preventDefault()}else if(['ArrowLeft','PageUp'].indexOf(e.key)>=0){go(i-1);e.preventDefault()}else if(e.key==='Home')go(0);else if(e.key==='End')go(s.length-1)});
+fit();var h=parseInt(location.hash.slice(1),10);go(h>0?h-1:0);})();
+</script></body></html>

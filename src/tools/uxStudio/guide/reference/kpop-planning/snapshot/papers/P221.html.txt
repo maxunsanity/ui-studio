@@ -1,0 +1,798 @@
+<!doctype html><html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P221 · 응원 크루 · 대표 개발 기획서</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"><style>.sample-document .mermaid{min-width:0;margin:8px 0}.sample-document .mermaid svg{max-width:100%;height:auto}.sample-document .doc-diagram{margin:16px 0;overflow:auto}.sample-document table{width:100%;border-collapse:collapse}.sample-document td,.sample-document th{overflow-wrap:anywhere}.sample-document pre{white-space:pre-wrap}.sample-document a{overflow-wrap:anywhere}</style></head><body><main class="sample-document"><header><h1>P221 · 응원 크루 · 대표 개발 기획서</h1>
+<p><strong>이 문서는</strong> 앨범 중심 크루의 찾기·만들기·홍보·가입·미션·단일 크루재화·누적 레벨·회원 정보·알림·운영을 설명합니다.</p>
+<p><strong>보는 법</strong> 목차 → 전체 흐름 → 화면 → 기능별 그림 순서로 읽습니다. <a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%EC%99%84%EB%A3%8C%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">상세 기획서</a>와 같은 기준입니다.</p>
+<p><strong>지금 상태</strong> 전체 목록·봇 크루10개·로컬 이미지 파일 선택·명시적 단독 시험의 앨범 없는 만들기를 반영했습니다. 별도 단독 시험에서 생성·10종 이미지·파일 저장/실패 보호·새로고침을 확인했고, 1차를 현중 지시로 정리합니다. 발란스값·실제 계정 서버·총공 실제 집행·홍보 추가 기획은 계속 대기입니다. 출전 신청·곡 사용 동의·등록 뒤 로비는 P207/P191의 현재 계약을 따릅니다.</p>
+<p><strong>2차 연결</strong> <a href="#crew-world-phase2">개인·크루의 월드 출전 경로</a> · 기획만, 새 인기/게임/총공 구현 없음</p>
+<p><strong>이번 정리</strong> <a href="#phase-one-close">1차 기록·확인 범위</a> · <a href="#phase-two-next">2차 준비 목록</a></p>
+</header><nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav><section id="crew-song-poll-world-application"><h2>크루 출전곡 투표와 크루장 신청</h2><p><strong>현재 단독 테스트 · 2026-11-10 13:58 KST · 제안(검수 대기)</strong></p><p>게임 시뮬레이터 단독 테스트는 상위 메뉴를 주간 페스티벌과 월드 페스티벌로 나눕니다. 폰 하단도 주간·월드로 바로 엽니다. 일반 월드 입구는 개인 출전이며, 크루 출전은 응원 크루의 고정된 크루장 전용 신청 버튼에서만 시작합니다. 크루 화면에는 앨범의 데뷔 준비·앨범 활동·차트·파이널 단계표를 표시하지 않습니다. 주간 신청 뒤에는 레이싱 입장과 주간 진행·레이싱 기록을 바로 볼 수 있습니다. 레이싱 입장은 같은 발매 앨범의 기존 시티 투어 자동차 레이싱으로 연결합니다. 기록은 기본 펼침으로 표시합니다.</p><p>단독 테스트에서 월드 메뉴(개인·크루)에 진입하면 현재 주간 신청·버프·자동 연료/레이싱 진행을 새 시험 상태로 초기화합니다. 원본 신청 영수증은 이력으로 보존하고 현재 유효한 신청에서 제외합니다. 다시 주간에 들어오면 앨범 선택·신청부터 시작합니다. 앨범·공통 팀·이미 지급된 공통 재화·월드 신청·크루 투표는 지우지 않습니다. 이전 자동 진행 기록은 다음 실제 보드 저장에서 보관하며 활성 기록과 분리합니다. 이 초기화는 단독 테스트만의 조작이며 실제 운영 일정·게임 일차·일반 연결 플레이의 버프 정책을 바꾸지 않습니다.</p><p>자유 테스트에서는 이전 앨범의24시간 차트가 진행 중이어도 새 앨범을 먼저 발매할 수 있습니다. 기존 차트·실적·제작비 결제·발매곡을 보존하고 새 곡의 이벤트 참가는 순서대로 대기합니다. 기존 순차 차트 진입 경로를 사용하며 일반 연결 플레이의 차트 잠금과 운영 수치는 변경하지 않습니다.</p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-label="개인 신청과 크루 신청의 별도 흐름" style="display:block;width:100%;max-width:640px;min-width:0;height:auto;margin:16px auto;font-family:sans-serif"><rect x="10" y="20" width="290" height="72" rx="14" fill="#f2e8fa"/><text x="155" y="49" text-anchor="middle" font-size="19" fill="#5b4170">주간·월드 개인 입구</text><text x="155" y="74" text-anchor="middle" font-size="14" fill="#80638f">내 앨범 선택 → 개인 신청</text><path d="M155 93v35" stroke="#9877ac" stroke-width="2"/><rect x="10" y="130" width="290" height="92" rx="14" fill="#e5f4e9"/><text x="155" y="159" text-anchor="middle" font-size="17" fill="#386447">주간: 해당 주7일째 버프</text><text x="155" y="190" text-anchor="middle" font-size="17" fill="#386447">월드: 내 출전곡 활동 로비</text><rect x="340" y="20" width="290" height="72" rx="14" fill="#f2e8fa"/><text x="485" y="49" text-anchor="middle" font-size="19" fill="#5b4170">크루 페이지</text><text x="485" y="74" text-anchor="middle" font-size="14" fill="#80638f">멤버 곡 투표 · 결과는 참고만</text><path d="M485 93v35" stroke="#9877ac" stroke-width="2"/><rect x="340" y="130" width="290" height="92" rx="14" fill="#f9edcf"/><text x="485" y="159" text-anchor="middle" font-size="17" fill="#775a32">크루장 최종 공유곡 선택</text><text x="485" y="190" text-anchor="middle" font-size="17" fill="#775a32">사용 동의 확인 → 크루 월드 신청</text><text x="320" y="270" text-anchor="middle" font-size="18" fill="#5b4170">크루장·크루원도 개인 출전 가능 · 두 신청 별도</text></svg><p>일반 주간·월드 입구는 모두 개인 신청입니다. 크루 소속·직책과 관계없이 내 발매 앨범 한 곡을 선택하며 크루장도 개인 월드에 출전할 수 있습니다. 크루 월드 신청은 크루 페이지에서 크루장만 시작하고 개인 출전과 서로 잠그지 않습니다.</p><p>크루 멤버는 현재 크루에 공유된 발매곡 한 곡에 내부 투표합니다. 한 번 투표하면 바꾸거나 취소할 수 없습니다. 현재 소속·현재 공유 상태를 다시 확인하며 탈퇴한 멤버나 철회된 공유곡의 선택은 현재 집계에서 제외합니다. 이 결과는 참고용으로만 표시하고, 크루장은 득표순·참여율·미투표와 관계없이 최종 공유곡을 고릅니다. 원소유자의 해당 회차 사용 동의와 크루장 권한은 실제 신청 때 재검사합니다. 원소유자는 일반 크루원이어도 크루 페이지에서 자기 곡의 회차 사용 동의·철회를 할 수 있습니다.</p><p>내부 출전곡 투표는 관객의 페스티벌 투표·공식 점수·크루재화 보상과 별개입니다. 투표 자체로 감상·팬·인기·점수·재화를 만들지 않습니다. 실제 로컬 신청/투표 원장으로 연결했으며 온라인 계정·공식 운영 기간과 총공 기능 완성으로 해석하지 않습니다.</p><p><a href="_assets/음악콘텐츠_UI기획_v04.html">개인·크루 UI v04</a></p></section><section class="part" id="part-1"><h2>1. 개요</h2><p>출처: (합침) <a href="../../../../proposal-concept/cheer-guild.html">응원 크루 제안</a> · <a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%EC%99%84%EB%A3%8C%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">크루 상세</a>.</p>
+<p><strong>앨범을 보고 모이고, 크루 미션으로 같은 재화를 쌓고, 누적획득량으로 크루를 키웁니다.</strong></p>
+<p>기여는 획득한 크루재화량 하나로 보고, 레벨도 그 재화의 누적획득량으로 정합니다. 크루재화를 써도 개인 기여·누적획득량·레벨은 줄지 않습니다.</p>
+<p><a id="crew-overview"></a></p>
+<figure class="doc-diagram"><div class="mermaid">flowchart TB
+  A[&quot;크루 찾기·만들기&quot;] --&gt; B[&quot;홍보·공개 앨범 확인&quot;]
+  B --&gt; C[&quot;가입 신청·수락&quot;]
+  C --&gt; D[&quot;앨범 중심 크루 내부&quot;]
+  D --&gt; E[&quot;기존 보드·팬덤·찬스 활동&quot;]
+  E --&gt; F[&quot;크루 미션 진행·보상 확인&quot;]
+  F --&gt; G[&quot;크루재화 한 종류 획득&quot;]
+  G --&gt; H[&quot;개인 기여·크루 누적획득량&quot;]
+  H --&gt; I[&quot;누적획득량으로 레벨·단계 혜택&quot;]
+  G --&gt; J[&quot;사용 가능한 크루재화 잔액&quot;]
+  J --&gt; K[&quot;크루 홍보·홍보알림 사용안&quot;]
+  K --&gt; L[&quot;비용 공급 전 집행 대기&quot;]
+  I --&gt; D</div></figure>
+<table>
+<thead>
+<tr>
+<th>영역</th>
+<th>유저가 하는 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>발견·가입</td>
+<td>전체 크루 목록·대표 이미지·소개·모집을 보고 공개 화면에서 신청, 미소속은 만들기</td>
+</tr>
+<tr>
+<td>작품</td>
+<td>등록 앨범을 좌우로 보고 해당 작품의 참여 아이돌 소개 확인</td>
+</tr>
+<tr>
+<td>미션·재화</td>
+<td>기존 활동 미션을 수행하고 크루재화 한 종류 보상 확인</td>
+</tr>
+<tr>
+<td>성장</td>
+<td>내 획득 기여·크루 누적획득량·데이터 기준 레벨과 혜택 확인</td>
+</tr>
+<tr>
+<td>내부·운영</td>
+<td>회원 상세·공지·내 알림함·권한별 심사/모집/멤버 관리</td>
+</tr>
+<tr>
+<td>홍보 사용안</td>
+<td>재화로 홍보 노출·홍보알림을 이용하는 안, 비용 공급 전 대기</td>
+</tr>
+</tbody>
+</table>
+<p>길드와 응원 크루는 하나입니다. 크루 회원은 사용자 모임이며 앨범에 참여한 아이돌과 구분합니다. 새 보상 종류·기여축·XP를 만들지 않습니다.</p>
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2><table>
+<thead>
+<tr>
+<th>문서</th>
+<th>연결</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="%EC%95%A8%EB%B2%94%EB%B0%9C%EB%A7%A4_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">앨범 발매</a>·<a href="%EC%9D%8C%EC%9B%90%EC%98%81%EC%83%81_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">음원 제작</a></td>
+<td>발매 원본·고정 참여자·후속 공유</td>
+</tr>
+<tr>
+<td><a href="../../%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B8%B0%ED%9A%8D/S03_%EB%B3%B4%EB%93%9C%EC%A3%BC%EC%82%AC%EC%9C%84%EA%B2%BD%EC%A0%9C.md">보드</a>·<a href="%EC%B0%AC%EC%8A%A4%EC%B9%B4%EB%93%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C.html">찬스</a></td>
+<td>기존 결과와 지급 원인·미션 관측</td>
+</tr>
+<tr>
+<td><a href="%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">월드 페스티벌</a></td>
+<td>현재 신청·곡 사용 동의·활동 로비, 실제 총공/평가는 후속</td>
+</tr>
+<tr>
+<td><a href="%EC%8B%9C%EC%A6%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">시즌</a>·<a href="../../%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B8%B0%ED%9A%8D/S17_%EA%B8%B0%ED%9A%8D%EC%84%9C%ED%88%B4_%EC%A0%9C%EC%9E%91%EA%B8%B0%EB%B3%B8%EC%96%91%EC%8B%9D_v02.md#game-simulator-data-contract">공용 연결 계약</a></td>
+<td>session/run/season·소속·기록 경계</td>
+</tr>
+</tbody>
+</table>
+<p><a id="crew-dependencies"></a></p>
+<figure class="doc-diagram"><div class="mermaid">flowchart TB
+  A[&quot;발매 앨범·고정 참여 아이돌&quot;] --&gt; B[&quot;공개 홍보·크루 내부 앨범&quot;]
+  C[&quot;현재 실행의 회원·소속·역할&quot;] --&gt; B
+  D[&quot;보드 공연·팬덤 지원·찬스 일정&quot;] --&gt; E[&quot;검증된 결과 관측&quot;]
+  E --&gt; F[&quot;개인 관측형 크루 미션&quot;]
+  F --&gt; G[&quot;crew_currency 보상 원장&quot;]
+  G --&gt; H[&quot;기여·누적획득량·레벨·잔액 조회&quot;]
+  H --&gt; I[&quot;레벨 혜택·홍보 사용안&quot;]
+  C --&gt; J[&quot;가입·보상·관리 기본알림&quot;]
+  B --&gt; K[&quot;페스티벌 신청·활동 로비 문맥&quot;]
+  K -.-&gt; L[&quot;공식 평가·총공 실제 집행은 후속&quot;]</div></figure>
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2><p>화면 흐름: 소속과 관계없이 전체 크루 → 대표 이미지·소개·공개 앨범·모집 → 신청/수락 → 내 크루 내부 → 미션·재화·회원 상세·알림함·관리. 미소속의 만들기는 일반 실행과 명시적 단독 시험의 자격을 따로 확인합니다.</p>
+<p><a id="crew-screens"></a></p>
+<figure class="doc-diagram"><div class="mermaid">flowchart TB
+  A[&quot;전체 크루·미소속은 만들기&quot;] --&gt; B[&quot;공개 홍보·앨범 미리보기&quot;]
+  B --&gt; C[&quot;신청·취소·처리 상태&quot;]
+  C --&gt; D[&quot;수락 뒤 내부 홈&quot;]
+  D --&gt; E[&quot;앨범 캐러셀·참여 아이돌 상세&quot;]
+  D --&gt; F[&quot;미션 목록·진행·보상·대기 사유&quot;]
+  D --&gt; G[&quot;사용가능 잔액·누적획득량·내 기여&quot;]
+  G --&gt; H[&quot;레벨·혜택·획득과 사용 내역&quot;]
+  D --&gt; I[&quot;크루 회원 목록·클릭 상세&quot;]
+  D --&gt; J[&quot;내부 공지·내 알림함&quot;]
+  D --&gt; K[&quot;권한별 관리&quot;]
+  K --&gt; L[&quot;가입 심사·모집·공지&quot;]
+  K --&gt; M[&quot;운영진·강퇴·위임·본인 탈퇴&quot;]
+  D --&gt; N[&quot;홍보 노출·홍보알림: 비용 공급 대기&quot;]</div></figure>
+<table>
+<thead>
+<tr>
+<th>화면</th>
+<th>표시·주 행동</th>
+<th>접근</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>전체 크루</td>
+<td>모든 현재 크루의 이미지·이름·멤버 수·소개·모집·공개 화면, 접힌 검색/필터</td>
+<td>소속 여부와 무관</td>
+</tr>
+<tr>
+<td>크루 만들기</td>
+<td>일반 발매 앨범 조건 또는 검증된 명시 standalone 자격</td>
+<td>미소속</td>
+</tr>
+<tr>
+<td>공개 홍보</td>
+<td>대표 이미지·소개·레벨·공개 앨범·참여 아이돌·모집·본인 신청/취소/결과</td>
+<td>공개 범위</td>
+</tr>
+<tr>
+<td>내부 홈</td>
+<td>앨범 캐러셀·미션·사용가능 잔액·누적획득량·내 기여·레벨</td>
+<td>현재 회원</td>
+</tr>
+<tr>
+<td>미션</td>
+<td>유형·본인 진행·목표·크루재화 보상·받기 가능/대기 사유</td>
+<td>현재 회원·본인 관측</td>
+</tr>
+<tr>
+<td>크루 회원 상세</td>
+<td>닉네임·소개·가입일·역할·획득 기여·등록 앨범</td>
+<td>허용된 내부 정보</td>
+</tr>
+<tr>
+<td>아이돌 상세</td>
+<td>그 앨범의 참여자·역할·소개·확인된 장점</td>
+<td>앨범 공개 범위</td>
+</tr>
+<tr>
+<td>내 알림함</td>
+<td>무료 기본알림·미읽음/읽음·원본 연결</td>
+<td>알림 수신 본인</td>
+</tr>
+<tr>
+<td>운영 관리</td>
+<td>공지·모집·심사·운영진·강퇴·위임·탈퇴</td>
+<td>현재 권한자</td>
+</tr>
+</tbody>
+</table>
+<p><a href="/docs/planning/game-simulator.html?module=simulator_module_music_crew">현재 공용 크루 실행</a>은 로컬 source 진입입니다. 관련 실행은 <a href="/docs/planning/game-simulator.html?module=simulator_module_music_festival">페스티벌</a> · <a href="/docs/planning/game-simulator.html?module=simulator_module_music_app">음악 앱</a>에서 이어 봅니다. 이 링크에는 이번 검수의 개인 testPage/run/session을 넣지 않습니다. <a href="../../../%EC%A6%9D%EA%B1%B0/20261105_123552_%EB%8B%A8%EC%9D%B4_10%EC%B0%A8_%ED%81%AC%EB%A3%A8%EB%A7%88%EB%AC%B4%EB%A6%AC/crew-inside-review.html">최신 검수 시안</a>은 예시 화면이며 게임 저장·회원·지갑·실제 발송과 연결하지 않습니다. 시안 버튼과 문서의 화살표는 실제 게임 확인의 근거가 아닙니다.</p>
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2><p><a id="crew-world-phase2"></a></p>
+<h3>월드2차 · 개인과 크루는 서로 다른 출전 경로</h3>
+<p><strong>현재 개발되지 않음, 진행 중 · 제안(검수 대기).</strong> 개인 유저 명의 출전과 크루 명의 출전을 구분합니다. 개인은 아이돌 한 명만 출전한다는 뜻이 아니고 팀·유닛 발매곡도 가능합니다. 자세한2차 본문은 <a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%8C%EC%9B%90%C3%97%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html#festival-phase2">P191 투표/개인콘텐츠</a>, 쉬운 전체 흐름은 <a href="%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html#world-full-journey">P207</a>, <a href="/docs/planning/proposal-concept/fest.html#slide-1">제안서 카드</a>에 연결합니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>개인 출전자</th>
+<th>크루 출전자</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>신청</td>
+<td>본인 발매곡 한 곡, 크루 미가입도 가능</td>
+<td>현재 크루장이 공유곡 한 곡 신청·원소유자 회차 동의</td>
+</tr>
+<tr>
+<td>게임 콘텐츠</td>
+<td>개인 특화 무대·인터뷰·디렉팅 등과 공통 종목</td>
+<td>공통 종목·파트 응원 릴레이·응원 큐 퍼즐</td>
+</tr>
+<tr>
+<td>인기</td>
+<td>실제 게임으로 얻은 인기 재화를 지정곡에 사용</td>
+<td>같은 사용 원장·같은 entry 최고점 목표, 인원 단순 합산 보너스 없음</td>
+</tr>
+<tr>
+<td>차트</td>
+<td>개인 명의 entry의 별도 보기·전체 순위 동시 확인</td>
+<td>크루 명의 entry의 별도 보기·전체 순위 동시 확인</td>
+</tr>
+<tr>
+<td>혜택</td>
+<td>개인 발견 슬롯·내 팀 베스트 기록·기념 연출 후보</td>
+<td>협동 편성·합동 연출·기여 기록 후보</td>
+</tr>
+<tr>
+<td>표와 권한</td>
+<td>자기 곡 일반표 제외안과 자기 게임활동 허용을 구분</td>
+<td>크루장이 회원 투표·타인 작품 동의/공개를 대신하지 않음</td>
+</tr>
+</tbody>
+</table>
+<figure class="doc-diagram"><div class="mermaid">flowchart LR
+ P[&quot;개인 명의 발매곡&quot;] --&gt; I[&quot;개인 과제·공통 콘텐츠&quot;]
+ C[&quot;크루 명의 공유곡&quot;] --&gt; R[&quot;협동 편성·공통 콘텐츠&quot;]
+ I --&gt; G[&quot;같은 공식 게임 슬롯·점수 상한 목표&quot;]
+ R --&gt; G
+ G --&gt; W[&quot;전체 종합 경쟁&quot;]
+ W --&gt; F[&quot;전체 | 개인 출전자 | 크루 출전자&quot;]
+ M[&quot;크루 미션&quot;] --&gt; E[&quot;보상은 crew_currency만&quot;]
+ E -. &quot;별도 경제·기여·누적 성장&quot; .-&gt; C</div></figure>
+<p>인기 재화는 현재 원본에서 별도 존재를 확인하지 못한 신규 제안이며 크루 재화·앨범 이벤트 재화와 다릅니다. <strong>기본 게임의 인기 획득과 크루 미션 보상 청구를 분리</strong>하고 미션 청구는 crew_currency만 지급합니다. 크루 재화 지출을 사람표로 바꾸지 않으며 총공 준비/이벤트 개최는 후속 기획입니다. 실제 참여/인기 사용의 인정 기여만 C로 검토합니다.</p>
+<p>같은 종목을 여러 회원이 했다고 각자의 공식 슬롯을 출전곡에 무한 합산하지 않습니다. 개인의 동등한 혼자/공개 과제와 실제 시간·무료 기회·매칭 대기를 함께 검수합니다. 크루 미션·레벨·재화 원본은 그대로이고2차 기능은 구현하지 않습니다.</p>
+<h3>한 판 순서 (현재 방향)</h3>
+<table>
+<thead>
+<tr>
+<th>점검</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>시작·종료</td>
+<td>크루 발견·가입 → 기존 활동 미션 → 재화·성장·알림 확인</td>
+</tr>
+<tr>
+<td>입력·출력</td>
+<td>현재 회원·작품·실제 활동 → 미션 진행·크루재화 획득·기여·누적량</td>
+</tr>
+<tr>
+<td>상태와 전이</td>
+<td>방문자 → 신청 대기 → 회원 → 본인 미션 달성/수치 대기</td>
+</tr>
+<tr>
+<td>판정</td>
+<td>당시 소속·원인 사건·현재 권한·목표와 보상량·중복</td>
+</tr>
+<tr>
+<td>오류·예외</td>
+<td>미정값·정원·처리 경합·이동·강퇴·미완료 사용</td>
+</tr>
+<tr>
+<td>저장·복원</td>
+<td>현재 session/run/season의 원인·소속 기간·원장·읽음 상태</td>
+</tr>
+<tr>
+<td>다른 모듈 연결</td>
+<td>기존 앨범·보드·팬덤·찬스·시즌, 페스티벌 신청·활동 로비 문맥</td>
+</tr>
+</tbody>
+</table>
+<h3>크루 찾기·만들기·가입 (현재 방향)</h3>
+<p><strong>「전체 크루」와 「내 크루」를 구분하며 소속 여부와 관계없이 전체 목록에 들어갈 수 있습니다.</strong> 전체 목록은 현재 투영된 크루를 임의 개수로 자르지 않습니다. 대표 이미지·이름·실제 멤버 수·소개·모집 상태·공개 화면 열기를 작은 행으로 보여 주고, 검색/필터는 기본 접힘입니다. 내 소속 표시와 봇 표시는 별개입니다. 공개 앨범이 없는 크루도 소개와 모집 상태를 볼 수 있으며 내부 앨범·신청 메모를 공개 목록의 대체 자료로 쓰지 않습니다.</p>
+<p>로컬 시험 fixture는 봇 크루 <strong>10개</strong>입니다. 기존 3개 저장은 누락된 7개만 추가하며 기존 크루·소속·역할·앨범·공개 동의·사용자 요청/영수증을 초기화하지 않습니다. 같은 확장을 재시도해도 중복 생성하지 않고, 봇은 실제 회원·유효 감상·득표로 표시하지 않습니다. 이 10개는 시험 구성 수이며 운영 정원·가입 한도가 아닙니다.</p>
+<p>만들기는 미소속 여부와 기존 명령을 재사용합니다. <strong>현재 소유자의 검증된 명시적 standalone 시험 환경</strong>에서만 발매 앨범 없이 만들 수 있습니다. 단순 URL·UI 플래그나 metadata-only 문맥은 허용 근거가 아닙니다. source가 같은 pageScope/run/session/season·owner/team·sourceRevision의 준비된 시험 원본을 확인해야 하고 UI/명령이 같은 <code>isStandaloneCrewCreationReady</code>를 사용합니다. 일반 실행의 본인 발매 앨범 조건은 유지하며 앨범을 자동 생성하거나 새 창설 비용·정원·보상을 정하지 않습니다.</p>
+<h3>크루 대표 이미지·개인 파일 (현재 계약)</h3>
+<p>대표 이미지는 사용자가 <strong>자기 기기 디스크에서 직접 고른 PNG/JPEG/WebP 파일</strong>로 변경합니다. 입력은 2 MiB 이하이며 여백을 포함해 256×256 WebP로 다시 인코딩하고 결과는 64 KiB 이하로 제한합니다. 파일의 원래 이름·경로·메타데이터를 커리어에 남기지 않으며 외부 전송은 없습니다. 권한은 현재 크루장 또는 <code>editPublicity</code>를 위임받은 운영진에게만 있고 명령 시점에 현재 소속·권한·scope를 다시 확인합니다.</p>
+<p>이미지 바이트는 IndexedDB Blob 전용 저장소에 총 <strong>16장·1 MiB</strong> 한도로 둡니다. 커리어/명령에는 <code>imageRef={kind,assetId,mime,width,height,byteLength}</code>의 6필드와 scope만 전달하며 Blob·base64·data URL·object URL·원본 파일을 넣지 않습니다. 실제 바이트 상한은 이미지 저장소의 한도이고 기존 요청 영수증/이벤트까지 저장 증가가 0이라는 뜻은 아닙니다. 정적 봇 이미지 10종과 개인 파일 Blob 한도는 별도입니다.</p>
+<p>상세 파일 처리·교체/실패·만들기 자격 도해는 <a href="../../%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%EC%99%84%EB%A3%8C%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html#crew-image-local">P192</a>에 둡니다.</p>
+<p><a id="crew-application"></a></p>
+<figure class="doc-diagram"><div class="mermaid">stateDiagram-v2
+  state &quot;홍보 열람&quot; as Browse
+  state &quot;신청 대기&quot; as Pending
+  state &quot;수락 재확인&quot; as Check
+  state &quot;가입 완료&quot; as Joined
+  state &quot;거절&quot; as Rejected
+  state &quot;신청 취소&quot; as Cancelled
+  state &quot;무효 종료&quot; as Invalid
+  [*] --&gt; Browse
+  Browse --&gt; Pending: 본인이 신청
+  Pending --&gt; Cancelled: 본인이 취소
+  Pending --&gt; Rejected: 심사권자가 거절
+  Pending --&gt; Check: 심사권자가 수락
+  Check --&gt; Joined: 자격 확인·소속 저장 완료
+  Check --&gt; Pending: 정원 부족·모집 중지
+  Check --&gt; Invalid: 타 크루 가입·크루 해산
+  Pending --&gt; Invalid: 크루 해산
+  Cancelled --&gt; Browse: 다시 둘러보기
+  Rejected --&gt; Browse: 다시 둘러보기</div></figure>
+<p>신청·본인 취소·수락·거절·무효 종료를 구분합니다. 수락 때 현재 소속·정원·모집·심사 권한을 다시 확인하고, 소속 생성과 수락 처리가 끝나야 내부에 들어갑니다. 동일 활성 신청과 처리 경합이 회원·알림을 중복 생성하지 않아야 합니다. 동시 신청 정책이 미공급이고 다른 활성 신청이 있거나, 재신청 정책이 미공급이고 같은 크루에 처리 이력이 있으면 새 신청을 만들지 않고 정책 대기를 표시합니다. 모집 중지·정원 미공급·정원 부족의 수락 요청은 기존 신청을 대기로 유지하고 사유를 보여줍니다.</p>
+<h3>앨범·크루 회원·아이돌 정보 (현재 방향)</h3>
+<p>등록 앨범이 내부 첫 화면에 보입니다. 발매 후 자동 공유와 기존 수동 공유는 회원 내부 공유이며 공개 홍보 허용이 아닙니다. 같은 발매 앨범 원본을 참조하며 커버·곡명·참여 아이돌을 좌우로 봅니다. 등록·해제는 현재 소속과 작품 권한을 확인하고, 크루 노출 정리와 원본 앨범 보존을 구분합니다. 해당 작품에 참여하지 않은 현재 팀 멤버를 앨범 참여자로 붙이지 않습니다.</p>
+<p>공개 홍보는 앨범 원본 소유자가 본인 글·본인 발매 앨범·현재 동일 membership을 확인한 뒤 명시적으로 허용합니다. 크루장·운영진이 다른 소유자의 동의를 대신할 수 없고 봇에도 자동 공개 예외를 두지 않습니다. 홍보 공개허용/해제는 무료 설정이며 크루재화를 쓰는 홍보 노출·홍보알림과 별개입니다. 찾기·공개 홍보는 유효한 <code>publicAlbums</code>만 읽고 내부 앨범 전체를 대체 표시하지 않습니다. 탈퇴·강퇴·재가입 뒤 이전 동의만으로 자동 재공개하지 않으며, 유료 홍보도 현재 유효한 소유자 동의가 있는 작품만 표시합니다. 앨범 원본의 소유권은 그대로 유지합니다.
+회원 목록의 이름을 누르면 크루 회원 상세를 엽니다. 닉네임·소개·가입일·역할·획득한 크루재화 기여·등록 앨범을 보고, 앨범에서 해당 작품 참여 아이돌로 이동합니다. 크루 회원은 사용자이며 아이돌 멤버와 구분합니다. 아이돌 상세에는 예명·참여 역할·소개·확인된 장점만 표시합니다. 없는 프로필·장점·수치는 만들지 않고 —로 둡니다. 타인의 신청 메모·알림함·내부 거래 전체를 공개 홍보나 회원 상세에 섞지 않습니다.</p>
+<h3>크루 미션·보상 (현재 방향)</h3>
+<table>
+<thead>
+<tr>
+<th>미션 유형</th>
+<th>기존 활동 경로</th>
+<th>목표량</th>
+<th>보상 종류</th>
+<th>보상량</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>보드 공연 · <code>board_concert</code></td>
+<td>실제 보드 공연 결과</td>
+<td></td>
+<td><code>crew_currency</code></td>
+<td></td>
+</tr>
+<tr>
+<td>팬덤 지원 · <code>fan_support</code></td>
+<td>기존 팬덤 지원 결과</td>
+<td></td>
+<td><code>crew_currency</code></td>
+<td></td>
+</tr>
+<tr>
+<td>찬스 일정 지원 · <code>schedule_support</code></td>
+<td>기존 찬스·스케줄 결과</td>
+<td></td>
+<td><code>crew_currency</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>빈칸은 발란스 대기이며 데이터의 <code>target</code>·<code>reward.amount</code>는 <code>null</code>입니다. 미션은 본인이 실제 수행한 관측을 세는 <code>personal_observation</code> 방식입니다. 보상은 공동 크루재화 한 종류뿐이며 개인 재화·돈·팬·능력·아이템을 추가 지급하지 않습니다.</p>
+<p><a id="crew-missions"></a></p>
+<figure class="doc-diagram"><div class="mermaid">flowchart TB
+  A[&quot;보드 공연&quot;] --&gt; D[&quot;본인 실제 관측·당시 소속&quot;]
+  B[&quot;팬덤 지원&quot;] --&gt; D
+  C[&quot;찬스·스케줄 지원&quot;] --&gt; D
+  D --&gt; E[&quot;유형별 미션 진행량&quot;]
+  E --&gt; F{&quot;목표·보상량 공급·달성?&quot;}
+  F --&gt;|&quot;미공급&quot;| G[&quot;발란스 대기·받기 불가&quot;]
+  F --&gt;|&quot;달성&quot;| H[&quot;본인 보상 청구·중복 확인&quot;]
+  H --&gt; I[&quot;crew_currency만 지급&quot;]
+  I --&gt; J[&quot;기여·누적획득량·레벨 조회&quot;]
+  I -. &quot;진행 재적립 금지&quot; .-&gt; K[&quot;미션 관측으로 재입력하지 않음&quot;]</div></figure>
+<p>목표와 보상량이 비어 있으면 진행 원인은 보존하되 임의 달성·지급을 열지 않습니다. 실제 보드·카드 writer가 남긴 결과와 당시 actor·membership을 확인해 본인 진행으로 세며, UI 버튼·봇·선택 미리보기는 실제 관측이 아닙니다. 청구자는 자기 관측만 사용하고 같은 mission+membership 보상은 한 번만 받습니다.</p>
+<p>미션보상과 재화 원장 적립은 미션 진행에 다시 입력하지 않습니다. 재화 모으기 목표를 후속으로 쓰더라도 검증된 기본획득 원인만 세고 미션보상은 제외해, 보상이 다시 달성을 만들며 재귀 적립되는 일을 막습니다. 현재 미션 목록은 위 기존 활동 유형만 사용합니다. 공연은 기존 실제 결과 writer의 확인 뒤 원자적으로 관측을 함께 기록하는 로컬 source 연결입니다. 팬덤·찬스는 관측 API와 미션 정의가 있으나 실제 카드 효과 확정 공급은 남아 있습니다. 선택 영수증만으로 관측·크루재화 보상을 생성하지 않습니다.</p>
+<h3>기여·누적 크루재화 레벨·혜택 (현재 방향)</h3>
+<table>
+<thead>
+<tr>
+<th>표시</th>
+<th>계산과 의미</th>
+<th>사용 때</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>개인 기여</td>
+<td>해당 회원이 획득한 크루재화 합계</td>
+<td>감소하지 않음</td>
+</tr>
+<tr>
+<td>크루 누적획득량</td>
+<td>크루재화 획득 합계 <code>lifetimeEarned</code></td>
+<td>감소하지 않음</td>
+</tr>
+<tr>
+<td>크루 레벨</td>
+<td>누적획득량과 데이터의 단계 기준으로 결정</td>
+<td>내려가지 않음</td>
+</tr>
+<tr>
+<td>사용 가능한 잔액</td>
+<td>획득 합계 − 사용 합계 <code>balance</code></td>
+<td>사용량만 차감</td>
+</tr>
+<tr>
+<td>별도 XP</td>
+<td>없음</td>
+<td>새 성장축을 만들지 않음</td>
+</tr>
+</tbody>
+</table>
+<p>레벨 단계·기준·혜택은 데이터로 읽고 미정값은 빈칸·발란스 대기로 둡니다. 혜택은 홍보 꾸미기·홍보 선택지 해금 등의 제안(검수 대기)이며, 임계치·비용·정원 증가·전투/인기 가산을 정하지 않습니다. 레벨·기여·재화량을 출전 가산표의 무게로 환산하지 않습니다.</p>
+<p><a id="crew-growth"></a></p>
+<figure class="doc-diagram"><div class="mermaid">flowchart TB
+  A[&quot;검증된 기본획득·미션보상&quot;] --&gt; B[&quot;crew_currency 획득 한 번 기록&quot;]
+  B --&gt; C[&quot;개인 기여 = 해당 회원의 획득량&quot;]
+  B --&gt; D[&quot;크루 누적획득량 = 획득합&quot;]
+  D --&gt; E[&quot;데이터 기준으로 크루 레벨&quot;]
+  E --&gt; F[&quot;홍보 꾸미기·선택지 해금 혜택안&quot;]
+  B --&gt; G[&quot;사용가능 잔액 = 획득합 - 사용합&quot;]
+  G --&gt; H[&quot;정책 공급 뒤 홍보·홍보알림 사용&quot;]
+  H --&gt; I[&quot;잔액만 차감·사용 원인 보존&quot;]
+  I --&gt; J[&quot;누적획득량·기여·레벨 유지&quot;]
+  K[&quot;별도 XP 없음&quot;] -.-&gt; E</div></figure>
+<h3>홍보 사용·기본알림 (제안과 현재 방향 구분)</h3>
+<p>기본 시스템 알림은 가입 신청 접수·처리 결과, 공지, 보상, 멤버 관리·탈퇴·강퇴·위임·운영권한, 레벨 변화 등의 본인 안내입니다. 원인 사건에 따라 자동·무료로 표시하고, 미읽음/읽음과 원본 연결을 제공합니다. 같은 사건을 다시 읽어도 알림을 복제하지 않습니다. 기존 공유글 알림은 같은 원본을 읽는 투영과 본인 읽음 상태를 구분합니다.</p>
+<p>크루 홍보 노출·홍보알림은 크루재화 사용처의 제안(검수 대기)입니다. 홍보할 글·현재 권한·공개 범위를 확인한 다음 데이터의 레벨 혜택 해금 → 유효한 비용 → 현재 잔액 순서로 확인합니다. 해금 기준·비용·노출/빈도 정책이 없으면 대기합니다. 완료된 공개 홍보만 찾기·홍보 페이지에 표시하고 내부 거래·비용은 공개하지 않습니다. 기본알림에 비용을 붙이지 않고, 비용 미공급 상태에서 잔액 차감·홍보 노출·발송 완료를 만들지 않습니다. 외부 메시지는 보내지 않습니다. 무료 기본알림에는 유료 홍보의 레벨 혜택 해금 조건을 적용하지 않습니다.</p>
+<p>홍보 노출은 노출기간·동시노출 한도까지 공급되어야 하며 완료·기간 유효·원본 미철회 상태만 공개 목록에 표시합니다. 홍보알림은 현재 크루원에게 한 번 보여주는 게임 내 알림이며 노출기간을 요구하지 않습니다. 같은 활성 홍보 재요청은 기존 효과를 재사용하고 재차감하지 않습니다. 완료·만료 뒤 반복 정책이 미공급이면 다시 집행하지 않고 대기합니다.</p>
+<p><a id="crew-point-spend"></a></p>
+<figure class="doc-diagram"><div class="mermaid">flowchart TB
+  A[&quot;크루 홍보·홍보알림 사용 요청안&quot;] --&gt; B[&quot;원본·권한·공개 범위 확인&quot;]
+  B --&gt; C{&quot;레벨 혜택·비용·노출 정책 공급?&quot;}
+  C --&gt;|&quot;아니요&quot;| D[&quot;잠김·대기 사유·차감 없음·노출 없음&quot;]
+  C --&gt;|&quot;공급 후&quot;| E[&quot;혜택 해금·유효 비용·현재 잔액 순서로 확인&quot;]
+  E --&gt; F[&quot;크루재화 사용 한 번 기록&quot;]
+  F --&gt; G[&quot;완료된 공개 홍보만 찾기·홍보에 표시&quot;]
+  G --&gt; H[&quot;잔액만 감소·누적량과 레벨 유지&quot;]
+  I[&quot;가입·보상·관리 기본알림&quot;] --&gt; J[&quot;자동·무료·본인 게임 내 알림함&quot;]</div></figure>
+<h3>내부 공지·권한·소속 변경 (현재 방향)</h3>
+<table>
+<thead>
+<tr>
+<th>행동</th>
+<th>크루장</th>
+<th>운영진</th>
+<th>일반 회원</th>
+<th>방문자</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>공개 홍보·공개 앨범 보기</td>
+<td>가능</td>
+<td>가능</td>
+<td>가능</td>
+<td>가능</td>
+</tr>
+<tr>
+<td>내부·본인 미션·내 알림</td>
+<td>본인 범위</td>
+<td>본인 범위</td>
+<td>본인 범위</td>
+<td>불가</td>
+</tr>
+<tr>
+<td>본인 앨범 등록</td>
+<td>소속·작품 권한</td>
+<td>소속·작품 권한</td>
+<td>소속·작품 권한</td>
+<td>불가</td>
+</tr>
+<tr>
+<td>공지·모집·심사</td>
+<td>현재 권한</td>
+<td>위임된 항목만</td>
+<td>불가</td>
+<td>본인 신청·취소</td>
+</tr>
+<tr>
+<td>대표 이미지 변경</td>
+<td>현재 소속·scope 확인</td>
+<td>editPublicity 위임 시</td>
+<td>불가</td>
+<td>불가</td>
+</tr>
+<tr>
+<td>운영진 임명·강퇴·위임</td>
+<td>현재 권한과 대상 확인</td>
+<td>위임 범위 밖 불가</td>
+<td>불가</td>
+<td>불가</td>
+</tr>
+<tr>
+<td>본인 탈퇴</td>
+<td>먼저 위임</td>
+<td>본인 확인</td>
+<td>본인 확인</td>
+<td>해당 없음</td>
+</tr>
+<tr>
+<td>재화로 홍보·홍보알림</td>
+<td>사용 권한·비용 정책 공급 전 대기</td>
+<td>위임 정책 대기</td>
+<td>불가</td>
+<td>불가</td>
+</tr>
+</tbody>
+</table>
+<p>운영진 한도가 미공급이면 신규 임명은 대기로 두고 기존 권한의 수정·회수와 구분합니다. 운영진의 범위·인원·한도는 데이터와 정책에 따르며 시안의 역할 전환으로 운영 승인을 만들지 않습니다. 내부 공지와 공개 홍보 문구는 따로 관리하고 공개로 지정한 내용만 외부 홍보에 표시합니다. 공개 홍보에는 신청자 목록·심사 메모·내부 원장을 넣지 않습니다. 내부 자동 공유 앨범도 소유자 명시 동의 없이는 공개 홍보에 넣지 않습니다.</p>
+<h3>페스티벌 현재 연결·남은 후속 범위</h3>
+<p>실제 발매곡의 크루장 신청·원소유자 회차 사용 동의·같은 크루 중복 방지·등록 뒤 활동 로비는 P207/P191의 현재 페스티벌 화면 계약을 따릅니다. 크루 화면은 같은 실행의 출전곡 준비 문맥과 복귀를 연결하고 내부 곡 투표는 참고용으로만 집계하고 관객 투표/총공 점수·별도 플레이어를 만들지 않습니다. 회차별 교체·마감·공식 평가·실제 총공 집행은 후속이며 <strong>홍보는 아직 추가 기획이 필요</strong>합니다. 기존 발매 앨범·공유 참조와 크루재화 원장을 유지합니다.</p>
+<h3>필요 시스템</h3>
+<p>기존 크루·소속·역할·신청, 앨범 참조·공개 범위, 실제 활동 관측·미션, 단일 크루재화 원장·기여·누적레벨, 데이터형 단계 혜택, 기본알림·읽음, 권한별 공지·모집·멤버 관리.</p>
+<h3>화면·연출 목록</h3>
+<p>찾기·만들기, 공개 홍보·신청 상태, 내부 앨범, 아이돌 상세, 미션 목록/보상 대기, 잔액·누적획득량·내 기여·레벨 혜택·원장, 크루 회원 상세, 내부 공지, 내 알림함, 권한별 관리·소속 변경 확인.</p>
+<h3>남은 결정</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>남은 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>미션 목표·크루재화 보상량</td>
+<td>빈칸·발란스 대기</td>
+</tr>
+<tr>
+<td>레벨 단계·기준·혜택</td>
+<td>데이터 공급·발란스 대기</td>
+</tr>
+<tr>
+<td>크루 홍보·홍보알림</td>
+<td>비용·노출·빈도·권한 정책 대기</td>
+</tr>
+<tr>
+<td>정원·운영진 한도·신청 유효기간·재신청</td>
+<td>기존 조건 재사용과 미정 정책 구분</td>
+</tr>
+<tr>
+<td>미가입 획득·이적·정정·환급·시즌 보존·해산</td>
+<td>정책 대기·과거 원인 기록 보존</td>
+</tr>
+<tr>
+<td>공식 회차·곡 교체·실제 총공·평가</td>
+<td>P207/P191 후속 정책·추가 기획 대기</td>
+</tr>
+</tbody>
+</table>
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2><table>
+<thead>
+<tr>
+<th>리소스</th>
+<th>표시</th>
+<th>준비</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>등록 앨범·아이돌</td>
+<td>커버·참여자·소개·확인된 장점</td>
+<td>시안은 예시·실제 리소스 필요</td>
+</tr>
+<tr>
+<td>전체 크루·홍보</td>
+<td>봇 크루 10개·대표 이미지·공개 소개·모집·본인 신청</td>
+<td>로컬 시험 fixture, 운영 회원/정원과 구분</td>
+</tr>
+<tr>
+<td>개인 파일 대표 이미지</td>
+<td>입력 2 MiB 이하 → 256×256 WebP·64 KiB 이하</td>
+<td>IndexedDB Blob 전용 16장·총 1 MiB, 외부 전송 없음</td>
+</tr>
+<tr>
+<td>미션·재화·레벨</td>
+<td>진행·보상·잔액·누적량·혜택</td>
+<td>미정량은 —·발란스 대기</td>
+</tr>
+<tr>
+<td>크루 회원 상세</td>
+<td>회원 프로필·역할·획득 기여·작품</td>
+<td>아이돌 상세와 구분</td>
+</tr>
+<tr>
+<td>기본알림·관리</td>
+<td>원인·읽음·권한·처리/대기 상태</td>
+<td>시안은 실제 발송 없음</td>
+</tr>
+</tbody>
+</table>
+<p><a id="crew-screens-resources"></a></p>
+<figure class="doc-diagram"><div class="mermaid">flowchart TB
+  A[&quot;전체 크루·미소속은 만들기&quot;] --&gt; B[&quot;공개 홍보·앨범 미리보기&quot;]
+  B --&gt; C[&quot;신청·취소·처리 상태&quot;]
+  C --&gt; D[&quot;수락 뒤 내부 홈&quot;]
+  D --&gt; E[&quot;앨범 캐러셀·참여 아이돌 상세&quot;]
+  D --&gt; F[&quot;미션 목록·진행·보상·대기 사유&quot;]
+  D --&gt; G[&quot;사용가능 잔액·누적획득량·내 기여&quot;]
+  G --&gt; H[&quot;레벨·혜택·획득과 사용 내역&quot;]
+  D --&gt; I[&quot;크루 회원 목록·클릭 상세&quot;]
+  D --&gt; J[&quot;내부 공지·내 알림함&quot;]
+  D --&gt; K[&quot;권한별 관리&quot;]
+  K --&gt; L[&quot;가입 심사·모집·공지&quot;]
+  K --&gt; M[&quot;운영진·강퇴·위임·본인 탈퇴&quot;]
+  D --&gt; N[&quot;홍보 노출·홍보알림: 비용 공급 대기&quot;]</div></figure>
+<h3>추가 제작·연출 리소스</h3>
+<p>봇 대표 이미지는 독립된 복셀 원본 10종의 512×512 WebP 정적 에셋 <code>/assets/music-career/crew-portraits/crew-{mint,night,letter,sunrise,velvet,ocean,starlight,peach,pixel,aurora}-v1.webp</code>를 사용합니다. 정확한 10개 경로는 P192 리소스 표에 둡니다. 개인 파일 대표 이미지는 위 Blob 처리 계약을 따르고 앨범 커버·회원/아이돌 정보와 구분합니다. 미션·레벨 등 정해지지 않은 수치로 게이지를 채우지 않고 —로 둡니다. 실제 게임 캡처와 예시 시안을 구분합니다.</p>
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2><p><a id="crew-records"></a></p>
+<figure class="doc-diagram"><div class="mermaid">flowchart TB
+  A[&quot;현재 session·run·season&quot;] --&gt; B[&quot;actor·소속 기간·역할&quot;]
+  B --&gt; C[&quot;같은 크루 식별&quot;]
+  D[&quot;발매 앨범·고정 참여자&quot;] --&gt; E[&quot;등록 참조·공개 범위&quot;]
+  F[&quot;보드·찬스 실제 원인&quot;] --&gt; G[&quot;본인 미션 관측&quot;]
+  C --&gt; G
+  G --&gt; H[&quot;mission + membership 보상 중복 방지&quot;]
+  H --&gt; I[&quot;crew_currency 획득·사용 원장&quot;]
+  I --&gt; J[&quot;잔액·누적획득량·개인 기여·레벨&quot;]
+  B --&gt; K[&quot;가입·관리 사건·본인 읽음 상태&quot;]
+  E --&gt; K
+  K --&gt; L[&quot;무료 기본알림 조회&quot;]
+  I --&gt; M[&quot;소속 종료 뒤에도 과거 원인 기록 보존&quot;]</div></figure>
+<table>
+<thead>
+<tr>
+<th>원본·개념</th>
+<th>역할</th>
+<th>값·상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/data/game/board_tile.csv">보드 칸</a>·<a href="/data/game/board_tile_reward.csv">보상</a></td>
+<td>기존 활동과 실제 지급 원인</td>
+<td>원표 재사용·새 수치 복사 금지</td>
+</tr>
+<tr>
+<td><a href="/data/idol_ability_sim/chance_card.csv">찬스 카드</a>·<a href="/data/idol_ability_sim/chance_effect.csv">효과</a></td>
+<td>팬덤·일정 결과 관측</td>
+<td>실제 writer 원인 확인</td>
+</tr>
+<tr>
+<td><a href="/data/music_career/crew_demo.json">크루 시험</a>·<a href="/data/music_career/crew_ui.json">기존 UI</a>·<a href="/data/music_career/crew_community_ui.json">커뮤니티 UI</a></td>
+<td>기존 예시·화면 문구·알림 경로</td>
+<td>로컬 시험·계정 서버 아님</td>
+</tr>
+<tr>
+<td><a href="/data/music_career/crew_community.json">크루 커뮤니티 데이터</a></td>
+<td>미션·단일재화·레벨 단계/혜택·가입/권한·알림·홍보 정책</td>
+<td>목표·보상량·단계 문턱·해금·비용·노출/반복 정책 미정=null</td>
+</tr>
+<tr>
+<td>미션 계약</td>
+<td>유형·personal_observation·target·reward</td>
+<td>보상 currency=crew_currency·미정량=null</td>
+</tr>
+<tr>
+<td>재화·기여·레벨 계약</td>
+<td>balance·lifetimeEarned·actor별 획득합·단계 혜택</td>
+<td>미정 수치·비용 발란스 대기</td>
+</tr>
+<tr>
+<td>알림·공개 계약</td>
+<td>원인·수신 본인·읽음·공개 범위</td>
+<td>기본 무료·홍보 비용 미공급 대기</td>
+</tr>
+<tr>
+<td>대표 이미지</td>
+<td>crewCommunity.images / imageRef 6필드·원인 요청/영수증</td>
+<td>Blob은 별도 IndexedDB, 정본에는 짧은 메타데이터만</td>
+</tr>
+<tr>
+<td>시험 크루 확장</td>
+<td>crew_demo.json의 10개 구성·fixtureRevision</td>
+<td>기존 3개를 초기화하지 않고 누락만 추가</td>
+</tr>
+</tbody>
+</table>
+<p>로컬 메모리 fixture의 compact JSON UTF-8 실측은 기존 3개 <strong>14,880 B</strong> → 신규 10개 <strong>22,529 B(+7,649 B)</strong>, 기존 3→10 이행 **22,923 B(+8,043 B)**입니다. 같은 시험 원본의 비교이며 모든 실제 저장의 고정 증가량으로 일반화하지 않습니다. 이미지 바이트의 career 증가량은 0 B이지만 서로 다른 이미지 변경 명령의 기존 fingerprint·영수증·이벤트 메타데이터는 누적됩니다. Blob 저장소 한도는 이 커리어 이력의 상한이 아닙니다.</p>
+<p>구조와 값은 데이터로 공급합니다. 이 문서에서 새 표·스키마·열·생성물을 등록하거나 원표를 수정하지 않습니다. 숫자 빈칸을 확정 0으로 바꾸지 않습니다. 현재 source의 정확한 계약·필드는 담당 구현 회신과 함께 하단 기록에 구분하며 실제 운영 승인을 뜻하지 않습니다.</p>
+<p>주사위 환산: 크루 미션에 새 주사위 보상·기존 재화 교환을 추가하지 않습니다. 크루재화 목표·획득량·배수·사용 비용은 발란스 대기입니다.</p>
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2><p><a id="phase-one-close"></a></p>
+<h3>1차 정리·종결 · 2026-11-06</h3>
+<p><strong>기록 구분:</strong> 주간 콘텐츠는 현중이 직접 확인했습니다. 단이는 새 고유 단독 시험 범위 두 개에서 월드 개인/크루 최종 등록·참여 로비·명시 대회 복귀·동일 유형 재신청 제거·새로고침 후 월드 자동 복귀를 확인했습니다. 로비는 실제 출전곡의 이미지·이름·아티스트·크루와 같은 회차 순위만 강조합니다. 미집계 순위/득표율은 집계 전이고 앨범 활동100위를 페스티벌 순위로 쓰지 않습니다.</p>
+<p>출전곡 공통 재생/전체화면 공연 이미지+시험 음원, 음악 앱의 같은 월드 회차·출전곡 연결과 다른 참가곡으로 재생 전환을 실제 화면에서 확인했습니다. 현재 자산은 정지 복셀 이미지와 라이선스 시험 음원이며 실제 생성 동영상·사용자 제작 원곡이 아닙니다. 소리 출력 자체·공식 온라인 투표/집계는 미확인입니다.</p>
+<p>크루는 앨범 없는 명시적 단독 시험에서 생성했고, 소속 후에도 전체 크루 목록에 접근해 봇10개와 내 크루를 확인했습니다. 봇10개 대표 이미지 로딩, 로컬 파일→256px WebP→Blob 저장·표시·새로고침 유지, 잘못된 파일 거절 시 이전 이미지 보존을 확인했습니다. 일반 게임의 발매 앨범 조건·크루장/원소유자 권한은 집중 시험으로 구분 검증했고 실제 모든 권한 조합을 클릭 검수한 것은 아닙니다.</p>
+<p><strong>저장/시험 범위:</strong> 기존 사용자 저장을 삭제·덮어쓰지 않고 고유 testPage를 사용했습니다. 브라우저 저장 용량 부족 때 기존 호스트가 표시한 탭 세션 저장 경로로 신규/재접속을 확인했습니다. 원본 main/발란스 이어하기·복구의 전체 검증으로 확대하지 않습니다. 공유 저장·발란스/idleSim·현황판·7007서버/금지 포트는 수정하지 않았습니다. 이미지 바이트는 career/localStorage에 넣지 않습니다.</p>
+<p><strong>증거/검사:</strong> 도메인9/9, 로컬 이미지 프로토콜10/10, source/view6/6, 페스티벌 메모리 UI12개 통과. 기존 비교 시험의 실패 집합은 전후 동일하며 전체 시험 통과로 쓰지 않습니다. 새로고침·등록·감상 연결의 실제 캡처와 파일/백업/명령은 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EB%B3%B4%EA%B3%A0/20261106_090357_%EB%8B%A8%EC%9D%B4_%EC%9B%94%EB%93%9C%EC%B0%B8%EC%97%AC%EB%A1%9C%EB%B9%84_%ED%81%AC%EB%A3%A8%EB%AA%A9%EB%A1%9D_%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%85%EB%A1%9C%EB%93%9C.md">이번 공용 보고</a>에 연결합니다.</p>
+<p><a id="phase-two-next"></a></p>
+<h3>2차 기획 진행 · 제안(검수 대기)</h3>
+<p>1차는 현중의 2026-11-06 직접 지시로 정리·종결합니다. 이는 아래 모든 운영 기능의 개발·검수가 완료되었다는 뜻이 아닙니다. <strong>다음은 2차 검토 목록이며 이 문서만으로 새 구현에 착수하지 않습니다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>다음 의제</th>
+<th>이어받을 기준</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>홍보·크루 총공</td>
+<td>크루 홍보/모집 페이지의 공개 소개와 실제 홍보 활동을 구분. 기간·횟수·크루재화 사용·효과·알림·남용 방지를 새로 검토</td>
+<td><strong>추가 기획 필요</strong>, 실제 집행 미구현</td>
+</tr>
+<tr>
+<td>월드 1주 본공연 보드</td>
+<td>시즌9주차 7일의 실제 공연·마지막 스퍼트, 같은40칸의 B/G/C 역할과 기존 시티투어 결과 연결</td>
+<td>기존 기획 보존, 연출·증거·정산 후속</td>
+</tr>
+<tr>
+<td>추천·찜·감상·능력·게임 점수</td>
+<td>간편 감상/투표 UX를 유지하며 공정한 원본·유효표·중복·부정 이용·능력/게임 결과를 분리</td>
+<td>공식 비중·상한·유효 감상 기준 <strong>null / 발란스 대기</strong></td>
+</tr>
+<tr>
+<td>실제 일정·회차·회원</td>
+<td>주간은 실제 한국시간 일요일, 월드는 시즌9주차7일. 시험 actor/회차를 실제 계정·서버 회차로 오인하지 않음</td>
+<td>인증·온라인 집계·마감/최종화·소셜 권한 후속</td>
+</tr>
+<tr>
+<td>보상·크루 성장</td>
+<td>크루 미션 보상은 크루재화 한 종류, 획득량=기여·누적획득량=레벨. 별도 XP/임의 수치 추가 금지</td>
+<td>목표·획득량·문턱·혜택/사용비용 발란스 대기</td>
+</tr>
+<tr>
+<td>추가 검증</td>
+<td>다중 탭 업로드 경합·물리기기·320px·마감/철회/역할 변경 실화면·전체 연결 회귀</td>
+<td>집중 메모리 시험과 실제 화면 확인을 분리해 진행</td>
+</tr>
+</tbody>
+</table>
+<p>2차는 월드 투표/개인콘텐츠 기획안으로 구체화했습니다. 실제 구현을 시작할 때 한 의제씩 현중 검수 후 범위를 정합니다. 방송의 세부 기획·실제 홍보 활동·운영 투표 정책을 1차 완료 기능으로 표시하지 않습니다.</p>
+<figure><img src="/docs/planning/삼중AI_공용_20260929/증거/20261106_090357_단이_월드로비_크루_1차종결/크루_전체목록_검수.jpg" alt="1차 별도 단독 시험 화면" style="width:300px;max-width:100%;height:auto"><figcaption>별도 단독 시험의 실제 화면. 공식 서비스·정식 영상·운영 집계 완료를 뜻하지 않습니다.</figcaption></figure>
+<p><a id="crew-development"></a></p>
+<figure class="doc-diagram"><div class="mermaid">flowchart TB
+  A[&quot;기존 결성·공유·소통 재사용&quot;] --&gt; B[&quot;찾기·만들기·공개 홍보·신청&quot;]
+  B --&gt; C[&quot;앨범 중심 내부·회원 클릭 상세&quot;]
+  C --&gt; D[&quot;미션·단일재화·획득기여·누적레벨&quot;]
+  D --&gt; E[&quot;무료 기본알림·권한별 관리&quot;]
+  E --&gt; F[&quot;데이터 수치·정책 공급 대기 표시&quot;]
+  F --&gt; G[&quot;실제 화면·플레이·저장 별도 확인&quot;]
+  H[&quot;페스티벌 신청·활동 로비&quot;] --&gt; I[&quot;현재 P207/P191 계약&quot;]
+  I -.-&gt; J[&quot;공식 평가·실제 총공은 후속&quot;]</div></figure>
+<table>
+<thead>
+<tr>
+<th>묶음</th>
+<th>현재 상태</th>
+<th>다음 확인</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>기존 결성·가입·공유·반응·댓글·위임·탈퇴</td>
+<td>기존 로컬 source 연결</td>
+<td>재사용 경계 보존</td>
+</tr>
+<tr>
+<td>전체 크루·10개 fixture·로컬 대표 이미지·standalone 만들기</td>
+<td>반영·별도 단독 시험에서 생성/목록/파일 저장·재접속 확인</td>
+<td>목록 전체·권한·3→10 무초기화·실제 파일/IndexedDB·실패/교체·일반 자격 보존</td>
+</tr>
+<tr>
+<td>공개 홍보·가입 신청/심사</td>
+<td>기존 로컬 source 연결</td>
+<td>실제 화면·권한별 조작 확인</td>
+</tr>
+<tr>
+<td>내부 앨범·미션·재화·회원 상세·알림·관리</td>
+<td>로컬 source 연결</td>
+<td>실제 화면·반영·복귀 확인</td>
+</tr>
+<tr>
+<td>단일재화 원장·미션 관측·누적레벨·기본알림</td>
+<td>로컬 source 연결·값 미공급 대기</td>
+<td>원본 공급 뒤 지급·중복·저장 확인</td>
+</tr>
+<tr>
+<td>공연·팬덤·찬스 실제 관측</td>
+<td>공연은 기존 실제 writer에 연결, 팬덤/찬스는 API·미션 정의</td>
+<td>카드 효과 확정 공급 전 선택 영수증만으로 지급하지 않음</td>
+</tr>
+<tr>
+<td>목표·보상량·레벨 기준·홍보 비용</td>
+<td>발란스·정책 대기</td>
+<td>데이터 공급 전 임의 지급 없음</td>
+</tr>
+<tr>
+<td>페스티벌 신청·등록 뒤 활동 로비</td>
+<td>P207/P191의 현재 구현 계약</td>
+<td>별도 단독 시험에서 월드 개인/크루 등록·로비·감상 연결 확인. 공식 회차/평가·실제 총공은 후속</td>
+</tr>
+<tr>
+<td>실제 게임 화면·클릭·플레이·재접속·저장</td>
+<td>미확인</td>
+<td>정적 확인과 구분</td>
+</tr>
+<tr>
+<td>실제 계정 서버·외부 알림 발송</td>
+<td>미연결</td>
+<td>현재 run/session/season을 영구 계정으로 승격하지 않음</td>
+</tr>
+</tbody>
+</table>
+<h3>수락 기준</h3>
+<ul>
+<li>미션 보상은 <code>crew_currency</code> 한 종류이고 개인 재화·돈·팬·능력·아이템·별도 XP를 추가하지 않습니다.</li>
+<li>기여는 획득한 크루재화량이며 레벨은 크루 누적획득량으로 정합니다. 사용은 잔액만 줄입니다.</li>
+<li>본인의 실제 writer 관측·당시 소속을 확인하며 같은 mission+membership은 한 번만 보상합니다.</li>
+<li>버튼·봇·미리보기·미션보상·원장획득을 미션 진행으로 다시 세지 않습니다.</li>
+<li>미정 목표·보상량·레벨 기준·사용 비용을 0·임의 수치로 채우지 않고 발란스 대기 사유를 표시합니다.</li>
+<li>홍보·회원 내부·관리의 공개 정보와 권한을 구분하고 회원 상세와 아이돌 상세를 구분합니다.</li>
+<li>신청은 현재 소속 생성·수락이 끝나야 가입 완료입니다. 소속 변경은 과거 정당한 원인·거래를 지우지 않습니다.</li>
+<li>기본알림은 무료이며 유료 홍보안은 비용 공급 전 차감·노출을 실행하지 않습니다.</li>
+<li>전체 크루는 소속과 무관하게 열리고 10개 시험 크루와 내 크루/봇 표시를 구분합니다. 기존 3개 저장의 이행은 사용자 기록을 초기화하지 않습니다.</li>
+<li>이미지 선택은 본인 디스크 파일·현재 크루장/위임 권한·scope를 확인하고 Blob 한도와 6필드 참조를 지킵니다. 실제 IndexedDB·디코드·동시 탭·교체/실패 검증은 정적 검사와 구분합니다.</li>
+<li>앨범 없는 만들기는 검증된 명시 standalone에만 열고 일반 실행의 발매 조건과 미소속 확인을 유지합니다.</li>
+<li>페스티벌 신청·활동 로비는 P207/P191 현재 계약을 따르며 공식 평가·실제 총공·홍보 추가 기획과 실제 화면 미확인을 숨기지 않습니다.</li>
+</ul>
+<h3>뺀 것·옮긴 것·보존한 것</h3>
+<p>이전 기여/활동 포인트 표현과 출전·총공 구안은 <a href="%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.log.md">짝 로그</a>의 지난 기록과 수정 전 백업에 원문 보존합니다. 현재 기여·레벨·잔액은 크루재화 한 종류의 획득/사용 기록만 참조합니다. 길드·크루·별도 XP·다른 보상 체계를 중복 운영하지 않습니다.</p>
+</section><details><summary>작업 기록</summary>
+<p>읽은 원본: 프로젝트 AGENTS, W00c, P86, S17, P221/P192의 MD·HTML·짝 로그, 기존 검수 시안. 구현 상태는 대표 본체·도메인·UI 담당의 정적 회신을 근거로 구분합니다. source는 기존 state validator, source의 데이터 로더·커뮤니티 dispatch·projection, view의 알림/대기 표시와 redraw, game-bridge의 기존 공연 writer 관측, 범위 CSS에 연결했습니다. 팬덤/찬스 카드 효과 확정 공급·실제 계정 서버는 별도입니다. 도메인 source는 <code>src/game/music-career/crew-community.mjs</code>·<code>crew-community-state.mjs</code>와 <code>data/music_career/crew_community.json</code>입니다. 도메인 담당은 두 모듈의 node --check와 JSON 문법·정적 제약 검사 통과를 회신했습니다. <code>set_crew_album_publicity {postId,public}</code>는 현재 소속·원본 소유자의 명시 동의 원장/영수증을 저장하며 publicAlbums/publicPromotions는 유효한 동의만 투영합니다. 비회원의 내부 albums는 빈 목록이고 공개 화면이 이를 fallback으로 대체하지 않습니다. 실제 혜택 데이터는 앨범 홍보·홍보알림의 해금 조건이며 requiredLevel 미정, 채널별 requiredBenefitId로 집행을 막습니다. 홍보 꾸미기 등 추가 혜택은 본문에 구분한 제안입니다. UI source는 <code>src/simulator/music-career/crew-panel.mjs</code>·<code>crew-community-panel.mjs</code>와 <code>data/music_career/crew_community_ui.json</code>입니다. UI 담당은 두 모듈의 node --check, JSON·문구 키·알림 종류/경로·홍보 gate 문구의 정적 검사 통과를 회신했습니다. 알림 열기는 본인 읽음 처리 뒤 같은 화면을 갱신하며, 홍보 가능 상태가 ready일 때만 집행을 열도록 연결했습니다. 이번 문서 확인은 정적 검증이며 7007 목록/화면·브라우저·게임·동적 시험·빌드는 수행하지 않았습니다. <a href="%EC%9D%91%EC%9B%90%ED%81%AC%EB%A3%A8_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.log.md">로그·지난 기록</a>.</p>
+</details>
+</main><script type="module">import mermaid from "/node_modules/mermaid/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:true,securityLevel:"strict",theme:"neutral",flowchart:{useMaxWidth:true,htmlLabels:false},sequence:{useMaxWidth:true,wrap:true}});</script></body></html>

@@ -1,0 +1,541 @@
+# 아이돌 기본 동작 · 포즈 · 모션 수집 기획서 v01
+
+**이 문서는** 보유 아이돌 한 명마다 붙는 2D 그림과 동작(포즈 · 모션)을 정하고, 카드 1장 = 포즈 1장 + 모션 1개 해금, 카드 밖 보상으로 얻는 보너스 포즈, 총 포즈 수량과 ComfyUI 생산량, 포토카드 화면과 아이돌 능력 보기 화면의 연동, 주간 MV 컷씬이 동작을 고르는 법을 정리한 기획서입니다.
+
+**보는 법** 1장 목적 → 2장 읽은 원본 → 3장 구조도 → 4장 동작 목록 → 5장 해금 연결 → 6장 보너스 포즈 → 7장 리소스 세트 · 총 포즈 수량 → 8장 2D · ComfyUI 규격 → 9장 동작 보기 → 10장 포토카드 ↔ 아이돌 능력 보기 → 11장 MV 컷씬 → 12장 40자리 나눔 · 표 연결 → 13장 카드 ID 규칙 → 14장 뒷 수정 목록 → 15장 7007 기획서툴 확인 → 16장 초안 파일 → 17장 동작 연결 구조(애니메이터 표).
+
+**지금 상태** 산출 폴더 초안입니다. `data` · `data/master` · 라이브 CSV · `schema.ts` · 화면 코드는 바꾸지 않았습니다. 작성 유르넷(총괄) · 2026-11-14 (KST). 이전 판 백업: `산출/개발진행기획_v01/_backup/20261114_1519_유르넷_모션기획서/`.
+
+[3D 발주: 실제 발주서 1장](/docs/planning/proposal-concept/3D리소스발주준비_20261118_제나/20261119_이스라트_3D공용애니_실제발주서_v12.html#ch1)
+---
+
+## 1. 목적 · 오늘 결정
+
+| 시각 | 현중 결정 | 이 기획서에 반영 |
+|---|---|---|
+| 15:07 | 캐릭터 기본 동작을 대기부터 연구해 나열, 무비에 쓰고 지금 2D · 나중에 3D로 교체 | 4장 동작 목록 · 8장 3D 짝 |
+| 15:09 | 동작은 수집형. 카드 1장 = 모션 1개, 기본 대기는 처음부터 | 5장 |
+| 15:10~15:11 | 대표 그림은 ComfyUI · 바탕 없는 개성 포즈 1장, 포토카드를 받을 때마다 포즈 그림이 늘어남, 동작 보기 화면 | 8장 · 9장 |
+| 15:12 | 동작 보기는 포토카드와 아이돌 능력 보기 두 곳에서, 두 화면 연동 | 10장 |
+| 15:20~15:21 | 「기타 포즈도 보상 같은 걸로 주자」 → 「미션으로 해야 겠네」 「포즈 미션 만들고」. 보너스 포즈는 **포즈 미션으로만** 얻음, 카드 13칸과 별도 칸 | 6장 · 해금 표 한 개(start · card · mission) |
+| 15:33 | 「30명 다 하지 말고 5명만 하라고 5명이 랜덤하개 들어가게」 | 1차 2D 리소스는 세트 5개, 아이돌 생성 때 무작위 배정(7장) |
+| 15:34 | 실제 리소스는 3D, ComfyUI 2D는 개발 · 시뮬 확인용 | 7-2 (a) 1차 2D · 7-3 (b) 3D 나눔 |
+| 15:23 | 「총 포즈 수량 체크해.. 아이돌만 있으면 되겠지」 | 포즈 · 모션은 **아이돌 30자리만**. 대표 10자리(스태프 6 · 기획사 3 · 팬회장 1)는 **대표 그림 1장만** 안. 7장 총 수량 |
+
+- 15:19 지시 ③의 「기획사 대표 3자리 모션 12개 세트」는 15:23 「아이돌만」 결정으로 넣지 않았습니다.
+- 캐릭터당 최대: **기본 대기 1 + 카드 12 + 보너스 6 = 동작 19개**, 그림은 대표 포즈 1장을 더해 **20장**.
+
+## 2. 읽은 원본
+
+| 원본 | 읽은 내용 | 쓴 곳 |
+|---|---|---|
+| `보고/20261114_1515_비앙카_모션해금_별비중표제안.md` · `…_motion_unlock_star_weight.csv` | 별 → 급: ★1 대기 · ★2 리액션 · ★3 · ★4 퍼포먼스 · ★5 시그니처, 가치 비중 = 별 배수(1 · 1.5 · 2 · 2.5 · 3), 합 20.5, 칸별 card_idol_01~12 | 4장 급 · 5장 star_weight |
+| `산출/게임프로토타입/_연동준비_20261113/card.csv` | card_idol_01~12 · card_staff_{자리}_01~12(9자리 108행) · card_fan_president_01~12, 모든 덱 별 1111 222 33 44 5 | 5장 card_id · 13장 · 14장 |
+| `산출/게임프로토타입/비앙카_발란스결정장부.md` 141행 D71 | 「아이돌 12종 … 아이돌 연계 스태프 72종 … 순수 기획사 36종 · 팬클럽 회장 12종 … 세팅 완료」 | 12장 40자리 나눔(72 = 6 × 12 · 36 = 3 × 12 · 12 = 1 × 12) |
+| `산출/기획서/산출_기획서_20261113_회의종합_상세명세서.md` 2-0~2-5 | 40자리 = 아이돌 30 + 기존 스태프 6 + 순수 기획사 3 + 팬클럽 회장 1, 별 구성 ★1 × 4 · ★2 × 3 · ★3 × 2 · ★4 × 2 · ★5 × 1 | 12장 · 14장 |
+| `보고/20261112_1810_회의록_현중유르넷이스라트.md` 36~38 · 73행, `보고/20261112_1623_이스라트_책갈피_제안서/20261112_수정예정_책갈피_P240.md` 20행 | 「12장 배치는 제시한 배치표대로 한다. (09:08 「12장 배치 이대로 해」)」, 세부 수 ★1 2 ~ ★5 10(09:07), 배수(09:09), 선생님 카드도 같은 별 배치(10:00 · 11:03) | 14장 |
+| `data/game/card.csv` (240행) · `data/game/card_theme.csv` (20행) | 테마 20개(idol 5 · make 7 · company 6 · fan 2), 테마마다 별 1★4 · 2★4 · 3★3 · 4★1, note 공통 문구 2종 | 13장 · 14장 |
+| `data/idol_ability_sim/idol_growth_card_owned.csv` (372행) | owner_id · deck_id=idol · card_id C01~C12 · star 1111 2222 333 4 | 3장 칸 표 · 14장 |
+| `data/idol_ability_sim/card_id_map.csv` | card.csv card_01_1 ↔ C01 매핑 | 13장 |
+| `data/mons_proto/mons_animation.csv` · `data/mons_zodiac_extra/animation.csv` (각 5행) | state_id · name_ko · duration · loop · description, 비행 5상태 | 동작 표 열 모양 |
+| `data/mons_proto/animation_tracks.json` · `data/mons_zodiac_extra/animation_tracks.json` (같은 파일) | part × property × keys(0~1, 5키) | 3D 애니 이름 규칙 참고 |
+| `event/concertRoulette/probability/data/entity/` motion_mode · camera_motion_mode · comic_behavior · comic_role | 판 · 카메라 이동 3방식, 2~4인 접촉 연출과 역할 | 11장 카메라 · 2인 포즈 참고 |
+| `data/master/resource_master.csv` (969행) · `resource_link.csv` (1,771행) · `resource_variant.csv` (125행) | 캐릭터 모션 리소스 0행(motion 행 170개는 몬스), owner_table=character_master 0행, variant_type 5종 | 8장 슬롯 |
+| `data/master/character_master.csv` (57행) | idol 5 · staff · fan_leader 없음 | 12장 |
+| `data/idol_ability_sim/staff_fixed_stat.csv` · `data/game/staff_rapport_bonus.csv` | 등급 고정 능력 600~ · 라포 5/10/15%(staff_9) | 12장 |
+| `산출/개발진행기획_v01/pose_mission_v01.csv`(6행) · `포즈미션_v01.md`(이올카, 읽기만 함) | 포즈 미션 6개: pose_mission_idol_weekly_festival_rank · _world_enter · _board_event · _adventure_perfect · _rapport_stage · _season_pass, npc_kind=idol, reward_motion_id = character_motion_idol_pose_mission_*, 8장 연결 요청(보너스 칸 수 · pose_mission_id 열 · 슬롯 이름) | 6장 · 해금 표 |
+| `data/game/mission_config.csv`(64행) · `mission_tab_config.csv` · `mission_track_event.csv` | 기존 미션 보상은 dice · pack, 포즈 아님 | 6장 맥락 |
+| `산출/전체기획서/08_월드페스티벌전투오리지널16_클로드.md` R-08-1 · R-08-2 · R-08-8 · R-08-19 · `06_음원정령음방_클로드.md` R-06-12 · `보고/20261113_1025_회의록` 18항 · `독립음악앱_기획서.md` | 주간 100명 구역 등수, 출품 = 음원 + 영상(자동 컷씬 · 사진 컷씬 편집 · 모션샷), 월드 외부 mp4 | 6장 · 11장 |
+| `산출/개발진행기획_v01/콘텐츠별_v03/아이돌능력_기획서.md`(P107) · `src/simulator/idol-neuron/panel.mjs` 316행 · `docs/planning/idol-growth-neuron.html` | 6축 18세부, 카드 결과는 같은 멤버 ID로 받음, 「{이름} 개인 능력 보기」 | 10장 |
+| `vite.config.ts` · `src/tools/planningDocs/*.ts` · `data/planning_doc_catalog.csv` | 7007 = vite(root = 레포), 기획서툴 입구 `docs/planning/planning-docs-tool.html`, 문서 목록은 catalog CSV | 15장 |
+| `산출/전체기획서/00_헌법_기획서기조.md` 제4 · 9 · 12조 | 카드 영구 이월 · 실존 인물 닮지 않게 · 숫자는 현재 세팅값 또는 「비어 있음(0으로 동작)」 | 표기 |
+
+**같은 일을 하는 표:** 캐릭터 동작 표는 없어 `character_motion`은 새로 두고 열 모양은 `mons_animation`(state_id · loop)을 따릅니다. 캐릭터별 12칸 카드 보유는 `idol_growth_card_owned.csv`가 이미 같은 일을 하므로 그 표를 칸 표로 씁니다. 2D · 3D는 `resource_link` · `resource_variant`에 slot_type · variant_type만 더합니다.
+
+## 3. 구조도
+
+```mermaid
+flowchart LR
+  CM["character_master<br/>idol 30 · staff 6 · company 3 · fan_leader 1"] --> RS["character_resource_set<br/>1차 2D 세트 5개 · 무작위 배정"]
+  RS --> RL["resource_link 2D<br/>portrait_main · card_pose · bonus_pose · motion_2d"]
+  RL --> RV["resource_variant 3D<br/>anim_clip · model_path"]
+  CM --> CS["카드 12칸<br/>idol_growth_card_owned"]
+  CS --> UL["character_motion_unlock<br/>start · card · mission + source_ref"]
+  RW["포즈 미션 6개(이올카)<br/>pose_mission_v01.csv"] --> UL
+  UL --> MO["character_motion<br/>아이돌 동작 19행"]
+  MO --> RL
+  CS --> AB["아이돌 능력(P107)"]
+```
+
+| 겹 | 표 | 하는 일 | 새로 / 넓힘 |
+|---|---|---|---|
+| ① | `character_master` | 정체 + seat_group · motion_set_id · card_deck_id · resource_set_id · 대표 그림 슬롯 | 넓힘 |
+| ①-2 | `character_resource_set` | 1차 2D 리소스 세트 5개 | 새로 |
+| ② | `resource_link` | 2D 그림 | 넓힘(slot_type) |
+| ③ | `resource_variant` | 3D 짝 | 넓힘(anim_clip) |
+| ④ | `idol_growth_card_owned` | 카드 12칸 보유 | 그대로 씀(별 배치는 14장) |
+| ⑤ | `character_motion_unlock` | 칸 → 동작, 카드와 보상을 한 표에서 | 새로 |
+| ⑥ | `character_motion` | 동작 목록 | 새로 |
+
+## 4. 아이돌 동작 목록 (19행)
+
+- **동작 종류 19개** = 기본 대기 1 + 카드 12(대기 4 · 리액션 3 · 퍼포먼스 4 · 시그니처 1) + 보너스 포즈 6. 30명 모두 같은 동작 종류를 쓰고, 그림은 1차 2D 리소스 세트 5개 중 배정된 세트를 읽습니다.
+- 우선: 필수 1차 5 · 무비용 8 · 확장 6.
+- 급은 비앙카 별비중표 그대로: ★1 대기 · ★2 리액션 · ★3 · ★4 퍼포먼스 · ★5 시그니처. 그래서 ★1 네 칸은 카드 주제를 살린 **대기 변형**(마이크 · 리듬 · 비트 · 거울)입니다.
+- ID 규칙: `character_motion_idol_{급}_{동작}`, 3D `anim_…`, 2D 컷 slot `motion_2d_…`(sort_order = 컷 번호).
+- 감정 · 표정 분류: 평온 · 미소 · 웃음 · 설렘 · 신남/환호 · 감동 · 놀람 · 집중/몰입 · 자신감/당당/카리스마 · 행복 · 뿌듯.
+
+### 4-1. 기본 (처음부터)
+| 칸 | motion_id | 한글 이름 | 분류 · 급 | 감정 · 표정 | 얻는 곳(unlock_source · 세부) | 별 · 비중 | 우선 | 2D 표현 | 3D 교체 애니 | 반복 | 시작 자세 | 끝 자세 | 다음 동작(전환 기준) | 쓰는 곳 | 인원 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | `character_motion_idle_basic` | 기본 대기 | 대기 · 대기(기본) | 평온(눈 깜빡임) | start · 처음부터 | - · 0 | 필수 1차 | 연속 컷 3장 | `anim_idle_basic` | 반복 | 기본 선 자세 | 기본 선 자세 | 모든 동작(시작·복귀 기준) | 포토카드·로비·주간 MV 컷씬·월드 영상·컷씬 | 1인 |
+
+### 4-2. 카드 12칸 (확정 별 배치 · card_idol_01~12)
+| 칸 | motion_id | 한글 이름 | 분류 · 급 | 감정 · 표정 | 얻는 곳(unlock_source · 세부) | 별 · 비중 | 우선 | 2D 표현 | 3D 교체 애니 | 반복 | 시작 자세 | 끝 자세 | 다음 동작(전환 기준) | 쓰는 곳 | 인원 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | `character_motion_idol_idle_mic_ready` | 마이크 쥐고 대기 | 대기 · 대기 | 설렘 | card · card_idol_01 보컬 기초 | ★1 · 1 | 필수 1차 | 연속 컷 3장 | `anim_idol_idle_mic_ready` | 반복 | 마이크 든 자세 | 마이크 든 자세 | idle_basic · idol_perform_live_sing | 로비·주간 MV 컷씬·컷씬 | 1인 |
+| 2 | `character_motion_idol_idle_rhythm_step` | 리듬 타며 대기(그루브) | 대기 · 대기 | 신남(미소) | card · card_idol_02 댄스 기초 | ★1 · 1 | 필수 1차 | 연속 컷 3장 | `anim_idol_idle_rhythm_step` | 반복 | 기본 선 자세 | 기본 선 자세 | idle_basic · idol_perform_killing_part · idol_react_confident_wave | 로비·주간 MV 컷씬·월드 영상 | 1인 |
+| 3 | `character_motion_idol_idle_beat_nod` | 비트 타며 끄덕 대기 | 대기 · 대기 | 자신감 | card · card_idol_03 랩 기초 | ★1 · 1 | 필수 1차 | 연속 컷 3장 | `anim_idol_idle_beat_nod` | 반복 | 마이크 든 자세 | 마이크 든 자세 | idol_idle_mic_ready · idol_perform_live_sing | 로비·주간 MV 컷씬 | 1인 |
+| 4 | `character_motion_idol_idle_mirror_pose` | 거울 보며 포즈 대기 | 대기 · 대기 | 미소·카메라 응시 | card · card_idol_04 비주얼 기초 | ★1 · 1 | 필수 1차 | 연속 컷 2장 | `anim_idol_idle_mirror_pose` | 반복 | 기본 선 자세 | 포즈 유지 | idle_basic · idol_perform_broadcast_heart | 포토카드·로비·주간 MV 컷씬 | 1인 |
+| 5 | `character_motion_idol_react_touched` | 감동 리액션 | 리액션 · 리액션 | 감동(눈물 맺힘) | card · card_idol_05 감정 표현 | ★2 · 1.5 | 무비용 | 연속 컷 3장 | `anim_idol_react_touched` | 1회 | 기본 선 자세 | 기본 선 자세 | idle_basic · idol_perform_broadcast_heart | 주간 MV 컷씬·컷씬 | 1인 |
+| 6 | `character_motion_idol_react_confident_wave` | 자신감 손 흔들기 | 리액션 · 리액션 | 당당 | card · card_idol_06 무대 존재감 | ★2 · 1.5 | 무비용 | 연속 컷 3장 | `anim_idol_react_confident_wave` | 1회 | 기본 선 자세 | 기본 선 자세 | idol_perform_live_sing · idol_perform_killing_part · idle_basic | 주간 MV 컷씬·월드 영상·컷씬 | 1인 |
+| 7 | `character_motion_idol_react_laugh_clap` | 박수 웃음 | 리액션 · 리액션 | 웃음 | card · card_idol_07 예능 토크 | ★2 · 1.5 | 무비용 | 연속 컷 3장 | `anim_idol_react_laugh_clap` | 반복 | 기본 선 자세 | 기본 선 자세 | idle_basic | 로비·컷씬 | 1인 |
+| 8 | `character_motion_idol_perform_live_sing` | 라이브 노래(립싱크) | 퍼포먼스 · 퍼포먼스 | 몰입(입 모양 4단) | card · card_idol_08 라이브 무대 | ★3 · 2 | 무비용 | 연속 컷 4장 | `anim_idol_perform_live_sing` | 반복 | 마이크 든 자세 | 마이크 든 자세 | idol_idle_mic_ready · idol_perform_broadcast_heart | 주간 MV 컷씬·월드 영상·컷씬 | 1인 |
+| 9 | `character_motion_idol_perform_keyboard` | 건반 연주 | 퍼포먼스 · 퍼포먼스 | 집중 | card · card_idol_09 곡 작업 | ★3 · 2 | 무비용 | 연속 컷 4장 | `anim_idol_perform_keyboard` | 반복 | 앉은 자세 | 앉은 자세 | idle_basic(일어서기 컷 전환) | 주간 MV 컷씬·컷씬 | 1인 |
+| 10 | `character_motion_idol_perform_killing_part` | 킬링 파트 안무 | 퍼포먼스 · 퍼포먼스 | 카리스마 | card · card_idol_10 컴백 퍼포먼스 | ★4 · 2.5 | 무비용 | 연속 컷 6장 | `anim_idol_perform_killing_part` | 1회 | 무대 시작 자세 | 킬링 파트 끝 자세 | idol_signature_ending · idol_idle_rhythm_step | 주간 MV 컷씬·월드 영상 | 1인 |
+| 11 | `character_motion_idol_perform_broadcast_heart` | 방송 무대 인사·손하트 | 퍼포먼스 · 퍼포먼스 | 밝은 미소·윙크 | card · card_idol_11 방송 활동 | ★4 · 2.5 | 무비용 | 연속 컷 3장 | `anim_idol_perform_broadcast_heart` | 1회 | 기본 선 자세 | 손하트 유지 | idle_basic · idol_idle_mirror_pose | 포토카드·주간 MV 컷씬·월드 영상·컷씬 | 1인 |
+| 12 | `character_motion_idol_signature_ending` | 시그니처 엔딩 포즈 | 시그니처 · 시그니처 | 엔딩 표정(카메라 응시) | card · card_idol_12 시그니처 | ★5 · 3 | 무비용 | 연속 컷 3장 | `anim_idol_signature_ending` | 1회 | 킬링 파트 끝 자세 | 엔딩 포즈 유지(마지막 장 정지) | 곡 끝 · idle_basic | 포토카드·주간 MV 컷씬·월드 영상 | 1인 |
+
+### 4-3. 보너스 포즈 칸 (6장)
+| 칸 | motion_id | 한글 이름 | 분류 · 급 | 감정 · 표정 | 얻는 곳(unlock_source · 세부) | 별 · 비중 | 우선 | 2D 표현 | 3D 교체 애니 | 반복 | 시작 자세 | 끝 자세 | 다음 동작(전환 기준) | 쓰는 곳 | 인원 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| B1 | `character_motion_idol_pose_mission_weekly_festival_rank` | 주간 순위 트로피 환호 | 보너스 포즈 · 보너스 | 환호 | mission · pose_mission_idol_weekly_festival_rank | - · 0 | 확장 | 정지 포즈 1장 | `anim_idol_pose_mission_weekly_festival_rank` | 1회 | 기본 선 자세 | 포즈 유지 | idle_basic | 포토카드·주간 MV 컷씬 | 1인 |
+| B2 | `character_motion_idol_pose_mission_world_enter` | 월드 무대 깃발 포즈 | 보너스 포즈 · 보너스 | 당당 | mission · pose_mission_idol_world_enter | - · 0 | 확장 | 정지 포즈 1장 | `anim_idol_pose_mission_world_enter` | 1회 | 기본 선 자세 | 포즈 유지 | idle_basic | 포토카드·월드 영상 | 1인 |
+| B3 | `character_motion_idol_pose_mission_board_event` | 이벤트 단계 달성 축하 포즈 | 보너스 포즈 · 보너스 | 기쁨 | mission · pose_mission_idol_board_event | - · 0 | 확장 | 정지 포즈 1장 | `anim_idol_pose_mission_board_event` | 1회 | 기본 선 자세 | 포즈 유지 | idle_basic | 포토카드·컷씬 | 1인 |
+| B4 | `character_motion_idol_pose_mission_adventure_perfect` | 모험 대성공 브이 점프 | 보너스 포즈 · 보너스 | 신남 | mission · pose_mission_idol_adventure_perfect | - · 0 | 확장 | 정지 포즈 1장 | `anim_idol_pose_mission_adventure_perfect` | 1회 | 기본 선 자세 | 포즈 유지 | idle_basic | 포토카드·컷씬 | 1인 |
+| B5 | `character_motion_idol_pose_mission_rapport_stage` | 라포 투샷 포즈 | 보너스 포즈 · 보너스 | 행복 | mission · pose_mission_idol_rapport_stage | - · 0 | 확장 | 정지 포즈 1장 | `anim_idol_pose_mission_rapport_stage` | 1회 | 기본 선 자세 | 포즈 유지 | idle_basic | 포토카드·주간 MV 컷씬·컷씬 | 2인 |
+| B6 | `character_motion_idol_pose_mission_season_pass` | 시즌 완주 포즈 | 보너스 포즈 · 보너스 | 뿌듯 | mission · pose_mission_idol_season_pass | - · 0 | 확장 | 정지 포즈 1장 | `anim_idol_pose_mission_season_pass` | 1회 | 기본 선 자세 | 포즈 유지 | idle_basic | 포토카드·로비 | 1인 |
+
+### 4-4. 조사 메모
+- 아이돌 게임 · 포즈 팩에서 자주 묶는 단위: 대기 변형, 춤(인트로 · 킬링 파트 · 엔딩 포즈), 무대(마이크 · 손 흔들기 · 손하트 · 인사), 화보 포즈, 2~3인 그룹 포즈, 립싱크 입 모양. (참고: Saesoli K-pop 애니 팩 60종 · TWICE 포즈 팩 27종(춤 21 · 그룹 3 · 화보 3) · K-POP 포즈 팩 11종)
+- 걷기 · 돌아서기는 2D 컷 편집에서 컷 전환으로 대신하고 동작으로 세지 않습니다.
+
+## 5. 해금 연결 (카드 · 보상 한 표)
+
+- `character_motion_unlock_v01.csv` 한 표에서 **unlock_source = start / card / mission** 큰 분류와 **source_ref** 세부 출처로 처리하고, 보너스 칸은 **pose_mission_id** 열에 이올카 미션 ID를 넣습니다. 화면은 이 두 열만 읽어 「얻는 곳」을 보여 줍니다.
+- 칸 종류: 기본 0칸 · 카드 1~12칸 · 보너스 B1~B6칸. 카드 칸 해금 = 그 칸 카드 첫 획득(중복은 더 주지 않음), 보너스 칸 해금 = 그 포즈 미션 완료(해당 아이돌 1회).
+
+| 칸 | 별 | 카드(card_idol_NN) | 급 | 가치 비중 | 동작 |
+|---|---|---|---|---|---|
+| 0 | - | 카드 없음  | 대기(기본) | 0 | 기본 대기 |
+| 1 | ★1 | card_idol_01 보컬 기초 | 대기 | 1 | 마이크 쥐고 대기 |
+| 2 | ★1 | card_idol_02 댄스 기초 | 대기 | 1 | 리듬 타며 대기(그루브) |
+| 3 | ★1 | card_idol_03 랩 기초 | 대기 | 1 | 비트 타며 끄덕 대기 |
+| 4 | ★1 | card_idol_04 비주얼 기초 | 대기 | 1 | 거울 보며 포즈 대기 |
+| 5 | ★2 | card_idol_05 감정 표현 | 리액션 | 1.5 | 감동 리액션 |
+| 6 | ★2 | card_idol_06 무대 존재감 | 리액션 | 1.5 | 자신감 손 흔들기 |
+| 7 | ★2 | card_idol_07 예능 토크 | 리액션 | 1.5 | 박수 웃음 |
+| 8 | ★3 | card_idol_08 라이브 무대 | 퍼포먼스 | 2 | 라이브 노래(립싱크) |
+| 9 | ★3 | card_idol_09 곡 작업 | 퍼포먼스 | 2 | 건반 연주 |
+| 10 | ★4 | card_idol_10 컴백 퍼포먼스 | 퍼포먼스 | 2.5 | 킬링 파트 안무 |
+| 11 | ★4 | card_idol_11 방송 활동 | 퍼포먼스 | 2.5 | 방송 무대 인사·손하트 |
+| 12 | ★5 | card_idol_12 시그니처 | 시그니처 | 3 | 시그니처 엔딩 포즈 |
+
+## 6. 보너스 포즈 = 포즈 미션 (이올카 작성)
+
+- 현중 15:20~15:21 「미션으로 해야 겠네」 「포즈 미션 만들고」. 카드 12장 포즈가 기본 축이고, 그 밖의 포즈는 **포즈 미션으로만** 얻습니다. 미션 표는 이올카의 `pose_mission_v01.csv` · `포즈미션_v01.md`를 그대로 읽고, 이 기획서는 칸 · 동작 · 해금 연결만 맞춥니다.
+- 보너스 칸 수 = 이올카 파일의 포즈 미션 수 = **6칸**(B1~B6). 카드 13칸(0~12)과 따로 있습니다.
+- 동작 ID는 이올카 표의 `reward_motion_id`를 그대로 씁니다. 그림 슬롯은 `bonus_pose_01~06`으로 정했습니다(이올카 8장 요청 5번 답).
+
+| 칸 | 포즈 미션 ID (pose_mission_id) | 포즈 | 동작 ID | 미션 조건 · 주기 (이올카 표) |
+|---|---|---|---|---|
+| B1 | `pose_mission_idol_weekly_festival_rank` | 주간 순위 트로피 환호 | `character_motion_idol_pose_mission_weekly_festival_rank` | 1~8주 주간 페스티벌 100명 구역 순위에 오름(출품 팀의 아이돌) · 주간 |
+| B2 | `pose_mission_idol_world_enter` | 월드 무대 깃발 포즈 | `character_motion_idol_pose_mission_world_enter` | 9주차 월드 페스티벌에 참가(출품 팀의 아이돌) · 시즌 |
+| B3 | `pose_mission_idol_board_event` | 이벤트 단계 달성 축하 포즈 | `character_motion_idol_pose_mission_board_event` | 보드·이벤트 마일스톤 단계에 도달 · 시즌 |
+| B4 | `pose_mission_idol_adventure_perfect` | 모험 대성공 브이 점프 | `character_motion_idol_pose_mission_adventure_perfect` | 모험 결과가 대성공인 출동에 그 아이돌이 참가 · 1회 |
+| B5 | `pose_mission_idol_rapport_stage` | 라포 투샷 포즈 | `character_motion_idol_pose_mission_rapport_stage` | 아이돌 쌍의 좋은 쪽 라포 단계에 도달 · 1회 |
+| B6 | `pose_mission_idol_season_pass` | 시즌 완주 포즈 | `character_motion_idol_pose_mission_season_pass` | 시즌 한 바퀴 패스 줄(기본 줄)을 진행 · 시즌 |
+
+- 미션 조건이 참고하는 활동(주간 페스티벌 순위 · 월드 참가 · 보드 · 이벤트 마일스톤 · 모험 대성공 · 라포 단계 · 시즌 패스 기본 줄)은 미션의 **조건 재료**일 뿐이고, 그 활동 자체가 포즈를 직접 주지는 않습니다. 조건의 등수 · 단계 컷 같은 숫자는 이올카 표에 「기존 표 근거 없음」으로 남아 있어 이 기획서도 정하지 않습니다.
+- 기존 `mission_config` 64행의 보상은 주사위 · 팩이라 포즈와 겹치지 않습니다. 새 미션 이벤트 열쇠(`mission_track_event`)는 엔진 연결 때 아론 쪽 순서입니다(이올카 8장 7번).
+
+## 7. 리소스 세트 · 총 포즈 수량
+
+현중 15:33 「30명 다 하지 말고 5명만 하라고 5명이 랜덤하개 들어가게」, 15:34 실제 리소스는 3D이고 ComfyUI 2D는 개발 · 시뮬 확인용. 그래서 리소스를 (a) 1차 2D 리소스 세트 5개와 (b) 3D 실제 리소스로 나눕니다.
+
+### 7-1. 아이돌 1명이 여는 수 (보유 아이돌별, 그대로)
+
+| 구분 | 1명당 |
+|---|---|
+| 동작 종류(공용 목록) | 기본 대기 1 + 카드 12 + 포즈 미션 6 = **19종** |
+| 포즈 그림(대표 1 + 대기 1 + 카드 12 + 포즈 미션 6) | **20장** |
+
+- 해금 상태(카드 칸 owned · 포즈 미션 완료)는 **보유 아이돌마다** 따로입니다. 그림 · 포즈 · 모션 컷은 그 아이돌의 `resource_set_id` 세트를 읽습니다.
+
+### 7-2. (a) 1차 2D 리소스(개발 · 시뮬 확인용) — 세트 5개
+
+- 세트 = `character_master`의 아이돌 5명(어우동 · 논개 · 이날치 · 신사임당 · 황진이, `idol_sample_*`). 생산 위치 `산출/개발진행기획_v01/1차리소스_아이돌5/`, ComfyUI 워크플로 `workflow_api.json`.
+- **무작위 배정 규칙:** 30자리 어디서든 아이돌이 생성되면 `resource_set_id`를 5개 중 **같은 확률(각 1/5)**로 무작위로 정합니다. 30명 안 중복 허용. 동작 · 포즈 그림은 세트 단위로 같이 쓰고, 해금 상태는 보유 아이돌별입니다.
+- 초안 `character_resource_set_v01.csv`(5행) · `character_master_add_column_v01.csv`에 `resource_set_id` 열.
+
+| 구분 | 1세트 | × 5세트 | 합계 |
+|---|---|---|---|
+| 포즈 그림 `portrait_main` · `card_pose_00~12` · `bonus_pose_01~06` (768×1152) | 20 | 5 | **100장** |
+| 모션 연속 컷 `motion_2d`(첫 컷은 포즈 재사용, 512×768) | 30 | 5 | **150장** |
+| **아이돌 ComfyUI 생산** | **50** | 5 | **250장** |
+| 대표 10자리 대표 그림(스태프 6 · 기획사 3 · 팬회장 1, 세트와 별도 1장씩) | | 10 | 10장 |
+| **ComfyUI 생산 총합** | | | **260장** |
+| 썸네일 `portrait_thumb`(축소, 생산 아님) | 1 | 5 + 10 | 15장 |
+
+- 대표 10자리는 아이돌이 아니어서 5세트를 쓰지 않고 자기 대표 그림 1장씩(1차 2D)만 둡니다.
+
+| 용량(8장 규격 상한) | 계산 | 합계 |
+|---|---|---|
+| 1세트 | 대표 400 + 포즈 19 × 300 + 컷 30 × 150 + 썸네일 60 | 10,660KB ≈ 10.4MB |
+| 5세트 | 10,660 × 5 | 53,300KB ≈ 52.1MB |
+| 대표 10자리 | (400 + 60) × 10 | 4,600KB ≈ 4.5MB |
+| **전체** | | **57,900KB ≈ 56.5MB** |
+
+### 7-3. (b) 3D 실제 리소스
+
+- 실제 출시 리소스는 3D입니다. 실제 캐릭터마다 나중에 만들고, 만들어지면 `resource_variant`(`variant_type=anim_clip` · `model_path`)로 **같은 motion_id · 같은 슬롯**에 붙여 2D를 대신합니다. 동작 목록 · 해금 표 · 컷씬 데이터는 그대로 씁니다.
+- 3D 수량은 실제 캐릭터 수에 따라 정해지므로 이 기획서에서 용량을 계산하지 않습니다. 1명당 붙는 자리는 7-1과 같습니다(모델 1 + 애니 클립 19).
+
+## 8. 2D 그림 · ComfyUI 출력 규격 · 리소스 슬롯
+
+- 이 장의 규격은 **1차 2D 리소스(개발 · 시뮬 확인용)** 기준입니다. ComfyUI 생성 → 바탕 제거(투명) → 256색 양자화로 줄여 저장. 실존 인물 · 실존 IP를 닮지 않게(헌법 제9조). 한 아이돌 그림은 같은 캔버스 · 같은 바닥선.
+
+| slot_type | 대상 | 1명당 | 쓰는 곳 | 해금 | ComfyUI 출력 | 저장 크기 | 상한 |
+|---|---|---|---|---|---|---|---|
+| `portrait_main` | 아이돌 세트 5 · 대표 10자리 | 1 | 포토카드 목록 · 아이돌 능력 보기 머리 · 로비 | 처음부터 | 투명 PNG, 전신 개성 포즈, 생성 1024×1536 | 768×1152 | 400KB |
+| `portrait_thumb` | 아이돌 세트 5 · 대표 10자리 | 1 | 목록 칸 | 처음부터 | portrait_main 축소 | 256×384 | 60KB |
+| `card_pose_00` | 아이돌 세트 5 | 1 | 동작 보기 0칸 | 처음부터 | 기본 선 자세 | 768×1152 | 300KB |
+| `card_pose_01~12` | 아이돌 세트 5 | 12 | 카드 12칸 · 크게 보기 | 카드 첫 획득 | 해금 동작의 핵심 장면 | 768×1152 | 300KB |
+| `bonus_pose_01~06` | 아이돌 세트 5 | 6 | 보너스 칸 · 크게 보기 | 포즈 미션 완료 | 포즈 미션 보상 포즈 | 768×1152 | 300KB |
+| `motion_2d_{동작}` | 아이돌 세트 5 | 컷 수 | MV 컷씬 · 컷씬 · 로비 | 동작 해금 | 연속 컷, sort_order = 컷 번호 | 512×768 | 컷당 150KB |
+
+- `resource_link` 예(아이돌): `owner_table=character_resource_set` · `owner_id={resource_set_id}` · `slot_type=card_pose_03` · `sort_order=3`. 대표 10자리는 `owner_table=data/master/character_master.csv`.
+- 3D: `resource_variant` base(card_pose · bonus_pose · motion_2d 첫 컷) → `variant_type=anim_clip` → glb 클립 `anim_…`. 모델은 portrait_main → `model_path`. 3D 짝이 있으면 3D, 없으면 2D.
+
+## 9. 동작 보기 화면 (포토카드 탭 안)
+
+```mermaid
+flowchart TD
+  T["포토카드 탭"] --> L["보유 아이돌 목록<br/>대표 포즈 · 이름 · 해금 n/19"]
+  L --> D["아이돌 상세<br/>카드 12칸 + 보너스 6칸"]
+  D --> M["동작 보기<br/>0칸 대기 + 해금 포즈·동작"]
+  M --> B["크게 보기<br/>연속 컷 재생"]
+  M --> R["대표 포즈 지정"]
+  D --> A["아이돌 능력 보기 (10장)"]
+```
+
+| 단계 | 보이는 것 | 누르면 |
+|---|---|---|
+| 목록 | 아이돌 대표 포즈(투명) · 해금 수 n/19 (대표 10자리는 대표 그림 1장만, 동작 보기 없음) | 아이돌 상세 |
+| 카드 12칸 + 보너스 6칸 | 열린 칸 = 포즈 그림, 잠긴 칸 = 실루엣 + **얻는 곳 표시** | 열린 칸 → 크게 보기 |
+| 얻는 곳 표시 | unlock_source · source_ref를 읽어 한 줄: 카드 칸 「{카드 이름} 카드 획득」, 보너스 칸 「포즈 미션: {미션 조건}」(pose_mission_v01.csv mission_condition) + 미션 화면 바로가기 | 해당 콘텐츠로 이동 |
+| 동작 보기 | 해금 동작 목록(이름 · 급 · 표정 · 반복 여부) | 크게 보기 · 대표 포즈 지정 |
+| 크게 보기 | 2D 연속 컷(3D 짝이 있으면 3D) · 시작 → 끝 자세 | 다음 동작 미리보기 |
+| 대표 포즈 지정 | 열린 포즈 하나 선택 | 목록 · 능력 보기 머리 그림이 함께 바뀜 |
+
+## 10. 포토카드 ↔ 아이돌 능력 보기 연동
+
+- 아이돌 능력 보기 = 기존 `docs/planning/idol-growth-neuron.html` 「아이돌 개인 성장 · 3D 뉴런」의 「{이름} 개인 능력 보기」(P174 · P107). 화면 구조는 그대로 두고 입구 버튼과 키만 맞춥니다.
+- 두 화면은 **같은 `character_master_id` · 같은 보유 아이돌 행 · 같은 카드 칸 행**을 읽습니다(P107 「카드 결과는 같은 멤버 ID로 받는다」).
+
+```mermaid
+flowchart LR
+  K["character_master_id · 보유 아이돌 행"] --> P["포토카드<br/>목록 → 12칸 · 보너스 → 동작 보기"]
+  K --> A["아이돌 능력 보기<br/>6축 18세부 · 뉴런"]
+  P -- 능력 보기 --> A
+  A -- 카드 12칸 · 동작 보기 --> P
+  G["카드 획득"] --> C["카드 칸 owned=1"]
+  C --> U1["능력 갱신(12칸 덱 능력)"]
+  C --> U2["포즈 · 동작 해금"]
+  RW["포즈 미션 완료"] --> U2
+  U1 --> A
+  U2 --> P
+```
+
+| 흐름 | 순서 |
+|---|---|
+| 포토카드 → 능력 보기 | 아이돌 상세 「능력 보기」 → 같은 id로 능력 보기 |
+| 능력 보기 → 카드 12칸 · 동작 보기 | 능력 보기 머리 버튼 → 포토카드 같은 아이돌 상세 |
+| 카드 1장 획득 | ① 칸 owned=1 → ② 능력 갱신(P107) → ③ 같은 칸 포즈 · 동작 해금 → ④ 두 화면이 같은 행을 다시 읽어 새 해금 배지 |
+| 포즈 미션 완료 | 보너스 칸 해금만(능력은 바뀌지 않음) → 포토카드 배지 |
+
+- 화면 구조도까지만 정했고 실제 UI 제작 · 시뮬 부착은 하지 않았습니다.
+
+## 11. 무비 · MV 컷씬이 동작을 고르는 법
+
+- 주간 출품 = 음원 + 영상, 영상이 없으면 아이돌 이미지 자동 컷씬, 편집은 사진 컷씬 + 모션샷(R-06-12 · R-08-2). 월드는 외부 mp4 3분(R-08-19).
+- 자동 컷씬은 **출품 팀 멤버가 해금한 동작만** 씁니다.
+
+| 곡 구간 | 1순위 | 없으면 |
+|---|---|---|
+| 인트로 | idol_react_confident_wave · idol_idle_rhythm_step | idle_basic + 대표 포즈 |
+| 벌스 | idol_perform_live_sing · idol_idle_beat_nod | idol_idle_mic_ready |
+| 프리코러스 | idol_idle_rhythm_step · idol_perform_keyboard | idol_idle_mic_ready |
+| 코러스 · 킬링 파트 | idol_perform_killing_part | idol_idle_rhythm_step |
+| 브리지 | idol_react_touched · idol_react_laugh_clap | idol_idle_mirror_pose |
+| 엔딩 | idol_signature_ending | idol_perform_broadcast_heart → idol_idle_mirror_pose |
+| 사진 컷 사이 | 포즈 미션 보너스 포즈(트로피 · 깃발 · 투샷) | 대표 포즈 |
+
+- 이어 붙이기: 앞 동작 끝 자세 = 뒤 동작 시작 자세면 바로, 다르면 idle_basic 1컷 또는 컷 전환. 「다음 동작」 열이 1순위.
+- 박자: 연속 컷을 한 박자 또는 반 박자에 1장. 3D 교체 뒤에는 같은 motion_id의 `anim_…`을 같은 구간에 재생.
+
+## 12. 40자리 나눔 · 표 연결
+
+| 묶음 | 자리 | 카드 | 포즈 · 동작 | 근거 |
+|---|---|---|---|---|
+| 아이돌 | 30 | 30 × 12 = 360 | 대표 1 + 대기 1 + 카드 12 + 보너스 6(그림은 세트 5개 중 무작위) | 명세서 2-0 · 장부 D71 「아이돌 12종」 |
+| 스태프(아이돌 연계) | 6 | 6 × 12 = 72 | **대표 그림 1장만**(세트와 별도) | 장부 D71 「아이돌 연계 스태프 72종」 |
+| 기획사(순수) | 3 | 3 × 12 = 36 | **대표 그림 1장만** | 장부 D71 「순수 기획사 36종」 |
+| 팬회장 | 1 | 1 × 12 = 12 | **대표 그림 1장만** | 장부 D71 「팬클럽 회장 12종」 |
+
+- 스태프 · 기획사 → `character_master`: `character_type=staff/company` · `seat_group=staff_6/company_3` · 등급 → `staff_fixed_stat_{등급}`, 라포 → `staff_rapport_bonus`(staff_9). 초안 `character_master_staff_link_v01.csv`(9행).
+- 팬회장: 원본 표 없음 → 새 초안 `fan_leader_master_v01.csv`(등급 1~5, 고정 능력 = 비어 있음(0으로 동작), 해금 = 공식 데뷔).
+- 열 더하기 초안: `character_master_add_column_v01.csv`(character_type · seat_group · motion_set_id · card_deck_id · 대표 그림 슬롯 · 대기 슬롯).
+
+## 13. 카드 ID 규칙
+
+- (11/16 갱신) card_theme은 20테마에서 **11덱**(아이돌 1 · 스태프 6 · 순수 기획사 3 · 팬클럽 회장 1)으로 바꿉니다. 구조는 캐릭터 마스터 > 카드덱 > 카드 > 카드 줄이고, **덱 틀 ID**와 **보유 ID**를 나눕니다([P168 4-1a](콘텐츠별_v03/카드_기획서.html)).
+  - 덱 틀: `card_idol_01~12` · `card_staff_{자리}_01~12` · `card_fan_president_01~12` (`_연동준비_20261113/card.csv`와 같음)
+  - 보유: `{주인 character_master_id}_card_{01~12}` (예 `character_master_idol_sample_eoudong_card_03`). 아이돌은 그 아이돌 줄, 스태프 · 팬클럽 회장은 **자리** 줄이 주인입니다(인물이 바뀌어도 카드는 자리에 남음, R-05-8)
+  - 칸 번호 01~12 = `idol_growth_card_owned` C01~C12 = `card_pose_01~12`. 테마는 `card_theme_ref` 별도 열로 참조만.
+
+## 14. 뒷 수정 목록 (라이브는 이번에 고치지 않음)
+
+### 14-1. 별 배치를 확정 배치(★1 4 · ★2 3 · ★3 2 · ★4 2 · ★5 1)로
+| 표 | 지금 | 고칠 것 |
+|---|---|---|
+| `data/game/card.csv` (240행) | 20테마 모두 ★1 4 · ★2 4 · ★3 3 · ★4 1 (전체 1★ 80 · 2★ 80 · 3★ 60 · 4★ 20, ★5 0) | 테마 안 8번째 2 → 3, 10 · 11번째 3 → 4, 12번째 4 → 5. 또는 `_연동준비_20261113/card.csv`(이미 확정 배치)로 바꿔 넣기 |
+| `data/idol_ability_sim/idol_growth_card_owned.csv` (372행) | C01~C12 = ★1 4 · ★2 4 · ★3 3 · ★4 1 | C08 2 → 3, C10 · C11 3 → 4, C12 4 → 5 (후보마다 같은 줄) |
+
+- effect_amount는 별 배수(1 · 1.5 · 2 · 2.5 · 3)로 다시 계산해야 합니다(아론 · 비앙카).
+
+### 14-2. card.csv note 열 금지어
+- `data/game/card.csv` note 공통 문구 2종 안 금지어(「검수」 뒤에 「대기」가 붙은 표현) — **240행 중 240행**(합류 아이돌 전체 180 · 해당 아이돌만 60).
+
+### 14-3. 「카드」 탭 → 「포토카드」 바꿀 곳
+| 파일 | 줄 | 지금 | 바꿀 것 |
+|---|---|---|---|
+| `산출/제안서카드로비_기획서_v0.md` | 264 · 302 · 420 | 로비 메뉴 09 `cards` 「카드」 | 「포토카드」 · 보유 아이돌 → 12칸 |
+| `산출/제안서카피표_v1.md` | 14 | 「카드」 카피 | 「포토카드」 |
+| `산출/개발진행기획_v01/UX_v01/보드화면_전체UX_기획_v01.md` | 65 | 「카드 화면은 메뉴」 | 「포토카드 화면은 메뉴」 |
+| `산출/개발진행기획_v01/콘텐츠별_v03/카드_기획서.md`(P168) | 5 · 70 · 72 | 카드 탭 · 단계 덱 | 포토카드 탭 → 아이돌 → 12칸 · 해금 동작 |
+| `산출/전체기획서/01_개요시나리오_클로드.md` | 36 | 「카드 · 활성 40자리 × 12장」 | 「포토카드(카드 덱)」 |
+| `src/tools/balanceTool/main.ts` 38 · `src/tools/shared/music-reward-flow-presentation.json` 35 | | 툴 탭 · 보상 이름 | 게임 탭과 별개라 그대로 |
+
+## 15. 7007 기획서툴에서 404였던 이유
+
+- 7007은 `vite`(레포 루트가 root, `publicDir: data`)입니다. 레포 파일을 **경로 그대로** 내주고 루트에 `index.html`이 없어서 `http://127.0.0.1:7007/`는 404였습니다.
+- 기획서툴 입구는 `/docs/planning/planning-docs-tool.html`이고, 문서는 `data/planning_doc_catalog.csv`에 등록된 번호로 엽니다(`?face=shelf&doc={번호}`). 이 기획서는 11/14에 catalog P246으로 등록되어 `?face=shelf&doc=P246`으로 열립니다(짝 html도 같은 날 생성). md 파일 자체는 `/docs/planning/삼중AI_공용_20260929/산출/개발진행기획_v01/캐릭터_기본동작_모션목록_v01.md`(URL 인코딩)로 200이지만 글자 그대로 보입니다.
+- 처음 작성 때는 catalog에 등록하지 않아 캡처를 md → HTML 렌더로 찍었습니다.
+
+## 16. 초안 파일 (같은 폴더)
+
+| 파일 | 행 | 내용 |
+|---|---|---|
+| `character_motion_v01.csv` | 19 | 아이돌 동작 목록(기본 1 · 카드 12 · 보너스 6) |
+| `character_motion_unlock_v01.csv` | 19 | 해금 한 표(start · card · mission + source_ref · pose_mission_id) |
+| `character_master_add_column_v01.csv` | 7 | character_master 더할 열(resource_set_id 포함) |
+| `character_resource_set_v01.csv` | 5 | 1차 2D 리소스 세트 5개 · 무작위 배정 |
+| `character_resource_slot_v01.csv` | 6 | 2D 슬롯 · ComfyUI 규격 |
+| `character_master_staff_link_v01.csv` | 9 | 스태프 6 · 기획사 3 → 마스터 |
+| `fan_leader_master_v01.csv` | 5 | 팬회장 새 초안 |
+| `character_animator.csv` | 4 | 동작 묶음(17장): 아이돌 · 스태프 · 기획사 · 팬클럽 회장 |
+| `character_animator_state.csv` | 40 | 묶음 안의 동작(상태): 아이돌 19 + 대표 10자리 7 × 3 |
+| `character_animator_signal.csv` | 17 | 동작을 바꾸는 신호 |
+| `character_animator_transition.csv` | 122 | 동작 사이 연결선: 아이돌 86 + 대표 10자리 12 × 3 |
+| `character_motion_clip.csv` | 58 | 동작 × 2D/3D 실제 그림 자리 |
+| `character_motion_npc.csv` | 10 | 대표 10자리 동작 원본(17-5) |
+
+- (11/16) 위 표 가운데 동작 · 애니메이터 8개는 `data/master`에 같은 이름으로 올렸고(`_v01` 뺌), 이제 라이브 표가 기준입니다. 2D · 3D 리소스 표는 18장.
+
+## 17. 동작 연결 구조 (애니메이터 표)
+
+현중 11/15 「NPC의 동작은 애니메이터 연결과 같은 것 · 나중에 정식 리소스를 연결할 때 NPC가 하는 동작 · 그 구조를 테이블 데이터로 · 2D든 3D든 다 세팅할 수 있는 구조」. 4장 표에 글로 적혀 있던 「다음 동작」 · 「시작 자세 · 끝 자세」와 11장 곡 구간 표를 표 다섯 개로 나눕니다. 동작과 연결은 한 번만 정하고, 2D와 3D의 차이는 마지막 표(클립)에서만 갈립니다.
+
+```mermaid
+flowchart LR
+  AN["character_animator<br/>동작 묶음 4(인물 종류별)"] --> ST["character_animator_state<br/>동작 = 상태 40"]
+  SG["character_animator_signal<br/>신호 17"] --> TR["character_animator_transition<br/>연결선 122"]
+  ST --> TR
+  ST --> MO["character_motion<br/>동작 목록(4장)"]
+  MO --> CL["character_motion_clip<br/>동작 × 2D/3D"]
+  CL --> R2["2D: resource_link<br/>포즈 그림 · 연속 컷"]
+  CL --> R3["3D: resource_variant<br/>anim_clip"]
+  UL["character_motion_unlock<br/>해금(5장)"] --> ST
+```
+
+| 표 | 하는 일 | 애니메이터로 치면 | 행 |
+|---|---|---|---|
+| `character_animator` | 인물 종류별 동작 묶음과 기본 동작 | 컨트롤러 | 4 (아이돌 · 스태프 · 기획사 · 팬클럽 회장) |
+| `character_animator_state` | 묶음 안의 동작 하나하나. 반복 여부, 시작 · 끝 자세, 마지막 장 멈춤, 해금 줄 | 상태 | 40 |
+| `character_animator_signal` | 동작을 바꾸는 신호 | 파라미터 · 트리거 | 17 |
+| `character_animator_transition` | 어느 동작에서 어느 동작으로, 무슨 신호에, 몇 번째로, 어떻게 이어 붙일지 | 연결선 | 122 |
+| `character_motion_clip` | 동작 × 그리는 방식(2D · 3D) → 실제 그림 자리 | 클립 | 58 (동작 29 × 2) |
+
+### 17-1. 상태 (`character_animator_state`)
+
+- 아이돌 묶음은 동작 목록 19행과 1:1입니다(대표 10자리는 17-5). `state_kind`는 4장 분류(대기 idle · 리액션 react · 퍼포먼스 perform · 시그니처 signature · 보너스 포즈 bonus_pose).
+- 자세 열쇠는 4장 글을 그대로 옮긴 여덟 가지입니다.
+
+| 열쇠 | 4장 글 |
+|---|---|
+| `pose_stand_basic` | 기본 선 자세 |
+| `pose_mic_hold` | 마이크 든 자세 |
+| `pose_seated` | 앉은 자세 |
+| `pose_stage_start` | 무대 시작 자세 |
+| `pose_killing_end` | 킬링 파트 끝 자세 |
+| `pose_hold` | 포즈 유지 |
+| `pose_heart_hold` | 손하트 유지 |
+| `pose_ending_hold` | 엔딩 포즈 유지(마지막 장 정지) |
+
+- `hold_last_frame = 1`은 끝 자세가 「유지」인 동작입니다. `character_motion_unlock_id`로 그 동작이 열렸는지 봅니다.
+
+### 17-2. 신호 (`character_animator_signal`)
+
+| 신호 | 언제 | 근거 |
+|---|---|---|
+| `request` | 반복 동작에서 다음 동작으로 넘어갈 때 | 4장 「다음 동작」 |
+| `motion_end` | 반복하지 않는 동작이 끝나면 자동으로 | 4장 「반복」 · 「다음 동작」 |
+| `preview_play` | 포토카드 동작 보기에서 고른 동작을 재생 | 9장 |
+| `song_intro` · `song_verse` · `song_prechorus` · `song_chorus` · `song_bridge` · `song_ending` · `song_photo_gap` | 자동 컷씬이 곡 구간에 맞는 동작을 고를 때 | 11장 |
+
+| `dialogue_enter` · `dialogue_speak` · `dialogue_listen` | 대사창에서 그 인물이 등장하거나 말하거나 듣는 줄일 때(대표 10자리) | 17-5 · P239 |
+| `outcome_great` · `outcome_miss` | 칸 도착 판정이 대박 · 운망일 때 | 헌법 제6조 · 02장 |
+| `schedule_work` | 스케줄 스태프 자리 · 개인 레슨에 나가 있는 동안 | P241 · 05장 R-05-23 |
+| `stage_cheer` | 주간 · 월드 페스티벌 무대가 진행되는 동안 | 08장 |
+
+- 지금 표에는 이 기획서와 P239에 근거가 있는 신호만 넣었습니다. 보드 칸 도착 · 카드 획득 같은 게임 신호는 화면에 붙일 때 이 표에 줄을 더하고 연결선을 답니다.
+
+### 17-3. 연결선 (`character_animator_transition`)
+
+| 묶음 | 줄 | 만든 규칙 |
+|---|---|---|
+| 4장 「다음 동작」 | 47 | 반복 동작은 `request`, 1회 동작은 `motion_end`. 기본 대기는 「모든 동작」이라 나머지 18개로 모두 이어짐. 적힌 순서가 `priority` |
+| 11장 곡 구간 | 20 | `from_state_id = any`. 1순위 동작이 앞 번호, 「없으면」 동작이 뒤 번호 |
+| 9장 동작 보기 | 19 | `any` → 고른 동작 |
+| 17-5 대표 10자리 | 36 | 묶음 3개 × 12줄(동작 6개마다 들어가는 줄 1 + 기본 대기로 돌아가는 줄 1) |
+
+- `need_unlocked = 1`: 열리지 않은 동작으로 가는 줄은 건너뛰고 다음 `priority` 줄을 봅니다(11장 「출품 팀 멤버가 해금한 동작만」).
+- `join_mode`는 11장 이어 붙이기 규칙을 값으로 옮긴 것입니다.
+
+| 값 | 뜻 | 줄 |
+|---|---|---|
+| `direct` | 앞 동작 끝 자세 = 뒤 동작 시작 자세 → 바로 이어 붙임 | 41 |
+| `via_idle_cut` | 자세가 다름 → 기본 대기 1컷 또는 컷 전환을 사이에 둠 | 24 |
+| `by_pose` | 출발 동작이 정해지지 않은 줄(`any`). 그때의 끝 자세와 도착 동작의 시작 자세를 비교해 위 둘 중 하나로 정함 | 57 |
+
+### 17-4. 클립 (`character_motion_clip`)
+
+| 그리는 방식 | 그림 자리 | 길이 · 속도 | 지금 |
+|---|---|---|---|
+| `2d` | 첫 컷 = 포즈 그림(`card_pose_NN` · `bonus_pose_NN`), 이어지는 컷 = `motion_2d_{동작}` · 512×768 | 컷 수는 4장 「2D 표현」, 속도는 `beat`(한 박자 또는 반 박자에 1장) | 기본 대기와 카드 12칸의 첫 컷 샘플 그림 있음(13), 보너스 6칸은 그림 없음 |
+| `3d` | `anim_…` 클립 이름, `resource_variant`의 `anim_clip` | `clip_length`(클립 길이 그대로) | 리소스 없음. `fallback_render_kind = 2d`라 2D로 보여 줌 |
+
+- 3D 리소스가 나오면 이 표의 3D 줄에 `resource_ready = 1`만 바꾸고 `resource_variant`에 줄을 답니다. 상태 · 신호 · 연결선 · 해금 표는 그대로입니다.
+- 한 인물이 어느 리소스 세트를 쓰는지는 `character_master.resource_set_id`(7장)가 정하고, 클립은 세트 안의 자리 이름만 가리킵니다.
+
+### 17-5. 대표 10자리 묶음 (스태프 · 기획사 · 팬클럽 회장)
+
+현중 11/15 「응 만들어줘」 · 「스태프와 팬 동작 설정은 니가 결정해서 만들어」 · 「그림은 나중에 하고 구조만 만들어 놓고」. 11/14에는 포즈 · 동작을 아이돌에게만 두었고(1장 15:23), 대표 10자리는 대표 그림 1장뿐이었습니다. 연결 구조가 생겨 대표 10자리도 묶음을 하나씩 두고, 동작은 그 인물이 게임에서 하는 일에 맞춰 클로드가 정했습니다. 해금 없이 처음부터 씁니다. 그림은 아직 만들지 않고 자리만 둡니다.
+
+| 묶음 | 인물 | 동작(상태 7) |
+|---|---|---|
+| `character_animator_staff` | 스태프 6(보컬·랩 · 댄스 · 작곡 · 연기 · 스타일리스트 · 무대 디렉터) | 기본 대기 · 인사 · 말하기 · 끄덕이며 듣기 · 박수 칭찬 · 아쉬워하기 · **지도하기** |
+| `character_animator_company` | 기획사 3(매니지먼트 · 홍보 · 비즈니스) | 기본 대기 · 인사 · 말하기 · 끄덕이며 듣기 · 박수 칭찬 · 아쉬워하기 · **서류 살피기** |
+| `character_animator_fan_leader` | 팬클럽 회장 1 | 기본 대기 · 인사 · 말하기 · 끄덕이며 듣기 · **응원봉 흔들기** · **손하트** · **다독이는 응원** |
+
+| 동작 | 들어가는 신호 | 반복 | 누가 | 왜 이 동작인가 |
+|---|---|---|---|---|
+| 인사 | `dialogue_enter` 대사창에 처음 나옴 | 1회 | 셋 다 | 대사창에서 NPC가 말하는 쪽으로 나옴(P239 · `filler_scene_line`) |
+| 말하기 | `dialogue_speak` 말하는 줄 | 반복 | 셋 다 | 같음 |
+| 끄덕이며 듣기 | `dialogue_listen` 듣는 줄 | 반복 | 셋 다 | 대본에 듣는 쪽 칸(listener)이 있음 |
+| 박수 칭찬 | `outcome_great` 판정 대박 | 1회 | 스태프 · 기획사 | 칸 도착 판정(헌법 제6조)에 곁에 있는 사람의 반응 |
+| 아쉬워하기 | `outcome_miss` 판정 운망 | 1회 | 스태프 · 기획사 | 같음 |
+| 지도하기 | `schedule_work` 스케줄 스태프 자리 | 반복 | 스태프 | 스케줄 스태프 1칸 · 개인 레슨(P241 · 05장 R-05-23) |
+| 서류 살피기 | `schedule_work` | 반복 | 기획사 | 같은 신호에 인물 종류만 다른 동작 |
+| 응원봉 흔들기 | `stage_cheer` 주간 · 월드 무대 | 반복 | 팬클럽 회장 | 무대를 보는 팬의 대표(08장) |
+| 손하트 | `outcome_great` | 1회 | 팬클럽 회장 | 같은 신호에 팬 쪽 반응 |
+| 다독이는 응원 | `outcome_miss` | 1회 | 팬클럽 회장 | 같은 신호에 팬 쪽 반응 |
+
+- 같은 신호(`outcome_great` · `schedule_work`)가 묶음마다 다른 동작으로 이어지는 것이 이 구조의 쓰임새입니다. 게임은 신호만 보내고, 누가 무슨 동작을 할지는 표가 정합니다.
+- 모든 동작은 끝나면 기본 대기로 돌아갑니다(1회 동작은 `motion_end`, 반복 동작은 `request`). 연결선은 묶음마다 12줄입니다.
+- 동작 원본은 `character_motion_npc.csv`(10행)이고, 어느 묶음이 쓰는지(`use_group`) · 들어가는 신호(`enter_signal`) · 다음 동작이 한 줄에 있습니다. 아이돌 동작 표(19행)와 해금 표(19행)의 행 수는 그대로입니다.
+- 그림: 첫 컷 자리는 대표 그림(`portrait_main`), 컷 수는 비어 있음(0으로 동작), 클립 표의 `resource_ready`는 모두 0입니다. 그림은 나중에 만듭니다.
+
+### 17-6. 옮긴 것 · 그대로 둔 것
+
+| 4장 · 11장의 칸 | 옮겨 간 표 |
+|---|---|
+| 반복 | `character_animator_state.loop` |
+| 시작 자세 · 끝 자세 | `character_animator_state.start_pose` · `end_pose` · `hold_last_frame` |
+| 다음 동작(전환 기준) | `character_animator_transition` (신호 `request` · `motion_end`) |
+| 11장 곡 구간 표 | `character_animator_transition` (신호 `song_*`) |
+| 2D 표현 · 3D 교체 애니 | `character_motion_clip` |
+| 얻는 곳 · 별 · 비중 | 그대로 `character_motion_unlock`(5장) |
+
+- 초안 표는 스크립트 `_작업/claude/20261115_애니메이터표/build.py`가 `character_motion_v01.csv` · `character_motion_unlock_v01.csv`에서 만들어 냅니다. 동작이 늘면 두 표를 고치고 다시 돌립니다.
+- (11/16) 아래 방법대로 8개 표를 `data/master`에 올렸습니다(18장). 라이브로 갈 때: 표 이름 그대로 `data/master`에 두고 `schema_table` · `schema_column`에 등록, `state_kind` · `signal_kind` · `join_mode` · `render_kind` · `timing_rule` 값은 `enum_value`에 먼저 넣습니다. 지금은 산출 폴더 초안이며 라이브 표 · 코드는 바꾸지 않았습니다.
+
+## 18. 2D · 3D 리소스 표 (라이브)
+
+현중 11/16 「리소스는 3d 와 2d 리소스 둘다 추가해놔」 · 「2d 리소스 테이블과 3d 리소스 테이블을 만들고 2d 리소스는 우리 지금 만들어 놓은거 추가하고 3d 리소스 테이블은 나중을 위해 … 애니메이터 중심의 리소스 테이블로」. 7장(2D 세트 · 3D 교체) · 8장(2D 슬롯) · 17장(애니메이터)을 실제 표로 옮깁니다. 17장 초안 8개도 같은 이름으로 `data/master`에 올립니다.
+
+```mermaid
+flowchart LR
+  CM["character_master<br/>character_type · seat_group · card_deck_id"] -->|character_animator_id| AN["character_animator<br/>동작 묶음"]
+  AN --> ST["character_animator_state<br/>동작(상태)"]
+  CM -->|resource_2d_set_id| R2["character_resource_2d<br/>만든 그림 한 장 = 한 줄"]
+  CM -->|resource_3d_set_id| M3["character_resource_3d_model<br/>모델 · 뼈대"]
+  M3 --> C3["character_resource_3d_clip<br/>세트 × 동작 = 클립"]
+  ST --> C3
+  C3 --> E3["character_resource_3d_event<br/>클립 안 타이밍"]
+  M3 --> F3["character_resource_3d_face<br/>표정(모프)"]
+  M3 --> A3["character_resource_3d_attach<br/>손에 드는 소품"]
+```
+
+### 18-1. 캐릭터 마스터에 더한 열
+
+| 열 | 값 | 쓰임 |
+|---|---|---|
+| `seat_group` | idol_30 · staff_6 · company_3 · fan_leader_1 | 40자리 어느 묶음인지 |
+| `card_deck_id` | card_theme_idol · card_theme_staff_{자리} · card_theme_fan_president | 그 자리 카드덱(카드 기획서 4-1a). card_theme 11덱 교체 전이라 아직 표 연결 검사는 걸지 않음 |
+| `character_animator_id` | character_animator_idol · staff · company · fan_leader | 동작 묶음(17장) |
+| `resource_2d_set_id` | 아이돌 5세트 `character_resource_2d_set_{이름}` | 2D 그림 묶음. 대표 10자리는 그림이 없어 비어 있음 |
+| `resource_3d_set_id` | 비어 있음 | 3D 실제 리소스가 들어오면 채움. 비어 있으면 2D로 보여 줌(8장) |
+
+- `character_type` 옵션값에 staff · company · fan_leader를 더했습니다. 대표 10자리(스태프 6 · 기획사 3 · 팬클럽 회장 1)는 **자리 틀** 줄 10개이고, 섭외된 실제 인물은 저장에 들어갑니다.
+
+### 18-2. 2D 리소스 표 `character_resource_2d`
+
+- 지금 만들어 둔 1차 2D 그림(`1차리소스_아이돌5`) 5세트 × 15장 = **75줄**. 한 장 = 한 줄이고, 크기 · 용량은 실제 파일을 재서 적었습니다.
+- 슬롯: `portrait_main` 1 · `portrait_thumb` 1 · `card_pose` 0~12(13장). 보너스 포즈 6 · 연속 컷 · 대표 10자리 대표 그림은 아직 만들지 않아 줄이 없습니다.
+- 카드 포즈 실제 크기는 384×576으로, 8장 규격(768×1152)의 절반입니다.
+
+### 18-3. 3D 리소스 표 (애니메이터 중심)
+
+3D는 **동작(애니메이터 상태)마다 어느 클립을 어떻게 트는지**를 중심에 둡니다. 게임은 신호만 보내고(17장), 상태가 정해지면 그 인물의 3D 세트에서 그 상태의 클립 줄을 찾아 틉니다. 줄이 없거나 `resource_ready = 0`이면 2D로 보여 줍니다.
+
+| 표 | 한 줄 | 주요 열 | 애니메이터로 치면 |
+|---|---|---|---|
+| `character_resource_3d_model` | 3D 세트 하나의 모델 | 모델 파일 · 뼈대 종류(humanoid · generic) · 뼈 수 · 기준 뼈(root · hips · head · 양손) · 표정 수 · 크기 · 바닥 높이 | 모델 + 아바타 |
+| `character_resource_3d_clip` | 세트 × 동작 상태 | 클립 이름 · 층(body 몸 · face 얼굴) · 길이 · 반복 · 제자리 여부(root_motion) · 속도 · 섞어 들어가기 · 나가기 시간 · 박자 맞춤 | 상태에 붙는 클립 + 전환 시간 |
+| `character_resource_3d_event` | 클립 안의 한 순간 | 0~1 위치 · 종류(소리 · 효과 · 박자 · 소품 보이기) · 대상 | 애니메이션 이벤트 |
+| `character_resource_3d_face` | 모델의 표정 하나 | 모프 이름 · 표정 종류(눈 감기 · 찡그림 …) · 켜는 클립 | 블렌드셰이프 |
+| `character_resource_3d_attach` | 손에 드는 소품 하나 | 붙는 뼈 · 소품 종류(마이크 · 응원봉 · 서류) · 파일 · 보이는 동작 | 소켓 · 소품 |
+
+- 조사 근거: glTF 2.0(모델 · 스킨 뼈대 · 애니메이션 · 모프 타깃) · three.js 애니메이션 믹서(클립 재생 · 섞어 넘기기 · 반복) · 게임 엔진 애니메이터의 상태 · 전환 시간 · 이벤트 · 층 · 소켓 개념. 전환 순서와 신호는 17장 표가 이미 맡으므로 3D 표에는 **클립 자체의 재생 값**만 둡니다.
+- 지금 들어 있는 3D: 프로젝트 안 실제 3D 인물 **루온 · 리아**(정화 숲, `event/concertRoulette/assets/characters/xoox09/`) 2개를 **참고 줄**로 재서 넣었습니다(모델 2 · 클립 36 · 표정 4). 뼈 46 · 48개, 클립 18개(idle 6.00초 · bow 2.80초 · wave 3.20초 · victory 3.20초 등), 표정 Blink · Squint. 어느 캐릭터 · 동작 상태에도 연결하지 않았습니다(`resource_ready = 0`).
+- 이벤트 · 소품 표는 머리줄만 있습니다. 섞기 시간 · 크기 · 바닥 높이 같은 값은 비어 있음(0으로 동작)입니다.
+- 3D가 들어오면: 모델 1줄 → 그 캐릭터 종류 동작 묶음의 상태 수만큼 클립 줄(아이돌 19 · 대표 10자리 7) → 캐릭터 마스터 `resource_3d_set_id` 채움 → 확인되면 `resource_ready = 1`. 동작 · 신호 · 연결선 · 해금 표는 그대로입니다.
+
+<details><summary>작업 기록</summary>
+
+- 2026-11-15 클로드 · 현중 11/15 직접 지시(동작 연결 구조를 테이블 데이터로 · 대표 10자리 묶음 「응 만들어줘」). 17장 추가(17-5 대표 10자리 · 동작 설정은 현중 「니가 결정해서 만들어」 · 「그림은 나중에 하고 구조만」), 16장 표에 5줄, 15장의 catalog 문장을 등록 뒤 사실로 고침, 「보는 법」에 17장. 1~14장 본문과 기존 초안 CSV 8개는 고치지 않음. 백업 `docs/planning/_backup/20261115_클로드/0800_동작연결_애니메이터표/`.
+- 읽은 원본: 이 문서 4 · 5 · 7 · 8 · 9 · 11장, `character_motion_v01.csv`, `character_motion_unlock_v01.csv`, `data/mons_proto/mons_animation.csv`(열 모양 참고), `data/master/resource_link.csv` · `resource_variant.csv` 머리줄.
+
+</details>

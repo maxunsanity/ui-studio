@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko" data-planning-document="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P211 · 팬덤 게이지 · 대표 개발 기획서</title><link rel="stylesheet" href="../작성기준_v02/format.css"><link rel="stylesheet" href="../작성기준_v02/sample-document.css"><link rel="stylesheet" href="./리소스/핵심제안_시뮬_20261102/sim.css"><style>.sample-document :target{scroll-margin-top:132px}.sample-document header .actions{flex-wrap:wrap}.sample-document header p{font-size:14px}.doc-ui-section{margin-top:42px;padding-top:24px;border-top:2px solid #c8dcd5}.doc-ui-section>h3{margin:0 0 10px;font-size:23px;color:#2c5659}.doc-ui-section>p{font-size:14px}.doc-ui-section details{padding:0;margin:16px 0;border:1px solid #c9dcd4;border-radius:16px;overflow:hidden;background:#f4f8f2}.doc-ui-section summary{cursor:pointer;min-height:58px;padding:16px 18px;font-weight:700;color:#315e5c;list-style:none}.doc-ui-section summary:after{content:"+";float:right;font-size:20px}.doc-ui-section details[open]>summary:after{content:"−"}.doc-ui-section summary::-webkit-details-marker{display:none}.doc-ui-section [data-sim-host]{padding:0 18px 18px;min-width:0}.doc-key{margin:18px 0;padding:16px 20px;border-left:6px solid #2f7f86;background:#eef6f5;border-radius:12px;font-size:16px;line-height:1.8}.doc-key b{color:#1f4f55}@media(max-width:680px){.sample-document :target{scroll-margin-top:18px}}</style><script type="module" src="./리소스/핵심제안_시뮬_20261102/gauge.mjs"></script></head><body class="sample-document"><main><header><div class="eyebrow">P211 · 핵심제안 개발 · 대표 개발 기획서</div><h1>팬덤 게이지 · 대표 개발 기획서</h1><p>팬은 시설 · 능력으로 생기고, 곡 · 페스티벌은 등급을 올립니다. <a href="#sim-preview">하단 시뮬레이터</a>로 막대가 어떻게 변하는지 봅니다.</p><div class="actions"><a href="./팬덤게이지_핵심제안서.md">짝 MD로 읽기</a><a href="../../기획서/산출_기획서_팬덤게이지_보완판_v1_클로드.html">상세 정본 · 책갈피 P196</a><a href="/docs/planning/proposal-concept/gauge.html" target="_blank" rel="noopener">제안서 원문</a><a href="#sim-preview">팬덤 게이지 시뮬레이터</a></div></header><nav class="local-nav" aria-label="기획서 7장"><a href="#part-1">1. 개요</a><a href="#part-2">2. 필요 관련 시스템 기획서</a><a href="#part-3">3. 구동 방법·시뮬레이션</a><a href="#part-4">4. 상세 기획</a><a href="#part-5">5. 필요 리소스·이미지 설명</a><a href="#part-6">6. 관련 CSV·테이블 데이터</a><a href="#part-7">7. 개발 진행·검수</a></nav>
+<p><b>이 문서는</b> 팬의 생김·바뀜·옮김과 한 막대 표시의 제안을 정리하고, 문서 표시 시안·공통 팬 코드·남은 연결을 구분하는 대표 개발 기획서입니다.</p>
+
+<p><b>보는 법</b> 1장 그림 → 4장 「한 판 순서」 → 하단 「팬덤 게이지 시뮬레이터」 순서로 읽습니다. 세부 제안과 근거는 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%8C%AC%EB%8D%A4%EA%B2%8C%EC%9D%B4%EC%A7%80_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%8C%AC%EB%8D%A4%EA%B2%8C%EC%9D%B4%EC%A7%80_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P196 팬덤 게이지 보완판</a>에 있습니다.</p>
+
+<p><b>지금 상태</b> 문서 표시 시안과 공통 팬 계산·세 활성층 HUD 표시 코드가 있습니다. 전용 눈금·악개·지역 표시의 연결과 실제 게임·저장은 검수 대기입니다.</p>
+
+<section class="part" id="part-1"><h2>1. 개요</h2>
+
+<p>출처: (합침) 제안서 <a href="/docs/planning/proposal-concept/gauge.html" data-paper-path="docs/planning/proposal-concept/gauge.html">팬덤 게이지</a> · 책갈피 <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%8C%AC%EB%8D%A4%EA%B2%8C%EC%9D%B4%EC%A7%80_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%8C%AC%EB%8D%A4%EA%B2%8C%EC%9D%B4%EC%A7%80_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P196 팬덤 게이지 보완판</a> · 현중 11/01~11/02 지시</p>
+
+<div class="doc-key"><b>핵심</b> 아래는 P196의 제안 방향(검수 대기)입니다. 팬이 <b>생기는</b> 길은 시설과 능력뿐입니다(10/04 원칙). 곡 · 피드 · 페스티벌은 새 팬을 만들지 않고 <b>머글 → 라이트 전환과 등급 올리기</b>만 합니다. 게이지는 이 결과를 등급 색으로 쌓은 한 막대입니다.</div>
+
+
+
+<figure class="doc-diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 666 188" width="666" height="188" role="img" aria-labelledby="title-P211-0"><title id="title-P211-0">설명 흐름도 P211-0</title><defs><marker id="arrow-P211-0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#407e87"/></marker></defs><path d="M198,50 L220.5,50 L243,50" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P211-0)"/><path d="M198,138 L220.5,138 L243,138" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P211-0)"/><path d="M423,50 L445.5,50 L476.1818181818182,62" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P211-0)"/><path d="M423,138 L445.5,138 L476.1818181818182,126" fill="none" stroke="#407e87" stroke-width="2" marker-end="url(#arrow-P211-0)"/><rect x="18" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">시설 · 능력 성장</tspan></text><rect x="243" y="18" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="55" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">팬 생김</tspan></text><rect x="18" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="108" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="108" dy="0">곡 · 피드 · 페스티벌</tspan></text><rect x="243" y="106" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="333" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="333" dy="0">등급 올림</tspan></text><rect x="468" y="62" width="180" height="64" rx="12" fill="#e9f3f1" stroke="#98c3c5"/><text x="558" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#203f4a"><tspan x="558" dy="0">팬덤 게이지 · 한 막대</tspan></text></svg><figcaption>화살표 순서로 읽어 주세요. 갈림길의 글자는 다음 단계로 넘어가는 조건입니다.</figcaption><p class="diagram-text">시설 · 능력 성장 → 팬 생김 / 곡 · 피드 · 페스티벌 → 등급 올림 / 팬 생김 → 팬덤 게이지 · 한 막대 / 등급 올림 → 팬덤 게이지 · 한 막대</p></figure>
+
+
+
+<h3 id="콘텐츠-경계">콘텐츠 경계</h3>
+
+<ul>
+<li>맡는 것: 팬 생김 · 등급 바뀜 · 옮김 세 길 · 게이지 모양 · 마일스톤 눈금.</li>
+<li>다른 문서에 맡기는 것: 팬 수익 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%8F%84%EC%8B%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EB%8F%84%EC%8B%9C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P213 도시</a> · 게릴라 팬 이동 → <a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B2%8C%EB%A6%B4%EB%9D%BC%EA%B3%B5%EC%97%B0_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EA%B2%8C%EB%A6%B4%EB%9D%BC%EA%B3%B5%EC%97%B0_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P220 게릴라 공연</a>.</li>
+</ul>
+
+<h3 id="현재-기준과-목표">현재 기준과 목표</h3>
+
+<p>다음 표는 P196의 제안 방향입니다. 현재 원표·공통 코드의 세 활성층과 같은 운영판으로 합치지 않습니다.</p>
+
+<div class="table-scroll"><table><thead><tr><th>길</th><th>무엇이</th><th>결과</th></tr></thead><tbody><tr><td>생김</td><td>시설 단계 · 능력 상승</td><td>머글 인원에서 새 팬</td></tr><tr><td>바뀜</td><td>곡 · 피드 · 페스티벌 · 투표</td><td>라이트 → 팬 → 코어 → 콘크리트</td></tr><tr><td>옮김</td><td>게릴라 공연</td><td>라이트 · 코어만 이동(콘크리트는 안 옮김)</td></tr></tbody></table></div>
+
+<ul>
+<li>P196은 본진 팬과 지역 현지 팬을 따로 세고, 지금 있는 곳의 팬을 보여 주는 방향을 제안합니다. 지역별 실제 연결은 미확인입니다.</li>
+<li>P196은 악개를 수익에서 빼고 빨간 줄로 따로 표시하는 방향을 제안합니다. 현재 원표의 수익 입력·팬 합과는 차이가 있어 정책 확인 대기입니다.</li>
+</ul>
+
+<p>P196에는 시설·능력만 생김이라는 설명과, 건물 도착·피드 찜(P10 후보)을 생김에 넣은 분류가 함께 있습니다. P11·P12도 후보이며, 생김·전환 용어와 후보 범위는 정합 확인 대기입니다. 현재 코드만으로 원정책을 결정하지 않습니다.</p>
+
+</section><section class="part" id="part-2"><h2>2. 필요 관련 시스템 기획서</h2>
+
+<div class="table-scroll"><table><thead><tr><th>문서</th><th>이 콘텐츠에서의 역할</th><th>의존 방향</th></tr></thead><tbody><tr><td>제안서 원문 <a href="/docs/planning/proposal-concept/gauge.html" data-paper-path="docs/planning/proposal-concept/gauge.html">팬덤 게이지</a></td><td>기준</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%8C%AC%EB%8D%A4%EA%B2%8C%EC%9D%B4%EC%A7%80_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B8%B0%ED%9A%8D%EC%84%9C/%EC%82%B0%EC%B6%9C_%EA%B8%B0%ED%9A%8D%EC%84%9C_%ED%8C%AC%EB%8D%A4%EA%B2%8C%EC%9D%B4%EC%A7%80_%EB%B3%B4%EC%99%84%ED%8C%90_v1_%ED%81%B4%EB%A1%9C%EB%93%9C.html">P196 팬덤 게이지 보완판</a></td><td>상세 결정안(제안 · 검수 대기 · 근거 · 조사)</td><td>입력</td></tr><tr><td>P108 팬과 수익(핵심제안 개발 8번)</td><td>팬 사다리 · 수익 곡선</td><td>입력</td></tr><tr><td><a href="/docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html" data-paper-path="docs/planning/%EC%82%BC%EC%A4%91AI_%EA%B3%B5%EC%9A%A9_20260929/%EC%82%B0%EC%B6%9C/%EA%B0%9C%EB%B0%9C%EC%A7%84%ED%96%89%EA%B8%B0%ED%9A%8D_v01/%EC%BD%98%ED%85%90%EC%B8%A0%EB%B3%84_v03/%EC%9B%94%EB%93%9C%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%95%B5%EC%8B%AC%EC%A0%9C%EC%95%88%EC%84%9C.html">P207 월드 페스티벌</a></td><td>등급 전환 보상</td><td>입력</td></tr></tbody></table></div>
+
+</section><section class="part" id="part-3"><h2>3. 구동 방법·시뮬레이션</h2>
+
+<p>화면 흐름: 보드 · 시설 → HUD 팬덤 게이지 → 마일스톤 보상 · 스샷 미완 · 이식 비교 해당 없음</p>
+
+<ul>
+<li>공통 코드: 팬 계산·세 활성층 HUD·마일스톤 수령 계산 경로가 있습니다. 이 문서의 전용 표시·보상 화면과 상위 게임 진입의 직접 연결은 미확인입니다.</li>
+<li>문서 시안: 팬덤 게이지 시뮬레이터는 시설·능력의 팬 생김과 피드·페스티벌의 등급 바뀜을 별도 메모리로 보여 줍니다. 인원·비율은 임시이며, 원표·게임 지갑·상대 팬 기록과 연결되지 않습니다.</li>
+<li>조회·저장: 현재팀 조회는 읽기 전용입니다. 공통 팬 계산의 writer는 선택한 로컬 저장 공간과 테스트 scope 조건에 따라 팬 기록에 닿을 수 있습니다. 이 문서 시안의 메모리와 같은 저장 방식이 아니며, 실제 저장 성공은 미검수입니다.</li>
+</ul>
+
+</section><section class="part" id="part-4"><h2>4. 상세 기획</h2>
+
+<h3 id="한-판-순서-임시-시안">한 판 순서 (임시 시안)</h3>
+
+<div class="table-scroll"><table><thead><tr><th>점검</th><th>내용</th></tr></thead><tbody><tr><td>시작·종료</td><td>게이지는 늘 HUD에 있음</td></tr><tr><td>입력·출력</td><td>입력 = 시설 · 능력 · 곡 · 페스티벌 / 출력 = 등급별 팬 수 · 눈금 보상</td></tr><tr><td>상태와 전이</td><td>팬 생김 · 바뀜 · 옮김</td></tr><tr><td>판정</td><td>생김은 머글 인원 안에서만</td></tr><tr><td>오류·예외</td><td>팬이 0이면 빈 막대 · 악개는 따로</td></tr><tr><td>저장·복원</td><td>팬 수는 시즌 범위(시즌 끝 리셋)</td></tr><tr><td>다른 모듈 연결</td><td>시설 · 능력 · 피드 · 게릴라 · 페스티벌</td></tr></tbody></table></div>
+
+<p>한 판 표의 상시 HUD·시즌 리셋·지역 연결은 기존 기획 범위입니다. 이번 대조로 실제 적용이나 최신 시즌 정책을 확정하지 않습니다. 실제 팬이 없는 상태와 팬 값 미공급은 구분해 검수해야 합니다.</p>
+
+<h3 id="게이지-모양-임시-시안">게이지 모양 (임시 시안)</h3>
+
+<p>한 막대를 등급 색(라이트 · 팬 · 코어 · 콘크리트)으로 쌓고, 막대 위 눈금 = 마일스톤 단(기존 8단 시안). 사람 수가 많아지면 무리 단위(1 → 10 → 100 …)로 바꿔 그립니다.</p>
+
+<p>위 네 층은 P196·문서 시안의 제안입니다. 현재 <code>fan_tier</code> 원표의 별도 팬 층은 라이트로 합침/removed이고, 공통 HUD는 라이트·코어·콘크리트만 합합니다. 원문의 여덟 단계 문턱과 현재 보상 그룹, 문서 시안의 다섯 후보 눈금은 서로 다른 자료입니다. 현재 보상 항목은 보상 마스터를 읽으며, 원 제안의 옛 금액을 현재 지급값으로 사용하지 않습니다.</p>
+
+<h3 id="필요-시스템">필요 시스템</h3>
+
+<p>팬 생김 · 등급 전환 · 이동 계산 · 게이지 그리기 · 마일스톤 보상.</p>
+
+<h3 id="화면연출-목록">화면·연출 목록</h3>
+
+<p>HUD 게이지 · 마일스톤 보상 팝업 · 도시 군중.</p>
+
+<h3 id="남은-결정">남은 결정</h3>
+
+<ul>
+<li>원인 건물 가중 비율 · 무리 단위 상한 — 발란스 · 개발</li>
+</ul>
+
+<p>원인 건물 가중 배정은 P196의 제안이며 비율은 발란스 대기입니다. 현재 배정 함수는 호출 자리가 있어도 건물별 팬을 쓰는 기능은 비어 있습니다. 도착·잭팟 팬 계수도 빈칸이며, 코드의 추가항 없음 처리는 계수를 최종 0으로 정한 뜻이 아닙니다. 머글 인구와 화면 군중 상한도 값 대기입니다.</p>
+
+</section><section class="part" id="part-5"><h2>5. 필요 리소스·이미지 설명</h2>
+
+<div class="table-scroll"><table><thead><tr><th>미리보기</th><th>이름·사용 위치</th><th>동작·상태</th><th>파일·테이블 키</th><th>출처·준비 상태</th></tr></thead><tbody><tr><td>공통 코드 있음</td><td>HUD 팬덤 게이지</td><td>등급 색 쌓기 · 전용 눈금 연결 미확인</td><td>fan_milestone_reward</td><td>전용 연결·실제 검수 대기</td></tr><tr><td><a href="#sim-preview">하단 시뮬레이터</a></td><td>팬덤 게이지 시뮬레이터</td><td>팬 생김 · 등급 올림</td><td>핵심제안_시뮬_20261102/gauge.mjs</td><td>시안 있음</td></tr></tbody></table></div>
+
+<h3 id="추가-제작연출-리소스">추가 제작·연출 리소스</h3>
+
+<p>도시 군중(사람 무리) 그림은 기존 도시 연출을 씁니다.</p>
+
+<p>별도 설명 도구에는 압축 무리를 그리는 코드가 있습니다. 이 문서의 도시 군중·성능 상한과 게임 연결은 실제 검수 전이며, 기존 도시 연출을 쓴다는 방향만으로 완성으로 보지 않습니다.</p>
+
+</section><section class="part" id="part-6"><h2>6. 관련 CSV·테이블 데이터</h2>
+
+<div class="table-scroll"><table><thead><tr><th>파일·보기</th><th>역할</th><th>주키·참조</th><th>값</th><th>담당</th></tr></thead><tbody><tr><td><code>data/fan_tier/fan_tier.csv</code></td><td>팬 층 이름·분류</td><td><code>fan_tier_id</code></td><td>임시값 · removed 층 구분</td><td>팬 담당</td></tr><tr><td><code>data/fan_tier/fan_ladder_path.csv</code></td><td>팬 전환 경로·후보 구분</td><td><code>fan_ladder_path_id</code> · <code>from_tier</code> · <code>to_tier</code></td><td>기존 경로 · 후보/값 대기 구분</td><td>팬 담당</td></tr><tr><td><code>data/fan_tier/fan_population.csv</code></td><td>머글 인구 입력</td><td><code>fan_population_id</code></td><td>값 빈칸 · 입력 대기</td><td>팬 담당</td></tr><tr><td><code>data/game/fan_milestone_reward.csv</code></td><td>마일스톤 문턱 · 기존 8단 시안</td><td><code>fan_milestone_reward_id</code></td><td>임시 문턱 · 보상 항목은 마스터 조회</td><td>발란스</td></tr><tr><td><code>data/master/reward_group.csv</code> · <code>data/master/reward_group_entry.csv</code></td><td>보상 묶음·항목 조회</td><td>묶음 <code>reward_group_id</code> · 항목 <code>reward_group_entry_id</code> · 항목의 <code>reward_group_id</code>로 연결</td><td>현재 임시 항목 · 운영 지급 미검수</td><td>발란스</td></tr><tr><td><code>data/fan_tier/building_fan_assign.csv</code> · <code>data/fan_tier/fan_income_modifier.csv</code></td><td>건물팬 배정·수익 계수</td><td><code>building_fan_assign_id</code> · <code>fan_income_modifier_id</code> · <code>fac_id</code> · <code>tier_id</code></td><td>배정·계수 값 대기</td><td>발란스</td></tr></tbody></table></div>
+
+<p>마일스톤 팬 기준은 <code>data/game/economy_config.csv</code>의 <code>milestone_fan_cap</code>을 읽습니다. 팬 인구·화면 객체 상한과 용도가 다릅니다. 파일과 계산 경로가 있다는 설명은 표 전체 검증이나 운영 수치 승인을 뜻하지 않습니다.</p>
+
+<p>주사위 환산: 해당 없음.</p>
+
+</section><section class="part" id="part-7"><h2>7. 개발 진행·검수</h2>
+
+<div class="table-scroll"><table><thead><tr><th>요소</th><th>상태</th><th>확인 방법·증거</th><th>다음 작업</th></tr></thead><tbody><tr><td>기획(이 문서 · 책갈피 상세)</td><td>제안 · 정합/정책 확인 대기</td><td>P196 · 이 문서</td><td>생김/전환·후보·악개 범위 확인</td></tr><tr><td>팬덤 게이지 시뮬레이터</td><td>문서 표시 시안 있음 · 메모리</td><td>핵심제안_시뮬_20261102/gauge.mjs</td><td>원표·실제 팬 기록과 구분</td></tr><tr><td>공통 팬 계산 · HUD</td><td>코드 경로 있음 · 실구동 미검수</td><td>세 활성층 표시 · 조건부 로컬 writer</td><td>전용 표시·상위 연결 검수</td></tr><tr><td>마일스톤</td><td>원표·수령 계산 있음</td><td>문턱 · 현재 보상 그룹</td><td>보상 화면·실제 수령/저장 검수</td></tr><tr><td>건물팬 배정 · 수익 보정</td><td>배정·계수 값 대기</td><td>배정 placeholder · 계수 빈칸</td><td>기획 정합·발란스 대기</td></tr><tr><td>게임 시뮬레이터 모듈 · 본게임</td><td>전용 통합·운영 검수 대기</td><td>현재팀 조회는 읽기 전용</td><td>별도 실화면·저장 검수</td></tr></tbody></table></div>
+
+<h3 id="수락-기준">수락 기준</h3>
+
+<p>다음 문장은 기존 제안의 검수 목표입니다. 생김·전환 및 악개 범위는 앞의 확인 대기를 함께 읽습니다. 실제 팬 0명과 미공급, 전용 마일스톤·도시 군중·실제 저장과 상위 게임 연결은 이번 문서 대조만으로 정상이라고 판정하지 않았습니다.</p>
+
+<p>곡 · 피드 · 페스티벌이 새 팬을 만들지 않고 등급만 바꿔야 합니다. 콘크리트 팬은 게릴라로 옮겨 가지 않아야 합니다.</p>
+
+<h3 id="뺀-것옮긴-것보존한-것">뺀 것·옮긴 것·보존한 것</h3>
+
+<p>세부 제안과 근거는 책갈피 P196에 둡니다. 제안서 원문 gauge.md는 그대로 보존합니다.</p>
+
+<details><summary>작업 기록</summary>
+
+<p>대표 개발 기획서(신규 · 핵심제안서). 상세 정본 P196. 변경 이력은 팬덤게이지_핵심제안서.log.md.</p>
+
+<p>이번 본문↔허용 소스 대조는 코드 경로와 미확인 범위를 구분한 문서 후보입니다. 실제 게임·저장 검수와 정책 승인은 하지 않았습니다. 변경 전 MD·HTML 전문과 이번 근거는 짝 로그에 보존합니다.</p>
+
+</details>
+</section><section class="doc-ui-section" aria-label="하단 시뮬레이터"><h3>팬덤 게이지 시뮬레이터 · 임시 시안</h3><p>버튼마다 팬이 생기거나 등급이 바뀌고, 한 막대가 등급 색으로 다시 쌓입니다. 인원은 시안 입력값입니다.</p><details id="sim-preview"><summary>시뮬레이터 펼치기 · 팬 생김 · 등급 올림</summary><div data-sim-host="gauge"></div></details></section><details class="history"><summary>로그 · 변경 이력과 이전 기록</summary><p><a href="./팬덤게이지_핵심제안서.log.md" target="_blank" rel="noopener">이 문서의 로그 열기</a></p></details></main></body></html>
