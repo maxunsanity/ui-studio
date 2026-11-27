@@ -1,0 +1,156 @@
+{
+  "revision": 89,
+  "viewport": {
+    "dpr": 0.800000011920929,
+    "h": 1180,
+    "w": 602
+  },
+  "press": [
+    {
+      "button": "Big",
+      "before": {
+        "artY": 939.8828125,
+        "frontY": 939.8828125,
+        "hitY": 939.8828125,
+        "labelY": 1005.859375,
+        "rimY": 959.86328125,
+        "state": "hover"
+      },
+      "during": {
+        "artY": 942.8828125,
+        "frontY": 942.8828125,
+        "hitY": 939.8828125,
+        "labelY": 1008.859375,
+        "rimY": 959.86328125,
+        "state": "pressed"
+      },
+      "after": {
+        "artY": 939.8828125,
+        "frontY": 939.8828125,
+        "hitY": 939.8828125,
+        "labelY": 1005.859375,
+        "rimY": 959.86328125,
+        "state": "hover"
+      }
+    },
+    {
+      "button": "Medium",
+      "before": {
+        "artY": 939.8828125,
+        "frontY": 939.8828125,
+        "hitY": 939.8828125,
+        "labelY": 1005.859375,
+        "rimY": 959.86328125,
+        "state": "hover"
+      },
+      "during": {
+        "artY": 942.8828125,
+        "frontY": 942.8828125,
+        "hitY": 939.8828125,
+        "labelY": 1008.859375,
+        "rimY": 959.86328125,
+        "state": "pressed"
+      },
+      "after": {
+        "artY": 939.8828125,
+        "frontY": 939.8828125,
+        "hitY": 939.8828125,
+        "labelY": 1005.859375,
+        "rimY": 959.86328125,
+        "state": "hover"
+      }
+    }
+  ],
+  "screens": [
+    {
+      "name": "03_신화스킬",
+      "broken": 0,
+      "h": 1180,
+      "modal": [
+        {
+          "label": "Popup_Capybara_MythicSkill",
+          "opacity": "1"
+        }
+      ],
+      "overflow": false,
+      "w": 602
+    },
+    {
+      "name": "04_즉시룰렛",
+      "broken": 0,
+      "h": 1180,
+      "modal": [
+        {
+          "label": "Popup_Capybara_InstantWheel",
+          "opacity": "1"
+        }
+      ],
+      "overflow": false,
+      "w": 602
+    },
+    {
+      "name": "01_모험",
+      "broken": 0,
+      "h": 1180,
+      "modal": [],
+      "overflow": false,
+      "w": 602
+    },
+    {
+      "name": "02_스킬선택",
+      "broken": 0,
+      "h": 1180,
+      "modal": [
+        {
+          "label": "Popup_Capybara_SkillSelect",
+          "opacity": "1"
+        }
+      ],
+      "overflow": false,
+      "w": 602
+    },
+    {
+      "name": "01_모험",
+      "broken": 0,
+      "h": 1180,
+      "modal": [],
+      "overflow": false,
+      "w": 602
+    },
+    {
+      "name": "03_신화스킬",
+      "broken": 0,
+      "h": 1180,
+      "modal": [
+        {
+          "label": "Popup_Capybara_MythicSkill",
+          "opacity": "1"
+        }
+      ],
+      "overflow": false,
+      "w": 602
+    }
+  ],
+  "routes": [
+    {
+      "route": "대박→신화스킬→닫기",
+      "focus": "Btn_Adventure_Big"
+    },
+    {
+      "route": "중박→즉시룰렛→닫기",
+      "focus": "Btn_Adventure_Medium"
+    },
+    {
+      "route": "Btn_SkillSelect_Ice→모험",
+      "adventure": true
+    },
+    {
+      "route": "Btn_SkillSelect_Heal→모험",
+      "adventure": true
+    },
+    {
+      "route": "Btn_SkillSelect_Strike→모험",
+      "adventure": true
+    }
+  ]
+}

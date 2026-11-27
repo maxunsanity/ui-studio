@@ -1,0 +1,2400 @@
+{
+  "schemaVersion": 4,
+  "projectId": "ux-e7ee9590",
+  "revision": 17,
+  "name": "capybara-go UI",
+  "entryScreen": "main",
+  "screens": [
+    {
+      "id": "main",
+      "name": "Page_Capybara_Lobby",
+      "kind": "page",
+      "purpose": "카피바라고 샘플 시작 로비. 원본 캡처는 분석용이며 모든 그림은 새로 제작합니다. 게임 장면은 새 스틸 이미지, UI 글자·입력·프레임은 별도 조립. 실제 전투·구매·계정 연결 없음.",
+      "elements": [
+        {
+          "id": "element-048b5255-91de-4624-bf4b-2f7cff064380",
+          "name": "Group_Lobby_Scene",
+          "kind": "panel",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "element-048b5255-91de-4624-bf4b-2f7cff064380-ui-image",
+          "parentId": "element-048b5255-91de-4624-bf4b-2f7cff064380",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Lobby_Scene",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "비조작 배경의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "새로 그린 카피바라고 로비 장면",
+            "fit": "cover",
+            "assetRef": "sha256-78daddcab5e584e9c83a92dbe5dd29c88e8b583a28a627563941fa9e37e86348.webp",
+            "sourceSize": [
+              941,
+              1672
+            ]
+          }
+        },
+        {
+          "id": "element-e8de7675-6e0d-4553-9139-ad2d370bf0ca",
+          "name": "BG_HUD_Top",
+          "kind": "panel",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 7.158836689038031,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#20222e",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "partRole": "background",
+          "rectTransform": {
+            "min": [
+              0,
+              1
+            ],
+            "max": [
+              0,
+              1
+            ],
+            "pivot": [
+              0,
+              1
+            ],
+            "position": [
+              0,
+              0
+            ],
+            "sizeDelta": [
+              504,
+              64
+            ]
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-9b790c1ff290bd8d6da4e0fa723dc4ea8bdf22bcec0b62351feec89d33c5329b.png",
+            "sourceSize": [
+              504,
+              64
+            ],
+            "alt": "BG_HUD_Top",
+            "fit": "fill"
+          }
+        },
+        {
+          "id": "element-7a1b3ba8-de97-44a0-952d-0857b970bac5",
+          "name": "BG_Nav_Bottom",
+          "kind": "panel",
+          "x": 0,
+          "y": 87.91946308724832,
+          "w": 100,
+          "h": 12.080536912751679,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#20222e",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "partRole": "background",
+          "rectTransform": {
+            "min": [
+              0,
+              0
+            ],
+            "max": [
+              0,
+              0
+            ],
+            "pivot": [
+              0,
+              0
+            ],
+            "position": [
+              0,
+              -1.4210854715202004e-14
+            ],
+            "sizeDelta": [
+              504,
+              92
+            ]
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-b3fe995d9d781475b417f1eeeb67957224e96aa247e19daab1d17cd13476a15a.png",
+            "sourceSize": [
+              504,
+              108
+            ],
+            "alt": "BG_Nav_Bottom",
+            "fit": "fill"
+          }
+        },
+        {
+          "id": "element-67b2796a-36cc-4266-80e1-15408db0dcc6",
+          "name": "Btn_Nav_Shop",
+          "kind": "button",
+          "x": 0,
+          "y": 0,
+          "w": 17.063492063492063,
+          "h": 100,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "parentId": "element-7a1b3ba8-de97-44a0-952d-0857b970bac5"
+        },
+        {
+          "id": "element-e0abd3ba-612b-400f-bf35-4ccbb4c48f63",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Nav_Shop",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_Nav_Shop",
+            "fit": "contain",
+            "assetRef": "sha256-fc694d9916dca8fb5f3c0bfe0b0e0ec64b366913388109e8a222a75ed243b069.png",
+            "sourceSize": [
+              80,
+              92
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-67b2796a-36cc-4266-80e1-15408db0dcc6"
+        },
+        {
+          "id": "element-67b2796a-36cc-4266-80e1-15408db0dcc6-image",
+          "parentId": "element-67b2796a-36cc-4266-80e1-15408db0dcc6",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Nav_Shop",
+          "x": 8.13953488372093,
+          "y": 8.695652173913043,
+          "w": 83.72093023255815,
+          "h": 78.26086956521739,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-1c80cc7497c1dabb1c8c5ae5cbb67e95a209274e9617abbab0c744d8d264bd6b.png",
+            "sourceSize": [
+              192,
+              192
+            ],
+            "alt": "이미지 + 프레임 버튼 이미지",
+            "fit": "contain"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-82056700-72cd-49ff-9272-34b9d2d60f90",
+          "name": "Btn_Nav_Equipment",
+          "kind": "button",
+          "x": 17.063492063492063,
+          "y": 0,
+          "w": 17.063492063492063,
+          "h": 100,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "parentId": "element-7a1b3ba8-de97-44a0-952d-0857b970bac5"
+        },
+        {
+          "id": "element-58da36f2-bf9d-4269-8ac7-af6cc607faf5",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Nav_Equipment",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_Nav_Equipment",
+            "fit": "contain",
+            "assetRef": "sha256-fc694d9916dca8fb5f3c0bfe0b0e0ec64b366913388109e8a222a75ed243b069.png",
+            "sourceSize": [
+              80,
+              92
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-82056700-72cd-49ff-9272-34b9d2d60f90"
+        },
+        {
+          "id": "element-e2bde39f-c0ed-40b6-beba-53a28cd8c0f0",
+          "parentId": "element-82056700-72cd-49ff-9272-34b9d2d60f90",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Nav_Equipment",
+          "x": 8.13953488372093,
+          "y": 8.695652173913043,
+          "w": 83.72093023255815,
+          "h": 78.26086956521739,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-98e1641bf055535e5e888e703abe6bb5b2829009df629dc812936175ffec4f4d.png",
+            "sourceSize": [
+              192,
+              192
+            ],
+            "alt": "이미지 + 프레임 버튼 이미지",
+            "fit": "contain"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-0d62937e-e5ac-43c0-915c-36aeae6f5df7",
+          "name": "Btn_Nav_Adventure",
+          "kind": "button",
+          "x": 34.12698412698413,
+          "y": 0,
+          "w": 31.746031746031747,
+          "h": 100,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "parentId": "element-7a1b3ba8-de97-44a0-952d-0857b970bac5"
+        },
+        {
+          "id": "element-7c40813e-202d-43cc-a5c4-e7844c8e48c2",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Nav_Adventure",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_Nav_Adventure",
+            "fit": "contain",
+            "assetRef": "sha256-6f116a987a39e24417ef6e71f6ae6b48ee87fd651006cba3cebc30da821d8af8.png",
+            "sourceSize": [
+              80,
+              92
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-0d62937e-e5ac-43c0-915c-36aeae6f5df7"
+        },
+        {
+          "id": "element-750d461b-0247-4b98-849e-9fe4c950ea03",
+          "parentId": "element-0d62937e-e5ac-43c0-915c-36aeae6f5df7",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Nav_Adventure",
+          "x": 17.5,
+          "y": -17.391304347826086,
+          "w": 65,
+          "h": 95.65217391304348,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-e8d0e58b11f0327b44d16cb24357645970c8da8f811c948312d6c74efa83fcc9.png",
+            "sourceSize": [
+              192,
+              192
+            ],
+            "alt": "이미지 + 프레임 버튼 이미지",
+            "fit": "contain"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-01223b04-24d6-4701-a569-ab6f443119d9",
+          "name": "Btn_Nav_Talent",
+          "kind": "button",
+          "x": 65.87301587301587,
+          "y": 0,
+          "w": 17.063492063492063,
+          "h": 100,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "parentId": "element-7a1b3ba8-de97-44a0-952d-0857b970bac5"
+        },
+        {
+          "id": "element-e78642ca-708f-4c22-8972-dcaa8498dca1",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Nav_Talent",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_Nav_Talent",
+            "fit": "contain",
+            "assetRef": "sha256-fc694d9916dca8fb5f3c0bfe0b0e0ec64b366913388109e8a222a75ed243b069.png",
+            "sourceSize": [
+              80,
+              92
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-01223b04-24d6-4701-a569-ab6f443119d9"
+        },
+        {
+          "id": "element-9ef7451b-7479-486e-ac41-1f2a964aa1e7",
+          "parentId": "element-01223b04-24d6-4701-a569-ab6f443119d9",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Nav_Talent",
+          "x": 8.13953488372093,
+          "y": 8.695652173913043,
+          "w": 83.72093023255815,
+          "h": 78.26086956521739,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-e856c01cdfc4e5da165eb9f3ec44ae6a9fd48a5ff875641279c0d9dd304b5511.png",
+            "sourceSize": [
+              192,
+              192
+            ],
+            "alt": "이미지 + 프레임 버튼 이미지",
+            "fit": "contain"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-80f17f94-d50d-4349-b8a4-affbfe6387a2",
+          "name": "Btn_Nav_Chest",
+          "kind": "button",
+          "x": 82.93650793650794,
+          "y": 0,
+          "w": 17.063492063492063,
+          "h": 100,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "parentId": "element-7a1b3ba8-de97-44a0-952d-0857b970bac5"
+        },
+        {
+          "id": "element-0a5207f1-8ab1-4fd2-841d-c948e331fd36",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Nav_Chest",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_Nav_Chest",
+            "fit": "contain",
+            "assetRef": "sha256-fc694d9916dca8fb5f3c0bfe0b0e0ec64b366913388109e8a222a75ed243b069.png",
+            "sourceSize": [
+              80,
+              92
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-80f17f94-d50d-4349-b8a4-affbfe6387a2"
+        },
+        {
+          "id": "element-28c19222-8d3a-4291-a26b-3d2a6e8468e3",
+          "parentId": "element-80f17f94-d50d-4349-b8a4-affbfe6387a2",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Nav_Chest",
+          "x": 8.13953488372093,
+          "y": 8.695652173913043,
+          "w": 83.72093023255815,
+          "h": 78.26086956521739,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-6e4f836fa7813daf38c742237c73dbd27ccf0668c77164bad1afb88d7b7b20de.png",
+            "sourceSize": [
+              192,
+              192
+            ],
+            "alt": "이미지 + 프레임 버튼 이미지",
+            "fit": "contain"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-69f9c73e-798c-4da7-a67f-cc2d18d9e7a0",
+          "name": "Btn_HUD_Energy",
+          "kind": "button",
+          "x": 38.095238095238095,
+          "y": 0,
+          "w": 20.634920634920636,
+          "h": 100,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "parentId": "element-e8de7675-6e0d-4553-9139-ad2d370bf0ca"
+        },
+        {
+          "id": "element-3dc74afb-4f27-4570-9046-b5bfda41cd1f",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_HUD_Energy",
+          "x": 0,
+          "y": 25,
+          "w": 100,
+          "h": 50,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_HUD_Energy",
+            "fit": "contain",
+            "assetRef": "sha256-c454f8eb5a8e0722e1c9570af97c9acf3c663488d6b7abdfd09677e96a7dc3b3.png",
+            "sourceSize": [
+              104,
+              32
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-69f9c73e-798c-4da7-a67f-cc2d18d9e7a0"
+        },
+        {
+          "id": "element-4ab279bd-acdf-4f43-9ee0-6d8be5228883",
+          "parentId": "element-69f9c73e-798c-4da7-a67f-cc2d18d9e7a0",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_HUD_Energy",
+          "x": 0,
+          "y": 31.25,
+          "w": 23.076923076923077,
+          "h": 37.5,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-9d5249009f413f5f3f95f1e0963d58446a6af71058057ac1377e463b05a4a9e8.png",
+            "sourceSize": [
+              192,
+              192
+            ],
+            "alt": "이미지 + 프레임 버튼 이미지",
+            "fit": "contain"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-975266b3-11e6-4527-bf94-fac20fa8775f",
+          "name": "Btn_HUD_Gem",
+          "kind": "button",
+          "x": 58.73015873015873,
+          "y": 0,
+          "w": 20.634920634920636,
+          "h": 100,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "parentId": "element-e8de7675-6e0d-4553-9139-ad2d370bf0ca"
+        },
+        {
+          "id": "element-3a8789f6-6175-4ffa-9c12-5cdd42f2bcd3",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_HUD_Gem",
+          "x": 0,
+          "y": 25,
+          "w": 100,
+          "h": 50,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_HUD_Gem",
+            "fit": "contain",
+            "assetRef": "sha256-c454f8eb5a8e0722e1c9570af97c9acf3c663488d6b7abdfd09677e96a7dc3b3.png",
+            "sourceSize": [
+              104,
+              32
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-975266b3-11e6-4527-bf94-fac20fa8775f"
+        },
+        {
+          "id": "element-a620d4d9-3e9b-49f2-b6f5-4a9a7124843f",
+          "parentId": "element-975266b3-11e6-4527-bf94-fac20fa8775f",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_HUD_Gem",
+          "x": 0,
+          "y": 31.25,
+          "w": 23.076923076923077,
+          "h": 37.5,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-9f8951795c0059b73ef0f62f0060c60b8bb6aa050d7fcd775e46e17edd89cd35.png",
+            "sourceSize": [
+              192,
+              192
+            ],
+            "alt": "이미지 + 프레임 버튼 이미지",
+            "fit": "contain"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-46510693-6fae-4462-beb2-d10bd69ba1a1",
+          "name": "Btn_HUD_Gold",
+          "kind": "button",
+          "x": 79.36507936507937,
+          "y": 0,
+          "w": 20.634920634920636,
+          "h": 100,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "parentId": "element-e8de7675-6e0d-4553-9139-ad2d370bf0ca"
+        },
+        {
+          "id": "element-4892055d-035e-4cb8-95e6-64ee54734082",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_HUD_Gold",
+          "x": 0,
+          "y": 25,
+          "w": 100,
+          "h": 50,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_HUD_Gold",
+            "fit": "contain",
+            "assetRef": "sha256-c454f8eb5a8e0722e1c9570af97c9acf3c663488d6b7abdfd09677e96a7dc3b3.png",
+            "sourceSize": [
+              104,
+              32
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-46510693-6fae-4462-beb2-d10bd69ba1a1"
+        },
+        {
+          "id": "element-65055f2d-aa20-4351-a706-f27c9c5f0bbc",
+          "parentId": "element-46510693-6fae-4462-beb2-d10bd69ba1a1",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_HUD_Gold",
+          "x": 0,
+          "y": 31.25,
+          "w": 23.076923076923077,
+          "h": 37.5,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-f014c4c26725187150232f594b12b8e79088d75d68698e522c22104188b61997.png",
+            "sourceSize": [
+              192,
+              192
+            ],
+            "alt": "이미지 + 프레임 버튼 이미지",
+            "fit": "contain"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-ab9516b9-7739-4ca3-a133-257b2f84be62",
+          "name": "Btn_HUD_Profile",
+          "kind": "button",
+          "x": 0,
+          "y": 0,
+          "w": 12.698412698412698,
+          "h": 100,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "parentId": "element-e8de7675-6e0d-4553-9139-ad2d370bf0ca"
+        },
+        {
+          "id": "element-95485762-2332-474e-975a-824ea3a9adb1",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_HUD_AvatarFrame",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_HUD_AvatarFrame",
+            "fit": "contain",
+            "assetRef": "sha256-66ba0cf8badccd2599fbe43ddbd5c5bcc49ac97054a8a25b9f9a1b910dd6bcf5.png",
+            "sourceSize": [
+              64,
+              64
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-ab9516b9-7739-4ca3-a133-257b2f84be62"
+        },
+        {
+          "id": "element-d5d2273f-9700-4237-9d3c-590c5f10d7d9",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_HUD_Nickname",
+          "x": 12.698412698412698,
+          "y": 6.25,
+          "w": 24.603174603174605,
+          "h": 31.25,
+          "text": "Capy24063707",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff3dc"
+          },
+          "typography": {
+            "weight": 600,
+            "lineHeight": 16,
+            "align": "left",
+            "wrap": "nowrap"
+          },
+          "parentId": "element-e8de7675-6e0d-4553-9139-ad2d370bf0ca"
+        },
+        {
+          "id": "element-dc0abf93-2125-46e2-8a29-c370c53ade12",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_HUD_Rank",
+          "x": 12.698412698412698,
+          "y": 35.9375,
+          "w": 24.603174603174605,
+          "h": 28.125,
+          "text": "마스터-3급",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 12,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#d4b1ee"
+          },
+          "typography": {
+            "weight": 600,
+            "lineHeight": 16,
+            "align": "left",
+            "wrap": "nowrap"
+          },
+          "parentId": "element-e8de7675-6e0d-4553-9139-ad2d370bf0ca"
+        },
+        {
+          "id": "element-3e6473dc-9469-4253-b893-f9b76b0ea835",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_HUD_Power",
+          "x": 12.698412698412698,
+          "y": 62.5,
+          "w": 24.603174603174605,
+          "h": 31.25,
+          "text": "231.1K",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 16,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#f9d876"
+          },
+          "typography": {
+            "weight": 700,
+            "lineHeight": 20,
+            "align": "left",
+            "wrap": "nowrap"
+          },
+          "parentId": "element-e8de7675-6e0d-4553-9139-ad2d370bf0ca"
+        },
+        {
+          "id": "element-00ded617-5043-43cd-99fb-448aa5221b92",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Lobby_Chapter",
+          "x": 19.047619047619047,
+          "y": 8.94854586129754,
+          "w": 61.904761904761905,
+          "h": 4.47427293064877,
+          "text": "16. 거인 고원 II",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 28,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff6df"
+          },
+          "typography": {
+            "weight": 800,
+            "lineHeight": 36,
+            "align": "center",
+            "wrap": "nowrap",
+            "strokeWidth": 1.5,
+            "strokeColor": "#25332b"
+          },
+          "rectTransform": {
+            "min": [
+              0,
+              1
+            ],
+            "max": [
+              0,
+              1
+            ],
+            "pivot": [
+              0,
+              1
+            ],
+            "position": [
+              96,
+              -80
+            ],
+            "sizeDelta": [
+              312,
+              40
+            ]
+          }
+        },
+        {
+          "id": "element-06320625-3768-4ec0-a02f-30f93d8c979f",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Lobby_Survival",
+          "x": 19.047619047619047,
+          "y": 13.870246085011185,
+          "w": 61.904761904761905,
+          "h": 3.131991051454139,
+          "text": "최고 생존 일수 · 13일",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 16,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffbd31",
+            "strokeWidth": 3,
+            "textColor": "#fff6df",
+            "stroke": "#3d342e"
+          },
+          "typography": {
+            "weight": 600,
+            "lineHeight": 20,
+            "align": "center",
+            "wrap": "nowrap",
+            "strokeWidth": 1.5,
+            "strokeColor": "#25332b"
+          },
+          "rectTransform": {
+            "min": [
+              0,
+              1
+            ],
+            "max": [
+              0,
+              1
+            ],
+            "pivot": [
+              0,
+              1
+            ],
+            "position": [
+              96,
+              -124
+            ],
+            "sizeDelta": [
+              312,
+              28
+            ]
+          }
+        },
+        {
+          "id": "element-54545018-426b-4874-ac62-a31c9bddac87",
+          "name": "Btn_Lobby_Start",
+          "kind": "button",
+          "x": 27.77777777777778,
+          "y": 75.39149888143177,
+          "w": 44.44444444444444,
+          "h": 7.158836689038031,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "rectTransform": {
+            "min": [
+              0,
+              0
+            ],
+            "max": [
+              0,
+              0
+            ],
+            "pivot": [
+              0,
+              0
+            ],
+            "position": [
+              140,
+              140
+            ],
+            "sizeDelta": [
+              224,
+              80
+            ]
+          }
+        },
+        {
+          "id": "element-98211cfa-7c3f-42cd-b84d-bbade22d72d4",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Lobby_Start",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-44d4c1553efe9c93cd799e4d1d8faba5bc3bcbdbd9d4ea04025b2961567e1bc9.png",
+            "sourceSize": [
+              224,
+              64
+            ],
+            "alt": "이미지 + 프레임 버튼 이미지",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-54545018-426b-4874-ac62-a31c9bddac87"
+        },
+        {
+          "id": "element-7255daa2-8b13-4495-8b16-126559bb3fef",
+          "parentId": "element-54545018-426b-4874-ac62-a31c9bddac87",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Lobby_Start",
+          "x": 0,
+          "y": 5,
+          "w": 100,
+          "h": 50,
+          "text": "시작",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 32,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff6df"
+          },
+          "typography": {
+            "weight": 800,
+            "lineHeight": 36,
+            "align": "center",
+            "wrap": "nowrap",
+            "strokeWidth": 2,
+            "strokeColor": "#31291e"
+          }
+        },
+        {
+          "id": "element-67b2796a-36cc-4266-80e1-15408db0dcc6-label",
+          "parentId": "element-67b2796a-36cc-4266-80e1-15408db0dcc6",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Nav_Shop",
+          "x": 0,
+          "y": 71.73913043478261,
+          "w": 100,
+          "h": 28.26086956521739,
+          "text": "",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 14,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff3dc"
+          },
+          "typography": {
+            "weight": 500,
+            "lineHeight": 18,
+            "align": "center",
+            "wrap": "nowrap"
+          }
+        },
+        {
+          "id": "element-2de145e4-1bbd-4f33-ae7c-74b5b7b4d1be",
+          "parentId": "element-82056700-72cd-49ff-9272-34b9d2d60f90",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Nav_Equipment",
+          "x": 0,
+          "y": 71.73913043478261,
+          "w": 100,
+          "h": 28.26086956521739,
+          "text": "",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 14,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff3dc"
+          },
+          "typography": {
+            "weight": 500,
+            "lineHeight": 18,
+            "align": "center",
+            "wrap": "nowrap"
+          }
+        },
+        {
+          "id": "element-1224b484-cf5e-4a85-9a5e-4e81eb787880",
+          "parentId": "element-0d62937e-e5ac-43c0-915c-36aeae6f5df7",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Nav_Adventure",
+          "x": 0,
+          "y": 71.73913043478261,
+          "w": 100,
+          "h": 28.26086956521739,
+          "text": "모험",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 20,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff6e7"
+          },
+          "typography": {
+            "weight": 700,
+            "lineHeight": 24,
+            "align": "center",
+            "wrap": "nowrap"
+          }
+        },
+        {
+          "id": "element-594b54a4-275d-4a1d-905a-96693ff1a983",
+          "parentId": "element-01223b04-24d6-4701-a569-ab6f443119d9",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Nav_Talent",
+          "x": 0,
+          "y": 71.73913043478261,
+          "w": 100,
+          "h": 28.26086956521739,
+          "text": "",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 14,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff3dc"
+          },
+          "typography": {
+            "weight": 500,
+            "lineHeight": 18,
+            "align": "center",
+            "wrap": "nowrap"
+          }
+        },
+        {
+          "id": "element-cbe53fb2-8395-49cf-a06d-ec11d4c2b3f7",
+          "parentId": "element-80f17f94-d50d-4349-b8a4-affbfe6387a2",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Nav_Chest",
+          "x": 0,
+          "y": 71.73913043478261,
+          "w": 100,
+          "h": 28.26086956521739,
+          "text": "",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 14,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff3dc"
+          },
+          "typography": {
+            "weight": 500,
+            "lineHeight": 18,
+            "align": "center",
+            "wrap": "nowrap"
+          }
+        },
+        {
+          "id": "element-ea41b961-448c-416e-9ce2-e6fa703e6fee",
+          "parentId": "element-69f9c73e-798c-4da7-a67f-cc2d18d9e7a0",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_HUD_Energy",
+          "x": 26.923076923076923,
+          "y": 28.125,
+          "w": 69.23076923076923,
+          "h": 43.75,
+          "text": "967/34",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 16,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff3dc"
+          },
+          "typography": {
+            "weight": 600,
+            "lineHeight": 20,
+            "align": "left",
+            "wrap": "nowrap"
+          }
+        },
+        {
+          "id": "element-b267d0c0-3563-4ec0-92e3-a91ce17e2b0b",
+          "parentId": "element-975266b3-11e6-4527-bf94-fac20fa8775f",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_HUD_Gem",
+          "x": 26.923076923076923,
+          "y": 28.125,
+          "w": 69.23076923076923,
+          "h": 43.75,
+          "text": "7255",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 16,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff3dc"
+          },
+          "typography": {
+            "weight": 600,
+            "lineHeight": 20,
+            "align": "left",
+            "wrap": "nowrap"
+          }
+        },
+        {
+          "id": "element-8824e620-94d2-4db8-b6d9-6b77d7a51632",
+          "parentId": "element-46510693-6fae-4462-beb2-d10bd69ba1a1",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_HUD_Gold",
+          "x": 26.923076923076923,
+          "y": 28.125,
+          "w": 69.23076923076923,
+          "h": 43.75,
+          "text": "26.4K",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 16,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff3dc"
+          },
+          "typography": {
+            "weight": 600,
+            "lineHeight": 20,
+            "align": "left",
+            "wrap": "nowrap"
+          }
+        },
+        {
+          "id": "element-0a40ba99-b9f8-4060-8d4d-dd3b1c23ea92",
+          "parentId": "element-ab9516b9-7739-4ca3-a133-257b2f84be62",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_HUD_Avatar",
+          "x": 12.5,
+          "y": 12.5,
+          "w": 75,
+          "h": 75,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-67c013b93d8a5b7af0e5c6d6cf7a64a6f449c1100685ff23a653518b2db35586.png",
+            "sourceSize": [
+              192,
+              192
+            ],
+            "alt": "이미지 + 프레임 버튼 이미지",
+            "fit": "contain"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-d3dfc50e-27f5-404d-8f2b-25577c426c59",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Lobby_MessageBar",
+          "x": 0,
+          "y": 84.3400447427293,
+          "w": 100,
+          "h": 3.5794183445190155,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_Lobby_MessageBar",
+            "fit": "contain",
+            "assetRef": "sha256-0d4de4251f3aa5608f022f1e668fdecf2c96ffc588ce70807ccae5e98a32e7c3.png",
+            "sourceSize": [
+              504,
+              32
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "rectTransform": {
+            "min": [
+              0,
+              0
+            ],
+            "max": [
+              0,
+              0
+            ],
+            "pivot": [
+              0,
+              0
+            ],
+            "position": [
+              0,
+              92
+            ],
+            "sizeDelta": [
+              504,
+              32
+            ]
+          }
+        },
+        {
+          "id": "element-ab633acc-8968-4be4-b96a-fdb791aec6e6",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Lobby_Message",
+          "x": 3.1746031746031744,
+          "y": 12.5,
+          "w": 4.761904761904762,
+          "h": 75,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "Img_Lobby_Message",
+            "fit": "contain",
+            "assetRef": "sha256-2b13c5f683cb731bb4b17a1dba6c74040e72f474c245dc0d178ba049b62e1c06.png",
+            "sourceSize": [
+              32,
+              32
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-d3dfc50e-27f5-404d-8f2b-25577c426c59"
+        },
+        {
+          "id": "element-54a9e1c7-a0d9-452c-81d0-8f836c6652c0",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Lobby_StartCost",
+          "x": 38.392857142857146,
+          "y": 65,
+          "w": 8.035714285714286,
+          "h": 25,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "Img_Lobby_StartCost",
+            "fit": "contain",
+            "assetRef": "sha256-9d5249009f413f5f3f95f1e0963d58446a6af71058057ac1377e463b05a4a9e8.png",
+            "sourceSize": [
+              192,
+              192
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-54545018-426b-4874-ac62-a31c9bddac87"
+        },
+        {
+          "id": "element-82ba7159-552b-4181-9398-ccb0ff476a3c",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Lobby_StartCost",
+          "x": 48.214285714285715,
+          "y": 62.5,
+          "w": 16.071428571428573,
+          "h": 30,
+          "text": "×5",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 18,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff6df"
+          },
+          "typography": {
+            "weight": 700,
+            "lineHeight": 22,
+            "align": "left",
+            "wrap": "nowrap",
+            "strokeWidth": 1,
+            "strokeColor": "#392b20"
+          },
+          "parentId": "element-54545018-426b-4874-ac62-a31c9bddac87"
+        },
+        {
+          "id": "element-cadd11a4-092f-4156-8bb9-42dc3b63efb2",
+          "partRole": "badge",
+          "kind": "image",
+          "name": "Badge_Nav_Shop",
+          "x": 65,
+          "y": 0,
+          "w": 35,
+          "h": 30.434782608695652,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "Badge_Nav_Shop",
+            "fit": "contain",
+            "assetRef": "sha256-daaa617307fba4abab5faed6b0155f14602b3275ffaa72a4cfa935078b6b8563.png",
+            "sourceSize": [
+              28,
+              28
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-67b2796a-36cc-4266-80e1-15408db0dcc6"
+        },
+        {
+          "id": "element-ee53fd1d-b59f-4e4d-af0b-c438b55fec70",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Nav_Shop_Notification",
+          "x": 65,
+          "y": 0,
+          "w": 35,
+          "h": 30.434782608695652,
+          "text": "!",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 20,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff5f3"
+          },
+          "typography": {
+            "weight": 800,
+            "lineHeight": 22,
+            "align": "center",
+            "wrap": "nowrap"
+          },
+          "parentId": "element-67b2796a-36cc-4266-80e1-15408db0dcc6"
+        },
+        {
+          "id": "element-cc12a449-f168-4d66-aecd-dadc4b0609e1",
+          "partRole": "badge",
+          "kind": "image",
+          "name": "Badge_Nav_Equipment",
+          "x": 65,
+          "y": 0,
+          "w": 35,
+          "h": 30.434782608695652,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "Badge_Nav_Equipment",
+            "fit": "contain",
+            "assetRef": "sha256-daaa617307fba4abab5faed6b0155f14602b3275ffaa72a4cfa935078b6b8563.png",
+            "sourceSize": [
+              28,
+              28
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-82056700-72cd-49ff-9272-34b9d2d60f90"
+        },
+        {
+          "id": "element-ccd1d0c2-b92d-446f-8e39-934474763279",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Nav_Equipment_Notification",
+          "x": 65,
+          "y": 0,
+          "w": 35,
+          "h": 30.434782608695652,
+          "text": "!",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 20,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff5f3"
+          },
+          "typography": {
+            "weight": 800,
+            "lineHeight": 22,
+            "align": "center",
+            "wrap": "nowrap"
+          },
+          "parentId": "element-82056700-72cd-49ff-9272-34b9d2d60f90"
+        },
+        {
+          "id": "element-1871b372-09a2-47eb-8616-72864362cf04",
+          "partRole": "badge",
+          "kind": "image",
+          "name": "Badge_Nav_Talent",
+          "x": 65,
+          "y": 0,
+          "w": 35,
+          "h": 30.434782608695652,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "Badge_Nav_Talent",
+            "fit": "contain",
+            "assetRef": "sha256-daaa617307fba4abab5faed6b0155f14602b3275ffaa72a4cfa935078b6b8563.png",
+            "sourceSize": [
+              28,
+              28
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-01223b04-24d6-4701-a569-ab6f443119d9"
+        },
+        {
+          "id": "element-9e1a7b2f-6a8a-486d-a88f-547a40397ecf",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Nav_Talent_Notification",
+          "x": 65,
+          "y": 0,
+          "w": 35,
+          "h": 30.434782608695652,
+          "text": "!",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 20,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff5f3"
+          },
+          "typography": {
+            "weight": 800,
+            "lineHeight": 22,
+            "align": "center",
+            "wrap": "nowrap"
+          },
+          "parentId": "element-01223b04-24d6-4701-a569-ab6f443119d9"
+        },
+        {
+          "id": "element-93d213fb-35a6-4645-a548-18284ec84921",
+          "partRole": "badge",
+          "kind": "image",
+          "name": "Badge_Nav_Chest",
+          "x": 65,
+          "y": 0,
+          "w": 35,
+          "h": 30.434782608695652,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "Badge_Nav_Chest",
+            "fit": "contain",
+            "assetRef": "sha256-daaa617307fba4abab5faed6b0155f14602b3275ffaa72a4cfa935078b6b8563.png",
+            "sourceSize": [
+              28,
+              28
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-80f17f94-d50d-4349-b8a4-affbfe6387a2"
+        },
+        {
+          "id": "element-91d3b542-ac3d-45d4-b3ac-26c9a195a1aa",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Nav_Chest_Notification",
+          "x": 65,
+          "y": 0,
+          "w": 35,
+          "h": 30.434782608695652,
+          "text": "1",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 20,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#fff5f3"
+          },
+          "typography": {
+            "weight": 800,
+            "lineHeight": 22,
+            "align": "center",
+            "wrap": "nowrap"
+          },
+          "parentId": "element-80f17f94-d50d-4349-b8a4-affbfe6387a2"
+        },
+        {
+          "id": "element-7a8f3119-48e3-4f1f-afa0-8e3fdc8910b6",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_HUD_Energy_Plus",
+          "x": 15.384615384615385,
+          "y": 50,
+          "w": 15.384615384615385,
+          "h": 25,
+          "text": "+",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 16,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#b4dc4e"
+          },
+          "typography": {
+            "weight": 800,
+            "lineHeight": 16,
+            "align": "center",
+            "wrap": "nowrap"
+          },
+          "parentId": "element-69f9c73e-798c-4da7-a67f-cc2d18d9e7a0"
+        },
+        {
+          "id": "element-b0076ebe-ad66-4a21-8f01-bda135ab2bf3",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_HUD_Gem_Plus",
+          "x": 15.384615384615385,
+          "y": 50,
+          "w": 15.384615384615385,
+          "h": 25,
+          "text": "+",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 16,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#b4dc4e"
+          },
+          "typography": {
+            "weight": 800,
+            "lineHeight": 16,
+            "align": "center",
+            "wrap": "nowrap"
+          },
+          "parentId": "element-975266b3-11e6-4527-bf94-fac20fa8775f"
+        },
+        {
+          "id": "element-1cd7214c-a341-46be-9c92-4b9eda5447f9",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_HUD_Gold_Plus",
+          "x": 15.384615384615385,
+          "y": 50,
+          "w": 15.384615384615385,
+          "h": 25,
+          "text": "+",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 16,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#b4dc4e"
+          },
+          "typography": {
+            "weight": 800,
+            "lineHeight": 16,
+            "align": "center",
+            "wrap": "nowrap"
+          },
+          "parentId": "element-46510693-6fae-4462-beb2-d10bd69ba1a1"
+        },
+        {
+          "id": "element-e8195748-a42c-4ec4-af42-fd6fa1b4eb83",
+          "name": "Btn_Lobby_Menu",
+          "kind": "button",
+          "x": 3.1746031746031744,
+          "y": 10.738255033557047,
+          "w": 14.285714285714286,
+          "h": 7.158836689038031,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "rectTransform": {
+            "min": [
+              0,
+              1
+            ],
+            "max": [
+              0,
+              1
+            ],
+            "pivot": [
+              0,
+              1
+            ],
+            "position": [
+              16,
+              -96
+            ],
+            "sizeDelta": [
+              72,
+              64
+            ]
+          }
+        },
+        {
+          "id": "element-933af558-4353-431f-ba52-b21e29d2a0d5",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Lobby_Menu",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_HUD_AvatarFrame",
+            "fit": "fill",
+            "assetRef": "sha256-fc694d9916dca8fb5f3c0bfe0b0e0ec64b366913388109e8a222a75ed243b069.png",
+            "sourceSize": [
+              80,
+              92
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-e8195748-a42c-4ec4-af42-fd6fa1b4eb83"
+        },
+        {
+          "id": "element-566ad016-d827-43d5-b635-c02e260f09de",
+          "parentId": "element-e8195748-a42c-4ec4-af42-fd6fa1b4eb83",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Lobby_Menu",
+          "x": 16.666666666666668,
+          "y": 12.5,
+          "w": 66.66666666666667,
+          "h": 75,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "메뉴 목록",
+            "fit": "contain",
+            "assetRef": "sha256-38692e40c601facc64ef7c80bc097421bc31760afa61e7dc3f6ddbbc7f4da6a1.png",
+            "sourceSize": [
+              48,
+              48
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        }
+      ],
+      "logicalSize": {
+        "w": 504,
+        "h": 894
+      }
+    }
+  ],
+  "transitions": [],
+  "fixtures": {
+    "items": [],
+    "balance": 0
+  },
+  "savedAt": "2026-11-17T04:11:24.287Z"
+}

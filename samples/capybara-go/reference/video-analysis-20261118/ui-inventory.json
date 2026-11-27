@@ -1,0 +1,142 @@
+[
+  {
+    "id": "N01",
+    "title": "모험 진행 / 전투 스틸",
+    "kind": "page",
+    "classification": "신규 고유 구조",
+    "priority": "P1",
+    "reuseCandidate": null,
+    "parts": "상단 일차·분기 진행,장면,하단 EXP/HP/공격/방어 줄,2단 사건 로그,하단 중앙 상태 버튼과 좌우 대박/중박",
+    "comparison": "기존 C01은 로비·공통 하단5탭, C04는 특성카드. 이 화면은 공통5탭 없이 사건로그와 일차진행/상태버튼의 분할이므로 별도 판틀. 전투/보물/다음날은 같은 페이지 상태.",
+    "observedEntrance": "영상 시작부터 열림. 기존 로비 시작→이 화면은 미관찰.",
+    "observedExit": "기존 로비로 종료/복귀 미관찰.",
+    "states": "보물 파내기/다음날/전투/이동 중/전투 중; 일차6~10·레벨1→2; 스킬 선택 후 로그 변경.",
+    "unobserved": "설정·통계·배속·학습한 스킬 목적지,전투 종료 규칙,로비 입구/복귀,전체 일차와 게임 계산",
+    "status": "영상 분석/제안(검수 대기),native미조립",
+    "captures": [
+      {
+        "file": "captures/N01_01_000.50s.png",
+        "requestedSecond": 0.5,
+        "label": "보물 파내기",
+        "sha256": "b43172f02282abcd80883d3ef5cc9ad40eb010ed12faa12f258b321bead35b8a"
+      },
+      {
+        "file": "captures/N01_02_003.50s.png",
+        "requestedSecond": 3.5,
+        "label": "다음날",
+        "sha256": "7be104ceb33b715e72fb0e37df6aa6c3c51edd0da55b5659213f37bf6ac29ef1"
+      },
+      {
+        "file": "captures/N01_03_008.50s.png",
+        "requestedSecond": 8.5,
+        "label": "7일차 진행",
+        "sha256": "fc41a50956910fbe87e165a06502859154192e297e623c5066082b79f2934989"
+      },
+      {
+        "file": "captures/N01_04_012.50s.png",
+        "requestedSecond": 12.5,
+        "label": "전투 입구",
+        "sha256": "6e81c677b0f1ae7e5d768c5a2d165cf6be5a13397467a179befbac7802e398ce"
+      },
+      {
+        "file": "captures/N01_05_016.80s.png",
+        "requestedSecond": 16.8,
+        "label": "전투 중 스틸",
+        "sha256": "17207827cacb9acadbfa5dac2911f164b34ba08bac69bad88ff5449dbb212b58"
+      },
+      {
+        "file": "captures/N01_06_023.25s.png",
+        "requestedSecond": 23.25,
+        "label": "레벨 상승",
+        "sha256": "90d4fd2a28b4ae856b42b24b84056273cd18e0c695bbbcf4c54d0727eae730b8"
+      },
+      {
+        "file": "captures/N01_08_033.50s.png",
+        "requestedSecond": 33.5,
+        "label": "스킬 선택 뒤 진행",
+        "sha256": "b3e7837c5d2a6a81fea383b6b4bf08c2ad44d0e0783e787c010826e91ac9a851"
+      },
+      {
+        "file": "captures/N01_09_040.50s.png",
+        "requestedSecond": 40.5,
+        "label": "10일차 보물 이벤트",
+        "sha256": "4e1cde2ae1d1f580d70f44bef4ee83ead99f7840727a1ee353686078717161db"
+      },
+      {
+        "file": "captures/N01_11_043.25s.png",
+        "requestedSecond": 43.25,
+        "label": "룰렛 닫은 뒤",
+        "sha256": "3d6c59a35749ec20eabae0def59c82c682f64ed11702c1c9bf42792eb61ebac4"
+      }
+    ]
+  },
+  {
+    "id": "N02",
+    "title": "스킬 선택 / 3택 카드",
+    "kind": "modal",
+    "classification": "신규 고유 구조",
+    "priority": "P1",
+    "reuseCandidate": null,
+    "parts": "딤+캐릭터/타이틀 장식,아이콘/등급/이름/설명 3행 선택카드,새로고침(1),학습한 스킬 진입",
+    "comparison": "C11 과제행과 C05 획득방법행은 참고가능하나,닫기 없는 3택 전체폭 카드·선택후 자동복귀 구조는 기존28종에 없음.",
+    "observedEntrance": "N01 레벨2 상승 뒤 23.558초 선택 오버레이 출현.",
+    "observedExit": "32.875초 모험 복귀 뒤 분노 공격 얼음가시 학습 로그 관찰. 별도×는 보이지 않음.",
+    "states": "일반 등급 분노 공격 얼음가시 / 빈사 시 회복 / 강타 3개 고정 후보.",
+    "unobserved": "새로고침·학습한 스킬 화면·다른후보 결과 미관찰. 카드 클릭 정확한 순간은 판별하지 않음.",
+    "status": "영상 분석/제안(검수 대기),native미조립",
+    "captures": [
+      {
+        "file": "captures/N02_07_025.00s.png",
+        "requestedSecond": 25,
+        "label": "스킬 선택",
+        "sha256": "75fa0e1fddffaeba249a4a0a2b91ea0a10fda5cacccd21205bf023be15066509"
+      }
+    ]
+  },
+  {
+    "id": "N03",
+    "title": "중박 / 즉시 룰렛",
+    "kind": "modal",
+    "classification": "기존 유사 변형",
+    "priority": "P2",
+    "reuseCandidate": "C19",
+    "parts": "딤 위 방사형 룰렛+상단 포인터,해제조건 텍스트,하단 원형×",
+    "comparison": "기존 C19 방사형룰렛 판틀 재사용 후보. 8구역내용/배경·누적진행/뽑기footer 생략은 변형. 같은 콘텐츠나 기능 구현완료 뜻 아님.",
+    "observedEntrance": "N01 우하단 중박 입구→41.325초 룰렛 출현.",
+    "observedExit": "42.867초 하단× 뒤 N01 복귀.",
+    "states": "중박12개 획득 후 해제 가능(2/12), 전설 스킬 등 구역 표시.",
+    "unobserved": "실제 회전/해제/보상 결과는 미관찰. 구역별 확률 확정금지.",
+    "status": "영상 분석/제안(검수 대기),native미조립",
+    "captures": [
+      {
+        "file": "captures/N03_10_042.00s.png",
+        "requestedSecond": 42,
+        "label": "일반 룰렛",
+        "sha256": "0693a1802862d3d9173944c3192b7e9bbae0c6d79a44c6420ade968f622dcc69"
+      }
+    ]
+  },
+  {
+    "id": "N04",
+    "title": "신화 스킬 / 슬롯",
+    "kind": "modal",
+    "classification": "신규 고유 구조",
+    "priority": "P1",
+    "reuseCandidate": null,
+    "parts": "딤,신화 스킬 타이틀,천사의힘/악마의아이 2그룹각3칸진행,세로슬롯창/양옆포인터,남은돌리기/해제조건,하단×",
+    "comparison": "C19 원판·C06 상자·C12 상품단계와 달리 세로슬롯창과 상단2그룹진행 분할. 새 판틀 후보.",
+    "observedEntrance": "N01 좌하단 대박 입구→43.883초 딤,44.125초 슬롯 본체 출현.",
+    "observedExit": "하단×가 보이지만48.890초 영상끝까지 닫기 미실행. N01 복귀 연결은 미관찰 제안으로만 둠.",
+    "states": "천사의 힘 선택띠,남은 돌리기 횟수5,대박7개 획득후 해제가능(3/7).",
+    "unobserved": "실제돌리기/스킬지급/다른띠/닫기결과/해제정책 미관찰.",
+    "status": "영상 분석/제안(검수 대기),native미조립",
+    "captures": [
+      {
+        "file": "captures/N04_12_045.00s.png",
+        "requestedSecond": 45,
+        "label": "신화 스킬",
+        "sha256": "850c4a7e26a102c7118cffb4d2c060bad0931efb6aad735e4be607e8be8c2d4b"
+      }
+    ]
+  }
+]

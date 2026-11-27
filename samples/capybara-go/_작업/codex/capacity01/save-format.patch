@@ -1,0 +1,36 @@
+--- before/save-plugin.mjs
++++ after/save-plugin.mjs
+@@ -77,14 +77,15 @@
+             ...document, revision: (before?.revision ?? 0) + 1, savedAt: new Date().toISOString()
+         };
+         validateDocument(next);
+-        if (Buffer.byteLength(JSON.stringify(next, null, 2) + '\n') > 2000000) throw Error('전체 설계는2MB 이하입니다.');
++        const serialized = JSON.stringify(next) + '\n';
++        if (Buffer.byteLength(serialized) > 2000000) throw Error('전체 설계는2MB 이하입니다.');
+         const backups = await ensureSafeRoot(root, join(dir, 'backups'));
+         if (before)
+             await copyFile(file, join(backups, document.projectId + '-r' + before.revision + '-' + randomUUID() + '.json'));
+         temp = join(dir, '.' + document.projectId + '-' + randomUUID() + '.tmp');
+         const out = await open(temp, 'wx', 0o600);
+         try {
+-            await out.writeFile(JSON.stringify(next, null, 2) + '\n');
++            await out.writeFile(serialized);
+             await out.sync();
+         }
+         finally {
+@@ -142,12 +143,14 @@
+         error.status = 409;
+         throw error;
+     }
++    const serialized = JSON.stringify(document) + '\n';
++    if (Buffer.byteLength(serialized) > 2000000) throw Error('전체 설계는2MB 이하입니다.');
+     const safe = await ensureSafeRoot(root, join(dir, 'baselines'));
+     const temp = join(safe, '.' + randomUUID() + '.tmp');
+     const out = await open(temp, 'wx', 0o600);
+     try {
+         try {
+-            await out.writeFile(JSON.stringify(document, null, 2) + '\n');
++            await out.writeFile(serialized);
+             await out.sync();
+         } finally {
+             await out.close();

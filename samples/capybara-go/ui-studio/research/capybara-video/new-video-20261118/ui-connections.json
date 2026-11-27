@@ -1,0 +1,133 @@
+{
+  "source": "source.json",
+  "timeBasis": "scene score>0.10 원본pts_time + fps2/대표캡처 대조. 클릭순간과 애니메이션완료시각 아님.",
+  "transitions": [
+    {
+      "id": "NT01",
+      "fromScreen": "N01",
+      "toScreen": "N01",
+      "sourceSecond": 1.65,
+      "trigger": "보물 파내기",
+      "action": "state",
+      "evidence": "보물 이벤트→보상/다음날. 시각은장면변화후보,클릭정확시각아님"
+    },
+    {
+      "id": "NT02",
+      "fromScreen": "N01",
+      "toScreen": "N01",
+      "sourceSecond": 6.692,
+      "trigger": "다음날",
+      "action": "state",
+      "evidence": "6→7일차 사건로그"
+    },
+    {
+      "id": "NT03",
+      "fromScreen": "N01",
+      "toScreen": "N01",
+      "sourceSecond": 11.783,
+      "trigger": "다음날/전투",
+      "action": "state",
+      "evidence": "8일차 전투입구 후 이동/전투,12.5초 전투버튼"
+    },
+    {
+      "id": "NT04",
+      "fromScreen": "N01",
+      "toScreen": "N01",
+      "sourceSecond": 23.167,
+      "trigger": "전투 종료 자동진행",
+      "action": "state",
+      "evidence": "레벨2 상승로그"
+    },
+    {
+      "id": "NT05",
+      "fromScreen": "N01",
+      "toScreen": "N02",
+      "sourceSecond": 23.558,
+      "trigger": "레벨 상승 뒤 자동출현",
+      "action": "open",
+      "evidence": "3택스킬"
+    },
+    {
+      "id": "NT06",
+      "fromScreen": "N02",
+      "toScreen": "N01",
+      "sourceSecond": 32.875,
+      "trigger": "스킬 선택 뒤",
+      "action": "close-result",
+      "evidence": "분노 공격 얼음가시 학습로그;정확클릭순간미확인"
+    },
+    {
+      "id": "NT07",
+      "fromScreen": "N01",
+      "toScreen": "N01",
+      "sourceSecond": 34.383,
+      "trigger": "다음날",
+      "action": "state",
+      "evidence": "9일차 회복 사건로그"
+    },
+    {
+      "id": "NT08",
+      "fromScreen": "N01",
+      "toScreen": "N01",
+      "sourceSecond": 37.825,
+      "trigger": "다음날",
+      "action": "state",
+      "evidence": "10일차 보물지도 사건로그"
+    },
+    {
+      "id": "NT09",
+      "fromScreen": "N01",
+      "toScreen": "N03",
+      "sourceSecond": 41.325,
+      "trigger": "우하단 중박",
+      "action": "open",
+      "evidence": "방사형 룰렛;해제미충족"
+    },
+    {
+      "id": "NT10",
+      "fromScreen": "N03",
+      "toScreen": "N01",
+      "sourceSecond": 42.867,
+      "trigger": "하단 ×",
+      "action": "close",
+      "evidence": "원래모험/보물파내기로복귀"
+    },
+    {
+      "id": "NT11",
+      "fromScreen": "N01",
+      "toScreen": "N04",
+      "sourceSecond": 43.883,
+      "trigger": "좌하단 대박",
+      "action": "open",
+      "evidence": "딤시작43.883/슬롯본체44.125"
+    }
+  ],
+  "unobservedConnections": [
+    {
+      "fromScreen": "C01",
+      "toScreen": "N01",
+      "trigger": "시작",
+      "status": "미관찰:신영상0초부터N01이며로비/시작진입없음"
+    },
+    {
+      "fromScreen": "N01",
+      "toScreen": "C01",
+      "trigger": "종료/뒤로",
+      "status": "미관찰:종료버튼/복귀없음"
+    },
+    {
+      "fromScreen": "N04",
+      "toScreen": "N01",
+      "trigger": "하단×",
+      "status": "버튼관찰/실제닫기결과미관찰"
+    }
+  ],
+  "tabs": {
+    "N01": "하단 공통5탭 미표시. 상단 일차노드는진행표시,탭전환미관찰.",
+    "N02": "3행선택카드,탭아님.새로고침/학습한스킬클릭결과미관찰.",
+    "N03": "탭없음.",
+    "N04": "상단2그룹진행표시를탭으로확정하지않음."
+  },
+  "reinforcement": "기존28종의미관찰구간이던모험내부하위3종입구를새로확인. 기존C01→모험입구와직접연결했다는뜻아님.",
+  "policy": "게임장면 새스틸,모든제품그림새제작,분석PNG제품자원사용금지.추첨/전투/게임계산미구현.미관찰목적지창작금지."
+}

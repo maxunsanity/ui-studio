@@ -1,0 +1,493 @@
+{
+  "schemaVersion": 4,
+  "projectId": "ux-eedbdf55",
+  "revision": 5,
+  "name": "카피바라고 · 고유 프레임 제작본",
+  "entryScreen": "main",
+  "screens": [
+    {
+      "id": "main",
+      "name": "Page_Capybara_FrameLobby",
+      "kind": "page",
+      "purpose": "",
+      "elements": [
+        {
+          "id": "element-b6851301-a1df-4550-af46-9edb5c73dc50",
+          "name": "Group_Lobby_Scene 복사",
+          "kind": "panel",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#e8edf2",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "component": "game-ui",
+          "partRole": "container",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "rectTransform": {
+            "min": [
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "position": [
+              0,
+              0
+            ],
+            "sizeDelta": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "element-51337152-9870-43bd-9062-a3130c2c9007",
+          "parentId": "element-b6851301-a1df-4550-af46-9edb5c73dc50",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Lobby_Scene 복사",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "비조작 배경의 image",
+          "info": "실제 아이콘을 교체하는 이미지 부품",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-f5e5f59a05659a0f450222092912b937b8763526e6b89b457f067c850c47b50b.webp",
+            "sourceSize": [
+              942,
+              1670
+            ],
+            "alt": "새로 그린 카피바라고 로비 장면",
+            "fit": "cover"
+          }
+        }
+      ],
+      "logicalSize": {
+        "w": 504,
+        "h": 894
+      }
+    },
+    {
+      "id": "screen-bf2da781-431c-48e3-a6f9-8a90bd2e5c63",
+      "name": "Popup_Capybara_Calendar",
+      "kind": "modal",
+      "purpose": "",
+      "elements": [
+        {
+          "id": "element-b3c67cb0-ad27-42d7-ad82-37163a8460e0",
+          "parentId": "element-cbb9f0f7-4cc0-4a4c-a792-448dd19eee65",
+          "partRole": "image",
+          "kind": "image",
+          "name": "BG_Funds_Close 복사",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-c499a276e9e671a50841a90031926620eafb17606685ec1a816d2ad4baaeccee.webp",
+            "sourceSize": [
+              52,
+              52
+            ],
+            "alt": "Btn_Chests_Open",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-7e3309d0-2e7f-46bf-bff2-60f2ab8cb8ce",
+          "parentId": "element-cbb9f0f7-4cc0-4a4c-a792-448dd19eee65",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Calendar_Close",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "×",
+          "purpose": "텍스트 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 36,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "strokeWidth": 0,
+            "textColor": "#ffffff"
+          },
+          "typography": {
+            "weight": 700,
+            "lineHeight": 40,
+            "align": "center",
+            "wrap": "nowrap",
+            "strokeWidth": 1.2,
+            "strokeColor": "#20202b"
+          }
+        },
+        {
+          "id": "element-cf9b2ad7-9552-4d59-b814-f5c4ff735bc7",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Calendar_Dim",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-c6e84f423302d54fdf4e5409261581f1cdec848a9cd561b4c424574a5bc6c4c0.webp",
+            "sourceSize": [
+              32,
+              32
+            ],
+            "alt": "Btn_Chests_Open",
+            "fit": "fill"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "rectTransform": {
+            "min": [
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "position": [
+              0,
+              0
+            ],
+            "sizeDelta": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "element-cbb9f0f7-4cc0-4a4c-a792-448dd19eee65",
+          "partRole": "container",
+          "kind": "button",
+          "name": "Btn_Calendar_Close",
+          "x": 44.84126984126984,
+          "y": 88.81431767337807,
+          "w": 10.317460317460318,
+          "h": 5.8165548098434,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "component": "image-frame",
+          "rectTransform": {
+            "min": [
+              0.5,
+              0.5
+            ],
+            "max": [
+              0.5,
+              0.5
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "position": [
+              0,
+              -373
+            ],
+            "sizeDelta": [
+              52,
+              52
+            ]
+          }
+        },
+        {
+          "id": "element-3f2e6926-b9c8-4b67-ada9-fb99acdea04d",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Calendar_Panel",
+          "x": 5.9523809523809526,
+          "y": 11.6331096196868,
+          "w": 88.0952380952381,
+          "h": 72.7069351230425,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_Calendar_Panel",
+            "fit": "fill",
+            "assetRef": "sha256-38e758024349be0aa2dce64cae2e365258106cbf900ed20aabb9136d8aa13c3e.webp",
+            "sourceSize": [
+              444,
+              650
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "rectTransform": {
+            "min": [
+              0.5,
+              0.5
+            ],
+            "max": [
+              0.5,
+              0.5
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "position": [
+              0,
+              18.000000000000057
+            ],
+            "sizeDelta": [
+              444,
+              649.9999999999999
+            ]
+          }
+        },
+        {
+          "id": "element-00f1cfcc-024c-449d-b496-3685887df37e",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "Img_Calendar_Header",
+          "x": 3.1531531531531534,
+          "y": 2.1538461538461537,
+          "w": 93.69369369369369,
+          "h": 20.307692307692307,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "Img_Calendar_Header",
+            "fit": "fill",
+            "assetRef": "sha256-c781689ff90ca0f88ee6235bdd6b2c63518e3a3a7325d5d5c85e40007b184deb.webp",
+            "sourceSize": [
+              832,
+              264
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-3f2e6926-b9c8-4b67-ada9-fb99acdea04d"
+        },
+        {
+          "id": "element-8f474525-50b8-42f0-ab86-539375bfe24e",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Calendar_Dates",
+          "x": 3.1531531531531534,
+          "y": 23.076923076923077,
+          "w": 93.69369369369369,
+          "h": 10.76923076923077,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_Calendar_Dates",
+            "fit": "fill",
+            "assetRef": "sha256-32ce2da641d80c8debfdf9690c18429b3284868329c896cb2ff517834f7a431e.webp",
+            "sourceSize": [
+              416,
+              70
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-3f2e6926-b9c8-4b67-ada9-fb99acdea04d"
+        },
+        {
+          "id": "element-c88a73dd-c784-4bd4-8b71-d59a5d0920c4",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_Calendar_Grid",
+          "x": 3.1531531531531534,
+          "y": 34.46153846153846,
+          "w": 93.69369369369369,
+          "h": 60.30769230769231,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "alt": "BG_Calendar_Grid",
+            "fit": "fill",
+            "assetRef": "sha256-83df91921ca8f6e76b897c996b31ee21eaec443c66368e35674998f93e0c2f90.webp",
+            "sourceSize": [
+              416,
+              392
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "element-3f2e6926-b9c8-4b67-ada9-fb99acdea04d"
+        }
+      ],
+      "logicalSize": {
+        "w": 504,
+        "h": 894
+      },
+      "presentation": {
+        "effect": "fade",
+        "durationMs": 240,
+        "autoCloseMs": 0,
+        "dim": true,
+        "blocking": true,
+        "dismissOnEscape": true,
+        "closePolicy": "allow",
+        "type": "modal",
+        "rootMode": "fullscreen"
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "id": "element-cea41398-2eba-4150-98f3-d11db61327cc",
+      "fromScreen": "screen-bf2da781-431c-48e3-a6f9-8a90bd2e5c63",
+      "fromElement": "element-cbb9f0f7-4cc0-4a4c-a792-448dd19eee65",
+      "event": "click",
+      "action": "close",
+      "condition": "always",
+      "label": "골드 획득 방법 닫기",
+      "payload": {
+        "message": "시험 안내"
+      },
+      "returnPolicy": "미정"
+    }
+  ],
+  "fixtures": {
+    "balance": 0,
+    "items": []
+  },
+  "savedAt": "2026-11-17T12:18:31.037Z"
+}
