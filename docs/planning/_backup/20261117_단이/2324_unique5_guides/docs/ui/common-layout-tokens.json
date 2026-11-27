@@ -1,0 +1,857 @@
+{
+  "documentVersion": "2026-11-17.12",
+  "status": "제안(검수 대기)",
+  "owner": "codex(단이·2차)",
+  "project": "capybara-go",
+  "referenceCanvas": {
+    "w": 504,
+    "h": 894,
+    "meaning": "프로젝트 논리 좌표계. 개별 스크린샷의 부품 크기를 채택하는 기준이 아님."
+  },
+  "grid": {
+    "unit": 4,
+    "gapSmall": 8,
+    "gap": 16,
+    "outerMargin": 16
+  },
+  "commonRolePolicy": "같은 역할은 이 정본 tokenKey/variant/부모/앵커를 사용. 원본 이미지 크기 때문에 wrapper·아이콘 슬롯·글자 영역을 화면별로 바꾸지 않음. 명시 예외는 variant로 기록.",
+  "tokens": {
+    "hud.top": {
+      "height": 64,
+      "anchor": "화면 위·왼쪽 고정",
+      "contentInsetX": 16,
+      "avatarWrapper": 64,
+      "avatarArt": 48,
+      "currencyIcon": 28,
+      "currencyTextSize": 16,
+      "currencyLineHeight": 20,
+      "logicalWidth": 504,
+      "widthPolicy": "논리 폭504 고정, 기기 미리보기에서 비례 표시. 가변 논리 폭의 좌우 늘림 구현을 뜻하지 않음.",
+      "currencyWrapper": [
+        104,
+        64
+      ],
+      "currencyXs": [
+        192,
+        296,
+        400
+      ],
+      "currencyCapsuleRect": [
+        12,
+        10,
+        88,
+        28
+      ],
+      "currencyIconRect": [
+        0,
+        4,
+        28,
+        32
+      ],
+      "currencyLabelRect": [
+        28,
+        10,
+        72,
+        28
+      ],
+      "energyIconRect": [
+        6,
+        4,
+        28,
+        32
+      ]
+    },
+    "nav.bottom": {
+      "logicalWidth": 504,
+      "height": 92,
+      "anchor": "화면 아래·왼쪽 고정",
+      "items": 5,
+      "widthPolicy": "논리 폭504 고정·기기 비례 표시",
+      "variants": {
+        "inactive": {
+          "w": 86,
+          "h": 92,
+          "iconRect": [
+            7,
+            8,
+            72,
+            72
+          ],
+          "label": "비선택 시 숨김"
+        },
+        "active": {
+          "w": 160,
+          "h": 92,
+          "iconRect": [
+            20,
+            -16,
+            120,
+            96
+          ],
+          "labelRect": [
+            0,
+            66,
+            160,
+            26
+          ],
+          "fontSize": 20,
+          "fontWeight": 700,
+          "lineHeight": 24
+        }
+      },
+      "lobbySlots": {
+        "shop": [
+          0,
+          0,
+          86,
+          92
+        ],
+        "equipment": [
+          86,
+          0,
+          86,
+          92
+        ],
+        "adventure": [
+          172,
+          0,
+          160,
+          92
+        ],
+        "talent": [
+          332,
+          0,
+          86,
+          92
+        ],
+        "chest": [
+          418,
+          0,
+          86,
+          92
+        ]
+      },
+      "badgeRect": [
+        62,
+        4,
+        22,
+        24
+      ],
+      "policy": "선택 상태의 폭/돌출과 비선택 상태를 별도 공통 variant로 적용. 모든 슬롯 동일폭 강제 금지.",
+      "selectionPolicy": "현재 클릭해 선택한 메뉴 하나가 active160×92, 나머지 inactive86×92. 페이지 전환 후에도 선택 표시 유지. pressed 동안만 커지는 효과와 구분. 순서별 x누적합으로 총504 유지.",
+      "selectedLayouts": {
+        "shop": [
+          {
+            "role": "shop",
+            "x": 0,
+            "w": 160,
+            "h": 92
+          },
+          {
+            "role": "equipment",
+            "x": 160,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "adventure",
+            "x": 246,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "talent",
+            "x": 332,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "chest",
+            "x": 418,
+            "w": 86,
+            "h": 92
+          }
+        ],
+        "equipment": [
+          {
+            "role": "shop",
+            "x": 0,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "equipment",
+            "x": 86,
+            "w": 160,
+            "h": 92
+          },
+          {
+            "role": "adventure",
+            "x": 246,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "talent",
+            "x": 332,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "chest",
+            "x": 418,
+            "w": 86,
+            "h": 92
+          }
+        ],
+        "adventure": [
+          {
+            "role": "shop",
+            "x": 0,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "equipment",
+            "x": 86,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "adventure",
+            "x": 172,
+            "w": 160,
+            "h": 92
+          },
+          {
+            "role": "talent",
+            "x": 332,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "chest",
+            "x": 418,
+            "w": 86,
+            "h": 92
+          }
+        ],
+        "talent": [
+          {
+            "role": "shop",
+            "x": 0,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "equipment",
+            "x": 86,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "adventure",
+            "x": 172,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "talent",
+            "x": 258,
+            "w": 160,
+            "h": 92
+          },
+          {
+            "role": "chest",
+            "x": 418,
+            "w": 86,
+            "h": 92
+          }
+        ],
+        "chest": [
+          {
+            "role": "shop",
+            "x": 0,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "equipment",
+            "x": 86,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "adventure",
+            "x": 172,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "talent",
+            "x": 258,
+            "w": 86,
+            "h": 92
+          },
+          {
+            "role": "chest",
+            "x": 344,
+            "w": 160,
+            "h": 92
+          }
+        ]
+      },
+      "layerPolicy": "Nav 화면직속 부모를 message보다 앞에 두어 돌출 active art가 알림/메시지 창에 가리지 않음. 자식만 앞으로 바꿔 부모 stacking 순서를 해결했다고 가정하지 않음."
+    },
+    "event.side": {
+      "wrapperW": 72,
+      "artRect": [
+        4,
+        0,
+        64,
+        64
+      ],
+      "badgeRect": [
+        52,
+        0,
+        20,
+        22
+      ],
+      "fontSize": 12,
+      "fontWeight": 700,
+      "lineHeight": 14,
+      "left": {
+        "columnRect": [
+          4,
+          164,
+          72,
+          380
+        ],
+        "slotH": 72,
+        "ys": [
+          0,
+          72,
+          144,
+          216,
+          288
+        ],
+        "labelRect": [
+          0,
+          56,
+          72,
+          16
+        ],
+        "expandRect": [
+          0,
+          360,
+          72,
+          20
+        ]
+      },
+      "right": {
+        "columnRect": [
+          428,
+          96,
+          72,
+          368
+        ],
+        "regularSlotH": 76,
+        "ys": [
+          0,
+          76,
+          152,
+          228,
+          296
+        ],
+        "labelRect": [
+          0,
+          58,
+          72,
+          18
+        ],
+        "marathon": {
+          "h": 68,
+          "artRect": [
+            4,
+            0,
+            64,
+            48
+          ],
+          "labelRect": [
+            6,
+            34,
+            60,
+            32
+          ]
+        },
+        "wheel": {
+          "h": 56,
+          "artRect": [
+            4,
+            0,
+            64,
+            56
+          ]
+        },
+        "expandRect": [
+          0,
+          352,
+          72,
+          16
+        ]
+      },
+      "anchor": "위·왼쪽 고정, 같은 family/variant의 내부규격 반복",
+      "unobservedCaptions": [
+        "epic-offer",
+        "wheel"
+      ]
+    },
+    "action.primary": {
+      "w": 216,
+      "h": 80,
+      "anchor": "화면 아래·왼쪽 고정",
+      "referenceRect": [
+        144,
+        670,
+        216,
+        80
+      ],
+      "bottomOffsetFormula": "nav.bottom.height + message.bottom.h + 20",
+      "inputFixed": true,
+      "fixedRimRect": [
+        0,
+        0,
+        216,
+        80
+      ],
+      "frontGroupRect": [
+        0,
+        0,
+        216,
+        72
+      ],
+      "labelRect": [
+        0,
+        4,
+        216,
+        40
+      ],
+      "fontSize": 34,
+      "fontWeight": 800,
+      "lineHeight": 38,
+      "costIconRect": [
+        80,
+        48,
+        18,
+        20
+      ],
+      "costTextRect": [
+        102,
+        46,
+        36,
+        24
+      ],
+      "costFont": 18,
+      "costLineHeight": 22,
+      "buttonState": "native tint targetGraphic=Front image, pressFeedback target=FrontGroup, enabled true,distance3,shadow #000/.12/0/1/1. 루트입력/고정림은 움직이지 않음. 실제 mouse/Space held·release·blur r45 확인."
+    },
+    "action.secondary": {
+      "w": 88,
+      "h": 80,
+      "y": 670,
+      "xs": [
+        0,
+        416
+      ],
+      "anchor": "화면 아래·왼쪽 고정",
+      "artRect": [
+        4,
+        -4,
+        80,
+        72
+      ],
+      "labelRect": [
+        0,
+        56,
+        88,
+        24
+      ],
+      "fontSize": 18,
+      "lineHeight": 22,
+      "badgeRect": [
+        64,
+        0,
+        22,
+        24
+      ]
+    },
+    "control.close": {
+      "wrapperW": 64,
+      "wrapperH": 64,
+      "glyphW": 44,
+      "glyphH": 44,
+      "glyphFont": 36,
+      "anchor": "정의된 팝업 footer 또는 우상단; variant명시"
+    },
+    "badge.notification": {
+      "size": 28,
+      "zeroHidden": true,
+      "canonicalOwner": "부모 1개",
+      "backgroundAndTextSeparate": true
+    },
+    "font.body": {
+      "size": 16,
+      "weight": 600,
+      "lineHeight": 20
+    },
+    "font.section": {
+      "size": 24,
+      "weight": 800,
+      "lineHeight": 28
+    },
+    "message.bottom": {
+      "w": 504,
+      "h": 32,
+      "anchor": "아래·왼쪽 고정",
+      "bottomOffset": 92,
+      "iconRect": [
+        16,
+        4,
+        24,
+        24
+      ],
+      "text": "관찰된 메시지 없음·임의 내용 만들지 않음",
+      "interaction": "미관찰·표시만"
+    },
+    "menu.list": {
+      "wrapper": [
+        72,
+        64
+      ],
+      "referenceRect": [
+        16,
+        96,
+        72,
+        64
+      ],
+      "iconRect": [
+        12,
+        8,
+        48,
+        48
+      ],
+      "anchor": "上·왼쪽 고정",
+      "backgroundSeparate": true
+    },
+    "action.quick": {
+      "rects": [
+        [
+          8,
+          552,
+          72,
+          76
+        ],
+        [
+          136,
+          552,
+          72,
+          76
+        ],
+        [
+          216,
+          552,
+          72,
+          76
+        ],
+        [
+          296,
+          552,
+          72,
+          76
+        ]
+      ],
+      "anchor": "아래·왼쪽 고정",
+      "artRect": [
+        4,
+        0,
+        64,
+        64
+      ],
+      "labelRect": [
+        0,
+        58,
+        72,
+        18
+      ],
+      "fontSize": 12,
+      "lineHeight": 14,
+      "badgeRect": [
+        52,
+        0,
+        20,
+        22
+      ],
+      "homeBadge": false
+    },
+    "chapter.title": {
+      "rect": [
+        96,
+        88,
+        312,
+        44
+      ],
+      "fontSize": 32,
+      "fontWeight": 800,
+      "lineHeight": 40,
+      "strokeWidth": 2.5,
+      "strokeColor": "#172327"
+    },
+    "chapter.record": {
+      "labelRect": [
+        140,
+        132,
+        164,
+        28
+      ],
+      "valueRect": [
+        304,
+        132,
+        48,
+        28
+      ],
+      "fontSize": 18,
+      "lineHeight": 24,
+      "valueColor": "#ffdc39",
+      "source": "C01 표시용 fixture; 게임 발란스 수치 생성 아님"
+    },
+    "hud.compact": {
+      "variant": "equipment/shop",
+      "logicalWidth": 504,
+      "height": 40,
+      "currencyXs": [
+        8,
+        112,
+        216,
+        320
+      ],
+      "wrapper": [
+        104,
+        40
+      ],
+      "capsuleRect": [
+        12,
+        8,
+        88,
+        24
+      ],
+      "iconRect": [
+        0,
+        2,
+        28,
+        32
+      ],
+      "labelRect": [
+        28,
+        6,
+        72,
+        28
+      ],
+      "fontSize": 16,
+      "lineHeight": 20
+    },
+    "shop.tabs": {
+      "rect": [
+        0,
+        732,
+        504,
+        70
+      ],
+      "anchor": "왼쪽 아래 고정",
+      "selectedColor": "#f6ba22",
+      "inactiveColor": "#302627",
+      "labelSize": 14,
+      "inputBackgroundLabel": "native별도부품"
+    },
+    "shop.content": {
+      "viewport": [
+        0,
+        40,
+        504,
+        692
+      ],
+      "anchor": "세로 늘림",
+      "content": [
+        0,
+        0,
+        504,
+        1540
+      ],
+      "contentAnchor": "가로 늘림",
+      "sourceReference": "C03_01/02/03",
+      "scrollbar": "native기본표시·숨김미구현"
+    },
+    "hud.compact.three": {
+      "extends": "hud.compact",
+      "variant": "talents",
+      "height": 40,
+      "currencyXs": [
+        8,
+        112,
+        216
+      ],
+      "logicalWidth": 504,
+      "energyShown": false
+    },
+    "talent.card": {
+      "size": [
+        132,
+        180
+      ],
+      "xs": [
+        28,
+        188,
+        348
+      ],
+      "y": 578,
+      "anchor": "왼쪽 아래 고정",
+      "gapToNav": 44
+    },
+    "chest.tab": {
+      "size": [
+        90,
+        52
+      ],
+      "xs": [
+        8,
+        108,
+        208,
+        308,
+        408
+      ],
+      "y": 684,
+      "anchor": "왼쪽 아래 고정",
+      "artRect": [
+        8,
+        -20,
+        74,
+        52
+      ],
+      "labelRect": [
+        0,
+        30,
+        90,
+        28
+      ],
+      "gapToNav": 66,
+      "sameForAllFive": true
+    },
+    "modal.gold-source": {
+      "panelRect": [
+        28,
+        122,
+        448,
+        602
+      ],
+      "closeRect": [
+        226,
+        748,
+        52,
+        52
+      ],
+      "anchorBoth": "가운데 고정",
+      "gap": 24
+    },
+    "scroll.content-width": {
+      "logicalWidth": 504,
+      "scrollbar": "hidden",
+      "overflowY": "auto",
+      "nativeSetting": "숨김 · 스크롤 유지",
+      "equipmentCardWidth": 92
+    },
+    "privilege.card": {
+      "width": 464,
+      "left": 20,
+      "rewardSize": [
+        56,
+        56
+      ],
+      "purchaseSize": [
+        152,
+        58
+      ],
+      "scrollContentHeight": 1652,
+      "footerHeight": 88
+    },
+    "modal.fund": {
+      "panel": [
+        25,
+        148,
+        454,
+        588
+      ],
+      "close": [
+        226,
+        750,
+        52,
+        52
+      ],
+      "anchorBoth": "가운데 고정",
+      "gap": 14,
+      "cardSize": [
+        424,
+        148
+      ],
+      "cardGap": 12,
+      "fourthOnlyObservedHeight": 36
+    }
+  },
+  "validation": [
+    "동일 tokenKey/variant의 논리 rect·글자/아이콘 슬롯·앵커 일치",
+    "화면별 top/bottom/left/right 기준선 비교",
+    "390/430에서 같은 비율·안전영역·하단접근·실제입력영역 확인",
+    "일반그림 contain/region으로 원비율; resource canvas크기로 UI wrapper변경금지",
+    "기본/기기왕복 후 설계원본 보존",
+    "캡처의 가시bbox/게임관찰값과 공통 UI 토큰 분리",
+    "같은 색이라도 전체+200~300% 확대에서 밑판/프레임/선택상태/메시지바 누락을 별도 비교",
+    "선택/비선택 variant·meaningful alpha bbox·고정 입력/림과 이동 앞면 그룹을 따로 검수"
+  ],
+  "unimplemented": "현재 캔버스사본 ux-gjs-525651fd r2·160부품/1화면/전환0. 모험 active와 메시지 앞 레이어만 실제 적용. 다른 메뉴 선택/페이지 연결은 다음 화면 제작 시 구현·실검수 필요. 원본 ux-e7ee9590 r47 보존.",
+  "commonGuide": "src/tools/uxStudio/guide/COMMON_UI_RULES.md @ 2026-11-17.22",
+  "safeAreaStatus": "기기별 안전영역 수치 미정·실기기 검수 미완료. 하단바 기준선 실측을 안전영역 검수로 대체하지 않음.",
+  "visualReviewGuide": "docs/ui/visual-review-and-lessons.md",
+  "currentNative": {
+    "document": "ux-gjs-525651fd",
+    "revision": 333,
+    "screens": 17,
+    "parts": 1661,
+    "transitions": 101,
+    "distinctAnalyzedUIBuiltAndUnitReviewed": 10,
+    "partialUnit": {
+      "id": "C11",
+      "savedParts": 52,
+      "status": "partial canonical save"
+    },
+    "analysisUnits": 28
+  },
+  "pendingNativeExport": {
+    "path": "_작업/codex/seven01/native-unsaved-export-v002.json",
+    "nativeExportUnmodified": true,
+    "revisionLabel": 333,
+    "canonicalSaveSucceeded": false,
+    "screens": 17,
+    "parts": 1712,
+    "transitions": 102,
+    "C11Parts": 103,
+    "reason": "formatted JSON > 2000000 bytes"
+  },
+  "preparedOnly": {
+    "C12": {
+      "assets": 12,
+      "nativeAssembled": false
+    },
+    "C13": {
+      "assets": 21,
+      "nativeAssembled": false
+    }
+  }
+}

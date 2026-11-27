@@ -1,0 +1,496 @@
+{
+  "schemaVersion": 1,
+  "format": "common-ui-rules-and-tokens-proposal",
+  "status": "draft_for_review",
+  "intendedGuideVersion": "2026-11-17.22",
+  "createdAtKST": "2026-11-17T11:26:50.775170+09:00",
+  "author": "codex(단이)",
+  "authorization": {
+    "requestedOutputs": [
+      "common-ui-rules-draft.md",
+      "common-ui-rules-draft.json"
+    ],
+    "productGuideIndexUIOrDesignWritesAllowed": false,
+    "scope": "7018 only; 7007 access/integration/list/card/QA excluded",
+    "automation": "ui PAUSED; no restart/new schedule/deadline",
+    "usage": "explicit 90-percent cap lift; no invented replacement cap/reset/purchase"
+  },
+  "provenance": {
+    "userFeedback": "본체가 전달한 현중 직접 피드백: 하단선 불일치, X 뒤 바탕 제거, 동일 family의 상하단 위치/크기는 공통가이드 우선, 경험/검증 방법 공유와 규칙화, 2차와 독립 지식 공유.",
+    "numericExamples": "본체가 초안에 지정한 Monopoly-specific 제안 예제; 아직 개별 token 최종 사용자 컨펌 기록은 없음.",
+    "currentModelBasis": {
+      "projectId": "ux-gjs-0d80d7fe",
+      "observedRevision": 248,
+      "logicalSize": [
+        551,
+        984
+      ],
+      "entrySafeAreaField": "absent; do not silently convert absence to approved zero in the proposal"
+    }
+  },
+  "canonicalPlan": {
+    "rulesDocument": "COMMON_UI_RULES.md",
+    "tokensDocument": "TOKENS.json",
+    "publishState": "not_created_not_registered",
+    "owner": "대표 본체가 확정 뒤 단일 정본에 직접 병합",
+    "noPerGuideCopies": true,
+    "preserve": [
+      "VIDEO_UI_WORKFLOW.md",
+      "index existing 8 sections",
+      "project guide .4",
+      "historical evidence and original assets"
+    ],
+    "sharing": "2차와 규칙·근거·경험만 공유; workspace/design/tab/source/asset 소유와 편집은 독립"
+  },
+  "resolutionOrder": [
+    "latest direct user instruction",
+    "common invariant rules",
+    "project logicalBasis and safeArea",
+    "same-family outerBox/iconBox/text/line/badge tokens",
+    "declared component variant",
+    "screen instance derived from references",
+    "actual QA and user confirmation"
+  ],
+  "schemaContract": {
+    "projectRequired": [
+      "id",
+      "logicalBasis",
+      "safeArea",
+      "families",
+      "variants"
+    ],
+    "familyRequired": [
+      "outerBox",
+      "iconBox",
+      "text",
+      "line",
+      "badge"
+    ],
+    "variantRequired": [
+      "family",
+      "placement",
+      "allowedDifferences",
+      "forbiddenOverrides"
+    ],
+    "experienceRequired": [
+      "failureOrSuccess",
+      "causeState",
+      "cause",
+      "correctionOrMethod",
+      "verification",
+      "evidence",
+      "limitations",
+      "userConfirmation",
+      "promotionState"
+    ],
+    "nullMeaning": "미정/미확인. 0/기본값/스크린샷별 임의값으로 바꾸지 않음. 구현에 필요한 미정 token은 프로필에서 먼저 결정.",
+    "tokenRefFormat": "dot-separated path inside this JSON; data proposal only, no runtime resolver implemented",
+    "screenOverridePolicy": "common family size/baseline overrides forbidden; a new declared/approved variant or token revision is required"
+  },
+  "rules": [
+    {
+      "id": "COMMON-FIRST",
+      "rule": "동일 family의 크기·기준선은 프로젝트 토큰을 먼저 따른다. 화면별 screenshot 측정값으로 조용히 덮어쓰지 않는다.",
+      "verify": "같은 family instance의 tokenRef와 논리 outer/icon/text/line/badge 값을 비교한다."
+    },
+    {
+      "id": "PROJECT-PROFILE",
+      "rule": "logical basis와 safe area를 프로젝트별로 정의한 뒤 family를 만든다. 다른 프로젝트 숫자를 강제하지 않는다.",
+      "verify": "workspace/project/profile 식별, basis/safe-area 출처와 미정값을 확인한다."
+    },
+    {
+      "id": "VARIANT-DECLARED",
+      "rule": "위치·내용 차이는 명시한 component variant로 표현한다. 같은 family의 공통 치수는 유지한다.",
+      "verify": "variant의 허용 차이와 금지 override를 확인하고 미등록 화면별 예외를 찾는다."
+    },
+    {
+      "id": "SCREENSHOT-EVIDENCE",
+      "rule": "screenshot/영상은 구성·모티프·관찰 문구의 근거다. 승인한 공통 size/기준선 override의 근거가 아니다.",
+      "verify": "관찰값과 토큰값을 별도 칸으로 남기고 충돌 시 공통 규칙을 적용한다."
+    },
+    {
+      "id": "GLYPH-ALPHA",
+      "rule": "불필요한 불투명 바탕이 붙은 icon/×를 사용하지 않는다. native glyph 또는 실제 투명 자원을 사용한다.",
+      "verify": "실제 PNG/WebP RGBA·바깥 alpha·실루엣을 보고 baked 배경과 native appearance를 구분한다."
+    },
+    {
+      "id": "SEPARATE-CONTAINER",
+      "rule": "의도한 container BG/fill/frame은 별도 native9/3slice 부품이며 icon 파일이나 Close hit 영역에 붙이지 않는다.",
+      "verify": "계층·assetRef·skin/appearance를 검사한다. 현 요청의 Close hit 배경은 없음이다."
+    },
+    {
+      "id": "ENGINE-SHADOW",
+      "rule": "외부 cast shadow는 엔진 효과로 분리한다. 그림에 구운 외부 그림자로 규칙을 대신하지 않는다.",
+      "verify": "효과 설정과 실제 자원 alpha, pressed/disabled 합성을 따로 확인한다."
+    },
+    {
+      "id": "NATIVE-COMMIT",
+      "rule": "현재 AX setValue+Tab으로 일반 속성을 확정한다. rectPx는 수치 적용 버튼이 있는 별도 경로다.",
+      "verify": "선택 ID·재표시·저장/재열기·Undo 값을 확인한다. fill 화면값만으로 성공을 판단하지 않는다."
+    },
+    {
+      "id": "ACTUAL-QA",
+      "rule": "저장/정적/HTTP/실화면/사용자 컨펌을 구분한다. mouse·keyboard·초점·scroll·안정 frame·CSS/PIL을 실제 확인한다.",
+      "verify": "popup명/overflow/loading/failed·논리값/기기별 기준선·동일 family 비교 증거를 남긴다."
+    },
+    {
+      "id": "EXPERIENCE-TO-RULE",
+      "rule": "실패와 잘된 방법을 원인 상태·수정·검증·한계·사용자 컨펌과 함께 공유하고 검증된 규칙으로 승격한다.",
+      "verify": "경험 ledger → 근거검토 → 프로젝트 QA → 사용자 특정판 컨펌 → 본체의 단일정본 병합 순서를 확인한다."
+    }
+  ],
+  "profiles": {
+    "monopoly-go": {
+      "id": "monopoly-go",
+      "status": "root_requested_draft_example",
+      "logicalBasis": {
+        "value": [
+          551,
+          984
+        ],
+        "unit": "logical px",
+        "source": "existing r248 model + root proposal"
+      },
+      "safeArea": {
+        "value": null,
+        "status": "needs explicit project-profile decision",
+        "source": "r248 entry field absent; current rendering default is not a confirmed token"
+      },
+      "families": {
+        "navigationAction": {
+          "outerBox": {
+            "size": [
+              44,
+              44
+            ]
+          },
+          "iconBox": {
+            "size": [
+              28,
+              28
+            ],
+            "align": [
+              "center",
+              "center"
+            ],
+            "innerPadding": [
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "text": {
+            "nativeCloseGlyph": "×",
+            "fontSize": 28,
+            "lineHeight": null,
+            "align": "center",
+            "vertical": "middle"
+          },
+          "line": null,
+          "badge": null,
+          "hitBackground": "none",
+          "glyphAssetAlternative": "true-transparent RGBA only",
+          "externalCastShadow": "engine only"
+        },
+        "systemFooter": {
+          "outerBox": {
+            "size": [
+              551,
+              60
+            ],
+            "widthPolicy": "follow profile logical width",
+            "anchor": "bottom-stretch",
+            "bottomOffset": 0,
+            "anchorReference": "project safe-area contract, to be resolved"
+          },
+          "iconBox": {
+            "tokenRef": "profiles.monopoly-go.families.navigationAction.iconBox"
+          },
+          "text": {
+            "tokenRef": "profiles.monopoly-go.families.navigationAction.text"
+          },
+          "line": {
+            "thickness": 6,
+            "length": null,
+            "color": null,
+            "positionWithinFooter": null,
+            "interpretation": "root line6 recorded as logical thickness6 in this draft; remaining line geometry must be fixed once in this family"
+          },
+          "badge": null,
+          "containerBackground": "separate only if intentional; no icon/hit-area baked backing"
+        },
+        "topShell": {
+          "outerBox": {
+            "rect": [
+              9,
+              12,
+              536,
+              94
+            ],
+            "anchor": "top-left",
+            "unit": "logical px"
+          },
+          "iconBox": null,
+          "text": null,
+          "line": null,
+          "badge": null,
+          "barLocal": {
+            "coordinateOrigin": "topShell.outerBox",
+            "rect": null,
+            "rule": "bar children use outer-local coordinates; no second independent screen-space outline"
+          }
+        }
+      },
+      "variants": {
+        "footer-common": {
+          "family": "systemFooter",
+          "placement": "bottom-stretch, bottom0",
+          "allowedDifferences": [
+            "content/action presence permitted by actual screen"
+          ],
+          "forbiddenOverrides": [
+            "outer width/height",
+            "bottom baseline",
+            "line thickness",
+            "shared action hit/glyph sizes"
+          ]
+        },
+        "top-main-default": {
+          "family": "topShell",
+          "placement": "profile topShell rect",
+          "allowedDifferences": [
+            "native content values"
+          ],
+          "forbiddenOverrides": [
+            "outer outline size",
+            "outer origin",
+            "independent screen-space bar coordinates"
+          ]
+        },
+        "top-build-body": {
+          "family": "topShell",
+          "placement": "same profile topShell outer outline",
+          "allowedDifferences": [
+            "Build body/content/palette as declared variant"
+          ],
+          "forbiddenOverrides": [
+            "shared outline size",
+            "shared outer baseline"
+          ]
+        },
+        "tycoon-close-floating-bottom": {
+          "family": "navigationAction",
+          "placement": "bottom-center floating",
+          "outerInset": null,
+          "glyph": "×",
+          "hitBackground": "none",
+          "allowedDifferences": [
+            "placement family"
+          ],
+          "forbiddenOverrides": [
+            "44x44 hit",
+            "28x28 glyph",
+            "8 inner padding"
+          ]
+        },
+        "racing-close-top-right": {
+          "family": "navigationAction",
+          "placement": "top-right",
+          "outerInset": null,
+          "glyph": "×",
+          "hitBackground": "none",
+          "allowedDifferences": [
+            "placement family"
+          ],
+          "forbiddenOverrides": [
+            "44x44 hit",
+            "28x28 glyph",
+            "8 inner padding"
+          ]
+        },
+        "album-back-top": {
+          "family": "navigationAction",
+          "placement": "top back region",
+          "outerInset": null,
+          "glyphRole": "back-arrow; exact native glyph not specified here",
+          "hitBackground": "none",
+          "allowedDifferences": [
+            "back glyph/action",
+            "placement family"
+          ],
+          "forbiddenOverrides": [
+            "44x44 hit",
+            "28x28 glyph",
+            "8 inner padding"
+          ]
+        }
+      },
+      "approval": {
+        "userConfirmation": null,
+        "canonicalTokenVersion": null,
+        "actualNormalizationQA": "not performed by draft author"
+      }
+    },
+    "capybara-go": {
+      "id": "capybara-go",
+      "status": "own profile required; no Monopoly numeric inheritance",
+      "logicalBasis": {
+        "value": null,
+        "source": "video/project analysis then explicit profile decision"
+      },
+      "safeArea": {
+        "value": null,
+        "source": "own project decision"
+      },
+      "families": {},
+      "variants": {},
+      "inherits": "common invariant rules only",
+      "forbiddenInheritance": "Monopoly551/984/60/44/28/9/12/536/94 values are not defaults for this project",
+      "approval": {
+        "userConfirmation": null,
+        "canonicalTokenVersion": null
+      }
+    }
+  },
+  "experienceLedger": [
+    {
+      "id": "EXP-FOOTER",
+      "failureOrSuccess": "현중이 동일 family 하단선/상하단 위치·크기 불일치를 지적",
+      "causeState": "hypothesis_pending_comparison",
+      "cause": "화면별 screenshot 좌표를 공통 family token보다 우선한 분산 제작 가능성; 현재 draft에서 원인 확정 검사하지 않음",
+      "correctionOrMethod": "project profile/family/variant 기준을 먼저 확정하고 instance를 참조 방식으로 정규화",
+      "verification": [
+        "같은 family token/논리 baseline 비교",
+        "기기별 CSS scale 적용 후 실제 기준선·크기 비교",
+        "사용자 해당판 컨펌"
+      ],
+      "evidence": [
+        "root-relayed direct feedback; new normalization QA pending"
+      ],
+      "limitations": "어느 화면의 어떤 필드가 원인인지 이번 파일 작업에서 진단/수정하지 않음",
+      "userConfirmation": null,
+      "promotionState": "draft_rule"
+    },
+    {
+      "id": "EXP-X-BACKGROUND",
+      "failureOrSuccess": "현중이 X 뒤 붙은 바탕 제거 요청",
+      "causeState": "unverified_source_of_backing",
+      "cause": "raster baked opaque BG인지 native appearance/skin인지 분리 확인 필요",
+      "correctionOrMethod": "실제 RGBA/alpha 검사, native glyph 또는 투명 icon, Close hit BG없음; intentional container fill/frame 별도",
+      "verification": [
+        "production PNG/WebP 직접 decode/view",
+        "outer alpha와 silhouette 확인",
+        "native appearance/skin/computed BG 확인",
+        "mouse/keyboard/focus/Undo"
+      ],
+      "evidence": [
+        "root-relayed direct feedback"
+      ],
+      "limitations": "alpha channel 존재만으로 투명 cutout을 통과시키지 않음; 실제 수정/시각 승인 대기",
+      "userConfirmation": null,
+      "promotionState": "draft_rule"
+    },
+    {
+      "id": "EXP-COPY-ZORDER",
+      "failureOrSuccess": "Racing 복제Close에 edge 동반/부모변경 뒤 Panel에 Close가 가려짐",
+      "causeState": "observed",
+      "cause": "bundle은 연결도 복사하며 reparent는 형제 paint 순서를 바꾸지 않음",
+      "correctionOrMethod": "기존 copied Close edge 역할명 정리, 중복 edge 금지; native Frame/TextClose/Close front 순서 확인",
+      "verification": [
+        "actual click/Enter/Space/Escape and SALE focus",
+        "saved existing edges preservation"
+      ],
+      "evidence": [
+        "docs/evidence/20261117-racing09/browser-checks.json",
+        "docs/evidence/20261117-racing09/file-verification.json"
+      ],
+      "limitations": "다른 화면이 자동 정규화되었다는 뜻 아님",
+      "userConfirmation": null,
+      "promotionState": "tested_method_pending_canonical_confirmation"
+    },
+    {
+      "id": "EXP-NATIVE-NUMBERS",
+      "failureOrSuccess": "일반 numeric fill 표시가 바뀌어도 model 확정이 안 된 사례와 AX 입력 방법",
+      "causeState": "observed_contract",
+      "cause": "일반 inspector와 명시 수치 적용 경로의 commit 차이",
+      "correctionOrMethod": "current AX setValue+Tab; rectPx는 수치 적용 버튼 경로 유지",
+      "verification": [
+        "selection ID",
+        "재표시/저장/재열기",
+        "Undo"
+      ],
+      "evidence": [
+        "_작업/codex/ux-studio/browser-ui-helpers.mjs",
+        "_작업/codex/ux-studio/main05-ui-assembly.mjs"
+      ],
+      "limitations": "모든 필드/앱에서 fill을 금지하는 규칙으로 일반화하지 않음",
+      "userConfirmation": null,
+      "promotionState": "tested_method_pending_canonical_confirmation"
+    },
+    {
+      "id": "EXP-QA-TARGET",
+      "failureOrSuccess": "Racing 파일명1440의 실제 CSS가 달랐고 1920중간본 대상이 Wins였음",
+      "causeState": "observed",
+      "cause": "요청 viewport/실제 selected tab/page zoom와 preview 대상의 차이",
+      "correctionOrMethod": "실제 popup/안정 opacity/loading/CSS/PIL 확인 후 캡처 채택; 중간본 보존",
+      "verification": [
+        "target name",
+        "measured viewport",
+        "failed/loading/overflow",
+        "Pillow dimensions"
+      ],
+      "evidence": [
+        "docs/evidence/20261117-racing09/browser-checks.json"
+      ],
+      "limitations": "파일명/요청 크기만으로 통과 선언하지 않음",
+      "userConfirmation": null,
+      "promotionState": "tested_method_pending_canonical_confirmation"
+    },
+    {
+      "id": "EXP-POINTER-SCROLL-UNDO",
+      "failureOrSuccess": "Tycoon keyboard 입구는 동작했으나 BG/Frame이 mouse를 가로챔; 보완 뒤 pointer/scroll/Undo 확인",
+      "causeState": "observed",
+      "cause": "exact two Main decoration interaction modes none required parent forwarding",
+      "correctionOrMethod": "두 기존ID mode만 none→parent; header/self 고정·목록45pxscroll·아치64→0→Undo64 별도 검증",
+      "verification": [
+        "pointer click and trigger focus",
+        "Space/Escape/Tabtrap",
+        "scrollTop0→45 header/self fixed",
+        "native Undo and saved values"
+      ],
+      "evidence": [
+        "docs/evidence/20261117-tycoon10/browser-checks.json",
+        "docs/evidence/20261117-tycoon10/file-verification.json"
+      ],
+      "limitations": "모든 decoration을 parent로 일괄변경하지 않음; 잘된 개별 방법을 검증 조건과 함께 재사용",
+      "userConfirmation": null,
+      "promotionState": "tested_method_pending_canonical_confirmation"
+    }
+  ],
+  "promotionLifecycle": [
+    "record observation and cause state",
+    "attach reproducible method/evidence/limitations",
+    "compare with current common rules and affected project tokens",
+    "actual native QA at declared device/viewport + Undo/preservation",
+    "share once through owner; keep independent workspace edits",
+    "user confirms specific rule/token version with evidence",
+    "root merges COMMON_UI_RULES + TOKENS single canonical pair and preserves previous versions"
+  ],
+  "verificationState": {
+    "draftOnly": true,
+    "newUIAssembly": false,
+    "browserQAByThisAuthor": false,
+    "assetAlphaInspectionForNewFeedbackByThisAuthor": false,
+    "canonicalPublished": false,
+    "userConfirmed": false
+  },
+  "localDraftValidation": {
+    "JSONParsed": true,
+    "tokenRefsResolved": 2,
+    "variantFamilyRefsResolved": 6,
+    "hitGlyphPaddingEquation": "44 - 2*8 = 28",
+    "capybaraNumericProfileNotInvented": true,
+    "noCanonicalOrUICompletionClaim": true
+  }
+}

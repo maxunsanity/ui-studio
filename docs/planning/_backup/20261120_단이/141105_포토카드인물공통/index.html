@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>포토카드 · 2차 작업 명세</title>
+<style>
+:root{font:15px/1.65 system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;color:#24313d;background:#f4f6f8}*{box-sizing:border-box}main{max-width:1040px;margin:24px auto;padding:0 18px 40px}h1{margin:.25em 0;font-size:clamp(23px,4vw,35px)}h2{margin:0 0 10px;font-size:20px}a{color:#554399}nav{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}section{border:1px solid #d3dce4;border-radius:10px;background:white;margin:12px 0;padding:16px;scroll-margin-top:12px}section:target{outline:2px solid #6654bc}img{width:100%;height:auto;border:1px solid #d3dce4}figure{margin:0}figcaption{margin-bottom:8px;font-weight:650}.phone{max-width:390px}table{border-collapse:collapse;width:100%}th,td{padding:7px 9px;border-bottom:1px solid #dce2e7;text-align:left;vertical-align:top}.muted{color:#586676}p{margin:0 0 .65em}
+</style>
+<main>
+<header>
+<h1>포토카드 · 2차 작업 명세</h1>
+<p class="muted">케이팝몬스터즈 · 검수안 · 390 × 844</p>
+<nav aria-label="포토카드 명세 목차">
+<a href="../kpop-planning/index.html?doc=P265#photocard">UI 기획서</a>
+<a href="#overview">캔버스</a><a href="#layout">1차 영역</a><a href="#main-list">메인 목록</a><a href="#person">사람 보기</a><a href="#team">팀 보기</a><a href="#business">명함집</a><a href="#common">공통 창</a><a href="#states">동작 상태</a>
+</nav>
+</header>
+<section id="overview">
+<h2>전체 캔버스</h2>
+<p>목록·아이돌·스태프·팀·명함집을 대표 화면으로 두고, 반복되는 상태는 부품 보드에 모았습니다.</p>
+<p><a href="/ui-studio/canvas.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6b577b09&amp;screen=list&amp;view=detailed-wireframe&amp;layout=grid" target="_blank" rel="noopener">포토카드 전체 캔버스 열기</a> · <a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6b577b09" target="_blank" rel="noopener">동작 미리보기</a></p>
+</section>
+<section id="layout">
+<h2>1차 · 와이어프레임</h2>
+<table><tr><th>영역</th><th>기준</th></tr><tr><td>제목 줄</td><td>y 0~51</td></tr><tr><td>책갈피와 본문</td><td>y 51~698. 목록은 분류 책갈피와 배치 현황, 사람 보기는 능력과 카드 책갈피</td></tr><tr><td>현재 화면 버튼</td><td>y 704~766. 목록은 두 버튼, 사람 보기와 명함집은 한 버튼</td></tr><tr><td>하단 메뉴</td><td>y 774~844. HUD와 같은 6칸과 흑백 아이콘</td></tr></table>
+</section>
+<section id="main-list">
+<h2>2차 · 메인 목록</h2>
+<figure class="phone"><figcaption>전체 탭 · 배치 6칸·2명·1명</figcaption><img src="main-overview-current.png" alt="아이돌 6슬롯, 스태프 2명, 팬클럽 회장 1명이 보이는 흑백 메인 시안"></figure>
+<p>아이돌은 3열 2줄로 빈 슬롯도 표시합니다. 스태프는 대표 2명과 전체 배치 수를 보여 줍니다. 팬클럽 회장을 누르면 상세 화면이 열립니다. 하단의 포토카드 팩과 명함집은 각각 보유한 팩과 명함을 여는 입구입니다.</p>
+<p><strong>아이돌 목록 스크롤</strong> 전체 탭에서는 아이돌 6칸을 3열 2줄로 고정합니다. 배치된 아이돌이 6명보다 적으면 남은 칸은 빈 슬롯으로 표시합니다. 이 그리드에는 별도 스크롤과 가로 캐러셀을 두지 않습니다. 아이돌 탭을 누르면 현재 배치된 아이돌 전원(최대 30명)을 3열로 보여 줍니다. 카드 목록만 세로로 스크롤하고, 상단 분류 탭과 하단 메뉴는 고정합니다. 상세에서 돌아오면 보던 탭과 스크롤 위치를 복원합니다.</p>
+<p class="muted">이미지의 인원·카드 수는 예시입니다. 저장판에서는 메인과 회장 상세의 카드 수를 0/12로 맞췄습니다. 분류 탭과 스태프 전체 보기는 배치 기준을 표시한 상태입니다.</p>
+</section>
+<section id="person">
+<h2>2차 · 아이돌 능력 화면</h2>
+<figure class="phone"><figcaption>어우동 · 능력 화면</figcaption><img src="person-current.jpg" alt="어우동 초상, 데뷔조 단계 강조, 6축 현재값·재능선·흡수율이 보이는 7018 검수 화면"></figure>
+<p>어우동 초상에 성장 현황판의 오시온 샘플 수치를 사용했습니다. 개인 저장 데이터가 연결되면 같은 멤버의 현재값·재능선·단계를 표시합니다. 카드 책갈피의 4×3 배열과 n/12·×n 표기는 그대로 사용합니다.</p>
+<table><thead><tr><th>항목</th><th>표시 및 데이터 규칙</th></tr></thead><tbody>
+<tr><td>6축</td><td>보컬 · 댄스 · 랩 · 비주얼 · 끼·예능감 · 프로듀싱. 각 축의 현재값은 세부 능력 3개의 평균입니다. 6축 평균과 18세부 합계는 별개입니다. 현재값과 재능선은 동일한 표시 단위로 읽고 결측은 ‘—’로 표시합니다.</td></tr>
+<tr><td>재능선</td><td>축의 현재값은 막대, 재능선은 세로선으로 표시합니다. 두 값 중 큰 값도 읽을 수 있도록 막대 눈금을 함께 확장합니다. 멤버의 재능선 도달은 가장 높은 재능 축 하나로 판정합니다. 동률이면 표의 축 순서가 앞선 축을 쓰고, 세부 3개 합 ≥ 재능선 × 3을 같은 단위로 비교합니다.</td></tr>
+<tr><td>흡수율</td><td>재능선 아래는 축 재능 구간에 따라 70·85·100·115·130·145·160%를 표시합니다. 재능선 이후 성장 구간의 실제 적용값은 기준 흡수율 × 축별 굴림 1~9%입니다. 굴림 주기는 7일이며, 화면은 이후 구간의 흡수율을 ‘?’로 표시하는 안입니다. 실제 구간 전환은 성장 계산의 구간 시작값으로 판정합니다.</td></tr>
+<tr><td>개인 단계</td><td>연습생 → 데뷔조 → 라이징 스타 → 톱스타 → 월드스타. 현재 단계 카드를 채워 강조하고, 초상 옆에 현재·다음 단계를 함께 표시합니다. 다음 단계가 없으면 ‘최종 단계’를 표시합니다. 단계 표시용 끝값과 재능선은 별개로 읽습니다.</td></tr>
+</tbody></table>
+<h3>재능선과 최종 단계 표시 예시</h3>
+<table><thead><tr><th>상태</th><th>화면에서 보이는 것</th></tr></thead><tbody>
+<tr><td>재능선 미도달</td><td>끼·예능감 <b>19,000</b> / 재능선 45,000 · 흡수율 <b>100%</b>. 막대는 재능선 앞에서 끝납니다.<span aria-hidden="true" style="position:relative;display:block;width:132px;height:7px;margin:5px 0;background:#e3e3e3;border-radius:4px"><span style="display:block;width:35%;height:7px;background:#828282;border-radius:4px"></span><span style="position:absolute;left:82%;top:-3px;width:2px;height:13px;background:#242424"></span></span></td></tr>
+<tr><td>재능선 도달</td><td>끼·예능감 <b>45,000</b> / 재능선 45,000 · <b>재능선 도달</b>. 막대 끝과 재능선이 맞닿고 성장 수치는 계속 표시합니다.<span aria-hidden="true" style="position:relative;display:block;width:132px;height:7px;margin:5px 0;background:#e3e3e3;border-radius:4px"><span style="display:block;width:82%;height:7px;background:#828282;border-radius:4px"></span><span style="position:absolute;left:82%;top:-3px;width:2px;height:13px;background:#242424"></span></span></td></tr>
+<tr><td>재능선 초과</td><td>끼·예능감 <b>47,000</b> / 재능선 45,000 · <b>재능선 초과</b>. 막대가 재능선을 넘어가고, 재능선 이후 성장 구간의 흡수율은 <b>?</b>로 표시합니다. 47,000은 상태 검수용 예시입니다.<span aria-hidden="true" style="position:relative;display:block;width:132px;height:7px;margin:5px 0;background:#e3e3e3;border-radius:4px"><span style="display:block;width:86%;height:7px;background:#828282;border-radius:4px"></span><span style="position:absolute;left:82%;top:-3px;width:2px;height:13px;background:#242424"></span></span></td></tr>
+<tr><td>월드스타</td><td><b>월드스타 · 최종 단계</b>를 강조합니다. 6축 현재값·재능선·흡수율은 계속 보여 줍니다.</td></tr>
+</tbody></table>
+<p><a href="http://127.0.0.1:7007/docs/planning/growth-board.html">성장 현황판</a> · <a href="http://127.0.0.1:7007/docs/planning/game-simulator.html?module=simulator_module_idol_growth">게임 시뮬레이터 · 아이돌 성장</a> · <a href="../kpop-planning/index.html?doc=P107">P107 아이돌 성장 기획서</a></p>
+</section>
+<section id="team">
+<h2>팀 보기</h2>
+<p>단체 그림, 팀 등급과 다음 등급, 6축, 멤버 타일 순입니다. 대표 멤버를 눌러 사람 보기로 이동한 뒤 뒤로를 누르면 팀으로 돌아옵니다.</p>
+</section>
+<section id="business">
+<h2>명함집</h2>
+<p>2×4 명함첩. 목록에서 열면 전체, 스태프의 교체에서 열면 같은 직업으로 들어갑니다. 명함 상세의 현재→교체 뒤 비교와 교체 확인은 공통 창으로 엽니다.</p>
+</section>
+<section id="common">
+<h2>공통 창과 리소스</h2>
+<table><tr><th>공통 규격</th><th>적용</th></tr><tr><td>창 프레임</td><td>폭 358. 제목은 좌측 상단, 닫기는 우측 상단, 동작 버튼은 하단.</td></tr><tr><td>9슬라이스</td><td>48 × 48 PNG. 원본 분할 11px, 화면 고정 폭 7px. 기본·초점/가리킴·눌림·선택·비활성.</td></tr><tr><td>재사용</td><td>카드 크게 보기, 팩·개봉 결과, 명함·스카우트·교체 확인, 공통 캐릭터 정보 연결 자리.</td></tr><tr><td>이미지와 글</td><td>회색 복셀 인물과 흑백 아이콘은 이미지. 화면 이름·상태와 수치 자리는 시스템 글꼴.</td></tr></table>
+</section>
+<section id="states">
+<h2>동작 상태</h2>
+<table><tr><th>상태</th><th>표시와 입력</th></tr>
+<tr><td>팩 보관함</td><td>3개 덱 × 3등급마다 이름·별 범위·보유 수를 표시합니다. 팩을 누르면 해당 팩의 내용 창이 열립니다.</td></tr>
+<tr><td>팩 0개</td><td>상세의 두 줄은 계속 보입니다. 열기 버튼에 보유 0개를 표시하고 입력을 막습니다.</td></tr>
+<tr><td>팩 1개 예시</td><td>기획사 고급 팩은 열 수 있으며 결과 창에서 남은 팩이 없어 「한 팩 더」가 비활성입니다.</td></tr>
+<tr><td>미보유 카드 · 06/12 예시</td><td>인물 그림만 23% 불투명도로 낮춥니다. 카드 제목·등급·효과·번호·얻는 곳은 그대로 읽힙니다.</td></tr></table>
+<p>확인한 흐름은 목록→사람→카드, 팀→멤버→팀 복귀, 스태프→직업별 명함집→교체 확인, 팩 보관함→내용→결과입니다.</p>
+<p>검수용 예시를 사용합니다. 실제 카드 보유, 팩 개봉·지급, 캐스팅·교체 처리와 수치는 연결 전입니다.</p>
+</section>
+</main>
+</html>

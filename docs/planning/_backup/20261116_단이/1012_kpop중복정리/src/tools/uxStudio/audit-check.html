@@ -1,0 +1,22 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><title>UX 1차 편집기 점검</title><body><div id="app"></div><pre id="audit-result" style="position:fixed;z-index:20000;top:4px;left:4px;max-width:500px;white-space:pre-wrap;background:white;color:black;padding:10px">검사 중</pre><script type="module">
+const result=document.querySelector('#audit-result');
+try{
+ const originalFetch=window.fetch.bind(window);
+ const heavy=new URL(location.href).searchParams.get('elements')==='400';
+ await import('./main.mjs');
+ if(!document.querySelector('#save-status'))await new Promise(resolve=>{const watch=new MutationObserver(()=>{if(document.querySelector('#save-status')){watch.disconnect();resolve();}});watch.observe(document.querySelector('#app'),{childList:true,subtree:true});});
+ if(heavy){
+ const response=await originalFetch('/api/ux-studio/project?id=lobby-0eba60ef');const data=await response.json(),d=data.document,s=d.screens.find(s=>s.id===d.entryScreen);while(s.elements.length<400){const i=s.elements.length;s.elements.push({id:'perf-'+i,name:'성능 시험 '+i,kind:'panel',x:i%10*10,y:Math.floor(i/10)*2,w:9,h:1.8,text:String(i),appearance:{shape:'rectangle',fill:'#e8edf2',stroke:'#71839a',strokeWidth:1}});}
+ const file=new File([JSON.stringify(d)],'audit-only.json',{type:'application/json'}),transfer=new DataTransfer();transfer.items.add(file);const input=document.querySelector('#import-file');input.files=transfer.files;input.dispatchEvent(new Event('change',{bubbles:true}));
+ await new Promise((resolve,reject)=>{const timer=setTimeout(()=>{observer.disconnect();reject(Error('400요소 불러오기 실패'));},5000);const observer=new MutationObserver(()=>{if(document.querySelectorAll('#preview-canvas .ui-element').length===400){clearTimeout(timer);observer.disconnect();resolve();}});observer.observe(document.querySelector('#app'),{childList:true,subtree:true});});
+ }
+ document.querySelector('.project-bookmark')?.click();document.querySelector('[data-tree="layers"]')?.click();
+ const times=[],counts=[],heaps=[];let refs=null,replaced={canvas:0,layers:0,graph:0};
+ for(let i=0;i<80;i++){
+  await new Promise(requestAnimationFrame);const el=document.querySelector('#preview-canvas [data-element="'+(i%2?'info-team':'slot-world')+'"]');if(!el)throw Error('로비 기준요소 없음');
+  const t=performance.now();el.click();document.querySelector('#app').getBoundingClientRect();times.push(performance.now()-t);const current={canvas:document.querySelector('#preview-canvas'),layers:document.querySelector('.layer-tree'),graph:document.querySelector('#ui-network')};if(refs){for(const key of Object.keys(refs))if(refs[key]!==current[key])replaced[key]++;}else refs=current;counts.push(document.querySelectorAll('#app *').length);if(performance.memory)heaps.push(performance.memory.usedJSHeapSize);
+ }
+ times.sort((a,b)=>a-b);
+ result.textContent=JSON.stringify({status:'PASS',phase:new URL(location.href).searchParams.get('phase')||'audit',elements:document.querySelectorAll('#preview-canvas .ui-element').length,selections:80,medianMs:+times[40].toFixed(2),p95Ms:+times[76].toFixed(2),maxMs:+times[79].toFixed(2),domFirst:counts[0],domLast:counts.at(-1),domMin:Math.min(...counts),domMax:Math.max(...counts),heap:heaps.length?{first:heaps[0],last:heaps.at(-1),peak:Math.max(...heaps),note:'GC not controlled; no leak conclusion'}:'not available',domReplacements:replaced,scope:'whole editor synchronous selection/render/layout only; not FPS'},null,2);
+}catch(e){result.textContent='FAIL '+e.stack;}finally{result.dataset.ready='true';}
+</script></body></html>

@@ -1,0 +1,14 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><title>경량 메뉴 반복 검증</title><link rel="stylesheet" href="./styles.css"><body><h1>경량 메뉴 반복 검증</h1><pre id="result">검사 중</pre><div id="root" style="position:relative;width:390px;height:844px"></div><script type="module">
+import {renderLayout} from './layout-view.mjs';
+import {mountDesignConsumer} from './consumer.mjs';
+const root=document.querySelector('#root'),result=document.querySelector('#result');
+try{
+ const elements=[{id:'menu',name:'메뉴',text:'메뉴',kind:'panel',x:0,y:0,w:100,h:100,menu:{defaultOpen:true,headerHeight:36}},...Array.from({length:399},(_,i)=>({id:'e'+i,parentId:'menu',name:'버튼 '+i,kind:'button',x:i%10*10,y:5+Math.floor(i/10)*2,w:9,h:1.8,text:String(i),appearance:{shape:'ellipse',fill:'#e8edf2',stroke:'#71839a',strokeWidth:1}}))];
+ const screen={id:'test',name:'시험',kind:'page',elements},state={menu:true},times=[];
+ renderLayout(screen,root,{menuState:state});const first=root.firstElementChild;
+ for(let i=0;i<60;i++){await new Promise(requestAnimationFrame);state.menu=!state.menu;const start=performance.now();renderLayout(screen,root,{menuState:state});root.getBoundingClientRect();times.push(performance.now()-start);if(root.querySelectorAll('.ui-element').length!==(state.menu?400:1))throw Error('접힌 DOM 누적');if(root.firstElementChild!==first)throw Error('부모 노드 재생성');}
+ const sorted=[...times].sort((a,b)=>a-b),d={schemaVersion:1,projectId:'menu-check',name:'메뉴 시험',revision:1,entryScreen:'test',screens:[screen],transitions:[],fixtures:{items:[],balance:0}};
+ const c=mountDesignConsumer(root,d);root.querySelector('.menu-toggle').click();if(c.getState().menuOpen.menu!==false||root.querySelectorAll('.ui-element').length!==1)throw Error('소비자 클릭 토글 실패');root.querySelector('.menu-toggle').click();if(root.querySelectorAll('.ui-element').length!==400)throw Error('소비자 재열기 실패');c.dispose();if(root.children.length)throw Error('해제 실패');
+ result.textContent=JSON.stringify({status:'PASS',elements:400,toggles:60,medianMs:+sorted[30].toFixed(2),p95Ms:+sorted[57].toFixed(2),maxMs:+sorted[59].toFixed(2),closedElements:1,disposeNodes:0,scope:'shared renderer synchronous DOM/layout only; not whole editor FPS or memory'},null,2);
+}catch(e){result.textContent='FAIL '+e.stack;}
+</script></body></html>

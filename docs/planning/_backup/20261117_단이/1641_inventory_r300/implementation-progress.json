@@ -1,0 +1,76 @@
+{
+  "asOf": "2026-11-17T15:16:25.625156+09:00",
+  "basisRevision": 277,
+  "currentRevision": 299,
+  "screens": 12,
+  "parts": 941,
+  "connections": 20,
+  "videoFamiliesDiscovered": 31,
+  "newGameFamiliesDiscovered": 21,
+  "newGameFamiliesInProgress": 2,
+  "newGameFamiliesNotStarted": 19,
+  "partialShowroomFamilyPending": 1,
+  "newUI": [
+    {
+      "family": "jail-roll-doubles",
+      "screenId": "screen-11d8b368-1a0e-4e3a-9ddd-77d8b8dd43e0",
+      "name": "Modal_Jail_RollDoubles",
+      "parts": 18,
+      "state": "native assembly; selective base UI suppression and fixed six anchors verified; state flow and source visual equivalence incomplete",
+      "evidence": "implementation/jail-r289-390-phone.png",
+      "evidenceRevision": 289,
+      "currentRevision": 299,
+      "currentChangeAfterCapture": "Main bottom reworked only; this modal remains byte-equivalent to r289",
+      "remaining": [
+        "3->2->1->0 and bail/result flow without invented triggers",
+        "actual jail board context and game logic",
+        "source illustration/font/corner/shadow precision; press-depth engine implemented on Main; this modal not yet migrated",
+        "standalone runtime entry remains unset where game condition is unproven"
+      ],
+      "devicePreviewChecks": {
+        "390x844": "six roots uniform within 0.08 CSS px",
+        "430x932": "six roots uniform within 0.08 CSS px",
+        "numericPairs": 12,
+        "fullRuntimeMobileCSS430": "not claimed; editor device preview only"
+      }
+    },
+    {
+      "family": "jail-bail-payment",
+      "screenId": "screen-b2b0fbc8-e5c1-45a7-8402-b6408ef5c7d6",
+      "name": "Modal_Jail_BailPayment",
+      "parts": 16,
+      "state": "native assembly; selective base UI suppression and fixed six anchors verified; state flow and source visual equivalence incomplete",
+      "evidence": "implementation/bail-r289-390-phone.png",
+      "evidenceRevision": 289,
+      "currentRevision": 299,
+      "currentChangeAfterCapture": "Main bottom reworked only; this modal remains byte-equivalent to r289",
+      "remaining": [
+        "3->2->1->0 and bail/result flow without invented triggers",
+        "actual jail board context and game logic",
+        "source illustration/font/corner/shadow precision; press-depth engine implemented on Main; this modal not yet migrated",
+        "standalone runtime entry remains unset where game condition is unproven"
+      ],
+      "devicePreviewChecks": {
+        "390x844": "six roots uniform within 0.08 CSS px",
+        "430x932": "six roots uniform within 0.08 CSS px",
+        "numericPairs": 12,
+        "fullRuntimeMobileCSS430": "not claimed; editor device preview only"
+      }
+    }
+  ],
+  "notFullGameCompletion": true,
+  "mainBottomCorrection": {
+    "revision": 299,
+    "mainParts": 180,
+    "state": "native source remeasurement and joined dock; final font/material equivalence pending",
+    "evidence": "implementation/main-bottom-r299.png",
+    "pressedEvidence": "implementation/main-pressed-r299.png",
+    "source": "05_main 709x1269",
+    "layout": "fixed center + fixed left/right; straight backgrounds stretch",
+    "sourceBodyDepthLogicalApprox": 29,
+    "pressDistanceLogicalProposal": 5,
+    "actualChecks": "mouse4sec/Space3sec, width551->768 and Undo; 34 numeric/state checks",
+    "sourceTests": 516,
+    "stageAcceptance": "W/P/U/S0/4"
+  }
+}

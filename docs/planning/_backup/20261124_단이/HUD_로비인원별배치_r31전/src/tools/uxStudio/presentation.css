@@ -1,0 +1,191 @@
+/* Load after styles.css. UI mode keeps the current renderer paint. */
+.presentation-filter-defs { position:absolute; width:0; height:0; overflow:hidden; pointer-events:none; }
+
+/* The viewer can mount inside the main dialog without sample-preview.html. */
+.sample-screen { position:absolute; inset:0; overflow:hidden; }
+.sample-panel { position:absolute; overflow:hidden; }
+.sample-screen.game-skin,.sample-panel.game-skin {
+  border:0 solid transparent!important;
+  border-image-source:var(--skin-source)!important;
+  border-image-slice:var(--skin-slices)!important;
+  border-image-width:var(--skin-edges)!important;
+  border-image-repeat:var(--skin-repeat)!important;
+  border-image-outset:0!important;
+  background:var(--skin-tone)!important;
+  color:var(--skin-text)!important; padding:0!important;
+}
+
+/* Coarse structure plus real action, image-slot and text-row positions. */
+[data-presentation-mode="wireframe"],
+[data-presentation-mode="wireframe"] .ui-element {
+  background:transparent!important; background-image:none!important;
+  border-color:transparent!important; border-image-source:none!important;
+  box-shadow:none!important; filter:none!important;
+}
+[data-presentation-mode="wireframe"] .ui-element { outline:0!important; }
+/* A removed image skin must retain its original zero-padding coordinate box. */
+[data-presentation-mode="wireframe"].presentation-skin-layout,
+[data-presentation-mode="wireframe"] .presentation-skin-layout {
+  padding:0!important; border:0 solid transparent!important; border-radius:8px!important;
+}
+[data-presentation-mode="wireframe"] .presentation-image-layout { border:0!important; }
+[data-presentation-mode="wireframe"] .presentation-skin-layout > .presentation-compact-layout { padding:0!important; border:0!important; }
+[data-presentation-mode="wireframe"] .ui-element::before,
+[data-presentation-mode="wireframe"] .ui-element::after,
+[data-presentation-mode="wireframe"] .element-text,
+[data-presentation-mode="wireframe"] .image-content,
+[data-presentation-mode="wireframe"] .unit-surface,
+[data-presentation-mode="wireframe"] .menu-toggle,
+[data-presentation-mode="wireframe"] .component-role-badge,
+[data-presentation-mode="wireframe"] .element-badge,
+[data-presentation-mode="wireframe"] .ui-control { visibility:hidden!important; }
+[data-presentation-mode="wireframe"] .presentation-zone {
+  outline:1px solid #7a8994!important; outline-offset:-1px;
+}
+[data-presentation-mode="wireframe"] .presentation-zone-label {
+  position:absolute; left:7px; top:5px; max-width:calc(100% - 14px);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  font:11px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;
+  color:#596a78; background:#f7f9fb; padding:0 3px; pointer-events:none;
+}
+
+/* Secondary boxes stay quiet; coordinate-only parents get no extra outline. */
+[data-presentation-mode="wireframe"] .presentation-action {
+  outline:1px solid #9ca9b4!important; outline-offset:-1px;
+}
+[data-presentation-mode="wireframe"] .presentation-placeholder {
+  position:absolute; box-sizing:border-box; pointer-events:none; z-index:1;
+}
+[data-presentation-mode="wireframe"] .presentation-image-placeholder {
+  inset:0; border:1px solid #aeb9c2; opacity:.65;
+  background:linear-gradient(to top right,transparent calc(50% - .5px),#b8c2ca 50%,transparent calc(50% + .5px)),linear-gradient(to bottom right,transparent calc(50% - .5px),#b8c2ca 50%,transparent calc(50% + .5px));
+}
+[data-presentation-mode="wireframe"] .presentation-action > .presentation-image-placeholder { border-color:transparent; }
+[data-presentation-mode="wireframe"] .presentation-text-placeholder {
+  left:10%; right:10%; top:50%; height:2px; transform:translateY(-50%);
+  background:#a4b0bb; opacity:.85;
+}
+[data-presentation-mode="wireframe"] .presentation-text-multiline > .presentation-text-placeholder { top:40%; }
+[data-presentation-mode="wireframe"] .presentation-text-multiline > .presentation-text-placeholder::after {
+  content:""; position:absolute; left:0; top:7px; width:65%; height:2px; background:inherit;
+}
+
+/* A neutral paper canvas keeps wire lines readable on dark editor and preview shells. */
+[data-presentation-mode="wireframe"]:not(.ui-element) { background:#f7f9fb!important; }
+
+/* Filter graphic paint only: native text, native controls and parent coordinates stay native. */
+[data-presentation-mode="detailed-wireframe"],
+[data-presentation-mode="detailed-wireframe"] .ui-element {
+  filter:none!important; box-shadow:none!important;
+}
+[data-presentation-mode="detailed-wireframe"] .element-text,
+[data-presentation-mode="detailed-wireframe"] .ui-control,
+[data-presentation-mode="detailed-wireframe"] .ui-control input,
+[data-presentation-mode="detailed-wireframe"] .ui-control select,
+[data-presentation-mode="detailed-wireframe"] .ui-control textarea,
+[data-presentation-mode="detailed-wireframe"] .ui-control button,
+[data-presentation-mode="detailed-wireframe"] .menu-toggle {
+  color:#263541!important; -webkit-text-stroke-color:#263541!important;
+  text-shadow:none!important; accent-color:#6c7c88;
+}
+/* Native controls need a paper surface as well as dark ink. Skin-painted tabs keep their pseudo layer. */
+[data-presentation-mode="detailed-wireframe"] .ui-control :is(input,select,textarea,button):not(.game-skin):not(.native-tab-skin) {
+  background:#f7f7f4!important; background-image:none!important; border-color:#9ba7b1!important;
+}
+[data-presentation-mode="detailed-wireframe"] .image-content > img,
+[data-presentation-mode="detailed-wireframe"] .image-content > .sprite-region-image,
+[data-presentation-mode="detailed-wireframe"] .unit-surface:not(.selection-hatch) {
+  filter:var(--presentation-alpha-filter)!important;
+}
+/* Review boards use authored imagery and borders in grayscale, including internal detail. */
+[data-presentation-mode="detailed-wireframe"][data-wireframe-review="true"] .image-content > img,
+[data-presentation-mode="detailed-wireframe"][data-wireframe-review="true"] .image-content > .sprite-region-image,
+[data-presentation-mode="detailed-wireframe"][data-wireframe-review="true"] .unit-surface:not(.selection-hatch) {
+  filter:grayscale(1)!important;
+}
+/* A pseudo paint layer inherits the original 3/9-slice texture and variables.
+   Filtering the input root itself would also filter every native label/child. */
+[data-presentation-mode="detailed-wireframe"].game-skin,
+[data-presentation-mode="detailed-wireframe"] .game-skin {
+  border-image-source:none!important; background:transparent!important; isolation:isolate;
+}
+/* Existing live source rules are !important with specificity 0,3,0. */
+[data-presentation-mode="detailed-wireframe"].skin-live:not(.input-disabled):hover,
+[data-presentation-mode="detailed-wireframe"].skin-live:not(.input-disabled):focus-visible,
+[data-presentation-mode="detailed-wireframe"].skin-live:not(.input-disabled):active,
+[data-presentation-mode="detailed-wireframe"] .skin-live:not(.input-disabled):hover,
+[data-presentation-mode="detailed-wireframe"] .skin-live:not(.input-disabled):focus-visible,
+[data-presentation-mode="detailed-wireframe"] .skin-live:not(.input-disabled):active {
+  border-image-source:none!important;
+}
+[data-presentation-mode="detailed-wireframe"] .native-tab-skin { position:relative; isolation:isolate; }
+[data-presentation-mode="detailed-wireframe"].game-skin::before,
+[data-presentation-mode="detailed-wireframe"] .game-skin::before {
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  border:0 solid transparent; border-image-source:var(--skin-source);
+  border-image-slice:var(--skin-slices); border-image-width:var(--skin-edges);
+  border-image-repeat:var(--skin-repeat); border-image-outset:0;
+  border-radius:inherit; background:var(--skin-tone);
+  filter:var(--presentation-alpha-filter);
+}
+[data-presentation-mode="detailed-wireframe"].custom-skin-image::before,
+[data-presentation-mode="detailed-wireframe"] .custom-skin-image::before,
+[data-presentation-mode="detailed-wireframe"] .compound-unit::before { background:transparent; }
+[data-presentation-mode="detailed-wireframe"] .native-tab-skin::before { border-radius:0; }
+[data-presentation-mode="detailed-wireframe"].skin-live:not(.input-disabled):hover::before,
+[data-presentation-mode="detailed-wireframe"].skin-live:not(.input-disabled):focus-visible::before,
+[data-presentation-mode="detailed-wireframe"] .skin-live:not(.input-disabled):hover::before,
+[data-presentation-mode="detailed-wireframe"] .skin-live:not(.input-disabled):focus-visible::before { border-image-source:var(--skin-highlighted-source); }
+[data-presentation-mode="detailed-wireframe"].skin-live:not(.input-disabled):active::before,
+[data-presentation-mode="detailed-wireframe"] .skin-live:not(.input-disabled):active::before { border-image-source:var(--skin-pressed-source); }
+
+/* Gauges only: a light solid tint so they read apart from gray wire lines. Other wire stays gray. */
+[data-presentation-mode="wireframe"] .ui-element.presentation-gauge > .unit-surface {
+  visibility:visible!important;
+}
+[data-presentation-mode="wireframe"] .ui-element.presentation-gauge[data-gauge-kind="ring"] > .unit-surface > * {
+  fill:none!important; stroke:#9ed4b0!important; stroke-width:3px!important;
+}
+[data-presentation-mode="wireframe"] .ui-element.presentation-gauge[data-gauge-kind="fill"] > .unit-surface {
+  opacity:.7;
+}
+[data-presentation-mode="wireframe"] .ui-element.presentation-gauge[data-gauge-kind="fill"] > .unit-surface > * {
+  fill:#9fc9e8!important; stroke:none!important;
+}
+[data-presentation-mode="detailed-wireframe"] .ui-element.presentation-gauge > .unit-surface,
+[data-presentation-mode="detailed-wireframe"] .ui-element.presentation-gauge > .image-content > img {
+  filter:none!important;
+}
+[data-presentation-mode="detailed-wireframe"] .ui-element.presentation-gauge[data-gauge-kind="ring"] > .image-content > img {
+  opacity:.75;
+}
+[data-presentation-mode="detailed-wireframe"] .ui-element.presentation-gauge[data-gauge-kind="fill"] > .unit-surface {
+  opacity:.7;
+}
+
+/* Keep the authored 9-slice button state contrast for these review boards. */
+[data-presentation-mode="detailed-wireframe"][data-wireframe-review="true"] .game-skin::before {
+  filter:grayscale(1);
+}
+
+/* Composite the PNG frame before the canvas zoom scales fractional tile edges. */
+[data-presentation-mode="detailed-wireframe"][data-wireframe-review="true"] .custom-skin-image::before {
+  backface-visibility:hidden;
+}
+
+/* Review labels use authored text rectangles without editor drag padding. */
+[data-presentation-mode="detailed-wireframe"][data-wireframe-review="true"] .ui-element.kind-text {
+  padding: 0;
+  border: 0;
+}
+
+/* These two child backgrounds form a gauge over the 9-slice status card. */
+[data-presentation-mode="detailed-wireframe"][data-wireframe-review="true"] .custom-skin-image > :is([data-element$=".mons.track"], [data-element$=".mons.fill"]) > .unit-surface {
+  display: block;
+}
+.planning-library-link {
+  display: inline-block;
+  margin-inline-start: 8px;
+  white-space: nowrap;
+  color: inherit;
+}

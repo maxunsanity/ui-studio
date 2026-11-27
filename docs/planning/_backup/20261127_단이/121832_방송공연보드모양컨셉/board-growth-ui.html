@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>보드 성장과 시설별 팬 · UI 기획</title>
+<style>
+body{background:#eef1f5;margin:0;font:16px/1.6 system-ui,sans-serif;color:#233142}main{max-width:860px;margin:auto;background:white;padding:clamp(18px,5vw,44px)}
+h1{line-height:1.2}h2{border-bottom:1px solid #c9d2dd;padding-bottom:5px}a{color:#21558a;text-underline-offset:.16em}table{border-collapse:collapse;width:100%;text-align:left}
+th,td{border-bottom:1px solid #ccd3db;padding:8px;vertical-align:top}thead{background:#edf2f7}.links{display:flex;flex-wrap:wrap;gap:8px}.links a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;border:1px solid #9faebb;border-radius:8px}.example{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.bubble{background:#edf0f4;border:1px solid #6d7784;border-radius:8px;padding:4px 8px;font-weight:700}.status{color:#526173}
+</style>
+</head>
+<body><main>
+<nav><a href="index.html#documents">‹ UI 스튜디오 가이드</a> · <a href="all-previews.html">전체 미리보기</a></nav>
+<h1>보드 성장과 시설별 팬</h1>
+<p class="status">2차 세부 와이어프레임 · 제안(검수 대기) · 2026-11-27</p>
+<div class="links">
+<a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=kpop-hud-roll-states&amp;screen=board-growth-parts&amp;view=detailed-wireframe">보드 성장 부품</a>
+<a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=kpop-hud-roll-states&amp;screen=board-growth-stages&amp;view=detailed-wireframe">첫 앨범 발매 전후</a>
+<a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=kpop-build-ui&amp;screen=facility-fans-rap&amp;view=detailed-wireframe">콘서트장 대표 팬</a>
+</div>
+<section id="ability"><h2>능력 성장과 시설 외형</h2>
+<p>본진의 시설 타일은 8개 시설군마다 3칸씩 배치합니다. 도착 칸은 성장 대상 능력을 정하고, 도착 결과에는 해당 이동에서 바뀐 멤버 이름과 세부 능력의 전후 값을 표시합니다. 팬샵 12·14·15는 굿즈 수익과 팬 활동을 안내합니다. 시설 외형은 건설에서 본관과 부속 두 동을 증설할 때 달라집니다.</p>
+<p>시설별 기존 바닥색과 지붕 각인은 평소에도 보입니다. 이동 중 잠깐 밟으면 얇은 외곽선, 최종 도착하면 두 겹 외곽선과 위치 핀을 표시합니다. 시설별 도착 연출은 핀 주변에 붙여서 이동 경로가 읽히게 합니다.</p>
+<table><thead><tr><th scope="col">시설</th><th scope="col">연결 칸</th><th scope="col">연출과 정보</th></tr></thead>
+<tbody><tr><th scope="row">댄스 연습실</th><td>4·24·25</td><td>연보라 바닥과 댄서 각인. 도착 결과에 해당 칸의 성장 능력을 표시합니다.</td></tr>
+<tr><th scope="row">예능 방송국</th><td>27·28·30</td><td>연두 바닥과 방송 카메라 각인. 직선 프레임과 ON AIR로 송출을 표현합니다.</td></tr>
+<tr><th scope="row">콘서트장</th><td>32·33·35</td><td>페리윙클 바닥과 왕관 돔 각인. 둥근 무대 아치와 스포트라이트로 공연을 표현합니다.</td></tr></tbody></table>
+<p>첫 앨범 발매 전후에는 같은 칸의 장소명과 활동 외형을 바꿉니다. 멤버 성장에 따라 추가로 외형을 바꾸는 조건은 시안 검수 항목입니다. 게임 조건과 능력 문턱은 확정 데이터가 필요합니다.</p>
+</section>
+<section id="fan-units"><h2>서 있는 대표 팬과 실제 인원</h2>
+<p>건설 → 시설 상세 → 모인 팬 보기에서 컬러 3D 인물 머리 위에 공통 테두리의 ×100 말풍선을 표시합니다. 아래에는 총인원과 나머지를 표시합니다. 인물은 최대 네 명을 보여 주고, 그 밖의 인원은 숫자로 이어서 표시합니다.</p>
+<div class="example" aria-label="총 430명은 100명 묶음 네 개와 나머지 30명"><strong>총 430명</strong><span class="bubble">×100</span><span class="bubble">×100</span><span class="bubble">×100</span><span class="bubble">×100</span><span>+30명</span></div>
+<ul><li>팬 100명은 인물 한 명과 ×100. 팬 99명은 총 99명 텍스트.</li><li>팬 0명은 인물 없이 총 0명. 집계 대기는 합계 자리에 대기 문구.</li><li>무대 앞 배경 관객은 분위기를 연출합니다. 인원을 나타내는 인물에는 항상 ×100 말풍선을 붙입니다.</li></ul>
+<p>100명과 430명은 미리보기 시연 값입니다. 능력 성장 원본은 P87·P106·P107·P265와 <code>board_tile.csv</code>, <code>growth_source.csv</code>를 따릅니다.</p>
+</section>
+</main></body></html>

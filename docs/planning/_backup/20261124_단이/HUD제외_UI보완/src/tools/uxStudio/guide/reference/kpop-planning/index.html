@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>케이팝몬스터즈 기획서 · UI 스튜디오</title>
+<link rel="stylesheet" href="./library.css">
+<script type="module" src="./library.mjs"></script>
+</head>
+<body>
+<header class="masthead"><a id="studio" href="/ui-studio/">UI 스튜디오</a><span>케이팝몬스터즈</span></header>
+<main>
+  <section id="library">
+    <h1>기획서</h1>
+    <nav class="featured" aria-label="UI 기획 문서">
+      <a href="?doc=P265"><strong>UI 기획</strong><span>HUD · 포토카드 탭 · 인계용 사본</span></a>
+      <a href="?doc=P264"><strong>UI 기획 문서 규칙</strong><span>대표 화면 + 접기 8항목</span></a>
+    </nav>
+    <div class="filters">
+      <label>검색<input type="search" id="query" placeholder="제목, 문서 번호, 키워드"></label>
+      <label>기획 영역<select id="group"><option value="">전체</option></select></label>
+      <label>문서 범위<select id="scope"><option value="current">현재 문서</option><option value="all">전체 문서</option><option value="history">이력 문서</option><option value="missing">원본 미확인</option><option value="reference">실행·참조 항목</option></select></label>
+    </div>
+    <p class="meta" id="counts" role="status">기획서 목록 불러오는 중</p>
+    <div class="list" id="list"></div>
+    <button id="more" type="button" hidden>더 보기</button>
+  </section>
+  <section id="reader" hidden>
+    <a id="back" href="./index.html">← 기획서 목록</a>
+    <div class="reader-head">
+      <div><p class="meta" id="document-meta"></p><h1 id="document-title"></h1><p id="summary"></p></div>
+      <div class="reader-actions"><a id="live-original" hidden>7007 원본 보기</a><a id="switch" hidden></a><a id="original" download hidden>원본 파일</a></div>
+    </div>
+    <div id="unavailable" hidden></div>
+    <iframe id="paper" title="기획서 본문" sandbox="allow-same-origin" hidden></iframe>
+  </section>
+</main>
+</body>
+</html>

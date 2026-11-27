@@ -1,0 +1,59 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>새 도시 진출 UI 기획서</title><style>
+.new-city-board { table-layout:fixed; width:100%; text-align:center; }
+.new-city-board td { padding:.48em .2em; word-break:keep-all; overflow-wrap:anywhere; }
+.new-city-board-empty { background:#fff; }
+.new-city-board-stage { background:#e8effc; color:#233f77; }
+.new-city-board-basic { background:#f5f5f7; }
+</style><style>body{font:16px/1.55 system-ui;margin:24px auto;padding:0 12px;max-width:760px} th,td{border:1px solid #d6dce5;padding:.4em;text-align:left} table{border-collapse:collapse} details{margin:1em 0}</style><main><section class="tab" id="new-city">
+<h2 class="tt">새 도시 진출 UI 기획서</h2>
+<p class="meta">2026-11-25 · 20칸 보드 1차 배치안 · 제안(검수 대기)</p>
+<p><strong>콘서트 9칸</strong>을 중심으로 카드 3칸, 쉼 2칸, 팬 반응 2칸, 찬스 2칸, 출발과 정산 안내를 둡니다. 훈련·연습 시설은 이 보드에서 제외합니다.</p>
+<p><a href="/ui-studio/canvas.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=new-city-roll-ready&amp;view=detailed-wireframe">HUD 캔버스에서 새 도시 열기</a></p>
+<section id="new-city-roll-hud"><h3>인게임 굴리기 HUD와 50바퀴 표시</h3><p>새 도시에서 기존 굴리기 대기 화면의 팀·엔터파워·팬·설정, 하단 재화 띠, 배수 선택과 주사위 굴리기 버튼을 같은 규격으로 씁니다. 3D 도시 보드는 컬러, 2D HUD는 흑백입니다.</p><p>상단에 「한 번 입장에 최대 50바퀴」와 「완료 0 / 50」를 별도 텍스트로 표시합니다. 입장 직후 0이며, 01번 출발점을 돌아오거나 통과하면 완료 수를 1 올립니다. 50 / 50에서는 하단 굴리기를 잠그고 방문 정산으로 이어집니다.</p><p>기준은 390×844입니다. 굴리기 HUD r73의 flow-01을 참고했습니다. 하단 재화 띠 386×37, 배수 버튼 93×43, 굴리기 버튼 275×61입니다. 바퀴 표시 297×46은 이 화면의 검수용 배치입니다.</p><p><a href="/ui-studio/source/sample-preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=kpop-new-city-board&amp;screen=new-city-roll-ready&amp;view=detailed-wireframe">첫 굴리기 · 0 / 50</a> · <a href="/ui-studio/source/sample-preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=kpop-new-city-board&amp;screen=new-city-roll-final&amp;view=detailed-wireframe">마지막 바퀴 · 49 / 50</a> · <a href="/ui-studio/source/sample-preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=kpop-new-city-board&amp;screen=new-city-roll-complete&amp;view=detailed-wireframe">방문 완료 · 50 / 50</a></p><p>49 / 50 페이지에서 굴리기 버튼을 누르는 동작 시험은 01번을 지나는 고정 검수 사례입니다. 실제 굴림, 주사위 차감, 정산 지급과 로비 이벤트 복귀는 게임 연동 범위입니다.</p></section>
+<h3 id="city-board-overview">보드 배치</h3>
+<figure><a href="/ui-studio/canvas.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=new-city-roll-ready&amp;view=detailed-wireframe"><img src="/api/ux-studio/asset?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;ref=sha256-3ff62d594f41da8ddf0ecc02dded3857822329a5f2167c19fbc16541ac1c6c9a.jpg" alt="현재 보드와 같은 높은 사선 카메라에서 본 3D 콘서트 도시와 외곽 20칸 도로" width="585" height="1040" style="width:min(100%,620px);height:auto"></a><figcaption>20칸 3D 시안 · 기존 보드의 사선 카메라와 외곽 도로를 적용한 공연 지구 · 그림을 누르면 HUD 캔버스에서 새 도시 화면을 엽니다.</figcaption></figure>
+<table class="new-city-board" aria-label="새 도시 보드의 공간 배치">
+<caption>01에서 출발해 번호 순서로 시계 방향 이동</caption>
+<tbody>
+<tr><td class="new-city-board-basic"><b>01</b><br>출발 광장</td><td class="new-city-board-stage"><b>02</b><br>콘서트</td><td class="new-city-board-basic"><b>03</b><br>팬 반응</td><td class="new-city-board-stage"><b>04</b><br>콘서트</td><td class="new-city-board-basic"><b>05</b><br>카드</td><td class="new-city-board-basic"><b>06</b><br>쉼</td></tr>
+<tr><td class="new-city-board-basic"><b>20</b><br>정산 안내</td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-stage"><b>07</b><br>콘서트</td></tr>
+<tr><td class="new-city-board-stage"><b>19</b><br>콘서트</td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-basic"><b>08</b><br>찬스</td></tr>
+<tr><td class="new-city-board-basic"><b>18</b><br>찬스</td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-stage"><b>09</b><br>콘서트</td></tr>
+<tr><td class="new-city-board-stage"><b>17</b><br>콘서트</td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-empty" aria-hidden="true"></td><td class="new-city-board-basic"><b>10</b><br>카드</td></tr>
+<tr><td class="new-city-board-basic"><b>16</b><br>쉼</td><td class="new-city-board-stage"><b>15</b><br>콘서트</td><td class="new-city-board-basic"><b>14</b><br>카드</td><td class="new-city-board-stage"><b>13</b><br>콘서트</td><td class="new-city-board-basic"><b>12</b><br>팬 반응</td><td class="new-city-board-stage"><b>11</b><br>대표 콘서트</td></tr>
+</tbody>
+</table>
+<details open id="city-board-tiles"><summary>20칸별 설명</summary><div>
+<table><thead><tr><th scope="col">번호</th><th scope="col">칸</th><th scope="col">도착 시 하는 일</th></tr></thead>
+<tbody>
+<tr><th scope="row">01</th><td>출발 광장</td><td>입장 시작점. 다시 통과하거나 도착하면 완료한 바퀴를 1 올립니다.</td></tr>
+<tr><th scope="row">02</th><td>콘서트</td><td>현지 공연을 열고 현지 팬·공연 수익을 보여 줍니다. 보상량은 발란스 대기입니다.</td></tr>
+<tr><th scope="row">03</th><td>팬 반응</td><td>기존 팬 반응 형식을 사용하고 현지 팬 반응을 보여 줍니다.</td></tr>
+<tr><th scope="row">04</th><td>콘서트</td><td>현지 공연을 열고 현지 팬·공연 수익을 보여 줍니다. 보상량은 발란스 대기입니다.</td></tr>
+<tr><th scope="row">05</th><td>카드</td><td>기존 카드 획득 흐름을 사용합니다. 지급 풀과 수량은 발란스 대기입니다.</td></tr>
+<tr><th scope="row">06</th><td>쉼</td><td>기존 쉼 칸의 표시와 처리를 재사용합니다.</td></tr>
+<tr><th scope="row">07</th><td>콘서트</td><td>현지 공연을 열고 현지 팬·공연 수익을 보여 줍니다. 보상량은 발란스 대기입니다.</td></tr>
+<tr><th scope="row">08</th><td>찬스</td><td>기존 찬스 카드 틀을 사용합니다. 현지 효과 후보는 발란스 대기입니다.</td></tr>
+<tr><th scope="row">09</th><td>콘서트</td><td>현지 공연을 열고 현지 팬·공연 수익을 보여 줍니다. 보상량은 발란스 대기입니다.</td></tr>
+<tr><th scope="row">10</th><td>카드</td><td>기존 카드 획득 흐름을 사용합니다. 지급 풀과 수량은 발란스 대기입니다.</td></tr>
+<tr><th scope="row">11</th><td>대표 콘서트</td><td>도시 대표 공연장입니다. 일반 공연과 같은 판정 틀을 쓰고 보상 차이는 발란스 대기입니다.</td></tr>
+<tr><th scope="row">12</th><td>팬 반응</td><td>기존 팬 반응 형식을 사용하고 현지 팬 반응을 보여 줍니다.</td></tr>
+<tr><th scope="row">13</th><td>콘서트</td><td>현지 공연을 열고 현지 팬·공연 수익을 보여 줍니다. 보상량은 발란스 대기입니다.</td></tr>
+<tr><th scope="row">14</th><td>카드</td><td>기존 카드 획득 흐름을 사용합니다. 지급 풀과 수량은 발란스 대기입니다.</td></tr>
+<tr><th scope="row">15</th><td>콘서트</td><td>현지 공연을 열고 현지 팬·공연 수익을 보여 줍니다. 보상량은 발란스 대기입니다.</td></tr>
+<tr><th scope="row">16</th><td>쉼</td><td>기존 쉼 칸의 표시와 처리를 재사용합니다.</td></tr>
+<tr><th scope="row">17</th><td>콘서트</td><td>현지 공연을 열고 현지 팬·공연 수익을 보여 줍니다. 보상량은 발란스 대기입니다.</td></tr>
+<tr><th scope="row">18</th><td>찬스</td><td>기존 찬스 카드 틀을 사용합니다. 현지 효과 후보는 발란스 대기입니다.</td></tr>
+<tr><th scope="row">19</th><td>콘서트</td><td>현지 공연을 열고 현지 팬·공연 수익을 보여 줍니다. 보상량은 발란스 대기입니다.</td></tr>
+<tr><th scope="row">20</th><td>정산 안내</td><td>이번 방문에서 모은 보상과 남은 바퀴를 보여 줍니다. 지급은 방문 종료 때 합니다.</td></tr>
+</tbody></table>
+</div></details>
+<details><summary>입장과 한 바퀴</summary><div>
+<p>방송 출연으로 입장 게이지를 채웁니다. 가득 찬 게이지는 입장 전까지 더 차지 않습니다. 로비 이벤트에서 열며, 앨범 보유와 팀 능력은 각각 확인합니다. 게이지 이름과 로비 내 정확한 위치는 결정 대기입니다.</p>
+<p>보유 주사위로 움직이고 최대 50바퀴 방문합니다. 정상 완료는 출발점으로 돌아와 50번째 바퀴가 완성될 때입니다. 정산 안내 칸에서 방문 중간 결과를 확인하고 방문을 마칠 때 결과를 정산합니다. 초과 이동 처리와 중도 귀환은 결정 대기입니다.</p>
+</div></details>
+<details><summary>혜택과 원본</summary><div>
+<p>공연 수익, 현지 팬, 카드 보상은 기존 방문안보다 혜택을 늘리는 방향입니다. 칸별 지급량, 배수, 바퀴별 보상과 최종 보상은 발란스 대기입니다.</p>
+<p><a href="http://127.0.0.1:7007/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=P219">P219 새 도시 진출</a> · <a href="http://127.0.0.1:7007/docs/planning/planning-docs-tool.html?face=shelf&amp;doc=P109">P109 기존 방문 보드</a></p>
+</div></details>
+</section></main></html>

@@ -1,0 +1,26 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>텍스트 정밀 속성 · 공통 렌더러 검증</title><link rel="stylesheet" href="./styles.css"><style>body{padding:16px}#root{position:relative;width:390px;height:320px;background:white}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><body><h1>텍스트 정밀 속성 검증</h1><p>제품 설계가 아닌 공통 렌더러 시험입니다. 편집 입력·원본 폰트 동등성·실기기 검수는 별도입니다.</p><pre id="result">검사 중</pre><div id="root"></div><script type="module">
+import {renderLayout} from './layout-view.mjs';
+import {validateParts} from './parts.mjs';
+const root=document.querySelector('#root'),result=document.querySelector('#result');
+let checks=0;
+const ok=(value,label)=>{if(!value)throw Error(label);checks++};
+const e={id:'label',name:'정밀 텍스트',kind:'text',x:5,y:5,w:45,h:20,text:'정밀한 글자 크기와 줄맞춤을 확인하는 긴 문장입니다.\n줄바꿈도 한 줄 모드에서는 접습니다.',fontSize:18.5,typography:{family:'arial',weight:700,lineHeight:24,letterSpacing:.25,align:'left',vertical:'top',wrap:'nowrap',overflow:'ellipsis'}};
+const s={id:'test',name:'시험',kind:'page',elements:[e]};
+try{
+ validateParts(e);renderLayout(s,root,{mode:'view'});
+ const node=root.firstElementChild,content=node.querySelector('.element-text'),css=getComputedStyle(content);
+ ok(getComputedStyle(node).fontSize==='18.5px','논리 글자 크기');
+ ok(css.fontWeight==='700','글자 굵기');ok(css.lineHeight==='24px','줄높이');ok(css.letterSpacing==='0.25px','자간');
+ ok(css.textAlign==='left','가로 정렬');ok(css.whiteSpace==='nowrap','한 줄');ok(css.textOverflow==='ellipsis','말줄임');ok(css.overflowX==='hidden','넘침 자르기');
+ ok(content.scrollWidth>content.clientWidth,'실제로 긴 문장 넘침');ok(content.getBoundingClientRect().height<=24.5,'줄바꿈 입력도 한 줄 모드 유지');ok(getComputedStyle(node).alignItems==='flex-start','세로 위');
+ const observer=new MutationObserver(()=>{});observer.observe(content,{attributes:true,attributeFilter:['style']});renderLayout(s,root,{mode:'view'});ok(observer.takeRecords().length===0,'동일 텍스트 스타일 재작성 없음');observer.disconnect();ok(getComputedStyle(node).alignItems==='flex-start','동일 속성 재렌더 세로 정렬 유지');
+ const firstRect=node.getBoundingClientRect();
+ e.typography={family:'system',weight:400,lineHeight:21,letterSpacing:0,align:'right',vertical:'bottom',wrap:'wrap',overflow:'clip'};
+ renderLayout(s,root,{mode:'view'});
+ ok(root.firstElementChild===node,'노드 보존');ok(getComputedStyle(content).whiteSpace==='pre-wrap','여러 줄');ok(getComputedStyle(content).textOverflow==='clip','말줄임 해제');ok(getComputedStyle(node).alignItems==='flex-end','세로 아래');
+ ok(node.getBoundingClientRect().width===firstRect.width&&node.getBoundingClientRect().height===firstRect.height,'글자 수정으로 레이어 크기 불변');
+ delete e.typography;renderLayout(s,root,{mode:'view'});
+ ok(content.style.fontWeight===''&&content.style.lineHeight===''&&content.style.letterSpacing==='','기본값 복원');ok(content.style.width===''&&content.style.overflow===''&&node.style.alignItems==='','배치/잘림 잔류 없음');
+ result.textContent=JSON.stringify({status:'PASS',checks,fontSize:getComputedStyle(node).fontSize,scope:'실제 공통 DOM/CSS 렌더러. 네이티브 편집 입력/원본 글꼴 동일성/모바일 실기기/성능 검수는 별도.'},null,2);
+}catch(e){result.textContent='FAIL '+e.stack;}
+</script></body></html>

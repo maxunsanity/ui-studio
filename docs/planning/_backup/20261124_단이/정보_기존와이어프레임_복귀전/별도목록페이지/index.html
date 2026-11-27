@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보 · UI 스튜디오</title>
+<link rel="stylesheet" href="/ui-studio/source/styles.css">
+<link rel="stylesheet" href="/ui-studio/source/presentation.css">
+<style>
+  body.info-page { margin:0; color:#24313d; background:#f0f2f5; font:15px/1.5 system-ui,sans-serif; }
+  .info-main { max-width:1440px; margin:auto; padding:24px clamp(14px,4vw,48px) 44px; }
+  .info-main h1 { font-size:36px; margin:.3em 0 0; }
+  .info-main h2 { font-size:23px; margin:0 0 4px; }
+  .info-main p { margin:0 0 14px; }
+  .info-main a { color:#244968; }
+  .info-main nav { display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 24px; }
+  .info-main nav a, .info-actions a { border:1px solid #bcc9d4; border-radius:6px; padding:6px 10px; background:#fff; text-decoration:none; }
+  .info-main section { margin:0 0 20px; padding:16px; background:#fff; border:1px solid #d8dfe6; border-radius:10px; }
+  .info-row { list-style:none; margin:0; padding:0; display:flex; gap:14px; flex-wrap:wrap; }
+  .info-row li { display:grid; gap:7px; width:204px; }
+  .info-row h3 { margin:0; font-size:14px; }
+  .info-preview { position:relative; width:203px; height:439px; overflow:hidden; background:#e6ebf0; border:1px solid #cad4dd; }
+  .info-preview .sample-screen { position:absolute; top:0; left:0; transform:scale(.52); transform-origin:top left; }
+  .info-preview .sample-panel { position:absolute; }
+  .info-actions { display:flex; gap:6px; font-size:12px; }
+</style>
+</head>
+<body class="info-page">
+<main id="overview" class="info-main">
+  <a href="/ui-studio/">UI 스튜디오</a>
+  <h1>정보</h1>
+  <p>케이팝몬스터즈 · 아이돌, 팀, 포토카드의 화면과 진입 순서</p>
+  <nav aria-label="정보 화면 목차"></nav>
+  <div id="flows"></div>
+</main>
+<script type="module" src="./sequence.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>케이팝몬스터즈 HUD 2차 작업 명세</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:#24313d;background:#f7f8fa}
+body{max-width:960px;margin:28px auto;padding:0 20px 30px;line-height:1.55}
+h1{margin:0 0 2px} h2{margin:0 0 10px;font-size:19px}
+header p{margin:0 0 20px;color:#596574}
+section,details{padding:16px;margin:14px 0;background:white;border:1px solid #d4d9e0;border-radius:8px;scroll-margin-top:14px}
+details:target,section:target{outline:2px solid #5c49ad}
+figure{margin:12px 0 0} img{max-width:100%;height:auto;border:1px solid #c7d0d9}
+.phone img{display:block;max-width:min(390px,100%)}
+figcaption{margin-bottom:6px;font-weight:650}
+nav{display:flex;gap:12px;flex-wrap:wrap} a{color:#49368a}
+table{width:100%;border-collapse:collapse} th,td{padding:7px;border-bottom:1px solid #d8dee6;text-align:left}
+.old{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}.old img{max-height:260px;object-fit:contain;width:100%}
+</style>
+</head>
+<body>
+<header><h1>HUD 작업 명세</h1><a href="../../kpop-planning/index.html?doc=P265#hud">7018 HUD 기획서</a></header><section id="hud24"><h2>로비 광장과 보드 HUD · r31</h2><p>HUD의 구분은 로비와 인게임이다. 이번 로비 상세는 간판의 회사명, 현수막의 적용 팀명, 보유 아이돌 외형의 재사용을 다룬다. 나머지 배치와 라포 연출은 검토 중이다.</p><p>광장에는 보유 아이돌 중 적용 팀 멤버가 현재 착용한 외형으로 등장한다. 인물 전신과 초상은 HUD 그림 제작 목록에서 제외한다. 라포 연출 제안은 멤버 사이의 신뢰·이해를 가까이 서는 위치로, 미해결 긴장을 시선으로 표현하는 것이다. 같은 장소에 서서도 시선이 엇갈릴 수 있다. 단독 또는 관계 기록이 없는 멤버는 개인 포즈를 쓴다. 위치·거리 기준과 선정 방식은 검토 중이다.</p><p>1차 광장과 보드는 직선 영역으로 표시합니다. 대기 중에는 보드가 하단 재화 띠까지 보이고, 도착하면 필러가 보드 위에 겹칩니다. 주사위 잔량은 재화 띠에 한 번 표시하고 배수는 조작부에 고정합니다. 팀·개별 정보는 프로필 공통 화면으로 열고, 나쁜 기운은 로비 오른쪽에 표시합니다.</p><p>박스·버튼·필러는 48×48px PNG를 네 변 11px에서 분할하고 모서리 폭을 7px로 고정합니다.</p><p>재화 띠(돈·주사위·몬스)는 하단 조작부에 고정한다. 보드 논리 높이 844px에서 재화 띠 y=728~765, 조작부 y=765~842. 필러는 보드 위로 겹쳐 펼쳐지며 재화 띠 위치에 영향을 주지 않는다.</p><p>2026-11-24 · 제안(검수 대기). 1차 영역·동선과 2차 세부 와이어프레임의 동일한 HUD 페이지를 검토합니다.</p><p><a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=wire-lobby&amp;view=detailed-wireframe">1차 로비</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=wire-board&amp;view=detailed-wireframe">1차 보드</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=wire-arrived&amp;view=detailed-wireframe">1차 도착</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=main&amp;view=detailed-wireframe">2차 로비</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=lobby-rapport&amp;view=detailed-wireframe">라포 배치 비교</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=board-ready&amp;view=detailed-wireframe">굴리기 대기</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=moving-x10&amp;view=detailed-wireframe">이동 중</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=board-talk&amp;view=detailed-wireframe">도착 대사</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=arrived&amp;view=detailed-wireframe">필러 결과</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=hud-parts&amp;view=detailed-wireframe">필러와 판정 부품</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=hud-lobby-parts&amp;view=detailed-wireframe">로비·메뉴 부품</a> · <a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=arrived-x1000&amp;view=detailed-wireframe">×1,000 검수</a></p><table><tr><th>사옥 간판과 팀 현수막</th><td>사옥 외벽 별 아래에는 플레이어의 회사명을, 입구 양 기둥에 걸린 천 현수막에는 현재 적용 팀명을 표시한다. 두 이름은 각각 편집 가능한 글자다. 회사명을 바꾸면 간판만, 적용 팀을 바꾸면 현수막의 팀명이 바뀌어야 한다. 저장판의 별빛 엔터테인먼트와 루미나는 표시 예시다.</td></tr><tr><th>로비 HUD와 부속품</th><td>상단은 내 팀·엔터파워·팬·설정. 내 앨범은 중앙, 왼쪽은 상점과 판매 이벤트, 오른쪽은 페스티벌·나쁜 기운·퍼즐·양궁. 현수막과 명판, 일정, 서포트 선물의 수령 전후를 구분한다.</td></tr><tr><th>순환 보드와 조작</th><td>게임 시작으로 같은 도시의 보드를 연다. 40개 칸 번호와 시설 입구를 개별 배치한다. 보드의 상단과 하단을 고정하고 상태별 중앙 조작을 교체한다.</td></tr><tr><th>주사위 배수</th><td>배수표의 1·2·5·10·20·50·100·200·500·1,000을 비교한다. 현재 배수와 상한을 분리하고 대사·결과에서도 표시한다. 이동 중 배수는 잠긴다.</td></tr><tr><th>필러 장면 그림</th><td>필러의 맨 뒤에 독립 연습실 그림을 깔고 밝은 카드 표면과 여백을 통해 그림이 보이게 한다. 카드와 배경 그림은 각각 교체할 수 있다.</td></tr><tr><th>이름표·말풍선</th><td>이름표, 말풍선, 대사와 지문을 UI 부품으로 둔다. 발화자의 얼굴은 해당 보유 아이돌 자료를 사용한다. 카드 폭 기준 378, 전체 필러 높이 170 이하. 대사가 남으면 하단에서 넘기기·건너뛰기를 조작한다.</td></tr><tr><th>도착·연습·판정</th><td>도착 핀, 연습 클랩보드, 지문 책, 대박·중박·운망 도형, 보상 칩을 각각 그림으로 제작한다. 검수 대표 결과는 중박이며 판정별 아이콘은 부품 보드에서 비교한다.</td></tr></table><p>검수용 장면 전환은 버튼으로 확인합니다. 수령 영속 저장·실제 판정·실시간 이동과 카메라·1초 길게 누른 자동 굴림·실제 라포 산출·이벤트 서비스는 게임 연동 범위입니다. 나쁜 기운·건설·몬스의 기존 개별 기획은 해당 탭을 따릅니다.</p><div style="display:flex;flex-wrap:wrap;gap:10px"><figure><figcaption><a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=wire-lobby&amp;view=detailed-wireframe">1차 로비</a></figcaption><img loading="lazy" width="198" src="hud24-wire-lobby.png" alt="1차 로비 실제 저장판"></figure><figure><figcaption><a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=wire-board&amp;view=detailed-wireframe">1차 보드</a></figcaption><img loading="lazy" width="198" src="hud24-wire-board.png" alt="1차 보드 실제 저장판"></figure><figure><figcaption><a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=wire-arrived&amp;view=detailed-wireframe">1차 도착</a></figcaption><img loading="lazy" width="198" src="hud24-wire-arrived.png" alt="1차 도착 실제 저장판"></figure><figure><figcaption><a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=main&amp;view=detailed-wireframe">2차 로비</a></figcaption><img loading="lazy" width="198" src="hud24-main.png" alt="2차 로비 실제 저장판"></figure><figure><figcaption><a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=board-ready&amp;view=detailed-wireframe">굴리기 대기</a></figcaption><img loading="lazy" width="198" src="hud24-board-ready.png" alt="굴리기 대기 실제 저장판"></figure><figure><figcaption><a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=arrived&amp;view=detailed-wireframe">필러 결과</a></figcaption><img loading="lazy" width="198" src="hud24-arrived.png" alt="필러 결과 실제 저장판"></figure><figure><figcaption><a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=hud-parts&amp;view=detailed-wireframe">필러와 판정 부품</a></figcaption><img loading="lazy" width="198" src="hud24-hud-parts.png" alt="필러와 판정 부품 실제 저장판"></figure><figure><figcaption><a href="http://127.0.0.1:7018/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=hud-lobby-parts&amp;view=detailed-wireframe">로비·메뉴 부품</a></figcaption><img loading="lazy" width="198" src="hud24-hud-lobby-parts.png" alt="로비·메뉴 부품 실제 저장판"></figure></div></section><section id="spec-details"><h2>부품별 상세 명세</h2><div id="spec-parts"></div></section><details><summary>이전판 작업 명세와 연결 규격</summary>
+<section id="overview">
+<h2>전체 캔버스</h2>
+<p>대표 HUD 두 장 옆의 부품 보드에 필러 카드 15종과 지문, 조작 줄 상태와 드롭다운 3종을 모았습니다.</p>
+<figure><figcaption>저장판 검수 화면 · 대표 HUD 두 장과 부품 보드</figcaption><img src="compact-canvas.jpg" alt="대기와 도착 HUD 두 장 옆에 필러 카드와 조작 줄을 배치한 최신 캔버스"></figure>
+<p><a href="/ui-studio/canvas.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=main&amp;view=detailed-wireframe&amp;layout=grid" target="_blank" rel="noopener">최신 캔버스 열기</a></p>
+</section>
+<section id="layout">
+<h2>1차 · 와이어프레임</h2>
+<table><thead><tr><th>영역</th><th>기본 기준</th></tr></thead><tbody>
+<tr><td>기준 화면</td><td>390 × 844</td></tr><tr><td>상단</td><td>0~50</td></tr>
+<tr><td>앨범·페스티벌</td><td>222 × 94, y 61~155</td></tr>
+<tr><td>재화 띠</td><td>높이 50. 필러 높이에 따라 이동</td></tr>
+<tr><td>필러</td><td>최대 170, y 527~697. 한 장 상태에서는 높이를 줄임</td></tr>
+<tr><td>조작 줄과 하단</td><td>y 697~774, y 774~844</td></tr></tbody></table>
+</section>
+<section id="hud">
+<h2>2차 · 세부 와이어프레임</h2>
+<figure class="phone"><figcaption>굴리기 대기 · HUD 저장판</figcaption><img src="p265-hud-main.png" alt="앨범 차트 버프와 몬스 수량·기분 게이지가 표시된 최신 HUD"></figure>
+<p>아이콘은 흑백 이미지 레이어, 글자는 시스템 글꼴의 별도 텍스트 레이어로 구성합니다. 앨범 커버는 정사각형 이미지이며 차트 버프는 내 앨범 칸에 둡니다. 상단 수치 세 칸은 엔터파워·루비·팬입니다. 몬스 수량과 기분 게이지를 재화 띠에 분리해 표시합니다. 수량은 검수용 예시이고 오른쪽 마일스톤 위치는 시안 기준입니다.</p>
+
+</section>
+<section id="filler">
+<h2>필러 카드</h2>
+<p>카드 폭 378px. 도착·리본 30px, 지문 26px, 말풍선 42px, 판정 30~62px. 칸 도착 후 결과와 대사가 쌓이는 범위는 최대 170px입니다.</p>
+<figure><figcaption>클로드 v1.6 그림 06 · 높이를 줄인 판</figcaption><img src="../source-images/06_필러모음.png" alt="필러 카드 15종과 지문, 모노카피바라 참고 카드"></figure>
+</section>
+<section id="action">
+<h2>조작 줄</h2>
+<table><thead><tr><th>9슬라이스 버튼 바탕</th><th>규격</th></tr></thead><tbody>
+<tr><td>원본 PNG</td><td>48 × 48, 투명 모서리</td></tr>
+<tr><td>원본 분할 / 화면 고정 폭</td><td>상·우·하·좌 11px / 7px</td></tr>
+<tr><td>내용 여백</td><td>0px. 이미지·문구는 독립 레이어에 배치</td></tr>
+<tr><td>상태</td><td>기본 · 가리킴/초점 · 눌림 · 선택 · 비활성</td></tr>
+</tbody></table>
+<p>대기에는 배수와 넓은 굴리기, 대사에는 넘기기와 건너뛰기를 둡니다. 상태와 목적에 따라 한 칸, 두 칸, 세 칸을 사용합니다. 본 설계의 수치와 대사는 검수용 예시입니다.</p>
+<figure><figcaption>클로드 v1.6 그림 03 · 굴리기 버튼 상태</figcaption><img src="../source-images/03_굴리기버튼상태.png" alt="대기, 눌림, 이동 중, 자동 이동, 주사위 부족 상태"></figure>
+</section>
+<section id="menus">
+<h2>메뉴와 창</h2>
+<p><strong>정보 드롭다운 순서</strong>　아이돌 → 팀 → 관계 → 크루 → 몬스</p>
+<p>정렬 보기에서는 정보·몬스 기분·설정의 메뉴 부품만 한 줄에 비교합니다. 정보·몬스는 여는 버튼 위, 설정은 아래로 펼칩니다. 몬스 메뉴는 기분 정보 · 몬스 정보로 표시합니다. 오른쪽 하단 정보의 아이돌·팀은 포토카드의 기존 상세에 연결하도록 명세합니다. HUD에서 들어왔을 때 뒤로는 진입 HUD로 복귀합니다.</p>
+</section>
+<section id="character-relationship">
+<h2>정보 드롭다운의 상세 진입</h2>
+<table><thead><tr><th>메뉴</th><th>목적지</th><th>복귀</th></tr></thead><tbody>
+<tr><td>아이돌</td><td>포토카드의 아이돌 능력 자세히 · <code>idol-ability-detail</code></td><td>뒤로 → HUD</td></tr>
+<tr><td>팀</td><td>포토카드의 팀 능력 자세히 · <code>team-ability-detail</code></td><td>뒤로 → HUD</td></tr>
+<tr><td>관계</td><td>관계 메인 · 2차 관계 작업 명세</td><td>뒤로 → HUD</td></tr>
+<tr><td>크루</td><td>크루 메인 · 회차와 다음 할 일</td><td>뒤로 → HUD</td></tr>
+<tr><td>몬스</td><td>몬스 로비 · 보관함 먼저</td><td>뒤로 → HUD</td></tr></tbody></table>
+<p>HUD r11 미리보기에서 크루 메인과 몬스 보관함으로 이동합니다. 몬스 기분 메뉴의 「몬스 정보」도 같은 보관함을 엽니다. <a href="../../kpop-mons/index.html">몬스 작업 명세</a> · <a href="../../kpop-crew/index.html">크루 작업 명세</a></p>
+<p><a href="../../kpop-photocard/index.html#character-relationship">포토카드 상세 화면 작업 명세</a></p>
+</section>
+
+
+<script type="module" src="details.mjs"></script>
+<section id="profile-application"><div class="shots"><figure><img src="/ui-studio/source/guide/reference/kpop-planning/snapshot/assets/hud-profile-apply-r15-arrived.png" alt="G1_Ingame · 칸 도착 후" width="220"><figcaption><a href="/ui-studio/source/sample-preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=arrived&amp;view=detailed-wireframe">G1_Ingame · 칸 도착 후</a></figcaption></figure><figure><img src="/ui-studio/source/guide/reference/kpop-planning/snapshot/assets/hud-profile-apply-r15-main-solo.png" alt="HUD · 솔로" width="220"><figcaption><a href="/ui-studio/source/sample-preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=main-solo&amp;view=detailed-wireframe">HUD · 솔로</a></figcaption></figure></div><h2>프로필·의상 기존 화면 적용</h2><p>7018 r15 · 프로필·의상 연동</p><ul><li><b>K-01 HUD 프로필</b>　<a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=main">HUD</a>와 <a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=arrived">판 진행 중 HUD</a>에서 공통 팀 정보로 진입합니다. 정보 메뉴의 아이돌과 팀도 같은 정보로 열립니다. <a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=main-solo">솔로 HUD</a>는 솔로 아이돌 정보를 엽니다.</li><li><b>K-03 캐릭터 정보</b>　포토카드 인물과 프로필 멤버에서 <a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=kpop-profile-ui&amp;screen=idol-info">오시온</a>·<a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=kpop-profile-ui&amp;screen=idol-hanseoa-info">한서아</a>의 공통 화면을 사용합니다. 능력·포토카드 수집·옷장은 공통 화면의 버튼으로 엽니다.</li><li><b>K-10 판 진행 중</b>　판 진행 중 HUD에서 <a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=kpop-profile-ui&amp;screen=team-info-board">보기 상태의 팀 정보</a>를 열고, 개인·단체 적용과 수령 후 바로 입기를 제한합니다. 게임 상태 공급원은 개발 연결 범위입니다.</li></ul></section><section id="screen-info-menu-board"><h2>정보 · 판 진행 중</h2><p>G1_Ingame에서 열리는 펼침 메뉴</p><p><a href="/ui-studio/source/sample-preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=info-menu-board&amp;view=detailed-wireframe">화면 미리보기</a></p></section><section id="screen-main-solo"><h2>HUD · 솔로</h2><p>팀 구성 전 1인 프로필에서 공통 아이돌 정보 열기</p><p><a href="/ui-studio/source/sample-preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=main-solo&amp;view=detailed-wireframe">화면 미리보기</a></p></section></details></body>
+</html>
+<section id="bad-energy-defense"><h2>나쁜 기운 정보</h2><p>로비의 나쁜 기운을 누르면 미충전 정보창이 열립니다. 만충 시 HUD의 5분 카운트를 누르면 만충 정보창이 열리고 방어 준비로 이어집니다.</p><p><a href="../../kpop-defense/index.html#gauge">디펜스 정보창 두 상태</a></p></section>
+<section id="build-access"><h2>로비 마을에서 건설</h2><p>로비 지도에서 건물 또는 지붕 배지 선택 → 해당 시설 확대. 건설 현황에서 9개 카드 중 선택 → 같은 시설 확대. 모두 같은 마을의 구도를 유지합니다. 최초 진입점에서 닫는 동작은 해당 진입점으로 복귀합니다.</p><p>지도 원화·시설 확대 구도·카드 사진은 같은 검수 원화 기반입니다. 로비 건물 터치 면과 지붕 배지는 각기 독립 레이어입니다. 증설 가능 표시의 게임 조건은 보유금이 +1 견적 이상이고 아직 완공·파손 상태가 아닐 때입니다. 초기 시설은 짓기 가능 상태로 다룹니다.</p><p><a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6604270d&amp;screen=main">로비 미리보기</a> · <a href="/ui-studio/source/guide/reference/kpop-build/index.html">건설 작업 명세</a></p><figure><img src="../../kpop-planning/snapshot/assets/hud-r19-village.png" width="225" alt="로비 마을의 지붕 위 증설 가능과 수리 필요"></figure></section>

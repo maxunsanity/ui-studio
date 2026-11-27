@@ -1,0 +1,232 @@
+{
+  "documentVersion": "2026-11-17.3",
+  "status": "제안(검수 대기)",
+  "owner": "codex(단이·2차)",
+  "project": "capybara-go",
+  "referenceCanvas": {
+    "w": 504,
+    "h": 894,
+    "meaning": "프로젝트 논리 좌표계. 개별 스크린샷의 부품 크기를 채택하는 기준이 아님."
+  },
+  "grid": {
+    "unit": 4,
+    "gapSmall": 8,
+    "gap": 16,
+    "outerMargin": 16
+  },
+  "commonRolePolicy": "같은 역할은 이 정본 tokenKey/variant/부모/앵커를 사용. 원본 이미지 크기 때문에 wrapper·아이콘 슬롯·글자 영역을 화면별로 바꾸지 않음. 명시 예외는 variant로 기록.",
+  "tokens": {
+    "hud.top": {
+      "height": 64,
+      "anchor": "화면 위·왼쪽 고정",
+      "contentInsetX": 16,
+      "avatarWrapper": 64,
+      "avatarArt": 48,
+      "currencyIcon": 24,
+      "currencyTextSize": 16,
+      "currencyLineHeight": 20,
+      "logicalWidth": 504,
+      "widthPolicy": "논리 폭504 고정, 기기 미리보기에서 비례 표시. 가변 논리 폭의 좌우 늘림 구현을 뜻하지 않음.",
+      "currencyWrapper": [
+        104,
+        64
+      ],
+      "currencyXs": [
+        192,
+        296,
+        400
+      ],
+      "currencyCapsuleRect": [
+        0,
+        16,
+        104,
+        32
+      ],
+      "currencyIconRect": [
+        0,
+        20,
+        24,
+        24
+      ],
+      "currencyLabelRect": [
+        28,
+        18,
+        72,
+        28
+      ]
+    },
+    "nav.bottom": {
+      "height": 108,
+      "anchor": "화면 아래·왼쪽 고정",
+      "safeArea": "기기 안전여백 안쪽",
+      "items": 5,
+      "buttonW": 80,
+      "buttonH": 92,
+      "gap": 16,
+      "groupWidth": 464,
+      "groupXFormula": "(logicalW - 464) / 2",
+      "buttonY": 8,
+      "iconRect": [
+        8,
+        6,
+        64,
+        64
+      ],
+      "labelRect": [
+        0,
+        70,
+        80,
+        22
+      ],
+      "labelFont": 14,
+      "labelWeight": 500,
+      "labelLineHeight": 18,
+      "badgeRect": [
+        52,
+        0,
+        28,
+        28
+      ],
+      "source": "기존 TOOL_SPEC/로비 제작 표준의 동일 역할 규격을 이 프로젝트 5개 메뉴에 적용",
+      "logicalWidth": 504,
+      "widthPolicy": "논리 폭504 고정, 기기 미리보기에서 비례 표시. 가변 논리 폭의 좌우 늘림 구현을 뜻하지 않음."
+    },
+    "event.side": {
+      "wrapperW": 72,
+      "wrapperH": 80,
+      "artRect": [
+        8,
+        0,
+        56,
+        56
+      ],
+      "labelRect": [
+        0,
+        58,
+        72,
+        20
+      ],
+      "badgeRect": [
+        52,
+        0,
+        20,
+        20
+      ],
+      "rowGap": 8,
+      "columnStartY": 112,
+      "leftX": 16,
+      "rightXFormula": "logicalW - 16 - 72",
+      "anchor": "각 화면 동일한 상단/좌·우 기준선"
+    },
+    "action.primary": {
+      "w": 224,
+      "h": 64,
+      "fontSize": 28,
+      "lineHeight": 32,
+      "anchor": "하단 중앙",
+      "bottomOffsetFormula": "nav.bottom.height + message.bottom.h + 16",
+      "labelSeparate": true,
+      "referenceRect": [
+        140,
+        674,
+        224,
+        64
+      ],
+      "labelRect": [
+        0,
+        4,
+        224,
+        32
+      ],
+      "costIconRect": [
+        86,
+        42,
+        16,
+        16
+      ],
+      "costTextRect": [
+        106,
+        40,
+        40,
+        20
+      ]
+    },
+    "action.secondary": {
+      "w": 72,
+      "h": 64,
+      "art": 48,
+      "anchor": "주요 행동 버튼과 같은 하단 기준선"
+    },
+    "control.close": {
+      "wrapperW": 64,
+      "wrapperH": 64,
+      "glyphW": 44,
+      "glyphH": 44,
+      "glyphFont": 36,
+      "anchor": "정의된 팝업 footer 또는 우상단; variant명시"
+    },
+    "badge.notification": {
+      "size": 28,
+      "zeroHidden": true,
+      "canonicalOwner": "부모 1개",
+      "backgroundAndTextSeparate": true
+    },
+    "font.body": {
+      "size": 16,
+      "weight": 600,
+      "lineHeight": 20
+    },
+    "font.section": {
+      "size": 24,
+      "weight": 800,
+      "lineHeight": 28
+    },
+    "message.bottom": {
+      "w": 504,
+      "h": 32,
+      "anchor": "아래·왼쪽 고정",
+      "bottomOffset": 108,
+      "iconRect": [
+        16,
+        4,
+        24,
+        24
+      ],
+      "text": "관찰된 메시지 없음·임의 내용 만들지 않음",
+      "interaction": "미관찰·표시만"
+    },
+    "menu.list": {
+      "wrapper": [
+        72,
+        64
+      ],
+      "referenceRect": [
+        16,
+        96,
+        72,
+        64
+      ],
+      "iconRect": [
+        12,
+        8,
+        48,
+        48
+      ],
+      "anchor": "上·왼쪽 고정",
+      "backgroundSeparate": true
+    }
+  },
+  "validation": [
+    "동일 tokenKey/variant의 논리 rect·글자/아이콘 슬롯·앵커 일치",
+    "화면별 top/bottom/left/right 기준선 비교",
+    "390/430에서 같은 비율·안전영역·하단접근·실제입력영역 확인",
+    "일반그림 contain/region으로 원비율; resource canvas크기로 UI wrapper변경금지",
+    "기본/기기왕복 후 설계원본 보존",
+    "캡처의 가시bbox/게임관찰값과 공통 UI 토큰 분리",
+    "같은 색이라도 전체+200~300% 확대에서 밑판/프레임/선택상태/메시지바 누락을 별도 비교"
+  ],
+  "unimplemented": "문서·규격 정본만 준비. 아직 모든 부품에 자동 적용하는 도구 기능은 아님.",
+  "commonGuide": "src/tools/uxStudio/guide/COMMON_UI_RULES.md @ 2026-11-17.22",
+  "safeAreaStatus": "기기별 안전영역 수치 미정·실기기 검수 미완료. 하단바 기준선 실측을 안전영역 검수로 대체하지 않음.",
+  "visualReviewGuide": "docs/ui/visual-review-and-lessons.md"
+}

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>크루 와이어프레임</title>
+<style>
+  :root { --bg:#e9eaec; --pane:#f4f5f6; --box:#fff; --ln:#4b515a; --soft:#8a9099; --ink:#2b2f35; --fill:#9ba1aa; --dim:#e3e5e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.3 -apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif; }
+  h1 { font-size:18px; margin:20px 24px 4px; }
+  .flow { margin:0 24px; color:var(--soft); font-size:13px; }
+  .rules { margin:10px 24px 0; padding:10px 14px; max-width:1200px; background:var(--box); border:1.5px solid var(--ln); border-radius:8px; font-size:13px; line-height:1.6; }
+  .rules b { color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:32px; padding:16px 24px 32px; }
+  .cap { font-weight:700; margin:0 0 8px; }
+  .phone { position:relative; width:390px; height:844px; background:var(--pane); border:2px solid var(--ln); overflow:hidden; }
+  .a { position:absolute; }
+  .b { position:absolute; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); display:flex; align-items:center; justify-content:center; text-align:center; }
+  .line { position:absolute; left:0; right:0; border-top:1.5px solid var(--ln); }
+  .val { font-weight:700; white-space:nowrap; }
+  .sub { color:var(--soft); font-size:11px; }
+  .pill { display:inline-block; border:1.5px solid var(--ln); border-radius:999px; padding:0 6px; font-size:11px; background:var(--box); white-space:nowrap; }
+  .off { background:var(--dim) !important; border-style:dashed !important; color:var(--soft); }
+  .tab { position:absolute; top:774px; height:70px; width:65px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:11px; font-weight:600; }
+  .tab i { width:24px; height:24px; border:1.5px solid var(--ln); border-radius:4px; background:var(--box); }
+  .tab + .tab { border-left:1px solid #c9ccd1; }
+  .tab.on { background:#dfe2e6; }
+  .bm { position:absolute; top:58px; height:32px; border:1.5px solid var(--ln); border-bottom:none; border-radius:8px 8px 0 0; background:var(--dim); display:flex; align-items:center; justify-content:center; font-weight:600; }
+  .bm.on { background:var(--box); }
+  .grid { position:absolute; left:8px; right:8px; top:96px; bottom:146px; overflow:hidden; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; align-content:start; }
+  .grp { grid-column:1/-1; font-weight:700; font-size:12px; margin-top:2px; display:flex; justify-content:space-between; align-items:center; }
+  .m { position:relative; height:112px; border:1.5px solid var(--ln); border-radius:8px; background:var(--box); overflow:hidden; display:flex; flex-direction:column; }
+  .m .pic { flex:1; background:var(--dim); display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; }
+  .m .nm { padding:2px 5px 0; font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .m .ft { padding:0 5px 4px; display:flex; justify-content:space-between; font-size:11px; color:var(--soft); }
+  .m .el { position:absolute; top:4px; left:4px; }
+  .m .lv { position:absolute; top:4px; right:4px; font-weight:700; }
+  .m.no { border-style:dashed; background:transparent; }
+  .m.no .pic { background:transparent; font-size:16px; }
+  .dimbg { position:absolute; inset:0; background:rgba(43,47,53,.45); }
+  .win { position:absolute; border:2px solid var(--ln); border-radius:14px; background:var(--pane); }
+  .n { position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; font-weight:700; line-height:20px; text-align:center; }
+  .notes { margin:10px 0 0; padding:0; list-style:none; width:390px; font-size:13px; }
+  .notes li { display:flex; gap:8px; padding:4px 0; }
+  .notes b { flex:none; width:20px; height:20px; border-radius:50%; background:#2b2f35; color:#fff; font-size:11px; line-height:20px; text-align:center; }
+  .kv { display:flex; justify-content:space-between; align-items:center; font-size:12px; }
+</style>
+</head>
+<body>
+<h1>크루 · 와이어프레임 1차 초안 (390×844)</h1>
+<p class="flow">⓪ HUD 「정보」 → 「크루」 → 가입 전 ⑥ 전체 크루 · ⑥-1 크루 보기 · 신청 / 가입 후 ① 크루 메인(크루원) · ①-L 크루 메인(크루장) → 하위 화면: ② 출품판(뮤비 단계) · ②-1 투표 · ③ 대표작 고르기(크루장만) · ④ 크루원 · ④-L 크루 관리(크루장만) · ⑤ 월드 총공(9주차) · 창: 음악 공유 · 투표 확인</p>
+<p class="flow"><b>메인은 단순하게</b>(11/23 현중 「크루 메인 화면은 단순하게 · 중요 정보만」 · 「메인에서 모든걸 다 할 생각은 하지 말라」): 메인 = 크루 · 이번 회차 상태 · 내 할 일 하나 · 지난 성적 · 공지 한 줄 · 메뉴. 공유 · 뮤비 · 투표 · 확정 · 관리는 하위 화면에서. <b>크루장 / 크루원 화면을 나눔</b>(「보는 화면이 틀릴꺼고」)</p>
+<div class="rules">
+  <b>규칙 근거</b> · 크루 재판단 보고(11/23 12:05) · W08 R-08-9~13 · 17 · 20 · 음악 앱 규칙서 M6 · R-MA-61 · 91 · 11/13 현중 「주간에도 올릴 수 있어」 · 「일단 하나」<br>
+  · <b>출품 흐름</b>: 원소유자가 「음악만」 공유(동의) → 크루원 각자(원작자 포함) 자기 아이돌로 뮤비(음악 앱 M5) → 크루 투표(참고용 · 1인 1표 · 바꾸기 · 취소 불가) → 크루장이 회차당 <b>대표작 1편</b>(설정값). 주간(1~8주) · 월드(9주) 같은 틀 · 개인 출품과 서로 안 잠김.<br>
+  · <b>크루원이 보는 것</b>: 상태 · 내 할 일(공유 / 뮤비 / 투표 중 남은 것 하나) · 출품판 · 크루원 목록(보기만) · 공지. <b>크루장만 보는 것</b>: 크루장 할 일(신청 심사 · 대표작 고르기) · ③ 대표작 고르기 · ④-L 크루 관리(신청 · 운영진 · 공지 쓰기 · 모집 · 크루 정보 · 위임). 운영진은 받은 권한만 ④-L에서 보임.<br>
+  · <b>뺀 것</b>: 크루 재화 · 레벨 · 미션 · 홍보(1차). 기여 = 이번 회차 참여 기록(공유 · 뮤비 · 투표).<br>
+  · <b>총공</b>: 9주차 인기 재화(각자 지갑) → 크루 대표작 · 1개 +10점 · 상한 +5%(비앙카 D73). 월드 「크루」 탭 = 크루 대표작 순위.<br>
+  · <b>정할 것</b>: 대표작 확정 뒤 바꾸기 · 운영진도 확정할지 / 득표 보이기 · 투표 마감 / 정원(30 제안) / 총공 기록 공개 범위</div>
+<div class="row" id="screens"></div>
+
+<script>
+const TABS = ["포토카드", "스케줄", "건설", "미션", "상점", "정보"];
+const tabs = (on = -1) => `<div class="line" style="top:774px"></div>` + TABS.map((t, i) =>
+  `<div class="tab${i === on ? " on" : ""}" style="left:${i * 65}px"><i></i>${t}</div>`).join("");
+const bell = `<div class="b" style="left:330px;top:8px;width:52px;height:34px;font-size:11px;font-weight:700">알림 2</div>`;
+const head = (title, b = true) => `<div class="b" style="left:8px;top:8px;width:34px;height:34px;font-size:18px">←</div>
+  <div class="a val" style="left:52px;top:16px;font-size:16px">${title}</div>${b ? bell : ""}<div class="line" style="top:50px"></div>`;
+const n = (k, x, y) => `<span class="n" style="left:${x}px;top:${y}px">${k}</span>`;
+const bigBtn = (x, w, label, sub = "", off = false) =>
+  `<div class="b${off ? " off" : ""}" style="left:${x}px;top:706px;width:${w}px;height:60px;flex-direction:column;gap:2px">
+    <span class="val" style="font-size:15px">${label}</span>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
+const bottomBar = inner => `<div class="line" style="top:698px"></div>${inner}${tabs()}`;
+const actBtn = (label, sub, off = false) => bigBtn(8, 374, label, sub, off);
+const chips = (list, on) => list.map((c, i) => `<div class="bm${c === on ? " on" : ""}" style="left:${8 + i * (374 / list.length)}px;width:${374 / list.length - 4}px">${c}</div>`).join("") + `<div class="line" style="top:90px"></div>`;
+const IN = ["출품판", "크루원", "공지", "전체 크루"], OUT = ["전체 크루", "만들기"];
+const lobby = on => head("민트 웨이브") + chips(IN, on);
+const behind = on => lobby(on) + tabs() + `<div class="dimbg"></div>`;
+// 회차 줄 + 단계 4칸
+const STEPS = ["음악 공유", "뮤비 만들기", "투표", "대표작"];
+const round = (title, due, step) => `
+  <div class="b" style="left:8px;top:98px;width:374px;height:46px;justify-content:space-between;padding:0 12px 0 28px">
+    <span style="text-align:left"><span class="val">${title}</span><br><span class="sub">개인 출품과 따로 · 대표작 1편</span></span><span class="val">${due}</span></div>
+  <div class="a" style="left:8px;top:150px;width:374px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px">${STEPS.map((s, i) =>
+    `<div style="height:34px;border:${i === step ? 2.5 : 1.5}px solid var(--ln);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:${i < step ? "var(--fill)" : i === step ? "var(--box)" : "var(--dim)"};color:${i < step ? "#fff" : i === step ? "var(--ink)" : "var(--soft)"}">${i < step ? "✓ " : ""}${s}</div>`).join("")}</div>`;
+const sect = (y, t, r = "") => `<div class="a" style="left:8px;top:${y}px;width:374px;display:flex;justify-content:space-between;padding-left:28px"><span class="val">${t}</span><span class="sub" style="font-size:12px">${r}</span></div>`;
+const MV = [["아이돌 A 버전", "나", "여름 신호"], ["레터 버전", "리아", "여름 신호"], ["밤 산책 컷", "도윤", "밤 산책"], ["무대 컷", "하나", "여름 신호"], ["골목 컷", "준", "밤 산책"]];
+const mvCard = (m, x, y, w = 118, h = 112) => `<div class="m" style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px"><div class="pic">뮤비</div><div class="nm">${m[0]}</div><div class="ft"><span>${m[1]}</span><span>${m[2]}</span></div></div>`;
+const face = (x, y, s = 40) => `<div class="b off" style="left:${x}px;top:${y}px;width:${s}px;height:${s}px;font-size:11px;border-radius:50%">얼굴</div>`;
+const win = (top, h, title) => `<div class="win" style="left:20px;top:${top}px;width:350px;height:${h}px"></div><div class="a val" style="left:40px;top:${top + 16}px;font-size:16px">${title}</div><div class="b" style="left:322px;top:${top + 10}px;width:34px;height:34px;font-size:15px">✕</div>`;
+const winBtns = (top, a, b) => `<div class="b" style="left:36px;top:${top}px;width:150px;height:48px"><span class="val">${a}</span></div><div class="b" style="left:204px;top:${top}px;width:150px;height:48px;border-width:2.5px"><span class="val">${b}</span></div>`;
+
+// 메인 공용: 크루 줄 · 이번 회차 카드 · 지난 대표작 · 공지 · 메뉴
+const crewTop = role => `
+  <div class="b" style="left:8px;top:58px;width:374px;height:96px;justify-content:flex-start;gap:12px;padding:0 10px">
+    <span class="b off" style="position:static;width:76px;height:76px;font-size:11px;flex:none">크루 그림</span>
+    <span style="text-align:left"><span class="val" style="font-size:17px">민트 웨이브</span><br><span class="sub" style="font-size:12px">23 / 30명 · 나는 <b>${role}</b></span></span></div>`;
+const roundCard = (stepNow, line) => `
+  <div class="b" style="left:8px;top:164px;width:374px;height:178px;border-width:2.5px"></div>
+  <div class="a" style="left:32px;top:176px;width:338px;display:flex;justify-content:space-between"><span class="val" style="font-size:15px">주간 3주차 · 크루 출품</span><span class="val">마감 D-2</span></div>
+  <div class="a" style="left:20px;top:206px;width:350px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px">${STEPS.map((x, i) =>
+    `<div style="height:28px;border:${i === stepNow ? 2.5 : 1.5}px solid var(--ln);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:${i < stepNow ? "var(--fill)" : i === stepNow ? "var(--box)" : "var(--dim)"};color:${i < stepNow ? "#fff" : i === stepNow ? "var(--ink)" : "var(--soft)"}">${x}</div>`).join("")}</div>
+  <div class="a" style="left:20px;top:246px;width:350px;text-align:center"><span class="val" style="font-size:16px">${line}</span></div>
+  <div class="b" style="left:20px;top:282px;width:350px;height:46px"><span class="val" style="font-size:15px">출품판 보기 ›</span></div>`;
+const lastRow = (y = 0) => `
+  <div class="b" style="left:8px;top:${y}px;width:374px;height:52px;justify-content:space-between;padding:0 14px 0 28px">
+    <span class="sub" style="font-size:12px">지난 대표작</span><span class="val">주간 2주차 · 구역 4위</span></div>`;
+const noticeRow = y => `
+  <div class="b" style="left:8px;top:${y}px;width:374px;height:52px;justify-content:space-between;padding:0 14px 0 28px">
+    <span class="sub" style="font-size:12px">공지</span><span class="val" style="font-size:13px">음악 공유는 수요일까지예요</span></div>`;
+const menu = (y, items) => `<div class="a" style="left:8px;top:${y}px;width:374px;display:grid;grid-template-columns:repeat(${items.length},1fr);gap:6px">${items.map(k =>
+  `<div style="height:56px;border:1.5px solid var(--ln);border-radius:8px;background:var(--box);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">${k}</div>`).join("")}</div>`;
+const todo = (y, title, rows) => `
+  <div class="b" style="left:8px;top:${y}px;width:374px;height:${30 + rows.length * 44}px"></div>
+  <div class="a val" style="left:28px;top:${y + 9}px">${title}</div>
+  ${rows.map((r, i) => `<div class="a" style="left:20px;top:${y + 34 + i * 44}px;width:350px;height:38px;border-top:1px solid #c9ccd1;display:flex;justify-content:space-between;align-items:center;padding:0 0 0 8px"><span style="font-size:13px">${r[0]}</span><span class="val">${r[1]} ›</span></div>`).join("")}`;
+const sub = (title, b = true) => head(title, b);
+
+const SCREENS = [
+  { cap: "⓪ 들어가는 곳 · HUD 「정보」 펼침 → 크루", html: `
+      <div class="b off" style="left:8px;top:8px;width:374px;height:34px">팀 이름 · 엔터파워 · 루비 · 팬 (HUD 그대로)</div><div class="line" style="top:50px"></div>
+      <div class="b off" style="left:8px;top:60px;width:374px;height:400px">보드 · 앨범/페스티벌 상자 · 좌우 이벤트 칸<br>(HUD UI 기획서 그대로)</div>
+      <div class="b off" style="left:8px;top:470px;width:250px;height:50px">띠 · 돈 · 주사위 · 몬스</div>
+      <div class="b off" style="left:8px;top:530px;width:250px;height:160px">필러 박스</div>
+      <div class="b off" style="left:8px;top:706px;width:250px;height:60px">굴리기</div>
+      <div class="win" style="left:262px;top:470px;width:124px;height:300px;border-radius:10px;background:var(--box);z-index:3">
+        ${["아이돌", "팀", "관계", "크루", "몬스"].map((k, i) => `<div class="a" style="left:6px;right:6px;top:${8 + i * 57}px;height:50px;border:${i === 3 ? 2.5 : 1.5}px solid var(--ln);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;background:${i === 3 ? "var(--dim)" : "var(--box)"}">${k}</div>`).join("")}
+      </div>` + tabs(5) + `${n(1, 336, 776)}${n(2, 244, 643)}`,
+    notes: ["아래 메뉴 「정보」 → 위로 펼침(HUD UI 기획서)", "4번째 「크루」 → 가입했으면 ① 메인(크루장이면 ①-L) · 안 했으면 ⑥ 전체 크루 · ← = HUD"] },
+
+  { cap: "① 크루 메인 · 크루원", html: head("크루") + crewTop("크루원") + roundCard(1, "지금: 뮤비 만들기 · 크루원 뮤비 5편") +
+      todo(352, "내 할 일", [["이 회차 투표가 아직이에요", "투표하러"]]) + lastRow(436) + noticeRow(496) + menu(560, ["크루원", "공지", "전체 크루"]) +
+      `${n(1, 2, 62)}${n(2, 2, 168)}${n(3, 2, 356)}${n(4, 2, 440)}${n(5, 2, 500)}${n(6, 2, 564)}` + tabs(),
+    notes: ["크루 그림 · 이름 · 인원 / 정원 · 내 역할", "이번 회차 카드 하나: 회차 · 마감 · 단계 4칸 · 지금 단계 한 줄 · 「출품판 보기 ›」 → ② · 9주차 출품 뒤에는 「총공 보기 ›」 → ⑤", "내 할 일 = 남은 것 하나만(음악 공유 / 뮤비 만들기 / 투표 · 다 했으면 「이번 회차 할 일 끝」) · 누르면 그 화면으로", "지난 대표작 성적 한 줄", "고정 공지 한 줄 · 누르면 공지", "메뉴 3개 · 크루원(보기만) · 공지 · 전체 크루 · 메인에서는 공유 · 투표 · 관리를 직접 하지 않음"] },
+
+  { cap: "①-L 크루 메인 · 크루장", html: head("크루") + crewTop("크루장") + roundCard(2, "지금: 투표 중 · 14 / 23명 투표") +
+      todo(352, "크루장 할 일", [["가입 신청", "3건"], ["대표작 고르기 · 투표 마감 뒤", "D-1"]]) + lastRow(480) + noticeRow(540) + menu(604, ["크루원", "공지", "전체 크루", "크루 관리"]) +
+      `${n(1, 2, 168)}${n(2, 2, 356)}${n(3, 2, 608)}` + tabs(),
+    notes: ["크루원 메인과 같은 틀 · 이번 회차 카드 · 지난 대표작 · 공지는 같음", "「내 할 일」 자리가 「크루장 할 일」: 가입 신청 n건 → ④-L · 대표작 고르기 → ③(투표 마감 뒤 켜짐) · 할 일이 없으면 줄 숨김 · 크루장 자신의 공유 · 뮤비 · 투표는 출품판에서", "메뉴에 「크루 관리」(→ ④-L)가 더해짐 · 운영진은 받은 권한이 있으면 「크루 관리」만 보임"] },
+
+  { cap: "② 출품판 · 뮤비 단계 (메인 「출품판 보기」)", html: sub("출품판 · 주간 3주차") + round("주간 3주차 · 크루 출품", "마감 D-2", 1).replace("top:98px", "top:58px").replace("top:150px", "top:110px") +
+      sect(156, "공유된 음악 2", "원소유자가 「음악만」 공유") +
+      [["여름 신호", "리아 · 뮤비 3"], ["밤 산책", "도윤 · 뮤비 2"]].map((x, i) => { const y = 180 + i * 70; return `
+        <div class="b" style="left:8px;top:${y}px;width:374px;height:62px"></div>
+        <div class="b off" style="left:16px;top:${y + 7}px;width:48px;height:48px;font-size:11px">앨범</div>
+        <div class="a" style="left:74px;top:${y + 10}px"><span class="val">${x[0]}</span><br><span class="sub" style="font-size:12px">${x[1]}</span></div>
+        <div class="b" style="left:258px;top:${y + 12}px;width:116px;height:38px;font-size:12px;font-weight:700">이 음악으로 뮤비</div>`; }).join("") +
+      sect(326, "크루원 뮤비 5", "누르면 크게 보기") +
+      MV.map((m, i) => mvCard(m, 8 + (i % 3) * 126, 350 + Math.floor(i / 3) * 120)).join("") +
+      `<div class="m no" style="position:absolute;left:260px;top:470px;width:118px;height:112px"><div class="pic">+</div><div class="nm" style="color:var(--soft)">내 뮤비 더</div><div class="ft"><span></span></div></div>
+      ${n(1, 2, 160)}${n(2, 236, 192)}${n(3, 2, 354)}${n(4, 2, 700)}${n(5, 193, 700)}` +
+      bottomBar(bigBtn(8, 183, "내 음악 공유", "→ 창") + bigBtn(199, 183, "음악 앱에서 만들기", "뮤비 제작(M5)")),
+    notes: ["공유된 음악 · 원소유자 · 뮤비 수", "「이 음악으로 뮤비」 → 음악 앱 M5(내 아이돌로) · 만들면 이 판에 자동으로 올라옴", "크루원 뮤비 · 누르면 크게 보기 · 좋아요 반응", "내 음악 공유 → 창", "크루장 · 크루원 같은 화면(누구나 공유 · 뮤비 가능)"] },
+
+  { cap: "②-1 출품판 · 투표 단계", html: sub("출품판 · 주간 3주차") + round("주간 3주차 · 크루 출품", "투표 마감 D-1", 2).replace("top:98px", "top:58px").replace("top:150px", "top:110px") +
+      sect(156, "뮤비 5 · 투표 14 / 23명", "결과는 크루장 참고용") +
+      MV.map((m, i) => { const y = 180 + i * 92; const votes = [6, 4, 2, 1, 1][i]; const mine = i === 1; return `
+        <div class="b" style="left:8px;top:${y}px;width:374px;height:84px${mine ? ";border-width:2.5px" : ""}"></div>
+        <div class="b off" style="left:16px;top:${y + 8}px;width:96px;height:68px;font-size:11px">뮤비</div>
+        <div class="a" style="left:122px;top:${y + 8}px"><span class="val">${m[0]}</span><br><span class="sub" style="font-size:12px">${m[1]} · ${m[2]}</span></div>
+        <div class="a" style="left:122px;top:${y + 54}px;width:130px;height:10px;border:1.5px solid var(--ln);border-radius:5px;background:linear-gradient(90deg,var(--fill) ${votes / 14 * 100}%,var(--box) 0)"></div>
+        <div class="a sub" style="left:258px;top:${y + 52}px;font-size:12px">${votes}표</div>
+        <div class="b${mine ? "" : " off"}" style="left:296px;top:${y + 14}px;width:78px;height:30px;font-size:12px;font-weight:700">${mine ? "내 투표 ✓" : "투표"}</div>`; }).join("") +
+      `${n(1, 2, 160)}${n(2, 362, 276)}${n(3, 362, 366)}` + bottomBar(actBtn("투표했어요 · 바꿀 수 없음", "마감 뒤 크루장이 대표작을 골라요", true)),
+    notes: ["투표한 사람 / 크루원 · 참고용", "내가 투표한 뮤비 「내 투표 ✓」 · 1인 1표 · 바꾸기 · 취소 불가", "투표 전이면 「투표」 → 투표 확인 창 · 투표하면 나머지 꺼짐"] },
+
+  { cap: "③ 대표작 고르기 (크루장만 · 「크루장 할 일」에서)", html: sub("대표작 고르기", false) + `
+      <div class="b" style="left:8px;top:58px;width:374px;height:46px;justify-content:space-between;padding:0 12px 0 28px"><span class="val">주간 3주차 · 회차당 1편</span><span class="val">출품 마감 D-0</span></div>` +
+      sect(114, "투표 순 · 하나 고르기", "표는 참고") +
+      MV.map((m, i) => { const y = 138 + i * 80; const sel = i === 0; return `
+        <div class="b" style="left:8px;top:${y}px;width:374px;height:72px${sel ? ";border-width:2.5px" : ""}"></div>
+        <div class="a" style="left:18px;top:${y + 26}px;width:20px;height:20px;border:2px solid var(--ln);border-radius:50%;background:${sel ? "radial-gradient(var(--ln) 45%,var(--box) 50%)" : "var(--box)"}"></div>
+        <div class="b off" style="left:48px;top:${y + 8}px;width:80px;height:56px;font-size:11px">뮤비</div>
+        <div class="a" style="left:138px;top:${y + 12}px"><span class="val">${m[0]}</span><br><span class="sub" style="font-size:12px">${m[1]} · ${m[2]} · ${[6, 4, 2, 1, 1][i]}표</span></div>`; }).join("") +
+      `<div class="b" style="left:8px;top:546px;width:374px;height:70px;flex-direction:column;align-items:stretch;justify-content:space-around;padding:6px 12px 6px 28px">
+        <div class="kv"><span class="sub" style="font-size:12px">출품되는 곳</span><span class="val">주간 페스티벌 · 크루 출품</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">음악 원소유자 동의</span><span class="val">공유할 때 받음 ✓</span></div></div>
+      ${n(1, 2, 62)}${n(2, 2, 160)}${n(3, 2, 550)}${n(4, 2, 700)}` + bottomBar(actBtn("대표작으로 출품", "「아이돌 A 버전」 · 확정 뒤 바꾸기는 정할 것")),
+    notes: ["크루장만 들어옴 · 크루원 메인에는 「크루장이 고르는 중」 한 줄만", "투표 순 · 하나 고르기(대표작 1편 = 설정값)", "출품되는 곳 · 원소유자 동의(거둔 음악의 뮤비는 못 고름 · R-MA-61)", "출품 → 페스티벌에 크루 출품 접수 · 크루원 모두에게 알림 · 메인 단계 4칸이 「대표작 ✓」"] },
+
+  { cap: "④ 크루원 (메뉴 · 누구나 보기)", html: sub("크루원") + `
+      <div class="b" style="left:8px;top:58px;width:374px;height:46px;justify-content:space-between;padding:0 12px 0 28px">
+        <span class="val">23 / 30명</span><span class="sub" style="font-size:12px">이번 회차 참여 14명</span></div>
+      <div class="a sub" style="left:206px;top:112px;width:150px;display:grid;grid-template-columns:repeat(3,1fr);font-size:11px;text-align:center"><span>공유</span><span>뮤비</span><span>투표</span></div>
+      ${[["리아", "크루장", "✓", "✓", "✓"], ["도윤", "운영진", "✓", "✓", "✓"], ["하나", "운영진", "—", "✓", "✓"], ["나", "", "—", "✓", "✓"], ["준", "", "—", "✓", "—"], ["세린", "", "—", "—", "✓"], ["태오", "", "—", "—", "—"], ["유나", "", "—", "✓", "✓"]].map((r, i) => { const y = 132 + i * 64; return `
+        <div class="b" style="left:8px;top:${y}px;width:374px;height:58px"></div>${face(16, y + 9)}
+        <div class="a" style="left:64px;top:${y + 19}px"><span class="val">${r[0]}</span>${r[1] ? ` <span class="pill">${r[1]}</span>` : ""}</div>
+        <div class="a" style="left:206px;top:${y + 19}px;width:150px;display:grid;grid-template-columns:repeat(3,1fr);text-align:center;font-weight:700">${r.slice(2).map(v => `<span${v === "—" ? ' style="color:var(--soft)"' : ""}>${v}</span>`).join("")}</div>`; }).join("")}
+      <div class="a sub" style="left:8px;top:654px;width:374px;text-align:center;font-size:12px">아래로 밀면 15명 더</div>
+      ${n(1, 2, 62)}${n(2, 182, 110)}${n(3, 2, 136)}` + tabs(),
+    notes: ["인원 / 정원 · 이번 회차 참여 수", "참여 기록 3칸 = 옛 기여 자리 · 숫자 · 등수 없음", "크루원은 보기만(줄 버튼 없음) · 크루장 · 운영진의 관리 동작은 ④-L에서"] },
+
+  { cap: "④-L 크루 관리 (크루장 · 권한 받은 운영진)", html: sub("크루 관리", false) +
+      [["가입 신청", "3건 · 수락 / 거절"], ["크루원 관리", "운영진 지정 · 내보내기 · 크루장 넘기기"], ["공지 쓰기", "고정 1개 · 크루원 / 공개"], ["모집", "모집 중 · 모집 글"], ["크루 정보", "이름 · 그림 · 소개"]].map((r, i) => { const y = 62 + i * 76; return `
+        <div class="b" style="left:8px;top:${y}px;width:374px;height:68px;justify-content:space-between;padding:0 14px 0 28px">
+          <span style="text-align:left"><span class="val">${r[0]}</span><br><span class="sub" style="font-size:12px">${r[1]}</span></span><span class="val">›</span></div>`; }).join("") +
+      `<div class="a sub" style="left:8px;top:452px;width:374px;font-size:12px;line-height:1.6;padding-left:28px">운영진은 받은 권한(신청 심사 · 공지 · 크루 정보)만 보여요.<br>크루장 넘기기 · 내보내기는 크루장만.</div>
+      ${n(1, 2, 66)}${n(2, 2, 142)}${n(3, 2, 454)}` + bottomBar(actBtn("크루 나가기", "크루장은 넘긴 뒤에 나갈 수 있어요")),
+    notes: ["가입 신청 심사(시뮬 기존 기능) · 수락 순간 정원 · 모집 다시 확인", "크루원 관리 · 공지 · 모집 · 크루 정보 = 시뮬 기존 「운영」 화면을 메뉴로 나눈 것", "권한별로 줄을 숨김 · 크루원에게는 이 화면이 없음"] },
+
+  { cap: "⑤ 월드 총공 (9주차 · 메인 회차 카드에서)", html: sub("월드 총공 · 9주차") + `
+      <div class="b" style="left:8px;top:58px;width:374px;height:150px"></div>
+      <div class="b off" style="left:16px;top:66px;width:150px;height:134px">대표작 뮤비</div>
+      <div class="a" style="left:176px;top:70px"><span class="val" style="font-size:15px">아이돌 A 버전</span><br><span class="sub" style="font-size:12px">여름 신호 · 리아 원곡</span></div>
+      <div class="a" style="left:176px;top:118px;width:198px;display:flex;flex-direction:column;gap:6px">
+        <div class="kv"><span class="sub" style="font-size:12px">크루 탭</span><span class="val">12위</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">인기 탭</span><span class="val">34위</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">갱신</span><span class="val">3분 전</span></div></div>
+      <div class="b" style="left:8px;top:220px;width:374px;height:120px;flex-direction:column;align-items:stretch;justify-content:space-around;padding:6px 12px 6px 28px">
+        <div class="kv"><span class="sub" style="font-size:12px">내 인기 재화</span><span class="val">7개</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">1개 쓰면</span><span class="val">대표작 +10점</span></div>
+        <div class="kv"><span class="sub" style="font-size:12px">대표작 받은 총공</span><span class="val">64개 · 상한 +5%</span></div></div>
+      <div class="b" style="left:8px;top:352px;width:374px;height:52px;border-width:2.5px"><span class="val" style="font-size:15px">인기 재화 쓰기</span></div>
+      <div class="a sub" style="left:8px;top:418px;width:374px;font-size:12px;line-height:1.6;padding-left:28px">9주차에만 생겨요 · 각자 자기 지갑에서 써요(크루장이 대신 못 씀).</div>
+      ${n(1, 2, 62)}${n(2, 2, 224)}${n(3, 2, 356)}` + bottomBar(actBtn("월드 화면에서 보기", "6탭 · 전체 · 창작 · 국가 · 친구 · 크루 · 인기")),
+    notes: ["대표작 · 월드 「크루」 탭 순위(= 크루 대표작 순위) · 「인기」 탭 순위 · 갱신 시각", "인기 재화 · 1개 +10점 · 상한 +5%(비앙카 D73)", "쓰기 → 개수 고르기는 음악 앱 보관함 창 · 크루장 · 크루원 같은 화면 · 누가 썼는지 기록은 정할 것(공개 범위)"] },
+
+  { cap: "창 · 내 음악 공유 (출품판에서)", html: sub("출품판 · 주간 3주차") + tabs() + `<div class="dimbg"></div>` + win(200, 440, "내 음악 크루에 공유") + `
+      <div class="a sub" style="left:40px;top:250px;font-size:12px">내 창작 음원 · 하나 고르기</div>
+      ${[["여름 끝", "내 팀 · 발매 2주차", 1], ["새벽 4시", "내 팀 · 발매 1주차", 0]].map((x, i) => { const y = 272 + i * 70; return `
+        <div class="b" style="left:36px;top:${y}px;width:318px;height:62px${x[2] ? ";border-width:2.5px" : ""}"></div>
+        <div class="a" style="left:48px;top:${y + 21}px;width:20px;height:20px;border:2px solid var(--ln);border-radius:50%;background:${x[2] ? "radial-gradient(var(--ln) 45%,var(--box) 50%)" : "var(--box)"}"></div>
+        <div class="b off" style="left:78px;top:${y + 7}px;width:48px;height:48px;font-size:11px">앨범</div>
+        <div class="a" style="left:136px;top:${y + 12}px"><span class="val">${x[0]}</span><br><span class="sub" style="font-size:12px">${x[1]}</span></div>`; }).join("")}
+      <div class="b" style="left:36px;top:420px;width:318px;height:72px;justify-content:flex-start;gap:10px;padding:0 12px">
+        <span style="flex:none;width:22px;height:22px;border:2px solid var(--ln);border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:700">✓</span>
+        <span style="text-align:left;font-size:12px"><b>음악만 공유</b>에 동의해요<br>크루원이 자기 아이돌로 뮤비를 만들 수 있어요</span></div>
+      <div class="a sub" style="left:40px;top:506px;width:310px;font-size:12px;line-height:1.5">공유를 거두면 새 뮤비 · 새 출품은 막히고, 이미 낸 출품은 그 회차 끝까지 유지돼요.</div>
+      ${winBtns(570, "취소", "공유")}${n(1, 12, 276)}${n(2, 12, 424)}${n(3, 12, 506)}`,
+    notes: ["내 창작 음원 하나 · 이미 공유한 곡은 「공유 중 · 거두기」", "원소유자 동의 = 음악만(R-08-9) · 체크해야 「공유」 켜짐", "거두기 규칙(R-08-13 · R-MA-61)"] },
+
+  { cap: "창 · 투표 확인 (출품판 투표 단계에서)", html: sub("출품판 · 주간 3주차") + tabs() + `<div class="dimbg"></div>` + win(250, 340, "이 뮤비에 투표할까요?") + `
+      <div class="b off" style="left:36px;top:300px;width:318px;height:130px">뮤비 · 레터 버전</div>
+      <div class="a" style="left:40px;top:442px"><span class="val">레터 버전</span> <span class="sub" style="font-size:12px">리아 · 여름 신호</span></div>
+      <div class="a sub" style="left:40px;top:470px;width:310px;font-size:12px;line-height:1.5">한 사람 한 표 · <b>바꾸거나 취소할 수 없어요</b>.<br>결과는 크루장이 대표작을 고를 때 참고해요.</div>
+      ${winBtns(526, "취소", "투표")}${n(1, 12, 304)}${n(2, 12, 472)}`,
+    notes: ["누른 뮤비 · 제목 · 만든 사람 · 음악", "1인 1표 · 변경 · 취소 불가 · 참고용"] },
+
+  { cap: "⑥ 전체 크루 (가입 전 · 메뉴 「전체 크루」)", html: head("크루") + chips(OUT, "전체 크루") + `
+      <div class="b" style="left:8px;top:98px;width:280px;height:40px;justify-content:flex-start;padding-left:12px;color:var(--soft)">크루 이름 찾기</div>
+      <div class="b" style="left:296px;top:98px;width:86px;height:40px;font-size:12px;font-weight:700">모집 중 ✓</div>
+      ${[["민트 웨이브", "23 / 30", "주간 2주차 · 구역 4위"], ["나이트 오빗", "18 / 30", "주간 2주차 · 구역 11위"], ["레터 가든", "29 / 30", "주간 2주차 · 구역 2위"], ["선라이즈", "9 / 30", "아직 출품 없음"], ["블루 노트", "14 / 30", "주간 1주차 · 구역 20위"]].map((c, i) => { const y = 148 + i * 106; return `
+        <div class="b" style="left:8px;top:${y}px;width:374px;height:98px"></div>
+        <div class="b off" style="left:16px;top:${y + 9}px;width:80px;height:80px;font-size:11px">크루 그림</div>
+        <div class="a" style="left:106px;top:${y + 12}px"><span class="val" style="font-size:15px">${c[0]}</span> <span class="pill">모집 중</span></div>
+        <div class="a sub" style="left:106px;top:${y + 40}px;font-size:12px">${c[1]}명 · 한 줄 소개</div>
+        <div class="a sub" style="left:106px;top:${y + 62}px;font-size:12px">지난 대표작 · ${c[2]}</div>`; }).join("")}
+      ${n(1, 2, 102)}${n(2, 80, 150)}${n(3, 2, 700)}` + bottomBar(actBtn("크루 만들기", "내 발매 앨범이 있어야 해요 · 한 크루만")),
+    notes: ["이름 찾기 · 모집 중만 · 가입 전에는 이 화면이 크루 첫 화면", "크루 카드 · 인원 · 지난 대표작 성적 한 줄 · 누르면 ⑥-1", "만들기(이름 · 그림 · 소개 · 모집) · 앨범이 없으면 꺼짐 · 만들면 내가 크루장 → ①-L"] },
+
+  { cap: "⑥-1 크루 보기 · 가입 신청", html: head("민트 웨이브", false) + `
+      <div class="b off" style="left:8px;top:58px;width:374px;height:150px">크루 그림 · 배너</div>
+      <div class="a" style="left:16px;top:218px"><span class="val" style="font-size:17px">민트 웨이브</span> <span class="pill">모집 중</span> <span class="pill">23 / 30명</span></div>
+      <div class="a sub" style="left:16px;top:248px;width:358px;font-size:12px;line-height:1.5">크루 소개 · 모집 글(300자까지)</div>
+      ${sect(296, "지난 대표작", "")}
+      ${[["주간 2주차", "밤 산책 컷", "구역 4위"], ["주간 1주차", "첫 무대 컷", "구역 9위"]].map((r, i) => { const y = 320 + i * 86; return `
+        <div class="b" style="left:8px;top:${y}px;width:374px;height:78px"></div>
+        <div class="b off" style="left:16px;top:${y + 8}px;width:90px;height:62px;font-size:11px">뮤비</div>
+        <div class="a" style="left:116px;top:${y + 14}px"><span class="val">${r[1]}</span><br><span class="sub" style="font-size:12px">${r[0]} · ${r[2]}</span></div>`; }).join("")}
+      <div class="a sub" style="left:8px;top:506px;width:374px;font-size:12px;line-height:1.6;padding-left:28px">신청하면 크루장 · 운영진이 수락해야 가입돼요.<br>한 크루에만 들어갈 수 있어요.</div>
+      ${n(1, 2, 180)}${n(2, 2, 300)}${n(3, 2, 700)}` + bottomBar(actBtn("가입 신청", "신청 중이면 「신청 취소」")),
+    notes: ["공개 화면 · 이름 · 모집 · 인원 · 소개", "지난 대표작(공개 동의한 것만)", "신청 → 수락되면 ① 메인 · 시뮬은 봇 크루장이 자동 수락"] },
+];
+
+const SHOT = new URLSearchParams(location.search).get("shot");
+if (SHOT !== null) { document.body.innerHTML = `<div class="phone">${SCREENS[+SHOT].html}</div>`; document.body.style.margin = "0"; document.body.style.background = "#fff"; }
+else document.getElementById("screens").innerHTML = SCREENS.map(s => `<div>
+  <p class="cap">${s.cap}</p><div class="phone">${s.html}</div>
+  <ul class="notes">${s.notes.map((t, i) => `<li><b>${i + 1}</b>${t}</li>`).join("")}</ul></div>`).join("");
+</script>
+</body>
+</html>

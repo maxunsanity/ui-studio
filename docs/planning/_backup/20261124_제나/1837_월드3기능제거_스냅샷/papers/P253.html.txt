@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>음악 앱 UI 컨셉 시안</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* ── 디자인 토큰 (앱 화면) ── */
+:root{
+ --bg:#0e0e11; --surface:#18181d; --surface2:#222229; --line:#2b2b33;
+ --tx:#f3f3f6; --tx2:#b4b4bf; --tx3:#7d7d89;
+ --brand:#ff3d7f; --brand-soft:rgba(255,61,127,.14); --violet:#8a63ff;
+ --up:#22c55e; --down:#ef4444; --new:#ff3d7f; --live:#ff1f3d; --gold:#f5b93a;
+ --r-s:8px; --r-m:12px; --r-l:16px; --r-xl:24px;
+ --page:#ecebf1; --ink:#1f1d27; --ink2:#5b5967;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--page);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+svg.i.s{width:20px;height:20px}
+svg.i.xs{width:16px;height:16px}
+svg.i.f{fill:currentColor;stroke:none}
+.wrap{max-width:1400px;margin:0 auto;padding:36px 24px 96px}
+header.doc h1{font-size:28px;font-weight:800;letter-spacing:-.025em}
+header.doc p{color:var(--ink2);margin-top:6px}
+.tag{display:inline-block;border-radius:6px;padding:1px 8px;font-size:12px;font-weight:700;margin-right:4px}
+.tag.y{background:#fff1c9;color:#7a5600}.tag.g{background:#e3e1ec;color:#4a4757}
+.card{background:#fff;border-radius:20px;padding:22px 24px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0 40px}
+.card h2{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.card ol,.card ul{padding-left:18px;display:grid;gap:6px;color:#33313d}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th,.tbl td{border-bottom:1px solid #e6e4ee;padding:8px 8px;text-align:left;vertical-align:top}
+.tbl th{background:#f5f4f9;font-weight:700;color:#3a3846}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:18px}
+.flow b{background:var(--ink);color:#fff;border-radius:999px;padding:5px 13px;font-size:13px;font-weight:700}
+.flow i{font-style:normal;color:#8a8896;font-size:13px}
+/* 화면 구역 */
+section.scr{display:grid;grid-template-columns:391px 1fr;gap:36px;align-items:start;margin:0 0 28px;padding:28px;background:#fff;border-radius:24px}
+.scr .num{font-size:13px;font-weight:800;color:var(--brand);letter-spacing:.04em}
+.scr h2{font-size:22px;font-weight:800;letter-spacing:-.025em;margin:2px 0 4px}
+.scr .ref{color:#7b7987;font-size:13px;margin-bottom:16px}
+.scr ol.spec{list-style:none;display:grid;gap:12px}
+.scr ol.spec li{display:grid;grid-template-columns:26px 1fr;gap:10px}
+.scr ol.spec .n{width:24px;height:24px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;font-size:12px;display:grid;place-items:center;margin-top:1px}
+.scr ol.spec b{display:block;font-weight:700}
+.scr ol.spec p{color:#4a4855}
+.drive{margin-top:16px;border-top:1px solid #eceaf2;padding-top:14px}
+.drive h3{font-size:14px;font-weight:800;margin-bottom:8px}
+.drive .tbl td:first-child{white-space:nowrap;font-weight:600;color:#3a3846}
+/* ── 폰 ── */
+.ph{width:391px;height:844px;border-radius:52px;background:var(--bg);color:var(--tx);overflow:hidden;position:relative;border:8px solid #0b0b0d;box-shadow:0 0 0 1px #3a3a44,0 24px 50px rgba(22,16,44,.28);display:flex;flex-direction:column;font-size:14px}
+.ph::before{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);width:110px;height:30px;border-radius:20px;background:#000;z-index:20}
+.sb{height:50px;flex:none;display:flex;justify-content:space-between;align-items:flex-end;padding:0 30px 6px;font-size:14px;font-weight:600}
+.sb span:last-child{display:flex;gap:5px;align-items:center}
+.sb i{display:inline-block;width:22px;height:11px;border:1.5px solid #ddd;border-radius:3px;position:relative}
+.sb i::after{content:"";position:absolute;inset:1.5px 5px 1.5px 1.5px;background:#ddd;border-radius:1px}
+.appbar{height:52px;flex:none;display:flex;align-items:center;gap:4px;padding:0 8px 0 16px}
+.appbar .sp{flex:1}
+.appbar h1{font-size:20px;font-weight:800;letter-spacing:-.03em}
+.logo{display:flex;align-items:center;gap:6px;font-weight:900;font-size:19px;letter-spacing:-.04em}
+.logo span{width:28px;height:20px;border-radius:6px;background:var(--brand);display:grid;place-items:center}
+.logo span svg{width:12px;height:12px}
+.tap{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;position:relative;color:var(--tx)}
+.tap .badge{position:absolute;top:7px;right:6px;min-width:16px;height:16px;border-radius:8px;background:var(--live);color:#fff;font-size:10px;font-weight:800;display:grid;place-items:center;padding:0 4px;border:2px solid var(--bg)}
+.body{flex:1;overflow:hidden;position:relative}
+.chips{display:flex;gap:8px;padding:2px 16px 12px;overflow:hidden;flex:none}
+.chip{flex:none;height:34px;padding:0 14px;border-radius:var(--r-s);background:var(--surface2);color:var(--tx);font-weight:600;font-size:13px;display:flex;align-items:center}
+.chip.on{background:var(--tx);color:#111}
+.tabbar{flex:none;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);padding:6px 0 26px;background:rgba(14,14,17,.96)}
+.tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--tx3);font-size:11px;font-weight:600;white-space:nowrap;height:48px;justify-content:center}
+.tabbar .on{color:var(--tx)}
+.mini{flex:none;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 12px;background:var(--surface);border-top:1px solid var(--line);position:relative}
+.mini::after{content:"";position:absolute;left:0;top:-1px;height:2px;width:23%;background:var(--brand)}
+.mini img{width:40px;height:40px;border-radius:var(--r-s);object-fit:cover}
+.mini .t{flex:1;min-width:0}
+.mini .t b{display:block;font-size:13.5px;font-weight:700}
+.mini .t small{color:var(--tx2);font-size:12px}
+.mk{position:absolute;z-index:15;width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;font-size:11.5px;display:grid;place-items:center;box-shadow:0 0 0 2.5px #fff,0 2px 6px rgba(0,0,0,.4)}
+/* 썸네일·영상 카드 */
+.thumb{position:relative;border-radius:var(--r-m);overflow:hidden;aspect-ratio:16/9;background:var(--surface2)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.dur{position:absolute;right:6px;bottom:6px;background:rgba(0,0,0,.78);color:#fff;font-size:11px;font-weight:700;padding:1px 5px;border-radius:4px;font-variant-numeric:tabular-nums}
+.livetag{position:absolute;left:6px;bottom:6px;display:flex;align-items:center;gap:4px;background:var(--live);color:#fff;font-size:11px;font-weight:800;padding:2px 6px;border-radius:4px}
+.livetag::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+.vcard{padding:0 16px 18px}
+.vmeta{display:grid;grid-template-columns:36px 1fr 24px;gap:12px;padding-top:10px}
+.av{width:36px;height:36px;border-radius:50%;object-fit:cover}
+.vmeta b{display:block;font-weight:600;font-size:14px;line-height:1.38;letter-spacing:-.01em}
+.vmeta small{color:var(--tx2);font-size:12px}
+.badge-cr{display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:4px;background:rgba(138,99,255,.22);color:#c9b8ff;font-size:11px;font-weight:700;vertical-align:2px;margin-left:4px}
+.prem{margin:0 16px 18px;border-radius:var(--r-l);overflow:hidden;background:linear-gradient(160deg,#241a3c,#16131f);border:1px solid #3a2e5e}
+.prem .thumb{border-radius:0}
+.prem .ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(8,5,20,.88));display:flex;flex-direction:column;justify-content:flex-end;padding:12px 14px}
+.prem .ov small{color:#d7ccff;font-size:12px;font-weight:700}
+.prem .ov b{font-size:28px;font-weight:800;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.prem .ov .tg{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.25);font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px}
+.prem .rw{display:flex;align-items:center;gap:10px;padding:12px 14px}
+.prem .rw div{flex:1;min-width:0}
+.prem .rw b{display:block;font-size:14px}
+.prem .rw small{color:var(--tx2);font-size:12px}
+.btn{height:36px;border:0;border-radius:999px;padding:0 16px;font-weight:700;font-size:13.5px;background:var(--tx);color:#111;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;font-family:inherit}
+.btn.brand{background:var(--brand);color:#fff}
+.btn.tonal{background:var(--surface2);color:var(--tx)}
+.btn.lg{height:48px;border-radius:24px;font-size:15px;justify-content:center}
+.sec-h{display:flex;align-items:center;justify-content:space-between;padding:4px 16px 10px;font-weight:800;font-size:17px;letter-spacing:-.02em}
+.sec-h small{color:var(--tx2);font-weight:600;font-size:13px;display:flex;align-items:center}
+.shelf{display:flex;gap:8px;padding:0 16px 16px;overflow:hidden}
+.sh{flex:none;width:104px;aspect-ratio:9/16;border-radius:var(--r-m);overflow:hidden;position:relative;background:var(--surface2)}
+.sh img{width:100%;height:100%;object-fit:cover}
+.sh::after{content:"";position:absolute;inset:55% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.sh small{position:absolute;left:8px;bottom:8px;right:8px;font-size:12px;font-weight:700;z-index:1;line-height:1.3}
+.sh em{position:absolute;left:8px;bottom:-14px;font-style:normal}
+/* 차트 */
+.seg{display:grid;grid-template-columns:repeat(3,1fr);margin:0 16px 12px;background:var(--surface2);border-radius:var(--r-m);padding:4px;height:44px}
+.seg div{display:grid;place-items:center;border-radius:9px;font-weight:700;font-size:13.5px;color:var(--tx2)}
+.seg .on{background:var(--tx);color:#111}
+.quota{margin:0 16px 6px;display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:var(--r-m);background:linear-gradient(100deg,rgba(255,61,127,.16),rgba(138,99,255,.16));border:1px solid rgba(255,61,127,.32)}
+.quota div{flex:1}
+.quota b{font-size:14px}
+.quota small{display:block;color:#d6d0e8;font-size:12px}
+.pips{display:flex;gap:4px}
+.pips i{width:18px;height:8px;border-radius:4px;background:var(--brand)}
+.pips i.off{background:#3b3b46}
+.snap{padding:4px 16px 4px;color:var(--tx3);font-size:12px;display:flex;align-items:center;gap:6px}
+.snap::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--up)}
+.row{display:grid;grid-template-columns:30px 60px 1fr auto;gap:12px;align-items:center;padding:0 16px;height:76px}
+.rk{text-align:center;font-weight:800;font-size:17px;line-height:1.1;font-variant-numeric:tabular-nums}
+.rk small{display:block;font-size:11px;font-weight:800;margin-top:2px}
+.up{color:var(--up)}.dn{color:var(--down)}.nw{color:var(--new)}.eq{color:var(--tx3)}
+.cov{width:60px;height:60px;border-radius:14px;object-fit:cover;box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+.row .t{min-width:0}
+.row .t b{display:block;font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em}
+.row .t small{display:block;color:var(--tx2);font-size:12.5px}
+.row .t>span{color:var(--tx2);font-size:12px;display:flex;align-items:center;gap:3px}
+.row .t>span svg{width:12px;height:12px}
+.vote{height:36px;min-width:64px;border-radius:999px;border:1.5px solid var(--tx);background:transparent;color:var(--tx);font-weight:700;font-size:13.5px;font-family:inherit}
+.vote.done{border-color:#3b3b46;color:var(--tx3)}
+.myrank{position:absolute;left:12px;right:12px;bottom:10px;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 12px;border-radius:var(--r-l);background:#261d3d;border:1px solid #57449a;box-shadow:0 8px 20px rgba(0,0,0,.4)}
+.myrank img{width:40px;height:40px;border-radius:10px;object-fit:cover}
+.myrank div{flex:1}
+.myrank b{display:block;font-size:13.5px}
+.myrank small{color:#cfc5ef;font-size:12px}
+/* 상세 */
+.dhead{display:grid;grid-template-columns:112px 1fr;gap:16px;padding:4px 20px 18px}
+.dhead img{width:112px;height:112px;border-radius:24px;object-fit:cover}
+.dhead h3{font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.2}
+.dhead .tm{color:var(--brand);font-weight:700;font-size:14px;display:block;margin:3px 0 2px}
+.dhead small{color:var(--tx2);font-size:12.5px;display:block}
+.ok{display:inline-flex;align-items:center;gap:3px;color:var(--up);font-size:12px;font-weight:700;margin-top:4px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin:0 20px 18px;padding:2px 0}
+.stats div{text-align:center;border-right:1px solid var(--line)}
+.stats div:last-child{border:0}
+.stats b{display:flex;justify-content:center;align-items:center;gap:2px;font-size:15px;font-weight:700}
+.stats small{color:var(--tx2);font-size:12px}
+.cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 20px 22px}
+.gal{display:flex;gap:8px;padding:0 20px 14px;overflow:hidden}
+.gal .thumb{flex:none;width:220px}
+.gal .sh{width:76px}
+.rate{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:0 20px 12px;align-items:center}
+.rate .big{font-size:46px;font-weight:300;line-height:1}
+.rate .st{color:var(--brand);font-size:12px;letter-spacing:1px}
+.rate small{color:var(--tx2);font-size:12px;display:block}
+.bars{display:grid;gap:4px}
+.bars div{display:grid;grid-template-columns:10px 1fr;gap:8px;align-items:center;font-size:11px;color:var(--tx2)}
+.bars i{height:8px;border-radius:4px;background:#2d2d36;position:relative;overflow:hidden}
+.bars i::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--brand);border-radius:4px}
+/* 채널 */
+.banner{height:84px;margin:0 16px;border-radius:var(--r-m);overflow:hidden}
+.banner img{width:100%;height:100%;object-fit:cover}
+.chead{display:grid;grid-template-columns:76px 1fr;gap:14px;padding:12px 16px 10px;align-items:center}
+.chead img{width:76px;height:76px;border-radius:50%;object-fit:cover}
+.chead h3{font-size:22px;font-weight:800;letter-spacing:-.03em;display:flex;align-items:center;gap:5px}
+.chead h3 svg{width:16px;height:16px;color:var(--tx2)}
+.chead small{display:block;color:var(--tx2);font-size:12.5px}
+.subrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 12px}
+.subrow .btn{justify-content:center}
+.ctabs{display:flex;gap:22px;padding:0 16px;border-bottom:1px solid var(--line);height:44px;align-items:stretch}
+.ctabs div{display:flex;align-items:center;color:var(--tx2);font-weight:700;font-size:14px}
+.ctabs .on{color:var(--tx);box-shadow:inset 0 -2px 0 var(--tx)}
+.feat{padding:12px 16px 2px}
+.feat .vmeta{grid-template-columns:1fr 24px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:8px 16px}
+.grid2 b{display:block;font-size:13px;font-weight:600;margin-top:6px;line-height:1.35}
+.grid2 small{color:var(--tx2);font-size:11.5px}
+/* 시청 */
+.player{position:relative;aspect-ratio:16/9;background:#000;flex:none}
+.player img{width:100%;height:100%;object-fit:cover}
+.player .lv{position:absolute;left:10px;top:10px;display:flex;gap:6px}
+.player .lv span{background:var(--live);color:#fff;font-weight:800;font-size:11px;padding:2px 7px;border-radius:4px;display:flex;align-items:center;gap:4px}
+.player .lv span.v{background:rgba(0,0,0,.6)}
+.player .hearts{position:absolute;right:14px;bottom:14px;display:grid;gap:4px;color:var(--brand)}
+.player .hearts svg:nth-child(2){color:var(--violet);margin-left:8px;opacity:.85}
+.player .hearts svg:nth-child(3){opacity:.6}
+.wt{padding:12px 16px 6px}
+.wt b{font-size:16px;font-weight:700;line-height:1.38;display:block;letter-spacing:-.01em}
+.wt small{color:var(--tx2);font-size:12.5px}
+.chrow{display:flex;align-items:center;gap:10px;padding:8px 16px}
+.chrow img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+.chrow div{flex:1;min-width:0}
+.chrow b{display:block;font-size:14px}
+.chrow small{color:var(--tx2);font-size:12px}
+.acts{display:flex;gap:8px;padding:4px 16px 12px;overflow:hidden}
+.acts span{flex:none;height:36px;background:var(--surface2);border-radius:999px;padding:0 14px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px}
+.acts span svg{width:18px;height:18px}
+.acts span.v{background:var(--brand);color:#fff}
+.chat{margin:0 12px;border-radius:var(--r-l);background:var(--surface);border:1px solid var(--line);flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
+.chat .h{display:flex;justify-content:space-between;align-items:center;padding:0 14px;height:44px;border-bottom:1px solid var(--line);font-weight:800;font-size:14px}
+.chat .h small{color:var(--tx2);font-weight:600;font-size:12px;display:flex;align-items:center;gap:2px}
+.chat .pin{margin:10px 10px 4px;padding:8px 10px;border-radius:10px;background:var(--brand-soft);font-size:12.5px;display:flex;gap:6px}
+.chat .pin svg{color:var(--brand);width:16px;height:16px;margin-top:1px}
+.msgs{padding:4px 14px;display:grid;gap:7px;overflow:hidden}
+.msgs p{font-size:13px;line-height:1.42;color:#e6e6ec}
+.msgs p b{font-size:13px;margin-right:6px;font-weight:700}
+.msgs .sp{background:linear-gradient(95deg,#3a2810,#251b0e);border:1px solid #7d5a1c;border-radius:10px;padding:7px 10px}
+.msgs .sp em{font-style:normal;color:var(--gold);font-weight:800;font-size:12px;display:flex;align-items:center;gap:4px;margin-bottom:1px}
+.cin{display:flex;gap:8px;padding:8px 10px;border-top:1px solid var(--line);margin-top:auto;align-items:center}
+.cin div{flex:1;height:40px;display:flex;align-items:center;background:var(--surface2);border-radius:999px;padding:0 14px;color:var(--tx3);font-size:13px}
+.cin .heart{width:44px;height:44px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center}
+/* 숏츠 */
+.sfull{position:absolute;inset:0}
+.sfull>img{width:100%;height:100%;object-fit:cover}
+.sfull .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45) 0,transparent 16%,transparent 52%,rgba(0,0,0,.85))}
+.sfull .stop{position:absolute;top:50px;left:0;right:0;display:flex;justify-content:center;gap:22px;font-weight:700;height:44px;align-items:center}
+.sfull .stop span{color:rgba(255,255,255,.65);font-size:16px}
+.sfull .stop .on{color:#fff;box-shadow:inset 0 -2px 0 #fff;padding:8px 0}
+.sfull .stop .srch{position:absolute;right:8px}
+.rail{position:absolute;right:6px;bottom:150px;display:grid;gap:10px;text-align:center}
+.rail div{width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.rail div i{width:48px;height:48px;border-radius:50%;background:rgba(40,40,48,.55);display:grid;place-items:center;backdrop-filter:blur(6px)}
+.rail div i svg{width:26px;height:26px}
+.rail .liked i{color:var(--brand)}
+.sinfo{position:absolute;left:14px;right:70px;bottom:84px}
+.sinfo .chrow{padding:0 0 8px}
+.sinfo p{font-size:14px;line-height:1.45}
+.sinfo p i{font-style:normal;color:#a9d3ff;font-weight:600}
+.orig{position:absolute;left:12px;right:12px;bottom:14px;display:flex;align-items:center;gap:10px;padding:6px 6px 6px 8px;border-radius:var(--r-l);background:rgba(22,22,28,.78);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px)}
+.orig img{width:44px;height:44px;border-radius:10px;object-fit:cover}
+.orig div{flex:1;min-width:0}
+.orig b{display:flex;align-items:center;gap:4px;font-size:13.5px}
+.orig b svg{width:14px;height:14px}
+.orig small{color:var(--tx2);font-size:12px}
+/* 투표 시트 */
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:8}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:9;background:#1c1c22;border-radius:24px 24px 0 0;padding:10px 20px 34px;box-shadow:0 -10px 30px rgba(0,0,0,.4)}
+.sheet .grab{width:40px;height:5px;border-radius:3px;background:#4a4a55;margin:0 auto 16px}
+.sheet h4{font-size:19px;font-weight:800;letter-spacing:-.02em;text-align:center}
+.sheet .s1{color:var(--tx2);text-align:center;font-size:13.5px;margin:4px 0 18px}
+.sheet .song{display:flex;gap:12px;align-items:center;padding:12px;border-radius:var(--r-l);background:var(--surface2)}
+.sheet .song img{width:56px;height:56px;border-radius:12px;object-fit:cover}
+.sheet .song b{display:block;font-size:15px}
+.sheet .song small{color:var(--tx2);font-size:12.5px}
+.sheet .q{display:flex;justify-content:space-between;align-items:center;margin:14px 2px 6px;font-size:13.5px}
+.sheet .q b{font-size:14px}
+.sheet .warn{display:flex;gap:8px;align-items:flex-start;margin:10px 0 18px;padding:10px 12px;border-radius:10px;background:rgba(245,185,58,.1);color:#f2d38f;font-size:12.5px}
+.sheet .warn svg{width:18px;height:18px;color:var(--gold)}
+.sheet .btns{display:grid;grid-template-columns:1fr 2fr;gap:10px}
+.toast{position:absolute;left:16px;right:16px;bottom:118px;z-index:12;background:#f3f3f6;color:#111;border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:center;font-size:13px;font-weight:600;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.toast svg{color:var(--up)}
+.toast span{flex:1}
+.toast a{color:var(--brand);font-weight:800}
+.vtag{position:absolute;top:6px;right:6px;z-index:6;display:flex;align-items:center;gap:2px;background:rgba(0,0,0,.66);color:#fff;font-size:11px;font-weight:800;line-height:16px;padding:1px 6px 1px 4px;border-radius:4px;border:1px solid rgba(255,255,255,.28)}
+.vtag svg{width:10px;height:10px}
+.vtag.vfull{top:104px;right:auto;left:14px}
+.sh .vtag{top:5px;right:5px}
+/* 게임 연동 */
+.gamechip{height:32px;display:inline-flex;align-items:center;gap:5px;padding:0 11px;border-radius:999px;background:#2a2140;border:1px solid #5b44a8;color:#e4dcff;font-weight:700;font-size:12.5px;white-space:nowrap;margin-right:2px}
+.gamechip svg{width:16px;height:16px}
+.fest{margin:0 16px 16px;border-radius:var(--r-l);padding:12px 14px;background:linear-gradient(120deg,#16302a,#14201d);border:1px solid #2e6b57;display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center}
+.fest .k{grid-column:1/-1;display:flex;align-items:center;gap:6px;color:#7fe0b8;font-size:12px;font-weight:800}
+.fest b{font-size:15px;letter-spacing:-.01em}
+.fest small{display:block;color:#b9d8cc;font-size:12px}
+.heartbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--tx)}
+.heartbtn.on{color:var(--brand)}
+.gamebox{margin:-6px 20px 16px;padding:9px 12px;border-radius:var(--r-m);background:#1d1830;border:1px solid #3d3170;font-size:12.5px;color:#d9d1f5;display:flex;gap:8px;align-items:center}
+.gamebox svg{color:#b9a3ff;width:18px;height:18px}
+.tagcrew{display:inline-block;font-size:11px;font-weight:800;color:#0e0e11;background:#7fe0b8;border-radius:4px;padding:0 4px;margin-right:5px;vertical-align:1px}
+.link-map{display:grid;grid-template-columns:1fr 150px 1fr;margin-top:10px;align-items:start}
+.lm-col{display:grid;gap:8px}
+.lm-col h3{font-size:14px;font-weight:800;text-align:center;padding:6px;border-radius:10px;height:34px}
+.lm-g h3{background:#e8e2ff;color:#3b2a8a}.lm-a h3{background:#ffe1ec;color:#8a1d47}
+.lm-box{border:1px solid #e3e1ea;border-radius:12px;padding:8px 11px;background:#fbfafd;height:62px;overflow:hidden}
+.lm-box b{display:block;font-size:13px;line-height:1.35}
+.lm-box small{color:#6b6978;font-size:12px}
+.lm-mid{display:grid;gap:8px;padding-top:42px}
+.lm-arrow{height:62px;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:12px;font-weight:700;color:#5b5967;text-align:center;line-height:1.3}
+.lm-arrow i{font-style:normal;font-size:17px;color:var(--brand)}
+/* 보관함 · 방송 · 크루 · 첫 화면 · 만들기 */
+.seg.s4{grid-template-columns:repeat(4,1fr)}
+.seg.s4 div{font-size:12.5px}
+.row .vote{min-width:58px}
+.rowdate{color:var(--tx3)!important;font-size:12px!important}
+.fmt{display:flex;gap:8px;padding:2px 16px 10px}
+.lineup{margin:0 12px;border-radius:var(--r-l);background:var(--surface);border:1px solid var(--line);overflow:hidden}
+.lineup .h{display:flex;justify-content:space-between;align-items:center;padding:0 14px;height:42px;border-bottom:1px solid var(--line);font-weight:800;font-size:14px}
+.lineup .h small{color:var(--tx2);font-weight:600;font-size:12px}
+.lu{display:grid;grid-template-columns:22px 44px 1fr auto;gap:10px;align-items:center;padding:8px 12px 8px 14px;border-bottom:1px solid var(--line)}
+.lu:last-child{border:0}
+.lu>span:first-child{font-weight:800;color:var(--tx3);font-variant-numeric:tabular-nums;text-align:center}
+.lu img{width:44px;height:44px;border-radius:10px;object-fit:cover}
+.lu b{display:block;font-size:13.5px;font-weight:700}
+.lu small{color:var(--tx2);font-size:12px}
+.lu.now{background:rgba(255,31,61,.1)}
+.lu.now>span:first-child{color:var(--live)}
+.stt{font-size:11.5px;font-weight:800;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.stt.done{background:var(--surface2);color:var(--tx2)}
+.stt.now{background:var(--live);color:#fff}
+.stt.next{background:var(--tx);color:#111}
+.crewrep{margin:4px 16px 12px;display:grid;grid-template-columns:64px 1fr 44px;gap:12px;align-items:center;padding:10px;border-radius:var(--r-l);background:linear-gradient(120deg,#16302a,#14201d);border:1px solid #2e6b57}
+.crewrep img{width:64px;height:64px;border-radius:14px;object-fit:cover}
+.crewrep em{font-style:normal;color:#7fe0b8;font-size:12px;font-weight:800;display:block}
+.crewrep b{display:block;font-size:15px}
+.crewrep small{color:#b9d8cc;font-size:12px}
+.share{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;padding:6px 16px}
+.share img.av{width:36px;height:36px}
+.share b{display:block;font-size:13.5px}
+.share small{color:var(--tx2);font-size:12px}
+.lock{margin:8px 16px 0;display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:var(--r-m);background:rgba(245,185,58,.08);border:1px dashed #7d5a1c;color:#f2d38f;font-size:12.5px}
+.lock svg{color:var(--gold)}
+.guest{margin:0 16px 16px;border-radius:var(--r-l);padding:12px 14px;background:linear-gradient(120deg,#2a1830,#1b1422);border:1px solid #6b2f57;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center}
+.guest b{font-size:15px}
+.guest small{display:block;color:#e6c6d8;font-size:12px}
+.sheet .opts{display:grid;gap:8px;margin-bottom:14px}
+.sheet .opt{display:grid;grid-template-columns:44px 1fr 20px;gap:12px;align-items:center;padding:10px 12px;border-radius:var(--r-l);background:var(--surface2)}
+.sheet .opt i{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#2f2f38}
+.sheet .opt b{display:block;font-size:14.5px}
+.sheet .opt small{color:var(--tx2);font-size:12px;line-height:1.4;display:block}
+.sheet .opt>svg{color:var(--tx3)}
+.sheet .note{color:var(--tx2);font-size:12px;text-align:center}
+.sheet .btns.one{grid-template-columns:1fr}
+.ask{display:inline-block;font-size:11px;font-weight:800;color:#7a5600;background:#fff1c9;border-radius:4px;padding:0 5px;margin-left:4px;vertical-align:1px}
+/* 디자인 기준 */
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.sw div{border-radius:12px;padding:10px;font-size:12px;border:1px solid #e3e1ea}
+.sw i{display:block;height:34px;border-radius:8px;margin-bottom:6px}
+@media(max-width:900px){section.scr{grid-template-columns:1fr}.ph{margin:0 auto}.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<!-- 아이콘 묶음 -->
+<svg width="0" height="0" style="position:absolute">
+ <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></symbol>
+ <symbol id="i-home-f" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M11.4 3.5a1 1 0 0 1 1.2 0l7.6 6.2c.5.4.8 1 .8 1.6V20a1.5 1.5 0 0 1-1.5 1.5H15v-6.2h-6v6.2H4.5A1.5 1.5 0 0 1 3 20v-8.7c0-.6.3-1.2.8-1.6z"/></symbol>
+ <symbol id="i-shorts" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="m10.5 9.5 4 2.5-4 2.5z"/></symbol>
+ <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 20V12M12 20V5M19 20v-6"/></symbol>
+ <symbol id="i-chart-f" viewBox="0 0 24 24"><path stroke-width="3" d="M5 20V12M12 20V5M19 20v-6"/></symbol>
+ <symbol id="i-subs" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M6 4h12M10 11v5l4-2.5z"/></symbol>
+ <symbol id="i-lib" viewBox="0 0 24 24"><path d="M4 5h16M4 10h16M4 15h9M17 14v6l4-3z"/></symbol>
+ <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+ <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0"/></symbol>
+ <symbol id="i-plus" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M12 9v6M9 12h6"/></symbol>
+ <symbol id="i-more" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="12" cy="18.5" r="1.4" fill="currentColor"/></symbol>
+ <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5 8 12l7 7"/></symbol>
+ <symbol id="i-share" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-8 8M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></symbol>
+ <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+ <symbol id="i-heart-f" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 20.5s-7.5-4.6-7.5-10.5a4.3 4.3 0 0 1 7.5-2.9 4.3 4.3 0 0 1 7.5 2.9c0 5.9-7.5 10.5-7.5 10.5z"/></symbol>
+ <symbol id="i-cmt" viewBox="0 0 24 24"><path d="M5 18.5V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H8z"/></symbol>
+ <symbol id="i-vote" viewBox="0 0 24 24"><path d="M4 13h16v7H4zM8 13V5h8v8M10 9l1.5 1.5L14 8"/></symbol>
+ <symbol id="i-cheer" viewBox="0 0 24 24"><path d="M4 10v4h3l6 4V6l-6 4zM17 9a4 4 0 0 1 0 6"/></symbol>
+ <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M8 5.5v13a1 1 0 0 0 1.5.9l10-6.5a1 1 0 0 0 0-1.7l-10-6.5A1 1 0 0 0 8 5.5z"/></symbol>
+ <symbol id="i-pause" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></symbol>
+ <symbol id="i-next" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M6 6v12l8.5-6zM16 6h2v12h-2z"/></symbol>
+ <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.3 2.7 2.7L16 9.7"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9 4h6l-1 5 3 3v2H7v-2l3-3zM12 14v6"/></symbol>
+ <symbol id="i-note" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></symbol>
+ <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+ <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+ <symbol id="i-verified" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="m12 2.5 2.4 1.7 2.9-.1.9 2.8 2.3 1.8-.9 2.8.9 2.8-2.3 1.8-.9 2.8-2.9-.1L12 21.5l-2.4-1.7-2.9.1-.9-2.8-2.3-1.8.9-2.8-.9-2.8 2.3-1.8.9-2.8 2.9.1z"/><path d="m8.6 12.2 2.3 2.3 4.6-4.6" stroke="#0e0e11" stroke-width="2"/></symbol>
+ <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4 2.8 19.5h18.4zM12 10v4.5M12 17.2v.3"/></symbol>
+ <symbol id="i-save" viewBox="0 0 24 24"><path d="M6 4h12v16l-6-4-6 4z"/></symbol>
+ <symbol id="i-game" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="11" rx="5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r=".9" fill="currentColor"/><circle cx="17.5" cy="13.8" r=".9" fill="currentColor"/></symbol>
+ <symbol id="i-like" viewBox="0 0 24 24"><path d="M7 11v9H4v-9zM7 11l4-7c1.5 0 2.5 1 2.2 2.6L12.7 10H19a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 17.8 20H7"/></symbol>
+</svg>
+
+<div class="wrap">
+<header class="doc">
+<h1>독립 음악 앱 · UI 컨셉 시안 v1</h1>
+<p><span class="tag y">제안(검수 대기)</span><span class="tag g">숫자는 모두 예시 값 — 실제 화면은 서버 집계 값만</span><span class="tag g">그림: 기존 프로젝트 복셀 이미지</span><span class="tag g">「▶ 영상」 표기 = 영상 자리 · 표기 없음 = 이미지</span></p>
+<p>기준: 「플레이스토어 랭킹 + 유튜브 콘텐츠 보기」, 아이돌 공식 유튜브 채널(프리미어 MV · 비하인드 · 라이브 채팅) 참조. 대상: 상업 서비스, 휴대폰 우선(393×852) · PC 1440 확장.</p>
+<div class="flow"><b>게임: 발매 · 출전 · 무대</b><i>→</i><b>앱 홈 페스티벌 카드 · 실황</b><i>감상 →</i><b>찜 ♡</b><i>→</i><b>곡 상세 · 보관함</b><i>투표하기 →</i><b>투표 확정</b><i>→</i><b>차트 · 게임 페스티벌 점수</b></div>
+</header>
+
+<div class="grid-2">
+<div class="card">
+<h2>핵심 컨셉</h2>
+<ol>
+<li><b>보는 앱이 먼저.</b> 첫 화면은 16:9 썸네일 피드다. 팬은 영상을 보다가 곡으로 들어가 투표한다. 듣기는 미니 플레이어로 어디서든 이어진다.</li>
+<li><b>순위는 플레이스토어처럼 단순하게.</b> 한 줄 = 순위·등락 · 아이콘형 커버 · 곡 정보 · 버튼 하나(찜). 듣기 · 투표 · 공유는 곡 상세로 모은다.</li>
+<li><b>게임 팀마다 공식 채널.</b> 게임에서 팀을 만들면 채널이 생긴다. 배너 · 구독 · 탭(홈 · 무대 · MV · 숏츠 · 앨범). 발매 MV는 프리미어 카운트다운으로 공개.</li>
+<li><b>게임이 원천, 앱은 무대.</b> 곡 · 영상 · 공연 실황은 모두 게임에서 키운 내 아이돌에게서 나온다. 앱 어디서나 「게임으로」 한 번에 돌아가고, 게임 페스티벌 진행이 앱 홈 맨 위에 있다.</li>
+<li><b>찜은 가볍게, 투표는 신중하게.</b> 목록 · 숏츠 · 실황에서는 찜(♡)만. 투표는 곡 상세 · 보관함에서 확정 시트로(2단계 확정 · 취소 불가).</li>
+</ol>
+</div>
+<div class="card">
+<h2>지금 화면에서 바뀌는 것</h2>
+<table class="tbl">
+<tr><th>지금</th><th>바꾸는 방향</th></tr>
+<tr><td>썸네일이 빈 칸 · 아이콘</td><td>모든 영상 · 곡에 그림(컷씬 MV 캡처 · 업로드 표지 · 라이브 대표 그림)</td></tr>
+<tr><td>차트 행 버튼 3개</td><td>버튼 1개(찜). 듣기 · 투표는 곡 상세</td></tr>
+<tr><td>조회수 · 날짜 · 길이 없음</td><td>「채널 · 조회 n회 · n시간 전」, 길이 배지</td></tr>
+<tr><td>채널 화면 없음</td><td>팀 공식 채널 추가, 하단 「구독」 탭</td></tr>
+<tr><td>공연 = 댓글 피드</td><td>게임 무대 실황 + 관람방 채팅(친구 · 크루 표시) + 무료 하트</td></tr>
+<tr><td>홈 = 내 팀 카드 · 크루 · 배너 나열</td><td>내 팀 페스티벌 카드(게임 연동) → 프리미어 → 무대 실황 피드</td></tr>
+<tr><td>이모지 아이콘 · 작은 버튼</td><td>선 아이콘 한 벌, 누르는 영역 44px 이상</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card" style="margin-bottom:28px">
+<h2>게임 ↔ 앱 연동 지도 — 화면 어디에 보이나</h2>
+<p style="color:var(--ink2);font-size:13px">게임 = 아티스트 쪽(팀 육성 · 발매 · 출전 · 무대), 앱 = 팬 쪽(감상 · 찜 · 투표 · 관람). 앱이 없어도 게임은 끝까지 진행되고, 시즌이 끝나도 앱 기록은 이월된다.</p>
+<div class="link-map">
+<div class="lm-col lm-g"><h3>게임</h3>
+<div class="lm-box"><b>팀 · 멤버 예명 · 크루</b><small>팀 만들기 · 예명 정하기</small></div>
+<div class="lm-box"><b>보드 공연 칸 · 방송 칸 · 월드 무대</b><small>무대가 열리는 순간</small></div>
+<div class="lm-box"><b>앨범 발매 · 페스티벌 신청</b><small>내부곡 · 창작곡 · 시즌 8곡</small></div>
+<div class="lm-box"><b>컷씬 MV · 모션샷 · 외부 영상</b><small>내 아이돌로 만든 영상</small></div>
+<div class="lm-box"><b>페스티벌 점수 · 결과 · 보상</b><small>주간 구역 · 월드 리그 · 가산점</small></div>
+<div class="lm-box"><b>인기 재화 (9주차)</b><small>게임에서 얻음</small></div>
+</div>
+<div class="lm-mid">
+<div class="lm-arrow"><i>⟶</i>#1 계정 · 크레딧</div>
+<div class="lm-arrow"><i>⟶</i>#2 · #3 실황 · 관람방</div>
+<div class="lm-arrow"><i>⟶</i>#4 곡 등록</div>
+<div class="lm-arrow"><i>⟷</i>#5 업로드 · 검수</div>
+<div class="lm-arrow"><i>⟷</i>#6 · #7 투표 · 차트</div>
+<div class="lm-arrow"><i>⟶</i>#6 · #8 크루 총공</div>
+</div>
+<div class="lm-col lm-a"><h3>앱 화면</h3>
+<div class="lm-box"><b>팀 채널 자동 생성</b><small>SCREEN 04 · 예명 크레딧 그대로</small></div>
+<div class="lm-box"><b>홈 실황 카드 · 관람방 100명</b><small>SCREEN 01 ③ · 05</small></div>
+<div class="lm-box"><b>프리미어 MV · 곡 상세 게임 줄</b><small>SCREEN 01 ② · 03</small></div>
+<div class="lm-box"><b>채널 MV 탭 · 숏츠 만들기 · 검수 배지</b><small>SCREEN 04 · 06 · 03</small></div>
+<div class="lm-box"><b>홈 페스티벌 카드 · 차트 · 투표 시트</b><small>SCREEN 01 ① · 02 · 07</small></div>
+<div class="lm-box"><b>월드 차트 인기 탭</b><small>크루 총공에만, 투표 · 찜과 섞지 않음</small></div>
+</div>
+</div>
+<p style="margin-top:12px;font-size:13px;color:var(--ink2)">모든 화면 위 「게임으로」 칩 ↔ 게임 쪽 「음악 앱 열기」 칩(#8). 게임 코어는 파일을 다루지 않고 참조 id와 상태만 받는다.</p>
+</div>
+
+<!-- ① 홈 -->
+<section class="scr">
+<div class="ph">
+ <div class="sb"><span>9:41</span><span>5G <i></i></span></div>
+ <div class="appbar"><span class="logo"><span><svg class="i f"><use href="#i-play"/></svg></span>K-MON</span><span class="sp"></span><span class="gamechip"><svg class="i"><use href="#i-game"/></svg>게임으로</span><span class="tap"><svg class="i"><use href="#i-plus"/></svg></span><span class="tap"><svg class="i"><use href="#i-bell"/></svg><span class="badge">3</span></span></div>
+ <div class="chips"><span class="chip on">전체</span><span class="chip">무대 실황</span><span class="chip">MV</span><span class="chip">숏츠</span><span class="chip">창작곡</span><span class="chip">우리 크루</span></div>
+ <div class="body">
+  <span class="mk" style="left:8px;top:2px">1</span>
+  <div class="fest"><span class="k"><svg class="i xs"><use href="#i-game"/></svg>게임 연동 · 1주차 주간 페스티벌</span><div><b>우리 팀 「첫 무대」 구역 3위</b><small>마감까지 2일 14시간 · 남은 투표 2 / 3</small></div><button class="btn">차트</button></div>
+  <span class="mk" style="left:8px;top:104px">2</span>
+  <div class="prem">
+   <div class="thumb"><img src="img/mv_first_stage.png" alt=""><span class="vtag"><svg class="i f"><use href="#i-play"/></svg>영상</span><div class="ov"><span class="tg">프리미어</span><small>발매 MV 최초 공개까지</small><b>02:14:05</b></div></div>
+   <div class="rw"><div><b>루나 시그널 「네온 사인」 컷씬 MV</b><small>1,204명 대기 중 · 오늘 21:00 공개</small></div><button class="btn brand"><svg class="i xs"><use href="#i-bell"/></svg>알림</button></div>
+  </div>
+  <span class="mk" style="left:8px;top:388px">3</span>
+  <div class="vcard">
+   <div class="thumb"><img src="img/live_virtual.png" alt=""><span class="vtag"><svg class="i f"><use href="#i-play"/></svg>영상</span><span class="livetag">무대 실황</span><span class="dur">관람방 87 / 100</span></div>
+   <div class="vmeta"><img class="av" src="img/cover_star_running.png" alt=""><div><b>[실황] 1주차 페스티벌 무대 · 별빛 소년단 「별빛 러닝」</b><small>별빛 소년단 · 게임 보드 공연 칸에서 진행 중</small></div><svg class="i s"><use href="#i-more"/></svg></div>
+  </div>
+ </div>
+ <div class="mini"><img src="img/cover_dance_pop.png" alt=""><div class="t"><b>첫 무대 <span class="badge-cr">창작</span></b><small>우리 팀 · 0:42 / 3:00</small></div><span class="tap"><svg class="i"><use href="#i-pause"/></svg></span><span class="tap"><svg class="i"><use href="#i-next"/></svg></span></div>
+ <div class="tabbar"><div class="on"><svg class="i"><use href="#i-home-f"/></svg>홈</div><div><svg class="i"><use href="#i-search"/></svg>검색</div><div><svg class="i"><use href="#i-chart"/></svg>차트</div><div><svg class="i"><use href="#i-shorts"/></svg>공연·숏츠</div><div><svg class="i"><use href="#i-lib"/></svg>보관함</div></div>
+</div>
+<div>
+<span class="num">SCREEN 01</span>
+<h2>홈 피드 — 유튜브 홈</h2>
+<p class="ref">참조: 유튜브 앱 홈 피드 · 아이돌 공식 채널의 MV 프리미어 · 게임 페스티벌 연동</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>내 팀 페스티벌 카드 (게임 연동, 맨 위)</b><p>게임에서 발매 · 출전한 곡의 지금 주차 · 구역 순위 · 마감 · 남은 투표. 출전곡이 없으면 「게임에서 앨범을 발매하면 여기서 순위를 볼 수 있어요」 + 게임으로. 9주차엔 월드 리그 카드로 바뀐다.</p></div></li>
+<li><span class="n">2</span><div><b>프리미어 카드</b><p>게임에서 앨범을 발매하면 그 컷씬 MV가 정한 시각에 공개된다. 그때까지 카운트다운, 「알림」은 공개 순간 푸시. 공개 뒤 일반 영상 카드로.</p></div></li>
+<li><span class="n">3</span><div><b>무대 실황 카드</b><p>게임 보드의 공연 칸 · 방송 칸 · 9주차 월드 무대가 진행되는 동안 「무대 실황」 배지와 관람방 인원(정원 100). 누르면 관람방(SCREEN 05).</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>피드 순서</td><td>내 팀 페스티벌 카드 → 프리미어(있을 때) → 진행 중 무대 실황 → 구독 채널 새 영상 → 숏츠 선반 → 추천. 가중치는 서버 표.</td></tr>
+<tr><td>게임으로</td><td>위 칩은 어느 화면에서나 같은 자리. 게임 쪽에는 「음악 앱 열기」 칩(연동 #8). 앱이 없어도 게임은 끝까지 진행된다.</td></tr>
+<tr><td>칩</td><td>전체 · 무대 실황 · MV · 숏츠 · 창작곡 · 우리 크루.</td></tr>
+<tr><td>미니 플레이어</td><td>듣던 곡이 있을 때만. 누르면 전체 플레이어. 영상 재생이 시작되면 자동 일시정지.</td></tr>
+<tr><td>빈 상태</td><td>발매곡 0개: 페스티벌 카드가 「게임에서 앨범을 발매해 보세요」. 구독 0개: 인기 채널 3개 추천.</td></tr>
+<tr><td>불러오는 중</td><td>16:9 회색 뼈대 카드 3장(숫자 자리 없음).</td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- ② 차트 -->
+<section class="scr">
+<div class="ph">
+ <div class="sb"><span>9:41</span><span>5G <i></i></span></div>
+ <div class="appbar"><h1>차트</h1><span class="sp"></span><span class="tap"><svg class="i"><use href="#i-search"/></svg></span></div>
+ <div class="seg"><div>앨범</div><div class="on">주간 페스티벌</div><div>월드</div></div>
+ <div class="chips"><span class="chip on">전체</span><span class="chip">창작곡</span><span class="chip">국가</span><span class="chip">친구</span><span class="chip">크루</span><span class="chip">인기</span></div>
+ <div class="body">
+  <span class="mk" style="left:6px;top:4px">1</span>
+  <div class="quota"><div><b>이번 회차 남은 투표 2 / 3</b><small>마감까지 1일 6시간</small></div><div class="pips"><i></i><i></i><i class="off"></i></div></div>
+  <p class="snap">21:30 기준 · 5분마다 갱신 · 1부 리그</p>
+  <span class="mk" style="left:44px;top:96px">2</span>
+  <div class="row"><div class="rk">1<small class="up">▲2</small></div><img class="cov" src="img/cover_neon_sign.png" alt=""><div class="t"><b>네온 사인</b><small>루나 시그널 · 댄스 팝</small><span>4.8 <svg class="i f"><use href="#i-star"/></svg> · 인기 12.8만</span></div><span class="heartbtn"><svg class="i"><use href="#i-heart"/></svg></span></div>
+  <div class="row"><div class="rk">2<small class="eq">—</small></div><img class="cov" src="img/cover_star_running.png" alt=""><div class="t"><b>별빛 러닝</b><small>별빛 소년단 · 댄스 팝</small><span>4.7 <svg class="i f"><use href="#i-star"/></svg> · 인기 11.2만</span></div><span class="heartbtn on"><svg class="i f"><use href="#i-heart-f"/></svg></span></div>
+  <div class="row"><div class="rk">3<small class="nw">NEW</small></div><img class="cov" src="img/cover_dance_pop.png" alt=""><div class="t"><b>첫 무대 <span class="badge-cr">창작</span></b><small>우리 팀 · 댄스 팝</small><span>4.5 <svg class="i f"><use href="#i-star"/></svg> · 인기 9.4만</span></div><span class="heartbtn"><svg class="i"><use href="#i-heart"/></svg></span></div>
+  <div class="row"><div class="rk">4<small class="dn">▼1</small></div><img class="cov" src="img/cover_rain_stop.png" alt=""><div class="t"><b>비 오는 정류장</b><small>하늘 정원 · R&amp;B</small><span>4.6 <svg class="i f"><use href="#i-star"/></svg> · 인기 8.1만</span></div><span class="heartbtn"><svg class="i"><use href="#i-heart"/></svg></span></div>
+  <div class="row"><div class="rk">5<small class="up">▲3</small></div><img class="cov" src="img/mv_alley_rhythm.png" alt=""><div class="t"><b>골목 리듬</b><small>별빛 소년단 · 힙합</small><span>4.4 <svg class="i f"><use href="#i-star"/></svg> · 인기 7.7만</span></div><span class="heartbtn"><svg class="i"><use href="#i-heart"/></svg></span></div>
+  <div class="row"><div class="rk">6<small class="eq">—</small></div><img class="cov" src="img/mv_night_letter.png" alt=""><div class="t"><b>밤하늘 편지</b><small>하늘 정원 · 발라드</small><span>4.9 <svg class="i f"><use href="#i-star"/></svg> · 인기 7.2만</span></div><span class="heartbtn"><svg class="i"><use href="#i-heart"/></svg></span></div>
+  <span class="mk" style="left:6px;bottom:52px">3</span>
+  <div class="myrank"><img src="img/cover_dance_pop.png" alt=""><div><b>내 곡 「첫 무대」 3위</b><small>인기 9.4만 · 1위까지 3.4만</small></div><button class="btn">보기</button></div>
+ </div>
+ <div class="tabbar"><div><svg class="i"><use href="#i-home"/></svg>홈</div><div><svg class="i"><use href="#i-search"/></svg>검색</div><div class="on"><svg class="i"><use href="#i-chart-f"/></svg>차트</div><div><svg class="i"><use href="#i-shorts"/></svg>공연·숏츠</div><div><svg class="i"><use href="#i-lib"/></svg>보관함</div></div>
+</div>
+<div>
+<span class="num">SCREEN 02</span>
+<h2>차트 — 플레이스토어 인기 차트</h2>
+<p class="ref">참조: 플레이스토어 「인기 차트」 목록 — 순위 · 둥근 아이콘 · 이름 · 분류 · 별점 · 버튼 하나</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>남은 투표</b><p>회차 표 수를 서버가 줄 때만 「남은 투표 n / m」 + 칸 막대. 없으면 「이번 회차 내 투표 n건」 한 줄. 그 아래 집계 시각 · 갱신 주기 · 리그.</p></div></li>
+<li><span class="n">2</span><div><b>순위 행 (높이 76)</b><p>순위 + 등락(▲ ▼ NEW —) · 60px 둥근 커버 · 곡명 · 「팀 · 장르」 · 「평점 · 인기」 · 찜(♡). 목록에서는 투표하지 않는다(2단계 확정 규칙). 행을 누르면 곡 상세에서 투표.</p></div></li>
+<li><span class="n">3</span><div><b>내 곡 줄</b><p>내 곡이 화면 밖에 있을 때만 아래에 뜬다. 1위와의 차이를 보여 줘 응원 동기를 준다. 50위 밖이면 「순위권 밖 · 내 점수」.</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>분류</td><td>앨범 · 주간 페스티벌 · 월드. 월드만 칩 6개(전체 · 창작곡 · 국가 · 친구 · 크루 · 인기). 칩은 가로 스크롤.</td></tr>
+<tr><td>범위</td><td>1,000등까지 계산, 화면은 상위 50. 1440에서는 2열(1~25 / 26~50).</td></tr>
+<tr><td>등락</td><td>서버가 직전 집계 순위를 줄 때만. 없으면 모두 「—」.</td></tr>
+<tr><td>찜</td><td>누르면 바로 찜(보관함 › 찜한 곡). 찜한 곡 목록에서 회차 투표로 이어진다.</td></tr>
+<tr><td>게임 연동</td><td>주간 구역 순위 · 월드 가산점 · 보상은 게임 페스티벌 결과와 같은 값(연동 #7). 내 곡 줄에서 게임 결과 화면으로 갈 수 있다.</td></tr>
+<tr><td>검수 중인 곡</td><td>목록에 나오지 않는다(등록 완료된 곡만 순위에 오른다).</td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- ③ 곡 상세 -->
+<section class="scr">
+<div class="ph">
+ <div class="sb"><span>9:41</span><span>5G <i></i></span></div>
+ <div class="appbar" style="padding-left:4px"><span class="tap"><svg class="i"><use href="#i-back"/></svg></span><span class="sp"></span><span class="tap"><svg class="i"><use href="#i-heart"/></svg></span><span class="tap"><svg class="i"><use href="#i-share"/></svg></span><span class="tap"><svg class="i"><use href="#i-more"/></svg></span></div>
+ <div class="body">
+  <span class="mk" style="left:6px;top:6px">1</span>
+  <div class="dhead"><img src="img/cover_star_running.png" alt=""><div><h3>별빛 러닝</h3><span class="tm">별빛 소년단</span><small>댄스 팝 · 128 BPM · 3:12</small><span class="ok"><svg class="i xs"><use href="#i-check"/></svg>등록 완료 · 주간 페스티벌 출전</span></div></div>
+  <div class="gamebox"><svg class="i"><use href="#i-game"/></svg><span>게임에서 11/10 발매 · 시즌 2번째 곡 · 정규 앨범(팀 전원)</span></div>
+  <div class="stats"><div><b>4.7<svg class="i xs f"><use href="#i-star"/></svg></b><small>리뷰 2,031</small></div><div><b>11.2만</b><small>인기</small></div><div><b>2위</b><small>주간 순위</small></div></div>
+  <span class="mk" style="left:6px;top:256px">2</span>
+  <div class="cta"><button class="btn brand lg"><svg class="i s"><use href="#i-vote"/></svg>투표하기</button><button class="btn tonal lg"><svg class="i s f"><use href="#i-play"/></svg>듣기</button></div>
+  <span class="mk" style="right:70px;top:322px">3</span>
+  <div class="sec-h">영상<small>전체<svg class="i xs"><use href="#i-right"/></svg></small></div>
+  <div class="gal"><div class="thumb"><img src="img/mv_alley_rhythm.png" alt=""><span class="vtag"><svg class="i f"><use href="#i-play"/></svg>영상</span><span class="dur">3:12</span></div><div class="sh"><img src="img/shorts_dance.png" alt=""><span class="vtag"><svg class="i f"><use href="#i-play"/></svg>영상</span></div></div>
+  <span class="mk" style="right:44px;top:524px">4</span>
+  <div class="sec-h">평점 및 리뷰<small><svg class="i xs"><use href="#i-right"/></svg></small></div>
+  <div class="rate"><div><div class="big">4.7</div><div class="st">★★★★★</div><small>2,031개</small></div><div class="bars"><div>5<i style="--w:78%"></i></div><div>4<i style="--w:14%"></i></div><div>3<i style="--w:5%"></i></div><div>2<i style="--w:2%"></i></div><div>1<i style="--w:1%"></i></div></div></div>
+ </div>
+ <div class="tabbar"><div><svg class="i"><use href="#i-home"/></svg>홈</div><div><svg class="i"><use href="#i-search"/></svg>검색</div><div class="on"><svg class="i"><use href="#i-chart-f"/></svg>차트</div><div><svg class="i"><use href="#i-shorts"/></svg>공연·숏츠</div><div><svg class="i"><use href="#i-lib"/></svg>보관함</div></div>
+</div>
+<div>
+<span class="num">SCREEN 03</span>
+<h2>곡 상세 — 플레이스토어 앱 상세</h2>
+<p class="ref">참조: 플레이스토어 앱 상세 — 큰 아이콘 · 지표 3칸 · 큰 설치 버튼 · 스크린샷 줄 · 평점 막대</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>머리</b><p>112px 커버 · 곡명 · 팀(누르면 채널) · 장르 · BPM · 길이 · 검수 배지(검수 중 · 등록 완료 · 반려됨)와 출전 상태. 지표 3칸 = 평점 · 인기 · 순위.</p></div></li>
+<li><span class="n">2</span><div><b>큰 버튼 두 개 (높이 48)</b><p>「투표하기」는 플레이스토어 설치 버튼 자리이고 투표의 정식 입구다(다른 하나는 보관함). 「듣기」는 미니 플레이어. 찜 · 공유는 위 오른쪽. 그 위 보라 줄은 게임 발매 정보(연동 #4).</p></div></li>
+<li><span class="n">3</span><div><b>영상 줄</b><p>스크린샷 자리에 이 곡의 MV · 무대 · 숏츠. 누르면 시청 화면.</p></div></li>
+<li><span class="n">4</span><div><b>평점 및 리뷰</b><p>평균 · 5단 막대 · 리뷰 목록. 내가 투표했거나 들은 곡만 리뷰를 남길 수 있다.</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>검수 중</td><td>투표하기 버튼 잠김 + 「검수가 끝나면 투표할 수 있어요」. 듣기는 채널 주인만.</td></tr>
+<tr><td>반려됨</td><td>채널 주인에게만 보이고 「이의 제기」 버튼이 붙는다.</td></tr>
+<tr><td>리뷰 0건</td><td>지표 칸 「★ 평점 전」, 리뷰 자리 「아직 리뷰가 없어요…」.</td></tr>
+<tr><td>창작곡</td><td>곡명 옆 「창작」 배지, 이 곡 정보에 원작자 표시.</td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- ④ 채널 -->
+<section class="scr">
+<div class="ph">
+ <div class="sb"><span>9:41</span><span>5G <i></i></span></div>
+ <div class="appbar" style="padding-left:4px"><span class="tap"><svg class="i"><use href="#i-back"/></svg></span><span class="sp"></span><span class="tap"><svg class="i"><use href="#i-search"/></svg></span><span class="tap"><svg class="i"><use href="#i-more"/></svg></span></div>
+ <div class="body">
+  <span class="mk" style="left:6px;top:4px">1</span>
+  <div class="banner"><img src="img/banner_channel.png" alt=""></div>
+  <div class="chead"><img src="img/cover_star_running.png" alt=""><div><h3>별빛 소년단<svg class="i f"><use href="#i-verified"/></svg></h3><small>@byeolbit · 구독자 3.2만 · 동영상 48개</small><small>하루 · 세나 · 유진 · 라온 · 미르</small></div></div>
+  <span class="mk" style="left:6px;top:194px">2</span>
+  <div class="subrow"><button class="btn tonal"><svg class="i xs"><use href="#i-bell"/></svg>구독 중<svg class="i xs"><use href="#i-down"/></svg></button><button class="btn tonal"><svg class="i xs"><use href="#i-note"/></svg>곡 · 앨범</button></div>
+  <div class="ctabs"><div class="on">홈</div><div>무대</div><div>MV</div><div>숏츠</div><div>앨범</div></div>
+  <span class="mk" style="left:6px;top:290px">3</span>
+  <div class="feat"><div class="thumb"><img src="img/mv_alley_rhythm.png" alt=""><span class="vtag"><svg class="i f"><use href="#i-play"/></svg>영상</span><span class="dur">3:12</span></div><div class="vmeta"><div><b>[1주차 페스티벌 무대] 별빛 소년단 「골목 리듬」</b><small>조회 41만회 · 3일 전 · 구역 2위</small></div><svg class="i s"><use href="#i-more"/></svg></div></div>
+  <span class="mk" style="left:6px;top:540px">4</span>
+  <div class="grid2"><div><div class="thumb"><img src="img/mv_dawn_walk.png" alt=""><span class="vtag"><svg class="i f"><use href="#i-play"/></svg>영상</span><span class="dur">12:40</span></div><b>[컷씬 MV] 새벽 산책 · 크루 대표작</b><small>조회 8.8만회 · 1주 전</small></div><div><div class="thumb"><img src="img/live_virtual.png" alt=""><span class="vtag"><svg class="i f"><use href="#i-play"/></svg>영상</span><span class="dur">58:02</span></div><b>[무대 다시보기] 데뷔 쇼케이스</b><small>조회 12만회 · 2주 전</small></div></div>
+ </div>
+ <div class="tabbar"><div><svg class="i"><use href="#i-home"/></svg>홈</div><div><svg class="i"><use href="#i-search"/></svg>검색</div><div><svg class="i"><use href="#i-chart"/></svg>차트</div><div class="on"><svg class="i"><use href="#i-shorts"/></svg>공연·숏츠</div><div><svg class="i"><use href="#i-lib"/></svg>보관함</div></div>
+</div>
+<div>
+<span class="num">SCREEN 04</span>
+<h2>팀 공식 채널 — 아이돌 공식 유튜브</h2>
+<p class="ref">참조: 아이돌 공식 유튜브 채널 — 배너 · 프로필 · 인증 표시 · 구독/알림 · 탭 · 대표 영상. 채널 = 게임에서 만든 팀</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>배너 · 프로필</b><p>게임에서 팀을 만들면 채널이 생긴다(연동 #1). 팀 이름 · 멤버 예명은 게임 그대로. 배너(3:1) · 원형 프로필 · 인증 표시 · 구독자 · 영상 수.</p></div></li>
+<li><span class="n">2</span><div><b>구독 · 알림</b><p>구독 전엔 흰 「구독」 버튼, 구독 뒤엔 「구독 중 ▾」(알림 전체 · 맞춤 · 끄기). 옆 버튼은 이 팀 곡 · 앨범 목록.</p></div></li>
+<li><span class="n">3</span><div><b>대표 영상</b><p>채널 주인이 고른 영상 하나를 크게. 보통 최신 MV나 페스티벌 출전 무대.</p></div></li>
+<li><span class="n">4</span><div><b>탭 목록</b><p>무대(게임 페스티벌 무대 실황 · 다시보기) · MV(컷씬 MV · 크루 대표작) · 숏츠 · 앨범(게임 발매 순, 누르면 곡 상세).</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>내 팀 채널</td><td>구독 버튼 자리에 「채널 관리」. 컷씬 MV를 만들면 여기 쌓이고, 공개 시각을 정해 프리미어로 올릴 수 있다.</td></tr>
+<tr><td>인증 표시</td><td>게임 팀 채널에만. 시즌이 끝나도 채널 · 구독 · 영상은 이월된다.</td></tr>
+<tr><td>구독</td><td>구독 채널의 새 무대 · MV는 홈 피드 위쪽과 숏츠 「구독」 피드에 먼저 뜬다.</td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- ⑤ 시청·라이브 -->
+<section class="scr">
+<div class="ph">
+ <div class="sb"><span>9:41</span><span>5G <i></i></span></div>
+ <span class="mk" style="left:6px;top:56px">1</span>
+ <div class="player"><img src="img/live_virtual.png" alt=""><span class="vtag"><svg class="i f"><use href="#i-play"/></svg>영상</span><div class="lv"><span>무대 실황</span><span class="v">관람방 87 / 100</span></div><div class="hearts"><svg class="i f"><use href="#i-heart-f"/></svg><svg class="i f"><use href="#i-heart-f"/></svg><svg class="i f"><use href="#i-heart-f"/></svg></div></div>
+ <div class="wt"><b>[실황] 1주차 페스티벌 무대 · 별빛 소년단 「별빛 러닝」</b><small>게임 보드 공연 칸 · 친구·크루 12명 함께 관람 중</small></div>
+ <span class="mk" style="left:6px;top:330px">2</span>
+ <div class="chrow"><img src="img/cover_star_running.png" alt=""><div><b>별빛 소년단</b><small>구독자 3.2만</small></div><button class="btn tonal">구독 중</button></div>
+ <div class="acts"><span><svg class="i"><use href="#i-like"/></svg>1.4천</span><span class="v"><svg class="i"><use href="#i-heart"/></svg>찜</span><span><svg class="i"><use href="#i-note"/></svg>곡 보기</span><span><svg class="i"><use href="#i-share"/></svg>공유</span><span><svg class="i"><use href="#i-save"/></svg>저장</span></div>
+ <span class="mk" style="left:2px;top:428px">3</span>
+ <div class="chat">
+  <div class="h">관람방 채팅<small>전체<svg class="i xs"><use href="#i-down"/></svg></small></div>
+  <div class="pin"><svg class="i"><use href="#i-pin"/></svg><span><b>별빛 소년단</b> 무대 끝나면 곡 상세에서 투표해 주세요!</span></div>
+  <div class="msgs">
+   <p><b style="color:#7fd0ff">하늘덕</b>라온 파트 진짜 좋다</p>
+   <p><span class="tagcrew">크루</span><b style="color:#7fe0b8">별빛지기</b>우리 크루 대표작 다음 무대예요!</p>
+   <p><b style="color:#b9a3ff">밤산책</b>세나 고음 미쳤다</p>
+   <p><span class="tagcrew">친구</span><b style="color:#ffcc66">유진최고</b>찜 해 두고 투표하러 감</p>
+  </div>
+  <span class="mk" style="right:8px;bottom:52px">4</span>
+  <div class="cin"><div>채팅 입력…</div><span class="heart"><svg class="i f"><use href="#i-heart-f"/></svg></span></div>
+ </div>
+ <div style="height:24px;flex:none"></div>
+</div>
+<div>
+<span class="num">SCREEN 05</span>
+<h2>무대 실황 · 관람방 — 유튜브 라이브 시청</h2>
+<p class="ref">참조: 유튜브 라이브 시청 화면 · 버추얼 아이돌 라이브(실시간 채팅 · 고정 공지 · 하트). 무대 = 게임 보드 공연</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>16:9 플레이어 · 무대 실황</b><p>게임 보드의 공연 칸 · 방송 칸 · 9주차 월드 무대가 진행되는 동안 실황(연동 #2). 위에 관람방 인원 n / 100. 하트를 누르면 화면에 떠오른다. 가로 = 전체 화면, 아래로 끌면 작은 화면(PIP).</p></div></li>
+<li><span class="n">2</span><div><b>채널 줄 · 행동 칩</b><p>좋아요 · 찜 · 곡 보기 · 공유 · 저장. 투표 칩은 두지 않는다 — 「곡 보기」로 곡 상세에 가서 투표한다.</p></div></li>
+<li><span class="n">3</span><div><b>관람방 채팅 <span class="ask">신규 제안 · 결정 대기</span></b><p>공연 상세 기획은 채팅방 생성을 이번 범위 밖으로 둔다 — 이 시안의 새 제안이다. 관람방 100명(친구 · 크루 먼저, 나머지는 같은 등급) 안의 채팅. 친구 · 크루는 이름 앞 표시. 맨 위 채널 주인 고정 공지. 「친구·크루만」으로 거를 수 있다.</p></div></li>
+<li><span class="n">4</span><div><b>하트</b><p>채팅 입력 옆 하트는 무료 반응이다. 점수 · 재화와 연결하지 않는다(인기 재화는 9주차 인기 탭 크루 총공에만 쓴다).</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>실황 아님</td><td>MV · 다시보기는 채팅 자리에 「다음 영상」 + 댓글.</td></tr>
+<tr><td>관람방</td><td>정원 100명(연동 #3). 월드 상위 무대는 관람 키로만. 「다른 그룹 보기」는 일반 관람객만 바꾼다.</td></tr>
+<tr><td>소리</td><td>한 번에 하나. 실황이 시작되면 미니 플레이어 일시정지, 닫으면 이어 듣기.</td></tr>
+<tr><td>채팅 질서</td><td>금지어 거름 · 도배 제한 · 채널 주인 숨기기. 신고는 메시지 길게 누르기.</td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- ⑥ 숏츠 -->
+<section class="scr">
+<div class="ph">
+ <div class="body" style="flex:1">
+  <div class="sfull"><img src="img/shorts_dance.png" alt=""><span class="vtag vfull"><svg class="i f"><use href="#i-play"/></svg>영상</span><div class="shade"></div>
+   <div class="stop"><span>구독</span><span class="on">추천</span><span>친구·크루</span><span class="tap srch"><svg class="i"><use href="#i-search"/></svg></span></div>
+   <span class="mk" style="right:60px;bottom:380px">1</span>
+   <div class="rail"><div class="liked"><i><svg class="i f"><use href="#i-heart-f"/></svg></i>2.1만</div><div><i><svg class="i"><use href="#i-cmt"/></svg></i>318</div><div><i><svg class="i"><use href="#i-plus"/></svg></i>만들기</div><div><i><svg class="i"><use href="#i-share"/></svg></i>공유</div></div>
+   <span class="mk" style="left:6px;bottom:196px">2</span>
+   <div class="sinfo"><div class="chrow"><img src="img/cover_neon_sign.png" alt=""><div><b>루나 시그널</b></div><button class="btn">구독</button></div><p>안무 연습실에서 한 번에 성공 <i>#네온사인챌린지 #루나시그널</i></p></div>
+   <span class="mk" style="left:6px;bottom:52px">3</span>
+   <div class="orig"><img src="img/cover_neon_sign.png" alt=""><div><b><svg class="i f"><use href="#i-note"/></svg>네온 사인 · 루나 시그널</b><small>주간 1위 · 곡 상세에서 투표</small></div><span class="heartbtn on"><svg class="i f"><use href="#i-heart-f"/></svg></span></div>
+  </div>
+ </div>
+ <div class="tabbar" style="background:#000"><div><svg class="i"><use href="#i-home"/></svg>홈</div><div><svg class="i"><use href="#i-search"/></svg>검색</div><div><svg class="i"><use href="#i-chart"/></svg>차트</div><div class="on"><svg class="i"><use href="#i-shorts"/></svg>공연·숏츠</div><div><svg class="i"><use href="#i-lib"/></svg>보관함</div></div>
+</div>
+<div>
+<span class="num">SCREEN 06</span>
+<h2>숏츠 — 유튜브 숏츠</h2>
+<p class="ref">참조: 유튜브 숏츠 — 전체 화면 9:16 · 오른쪽 버튼 줄 · 아래 채널 · 설명 · 원곡 표시</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>오른쪽 버튼 줄 (48px 원)</b><p>찜 · 댓글 · 공유 · 만들기. 「만들기」는 이 곡으로 내 아이돌 숏츠 만들기(모션샷 · 컷씬 편집기). 두 번 누르면 숏츠 찜.</p></div></li>
+<li><span class="n">2</span><div><b>채널 · 설명</b><p>채널 얼굴 · 이름 · 구독, 설명 2줄 + 해시태그. 해시태그를 누르면 같은 챌린지 숏츠 모음.</p></div></li>
+<li><span class="n">3</span><div><b>원곡 바</b><p>숏츠에 쓴 곡을 항상 보여 준다. ♡ = 곡 찜(숏츠 찜과 따로), 바를 누르면 곡 상세 → 투표. 숏츠에서 곡으로 가는 길.</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>넘기기</td><td>위아래 밀기. 다음 2개를 미리 읽는다.</td></tr>
+<tr><td>위 탭</td><td>구독 · 추천 · 친구·크루. 친구·크루에 숏츠가 없으면 「친구가 올린 숏츠가 아직 없어요」 + 추천으로 가기.</td></tr>
+<tr><td>길이</td><td>30초 · 60초(지금 기획 그대로).</td></tr>
+<tr><td>미니 플레이어</td><td>숏츠 화면에서는 숨기고 일시정지, 나가면 이어 듣기.</td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- ⑦ 투표 시트 -->
+<section class="scr">
+<div class="ph">
+ <div class="sb"><span>9:41</span><span>5G <i></i></span></div>
+ <div class="appbar" style="padding-left:4px"><span class="tap"><svg class="i"><use href="#i-back"/></svg></span><span class="sp"></span></div>
+ <div class="body">
+  <div class="dhead"><img src="img/cover_neon_sign.png" alt=""><div><h3>네온 사인</h3><span class="tm">루나 시그널</span><small>댄스 팝 · 124 BPM · 3:05</small></div></div>
+  <div class="dim"></div>
+  <div class="sheet">
+   <div class="grab"></div>
+   <span class="mk" style="left:6px;top:12px">1</span>
+   <h4>투표 확정 확인</h4>
+   <p class="s1">이 곡에 투표하시겠습니까? (확정 후 취소 불가)</p>
+   <div class="song"><img src="img/cover_neon_sign.png" alt=""><div><b>네온 사인</b><small>루나 시그널 · 주간 페스티벌 1주차</small></div></div>
+   <span class="mk" style="left:6px;top:226px">2</span>
+   <div class="q"><span>남은 투표</span><b>2 → 1</b></div>
+   <div class="pips" style="padding:0 2px"><i></i><i class="off"></i><i class="off"></i></div>
+   <div class="warn"><svg class="i"><use href="#i-warn"/></svg><span>한 회차에 같은 곡은 한 번만 투표할 수 있어요.</span></div>
+   <span class="mk" style="left:6px;bottom:44px">3</span>
+   <div class="btns"><button class="btn tonal lg">취소</button><button class="btn brand lg">투표 확정하기</button></div>
+  </div>
+ </div>
+</div>
+<div>
+<span class="num">SCREEN 07</span>
+<h2>투표 확정 시트 — 핵심 결제 동선</h2>
+<p class="ref">참조: 플레이스토어 구매 확인 시트 — 아래에서 올라오는 한 장, 대상 · 차감 · 확정 버튼</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>제목 · 안내 (곡 상세 · 보관함에서만 열림)</b><p>문구는 카피 정본 그대로: 「투표 확정 확인」 / 「이 곡에 투표하시겠습니까? (확정 후 취소 불가)」. 대상 곡을 커버와 함께 다시 보여 줘 잘못 누름을 막는다.</p></div></li>
+<li><span class="n">2</span><div><b>차감 미리 보기</b><p>「남은 투표 2 → 1」과 칸 막대. 서버가 회차 표 수를 주지 않으면 이 줄은 숨기고 「이번 회차 내 투표 n건」.</p></div></li>
+<li><span class="n">3</span><div><b>버튼</b><p>취소(1) : 투표 확정하기(2) 너비. 확정을 누르면 버튼이 잠기고 처리 표시 → 성공 토스트 「투표가 완료되었어요. 보관함에서 영수증을 확인할 수 있어요.」</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>입구 2곳</td><td>곡 상세 「투표하기」 · 보관함 찜한 곡의 「투표」. 목록 · 숏츠 · 실황 화면에는 투표 버튼이 없다(감상 → 찜 → 확정 순서).</td></tr>
+<tr><td>성공 뒤</td><td>버튼이 「투표함」으로, 남은 투표 한 칸 비움, 보관함 › 투표 내역 영수증. 게임 페스티벌 점수에 반영(연동 #6 · #7).</td></tr>
+<tr><td>막힘</td><td>남은 표 0 · 검수 중 곡 · 마감 지남 → 시트를 열지 않고 사유 토스트.</td></tr>
+<tr><td>실패</td><td>통신 실패 시 표를 차감하지 않고 「투표를 보내지 못했어요. 다시 눌러 주세요」. 같은 요청을 두 번 보내도 한 표만 들어가게 서버가 막는다.</td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- ⑧ 보관함 -->
+<section class="scr">
+<div class="ph">
+ <div class="sb"><span>9:41</span><span>5G <i></i></span></div>
+ <div class="appbar"><h1>보관함</h1><span class="sp"></span><span class="gamechip"><svg class="i"><use href="#i-game"/></svg>게임으로</span><span class="tap"><svg class="i"><use href="#i-search"/></svg></span></div>
+ <span class="mk" style="left:6px;top:106px">1</span>
+ <div class="seg s4"><div class="on">찜한 곡</div><div>찜한 숏츠</div><div>내 업로드</div><div>투표 내역</div></div>
+ <div class="body">
+  <div class="quota"><div><b>이번 회차 남은 투표 2 / 3</b><small>1주차 · 마감 1일 6시간</small></div><div class="pips"><i></i><i></i><i class="off"></i></div></div>
+  <p class="snap">찜한 곡 6 · 최근 찜한 순</p>
+  <span class="mk" style="right:8px;top:92px">2</span>
+  <div class="row"><div class="rk">1<small class="up">▲2</small></div><img class="cov" src="img/cover_neon_sign.png" alt=""><div class="t"><b>네온 사인</b><small>루나 시그널 · 주간 1위</small><span class="rowdate">오늘 찜 · 숏츠에서</span></div><button class="vote">투표</button></div>
+  <div class="row"><div class="rk">2<small class="eq">—</small></div><img class="cov" src="img/cover_star_running.png" alt=""><div class="t"><b>별빛 러닝</b><small>별빛 소년단 · 주간 2위</small><span class="rowdate">어제 찜 · 무대 실황에서</span></div><button class="vote done">투표함</button></div>
+  <div class="row"><div class="rk">3<small class="nw">NEW</small></div><img class="cov" src="img/cover_dance_pop.png" alt=""><div class="t"><b>첫 무대 <span class="badge-cr">창작</span></b><small>우리 팀 · 주간 3위</small><span class="rowdate">2일 전 찜 · 차트에서</span></div><button class="vote">투표</button></div>
+  <div class="row"><div class="rk">4<small class="dn">▼1</small></div><img class="cov" src="img/cover_rain_stop.png" alt=""><div class="t"><b>비 오는 정류장</b><small>하늘 정원 · 주간 4위</small><span class="rowdate">3일 전 찜 · 홈에서</span></div><button class="vote">투표</button></div>
+  <span class="mk" style="left:6px;bottom:96px">3</span>
+  <div class="row" style="opacity:.55"><div class="rk">—</div><img class="cov" src="img/av_letter.png" alt=""><div class="t"><b>편지 한 장 <span class="badge-cr">창작</span></b><small>레터 크루 · 검수 중</small><span class="rowdate">검수가 끝나면 투표할 수 있어요</span></div><button class="vote done">잠김</button></div>
+ </div>
+ <div class="tabbar"><div><svg class="i"><use href="#i-home"/></svg>홈</div><div><svg class="i"><use href="#i-search"/></svg>검색</div><div><svg class="i"><use href="#i-chart"/></svg>차트</div><div><svg class="i"><use href="#i-shorts"/></svg>공연·숏츠</div><div class="on"><svg class="i"><use href="#i-lib"/></svg>보관함</div></div>
+</div>
+<div>
+<span class="num">SCREEN 08</span>
+<h2>보관함 — 찜에서 투표로</h2>
+<p class="ref">참조: 유튜브 「보관함」 · 플레이스토어 「내 앱」 목록 — 내가 모은 것 한곳에, 행마다 할 일 버튼 하나</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>4칸 나눔</b><p>찜한 곡 · 찜한 숏츠 · 내 업로드 · 투표 내역(지금 앱 보관함 4칸 그대로). 위 「게임으로」 칩은 다른 화면과 같은 자리.</p></div></li>
+<li><span class="n">2</span><div><b>찜한 곡 행 = 투표 입구</b><p>차트처럼 순위 · 등락 · 커버 · 곡 정보에 「어디서 찜했나」를 붙이고, 오른쪽에 「투표」. 누르면 투표 확정 시트(SCREEN 07). 이미 투표한 곡은 「투표함」. 곡 상세와 함께 투표 입구 두 곳 중 하나.</p></div></li>
+<li><span class="n">3</span><div><b>투표할 수 없는 곡</b><p>검수 중 · 마감 지난 회차 곡은 흐리게, 버튼은 「잠김」과 이유 한 줄.</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>찜한 숏츠</td><td>9:16 두 줄 격자. 누르면 숏츠 화면, 원곡 바로 곡 찜까지.</td></tr>
+<tr><td>내 업로드</td><td>검수 중 · 등록 완료 · 반려됨 배지. 반려됨은 「이의 제기」 버튼(지금 앱 그대로).</td></tr>
+<tr><td>투표 내역</td><td>회차별 영수증(곡 · 시각 · 회차). 취소 버튼은 없다(확정 후 취소 불가).</td></tr>
+<tr><td>인기 지갑</td><td>9주차 월드 기간에만 이 화면 위에 보인다. 인기 탭 크루 총공에만 쓰고, 투표 · 찜과 섞지 않는다.</td></tr>
+<tr><td>로그인 안 함</td><td>보관함 대신 「로그인하면 찜한 곡을 모아 볼 수 있어요」 + 로그인(SCREEN 11).</td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- ⑨ 방송 칸 실황 -->
+<section class="scr">
+<div class="ph">
+ <div class="sb"><span>9:41</span><span>5G <i></i></span></div>
+ <span class="mk" style="left:6px;top:150px">1</span>
+ <div class="player"><img src="img/broadcast_music.png" alt=""><span class="vtag"><svg class="i f"><use href="#i-play"/></svg>영상</span><div class="lv"><span>공연 중</span><span class="v">음악 방송국 · 방송30</span></div></div>
+ <div class="wt"><b>별빛 소년단 「별빛 러닝」 · 음악방송 무대</b><small>지금 지점에 합류 · 내 그룹 · 크루원 무대</small></div>
+ <span class="mk" style="left:6px;top:322px">2</span>
+ <div class="fmt" style="overflow:hidden"><span class="chip on">방송30 음악</span><span class="chip">방송28 라디오</span><span class="chip">방송27 예능</span><span class="chip">공연 3채널</span></div>
+ <span class="mk" style="left:2px;top:372px">3</span>
+ <div class="lineup">
+  <div class="h">이 채널 무대 · 내 그룹<small>명단 100명 중</small></div>
+  <div class="lu now"><span>●</span><img src="img/cover_star_running.png" alt=""><div><b>별빛 러닝 <span class="tagcrew">크루</span></b><small>별빛 소년단 · 공연 중</small></div><span class="stt now">지금</span></div>
+  <div class="lu"><span>●</span><img src="img/cover_neon_sign.png" alt=""><div><b>네온 사인 <span class="tagcrew" style="background:#ffcc66">친구</span></b><small>루나 시그널 · 새 무대 · 아직 안 봄</small></div><span class="stt next">보기</span></div>
+  <div class="lu"><span>●</span><img src="img/cover_rain_stop.png" alt=""><div><b>비 오는 정류장</b><small>하늘 정원 · 공연 중 · 영상 연결 중</small></div><span class="stt done">연결 중</span></div>
+  <div class="lu"><span>○</span><img src="img/cover_dance_pop.png" alt=""><div><b>첫 무대 <span class="badge-cr">창작</span></b><small>우리 팀 · 2시간 전 끝남</small></div><span class="stt done">다시보기</span></div>
+  <div class="lu"><span>○</span><img src="img/av_mint.png" alt=""><div><b>민트 시티</b><small>민트 크루 · 어제 끝남</small></div><span class="stt done">다시보기</span></div>
+ </div>
+ <div style="flex:1"></div>
+ <div class="tabbar"><div><svg class="i"><use href="#i-home"/></svg>홈</div><div><svg class="i"><use href="#i-search"/></svg>검색</div><div><svg class="i"><use href="#i-chart"/></svg>차트</div><div class="on"><svg class="i"><use href="#i-shorts"/></svg>공연·숏츠</div><div><svg class="i"><use href="#i-lib"/></svg>보관함</div></div>
+</div>
+<div>
+<span class="num">SCREEN 09</span>
+<h2>방송 · 공연 채널 실황 — 음악방송 · 라디오 · 예능</h2>
+<p class="ref">참조: 유튜브 라이브 탭(지금 방송 중 → 지난 라이브) · 음악방송 무대 클립 목록. 원천 = 게임 보드 방송 3칸 · 공연 3칸</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>실황 플레이어</b><p>내 관람 명단에 있는 사람이 게임 보드 방송 칸에 도착해 공연이 시작되면 「공연 중」(연동 #2). 들어가면 지금 지점에 합류한다. 끝난 영상을 처음부터 틀며 실황이라고 쓰지 않는다.</p></div></li>
+<li><span class="n">2</span><div><b>6채널</b><p>방송27 예능 방송국 · 방송28 라디오 방송국(보이는 라디오 · 라이브) · 방송30 음악 방송국 · 공연32 · 33 · 35. 발매 전에는 거리 인터뷰 · 온라인 홍보방송 · 신인 소개방송 이름으로 바뀐다.</p></div></li>
+<li><span class="n">3</span><div><b>채널 무대 목록</b><p>내 그룹(친구 · 크루 + 같은 등급 일반, 100명 고정) 사람들의 이 채널 무대만. 공연 중 → 아직 안 본 새 무대 → 다시보기 순. 친구 · 크루 배지. 줄을 누르면 시청, 곡 보기에서 찜 · 투표.</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>관람 모드</td><td>내 그룹 N · 주간 대회 V(경쟁 상대 + 친구 · 크루) · 월드 상위권(관람 키). 모드를 바꿔도 순위 · 점수는 바뀌지 않는다.</td></tr>
+<tr><td>실황 상태</td><td>공연 중 · 영상 연결 중 · 다시보기 · 상태 확인 중 · 영상 없음(공연 정보만).</td></tr>
+<tr><td>내 공연</td><td>게임 오른쪽 PIP로 먼저 뜨고, 이 목록에서는 「우리 팀」 줄. 줄이기 · 닫기는 공연 취소가 아니다.</td></tr>
+<tr><td>점수</td><td>시청 · 재생 · 키 사용 자체로는 점수를 주지 않는다. 인정된 공식 공연 결과만 페스티벌에 들어간다.</td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- ⑩ 크루 -->
+<section class="scr">
+<div class="ph">
+ <div class="sb"><span>9:41</span><span>5G <i></i></span></div>
+ <div class="appbar" style="padding-left:4px"><span class="tap"><svg class="i"><use href="#i-back"/></svg></span><span class="sp"></span><span class="tap"><svg class="i"><use href="#i-share"/></svg></span><span class="tap"><svg class="i"><use href="#i-more"/></svg></span></div>
+ <div class="body">
+  <span class="mk" style="left:6px;top:4px">1</span>
+  <div class="banner"><img src="img/banner_crew.png" alt=""></div>
+  <div class="chead"><img src="img/av_aurora.png" alt=""><div><h3>오로라 크루</h3><small>크루원 18명 · 크루장 별빛지기</small><small>함께 낸 대표작 6편</small></div></div>
+  <div class="subrow"><button class="btn tonal"><svg class="i xs"><use href="#i-note"/></svg>음악 공유</button><button class="btn tonal"><svg class="i xs"><use href="#i-plus"/></svg>초대</button></div>
+  <div class="ctabs"><div class="on">공유곡</div><div>크루 MV</div><div>크루 투표</div><div>기록</div></div>
+  <span class="mk" style="left:6px;top:302px">2</span>
+  <div class="crewrep" style="margin-top:12px"><div style="position:relative;width:64px;height:64px"><img src="img/mv_dawn_walk.png" alt=""><span class="vtag" style="top:auto;bottom:3px;right:3px;padding:0 4px 0 3px"><svg class="i f"><use href="#i-play"/></svg>영상</span></div><div><em>이번 회차 크루 대표작 · 크루장 확정</em><b>새벽 산책 MV</b><small>크루 투표 1위 · 7표 · 주간 출품</small></div><span class="heartbtn on"><svg class="i f"><use href="#i-heart-f"/></svg></span></div>
+  <span class="mk" style="left:6px;top:398px">3</span>
+  <div class="share"><img class="av" src="img/av_mint.png" alt=""><div><b>새벽 산책 <span class="badge-cr">창작</span></b><small>민트님이 음악만 공유 · MV 9편</small></div><button class="btn tonal" style="height:32px;padding:0 10px">MV 만들기</button></div>
+  <div class="share"><img class="av" src="img/av_ocean.png" alt=""><div><b>파도 소리 <span class="badge-cr">창작</span></b><small>오션님이 음악만 공유 · MV 3편</small></div><button class="btn tonal" style="height:32px;padding:0 10px">MV 만들기</button></div>
+  <div class="share"><img class="av" src="img/av_sunrise.png" alt=""><div><b>아침 인사 <span class="badge-cr">창작</span></b><small>선라이즈님 · 검수 중(크루만 보임)</small></div><button class="btn tonal" style="height:32px;padding:0 10px;opacity:.5">대기</button></div>
+  <span class="mk" style="left:6px;bottom:30px">4</span>
+  <div class="lock"><svg class="i s"><use href="#i-cheer"/></svg><span><b>인기 총공</b>은 9주차 월드 기간에 열려요 · 월드 차트 인기 탭</span></div>
+ </div>
+ <div class="tabbar"><div><svg class="i"><use href="#i-home"/></svg>홈</div><div><svg class="i"><use href="#i-search"/></svg>검색</div><div><svg class="i"><use href="#i-chart"/></svg>차트</div><div><svg class="i"><use href="#i-shorts"/></svg>공연·숏츠</div><div class="on"><svg class="i"><use href="#i-lib"/></svg>보관함</div></div>
+</div>
+<div>
+<span class="num">SCREEN 10</span>
+<h2>크루 — 음악 공유 → 각자 MV → 대표작</h2>
+<p class="ref">참조: 팬 커뮤니티 그룹 홈 · 유튜브 채널 머리 구조. 크루 = 게임에서 맺은 응원 크루</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>크루 머리</b><p>게임 크루를 그대로 가져온다(연동 #8). 배너 · 크루 얼굴 · 인원 · 크루장. 「음악 공유」는 내 창작곡을 음악만 크루에 공유(동의 체크).</p></div></li>
+<li><span class="n">2</span><div><b>이번 회차 크루 대표작</b><p>크루원 MV 가운데 크루장이 회차당 1편을 확정해 주간 · 월드에 낸다. 크루 투표(1인 1표)는 참고 지표다. 크루 대표작과 개인 출품은 서로 막지 않는다.</p></div></li>
+<li><span class="n">3</span><div><b>공유곡 줄</b><p>크루원이 공유한 창작곡. 「MV 만들기」는 그 곡으로 <b>내 아이돌</b> MV를 만든다(모션샷 · 컷씬 편집). 검수 중인 곡은 크루 안에서만 보이고 MV는 기다린다.</p></div></li>
+<li><span class="n">4</span><div><b>인기 총공 (9주차만)</b><p>인기 재화는 9주차 월드 인기 탭 크루 총공에만 쓴다. 그 전에는 잠금 안내만, 투표 · 찜 · 연료와 섞지 않는다.</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>공유 철회</td><td>원작자가 내리면 새 MV · 새 출품은 바로 막힘. 이미 접수된 출품은 그 회차 끝까지 유지 뒤 비공개, 확정된 순위 · 보상 기록은 남김.</td></tr>
+<tr><td>관람</td><td>크루원은 관람 명단에 전원 들어간다(친구 · 크루 우선, 100명 넘으면 넘는 대로).</td></tr>
+<tr><td>크루 정보</td><td>이름 40자 · 소개 300자 · 정원 현재 세팅 0 = 제한 없음.</td></tr>
+<tr><td>크루 없음</td><td>「게임에서 크루에 들어가면 여기서 함께 응원할 수 있어요」 + 게임으로.</td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- ⑪ 게임 안 하는 사람 첫 화면 -->
+<section class="scr">
+<div class="ph">
+ <div class="sb"><span>9:41</span><span>5G <i></i></span></div>
+ <div class="appbar"><span class="logo"><span><svg class="i f"><use href="#i-play"/></svg></span>K-MON</span><span class="sp"></span><button class="btn" style="height:32px">로그인</button><span class="tap"><svg class="i"><use href="#i-search"/></svg></span></div>
+ <div class="chips"><span class="chip on">전체</span><span class="chip">무대 실황</span><span class="chip">MV</span><span class="chip">숏츠</span><span class="chip">창작곡</span></div>
+ <div class="body">
+  <span class="mk" style="left:8px;top:2px">1</span>
+  <div class="guest"><div><b>지금 주간 페스티벌 1주차</b><small>로그인하면 찜 · 투표 · 응원을 할 수 있어요</small></div><button class="btn">차트</button></div>
+  <div class="vcard">
+   <div class="thumb"><img src="img/mv_visual.png" alt=""><span class="vtag"><svg class="i f"><use href="#i-play"/></svg>영상</span><span class="dur">3:05</span></div>
+   <div class="vmeta"><img class="av" src="img/cover_neon_sign.png" alt=""><div><b>[컷씬 MV] 루나 시그널 「네온 사인」</b><small>루나 시그널 · 조회 52만회 · 1일 전</small></div><svg class="i s"><use href="#i-more"/></svg></div>
+  </div>
+  <div class="dim"></div>
+  <div class="sheet">
+   <div class="grab"></div>
+   <span class="mk" style="left:6px;top:12px">2</span>
+   <h4>찜하려면 로그인이 필요해요</h4>
+   <p class="s1">듣기 · 보기는 로그인 없이 계속할 수 있어요</p>
+   <div class="song"><img src="img/cover_neon_sign.png" alt=""><div><b>네온 사인</b><small>루나 시그널 · 주간 1위</small></div></div>
+   <span class="mk" style="left:6px;bottom:44px">3</span>
+   <div style="height:16px"></div>
+   <div class="btns"><button class="btn tonal lg">둘러보기</button><button class="btn brand lg">로그인하고 찜하기</button></div>
+  </div>
+ </div>
+ <div class="tabbar"><div class="on"><svg class="i"><use href="#i-home-f"/></svg>홈</div><div><svg class="i"><use href="#i-search"/></svg>검색</div><div><svg class="i"><use href="#i-chart"/></svg>차트</div><div><svg class="i"><use href="#i-shorts"/></svg>공연·숏츠</div><div><svg class="i"><use href="#i-lib"/></svg>보관함</div></div>
+</div>
+<div>
+<span class="num">SCREEN 11</span>
+<h2>게임 안 하는 사람의 첫 화면 — 로그인 경계</h2>
+<p class="ref">참조: 유튜브 비로그인 홈(보기는 자유, 반응은 로그인) · 플레이스토어 「로그인하고 설치」 시트</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>비로그인 홈</b><p>「게임으로」 칩 · 만들기 · 알림 자리에 「로그인」. 내 팀 페스티벌 카드 대신 지금 페스티벌 안내 카드. 칩에 「우리 크루」 없음. 피드 · 차트 · 숏츠 · 실황 보기는 그대로 열린다.</p></div></li>
+<li><span class="n">2</span><div><b>로그인 시트</b><p>찜 · 투표 · 하트 · 업로드 · 크루 · 보관함을 누르는 순간에만 연다. 누른 곡을 다시 보여 줘 「무엇을 하려다 막혔는지」 알 수 있게.</p></div></li>
+<li><span class="n">3</span><div><b>버튼</b><p>「둘러보기」 = 시트만 닫고 보던 곳 그대로. 「로그인하고 찜하기」 = 로그인 뒤 그 찜을 바로 마친다.</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>정해진 것</td><td>비로그인 = 듣기 · 보기만. 로그인 = 찜 · 투표 · 인기 응원 · 업로드 · 크루.</td></tr>
+<tr><td>관람방</td><td>비로그인도 실황은 볼 수 있다. 채팅 입력 · 하트를 누르면 이 시트.</td></tr>
+<tr><td>확인 필요</td><td>게임 없이 앱 계정만 만든 사람(앱 전용 팬)이 투표 · 차트에 어떻게 들어가는지, 게임 계정과 묶는 방법 <span class="ask">시퀀스 기획서에서</span></td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- ⑫ 만들기 시트 -->
+<section class="scr">
+<div class="ph">
+ <div class="sb"><span>9:41</span><span>5G <i></i></span></div>
+ <div class="appbar"><span class="logo"><span><svg class="i f"><use href="#i-play"/></svg></span>K-MON</span><span class="sp"></span><span class="gamechip"><svg class="i"><use href="#i-game"/></svg>게임으로</span><span class="tap"><svg class="i"><use href="#i-plus"/></svg></span><span class="tap"><svg class="i"><use href="#i-bell"/></svg></span></div>
+ <div class="body">
+  <div class="fest"><span class="k"><svg class="i xs"><use href="#i-game"/></svg>게임 연동 · 1주차 주간 페스티벌</span><div><b>우리 팀 「첫 무대」 구역 3위</b><small>마감까지 2일 14시간</small></div><button class="btn">차트</button></div>
+  <div class="vcard"><div class="thumb"><img src="img/mv_first_stage.png" alt=""><span class="vtag"><svg class="i f"><use href="#i-play"/></svg>영상</span></div></div>
+  <div class="dim"></div>
+  <div class="sheet">
+   <div class="grab"></div>
+   <h4 style="margin-bottom:14px">만들기</h4>
+   <span class="mk" style="left:6px;top:58px">1</span>
+   <div class="opts">
+    <div class="opt"><i><svg class="i"><use href="#i-shorts"/></svg></i><div><b>숏츠 만들기</b><small>내 아이돌 모션샷 · 컷씬으로 30 · 60초</small></div><svg class="i s"><use href="#i-right"/></svg></div>
+    <div class="opt"><i><svg class="i"><use href="#i-subs"/></svg></i><div><b>컷씬 MV 올리기</b><small>게임에서 만든 MV · 공개 시각 예약(프리미어)</small></div><svg class="i s"><use href="#i-right"/></svg></div>
+    <div class="opt"><i><svg class="i"><use href="#i-note"/></svg></i><div><b>창작곡 올리기</b><small>mp3 · 최대 180초 · 검수 뒤 등록</small></div><svg class="i s"><use href="#i-right"/></svg></div>
+    <div class="opt"><i><svg class="i"><use href="#i-play"/></svg></i><div><b>무대 영상 올리기</b><small>mp4 · 월드 무대 출전곡만</small></div><svg class="i s"><use href="#i-right"/></svg></div>
+   </div>
+   <span class="mk" style="left:6px;bottom:30px">2</span>
+   <p class="note">올린 곡 · 영상은 검수가 끝나야 차트 · 피드에 나와요</p>
+  </div>
+ </div>
+ <div class="tabbar"><div class="on"><svg class="i"><use href="#i-home-f"/></svg>홈</div><div><svg class="i"><use href="#i-search"/></svg>검색</div><div><svg class="i"><use href="#i-chart"/></svg>차트</div><div><svg class="i"><use href="#i-shorts"/></svg>공연·숏츠</div><div><svg class="i"><use href="#i-lib"/></svg>보관함</div></div>
+</div>
+<div>
+<span class="num">SCREEN 12</span>
+<h2>만들기 시트 — 위 「+」 하나로</h2>
+<p class="ref">참조: 유튜브 「만들기(+)」 시트 — 숏츠 · 동영상 업로드 · 라이브를 한 시트에</p>
+<ol class="spec">
+<li><span class="n">1</span><div><b>만들기 4가지</b><p>숏츠 만들기(내 아이돌 모션샷 · 컷씬 편집) · 컷씬 MV 올리기(게임에서 만든 MV, 프리미어 예약) · 창작곡 올리기(mp3 180초) · 무대 영상 올리기(외부 mp4는 월드만). 지금 기획의 업로드 규칙 그대로.</p></div></li>
+<li><span class="n">2</span><div><b>검수 안내</b><p>올린 것은 검수 중 → 등록 완료 / 반려됨. 등록 완료만 차트 · 피드에 오른다. 진행 상태는 보관함 › 내 업로드.</p></div></li>
+</ol>
+<div class="drive"><h3>구동</h3>
+<table class="tbl">
+<tr><td>입구</td><td>홈 위 「+」 · 숏츠 오른쪽 줄 「만들기」(그 곡이 미리 골라진 채로 숏츠 만들기).</td></tr>
+<tr><td>게임 연동</td><td>컷씬 MV · 창작곡은 게임 팀 · 곡 id에 묶여 올라간다(연동 #4 · #5). 게임 코어는 파일을 받지 않고 참조 id · 상태만 받는다.</td></tr>
+<tr><td>로그인 안 함</td><td>「+」 대신 로그인 버튼(SCREEN 11). 게임 팀이 없으면 숏츠 만들기만 열린다 <span class="ask">확인 필요</span></td></tr>
+</table></div>
+</div>
+</section>
+
+<!-- 디자인 기준 -->
+<div class="card" style="margin-top:12px">
+<h2>디자인 기준 (상업 출시용 최소 규칙)</h2>
+<div class="grid-2" style="margin:8px 0 0">
+<div>
+<table class="tbl">
+<tr><th>항목</th><th>값</th></tr>
+<tr><td>글꼴</td><td>Pretendard · 숫자는 고정폭 숫자(순위 · 시간 · 카운트다운)</td></tr>
+<tr><td>글자 크기</td><td>화면 제목 20 · 섹션 17 · 목록 제목 15 · 본문 14 · 보조 12.5 · 최소 11</td></tr>
+<tr><td>간격</td><td>4의 배수(4 · 8 · 12 · 16 · 20 · 24). 화면 좌우 여백 16</td></tr>
+<tr><td>모서리</td><td>칩 8 · 썸네일 12 · 카드 16 · 커버 아이콘 14~24 · 시트 24 · 버튼 둥근 끝</td></tr>
+<tr><td>누르는 영역</td><td>44×44 이상(아이콘 버튼 · 탭 · 칩 높이 34 + 위아래 여백)</td></tr>
+<tr><td>그림 비율</td><td>영상 16:9 · 숏츠 9:16 · 곡 커버 1:1 · 채널 배너 3:1 · 프로필 원형</td></tr>
+<tr><td>아이콘</td><td>선 굵기 1.9 · 24px 한 벌. 켜진 탭만 채운 모양</td></tr>
+<tr><td>화면 폭</td><td>휴대폰 393 기준 → 430까지 늘림 · 1440은 차트 2열 · 시청 화면 오른쪽 채팅 열</td></tr>
+</table>
+</div>
+<div>
+<div class="sw">
+<div><i style="background:#0e0e11"></i>배경 #0e0e11</div>
+<div><i style="background:#18181d"></i>면 #18181d</div>
+<div><i style="background:#222229"></i>면 2 #222229</div>
+<div><i style="background:#ff3d7f"></i>브랜드 #ff3d7f</div>
+<div><i style="background:#8a63ff"></i>창작 · 보조 #8a63ff</div>
+<div><i style="background:#ff1f3d"></i>실시간 #ff1f3d</div>
+<div><i style="background:#22c55e"></i>상승 · 완료 #22c55e</div>
+<div><i style="background:#ef4444"></i>하락 · 반려 #ef4444</div>
+<div><i style="background:#f5b93a"></i>응원 강조 #f5b93a</div>
+</div>
+<p style="margin-top:12px;color:var(--ink2);font-size:13px">어두운 화면 하나로 간다(영상 · 썸네일이 돋보임). 밝은 화면은 다음 단계에서 같은 토큰을 바꿔 만든다.</p>
+</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:18px">
+<h2>다음 단계</h2>
+<ol>
+<li>이 시안으로 화면 방향 확인</li>
+<li>기획서: 화면별 그림 + 설명 + 구동(누르면 어디로, 서버가 주는 값, 빈 값일 때 문구)</li>
+<li>본 앱 <code>src/tools/musicApp/</code> 배치 교체 — 데이터 · 투표 · 검수 흐름은 그대로, 화면만</li>
+<li>서버 자리 추가: 썸네일 주소 · 조회수 · 올린 시각 · 프리미어 시각 · 라이브 시청자 수 · 채팅</li>
+</ol>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>UI 스튜디오 · 전체 캔버스</title>
+ <link rel="stylesheet" href="/ui-studio/source/styles.css">
+ <link rel="stylesheet" href="/ui-studio/source/presentation.css">
+ <link rel="stylesheet" href="/ui-studio/source/overview.css">
+</head>
+<body class="overview-page" id="overview">
+ <header class="overview-header">
+  <div class="overview-context">
+   <a class="overview-brand" href="/ui-studio/" aria-label="UI 스튜디오 시작 화면">UI 스튜디오</a>
+   <span id="overview-project">프로젝트 확인 중</span><span class="overview-separator">/</span>
+   <strong id="overview-design">설계 읽는 중…</strong>
+   <details class="overview-management">
+    <summary aria-label="프로젝트와 설계 관리">관리 ▾</summary>
+    <div class="overview-management-menu">
+     <button type="button" id="overview-projects">프로젝트 폴더 열기</button>
+     <label for="overview-design-select">저장 설계</label>
+     <select id="overview-design-select" aria-label="저장 설계 선택" disabled></select>
+     <button type="button" id="overview-design-open" disabled>선택 설계 열기</button>
+     <button type="button" id="overview-refresh">저장 설계 다시 읽기</button>
+     <button type="button" id="overview-manual">사용 설명서</button>
+    </div>
+   </details>
+  </div>
+  <div class="overview-toolbar">
+   <div class="overview-current"><strong>전체 캔버스</strong><span class="overview-separator">/</span><span id="overview-current-screen">화면 선택</span></div>
+   <div class="overview-toolbar-options">
+    <label class="overview-control">표현<select id="overview-presentation" aria-label="제작 표현" disabled><option value="ui">본UI</option></select></label>
+    <label class="overview-control">보기<select id="overview-layout" aria-label="캔버스 보기" disabled><option value="grid">정렬 · 5열</option><option value="flow">연결</option></select></label>
+    <div class="overview-zoom"><button type="button" id="overview-zoom-out" aria-label="캔버스 축소" disabled>−</button><output id="overview-zoom-value" aria-label="캔버스 확대율">100%</output><button type="button" id="overview-zoom-in" aria-label="캔버스 확대" disabled>+</button><button type="button" id="overview-fit" disabled>맞춤</button></div>
+    <a id="overview-preview" class="overview-link" target="_blank" rel="noopener" aria-disabled="true">미리보기 ↗</a>
+    <a id="overview-detail" class="overview-link overview-primary" aria-disabled="true">상세 편집 →</a>
+   </div>
+  </div>
+ </header>
+ <main class="overview-workspace">
+  <aside class="overview-screen-panel" aria-label="화면 목록">
+   <h2>화면 <span id="overview-count">0</span></h2>
+   <nav id="overview-screens" aria-label="저장된 화면"></nav>
+  </aside>
+  <section class="overview-canvas-area" aria-label="전체 화면 캔버스">
+   <div id="overview-viewport" tabindex="0" aria-label="전체 화면 캔버스 · 스크롤로 이동, Ctrl 또는 ⌘와 휠로 확대">
+    <div id="overview-stage"><svg id="overview-edges" aria-hidden="true" focusable="false"></svg><div id="overview-layer"></div></div>
+   </div>
+   <p id="overview-empty">저장된 화면을 읽는 중입니다…</p>
+   <div id="overview-status" role="status" aria-live="polite">저장 설계 읽는 중…</div>
+  </section>
+  <aside class="overview-description" aria-label="선택 화면 설명">
+   <h2 id="overview-selected-name">화면 설명</h2>
+   <p id="overview-purpose">화면을 선택하면 설명과 실제 연결을 볼 수 있습니다.</p>
+   <div id="overview-planning"></div>
+   <dl><div><dt>종류</dt><dd id="overview-kind">—</dd></div><div><dt>크기</dt><dd id="overview-size">—</dd></div></dl>
+   <h3>들어오는 연결</h3><ul id="overview-incoming"></ul>
+   <h3>나가는 연결</h3><ul id="overview-outgoing"></ul>
+  </aside>
+ </main>
+ <script type="module" src="/ui-studio/source/entry.mjs"></script>
+</body>
+</html>

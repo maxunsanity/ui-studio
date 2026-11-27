@@ -1,0 +1,1219 @@
+{
+  "version": 1,
+  "assetVersion": "v001",
+  "createdAtKST": "2026-11-17T00:02:31+09:00",
+  "author": "codex(단이)",
+  "status": "제안(검수 대기)",
+  "reference": {
+    "path": "docs/reference/monopoly-go/20261116-ten-screens/06_menu.png",
+    "size": [
+      296,
+      531
+    ],
+    "sha256": "72246016e6a26c9c9953131f6b20bd121f938dbf0a83fac4bacf30da7b103f4e",
+    "use": "Actual full reference viewed; no screenshot pixels copied"
+  },
+  "readOnlySavedDesign": {
+    "path": "samples/monopoly-go/ui-studio/designs/ux-gjs-0d80d7fe.json",
+    "revisionObserved": 90,
+    "sha256Observed": "33fbd0d3fee5eeda2738ce3ac67668989a0bc5ce10699a17a816e1c906ddb331",
+    "elementCounts": {
+      "Page_Board": 175,
+      "Page_Build_City": 78,
+      "Modal_Wins_QuickWins": 46,
+      "Page_Album_Sets": 74,
+      "Modal_Friends_Timeline": 87
+    },
+    "existingReuseReferences": {
+      "drawer-fill9": [
+        {
+          "screen": "common-1ea9535b-40a5-4941-a33b-57bf7b381aea",
+          "element": "element-7173ad88-7bec-42c6-940c-01ead9054ea2-background",
+          "name": "BG_Friends_Panel"
+        }
+      ],
+      "drawer-leaf-upper-left": [
+        {
+          "screen": "common-1ea9535b-40a5-4941-a33b-57bf7b381aea",
+          "element": "element-48ec58fb-26b5-42e6-8e2a-6feb33b5ce4c",
+          "name": "Img_Friends_Panel_LeafLeft"
+        }
+      ],
+      "drawer-leaf-lower": [
+        {
+          "screen": "common-1ea9535b-40a5-4941-a33b-57bf7b381aea",
+          "element": "element-f169f66e-ee03-41d3-9f34-f92821997455",
+          "name": "Img_Friends_Panel_LeafRight"
+        }
+      ],
+      "daily-treats-calendar": [
+        {
+          "screen": "common-1ea9535b-40a5-4941-a33b-57bf7b381aea",
+          "element": "element-094d0ff1-5527-449f-acbd-a002f10ca125",
+          "name": "Img_Friends_Activity04_Type"
+        }
+      ],
+      "shop": [
+        {
+          "screen": "main",
+          "element": "element-9b0ec3e6-db01-426b-aacb-b1ec2e28bd7d",
+          "name": "Img_Event_Shop"
+        }
+      ]
+    }
+  },
+  "observations": [
+    "Right ivory drawer, nine menu rows, white edge and separate icon/text/divider/badge roles.",
+    "Source ornaments are visible at upper-left and lower-left. Parent asked upper-left/lower-right placement; preview uses requested placement and does not label it as source observation.",
+    "SHOP and DAILY TREATS icons match existing prepared shop/calendar concepts.",
+    "BOARD REPORT exclamation is visible in source; it is deliberately a separate native label, not part of the new circle.",
+    "GO!CHAT is a white bubble with green outline and three green dots; its red notification is separate."
+  ],
+  "creation": {
+    "method": "New SVG geometric artwork plus Pillow4x supersampling/LANCZOS raster masters; decoded production used for contact preview",
+    "dependencies": "Existing Pillow only; no installation",
+    "sourcePreservation": "SVG+PNG retained",
+    "sourceRendererEquivalence": "SVG parses; independent browser SVG raster equality not checked",
+    "castShadow": "None baked; separate parent engine effects"
+  },
+  "reuse": [
+    {
+      "menuRole": "drawer-fill9",
+      "existingName": "common_friends_panel-fill9_normal_v001",
+      "size": [
+        128,
+        96
+      ],
+      "assembly": {
+        "nineSlice": {
+          "mode": "9",
+          "sourceSize": [
+            128,
+            96
+          ],
+          "slices": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "edges": [
+            24,
+            24,
+            24,
+            24
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            74,
+            42
+          ],
+          "minimumTargetForPositiveCenter": [
+            49,
+            49
+          ],
+          "crop": "none; preserve full source and transparent corners"
+        },
+        "stack": "below matching frame9 and all native text/content",
+        "fill": "#f4f1df"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-fill9_normal_v001.svg",
+          "bytes": 158,
+          "sha256": "5eef50c413fb441368d05dd8364785468b69f33eec99a6444690d556f23759b1"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-fill9_normal_v001.png",
+          "bytes": 1738,
+          "sha256": "7b3bf0dfcce44186cee2cfa0767692d2a280433a3b45d12caa6eea1070ffd62e"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_panel-fill9_normal_v001.webp",
+          "bytes": 516,
+          "sha256": "fba39b66be7c8aaad837813541852d0498145b16e844505706d1b5f2bf93c74c"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_panel-fill9_normal_v001.webp",
+          "bytes": 516,
+          "sha256": "fba39b66be7c8aaad837813541852d0498145b16e844505706d1b5f2bf93c74c"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_panel-fill9_normal_v001.webp",
+      "reason": "Same ivory panel-background role and compatible transparent corner geometry; reuse rather than duplicate solid fill.",
+      "verifiedSHA": "fba39b66be7c8aaad837813541852d0498145b16e844505706d1b5f2bf93c74c",
+      "copiedOrModified": false
+    },
+    {
+      "menuRole": "drawer-leaf-upper-left",
+      "existingName": "common_friends_panel-leaf-left_normal_v001",
+      "size": [
+        64,
+        64
+      ],
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          64,
+          64
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "stack": "separate decoration near panel top left corner; never bake into flexible panel"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-leaf-left_normal_v001.svg",
+          "bytes": 679,
+          "sha256": "a2e1c34e2bee9eea3770d54a9405f778baa56339e270de58a13e3f262d5699cc"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-leaf-left_normal_v001.png",
+          "bytes": 2125,
+          "sha256": "6d063fe39559d37d6a022cb2ccf883468f1ba277888e5d1c9d5d8359aaacb2fd"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_panel-leaf-left_normal_v001.webp",
+          "bytes": 1124,
+          "sha256": "2b142a601ce100f4216d3d35557edef4e7b4c28b63b6aeb1fa2ecd47f6f21c59"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_panel-leaf-left_normal_v001.webp",
+          "bytes": 1124,
+          "sha256": "2b142a601ce100f4216d3d35557edef4e7b4c28b63b6aeb1fa2ecd47f6f21c59"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_panel-leaf-left_normal_v001.webp",
+      "reason": "Same small ivory/gold corner leaf decoration; fixed artwork, keep separate from flexible frame.",
+      "verifiedSHA": "2b142a601ce100f4216d3d35557edef4e7b4c28b63b6aeb1fa2ecd47f6f21c59",
+      "copiedOrModified": false
+    },
+    {
+      "menuRole": "drawer-leaf-lower",
+      "existingName": "common_friends_panel-leaf-right_normal_v001",
+      "size": [
+        64,
+        64
+      ],
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          64,
+          64
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "stack": "separate decoration near panel top right corner; never bake into flexible panel"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-leaf-right_normal_v001.svg",
+          "bytes": 680,
+          "sha256": "d544be31bdb61789a4b396c23dbe0faa83aefe26bc97b827fedc1cd567a65771"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_panel-leaf-right_normal_v001.png",
+          "bytes": 2127,
+          "sha256": "f418cac3fa547364fc139e1a8becf23a570832d253d57a07dcffba1186417c73"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_panel-leaf-right_normal_v001.webp",
+          "bytes": 1118,
+          "sha256": "94515640796dd1f9e85f77d7f846b94765a44aff0b1ca3d72212321862f58c2f"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_panel-leaf-right_normal_v001.webp",
+          "bytes": 1118,
+          "sha256": "94515640796dd1f9e85f77d7f846b94765a44aff0b1ca3d72212321862f58c2f"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_panel-leaf-right_normal_v001.webp",
+      "reason": "Same corner leaf role; parent owns lower-left observed vs lower-right requested placement.",
+      "verifiedSHA": "94515640796dd1f9e85f77d7f846b94765a44aff0b1ca3d72212321862f58c2f",
+      "copiedOrModified": false
+    },
+    {
+      "menuRole": "daily-treats-calendar",
+      "existingName": "common_friends_pictogram-calendar-red_normal_v001",
+      "size": [
+        80,
+        96
+      ],
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          80,
+          96
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "stack": "small row-end blank calendar pictogram"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_pictogram-calendar-red_normal_v001.svg",
+          "bytes": 654,
+          "sha256": "3e1c4f1113826ef837aef3580efc9f1356ad8d4f2e4e8d64f9b7414a636ae515"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/friends-ui/v001/common_friends_pictogram-calendar-red_normal_v001.png",
+          "bytes": 2035,
+          "sha256": "532b029acedb743cf70290aba117bfce124f91312f9ec2d05bab9bbeaa1a08bb"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/friends-ui/common_friends_pictogram-calendar-red_normal_v001.webp",
+          "bytes": 1260,
+          "sha256": "0c732602c7741ededf31d287d829c77a4f06269988248d45f755526d7e853b2b"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/friends-ui/common_friends_pictogram-calendar-red_normal_v001.webp",
+          "bytes": 1260,
+          "sha256": "0c732602c7741ededf31d287d829c77a4f06269988248d45f755526d7e853b2b"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/friends-ui/common_friends_pictogram-calendar-red_normal_v001.webp",
+      "reason": "Same red-headed blank calendar role; date/count stays separate and no digits are invented.",
+      "verifiedSHA": "0c732602c7741ededf31d287d829c77a4f06269988248d45f755526d7e853b2b",
+      "copiedOrModified": false
+    },
+    {
+      "menuRole": "shop",
+      "existingName": "common_main-shop_icon_normal_v001",
+      "size": [
+        402,
+        391
+      ],
+      "files": {
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/main-events/common_main-shop_icon_normal_v001.webp",
+          "bytes": 161420,
+          "sha256": "ddcbcd6cd3688e40d1636d5fe5a001636dcebee8d93566f9a629c8fb6df58667"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/main-events/common_main-shop_icon_normal_v001.webp",
+          "bytes": 161420,
+          "sha256": "ddcbcd6cd3688e40d1636d5fe5a001636dcebee8d93566f9a629c8fb6df58667"
+        }
+      },
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          402,
+          391
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "preserveAspectRatio": true,
+        "recommendedTarget": [
+          48,
+          48
+        ]
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/main-events/common_main-shop_icon_normal_v001.webp",
+      "reason": "Same orange-awning shop icon role; existing r90 Main registered image uses this exact production SHA.",
+      "verifiedSHA": "ddcbcd6cd3688e40d1636d5fe5a001636dcebee8d93566f9a629c8fb6df58667",
+      "copiedOrModified": false,
+      "observed": "상점의 주황/흰 차양 아래 주사위와 파랑·초록·보라 팩을 관찰.",
+      "inferred": "금빛 카운터와 목재 받침·입체 재질은 새 그림 제작 해석."
+    }
+  ],
+  "assets": [
+    {
+      "name": "common_menu_networth-gear-star-fixed_normal_v001",
+      "role": "networth-gear-star-fixed",
+      "size": [
+        96,
+        96
+      ],
+      "observed": "NET WORTH row has a blue gear/sunburst with a yellow star center.",
+      "inferred": "Exact teeth count, solid geometry, palette and highlight are newly drawn interpretations; no value or title baked.",
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          96,
+          96
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "preserveAspectRatio": true,
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "recommendedTarget": [
+          48,
+          48
+        ]
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_networth-gear-star-fixed_normal_v001.svg",
+          "bytes": 1810,
+          "sha256": "d1064c2dddebdd2952119d949111d85602f43757154f28f9b177951fa403ef1e"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_networth-gear-star-fixed_normal_v001.png",
+          "bytes": 11980,
+          "sha256": "cdd9b710ac5fdff6bac564b1949b77655c6445790f3cc640681ce02d56b79d7e"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/menu-ui/common_menu_networth-gear-star-fixed_normal_v001.webp",
+          "bytes": 8566,
+          "sha256": "4f1adecb650e9c3b830c4aeb355d6c78fc52ec1b91735c13f4e42f061587e46e"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/menu-ui/common_menu_networth-gear-star-fixed_normal_v001.webp",
+          "bytes": 8566,
+          "sha256": "4f1adecb650e9c3b830c4aeb355d6c78fc52ec1b91735c13f4e42f061587e46e"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/menu-ui/common_menu_networth-gear-star-fixed_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          3,
+          3,
+          93,
+          94
+        ],
+        "bboxAlpha128": [
+          4,
+          3,
+          93,
+          93
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "bakedNotifications": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          96,
+          96
+        ]
+      },
+      "status": "제안(검수 대기); resource preparation only, not registered or UI-applied"
+    },
+    {
+      "name": "common_menu_showroom-hat-pedestal-fixed_normal_v001",
+      "role": "showroom-hat-pedestal-fixed",
+      "size": [
+        96,
+        96
+      ],
+      "observed": "MY SHOWROOM row shows a dark blue/gray top hat on a blue round pedestal.",
+      "inferred": "New simplified 2D cylinder/ellipse construction; not a copy of source pixels.",
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          96,
+          96
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "preserveAspectRatio": true,
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "recommendedTarget": [
+          48,
+          48
+        ]
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_showroom-hat-pedestal-fixed_normal_v001.svg",
+          "bytes": 926,
+          "sha256": "af2e3db0f4c6738bab761697966796533c69cf2aef1abb5420b9da9da2ff2633"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_showroom-hat-pedestal-fixed_normal_v001.png",
+          "bytes": 5391,
+          "sha256": "3c61d049dcf5b2715ffd5a49f00a33ffcfa7b4410cfabf7b7ce0335bd996f2a6"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/menu-ui/common_menu_showroom-hat-pedestal-fixed_normal_v001.webp",
+          "bytes": 3756,
+          "sha256": "40ae0a48a21f6f4fa8076098f2cca91e9081e4887465f446aceb800e98879968"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/menu-ui/common_menu_showroom-hat-pedestal-fixed_normal_v001.webp",
+          "bytes": 3756,
+          "sha256": "40ae0a48a21f6f4fa8076098f2cca91e9081e4887465f446aceb800e98879968"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/menu-ui/common_menu_showroom-hat-pedestal-fixed_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          14,
+          7,
+          82,
+          92
+        ],
+        "bboxAlpha128": [
+          15,
+          8,
+          81,
+          91
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "bakedNotifications": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          96,
+          96
+        ]
+      },
+      "status": "제안(검수 대기); resource preparation only, not registered or UI-applied"
+    },
+    {
+      "name": "common_menu_map-folded-yellow-fixed_normal_v001",
+      "role": "map-folded-yellow-fixed",
+      "size": [
+        96,
+        96
+      ],
+      "observed": "MAP row has a yellow folded map with a small reddish detail.",
+      "inferred": "Three paper panels and a red pin-shaped mark are drawing choices inferred from the small reference.",
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          96,
+          96
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "preserveAspectRatio": true,
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "recommendedTarget": [
+          48,
+          48
+        ]
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_map-folded-yellow-fixed_normal_v001.svg",
+          "bytes": 1091,
+          "sha256": "fb5e0ad56023d324fa5800db0373e0164b1047892be58e905c449cb3a70dad8d"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_map-folded-yellow-fixed_normal_v001.png",
+          "bytes": 6895,
+          "sha256": "e3bb25126bae9f1ae9734f937afd914387d71f81fd999497f3fac9207d8cd566"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/menu-ui/common_menu_map-folded-yellow-fixed_normal_v001.webp",
+          "bytes": 4762,
+          "sha256": "cdacfa8d9ac56472e80b46eba3e7877149acb2f6f5145cfcba72a7de313392fc"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/menu-ui/common_menu_map-folded-yellow-fixed_normal_v001.webp",
+          "bytes": 4762,
+          "sha256": "cdacfa8d9ac56472e80b46eba3e7877149acb2f6f5145cfcba72a7de313392fc"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/menu-ui/common_menu_map-folded-yellow-fixed_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          7,
+          8,
+          88,
+          90
+        ],
+        "bboxAlpha128": [
+          8,
+          8,
+          87,
+          89
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "bakedNotifications": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          96,
+          96
+        ]
+      },
+      "status": "제안(검수 대기); resource preparation only, not registered or UI-applied"
+    },
+    {
+      "name": "common_menu_boardreport-circle-fixed_normal_v001",
+      "role": "boardreport-circle-fixed",
+      "size": [
+        96,
+        96
+      ],
+      "observed": "BOARD REPORT row has a blue-gray circular information badge with a white exclamation.",
+      "inferred": "Circle/rim is newly drawn; exclamation intentionally separated as native text.",
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          96,
+          96
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "preserveAspectRatio": true,
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "recommendedTarget": [
+          48,
+          48
+        ],
+        "separateNativeLabel": {
+          "text": "!",
+          "layout": "center in same48x48 slot",
+          "fontPolicy": "Parent chooses native typography; original font unverified."
+        }
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_boardreport-circle-fixed_normal_v001.svg",
+          "bytes": 285,
+          "sha256": "50b8037df3abdc8f87ef0106e45d546d8e22d8dfbfb635e8168082b8a2d0cdcc"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_boardreport-circle-fixed_normal_v001.png",
+          "bytes": 5608,
+          "sha256": "ffcaaae3de86053800e2db6184e6bd06d3c4e6d74c72cce9519816d88cada3d5"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/menu-ui/common_menu_boardreport-circle-fixed_normal_v001.webp",
+          "bytes": 2316,
+          "sha256": "e26efc62029ce44144f2b64c151016914437e40c9c02afbb19dcd3f9503e2cb0"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/menu-ui/common_menu_boardreport-circle-fixed_normal_v001.webp",
+          "bytes": 2316,
+          "sha256": "e26efc62029ce44144f2b64c151016914437e40c9c02afbb19dcd3f9503e2cb0"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/menu-ui/common_menu_boardreport-circle-fixed_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          6,
+          6,
+          90,
+          90
+        ],
+        "bboxAlpha128": [
+          7,
+          7,
+          89,
+          89
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "bakedNotifications": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          96,
+          96
+        ]
+      },
+      "status": "제안(검수 대기); resource preparation only, not registered or UI-applied"
+    },
+    {
+      "name": "common_menu_join-thumbsup-fixed_normal_v001",
+      "role": "join-thumbsup-fixed",
+      "size": [
+        96,
+        96
+      ],
+      "observed": "JOIN US! row uses a beige thumbs-up hand with a gray/blue cuff.",
+      "inferred": "Hand contour, finger separations and cuff are simplified new geometric drawing choices.",
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          96,
+          96
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "preserveAspectRatio": true,
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "recommendedTarget": [
+          48,
+          48
+        ]
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_join-thumbsup-fixed_normal_v001.svg",
+          "bytes": 1226,
+          "sha256": "2ee4606ab49d5e63b63f45fc8f20eff24ff57e836dc219f796f0b15c2abbf38b"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_join-thumbsup-fixed_normal_v001.png",
+          "bytes": 4976,
+          "sha256": "dc7e4766c3be2172447d602ea75af7be5451be89cbe5332aaff483c818f342fd"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/menu-ui/common_menu_join-thumbsup-fixed_normal_v001.webp",
+          "bytes": 3424,
+          "sha256": "9b0f36f6747adfda2f4552d4230ca137bdc6386fe88bf597a2b36cb8d08cdbd6"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/menu-ui/common_menu_join-thumbsup-fixed_normal_v001.webp",
+          "bytes": 3424,
+          "sha256": "9b0f36f6747adfda2f4552d4230ca137bdc6386fe88bf597a2b36cb8d08cdbd6"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/menu-ui/common_menu_join-thumbsup-fixed_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          5,
+          5,
+          90,
+          88
+        ],
+        "bboxAlpha128": [
+          6,
+          5,
+          89,
+          87
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "bakedNotifications": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          96,
+          96
+        ]
+      },
+      "status": "제안(검수 대기); resource preparation only, not registered or UI-applied"
+    },
+    {
+      "name": "common_menu_settings-gear-fixed_normal_v001",
+      "role": "settings-gear-fixed",
+      "size": [
+        96,
+        96
+      ],
+      "observed": "SETTINGS row has a gray gear with a pale circular center.",
+      "inferred": "Exact tooth count and neutral blue-gray palette are new drawing choices.",
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          96,
+          96
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "preserveAspectRatio": true,
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "recommendedTarget": [
+          48,
+          48
+        ]
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_settings-gear-fixed_normal_v001.svg",
+          "bytes": 1301,
+          "sha256": "3642f16208c11d315389f64eebe9f6dba3146a818aa164f16e3cbe2cc10a094c"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_settings-gear-fixed_normal_v001.png",
+          "bytes": 8108,
+          "sha256": "71d7499dececb58b67c14135efde064531a7714dcb22fd90562f48c0850c714e"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/menu-ui/common_menu_settings-gear-fixed_normal_v001.webp",
+          "bytes": 4222,
+          "sha256": "8c01df11b28ef47c8fdbf0e7de84f22a2a9342696bed8d471a6c445eb531db64"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/menu-ui/common_menu_settings-gear-fixed_normal_v001.webp",
+          "bytes": 4222,
+          "sha256": "8c01df11b28ef47c8fdbf0e7de84f22a2a9342696bed8d471a6c445eb531db64"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/menu-ui/common_menu_settings-gear-fixed_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          2,
+          3,
+          94,
+          94
+        ],
+        "bboxAlpha128": [
+          3,
+          3,
+          93,
+          93
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "bakedNotifications": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          96,
+          96
+        ]
+      },
+      "status": "제안(검수 대기); resource preparation only, not registered or UI-applied"
+    },
+    {
+      "name": "common_menu_gochat-bubble-fixed_normal_v001",
+      "role": "gochat-bubble-fixed",
+      "size": [
+        96,
+        96
+      ],
+      "observed": "GO!CHAT row shows a white chat bubble with green outline/three green dots; red notification is separate.",
+      "inferred": "Tail contour, green colors and dot positions are newly drawn geometry; no emoji/font baked.",
+      "assembly": {
+        "mode": "fixed-image",
+        "sourceSize": [
+          96,
+          96
+        ],
+        "objectFit": "contain",
+        "noSlice": true,
+        "preserveAspectRatio": true,
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "recommendedTarget": [
+          48,
+          48
+        ]
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_gochat-bubble-fixed_normal_v001.svg",
+          "bytes": 564,
+          "sha256": "4eb7f6a857c9a8fa4cca90b822df68c3ce453e8570cbd06896270eeaecc5b321"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_gochat-bubble-fixed_normal_v001.png",
+          "bytes": 3993,
+          "sha256": "5b9b208b32327e4b2bd0d6338b3a30ee9a4cb491e7554a9ff572aec99648899d"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/menu-ui/common_menu_gochat-bubble-fixed_normal_v001.webp",
+          "bytes": 1906,
+          "sha256": "36697c1e33fdcd285a52a5f0e037ecbe4f0c5bd77b839772699ac655496c4c10"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/menu-ui/common_menu_gochat-bubble-fixed_normal_v001.webp",
+          "bytes": 1906,
+          "sha256": "36697c1e33fdcd285a52a5f0e037ecbe4f0c5bd77b839772699ac655496c4c10"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/menu-ui/common_menu_gochat-bubble-fixed_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 255,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          7,
+          12,
+          89,
+          91
+        ],
+        "bboxAlpha128": [
+          8,
+          13,
+          88,
+          91
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "bakedNotifications": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          96,
+          96
+        ]
+      },
+      "status": "제안(검수 대기); resource preparation only, not registered or UI-applied"
+    },
+    {
+      "name": "common_menu_drawer-white-frame9_normal_v001",
+      "role": "drawer-white-frame9",
+      "size": [
+        128,
+        96
+      ],
+      "observed": "Drawer has ivory interior, white perimeter and rounded corners.",
+      "inferred": "Thin white3.5px source rim matches existing fill geometry; source grain is not synthesized.",
+      "assembly": {
+        "nineSlice": {
+          "mode": "9",
+          "sourceSize": [
+            128,
+            96
+          ],
+          "slices": [
+            27,
+            27,
+            27,
+            27
+          ],
+          "edges": [
+            24,
+            24,
+            24,
+            24
+          ],
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "order": "top right bottom left",
+          "repeat": "stretch",
+          "sourceCenter": [
+            74,
+            42
+          ],
+          "minimumTargetForPositiveCenter": [
+            49,
+            49
+          ],
+          "crop": "none; preserve full source and transparent corners"
+        },
+        "recommendedTarget": [
+          342,
+          868
+        ],
+        "stack": "same rect above reused Friends ivory fill9; native text/icons and engine shadow separate",
+        "contentInsetPolicy": "padding0; parent positions children independently"
+      },
+      "files": {
+        "svgMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_drawer-white-frame9_normal_v001.svg",
+          "bytes": 340,
+          "sha256": "8c4bc25b596f21786b25e33c16a2981a0e380277b4b8a5851c0215e4cec83259"
+        },
+        "pngRasterMaster": {
+          "path": "samples/monopoly-go/ui-studio/assets/authoring/menu-ui/v001/common_menu_drawer-white-frame9_normal_v001.png",
+          "bytes": 1940,
+          "sha256": "95cbfdf841355e05779a99bb921b9a71ee58881106c63ce04f910d4ecddb953b"
+        },
+        "production": {
+          "path": "samples/monopoly-go/ui-studio/assets/production/menu-ui/common_menu_drawer-white-frame9_normal_v001.webp",
+          "bytes": 606,
+          "sha256": "6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a"
+        },
+        "importMirror": {
+          "path": "src/tools/uxStudio/assets/import-staging/menu-ui/common_menu_drawer-white-frame9_normal_v001.webp",
+          "bytes": 606,
+          "sha256": "6f02da9ecc27c6db3efb379e0006a44017d65156991ff102b260a8a9c070500a"
+        }
+      },
+      "importPath": "/ui-studio/source/assets/import-staging/menu-ui/common_menu_drawer-white-frame9_normal_v001.webp",
+      "encoding": {
+        "format": "WEBP",
+        "lossless": true,
+        "method": 6,
+        "exact": true,
+        "decodedRGBAEqualsPNG": true
+      },
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "center": 0,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "bboxAlpha16": [
+          0,
+          0,
+          128,
+          96
+        ],
+        "bboxAlpha128": [
+          0,
+          0,
+          128,
+          96
+        ]
+      },
+      "sourceContract": {
+        "referencePixelsCopied": false,
+        "bakedText": false,
+        "bakedNumbers": false,
+        "bakedNotifications": false,
+        "externalCastShadow": false,
+        "defaultRuntimeShadow": {
+          "enabled": false
+        },
+        "sourceRect": [
+          0,
+          0,
+          128,
+          96
+        ]
+      },
+      "status": "제안(검수 대기); resource preparation only, not registered or UI-applied"
+    }
+  ],
+  "assemblyRules": [
+    "New glyphs source96x96, fixed48x48 contain, preserve aspect ratio. Existing shop/calendar keep original dimensions and contain in same slot.",
+    "Drawer uses existing Friends panel-fill9 and new menu white-frame9, both source128x96/slices27/edges24/padding0; same target rect, minimum49x49.",
+    "Leaves remain separate fixed images. Parent owns placement and any clipping.",
+    "Use native panel separator with proposed color#d8d3c2; no separator image created.",
+    "Menu labels/name, BOARD REPORT !, notifications, input and shadows stay separate.",
+    "Prepared files and reuse contract do not mean editor registration, UI assembly, gameplay connection or visual approval."
+  ],
+  "checks": {
+    "newAssetCount": 8,
+    "reusedResourceCount": 5,
+    "eachWebPAtMost300000Bytes": true,
+    "maximumNewWebPBytes": 8566,
+    "allSVGParse": true,
+    "decodedWebPRGBAEqualsPNG": true,
+    "productionMirrorSHAEqual": true,
+    "allNewCornerAlpha0": true,
+    "frameCenterAlpha0": true,
+    "native9SourceAndTargetCentersPositive": true,
+    "textElementsInSVG": 0,
+    "mainUIAssetsAndManifestSHAUnchanged": true,
+    "mainChangedPathsObserved": [],
+    "contactSheet": {
+      "path": "_작업/codex/ux-studio/menu-ui/menu-ui-v001-contact-sheet.png",
+      "bytes": 184208,
+      "sha256": "4f454fe44e4b9c6bacc4482c98707c40e87b0a73724503a3811b47d434264c6a"
+    },
+    "visualQA": "pending local decoded production contact inspection",
+    "productBrowserQA": false,
+    "registration": null,
+    "UIApplied": false
+  },
+  "backup": {
+    "path": "docs/planning/_backup/20261117_단이/000231_menu_ui_assets",
+    "newFilesOnly": true,
+    "mainUIProtectedSHAInventory": "main-ui-readonly-sha256.json"
+  },
+  "registration": null,
+  "UIApplied": false,
+  "visualApproval": false,
+  "limitations": [
+    "Source is a small raster reference; exact original glyph shape/font/pixel equality is not claimed.",
+    "No product source/tests/design JSON/UI/guide/shared report/STATUS/server/build/7007/protected file/secret changes or access.",
+    "No menu destinations or game functionality invented."
+  ]
+}

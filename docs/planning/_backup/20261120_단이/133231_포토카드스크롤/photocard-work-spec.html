@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>포토카드 · 2차 작업 명세</title>
+<style>
+:root{font:15px/1.65 system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;color:#24313d;background:#f4f6f8}*{box-sizing:border-box}main{max-width:1040px;margin:24px auto;padding:0 18px 40px}h1{margin:.25em 0;font-size:clamp(23px,4vw,35px)}h2{margin:0 0 10px;font-size:20px}a{color:#554399}nav{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}section{border:1px solid #d3dce4;border-radius:10px;background:white;margin:12px 0;padding:16px;scroll-margin-top:12px}section:target{outline:2px solid #6654bc}img{width:100%;height:auto;border:1px solid #d3dce4}figure{margin:0}figcaption{margin-bottom:8px;font-weight:650}.phone{max-width:390px}table{border-collapse:collapse;width:100%}th,td{padding:7px 9px;border-bottom:1px solid #dce2e7;text-align:left;vertical-align:top}.muted{color:#586676}p{margin:0 0 .65em}
+</style>
+<main>
+<header>
+<h1>포토카드 · 2차 작업 명세</h1>
+<p class="muted">케이팝몬스터즈 · 검수안 · 390 × 844</p>
+<nav aria-label="포토카드 명세 목차">
+<a href="../kpop-planning/index.html?doc=P265#photocard">UI 기획서</a>
+<a href="#overview">캔버스</a><a href="#layout">1차 영역</a><a href="#main-list">메인 목록</a><a href="#person">사람 보기</a><a href="#team">팀 보기</a><a href="#business">명함집</a><a href="#common">공통 창</a><a href="#states">동작 상태</a>
+</nav>
+</header>
+<section id="overview">
+<h2>전체 캔버스</h2>
+<p>목록·아이돌·스태프·팀·명함집을 대표 화면으로 두고, 반복되는 상태는 부품 보드에 모았습니다.</p>
+<p><a href="/ui-studio/canvas.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6b577b09&amp;screen=list&amp;view=detailed-wireframe&amp;layout=grid" target="_blank" rel="noopener">포토카드 전체 캔버스 열기</a> · <a href="/ui-studio/preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=import-6b577b09" target="_blank" rel="noopener">동작 미리보기</a></p>
+</section>
+<section id="layout">
+<h2>1차 · 와이어프레임</h2>
+<table><tr><th>영역</th><th>기준</th></tr><tr><td>제목 줄</td><td>y 0~51</td></tr><tr><td>책갈피와 본문</td><td>y 51~698. 목록은 분류 책갈피와 배치 현황, 사람 보기는 능력과 카드 책갈피</td></tr><tr><td>현재 화면 버튼</td><td>y 704~766. 목록은 두 버튼, 사람 보기와 명함집은 한 버튼</td></tr><tr><td>하단 메뉴</td><td>y 774~844. HUD와 같은 6칸과 흑백 아이콘</td></tr></table>
+</section>
+<section id="main-list">
+<h2>2차 · 메인 목록</h2>
+<figure class="phone"><figcaption>전체 탭 · 배치 6칸·2명·1명</figcaption><img src="main-overview-current.png" alt="아이돌 6슬롯, 스태프 2명, 팬클럽 회장 1명이 보이는 흑백 메인 시안"></figure>
+<p>아이돌은 3열 2줄로 빈 슬롯도 표시합니다. 스태프는 대표 2명과 전체 배치 수를 보여 줍니다. 팬클럽 회장을 누르면 상세 화면이 열립니다. 하단의 포토카드 팩과 명함집은 각각 보유한 팩과 명함을 여는 입구입니다.</p>
+<p class="muted">이미지의 인원·카드 수는 예시입니다. 저장판에서는 메인과 회장 상세의 카드 수를 0/12로 맞췄습니다. 분류 탭과 스태프 전체 보기는 배치 기준을 표시한 상태입니다.</p>
+</section>
+<section id="person">
+<h2>2차 · 사람 보기</h2>
+<figure class="phone"><figcaption>아이돌 · 능력 화면</figcaption><img src="person-current.jpg" alt="어우동 스타일 복셀 캐릭터와 능력 줄을 중심으로 배치한 현재 시안"></figure>
+<p>제안서 카드의 어우동·논개·이날치 복셀 표현을 기준으로 흑백 인물을 제작했습니다. 스태프와 회장 그림은 같은 화풍의 검수용 인물입니다. 얼굴을 가리지 않도록 능력 정보는 인물 영역 왼쪽, 대표 능력은 아래 띠에 둡니다.</p>
+<p>카드 책갈피는 4×3. 서로 다른 종류의 보유 수는 n/12, 중복은 ×n으로 구분합니다. 초상·아이콘·시스템 글꼴은 각각 편집할 수 있습니다.</p>
+</section>
+<section id="team">
+<h2>팀 보기</h2>
+<p>단체 그림, 팀 등급과 다음 등급, 6축, 멤버 타일 순입니다. 대표 멤버를 눌러 사람 보기로 이동한 뒤 뒤로를 누르면 팀으로 돌아옵니다.</p>
+</section>
+<section id="business">
+<h2>명함집</h2>
+<p>2×4 명함첩. 목록에서 열면 전체, 스태프의 교체에서 열면 같은 직업으로 들어갑니다. 명함 상세의 현재→교체 뒤 비교와 교체 확인은 공통 창으로 엽니다.</p>
+</section>
+<section id="common">
+<h2>공통 창과 리소스</h2>
+<table><tr><th>공통 규격</th><th>적용</th></tr><tr><td>창 프레임</td><td>폭 358. 제목은 좌측 상단, 닫기는 우측 상단, 동작 버튼은 하단.</td></tr><tr><td>9슬라이스</td><td>48 × 48 PNG. 원본 분할 11px, 화면 고정 폭 7px. 기본·초점/가리킴·눌림·선택·비활성.</td></tr><tr><td>재사용</td><td>카드 크게 보기, 팩·개봉 결과, 명함·스카우트·교체 확인, 공통 캐릭터 정보 연결 자리.</td></tr><tr><td>이미지와 글</td><td>회색 복셀 인물과 흑백 아이콘은 이미지. 화면 이름·상태와 수치 자리는 시스템 글꼴.</td></tr></table>
+</section>
+<section id="states">
+<h2>동작 상태</h2>
+<table><tr><th>상태</th><th>표시와 입력</th></tr>
+<tr><td>팩 보관함</td><td>3개 덱 × 3등급마다 이름·별 범위·보유 수를 표시합니다. 팩을 누르면 해당 팩의 내용 창이 열립니다.</td></tr>
+<tr><td>팩 0개</td><td>상세의 두 줄은 계속 보입니다. 열기 버튼에 보유 0개를 표시하고 입력을 막습니다.</td></tr>
+<tr><td>팩 1개 예시</td><td>기획사 고급 팩은 열 수 있으며 결과 창에서 남은 팩이 없어 「한 팩 더」가 비활성입니다.</td></tr>
+<tr><td>미보유 카드 · 06/12 예시</td><td>인물 그림만 23% 불투명도로 낮춥니다. 카드 제목·등급·효과·번호·얻는 곳은 그대로 읽힙니다.</td></tr></table>
+<p>확인한 흐름은 목록→사람→카드, 팀→멤버→팀 복귀, 스태프→직업별 명함집→교체 확인, 팩 보관함→내용→결과입니다.</p>
+<p>검수용 예시를 사용합니다. 실제 카드 보유, 팩 개봉·지급, 캐스팅·교체 처리와 수치는 연결 전입니다.</p>
+</section>
+</main>
+</html>

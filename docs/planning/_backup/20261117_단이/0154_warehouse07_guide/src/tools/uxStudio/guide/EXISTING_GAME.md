@@ -1,0 +1,261 @@
+# 기존 게임 변환과 독립 UI 작업 규칙
+가이드 판: 2026-11-17.17 · 제안(검수 대기)
+
+**현재 .17:** 문서 끝의 “Menu06 제작 기록 · .17 · r107 기준”과 [제작값](TOOL_SPEC.md#menu06-제작-기록--17--r107-기준)·[검수경계](PROGRESS.md#menu06-제작-기록--17--r107-기준)를 먼저 읽습니다. 최종Menu06 actual은 본체 후속append를 우선하며 .16 Main05/이전본문·프로젝트guide.4는 보존합니다.
+독립 정본 보정: 2026-11-16
+
+**현재 .16:** 문서 끝의 “메인05 조립 기록 · .16 · r76 중간 기준”과 [제작값](TOOL_SPEC.md#메인05-조립-기록--16--r76-중간-기준)·[미완료 경계](PROGRESS.md#메인05-조립-기록--16--r76-중간-기준)를 먼저 읽습니다. 아래 .15 이하의 현재/완료 표현은 당시 이력입니다. 본체 후속 append가 중간값을 보정하며 프로젝트 guide .4는 보존합니다.
+
+**현재 .15:** 문서 끝의 “친구 모달 실제 조립 추가 기록 · .15 · r72 기준”과 [제작값](TOOL_SPEC.md#친구-모달-실제-조립-추가-기록--15--r72-기준)·[검수 경계](PROGRESS.md#친구-모달-실제-조립-추가-기록--15--r72-기준)를 먼저 읽습니다. 아래 .14 이하의 최신/완료/다음 표현은 당시 이력이며 본체 후속 보고가 실제 검수를 보정합니다. 프로젝트 guide .4는 보존합니다.
+
+
+**최신 .13:** 문서 끝의 “승리 화면 조립 추가 기록”과 [제작 recipe](TOOL_SPEC.md), [검수 경계](PROGRESS.md)의 .13을 먼저 읽습니다. 아래 .12 이하의 “최신/진행 중”은 해당 판의 이력입니다. 기존 프로젝트 guide .4는 보존합니다.
+
+## 최신 안내 · .12 · r43
+
+공통 정본은2026-11-16.12입니다. 실제 저장본 ux-gjs-0d80d7fe r43은 기존메인63+신규짓기78부품·2페이지·navigate/Back2개입니다. [진척 맨 위의 .12](PROGRESS.md)와 [툴 기획서 끝의 짓기 제작 recipe](TOOL_SPEC.md)를 우선합니다. 아래 .11/r24·미등록·수정 중 문구는 당시 이력이며 최신 완료/미완료를 대신하지 않습니다. W/P/U/S0/4·10장 최종동등검수0/10·사용자 승인 없음, 기존 프로젝트guide.4는 보존합니다.
+
+## 최신 상태 바로보기 · .11 · r24
+
+최신 저장판은 ux-gjs-0d80d7fe **r24·1페이지63부품·0연결**입니다. 세 배지 이미지 자식의 “Img_Notification_BG 복사”를 “Img_Notification_BG”로 정리해 저장했습니다. 아래 r21/수정 중/재시험 예정 문구는 당시 이력이며, 최신 사실과 지원 경계는 [PROGRESS 맨 위의 r24 마감 보정](PROGRESS.md)을 우선합니다. 공통판 .11·기존 본문·프로젝트 .4 사본은 유지합니다.
+
+현재 로비 제작/기기 수정은 선택 게임 전체 변환·실3D·게임 연결 완료가 아닙니다. 10원본/132계층/43연결 항목은 명세이고 새 도시/랜드마크 아트도 아직 UI 미등록입니다. 기존 변환 동의·독립 작업·프로젝트 .4 보존 원칙을 유지합니다.
+
+## 공통판과 실제 샘플의 최신 경계 · .11
+
+공통 가이드는2026-11-16.11이며 프로젝트 guide .4 사본은 보존합니다. 현재 actual 로비 r21·1페이지63부품·0연결과 최신 미완료는 [PROGRESS](PROGRESS.md), 제작/검수 계약은 [TOOL_SPEC](TOOL_SPEC.md)을 먼저 읽습니다. 아래 기존 프로젝트 선택/변환·독립 검수 이력은 보존하며 현재 로비 조립을 기존 게임 전체 변환/연결 완료로 해석하지 않습니다. [AI for UI](../../../../docs/plans/20261116-ai-for-ui-adoption.md)는 필요한 방법의 선택 편입이며 설치/변환 동의가 아닙니다.
+
+## 적용할 프로젝트부터 구분
+도구 정본은 /Users/max/projest_max/ui-studio/이며 자체 소스·의존성·서버·가이드·기본 저장·보고를 독립 관리합니다. 선택한 게임 프로젝트는 도구 자체와 다릅니다. 프로젝트에 실제 게임 UI가 존재하는지는 원본으로 확인합니다. samples/monopoly-go/는 검증용 샘플이며 모노폴리 GO 게임 전체 소스나 변환 완료본을 뜻하지 않습니다. 실제 게임 폴더를 선택한 경우 그 프로젝트에 존재하는 원본만 조사합니다.
+
+## 가장 먼저 지킬 규칙
+기존 게임 UI를 스튜디오 관리 구조로 바꾸기 전에 반드시 사용자에게 변환 여부를 묻습니다.
+
+허용하면 AI가 기존 게임의 UI를 전부 조사하고 변환합니다. 백업과 대응표, 동작 확인 증거를 남깁니다. 일부 화면·샘플만 바꾼 결과를 전체 완료로 표시하지 않습니다.
+
+거절하면 기존 게임 UI와 게임 소스를 건드리지 않습니다. 독립 UI 소스만 선택게임/ui-studio 안에서 작성합니다.
+
+폴더 찾기로 게임 폴더를 열었다는 사실은 변환 동의가 아닙니다. 새 설계·가이드·자원 폴더 생성도 변환 동의가 아닙니다. 사용자가 명시적으로 선택을 바꾸기 전 이전 선택을 유지합니다.
+
+## 처음 폴더를 열 때의 선택
+- 변환·연결 요청: 기존 UI 전체 조사·변환 작업을 AI에게 요청합니다.
+- 독립 UI로 작업: 기존 게임을 보존하고 ui-studio 안에서만 작업합니다.
+- 취소: 새 폴더 활성화 작업을 중단하고 현재 작업에 남습니다.
+
+project.json에는 선택과 시각을 남깁니다. conversionDecision은 pending / convert / independent를 구분합니다. convert와 conversionStatus=requested는 요청 상태입니다. 완료 표시가 아니며, 이번 폴더 기능이 실제 게임의 UI를 자동 변환하지 않습니다.
+
+## 변환 허용 후 AI가 할 일
+1. 원본과 지침 확인
+상위 AGENTS, 게임 기획, 표, UI 소스와 저장 계약, 현재 요청 범위를 읽습니다. 보호 파일과 담당 금지는 그대로 유지합니다.
+
+2. 기존 UI 전체 목록 작성
+기본 화면, 공통창, 모달, 탑/바텀, 도움말, 목록, 설정, 입력·확인·실패·로딩·빈 상태, 조건부/동적 화면과 반복 부품을 조사합니다. 실제 게임마다 존재하는 범위만 기록합니다. 없는 화면을 창작해 채우지 않습니다.
+
+3. 기존/스튜디오 대응표 작성
+원본 파일·화면·부품 식별자와 스튜디오 문서·화면·요소 ID를 연결합니다. 배치·상태·입력 소유자·이동/복귀·스크롤·저장/복원·자원·모듈 요청을 대조합니다. 동적 생성이나 외부 데이터는 생성 원천과 확인 방법도 남깁니다.
+
+4. 변경 전 백업
+프로젝트가 지정한 위치와 방식으로 수정 원본을 보존합니다. 덮어쓰기·삭제로 원본 증거를 없애지 않습니다. 기존 시안·이미지도 보존하고 버전을 올립니다.
+
+5. 관리 구조로 변환
+허용된 설계·부품·자원·상태·연결을 스튜디오 형식으로 구성합니다. 구조가 맞지 않는 영역은 우회하거나 누락을 숨기지 말고 미지원으로 기록합니다. 저장 모델 제한·입력 의미·기존 ID와 계약을 확인합니다.
+
+6. 실제 게임 연결 변경
+허용된 파일과 구체적 지시에 따라 게임의 렌더·입력·기능·콘텐츠 공급 연결을 수정합니다. 폴더 관리의 기본 쓰기 범위가 게임 소스 전체 변경 허가라고 가정하지 않습니다. 호스트 어댑터가 없으면 연결 미완료로 남깁니다.
+
+7. 기존 동작 회귀와 증거
+원본 대비 화면 진입·상태 변화·입력·이동·복귀·스크롤·저장/복원·자원 누락과 기기 배치를 확인합니다. 수정 파일, 전후 근거, 실제 실행 범위, 캡처와 시험 결과를 기록합니다.
+
+8. 전체 확인 후 검수 요청
+전체 목록의 각 항목에 완료/미지원/미확인과 근거를 남깁니다. 누락·미지원·동적 화면 검증이 남아 있으면 전체 변환 완료로 표시하지 않습니다. 최종 승인과 정책 결정은 사용자에게 있습니다.
+
+## 변환 거절 후 허용되는 작업
+독립 설계 JSON, 독립 자원, 설명서, 연결 제안 문서와 독립 출력은 선택게임/ui-studio 안에서 작성할 수 있습니다. 기존 게임의 소스·루트 AGENTS·게임 자원·게임 저장 파일을 수정하지 않습니다.
+
+독립 설계가 있어도 기존 게임에 반영되었다고 보고하지 않습니다. integration.md에는 독립 작업 선택, 게임 미변경, 향후 연결이 필요한 점을 기록합니다. 별도 복제본이나 다른 폴더로 게임 수정을 우회하지 않습니다.
+
+## 선택 변경
+기존 선택을 AI가 추측해 바꾸지 않습니다. 사용자가 명시적으로 변경을 요청하면 요청 원문·시각과 새 범위를 확인하고 기록합니다. 독립 작업에서 변환으로 바뀌어도 기존 UI 전체 조사와 백업부터 수행합니다. 과거 독립 설계 몇 개가 전체 변환을 대신하지 않습니다.
+
+## 실제 독립 선택 검수
+samples/monopoly-go를 네이티브 폴더로 선택하고 변환 안 함(independent)을 명시했습니다. 해당 ui-studio에 ‘모노폴리 GO UI 샘플’ ux-902404d6 r4를 저장·재열기하고 프로젝트 .4 가이드를 읽었습니다. 기존 r14 원본은 보존했습니다. samples/folder-check는 별도 저장·격리 시험 fixture이며 게임 샘플이나 기존 게임 전체 변환 결과가 아닙니다. 현재 공통 가이드는 .10이고 두 프로젝트의 .4 사본은 자동 갱신하지 않습니다.
+
+## 현재 알려진 한계
+실제 검수 설계 ux-902404d6 r4는 3개 page·1개 modal·24개 부품·6개 연결이며 보존 원본 r14와 구분합니다. W/P/U/S 단계 종합검수는 0/4입니다. UI·그래픽·전체 샘플은 미완료입니다. 샘플 설계나 폴더 생성과 실제 게임 전체 변환은 별개입니다.
+
+이번 도구는 기존 게임 UI 전체를 자동 탐색·변환·연결하는 엔진을 제공하지 않습니다. 폴더의 선택 기록, 독립 저장공간과 안내가 AI 작업의 출발점입니다. 실제 변환은 원본 조사와 승인 범위 내 구현·검수 작업으로 별도 진행합니다.
+
+그림이 비슷함, JSON 요소 수가 같음, 한 화면이 열림은 전체 동작 동등성의 증거가 아닙니다. 검증하지 않은 동등률이나 완성률을 만들지 않습니다.
+
+
+## 승리 화면 조립 추가 기록 · .13 · r53 기준
+
+작성자 codex(단이) · 2026-11-16 20:01 KST · 제안(검수 대기)
+
+현재 공통판은 .13이고 선택 프로젝트의 기존 guide .4 사본은 그대로 보존합니다. 이번에는 공통 안내 7종/index와 조립 계획의 추가 기록만 갱신했으며 프로젝트 사본을 자동 덮어쓰지 않았습니다. 샘플의 현재 본체 전달 기준은 ux-gjs-0d80d7fe r53/Main63/Build78+새 Modal_Wins_QuickWins입니다. 다음 편집은 실제 현재 revision을 다시 확인합니다.
+
+이번 승리는 선택 게임의 독립 UI 조립 범위입니다. 종이/프레임·고정 장식·새 아이콘·native text를 분리했고 미션 판정/주간 보상 지급·원본 게임 데이터 정책은 미구현/미확인으로 둡니다. 현재 변환 동의와 기존 게임 소스 보존 원칙은 그대로 유지합니다.
+
+[TOOL_SPEC의 .13](TOOL_SPEC.md)과 [PROGRESS의 .13](PROGRESS.md)을 먼저 읽습니다. 본체의 standalone 진입·r53 저장 재읽기 확인, 문서 담당의447/447 로그 읽기, 진행 중 모바일430/키보드/차단 검수를 구분합니다. 원본 폰트/픽셀·장식 정확도·7007/LocalServerBrowser는 미검수이고 10장 최종 동등0/10·W/P/U/S0/4·사용자 승인 없음입니다. 특정 판의 원문 컨펌·실제 캡처 확인 후 고정하는 기존 규칙을 유지합니다.
+
+
+### 본체 후속 검수 · .13 · 2026-11-16 20:21 KST
+r53/187부품·2page+1modal·4연결을실제저장재열기했습니다. Main/Build r43 deep equality동일,actual클릭·Enter/Space·Close/Escape·메뉴활성/초점복귀·배후inert·1440/430·논리390복귀·전체캔버스3판1920 확인. 최종451/451·fail0,보고 docs/collaboration/reports/20261116_1916_wins-screen.md 및 PROGRESS .13 본체최종절을읽습니다. 닫기렌더staleinert·fullscreen demo×·고정bridge?v의immutable캐시불일치도최소보완/actual재확인했습니다. bridge공개API변경때import버전URL캐시를함께점검합니다. 위전달시점pending/447은이력이며최신결과로합산하지않습니다. 프로젝트guide.4보존·모든산출제안,10장동등0/10·W/P/U/S0/4·원본폰트/게임보상/7007LSB native/사용자승인미완료. 다음03앨범새그림·메뉴연결입니다.
+
+
+## 앨범 실제 조립 추가 기록 · .14 · r63 기준
+
+작성자 codex(단이) · 2026-11-16 21:09 KST · 제안(검수 대기)
+
+문서 담당이 실제 샘플 ux-gjs-0d80d7fe r63을 읽어 Main63+Build78+Wins46+Album74=261부품, 3page+1modal·6연결을 확인했습니다. Main Album→navigate/always와 Album Back→back/always가 추가되었습니다. 기존 .13 이하 본문과 프로젝트 guide.4는 그대로 보존합니다.
+
+현재공통판.14는선택프로젝트guide.4를자동덮어쓰지않습니다. 이번독립앨범제작은새그림15+기하UI7·native문구·진행·입력분리범위이며원게임변환/보상API완료가아닙니다. 원본441×731과제작551×984의종횡비차이·partial3이름/수빈문자열·새그림의제안부분을유지합니다. Back은원본not-observed복귀제안,Info/Vault/상세는unknown입니다.
+
+[조립계약TOOL_SPEC .14](TOOL_SPEC.md)와[진척PROGRESS .14](PROGRESS.md)를읽습니다.
+
+문서 담당은 fresh [album-screen-final-tests.log](../../../../_작업/codex/ux-studio/album-screen-final-tests.log)의451/451·실패0·cancelled0을 직접 읽었고 시험/actual UI를 재실행하지 않았습니다. 과거 실행 수를 합산하지 않습니다. 본체 전달 actual은 로비→Album→Back→Main 현금13,075/trigger 초점 복귀·재진입 scroll0, AX scroll0→181.25/client625/scrollHeight806/headerY114.765625 고정/body scroll0입니다. 재진입 초기화는 관찰값이며 원본 정책으로 확정하지 않습니다. 모바일430·1920canvas·최종 캡처·기존Main/Build/Wins deep equality는 본체 검수 대기이며 후속 본체 보고를 우선합니다.
+
+원본 폰트/픽셀·실제 게임/보상/카운트다운·Info/Vault/세트 상세 목적지·7007/LSB·사용자 승인/freeze는 미완료/미확인입니다. 10장 최종 동등0/10·W/P/U/S0/4, 제안(검수 대기)를 유지합니다.
+
+
+### .14 후속 미확인 보정 · 2026-11-16 21:10 KST
+
+Set08/09 새 그림은 원본 종과 불일치해 본체가 새 그림으로 보정 중입니다. 해당 그림의 최종 교체 revision·실제 등록/표시·검수 결과는 본체의 후속 실제값 append를 기다립니다. 현재 UI 완료나 원본 동등을 주장하지 않습니다. 상세 본체 보고는 [20261116_2025_album-screen.md](../../../../docs/collaboration/reports/20261116_2025_album-screen.md)입니다.
+
+UI manifest의 progressCapsTransparentCorners=false는 room을 추가한 뒤 마지막2개 배열이fill+room이된집계오류였습니다. 실제progress-bg3/fill3의4모서리알파0을직접확인하고해당2role만명시선택하도록원스크립트집계식을보정했습니다. 그림파일/등록/UI는변경하지않았습니다. 이메타데이터보정은UI검수완료판정이아닙니다.
+
+
+### 본체 최종 실제값 · 앨범 r64 · 2026-11-16 21:20 KST
+
+위 r63/교체 중/pending은 중간 이력입니다. 최종 ux-gjs-0d80d7fe r64=Main63+Build78+Wins46+Album74=261부품·3page+1modal·6연결입니다. 실제 툴의 이미지 경로 입력+Tab으로 Set08 초록·노랑 새/Set09 노란 강아지 v002를 등록·교체·저장했습니다. 두 종을 고양이로 잘못 읽은 v001은 원본/해시를 보존하고, _작업/codex/ux-studio/album-icon-corrections.json에 교체 이유·새 원본/프롬프트/투명 PNG/WebP·SHA·관찰/추정을 기록했습니다. screenshot pixels 재사용 없이 새로 그린 그림입니다. v00115+기하UI7+교정2=24개 보관 자원 해시·미러 일치, 최종 사용 신규 자원22개입니다. 일러스트15개 사용 중2개가v002이며 기하UI7은직접작성SVG→losslessWebP입니다.
+
+본체 actual: Main Album 클릭→새 Album→Back→Main 현금13,075/Album trigger 초점복귀, native Tab/Enter로Back·Space재진입, scroll0→181.25(client625/scrollHeight806)·headerY114.765625고정·바깥scroll0·재진입scroll0을 확인했습니다. 재진입 초기화는 우리 도구 관찰이며 원본 정책 확정이 아닙니다. 최종preview CSS1440×900·모바일CSS430×844에서 가로/세로넘침0·깨진이미지0. 캡처파일은 각각phoneclip408×729/모바일430×843입니다. 전체canvas CSS1920×1280의실제파일1919×1280,4boards X24/635/1246/1857,Y40·폭551/60간격·261부품·r64재열기를확인했습니다. 상세390×844의root와preview-screen실제389.997×843.987일치/설계기준복귀·r64hash불변,당시상세브라우저CSS2687×1792로1440상세검수라쓰지않습니다. 카드가이드W164/H248actual파일2520×1575도보존했습니다. 자동배치자식의가이드위치/크기잠금은부모grid보존규칙입니다.
+
+Vault actual right10.019/bottom12.012 논리px·engine filter drop-shadow(0,2,3,.25)로하단고정확인. Main/Build/Wins 전체deep equality와기존4edges는r53와동일합니다. 본체 이번npm test451/451·fail0·exit0,로그 _작업/codex/ux-studio/album-screen-final-tests.log. 그뒤제품소스변경0/재실행중복합산0이며삽화교체는자원해시/실제표시로재검증했습니다.
+
+보고 docs/collaboration/reports/20261116_2025_album-screen.md, 증거 docs/evidence/20261116-album-screen/ 및 file-verification.json을 우선합니다. current-review는r64로갱신합니다. 프로젝트guide.4/원본/이전판보존, 공통.14. 다음04친구새그림·native본문/탭/목록/행동·Main입구/Close/차단/복귀연결입니다. Info/Vault/세트상세목적지·게임수치변화/보상/시간·원본폰트/픽셀동등·7007/LSB native·사용자승인/freeze는미완료입니다. 10장최종동등0/10·W/P/U/S0/4·제안(검수대기),주간81/90·11/17 08:00KST중지선·기존ui30분만유지합니다.
+
+
+## 친구 모달 실제 조립 추가 기록 · .15 · r72 기준
+
+작성자 codex(단이) · 2026-11-16 22:09 KST · 제안(검수 대기)
+
+문서 담당이 실제 저장본 `ux-gjs-0d80d7fe` r72를 읽었습니다. Main63+Build78+Wins46+Album74+Friends87=348부품, 3page+2modal·8연결입니다. r72는 이번 문서의 확인 기준이며 본체 후속 저장/실제 검수 보고를 우선합니다. 기존 본문·원본·프로젝트 guide .4는 보존합니다.
+
+이번r72는선택한모노폴리GO샘플의**독립UI조립**입니다. 원게임변환동의·소스변경·실제계정/친구/리더보드/스티커API를이기록으로추가승인하거나구현한것으로보지않습니다. 프로젝트guide.4를자동덮어쓰지않고공통.15와구분합니다.
+
+Source04는512×922의정적타임라인입니다. source별수치와현재Main상태를합치지않습니다. 보이는요청/활동5행은표시fixture이고,6행Jaime/2시간전부분의본문·원본초상·활동종류는미확인입니다. 친구추가/리더보드본문도빈칸입니다. 실제전송/거절을시연성공으로표시하거나수치를차감하지않습니다.
+
+그림2+기하15의새자원과기존Cashv003/Bankv002/공통Badge재사용을나눕니다. 주사위초상의내부alpha가주로253/255인생성원본한계와입맞춤삽화의제작해석은그림manifest에남아있으며원본인물·색·픽셀동등을주장하지않습니다. source05새배경1회생성준비는미등록이고05완료가아닙니다. [TOOL_SPEC .15](TOOL_SPEC.md#친구-모달-실제-조립-추가-기록--15--r72-기준)의재현값과[PROGRESS .15](PROGRESS.md#친구-모달-실제-조립-추가-기록--15--r72-기준)의실제검수경계를따릅니다.
+
+본체 실행 로그 [friends-screen-final-tests.log](../../../../_작업/codex/ux-studio/friends-screen-final-tests.log)의 **463/463·실패0·cancelled0**을 문서 담당이 직접 읽었습니다. 이 담당은 시험을 재실행하지 않았습니다. 선행 전체462/462와 후속 escape 전용7/7·RED/GREEN은 별도 실행 이력이며 합산하지 않습니다. **모바일430·데스크톱1440·전체캔버스1920, 키보드·스크롤·dim·Close·포커스 복귀 최종 실검수는 본체 진행 중**으로 이 추가절에서 통과를 주장하지 않습니다. 소스/저장 계약과 실제 입력 성공을 구분합니다.
+
+원본 폰트/픽셀 동등·실제 스티커 요청/전송/거절·게임 수치/시간·7007/LSB native·사용자 승인/freeze는 미완료/미확인입니다. **W/P/U/S0/4·10장 최종 동등0/10·제안(검수 대기)**를 유지합니다. Source05 배경은 새 그림1회 생성 준비·미등록 단계로 05 조립 완료가 아닙니다. 주간83/90·11/17 08:00 KST 중지선·기존30분 운영은 본체 전달 상태이며 이 문서 작업은 예약/서버를 만들거나 재개하지 않았습니다.
+
+근거: [04 원본](../../../../docs/reference/monopoly-go/20261116-ten-screens/04_friends.png) · [측정표](../../../../_작업/codex/ux-studio/friends-assembly-quick-sheet.md) · [그림2 manifest](../../../../_작업/codex/ux-studio/friends-icon-assets.json) · [기하UI15 manifest](../../../../_작업/codex/ux-studio/friends-ui-assets.json) · [탭 엔진 diff](../../../../_작업/codex/ux-studio/tab-engine-source.diff) · [본체 보고](../../../../docs/collaboration/reports/20261116_2125_friends-screen.md). Manifest의 UIApplied/registration은 자원 하위작업 당시 상태이며 실제 참조는 r72를 대조했습니다.
+
+
+### 본체 최종 실제값 · 친구 r72 · 2026-11-16 22:36 KST
+
+앞선 .15의 463/463·실화면검수중은 중간 이력입니다. 최종 저장 ux-gjs-0d80d7fe r72는 348부품·3page+2modal·8연결이며 기존 r64의 네 화면 전체와 6연결은 deep equality/포함 대조로 보존했습니다. 신규 Friends87, 새 그림2+직접 그린 기하UI15=17자원의 production·staging·등록본 SHA와 실제 설계 참조를 확인했고 17개 HTTP200/응답SHA도 확인했습니다. 기존 Cashv003/Bankv002/공통Badge 재사용과 신규 그림을 구분합니다. 프로젝트 guide.4는 보존했습니다.
+
+본체 실제 브라우저: 메인 친구 클릭/Enter/Space→모달, 세 탭 Enter/Space→선택skin/본문 display·inert 전환, 배후Main inert, Close 클릭/Enter·Escape→닫힘/메인Friends 초점복귀를 확인했습니다. native PageDown으로 scrollTop0→51.25(client585/scrollHeight636), CSS1440×900에서 headerY226.51834106445312/footerY773.5620727539062 불변·바깥scroll0, 재진입scroll0 확인. Panel 실제 filter는 drop-shadow(rgba(0,0,0,.25) 0px 3px 6px), 실제 dim은 rgba(22,39,56,.5)입니다. CSS1440×900/430×843에서 가로·세로넘침0/깨진img0, 1920×1280 실행 캡처를 보존했습니다. 파일 픽셀은 각각1800×1125/537×1055/2400×1600입니다. 1920 증거는 전체캔버스가 아닌 독립 미리보기이며 상세편집1920 증거도 별도로 보존했습니다.
+
+검수 중 구탭24의 미저장 재열기 경로가 응답하지 않아 한 번 질문했지만, 새 탭25/29의 저장 r72 읽기와 최종 키보드·마우스 검수는 성공했습니다. 원인을 Mac잠금/제품결함으로 확정하지 않습니다. 즉시 읽은 Enter Close와 PageDown은 240ms 연출/브라우저 스크롤 중간값일 수 있어 후속 안정 프레임을 확인합니다. 에디터 선택목록에도 data-element가 있으므로 computed 검사는 .ui-element로 범위를 좁힙니다. CSS border-image는 document.images 검사 밖이므로 HTTP/SHA를 별도로 확인했습니다.
+
+최종 소스 검토에서 복제된 tabs의 panelId가 원본문을 가리키는 결함을 확인해 commands.mjs의 번들 ID 재매핑/범위 밖 참조 해제/삭제·그룹해제의 지워진 참조 정리를 보완했습니다. 관련6RED→GREEN 뒤 본체 최종 npm test469/469·fail0·cancelled0·exit0. 로그 _작업/codex/ux-studio/friends-screen-final-verified-tests.log, 실제 Panel 복제→Undo(저장안함)도 확인했습니다. 이 최종 시험 뒤 제품 소스 변경0입니다. workspace 누락 의심은 실제 root metadata 상속으로 해소했고 소스수정 없이 두 workspace 소비자20/20을 확인했습니다. 실제 결함으로 기록하지 않습니다.
+
+근거는 docs/collaboration/reports/20261116_2125_friends-screen.md와 docs/evidence/20261116-friends-screen/{browser-checks,file-verification,asset-http-checks}.json 및 JPG입니다. 구체적인 안정 프레임·입력 성공은 이 최종 절을 우선합니다. 실제 Send/Reject API·원본에 없는 두 탭 본문·Jaime 본문/초상·원본 폰트/픽셀동등·7007/LSB native·게임연결/사용자승인·W/P/U/S0/4·10장 최종동등0/10은 미완료입니다. 다음05 메인 신규 배경은 준비 파일이며 아직 미등록/미조립,06메뉴/07창고/08상점/09·10이벤트 순서로 이어갑니다. 주간84/90·11/17 08:00KST 중지선·기존ui30분만 유지합니다.
+
+
+### 전체 캔버스 실제 재검수 보정 · 2026-11-16 22:41 KST
+
+22:36 단위보고 뒤 기본 진입을 다시 열자 고정 ?v=20261116-wins-fullscreen1 주소의 이전 controls 검증기가 새 tabSkin을 거부해 ‘저장 설계 읽는 중’에 머무는 오류를 실제 재현했습니다. 브라우저 오류시각13:36:24.879Z/스택과 HTTP헤더를 대조했습니다. 같은 모듈의 일반주소는 Cache-Control:no-cache,고정 ?v= 주소는 max-age=31536000,immutable이었습니다. src/tools/uxStudio/grapes-pilot.mjs:5의 bridge import에서 고정 query만 제거해 Vite의 최신소스 재검증을 사용합니다. 새 버전문자열을 반복해서 붙이거나 캐시전부삭제/서버재시작은 하지 않았습니다. 실제 재현→최소 한 줄 보완→관련27/27→전체470/470·fail0·cancelled0·exit0→같은 기본진입 재열기로 검증했습니다. 최종로그는 _작업/codex/ux-studio/friends-canvas-cache-final-tests.log이며 469는 직전 결과입니다. 추가된1개는 control-visual.test.mjs:330의 두workspace page/modal native탭 자원경계 특성시험으로,제품수정이아닌20개관련검증안의추가회귀입니다. 시험 수를 합산하지 않습니다.
+
+actual 기본 전체캔버스 status ‘5개 화면 ·348개 부품 ·원본r72보존 ·수정은사본으로저장’, 사본저장enabled·header저장됨r72. 5판 x24/635/1246/1857/2468,y40,width550.996,height983.984의약60간격을확인했습니다. 캔버스CSS1600×900/실제파일2000×1125이며1920검수로쓰지않습니다. 증거 docs/evidence/20261116-friends-screen/canvas-cache-recovery.json 및 friends-canvas-css1600-r72.jpg. 오류로그의13:36기록은재열기전이력이고복구후새오류로세지않습니다. r72설계SHA65770adbe5263f57b9f2f8ab38593bd272a894c1a92759a41163d3e8f26d82aa 불변, 기존4화면/6연결보존. 위 ‘469뒤제품변경0’은이추가수정전시점이며최종은470이후제품소스변경0입니다. 백업2240_canvas_cache/2241_canvas_recovery_closeout. 공통.15/프로젝트.4·W/P/U/S0/4·전체동등0/10·미완료경계는그대로입니다.
+
+
+## 메인05 조립 기록 · .16 · r76 중간 기준
+
+작성자 codex(단이) · 2026-11-16 23:04 KST · 제안(검수 대기)
+
+문서 담당은 저장본 `ux-gjs-0d80d7fe` r76을 직접 읽었습니다. Main71+Build78+Wins46+Album74+Friends87=356부품, 3page+2modal·8연결이며 Main 조립 중의 스냅샷입니다. SHA는 `123486eb140ffe898e5cb3ef3a78fe8065e292e8bfc0777d1c4f8c025ef4d06c`입니다. 본체 후속 저장·최종 append가 이 중간값을 보정합니다. 기존 본문·이전판·프로젝트 guide .4는 보존합니다.
+
+이번 Main05는 기존 게임 소스의 변환이 아니라 선택 샘플의 독립 UI 편집입니다. 원게임 변환 동의·소스 쓰기·서버/빌드·계정 접근·실제 보상/상점/자동굴림 API를 새로 승인한 것으로 보지 않습니다. 프로젝트 guide .4와 기존 도시/공원 시안·원본 이미지는 보존합니다.
+
+Source05 709×1269의 새 캔디 보드는 screenshot pixels 조립이 아닌 별도 2D 그림입니다. 배경의 문/딸기 장식·토큰·식생과 일부 이벤트 art는 제작 해석이며 실3D/원본 장면·인물·색·폰트·픽셀 동등을 주장하지 않습니다. 생성 source/RGBA·prompt·production/staging을 manifest 경로에 보존합니다. 이벤트 그림 일부의 alpha상한253/254 등 생성 원본 한계도 manifest의 관찰을 따릅니다.
+
+현금36,750,000·주사위2602/90·방패4·HOLD FOR AUTO·각시간은 source05 정지 화면의 표시값입니다. 이전551판의13,075/89/30/3방패와현재게임live state를합치지않습니다. 하단한국어승리/짓기/앨범/친구는우리copy,원본WINS/BUILD/ALBUM/FRIENDS는관찰문구로구분합니다.
+
+기존Main/stableID/4하단연결은유지합니다. 새목적지06~10과09/10의다른이벤트버전시연매핑은본체의후속조립·검수범위입니다. 보이지않는이벤트이름/목적지·balance숫자를만들지않습니다. native GO 전환·프레임source등록순서·동일역할규격은[사용방법](USER_GUIDE.md#메인05-조립-기록--16--r76-중간-기준)과[제작값](TOOL_SPEC.md#메인05-조립-기록--16--r76-중간-기준)을따릅니다.
+
+신규 준비는 그림12+기하UI11+배경1=24개입니다. 세 manifest의 production/staging SHA를 이번에 24/24 직접 대조했습니다. r76의 고유 assetRef 참조는 그림2(Shop·pirate-shield)+기하UI2(banner fill9/frame9)+배경1=5/24이며, 방패4개는 같은 자원1개를 재사용합니다. 이는 저장 설계 참조 수이며 이번 담당의 실제 등록 UI·HTTP·최종 화면 검수는 아닙니다. Manifest의 제작 시점 uiApplied=false/registration=null만으로 현재 미등록이라고 판단하지 않습니다. 최종 등록·사용 개수는 본체 후속 실제값을 따릅니다.
+
+앞 단위 본체 소스 검증470/470은 과거 실행입니다. Main05 이번 시험 재실행·390/430/1440/전체캔버스·키보드·그림자·저장 재열기 최종 실검수는 미완료이며 이 문서 담당은 실행하지 않았습니다. 상단 진행/보상/시간과 좌우 다수 입구, x50 및 06~10 목적지도 조립/연결 대기입니다. 원본 폰트·픽셀 동등·실3D·실제 GO/자동굴림/배수/차감/보상/카운트다운·7007/LSB native·사용자 승인/freeze는 미완료/미확인입니다. **W/P/U/S0/4·10장 최종 동등0/10·제안(검수 대기)**를 유지합니다. 주간85/90·11/17 08:00 KST 중지선·기존 ui30분은 본체 전달 상태이며 새 예약·재개·서버 작업은 하지 않습니다.
+
+근거: [05 원본](../../../../docs/reference/monopoly-go/20261116-ten-screens/05_main.png) · [측정표](../../../../_작업/codex/ux-studio/main05-assembly-quick-sheet.md) · [그림12 manifest](../../../../_작업/codex/ux-studio/main-events-assets.json) · [기하UI11 manifest](../../../../_작업/codex/ux-studio/main-ui-assets.json) · [배경 manifest](../../../../_작업/codex/ux-studio/main-candy-board-assets.json). 측정표의 초기r72/후속r74와 이 문서의 r76을 구분합니다.
+
+최종 정규화 제작값은 원본bbox 측정과 구분합니다. 좌6은 input100×104, art88×78@(6,0), timer96×22@(2,80), dot18²@(80,0), root x10/y100·205·310·415·520·625입니다. 우원형4는 input84×108, art80²@(2,0), timer84×30@(0,76), dot18²@(66,0), root x449/y234·344·454·574입니다. 초기 우높이104 제안은 timer의끝106보다 작아108로 보정했습니다. 모든 자식은 부모 가이드 영역 안에 두고 그림은contain으로 원비율을 유지합니다. Tycoon은 별도 featured106×137이며 같은 역할끼리 부모/자식 규격을 통일합니다.
+
+
+## Main05 최종 실제 보정 · .16 · r92
+
+작성자 codex(단이) · 2026-11-17 00:16 KST · 제안(검수 대기)
+
+**공통 .16의 최신 실제 사실은 이 최종 절을 우선합니다.** 앞선 r76/준비24개/GO전환 실패·조립 대기 기록은 당시 이력으로 보존합니다. 현재 저장본은 `ux-gjs-0d80d7fe` **r92·Main175/총460부품·3page+2modal·기존8연결**이며 SHA는 `c27d09e500d63ad2a6caf93b0a6f681cc681c137095c3d209a953bb336b9743e`입니다. r92의 설명도 실제2D/목적지·게임 미완료 경계를 반영했습니다.
+
+Main05는선택샘플의독립 UI조립이며원게임변환·소스쓰기·게임계정/구매·실3D연결을새로승인한작업이아닙니다. 새자원27개가실제등록/참조되었지만원본screenshot을한장으로넣은구성이아니며그룹·그림·native문구/수치·frame9/3·shadow·입력을분리했습니다. 원본그림/폰트/픽셀동등·작은hammer아바타중첩재현은완료하지않았습니다.
+
+Source05 현금36,750,000·roll2602/90·HOLD FOR AUTO·해적방패4는관찰fixture이고실제경제/자동굴림/배수·시간엔진이아닙니다. 기존Main63ID/8edges·다른4화면r72deepEqual을유지했으며프로젝트guide.4를자동덮어쓰지않았습니다. 06/07측정표와자원준비는미등록이고06~10목적지연결은미완료입니다. SHOP/SHOWROOM/창고tab 등없는화면이나게임동작을완료라고하지않습니다.
+
+원본bbox와정규화제작값을구분합니다. 좌100×104/우84×108/Tycoon106×137·x50Bottom자식74²와native앵커를써서기기비율을보존했습니다. 모바일기기profile390×844/430×932와별도preview CSS430×843검수,bitmap537×1055를서로대신하지않습니다. 같은역할반복제작·새source등록후분할입력·nativeGO전환방법은공통USER_GUIDE/TOOL_SPEC의이최종절을따릅니다.
+
+문서 담당은 r92 저장본·[파일 검증](../../../../docs/evidence/20261116-main05/file-verification.json)·[브라우저 기록](../../../../docs/evidence/20261116-main05/browser-checks.json)·[최종 시험 로그](../../../../_작업/codex/ux-studio/main05-final-tests.log)를 직접 읽었습니다. 신규 **27개=배경1+AI그림13+직접 그린 기하UI13**은 실제 UI 등록·설계 참조·production/staging/등록 SHA·HTTP200/응답 SHA가 확인됐습니다. Main기존63 ID·기존8edges·다른4화면의 r72 대비 deep equality를 보존했습니다. 최종 본체 `npm test`는 **477/477·실패0·cancelled0·exit0**이며 앞선470은 이전 실행입니다. 이 문서 담당은 시험/브라우저를 재실행하지 않았습니다. GUI 실제 검수와 Undo/Redo·기기 수치는 본체 실행 기록/전달값입니다.
+
+목적지06~10·원본폰트/픽셀동등·실3D·GO굴림/자동모드/배수/시간·보상/구매 등 게임 로직·7007/LSB native·사용자 승인/freeze는 미완료입니다. 원본05의 작은 hammer 아바타 중첩도 미재현입니다. 06/07 측정·자원 준비는 UI 미등록이며 화면 완성으로 세지 않습니다. **W/P/U/S0/4·10장 최종 동등0/10·제안(검수 대기)**, 주간86/90·**2026-11-17 08:00 KST 최종 중지선**을 유지합니다. 기존 ui30분 외 새 예약·재개·서버/빌드는 하지 않습니다. 프로젝트 guide .4와 이전판·원본을 보존합니다.
+
+증거 파일: [1440 preview](../../../../docs/evidence/20261116-main05/main-r90-css1440.jpg) · [430 preview](../../../../docs/evidence/20261116-main05/main-r90-css430.jpg) · [1920 preview](../../../../docs/evidence/20261116-main05/main-r90-css1920.jpg) · [r90 전체캔버스](../../../../docs/evidence/20261116-main05/main-r90-canvas-css1920.jpg) · [r90 정상clip](../../../../docs/evidence/20261116-main05/main-r90-phone-clip.jpg) · [r92 폰파일](../../../../docs/evidence/20261116-main05/main-r92-phone.jpg). 파일 픽셀과 CSS viewport·기기 profile을 구분합니다.
+
+
+## Menu06 제작 기록 · .17 · r107 기준
+
+작성자 codex(단이) · 2026-11-17 00:45 KST · 제안(검수 대기)
+
+문서 담당은 먼저 r106을 읽고, 본체의 프로필 crop/알림 alt 보정 뒤 **r107**을 다시 읽었습니다. 현재 `ux-gjs-0d80d7fe`는 Main175+Build78+Wins46+Album74+Friends87+Menu81=541부품·3page+3modal·10연결입니다. r107 SHA는 `75bda424a32d2e998fc2043547259d4b6a1b3ad0b07f4e99d1dfb1e787664cc6`입니다. 기존8연결과 Main Menu stableID를 유지하고 MainMenu open/Close 두 연결만 추가했습니다. 공통 .16과 프로젝트 guide .4·이전 본문은 보존합니다.
+
+**Menu06 최종 r107의1440/430/390·키보드·캡처 종합 실검수는 본체 진행 중입니다. 이 절은 저장/제작법/소스 검증이며 통과 선언이 아닙니다. 최종 actual은 본체의 후속 append를 우선합니다.**
+
+Menu06은독립선택샘플의새UI조립이며원게임변환·다른프로젝트source/게임API·외부발송·공개배포를뜻하지않습니다. MainMenu기존ID와원8edges를보존하고open/Close2개만추가했습니다. SHOP08/SHOWROOM07이아직실조립전이라연결을미루고나머지7목적지는빈target로유지합니다. 이름을바꾸며가짜상세화면이나게임기능을만들지않습니다.
+
+원본296×531의profile현중/9행/아이콘/점3개를관찰했으며원본폰트/정확dim alpha는확정하지않았습니다. solid검정.7은시안값입니다. 기존SNS사진asset과crop60,75,1111,1111을재사용한r107저장값·native circleframe7/name30을확인했으며원본사진/초상/픽셀동등을주장하지않습니다. 공통.16·프로젝트guide.4·이전시안/source는보존합니다.
+
+새SVG8/solid3=11과기존5+SNS/Badge재사용을구분합니다. SVG직접그리기는기하UI용이며source screenshot pixels를재사용하지않습니다. 텍스처준비/정식등록/저장assetRef/최종화면검수는서로다른단계입니다. r107의최종실검수는본체진행중이며앞단위Main05기기결과를Menu06통과로옮기지않습니다.
+
+직접 읽은 근거: [지정 시작 보고](../../../../docs/collaboration/reports/20261117_0013_menu06.md) · [06 원본](../../../../docs/reference/monopoly-go/20261116-ten-screens/06_menu.png) · [측정표](../../../../_작업/codex/ux-studio/menu06-assembly-quick-sheet.json) · [신규8/재사용5 manifest](../../../../_작업/codex/ux-studio/menu-ui-assets.json) · [solid3 manifest](../../../../_작업/codex/ux-studio/menu-flat-assets.json) · [RED](../../../../_작업/codex/ux-studio/group-badge-notification-red.log) · [GREEN](../../../../_작업/codex/ux-studio/group-badge-notification-green.log) · [최종 시험](../../../../_작업/codex/ux-studio/menu06-final-verified-tests.log). 최초 보고의8준비/미등록·소스수정예정없음은 당시 계획입니다. 현재 신규11개 production/staging SHA와 저장 assetRef 참조를 직접 대조했습니다. manifest의생성시점UIApplied=false/registration=null을 현재 적용 상태로 그대로 옮기지 않습니다.
+
+그룹 배지 관련2RED(actual1/expected빈문자열)→관련41GREEN 뒤 본체 최종 `npm test` **479/479·실패0·cancelled0·exit0**입니다. 문서 담당은 로그를 읽었으며 시험/GUI를 재실행하지 않았습니다. 본체 소스 리뷰1회 완료 후 후속focus CSS한규칙의 범위를 아래에 구분했습니다. r104이전 Menuopen/첫Shop초점/Maininert/점글자숨김/Close·dim화면을 확인한 기록과 최종r107 종합실검수 진행을 구분합니다.
+
+SHOP08/SHOWROOM07 연결은 실제 목적지 조립 뒤 진행하며 NET WORTH/DAILY TREATS/MAP/BOARD REPORT/JOIN US!/SETTINGS/GO!CHAT의7목적지는 미관찰·미설정입니다. 원본 dim 정확alpha·폰트/픽셀동등·게임 기능·7007/LSB native·사용자 승인/freeze는 미완료/미확인입니다. **W/P/U/S0/4·10장 최종 동등0/10·제안(검수 대기)**, 주간87/90·**2026-11-17 08:00 KST 중지선**·기존 ui30분만 유지합니다. 새 예약/재개·서버/빌드는 하지 않습니다.
+
+후속 focus 보정: native 행은 isGroup/button·hitshape rectangle인데 예전 wireframe `.kind-button`의50% radius가 keyboardfocus를큰타원으로보이게한실제사례를확인했습니다. [styles.css](../styles.css):1257근방에 `.is-group.kind-button[data-hit-shape="rectangle"] { border-radius:0; }` 한규칙을추가해그룹+사각입력만맞췄고일반button/도형전체정책은유지했습니다. CSS보완전 `menu06-final-tests.log`479는이전이력이며이후새 [menu06-final-verified-tests.log](../../../../_작업/codex/ux-studio/menu06-final-verified-tests.log)의479/479·fail0·cancelled0·exit0을최종소스검증으로읽었습니다. 최종390/430/1440·키보드·캡처 actual은여전히본체진행중입니다.
+
+
+## Menu06 최종 실제 보정 · .17 · r107
+
+작성자 codex(단이) · 2026-11-17 00:52 KST · 제안(검수 대기)
+
+**이 최종절은 앞선 .17 r107 준비절의 기기/키보드/캡처 ‘검수 진행 중’ 표현을 보정합니다.** r107은 Menu81/총541·6화면(3page+3modal)·10연결이고 SHA `75bda424a32d2e998fc2043547259d4b6a1b3ad0b07f4e99d1dfb1e787664cc6`가 기기변경·기준복귀 뒤에도 불변입니다. 다른 기존5화면 deep equality·원8연결·Main Menu stableID를 보존했습니다. **현재 기본 전체캔버스의 최종 재열기는 본체 마감 검수 중**이며 이 절에서 통과를 주장하지 않습니다.
+
+Menu06 독립UI의실제진입·닫기·배후차단·프로필crop·행규격·기기비율은r107증거로확인됐습니다. 이는SHOP08/SHOWROOM07실화면·미관찰7목적지·원게임API·구매/계정기능·원본폰트/픽셀동등승인을뜻하지않습니다. source06 dim정확alpha는계속미확인이고.7은제작시안입니다.
+
+기존5화면deepEqual/원8edges와MainMenuID를보존했고사용18자원중신규11개만이번신규수로셉니다. 공통.16/.17준비절과프로젝트guide.4·원본/시안/진단캡처를보존합니다. observer중간프레임과focus보정전이미지는이력이며최종stable결과에섞지않습니다. 기본canvas재열기는본체최종마감기록을따릅니다.
+
+본체 실제 입력은 Menu click/Enter/Space→첫Shop초점, Close click/Enter 및 Escape→Main/Menu초점복귀입니다. 열린동안 Main의inert속성값은빈문자열(속성존재)/Menu aria-disabled=true,닫으면inert제거(null)/aria-disabled=false였습니다. 실제9배지의native글자는모두빈칸·6개0배지는숨김입니다. 단일32²fullblacktexture opacity.7/engine.dim=false의정확경계,CloselegacySkin없음,새로열기뒤직사각focus radius0px(이전50%)를확인했습니다. 원본정확dim alpha .7확정이나숨은목적지구현을뜻하지않습니다.
+
+문서 담당이 [브라우저 기록](../../../../docs/evidence/20261117-menu06/browser-checks.json)·[파일 검증](../../../../docs/evidence/20261117-menu06/file-verification.json)을 직접 읽었습니다. Menu사용18고유자원이등록되어있고그중신규11개(SVG8+solid3)입니다. 기본재사용5+SNS/공통Badge는신규수에더하지않습니다. 최종프로필crop[60,75,1111,1111]/9개알림alt/9행307.15×56.21·3점/6숨김·Close.skin없음도저장대조했습니다.
+
+CSS focus 보완 후 [menu06-final-verified-tests.log](../../../../_작업/codex/ux-studio/menu06-final-verified-tests.log)의 **479/479·fail0·cancelled0**을 직접 읽었고 본체가 process13769의 **exit0 완료**를 확인했습니다. 이후 제품source변경0입니다. CSS전의동일479로그와합산하지않습니다. 이문서담당은시험/브라우저를재실행하지않았으며 actual 입력·기기값은본체증거/전달값입니다.
+
+기본캔버스최종재열기는본체마감append를우선합니다. SHOP08/SHOWROOM07연결은실제목적지조립뒤이며나머지7메뉴목적지는미관찰·미설정입니다. 원본폰트/픽셀동등·정확dim alpha·게임기능·7007/LSB native·사용자승인/freeze는미완료입니다. **W/P/U/S0/4·10장최종동등0/10·제안(검수대기)**, 주간87/90·2026-11-17 08:00 KST 중지선·기존 ui30분만유지합니다. 공통.16/.17준비기록·프로젝트guide.4·원본을보존하며새예약/서버/빌드를만들지않습니다.
+
+최종이미지: [nativeclip551×985](../../../../docs/evidence/20261117-menu06/menu-r107-phone.jpg) · [CSS1440](../../../../docs/evidence/20261117-menu06/menu-r107-css1440.jpg) · [CSS430 stable](../../../../docs/evidence/20261117-menu06/menu-r107-css430.jpg) · [CSS1920](../../../../docs/evidence/20261117-menu06/menu-r107-css1920.jpg). [resize중간프레임](../../../../docs/evidence/20261117-menu06/menu-r107-css430-resize-transient.jpg)과 [focus보정전](../../../../docs/evidence/20261117-menu06/menu-r107-phone-before-focus-correction.jpg)은진단본으로보존하며최종결과와구분합니다.

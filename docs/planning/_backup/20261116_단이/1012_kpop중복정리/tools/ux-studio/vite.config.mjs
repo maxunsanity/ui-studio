@@ -1,0 +1,6 @@
+import {defineConfig} from 'vite';
+import {fileURLToPath} from 'node:url';
+import {resolve} from 'node:path';
+import uxSavePlugin from '../../src/tools/uxStudio/save-plugin.mjs';
+const root=fileURLToPath(new URL('../../',import.meta.url));
+export default defineConfig({root,cacheDir:resolve(root,'_작업/codex/ux-studio/vite-cache'),publicDir:false,optimizeDeps:{noDiscovery:true,entries:['docs/planning/ux-studio.html','docs/planning/ux-runtime-preview.html']},plugins:[uxSavePlugin(root,resolve(root,'_작업/codex/ux-studio/projects'))],server:{host:'127.0.0.1',port:7018,strictPort:true,open:false,fs:{allow:[resolve(root,'docs/planning/ux-runtime-preview.html'),resolve(root,'docs/planning/code-map/vis-network.min.js'),resolve(root,'docs/planning/ux-studio.html'),resolve(root,'src/tools/uxStudio'),resolve(root,'docs/planning/삼중AI_공용_20260929/산출/툴기획'),resolve(root,'node_modules')],deny:['.env','**/.git/**','**/_backup/**','**/play.html']},watch:{ignored:path=>{const current=resolve(path).normalize('NFC');const allowed=['src/tools/uxStudio','docs/planning/ux-runtime-preview.html','docs/planning/ux-studio.html','tools/ux-studio'].map(p=>resolve(root,p).normalize('NFC'));return current!==root.normalize('NFC')&&!allowed.some(a=>a===current||a.startsWith(current+'/')||current.startsWith(a+'/'));}}}});

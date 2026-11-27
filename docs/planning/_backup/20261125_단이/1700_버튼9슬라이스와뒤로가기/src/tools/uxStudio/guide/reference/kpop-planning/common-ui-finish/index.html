@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>케이팝몬스터즈 UI 마무리 가이드</title>
+<style>
+:root{font:16px/1.6 system-ui,sans-serif;color:#222b39;background:#f2f3f6}
+body{margin:0}main{max-width:1000px;margin:auto;padding:clamp(18px,5vw,52px)}
+h1{font-size:clamp(27px,4vw,42px);line-height:1.2;margin:10px 0 12px}
+h2{font-size:clamp(21px,3vw,27px);margin:0 0 14px}
+h3{font-size:16px;margin:0}p{margin:0 0 12px}
+a{color:#284a72;text-underline-offset:.2em}
+header{padding:0 0 16px}.status{font-size:14px;color:#475568}
+section{background:#fff;border:1px solid #d6dae2;border-radius:12px;margin:18px 0;padding:clamp(14px,3vw,26px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr));gap:12px}
+.card{border:1px solid #dadde4;border-radius:8px;padding:12px;min-width:0}.card p{font-size:14px;margin:5px 0 0}
+.meters{display:grid;gap:18px}.meter{max-width:525px}.meter-header{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.meter-header span,.meter-header strong{font-size:14px}.track{background:#d9dcdf;margin:7px 0 0;height:var(--thickness);border-radius:2px;overflow:hidden}
+.track span{display:block;background:#323743;height:100%;width:var(--ratio)}
+figure{margin:0 0 18px}img{display:block;width:100%;height:auto;border-radius:6px;background:#f3f3f5}
+figcaption{margin-top:8px;color:#404958;font-size:14px}ul{padding-inline-start:1.2em;margin:8px 0}
+</style>
+</head>
+<body><main>
+<header><p><a href="../../../KPOP_WORKFLOW_GUIDE.md">제작 가이드</a></p><h1>케이팝몬스터즈 UI 마무리</h1><p>공통 부품 규격, 실화면 적용 사례, 화면별 검수 자료를 확인합니다.</p><p class="status">2차 세부 와이어프레임 · 2026-11-25 · 검수안</p></header>
+<section aria-labelledby="documents"><h2 id="documents">문서와 검수표</h2><div class="grid">
+<div class="card"><h3><a href="finish-plan.md">마무리 계획</a></h3><p>11개 완료 기준과 작업 진척, 범위</p></div>
+<div class="card"><h3><a href="ui-components.md">공통 규격과 부품서</a></h3><p>버튼·모달·바텀시트·아이콘, 표현과 연출</p></div>
+<div class="card"><h3><a href="screen-audit.csv">화면 검수 목록</a></h3><p>저장 종류, 연출 유형과 검수 상태</p></div>
+<div class="card"><h3><a href="input-audit.csv">입력 영역 검수 후보</a></h3><p>닫기와 뒤로 버튼의 논리 크기</p></div>
+<div class="card"><h3><a href="image-register.csv">활용 이미지 목록</a></h3><p>원본 참조, 사용 화면, 표시 용도</p></div>
+<div class="card"><h3><a href="verification.md">실화면 검수 기록</a></h3><p>저장판, 입력 및 복귀, 확인 범위</p></div>
+</div></section>
+<section aria-labelledby="gauges"><h2 id="gauges">게이지의 역할과 두께</h2>
+<p>남은 정도를 한눈에 볼 때 게이지와 수치를 함께 표시합니다. 가격, 보유량, 개별 보상은 숫자로 읽습니다. 상점의 루비 가격과 스케줄의 미정 라포 값은 텍스트로 표시합니다.</p>
+<div class="meters">
+<div class="meter"><div class="meter-header"><strong>상세 화면 · 다음 해금</strong><span>366 / 538 · 14px</span></div><div class="track" style="--thickness:14px;--ratio:68.03%" aria-hidden="true"><span></span></div></div>
+<div class="meter"><div class="meter-header"><strong>게임 HUD · 방문 바퀴</strong><span>49 / 50 · 8px</span></div><div class="track" style="--thickness:8px;--ratio:98%" aria-hidden="true"><span></span></div></div>
+<div class="meter"><div class="meter-header"><strong>보조 상태 · 몬스 기분</strong><span>340 / 500 · 6px</span></div><div class="track" style="--thickness:6px;--ratio:68%" aria-hidden="true"><span></span></div></div>
+</div></section>
+<section aria-labelledby="replaceable"><h2 id="replaceable">편집 가능한 공통 부품 · 검수 대기</h2>
+<p>정보 박스의 네 모서리를 고정합니다. 같은 프레임을 205×48과 248×66으로 표시했으며, 원본 분할 12px와 고정 테두리 6px는 동일합니다.</p>
+<p><a href="/ui-studio/?editor=detail&amp;workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=kpop-info-parts&amp;screen=screen-f89410ee-3615-45f2-a69f-2eff43abcb2c&amp;view=detailed-wireframe">UI 스튜디오에서 부품 편집</a> · <a href="/ui-studio/source/sample-preview.html?workspace=workspace-cfa517bd-d9e1-40c4-aa1f-576e182500ba&amp;project=kpop-info-parts&amp;screen=screen-f89410ee-3615-45f2-a69f-2eff43abcb2c&amp;view=detailed-wireframe">저장판 미리보기</a></p>
+<figure><img src="component-board-nine-slice.jpg" width="554" height="781" alt="주·보조 버튼, 세 게이지, 같은 9슬라이스 이미지의 축소·확대 비교"><figcaption>공통 부품 보드 r9. 텍스트, 입력, 트랙과 채움, 9슬라이스 프레임은 편집할 수 있습니다.</figcaption></figure>
+</section>
+<section aria-labelledby="screens"><h2 id="screens">UI 스튜디오 적용 화면</h2>
+<figure><img src="applied-screens.jpg" width="980" height="734" alt="상점 구매 모달, 이야기 변경 시트, 엔터파워 해금 상세의 저장판 화면 세 장"><figcaption>상점·스케줄·HUD. 주 버튼을 입체 프레임으로 구분하고 같은 행의 높이를 맞췄습니다.</figcaption></figure>
+<figure><img src="new-city-progress.jpg" width="1097" height="410" alt="컬러 새 도시 보드 상단에서 방문 게이지가 0, 49, 50바퀴로 바뀌는 세 상태" loading="lazy"><figcaption>새 도시 20칸 보드. 한 번 입장에 최대 50바퀴. 현재 수와 게이지를 함께 표시합니다.</figcaption></figure>
+<figure><img src="build-detail-comparison.jpg" width="768" height="829" alt="건설 상세 기존 화면과 효과 세 항목을 한 영역으로 묶은 개선 화면의 비교" loading="lazy"><figcaption>건설 상세 r13 → r14. 효과 세 항목을 묶고 주 행동을 강조했습니다.</figcaption></figure>
+</section>
+</main></body></html>
