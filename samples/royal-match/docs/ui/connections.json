@@ -1,0 +1,171 @@
+{
+  "planned": [
+    {
+      "source": "Lobby",
+      "input": "하단 Areas",
+      "action": "navigate",
+      "target": "Areas",
+      "evidence": "영상 관찰",
+      "returnTo": "Lobby"
+    },
+    {
+      "source": "Lobby",
+      "input": "하단 Rankings",
+      "action": "navigate",
+      "target": "Rankings",
+      "evidence": "영상 관찰",
+      "returnTo": "Lobby"
+    },
+    {
+      "source": "Lobby",
+      "input": "하단 Team",
+      "action": "navigate",
+      "target": "Team",
+      "evidence": "영상 관찰",
+      "returnTo": "Lobby"
+    },
+    {
+      "source": "Lobby",
+      "input": "하단 Collection",
+      "action": "navigate",
+      "target": "Collection",
+      "evidence": "영상 관찰",
+      "returnTo": "Lobby"
+    },
+    {
+      "source": "Lobby",
+      "input": "골드",
+      "action": "open-modal",
+      "target": "Shop",
+      "evidence": "영상 관찰",
+      "returnTo": "Lobby"
+    },
+    {
+      "source": "Lobby",
+      "input": "생명",
+      "action": "open-modal",
+      "target": "Lives",
+      "evidence": "영상 관찰",
+      "returnTo": "Lobby"
+    },
+    {
+      "source": "Lobby",
+      "input": "별",
+      "action": "open-modal",
+      "target": "Stars",
+      "evidence": "영상 관찰",
+      "returnTo": "Lobby"
+    },
+    {
+      "source": "Lobby",
+      "input": "설정",
+      "action": "open-modal",
+      "target": "Settings",
+      "evidence": "영상 관찰",
+      "returnTo": "Lobby"
+    },
+    {
+      "source": "Lobby",
+      "input": "프로필",
+      "action": "open-modal",
+      "target": "Profile",
+      "evidence": "영상 관찰",
+      "returnTo": "Lobby"
+    },
+    {
+      "source": "Lobby",
+      "input": "이벤트 컵",
+      "action": "open-modal",
+      "target": "KingsCup",
+      "evidence": "영상 관찰",
+      "returnTo": "Lobby"
+    },
+    {
+      "source": "Lobby",
+      "input": "레벨25",
+      "action": "open-modal",
+      "target": "Level",
+      "evidence": "영상 관찰",
+      "returnTo": "Lobby"
+    },
+    {
+      "source": "Level",
+      "input": "플레이",
+      "action": "navigate",
+      "target": "Puzzle",
+      "evidence": "영상 관찰"
+    },
+    {
+      "source": "Welcome",
+      "input": "탭해서 받기",
+      "action": "close",
+      "target": "Lobby",
+      "evidence": "영상 관찰. 실제 보상 지급 제외"
+    },
+    {
+      "source": "Shop",
+      "input": "닫기",
+      "action": "close",
+      "target": "Lobby",
+      "evidence": "영상 관찰"
+    },
+    {
+      "source": "Lives",
+      "input": "닫기",
+      "action": "close",
+      "target": "Lobby",
+      "evidence": "영상 관찰"
+    },
+    {
+      "source": "Stars",
+      "input": "닫기",
+      "action": "close",
+      "target": "Lobby",
+      "evidence": "영상 관찰"
+    },
+    {
+      "source": "Settings",
+      "input": "닫기",
+      "action": "close",
+      "target": "Lobby",
+      "evidence": "영상 관찰"
+    },
+    {
+      "source": "Profile",
+      "input": "닫기",
+      "action": "close",
+      "target": "Lobby",
+      "evidence": "영상 관찰"
+    },
+    {
+      "source": "KingsCup",
+      "input": "닫기",
+      "action": "close",
+      "target": "Lobby",
+      "evidence": "영상 관찰"
+    },
+    {
+      "source": "Level",
+      "input": "닫기",
+      "action": "close",
+      "target": "Lobby",
+      "evidence": "영상 관찰"
+    }
+  ],
+  "unseen": [
+    "킹스컵 플레이 목적지",
+    "퍼즐 설정 이후 화면",
+    "구매·계정·메시지·지원 외부 동작"
+  ],
+  "note": "planned는 최초 조사 계획. actualSaved와 실제 시험을 구분한다.",
+  "actualSaved": {
+    "revision": 194,
+    "count": 42,
+    "source": "saved-data-audit.json actualConnections"
+  },
+  "verified": "r194 실제 13개 주요 연결 시나리오 통과. 42개 전이 전수 조작 시험으로 확대하지 않음.",
+  "remaining": [
+    "Welcome→Lobby는 저장 연결만 존재, 자동 진입 미연결/실행 왕복 미검수",
+    "킹스컵 플레이·외부 계정/지원·구매/팀/친구 결과는 영상 미관찰로 미연결"
+  ]
+}

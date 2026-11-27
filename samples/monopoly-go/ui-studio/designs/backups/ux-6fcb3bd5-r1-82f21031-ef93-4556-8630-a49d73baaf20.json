@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 2,
+  "projectId": "ux-6fcb3bd5",
+  "revision": 1,
+  "name": "모노폴리 GO · 원본 대응 정식 UI 제작 v1",
+  "entryScreen": "main",
+  "screens": [
+    {
+      "id": "main",
+      "name": "친구 또는 가족 · 타임라인",
+      "kind": "page",
+      "purpose": "Figma image302 / node411:13860 관찰 대응. HUD·요청·활동 목록을 개별 부품으로 제작 중. 실제 게임 전송·탭 동작은 미관찰.",
+      "elements": [
+        {
+          "id": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4",
+          "name": "HUD · 상단 바탕",
+          "kind": "panel",
+          "x": 15.267976093068144,
+          "y": 2.2406817202841767,
+          "w": 83.24941255454851,
+          "h": 5.13595166163142,
+          "text": "",
+          "purpose": "Figma302 상단 바탕. 표시 전용; 숫자·아이콘·프레임·메뉴 입력은 별도 부품. 원본 딤 포함 색상 참고.",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#aaa798",
+            "stroke": "#c2c3bd",
+            "textColor": "#243549",
+            "strokeWidth": 3,
+            "radius": 20,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "partRole": "container",
+          "component": "image-frame",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4-background",
+          "parentId": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "HUD · 상단 바탕 · 바탕",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "바탕 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "appearance": {
+            "fill": "#aaa798",
+            "stroke": "#c2c3bd",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 20,
+            "opacity": 1,
+            "shape": "capsule"
+          }
+        },
+        {
+          "id": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4-image",
+          "parentId": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4",
+          "partRole": "image",
+          "kind": "image",
+          "name": "HUD · 현금 아이콘",
+          "x": 12,
+          "y": 14,
+          "w": 11,
+          "h": 74,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-fb34110a54e340c7bd380948584b123e16c62ce57dd3a609e6c0fd7e41553504.webp",
+            "sourceSize": [
+              1326,
+              2386
+            ],
+            "alt": "HUD · 상단 바탕 이미지",
+            "fit": "contain",
+            "region": [
+              330,
+              66,
+              112,
+              90
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4-label",
+          "parentId": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4",
+          "partRole": "label",
+          "kind": "text",
+          "name": "HUD · 현금 수치",
+          "x": 25,
+          "y": 8,
+          "w": 32,
+          "h": 82,
+          "text": "725,480",
+          "purpose": "텍스트 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 17,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#aaa798",
+            "strokeWidth": 0
+          },
+          "typography": {
+            "weight": 750
+          }
+        },
+        {
+          "id": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4-frame",
+          "parentId": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4",
+          "partRole": "frame",
+          "kind": "panel",
+          "name": "HUD · 상단 바탕 · 프레임",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "프레임 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "appearance": {
+            "fill": "#aaa798",
+            "stroke": "#c2c3bd",
+            "textColor": "#243549",
+            "strokeWidth": 3,
+            "radius": 0,
+            "opacity": 1,
+            "shape": "capsule"
+          }
+        }
+      ]
+    }
+  ],
+  "transitions": [],
+  "fixtures": {
+    "balance": 0,
+    "items": []
+  },
+  "savedAt": "2026-11-16T03:50:43.535Z"
+}

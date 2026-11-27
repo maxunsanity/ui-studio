@@ -1,0 +1,653 @@
+{
+  "schemaVersion": 4,
+  "projectId": "ux-6fcb3bd5",
+  "revision": 12,
+  "name": "모노폴리 GO · 원본 대응 정식 UI 제작 v1",
+  "entryScreen": "main",
+  "screens": [
+    {
+      "id": "main",
+      "name": "Page_Board",
+      "kind": "page",
+      "purpose": "Figma302 상단 HUD 콘셉트 참조. 사용자 지시에 따라 새로 그린 2D 자원만 사용합니다. 3D는 Slot_3D에 표시만 두며 그림·엔진 연결 없이 비웁니다.",
+      "elements": [
+        {
+          "id": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4",
+          "name": "Group_TopBar",
+          "kind": "panel",
+          "x": 13.992537313432834,
+          "y": 17.02127659574468,
+          "w": 86.00746268656717,
+          "h": 57.446808510638306,
+          "text": "",
+          "purpose": "Figma302 상단 바탕. 표시 전용; 숫자·아이콘·프레임·메뉴 입력은 별도 부품. 원본 딤 포함 색상 참고.",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#aaa798",
+            "stroke": "#c2c3bd",
+            "textColor": "#243549",
+            "strokeWidth": 3,
+            "radius": 20,
+            "opacity": 1,
+            "shape": "rounded"
+          },
+          "partRole": "container",
+          "component": "image-frame",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "parentId": "group-b421c329-4b36-4333-921c-22d6d37b45db"
+        },
+        {
+          "id": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4-background",
+          "parentId": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4",
+          "partRole": "background",
+          "kind": "panel",
+          "name": "BG_TopBar",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "바탕 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "appearance": {
+            "fill": "#f0ebdb",
+            "stroke": "#c2c3bd",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 4,
+            "opacity": 1,
+            "shape": "capsule"
+          },
+          "skin": {
+            "preset": "backplate",
+            "version": 1,
+            "name": "정보 백판",
+            "mode": "9",
+            "asset": "frame",
+            "tone": "#dbe2e9",
+            "slices": [
+              27,
+              27,
+              27,
+              27
+            ],
+            "edges": [
+              27,
+              27,
+              27,
+              27
+            ],
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch",
+            "textures": {
+              "normal": {
+                "src": "",
+                "assetRef": "sha256-01ff4cb0e22cd9f0623400729df16d592f3903e1f677b018e3c108f751d8d218.webp",
+                "w": 128,
+                "h": 64
+              }
+            }
+          }
+        },
+        {
+          "id": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4-image",
+          "parentId": "group-60125bc9-5219-4616-a184-e63867609f40",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Cash",
+          "x": 0,
+          "y": 0,
+          "w": 32.142857142857146,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-5f2163a6a738a77769f5371b89d0951b33810e3a28ebf4c38c578e57280fb5c2.webp",
+            "sourceSize": [
+              1254,
+              1254
+            ],
+            "alt": "현금 아이콘",
+            "fit": "contain",
+            "region": [
+              148,
+              308,
+              959,
+              680
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4-label",
+          "parentId": "group-60125bc9-5219-4616-a184-e63867609f40",
+          "partRole": "label",
+          "kind": "text",
+          "name": "Txt_Amount",
+          "x": 41.42857142857143,
+          "y": 0,
+          "w": 58.57142857142858,
+          "h": 100,
+          "text": "13,075",
+          "purpose": "텍스트 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "fontSize": 26,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#aaa798",
+            "strokeWidth": 0
+          },
+          "typography": {
+            "weight": 700,
+            "align": "left",
+            "vertical": "middle"
+          }
+        },
+        {
+          "id": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4-frame",
+          "parentId": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4",
+          "partRole": "frame",
+          "kind": "panel",
+          "name": "Frame_TopBar",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "",
+          "purpose": "프레임 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "appearance": {
+            "fill": "#aaa798",
+            "stroke": "#ffffff",
+            "textColor": "#243549",
+            "strokeWidth": 4,
+            "radius": 4,
+            "opacity": 1,
+            "shape": "capsule"
+          },
+          "skin": {
+            "preset": "backplate",
+            "version": 1,
+            "name": "정보 백판",
+            "mode": "9",
+            "asset": "frame",
+            "tone": "#dbe2e9",
+            "slices": [
+              27,
+              12,
+              12,
+              12
+            ],
+            "edges": [
+              6,
+              6,
+              6,
+              6
+            ],
+            "padding": [
+              6,
+              8,
+              6,
+              8
+            ],
+            "defaultState": "normal",
+            "repeat": "stretch",
+            "textures": {
+              "normal": {
+                "src": "",
+                "assetRef": "sha256-7a2f4ce458743ac7c6a440c16f9090f04c05feb3706b993c1e442b49b33e3039.webp",
+                "w": 128,
+                "h": 64
+              }
+            }
+          }
+        },
+        {
+          "id": "element-0d2733f8-2a6c-43c1-875c-5b88342b1304",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Shield01",
+          "x": 0,
+          "y": 0,
+          "w": 38.63636363636363,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-611ca69110e325f8c6fb56e647a9c3471094a4991e359d1c61d2bd3982442190.webp",
+            "sourceSize": [
+              1254,
+              1254
+            ],
+            "alt": "방패 1",
+            "fit": "contain",
+            "region": [
+              190,
+              165,
+              869,
+              927
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "group-41e56a24-ea67-4991-9af8-3cb43c446a11"
+        },
+        {
+          "id": "element-b44d713d-5bfe-45dc-a9a3-7258c8664141",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Shield02",
+          "x": 30.681818181818183,
+          "y": 0,
+          "w": 38.63636363636363,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-611ca69110e325f8c6fb56e647a9c3471094a4991e359d1c61d2bd3982442190.webp",
+            "sourceSize": [
+              1254,
+              1254
+            ],
+            "alt": "방패 2",
+            "fit": "contain",
+            "region": [
+              190,
+              165,
+              869,
+              927
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "group-41e56a24-ea67-4991-9af8-3cb43c446a11"
+        },
+        {
+          "id": "element-2f1c3d6a-35cf-497d-ad20-41bebd01f779",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_Shield03",
+          "x": 61.36363636363637,
+          "y": 0,
+          "w": 38.63636363636363,
+          "h": 100,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-611ca69110e325f8c6fb56e647a9c3471094a4991e359d1c61d2bd3982442190.webp",
+            "sourceSize": [
+              1254,
+              1254
+            ],
+            "alt": "방패 3",
+            "fit": "contain",
+            "region": [
+              190,
+              165,
+              869,
+              927
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "group-41e56a24-ea67-4991-9af8-3cb43c446a11"
+        },
+        {
+          "id": "element-3405c78e-3c78-4e54-8f7b-a367e83e3757",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_SNSAvatar",
+          "x": 0,
+          "y": -2.127659574468085,
+          "w": 17.91044776119403,
+          "h": 102.12765957446808,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "표시 전용입니다. 게임 기능을 실행하지 않습니다.",
+          "interaction": {
+            "mode": "none",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-5c24391da35e6ea0fa50e68d9db00c1da08086a2fc52ae9eb73d01b1e5225124.webp",
+            "sourceSize": [
+              1254,
+              1254
+            ],
+            "alt": "플레이어 아바타",
+            "fit": "contain",
+            "region": [
+              60,
+              75,
+              1111,
+              1111
+            ]
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          },
+          "parentId": "group-b421c329-4b36-4333-921c-22d6d37b45db"
+        },
+        {
+          "id": "element-e8785ae7-4e1d-4a27-acd8-e119263d624f",
+          "name": "Btn_Menu",
+          "kind": "button",
+          "x": 87.8731343283582,
+          "y": 23.404255319148938,
+          "w": 10.820895522388058,
+          "h": 44.680851063829785,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#fff0cf",
+            "stroke": "#71839a",
+            "textColor": "#c3a75b",
+            "strokeWidth": 0,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "circle"
+          },
+          "fontSize": 24,
+          "parentId": "group-b421c329-4b36-4333-921c-22d6d37b45db",
+          "component": "image-frame",
+          "partRole": "container",
+          "interaction": {
+            "mode": "action",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          }
+        },
+        {
+          "id": "group-60125bc9-5219-4616-a184-e63867609f40",
+          "name": "Currency_Cash",
+          "kind": "panel",
+          "x": 11.279826464208242,
+          "y": 18.51851851851852,
+          "w": 30.36876355748373,
+          "h": 62.96296296296296,
+          "text": "",
+          "purpose": "요소 그룹",
+          "info": "",
+          "isGroup": true,
+          "parentId": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4",
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "stroke": "#71839a",
+            "strokeWidth": 0,
+            "opacity": 1,
+            "textColor": "#243549"
+          }
+        },
+        {
+          "id": "group-41e56a24-ea67-4991-9af8-3cb43c446a11",
+          "name": "Shield_Group",
+          "kind": "panel",
+          "x": 63.34056399132321,
+          "y": 16.666666666666664,
+          "w": 19.088937093275486,
+          "h": 66.66666666666666,
+          "text": "",
+          "purpose": "요소 그룹",
+          "info": "",
+          "isGroup": true,
+          "parentId": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4",
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "stroke": "#71839a",
+            "strokeWidth": 0,
+            "opacity": 1,
+            "textColor": "#243549"
+          }
+        },
+        {
+          "id": "element-a96c6700-3991-4af6-bd5a-9f930029a949",
+          "name": "Slot_3D",
+          "kind": "panel",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 100,
+          "text": "3D 영역",
+          "purpose": "사용자 지정 빈 3D 연결 영역. 3D 그림·캡처·가짜 보드·엔진을 넣지 않습니다. 표시 전용.",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#edf1f4",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 1.5,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          }
+        },
+        {
+          "id": "group-b421c329-4b36-4333-921c-22d6d37b45db",
+          "name": "HUD_Top",
+          "kind": "panel",
+          "x": 1.6333938294010888,
+          "y": 0,
+          "w": 97.27767695099818,
+          "h": 9.552845528455284,
+          "text": "",
+          "purpose": "요소 그룹",
+          "info": "",
+          "isGroup": true,
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#ffffff",
+            "stroke": "#71839a",
+            "strokeWidth": 0,
+            "opacity": 1,
+            "textColor": "#243549"
+          }
+        },
+        {
+          "id": "element-e8785ae7-4e1d-4a27-acd8-e119263d624f-image",
+          "parentId": "element-e8785ae7-4e1d-4a27-acd8-e119263d624f",
+          "partRole": "image",
+          "kind": "image",
+          "name": "Img_MenuBars",
+          "x": 20.689655172413794,
+          "y": 14.285714285714285,
+          "w": 56.896551724137936,
+          "h": 66.66666666666666,
+          "text": "",
+          "purpose": "이미지 부품",
+          "info": "게임 입력은 부모 전체에 전달합니다.",
+          "interaction": {
+            "mode": "parent",
+            "enabled": true,
+            "shape": "rectangle",
+            "reason": ""
+          },
+          "image": {
+            "src": "",
+            "assetRef": "sha256-5ee8af213df20c8ac28f4c901103369d3246de3a7962d3a82abd04cf3731151b.webp",
+            "sourceSize": [
+              264,
+              224
+            ],
+            "alt": "Btn_Menu 이미지",
+            "fit": "contain"
+          },
+          "appearance": {
+            "shape": "rectangle",
+            "fill": "#f4f5f7",
+            "stroke": "#a2acb5",
+            "strokeWidth": 1,
+            "radius": 0
+          }
+        },
+        {
+          "id": "element-cdf600ff-bc6c-4c3b-83b3-2a9ead9e77a6",
+          "name": "Line_TopBar_Avatar",
+          "kind": "panel",
+          "x": 7.592190889370933,
+          "y": 12.962962962962962,
+          "w": 0.6507592190889371,
+          "h": 74.07407407407408,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#d8cd7e",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "parentId": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4"
+        },
+        {
+          "id": "element-8e889f54-9ea1-434e-b075-3a8a6a97fae6",
+          "name": "Line_TopBar_Shield",
+          "kind": "panel",
+          "x": 59.869848156182215,
+          "y": 12.962962962962962,
+          "w": 0.6507592190889371,
+          "h": 74.07407407407408,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#d8cd7e",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "parentId": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4"
+        },
+        {
+          "id": "element-ab75de95-072d-44bf-be9c-9a8c97d8e944",
+          "name": "Line_TopBar_Menu",
+          "kind": "panel",
+          "x": 85.24945770065075,
+          "y": 12.962962962962962,
+          "w": 0.6507592190889371,
+          "h": 74.07407407407408,
+          "text": "",
+          "purpose": "",
+          "info": "와이어프레임 유닛 · 기능은 연결·조건에서 지정",
+          "appearance": {
+            "fill": "#d8cd7e",
+            "stroke": "#71839a",
+            "textColor": "#243549",
+            "strokeWidth": 0,
+            "radius": 12,
+            "opacity": 1,
+            "shape": "rectangle"
+          },
+          "parentId": "element-83c6290c-ba9f-4ef1-9c9d-37f8332373d4"
+        }
+      ],
+      "logicalSize": {
+        "w": 551,
+        "h": 984
+      }
+    }
+  ],
+  "transitions": [],
+  "fixtures": {
+    "balance": 0,
+    "items": []
+  },
+  "savedAt": "2026-11-16T05:22:30.568Z"
+}

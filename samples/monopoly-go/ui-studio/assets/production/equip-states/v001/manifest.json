@@ -1,0 +1,407 @@
+{
+  "schemaVersion": 1,
+  "createdKST": "2026-11-18",
+  "status": "proposal-awaiting-review",
+  "referenceImages": [
+    "docs/reference/monopoly-go/video-analysis-20261117/MGV02/frames/game-crops/MGV02-S04-B.png",
+    "docs/evidence/20261117-unique-frames32/showroom-phone.jpg"
+  ],
+  "referenceRead": "Both reference images visually inspected before geometry creation.",
+  "originalVectorPreserved": "_작업/codex/ux-studio/equip-state-finish-20261118/art/equip-button3.original.svg",
+  "renderMethod": "Existing project Pillow SVG subset renderer, 4x supersampling. Circular capsule cubic paths shared by saved SVG masters and raster exports.",
+  "renderScript": "_작업/codex/ux-studio/unique-frames32/geometry/pillow_svg.py",
+  "stateReuse": {
+    "hover": "normal",
+    "selected": "normal"
+  },
+  "layout": {
+    "canvas": [
+      244,
+      72
+    ],
+    "centerX": 122,
+    "baseBottom": 72,
+    "heightFixed": 72,
+    "scaling": "horizontal-three-slice-only",
+    "sliceOrder": "top,right,bottom,left",
+    "slice": [
+      0,
+      40,
+      0,
+      40
+    ],
+    "edges": [
+      0,
+      40,
+      0,
+      40
+    ],
+    "fixedLeftCap": [
+      0,
+      0,
+      40,
+      72
+    ],
+    "stretchCenter": [
+      40,
+      0,
+      204,
+      72
+    ],
+    "fixedRightCap": [
+      204,
+      0,
+      244,
+      72
+    ],
+    "verifiedWidths": [
+      180,
+      244,
+      320
+    ]
+  },
+  "assumptions": [
+    "Capsule orthographic front with circle end profiles; no copied GO diamond or two-point perspective coordinates.",
+    "White rim is approximately 5 px along top and sides. Front green and rim end at the same baseline; no white bottom ring.",
+    "Normal face y=5..65, fixed extrusion base y=72. Pressed front/rim only translate +1.5 px; side exposure becomes 5.5 px.",
+    "Green face gradient #3cdb00 to #10bb00; side #2b8f00. Palette is an implementation proposal, not an extracted/approved product constant.",
+    "Disabled preserves geometry with gray palette; hover and selected reuse the normal asset.",
+    "No baked text, icon, external cast shadow, or separate pressed tray. Alpha canvas remains identical and is not recropped."
+  ],
+  "assets": [
+    {
+      "state": "normal",
+      "name": "equip-button3_normal_v001",
+      "sourceSvg": "samples/monopoly-go/ui-studio/assets/authoring/equip-states/v001/equip-button3_normal_v001.svg",
+      "sourcePng": "samples/monopoly-go/ui-studio/assets/authoring/equip-states/v001/equip-button3_normal_v001.png",
+      "sourceWebp": "samples/monopoly-go/ui-studio/assets/authoring/equip-states/v001/equip-button3_normal_v001.webp",
+      "production": "samples/monopoly-go/ui-studio/assets/production/equip-states/v001/equip-button3_normal_v001.webp",
+      "staging": "src/tools/uxStudio/assets/import-staging/equip-states/v001/equip-button3_normal_v001.webp",
+      "bytes": 4230,
+      "sha256": "e2bab5af103141d6643b4468589c16161fc220b59fc9da6a9bba4b40e536ae6b",
+      "canvas": [
+        244,
+        72
+      ],
+      "alphaBoundsThreshold8": [
+        0,
+        0,
+        244,
+        72
+      ],
+      "faceBoundsThreshold8": [
+        4,
+        4,
+        240,
+        66
+      ],
+      "rimBoundsThreshold8": [
+        0,
+        0,
+        244,
+        66
+      ],
+      "sideBoundsThreshold8": [
+        0,
+        6,
+        244,
+        72
+      ],
+      "geometry": {
+        "faceTop": 5,
+        "faceBottom": 65,
+        "rimTop": 0,
+        "rimBottom": 65,
+        "baseBottom": 72,
+        "centerX": 122,
+        "faceTranslationY": 0,
+        "sideThicknessAtCenter": 7,
+        "capRadius": 32.5,
+        "faceCapRadius": 30
+      },
+      "recommendedSlice": [
+        0,
+        40,
+        0,
+        40
+      ],
+      "recommendedEdges": [
+        0,
+        40,
+        0,
+        40
+      ],
+      "observedRaster": {
+        "faceBoundsAlpha128": [
+          5,
+          5,
+          239,
+          65
+        ],
+        "rimBoundsAlpha128": [
+          0,
+          0,
+          244,
+          65
+        ],
+        "sideBoundsAlpha128": [
+          0,
+          7,
+          244,
+          72
+        ],
+        "centerFaceCoverageBottom": 65.25882352941177,
+        "centerBaseCoverageBottom": 72.0,
+        "centerSideExposureCoverageEstimate": 6.741176470588229,
+        "coverageTolerancePx": 0.27,
+        "coverageNote": "Existing 4x Pillow polygon renderer includes the boundary sample; raster edge estimate can extend approximately 0.25 px beyond SVG geometry. Alpha128 integer bounds are not subpixel vector bounds."
+      },
+      "checks": {
+        "canvas244x72": true,
+        "pngWebpDecodedRGBAEqual": true,
+        "webpUnder300000Bytes": true,
+        "sourceProductionStagingByteEqual": true,
+        "allCornersTransparent": true,
+        "baseAt72": true,
+        "noBakedTextImageOrFilter": true,
+        "noWhiteBottomRing": true,
+        "centerFlatFrom40To204": true,
+        "width180LeftCapUnchanged": true,
+        "width180RightCapUnchanged": true,
+        "width180BottomFixed": true,
+        "width244LeftCapUnchanged": true,
+        "width244RightCapUnchanged": true,
+        "width244BottomFixed": true,
+        "width320LeftCapUnchanged": true,
+        "width320RightCapUnchanged": true,
+        "width320BottomFixed": true
+      }
+    },
+    {
+      "state": "pressed",
+      "name": "equip-button3_pressed_v001",
+      "sourceSvg": "samples/monopoly-go/ui-studio/assets/authoring/equip-states/v001/equip-button3_pressed_v001.svg",
+      "sourcePng": "samples/monopoly-go/ui-studio/assets/authoring/equip-states/v001/equip-button3_pressed_v001.png",
+      "sourceWebp": "samples/monopoly-go/ui-studio/assets/authoring/equip-states/v001/equip-button3_pressed_v001.webp",
+      "production": "samples/monopoly-go/ui-studio/assets/production/equip-states/v001/equip-button3_pressed_v001.webp",
+      "staging": "src/tools/uxStudio/assets/import-staging/equip-states/v001/equip-button3_pressed_v001.webp",
+      "bytes": 4156,
+      "sha256": "bd864c5b55ff5bd8ff317195877aa3227c5804f94f999a72cd0c7ceb9818ed34",
+      "canvas": [
+        244,
+        72
+      ],
+      "alphaBoundsThreshold8": [
+        0,
+        1,
+        244,
+        72
+      ],
+      "faceBoundsThreshold8": [
+        4,
+        6,
+        240,
+        67
+      ],
+      "rimBoundsThreshold8": [
+        0,
+        1,
+        244,
+        67
+      ],
+      "sideBoundsThreshold8": [
+        0,
+        6,
+        244,
+        72
+      ],
+      "geometry": {
+        "faceTop": 6.5,
+        "faceBottom": 66.5,
+        "rimTop": 1.5,
+        "rimBottom": 66.5,
+        "baseBottom": 72,
+        "centerX": 122,
+        "faceTranslationY": 1.5,
+        "sideThicknessAtCenter": 5.5,
+        "capRadius": 32.5,
+        "faceCapRadius": 30
+      },
+      "recommendedSlice": [
+        0,
+        40,
+        0,
+        40
+      ],
+      "recommendedEdges": [
+        0,
+        40,
+        0,
+        40
+      ],
+      "observedRaster": {
+        "faceBoundsAlpha128": [
+          5,
+          6,
+          239,
+          67
+        ],
+        "rimBoundsAlpha128": [
+          0,
+          2,
+          244,
+          67
+        ],
+        "sideBoundsAlpha128": [
+          0,
+          7,
+          244,
+          72
+        ],
+        "centerFaceCoverageBottom": 66.74117647058823,
+        "centerBaseCoverageBottom": 72.0,
+        "centerSideExposureCoverageEstimate": 5.258823529411771,
+        "coverageTolerancePx": 0.27,
+        "coverageNote": "Existing 4x Pillow polygon renderer includes the boundary sample; raster edge estimate can extend approximately 0.25 px beyond SVG geometry. Alpha128 integer bounds are not subpixel vector bounds."
+      },
+      "checks": {
+        "canvas244x72": true,
+        "pngWebpDecodedRGBAEqual": true,
+        "webpUnder300000Bytes": true,
+        "sourceProductionStagingByteEqual": true,
+        "allCornersTransparent": true,
+        "baseAt72": true,
+        "noBakedTextImageOrFilter": true,
+        "noWhiteBottomRing": true,
+        "centerFlatFrom40To204": true,
+        "width180LeftCapUnchanged": true,
+        "width180RightCapUnchanged": true,
+        "width180BottomFixed": true,
+        "width244LeftCapUnchanged": true,
+        "width244RightCapUnchanged": true,
+        "width244BottomFixed": true,
+        "width320LeftCapUnchanged": true,
+        "width320RightCapUnchanged": true,
+        "width320BottomFixed": true
+      }
+    },
+    {
+      "state": "disabled",
+      "name": "equip-button3_disabled_v001",
+      "sourceSvg": "samples/monopoly-go/ui-studio/assets/authoring/equip-states/v001/equip-button3_disabled_v001.svg",
+      "sourcePng": "samples/monopoly-go/ui-studio/assets/authoring/equip-states/v001/equip-button3_disabled_v001.png",
+      "sourceWebp": "samples/monopoly-go/ui-studio/assets/authoring/equip-states/v001/equip-button3_disabled_v001.webp",
+      "production": "samples/monopoly-go/ui-studio/assets/production/equip-states/v001/equip-button3_disabled_v001.webp",
+      "staging": "src/tools/uxStudio/assets/import-staging/equip-states/v001/equip-button3_disabled_v001.webp",
+      "bytes": 3458,
+      "sha256": "f77ecd3e214eb8ac4a3768be181c95b98537e78d8da8a7068357fccfd31dcce1",
+      "canvas": [
+        244,
+        72
+      ],
+      "alphaBoundsThreshold8": [
+        0,
+        0,
+        244,
+        72
+      ],
+      "faceBoundsThreshold8": [
+        4,
+        4,
+        240,
+        66
+      ],
+      "rimBoundsThreshold8": [
+        0,
+        0,
+        244,
+        66
+      ],
+      "sideBoundsThreshold8": [
+        0,
+        6,
+        244,
+        72
+      ],
+      "geometry": {
+        "faceTop": 5,
+        "faceBottom": 65,
+        "rimTop": 0,
+        "rimBottom": 65,
+        "baseBottom": 72,
+        "centerX": 122,
+        "faceTranslationY": 0,
+        "sideThicknessAtCenter": 7,
+        "capRadius": 32.5,
+        "faceCapRadius": 30
+      },
+      "recommendedSlice": [
+        0,
+        40,
+        0,
+        40
+      ],
+      "recommendedEdges": [
+        0,
+        40,
+        0,
+        40
+      ],
+      "observedRaster": {
+        "faceBoundsAlpha128": [
+          5,
+          5,
+          239,
+          65
+        ],
+        "rimBoundsAlpha128": [
+          0,
+          0,
+          244,
+          65
+        ],
+        "sideBoundsAlpha128": [
+          0,
+          7,
+          244,
+          72
+        ],
+        "centerFaceCoverageBottom": 65.25882352941177,
+        "centerBaseCoverageBottom": 72.0,
+        "centerSideExposureCoverageEstimate": 6.741176470588229,
+        "coverageTolerancePx": 0.27,
+        "coverageNote": "Existing 4x Pillow polygon renderer includes the boundary sample; raster edge estimate can extend approximately 0.25 px beyond SVG geometry. Alpha128 integer bounds are not subpixel vector bounds."
+      },
+      "checks": {
+        "canvas244x72": true,
+        "pngWebpDecodedRGBAEqual": true,
+        "webpUnder300000Bytes": true,
+        "sourceProductionStagingByteEqual": true,
+        "allCornersTransparent": true,
+        "baseAt72": true,
+        "noBakedTextImageOrFilter": true,
+        "noWhiteBottomRing": true,
+        "centerFlatFrom40To204": true,
+        "width180LeftCapUnchanged": true,
+        "width180RightCapUnchanged": true,
+        "width180BottomFixed": true,
+        "width244LeftCapUnchanged": true,
+        "width244RightCapUnchanged": true,
+        "width244BottomFixed": true,
+        "width320LeftCapUnchanged": true,
+        "width320RightCapUnchanged": true,
+        "width320BottomFixed": true
+      }
+    }
+  ],
+  "stateChecks": {
+    "extrudedBodyPixelIdentical": true,
+    "commonBottomRowPixelIdentical": true,
+    "sameCanvasAllStates": true,
+    "pressedMovesFrontOnlyBy1point5": true,
+    "sideThicknessNormal7Pressed5point5": true,
+    "observedFrontShiftWithin0point04px": true,
+    "observedNormalSideBetween6point5and7": true,
+    "observedPressedSideWithinRasterQuarterPixel": true
+  }
+}
