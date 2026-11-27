@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import * as bridge from '../../src/tools/uxStudio/grapes-bridge.mjs';
+const base=JSON.parse(readFileSync('tests/ux-studio/fixtures/lobby-v1.json','utf8'));
+function fixture(){const d=structuredClone(base),s=d.screens[0];s.elements.push({id:'new-button',kind:'button',name:'New',x:0,y:0,w:10,h:10});return d;}
+const edit={id:'new-link',fromElement:'new-button',action:'navigate'};
+test('new connection appends without changing existing data',()=>{assert.equal(typeof bridge.applyGrapesNewLinks,'function');const d=fixture(),s=d.screens[0],before=structuredClone(d);const out=bridge.applyGrapesNewLinks(d,[{...edit,fromScreen:s.id,targetScreen:s.id}]);assert.deepEqual(out.screens,d.screens);assert.deepEqual(out.transitions.slice(0,-1),d.transitions);assert.deepEqual(d,before);assert.equal(out.transitions.at(-1).event,'click');assert.equal(out.transitions.at(-1).condition,'always');assert.equal(out.transitions.at(-1).targetScreen,s.id);});
+test('display-only, parent input, disabled and menu buttons cannot receive new connections',()=>{assert.equal(typeof bridge.applyGrapesNewLinks,'function');for(const patch of [{interaction:{mode:'none'}},{interaction:{mode:'parent'}},{interaction:{mode:'block'}},{interaction:{mode:'action',enabled:false}},{intentionalNoAction:true},{menu:{defaultOpen:false}}]){const d=fixture(),s=d.screens[0];Object.assign(s.elements.at(-1),patch);assert.throws(()=>bridge.applyGrapesNewLinks(d,[{...edit,fromScreen:s.id,targetScreen:s.id}]));}});
+test('duplicate first action, missing source, unsupported action and ID collision reject',()=>{assert.equal(typeof bridge.applyGrapesNewLinks,'function');const d=fixture(),s=d.screens[0],e={...edit,fromScreen:s.id,targetScreen:s.id};for(const edits of [[e,e],[{...e,fromElement:'missing'}],[{...e,action:'purchase'}],[{...e,id:s.elements[0].id}]])assert.throws(()=>bridge.applyGrapesNewLinks(d,edits));const out=bridge.applyGrapesNewLinks(d,[e]);assert.throws(()=>bridge.applyGrapesNewLinks(out,[{...e,id:'another'}]));});
